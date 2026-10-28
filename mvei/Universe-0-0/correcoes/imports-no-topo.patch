@@ -1,0 +1,139 @@
+--- a/provers/lean/Foundations/ImpossibilityTheorem.lean
++++ b/provers/lean/Foundations/ImpossibilityTheorem.lean
+@@ -1,3 +1,8 @@
++import Mathlib.Algebra.Field.Basic
++import Mathlib.Algebra.Ring.Basic
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
++
+ /-
+   Impossibility Theorem for 0/0 in Fields
+   
+@@ -17,9 +22,6 @@
+ Based on: foundations/07-impossibility-and-construction.tex
+ -/
+ 
+-import Mathlib.Algebra.Field.Basic
+-import Mathlib.Algebra.Ring.Basic
+-import Mathlib.Tactic
+ 
+ namespace ImpossibilityTheorem
+ 
+@@ -38,7 +40,6 @@
+ section FieldCollapse
+ 
+ /-! ### Field Collapse with Total Division -/
+-import Mathlib.Data.Real.Basic
+ 
+ /-!
+ ## Overview
+--- a/provers/lean/LRE/StructuralResidue.lean
++++ b/provers/lean/LRE/StructuralResidue.lean
+@@ -1,3 +1,9 @@
++import Mathlib.Algebra.Group.Basic
++import Mathlib.Algebra.Group.Hom.Basic
++import Mathlib.GroupTheory.QuotientGroup
++import Mathlib.Topology.Basic
++import Mathlib.Data.Set.Basic
++
+ /-
+   Lei do Resíduo Estrutural (LRE) — Law of Structural Residue
+   
+@@ -18,10 +24,6 @@
+   Date: December 2025
+ -/
+ 
+-import Mathlib.Algebra.Group.Basic
+-import Mathlib.Algebra.Group.Hom.Basic
+-import Mathlib.GroupTheory.QuotientGroup
+-import Mathlib.Topology.Basic
+ 
+ namespace LRE
+ 
+@@ -303,8 +305,6 @@
+   exact sys.residue_exists_of_nontrivial_kernel ⟨x - y, h_ne_zero, h_in_ker⟩
+ 
+ end LRE
+-import Mathlib.Topology.Basic
+-import Mathlib.Data.Set.Basic
+ 
+ /-! ## 1. Domain Structures -/
+ 
+--- a/provers/lean/MillenniumProblems/Complexity.lean
++++ b/provers/lean/MillenniumProblems/Complexity.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Computability.Language
++import Mathlib.Computability.TMComputable
++
+ /-!
+ # P vs NP Problem - Formal Statement
+ 
+@@ -30,8 +33,6 @@
+ - Clay Mathematics Institute. "Millennium Prize Problems"
+ -/
+ 
+-import Mathlib.Computability.Language
+-import Mathlib.Computability.TMComputable
+ 
+ namespace MillenniumProblems.Complexity
+ 
+--- a/provers/lean/MillenniumProblems/NavierStokes.lean
++++ b/provers/lean/MillenniumProblems/NavierStokes.lean
+@@ -1,3 +1,8 @@
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Topology.MetricSpace.Basic
++import Mathlib.MeasureTheory.Integral.Bochner
++
+ /-!
+ # Navier-Stokes Existence and Smoothness - Formal Statement
+ 
+@@ -31,10 +36,6 @@
+ - Clay Mathematics Institute. "Millennium Prize Problems"
+ -/
+ 
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.Calculus.FDeriv.Basic
+-import Mathlib.Topology.MetricSpace.Basic
+-import Mathlib.MeasureTheory.Integral.Bochner
+ 
+ namespace MillenniumProblems.NavierStokes
+ 
+--- a/provers/lean/MillenniumProblems/RiemannHypothesis.lean
++++ b/provers/lean/MillenniumProblems/RiemannHypothesis.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Analysis.Complex.Basic
++import Mathlib.NumberTheory.ZetaFunction
++
+ /-!
+ # Riemann Hypothesis - Formal Statement
+ 
+@@ -31,8 +34,6 @@
+ - Clay Mathematics Institute. "Millennium Prize Problems"
+ -/
+ 
+-import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
+ 
+ namespace MillenniumProblems
+ 
+--- a/provers/lean/MillenniumProblems.lean
++++ b/provers/lean/MillenniumProblems.lean
+@@ -1,3 +1,7 @@
++import MillenniumProblems.RiemannHypothesis
++import MillenniumProblems.Complexity
++import MillenniumProblems.NavierStokes
++
+ /-!
+ # Millennium Problems - Master Index
+ 
+@@ -15,9 +19,6 @@
+ -/
+ 
+ -- Import all Millennium Problem formalizations
+-import MillenniumProblems.RiemannHypothesis
+-import MillenniumProblems.Complexity
+-import MillenniumProblems.NavierStokes
+ 
+ /-!
+ ## Available Problems

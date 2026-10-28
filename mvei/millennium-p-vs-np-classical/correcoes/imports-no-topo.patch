@@ -1,0 +1,348 @@
+--- a/formal/lean4/PvsNP/Barriers.lean
++++ b/formal/lean4/PvsNP/Barriers.lean
+@@ -1,3 +1,7 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.StoneLemma
++
+ /-!
+   # PvsNP.Barriers - Known Barriers to P vs NP
+   
+@@ -18,9 +22,6 @@
+   proof techniques, not object-level propositions in our theory.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.StoneLemma
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/ComplexityClasses.lean
++++ b/formal/lean4/PvsNP/ComplexityClasses.lean
+@@ -1,3 +1,6 @@
++import PvsNP.Basics
++import PvsNP.TuringMachines
++
+ /-!
+   # PvsNP.ComplexityClasses - Complexity Classes P, NP, P/poly
+   
+@@ -25,8 +28,6 @@
+   - eq_of_npc_in_p: NPC ∩ P ≠ ∅ ⇒ P = NP (standard)
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.TuringMachines
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/HierarchyTheorems.lean
++++ b/formal/lean4/PvsNP/HierarchyTheorems.lean
+@@ -1,3 +1,5 @@
++import PvsNP.ComplexityClasses
++
+ /-!
+   # PvsNP.HierarchyTheorems - Time and Space Hierarchy Theorems
+   
+@@ -25,7 +27,6 @@
+   or nondet vs nondet). P vs NP compares deterministic to nondeterministic.
+ -/
+ 
+-import PvsNP.ComplexityClasses
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/Reductions.lean
++++ b/formal/lean4/PvsNP/Reductions.lean
+@@ -1,3 +1,5 @@
++import PvsNP.ComplexityClasses
++
+ /-!
+   # PvsNP.Reductions - Polynomial-Time Reductions
+   
+@@ -21,7 +23,6 @@
+   - `manyOne_P_closed`, `manyOne_NP_closed`: Axiomatized (standard)
+ -/
+ 
+-import PvsNP.ComplexityClasses
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/SAT_NPCompleteness.lean
++++ b/formal/lean4/PvsNP/SAT_NPCompleteness.lean
+@@ -1,3 +1,6 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++
+ /-!
+   # PvsNP.SAT_NPCompleteness - SAT and NP-Completeness
+   
+@@ -22,8 +25,6 @@
+   Theorem B (Equality): SAT ∈ P → P = NP
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/TuringMachines.lean
++++ b/formal/lean4/PvsNP/TuringMachines.lean
+@@ -1,3 +1,5 @@
++import PvsNP.Basics
++
+ /-!
+   # PvsNP.TuringMachines - Turing Machine Definitions
+   
+@@ -26,7 +28,6 @@
+   - State count |Q| ≥ 2 (at least initial and halting states)
+ -/
+ 
+-import PvsNP.Basics
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/Barriers.lean
++++ b/src/lean4/Barriers.lean
+@@ -1,3 +1,7 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.StoneLemma
++
+ /-!
+ # Barriers - Known Barriers to P vs NP Resolution
+ 
+@@ -19,9 +23,6 @@
+ certain proof techniques cannot resolve the question.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.StoneLemma
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/CircuitComplexity.lean
++++ b/src/lean4/CircuitComplexity.lean
+@@ -1,3 +1,6 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++
+ /-!
+ # CircuitComplexity - Boolean Circuits and P/poly
+ 
+@@ -20,8 +23,6 @@
+ where different input lengths can have completely different circuits.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/ComplexityClasses.lean
++++ b/src/lean4/ComplexityClasses.lean
+@@ -1,3 +1,6 @@
++import PvsNP.Basics
++import PvsNP.TuringMachines
++
+ /-!
+ # ComplexityClasses - The Classes P, NP, coNP, and P/poly
+ 
+@@ -23,8 +26,6 @@
+ - P/poly = ⋃_{k≥1} SIZE(n^k)
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.TuringMachines
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/HierarchyTheorems.lean
++++ b/src/lean4/HierarchyTheorems.lean
+@@ -1,3 +1,6 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++
+ /-!
+ # HierarchyTheorems - Time and Space Hierarchy Theorems
+ 
+@@ -19,8 +22,6 @@
+ They do NOT resolve P vs NP which compares deterministic to nondeterministic.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/MasterTheorem.lean
++++ b/src/lean4/MasterTheorem.lean
+@@ -1,3 +1,13 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.CircuitComplexity
++import PvsNP.Reductions
++import PvsNP.SAT_NPCompleteness
++import PvsNP.StoneLemma
++import PvsNP.PneqNP_from_Stone
++import PvsNP.PeqNP_from_SAT
++import PvsNP.PneqNP_from_NP_not_in_Ppoly
++
+ /-!
+ # MasterTheorem - The Symbolic Separation Program
+ 
+@@ -26,15 +36,6 @@
+ All proofs use only A1-A17 from universal-axiom-registry.json
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.CircuitComplexity
+-import PvsNP.Reductions
+-import PvsNP.SAT_NPCompleteness
+-import PvsNP.StoneLemma
+-import PvsNP.PneqNP_from_Stone
+-import PvsNP.PeqNP_from_SAT
+-import PvsNP.PneqNP_from_NP_not_in_Ppoly
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/PeqNP_from_SAT.lean
++++ b/src/lean4/PeqNP_from_SAT.lean
+@@ -1,3 +1,8 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.Reductions
++import PvsNP.SAT_NPCompleteness
++
+ /-!
+ # PeqNP_from_SAT - Branch B: Equality via SAT Algorithm
+ 
+@@ -20,10 +25,6 @@
+ This is the second route of the separation triangle.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.Reductions
+-import PvsNP.SAT_NPCompleteness
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/PneqNP_from_NP_not_in_Ppoly.lean
++++ b/src/lean4/PneqNP_from_NP_not_in_Ppoly.lean
+@@ -1,3 +1,7 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.CircuitComplexity
++
+ /-!
+ # PneqNP_from_NP_not_in_Ppoly - Branch C: Separation via Circuit Bounds
+ 
+@@ -26,9 +30,6 @@
+ Branch A provides an explicit witness; Branch C only requires existence.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.CircuitComplexity
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/PneqNP_from_Stone.lean
++++ b/src/lean4/PneqNP_from_Stone.lean
+@@ -1,3 +1,8 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.CircuitComplexity
++import PvsNP.StoneLemma
++
+ /-!
+ # PneqNP_from_Stone - Branch A: Separation via Stone Lemma
+ 
+@@ -20,10 +25,6 @@
+ This is the first route of the separation triangle.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.CircuitComplexity
+-import PvsNP.StoneLemma
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/Reductions.lean
++++ b/src/lean4/Reductions.lean
+@@ -1,3 +1,6 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++
+ /-!
+ # Reductions - Polynomial-Time Reductions and NP-Completeness
+ 
+@@ -21,8 +24,6 @@
+ - NP-complete in P implies P = NP
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/SAT_NPCompleteness.lean
++++ b/src/lean4/SAT_NPCompleteness.lean
+@@ -1,3 +1,7 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.Reductions
++
+ /-!
+ # SAT_NPCompleteness - SAT and Cook-Levin Theorem
+ 
+@@ -19,9 +23,6 @@
+ Proved independently by Cook (1971) and Levin (1973).
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.Reductions
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/StoneLemma.lean
++++ b/src/lean4/StoneLemma.lean
+@@ -1,3 +1,7 @@
++import PvsNP.Basics
++import PvsNP.ComplexityClasses
++import PvsNP.CircuitComplexity
++
+ /-!
+ # StoneLemma - The Stone Lemma for Circuit Lower Bounds
+ 
+@@ -21,9 +25,6 @@
+ the arch of the separation proof.
+ -/
+ 
+-import PvsNP.Basics
+-import PvsNP.ComplexityClasses
+-import PvsNP.CircuitComplexity
+ 
+ namespace PvsNP
+ 
+--- a/src/lean4/TuringMachines.lean
++++ b/src/lean4/TuringMachines.lean
+@@ -1,3 +1,5 @@
++import PvsNP.Basics
++
+ /-!
+ # TuringMachines - Turing Machine Definitions for Complexity Theory
+ 
+@@ -19,7 +21,6 @@
+ as full TM semantics are orthogonal to the P vs NP structure.
+ -/
+ 
+-import PvsNP.Basics
+ 
+ namespace PvsNP
+ 

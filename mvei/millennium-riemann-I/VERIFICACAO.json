@@ -1,0 +1,2152 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/millennium-riemann-I",
+ "verified_commit": "ae79aed383c696c2ecce69e24e711d26beddd64d",
+ "projects": [
+  {
+   "repo": "millennium-riemann-I",
+   "path": ".",
+   "toolchain": "leanprover/lean4:stable",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (991ms) | ✔ [41/42] Built Cache.Main:c.o (1.1s) | ✔ [42/42] Built cache:exe (966ms)",
+   "sorry_warnings": 29,
+   "reconstructed": true,
+   "bridges": [
+    {
+     "repo": "millennium-riemann-I",
+     "project": ".",
+     "theorem": "ATKTerminalStaging.terminal_closure",
+     "statement": "∀ (ExactEndpoint : Prop), ExactEndpoint",
+     "verdict": "refutável",
+     "tactic": "intro h; simp_all",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all"
+     ]
+    }
+   ],
+   "declared_axioms": [
+    {
+     "name": "Riemann.Sim.analyze_i_kernel_spectrum_external",
+     "module": "src.Sim.Bridges",
+     "statement": "{ℝ : Type} → ℝ → IO (List ℝ)"
+    },
+    {
+     "name": "Riemann.Sim.compute_zeros_external",
+     "module": "src.Sim.Bridges",
+     "statement": "{ℕ : Sort u_1} → {ℂ : Type} → ℕ → IO (List ℂ)"
+    },
+    {
+     "name": "Riemann.Sim.computed_zeros_on_critical_line",
+     "module": "src.Sim.Numerics",
+     "statement": "Prop"
+    },
+    {
+     "name": "Riemann.Sim.functional_equation_verified_numerically",
+     "module": "src.Sim.Numerics",
+     "statement": "Prop"
+    },
+    {
+     "name": "Riemann.Sim.i_kernel_approximations_converge",
+     "module": "src.Sim.Numerics",
+     "statement": "Prop"
+    },
+    {
+     "name": "Riemann.Sim.load_zeros_from_csv",
+     "module": "src.Sim.Bridges",
+     "statement": "{ℂ : Type} → String → IO (List ℂ)"
+    },
+    {
+     "name": "Riemann.Sim.numeric_evidence_first_10_13_zeros",
+     "module": "src.Sim.Numerics",
+     "statement": "Prop"
+    },
+    {
+     "name": "Riemann.Sim.verify_functional_equation_external",
+     "module": "src.Sim.Bridges",
+     "statement": "{ℂ : Sort u_1} → ℂ → IO Bool"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "ATKTerminalStaging.terminal_closure",
+     "module": "formal.ATKTerminalStaging",
+     "axioms": [
+      "sorryAx"
+     ],
+     "statement": "∀ (ExactEndpoint : Prop), ExactEndpoint",
+     "status": "aberto-sorry"
+    }
+   ],
+   "integrity": [],
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo): imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Main, MillenniumRiemann, cross, formal, lean, src e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././Main.lean:12:0: unknown module prefix 'Millennium' | error: Lean exited with code 1)",
+   "corrections": [
+    "imports-no-topo"
+   ],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Main, .one `MillenniumRiemann, .submodules `MillenniumRiemann, .submodules `cross, .submodules `formal, .submodules `lean, .submodules `src]\n",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 125,
+     "nome": "Collapse.CollapseComplex.ext",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 135,
+     "nome": "Collapse.CollapseComplex.add_assoc",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 143,
+     "nome": "Collapse.CollapseComplex.add_comm",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 151,
+     "nome": "Collapse.CollapseComplex.zero_add",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 156,
+     "nome": "Collapse.CollapseComplex.add_zero",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 161,
+     "nome": "Collapse.CollapseComplex.add_left_neg",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 179,
+     "nome": "Collapse.CollapseComplex.mul_assoc",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 187,
+     "nome": "Collapse.CollapseComplex.mul_comm",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 195,
+     "nome": "Collapse.CollapseComplex.one_mul",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 202,
+     "nome": "Collapse.CollapseComplex.mul_one",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 209,
+     "nome": "Collapse.CollapseComplex.left_distrib",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 217,
+     "nome": "Collapse.CollapseComplex.right_distrib",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 225,
+     "nome": "Collapse.CollapseComplex.zero_mul",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 230,
+     "nome": "Collapse.CollapseComplex.mul_zero",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 259,
+     "nome": "Collapse.CollapseComplex.conj_add",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 267,
+     "nome": "Collapse.CollapseComplex.conj_mul",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 274,
+     "nome": "Collapse.CollapseComplex.conj_conj",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 279,
+     "nome": "Collapse.CollapseComplex.toComplex_add",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 285,
+     "nome": "Collapse.CollapseComplex.toComplex_mul",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 291,
+     "nome": "Collapse.CollapseComplex.toComplex_ringHom",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 298,
+     "nome": "Collapse.CollapseComplex.kernel_toComplex",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 308,
+     "nome": "Collapse.CollapseComplex.deltaI_add",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 313,
+     "nome": "Collapse.CollapseComplex.deltaI_smul",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 318,
+     "nome": "Collapse.CollapseComplex.deltaI_idem",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 323,
+     "nome": "Collapse.CollapseComplex.kernel_deltaI",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 331,
+     "nome": "Collapse.CollapseComplex.image_deltaI",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 342,
+     "nome": "Collapse.CollapseComplex.normI_nonneg",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 350,
+     "nome": "Collapse.CollapseComplex.normI_eq_zero",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/CollapseComplex.lean",
+     "linha": 370,
+     "nome": "Collapse.CollapseComplex.normI_add_le",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 33,
+     "nome": "Collapse.CollapseComplex.toProduct_fromProduct",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 39,
+     "nome": "Collapse.CollapseComplex.fromProduct_toProduct",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 45,
+     "nome": "Collapse.CollapseComplex.toProduct_add",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 53,
+     "nome": "Collapse.CollapseComplex.toProduct_mul",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 61,
+     "nome": "Collapse.CollapseComplex.ring_isomorphism",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 84,
+     "nome": "Collapse.CollapseComplex.mul_inv_cancel",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 89,
+     "nome": "Collapse.CollapseComplex.inv_mul_cancel",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 104,
+     "nome": "Collapse.CollapseComplex.pureComplex_closed_add",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 111,
+     "nome": "Collapse.CollapseComplex.pureComplex_closed_mul",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 117,
+     "nome": "Collapse.CollapseComplex.pureComplex_has_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 121,
+     "nome": "Collapse.CollapseComplex.pureComplex_has_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 125,
+     "nome": "Collapse.CollapseComplex.pureIndet_closed_add",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 132,
+     "nome": "Collapse.CollapseComplex.pureIndet_has_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 136,
+     "nome": "Collapse.CollapseComplex.deltaI_image_eq_pureIndet",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 149,
+     "nome": "Collapse.CollapseComplex.kernel_deltaI_eq_pureComplex",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 157,
+     "nome": "Collapse.CollapseComplex.conj_pureComplex",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 163,
+     "nome": "Collapse.CollapseComplex.conj_pureIndet",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 169,
+     "nome": "Collapse.CollapseComplex.conj_mul_self",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 179,
+     "nome": "Collapse.CollapseComplex.normI_smul_nonneg",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 186,
+     "nome": "Collapse.CollapseComplex.normI_mul_le",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 196,
+     "nome": "Collapse.CollapseComplex.i_sq",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 205,
+     "nome": "Collapse.CollapseComplex.I_sq",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "MillenniumRiemann/Theorems.lean",
+     "linha": 210,
+     "nome": "Collapse.CollapseComplex.i_mul_I",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist"
+    },
+    {
+     "arquivo": "cross/lean/AnomalousZeros.lean",
+     "linha": 257,
+     "nome": "Millennium.Riemann.Anomalous.Theorems.critical_zero_no_I_contribution",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/AnomalousZeros.lean",
+     "linha": 265,
+     "nome": "Millennium.Riemann.Anomalous.Theorems.anomalous_I_contribution",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/AnomalousZeros.lean",
+     "linha": 273,
+     "nome": "Millennium.Riemann.Anomalous.Theorems.collapse_at_I_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Collapse/Constants.lean",
+     "linha": 29,
+     "nome": "Riemann.Collapse.no_anomalous_from_I_ne_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Collapse/Constants.lean",
+     "linha": 56,
+     "nome": "Riemann.Collapse.RH_from_I_ne_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 80,
+     "nome": "Riemann.INumber.collapse_add_left",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 84,
+     "nome": "Riemann.INumber.collapse_add_right",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 87,
+     "nome": "Riemann.INumber.collapse_mul_left",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 91,
+     "nome": "Riemann.INumber.collapse_mul_right",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 94,
+     "nome": "Riemann.INumber.add_comm",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 99,
+     "nome": "Riemann.INumber.mul_comm",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 104,
+     "nome": "Riemann.INumber.add_zero",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 109,
+     "nome": "Riemann.INumber.mul_one",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
+     "linha": 18,
+     "nome": "Riemann.Zeros.anomalous_zero_off_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
+     "linha": 26,
+     "nome": "Riemann.Zeros.anomalous_zero_is_anomalous",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
+     "linha": 32,
+     "nome": "Riemann.Zeros.anomalous_zero_distance_pos",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
+     "linha": 39,
+     "nome": "Riemann.Zeros.anomalous_zero_side",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
+     "linha": 53,
+     "nome": "Riemann.Zeros.anomalous_left_or_right",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
+     "linha": 16,
+     "nome": "Riemann.Zeros.critical_zero_on_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
+     "linha": 24,
+     "nome": "Riemann.Zeros.critical_zero_is_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
+     "linha": 30,
+     "nome": "Riemann.Zeros.critical_zero_distance",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Nontrivial.lean",
+     "linha": 43,
+     "nome": "Riemann.Zeros.zero_classification",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "cross/lean/Riemann/Zeros/Nontrivial.lean",
+     "linha": 51,
+     "nome": "Riemann.Zeros.critical_anomalous_exclusive",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/DirectEndpointRule.lean",
+     "linha": 17,
+     "nome": "DirectEndpointRule.direct_endpoint",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/DirectEndpointRule.lean",
+     "linha": 30,
+     "nome": "DirectEndpointRule.no_infinite_descent",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/DirectEndpointRule.lean",
+     "linha": 52,
+     "nome": "DirectEndpointRule.forwardDependency_wellFounded",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 140,
+     "nome": "Millennium.Riemann.CollapseComplex.add_assoc",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 151,
+     "nome": "Millennium.Riemann.CollapseComplex.add_comm",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 160,
+     "nome": "Millennium.Riemann.CollapseComplex.zero_add",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 169,
+     "nome": "Millennium.Riemann.CollapseComplex.add_zero",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 178,
+     "nome": "Millennium.Riemann.CollapseComplex.mul_assoc",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 187,
+     "nome": "Millennium.Riemann.CollapseComplex.mul_comm",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 196,
+     "nome": "Millennium.Riemann.CollapseComplex.one_mul",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 205,
+     "nome": "Millennium.Riemann.CollapseComplex.mul_one",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 214,
+     "nome": "Millennium.Riemann.CollapseComplex.left_distrib",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 223,
+     "nome": "Millennium.Riemann.CollapseComplex.right_distrib",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 232,
+     "nome": "Millennium.Riemann.CollapseComplex.ofReal_add",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 241,
+     "nome": "Millennium.Riemann.CollapseComplex.ofReal_mul",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 250,
+     "nome": "Millennium.Riemann.CollapseComplex.I_components",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
+     "linha": 254,
+     "nome": "Millennium.Riemann.CollapseComplex.i_components",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Assumptions.lean",
+     "linha": 64,
+     "nome": "Millennium.Riemann.CollapseProof.all_assumptions_stated",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 21,
+     "nome": "Millennium.Riemann.CollapseProof.symbolicRiemannHypothesis",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 42,
+     "nome": "Millennium.Riemann.CollapseProof.RH_explicit",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 51,
+     "nome": "Millennium.Riemann.CollapseProof.critical_strip_implies_critical_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 59,
+     "nome": "Millennium.Riemann.CollapseProof.no_zeros_left_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 66,
+     "nome": "Millennium.Riemann.CollapseProof.no_zeros_right_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 73,
+     "nome": "Millennium.Riemann.CollapseProof.no_exceptional_zeros",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 82,
+     "nome": "Millennium.Riemann.CollapseProof.symbolic_proof_summary",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 28,
+     "nome": "Millennium.Riemann.CollapseProof.not_RH_implies_exceptional",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 43,
+     "nome": "Millennium.Riemann.CollapseProof.singularity_positive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 74,
+     "nome": "Millennium.Riemann.CollapseProof.I_times_zero_ne_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 80,
+     "nome": "Millennium.Riemann.CollapseProof.I_collapse_contradiction",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 93,
+     "nome": "Millennium.Riemann.CollapseProof.I_collapse_alternative",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 101,
+     "nome": "Millennium.Riemann.CollapseProof.not_RH_contradiction",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/ClassicalZeros.lean",
+     "linha": 34,
+     "nome": "Millennium.Riemann.Core.trivial_zero_locations",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
+     "linha": 27,
+     "nome": "Millennium.Riemann.Core.critical_line_in_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
+     "linha": 41,
+     "nome": "Millennium.Riemann.Core.functional_symmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
+     "linha": 51,
+     "nome": "Millennium.Riemann.Core.on_critical_line_iff",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
+     "linha": 56,
+     "nome": "Millennium.Riemann.Core.distance_symmetric",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/FunctionalEquation.lean",
+     "linha": 42,
+     "nome": "Millennium.Riemann.Core.reflection_symmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Core/FunctionalEquation.lean",
+     "linha": 52,
+     "nome": "Millennium.Riemann.Core.functional_eq_preserves_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Examples.lean",
+     "linha": 130,
+     "nome": "Millennium.Riemann.Examples.Transitions.large_transitions",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Examples.lean",
+     "linha": 171,
+     "nome": "Millennium.Riemann.Examples.OperatorExamples.operators_increase",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Examples.lean",
+     "linha": 208,
+     "nome": "Millennium.Riemann.Examples.ZetaExamples.critical_point_is_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
+     "linha": 125,
+     "nome": "Millennium.Riemann.hierarchy_complete",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "unknown module prefix 'Millennium' No directory 'Millennium' or file 'Millennium.olean' in the search path entries: ././.lake/packages/Cli/.lake/build/lib/lean ././.lake/packages/batteries/.lake/build"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
+     "linha": 136,
+     "nome": "Millennium.Riemann.zeta_universal_preserves_level",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "unknown module prefix 'Millennium' No directory 'Millennium' or file 'Millennium.olean' in the search path entries: ././.lake/packages/Cli/.lake/build/lib/lean ././.lake/packages/batteries/.lake/build"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
+     "linha": 275,
+     "nome": "Millennium.Riemann.Millennium.Riemann.derivative_integral_equality",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "unknown module prefix 'Millennium' No directory 'Millennium' or file 'Millennium.olean' in the search path entries: ././.lake/packages/Cli/.lake/build/lib/lean ././.lake/packages/batteries/.lake/build"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 171,
+     "nome": "Millennium.Riemann.FormalAxioms.L1_phases_disjoint",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 188,
+     "nome": "Millennium.Riemann.FormalAxioms.L2_phase_completeness",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 201,
+     "nome": "Millennium.Riemann.FormalAxioms.L3_Phi_on_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 210,
+     "nome": "Millennium.Riemann.FormalAxioms.L4_Phi_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 220,
+     "nome": "Millennium.Riemann.FormalAxioms.L5_strip_bounds",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 225,
+     "nome": "Millennium.Riemann.FormalAxioms.L6_line_in_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 235,
+     "nome": "Millennium.Riemann.FormalAxioms.L7_trivial_outside",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 249,
+     "nome": "Millennium.Riemann.FormalAxioms.L8_nontrivial_in_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 254,
+     "nome": "Millennium.Riemann.FormalAxioms.L9_I_idempotent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
+     "linha": 394,
+     "nome": "Millennium.Riemann.FormalAxioms.C5_classification_complete",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 161,
+     "nome": "Millennium.Riemann.HorizonComplex.add_assoc",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 171,
+     "nome": "Millennium.Riemann.HorizonComplex.add_comm",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 179,
+     "nome": "Millennium.Riemann.HorizonComplex.zero_add",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 187,
+     "nome": "Millennium.Riemann.HorizonComplex.mul_assoc",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 195,
+     "nome": "Millennium.Riemann.HorizonComplex.mul_comm",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 203,
+     "nome": "Millennium.Riemann.HorizonComplex.one_mul",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 211,
+     "nome": "Millennium.Riemann.HorizonComplex.left_distrib",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 219,
+     "nome": "Millennium.Riemann.HorizonComplex.H_components",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 223,
+     "nome": "Millennium.Riemann.HorizonComplex.ofCollapseComplex_add",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 25,
+     "nome": "Millennium.Riemann.IConstant.Delta_projects",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 30,
+     "nome": "Millennium.Riemann.IConstant.Delta_preserves_im",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 35,
+     "nome": "Millennium.Riemann.IConstant.Delta_deviation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 41,
+     "nome": "Millennium.Riemann.IConstant.Delta_idempotent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 48,
+     "nome": "Millennium.Riemann.IConstant.Delta_critical_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 58,
+     "nome": "Millennium.Riemann.IConstant.vertical_symmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 72,
+     "nome": "Millennium.Riemann.IConstant.collapse_distance_zero_iff",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 77,
+     "nome": "Millennium.Riemann.IConstant.Delta_zero_distance",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 87,
+     "nome": "Millennium.Riemann.IConstant.collapse_equiv_iff",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 20,
+     "nome": "Millennium.Riemann.IConstant.I_real_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 23,
+     "nome": "Millennium.Riemann.IConstant.I_imag_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 26,
+     "nome": "Millennium.Riemann.IConstant.I_indet_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 29,
+     "nome": "Millennium.Riemann.IConstant.I_squared",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 38,
+     "nome": "Millennium.Riemann.IConstant.I_times_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 42,
+     "nome": "Millennium.Riemann.IConstant.zero_times_I",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 46,
+     "nome": "Millennium.Riemann.IConstant.I_times_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 50,
+     "nome": "Millennium.Riemann.IConstant.one_times_I",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 54,
+     "nome": "Millennium.Riemann.IConstant.I_ne_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 60,
+     "nome": "Millennium.Riemann.IConstant.I_ne_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 73,
+     "nome": "Millennium.Riemann.IConstant.I_is_pure",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 81,
+     "nome": "Millennium.Riemann.IConstant.scaleI_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 85,
+     "nome": "Millennium.Riemann.IConstant.scaleI_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IKernel/KernelDef.lean",
+     "linha": 29,
+     "nome": "Millennium.Riemann.IKernel.kernel_at_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IKernel/KernelDef.lean",
+     "linha": 53,
+     "nome": "Millennium.Riemann.IKernel.kernel_pure_I",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IKernel/ZetaIntegralEq.lean",
+     "linha": 25,
+     "nome": "Millennium.Riemann.IKernel.zero_integral_characterization",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IKernel/ZetaIntegralEq.lean",
+     "linha": 65,
+     "nome": "Millennium.Riemann.IKernel.functional_eq_from_integral",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
+     "linha": 351,
+     "nome": "Millennium.Riemann.HierarchyTheorems.operators_monotone",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
+     "linha": 396,
+     "nome": "Millennium.Riemann.real_subset_complex",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
+     "linha": 401,
+     "nome": "Millennium.Riemann.complex_subset_CC",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
+     "linha": 482,
+     "nome": "Millennium.Riemann.number_hierarchy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 203,
+     "nome": "Millennium.Riemann.RefutationComplex.add_assoc",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 214,
+     "nome": "Millennium.Riemann.RefutationComplex.add_comm",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 223,
+     "nome": "Millennium.Riemann.RefutationComplex.zero_add",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 232,
+     "nome": "Millennium.Riemann.RefutationComplex.mul_comm",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 241,
+     "nome": "Millennium.Riemann.RefutationComplex.one_mul",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 250,
+     "nome": "Millennium.Riemann.RefutationComplex.R_components",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 254,
+     "nome": "Millennium.Riemann.RefutationComplex.R_squared",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 263,
+     "nome": "Millennium.Riemann.RefutationComplex.collapse_idempotent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 268,
+     "nome": "Millennium.Riemann.RefutationComplex.refute_refute",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
+     "linha": 274,
+     "nome": "Millennium.Riemann.RefutationComplex.synthesize_no_refutation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/SymbolicZeta.lean",
+     "linha": 134,
+     "nome": "Millennium.Riemann.symbolicRH_statement",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/SymbolicZeta.lean",
+     "linha": 144,
+     "nome": "Millennium.Riemann.functional_equation_symmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/TwoPhaseTheorem.lean",
+     "linha": 259,
+     "nome": "Millennium.Riemann.TwoPhaseTheorem.L5_phases_exclusive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/TwoPhaseTheorem.lean",
+     "linha": 271,
+     "nome": "Millennium.Riemann.TwoPhaseTheorem.L6_exactly_one_phase",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 63,
+     "nome": "Millennium.Riemann.Zeros.DeltaCollapse_preserves_im",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 68,
+     "nome": "Millennium.Riemann.Zeros.DeltaCollapse_critical_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 73,
+     "nome": "Millennium.Riemann.Zeros.DeltaCollapse_idempotent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 146,
+     "nome": "Millennium.Riemann.Zeros.I_collapse_contradiction",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 163,
+     "nome": "Millennium.Riemann.Zeros.symbolic_RH_via_I_collapse",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 194,
+     "nome": "Millennium.Riemann.Zeros.vertical_symmetry_from_Delta",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
+     "linha": 210,
+     "nome": "Millennium.Riemann.Zeros.zeros_satisfy_integral_equation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 36,
+     "nome": "Millennium.Riemann.Zeros.reflect_imaginary",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 42,
+     "nome": "Millennium.Riemann.Zeros.reflect_swaps_sides",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 47,
+     "nome": "Millennium.Riemann.Zeros.critical_line_fixed_point",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 71,
+     "nome": "Millennium.Riemann.Zeros.critical_orbit_size",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 75,
+     "nome": "Millennium.Riemann.Zeros.generic_orbit_size",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 79,
+     "nome": "Millennium.Riemann.Zeros.Delta_unifies_orbit",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
+     "linha": 86,
+     "nome": "Millennium.Riemann.Zeros.vertical_strip_symmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
+     "linha": 27,
+     "nome": "Millennium.Riemann.Zeros.trivial_real_axis",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
+     "linha": 32,
+     "nome": "Millennium.Riemann.Zeros.trivial_negative",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
+     "linha": 39,
+     "nome": "Millennium.Riemann.Zeros.trivial_infinite",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
+     "linha": 51,
+     "nome": "Millennium.Riemann.Zeros.trivial_mechanism",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
+     "linha": 55,
+     "nome": "Millennium.Riemann.Zeros.trivial_spacing",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Assumptions.lean",
+     "linha": 32,
+     "nome": "Riemann.CollapseProof.collapse_law_critical_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Assumptions.lean",
+     "linha": 39,
+     "nome": "Riemann.CollapseProof.collapse_law_contrapositive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 18,
+     "nome": "Riemann.CollapseProof.RH_by_I_collapse",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 36,
+     "nome": "Riemann.CollapseProof.RH_by_I_collapse_contrapositive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 40,
+     "nome": "Riemann.CollapseProof.riemann_hypothesis",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 44,
+     "nome": "Riemann.CollapseProof.all_nontrivial_zeros_on_critical_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 49,
+     "nome": "Riemann.CollapseProof.no_nontrivial_zero_off_critical_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
+     "linha": 56,
+     "nome": "Riemann.CollapseProof.all_nontrivial_zeros_real_part_half",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 18,
+     "nome": "Riemann.CollapseProof.not_RH_means_exists_off_line",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 26,
+     "nome": "Riemann.CollapseProof.not_RH_implies_I_eq_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
+     "linha": 34,
+     "nome": "Riemann.CollapseProof.not_RH_implies_I_eq_one_direct",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Core/ClassicalZeros.lean",
+     "linha": 61,
+     "nome": "Riemann.Core.Riemann.Core.trivial_zeros_outside_strip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "unknown module prefix 'Riemann' No directory 'Riemann' or file 'Riemann.olean' in the search path entries: ././.lake/packages/Cli/.lake/build/lib/lean ././.lake/packages/batteries/.lake/build/lib/lean"
+    },
+    {
+     "arquivo": "src/Riemann/Core/CriticalStrip.lean",
+     "linha": 28,
+     "nome": "Riemann.Core.criticalLineSymmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Core/FunctionalEquation.lean",
+     "linha": 27,
+     "nome": "Riemann.Core.reflectionSymmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Core/FunctionalEquation.lean",
+     "linha": 36,
+     "nome": "Riemann.Core.zeroPairs",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 23,
+     "nome": "Riemann.IConstant.noAnomalousFromI",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 29,
+     "nome": "Riemann.IConstant.symmetryFromI",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
+     "linha": 57,
+     "nome": "Riemann.IConstant.collapseFromAnomalous",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/IKernel/KernelDef.lean",
+     "linha": 42,
+     "nome": "Riemann.IKernel.gaussianAtZero",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
+     "linha": 34,
+     "nome": "Riemann.IKernel.zero_integral_equation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
+     "linha": 64,
+     "nome": "Riemann.IKernel.reflection_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
+     "linha": 73,
+     "nome": "Riemann.IKernel.RH_integral_formulation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
+     "linha": 19,
+     "nome": "Riemann.Zeros.nontrivialInStrip'",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
+     "linha": 43,
+     "nome": "Riemann.Zeros.zeroClassification",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
+     "linha": 52,
+     "nome": "Riemann.Zeros.criticalAnomalousExclusive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
+     "linha": 74,
+     "nome": "Riemann.Zeros.RH_iff_noAnomalous",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Symmetry.lean",
+     "linha": 13,
+     "nome": "Riemann.Zeros.verticalSymmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Symmetry.lean",
+     "linha": 19,
+     "nome": "Riemann.Zeros.horizontalSymmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Symmetry.lean",
+     "linha": 25,
+     "nome": "Riemann.Zeros.quartetStructure",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Symmetry.lean",
+     "linha": 36,
+     "nome": "Riemann.Zeros.criticalPairStructure",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Symmetry.lean",
+     "linha": 43,
+     "nome": "Riemann.Zeros.anomalousBreaksSymmetry",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Trivial.lean",
+     "linha": 19,
+     "nome": "Riemann.Zeros.negEvenIsZero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/Riemann/Zeros/Trivial.lean",
+     "linha": 24,
+     "nome": "Riemann.Zeros.trivialNotInStrip",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Sim.compute_zeros_external",
+     "enunciado": "{ℕ : Sort u_1} → {ℂ : Type} → ℕ → IO (List ℂ)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Sim.verify_functional_equation_external",
+     "enunciado": "{ℂ : Sort u_1} → ℂ → IO Bool",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Sim.analyze_i_kernel_spectrum_external",
+     "enunciado": "{ℝ : Type} → ℝ → IO (List ℝ)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Sim.load_zeros_from_csv",
+     "enunciado": "{ℂ : Type} → String → IO (List ℂ)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 1,
+    "condicional": 0
+   }
+  }
+ ]
+}

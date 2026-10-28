@@ -1,0 +1,1511 @@
+--- a/formalization/lean/HEAU.lean
++++ b/formalization/lean/HEAU.lean
+@@ -1,2 +1,3 @@
+-/-! Entry point for Lean HEAU formalization. -/
+ import HEAU.BasicDefs
++
++/-! Entry point for Lean HEAU formalization. -/
+--- a/formalization/lean/LRE/Basic.lean
++++ b/formalization/lean/LRE/Basic.lean
+@@ -1,11 +1,14 @@
++import Mathlib.Analysis.InnerProductSpace.Basic
++import Mathlib.Topology.Basic
++import Mathlib.Topology.ContinuousFunction.Basic
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.MeasureTheory.Measure.MeasureSpace
++
+ /-
+ LRE (Lógica da Representação Estrutural) - Basic Definitions
+ Structural Representation Logic - Core Types and Axioms
+ -/
+ 
+-import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Topology.Basic
+-import Mathlib.Topology.ContinuousFunction.Basic
+ 
+ /-!
+ # LRE: Structural Representation Logic
+@@ -224,9 +227,6 @@
+ This file contains the fundamental definitions for LRE theory.
+ -/
+ 
+-import Mathlib.Topology.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.MeasureTheory.Measure.MeasureSpace
+ 
+ /-!
+ # Structural Residue Logic - Core Definitions
+--- a/formalization/lean/LRE/Core/Basic.lean
++++ b/formalization/lean/LRE/Core/Basic.lean
+@@ -1,3 +1,10 @@
++import Mathlib.MeasureTheory.MeasurableSpace.Basic
++import Mathlib.MeasureTheory.Measure.MeasureSpace
++import Mathlib.Topology.Basic
++import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
++import Mathlib.Geometry.Manifold.ContMDiff
++import Mathlib.Analysis.NormedSpace.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -19,9 +26,6 @@
+ * "Teoria das Fibras Residuais" - Framework document
+ -/
+ 
+-import Mathlib.MeasureTheory.MeasurableSpace.Basic
+-import Mathlib.MeasureTheory.Measure.MeasureSpace
+-import Mathlib.Topology.Basic
+ 
+ /-! ## Basic Structures -/
+ 
+@@ -131,9 +135,6 @@
+ - Residue function R: C → ℝ≥0 (smooth, non-negative)
+ -/
+ 
+-import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
+-import Mathlib.Geometry.Manifold.ContMDiff
+-import Mathlib.Analysis.NormedSpace.Basic
+ 
+ namespace LRE
+ 
+--- a/formalization/lean/LRE/Core/ClosureObstruction.lean
++++ b/formalization/lean/LRE/Core/ClosureObstruction.lean
+@@ -1,3 +1,11 @@
++import LRE.Core.Basic
++import LRE.Core.Projection
++import LRE.Core.Residue
++import LRE.Core.NonControl
++import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
++import LRE.Geometry.Ehresmann
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -29,11 +37,6 @@
+ about σ-algebras and measurability, not syntactic diagonalization.
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.Projection
+-import LRE.Core.Residue
+-import LRE.Core.NonControl
+-import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+ 
+ namespace ProjectionSystem
+ 
+@@ -280,9 +283,6 @@
+ prevents closure of the dynamics on the reduced space.
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Geometry.Ehresmann
+-import Mathlib.Analysis.Calculus.ContDiff.Defs
+ 
+ namespace LRE
+ 
+--- a/formalization/lean/LRE/Core/ProjectiveSystem.lean
++++ b/formalization/lean/LRE/Core/ProjectiveSystem.lean
+@@ -1,3 +1,12 @@
++import Mathlib.MeasureTheory.Integral.Bochner
++import Mathlib.MeasureTheory.Function.AEMeasurable
++import Mathlib.MeasureTheory.Function.EssSup
++import LRE.Core.Basic
++import Mathlib.Data.Real.Basic
++import Mathlib.Analysis.SpecialFunctions.Pow.Real
++import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
++import Mathlib
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -15,9 +24,6 @@
+ * `ResidualCurvature` - Curvature condition for obstruction theorem
+ -/
+ 
+-import Mathlib.MeasureTheory.Integral.Bochner
+-import Mathlib.MeasureTheory.Function.AEMeasurable
+-import Mathlib.MeasureTheory.Function.EssSup
+ 
+ namespace LRE
+ 
+@@ -153,10 +159,6 @@
+ 3. Non-control: R cannot be bounded by any function of x alone
+ -/
+ 
+-import LRE.Core.Basic
+-import Mathlib.Data.Real.Basic
+-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+ 
+ namespace LRE
+ 
+@@ -260,7 +262,6 @@
+   -- Strategy: For Lebesgue-a.e. x, the fiber over x contains
+   -- points with arbitrarily large residue
+   sorry
+-import Mathlib
+ 
+ /-!
+ # Projective Systems for LRE (Lei do Resíduo Estrutural)
+--- a/formalization/lean/LRE/Core/QuantitativeObstruction.lean
++++ b/formalization/lean/LRE/Core/QuantitativeObstruction.lean
+@@ -1,3 +1,17 @@
++import LRE.Core.ProjectiveSystem
++import Mathlib.MeasureTheory.Function.EssSup
++import Mathlib.Analysis.Normed.Group.Basic
++import LRE.Core.Basic
++import LRE.Core.Residue
++import LRE.Geometry.Ehresmann
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import Mathlib.Geometry.Manifold.ContMDiff.Defs
++import Mathlib.Geometry.Manifold.VectorBundle.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.MeasureTheory.Integral.Bochner
++import Mathlib.Topology.MetricSpace.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -20,9 +34,6 @@
+ contradiction using essential supremum/infimum.
+ -/
+ 
+-import LRE.Core.ProjectiveSystem
+-import Mathlib.MeasureTheory.Function.EssSup
+-import Mathlib.Analysis.Normed.Group.Basic
+ 
+ namespace LRE
+ 
+@@ -128,11 +139,6 @@
+ 
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.Residue
+-import LRE.Geometry.Ehresmann
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Analysis.InnerProductSpace.PiL2
+ 
+ namespace LRE
+ 
+@@ -451,12 +457,6 @@
+ PROVA DO TEOREMA DE OBSTRUÇÃO QUANTITATIVA"
+ -/
+ 
+-import Mathlib.Geometry.Manifold.ContMDiff.Defs
+-import Mathlib.Geometry.Manifold.VectorBundle.Basic
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.MeasureTheory.Integral.Bochner
+-import Mathlib.Topology.MetricSpace.Basic
+ 
+ open Manifold MeasureTheory Set
+ 
+--- a/formalization/lean/LRE/Core/Residual.lean
++++ b/formalization/lean/LRE/Core/Residual.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Data.Real.ENNReal
++import Mathlib
++import LRE.Core.ProjectiveSystem
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -17,7 +21,6 @@
+ * Problem statement: Section 1.1 - Estruturas centrais
+ -/
+ 
+-import Mathlib.Data.Real.ENNReal
+ 
+ namespace LRE
+ 
+@@ -65,8 +68,6 @@
+ -/
+ def HasUnboundedResidue {C : Sort u} [Residual C] (c : C) : Prop :=
+   Residual.R c = ⊤
+-import Mathlib
+-import LRE.Core.ProjectiveSystem
+ 
+ /-!
+ # Residual Functions and Properties
+--- a/formalization/lean/LRE/Examples/NavierStokesLRE.lean
++++ b/formalization/lean/LRE/Examples/NavierStokesLRE.lean
+@@ -1,3 +1,10 @@
++import LRE.Core.Basic
++import LRE.Core.ClosureObstruction
++import LRE.Geometry.ResidualCurvature
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
++import LRE.Core.NonControl
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -65,10 +72,6 @@
+ diverging residual curvature: Ω → ∞ as t → T*.
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.ClosureObstruction
+-import LRE.Geometry.ResidualCurvature
+-import Mathlib.Analysis.NormedSpace.Basic
+ 
+ namespace LRE.Examples.NavierStokes
+ 
+@@ -181,7 +184,6 @@
+   trivial  -- Highly conjectural
+ 
+ end LRE.Examples.NavierStokes
+-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+ 
+ namespace LRE.Examples
+ 
+@@ -330,11 +332,6 @@
+ * Closure obstruction explains the turbulence closure problem
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.NonControl
+-import LRE.Core.ClosureObstruction
+-import LRE.Geometry.ResidualCurvature
+-import Mathlib.Analysis.NormedSpace.Basic
+ 
+ namespace LRE.Examples
+ 
+--- a/formalization/lean/LRE/Examples/PvsNPLRE.lean
++++ b/formalization/lean/LRE/Examples/PvsNPLRE.lean
+@@ -1,3 +1,9 @@
++import LRE.Core.Basic
++import LRE.Core.ClosureObstruction
++import LRE.Geometry.ResidualCurvature
++import Mathlib.Data.Nat.Basic
++import Mathlib.Data.Fintype.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -60,9 +66,6 @@
+ It serves as a research direction for applying LRE to complexity theory.
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.ClosureObstruction
+-import LRE.Geometry.ResidualCurvature
+ 
+ namespace LRE.Examples.PvsNP
+ 
+@@ -207,8 +210,6 @@
+ -/
+ 
+ end LRE.Examples.PvsNP
+-import Mathlib.Data.Nat.Basic
+-import Mathlib.Data.Fintype.Basic
+ 
+ namespace LRE.Examples
+ 
+--- a/formalization/lean/LRE/Geometry/Ehresmann.lean
++++ b/formalization/lean/LRE/Geometry/Ehresmann.lean
+@@ -1,3 +1,10 @@
++import LRE.Core.Basic
++import LRE.Core.Projection
++import LRE.Core.Residue
++import Mathlib.Geometry.Manifold.VectorBundle.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.LinearAlgebra.Exterior.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -24,11 +31,6 @@
+ - Curvature measures obstruction to consistent parallel transport
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.Projection
+-import LRE.Core.Residue
+-import Mathlib.Geometry.Manifold.VectorBundle.Basic
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ namespace ProjectionSystem
+ 
+@@ -183,9 +185,6 @@
+ - Holonomy
+ -/
+ 
+-import LRE.Core.Basic
+-import Mathlib.Geometry.Manifold.VectorBundle.Basic
+-import Mathlib.LinearAlgebra.Exterior.Basic
+ 
+ namespace LRE
+ 
+--- a/formalization/lean/LRE/Geometry/Holonomy.lean
++++ b/formalization/lean/LRE/Geometry/Holonomy.lean
+@@ -1,3 +1,12 @@
++import LRE.Core.Basic
++import LRE.Geometry.Ehresmann
++import LRE.Geometry.ResidualCurvature
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.MeasureTheory.Integral.Bochner
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.MeasureTheory.Integral.IntervalIntegral
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -22,11 +31,6 @@
+ 
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Geometry.Ehresmann
+-import LRE.Geometry.ResidualCurvature
+-import Mathlib.Analysis.Calculus.ContDiff.Defs
+-import Mathlib.MeasureTheory.Integral.Bochner
+ 
+ namespace LRE
+ 
+@@ -212,10 +216,6 @@
+ accumulated residual effects.
+ -/
+ 
+-import LRE.Geometry.ResidualCurvature
+-import LRE.Geometry.Ehresmann
+-import Mathlib.Analysis.SpecialFunctions.Exp
+-import Mathlib.MeasureTheory.Integral.IntervalIntegral
+ 
+ namespace LRE
+ 
+@@ -365,10 +365,6 @@
+ at a different point in the fiber than where it started. This is holonomy.
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Geometry.Ehresmann
+-import LRE.Geometry.ResidualCurvature
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ namespace ProjectionSystem
+ 
+--- a/formalization/lean/LRE/Geometry/ResidualCurvature.lean
++++ b/formalization/lean/LRE/Geometry/ResidualCurvature.lean
+@@ -1,3 +1,16 @@
++import LRE.Core.Basic
++import LRE.Core.Residue
++import LRE.Core.NonControl
++import LRE.Geometry.Ehresmann
++import Mathlib.MeasureTheory.Measure.MeasureSpaceDef
++import Mathlib.Analysis.SpecialFunctions.Pow.Real
++import LRE.Core.ProjectiveSystem
++import Mathlib.Geometry.Manifold.VectorBundle.Basic
++import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.MeasureTheory.Integral.Bochner
++import LRE.Core.ClosureObstruction
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -18,12 +31,6 @@
+ 
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.Residue
+-import LRE.Core.NonControl
+-import LRE.Geometry.Ehresmann
+-import Mathlib.MeasureTheory.Measure.MeasureSpaceDef
+-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ # Ehresmann Connection with Residual Curvature
+ 
+ This file implements the geometric foundation of LRE: Ehresmann connections
+@@ -43,9 +50,6 @@
+ Non-zero curvature means the residue cannot be eliminated by coordinate changes.
+ -/
+ 
+-import LRE.Core.ProjectiveSystem
+-import Mathlib.Geometry.Manifold.VectorBundle.Basic
+-import Mathlib.Analysis.Calculus.FDeriv.Basic
+ 
+ namespace LRE
+ 
+@@ -180,11 +184,6 @@
+   Hol(γ) = exp(∬_{A_γ} Ω)
+ -/
+ 
+-import LRE.Geometry.Ehresmann
+-import LRE.Core.ProjectiveSystem
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.Calculus.FDeriv.Basic
+-import Mathlib.MeasureTheory.Integral.Bochner
+ 
+ namespace LRE
+ 
+@@ -412,10 +411,6 @@
+ providing a quantitative obstruction to closure.
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Core.ClosureObstruction
+-import LRE.Geometry.Ehresmann
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ namespace ProjectionSystem
+ 
+--- a/formalization/lean/LRE/Millennium/BSD/Model.lean
++++ b/formalization/lean/LRE/Millennium/BSD/Model.lean
+@@ -1,3 +1,11 @@
++import LRE.Core.Projective
++import LRE.Framework.ProblemTemplate
++import Mathlib.Analysis.Complex.Basic
++import LRE.Core.Residual
++import LRE.Core.Closure
++import Mathlib.NumberTheory.LSeries.Basic
++import Mathlib.Data.Nat.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -16,9 +24,6 @@
+ * "ESTRATÉGIA DE CERCO FORMALIZADA: META-FRAMEWORK LRE EM LEAN 4"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Framework.ProblemTemplate
+-import Mathlib.Analysis.Complex.Basic
+ 
+ namespace LRE.BSD
+ 
+@@ -96,11 +101,6 @@
+ * Problem statement: Section 3.5 - "Birch–Swinnerton–Dyer (BSD)"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Core.Residual
+-import LRE.Core.Closure
+-import Mathlib.NumberTheory.LSeries.Basic
+-import Mathlib.Data.Nat.Basic
+ 
+ namespace LRE.Millennium.BSD
+ 
+--- a/formalization/lean/LRE/Millennium/BSD.lean
++++ b/formalization/lean/LRE/Millennium/BSD.lean
+@@ -1,3 +1,11 @@
++import LRE.Unified.Core
++import Mathlib.NumberTheory.LSeries.Basic
++import Mathlib.AlgebraicGeometry.EllipticCurve.Affine
++import LRE.MillenniumCore
++import LRE.ERS
++import Mathlib.NumberTheory.EllipticCurve
++import Mathlib.Analysis.Complex.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -34,9 +42,6 @@
+ * LRE Theory: "Lei do Resíduo Estrutural"
+ -/
+ 
+-import LRE.Unified.Core
+-import Mathlib.NumberTheory.LSeries.Basic
+-import Mathlib.AlgebraicGeometry.EllipticCurve.Affine
+ 
+ namespace LRE.Millennium
+ 
+@@ -220,10 +225,6 @@
+ 3. **BSD ⟺ Zero Residue**: The conjecture is equivalent to R = 0
+ -/
+ 
+-import LRE.MillenniumCore
+-import LRE.ERS
+-import Mathlib.NumberTheory.EllipticCurve
+-import Mathlib.Analysis.Complex.Basic
+ 
+ open LRE Complex
+ 
+--- a/formalization/lean/LRE/Millennium/NavierStokes/Model.lean
++++ b/formalization/lean/LRE/Millennium/NavierStokes/Model.lean
+@@ -1,3 +1,12 @@
++import LRE.Core.Projective
++import LRE.Framework.ProblemTemplate
++import LRE.ERS.AbstractODE
++import Mathlib.Analysis.Complex.Basic
++import LRE.Core.Residual
++import LRE.Core.Closure
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.InnerProductSpace.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -22,10 +31,6 @@
+ * "ESTRATÉGIA DE CERCO FORMALIZADA: META-FRAMEWORK LRE EM LEAN 4"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Framework.ProblemTemplate
+-import LRE.ERS.AbstractODE
+-import Mathlib.Analysis.Complex.Basic
+ 
+ namespace LRE.NS
+ 
+@@ -172,11 +177,6 @@
+ * Problem statement: Section 3.1 - "Navier-Stokes (regularidade 3D)"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Core.Residual
+-import LRE.Core.Closure
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace LRE.Millennium.NavierStokes
+ 
+--- a/formalization/lean/LRE/Millennium/PvsNP/Model.lean
++++ b/formalization/lean/LRE/Millennium/PvsNP/Model.lean
+@@ -1,3 +1,11 @@
++import LRE.Core.Projective
++import LRE.Framework.ProblemTemplate
++import LRE.ERS.AbstractODE
++import LRE.Core.Residual
++import LRE.Core.Closure
++import Mathlib.Data.Nat.Basic
++import Mathlib.Computability.Language
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -20,9 +28,6 @@
+ * "ESTRATÉGIA DE CERCO FORMALIZADA: META-FRAMEWORK LRE EM LEAN 4"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Framework.ProblemTemplate
+-import LRE.ERS.AbstractODE
+ 
+ namespace LRE.PvsNP
+ 
+@@ -176,11 +181,6 @@
+ * Problem statement: Section 3.2 - "P vs NP"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Core.Residual
+-import LRE.Core.Closure
+-import Mathlib.Data.Nat.Basic
+-import Mathlib.Computability.Language
+ 
+ namespace LRE.Millennium.PvsNP
+ 
+--- a/formalization/lean/LRE/Millennium/PvsNP.lean
++++ b/formalization/lean/LRE/Millennium/PvsNP.lean
+@@ -1,3 +1,10 @@
++import LRE.Unified.Core
++import Mathlib.Data.Nat.Basic
++import Mathlib.Data.Fintype.Basic
++import LRE.MillenniumCore
++import LRE.ERS
++import Mathlib.Computability.TuringMachine
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -35,9 +42,6 @@
+ * LRE Theory: "Lei do Resíduo Estrutural"
+ -/
+ 
+-import LRE.Unified.Core
+-import Mathlib.Data.Nat.Basic
+-import Mathlib.Data.Fintype.Basic
+ 
+ namespace LRE.Millennium
+ 
+@@ -181,10 +185,6 @@
+ 3. **Complexity Gap**: If ERS shows exponential growth, then P ≠ NP
+ -/
+ 
+-import LRE.MillenniumCore
+-import LRE.ERS
+-import Mathlib.Data.Nat.Basic
+-import Mathlib.Computability.TuringMachine
+ 
+ open LRE
+ 
+--- a/formalization/lean/LRE/Millennium/Riemann/Model.lean
++++ b/formalization/lean/LRE/Millennium/Riemann/Model.lean
+@@ -1,3 +1,12 @@
++import LRE.Core.Projective
++import LRE.Framework.ProblemTemplate
++import LRE.ERS.AbstractODE
++import Mathlib.Analysis.Complex.Basic
++import LRE.Core.Residual
++import LRE.Core.Closure
++import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.Data.Complex.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -18,10 +27,6 @@
+ * "ESTRATÉGIA DE CERCO FORMALIZADA: META-FRAMEWORK LRE EM LEAN 4"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Framework.ProblemTemplate
+-import LRE.ERS.AbstractODE
+-import Mathlib.Analysis.Complex.Basic
+ 
+ namespace LRE.Riemann
+ 
+@@ -162,11 +167,6 @@
+ * Problem statement: Section 3.3 - "Hipótese de Riemann (RH)"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Core.Residual
+-import LRE.Core.Closure
+-import Mathlib.NumberTheory.ZetaFunction
+-import Mathlib.Data.Complex.Basic
+ 
+ namespace LRE.Millennium.Riemann
+ 
+--- a/formalization/lean/LRE/Millennium/YangMills/Model.lean
++++ b/formalization/lean/LRE/Millennium/YangMills/Model.lean
+@@ -1,3 +1,10 @@
++import LRE.Core.Projective
++import LRE.Framework.ProblemTemplate
++import LRE.Core.Residual
++import LRE.Core.Closure
++import Mathlib.Geometry.Manifold.VectorBundle.Basic
++import Mathlib.Data.Real.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -16,8 +23,6 @@
+ * "ESTRATÉGIA DE CERCO FORMALIZADA: META-FRAMEWORK LRE EM LEAN 4"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Framework.ProblemTemplate
+ 
+ namespace LRE.YangMills
+ 
+@@ -93,11 +98,6 @@
+ * Problem statement: Section 3.4 - "Yang-Mills e o gap de massa"
+ -/
+ 
+-import LRE.Core.Projective
+-import LRE.Core.Residual
+-import LRE.Core.Closure
+-import Mathlib.Geometry.Manifold.VectorBundle.Basic
+-import Mathlib.Data.Real.Basic
+ 
+ namespace LRE.Millennium.YangMills
+ 
+--- a/formalization/lean/LRE/Millennium/YangMills.lean
++++ b/formalization/lean/LRE/Millennium/YangMills.lean
+@@ -1,3 +1,10 @@
++import LRE.Unified.Core
++import Mathlib.Geometry.Manifold.Instances.Real
++import Mathlib.Analysis.InnerProductSpace.Basic
++import LRE.MillenniumCore
++import LRE.ERS
++import Mathlib.Geometry.Manifold.VectorBundle.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -34,9 +41,6 @@
+ * LRE Theory: "Lei do Resíduo Estrutural"
+ -/
+ 
+-import LRE.Unified.Core
+-import Mathlib.Geometry.Manifold.Instances.Real
+-import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace LRE.Millennium
+ 
+@@ -213,9 +217,6 @@
+ 3. **Mass Gap**: Δ > 0 ⟺ inf R > 0 over all physical states
+ -/
+ 
+-import LRE.MillenniumCore
+-import LRE.ERS
+-import Mathlib.Geometry.Manifold.VectorBundle.Basic
+ 
+ open LRE
+ 
+--- a/formalization/lean/LRE/MillenniumProblems.lean
++++ b/formalization/lean/LRE/MillenniumProblems.lean
+@@ -1,3 +1,16 @@
++import Mathlib.Topology.Basic
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.MeasureTheory.Measure.MeasureSpace
++import Mathlib.Data.Real.NNReal
++import LRE.MillenniumProblems
++import LRE.MillenniumProblems.Core
++import LRE.MillenniumProblems.NavierStokes
++import LRE.MillenniumProblems.PvsNP
++import LRE.MillenniumProblems.RiemannHypothesis
++import LRE.MillenniumProblems.YangMills
++import LRE.MillenniumProblems.BSD
++import LRE.MillenniumProblems.Unified
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -30,10 +43,6 @@
+ 
+ -/
+ 
+-import Mathlib.Topology.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.MeasureTheory.Measure.MeasureSpace
+-import Mathlib.Data.Real.NNReal
+ 
+ open Classical
+ open Real
+@@ -523,7 +532,6 @@
+ ## How to Use
+ 
+ ```lean
+-import LRE.MillenniumProblems
+ 
+ open LRE.MillenniumProblems
+ 
+@@ -566,17 +574,10 @@
+ -/
+ 
+ -- Core ontology
+-import LRE.MillenniumProblems.Core
+ 
+ -- Individual problems
+-import LRE.MillenniumProblems.NavierStokes
+-import LRE.MillenniumProblems.PvsNP
+-import LRE.MillenniumProblems.RiemannHypothesis
+-import LRE.MillenniumProblems.YangMills
+-import LRE.MillenniumProblems.BSD
+ 
+ -- Unified framework
+-import LRE.MillenniumProblems.Unified
+ 
+ /-! ## Quick Reference -/
+ 
+--- a/formalization/lean/LRE/NavierStokes/ResidualStability.lean
++++ b/formalization/lean/LRE/NavierStokes/ResidualStability.lean
+@@ -1,3 +1,14 @@
++import LRE.NavierStokes.LittlewoodPaley
++import LRE.FiberBundle
++import LRE.CouplingOperator
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Topology.MetricSpace.Basic
++import Mathlib.MeasureTheory.Integral.Bochner
++import LRE.Core.Basic
++import LRE.Core.Residue
++import LRE.Geometry.Ehresmann
++
+ /-
+ Residual Stability Inequality for Navier-Stokes
+ 
+@@ -20,10 +31,6 @@
+ the residual curvature can become infinite in finite time.
+ -/
+ 
+-import LRE.NavierStokes.LittlewoodPaley
+-import LRE.FiberBundle
+-import LRE.CouplingOperator
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ namespace LRE.NavierStokes
+ 
+@@ -270,13 +277,6 @@
+ The LRE framework provides geometric tools to analyze these conditions.
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Topology.MetricSpace.Basic
+-import Mathlib.MeasureTheory.Integral.Bochner
+-import LRE.Core.Basic
+-import LRE.Core.Residue
+-import LRE.Geometry.Ehresmann
+ 
+ /-! ## Navier-Stokes Configuration Space -/
+ 
+--- a/formalization/lean/LRE/NavierStokes.lean
++++ b/formalization/lean/LRE/NavierStokes.lean
+@@ -1,3 +1,23 @@
++import LRE.Basic
++import Mathlib.Analysis.InnerProductSpace.Basic
++import Mathlib.Analysis.NormedSpace.Basic
++import LRE.FiberBundle
++import LRE.CouplingOperator
++import LRE.ClosureTheorem
++import LRE.NavierStokes.LittlewoodPaley
++import LRE.NavierStokes.ResidualStability
++import LRE.Core.QuantitativeObstruction
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import LRE.NavierStokes.ResidualStabilityInequality
++import LRE.Geometry.CurvatureTheory
++import LRE.Geometry.CouplingCurvature
++import LRE.NavierStokes.Complete
++import LRE.NavierStokes.LerayProjection
++import LRE.NavierStokes.CurvatureEstimates
++import LRE.NavierStokes.Injective
++import LRE.NavierStokes.Energy
++import LRE.NavierStokes.Main
++
+ /-
+ Application to Navier-Stokes: Geometric Decomposition and Closure Problem
+ 
+@@ -40,9 +60,6 @@
+ LRE Application: Navier-Stokes Blow-up via Projection Failure
+ -/
+ 
+-import LRE.Basic
+-import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
+ 
+ /-!
+ # Navier-Stokes Regularity via LRE
+@@ -268,14 +285,6 @@
+ explodes and the model (finite modes) cannot track the full dynamics → blow-up.
+ -/
+ 
+-import LRE.FiberBundle
+-import LRE.CouplingOperator
+-import LRE.ClosureTheorem
+-import LRE.NavierStokes.LittlewoodPaley
+-import LRE.NavierStokes.ResidualStability
+-import LRE.Core.QuantitativeObstruction
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Analysis.InnerProductSpace.PiL2
+ 
+ /-! ## Section 1: Classical Navier-Stokes Setup -/
+ 
+@@ -283,16 +292,8 @@
+     ∂u/∂t + (u·∇)u = -∇p + ν Δu + f
+     ∇·u = 0
+ where u is velocity, p is pressure, ν > 0 is viscosity, f is forcing -/
+-import LRE.NavierStokes.ResidualStabilityInequality
+-import LRE.Geometry.CurvatureTheory
+-import LRE.Geometry.CouplingCurvature
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Analysis.InnerProductSpace.PiL2
+ 
+ -- Re-export the complete formalization
+-import LRE.NavierStokes.Complete
+-import LRE.NavierStokes.LerayProjection
+-import LRE.NavierStokes.CurvatureEstimates
+ 
+ /-! ## Navier-Stokes Setup -/
+ 
+@@ -612,9 +613,6 @@
+ curvature bound problem.
+ -/
+ 
+-import LRE.NavierStokes.Injective
+-import LRE.NavierStokes.Energy
+-import LRE.NavierStokes.Main
+ 
+ /-! ## Re-export main results
+ 
+--- a/formalization/lean/LRE/PvsNP.lean
++++ b/formalization/lean/LRE/PvsNP.lean
+@@ -1,3 +1,11 @@
++import Mathlib.Computability.TuringMachine
++import Mathlib.Complexity.Basic
++import Mathlib.Data.Polynomial.Basic
++import Mathlib.Data.Real.Basic
++import LRE.Basic
++import Mathlib.Analysis.InnerProductSpace.Basic
++import Mathlib.Topology.MetricSpace.Basic
++
+ /-
+ P vs NP via Residual Emergent Logic (LRE)
+ 
+@@ -14,10 +22,6 @@
+ Date: 2025
+ -/
+ 
+-import Mathlib.Computability.TuringMachine
+-import Mathlib.Complexity.Basic
+-import Mathlib.Data.Polynomial.Basic
+-import Mathlib.Data.Real.Basic
+ 
+ namespace LRE.PvsNP
+ 
+@@ -281,9 +285,6 @@
+ LRE Application: P vs NP via Geometry of Search Space
+ -/
+ 
+-import LRE.Basic
+-import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Topology.MetricSpace.Basic
+ 
+ /-!
+ # P vs NP via LRE
+--- a/formalization/lean/LRE/QuantitativeObstruction.lean
++++ b/formalization/lean/LRE/QuantitativeObstruction.lean
+@@ -1,3 +1,9 @@
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
++import Mathlib.Geometry.Manifold.ContMDiff
++import Mathlib.Topology.Basic
++
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -53,11 +59,6 @@
+ 
+ -/
+ 
+-import Mathlib.Analysis.Calculus.ContDiff.Defs
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
+-import Mathlib.Geometry.Manifold.ContMDiff
+-import Mathlib.Topology.Basic
+ 
+ namespace LRE
+ 
+@@ -396,7 +397,6 @@
+     ∀ (model : sys.D → ℝ≥0) (hmodel : Continuous model),
+     ∃ c, (res.R c : ℝ) > (model (sys.π c) : ℝ) := by
+   sorry
+-import Mathlib.Topology.Basic
+ 
+ open Set Function
+ 
+--- a/formalization/lean/LRE.lean
++++ b/formalization/lean/LRE.lean
+@@ -6,6 +6,74 @@
+ import LRE.Applications.NavierStokes
+ import LRE.Applications.PvsNP
+ import LRE.Applications.RiemannHypothesis
++import LRE.Core.Basic
++import LRE.Core.Projection
++import LRE.Core.Residue
++import LRE.Core.NonControl
++import LRE.Core.ClosureObstruction
++import LRE.Core.QuantitativeObstruction
++import LRE.Geometry.Ehresmann
++import LRE.Geometry.EhresmannComplete
++import LRE.Geometry.Coupling
++import LRE.Geometry.ResidualCurvature
++import LRE.Geometry.Holonomy
++import LRE.Geometry.ToyModel
++import LRE.Examples.ToyModelDynamics
++import LRE.Examples.NavierStokesLRE
++import LRE.Examples.PvsNPLRE
++import LRE.Geometry.ToyModelDetailed
++import LRE.ClosureObstructionQuantitative
++import LRE.QuantitativeObstruction
++import LRE.Examples
++import LRE.MillenniumProblems
++import LRE.MillenniumExamples
++import LRE.RBC
++import LRE.RBC_Corrected
++import LRE.Final
++import LRE.FiberBundle
++import LRE.CouplingOperator
++import LRE.ClosureTheorem
++import LRE.NavierStokes
++import LRE.NavierStokes.Injective
++import LRE.NavierStokes.Energy
++import LRE.NavierStokes.Main
++import LRE.NavierStokes.LittlewoodPaley
++import LRE.NavierStokes.ResidualStability
++import LRE.Complexity.Basic
++import LRE.Complexity.Holonomy
++import LRE.NavierStokes.Complete
++import LRE.NavierStokes.LerayProjection
++import LRE.NavierStokes.CurvatureEstimates
++import LRE.NavierStokesResidual
++import LRE.NS
++import LRE.Geometry.CurvatureTheory
++import LRE.Geometry.CouplingCurvature
++import LRE.Topology.Grothendieck
++import LRE.Unified.Core
++import LRE.Millennium
++import LRE.OtherProblems.ABC
++import LRE.OtherProblems.Collatz
++import LRE.NavierStokesApplication
++import LRE.NavierStokes.ResidualStabilityInequality
++import LRE.PvsNP
++import LRE.Core.Projective
++import LRE.ERS.AbstractODE
++import LRE.Framework.ProblemTemplate
++import LRE.Millennium.NavierStokes.Model
++import LRE.Millennium.PvsNP.Model
++import LRE.Millennium.Riemann.Model
++import LRE.Millennium.YangMills.Model
++import LRE.Millennium.BSD.Model
++import LRE.Theorems.UnifiedLRE
++import LRE.Implementation.Roadmap
++import LRE.MillenniumCore
++import LRE.ERS
++import LRE.Millennium.NavierStokes
++import LRE.Millennium.PvsNP
++import LRE.Millennium.Riemann
++import LRE.Millennium.YangMills
++import LRE.Millennium.BSD
++import LRE.HCS
+ 
+ /-!
+ # Lei do Resíduo Estrutural (LRE)
+@@ -199,52 +267,21 @@
+ -/
+ 
+ -- Core modules
+-import LRE.Core.Basic
+-import LRE.Core.Projection
+-import LRE.Core.ProjectiveSystem
+-import LRE.Core.Residue
+-import LRE.Core.NonControl
+-import LRE.Core.ClosureObstruction
+-import LRE.Core.ProjectiveSystem
+-import LRE.Core.QuantitativeObstruction
+ 
+ -- Geometry modules
+-import LRE.Geometry.Ehresmann
+-import LRE.Geometry.EhresmannComplete
+-import LRE.Geometry.Coupling
+-import LRE.Geometry.ResidualCurvature
+-import LRE.Geometry.Holonomy
+-import LRE.Geometry.ToyModel
+-import LRE.Geometry.ResidualCurvature
+-import LRE.Geometry.Holonomy
+ 
+ -- Examples
+-import LRE.Examples.ToyModelDynamics
+-import LRE.Examples.NavierStokesLRE
+-import LRE.Examples.PvsNPLRE
+-import LRE.Geometry.ToyModelDetailed
+ 
+ -- Quantitative theory
+-import LRE.ClosureObstructionQuantitative
+ 
+ -- Quantitative Obstruction Theorem
+-import LRE.QuantitativeObstruction
+-import LRE.Examples
+ -- Examples
+-import LRE.Examples.NavierStokesLRE
+-import LRE.Examples.PvsNPLRE
+ -- Millennium Problems: Unified LRE Framework
+-import LRE.MillenniumProblems
+ 
+ -- Concrete Examples and Computations
+-import LRE.MillenniumExamples
+ -- Examples
+-import LRE.Examples.NavierStokesLRE
+ -- Dynamics and blow-up theory
+-import LRE.RBC
+-import LRE.RBC_Corrected
+ -- Final Theory
+-import LRE.Final
+ 
+ /-! ## Quick Reference -/
+ 
+@@ -341,36 +378,8 @@
+ - "Holonomia de Complexidade: Uma Abordagem Geométrica para P vs NP" (NEW)
+ -/
+ 
+-import LRE.FiberBundle
+-import LRE.CouplingOperator
+-import LRE.ClosureTheorem
+-import LRE.NavierStokes
+-import LRE.NavierStokes.Injective
+-import LRE.NavierStokes.Energy
+-import LRE.NavierStokes.Main
+-import LRE.NavierStokes.LittlewoodPaley
+-import LRE.NavierStokes.ResidualStability
+-import LRE.Complexity.Basic
+-import LRE.Complexity.Holonomy
+-import LRE.NavierStokes.Complete
+-import LRE.NavierStokes.LerayProjection
+-import LRE.NavierStokes.CurvatureEstimates
+-import LRE.NavierStokesResidual
+-import LRE.NS
+-import LRE.MillenniumProblems
+-import LRE.MillenniumExamples
+-import LRE.NavierStokes.ResidualStability
+-import LRE.Geometry.CurvatureTheory
+-import LRE.Geometry.CouplingCurvature
+-import LRE.Topology.Grothendieck
+-import LRE.RBC
+-import LRE.Final
+ 
+ -- Unified framework and comprehensive applications
+-import LRE.Unified.Core
+-import LRE.Millennium
+-import LRE.OtherProblems.ABC
+-import LRE.OtherProblems.Collatz
+ 
+ /-! ## Integration with UIA Framework -/
+ 
+@@ -555,15 +564,8 @@
+ 
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Geometry.Ehresmann
+-import LRE.Core.ClosureObstruction
+-import LRE.QuantitativeObstruction
+-import LRE.NavierStokesApplication
+ 
+ -- New modules for complete Navier-Stokes and P vs NP formalization
+-import LRE.NavierStokes.ResidualStabilityInequality
+-import LRE.PvsNP
+ /-! ## NEW: Extended Applications to Millennium Problems -/
+ 
+ namespace LRE.Extensions
+@@ -665,39 +667,19 @@
+ 
+ -/
+ 
+-import LRE.Core.Basic
+-import LRE.Geometry.Ehresmann
+-import LRE.Core.ClosureObstruction
+ -- New LRE Meta-Framework modules
+-import LRE.Core.Projective
+-import LRE.ERS.AbstractODE
+-import LRE.Framework.ProblemTemplate
+ 
+ -- Millennium Problem Instances
+-import LRE.Millennium.NavierStokes.Model
+-import LRE.Millennium.PvsNP.Model
+-import LRE.Millennium.Riemann.Model
+-import LRE.Millennium.YangMills.Model
+-import LRE.Millennium.BSD.Model
+ 
+ -- Unifying Theory
+-import LRE.Theorems.UnifiedLRE
+-import LRE.Implementation.Roadmap
+ /-! ## Millennium Problems Framework -/
+ 
+ /-- The LRE framework extends to provide a unified approach to the Millennium Problems.
+ Each problem is formulated as a projection system with residual structure. -/
+ 
+ -- Millennium framework core
+-import LRE.MillenniumCore
+-import LRE.ERS
+ 
+ -- Millennium problem instantiations
+-import LRE.Millennium.NavierStokes
+-import LRE.Millennium.PvsNP
+-import LRE.Millennium.Riemann
+-import LRE.Millennium.YangMills
+-import LRE.Millennium.BSD
+ 
+ /-! ## Millennium Problems Integration -/
+ 
+@@ -732,5 +714,3 @@
+ 
+ end LRE.Millennium
+ -- Section Collapse Hypothesis (HCS) - Unified Millennium Problem Framework
+-import LRE.HCS
+-import LRE.RBC
+--- a/formalization/lean/ProvaCondicionalEstrutural.lean
++++ b/formalization/lean/ProvaCondicionalEstrutural.lean
+@@ -1,3 +1,9 @@
++import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Analysis.InnerProductSpace.Basic
++import Mathlib.Analysis.InnerProductSpace.Spectrum
++import Mathlib.LinearAlgebra.Eigenspace.Basic
++import Mathlib.Topology.Algebra.Module.Basic
++
+ /-!
+ # Prova Condicional Estrutural dos Problemas do Milênio
+ 
+@@ -28,11 +34,6 @@
+ 
+ -/
+ 
+-import Mathlib.Analysis.Calculus.FDeriv.Basic
+-import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Analysis.InnerProductSpace.Spectrum
+-import Mathlib.LinearAlgebra.Eigenspace.Basic
+-import Mathlib.Topology.Algebra.Module.Basic
+ 
+ /-!
+ ## 1. DEFINIÇÕES FUNDAMENTAIS
+--- a/src/lean/EmergentTheta/Conjectures/RiemannHypothesis.lean
++++ b/src/lean/EmergentTheta/Conjectures/RiemannHypothesis.lean
+@@ -1,4 +1,6 @@
+ import EmergentTheta.Operators.EkCore
++import Mathlib
++import EmergentTheta.Core.Framework
+ 
+ namespace EmergentTheta
+ 
+@@ -27,8 +29,6 @@
+   (θ : ℝ) [UniversalTheta θ] :
+   RiemannHypothesis := by
+   admit
+-import Mathlib
+-import EmergentTheta.Core.Framework
+ 
+ namespace EmergentTheta
+ 
+--- a/universe00/Universe00/Core/Aggregation.lean
++++ b/universe00/Universe00/Core/Aggregation.lean
+@@ -1,3 +1,8 @@
++import Universe00.Core.Vector
++import Universe00.Core.Error
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.List.Basic
++
+ /-
+   Aggregation.lean
+   
+@@ -16,7 +21,6 @@
+   Everything is explicit and verifiable.
+ -/
+ 
+-import Universe00.Core.Vector
+ 
+ namespace ErrorAggregation
+ 
+@@ -119,9 +123,6 @@
+   a percentage of total incompleteness.
+ -/
+ 
+-import Universe00.Core.Error
+-import Mathlib.Data.Real.Basic
+-import Mathlib.Data.List.Basic
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Core/Error.lean
++++ b/universe00/Universe00/Core/Error.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.List.Basic
++
+ /-
+   Error.lean
+   
+@@ -136,8 +139,6 @@
+   An error of 1 means maximum uncertainty.
+ -/
+ 
+-import Mathlib.Data.Real.Basic
+-import Mathlib.Data.List.Basic
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Core/Ledger.lean
++++ b/universe00/Universe00/Core/Ledger.lean
+@@ -1,3 +1,10 @@
++import Universe00.Core.Parameter
++import Universe00.Core.Vector
++import Universe00.Core.Aggregation
++import Universe00.Core.Status
++import Universe00.Core.Error
++import Mathlib.Data.List.Basic
++
+ /-
+   Ledger.lean
+   
+@@ -22,10 +29,6 @@
+   Everything is explicit, typed, and verifiable.
+ -/
+ 
+-import Universe00.Core.Parameter
+-import Universe00.Core.Vector
+-import Universe00.Core.Aggregation
+-import Universe00.Core.Status
+ 
+ -- The complete ledger for a mathematical problem
+ structure ProblemLedger where
+@@ -175,11 +178,6 @@
+   All components must be consistent.
+ -/
+ 
+-import Universe00.Core.Parameter
+-import Universe00.Core.Error
+-import Universe00.Core.Status
+-import Universe00.Core.Aggregation
+-import Mathlib.Data.List.Basic
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Core/Monotonicity.lean
++++ b/universe00/Universe00/Core/Monotonicity.lean
+@@ -1,3 +1,7 @@
++import Universe00.Core.Ledger
++import Universe00.Core.Error
++import Mathlib.Data.Real.Basic
++
+ /-
+   Monotonicity.lean
+   
+@@ -20,7 +24,6 @@
+   Monotonicity is absolute.
+ -/
+ 
+-import Universe00.Core.Ledger
+ 
+ namespace Monotonicity
+ 
+@@ -135,8 +138,6 @@
+   This ensures that progress is always forward and measurable.
+ -/
+ 
+-import Universe00.Core.Error
+-import Mathlib.Data.Real.Basic
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Core/Parameter.lean
++++ b/universe00/Universe00/Core/Parameter.lean
+@@ -1,3 +1,5 @@
++import Mathlib.Data.Real.Basic
++
+ /-
+   Parameter.lean
+   
+@@ -34,7 +36,6 @@
+     - error = 1 means maximum uncertainty
+ -/
+ 
+-import Mathlib.Data.Real.Basic
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Core/Status.lean
++++ b/universe00/Universe00/Core/Status.lean
+@@ -1,3 +1,6 @@
++import Universe00.Core.Vector
++import Universe00.Core.Error
++
+ /-
+   Status.lean
+   
+@@ -12,7 +15,6 @@
+   Status is determined purely by the error vector.
+ -/
+ 
+-import Universe00.Core.Vector
+ 
+ -- The three possible states of a mathematical problem
+ inductive ProblemStatus
+@@ -39,7 +41,6 @@
+   Status is determined entirely by the error vector.
+ -/
+ 
+-import Universe00.Core.Error
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Core/Vector.lean
++++ b/universe00/Universe00/Core/Vector.lean
+@@ -1,3 +1,6 @@
++import Universe00.Core.Error
++import Mathlib.Data.List.Basic
++
+ /-
+   Vector.lean
+   
+@@ -12,7 +15,6 @@
+   The refutation of P is the structural impossibility of such collapse.
+ -/
+ 
+-import Universe00.Core.Error
+ 
+ -- ErrorVector: A finite list of error components
+ structure ErrorVector where
+@@ -147,8 +149,6 @@
+   including construction, validation, and basic operations.
+ -/
+ 
+-import Universe00.Core.Error
+-import Mathlib.Data.List.Basic
+ 
+ namespace Universe00.Core
+ 
+--- a/universe00/Universe00/Examples/BSD_Ledger.lean
++++ b/universe00/Universe00/Examples/BSD_Ledger.lean
+@@ -1,3 +1,6 @@
++import Universe00.Problems.BSD
++import Universe00.Core.Monotonicity
++
+ /-
+   BSD_Ledger.lean
+   
+@@ -9,7 +12,6 @@
+   - Staged refinement toward complete proof
+ -/
+ 
+-import Universe00.Problems.BSD
+ 
+ namespace Examples.BirchSwinnertonDyer
+ 
+@@ -171,8 +173,6 @@
+   It is the coordinate of proof itself.
+ -/
+ 
+-import Universe00.Problems.BSD
+-import Universe00.Core.Monotonicity
+ 
+ namespace Universe00.Examples
+ 
+--- a/universe00/Universe00.lean
++++ b/universe00/Universe00.lean
+@@ -1,3 +1,21 @@
++import Universe00.Core.Parameter
++import Universe00.Core.Error
++import Universe00.Core.Vector
++import Universe00.Core.Aggregation
++import Universe00.Core.Status
++import Universe00.Core.Ledger
++import Universe00.Core.Monotonicity
++import Universe00.Problems.Riemann
++import Universe00.Problems.NavierStokes
++import Universe00.Problems.PvsNP
++import Universe00.Problems.YangMills
++import Universe00.Problems.Hodge
++import Universe00.Problems.BSD
++import Universe00.Problems.Poincare
++import Universe00.Examples.RH_Ledger
++import Universe00.Examples.NS_Ledger
++import Universe00.Examples.BSD_Ledger
++
+ /-
+   Universe00.lean
+   
+@@ -19,29 +37,12 @@
+ -/
+ 
+ -- Core modules
+-import Universe00.Core.Parameter
+-import Universe00.Core.Error
+-import Universe00.Core.Vector
+-import Universe00.Core.Aggregation
+-import Universe00.Core.Status
+-import Universe00.Core.Ledger
+-import Universe00.Core.Monotonicity
+ 
+ -- Problems: Millennium Prize Problem reformulations  
+ -- Problem definitions
+-import Universe00.Problems.Riemann
+-import Universe00.Problems.NavierStokes
+-import Universe00.Problems.PvsNP
+-import Universe00.Problems.YangMills
+-import Universe00.Problems.Hodge
+-import Universe00.Problems.BSD
+-import Universe00.Problems.Poincare
+ 
+ -- Examples: Complete ledger demonstrations
+ -- Example ledgers
+-import Universe00.Examples.RH_Ledger
+-import Universe00.Examples.NS_Ledger
+-import Universe00.Examples.BSD_Ledger
+ 
+ /-!
+ # Universe00: Classical Error-Based Framework

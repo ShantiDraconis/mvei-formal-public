@@ -1,0 +1,334 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/lc-rh-coercivity",
+ "verified_commit": "5283a63651a53c57fc3e8d11972f2169e38de3c6",
+ "projects": [
+  {
+   "repo": "lc-rh-coercivity",
+   "path": "formal/lean",
+   "toolchain": "",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "error: ././././LcRh/AnalysisKernel/HilbertForms.lean:17:0: invalid 'import' command, it must be used in the beginning of the file | error: Lean exited with code 1 | error: build failed",
+   "sorry_warnings": 0,
+   "reconstructed": true,
+   "bridges": [],
+   "declared_axioms": [
+    {
+     "name": "LcRh.AnalysisKernel.RiemannHypothesis",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "statement": "Prop"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.coercivity_threshold",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "statement": "LcRh.AnalysisKernel.Operator → Prop"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.lc_implies_rh",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "statement": "∀ (L : LcRh.AnalysisKernel.Operator),   LcRh.AxiomGates.WeilExplicitGate →     LcRh.AxiomGates.TrivialTermsNormalized →       LcRh.AnalysisKernel.coercivity_threshold L → LcRh.AnalysisKernel.RiemannHypothesis"
+    },
+    {
+     "name": "LcRh.AxiomGates.TrivialTermsNormalized",
+     "module": "LcRh.AxiomGates.WeilExplicitGate",
+     "statement": "Prop"
+    },
+    {
+     "name": "LcRh.AxiomGates.WeilExplicitGate",
+     "module": "LcRh.AxiomGates.WeilExplicitGate",
+     "statement": "Prop"
+    },
+    {
+     "name": "LcRh.Spectral.contradiction_lemma",
+     "module": "LcRh.Spectral.ApproxEigenvectors",
+     "statement": "(∃ v, LcRh.Spectral.collapses v) → False"
+    },
+    {
+     "name": "LcRh.Weil.minimalFunctional",
+     "module": "LcRh.Weil.AxiomGate",
+     "statement": "Prop"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "LcRh.AnalysisKernel.BalancedSpace.mk.inj",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [],
+     "statement": "∀ {carrier carrier_1 : Type}, { carrier := carrier } = { carrier := carrier_1 } → carrier = carrier_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.BalancedSpace.mk.injEq",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (carrier carrier_1 : Type), ({ carrier := carrier } = { carrier := carrier_1 }) = (carrier = carrier_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.BalancedSpace.mk.sizeOf_spec",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [],
+     "statement": "∀ (carrier : Type), sizeOf { carrier := carrier } = 1 + sizeOf carrier",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.ClosedOperator.mk.inj",
+     "module": "LcRh.AnalysisKernel.ClosedOperators",
+     "axioms": [],
+     "statement": "∀ {domain codomain domain_1 codomain_1 : Type},   { domain := domain, codomain := codomain } = { domain := domain_1, codomain := codomain_1 } →     domain = domain_1 ∧ codomain = codomain_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.ClosedOperator.mk.injEq",
+     "module": "LcRh.AnalysisKernel.ClosedOperators",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (domain codomain domain_1 codomain_1 : Type),   ({ domain := domain, codomain := codomain } = { domain := domain_1, codomain := codomain_1 }) =     (domain = domain_1 ∧ codomain = codomain_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.ClosedOperator.mk.sizeOf_spec",
+     "module": "LcRh.AnalysisKernel.ClosedOperators",
+     "axioms": [],
+     "statement": "∀ (domain codomain : Type), sizeOf { domain := domain, codomain := codomain } = 1 + sizeOf domain + sizeOf codomain",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.CoerciveForm.mk.inj",
+     "module": "LcRh.AnalysisKernel.CoercivityForms",
+     "axioms": [],
+     "statement": "∀ {form : Type} {constant : {«ℝ» : Sort u_1} → «ℝ»} {form_1 : Type} {constant_1 : {«ℝ» : Sort u_1} → «ℝ»},   { form := form, constant := constant } = { form := form_1, constant := constant_1 } →     form = form_1 ∧ constant = constant_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.CoerciveForm.mk.injEq",
+     "module": "LcRh.AnalysisKernel.CoercivityForms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (form : Type) (constant : {«ℝ» : Sort u_1} → «ℝ») (form_1 : Type) (constant_1 : {«ℝ» : Sort u_1} → «ℝ»),   ({ form := form, constant := constant } = { form := form_1, constant := constant_1 }) =     (form = form_1 ∧ constant = constant_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.CoerciveForm.mk.sizeOf_spec",
+     "module": "LcRh.AnalysisKernel.CoercivityForms",
+     "axioms": [],
+     "statement": "∀ (form : Type) (constant : {«ℝ» : Sort u_1} → «ℝ»), sizeOf { form := form, constant := constant } = 1 + sizeOf form",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.InstabilityWitness.mk.inj",
+     "module": "LcRh.AnalysisKernel.SpectralInstability",
+     "axioms": [],
+     "statement": "∀ {sequence : ℕ → Type} {boundFails : Prop} {sequence_1 : ℕ → Type} {boundFails_1 : Prop},   { sequence := sequence, boundFails := boundFails } = { sequence := sequence_1, boundFails := boundFails_1 } →     sequence = sequence_1 ∧ boundFails = boundFails_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.InstabilityWitness.mk.injEq",
+     "module": "LcRh.AnalysisKernel.SpectralInstability",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (sequence : ℕ → Type) (boundFails : Prop) (sequence_1 : ℕ → Type) (boundFails_1 : Prop),   ({ sequence := sequence, boundFails := boundFails } = { sequence := sequence_1, boundFails := boundFails_1 }) =     (sequence = sequence_1 ∧ boundFails = boundFails_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.InstabilityWitness.mk.sizeOf_spec",
+     "module": "LcRh.AnalysisKernel.SpectralInstability",
+     "axioms": [],
+     "statement": "∀ (sequence : ℕ → Type) (boundFails : Prop),   sizeOf { sequence := sequence, boundFails := boundFails } = 1 + sizeOf boundFails",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.Operator.mk.inj",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [],
+     "statement": "∀ {dom : LcRh.AnalysisKernel.BalancedSpace} {cod : LcRh.AnalysisKernel.VarianceSpace}   {dom_1 : LcRh.AnalysisKernel.BalancedSpace} {cod_1 : LcRh.AnalysisKernel.VarianceSpace},   { dom := dom, cod := cod } = { dom := dom_1, cod := cod_1 } → dom = dom_1 ∧ cod = cod_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.Operator.mk.injEq",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (dom : LcRh.AnalysisKernel.BalancedSpace) (cod : LcRh.AnalysisKernel.VarianceSpace)   (dom_1 : LcRh.AnalysisKernel.BalancedSpace) (cod_1 : LcRh.AnalysisKernel.VarianceSpace),   ({ dom := dom, cod := cod } = { dom := dom_1, cod := cod_1 }) = (dom = dom_1 ∧ cod = cod_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.Operator.mk.sizeOf_spec",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [],
+     "statement": "∀ (dom : LcRh.AnalysisKernel.BalancedSpace) (cod : LcRh.AnalysisKernel.VarianceSpace),   sizeOf { dom := dom, cod := cod } = 1 + sizeOf dom + sizeOf cod",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.VarianceSpace.mk.inj",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [],
+     "statement": "∀ {carrier carrier_1 : Type}, { carrier := carrier } = { carrier := carrier_1 } → carrier = carrier_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.VarianceSpace.mk.injEq",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (carrier carrier_1 : Type), ({ carrier := carrier } = { carrier := carrier_1 }) = (carrier = carrier_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.AnalysisKernel.VarianceSpace.mk.sizeOf_spec",
+     "module": "LcRh.AnalysisKernel.Coercivity",
+     "axioms": [],
+     "statement": "∀ (carrier : Type), sizeOf { carrier := carrier } = 1 + sizeOf carrier",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.SesquilinearForms.SesqForm.mk.inj",
+     "module": "LcRh.SesquilinearForms.Core",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {α : Type} {form form_1 : α → α → ℂ}, { form := form } = { form := form_1 } → form = form_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.SesquilinearForms.SesqForm.mk.injEq",
+     "module": "LcRh.SesquilinearForms.Core",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {α : Type} (form form_1 : α → α → ℂ), ({ form := form } = { form := form_1 }) = (form = form_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.SesquilinearForms.SesqForm.mk.sizeOf_spec",
+     "module": "LcRh.SesquilinearForms.Core",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {α : Type} [inst : SizeOf α] (form : α → α → ℂ), sizeOf { form := form } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Spectral.ApproxEigenvector.mk.inj",
+     "module": "LcRh.Spectral.ApproxEigenvectors",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {carrier : Type} {weight : ℝ} {balanced : Prop} {spectral_mass operator_energy : ℝ} {carrier_1 : Type} {weight_1 : ℝ}   {balanced_1 : Prop} {spectral_mass_1 operator_energy_1 : ℝ},   { carrier := carrier, weight := weight, balanced := balanced, spectral_mass := spectral_mass,         operator_energy := operator_energy } =       { carrier := carrier_1, weight := weight_1, balanced := balanced_1,",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Spectral.ApproxEigenvector.mk.injEq",
+     "module": "LcRh.Spectral.ApproxEigenvectors",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (carrier : Type) (weight : ℝ) (balanced : Prop) (spectral_mass operator_energy : ℝ) (carrier_1 : Type) (weight_1 : ℝ)   (balanced_1 : Prop) (spectral_mass_1 operator_energy_1 : ℝ),   ({ carrier := carrier, weight := weight, balanced := balanced, spectral_mass := spectral_mass,         operator_energy := operator_energy } =       { carrier := carrier_1, weight := weight_1, balanced := balanced_1,",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Spectral.ApproxEigenvector.mk.sizeOf_spec",
+     "module": "LcRh.Spectral.ApproxEigenvectors",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (carrier : Type) (weight : ℝ) (balanced : Prop) (spectral_mass operator_energy : ℝ),   sizeOf       { carrier := carrier, weight := weight, balanced := balanced, spectral_mass := spectral_mass,         operator_energy := operator_energy } =     1 + sizeOf carrier + sizeOf weight + sizeOf balanced + sizeOf spectral_mass + sizeOf operator_energy",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Transforms.BandLimited.mk.inj",
+     "module": "LcRh.Transforms.FourierMellin",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {carrier : Type} {bandwidth : ℝ} {carrier_1 : Type} {bandwidth_1 : ℝ},   { carrier := carrier, bandwidth := bandwidth } = { carrier := carrier_1, bandwidth := bandwidth_1 } →     carrier = carrier_1 ∧ bandwidth = bandwidth_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Transforms.BandLimited.mk.injEq",
+     "module": "LcRh.Transforms.FourierMellin",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (carrier : Type) (bandwidth : ℝ) (carrier_1 : Type) (bandwidth_1 : ℝ),   ({ carrier := carrier, bandwidth := bandwidth } = { carrier := carrier_1, bandwidth := bandwidth_1 }) =     (carrier = carrier_1 ∧ bandwidth = bandwidth_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Transforms.BandLimited.mk.sizeOf_spec",
+     "module": "LcRh.Transforms.FourierMellin",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (carrier : Type) (bandwidth : ℝ),   sizeOf { carrier := carrier, bandwidth := bandwidth } = 1 + sizeOf carrier + sizeOf bandwidth",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Weil.BalancedTest.mk.inj",
+     "module": "LcRh.Weil.TrivialTermsCancellation",
+     "axioms": [],
+     "statement": "∀ {carrier carrier_1 : Type}, { carrier := carrier } = { carrier := carrier_1 } → carrier = carrier_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Weil.BalancedTest.mk.injEq",
+     "module": "LcRh.Weil.TrivialTermsCancellation",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (carrier carrier_1 : Type), ({ carrier := carrier } = { carrier := carrier_1 }) = (carrier = carrier_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LcRh.Weil.BalancedTest.mk.sizeOf_spec",
+     "module": "LcRh.Weil.TrivialTermsCancellation",
+     "axioms": [],
+     "statement": "∀ (carrier : Type), sizeOf { carrier := carrier } = 1 + sizeOf carrier",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com LcRh e o Mathlib v4.19.0 (alguns arquivos com erro)",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `LcRh]\n",
+   "avulso": true,
+   "summary": {
+    "fechado": 30,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

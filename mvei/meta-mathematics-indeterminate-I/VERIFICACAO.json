@@ -1,0 +1,950 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/meta-mathematics-indeterminate-I",
+ "verified_commit": "919fc815ae713f05e5f8d781636f89e74e8fbbbc",
+ "projects": [
+  {
+   "repo": "meta-mathematics-indeterminate-I",
+   "path": ".",
+   "toolchain": "leanprover/lean4:v4.12.0",
+   "toolchain_used": "leanprover/lean4:v4.12.0",
+   "needs_mathlib": true,
+   "build_ok": true,
+   "build_seconds": 25.6,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "IMath.Certificates.C01_I_is_indeterminate",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.Phi3.I.state = IMath.State.indeterminate",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C02_I_is_not_infinity",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.Phi3.I ≠ IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C03_I_is_not_finite",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (z : ℂ), IMath.Phi3.I ≠ IMath.Phi3.finite z",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C04_real_embedding_injective",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "Function.Injective IMath.ofReal",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C05_complex_embedding_injective",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "Function.Injective IMath.ofComplex",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C06_zero_over_zero_is_I",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "(IMath.Phi3.finite 0).idiv (IMath.Phi3.finite 0) = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C07_infinity_over_infinity_retains_provenance",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.Phi3.infinity.idiv IMath.Phi3.infinity = IMath.Phi3.indeterminate (IMath.Expr.infinity.div IMath.Expr.infinity)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C08_collapse_is_idempotent",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (x : IMath.Phi3 ℂ), x.collapse.collapse = x.collapse",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C09_absorbing_addition_refutes_right_cancellation",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∃ a b, a ≠ b ∧ a.absorbingAdd IMath.Phi3.I = b.absorbingAdd IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C10_refinement_transitive",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {A B C : IMath.Realization ℂ}, IMath.refines A B → IMath.refines B C → IMath.refines A C",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C11_contextual_zero_over_zero_germs_differ",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.xOverX ≠ IMath.xSqOverX",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C12_x_over_x_resolves_to_one",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.ResolvesTo IMath.xOverX 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C13_x_squared_over_x_resolves_to_zero",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.ResolvesTo IMath.xSqOverX 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C14_same_substitution_form_different_resolutions",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.ResolvesTo IMath.xOverX 1 ∧ IMath.ResolvesTo IMath.xSqOverX 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Certificates.C15_determined_geometry_embedding_injective",
+     "module": "IMath.Certificates.Core",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {n : ℕ}, Function.Injective IMath.determinedPoint",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.add.inj",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 a_2 a_3 : IMath.Expr α}, a.add a_1 = a_2.add a_3 → a = a_2 ∧ a_1 = a_3",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.add.injEq",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 a_2 a_3 : IMath.Expr α), (a.add a_1 = a_2.add a_3) = (a = a_2 ∧ a_1 = a_3)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.add.sizeOf_spec",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a a_1 : IMath.Expr α), sizeOf (a.add a_1) = 1 + sizeOf a + sizeOf a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.div.inj",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 a_2 a_3 : IMath.Expr α}, a.div a_1 = a_2.div a_3 → a = a_2 ∧ a_1 = a_3",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.div.injEq",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 a_2 a_3 : IMath.Expr α), (a.div a_1 = a_2.div a_3) = (a = a_2 ∧ a_1 = a_3)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.div.sizeOf_spec",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a a_1 : IMath.Expr α), sizeOf (a.div a_1) = 1 + sizeOf a + sizeOf a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.infinity.sizeOf_spec",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α], sizeOf IMath.Expr.infinity = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map.eq_1",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β) (a : α), IMath.Expr.map f (IMath.Expr.value a) = IMath.Expr.value (f a)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map.eq_2",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β), IMath.Expr.map f IMath.Expr.infinity = IMath.Expr.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map.eq_3",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β) (a a_1 : IMath.Expr α),   IMath.Expr.map f (a.add a_1) = (IMath.Expr.map f a).add (IMath.Expr.map f a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map.eq_4",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β) (a a_1 : IMath.Expr α),   IMath.Expr.map f (a.sub a_1) = (IMath.Expr.map f a).sub (IMath.Expr.map f a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map.eq_5",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β) (a a_1 : IMath.Expr α),   IMath.Expr.map f (a.mul a_1) = (IMath.Expr.map f a).mul (IMath.Expr.map f a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map.eq_6",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β) (a a_1 : IMath.Expr α),   IMath.Expr.map f (a.div a_1) = (IMath.Expr.map f a).div (IMath.Expr.map f a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map_comp",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} {β : Type v} {γ : Type w} (f : α → β) (g : β → γ) (e : IMath.Expr α),   IMath.Expr.map g (IMath.Expr.map f e) = IMath.Expr.map (g ∘ f) e",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map_id",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (e : IMath.Expr α), IMath.Expr.map id e = e",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map_infinity",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β), IMath.Expr.map f IMath.Expr.infinity = IMath.Expr.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.map_value",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {β : Type v} (f : α → β) (a : α), IMath.Expr.map f (IMath.Expr.value a) = IMath.Expr.value (f a)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.mul.inj",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 a_2 a_3 : IMath.Expr α}, a.mul a_1 = a_2.mul a_3 → a = a_2 ∧ a_1 = a_3",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.mul.injEq",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 a_2 a_3 : IMath.Expr α), (a.mul a_1 = a_2.mul a_3) = (a = a_2 ∧ a_1 = a_3)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.mul.sizeOf_spec",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a a_1 : IMath.Expr α), sizeOf (a.mul a_1) = 1 + sizeOf a + sizeOf a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.sub.inj",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 a_2 a_3 : IMath.Expr α}, a.sub a_1 = a_2.sub a_3 → a = a_2 ∧ a_1 = a_3",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.sub.injEq",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 a_2 a_3 : IMath.Expr α), (a.sub a_1 = a_2.sub a_3) = (a = a_2 ∧ a_1 = a_3)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.sub.sizeOf_spec",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a a_1 : IMath.Expr α), sizeOf (a.sub a_1) = 1 + sizeOf a + sizeOf a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.value.inj",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 : α}, IMath.Expr.value a = IMath.Expr.value a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.value.injEq",
+     "module": "IMath.Core.Expr",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 : α), (IMath.Expr.value a = IMath.Expr.value a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Expr.value.sizeOf_spec",
+     "module": "IMath.Core.Expr",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a : α), sizeOf (IMath.Expr.value a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Germ00.denominator_zero",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (self : IMath.Germ00), self.denominator self.center = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Germ00.mk.inj",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {numerator denominator : ℝ → ℝ} {center : ℝ} {numerator_zero : numerator center = 0}   {denominator_zero : denominator center = 0} {numerator_1 denominator_1 : ℝ → ℝ} {center_1 : ℝ}   {numerator_zero_1 : numerator_1 center_1 = 0} {denominator_zero_1 : denominator_1 center_1 = 0},   { numerator := numerator, denominator := denominator, center := center, numerator_zero := numerator_zero,         d",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Germ00.mk.injEq",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (numerator denominator : ℝ → ℝ) (center : ℝ) (numerator_zero : numerator center = 0)   (denominator_zero : denominator center = 0) (numerator_1 denominator_1 : ℝ → ℝ) (center_1 : ℝ)   (numerator_zero_1 : numerator_1 center_1 = 0) (denominator_zero_1 : denominator_1 center_1 = 0),   ({ numerator := numerator, denominator := denominator, center := center, numerator_zero := numerator_zero,",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Germ00.mk.sizeOf_spec",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (numerator denominator : ℝ → ℝ) (center : ℝ) (numerator_zero : numerator center = 0)   (denominator_zero : denominator center = 0),   sizeOf       { numerator := numerator, denominator := denominator, center := center, numerator_zero := numerator_zero,         denominator_zero := denominator_zero } =     1 + sizeOf center + sizeOf numerator_zero + sizeOf denominator_zero",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Germ00.numerator_zero",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (self : IMath.Germ00), self.numerator self.center = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.I.eq_1",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α], IMath.Phi3.I = IMath.Phi3.indeterminate ((IMath.Expr.value 0).div (IMath.Expr.value 0))",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.I_def",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α], IMath.Phi3.I = IMath.Phi3.indeterminate ((IMath.Expr.value 0).div (IMath.Expr.value 0))",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.I_ne_finite",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] (a : α), IMath.Phi3.I ≠ IMath.Phi3.finite a",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.I_ne_infinity",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α], IMath.Phi3.I ≠ IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd.eq_1",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (x : IMath.Phi3 α) (a : IMath.Expr α),   (IMath.Phi3.indeterminate a).absorbingAdd x = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd.eq_2",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (x : IMath.Phi3 α) (a : IMath.Expr α),   (∀ (a : IMath.Expr α), x = IMath.Phi3.indeterminate a → False) →     x.absorbingAdd (IMath.Phi3.indeterminate a) = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd.eq_3",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (a b : α),   (IMath.Phi3.finite a).absorbingAdd (IMath.Phi3.finite b) = IMath.Phi3.finite (a + b)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd.eq_4",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (x : IMath.Phi3 α),   (∀ (a : IMath.Expr α), x = IMath.Phi3.indeterminate a → False) →     IMath.Phi3.infinity.absorbingAdd x = IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd.eq_5",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (x : IMath.Phi3 α),   (∀ (a : IMath.Expr α), x = IMath.Phi3.indeterminate a → False) →     (x = IMath.Phi3.infinity → False) → x.absorbingAdd IMath.Phi3.infinity = IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd_I_left",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (x : IMath.Phi3 α), IMath.Phi3.I.absorbingAdd x = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd_I_right",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] (x : IMath.Phi3 α), x.absorbingAdd IMath.Phi3.I = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.absorbingAdd_not_right_cancellative_of_ne",
+     "module": "IMath.Algebra.Absorbing",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Add α] {a b : α},   a ≠ b → ∃ x y, x ≠ y ∧ x.absorbingAdd IMath.Phi3.I = y.absorbingAdd IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.collapse_I",
+     "module": "IMath.Arithmetic.Collapse",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α], IMath.Phi3.I.collapse = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.collapse_finite",
+     "module": "IMath.Arithmetic.Collapse",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] (a : α), (IMath.Phi3.finite a).collapse = IMath.Phi3.finite a",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.collapse_idempotent",
+     "module": "IMath.Arithmetic.Collapse",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] (x : IMath.Phi3 α), x.collapse.collapse = x.collapse",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.collapse_indeterminate",
+     "module": "IMath.Arithmetic.Collapse",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] (e : IMath.Expr α), (IMath.Phi3.indeterminate e).collapse = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.collapse_infinity",
+     "module": "IMath.Arithmetic.Collapse",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α], IMath.Phi3.infinity.collapse = IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite.inj",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 : α}, IMath.Phi3.finite a = IMath.Phi3.finite a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite.injEq",
+     "module": "IMath.Core.Phi3",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 : α), (IMath.Phi3.finite a = IMath.Phi3.finite a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite.sizeOf_spec",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a : α), sizeOf (IMath.Phi3.finite a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite_idiv_finite_ne_zero",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (a b : α),   b ≠ 0 → (IMath.Phi3.finite a).idiv (IMath.Phi3.finite b) = IMath.Phi3.finite (a / b)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite_idiv_infinity",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (a : α),   (IMath.Phi3.finite a).idiv IMath.Phi3.infinity = IMath.Phi3.finite 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite_injective",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u}, Function.Injective IMath.Phi3.finite",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.finite_ne_zero_idiv_zero",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] {a : α},   a ≠ 0 → (IMath.Phi3.finite a).idiv (IMath.Phi3.finite 0) = IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.idiv.eq_1",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (a b : α),   (IMath.Phi3.finite a).idiv (IMath.Phi3.finite b) =     if b = 0 then if a = 0 then IMath.Phi3.I else IMath.Phi3.infinity else IMath.Phi3.finite (a / b)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.idiv.eq_2",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (a : α),   (IMath.Phi3.finite a).idiv IMath.Phi3.infinity = IMath.Phi3.finite 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.idiv.eq_3",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (a : α),   IMath.Phi3.infinity.idiv (IMath.Phi3.finite a) = IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.idiv.eq_4",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α],   IMath.Phi3.infinity.idiv IMath.Phi3.infinity = IMath.Phi3.indeterminate (IMath.Expr.infinity.div IMath.Expr.infinity)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.idiv.eq_5",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (x : IMath.Phi3 α) (e : IMath.Expr α),   (IMath.Phi3.indeterminate e).idiv x = IMath.Phi3.indeterminate (e.div x.toExpr)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.idiv.eq_6",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (x : IMath.Phi3 α) (e : IMath.Expr α),   (∀ (e_1 : IMath.Expr α), x = IMath.Phi3.indeterminate e_1 → False) →     x.idiv (IMath.Phi3.indeterminate e) = IMath.Phi3.indeterminate (x.toExpr.div e)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.indeterminate.inj",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {a a_1 : IMath.Expr α}, IMath.Phi3.indeterminate a = IMath.Phi3.indeterminate a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.indeterminate.injEq",
+     "module": "IMath.Core.Phi3",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} (a a_1 : IMath.Expr α), (IMath.Phi3.indeterminate a = IMath.Phi3.indeterminate a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.indeterminate.sizeOf_spec",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α] (a : IMath.Expr α), sizeOf (IMath.Phi3.indeterminate a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.infinity.sizeOf_spec",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : SizeOf α], sizeOf IMath.Phi3.infinity = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.infinity_idiv_finite",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α] (a : α),   IMath.Phi3.infinity.idiv (IMath.Phi3.finite a) = IMath.Phi3.infinity",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.infinity_idiv_infinity",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α],   IMath.Phi3.infinity.idiv IMath.Phi3.infinity = IMath.Phi3.indeterminate (IMath.Expr.infinity.div IMath.Expr.infinity)",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.state_I",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} [inst : Zero α], IMath.Phi3.I.state = IMath.State.indeterminate",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.state_finite",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u} (a : α), (IMath.Phi3.finite a).state = IMath.State.finite",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.state_infinity",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ {α : Type u}, IMath.Phi3.infinity.state = IMath.State.infinite",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.Phi3.zero_idiv_zero",
+     "module": "IMath.Arithmetic.Division",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} [inst : Zero α] [inst_1 : Div α] [inst_2 : DecidableEq α],   (IMath.Phi3.finite 0).idiv (IMath.Phi3.finite 0) = IMath.Phi3.I",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.State.finite.sizeOf_spec",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "sizeOf IMath.State.finite = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.State.indeterminate.sizeOf_spec",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "sizeOf IMath.State.indeterminate = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.State.infinite.sizeOf_spec",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "sizeOf IMath.State.infinite = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.State.ofNat_toCtorIdx",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ (x : IMath.State), IMath.State.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.determinedPoint_injective",
+     "module": "IMath.Geometry.Point",
+     "axioms": [
+      "Quot.sound"
+     ],
+     "statement": "∀ {α : Type u} {n : ℕ}, Function.Injective IMath.determinedPoint",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.instDecidableEqState.proof_1",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ (x y : IMath.State), x.toCtorIdx = y.toCtorIdx → x = y",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.instDecidableEqState.proof_2",
+     "module": "IMath.Core.Phi3",
+     "axioms": [],
+     "statement": "∀ (x y : IMath.State), ¬x.toCtorIdx = y.toCtorIdx → x = y → False",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.ofComplex_injective",
+     "module": "IMath.Core.Embeddings",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "Function.Injective IMath.ofComplex",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.ofReal_eq_ofComplex",
+     "module": "IMath.Core.Embeddings",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (x : ℝ), IMath.ofReal x = IMath.ofComplex ↑x",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.ofReal_injective",
+     "module": "IMath.Core.Embeddings",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "Function.Injective IMath.ofReal",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.refines_antisymm",
+     "module": "IMath.Refinement.Realization",
+     "axioms": [
+      "Quot.sound",
+      "propext"
+     ],
+     "statement": "∀ {α : Type u} {A B : IMath.Realization α}, IMath.refines A B → IMath.refines B A → A = B",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.refines_refl",
+     "module": "IMath.Refinement.Realization",
+     "axioms": [],
+     "statement": "∀ {α : Type u} (A : IMath.Realization α), IMath.refines A A",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.refines_trans",
+     "module": "IMath.Refinement.Realization",
+     "axioms": [],
+     "statement": "∀ {α : Type u} {A B C : IMath.Realization α}, IMath.refines A B → IMath.refines B C → IMath.refines A C",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.same_form_different_resolutions",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.ResolvesTo IMath.xOverX 1 ∧ IMath.ResolvesTo IMath.xSqOverX 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xOverX.eq_1",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.xOverX =   { numerator := fun x => x, denominator := fun x => x, center := 0, numerator_zero := IMath.xOverX.proof_1,     denominator_zero := IMath.xOverX.proof_1 }",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xOverX.proof_1",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "(fun x => x) 0 = (fun x => x) 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xOverX_ne_xSqOverX",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.xOverX ≠ IMath.xSqOverX",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xOverX_resolvesTo_one",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.ResolvesTo IMath.xOverX 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xSqOverX.eq_1",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.xSqOverX =   { numerator := fun x => x ^ 2, denominator := fun x => x, center := 0, numerator_zero := IMath.xSqOverX.proof_1,     denominator_zero := IMath.xSqOverX.proof_2 }",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xSqOverX.proof_1",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "(fun x => x ^ 2) 0 = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xSqOverX.proof_2",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "(fun x => x) 0 = (fun x => x) 0",
+     "status": "fechado"
+    },
+    {
+     "name": "IMath.xSqOverX_resolvesTo_zero",
+     "module": "IMath.Analysis.Germ",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "IMath.ResolvesTo IMath.xSqOverX 0",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "summary": {
+    "fechado": 108,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

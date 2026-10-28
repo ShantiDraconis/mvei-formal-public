@@ -1,0 +1,30 @@
+import AxiomaticMillenium.SevenLaneClosureKernel
+
+namespace AxiomaticMillenium
+
+#print axioms AxiomaticMillenium.seven_lane_architecture_count
+#print axioms AxiomaticMillenium.seven_lane_exact_material_atom_count
+#print axioms AxiomaticMillenium.all_existing_structural_bridges_closed
+#print axioms AxiomaticMillenium.no_existing_structural_bridge_open
+#print axioms AxiomaticMillenium.all_seven_material_lanes_remain_open
+#print axioms AxiomaticMillenium.seven_lane_fail_closed
+
+#print axioms AxiomaticMillenium.closed_math_has_seven_lanes
+#print axioms AxiomaticMillenium.closed_math_lane_names
+#print axioms AxiomaticMillenium.closed_math_catalog_is_structural
+
+#print axioms AxiomaticMillenium.closed_bridge_has_seven_lanes
+#print axioms AxiomaticMillenium.every_refined_bridge_is_closed
+#print axioms AxiomaticMillenium.registry_and_refined_bridge_counts_agree
+
+#print axioms AxiomaticMillenium.exact_frontier_has_seven_lanes
+#print axioms AxiomaticMillenium.exact_frontier_all_open
+#print axioms AxiomaticMillenium.refined_exact_material_atom_count
+#print axioms AxiomaticMillenium.bsd_refined_frontier_has_three_atoms
+#print axioms AxiomaticMillenium.pnp_refined_frontier_has_one_material_dichotomy
+
+#print axioms AxiomaticMillenium.seven_lane_kernel_exact
+#print axioms AxiomaticMillenium.structural_closure_does_not_imply_material_closure
+#print axioms AxiomaticMillenium.refined_atom_accounting
+
+end AxiomaticMillenium

@@ -1,0 +1,741 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/hawking-singularities-millennium-problems",
+ "verified_commit": "405bd93a8ba2e1da819acdd5ebf3eed49f167d51",
+ "projects": [
+  {
+   "repo": "hawking-singularities-millennium-problems",
+   "path": "lean",
+   "toolchain": "",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "error: ././././Problems/YangMills/HawkingLimit.lean:18:45: unexpected token 'λ'; expected '_' or identifier | error: ././././Problems/YangMills/HawkingLimit.lean:22:41: unexpected token 'λ'; expected '_' or identifier | error: ././././Problems/YangMills/HawkingLimit.lean:37:16: unexpected token 'λ'; expected '(', '[', '_', '{', '⦃' or identifier",
+   "sorry_warnings": 8,
+   "reconstructed": true,
+   "bridges": [
+    {
+     "repo": "hawking-singularities-millennium-problems",
+     "project": "lean",
+     "theorem": "Problems.BSD.bsd_hawking_equivalence",
+     "statement": "∀ (E : Problems.BSD.EllipticCurve),   Problems.BSD.BSD_Conjecture E ↔ ∃ L, L ≠ 0 ∧ Hawking.RegularLimit (Problems.BSD.H_BSD E) 1 L",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "hawking-singularities-millennium-problems",
+     "project": "lean",
+     "theorem": "Problems.Hodge.hodge_hawking_equivalence",
+     "statement": "∀ (X : Problems.Hodge.ProjectiveVariety),   Problems.Hodge.HodgeConjecture X ↔     ∀ (h : Problems.Hodge.HodgeClass X), ∃ L, Filter.Tendsto (Problems.Hodge.H_Hodge X h) (nhds 0) (nhds L)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "hawking-singularities-millennium-problems",
+     "project": "lean",
+     "theorem": "Problems.NavierStokes.ns_hawking_equivalence",
+     "statement": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "hawking-singularities-millennium-problems",
+     "project": "lean",
+     "theorem": "Problems.PvsNP.pnp_hawking_equivalence",
+     "statement": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    }
+   ],
+   "declared_axioms": [
+    {
+     "name": "Hawking.casorati_weierstrass",
+     "module": "Hawking.EssentialSingularity",
+     "statement": "∀ (f : ℂ → ℂ) (x₀ : ℂ),   Hawking.EssentialSingularity f x₀ →     ∀ (w : ℂ), ∀ ε > 0, ∀ δ > 0, ∃ x, 0 < (x - x₀).abs ∧ (x - x₀).abs < δ ∧ (f x - w).abs < ε"
+    },
+    {
+     "name": "Hawking.millennium_problem_hawking",
+     "module": "Hawking.UniversalFunctional",
+     "statement": "∀ (P : Prop), P = True ∨ P = False → Hawking.HasHawkingFormulation P"
+    },
+    {
+     "name": "Problems.BSD.L_function",
+     "module": "Problems.BSD.HawkingLimit",
+     "statement": "Problems.BSD.EllipticCurve → ℂ → ℂ"
+    },
+    {
+     "name": "Problems.BSD.algebraic_rank",
+     "module": "Problems.BSD.HawkingLimit",
+     "statement": "Problems.BSD.EllipticCurve → ℕ"
+    },
+    {
+     "name": "Problems.BSD.analytic_rank",
+     "module": "Problems.BSD.HawkingLimit",
+     "statement": "Problems.BSD.EllipticCurve → ℕ"
+    },
+    {
+     "name": "Problems.Hodge.is_algebraic",
+     "module": "Problems.Hodge.HawkingLimit",
+     "statement": "(X : Problems.Hodge.ProjectiveVariety) → Problems.Hodge.HodgeClass X → Prop"
+    },
+    {
+     "name": "Problems.PvsNP.relativization_barrier",
+     "module": "Problems.PvsNP.HawkingLimit",
+     "statement": "∃ oracle_A oracle_B, (∃ (_ : True), True) ∧ ∃ (_ : True), True"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "Hawking.HawkingFunctional.criticalInBoundary",
+     "module": "Hawking.UniversalFunctional",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Hawking.HawkingFunctional), self.criticalPoint ∈ frontier self.domain ∨ self.criticalPoint = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.HawkingFunctional.mk.inj",
+     "module": "Hawking.UniversalFunctional",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {domain : Set ℂ} {functional : ℂ → ℂ} {criticalPoint : ℂ}   {criticalInBoundary : criticalPoint ∈ frontier domain ∨ criticalPoint = 0} {domain_1 : Set ℂ} {functional_1 : ℂ → ℂ}   {criticalPoint_1 : ℂ} {criticalInBoundary_1 : criticalPoint_1 ∈ frontier domain_1 ∨ criticalPoint_1 = 0},   { domain := domain, functional := functional, criticalPoint := criticalPoint,         criticalInBoundary := cri",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.HawkingFunctional.mk.injEq",
+     "module": "Hawking.UniversalFunctional",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (domain : Set ℂ) (functional : ℂ → ℂ) (criticalPoint : ℂ)   (criticalInBoundary : criticalPoint ∈ frontier domain ∨ criticalPoint = 0) (domain_1 : Set ℂ) (functional_1 : ℂ → ℂ)   (criticalPoint_1 : ℂ) (criticalInBoundary_1 : criticalPoint_1 ∈ frontier domain_1 ∨ criticalPoint_1 = 0),   ({ domain := domain, functional := functional, criticalPoint := criticalPoint,         criticalInBoundary := cr",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.HawkingFunctional.mk.sizeOf_spec",
+     "module": "Hawking.UniversalFunctional",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (domain : Set ℂ) (functional : ℂ → ℂ) (criticalPoint : ℂ)   (criticalInBoundary : criticalPoint ∈ frontier domain ∨ criticalPoint = 0),   sizeOf       { domain := domain, functional := functional, criticalPoint := criticalPoint,         criticalInBoundary := criticalInBoundary } =     1 + sizeOf criticalPoint + sizeOf criticalInBoundary",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.essential_failure_invariant",
+     "module": "Hawking.LimitFailure",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (f : ℂ → ℂ) (x₀ : ℂ),   Hawking.EssentialLimitFailure f x₀ → ∀ (g : ℂ → ℂ), (∀ (x : ℂ), x ≠ x₀ → g x = f x) → Hawking.LimitFails g x₀",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.essential_implies_not_problem",
+     "module": "Hawking.UniversalFunctional",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (H : Hawking.HawkingFunctional) (P : Prop),   Hawking.HasDichotomy H P → Hawking.EssentialLimitFailure H.functional H.criticalPoint → ¬P",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.essential_is_hawking_type",
+     "module": "Hawking.EssentialSingularity",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (f : ℂ → ℂ) (x₀ : ℂ), Hawking.EssentialSingularity f x₀ → Hawking.LimitFails f x₀",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.limit_dichotomy",
+     "module": "Hawking.LimitFailure",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (f : ℂ → ℂ) (x₀ : ℂ), (∃ L, Hawking.RegularLimit f x₀ L) ∨ Hawking.LimitFails f x₀",
+     "status": "fechado"
+    },
+    {
+     "name": "Hawking.regular_implies_problem",
+     "module": "Hawking.UniversalFunctional",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (H : Hawking.HawkingFunctional) (P : Prop),   Hawking.HasDichotomy H P → (∃ L, Hawking.RegularLimit H.functional H.criticalPoint L) → P",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.BSD.EllipticCurve.discriminant_nonzero",
+     "module": "Problems.BSD.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (self : Problems.BSD.EllipticCurve), -16 * (4 * self.a ^ 3 + 27 * self.b ^ 2) ≠ 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.BSD.EllipticCurve.mk.inj",
+     "module": "Problems.BSD.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {a b : ℤ} {discriminant_nonzero : -16 * (4 * a ^ 3 + 27 * b ^ 2) ≠ 0} {a_1 b_1 : ℤ}   {discriminant_nonzero_1 : -16 * (4 * a_1 ^ 3 + 27 * b_1 ^ 2) ≠ 0},   { a := a, b := b, discriminant_nonzero := discriminant_nonzero } =       { a := a_1, b := b_1, discriminant_nonzero := discriminant_nonzero_1 } →     a = a_1 ∧ b = b_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.BSD.EllipticCurve.mk.injEq",
+     "module": "Problems.BSD.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a b : ℤ) (discriminant_nonzero : -16 * (4 * a ^ 3 + 27 * b ^ 2) ≠ 0) (a_1 b_1 : ℤ)   (discriminant_nonzero_1 : -16 * (4 * a_1 ^ 3 + 27 * b_1 ^ 2) ≠ 0),   ({ a := a, b := b, discriminant_nonzero := discriminant_nonzero } =       { a := a_1, b := b_1, discriminant_nonzero := discriminant_nonzero_1 }) =     (a = a_1 ∧ b = b_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.BSD.EllipticCurve.mk.sizeOf_spec",
+     "module": "Problems.BSD.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a b : ℤ) (discriminant_nonzero : -16 * (4 * a ^ 3 + 27 * b ^ 2) ≠ 0),   sizeOf { a := a, b := b, discriminant_nonzero := discriminant_nonzero } = 1 + sizeOf a + sizeOf b",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.BSD.bsd_hawking_equivalence",
+     "module": "Problems.BSD.HawkingLimit",
+     "axioms": [
+      "propext",
+      "Problems.BSD.analytic_rank",
+      "Problems.BSD.algebraic_rank",
+      "Quot.sound",
+      "Classical.choice",
+      "Problems.BSD.L_function",
+      "sorryAx"
+     ],
+     "statement": "∀ (E : Problems.BSD.EllipticCurve),   Problems.BSD.BSD_Conjecture E ↔ ∃ L, L ≠ 0 ∧ Hawking.RegularLimit (Problems.BSD.H_BSD E) 1 L",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "Problems.Hodge.AlgebraicCycleClass.mk.inj",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [],
+     "statement": "∀ {X : Problems.Hodge.ProjectiveVariety} {degree degree_1 : ℕ},   { degree := degree } = { degree := degree_1 } → degree = degree_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.AlgebraicCycleClass.mk.injEq",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {X : Problems.Hodge.ProjectiveVariety} (degree degree_1 : ℕ),   ({ degree := degree } = { degree := degree_1 }) = (degree = degree_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.AlgebraicCycleClass.mk.sizeOf_spec",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [],
+     "statement": "∀ {X : Problems.Hodge.ProjectiveVariety} (degree : ℕ), sizeOf { degree := degree } = 1 + sizeOf degree",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.HodgeClass.mk.inj",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [],
+     "statement": "∀ {X : Problems.Hodge.ProjectiveVariety} {degree degree_1 : ℕ},   { degree := degree } = { degree := degree_1 } → degree = degree_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.HodgeClass.mk.injEq",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {X : Problems.Hodge.ProjectiveVariety} (degree degree_1 : ℕ),   ({ degree := degree } = { degree := degree_1 }) = (degree = degree_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.HodgeClass.mk.sizeOf_spec",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [],
+     "statement": "∀ {X : Problems.Hodge.ProjectiveVariety} (degree : ℕ), sizeOf { degree := degree } = 1 + sizeOf degree",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.ProjectiveVariety.mk.inj",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [],
+     "statement": "∀ {dimension dimension_1 : ℕ}, { dimension := dimension } = { dimension := dimension_1 } → dimension = dimension_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.ProjectiveVariety.mk.injEq",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (dimension dimension_1 : ℕ), ({ dimension := dimension } = { dimension := dimension_1 }) = (dimension = dimension_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.ProjectiveVariety.mk.sizeOf_spec",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [],
+     "statement": "∀ (dimension : ℕ), sizeOf { dimension := dimension } = 1 + sizeOf dimension",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.Hodge.hodge_hawking_equivalence",
+     "module": "Problems.Hodge.HawkingLimit",
+     "axioms": [
+      "Problems.Hodge.is_algebraic",
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "∀ (X : Problems.Hodge.ProjectiveVariety),   Problems.Hodge.HodgeConjecture X ↔     ∀ (h : Problems.Hodge.HodgeClass X), ∃ L, Filter.Tendsto (Problems.Hodge.H_Hodge X h) (nhds 0) (nhds L)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "Problems.NavierStokes.ns_hawking_equivalence",
+     "module": "Problems.NavierStokes.HawkingLimit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "Problems.PvsNP.pnp_hawking_equivalence",
+     "module": "Problems.PvsNP.HawkingLimit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
+     "status": "aberto-sorry"
+    }
+   ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com Hawking, MainTheorem, Problems e o Mathlib v4.19.0 (alguns arquivos com erro)",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `Hawking, .one `MainTheorem, .submodules `Problems]\n",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "lean/MainTheorem.lean",
+     "linha": 27,
+     "nome": "Hawking.Main.universal_singularity_principle",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "lean/Problems/Riemann/HawkingLimit.lean",
+     "linha": 50,
+     "nome": "Problems.Riemann.rh_hawking_equivalence",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Problems.Riemann.xi"
+     ]
+    },
+    {
+     "arquivo": "lean/Problems/YangMills/HawkingLimit.lean",
+     "linha": 32,
+     "nome": "Problems.YangMills.ym_hawking_equivalence",
+     "status": "erro",
+     "axioms": []
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "Hawking.millennium_problem_hawking",
+     "enunciado": "∀ (P : Prop), P = True ∨ P = False → Hawking.HasHawkingFormulation P",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Problems.PvsNP.relativization_barrier",
+     "enunciado": "∃ oracle_A oracle_B, (∃ (_ : True), True) ∧ ∃ (_ : True), True",
+     "resultado": "demonstrável",
+     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Problems.BSD.algebraic_rank",
+     "enunciado": "Problems.BSD.EllipticCurve → ℕ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Problems.Hodge.is_algebraic",
+     "enunciado": "(X : Problems.Hodge.ProjectiveVariety) → Problems.Hodge.HodgeClass X → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Hawking.casorati_weierstrass",
+     "enunciado": "∀ (f : ℂ → ℂ) (x₀ : ℂ),   Hawking.EssentialSingularity f x₀ →     ∀ (w : ℂ), ∀ ε > 0, ∀ δ > 0, ∃ x, 0 < (x - x₀).abs ∧ (x - x₀).abs < δ ∧ (f x - w).abs < ε",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Problems.BSD.L_function",
+     "enunciado": "Problems.BSD.EllipticCurve → ℂ → ℂ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Problems.BSD.analytic_rank",
+     "enunciado": "Problems.BSD.EllipticCurve → ℕ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "Problems.BSD.bsd_hawking_equivalence",
+     "enunciado": "∀ (E : Problems.BSD.EllipticCurve),   Problems.BSD.BSD_Conjecture E ↔ ∃ L, L ≠ 0 ∧ Hawking.RegularLimit (Problems.BSD.H_BSD E) 1 L",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "Problems.Hodge.hodge_hawking_equivalence",
+     "enunciado": "∀ (X : Problems.Hodge.ProjectiveVariety),   Problems.Hodge.HodgeConjecture X ↔     ∀ (h : Problems.Hodge.HodgeClass X), ∃ L, Filter.Tendsto (Problems.Hodge.H_Hodge X h) (nhds 0) (nhds L)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "Problems.NavierStokes.ns_hawking_equivalence",
+     "enunciado": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "Problems.PvsNP.pnp_hawking_equivalence",
+     "enunciado": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 22,
+    "aberto-sorry": 4,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "hawking-singularities-millennium-problems",
+   "path": "src/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Hawking/Core/Limits.lean:51:10: function expected at | error: ././././Hawking/Core/Limits.lean:50:73: unsolved goals",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "src/lean/Hawking/BSD/HawkingBSD.lean",
+     "linha": 74,
+     "nome": "Hawking.BSD.bsd_hawking_reformulation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/EssentialSingularity.lean",
+     "linha": 54,
+     "nome": "Hawking.Core.essential_singularity_causes_failure",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/EssentialSingularity.lean",
+     "linha": 70,
+     "nome": "Hawking.Core.singularity_trichotomy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",
+     "linha": 51,
+     "nome": "Hawking.Core.hawking_dichotomy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",
+     "linha": 67,
+     "nome": "Hawking.Core.regular_implies_problem",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",
+     "linha": 73,
+     "nome": "Hawking.Core.singular_implies_not_problem",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/Limits.lean",
+     "linha": 47,
+     "nome": "Hawking.Core.limit_unique",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/Limits.lean",
+     "linha": 54,
+     "nome": "Hawking.Core.limit_dichotomy",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/Limits.lean",
+     "linha": 61,
+     "nome": "Hawking.Core.limit_add",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/Limits.lean",
+     "linha": 67,
+     "nome": "Hawking.Core.limit_mul",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/USC_HCP.lean",
+     "linha": 26,
+     "nome": "Hawking.Core.usc_negation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/USC_HCP.lean",
+     "linha": 36,
+     "nome": "Hawking.Core.usc_determines_truth",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Core/USC_HCP.lean",
+     "linha": 58,
+     "nome": "Hawking.Core.hcp_non_removable",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/Hodge/HawkingHodge.lean",
+     "linha": 67,
+     "nome": "Hawking.Hodge.hodge_hawking_reformulation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/NavierStokes/HawkingNS.lean",
+     "linha": 60,
+     "nome": "Hawking.NavierStokes.ns_hawking_reformulation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/PvsNP/HawkingPNP.lean",
+     "linha": 75,
+     "nome": "Hawking.PvsNP.pnp_hawking_reformulation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/RH/HawkingRH.lean",
+     "linha": 67,
+     "nome": "Hawking.RH.rh_no_off_line_singularities",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
+     "linha": 82,
+     "nome": "Hawking.UST.universal_singularity_theorem",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
+     "linha": 94,
+     "nome": "Hawking.UST.structural_unity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
+     "linha": 101,
+     "nome": "Hawking.UST.transfer_principle",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/Hawking/YangMills/HawkingYM.lean",
+     "linha": 76,
+     "nome": "Hawking.YangMills.ym_hawking_reformulation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

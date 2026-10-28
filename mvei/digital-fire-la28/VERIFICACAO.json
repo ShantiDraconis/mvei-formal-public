@@ -1,0 +1,162 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/digital-fire-la28",
+ "verified_commit": "04b0f2f3b531511e6680b2c9212e62bce0a28aff",
+ "projects": [
+  {
+   "repo": "digital-fire-la28",
+   "path": "formal/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": false,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././SEETV5/Axioms.lean:16:2: expected token | error: ././././SEETV5/Axioms.lean:17:8: unexpected identifier; expected 'instance'",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "formal/lean/SEETV5/Energy.lean",
+     "linha": 4,
+     "nome": "SEETV5.recovery_less_than_or_equal_input",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-bmi4cg57/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+    },
+    {
+     "arquivo": "formal/lean/SEETV5/Energy.lean",
+     "linha": 10,
+     "nome": "SEETV5.zero_recovery_is_dissipative",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-bmi4cg57/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+    },
+    {
+     "arquivo": "formal/lean/SEETV5/Safety.lean",
+     "linha": 7,
+     "nome": "SEETV5.no_actuation_without_enable",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-bmi4cg57/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+    },
+    {
+     "arquivo": "formal/lean/SEETV5/Safety.lean",
+     "linha": 13,
+     "nome": "SEETV5.no_actuation_without_safety",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-bmi4cg57/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+    },
+    {
+     "arquivo": "formal/lean/SEETV5/ShowLifecycle.lean",
+     "linha": 16,
+     "nome": "SEETV5.boot_to_calibration_valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-bmi4cg57/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+    },
+    {
+     "arquivo": "formal/lean/SEETV5/Telemetry.lean",
+     "linha": 7,
+     "nome": "SEETV5.telemetry_required_for_pulse",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-bmi4cg57/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "digital-fire-la28",
+   "path": "show_control_previsualization/formal/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": false,
+   "build_ok": true,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": true,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "ShowControlPreviz.Cue.mk.inj",
+     "module": "PrevizModel",
+     "axioms": [],
+     "statement": "∀ {cueId : String} {mode : ShowControlPreviz.CueMode} {action cueId_1 : String} {mode_1 : ShowControlPreviz.CueMode}   {action_1 : String},   { cueId := cueId, mode := mode, action := action } = { cueId := cueId_1, mode := mode_1, action := action_1 } →     cueId = cueId_1 ∧ mode = mode_1 ∧ action = action_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ShowControlPreviz.Cue.mk.injEq",
+     "module": "PrevizModel",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (cueId : String) (mode : ShowControlPreviz.CueMode) (action cueId_1 : String) (mode_1 : ShowControlPreviz.CueMode)   (action_1 : String),   ({ cueId := cueId, mode := mode, action := action } = { cueId := cueId_1, mode := mode_1, action := action_1 }) =     (cueId = cueId_1 ∧ mode = mode_1 ∧ action = action_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "ShowControlPreviz.Cue.mk.sizeOf_spec",
+     "module": "PrevizModel",
+     "axioms": [],
+     "statement": "∀ (cueId : String) (mode : ShowControlPreviz.CueMode) (action : String),   sizeOf { cueId := cueId, mode := mode, action := action } = 1 + sizeOf cueId + sizeOf mode + sizeOf action",
+     "status": "fechado"
+    },
+    {
+     "name": "ShowControlPreviz.CueMode.ofNat_ctorIdx",
+     "module": "PrevizModel",
+     "axioms": [],
+     "statement": "∀ (x : ShowControlPreviz.CueMode), ShowControlPreviz.CueMode.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "ShowControlPreviz.CueMode.simulation_only.sizeOf_spec",
+     "module": "PrevizModel",
+     "axioms": [],
+     "statement": "sizeOf ShowControlPreviz.CueMode.simulation_only = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ShowControlPreviz.singletonSafe",
+     "module": "PrevizModel",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (c : ShowControlPreviz.Cue), c.mode = ShowControlPreviz.CueMode.simulation_only → ShowControlPreviz.safeCueMap [c]",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com PrevizModel",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `PrevizModel]\n",
+   "avulso": true,
+   "salvage": [],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 6,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

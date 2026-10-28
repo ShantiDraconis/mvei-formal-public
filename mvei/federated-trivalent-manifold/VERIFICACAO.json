@@ -1,0 +1,1787 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/federated-trivalent-manifold",
+ "verified_commit": "95e7a6a7a64832ae25a2342445e429eb17a2098c",
+ "projects": [
+  {
+   "repo": "federated-trivalent-manifold",
+   "path": ".",
+   "toolchain": "leanprover/lean4:v4.19.0",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": false,
+   "build_ok": true,
+   "build_seconds": 12.6,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "FTM.Audit.mk.inj",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀   {semanticInvariant entropyMonotone noCollapse surgerySound eventualTerminal classifyTerminal semanticInvariant_1     entropyMonotone_1 noCollapse_1 surgerySound_1 eventualTerminal_1 classifyTerminal_1 : Bool},   { semanticInvariant := semanticInvariant, entropyMonotone := entropyMonotone, noCollapse := noCollapse,         surgerySound := surgerySound, eventualTerminal := eventualTerminal, clas",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Audit.mk.injEq",
+     "module": "FTM.PoincareMethod",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀   (semanticInvariant entropyMonotone noCollapse surgerySound eventualTerminal classifyTerminal semanticInvariant_1     entropyMonotone_1 noCollapse_1 surgerySound_1 eventualTerminal_1 classifyTerminal_1 : Bool),   ({ semanticInvariant := semanticInvariant, entropyMonotone := entropyMonotone, noCollapse := noCollapse,         surgerySound := surgerySound, eventualTerminal := eventualTerminal, cla",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Audit.mk.sizeOf_spec",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ (semanticInvariant entropyMonotone noCollapse surgerySound eventualTerminal classifyTerminal : Bool),   sizeOf       { semanticInvariant := semanticInvariant, entropyMonotone := entropyMonotone, noCollapse := noCollapse,         surgerySound := surgerySound, eventualTerminal := eventualTerminal, classifyTerminal := classifyTerminal } =     1 + sizeOf semanticInvariant + sizeOf entropyMonotone +",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Audit.unlocked.eq_1",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ (a : FTM.Audit),   a.unlocked =     (a.semanticInvariant &&       (a.entropyMonotone && (a.noCollapse && (a.surgerySound && (a.eventualTerminal && a.classifyTerminal)))))",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Audit.unlocked_iff",
+     "module": "FTM.PoincareMethod",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a : FTM.Audit),   a.unlocked = true ↔     a.semanticInvariant = true ∧       a.entropyMonotone = true ∧         a.noCollapse = true ∧ a.surgerySound = true ∧ a.eventualTerminal = true ∧ a.classifyTerminal = true",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.BridgeAudit.establishesTarget.eq_1",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (a : FTM.Evidence.BridgeAudit),   a.establishesTarget =     (a.sourceValidated &&       (a.unitsChecked &&         (a.uncertaintyPropagated && (a.modelIdentifiable && (a.semanticsPreserved && a.reductionProved)))))",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.BridgeAudit.mk.inj",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀   {sourceValidated unitsChecked uncertaintyPropagated modelIdentifiable semanticsPreserved reductionProved     sourceValidated_1 unitsChecked_1 uncertaintyPropagated_1 modelIdentifiable_1 semanticsPreserved_1     reductionProved_1 : Bool},   { sourceValidated := sourceValidated, unitsChecked := unitsChecked, uncertaintyPropagated := uncertaintyPropagated,         modelIdentifiable := modelIdenti",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.BridgeAudit.mk.injEq",
+     "module": "FTM.EvidenceStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀   (sourceValidated unitsChecked uncertaintyPropagated modelIdentifiable semanticsPreserved reductionProved     sourceValidated_1 unitsChecked_1 uncertaintyPropagated_1 modelIdentifiable_1 semanticsPreserved_1     reductionProved_1 : Bool),   ({ sourceValidated := sourceValidated, unitsChecked := unitsChecked, uncertaintyPropagated := uncertaintyPropagated,         modelIdentifiable := modelIdent",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.BridgeAudit.mk.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (sourceValidated unitsChecked uncertaintyPropagated modelIdentifiable semanticsPreserved reductionProved : Bool),   sizeOf       { sourceValidated := sourceValidated, unitsChecked := unitsChecked,         uncertaintyPropagated := uncertaintyPropagated, modelIdentifiable := modelIdentifiable,         semanticsPreserved := semanticsPreserved, reductionProved := reductionProved } =     1 + sizeOf s",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Domain.atomic.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.Domain.atomic = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Domain.biochemical.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.Domain.biochemical = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Domain.computational.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.Domain.computational = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Domain.cosmological.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.Domain.cosmological = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Domain.mathematical.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.Domain.mathematical = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Domain.ofNat_toCtorIdx",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Evidence.Domain), FTM.Evidence.Domain.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.controlledExperiment.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.controlledExperiment = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.counterexample.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.counterexample = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.databaseCuration.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.databaseCuration = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.deductiveProof.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.deductiveProof = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.expertJudgment.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.expertJudgment = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.observation.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.observation = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.ofNat_toCtorIdx",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Evidence.EvidenceMode), FTM.Evidence.EvidenceMode.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.simulation.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.simulation = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceMode.statisticalInference.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceMode.statisticalInference = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.calibrated.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.calibrated = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.censored.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.censored = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.curated.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.curated = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.disputed.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.disputed = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.inferred.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.inferred = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.ofNat_toCtorIdx",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Evidence.EvidenceStatus), FTM.Evidence.EvidenceStatus.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.predicted.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.predicted = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.raw.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.raw = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.replicated.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.replicated = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.retracted.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.retracted = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.EvidenceStatus.superseded.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.EvidenceStatus.superseded = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.algebraicNumber.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.algebraicNumber = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.categorical.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.categorical = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.censoredValue.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.censoredValue = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.complexInterval.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.complexInterval = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.exactInteger.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.exactInteger = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.exactRational.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.exactRational = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.finiteSequence.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.finiteSequence = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.floatingPoint.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.floatingPoint = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.graph.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.graph = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.lowerLimit.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.lowerLimit = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.measurementWithUncertainty.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.measurementWithUncertainty = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.ofNat_toCtorIdx",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Evidence.NumericClass), FTM.Evidence.NumericClass.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.posteriorSamples.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.posteriorSamples = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.probabilityDistribution.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.probabilityDistribution = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.realInterval.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.realInterval = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.tensor.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.tensor = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.NumericClass.upperLimit.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.NumericClass.upperLimit = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.BayesianUpdate.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.BayesianUpdate = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.FourierTransform.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.FourierTransform = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.calibration.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.calibration = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.causalIntervention.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.causalIntervention = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.coarseGraining.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.coarseGraining = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.cohomology.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.cohomology = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.covarianceAdjustment.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.covarianceAdjustment = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.filtering.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.filtering = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.functorialMap.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.functorialMap = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.graphReduction.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.graphReduction = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.homology.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.homology = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.hypothesisTest.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.hypothesisTest = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.modelSelection.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.modelSelection = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.normalization.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.normalization = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.ofNat_toCtorIdx",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Evidence.OperatorKind), FTM.Evidence.OperatorKind.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.renormalization.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.renormalization = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.sequenceAlignment.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.sequenceAlignment = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.spectralDecomposition.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.spectralDecomposition = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.structureSuperposition.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.structureSuperposition = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.uncertaintyPropagation.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.uncertaintyPropagation = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.OperatorKind.unitConversion.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.OperatorKind.unitConversion = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Provenance.mk.inj",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ {source version retrievedAt method license source_1 version_1 retrievedAt_1 method_1 license_1 : String},   { source := source, version := version, retrievedAt := retrievedAt, method := method, license := license } =       { source := source_1, version := version_1, retrievedAt := retrievedAt_1, method := method_1,         license := license_1 } →     source = source_1 ∧ version = version_1 ∧ re",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Provenance.mk.injEq",
+     "module": "FTM.EvidenceStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (source version retrievedAt method license source_1 version_1 retrievedAt_1 method_1 license_1 : String),   ({ source := source, version := version, retrievedAt := retrievedAt, method := method, license := license } =       { source := source_1, version := version_1, retrievedAt := retrievedAt_1, method := method_1,         license := license_1 }) =     (source = source_1 ∧ version = version_1 ∧",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Provenance.mk.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (source version retrievedAt method license : String),   sizeOf { source := source, version := version, retrievedAt := retrievedAt, method := method, license := license } =     1 + sizeOf source + sizeOf version + sizeOf retrievedAt + sizeOf method + sizeOf license",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Quantity.mk.inj",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ {name canonicalValue unit : String} {uncertainty : Option String} {numericClass : FTM.Evidence.NumericClass}   {provenance : FTM.Evidence.Provenance} {name_1 canonicalValue_1 unit_1 : String} {uncertainty_1 : Option String}   {numericClass_1 : FTM.Evidence.NumericClass} {provenance_1 : FTM.Evidence.Provenance},   { name := name, canonicalValue := canonicalValue, unit := unit, uncertainty := unce",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Quantity.mk.injEq",
+     "module": "FTM.EvidenceStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (name canonicalValue unit : String) (uncertainty : Option String) (numericClass : FTM.Evidence.NumericClass)   (provenance : FTM.Evidence.Provenance) (name_1 canonicalValue_1 unit_1 : String) (uncertainty_1 : Option String)   (numericClass_1 : FTM.Evidence.NumericClass) (provenance_1 : FTM.Evidence.Provenance),   ({ name := name, canonicalValue := canonicalValue, unit := unit, uncertainty := unc",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.Quantity.mk.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (name canonicalValue unit : String) (uncertainty : Option String) (numericClass : FTM.Evidence.NumericClass)   (provenance : FTM.Evidence.Provenance),   sizeOf       { name := name, canonicalValue := canonicalValue, unit := unit, uncertainty := uncertainty,         numericClass := numericClass, provenance := provenance } =     1 + sizeOf name + sizeOf canonicalValue + sizeOf unit + sizeOf uncert",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.ScientificClaim.mk.inj",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ {id : String} {domain : FTM.Evidence.Domain} {statement : String} {truth : FTM.Evidence.TruthStatus}   {evidence : FTM.Evidence.EvidenceStatus} {mode : FTM.Evidence.EvidenceMode} {id_1 : String}   {domain_1 : FTM.Evidence.Domain} {statement_1 : String} {truth_1 : FTM.Evidence.TruthStatus}   {evidence_1 : FTM.Evidence.EvidenceStatus} {mode_1 : FTM.Evidence.EvidenceMode},   { id := id, domain := d",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.ScientificClaim.mk.injEq",
+     "module": "FTM.EvidenceStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : String) (domain : FTM.Evidence.Domain) (statement : String) (truth : FTM.Evidence.TruthStatus)   (evidence : FTM.Evidence.EvidenceStatus) (mode : FTM.Evidence.EvidenceMode) (id_1 : String)   (domain_1 : FTM.Evidence.Domain) (statement_1 : String) (truth_1 : FTM.Evidence.TruthStatus)   (evidence_1 : FTM.Evidence.EvidenceStatus) (mode_1 : FTM.Evidence.EvidenceMode),   ({ id := id, domain :=",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.ScientificClaim.mk.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (id : String) (domain : FTM.Evidence.Domain) (statement : String) (truth : FTM.Evidence.TruthStatus)   (evidence : FTM.Evidence.EvidenceStatus) (mode : FTM.Evidence.EvidenceMode),   sizeOf { id := id, domain := domain, statement := statement, truth := truth, evidence := evidence, mode := mode } =     1 + sizeOf id + sizeOf domain + sizeOf statement + sizeOf truth + sizeOf evidence + sizeOf mode",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.illPosed.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.illPosed = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.inconsistentPremises.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.inconsistentPremises = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.independentOfAxioms.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.independentOfAxioms = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.ofNat_toCtorIdx",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Evidence.TruthStatus), FTM.Evidence.TruthStatus.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.open.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.open = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.outOfDomain.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.outOfDomain = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.proved.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.proved = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.TruthStatus.refuted.sizeOf_spec",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "sizeOf FTM.Evidence.TruthStatus.refuted = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.analogy_alone_is_insufficient",
+     "module": "FTM.EvidenceStates",
+     "axioms": [],
+     "statement": "{ sourceValidated := true, unitsChecked := true, uncertaintyPropagated := true, modelIdentifiable := true,       semanticsPreserved := false, reductionProved := false }.establishesTarget =   false",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Evidence.no_reduction_no_mathematical_proof",
+     "module": "FTM.EvidenceStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a : FTM.Evidence.BridgeAudit), a.reductionProved = false → a.establishesTarget = false",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.classifyTerminal",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (x y : P.State), P.Admissible x → self.terminal y → P.Target x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.entropyMonotone",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (t : Nat) (x : P.State),   P.Admissible x → self.entropy x ≤ self.entropy (self.advance t x)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.eventualTerminal",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (x : P.State),   P.Admissible x → ∃ n, self.terminal (self.evolve n x)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.mk.inj",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} {evolve : Nat → P.State → P.State} {singular : P.State → Bool} {surgery : P.State → P.State}   {entropy : P.State → Int} {complexity : P.State → Nat} {terminal : P.State → Prop} {advance : Nat → P.State → P.State}   {semanticInvariant : ∀ (t : Nat) (x : P.State), P.Admissible x → P.Admissible (advance t x)}   {entropyMonotone : ∀ (t : Nat) (x : P.State), P.Admissible x → entrop",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.mk.injEq",
+     "module": "FTM.PoincareMethod",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {P : FTM.Problem} (evolve : Nat → P.State → P.State) (singular : P.State → Bool) (surgery : P.State → P.State)   (entropy : P.State → Int) (complexity : P.State → Nat) (terminal : P.State → Prop) (advance : Nat → P.State → P.State)   (semanticInvariant : ∀ (t : Nat) (x : P.State), P.Admissible x → P.Admissible (advance t x))   (entropyMonotone : ∀ (t : Nat) (x : P.State), P.Admissible x → entrop",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.mk.sizeOf_spec",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (evolve : Nat → P.State → P.State) (singular : P.State → Bool) (surgery : P.State → P.State)   (entropy : P.State → Int) (complexity : P.State → Nat) (terminal : P.State → Prop) (advance : Nat → P.State → P.State)   (semanticInvariant : ∀ (t : Nat) (x : P.State), P.Admissible x → P.Admissible (advance t x))   (entropyMonotone : ∀ (t : Nat) (x : P.State), P.Admissible x → entrop",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.noCollapse",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (C : Int),   ∃ K, ∀ (x : P.State), P.Admissible x → self.entropy x ≤ C → self.complexity x ≤ K",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.semanticInvariant",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (t : Nat) (x : P.State),   P.Admissible x → P.Admissible (self.advance t x)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.FlowSurgeryProgram.surgerySound",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (x : P.State),   P.Admissible x → self.singular x = true → P.Admissible (self.surgery x)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Millennium.AdapterSpec.mk.inj",
+     "module": "FTM.MillenniumAdapters",
+     "axioms": [],
+     "statement": "∀ {name stateMeaning flowCandidate entropyCandidate singularityMeaning surgeryCandidate terminalMeaning : String}   {audit : FTM.Audit}   {name_1 stateMeaning_1 flowCandidate_1 entropyCandidate_1 singularityMeaning_1 surgeryCandidate_1 terminalMeaning_1 :     String}   {audit_1 : FTM.Audit},   { name := name, stateMeaning := stateMeaning, flowCandidate := flowCandidate, entropyCandidate := entropy",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Millennium.AdapterSpec.mk.injEq",
+     "module": "FTM.MillenniumAdapters",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (name stateMeaning flowCandidate entropyCandidate singularityMeaning surgeryCandidate terminalMeaning : String)   (audit : FTM.Audit)   (name_1 stateMeaning_1 flowCandidate_1 entropyCandidate_1 singularityMeaning_1 surgeryCandidate_1 terminalMeaning_1 :     String)   (audit_1 : FTM.Audit),   ({ name := name, stateMeaning := stateMeaning, flowCandidate := flowCandidate, entropyCandidate := entrop",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Millennium.AdapterSpec.mk.sizeOf_spec",
+     "module": "FTM.MillenniumAdapters",
+     "axioms": [],
+     "statement": "∀ (name stateMeaning flowCandidate entropyCandidate singularityMeaning surgeryCandidate terminalMeaning : String)   (audit : FTM.Audit),   sizeOf       { name := name, stateMeaning := stateMeaning, flowCandidate := flowCandidate,         entropyCandidate := entropyCandidate, singularityMeaning := singularityMeaning,         surgeryCandidate := surgeryCandidate, terminalMeaning := terminalMeaning,",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Millennium.adapters.eq_1",
+     "module": "FTM.MillenniumAdapters",
+     "axioms": [],
+     "statement": "FTM.Millennium.adapters =   [FTM.Millennium.pVsNP, FTM.Millennium.riemann, FTM.Millennium.yangMills, FTM.Millennium.hodge,     FTM.Millennium.navierStokes, FTM.Millennium.bsd]",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Millennium.no_adapter_is_claimed_unlocked",
+     "module": "FTM.MillenniumAdapters",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a : FTM.Millennium.AdapterSpec), a ∈ FTM.Millennium.adapters → a.audit.unlocked = false",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Problem.mk.inj",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ {State : Type u} {Admissible Target : State → Prop} {State_1 : Type u} {Admissible_1 Target_1 : State_1 → Prop},   { State := State, Admissible := Admissible, Target := Target } =       { State := State_1, Admissible := Admissible_1, Target := Target_1 } →     State = State_1 ∧ HEq Admissible Admissible_1 ∧ HEq Target Target_1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Problem.mk.injEq",
+     "module": "FTM.PoincareMethod",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (State : Type u) (Admissible Target : State → Prop) (State_1 : Type u) (Admissible_1 Target_1 : State_1 → Prop),   ({ State := State, Admissible := Admissible, Target := Target } =       { State := State_1, Admissible := Admissible_1, Target := Target_1 }) =     (State = State_1 ∧ HEq Admissible Admissible_1 ∧ HEq Target Target_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Problem.mk.sizeOf_spec",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ (State : Type u) (Admissible Target : State → Prop),   sizeOf { State := State, Admissible := Admissible, Target := Target } = 1 + sizeOf State",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Renormalization.DriftSign.negative.sizeOf_spec",
+     "module": "FTM.Renormalization",
+     "axioms": [],
+     "statement": "sizeOf FTM.Renormalization.DriftSign.negative = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Renormalization.DriftSign.ofNat_toCtorIdx",
+     "module": "FTM.Renormalization",
+     "axioms": [],
+     "statement": "∀ (x : FTM.Renormalization.DriftSign), FTM.Renormalization.DriftSign.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Renormalization.ScaledDrift.mk.inj",
+     "module": "FTM.Renormalization",
+     "axioms": [],
+     "statement": "∀ {sign : FTM.Renormalization.DriftSign} {magnitude : Nat} {sign_1 : FTM.Renormalization.DriftSign} {magnitude_1 : Nat},   { sign := sign, magnitude := magnitude } = { sign := sign_1, magnitude := magnitude_1 } →     sign = sign_1 ∧ magnitude = magnitude_1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Renormalization.ScaledDrift.mk.injEq",
+     "module": "FTM.Renormalization",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (sign : FTM.Renormalization.DriftSign) (magnitude : Nat) (sign_1 : FTM.Renormalization.DriftSign) (magnitude_1 : Nat),   ({ sign := sign, magnitude := magnitude } = { sign := sign_1, magnitude := magnitude_1 }) =     (sign = sign_1 ∧ magnitude = magnitude_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Renormalization.ScaledDrift.mk.sizeOf_spec",
+     "module": "FTM.Renormalization",
+     "axioms": [],
+     "statement": "∀ (sign : FTM.Renormalization.DriftSign) (magnitude : Nat),   sizeOf { sign := sign, magnitude := magnitude } = 1 + sizeOf sign + sizeOf magnitude",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Renormalization.boundaryDrift_strictly_negative",
+     "module": "FTM.Renormalization",
+     "axioms": [],
+     "statement": "∀ (e : Nat), FTM.Renormalization.IsStrictlyNegative (FTM.Renormalization.boundaryDrift e)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Truncation.cutoff_idempotent",
+     "module": "FTM.Truncation",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (N n : Nat),   (if FTM.Truncation.cutoff N n = true then FTM.Truncation.cutoff N n else false) = FTM.Truncation.cutoff N n",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.Truncation.project_idempotent",
+     "module": "FTM.Truncation",
+     "axioms": [
+      "Quot.sound",
+      "propext"
+     ],
+     "statement": "∀ {α : Type} [inst : Zero α] (N : Nat) (x : Nat → α),   FTM.Truncation.project N (FTM.Truncation.project N x) = FTM.Truncation.project N x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.WMonotone.le_add_right",
+     "module": "FTM.WMonotone",
+     "axioms": [],
+     "statement": "∀ (a b : Nat), a ≤ a + b",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.WMonotone.step_strictly_grows",
+     "module": "FTM.WMonotone",
+     "axioms": [],
+     "statement": "∀ (w score : Nat), w < FTM.WMonotone.step w score",
+     "status": "fechado"
+    },
+    {
+     "name": "FTM.solve_of_flow_surgery",
+     "module": "FTM.PoincareMethod",
+     "axioms": [],
+     "statement": "∀ (P : FTM.Problem), FTM.FlowSurgeryProgram P → ∀ (x : P.State), P.Admissible x → P.Target x",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 19,
+     "nome": "L_A1_1_ERes_finite",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 30,
+     "nome": "L_A1_2_Nmax_bound",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 37,
+     "nome": "L_A2_1_e_nl_bound",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 49,
+     "nome": "L_A2_2_e_linear_negative",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 52,
+     "nome": "L_A2_3_liveness",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 57,
+     "nome": "L_B1_Saros_diff_finite",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 64,
+     "nome": "L_B2_Res_bound",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
+     "linha": 154,
+     "nome": "ns_global_regularity_no_tanh_final",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 120,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "federated-trivalent-manifold",
+   "path": "formal/lean",
+   "toolchain": "leanprover/lean4:v4.8.0",
+   "toolchain_used": "leanprover/lean4:v4.8.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 7.2,
+   "build_error": "error: no such file or directory (error code: 2) | error: build failed",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [
+    {
+     "name": "CryptoAssumption",
+     "module": "Model",
+     "statement": "Prop"
+    },
+    {
+     "name": "RiemannHypothesisAssumption",
+     "module": "Model",
+     "statement": "Prop"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "Point5.mk.inj",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ {x y z t e x_1 y_1 z_1 t_1 e_1 : Float},   { x := x, y := y, z := z, t := t, e := e } = { x := x_1, y := y_1, z := z_1, t := t_1, e := e_1 } →     x = x_1 ∧ y = y_1 ∧ z = z_1 ∧ t = t_1 ∧ e = e_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Point5.mk.injEq",
+     "module": "Model",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (x y z t e x_1 y_1 z_1 t_1 e_1 : Float),   ({ x := x, y := y, z := z, t := t, e := e } = { x := x_1, y := y_1, z := z_1, t := t_1, e := e_1 }) =     (x = x_1 ∧ y = y_1 ∧ z = z_1 ∧ t = t_1 ∧ e = e_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Point5.mk.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ (x y z t e : Float),   sizeOf { x := x, y := y, z := z, t := t, e := e } = 1 + sizeOf x + sizeOf y + sizeOf z + sizeOf t + sizeOf e",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.bsd.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.bsd = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.hodge.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.hodge = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.navierStokes.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.navierStokes = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.ofNat_toCtorIdx",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ (x : Problem), Problem.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.pVsNP.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.pVsNP = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.poincare.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.poincare = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.riemann.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.riemann = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problem.yangMills.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "sizeOf Problem.yangMills = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SystemState.mk.inj",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ {portOpen logEncrypted portOpen_1 logEncrypted_1 : Bool},   { portOpen := portOpen, logEncrypted := logEncrypted } = { portOpen := portOpen_1, logEncrypted := logEncrypted_1 } →     portOpen = portOpen_1 ∧ logEncrypted = logEncrypted_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SystemState.mk.injEq",
+     "module": "Model",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (portOpen logEncrypted portOpen_1 logEncrypted_1 : Bool),   ({ portOpen := portOpen, logEncrypted := logEncrypted } =       { portOpen := portOpen_1, logEncrypted := logEncrypted_1 }) =     (portOpen = portOpen_1 ∧ logEncrypted = logEncrypted_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SystemState.mk.sizeOf_spec",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ (portOpen logEncrypted : Bool),   sizeOf { portOpen := portOpen, logEncrypted := logEncrypted } = 1 + sizeOf portOpen + sizeOf logEncrypted",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.and_comm",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "∀ (a b : Triv), a.and b = b.and a",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.false.sizeOf_spec",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "sizeOf Triv.false = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.neg_involutive",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "∀ (a : Triv), a.neg.neg = a",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.ofNat_toCtorIdx",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "∀ (x : Triv), Triv.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.or_comm",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "∀ (a b : Triv), a.or b = b.or a",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.true.sizeOf_spec",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "sizeOf Triv.true = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Triv.unknown.sizeOf_spec",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "sizeOf Triv.unknown = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "conditional_pipeline",
+     "module": "Model",
+     "axioms": [
+      "CryptoAssumption",
+      "RiemannHypothesisAssumption"
+     ],
+     "statement": "CryptoAssumption → RiemannHypothesisAssumption → True",
+     "status": "condicional"
+    },
+    {
+     "name": "instDecidableEqProblem.proof_1",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ (x y : Problem), x.toCtorIdx = y.toCtorIdx → x = y",
+     "status": "fechado"
+    },
+    {
+     "name": "instDecidableEqProblem.proof_2",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ (x y : Problem), ¬x.toCtorIdx = y.toCtorIdx → x = y → False",
+     "status": "fechado"
+    },
+    {
+     "name": "instDecidableEqTriv.proof_1",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "∀ (x y : Triv), x.toCtorIdx = y.toCtorIdx → x = y",
+     "status": "fechado"
+    },
+    {
+     "name": "instDecidableEqTriv.proof_2",
+     "module": "Trivalent",
+     "axioms": [],
+     "statement": "∀ (x y : Triv), ¬x.toCtorIdx = y.toCtorIdx → x = y → False",
+     "status": "fechado"
+    },
+    {
+     "name": "poincare_reference_is_true",
+     "module": "Model",
+     "axioms": [],
+     "statement": "currentStatus Problem.poincare = Triv.true",
+     "status": "fechado"
+    },
+    {
+     "name": "riemann_is_not_encoded_as_proved",
+     "module": "Model",
+     "axioms": [],
+     "statement": "currentStatus Problem.riemann = Triv.unknown",
+     "status": "fechado"
+    },
+    {
+     "name": "teardown_closes_modelled_port",
+     "module": "Model",
+     "axioms": [],
+     "statement": "∀ (state : SystemState), (teardown state).portOpen = false",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "formal/lean/AnomalyKernel.lean",
+     "linha": 11,
+     "nome": "AnomalyKernel.wRate_positive",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/AnomalyKernel.lean",
+     "linha": 19,
+     "nome": "AnomalyKernel.partial_e_identity",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/AnomalyKernel.lean",
+     "linha": 26,
+     "nome": "AnomalyKernel.affineClock_strictMono",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Behaviors.lean",
+     "linha": 80,
+     "nome": "ComportamentoEspecifico.limit_zero",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/Behaviors.lean",
+     "linha": 179,
+     "nome": "canonical_surreal_limit_zero",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/Behaviors.lean",
+     "linha": 274,
+     "nome": "seet_phase1_closed_no_sorry",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/FiniteEvidence.lean",
+     "linha": 10,
+     "nome": "FiniteEvidence.delayedWitness_prefix_zero",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/FiniteEvidence.lean",
+     "linha": 14,
+     "nome": "FiniteEvidence.delayedWitness_after_one",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/FiniteScale.lean",
+     "linha": 13,
+     "nome": "FiniteScale.retained_card",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/FiniteScale.lean",
+     "linha": 19,
+     "nome": "FiniteScale.thresholdIndicator_true_iff",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/FiniteScale.lean",
+     "linha": 27,
+     "nome": "FiniteScale.linearFlow_initial",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/FiniteScale.lean",
+     "linha": 31,
+     "nome": "FiniteScale.linearFlow_offset_negative",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/FlowOperators.lean",
+     "linha": 18,
+     "nome": "surgery_preserves_x",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/FlowOperators.lean",
+     "linha": 20,
+     "nome": "surgery_delta_e_nonpositive",
+     "status": "erro",
+     "axioms": [
+      "sorryAx",
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/FlowOperators.lean",
+     "linha": 29,
+     "nome": "wStep_non_decreasing",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 14,
+     "nome": "L_A1_1_ERes_finite",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 22,
+     "nome": "L_A1_2_Nmax_bound",
+     "status": "condicional",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 27,
+     "nome": "L_A2_1_e_nl_bound",
+     "status": "condicional",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 36,
+     "nome": "L_A2_2_e_linear_negative",
+     "status": "condicional",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 38,
+     "nome": "L_A2_3_liveness",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 42,
+     "nome": "L_B1_Saros_diff",
+     "status": "condicional",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 47,
+     "nome": "L_B2_Res_bound",
+     "status": "condicional",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/NumeroComComportamento.lean",
+     "linha": 187,
+     "nome": "NumeroComComportamento.limite_exato",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/NumeroComComportamento.lean",
+     "linha": 365,
+     "nome": "seet_fase1_fechado",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 84,
+     "nome": "godelNum_PeqNP_value",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 87,
+     "nome": "godelNum_injective",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 150,
+     "nome": "p_subset_np",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 156,
+     "nome": "not_p_supset_np",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 159,
+     "nome": "p_le_np_prop",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 162,
+     "nome": "not_gt",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 178,
+     "nome": "p_eq_or_neq_np",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 183,
+     "nome": "not_both",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 208,
+     "nome": "equiv_eq_ge",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 212,
+     "nome": "equiv_neq_lt",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 216,
+     "nome": "equiv_neq_pct",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 220,
+     "nome": "equiv_eq_not_neq",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 230,
+     "nome": "equiv_lt_pct",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 234,
+     "nome": "cinco_equivalencias",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/PvsNP_ComoNumeros.lean",
+     "linha": 260,
+     "nome": "pvsnp_nao_e_gap_assintotico",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/RadialGeometry.lean",
+     "linha": 20,
+     "nome": "RadialGeometry.radius_difference",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/RadialGeometry.lean",
+     "linha": 25,
+     "nome": "RadialGeometry.parity_defect_eq_square",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/RadialGeometry.lean",
+     "linha": 30,
+     "nome": "RadialGeometry.parity_defect_nonnegative",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/RadialGeometry.lean",
+     "linha": 35,
+     "nome": "RadialGeometry.radial_weight_nonnegative",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 28,
+    "aberto-sorry": 0,
+    "condicional": 1
+   }
+  },
+  {
+   "repo": "federated-trivalent-manifold",
+   "path": "hub/formal/lean",
+   "toolchain": "leanprover/lean4:v4.8.0",
+   "toolchain_used": "leanprover/lean4:v4.8.0",
+   "needs_mathlib": false,
+   "build_ok": true,
+   "build_seconds": 5.3,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "FTMHub.AllProved.brecOn",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ {motive : (a : List FTMHub.Status) → FTMHub.AllProved a → Prop} {a : List FTMHub.Status} (x : FTMHub.AllProved a),   (∀ (a : List FTMHub.Status) (x : FTMHub.AllProved a), x.below → motive a x) → motive a x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Node.mk.inj",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ {status : FTMHub.Status} {dependencies : List FTMHub.Status} {status_1 : FTMHub.Status}   {dependencies_1 : List FTMHub.Status},   { status := status, dependencies := dependencies } = { status := status_1, dependencies := dependencies_1 } →     status = status_1 ∧ dependencies = dependencies_1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Node.mk.injEq",
+     "module": "FTMHub.Audit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (status : FTMHub.Status) (dependencies : List FTMHub.Status) (status_1 : FTMHub.Status)   (dependencies_1 : List FTMHub.Status),   ({ status := status, dependencies := dependencies } = { status := status_1, dependencies := dependencies_1 }) =     (status = status_1 ∧ dependencies = dependencies_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Node.mk.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (status : FTMHub.Status) (dependencies : List FTMHub.Status),   sizeOf { status := status, dependencies := dependencies } = 1 + sizeOf status + sizeOf dependencies",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.RadiiEncoding.mk.inj",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ {center delta deltaSq center_1 delta_1 deltaSq_1 : Int},   { center := center, delta := delta, deltaSq := deltaSq } =       { center := center_1, delta := delta_1, deltaSq := deltaSq_1 } →     center = center_1 ∧ delta = delta_1 ∧ deltaSq = deltaSq_1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.RadiiEncoding.mk.injEq",
+     "module": "FTMHub.Audit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (center delta deltaSq center_1 delta_1 deltaSq_1 : Int),   ({ center := center, delta := delta, deltaSq := deltaSq } =       { center := center_1, delta := delta_1, deltaSq := deltaSq_1 }) =     (center = center_1 ∧ delta = delta_1 ∧ deltaSq = deltaSq_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.RadiiEncoding.mk.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (center delta deltaSq : Int),   sizeOf { center := center, delta := delta, deltaSq := deltaSq } = 1 + sizeOf center + sizeOf delta + sizeOf deltaSq",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.conditional.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.conditional = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.conjectural.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.conjectural = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.equivalent.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.equivalent = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.finiteCertificate.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.finiteCertificate = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.ofNat_toCtorIdx",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (x : FTMHub.Status), FTMHub.Status.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.open.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.open = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.proved.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.proved = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.Status.refuted.sizeOf_spec",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "sizeOf FTMHub.Status.refuted = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.equivalentNotAutomatic",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "FTMHub.statusAllowsAutomaticProof FTMHub.Status.equivalent = false",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.finiteCertificateNotAutomatic",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "FTMHub.statusAllowsAutomaticProof FTMHub.Status.finiteCertificate = false",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.finiteDependencyBlocks",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (tail : List FTMHub.Status), ¬FTMHub.AllProved (FTMHub.Status.finiteCertificate :: tail)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.instDecidableEqStatus.proof_1",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (x y : FTMHub.Status), x.toCtorIdx = y.toCtorIdx → x = y",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.instDecidableEqStatus.proof_2",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (x y : FTMHub.Status), ¬x.toCtorIdx = y.toCtorIdx → x = y → False",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.openDependencyBlocks",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "∀ (tail : List FTMHub.Status), ¬FTMHub.AllProved (FTMHub.Status.open :: tail)",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.openNotAutomatic",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "FTMHub.statusAllowsAutomaticProof FTMHub.Status.open = false",
+     "status": "fechado"
+    },
+    {
+     "name": "FTMHub.safeBaseDependencies",
+     "module": "FTMHub.Audit",
+     "axioms": [],
+     "statement": "FTMHub.safeBase.dependencies = []",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 23,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

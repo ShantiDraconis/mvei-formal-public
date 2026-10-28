@@ -1,0 +1,1213 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/open-math-scoped-final",
+ "verified_commit": "e0f15e7520f6716188d9c089795bbf0018a0140c",
+ "projects": [
+  {
+   "repo": "open-math-scoped-final",
+   "path": "RIEMANN",
+   "toolchain": "leanprover/lean4:v4.19.0",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 47.2,
+   "build_error": "error: ././././Riemann.lean:1:0: import Riemann.external.FinalExternalStatus failed, environment already contains 'Riemann.external.PRODUCER_STATE._cstage1' from Riemann.external.ExternalStatus | error: Lean exited with code 1 | error: build failed",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DNLimit_eq_zero_of_vanishingUpperBound",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DNLimit_nonneg",
+     "module": "MCore.RH.NB.Limit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), 0 ≤ D.DNLimit rho",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DNToZero_iff_DNLimit_eq_zero",
+     "module": "MCore.RH.NB.ZeroLimitFrontier",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.DNToZero rho ↔ D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DNToZero_of_le_zero",
+     "module": "MCore.RH.NB.ZeroLimitFrontier",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), (∀ (N : ℕ), D.DN rho N ≤ 0) → D.DNToZero rho",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DNToZero_of_vanishingUpperBound",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNToZero rho",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DN_antitone",
+     "module": "MCore.RH.NB.Antitone",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), Antitone (D.DN rho)",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DN_antitone_of_le",
+     "module": "MCore.RH.NB.Antitone",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) {N M : ℕ}, N ≤ M → D.DN rho M ≤ D.DN rho N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DN_bddBelow",
+     "module": "MCore.RH.NB.Limit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), BddBelow (Set.range (D.DN rho))",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.DN_nonneg",
+     "module": "MCore.RH.NB.Distance",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), 0 ≤ D.DN rho N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.P_mem",
+     "module": "MCore.RH.NB.Projection",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ) (x : D.H), ↑((D.P rho N) x) ∈ D.V rho N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.P_minimal",
+     "module": "MCore.RH.NB.Projection",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ) (x : D.H), ‖x - ↑((D.P rho N) x)‖ = ⨅ v, ‖x - ↑v‖",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.V.eq_1",
+     "module": "MCore.RH.NB.FiniteSpan",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ),   D.V rho N = Submodule.span ℝ (D.finiteGenerators rho N)",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.V_le_succ",
+     "module": "MCore.RH.NB.Nesting",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), D.V rho N ≤ D.V rho (N + 1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.V_mono_of_le",
+     "module": "MCore.RH.NB.Nesting",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) {N M : ℕ}, N ≤ M → D.V rho N ≤ D.V rho M",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.VanishingUpperBound.dn_le",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} (self : D.VanishingUpperBound rho) (N : ℕ),   D.DN rho N ≤ self.eps N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.VanishingUpperBound.eps_nonneg",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} (self : D.VanishingUpperBound rho) (N : ℕ), 0 ≤ self.eps N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.VanishingUpperBound.eps_tendsto_zero",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} (self : D.VanishingUpperBound rho),   Filter.Tendsto self.eps Filter.atTop (nhds 0)",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.VanishingUpperBound.mk.inj",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} {eps : ℕ → ℝ} {eps_nonneg : ∀ (N : ℕ), 0 ≤ eps N}   {dn_le : ∀ (N : ℕ), D.DN rho N ≤ eps N} {eps_tendsto_zero : Filter.Tendsto eps Filter.atTop (nhds 0)} {eps_1 : ℕ → ℝ}   {eps_nonneg_1 : ∀ (N : ℕ), 0 ≤ eps_1 N} {dn_le_1 : ∀ (N : ℕ), D.DN rho N ≤ eps_1 N}   {eps_tendsto_zero_1 : Filter.Tendsto eps_1 Filter.atTop (nhds 0)},   { eps := eps,",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.VanishingUpperBound.mk.injEq",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} (eps : ℕ → ℝ) (eps_nonneg : ∀ (N : ℕ), 0 ≤ eps N)   (dn_le : ∀ (N : ℕ), D.DN rho N ≤ eps N) (eps_tendsto_zero : Filter.Tendsto eps Filter.atTop (nhds 0)) (eps_1 : ℕ → ℝ)   (eps_nonneg_1 : ∀ (N : ℕ), 0 ≤ eps_1 N) (dn_le_1 : ∀ (N : ℕ), D.DN rho N ≤ eps_1 N)   (eps_tendsto_zero_1 : Filter.Tendsto eps_1 Filter.atTop (nhds 0)),   ({ eps := eps",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.VanishingUpperBound.mk.sizeOf_spec",
+     "module": "MCore.RH.NB.QuantitativeUpperBound",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} (eps : ℕ → ℝ) (eps_nonneg : ∀ (N : ℕ), 0 ≤ eps N)   (dn_le : ∀ (N : ℕ), D.DN rho N ≤ eps N) (eps_tendsto_zero : Filter.Tendsto eps Filter.atTop (nhds 0)),   sizeOf { eps := eps, eps_nonneg := eps_nonneg, dn_le := dn_le, eps_tendsto_zero := eps_tendsto_zero } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.dN_antitone_of_le",
+     "module": "MCore.RH.NB.Antitone",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) {N M : ℕ}, N ≤ M → D.dN rho M ≤ D.dN rho N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.dN_nonneg",
+     "module": "MCore.RH.NB.Distance",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), 0 ≤ D.dN rho N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.finiteDimensional_V",
+     "module": "MCore.RH.NB.FiniteSpan",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), Module.Finite ℝ ↥(D.V rho N)",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.finiteGenerators_mono",
+     "module": "MCore.RH.NB.Nesting",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) {N M : ℕ},   N ≤ M → D.finiteGenerators rho N ⊆ D.finiteGenerators rho M",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.finite_finiteGenerators",
+     "module": "MCore.RH.NB.HilbertData",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), (D.finiteGenerators rho N).Finite",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.generator_mem_V",
+     "module": "MCore.RH.NB.HilbertData",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ) (n : Fin N), rho ↑n ∈ D.V rho N",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.hasOrthogonalProjection_V",
+     "module": "MCore.RH.NB.Projection",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), (D.V rho N).HasOrthogonalProjection",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.instCompleteSpace",
+     "module": "MCore.RH.NB.HilbertData",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : MCore.RH.NB.NBHilbertData), CompleteSpace self.H",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.isClosed_V",
+     "module": "MCore.RH.NB.FiniteSpan",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ), IsClosed ↑(D.V rho N)",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.mk.inj",
+     "module": "MCore.RH.NB.HilbertData",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {H : Type} {instNormedAddCommGroup : NormedAddCommGroup H} {instInnerProductSpace : InnerProductSpace ℝ H}   {instCompleteSpace : CompleteSpace H} {chi : H} {H_1 : Type} {instNormedAddCommGroup_1 : NormedAddCommGroup H_1}   {instInnerProductSpace_1 : InnerProductSpace ℝ H_1} {instCompleteSpace_1 : CompleteSpace H_1} {chi_1 : H_1},   { H := H, instNormedAddCommGroup := instNormedAddCommGroup, ins",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.mk.injEq",
+     "module": "MCore.RH.NB.HilbertData",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (H : Type) (instNormedAddCommGroup : NormedAddCommGroup H) (instInnerProductSpace : InnerProductSpace ℝ H)   (instCompleteSpace : CompleteSpace H) (chi : H) (H_1 : Type) (instNormedAddCommGroup_1 : NormedAddCommGroup H_1)   (instInnerProductSpace_1 : InnerProductSpace ℝ H_1) (instCompleteSpace_1 : CompleteSpace H_1) (chi_1 : H_1),   ({ H := H, instNormedAddCommGroup := instNormedAddCommGroup, in",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.mk.sizeOf_spec",
+     "module": "MCore.RH.NB.HilbertData",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (H : Type) (instNormedAddCommGroup : NormedAddCommGroup H) (instInnerProductSpace : InnerProductSpace ℝ H)   (instCompleteSpace : CompleteSpace H) (chi : H),   sizeOf       { H := H, instNormedAddCommGroup := instNormedAddCommGroup, instInnerProductSpace := instInnerProductSpace,         instCompleteSpace := instCompleteSpace, chi := chi } =     1 + sizeOf H + sizeOf instNormedAddCommGroup + siz",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.residual_inner_eq_zero",
+     "module": "MCore.RH.NB.Projection",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (N : ℕ) (x v : D.H),   v ∈ D.V rho N → inner (x - ↑((D.P rho N) x)) v = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "MCore.RH.NB.NBHilbertData.tendsto_DN_DNLimit",
+     "module": "MCore.RH.NB.Limit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily),   Filter.Tendsto (D.DN rho) Filter.atTop (nhds (D.DNLimit rho))",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_1",
+     "module": "Riemann.claims.Claim1_FinalScoped",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_2_COVERING",
+     "module": "Riemann.claims.Claim2_A14Refuted",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (obs : Riemann.refutedRoutes.NBObservation),     Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.coveringDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_2_JOINT",
+     "module": "Riemann.claims.Claim2_A14Refuted",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (obs : Riemann.refutedRoutes.NBObservation),     Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs →       obs.coveringDecay ∧ obs.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_2_TESTDEFECT",
+     "module": "Riemann.claims.Claim2_A14Refuted",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (obs : Riemann.refutedRoutes.NBObservation),     Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_4_ENDPOINT_TYPED",
+     "module": "Riemann.claims.Claim4_EndpointTyped",
+     "axioms": [],
+     "statement": "Riemann.full.ENDPOINT_TYPED = true",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_6_DNLIMIT_ZERO",
+     "module": "Riemann.claims.Claim6_DNLimitZero",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (P : Riemann.full.VanishingProducer), P.D.DNLimit P.rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.claims.CLAIM_8_RIEMANN_COMPLETE",
+     "module": "Riemann.claims.Claim8_RiemannComplete",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (P : Riemann.full.VanishingProducer), Riemann.full.EndpointBridge P → Riemann.full.RiemannHypothesis",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.EXTERNAL_SCOPED_CLAIM",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.a14CoveringRefuted",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.external.ExternalCertificate →   ¬∀ (obs : Riemann.refutedRoutes.NBObservation),       Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.coveringDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.a14JointRefuted",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.external.ExternalCertificate →   ¬∀ (obs : Riemann.refutedRoutes.NBObservation),       Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs →         obs.coveringDecay ∧ obs.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.a14TestDefectRefuted",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.external.ExternalCertificate →   ¬∀ (obs : Riemann.refutedRoutes.NBObservation),       Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.mk.inj",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀   {scopedClaim :     ∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0}   {a14CoveringRefuted :     ¬∀ (obs : Riemann.refutedRoutes.NBObservation),         Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.coveringDecay}   {a14TestDefectRefuted :     ¬∀ (obs : Riemann.refutedRoutes.NBObservation),",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.mk.injEq",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀   (scopedClaim :     ∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0)   (a14CoveringRefuted :     ¬∀ (obs : Riemann.refutedRoutes.NBObservation),         Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.coveringDecay)   (a14TestDefectRefuted :     ¬∀ (obs : Riemann.refutedRoutes.NBObservation),",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.mk.sizeOf_spec",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀   (scopedClaim :     ∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0)   (a14CoveringRefuted :     ¬∀ (obs : Riemann.refutedRoutes.NBObservation),         Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.coveringDecay)   (a14TestDefectRefuted :     ¬∀ (obs : Riemann.refutedRoutes.NBObservation),",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.rhClaims_zero",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Riemann.external.ExternalCertificate), self.rhClaims = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.ExternalCertificate.scopedClaim",
+     "module": "Riemann.external.ExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.external.ExternalCertificate →   ∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.FinalExternalCertificate.bridge",
+     "module": "Riemann.external.FinalExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Riemann.external.FinalExternalCertificate), Riemann.full.EndpointBridge self.producer",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.FinalExternalCertificate.mk.inj",
+     "module": "Riemann.external.FinalExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {producer : Riemann.full.VanishingProducer} {bridge : Riemann.full.EndpointBridge producer}   {rhProof : Riemann.full.RiemannHypothesis} {rhProof_eq_final : rhProof = ⋯}   {producer_1 : Riemann.full.VanishingProducer} {bridge_1 : Riemann.full.EndpointBridge producer_1}   {rhProof_1 : Riemann.full.RiemannHypothesis} {rhProof_eq_final_1 : rhProof_1 = ⋯},   { producer := producer, bridge := bridge,",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.FinalExternalCertificate.mk.injEq",
+     "module": "Riemann.external.FinalExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (producer : Riemann.full.VanishingProducer) (bridge : Riemann.full.EndpointBridge producer)   (rhProof : Riemann.full.RiemannHypothesis) (rhProof_eq_final : rhProof = ⋯)   (producer_1 : Riemann.full.VanishingProducer) (bridge_1 : Riemann.full.EndpointBridge producer_1)   (rhProof_1 : Riemann.full.RiemannHypothesis) (rhProof_eq_final_1 : rhProof_1 = ⋯),   ({ producer := producer, bridge := bridge",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.FinalExternalCertificate.mk.sizeOf_spec",
+     "module": "Riemann.external.FinalExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (producer : Riemann.full.VanishingProducer) (bridge : Riemann.full.EndpointBridge producer)   (rhProof : Riemann.full.RiemannHypothesis) (rhProof_eq_final : rhProof = ⋯),   sizeOf { producer := producer, bridge := bridge, rhProof := rhProof, rhProof_eq_final := rhProof_eq_final } =     1 + sizeOf producer + sizeOf bridge + sizeOf rhProof_eq_final",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.FinalExternalCertificate.rhProof",
+     "module": "Riemann.external.FinalExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.external.FinalExternalCertificate → Riemann.full.RiemannHypothesis",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.external.FinalExternalCertificate.rhProof_eq_final",
+     "module": "Riemann.external.FinalExternalCertificate",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Riemann.external.FinalExternalCertificate), ⋯ = ⋯",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.frozen.vanishing_upper_bound_thm",
+     "module": "Riemann.frozen.vanishing_upper_bound_green_5c66f8dc",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.full.EndpointBridge.dn_zero_to_rh",
+     "module": "Riemann.full.Obligations",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {P : Riemann.full.VanishingProducer},   Riemann.full.EndpointBridge P → P.D.DNLimit P.rho = 0 → Riemann.full.RiemannHypothesis",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.full.FINAL_PROOF",
+     "module": "Riemann.full.FinalProof",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (P : Riemann.full.VanishingProducer), Riemann.full.EndpointBridge P → Riemann.full.RiemannHypothesis",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.full.VanishingProducer.mk.inj",
+     "module": "Riemann.full.Obligations",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {D : MCore.RH.NB.NBHilbertData} {rho : D.GeneratorFamily} {vanishing : D.VanishingUpperBound rho}   {D_1 : MCore.RH.NB.NBHilbertData} {rho_1 : D_1.GeneratorFamily} {vanishing_1 : D_1.VanishingUpperBound rho_1},   { D := D, rho := rho, vanishing := vanishing } = { D := D_1, rho := rho_1, vanishing := vanishing_1 } →     D = D_1 ∧ HEq rho rho_1 ∧ HEq vanishing vanishing_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.full.VanishingProducer.mk.injEq",
+     "module": "Riemann.full.Obligations",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (vanishing : D.VanishingUpperBound rho)   (D_1 : MCore.RH.NB.NBHilbertData) (rho_1 : D_1.GeneratorFamily) (vanishing_1 : D_1.VanishingUpperBound rho_1),   ({ D := D, rho := rho, vanishing := vanishing } = { D := D_1, rho := rho_1, vanishing := vanishing_1 }) =     (D = D_1 ∧ HEq rho rho_1 ∧ HEq vanishing vanishing_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.full.VanishingProducer.mk.sizeOf_spec",
+     "module": "Riemann.full.Obligations",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily) (vanishing : D.VanishingUpperBound rho),   sizeOf { D := D, rho := rho, vanishing := vanishing } = 1 + sizeOf D + sizeOf vanishing",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.full.endpoint_typed",
+     "module": "Riemann.full.Endpoint",
+     "axioms": [],
+     "statement": "Riemann.full.ENDPOINT_TYPED = true",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.A14_alone_not_sufficient_for_covering",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (obs : Riemann.refutedRoutes.NBObservation),     Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.coveringDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.A14_alone_not_sufficient_for_joint_decay",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (obs : Riemann.refutedRoutes.NBObservation),     Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs →       obs.coveringDecay ∧ obs.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.A14_alone_not_sufficient_for_testDefect",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (obs : Riemann.refutedRoutes.NBObservation),     Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs → obs.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.MCoreSystem.mk.inj",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {baseVal : ℝ} {amplitude scale : ℝ → ℝ} {zeroLimit : Riemann.refutedRoutes.ZeroDirection → ℝ}   {hasEdge : String → String → Prop} {phiObserved : ℝ → Prop} {baseVal_1 : ℝ} {amplitude_1 scale_1 : ℝ → ℝ}   {zeroLimit_1 : Riemann.refutedRoutes.ZeroDirection → ℝ} {hasEdge_1 : String → String → Prop}   {phiObserved_1 : ℝ → Prop},   { baseVal := baseVal, amplitude := amplitude, scale := scale, zeroLim",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.MCoreSystem.mk.injEq",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (baseVal : ℝ) (amplitude scale : ℝ → ℝ) (zeroLimit : Riemann.refutedRoutes.ZeroDirection → ℝ)   (hasEdge : String → String → Prop) (phiObserved : ℝ → Prop) (baseVal_1 : ℝ) (amplitude_1 scale_1 : ℝ → ℝ)   (zeroLimit_1 : Riemann.refutedRoutes.ZeroDirection → ℝ) (hasEdge_1 : String → String → Prop)   (phiObserved_1 : ℝ → Prop),   ({ baseVal := baseVal, amplitude := amplitude, scale := scale, zeroLi",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.MCoreSystem.mk.sizeOf_spec",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (baseVal : ℝ) (amplitude scale : ℝ → ℝ) (zeroLimit : Riemann.refutedRoutes.ZeroDirection → ℝ)   (hasEdge : String → String → Prop) (phiObserved : ℝ → Prop),   sizeOf       { baseVal := baseVal, amplitude := amplitude, scale := scale, zeroLimit := zeroLimit, hasEdge := hasEdge,         phiObserved := phiObserved } =     1 + sizeOf baseVal",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.NBObservation.mk.inj",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "∀ {coveringDecay testDefectDecay coveringDecay_1 testDefectDecay_1 : Prop},   { coveringDecay := coveringDecay, testDefectDecay := testDefectDecay } =       { coveringDecay := coveringDecay_1, testDefectDecay := testDefectDecay_1 } →     coveringDecay = coveringDecay_1 ∧ testDefectDecay = testDefectDecay_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.NBObservation.mk.injEq",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (coveringDecay testDefectDecay coveringDecay_1 testDefectDecay_1 : Prop),   ({ coveringDecay := coveringDecay, testDefectDecay := testDefectDecay } =       { coveringDecay := coveringDecay_1, testDefectDecay := testDefectDecay_1 }) =     (coveringDecay = coveringDecay_1 ∧ testDefectDecay = testDefectDecay_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.NBObservation.mk.sizeOf_spec",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "∀ (coveringDecay testDefectDecay : Prop),   sizeOf { coveringDecay := coveringDecay, testDefectDecay := testDefectDecay } =     1 + sizeOf coveringDecay + sizeOf testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.ZeroDirection.ETA.sizeOf_spec",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "sizeOf Riemann.refutedRoutes.ZeroDirection.ETA = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.ZeroDirection.K0.sizeOf_spec",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "sizeOf Riemann.refutedRoutes.ZeroDirection.K0 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.ZeroDirection.RHO.sizeOf_spec",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "sizeOf Riemann.refutedRoutes.ZeroDirection.RHO = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.ZeroDirection.ofNat_toCtorIdx",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "∀ (x : Riemann.refutedRoutes.ZeroDirection), Riemann.refutedRoutes.ZeroDirection.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.badObservation.eq_1",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "Riemann.refutedRoutes.badObservation = { coveringDecay := False, testDefectDecay := False }",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.bad_is_compatible",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem Riemann.refutedRoutes.badObservation",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.bad_not_covering",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "¬Riemann.refutedRoutes.badObservation.coveringDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.bad_not_testDefect",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "¬Riemann.refutedRoutes.badObservation.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.compatible_counterexample_blocks_universal",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (P : Riemann.refutedRoutes.NBObservation → Prop) (obs : Riemann.refutedRoutes.NBObservation),   Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem obs →     ¬P obs →       ¬∀ (x : Riemann.refutedRoutes.NBObservation),           Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem x → P x",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.good_covering",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "Riemann.refutedRoutes.goodObservation.coveringDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.good_is_compatible",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.CompatibleObservation Riemann.refutedRoutes.witnessSystem Riemann.refutedRoutes.goodObservation",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.good_testDefect",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [],
+     "statement": "Riemann.refutedRoutes.goodObservation.testDefectDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.witnessSystem.eq_1",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.witnessSystem =   { baseVal := 1, amplitude := fun x => 1, scale := fun x => 1,     zeroLimit := fun d =>       match d with       | Riemann.refutedRoutes.ZeroDirection.K0 => 0       | Riemann.refutedRoutes.ZeroDirection.RHO => 1       | Riemann.refutedRoutes.ZeroDirection.ETA => 2,     hasEdge := fun a b => a = \"G1\" ∧ b = \"G4\" ∨ a = \"G4\" ∧ b = \"G1\", phiObserved := fun x => F",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.witness_A1",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.A1_prop Riemann.refutedRoutes.witnessSystem",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.witness_A14",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.A14Signature Riemann.refutedRoutes.witnessSystem",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.witness_A2",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.A2_cycleDetected Riemann.refutedRoutes.witnessSystem",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.witness_A3",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.A3_pathDependent Riemann.refutedRoutes.witnessSystem",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.refutedRoutes.witness_A4",
+     "module": "Riemann.refutedRoutes.A14NonImplication",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.refutedRoutes.A4_scaleInvariant Riemann.refutedRoutes.witnessSystem",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.scoped.FINAL_PROOF",
+     "module": "Riemann.scoped.FinalProof",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.scoped.FINAL_SCOPED_CLAIM",
+     "module": "Riemann.scoped.FinalProof",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.scoped.FINAL_SCOPED_CLAIM_FROM_CLAIM",
+     "module": "Riemann.scoped.FinalClaim",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.scoped.OPEN_MATH_SCOPED_CLOSED",
+     "module": "Riemann.scoped.OpenMathClosure",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.scoped.OPEN_MATH_TO_EXTERNAL",
+     "module": "Riemann.scoped.OpenMathClosure",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (D : MCore.RH.NB.NBHilbertData) (rho : D.GeneratorFamily), D.VanishingUpperBound rho → D.DNLimit rho = 0",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 51,
+     "nome": "Riemann.refutedRoutes.witness_A1",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 59,
+     "nome": "Riemann.refutedRoutes.witness_A2",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 62,
+     "nome": "Riemann.refutedRoutes.witness_A3",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 66,
+     "nome": "Riemann.refutedRoutes.witness_A4",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 70,
+     "nome": "Riemann.refutedRoutes.witness_A14",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 79,
+     "nome": "Riemann.refutedRoutes.good_is_compatible",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 83,
+     "nome": "Riemann.refutedRoutes.bad_is_compatible",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 87,
+     "nome": "Riemann.refutedRoutes.good_covering",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 90,
+     "nome": "Riemann.refutedRoutes.good_testDefect",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 93,
+     "nome": "Riemann.refutedRoutes.bad_not_covering",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 96,
+     "nome": "Riemann.refutedRoutes.bad_not_testDefect",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 99,
+     "nome": "Riemann.refutedRoutes.compatible_counterexample_blocks_universal",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 108,
+     "nome": "Riemann.refutedRoutes.A14_alone_not_sufficient_for_covering",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 114,
+     "nome": "Riemann.refutedRoutes.A14_alone_not_sufficient_for_testDefect",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/Riemann/refuted-routes/A14NonImplication.lean",
+     "linha": 120,
+     "nome": "Riemann.refutedRoutes.A14_alone_not_sufficient_for_joint_decay",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/K8.lean",
+     "linha": 15,
+     "nome": "MCore.rh_endpoint_of_adapter",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MCore/K7.olean' of module MCore.K7 does not exist"
+    },
+    {
+     "arquivo": "RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/K8.lean",
+     "linha": 19,
+     "nome": "MCore.k8_preserves_k7_firewall",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MCore/K7.olean' of module MCore.K7 does not exist"
+    },
+    {
+     "arquivo": "RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/K8.lean",
+     "linha": 25,
+     "nome": "MCore.k8_k7_target_open",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/build/lib/lean/MCore/K7.olean' of module MCore.K7 does not exist"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 95,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

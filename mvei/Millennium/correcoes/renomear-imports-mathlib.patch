@@ -1,0 +1,200 @@
+--- a/formal/lean/BSD/BSD_bridge.lean
++++ b/formal/lean/BSD/BSD_bridge.lean
+@@ -9,7 +9,7 @@
+ -/
+ 
+ import Mathlib.Tactic
+-import Mathlib.NumberTheory.EllipticCurve
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ import Mathlib.Analysis.Complex.Basic
+ 
+ namespace Millennium.BSD
+--- a/formal/lean/BSD/BridgeTheorem.lean
++++ b/formal/lean/BSD/BridgeTheorem.lean
+@@ -1,5 +1,5 @@
+ import Mathlib.Tactic
+-import Mathlib.NumberTheory.EllipticCurve.Basic
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ import BSD.Classical
+ import Mathlib.NumberTheory.LSeries.Basic
+ 
+--- a/formal/lean/BSD/Classical.lean
++++ b/formal/lean/BSD/Classical.lean
+@@ -4,7 +4,7 @@
+ This file contains classical definitions for the BSD conjecture in Clay format.
+ -/
+ 
+-import Mathlib.NumberTheory.EllipticCurve
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ import Mathlib.Analysis.Complex.Basic
+ 
+ namespace BSD.Classical
+--- a/formal/lean/Millennium/BSD_Instance.lean
++++ b/formal/lean/Millennium/BSD_Instance.lean
+@@ -6,7 +6,7 @@
+ -/
+ 
+ import Mathlib.Tactic
+-import Mathlib.NumberTheory.EllipticCurve.Basic
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ 
+ namespace LGMathOS.BSD
+ 
+--- a/formal/lean/NavierStokes/Classical.lean
++++ b/formal/lean/NavierStokes/Classical.lean
+@@ -5,7 +5,7 @@
+ existence and smoothness problem in the format expected by the Clay Institute.
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+--- a/formal/lean/NavierStokes/NS_bridge.lean
++++ b/formal/lean/NavierStokes/NS_bridge.lean
+@@ -10,7 +10,7 @@
+ 
+ import Mathlib.Tactic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ 
+ namespace Millennium.NavierStokes
+ 
+--- a/formal/lean/Problems/NS.lean
++++ b/formal/lean/Problems/NS.lean
+@@ -1,7 +1,7 @@
+ import UnifiedMath.Framework
+ import UnifiedMath.TUNS
+ import TUNS.Framework
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ 
+ /-
+ Navier-Stokes Framework in Lean
+--- a/formal/lean/RH/BridgeTheorem.lean
++++ b/formal/lean/RH/BridgeTheorem.lean
+@@ -1,6 +1,6 @@
+ import Mathlib.Tactic
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import RH.Classical
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
+ 
+--- a/formal/lean/RH/RH_bridge.lean
++++ b/formal/lean/RH/RH_bridge.lean
+@@ -10,7 +10,7 @@
+ 
+ import Mathlib.Tactic
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace Millennium.RH
+ 
+--- a/lean4/GridZetaCoupling.lean
++++ b/lean4/GridZetaCoupling.lean
+@@ -13,7 +13,7 @@
+ -/
+ 
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.Analysis.SpecialFunctions.Gamma
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+--- a/lean4/MMEU/Basic.lean
++++ b/lean4/MMEU/Basic.lean
+@@ -1,5 +1,5 @@
+ import Mathlib.Data.Real.Basic
+-import Mathlib.Data.Real.NNReal
++import Mathlib.Data.NNReal.Basic
+ 
+ namespace MMEU
+ 
+--- a/lean4/NavierStokes/FormalClosure.lean
++++ b/lean4/NavierStokes/FormalClosure.lean
+@@ -1,8 +1,8 @@
+ import Mathlib.Analysis.Calculus.ContDiff.Basic
+-import Mathlib.Analysis.NormedSpace.OperatorNorm
++import Mathlib.Analysis.NormedSpace.OperatorNorm.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.MeasureTheory.Integral.Bochner
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+--- a/lean4/NavierStokes/LRE_NS.lean
++++ b/lean4/NavierStokes/LRE_NS.lean
+@@ -20,9 +20,9 @@
+ - Fefferman (2000): Clay problem statement
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Topology.ContinuousFunction.Basic
++import Mathlib.Topology.ContinuousMap.Basic
+ 
+ namespace NavierStokes
+ 
+--- a/lean4/NonUnification/Basic.lean
++++ b/lean4/NonUnification/Basic.lean
+@@ -3,7 +3,7 @@
+   Formalizing the structural incompatibilities in mathematics
+ -/
+ 
+-import Mathlib.Init.Set
++import Mathlib.Data.Set.Defs
+ 
+ -- Basic types for the framework
+ universe u
+--- a/lean4/RiemannZerosPrimes.lean
++++ b/lean4/RiemannZerosPrimes.lean
+@@ -8,7 +8,7 @@
+   because such deviation would contradict the asymptotic behavior of primes.
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
+ import Mathlib.NumberTheory.PrimeCounting
+ import Mathlib.Data.Complex.Basic
+--- a/lean4/UnifiedTheory/RiemannHypothesis.lean
++++ b/lean4/UnifiedTheory/RiemannHypothesis.lean
+@@ -4,8 +4,8 @@
+ -/
+ 
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
+-import Mathlib.Analysis.Asymptotics.Asymptotics
++import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Analysis.Asymptotics.Defs
+ import UnifiedTheory.CoreTheory
+ 
+ namespace RiemannHypothesis
+--- a/lean4/UniversalCriticalFunctional.lean
++++ b/lean4/UniversalCriticalFunctional.lean
+@@ -27,7 +27,7 @@
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ import Mathlib.MeasureTheory.Integral.IntervalIntegral
+-import Mathlib.Analysis.Asymptotics.Asymptotics
++import Mathlib.Analysis.Asymptotics.Defs
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+ noncomputable section
+--- a/src/lean4/Millennium/PvsNP.lean
++++ b/src/lean4/Millennium/PvsNP.lean
+@@ -1,7 +1,7 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.ENNReal.Basic
+ import Millennium.CoreDelta
+-import Mathlib.Data.Real.ENNReal
++import Mathlib.Data.ENNReal.Basic
+ import Mathlib.Computability.TuringMachine
+ 
+ /-

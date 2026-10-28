@@ -1,0 +1,226 @@
+--- a/src/lean/BSD/BSD/MainTheoremSkeleton.lean
++++ b/src/lean/BSD/BSD/MainTheoremSkeleton.lean
+@@ -1,3 +1,6 @@
++import BSD.BSD.Statement
++import BSD.BSD.KnownCases
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -14,8 +17,6 @@
+ * See: `docs/08-proof-architecture/global-proof-outline.md`
+ -/
+ 
+-import BSD.BSD.Statement
+-import BSD.BSD.KnownCases
+ 
+ namespace BSD.BSD
+ 
+--- a/src/lean/BSD/BSD/StrongBSD.lean
++++ b/src/lean/BSD/BSD/StrongBSD.lean
+@@ -1,10 +1,11 @@
++import BSD.BSD.Statement
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license.
+ Authors: BSD Formalization Project Contributors
+ -/
+ 
+-import BSD.BSD.Statement
+ 
+ /-!
+ # Strong BSD Conjecture
+@@ -127,7 +128,6 @@
+ * See: `docs/07-bsd-conjecture/weak-and-strong-bsd.md`
+ -/
+ 
+-import BSD.BSD.Statement
+ 
+ namespace BSD.BSD
+ 
+--- a/src/lean/BSD/BSD/WeakBSD.lean
++++ b/src/lean/BSD/BSD/WeakBSD.lean
+@@ -1,10 +1,11 @@
++import BSD.BSD.Statement
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license.
+ Authors: BSD Formalization Project Contributors
+ -/
+ 
+-import BSD.BSD.Statement
+ 
+ /-!
+ # Weak BSD Conjecture
+@@ -114,7 +115,6 @@
+ * See: `docs/07-bsd-conjecture/weak-and-strong-bsd.md`
+ -/
+ 
+-import BSD.BSD.Statement
+ 
+ namespace BSD.BSD
+ 
+--- a/src/lean/BSD/Cohomology/SelmerGroups.lean
++++ b/src/lean/BSD/Cohomology/SelmerGroups.lean
+@@ -1,3 +1,5 @@
++import BSD.Cohomology.GaloisCohomology
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -19,7 +21,6 @@
+ * See: `docs/05-cohomology-selmer-sha/selmer-groups-definition.md`
+ -/
+ 
+-import BSD.Cohomology.GaloisCohomology
+ 
+ namespace BSD.Cohomology
+ 
+--- a/src/lean/BSD/Cohomology/TateShafarevich.lean
++++ b/src/lean/BSD/Cohomology/TateShafarevich.lean
+@@ -1,3 +1,5 @@
++import BSD.Cohomology.SelmerGroups
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -19,7 +21,6 @@
+ * See: `docs/05-cohomology-selmer-sha/tate-shafarevich-group.md`
+ -/
+ 
+-import BSD.Cohomology.SelmerGroups
+ 
+ namespace BSD.Cohomology
+ 
+--- a/src/lean/BSD/EllipticCurve/GroupLaw.lean
++++ b/src/lean/BSD/EllipticCurve/GroupLaw.lean
+@@ -1,10 +1,12 @@
++import BSD.EllipticCurve.Basic
++import BSD.EllipticCurve.Weierstrass
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license.
+ Authors: BSD Formalization Project Contributors
+ -/
+ 
+-import BSD.EllipticCurve.Basic
+ 
+ /-!
+ # Group Law on Elliptic Curves
+@@ -163,7 +165,6 @@
+ * See: `src/lean/BSD/EllipticCurve/Weierstrass.lean` for basic definitions
+ -/
+ 
+-import BSD.EllipticCurve.Weierstrass
+ 
+ namespace BSD.EllipticCurve
+ 
+--- a/src/lean/BSD/EllipticCurve/Invariants.lean
++++ b/src/lean/BSD/EllipticCurve/Invariants.lean
+@@ -1,10 +1,12 @@
++import BSD.EllipticCurve.Basic
++import BSD.EllipticCurve.Weierstrass
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license.
+ Authors: BSD Formalization Project Contributors
+ -/
+ 
+-import BSD.EllipticCurve.Basic
+ 
+ /-!
+ # Elliptic Curve Invariants
+@@ -101,7 +103,6 @@
+ * See: `docs/02-elliptic-curves/discriminant-and-j-invariant.md`
+ -/
+ 
+-import BSD.EllipticCurve.Weierstrass
+ 
+ namespace BSD.EllipticCurve
+ 
+--- a/src/lean/BSD/LFunction/AnalyticContinuationAxioms.lean
++++ b/src/lean/BSD/LFunction/AnalyticContinuationAxioms.lean
+@@ -1,3 +1,5 @@
++import BSD.LFunction.Definition
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -19,7 +21,6 @@
+ * See: `docs/04-l-functions/analytic-continuation-and-functional-equation.md`
+ -/
+ 
+-import BSD.LFunction.Definition
+ 
+ namespace BSD.LFunction
+ 
+--- a/src/lean/BSD/LFunction/FunctionalEquationAxioms.lean
++++ b/src/lean/BSD/LFunction/FunctionalEquationAxioms.lean
+@@ -1,3 +1,5 @@
++import BSD.LFunction.AnalyticContinuationAxioms
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -18,7 +20,6 @@
+ * See: `docs/04-l-functions/analytic-continuation-and-functional-equation.md`
+ -/
+ 
+-import BSD.LFunction.AnalyticContinuationAxioms
+ 
+ namespace BSD.LFunction
+ 
+--- a/src/lean/BSD/LFunction/SpecialValues.lean
++++ b/src/lean/BSD/LFunction/SpecialValues.lean
+@@ -1,3 +1,5 @@
++import BSD.LFunction.FunctionalEquationAxioms
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -20,7 +22,6 @@
+ * See: `docs/04-l-functions/special-values-and-derivatives.md`
+ -/
+ 
+-import BSD.LFunction.FunctionalEquationAxioms
+ 
+ namespace BSD.LFunction
+ 
+--- a/src/lean/BSD/ModularForms/ModularityTheoremStub.lean
++++ b/src/lean/BSD/ModularForms/ModularityTheoremStub.lean
+@@ -1,3 +1,5 @@
++import BSD.ModularForms.Newforms
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -24,7 +26,6 @@
+ * Wiles, Taylor-Wiles, Breuil-Conrad-Diamond-Taylor
+ -/
+ 
+-import BSD.ModularForms.Newforms
+ -- import BSD.EllipticCurve.Weierstrass  -- Once imports work
+ 
+ namespace BSD.ModularForms
+--- a/src/lean/BSD/Rank/RankEquivalenceStrategy.lean
++++ b/src/lean/BSD/Rank/RankEquivalenceStrategy.lean
+@@ -1,3 +1,6 @@
++import BSD.Rank.AlgebraicRank
++import BSD.Rank.AnalyticRank
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+@@ -14,8 +17,6 @@
+ * See: `docs/07-bsd-conjecture/rank-equality-algebraic-analytic.md`
+ -/
+ 
+-import BSD.Rank.AlgebraicRank
+-import BSD.Rank.AnalyticRank
+ 
+ namespace BSD.Rank
+ 

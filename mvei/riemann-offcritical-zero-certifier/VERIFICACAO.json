@@ -1,0 +1,895 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/riemann-offcritical-zero-certifier",
+ "verified_commit": "94ae8e7446c5af5cdd50cd32eade96da30c07cca",
+ "projects": [
+  {
+   "repo": "riemann-offcritical-zero-certifier",
+   "path": ".",
+   "toolchain": "leanprover/lean4:v4.19.0",
+   "toolchain_used": "v4.19.0",
+   "needs_mathlib": false,
+   "build_ok": true,
+   "build_seconds": 0.3,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "ROZC.AnalyticClosure.bilinear_to_dn",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.AnalyticClosure M dnDecay bilinearDecay → ROZC.BilinearToDN bilinearDecay dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AnalyticClosure.rh_iff_dn",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.AnalyticClosure M dnDecay bilinearDecay → ROZC.RHiffDN M dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumedOffCriticalFamilyTheory.mk.inj",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {family family_1 : ROZC.OffCriticalZeroFamily M},   { family := family } = { family := family_1 } → family = family_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumedOffCriticalFamilyTheory.mk.injEq",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (family family_1 : ROZC.OffCriticalZeroFamily M),   ({ family := family } = { family := family_1 }) = (family = family_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumedOffCriticalFamilyTheory.mk.sizeOf_spec",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (family : ROZC.OffCriticalZeroFamily M), sizeOf { family := family } = 1 + sizeOf family",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumptionFamilyCertificate.analyticClosure",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.AssumptionFamilyCertificate M dnDecay bilinearDecay → ROZC.AnalyticClosure M dnDecay bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumptionFamilyCertificate.familyObstruction",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   (self : ROZC.AssumptionFamilyCertificate M dnDecay bilinearDecay),   self.theory.family.Index → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumptionFamilyCertificate.mk.inj",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   {theory : ROZC.AssumedOffCriticalFamilyTheory M} {analyticClosure : ROZC.AnalyticClosure M dnDecay bilinearDecay}   {familyObstruction : theory.family.Index → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay}   {theory_1 : ROZC.AssumedOffCriticalFamilyTheory M} {analyticClosure_1 : ROZC.AnalyticClosure M dnDecay b",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumptionFamilyCertificate.mk.injEq",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   (theory : ROZC.AssumedOffCriticalFamilyTheory M) (analyticClosure : ROZC.AnalyticClosure M dnDecay bilinearDecay)   (familyObstruction : theory.family.Index → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay)   (theory_1 : ROZC.AssumedOffCriticalFamilyTheory M) (analyticClosure_1 : ROZC.AnalyticClosure M dnDecay b",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.AssumptionFamilyCertificate.mk.sizeOf_spec",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay} [inst : SizeOf dnDecay]   [inst_1 : SizeOf bilinearDecay] (theory : ROZC.AssumedOffCriticalFamilyTheory M)   (analyticClosure : ROZC.AnalyticClosure M dnDecay bilinearDecay)   (familyObstruction : theory.family.Index → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay),   sizeOf { theory := theory, analyticClosure :=",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.BCFToVanishingUpperBound.forward",
+     "module": "ROZC.TerminalProducer",
+     "axioms": [],
+     "statement": "∀ {bcf : ROZC.BCFZeroResidueControl} {vub : ROZC.VanishingUpperBound}, ROZC.BCFToVanishingUpperBound bcf vub → bcf → vub",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.BilinearToDN.forward",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {bilinearDecay : ROZC.WeightedBilinearDecay} {dnDecay : ROZC.DNDecay},   ROZC.BilinearToDN bilinearDecay dnDecay → bilinearDecay → dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.BridgeProvenance.mk.inj",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "∀ {name sourceRepository sourceAnchor : String} {status : ROZC.EvidenceStatus}   {name_1 sourceRepository_1 sourceAnchor_1 : String} {status_1 : ROZC.EvidenceStatus},   { name := name, sourceRepository := sourceRepository, sourceAnchor := sourceAnchor, status := status } =       { name := name_1, sourceRepository := sourceRepository_1, sourceAnchor := sourceAnchor_1, status := status_1 } →     nam",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.BridgeProvenance.mk.injEq",
+     "module": "ROZC.Provenance",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (name sourceRepository sourceAnchor : String) (status : ROZC.EvidenceStatus)   (name_1 sourceRepository_1 sourceAnchor_1 : String) (status_1 : ROZC.EvidenceStatus),   ({ name := name, sourceRepository := sourceRepository, sourceAnchor := sourceAnchor, status := status } =       { name := name_1, sourceRepository := sourceRepository_1, sourceAnchor := sourceAnchor_1, status := status_1 }) =     (",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.BridgeProvenance.mk.sizeOf_spec",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "∀ (name sourceRepository sourceAnchor : String) (status : ROZC.EvidenceStatus),   sizeOf { name := name, sourceRepository := sourceRepository, sourceAnchor := sourceAnchor, status := status } =     1 + sizeOf name + sizeOf sourceRepository + sizeOf sourceAnchor + sizeOf status",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.analytic_closure",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ConditionalExternalCertificate M dnDecay bilinearDecay → ROZC.AnalyticClosure M dnDecay bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.mk.inj",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   {witness : ROZC.OffCriticalZeroWitness M} {analytic_closure : ROZC.AnalyticClosure M dnDecay bilinearDecay}   {not_rh : ¬ROZC.RH M} {not_dn_decay : ¬dnDecay} {not_bilinear_decay : ¬bilinearDecay}   {witness_1 : ROZC.OffCriticalZeroWitness M} {analytic_closure_1 : ROZC.AnalyticClosure M dnDecay bilinearDe",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.mk.injEq",
+     "module": "ROZC.Certificates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   (witness : ROZC.OffCriticalZeroWitness M) (analytic_closure : ROZC.AnalyticClosure M dnDecay bilinearDecay)   (not_rh : ¬ROZC.RH M) (not_dn_decay : ¬dnDecay) (not_bilinear_decay : ¬bilinearDecay)   (witness_1 : ROZC.OffCriticalZeroWitness M) (analytic_closure_1 : ROZC.AnalyticClosure M dnDecay bilinearDe",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.mk.sizeOf_spec",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay} [inst : SizeOf dnDecay]   [inst_1 : SizeOf bilinearDecay] (witness : ROZC.OffCriticalZeroWitness M)   (analytic_closure : ROZC.AnalyticClosure M dnDecay bilinearDecay) (not_rh : ¬ROZC.RH M) (not_dn_decay : ¬dnDecay)   (not_bilinear_decay : ¬bilinearDecay),   sizeOf       { witness := witness, analytic_clos",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.not_bilinear_decay",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ConditionalExternalCertificate M dnDecay bilinearDecay → ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.not_dn_decay",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ConditionalExternalCertificate M dnDecay bilinearDecay → ¬dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ConditionalExternalCertificate.not_rh",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ConditionalExternalCertificate M dnDecay bilinearDecay → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.CriticalCoordinateModel.mk.inj",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {Coord : Type u} {zero : Coord} {displacement : M.Point → Coord}   {onLine_iff_zero : ∀ (z : M.Point), M.onCriticalLine z ↔ displacement z = zero} {Coord_1 : Type u} {zero_1 : Coord_1}   {displacement_1 : M.Point → Coord_1}   {onLine_iff_zero_1 : ∀ (z : M.Point), M.onCriticalLine z ↔ displacement_1 z = zero_1},   { Coord := Coord, zero := zero, displacement := displacement,",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.CriticalCoordinateModel.mk.injEq",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (Coord : Type u) (zero : Coord) (displacement : M.Point → Coord)   (onLine_iff_zero : ∀ (z : M.Point), M.onCriticalLine z ↔ displacement z = zero) (Coord_1 : Type u) (zero_1 : Coord_1)   (displacement_1 : M.Point → Coord_1)   (onLine_iff_zero_1 : ∀ (z : M.Point), M.onCriticalLine z ↔ displacement_1 z = zero_1),   ({ Coord := Coord, zero := zero, displacement := displacement,",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.CriticalCoordinateModel.mk.sizeOf_spec",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (Coord : Type u) (zero : Coord) (displacement : M.Point → Coord)   (onLine_iff_zero : ∀ (z : M.Point), M.onCriticalLine z ↔ displacement z = zero),   sizeOf { Coord := Coord, zero := zero, displacement := displacement, onLine_iff_zero := onLine_iff_zero } =     1 + sizeOf Coord + sizeOf zero",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.CriticalCoordinateModel.onLine_iff_zero",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.CriticalCoordinateModel M) (z : M.Point),   M.onCriticalLine z ↔ self.displacement z = self.zero",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.EvidenceStatus.externalAudited.sizeOf_spec",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "sizeOf ROZC.EvidenceStatus.externalAudited = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.EvidenceStatus.kernelProved.sizeOf_spec",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "sizeOf ROZC.EvidenceStatus.kernelProved = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.EvidenceStatus.ofNat_toCtorIdx",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "∀ (x : ROZC.EvidenceStatus), ROZC.EvidenceStatus.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.EvidenceStatus.openBridge.sizeOf_spec",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "sizeOf ROZC.EvidenceStatus.openBridge = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.analytic_closure",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ExternalCertificate M dnDecay bilinearDecay → ROZC.AnalyticClosure M dnDecay bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.mk.inj",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   {verified_zero : ROZC.VerifiedOffCriticalZero M} {analytic_closure : ROZC.AnalyticClosure M dnDecay bilinearDecay}   {not_rh : ¬ROZC.RH M} {not_dn_decay : ¬dnDecay} {not_bilinear_decay : ¬bilinearDecay}   {verified_zero_1 : ROZC.VerifiedOffCriticalZero M} {analytic_closure_1 : ROZC.AnalyticClosure M dnDe",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.mk.injEq",
+     "module": "ROZC.Certificates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   (verified_zero : ROZC.VerifiedOffCriticalZero M) (analytic_closure : ROZC.AnalyticClosure M dnDecay bilinearDecay)   (not_rh : ¬ROZC.RH M) (not_dn_decay : ¬dnDecay) (not_bilinear_decay : ¬bilinearDecay)   (verified_zero_1 : ROZC.VerifiedOffCriticalZero M) (analytic_closure_1 : ROZC.AnalyticClosure M dnDe",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.mk.sizeOf_spec",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay} [inst : SizeOf dnDecay]   [inst_1 : SizeOf bilinearDecay] (verified_zero : ROZC.VerifiedOffCriticalZero M)   (analytic_closure : ROZC.AnalyticClosure M dnDecay bilinearDecay) (not_rh : ¬ROZC.RH M) (not_dn_decay : ¬dnDecay)   (not_bilinear_decay : ¬bilinearDecay),   sizeOf       { verified_zero := verified_",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.not_bilinear_decay",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ExternalCertificate M dnDecay bilinearDecay → ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.not_dn_decay",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ExternalCertificate M dnDecay bilinearDecay → ¬dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ExternalCertificate.not_rh",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.ExternalCertificate M dnDecay bilinearDecay → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.FreeOffCriticalTheory.mk.inj",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {family family_1 : ROZC.OffCriticalZeroFamily M},   { family := family } = { family := family_1 } → family = family_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.FreeOffCriticalTheory.mk.injEq",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (family family_1 : ROZC.OffCriticalZeroFamily M),   ({ family := family } = { family := family_1 }) = (family = family_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.FreeOffCriticalTheory.mk.sizeOf_spec",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (family : ROZC.OffCriticalZeroFamily M), sizeOf { family := family } = 1 + sizeOf family",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.LocalZeroResponse.mk.inj",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ {Point Value : Type u} {isZero : Point → Prop} {response : Point → Value} {Point_1 Value_1 : Type u}   {isZero_1 : Point_1 → Prop} {response_1 : Point_1 → Value_1},   { Point := Point, Value := Value, isZero := isZero, response := response } =       { Point := Point_1, Value := Value_1, isZero := isZero_1, response := response_1 } →     Point = Point_1 ∧ Value = Value_1 ∧ HEq isZero isZero_1 ∧ H",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.LocalZeroResponse.mk.injEq",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (Point Value : Type u) (isZero : Point → Prop) (response : Point → Value) (Point_1 Value_1 : Type u)   (isZero_1 : Point_1 → Prop) (response_1 : Point_1 → Value_1),   ({ Point := Point, Value := Value, isZero := isZero, response := response } =       { Point := Point_1, Value := Value_1, isZero := isZero_1, response := response_1 }) =     (Point = Point_1 ∧ Value = Value_1 ∧ HEq isZero isZero_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.LocalZeroResponse.mk.sizeOf_spec",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ (Point Value : Type u) (isZero : Point → Prop) (response : Point → Value),   sizeOf { Point := Point, Value := Value, isZero := isZero, response := response } = 1 + sizeOf Point + sizeOf Value",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroFamily.mk.inj",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {Index : Type u} {state : Index → M.Point} {zero : ∀ (j : Index), M.isZero (state j)}   {nontrivial : ∀ (j : Index), M.nontrivial (state j)} {off_line : ∀ (j : Index), ¬M.onCriticalLine (state j)}   {Index_1 : Type u} {state_1 : Index_1 → M.Point} {zero_1 : ∀ (j : Index_1), M.isZero (state_1 j)}   {nontrivial_1 : ∀ (j : Index_1), M.nontrivial (state_1 j)}   {off_line_1 : ∀ (",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroFamily.mk.injEq",
+     "module": "ROZC.Family",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (Index : Type u) (state : Index → M.Point) (zero : ∀ (j : Index), M.isZero (state j))   (nontrivial : ∀ (j : Index), M.nontrivial (state j)) (off_line : ∀ (j : Index), ¬M.onCriticalLine (state j))   (Index_1 : Type u) (state_1 : Index_1 → M.Point) (zero_1 : ∀ (j : Index_1), M.isZero (state_1 j))   (nontrivial_1 : ∀ (j : Index_1), M.nontrivial (state_1 j))   (off_line_1 : ∀ (",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroFamily.mk.sizeOf_spec",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (Index : Type u) (state : Index → M.Point) (zero : ∀ (j : Index), M.isZero (state j))   (nontrivial : ∀ (j : Index), M.nontrivial (state j)) (off_line : ∀ (j : Index), ¬M.onCriticalLine (state j)),   sizeOf { Index := Index, state := state, zero := zero, nontrivial := nontrivial, off_line := off_line } =     1 + sizeOf Index",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroFamily.nontrivial",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.OffCriticalZeroFamily M) (j : self.Index), M.nontrivial (self.state j)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroFamily.off_line",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.OffCriticalZeroFamily M) (j : self.Index), ¬M.onCriticalLine (self.state j)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroFamily.zero",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.OffCriticalZeroFamily M) (j : self.Index), M.isZero (self.state j)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroWitness.mk.inj",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {rho : M.Point} {zero : M.isZero rho} {nontrivial_zero : M.nontrivial rho}   {off_line : ¬M.onCriticalLine rho} {rho_1 : M.Point} {zero_1 : M.isZero rho_1}   {nontrivial_zero_1 : M.nontrivial rho_1} {off_line_1 : ¬M.onCriticalLine rho_1},   { rho := rho, zero := zero, nontrivial_zero := nontrivial_zero, off_line := off_line } =       { rho := rho_1, zero := zero_1, nontrivia",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroWitness.mk.injEq",
+     "module": "ROZC.Core",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (rho : M.Point) (zero : M.isZero rho) (nontrivial_zero : M.nontrivial rho)   (off_line : ¬M.onCriticalLine rho) (rho_1 : M.Point) (zero_1 : M.isZero rho_1)   (nontrivial_zero_1 : M.nontrivial rho_1) (off_line_1 : ¬M.onCriticalLine rho_1),   ({ rho := rho, zero := zero, nontrivial_zero := nontrivial_zero, off_line := off_line } =       { rho := rho_1, zero := zero_1, nontrivi",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroWitness.mk.sizeOf_spec",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (rho : M.Point) (zero : M.isZero rho) (nontrivial_zero : M.nontrivial rho)   (off_line : ¬M.onCriticalLine rho),   sizeOf { rho := rho, zero := zero, nontrivial_zero := nontrivial_zero, off_line := off_line } =     1 + sizeOf rho + sizeOf zero + sizeOf nontrivial_zero",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroWitness.nontrivial_zero",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.OffCriticalZeroWitness M), M.nontrivial self.rho",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroWitness.off_line",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.OffCriticalZeroWitness M), ¬M.onCriticalLine self.rho",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.OffCriticalZeroWitness.zero",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.OffCriticalZeroWitness M), M.isZero self.rho",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.RHiffDN.iff_statement",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay}, ROZC.RHiffDN M dnDecay → (ROZC.RH M ↔ dnDecay)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalChart.inv_involutive",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ (self : ROZC.ReciprocalChart) (x : self.Coord), self.nonzero x → self.inv (self.inv x) = x",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalChart.mk.inj",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ {Coord : Type u} {zero : Coord} {inv : Coord → Coord} {nonzero : Coord → Prop}   {inv_involutive : ∀ (x : Coord), nonzero x → inv (inv x) = x} {Coord_1 : Type u} {zero_1 : Coord_1}   {inv_1 : Coord_1 → Coord_1} {nonzero_1 : Coord_1 → Prop}   {inv_involutive_1 : ∀ (x : Coord_1), nonzero_1 x → inv_1 (inv_1 x) = x},   { Coord := Coord, zero := zero, inv := inv, nonzero := nonzero, inv_involutive :=",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalChart.mk.injEq",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (Coord : Type u) (zero : Coord) (inv : Coord → Coord) (nonzero : Coord → Prop)   (inv_involutive : ∀ (x : Coord), nonzero x → inv (inv x) = x) (Coord_1 : Type u) (zero_1 : Coord_1)   (inv_1 : Coord_1 → Coord_1) (nonzero_1 : Coord_1 → Prop)   (inv_involutive_1 : ∀ (x : Coord_1), nonzero_1 x → inv_1 (inv_1 x) = x),   ({ Coord := Coord, zero := zero, inv := inv, nonzero := nonzero, inv_involutive :",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalChart.mk.sizeOf_spec",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ (Coord : Type u) (zero : Coord) (inv : Coord → Coord) (nonzero : Coord → Prop)   (inv_involutive : ∀ (x : Coord), nonzero x → inv (inv x) = x),   sizeOf { Coord := Coord, zero := zero, inv := inv, nonzero := nonzero, inv_involutive := inv_involutive } =     1 + sizeOf Coord + sizeOf zero",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalState.delta_nonzero",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ {R : ROZC.ReciprocalChart} (self : ROZC.ReciprocalState R), R.nonzero self.delta",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalState.eta_eq",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ {R : ROZC.ReciprocalChart} (self : ROZC.ReciprocalState R), self.eta = R.inv self.delta",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalState.mk.inj",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ {R : ROZC.ReciprocalChart} {delta : R.Coord} {delta_nonzero : R.nonzero delta} {eta : R.Coord}   {eta_eq : eta = R.inv delta} {delta_1 : R.Coord} {delta_nonzero_1 : R.nonzero delta_1} {eta_1 : R.Coord}   {eta_eq_1 : eta_1 = R.inv delta_1},   { delta := delta, delta_nonzero := delta_nonzero, eta := eta, eta_eq := eta_eq } =       { delta := delta_1, delta_nonzero := delta_nonzero_1, eta := eta_1,",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalState.mk.injEq",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {R : ROZC.ReciprocalChart} (delta : R.Coord) (delta_nonzero : R.nonzero delta) (eta : R.Coord)   (eta_eq : eta = R.inv delta) (delta_1 : R.Coord) (delta_nonzero_1 : R.nonzero delta_1) (eta_1 : R.Coord)   (eta_eq_1 : eta_1 = R.inv delta_1),   ({ delta := delta, delta_nonzero := delta_nonzero, eta := eta, eta_eq := eta_eq } =       { delta := delta_1, delta_nonzero := delta_nonzero_1, eta := eta_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ReciprocalState.mk.sizeOf_spec",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ {R : ROZC.ReciprocalChart} (delta : R.Coord) (delta_nonzero : R.nonzero delta) (eta : R.Coord)   (eta_eq : eta = R.inv delta),   sizeOf { delta := delta, delta_nonzero := delta_nonzero, eta := eta, eta_eq := eta_eq } =     1 + sizeOf delta + sizeOf delta_nonzero + sizeOf eta + sizeOf eta_eq",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.VanishingUpperBoundToDN.forward",
+     "module": "ROZC.TerminalProducer",
+     "axioms": [],
+     "statement": "∀ {vub : ROZC.VanishingUpperBound} {dnDecay : ROZC.DNDecay}, ROZC.VanishingUpperBoundToDN vub dnDecay → vub → dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.VerifiedOffCriticalZero.mk.inj",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {witness : ROZC.OffCriticalZeroWitness M} {verificationPredicate : Prop}   {verificationProof : verificationPredicate} {witness_1 : ROZC.OffCriticalZeroWitness M}   {verificationPredicate_1 : Prop} {verificationProof_1 : verificationPredicate_1},   { witness := witness, verificationPredicate := verificationPredicate, verificationProof := verificationProof } =       { witness",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.VerifiedOffCriticalZero.mk.injEq",
+     "module": "ROZC.Certificates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (witness : ROZC.OffCriticalZeroWitness M) (verificationPredicate : Prop)   (verificationProof : verificationPredicate) (witness_1 : ROZC.OffCriticalZeroWitness M)   (verificationPredicate_1 : Prop) (verificationProof_1 : verificationPredicate_1),   ({ witness := witness, verificationPredicate := verificationPredicate, verificationProof := verificationProof } =       { witnes",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.VerifiedOffCriticalZero.mk.sizeOf_spec",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (witness : ROZC.OffCriticalZeroWitness M) (verificationPredicate : Prop)   (verificationProof : verificationPredicate),   sizeOf       { witness := witness, verificationPredicate := verificationPredicate, verificationProof := verificationProof } =     1 + sizeOf witness + sizeOf verificationPredicate + sizeOf verificationProof",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.VerifiedOffCriticalZero.verificationProof",
+     "module": "ROZC.Certificates",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.VerifiedOffCriticalZero M), self.verificationPredicate",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroOrbit.mk.inj",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel}   {base reflected conjugated reflectedConjugated base_1 reflected_1 conjugated_1 reflectedConjugated_1 : M.Point},   { base := base, reflected := reflected, conjugated := conjugated, reflectedConjugated := reflectedConjugated } =       { base := base_1, reflected := reflected_1, conjugated := conjugated_1,         reflectedConjugated := reflectedConjugated_1 } →     base = b",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroOrbit.mk.injEq",
+     "module": "ROZC.Orbit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel}   (base reflected conjugated reflectedConjugated base_1 reflected_1 conjugated_1 reflectedConjugated_1 : M.Point),   ({ base := base, reflected := reflected, conjugated := conjugated, reflectedConjugated := reflectedConjugated } =       { base := base_1, reflected := reflected_1, conjugated := conjugated_1,         reflectedConjugated := reflectedConjugated_1 }) =     (base",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroOrbit.mk.sizeOf_spec",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (base reflected conjugated reflectedConjugated : M.Point),   sizeOf       { base := base, reflected := reflected, conjugated := conjugated, reflectedConjugated := reflectedConjugated } =     1 + sizeOf base + sizeOf reflected + sizeOf conjugated + sizeOf reflectedConjugated",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.commute",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point),   self.reflect (self.conjugate z) = self.conjugate (self.reflect z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.conjugate_involutive",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point), self.conjugate (self.conjugate z) = z",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.conjugate_nontrivial",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point), M.nontrivial z → M.nontrivial (self.conjugate z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.conjugate_offline",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point),   ¬M.onCriticalLine z → ¬M.onCriticalLine (self.conjugate z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.conjugate_zero",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point), M.isZero z → M.isZero (self.conjugate z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.mk.inj",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {reflect conjugate : M.Point → M.Point}   {reflect_involutive : ∀ (z : M.Point), reflect (reflect z) = z}   {conjugate_involutive : ∀ (z : M.Point), conjugate (conjugate z) = z}   {commute : ∀ (z : M.Point), reflect (conjugate z) = conjugate (reflect z)}   {reflect_zero : ∀ (z : M.Point), M.isZero z → M.isZero (reflect z)}   {conjugate_zero : ∀ (z : M.Point), M.isZero z → M.",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.mk.injEq",
+     "module": "ROZC.Orbit",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : ROZC.ZetaModel} (reflect conjugate : M.Point → M.Point)   (reflect_involutive : ∀ (z : M.Point), reflect (reflect z) = z)   (conjugate_involutive : ∀ (z : M.Point), conjugate (conjugate z) = z)   (commute : ∀ (z : M.Point), reflect (conjugate z) = conjugate (reflect z))   (reflect_zero : ∀ (z : M.Point), M.isZero z → M.isZero (reflect z))   (conjugate_zero : ∀ (z : M.Point), M.isZero z → M.",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.mk.sizeOf_spec",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (reflect conjugate : M.Point → M.Point)   (reflect_involutive : ∀ (z : M.Point), reflect (reflect z) = z)   (conjugate_involutive : ∀ (z : M.Point), conjugate (conjugate z) = z)   (commute : ∀ (z : M.Point), reflect (conjugate z) = conjugate (reflect z))   (reflect_zero : ∀ (z : M.Point), M.isZero z → M.isZero (reflect z))   (conjugate_zero : ∀ (z : M.Point), M.isZero z → M.",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.reflect_involutive",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point), self.reflect (self.reflect z) = z",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.reflect_nontrivial",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point), M.nontrivial z → M.nontrivial (self.reflect z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.reflect_offline",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point),   ¬M.onCriticalLine z → ¬M.onCriticalLine (self.reflect z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroSymmetry.reflect_zero",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (self : ROZC.ZeroSymmetry M) (z : M.Point), M.isZero z → M.isZero (self.reflect z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroWithResponse.mk.inj",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ {L : ROZC.LocalZeroResponse} {point : L.Point} {zero : L.isZero point} {localResponse : L.Value}   {response_eq : localResponse = L.response point} {point_1 : L.Point} {zero_1 : L.isZero point_1}   {localResponse_1 : L.Value} {response_eq_1 : localResponse_1 = L.response point_1},   { point := point, zero := zero, localResponse := localResponse, response_eq := response_eq } =       { point := po",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroWithResponse.mk.injEq",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {L : ROZC.LocalZeroResponse} (point : L.Point) (zero : L.isZero point) (localResponse : L.Value)   (response_eq : localResponse = L.response point) (point_1 : L.Point) (zero_1 : L.isZero point_1)   (localResponse_1 : L.Value) (response_eq_1 : localResponse_1 = L.response point_1),   ({ point := point, zero := zero, localResponse := localResponse, response_eq := response_eq } =       { point := p",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroWithResponse.mk.sizeOf_spec",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ {L : ROZC.LocalZeroResponse} (point : L.Point) (zero : L.isZero point) (localResponse : L.Value)   (response_eq : localResponse = L.response point),   sizeOf { point := point, zero := zero, localResponse := localResponse, response_eq := response_eq } =     1 + sizeOf point + sizeOf zero + sizeOf localResponse + sizeOf response_eq",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroWithResponse.response_eq",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ {L : ROZC.LocalZeroResponse} (self : ROZC.ZeroWithResponse L), self.localResponse = L.response self.point",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZeroWithResponse.zero",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ {L : ROZC.LocalZeroResponse} (self : ROZC.ZeroWithResponse L), L.isZero self.point",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZetaModel.mk.inj",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {Point : Type u} {isZero nontrivial onCriticalLine : Point → Prop} {Point_1 : Type u}   {isZero_1 nontrivial_1 onCriticalLine_1 : Point_1 → Prop},   { Point := Point, isZero := isZero, nontrivial := nontrivial, onCriticalLine := onCriticalLine } =       { Point := Point_1, isZero := isZero_1, nontrivial := nontrivial_1, onCriticalLine := onCriticalLine_1 } →     Point = Point_1 ∧ HEq isZero isZe",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZetaModel.mk.injEq",
+     "module": "ROZC.Core",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (Point : Type u) (isZero nontrivial onCriticalLine : Point → Prop) (Point_1 : Type u)   (isZero_1 nontrivial_1 onCriticalLine_1 : Point_1 → Prop),   ({ Point := Point, isZero := isZero, nontrivial := nontrivial, onCriticalLine := onCriticalLine } =       { Point := Point_1, isZero := isZero_1, nontrivial := nontrivial_1, onCriticalLine := onCriticalLine_1 }) =     (Point = Point_1 ∧ HEq isZero i",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.ZetaModel.mk.sizeOf_spec",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ (Point : Type u) (isZero nontrivial onCriticalLine : Point → Prop),   sizeOf { Point := Point, isZero := isZero, nontrivial := nontrivial, onCriticalLine := onCriticalLine } =     1 + sizeOf Point",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.assumed_family_not_RH",
+     "module": "ROZC.AssumedFamilyCertificate",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (T : ROZC.AssumedOffCriticalFamilyTheory M), T.family.Index → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.assumed_family_obstructs_bcf",
+     "module": "ROZC.TerminalProducer",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   {bcf : ROZC.BCFZeroResidueControl} {vub : ROZC.VanishingUpperBound} (T : ROZC.AssumedOffCriticalFamilyTheory M),   T.family.Index →     ROZC.AnalyticClosure M dnDecay bilinearDecay →       ROZC.BCFToVanishingUpperBound bcf vub → ROZC.VanishingUpperBoundToDN vub dnDecay → ¬bcf",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.assumed_family_obstructs_vanishing_upper_bound",
+     "module": "ROZC.TerminalProducer",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   {vub : ROZC.VanishingUpperBound} (T : ROZC.AssumedOffCriticalFamilyTheory M),   T.family.Index → ROZC.AnalyticClosure M dnDecay bilinearDecay → ROZC.VanishingUpperBoundToDN vub dnDecay → ¬vub",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.bcf_to_dn",
+     "module": "ROZC.TerminalProducer",
+     "axioms": [],
+     "statement": "∀ {bcf : ROZC.BCFZeroResidueControl} {vub : ROZC.VanishingUpperBound} {dnDecay : ROZC.DNDecay},   ROZC.BCFToVanishingUpperBound bcf vub → ROZC.VanishingUpperBoundToDN vub dnDecay → bcf → dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.conjugate_order_two",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (S : ROZC.ZeroSymmetry M) (z : M.Point), S.conjugate (S.conjugate z) = z",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.dn_zero_limit_is_locally_closed",
+     "module": "ROZC.ConcreteBridgeLedger",
+     "axioms": [],
+     "statement": "ROZC.LocallyClosed ROZC.dnZeroLimitLedger",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.every_family_member_not_RH",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (F : ROZC.OffCriticalZeroFamily M), F.Index → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.family_full_obstruction",
+     "module": "ROZC.FamilyBridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   (F : ROZC.OffCriticalZeroFamily M),   ROZC.AnalyticClosure M dnDecay bilinearDecay → F.Index → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.family_member_full_obstruction",
+     "module": "ROZC.FamilyBridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay}   (F : ROZC.OffCriticalZeroFamily M),   F.Index → ROZC.AnalyticClosure M dnDecay bilinearDecay → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.family_not_RH",
+     "module": "ROZC.Family",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (F : ROZC.OffCriticalZeroFamily M), F.Index → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.free_state_nonzero_displacement",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (C : ROZC.CriticalCoordinateModel M) (T : ROZC.FreeOffCriticalTheory M) (j : T.family.Index),   C.displacement (T.family.state j) ≠ C.zero",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.free_state_off_line",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (T : ROZC.FreeOffCriticalTheory M) (j : T.family.Index), ¬M.onCriticalLine (T.family.state j)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.free_theory_not_RH",
+     "module": "ROZC.FreeOffCriticalGeometry",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (T : ROZC.FreeOffCriticalTheory M), T.family.Index → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.full_conditional_chain",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.OffCriticalZeroWitness M → ROZC.AnalyticClosure M dnDecay bilinearDecay → ¬ROZC.RH M ∧ ¬dnDecay ∧ ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.kernel_status_locally_closed",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "∀ (name repo anchor : String),   ROZC.LocallyClosed     { name := name, sourceRepository := repo, sourceAnchor := anchor, status := ROZC.EvidenceStatus.kernelProved }",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.offCriticalZero_not_RH",
+     "module": "ROZC.Core",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel}, ROZC.OffCriticalZeroWitness M → ¬ROZC.RH M",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.offCritical_obstructs_dn",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay}, ROZC.OffCriticalZeroWitness M → ROZC.RHiffDN M dnDecay → ¬dnDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.offCritical_obstructs_weightedBilinear",
+     "module": "ROZC.Bridges",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} {dnDecay : ROZC.DNDecay} {bilinearDecay : ROZC.WeightedBilinearDecay},   ROZC.OffCriticalZeroWitness M → ROZC.AnalyticClosure M dnDecay bilinearDecay → ¬bilinearDecay",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.open_bridge_not_locally_closed",
+     "module": "ROZC.Provenance",
+     "axioms": [],
+     "statement": "∀ (name repo anchor : String),   ¬ROZC.LocallyClosed       { name := name, sourceRepository := repo, sourceAnchor := anchor, status := ROZC.EvidenceStatus.openBridge }",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.orbit_zeros",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (S : ROZC.ZeroSymmetry M) (h : ROZC.OffCriticalZeroWitness M),   M.isZero (S.reflect h.rho) ∧ M.isZero (S.conjugate h.rho) ∧ M.isZero (S.reflect (S.conjugate h.rho))",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.reciprocal_round_trip",
+     "module": "ROZC.ReciprocalChart",
+     "axioms": [],
+     "statement": "∀ {R : ROZC.ReciprocalChart} (s : ROZC.ReciprocalState R), R.inv s.eta = s.delta",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.reflect_order_two",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (S : ROZC.ZeroSymmetry M) (z : M.Point), S.reflect (S.reflect z) = z",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.response_is_preserved",
+     "module": "ROZC.LocalZeroResponse",
+     "axioms": [],
+     "statement": "∀ {L : ROZC.LocalZeroResponse} (z : ROZC.ZeroWithResponse L), z.localResponse = L.response z.point",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.symmetry_commutes",
+     "module": "ROZC.Orbit",
+     "axioms": [],
+     "statement": "∀ {M : ROZC.ZetaModel} (S : ROZC.ZeroSymmetry M) (z : M.Point), S.reflect (S.conjugate z) = S.conjugate (S.reflect z)",
+     "status": "fechado"
+    },
+    {
+     "name": "ROZC.weighted_bilinear_not_locally_closed",
+     "module": "ROZC.ConcreteBridgeLedger",
+     "axioms": [],
+     "statement": "¬ROZC.LocallyClosed ROZC.weightedBilinearLedger",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "summary": {
+    "fechado": 118,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}
