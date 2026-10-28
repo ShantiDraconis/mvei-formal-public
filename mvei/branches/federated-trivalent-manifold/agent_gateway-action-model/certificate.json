@@ -1,0 +1,220 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/federated-trivalent-manifold",
+ "branch": "agent/gateway-action-model",
+ "branch_state": "parada",
+ "head_commit": "ccc5b7c6767ca1de84449b790766c0fdbdb7cfb1",
+ "head_commit_date": "2026-07-15T11:28:00-03:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "ccc5b7c6767ca1de84449b790766c0fdbdb7cfb1",
+   "date": "2026-07-15T11:28:00-03:00",
+   "subject": "formalize epistemic evidence across proof assistants"
+  },
+  {
+   "commit": "59313f6f168756f336313017de2fa885e017715d",
+   "date": "2026-07-15T09:59:20-03:00",
+   "subject": "make Lean proofs compile and pin Mathlib"
+  },
+  {
+   "commit": "2bbf3b8709cf557df60166e30915e63aca4e478f",
+   "date": "2026-07-15T08:58:27-03:00",
+   "subject": "add self-healing Kubernetes deployment and strict W proof"
+  },
+  {
+   "commit": "376b34d8cd915ccca6230a251c8893697328e87d",
+   "date": "2026-07-15T08:50:30-03:00",
+   "subject": "add automated Lean and Python verification"
+  },
+  {
+   "commit": "3c3889a977a3f031890e6d0e5640c08e0f6b97b7",
+   "date": "2026-07-15T08:43:43-03:00",
+   "subject": "formalize gateway flow model and tests"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "FederatedTrivalent.conditional_transport",
+   "file": "FederatedTrivalent/Epistemic.lean",
+   "line": 53,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (H P : Prop), (H → P) → H → P"
+  },
+  {
+   "name": "FederatedTrivalent.custo_isolamento_nonneg",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 99,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (v : FederatedTrivalent.Variedade5D) (limiar : ℝ), 0 ≤ (FederatedTrivalent.isolar v limiar).custo"
+  },
+  {
+   "name": "FederatedTrivalent.epsilonQ_pos",
+   "file": "FederatedTrivalent/Epistemic.lean",
+   "line": 40,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "0 < FederatedTrivalent.epsilonQ"
+  },
+  {
+   "name": "FederatedTrivalent.epsilon_pos",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 117,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "0 < FederatedTrivalent.epsilon"
+  },
+  {
+   "name": "FederatedTrivalent.fluxoGauge_preservaExodo",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 81,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (gap : FederatedTrivalent.NonnegativeGap) (v : FederatedTrivalent.Variedade5D) (dt : FederatedTrivalent.TimeStep),   (FederatedTrivalent.fluxoGauge gap v dt).e = v.e"
+  },
+  {
+   "name": "FederatedTrivalent.incrementoW_pos",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 119,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (curvatura conexoes : ℝ) (dt : FederatedTrivalent.TimeStep), 0 < FederatedTrivalent.incrementoW curvatura conexoes dt"
+  },
+  {
+   "name": "FederatedTrivalent.passoW_crescimento_estrito",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 128,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (w curvatura conexoes : ℝ) (dt : FederatedTrivalent.TimeStep), w < FederatedTrivalent.passoW w curvatura conexoes dt"
+  },
+  {
+   "name": "FederatedTrivalent.potencialZeta_nonneg",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 59,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (sigma : ℝ), 0 ≤ FederatedTrivalent.potencialZeta sigma"
+  },
+  {
+   "name": "FederatedTrivalent.potencialZeta_zero_iff",
+   "file": "FederatedTrivalent/FlowOperators.lean",
+   "line": 62,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (sigma : ℝ), FederatedTrivalent.potencialZeta sigma = 0 ↔ sigma = 1 / 2"
+  },
+  {
+   "name": "FederatedTrivalent.squared_threshold_iff",
+   "file": "FederatedTrivalent/Epistemic.lean",
+   "line": 58,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (alpha beta t e : ℚ),   FederatedTrivalent.actionQ alpha beta t e ^ 2 = 1 ↔     FederatedTrivalent.actionQ alpha beta t e = 1 ∨ FederatedTrivalent.actionQ alpha beta t e = -1"
+  },
+  {
+   "name": "FederatedTrivalent.truth_has_no_half_state",
+   "file": "FederatedTrivalent/Epistemic.lean",
+   "line": 49,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P : Prop), P ∨ ¬P"
+  },
+  {
+   "name": "FederatedTrivalent.wStepQ_strict",
+   "file": "FederatedTrivalent/Epistemic.lean",
+   "line": 45,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (w load : ℚ), 0 ≤ load → w < FederatedTrivalent.wStepQ w load"
+  },
+  {
+   "name": "GatewayModel.action_at_critical",
+   "file": "GatewayModel/Classes.lean",
+   "line": 50,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (alpha t e : ℚ), e ≠ 0 → GatewayModel.action alpha (GatewayModel.betaCritical alpha t e) t e = 0"
+  },
+  {
+   "name": "GatewayModel.corrected_beta_five_example",
+   "file": "GatewayModel/Classes.lean",
+   "line": 42,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "GatewayModel.action (1 / 10) 5 GatewayModel.measured.total (3 / 10) = 218161 / 400000"
+  },
+  {
+   "name": "GatewayModel.critical_beta_exact",
+   "file": "GatewayModel/Classes.lean",
+   "line": 46,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "GatewayModel.betaCritical (1 / 10) GatewayModel.measured.total (3 / 10) = 398161 / 36000"
+  },
+  {
+   "name": "GatewayModel.mass_proxy_exact",
+   "file": "GatewayModel/Classes.lean",
+   "line": 54,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "GatewayModel.massProxy GatewayModel.params.beta GatewayModel.params.eNorm = 32661 / 1000000"
+  },
+  {
+   "name": "GatewayModel.measured_total",
+   "file": "GatewayModel/Classes.lean",
+   "line": 36,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "GatewayModel.measured.total = 631 / 200"
+  },
+  {
+   "name": "GatewayModel.negative_action_means_exodus_dominates",
+   "file": "GatewayModel/Classes.lean",
+   "line": 62,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (alpha beta t e : ℚ), GatewayModel.action alpha beta t e < 0 → alpha * t ^ 2 < beta * e ^ 2"
+  },
+  {
+   "name": "GatewayModel.positive_action_means_temporal_dominates",
+   "file": "GatewayModel/Classes.lean",
+   "line": 57,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (alpha beta t e : ℚ), 0 < GatewayModel.action alpha beta t e → beta * e ^ 2 < alpha * t ^ 2"
+  },
+  {
+   "name": "GatewayModel.reported_action",
+   "file": "GatewayModel/Classes.lean",
+   "line": 38,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "GatewayModel.action GatewayModel.params.alpha GatewayModel.params.beta GatewayModel.measured.total     GatewayModel.params.eNorm =   4928021 / 5000000"
+  }
+ ],
+ "closed": 20,
+ "files_sha256": {
+  "FederatedTrivalent/Epistemic.lean": "9c4b75ae2913a9e7a948202f5d48300741f9fa040eefa731732ff6499fd200fd",
+  "FederatedTrivalent/FlowOperators.lean": "02431727aa5ef2bade05eab573592e33c7c2c0a0a591f029854485d127a98833",
+  "GatewayModel/Classes.lean": "4ae97e96e464a95d50e12681d64e783c6074d6f8f9224770b8a2d9e746f6927d",
+  "lake-manifest.json": "4c6576f01a5e7e12f08660954bbac1856cd288ec349856e5aa13f871d14d7dc2",
+  "lakefile.toml": "215994ee9c42d3c605e6096fa7007d74e600fe402bf808b705cf87cc8c6a20d3",
+  "lean-toolchain": "ee6fd37555065223ddad24dff70b5447dfbac23c14f48fb8e3ddf266104bfa87"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "fcb9a9f138525d99bdcaf53f2a3a2b18e4c5d8d9641860c849cd017ad2b3c896"
+}

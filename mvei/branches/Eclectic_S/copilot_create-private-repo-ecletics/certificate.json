@@ -1,0 +1,128 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Eclectic_S",
+ "branch": "copilot/create-private-repo-ecletics",
+ "branch_state": "parada",
+ "head_commit": "32183b19e39b5ab6368df3675de222f8fea48137",
+ "head_commit_date": "2025-12-29T01:33:18+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "32183b19e39b5ab6368df3675de222f8fea48137",
+   "date": "2025-12-29T01:33:18+00:00",
+   "subject": "Complete Eclectics repository structure with formal verification framework"
+  },
+  {
+   "commit": "be7bcb9431d44d0967fbe58064e1ba6d7d7e4c48",
+   "date": "2025-12-29T01:10:50+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "axiom_compatibility",
+   "file": "formal/theorems/non_contradiction.lean",
+   "line": 21,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (assumption1 assumption2 : Prop), ¬(assumption1 ∧ ¬assumption1)"
+  },
+  {
+   "name": "basic_consistency",
+   "file": "formal/theorems/coherence_theorems.lean",
+   "line": 12,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (P Q : Prop), ¬(P ∧ ¬P)"
+  },
+  {
+   "name": "basic_non_contradiction",
+   "file": "formal/theorems/non_contradiction.lean",
+   "line": 1,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P : Prop), ¬(P ∧ ¬P)"
+  },
+  {
+   "name": "collapse_boundary_exists",
+   "file": "formal/theorems/collapse_conditions.lean",
+   "line": 35,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ (boundary : Nat), ∀ (state : Nat), (state < boundary) ∨ (state ≥ boundary)"
+  },
+  {
+   "name": "collapse_sufficient_conditions",
+   "file": "formal/theorems/collapse_conditions.lean",
+   "line": 55,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (threshold : ℝ) (value : ℝ), value < threshold → ∃ (collapsed : Bool), collapsed = true"
+  },
+  {
+   "name": "definition_consistency",
+   "file": "formal/theorems/non_contradiction.lean",
+   "line": 37,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (x : Nat), ¬(x = x ∧ x ≠ x)"
+  },
+  {
+   "name": "formal_collapse_irreversibility",
+   "file": "formal/theorems/collapse_conditions.lean",
+   "line": 11,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (evolve : Nat → Nat) (collapsed_state : Nat), (∀ n, evolve collapsed_state = collapsed_state) → (∀ t : Nat, evolve collapsed_state = collapsed_state)"
+  },
+  {
+   "name": "limit_consistency",
+   "file": "formal/theorems/coherence_theorems.lean",
+   "line": 53,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (f : Nat → ℝ), ∃ (result : ℝ), result = result"
+  },
+  {
+   "name": "model_internal_consistency",
+   "file": "formal/theorems/non_contradiction.lean",
+   "line": 52,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (state : Nat), ¬False"
+  },
+  {
+   "name": "model_well_defined",
+   "file": "formal/theorems/coherence_theorems.lean",
+   "line": 70,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (x : Nat), ∃ (y : Nat), y = x + 1"
+  },
+  {
+   "name": "stability_coherence",
+   "file": "formal/theorems/coherence_theorems.lean",
+   "line": 38,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (s : Nat), ∃ (property : Nat → Prop), property s"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "formal/theorems/non_contradiction.lean": "065cba062d51543852cfd62b1e00431bef7ce82fe4bee71956b80afdeb9c6a74"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "74d9631da33318d3c0c4af924d045a7f2511ac4e5f2d4e3dbc30aa92d30d1fa4"
+}

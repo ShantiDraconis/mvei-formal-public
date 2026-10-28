@@ -1,0 +1,454 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Heu-7-universal-framework",
+ "branch": "copilot/create-scientific-repository",
+ "branch_state": "parada",
+ "head_commit": "8a96b4515634986aa29448563e1f56d8dcacdacf",
+ "head_commit_date": "2025-12-02T08:47:05+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "8a96b4515634986aa29448563e1f56d8dcacdacf",
+   "date": "2025-12-02T08:47:05+00:00",
+   "subject": "Fix code review comments and add workflow permissions for security"
+  },
+  {
+   "commit": "aaa4071bfecd66613563cfffe3467c2626306b89",
+   "date": "2025-12-02T08:42:20+00:00",
+   "subject": "Expand P vs NP and BSD chapters with full proofs and HEU analysis"
+  },
+  {
+   "commit": "9447cbd4ebe28b6f1cb5da0265efed82e33f053b",
+   "date": "2025-12-02T08:38:48+00:00",
+   "subject": "Major expansion: add metamathematics, cross-problem connections, L-functions, unified theory"
+  },
+  {
+   "commit": "a0129e63a11e83ab00b37007220d29d23ad7361d",
+   "date": "2025-12-01T22:13:16+00:00",
+   "subject": "Address code review feedback: fix Lean tactic, Python type hints, and clarify documentation"
+  },
+  {
+   "commit": "46203c2b679d67af25ef7ca86eb36315075898de",
+   "date": "2025-12-01T22:10:30+00:00",
+   "subject": "Create HEU-7 scientific repository structure with docs, papers, Lean4, and Python"
+  },
+  {
+   "commit": "6e32ed9d2e8193256a3b958d032716f7c94576cc",
+   "date": "2025-12-01T21:49:05+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "HEU.BSD.BSD_structural_equivalence",
+   "file": "src/lean/HEU/BSD/Equivalence_BSD.lean",
+   "line": 22,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": BSD_Conjecture ↔ BSD_RankEquality"
+  },
+  {
+   "name": "HEU.BSD.F_BSD_finite",
+   "file": "src/lean/HEU/BSD/F_BSD.lean",
+   "line": 23,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(E : X_BSD) : F_BSD E < omega"
+  },
+  {
+   "name": "HEU.BSD.α_BSD_type",
+   "file": "src/lean/HEU/BSD/Critical_BSD.lean",
+   "line": 17,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": criticalTypeOf \" \" = CriticalType.variable"
+  },
+  {
+   "name": "HEU.Core.Advanced.OrdinalNotation.wf",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 87,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": WellFounded (fun a b : OrdinalNotation => a.interpret < b.interpret)"
+  },
+  {
+   "name": "HEU.Core.Advanced.epsilon0_fixed_point",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 31,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": omega ^ epsilon0 = epsilon0"
+  },
+  {
+   "name": "HEU.Core.Advanced.fastGrowing_omega_superpolynomial",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 71,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ k : ℕ, ∃ N, ∀ n ≥ N, fastGrowingHierarchy omega sorry n > n ^ k"
+  },
+  {
+   "name": "HEU.Core.Advanced.fundamentalSequence_strictMono",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 48,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(α : Ordinal) (h : α.IsLimit) (hε : α < epsilon0) : StrictMono (fundamentalSequence α hε)"
+  },
+  {
+   "name": "HEU.Core.Advanced.has_cnf_below_epsilon0",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 35,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(α : Ordinal) (h : α < epsilon0) : ∃ cnf : CantorNormalForm, cnf.toOrdinal = α"
+  },
+  {
+   "name": "HEU.Core.Advanced.omega_exp_add",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 103,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(α β : Ordinal) : omega ^ (α + β) = omega ^ α * omega ^ β"
+  },
+  {
+   "name": "HEU.Core.Advanced.ordinal_add_assoc",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 91,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(a b c : Ordinal) : a + (b + c) = (a + b) + c"
+  },
+  {
+   "name": "HEU.Core.Advanced.ordinal_add_left_cancel",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 95,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(a b c : Ordinal) (h : a + b = a + c) : b = c"
+  },
+  {
+   "name": "HEU.Core.Advanced.ordinal_mul_add",
+   "file": "src/lean/HEU/Core/AdvancedOrdinals.lean",
+   "line": 99,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(a b c : Ordinal) : a * (b + c) = a * b + a * c"
+  },
+  {
+   "name": "HEU.Core.bound_or_exceed",
+   "file": "src/lean/HEU/Core/Functional.lean",
+   "line": 42,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{X : Type*} [Nonempty X] (heu : HEUFramework X) : SatisfiesBound heu ∨ ExceedsBound heu"
+  },
+  {
+   "name": "HEU.Core.encodeNat_lt_omega",
+   "file": "src/lean/HEU/Core/Encoding.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(n : ℕ) : encodeNat n < omega"
+  },
+  {
+   "name": "HEU.Core.extensionality",
+   "file": "src/lean/HEU/Core/ZFC.lean",
+   "line": 35,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(A B : ZFCSet) : (∀ x, x ∈ A ↔ x ∈ B) → A = B"
+  },
+  {
+   "name": "HEU.Core.finite_lt_omega",
+   "file": "src/lean/HEU/Core/Ordinals.lean",
+   "line": 49,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{n : ℕ} : natToOrd n < omega"
+  },
+  {
+   "name": "HEU.Core.foundation",
+   "file": "src/lean/HEU/Core/ZFC.lean",
+   "line": 41,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(A : ZFCSet) (hne : A ≠ ∅) : ∃ x ∈ A, ∀ y ∈ x, y ∉ A"
+  },
+  {
+   "name": "HEU.Core.omega_isLimitOrd",
+   "file": "src/lean/HEU/Core/Ordinals.lean",
+   "line": 42,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": IsLimitOrd omega"
+  },
+  {
+   "name": "HEU.Core.omega_ne_zero",
+   "file": "src/lean/HEU/Core/Ordinals.lean",
+   "line": 40,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega ≠ 0"
+  },
+  {
+   "name": "HEU.Hodge.Hodge_structural_equivalence",
+   "file": "src/lean/HEU/Hodge/Equivalence_Hodge.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": HodgeConjecture ↔ ∀ pair : X_Hodge, F_Hodge pair < α_Hodge"
+  },
+  {
+   "name": "HEU.Hodge.α_Hodge_eq_omega",
+   "file": "src/lean/HEU/Hodge/Critical_Hodge.lean",
+   "line": 15,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_Hodge = omega"
+  },
+  {
+   "name": "HEU.Hodge.α_Hodge_type",
+   "file": "src/lean/HEU/Hodge/Critical_Hodge.lean",
+   "line": 17,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": criticalTypeOf \" \" = CriticalType.omega"
+  },
+  {
+   "name": "HEU.LFunctions.GRH_RankinSelberg",
+   "file": "src/lean/HEU/Core/LFunctions.lean",
+   "line": 73,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(L₁ L₂ : LFunction) (h₁ : GeneralizedRH L₁) (h₂ : GeneralizedRH L₂) : True"
+  },
+  {
+   "name": "HEU.LFunctions.GRH_structural_equivalence",
+   "file": "src/lean/HEU/Core/LFunctions.lean",
+   "line": 53,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(L : LFunction) : GeneralizedRH L ↔ ∀ z : NonTrivialZero L, F_L L z ≤ α_L ∧ z.point ∈ CriticalLine"
+  },
+  {
+   "name": "HEU.LFunctions.L_function_unity",
+   "file": "src/lean/HEU/Core/LFunctions.lean",
+   "line": 124,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (∀ L : LFunction, ∃ (X : Type) (F : X → Ordinal) (α : Ordinal), (∀ x : X, F x ≤ α) ↔ GeneralizedRH L)"
+  },
+  {
+   "name": "HEU.NS.NS_structural_equivalence",
+   "file": "src/lean/HEU/NS/Equivalence_NS.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": NavierStokesExistence ↔ ∀ u₀ : X_NS, F_NS u₀ < α_NS"
+  },
+  {
+   "name": "HEU.NS.α_NS_eq_omega",
+   "file": "src/lean/HEU/NS/Critical_NS.lean",
+   "line": 15,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_NS = omega"
+  },
+  {
+   "name": "HEU.NS.α_NS_type",
+   "file": "src/lean/HEU/NS/Critical_NS.lean",
+   "line": 17,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": criticalTypeOf \" \" = CriticalType.omega"
+  },
+  {
+   "name": "HEU.PvsNP.PNP_structural_equivalence_negative",
+   "file": "src/lean/HEU/PvsNP/Equivalence_PNP.lean",
+   "line": 33,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬P_eq_NP ↔ ∃ L : X_PNP, F_PNP L ≥ α_PNP"
+  },
+  {
+   "name": "HEU.PvsNP.PNP_structural_equivalence_positive",
+   "file": "src/lean/HEU/PvsNP/Equivalence_PNP.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": P_eq_NP ↔ ∀ L : X_PNP, F_PNP L < α_PNP"
+  },
+  {
+   "name": "HEU.PvsNP.α_PNP_eq_omega",
+   "file": "src/lean/HEU/PvsNP/Critical_PNP.lean",
+   "line": 15,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_PNP = omega"
+  },
+  {
+   "name": "HEU.PvsNP.α_PNP_type",
+   "file": "src/lean/HEU/PvsNP/Critical_PNP.lean",
+   "line": 17,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": criticalTypeOf \" \" = CriticalType.omega"
+  },
+  {
+   "name": "HEU.RH.F_RH_eq_one",
+   "file": "src/lean/HEU/RH/F_RH.lean",
+   "line": 25,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(ρ : X_RH) : F_RH ρ = 1"
+  },
+  {
+   "name": "HEU.RH.F_RH_finite",
+   "file": "src/lean/HEU/RH/F_RH.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(ρ : X_RH) : F_RH ρ < omega"
+  },
+  {
+   "name": "HEU.RH.RH_bound_holds",
+   "file": "src/lean/HEU/RH/Equivalence_RH.lean",
+   "line": 44,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": RH_StructuralBound"
+  },
+  {
+   "name": "HEU.RH.RH_structural_equivalence",
+   "file": "src/lean/HEU/RH/Equivalence_RH.lean",
+   "line": 28,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": RiemannHypothesis ↔ RH_FullCondition"
+  },
+  {
+   "name": "HEU.RH.α_RH_eq_one",
+   "file": "src/lean/HEU/RH/Critical_RH.lean",
+   "line": 15,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_RH = 1"
+  },
+  {
+   "name": "HEU.RH.α_RH_finite",
+   "file": "src/lean/HEU/RH/Critical_RH.lean",
+   "line": 17,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_RH < omega"
+  },
+  {
+   "name": "HEU.RH.α_RH_type",
+   "file": "src/lean/HEU/RH/Critical_RH.lean",
+   "line": 22,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": criticalTypeOf \" \" = CriticalType.one"
+  },
+  {
+   "name": "HEU.Unified.HEU_implication_preservation",
+   "file": "src/lean/HEU/Core/UnifiedTheory.lean",
+   "line": 89,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(F G : GeneralizedHEU) (m : HEU_Morphism F G) (hF : F.statement) : ∀ x : F.Space, G.functional (m.map x) ≤ G.critical"
+  },
+  {
+   "name": "HEU.Unified.PNP_NS_Hodge_similar",
+   "file": "src/lean/HEU/Core/UnifiedTheory.lean",
+   "line": 49,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": structurallySimilar .PvsNP .NS ∧ structurallySimilar .NS .Hodge ∧ structurallySimilar .PvsNP .Hodge"
+  },
+  {
+   "name": "HEU.Unified.RH_YM_similar",
+   "file": "src/lean/HEU/Core/UnifiedTheory.lean",
+   "line": 45,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": structurallySimilar .RH .YM"
+  },
+  {
+   "name": "HEU.Unified.polynomial_barrier",
+   "file": "src/lean/HEU/Core/UnifiedTheory.lean",
+   "line": 105,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) (h : criticalClass P = .omega) : ∃ bound : ℕ → Ordinal, ∀ n, bound n < omega ∧ bound n = n"
+  },
+  {
+   "name": "HEU.Unified.universal_HEU_property",
+   "file": "src/lean/HEU/Core/UnifiedTheory.lean",
+   "line": 115,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) : ∃ (X : Type*) (F : X → Ordinal) (α : Ordinal), (∀ x : X, F x ≤ α) ↔ (∃ proof : Prop, proof)"
+  },
+  {
+   "name": "HEU.YM.YM_structural_equivalence",
+   "file": "src/lean/HEU/YM/Equivalence_YM.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": YangMillsMassGap ↔ ∀ A : X_YM, F_YM A ≤ α_YM"
+  },
+  {
+   "name": "HEU.YM.α_YM_eq_one",
+   "file": "src/lean/HEU/YM/Critical_YM.lean",
+   "line": 15,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_YM = 1"
+  },
+  {
+   "name": "HEU.YM.α_YM_finite",
+   "file": "src/lean/HEU/YM/Critical_YM.lean",
+   "line": 17,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": α_YM < omega"
+  },
+  {
+   "name": "HEU.YM.α_YM_type",
+   "file": "src/lean/HEU/YM/Critical_YM.lean",
+   "line": 22,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": criticalTypeOf \" \" = CriticalType.one"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "src/lean/HEU/Core/ZFC.lean": "362c2b14fef1fbf395ff7b2e2b9d32921dfdd3009c3114d133559a06c0ba8015",
+  "src/lean/lakefile.lean": "025fb0fec2dbc49ed74c7fd436a2e9e7e8798dc45a4d548d8942835688438d35",
+  "src/lean/lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "1eabac8c89d99400e7265a42882506863e5cd5914355eb871a90df0afdf3ccf6"
+}

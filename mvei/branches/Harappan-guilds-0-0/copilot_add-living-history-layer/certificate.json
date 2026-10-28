@@ -1,0 +1,106 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Harappan-guilds-0-0",
+ "branch": "copilot/add-living-history-layer",
+ "branch_state": "parada",
+ "head_commit": "dd51ea07b1f656d8b3fae6fe2547a84679a21e2e",
+ "head_commit_date": "2025-11-30T17:25:38+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "dd51ea07b1f656d8b3fae6fe2547a84679a21e2e",
+   "date": "2025-11-30T17:25:38+01:00",
+   "subject": "Merge branch 'main' into copilot/add-living-history-layer"
+  },
+  {
+   "commit": "e0b30e8c3a0c7ebbe0c0b89b231f8a51844af5b5",
+   "date": "2025-11-30T15:49:44+00:00",
+   "subject": "Address code review feedback: fix Lean proof, improve Python typing"
+  },
+  {
+   "commit": "9d828e51c75ce1afdfa971006efca9b84aac6eef",
+   "date": "2025-11-30T15:46:35+00:00",
+   "subject": "Add .gitignore to exclude build artifacts"
+  },
+  {
+   "commit": "5d6350c4c36503ff19541cb30bbe4543890b6de6",
+   "date": "2025-11-30T15:46:02+00:00",
+   "subject": "Add complete Harappan Guilds 0/0 repository structure"
+  },
+  {
+   "commit": "6e66c7e994a240d54777b4f75323f642f2c29a93",
+   "date": "2025-11-30T15:37:31+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "archetype_coverage",
+   "file": "lean/Guilds.lean",
+   "line": 158,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ a : Archetype, ∃ g ∈ allGuilds, g.archetype = a"
+  },
+  {
+   "name": "collapse_preservation",
+   "file": "lean/Guilds.lean",
+   "line": 144,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ g : Guild, ∀ i : Indeterminacy, collapse g i = g.domain"
+  },
+  {
+   "name": "common_source",
+   "file": "lean/Guilds.lean",
+   "line": 179,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ g1 g2 : Guild, ∃ d1 d2 : String, collapse g1 primordialI = d1 ∧ collapse g2 primordialI = d2"
+  },
+  {
+   "name": "complementarity",
+   "file": "lean/Guilds.lean",
+   "line": 132,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ g1 g2 : Guild, g1 ∈ allGuilds → g2 ∈ allGuilds → g1.archetype ≠ g2.archetype → g1.domain ≠ g2.domain"
+  },
+  {
+   "name": "completeness",
+   "file": "lean/Guilds.lean",
+   "line": 125,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ d ∈ validDomains, domainCovered d = true"
+  },
+  {
+   "name": "guild_count",
+   "file": "lean/Guilds.lean",
+   "line": 169,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": allGuilds.length = 6"
+  }
+ ],
+ "closed": 5,
+ "files_sha256": {
+  "lean/Guilds.lean": "654f0c2d14b07799d2a29e29ce8b70e5fbc560885944ee4c278279373b8bda52"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "b635a625b169b619f474cd42aa2786a23b48d91c1e78973b3f8cad23ed82f7ae"
+}

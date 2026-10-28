@@ -1,0 +1,169 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/analyze-text-logic",
+ "branch_state": "parada",
+ "head_commit": "6be21446b4f0bb368891373c50716399c6b49079",
+ "head_commit_date": "2025-12-21T21:47:23+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "6be21446b4f0bb368891373c50716399c6b49079",
+   "date": "2025-12-21T21:47:23+01:00",
+   "subject": "Merge branch 'main' into copilot/analyze-text-logic"
+  },
+  {
+   "commit": "2709e033caa06874c04c5ab79f7c7d25d5a26c0d",
+   "date": "2025-12-21T20:08:28+00:00",
+   "subject": "Address code review: Add TODO comments to incomplete Lean proofs"
+  },
+  {
+   "commit": "43a46a346a666e6746a2f519246cc6a42d168494",
+   "date": "2025-12-21T20:05:29+00:00",
+   "subject": "Add comprehensive tests for state logic parser"
+  },
+  {
+   "commit": "47d83949019705491e6b64648d3a5cdb4361bb0b",
+   "date": "2025-12-21T20:03:04+00:00",
+   "subject": "Add state logic framework documentation and implementation"
+  },
+  {
+   "commit": "8676af8e558a81248b78422b23b521d0d02b3d24",
+   "date": "2025-12-21T19:55:58+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "closure_always_final",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 78,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : StateSign) : s.component = StateComponent.closure → s.position = InscriptionPosition.final"
+  },
+  {
+   "name": "indus_inscriptions_are_state_logic",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 191,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (insc : Inscription), standard_length insc → (∃ (decl : StateDeclaration), well_formed decl ∧ self_executing decl ∧ (∀ s ∈ insc, ¬has_temporal_marker s))"
+  },
+  {
+   "name": "indus_not_narrative",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 245,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(insc : Inscription) : ¬is_narrative insc"
+  },
+  {
+   "name": "no_temporal_markers",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 111,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(insc : Inscription) : ∀ s ∈ insc, ¬has_temporal_marker s"
+  },
+  {
+   "name": "objects_medial",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 84,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : StateSign) : s.component = StateComponent.object → s.position = InscriptionPosition.medial"
+  },
+  {
+   "name": "position_determines_function",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 71,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : StateSign) : s.position = InscriptionPosition.initial → (s.component = StateComponent.authority ∨ s.component = StateComponent.agent)"
+  },
+  {
+   "name": "standard_length_complete",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 100,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(insc : Inscription) : standard_length insc → ∃ (decl : StateDeclaration), well_formed decl"
+  },
+  {
+   "name": "state_context_independent",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 142,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(decl1 decl2 : StateDeclaration) : decl1.object.id = decl2.object.id ∧ decl1.closure.id = decl2.closure.id → (well_formed decl1 ↔ well_formed decl2)"
+  },
+  {
+   "name": "state_declarations_self_executing",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 166,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(decl : StateDeclaration) : self_executing decl"
+  },
+  {
+   "name": "state_logic_no_oral_reading",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 202,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(decl : StateDeclaration) : well_formed decl → self_executing decl"
+  },
+  {
+   "name": "wellformed_implies_valid",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 90,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(decl : StateDeclaration) : well_formed decl → ∃ (state : ModalOp), state = ModalOp.valid"
+  },
+  {
+   "name": "wellformed_satisfies_modal",
+   "file": "formal/lean/IndusStateLogic.lean",
+   "line": 285,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(decl : StateDeclaration) : well_formed decl → satisfies decl (state_modal_formula decl)"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "formal/lean/IndusStateLogic.lean": "045f12a59d4157fddf955f68316afe7bf0b64fb682162a06cf87b03a6f3a061a"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "f9bdd3f535cece20c240c07b09d6e2433c96bc6da3670c81acb4731333e768aa"
+}

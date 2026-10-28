@@ -1,0 +1,93 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/lean-winwin-logic",
+ "branch": "atk/winwin-green-v435-20261025",
+ "branch_state": "em andamento",
+ "head_commit": "0a4cd9c0ee43c477817e2f039be8e59ceda9e1e8",
+ "head_commit_date": "2026-10-25T01:02:10+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "0a4cd9c0ee43c477817e2f039be8e59ceda9e1e8",
+   "date": "2026-10-25T01:02:10+00:00",
+   "subject": "GREEN on Lean v4.35.0: refute the false bebedor, prove the drinker principle"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.35.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "LeanWinWinLogic.bebedor_classical",
+   "file": "LeanWinWinLogic.lean",
+   "line": 77,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {Person : Type} (Drinks : Person → Prop) (x0 : Person), ∃ x, Drinks x → ∀ (y : Person), Drinks y"
+  },
+  {
+   "name": "LeanWinWinLogic.bebedor_original_false",
+   "file": "LeanWinWinLogic.lean",
+   "line": 45,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "¬∀ {Person : Type} (Drinks : Person → Prop) (x : Person),     ((∀ (y : Person), Drinks y) ∨ ¬∀ (y : Person), Drinks y) →       LeanWinWinLogic.WinWin (∀ (y : Person), Drinks y) (Drinks x → ∀ (y : Person), Drinks y)"
+  },
+  {
+   "name": "LeanWinWinLogic.close",
+   "file": "LeanWinWinLogic.lean",
+   "line": 7,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {P Q : Prop}, LeanWinWinLogic.WinWin P Q → P ∨ ¬P → Q"
+  },
+  {
+   "name": "LeanWinWinLogic.heilbronnWinWin",
+   "file": "LeanWinWinLogic.lean",
+   "line": 84,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {P Q : Prop}, (P → Q) → (¬P → Q) → LeanWinWinLogic.WinWin P Q"
+  },
+  {
+   "name": "LeanWinWinLogic.missing_half_iff_target",
+   "file": "LeanWinWinLogic.lean",
+   "line": 28,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {Opp Branch Target : Prop}, (Opp → Branch) → (Target ↔ ¬Opp) → (Branch → Target ↔ Target)"
+  },
+  {
+   "name": "LeanWinWinLogic.self_target_missing_half",
+   "file": "LeanWinWinLogic.lean",
+   "line": 38,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {P : Prop}, P ∨ ¬P → (¬P → P ↔ P)"
+  },
+  {
+   "name": "LeanWinWinLogic.simultaneous_sides_impossible",
+   "file": "LeanWinWinLogic.lean",
+   "line": 24,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {P : Prop}, ¬(P ∧ ¬P)"
+  }
+ ],
+ "closed": 7,
+ "files_sha256": {
+  "LeanWinWinLogic.lean": "9c5d8b5af4ed8fcab88a99fc269057d3f2a50d52bac38bd9b7722acda2a258ae",
+  "lakefile.toml": "637d1c680bf84005159d0ba098fdcc4f6f58faa5ea828005642001a681cef45e",
+  "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "541bd3d5434c21a5f5272c1d9c44cf8f3369d95fa464695006a4c7ce5c923dd2"
+}
