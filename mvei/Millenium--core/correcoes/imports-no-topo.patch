@@ -1,0 +1,338 @@
+--- a/Core/Collapse.lean
++++ b/Core/Collapse.lean
+@@ -1,3 +1,8 @@
++import Core.Types
++import Core.Syntax
++import Core.State
++import Core.Eval
++
+ /-!
+ # Core/Collapse.lean
+ ## The Indeterminate Framework (TIF) — Collapse Operator
+@@ -8,10 +13,6 @@
+ Depends on: `Core.Types`, `Core.Syntax`, `Core.State`, `Core.Eval`
+ -/
+ 
+-import Core.Types
+-import Core.Syntax
+-import Core.State
+-import Core.Eval
+ 
+ -- ---------------------------------------------------------------------------
+ -- D17 / A6–A8 : Collapse operator
+--- a/Core/Conservativity.lean
++++ b/Core/Conservativity.lean
+@@ -1,3 +1,9 @@
++import TIF.Core.Collapse
++import Core.Syntax
++import Core.States
++import Core.Semantics
++import Core.Collapse
++
+ /-
+   Core/Conservativity.lean
+   Chapter 6: Conservativity and Relative Consistency of TIF
+@@ -9,7 +15,6 @@
+   - No spurious classical consequences
+ -/
+ 
+-import TIF.Core.Collapse
+ 
+ namespace TIF
+ 
+@@ -183,10 +188,6 @@
+   and local completeness of collapse.
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+-import Core.Semantics
+-import Core.Collapse
+ 
+ namespace TIF
+ 
+--- a/Core/Eval.lean
++++ b/Core/Eval.lean
+@@ -1,3 +1,7 @@
++import Core.Types
++import Core.Syntax
++import Core.State
++
+ /-!
+ # Core/Eval.lean
+ ## The Indeterminate Framework (TIF) — Evaluation and Semantic Value Sets
+@@ -11,9 +15,6 @@
+ Depends on: `Core.Types`, `Core.Syntax`, `Core.State`
+ -/
+ 
+-import Core.Types
+-import Core.Syntax
+-import Core.State
+ 
+ -- ---------------------------------------------------------------------------
+ -- Operator semantics (axiom stubs for ClassicalScalar arithmetic)
+--- a/Core/Rewrite.lean
++++ b/Core/Rewrite.lean
+@@ -1,3 +1,9 @@
++import Core.Types
++import Core.Syntax
++import Core.State
++import Core.Eval
++import Core.Collapse
++
+ /-!
+ # Core/Rewrite.lean
+ ## The Indeterminate Framework (TIF) — Rewrite System
+@@ -12,11 +18,6 @@
+ Depends on: `Core.Types`, `Core.Syntax`, `Core.State`, `Core.Eval`, `Core.Collapse`
+ -/
+ 
+-import Core.Types
+-import Core.Syntax
+-import Core.State
+-import Core.Eval
+-import Core.Collapse
+ 
+ -- ---------------------------------------------------------------------------
+ -- D22 : One-step rewrite relation  t →_Σ t'
+--- a/Core/Semantics.lean
++++ b/Core/Semantics.lean
+@@ -1,3 +1,7 @@
++import TIF.Core.States
++import Core.Syntax
++import Core.States
++
+ /-
+   Core/Semantics.lean
+   Chapter 4: Algebraic and Logical Semantics of TIF
+@@ -10,7 +14,6 @@
+   - The semantic content of the collapse axioms A8-A10
+ -/
+ 
+-import TIF.Core.States
+ 
+ namespace TIF
+ 
+@@ -187,8 +190,6 @@
+   and semantics of collapse (Definitions 4.1–4.4 and Theorems 4.4.4–4.4.6).
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+ 
+ namespace TIF
+ 
+--- a/Core/State.lean
++++ b/Core/State.lean
+@@ -1,3 +1,6 @@
++import Core.Types
++import Core.Syntax
++
+ /-!
+ # Core/State.lean
+ ## The Indeterminate Framework (TIF) — States and Valuations
+@@ -11,8 +14,6 @@
+ Depends on: `Core.Types`, `Core.Syntax`
+ -/
+ 
+-import Core.Types
+-import Core.Syntax
+ 
+ -- ---------------------------------------------------------------------------
+ -- D11 : State  Σ = (ℰ, 𝒞)
+--- a/Core/States.lean
++++ b/Core/States.lean
+@@ -1,3 +1,6 @@
++import TIF.Core.Syntax
++import Core.Syntax
++
+ /-
+   Core/States.lean
+   Chapter 1.4: States — Meta-Arithmetic States for TIF
+@@ -9,7 +12,6 @@
+   - Basic lemmas about state structure
+ -/
+ 
+-import TIF.Core.Syntax
+ 
+ namespace TIF
+ 
+@@ -210,7 +212,6 @@
+   kinds of indeterminacy, and contexts (Definitions 2.1–2.5).
+ -/
+ 
+-import Core.Syntax
+ 
+ namespace TIF
+ 
+--- a/Core/Syntax.lean
++++ b/Core/Syntax.lean
+@@ -1,3 +1,5 @@
++import Core.Types
++
+ /-!
+ # Core/Syntax.lean
+ ## The Indeterminate Framework (TIF) — Syntactic Layer
+@@ -9,7 +11,6 @@
+ Depends on: `Core.Types`
+ -/
+ 
+-import Core.Types
+ 
+ -- ---------------------------------------------------------------------------
+ -- D6 : Terms  (Term_I)
+--- a/Toy/Algebraic.lean
++++ b/Toy/Algebraic.lean
+@@ -1,3 +1,9 @@
++import TIF.Core.Collapse
++import Core.Syntax
++import Core.States
++import Core.Semantics
++import Core.Collapse
++
+ /-
+   Toy/Algebraic.lean
+   Chapter 7.1: Algebraic Toy Model — Rational Singularities
+@@ -10,7 +16,6 @@
+   - Non-removable singularities remain blocked after collapse attempt
+ -/
+ 
+-import TIF.Core.Collapse
+ 
+ namespace TIF
+ namespace Toy
+@@ -190,10 +195,6 @@
+   and Theorems 8.1.3–8.1.4.
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+-import Core.Semantics
+-import Core.Collapse
+ 
+ namespace TIF.Toy
+ 
+--- a/Toy/Analytic.lean
++++ b/Toy/Analytic.lean
+@@ -1,3 +1,9 @@
++import TIF.Core.Collapse
++import Core.Syntax
++import Core.States
++import Core.Semantics
++import Core.Collapse
++
+ /-
+   Toy/Analytic.lean
+   Chapter 7.4: Analytic Toy Model — Meromorphic Functions
+@@ -9,7 +15,6 @@
+   - Critical symmetry functional
+ -/
+ 
+-import TIF.Core.Collapse
+ 
+ namespace TIF
+ namespace Toy
+@@ -186,10 +191,6 @@
+   Covers Definitions 7.4.1–7.4.3, 9.1.1–9.1.5, 12.1.1–12.1.5.
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+-import Core.Semantics
+-import Core.Collapse
+ 
+ namespace TIF.Toy
+ 
+--- a/Toy/Boolean.lean
++++ b/Toy/Boolean.lean
+@@ -1,3 +1,9 @@
++import TIF.Core.Collapse
++import Core.Syntax
++import Core.States
++import Core.Semantics
++import Core.Collapse
++
+ /-
+   Toy/Boolean.lean
+   Chapter 7.2: Boolean Toy Model
+@@ -9,7 +15,6 @@
+   - Collapse preserves truth under unique witness
+ -/
+ 
+-import TIF.Core.Collapse
+ 
+ namespace TIF
+ namespace Toy
+@@ -182,10 +187,6 @@
+   Covers Definitions 7.2.1–7.2.3.
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+-import Core.Semantics
+-import Core.Collapse
+ 
+ namespace TIF.Toy
+ 
+--- a/Toy/Complexity.lean
++++ b/Toy/Complexity.lean
+@@ -1,3 +1,9 @@
++import TIF.Core.Collapse
++import Core.Syntax
++import Core.States
++import Core.Semantics
++import Core.Collapse
++
+ /-
+   Toy/Complexity.lean
+   Chapter 7.5: Computational Toy Model — Restricted SAT and Collapse Tractability
+@@ -9,7 +15,6 @@
+   - Connection between unique satisfying assignment and exact collapse
+ -/
+ 
+-import TIF.Core.Collapse
+ 
+ namespace TIF
+ namespace Toy
+@@ -205,10 +210,6 @@
+   and restricted P ≠ NP theorem for toy classes.
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+-import Core.Semantics
+-import Core.Collapse
+ 
+ namespace TIF.Toy
+ 
+--- a/Toy/Linear.lean
++++ b/Toy/Linear.lean
+@@ -1,3 +1,9 @@
++import TIF.Core.Collapse
++import Core.Syntax
++import Core.States
++import Core.Semantics
++import Core.Collapse
++
+ /-
+   Toy/Linear.lean
+   Chapter 7.3: Linear System Toy Model
+@@ -9,7 +15,6 @@
+   - No solution → collapse is blocked
+ -/
+ 
+-import TIF.Core.Collapse
+ 
+ namespace TIF
+ namespace Toy
+@@ -174,10 +179,6 @@
+   Covers Definitions 7.3.1–7.3.3.
+ -/
+ 
+-import Core.Syntax
+-import Core.States
+-import Core.Semantics
+-import Core.Collapse
+ 
+ namespace TIF.Toy
+ 

@@ -1,0 +1,210 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/orion",
+ "verified_commit": "6849ba69e724bbf510d71dc6a065759a91588e99",
+ "projects": [
+  {
+   "repo": "orion",
+   "path": "formalization/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": false,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "error: OrionUCIF.lean:194:9: expected token | error: build failed",
+   "sorry_warnings": 0,
+   "reconstructed": true,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "OrionHiddenState.DefectMode.boundedness.sizeOf_spec",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "sizeOf OrionHiddenState.DefectMode.boundedness = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.DefectMode.collapse.sizeOf_spec",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "sizeOf OrionHiddenState.DefectMode.collapse = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.DefectMode.gap.sizeOf_spec",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "sizeOf OrionHiddenState.DefectMode.gap = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.DefectMode.ofNat_ctorIdx",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (x : OrionHiddenState.DefectMode), OrionHiddenState.DefectMode.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.HiddenStateSystem.mk.inj",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ {X : Type u} {O : Type v} {π : X → O} {residue : X → Nat} {signature : O → Nat} {transfer : Nat → Nat}   {positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x)}   {transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))} {X_1 : Type u} {O_1 : Type v} {π_1 : X_1 → O_1}   {residue_1 : X_1 → Nat} {signature_1 : O_1 → Nat} {transfer_1 : Nat → Nat}   {positivity_1 : ∀ (x : X_1), 0 < r",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.HiddenStateSystem.mk.injEq",
+     "module": "OrionHiddenState",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (X : Type u) (O : Type v) (π : X → O) (residue : X → Nat) (signature : O → Nat) (transfer : Nat → Nat)   (positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x))   (transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))) (X_1 : Type u) (O_1 : Type v) (π_1 : X_1 → O_1)   (residue_1 : X_1 → Nat) (signature_1 : O_1 → Nat) (transfer_1 : Nat → Nat)   (positivity_1 : ∀ (x : X_1), 0 < r",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.HiddenStateSystem.mk.sizeOf_spec",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (X : Type u) (O : Type v) (π : X → O) (residue : X → Nat) (signature : O → Nat) (transfer : Nat → Nat)   (positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x))   (transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))),   sizeOf       { X := X, O := O, π := π, residue := residue, signature := signature, transfer := transfer,         positivity := positivity, transferBound := tr",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.HiddenStateSystem.positivity",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (self : OrionHiddenState.HiddenStateSystem) (x : self.X), 0 < self.residue x → 0 < self.signature (self.π x)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.HiddenStateSystem.transferBound",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (self : OrionHiddenState.HiddenStateSystem) (x : self.X), self.residue x ≤ self.transfer (self.signature (self.π x))",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.boundedHiddenOfBoundedSignature",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (S : OrionHiddenState.HiddenStateSystem) {B : Nat},   OrionHiddenState.NatMonotone S.transfer →     OrionHiddenState.SignatureBound S B → ∀ (x : S.X), S.residue x ≤ S.transfer B",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.classifyBoundedness",
+     "module": "OrionHiddenState",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {defect threshold : Nat},   defect ≠ 0 →     ¬threshold ≤ defect → OrionHiddenState.classifyDefect defect threshold = OrionHiddenState.DefectMode.boundedness",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.classifyCollapse",
+     "module": "OrionHiddenState",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (threshold : Nat), OrionHiddenState.classifyDefect 0 threshold = OrionHiddenState.DefectMode.collapse",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.classifyDefect.eq_1",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (defect threshold : Nat),   OrionHiddenState.classifyDefect defect threshold =     if defect = 0 then OrionHiddenState.DefectMode.collapse     else if threshold ≤ defect then OrionHiddenState.DefectMode.gap else OrionHiddenState.DefectMode.boundedness",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.classifyGap",
+     "module": "OrionHiddenState",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {defect threshold : Nat},   defect ≠ 0 → threshold ≤ defect → OrionHiddenState.classifyDefect defect threshold = OrionHiddenState.DefectMode.gap",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.hiddenStatePrinciple",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (S : OrionHiddenState.HiddenStateSystem) {x : S.X}, 0 < S.residue x → 0 < S.signature (S.π x)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionHiddenState.quantitativeTransfer",
+     "module": "OrionHiddenState",
+     "axioms": [],
+     "statement": "∀ (S : OrionHiddenState.HiddenStateSystem) (x : S.X), S.residue x ≤ S.transfer (S.signature (S.π x))",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com OrionHiddenState, OrionUCIF (alguns arquivos com erro)",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `OrionHiddenState, .one `OrionUCIF]\n",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 25,
+     "nome": "OrionUCIF.lemma1_well_defined",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 36,
+     "nome": "OrionUCIF.lemma3_idempotent",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 39,
+     "nome": "OrionUCIF.lemma4_fixed_point_compatibility",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 187,
+     "nome": "OrionUCIF.law1_projection_from_hypothesis",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 192,
+     "nome": "OrionUCIF.lemma_l1_identity_checker",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 198,
+     "nome": "OrionUCIF.law7_closure_from_detection",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formalization/lean/OrionUCIF.lean",
+     "linha": 206,
+     "nome": "OrionUCIF.indirect_absorption_template",
+     "status": "fechado",
+     "axioms": []
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 16,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

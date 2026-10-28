@@ -1,0 +1,720 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/UMA",
+ "verified_commit": "62b22ffb050a526dcb0d40229ce1077405ea701b",
+ "projects": [
+  {
+   "repo": "UMA",
+   "path": ".formal_foundations/lean",
+   "toolchain": "leanprover/lean4:v4.36.0-rc2",
+   "toolchain_used": "leanprover/lean4:v4.36.0-rc2",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 2.6,
+   "build_error": "Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: no such file or directory (error code: 2) | error: build failed",
+   "sorry_warnings": 0,
+   "reconstructed": true,
+   "bridges": [],
+   "declared_axioms": [
+    {
+     "name": "Universe00.ZeroOverZero",
+     "module": "Universe00",
+     "statement": "Type"
+    },
+    {
+     "name": "Universe00.ZeroOverZero.maximal",
+     "module": "Universe00",
+     "statement": "∀ (ψ₀ : Universe00.ZeroOverZero) (s₁ s₂ : Universe00.PhysicalState), s₁ ∈ ψ₀.potential_state → s₂ ∈ ψ₀.potential_state"
+    },
+    {
+     "name": "Universe00.ZeroOverZero.potential_state",
+     "module": "Universe00",
+     "statement": "Universe00.ZeroOverZero → Set Universe00.PhysicalState"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "Universe00.PhysicalState.error_nonneg",
+     "module": "Universe00",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Universe00.PhysicalState), 0 ≤ self.error",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.PhysicalState.mk.inj",
+     "module": "Universe00",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {value error : ℝ} {error_nonneg : 0 ≤ error} {value_1 error_1 : ℝ} {error_nonneg_1 : 0 ≤ error_1},   { value := value, error := error, error_nonneg := error_nonneg } =       { value := value_1, error := error_1, error_nonneg := error_nonneg_1 } →     value = value_1 ∧ error = error_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.PhysicalState.mk.injEq",
+     "module": "Universe00",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (value error : ℝ) (error_nonneg : 0 ≤ error) (value_1 error_1 : ℝ) (error_nonneg_1 : 0 ≤ error_1),   ({ value := value, error := error, error_nonneg := error_nonneg } =       { value := value_1, error := error_1, error_nonneg := error_nonneg_1 }) =     (value = value_1 ∧ error = error_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.PhysicalState.mk.sizeOf_spec",
+     "module": "Universe00",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (value error : ℝ) (error_nonneg : 0 ≤ error),   sizeOf { value := value, error := error, error_nonneg := error_nonneg } =     1 + sizeOf value + sizeOf error + sizeOf error_nonneg",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.error_parametrization_principle",
+     "module": "Universe00",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (ideal : ℝ) (system : Universe00.PhysicalState) (ε : ℝ) (ε_crit : Universe00.CriticalError),   Universe00.Operational system ε_crit →     Universe00.ParametricallySolvable ideal system ε → ∃ f, ∀ δ > 0, ∃ ε₀, ∀ ε < ε₀, f ε < δ",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com NavierStokes, Universe00, YangMills e o Mathlib v4.36.0-rc2 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.36.0-rc2\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `NavierStokes, .one `Universe00, .one `YangMills]\n",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": ".formal_foundations/lean/NavierStokes.lean",
+     "linha": 69,
+     "nome": "NavierStokes.navier_stokes_parametrization",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/NavierStokes.lean",
+     "linha": 99,
+     "nome": "NavierStokes.stabilization_maintains_operational_bounds",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/NavierStokes.lean",
+     "linha": 112,
+     "nome": "NavierStokes.turbulence_parametric_control",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 47,
+     "nome": "YangMills.mass_gap_exists",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 69,
+     "nome": "YangMills.energy_quantization",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 79,
+     "nome": "YangMills.reset_consumes_mass_gap",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 91,
+     "nome": "YangMills.confinement_below_gap",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 100,
+     "nome": "YangMills.reset_reversibility",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 114,
+     "nome": "YangMills.energy_stability",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": ".formal_foundations/lean/YangMills.lean",
+     "linha": 124,
+     "nome": "YangMills.yang_mills_analogy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "Universe00.ZeroOverZero.potential_state",
+     "enunciado": "Universe00.ZeroOverZero → Set Universe00.PhysicalState",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Universe00.ZeroOverZero.maximal",
+     "enunciado": "∀ (ψ₀ : Universe00.ZeroOverZero) (s₁ s₂ : Universe00.PhysicalState), s₁ ∈ ψ₀.potential_state → s₂ ∈ ψ₀.potential_state",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 5,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "UMA",
+   "path": "formal_proofs/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: ././././universe00_core.lean: bad import 'Mathlib.Data.Nat.Prime'",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 35,
+     "nome": "IndeterminacaoContextual.resolver_bem_definida",
+     "status": "erro",
+     "axioms": [
+      "propext"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 61,
+     "nome": "SistemaTransformacao.transformacao_valor_zero",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 112,
+     "nome": "ProtocoloCivilizacaoAutonoma.autossuficiencia_minima",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 123,
+     "nome": "ProtocoloCivilizacaoAutonoma.independencia_logistica_absoluta_alcancavel",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 153,
+     "nome": "BateriaMagnetica.energia_perpetua",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 165,
+     "nome": "BateriaMagnetica.vantagem_longevidade",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 196,
+     "nome": "SistemaCriptoPrimosPares.descentralizado",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    },
+    {
+     "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
+     "linha": 207,
+     "nome": "independencia_logistica_absoluta_viavel",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 110,
+     "nome": "Universe00.pure_potential_unity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 116,
+     "nome": "Universe00.transformation_preserves_potential",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 123,
+     "nome": "Universe00.potential_conservation_lemma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 130,
+     "nome": "Universe00.decomposition_completeness",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 137,
+     "nome": "Universe00.reconstruction_sufficiency",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 163,
+     "nome": "Universe00.prime_security_hardness",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 190,
+     "nome": "Universe00.motion_nullification",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 214,
+     "nome": "Universe00.fleet_optimization",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 249,
+     "nome": "Universe00.zero_knowledge_security",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 280,
+     "nome": "Universe00.waste_elimination",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 289,
+     "nome": "Universe00.infinite_recyclability",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 296,
+     "nome": "Universe00.scarcity_resolution",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 316,
+     "nome": "Universe00.precision_achievable",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 362,
+     "nome": "Universe00.validation_sound",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_core.lean",
+     "linha": 371,
+     "nome": "Universe00.system_integration",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 63,
+     "nome": "Universe00Extended.compensation_degrades",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 144,
+     "nome": "Universe00Extended.titanium_better_than_aluminum",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 181,
+     "nome": "Universe00Extended.sufficient_generation_positive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 190,
+     "nome": "Universe00Extended.renewable_target_achievable",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 207,
+     "nome": "Universe00Extended.negative_gibbs_spontaneous",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 243,
+     "nome": "Universe00Extended.high_reynolds_turbulent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 283,
+     "nome": "Universe00Extended.higher_snr_increases_capacity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 304,
+     "nome": "Universe00Extended.high_cpk_capable",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_proofs/lean/universe00_extended.lean",
+     "linha": 468,
+     "nome": "Universe00Extended.higher_renewable_reduces_carbon",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "UMA",
+   "path": "formal_verification",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: ././././UMA_Foundation.lean: bad import 'Mathlib.Data.Nat.Prime'",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 33,
+     "nome": "UMA.Singularity.sinc_removable_singularity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 42,
+     "nome": "UMA.Singularity.lhopital_rule_zero_over_zero",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 74,
+     "nome": "UMA.PrimeSync.prime_proximity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 82,
+     "nome": "UMA.PrimeSync.prime_frequencies_independent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 90,
+     "nome": "UMA.PrimeSync.no_resonance_buildup",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 137,
+     "nome": "UMA.Gyroscope.quaternion_no_gimbal_lock",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 153,
+     "nome": "UMA.Gyroscope.gyroscopic_stability",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 174,
+     "nome": "UMA.Logistics.triangle_inequality",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 182,
+     "nome": "UMA.Logistics.nearest_neighbor_approximation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 223,
+     "nome": "UMA.NewMath.real_embeds_in_singularity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/UMA_Foundation.lean",
+     "linha": 246,
+     "nome": "UMA.Soundness.uma_framework_sound",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 31,
+     "nome": "Universe00.zero_over_zero_is_one",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 34,
+     "nome": "Universe00.lhopital_zero_form",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 45,
+     "nome": "Universe00.unique_prime_factorization",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 61,
+     "nome": "Universe00.prime_event_collision_free",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 86,
+     "nome": "Universe00.gyro_stability",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 111,
+     "nome": "Universe00.tmfm_energy_conservation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 136,
+     "nome": "Universe00.normal_implies_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 157,
+     "nome": "Universe00.system_is_antifragile",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 174,
+     "nome": "Universe00.swarm_learning_superlinear",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 196,
+     "nome": "Universe00.blockchain_unique_ids",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 225,
+     "nome": "Universe00.universe00_stability",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

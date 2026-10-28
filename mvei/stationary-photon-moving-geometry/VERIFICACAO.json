@@ -1,0 +1,419 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/stationary-photon-moving-geometry",
+ "verified_commit": "bfd05570b324bdca88319e8c865d9c0b6acd4a98",
+ "projects": [
+  {
+   "repo": "stationary-photon-moving-geometry",
+   "path": ".",
+   "toolchain": "leanprover/lean4:v4.19.0",
+   "toolchain_used": "v4.19.0",
+   "needs_mathlib": false,
+   "build_ok": true,
+   "build_seconds": 0.1,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "SPMG.CommutingSymmetries.commute",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (self : SPMG.CommutingSymmetries Q) (ψ : Q.State),   self.A.act (self.B.act ψ) = self.B.act (self.A.act ψ)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.CommutingSymmetries.mk.inj",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} {A B : SPMG.Involution Q} {commute : ∀ (ψ : Q.State), A.act (B.act ψ) = B.act (A.act ψ)}   {A_1 B_1 : SPMG.Involution Q} {commute_1 : ∀ (ψ : Q.State), A_1.act (B_1.act ψ) = B_1.act (A_1.act ψ)},   { A := A, B := B, commute := commute } = { A := A_1, B := B_1, commute := commute_1 } → A = A_1 ∧ B = B_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.CommutingSymmetries.mk.injEq",
+     "module": "SPMG.QuantumStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (A B : SPMG.Involution Q) (commute : ∀ (ψ : Q.State), A.act (B.act ψ) = B.act (A.act ψ))   (A_1 B_1 : SPMG.Involution Q) (commute_1 : ∀ (ψ : Q.State), A_1.act (B_1.act ψ) = B_1.act (A_1.act ψ)),   ({ A := A, B := B, commute := commute } = { A := A_1, B := B_1, commute := commute_1 }) = (A = A_1 ∧ B = B_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.CommutingSymmetries.mk.sizeOf_spec",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (A B : SPMG.Involution Q) (commute : ∀ (ψ : Q.State), A.act (B.act ψ) = B.act (A.act ψ)),   sizeOf { A := A, B := B, commute := commute } = 1 + sizeOf A + sizeOf B",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Dynamics.mk.inj",
+     "module": "SPMG.Core",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} {evolveState evolveState_1 : M.Time → M.State → M.State},   { evolveState := evolveState } = { evolveState := evolveState_1 } → evolveState = evolveState_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Dynamics.mk.injEq",
+     "module": "SPMG.Core",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : SPMG.GeometryModel} (evolveState evolveState_1 : M.Time → M.State → M.State),   ({ evolveState := evolveState } = { evolveState := evolveState_1 }) = (evolveState = evolveState_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Dynamics.mk.sizeOf_spec",
+     "module": "SPMG.Core",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} (evolveState : M.Time → M.State → M.State), sizeOf { evolveState := evolveState } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.GeometryModel.mk.inj",
+     "module": "SPMG.Core",
+     "axioms": [],
+     "statement": "∀ {State : Type u} {Geometry : Type v} {Time : Type w} {Photon : State → Prop}   {evolveGeometry : Time → Geometry → Geometry} {observe : Geometry → State → State} {State_1 : Type u}   {Geometry_1 : Type v} {Time_1 : Type w} {Photon_1 : State_1 → Prop}   {evolveGeometry_1 : Time_1 → Geometry_1 → Geometry_1} {observe_1 : Geometry_1 → State_1 → State_1},   { State := State, Geometry := Geometry, Tim",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.GeometryModel.mk.injEq",
+     "module": "SPMG.Core",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (State : Type u) (Geometry : Type v) (Time : Type w) (Photon : State → Prop)   (evolveGeometry : Time → Geometry → Geometry) (observe : Geometry → State → State) (State_1 : Type u)   (Geometry_1 : Type v) (Time_1 : Type w) (Photon_1 : State_1 → Prop)   (evolveGeometry_1 : Time_1 → Geometry_1 → Geometry_1) (observe_1 : Geometry_1 → State_1 → State_1),   ({ State := State, Geometry := Geometry, Ti",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.GeometryModel.mk.sizeOf_spec",
+     "module": "SPMG.Core",
+     "axioms": [],
+     "statement": "∀ (State : Type u) (Geometry : Type v) (Time : Type w) (Photon : State → Prop)   (evolveGeometry : Time → Geometry → Geometry) (observe : Geometry → State → State),   sizeOf       { State := State, Geometry := Geometry, Time := Time, Photon := Photon, evolveGeometry := evolveGeometry,         observe := observe } =     1 + sizeOf State + sizeOf Geometry + sizeOf Time",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.IdentityTime.geometry_identity",
+     "module": "SPMG.Composition",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} (self : SPMG.IdentityTime M) (g : M.Geometry), M.evolveGeometry self.zeroTime g = g",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.IdentityTime.mk.inj",
+     "module": "SPMG.Composition",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} {zeroTime : M.Time} {geometry_identity : ∀ (g : M.Geometry), M.evolveGeometry zeroTime g = g}   {zeroTime_1 : M.Time} {geometry_identity_1 : ∀ (g : M.Geometry), M.evolveGeometry zeroTime_1 g = g},   { zeroTime := zeroTime, geometry_identity := geometry_identity } =       { zeroTime := zeroTime_1, geometry_identity := geometry_identity_1 } →     zeroTime = zeroTime_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.IdentityTime.mk.injEq",
+     "module": "SPMG.Composition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : SPMG.GeometryModel} (zeroTime : M.Time) (geometry_identity : ∀ (g : M.Geometry), M.evolveGeometry zeroTime g = g)   (zeroTime_1 : M.Time) (geometry_identity_1 : ∀ (g : M.Geometry), M.evolveGeometry zeroTime_1 g = g),   ({ zeroTime := zeroTime, geometry_identity := geometry_identity } =       { zeroTime := zeroTime_1, geometry_identity := geometry_identity_1 }) =     (zeroTime = zeroTime_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.IdentityTime.mk.sizeOf_spec",
+     "module": "SPMG.Composition",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} (zeroTime : M.Time)   (geometry_identity : ∀ (g : M.Geometry), M.evolveGeometry zeroTime g = g),   sizeOf { zeroTime := zeroTime, geometry_identity := geometry_identity } = 1 + sizeOf zeroTime",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Involution.mk.inj",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} {act : Q.State → Q.State} {squared : ∀ (ψ : Q.State), act (act ψ) = ψ}   {act_1 : Q.State → Q.State} {squared_1 : ∀ (ψ : Q.State), act_1 (act_1 ψ) = ψ},   { act := act, squared := squared } = { act := act_1, squared := squared_1 } → act = act_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Involution.mk.injEq",
+     "module": "SPMG.QuantumStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (act : Q.State → Q.State) (squared : ∀ (ψ : Q.State), act (act ψ) = ψ)   (act_1 : Q.State → Q.State) (squared_1 : ∀ (ψ : Q.State), act_1 (act_1 ψ) = ψ),   ({ act := act, squared := squared } = { act := act_1, squared := squared_1 }) = (act = act_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Involution.mk.sizeOf_spec",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (act : Q.State → Q.State) (squared : ∀ (ψ : Q.State), act (act ψ) = ψ),   sizeOf { act := act, squared := squared } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Involution.squared",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (self : SPMG.Involution Q) (ψ : Q.State), self.act (self.act ψ) = ψ",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.ObservationIdentity.identity_observation",
+     "module": "SPMG.Composition",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} {I : SPMG.IdentityTime M},   SPMG.ObservationIdentity M I →     ∀ (g : M.Geometry) (s : M.State), M.observe (M.evolveGeometry I.zeroTime g) s = M.observe g s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Observer.mk.inj",
+     "module": "SPMG.Observers",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} {read read_1 : M.Geometry → M.State → M.State},   { read := read } = { read := read_1 } → read = read_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Observer.mk.injEq",
+     "module": "SPMG.Observers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {M : SPMG.GeometryModel} (read read_1 : M.Geometry → M.State → M.State),   ({ read := read } = { read := read_1 }) = (read = read_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.Observer.mk.sizeOf_spec",
+     "module": "SPMG.Observers",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} (read : M.Geometry → M.State → M.State), sizeOf { read := read } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.PhotonKinematics.geometry_speed_c",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ {S : SPMG.SpeedModel} (self : SPMG.PhotonKinematics S), self.geometryPropagationSpeed = S.c",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.PhotonKinematics.mk.inj",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ {S : SPMG.SpeedModel} {photonIntrinsicSpeed geometryPropagationSpeed : S.Speed}   {photon_intrinsic_zero : photonIntrinsicSpeed = S.zero} {geometry_speed_c : geometryPropagationSpeed = S.c}   {photonIntrinsicSpeed_1 geometryPropagationSpeed_1 : S.Speed}   {photon_intrinsic_zero_1 : photonIntrinsicSpeed_1 = S.zero} {geometry_speed_c_1 : geometryPropagationSpeed_1 = S.c},   { photonIntrinsicSpeed",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.PhotonKinematics.mk.injEq",
+     "module": "SPMG.Kinematics",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {S : SPMG.SpeedModel} (photonIntrinsicSpeed geometryPropagationSpeed : S.Speed)   (photon_intrinsic_zero : photonIntrinsicSpeed = S.zero) (geometry_speed_c : geometryPropagationSpeed = S.c)   (photonIntrinsicSpeed_1 geometryPropagationSpeed_1 : S.Speed)   (photon_intrinsic_zero_1 : photonIntrinsicSpeed_1 = S.zero) (geometry_speed_c_1 : geometryPropagationSpeed_1 = S.c),   ({ photonIntrinsicSpeed",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.PhotonKinematics.mk.sizeOf_spec",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ {S : SPMG.SpeedModel} (photonIntrinsicSpeed geometryPropagationSpeed : S.Speed)   (photon_intrinsic_zero : photonIntrinsicSpeed = S.zero) (geometry_speed_c : geometryPropagationSpeed = S.c),   sizeOf       { photonIntrinsicSpeed := photonIntrinsicSpeed, geometryPropagationSpeed := geometryPropagationSpeed,         photon_intrinsic_zero := photon_intrinsic_zero, geometry_speed_c := geometry_speed",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.PhotonKinematics.photon_intrinsic_zero",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ {S : SPMG.SpeedModel} (self : SPMG.PhotonKinematics S), self.photonIntrinsicSpeed = S.zero",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.QuantumStateSpace.mk.inj",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Basis State : Type u} {embed : Basis → State} {superpose : State → State → State} {Basis_1 State_1 : Type u}   {embed_1 : Basis_1 → State_1} {superpose_1 : State_1 → State_1 → State_1},   { Basis := Basis, State := State, embed := embed, superpose := superpose } =       { Basis := Basis_1, State := State_1, embed := embed_1, superpose := superpose_1 } →     Basis = Basis_1 ∧ State = State_1 ∧ H",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.QuantumStateSpace.mk.injEq",
+     "module": "SPMG.QuantumStates",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (Basis State : Type u) (embed : Basis → State) (superpose : State → State → State) (Basis_1 State_1 : Type u)   (embed_1 : Basis_1 → State_1) (superpose_1 : State_1 → State_1 → State_1),   ({ Basis := Basis, State := State, embed := embed, superpose := superpose } =       { Basis := Basis_1, State := State_1, embed := embed_1, superpose := superpose_1 }) =     (Basis = Basis_1 ∧ State = State_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.QuantumStateSpace.mk.sizeOf_spec",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ (Basis State : Type u) (embed : Basis → State) (superpose : State → State → State),   sizeOf { Basis := Basis, State := State, embed := embed, superpose := superpose } = 1 + sizeOf Basis + sizeOf State",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.energy_momentum_proof",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ (self : SPMG.RelativityRecoveryContract), self.EnergyMomentumRecovered",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.local_light_speed_proof",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ (self : SPMG.RelativityRecoveryContract), self.LocalLightSpeedRecovered",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.lorentz_composition_proof",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ (self : SPMG.RelativityRecoveryContract), self.LorentzCompositionRecovered",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.mk.inj",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ {LocalLightSpeedRecovered TimeDilationRecovered EnergyMomentumRecovered LorentzCompositionRecovered : Prop}   {local_light_speed_proof : LocalLightSpeedRecovered} {time_dilation_proof : TimeDilationRecovered}   {energy_momentum_proof : EnergyMomentumRecovered} {lorentz_composition_proof : LorentzCompositionRecovered}   {LocalLightSpeedRecovered_1 TimeDilationRecovered_1 EnergyMomentumRecovered_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.mk.injEq",
+     "module": "SPMG.RelativityContract",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (LocalLightSpeedRecovered TimeDilationRecovered EnergyMomentumRecovered LorentzCompositionRecovered : Prop)   (local_light_speed_proof : LocalLightSpeedRecovered) (time_dilation_proof : TimeDilationRecovered)   (energy_momentum_proof : EnergyMomentumRecovered) (lorentz_composition_proof : LorentzCompositionRecovered)   (LocalLightSpeedRecovered_1 TimeDilationRecovered_1 EnergyMomentumRecovered_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.mk.sizeOf_spec",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ (LocalLightSpeedRecovered TimeDilationRecovered EnergyMomentumRecovered LorentzCompositionRecovered : Prop)   (local_light_speed_proof : LocalLightSpeedRecovered) (time_dilation_proof : TimeDilationRecovered)   (energy_momentum_proof : EnergyMomentumRecovered) (lorentz_composition_proof : LorentzCompositionRecovered),   sizeOf       { LocalLightSpeedRecovered := LocalLightSpeedRecovered, TimeDil",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.RelativityRecoveryContract.time_dilation_proof",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ (self : SPMG.RelativityRecoveryContract), self.TimeDilationRecovered",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.SpeedModel.mk.inj",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ {Speed : Type} {zero c : Speed} {Speed_1 : Type} {zero_1 c_1 : Speed_1},   { Speed := Speed, zero := zero, c := c } = { Speed := Speed_1, zero := zero_1, c := c_1 } →     Speed = Speed_1 ∧ HEq zero zero_1 ∧ HEq c c_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.SpeedModel.mk.injEq",
+     "module": "SPMG.Kinematics",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (Speed : Type) (zero c : Speed) (Speed_1 : Type) (zero_1 c_1 : Speed_1),   ({ Speed := Speed, zero := zero, c := c } = { Speed := Speed_1, zero := zero_1, c := c_1 }) =     (Speed = Speed_1 ∧ HEq zero zero_1 ∧ HEq c c_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.SpeedModel.mk.sizeOf_spec",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ (Speed : Type) (zero c : Speed),   sizeOf { Speed := Speed, zero := zero, c := c } = 1 + sizeOf Speed + sizeOf zero + sizeOf c",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.geometry_speed_is_c",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ (S : SPMG.SpeedModel) (K : SPMG.PhotonKinematics S), K.geometryPropagationSpeed = S.c",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.involution_order_two",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (U : SPMG.Involution Q) (ψ : Q.State), U.act (U.act ψ) = ψ",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.observed_at_zero_time",
+     "module": "SPMG.Composition",
+     "axioms": [],
+     "statement": "∀ (M : SPMG.GeometryModel) (D : SPMG.Dynamics M) (I : SPMG.IdentityTime M),   SPMG.ObservationIdentity M I →     ∀ (g : M.Geometry) (s : M.State),       D.evolveState I.zeroTime s = s → SPMG.ObservedState M D I.zeroTime g s = M.observe g s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.observer_equivalence_refl",
+     "module": "SPMG.Observers",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} (A : SPMG.Observer M) (g : M.Geometry) (s : M.State), SPMG.ObserverEquivalentOn A A g s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.observer_equivalence_symm",
+     "module": "SPMG.Observers",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} {A B : SPMG.Observer M} {g : M.Geometry} {s : M.State},   SPMG.ObserverEquivalentOn A B g s → SPMG.ObserverEquivalentOn B A g s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.observer_equivalence_trans",
+     "module": "SPMG.Observers",
+     "axioms": [],
+     "statement": "∀ {M : SPMG.GeometryModel} {A B C : SPMG.Observer M} {g : M.Geometry} {s : M.State},   SPMG.ObserverEquivalentOn A B g s → SPMG.ObserverEquivalentOn B C g s → SPMG.ObserverEquivalentOn A C g s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.photon_observed_motion_is_geometric",
+     "module": "SPMG.Core",
+     "axioms": [],
+     "statement": "∀ (M : SPMG.GeometryModel) (D : SPMG.Dynamics M),   SPMG.StationaryPhotonLaw M D →     ∀ (t : M.Time) (g₀ : M.Geometry) (s : M.State),       M.Photon s → SPMG.ObservedState M D t g₀ s = M.observe (M.evolveGeometry t g₀) s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.photon_speed_zero",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ (S : SPMG.SpeedModel) (K : SPMG.PhotonKinematics S), K.photonIntrinsicSpeed = S.zero",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.relativity_recovery_bundle",
+     "module": "SPMG.RelativityContract",
+     "axioms": [],
+     "statement": "∀ (R : SPMG.RelativityRecoveryContract),   R.LocalLightSpeedRecovered ∧ R.TimeDilationRecovered ∧ R.EnergyMomentumRecovered ∧ R.LorentzCompositionRecovered",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.stationary_photon_intrinsic_fixed",
+     "module": "SPMG.Composition",
+     "axioms": [],
+     "statement": "∀ (M : SPMG.GeometryModel) (D : SPMG.Dynamics M),   SPMG.StationaryPhotonLaw M D → ∀ (t : M.Time) (s : M.State), M.Photon s → D.evolveState t s = s",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.stationary_photon_moving_geometry",
+     "module": "SPMG.Kinematics",
+     "axioms": [],
+     "statement": "∀ (S : SPMG.SpeedModel) (K : SPMG.PhotonKinematics S),   K.photonIntrinsicSpeed = S.zero ∧ K.geometryPropagationSpeed = S.c",
+     "status": "fechado"
+    },
+    {
+     "name": "SPMG.symmetry_pair_commutes",
+     "module": "SPMG.QuantumStates",
+     "axioms": [],
+     "statement": "∀ {Q : SPMG.QuantumStateSpace} (S : SPMG.CommutingSymmetries Q) (ψ : Q.State), S.A.act (S.B.act ψ) = S.B.act (S.A.act ψ)",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "summary": {
+    "fechado": 52,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

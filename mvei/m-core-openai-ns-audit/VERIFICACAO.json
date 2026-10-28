@@ -1,0 +1,79 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/m-core-openai-ns-audit",
+ "verified_commit": "9e845430c14b19308a1a160d2c376ccf828b6c1e",
+ "projects": [
+  {
+   "repo": "m-core-openai-ns-audit",
+   "path": "atk-kernel",
+   "toolchain": "leanprover/lean4:v4.34.1",
+   "toolchain_used": "leanprover/lean4:v4.34.1",
+   "needs_mathlib": true,
+   "build_ok": true,
+   "build_seconds": 63.9,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "ATK.NavierStokes.absorption",
+     "module": "ATK.NavierStokes",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {ν z y y' B T R cB cT C : ℝ},   y' / 2 + ν * z ≤ B + T + R →     B ≤ cB * ν * z → T ≤ cT * ν * z → R ≤ C * y ^ 2 → y' / 2 + (1 - cB - cT) * ν * z ≤ C * y ^ 2",
+     "status": "fechado"
+    },
+    {
+     "name": "ATK.NavierStokes.absorption_margin_pos",
+     "module": "ATK.NavierStokes",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {cB cT : ℝ}, cB + cT < 1 → 0 < 1 - cB - cT",
+     "status": "fechado"
+    },
+    {
+     "name": "ATK.NavierStokes.riccati_comparison",
+     "module": "ATK.NavierStokes",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {y y' : ℝ → ℝ} {C T : ℝ},   0 ≤ T →     (∀ t ∈ Set.Icc 0 T, 0 < y t) →       (∀ (t : ℝ), HasDerivAt y (y' t) t) →         (∀ t ∈ Set.Icc 0 T, y' t ≤ 2 * C * y t ^ 2) → ∀ t ∈ Set.Icc 0 T, (y 0)⁻¹ - 2 * C * t ≤ (y t)⁻¹",
+     "status": "fechado"
+    },
+    {
+     "name": "ATK.NavierStokes.riccati_upper_bound",
+     "module": "ATK.NavierStokes",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {y y' : ℝ → ℝ} {C T t : ℝ},   0 ≤ T →     (∀ s ∈ Set.Icc 0 T, 0 < y s) →       (∀ (s : ℝ), HasDerivAt y (y' s) s) →         (∀ s ∈ Set.Icc 0 T, y' s ≤ 2 * C * y s ^ 2) →           t ∈ Set.Icc 0 T → 0 < 1 - 2 * C * y 0 * t → y t ≤ y 0 / (1 - 2 * C * y 0 * t)",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "summary": {
+    "fechado": 4,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

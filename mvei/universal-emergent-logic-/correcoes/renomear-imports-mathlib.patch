@@ -1,0 +1,627 @@
+--- a/formalization/lean/LRE/Basic.lean
++++ b/formalization/lean/LRE/Basic.lean
+@@ -1,7 +1,7 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Topology.Basic
+-import Mathlib.Topology.ContinuousFunction.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Topology.ContinuousMap.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ 
+ /-
+--- a/formalization/lean/LRE/ClosureObstructionQuantitative.lean
++++ b/formalization/lean/LRE/ClosureObstructionQuantitative.lean
+@@ -33,7 +33,7 @@
+ import LRE.Core.Residue
+ import LRE.Geometry.Ehresmann
+ import LRE.CouplingOperator
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+--- a/formalization/lean/LRE/Core/Basic.lean
++++ b/formalization/lean/LRE/Core/Basic.lean
+@@ -1,9 +1,9 @@
+ import Mathlib.MeasureTheory.MeasurableSpace.Basic
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ import Mathlib.Topology.Basic
+-import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
+-import Mathlib.Geometry.Manifold.ContMDiff
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Geometry.Manifold.IsManifold.Basic
++import Mathlib.Geometry.Manifold.ContMDiff.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ 
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+--- a/formalization/lean/LRE/Core/Closure.lean
++++ b/formalization/lean/LRE/Core/Closure.lean
+@@ -18,7 +18,7 @@
+ -/
+ 
+ import LRE.Core.Projective
+-import Mathlib.Data.Real.ENNReal
++import Mathlib.Data.ENNReal.Basic
+ 
+ namespace LRE
+ 
+--- a/formalization/lean/LRE/Core/LRETheorem.lean
++++ b/formalization/lean/LRE/Core/LRETheorem.lean
+@@ -23,7 +23,7 @@
+ import LRE.Core.Projective
+ import LRE.Core.Residual
+ import LRE.Core.Closure
+-import Mathlib.Data.Real.ENNReal
++import Mathlib.Data.ENNReal.Basic
+ 
+ namespace LRE
+ 
+--- a/formalization/lean/LRE/Core/Projection.lean
++++ b/formalization/lean/LRE/Core/Projection.lean
+@@ -14,7 +14,7 @@
+ -/
+ 
+ import LRE.Core.Basic
+-import Mathlib.MeasureTheory.Constructions.Prod.Basic
++import Mathlib.MeasureTheory.Measure.Prod
+ 
+ namespace ProjectionSystem
+ 
+--- a/formalization/lean/LRE/Core/Projective.lean
++++ b/formalization/lean/LRE/Core/Projective.lean
+@@ -23,7 +23,7 @@
+ -/
+ 
+ import Mathlib.Data.ENNReal.Basic
+-import Mathlib.Data.Real.NNReal
++import Mathlib.Data.NNReal.Basic
+ import Mathlib.Order.Filter.Basic
+ import Mathlib.Topology.Basic
+ 
+--- a/formalization/lean/LRE/Core/ProjectiveSystem.lean
++++ b/formalization/lean/LRE/Core/ProjectiveSystem.lean
+@@ -1,5 +1,5 @@
+ import Mathlib.MeasureTheory.Integral.Bochner
+-import Mathlib.MeasureTheory.Function.AEMeasurable
++import Mathlib.MeasureTheory.Measure.AEMeasurable
+ import Mathlib.MeasureTheory.Function.EssSup
+ import LRE.Core.Basic
+ import Mathlib.Data.Real.Basic
+--- a/formalization/lean/LRE/Core/QuantitativeObstruction.lean
++++ b/formalization/lean/LRE/Core/QuantitativeObstruction.lean
+@@ -4,7 +4,7 @@
+ import LRE.Core.Basic
+ import LRE.Core.Residue
+ import LRE.Geometry.Ehresmann
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ import Mathlib.Geometry.Manifold.ContMDiff.Defs
+ import Mathlib.Geometry.Manifold.VectorBundle.Basic
+--- a/formalization/lean/LRE/Core/Residual.lean
++++ b/formalization/lean/LRE/Core/Residual.lean
+@@ -1,4 +1,4 @@
+-import Mathlib.Data.Real.ENNReal
++import Mathlib.Data.ENNReal.Basic
+ import Mathlib
+ import LRE.Core.ProjectiveSystem
+ 
+--- a/formalization/lean/LRE/ERS/AbstractODE.lean
++++ b/formalization/lean/LRE/ERS/AbstractODE.lean
+@@ -24,7 +24,7 @@
+ import Mathlib.Analysis.Calculus.MeanValue
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Topology.Order.Basic
+-import Mathlib.Order.Filter.AtTopBot
++import Mathlib.Order.Filter.AtTopBot.Basic
+ 
+ namespace LRE.ERS
+ 
+--- a/formalization/lean/LRE/Examples/NavierStokesLRE.lean
++++ b/formalization/lean/LRE/Examples/NavierStokesLRE.lean
+@@ -1,7 +1,7 @@
+ import LRE.Core.Basic
+ import LRE.Core.ClosureObstruction
+ import LRE.Geometry.ResidualCurvature
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+ import LRE.Core.NonControl
+ 
+--- a/formalization/lean/LRE/Final.lean
++++ b/formalization/lean/LRE/Final.lean
+@@ -22,7 +22,7 @@
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ import Mathlib.Data.Real.Basic
+-import Mathlib.Order.Filter.AtTopBot
++import Mathlib.Order.Filter.AtTopBot.Basic
+ import Mathlib.Topology.Basic
+ 
+ open Real
+--- a/formalization/lean/LRE/Geometry/CurvatureTheory.lean
++++ b/formalization/lean/LRE/Geometry/CurvatureTheory.lean
+@@ -29,7 +29,7 @@
+ import LRE.FiberBundle
+ import LRE.Geometry.Ehresmann
+ import Mathlib.Geometry.Manifold.VectorBundle.Basic
+-import Mathlib.LinearAlgebra.Exterior.Basic
++import Mathlib.LinearAlgebra.ExteriorAlgebra.Basic
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ 
+ namespace LRE
+--- a/formalization/lean/LRE/Geometry/Ehresmann.lean
++++ b/formalization/lean/LRE/Geometry/Ehresmann.lean
+@@ -3,7 +3,7 @@
+ import LRE.Core.Residue
+ import Mathlib.Geometry.Manifold.VectorBundle.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.LinearAlgebra.Exterior.Basic
++import Mathlib.LinearAlgebra.ExteriorAlgebra.Basic
+ 
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+--- a/formalization/lean/LRE/HCS/Core.lean
++++ b/formalization/lean/LRE/HCS/Core.lean
+@@ -23,7 +23,7 @@
+ -/
+ 
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ import LRE.Core.Basic
+ import LRE.FiberBundle
+--- a/formalization/lean/LRE/HCS/RiemannHypothesis.lean
++++ b/formalization/lean/LRE/HCS/RiemannHypothesis.lean
+@@ -21,7 +21,7 @@
+ -/
+ 
+ import LRE.HCS.Core
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace LRE.HCS.RiemannHypothesis
+ 
+--- a/formalization/lean/LRE/Millennium/BSD.lean
++++ b/formalization/lean/LRE/Millennium/BSD.lean
+@@ -3,7 +3,7 @@
+ import Mathlib.AlgebraicGeometry.EllipticCurve.Affine
+ import LRE.MillenniumCore
+ import LRE.ERS
+-import Mathlib.NumberTheory.EllipticCurve
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ import Mathlib.Analysis.Complex.Basic
+ 
+ /-
+--- a/formalization/lean/LRE/Millennium/BirchSwinnertonDyer/LRE_Formulation.lean
++++ b/formalization/lean/LRE/Millennium/BirchSwinnertonDyer/LRE_Formulation.lean
+@@ -35,7 +35,7 @@
+ * Section 3.5: "Birch-Swinnerton-Dyer: Holonomia Algébrica"
+ -/
+ 
+-import Mathlib.NumberTheory.EllipticCurve
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ import Mathlib.Analysis.Complex.Basic
+ import LRE.Core.UC.ProjectiveSystem
+ import LRE.Core.UC.RBC_Theorem
+--- a/formalization/lean/LRE/Millennium/NavierStokes/LRE_Formulation.lean
++++ b/formalization/lean/LRE/Millennium/NavierStokes/LRE_Formulation.lean
+@@ -39,7 +39,7 @@
+ -/
+ 
+ import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import LRE.Core.UC.ProjectiveSystem
+ import LRE.Core.UC.RBC_Theorem
+ 
+--- a/formalization/lean/LRE/Millennium/NavierStokes/Model.lean
++++ b/formalization/lean/LRE/Millennium/NavierStokes/Model.lean
+@@ -4,7 +4,7 @@
+ import Mathlib.Analysis.Complex.Basic
+ import LRE.Core.Residual
+ import LRE.Core.Closure
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ /-
+--- a/formalization/lean/LRE/Millennium/Riemann/Model.lean
++++ b/formalization/lean/LRE/Millennium/Riemann/Model.lean
+@@ -4,7 +4,7 @@
+ import Mathlib.Analysis.Complex.Basic
+ import LRE.Core.Residual
+ import LRE.Core.Closure
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Data.Complex.Basic
+ 
+ /-
+--- a/formalization/lean/LRE/Millennium/Riemann.lean
++++ b/formalization/lean/LRE/Millennium/Riemann.lean
+@@ -35,7 +35,7 @@
+ 
+ import LRE.MillenniumCore
+ import LRE.ERS
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Analysis.Complex.Basic
+ 
+ open LRE Complex
+--- a/formalization/lean/LRE/Millennium/RiemannHypothesis/LRE_Formulation.lean
++++ b/formalization/lean/LRE/Millennium/RiemannHypothesis/LRE_Formulation.lean
+@@ -35,7 +35,7 @@
+ -/
+ 
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import LRE.Core.UC.ProjectiveSystem
+ import LRE.Core.UC.RBC_Theorem
+ 
+--- a/formalization/lean/LRE/Millennium/RiemannHypothesis/ThreeFrontStrategy.lean
++++ b/formalization/lean/LRE/Millennium/RiemannHypothesis/ThreeFrontStrategy.lean
+@@ -15,7 +15,7 @@
+ import Mathlib.MeasureTheory.Integral.Bochner
+ import Mathlib.Probability.Notation
+ import Mathlib.Analysis.Convex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace RiemannHypothesis
+ 
+--- a/formalization/lean/LRE/Millennium/RiemannHypothesis.lean
++++ b/formalization/lean/LRE/Millennium/RiemannHypothesis.lean
+@@ -36,7 +36,7 @@
+ -/
+ 
+ import LRE.Unified.Core
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Analysis.Complex.Basic
+ 
+ namespace LRE.Millennium
+--- a/formalization/lean/LRE/MillenniumProblems/BSD.lean
++++ b/formalization/lean/LRE/MillenniumProblems/BSD.lean
+@@ -19,7 +19,7 @@
+ -/
+ 
+ import LRE.MillenniumProblems.Core
+-import Mathlib.NumberTheory.EllipticCurve
++import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
+ 
+ open LRE.MillenniumProblems
+ 
+--- a/formalization/lean/LRE/MillenniumProblems/Core.lean
++++ b/formalization/lean/LRE/MillenniumProblems/Core.lean
+@@ -35,11 +35,11 @@
+ 
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Topology.Basic
+-import Mathlib.Topology.Instances.Real
++import Mathlib.Topology.Instances.Real.Lemmas
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+-import Mathlib.Data.Real.NNReal
++import Mathlib.Data.NNReal.Basic
+ 
+ open Classical
+ open Real
+--- a/formalization/lean/LRE/MillenniumProblems/RiemannHypothesis.lean
++++ b/formalization/lean/LRE/MillenniumProblems/RiemannHypothesis.lean
+@@ -19,7 +19,7 @@
+ -/
+ 
+ import LRE.MillenniumProblems.Core
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Analysis.Complex.Basic
+ 
+ open LRE.MillenniumProblems
+--- a/formalization/lean/LRE/MillenniumProblems.lean
++++ b/formalization/lean/LRE/MillenniumProblems.lean
+@@ -1,7 +1,7 @@
+ import Mathlib.Topology.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+-import Mathlib.Data.Real.NNReal
++import Mathlib.Data.NNReal.Basic
+ import LRE.MillenniumProblems
+ import LRE.MillenniumProblems.Core
+ import LRE.MillenniumProblems.NavierStokes
+--- a/formalization/lean/LRE/NS/Basic.lean
++++ b/formalization/lean/LRE/NS/Basic.lean
+@@ -29,7 +29,7 @@
+ import Mathlib.Analysis.Fourier.FourierTransform
+ import Mathlib.Analysis.Fourier.PoissonSummation
+ import Mathlib.MeasureTheory.Integral.Bochner
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace LRE.NS
+--- a/formalization/lean/LRE/NS/Norms.lean
++++ b/formalization/lean/LRE/NS/Norms.lean
+@@ -29,7 +29,7 @@
+ import LRE.NS.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Analysis.NormedSpace.OperatorNorm
++import Mathlib.Analysis.NormedSpace.OperatorNorm.Basic
+ 
+ namespace LRE.NS
+ 
+--- a/formalization/lean/LRE/NavierStokes/Complete.lean
++++ b/formalization/lean/LRE/NavierStokes/Complete.lean
+@@ -27,7 +27,7 @@
+ 
+ import Mathlib.Analysis.Fourier.FourierTransform
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ import Mathlib.Topology.FiberBundle.Basic
+ import LRE.Core.Basic
+--- a/formalization/lean/LRE/NavierStokes/Injective.lean
++++ b/formalization/lean/LRE/NavierStokes/Injective.lean
+@@ -26,7 +26,7 @@
+ import Mathlib.Analysis.Distribution.SchwartzSpace
+ import Mathlib.Analysis.Fourier.FourierTransform
+ import Mathlib.MeasureTheory.Function.Jacobian
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+ open Real Complex Set Filter
+--- a/formalization/lean/LRE/NavierStokes/ResidualStability.lean
++++ b/formalization/lean/LRE/NavierStokes/ResidualStability.lean
+@@ -2,7 +2,7 @@
+ import LRE.FiberBundle
+ import LRE.CouplingOperator
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.MeasureTheory.Integral.Bochner
+ import LRE.Core.Basic
+--- a/formalization/lean/LRE/NavierStokes/ResidualStabilityInequality.lean
++++ b/formalization/lean/LRE/NavierStokes/ResidualStabilityInequality.lean
+@@ -42,7 +42,7 @@
+ import LRE.Core.ClosureObstruction
+ import LRE.Geometry.Ehresmann
+ import LRE.Geometry.Coupling
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+--- a/formalization/lean/LRE/NavierStokes.lean
++++ b/formalization/lean/LRE/NavierStokes.lean
+@@ -1,6 +1,6 @@
+ import LRE.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import LRE.FiberBundle
+ import LRE.CouplingOperator
+ import LRE.ClosureTheorem
+--- a/formalization/lean/LRE/NavierStokesApplication.lean
++++ b/formalization/lean/LRE/NavierStokesApplication.lean
+@@ -26,7 +26,7 @@
+ 
+ import LRE.QuantitativeObstruction
+ import Mathlib.Analysis.InnerProductSpace.Basic
+-import Mathlib.Analysis.NormedSpace.Dual
++import Mathlib.Analysis.Normed.Module.Dual
+ 
+ namespace LRE.NavierStokes
+ 
+--- a/formalization/lean/LRE/NavierStokesResidual.lean
++++ b/formalization/lean/LRE/NavierStokesResidual.lean
+@@ -41,7 +41,7 @@
+ import LRE.CouplingOperator
+ import LRE.ClosureTheorem
+ import LRE.NavierStokes
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+--- a/formalization/lean/LRE/OtherProblems/ABC.lean
++++ b/formalization/lean/LRE/OtherProblems/ABC.lean
+@@ -36,7 +36,7 @@
+ 
+ import LRE.Unified.Core
+ import Mathlib.Data.Nat.Basic
+-import Mathlib.Data.Nat.Prime
++import Mathlib.Data.Nat.Prime.Basic
+ 
+ namespace LRE.OtherProblems
+ 
+--- a/formalization/lean/LRE/PvsNP.lean
++++ b/formalization/lean/LRE/PvsNP.lean
+@@ -1,6 +1,6 @@
+ import Mathlib.Computability.TuringMachine
+ import Mathlib.Complexity.Basic
+-import Mathlib.Data.Polynomial.Basic
++import Mathlib.Algebra.Polynomial.Basic
+ import Mathlib.Data.Real.Basic
+ import LRE.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+--- a/formalization/lean/LRE/QuantitativeObstruction.lean
++++ b/formalization/lean/LRE/QuantitativeObstruction.lean
+@@ -1,7 +1,7 @@
+ import Mathlib.Analysis.Calculus.ContDiff.Defs
+-import Mathlib.Analysis.NormedSpace.Basic
+-import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
+-import Mathlib.Geometry.Manifold.ContMDiff
++import Mathlib.Analysis.Normed.Module.Basic
++import Mathlib.Geometry.Manifold.IsManifold.Basic
++import Mathlib.Geometry.Manifold.ContMDiff.Basic
+ import Mathlib.Topology.Basic
+ 
+ /-
+--- a/formalization/lean/LRE/RBC.lean
++++ b/formalization/lean/LRE/RBC.lean
+@@ -3,7 +3,7 @@
+ import Mathlib.Analysis.Calculus.Deriv.Pow
+ import Mathlib.Analysis.Calculus.MeanValue
+ import Mathlib.Topology.Order.Basic
+-import Mathlib.Order.Filter.AtTopBot
++import Mathlib.Order.Filter.AtTopBot.Basic
+ import Mathlib.Data.Real.Basic
+ 
+ open scoped Topology
+--- a/formalization/lean/LRE/RBC_Corrected.lean
++++ b/formalization/lean/LRE/RBC_Corrected.lean
+@@ -39,7 +39,7 @@
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Topology.Basic
+-import Mathlib.Order.Filter.AtTopBot
++import Mathlib.Order.Filter.AtTopBot.Basic
+ 
+ open Real Set Filter Topology
+ 
+--- a/formalization/lean/LRE/Unified/Core.lean
++++ b/formalization/lean/LRE/Unified/Core.lean
+@@ -25,7 +25,7 @@
+ 
+ import LRE.Core.Basic
+ import LRE.Core.Residue
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Topology.Basic
+ 
+ namespace LRE.Unified
+--- a/formalization/lean/Millennium/StabilityBundle.lean
++++ b/formalization/lean/Millennium/StabilityBundle.lean
+@@ -30,7 +30,7 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Analysis.SpecialFunctions.Exp
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+-import Mathlib.LinearAlgebra.Matrix.Determinant
++import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+ import Mathlib.LinearAlgebra.Matrix.PosDef
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+--- a/formalization/lean/Millennium/StabilityCascade.lean
++++ b/formalization/lean/Millennium/StabilityCascade.lean
+@@ -20,7 +20,7 @@
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Analysis.Complex.UpperHalfPlane.Basic
+ import Mathlib.LinearAlgebra.Matrix.PosDef
+-import Mathlib.Topology.MetricSpace.Hausdorff
++import Mathlib.Topology.MetricSpace.HausdorffDistance
+ import Millennium.UniversalConstants
+ 
+ namespace MillenniumCascade
+--- a/formalization/lean/Millennium/UnifiedTheory/BerryKeating.lean
++++ b/formalization/lean/Millennium/UnifiedTheory/BerryKeating.lean
+@@ -4,7 +4,7 @@
+ 
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.LinearAlgebra.Eigenspace.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Millennium.UnifiedTheory.CoreTheory
+--- a/formalization/lean/Millennium/UnifiedTheory/OperatorCore.lean
++++ b/formalization/lean/Millennium/UnifiedTheory/OperatorCore.lean
+@@ -8,7 +8,7 @@
+ import Mathlib.MeasureTheory.Integral.Lebesgue
+ import Mathlib.MeasureTheory.Function.L2Space
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.LinearAlgebra.Matrix.Hermitian
+ import Mathlib.Topology.MetricSpace.Basic
+ import Millennium.UnifiedTheory.CoreTheory
+--- a/formalization/lean/Millennium/UnifiedTheory/PhysicalRealizations.lean
++++ b/formalization/lean/Millennium/UnifiedTheory/PhysicalRealizations.lean
+@@ -3,8 +3,8 @@
+ -- Focus: Fine-structure constant α from 41-dimensional Calabi-Yau manifold
+ 
+ import Mathlib.Analysis.SpecialFunctions.Exp
+-import Mathlib.Analysis.SpecialFunctions.Log
+-import Mathlib.Data.Real.Pi
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Data.Real.Pi.Bounds
+ import Mathlib.Geometry.Manifold.VectorBundle.Basic
+ import Mathlib.LinearAlgebra.Eigenspace.Basic
+ import Millennium.UnifiedTheory.CoreTheory
+--- a/formalization/lean/Millennium/UnifiedTheory/RiemannHypothesis.lean
++++ b/formalization/lean/Millennium/UnifiedTheory/RiemannHypothesis.lean
+@@ -2,8 +2,8 @@
+ -- Formalization of Riemann Hypothesis within the unified framework
+ 
+ import Mathlib.Analysis.Complex.Basic
+-import Mathlib.NumberTheory.ZetaFunction
+-import Mathlib.Analysis.Asymptotics.Asymptotics
++import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Analysis.Asymptotics.Defs
+ import Millennium.UnifiedTheory.CoreTheory
+ 
+ /-!
+--- a/formalization/lean/Millennium/UniversalConstants.lean
++++ b/formalization/lean/Millennium/UniversalConstants.lean
+@@ -12,7 +12,7 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Analysis.SpecialFunctions.Exp
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+-import Mathlib.LinearAlgebra.Matrix.Determinant
++import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+ namespace UniversalConstants
+--- a/formalization/lean/UIA/Basic.lean
++++ b/formalization/lean/UIA/Basic.lean
+@@ -8,7 +8,7 @@
+ -/
+ 
+ import Mathlib.Topology.Basic
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ 
+ namespace UIA
+--- a/formalization/lean/UIA/Problems/RiemannHypothesis.lean
++++ b/formalization/lean/UIA/Problems/RiemannHypothesis.lean
+@@ -9,7 +9,7 @@
+ 
+ import UIA.Basic
+ import Mathlib.NumberTheory.ArithmeticFunction
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace UIA.Problems
+ 
+--- a/formalization/lean/UMI/RH/Coercivity.lean
++++ b/formalization/lean/UMI/RH/Coercivity.lean
+@@ -8,7 +8,7 @@
+ import UMI.Core
+ import UMI.Invariants
+ import Mathlib.Analysis.Fourier.FourierTransform
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ /-! ## Band-limited Test Space -/
+ 
+--- a/formalization/lean/UniversalisStructuralis.lean
++++ b/formalization/lean/UniversalisStructuralis.lean
+@@ -37,7 +37,7 @@
+ -/
+ 
+ import Mathlib.Tactic
+-import Mathlib.Analysis.Calculus.BumpFunction
++import Mathlib.Analysis.Calculus.BumpFunction.Basic
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Algebra.Algebra.Basic
+ import Mathlib.MeasureTheory.Integral.Bochner

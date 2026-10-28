@@ -1,0 +1,201 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/lean-audit-kit",
+ "verified_commit": "853c03113860fe4468e6ce3b23845d4ce9780c0e",
+ "projects": [
+  {
+   "repo": "lean-audit-kit",
+   "path": ".",
+   "toolchain": "leanprover/lean4:v4.19.0",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": false,
+   "build_ok": true,
+   "build_seconds": 14.4,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "LeanAuditKit.LaneId.core.sizeOf_spec",
+     "module": "LeanAuditKit.Lanes",
+     "axioms": [],
+     "statement": "sizeOf LeanAuditKit.LaneId.core = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.LaneId.manifest.sizeOf_spec",
+     "module": "LeanAuditKit.Lanes",
+     "axioms": [],
+     "statement": "sizeOf LeanAuditKit.LaneId.manifest = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.LaneId.ofNat_toCtorIdx",
+     "module": "LeanAuditKit.Lanes",
+     "axioms": [],
+     "statement": "∀ (x : LeanAuditKit.LaneId), LeanAuditKit.LaneId.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.LaneId.producer.sizeOf_spec",
+     "module": "LeanAuditKit.Lanes",
+     "axioms": [],
+     "statement": "sizeOf LeanAuditKit.LaneId.producer = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.ProducerCertificate.producer",
+     "module": "LeanAuditKit.ProducerCertificate",
+     "axioms": [],
+     "statement": "∀ {P : Prop}, LeanAuditKit.ProducerCertificate P → P",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.ReleaseManifest.mk.inj",
+     "module": "LeanAuditKit.Manifest",
+     "axioms": [],
+     "statement": "∀ {product version releaseState product_1 version_1 releaseState_1 : String},   { product := product, version := version, releaseState := releaseState } =       { product := product_1, version := version_1, releaseState := releaseState_1 } →     product = product_1 ∧ version = version_1 ∧ releaseState = releaseState_1",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.ReleaseManifest.mk.injEq",
+     "module": "LeanAuditKit.Manifest",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (product version releaseState product_1 version_1 releaseState_1 : String),   ({ product := product, version := version, releaseState := releaseState } =       { product := product_1, version := version_1, releaseState := releaseState_1 }) =     (product = product_1 ∧ version = version_1 ∧ releaseState = releaseState_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.ReleaseManifest.mk.sizeOf_spec",
+     "module": "LeanAuditKit.Manifest",
+     "axioms": [],
+     "statement": "∀ (product version releaseState : String),   sizeOf { product := product, version := version, releaseState := releaseState } =     1 + sizeOf product + sizeOf version + sizeOf releaseState",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.certificate_yields_producer",
+     "module": "LeanAuditKit.ProducerCertificate",
+     "axioms": [],
+     "statement": "∀ {P : Prop}, LeanAuditKit.ProducerCertificate P → P",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.expectedManifest.eq_1",
+     "module": "LeanAuditKit.Manifest",
+     "axioms": [],
+     "statement": "LeanAuditKit.expectedManifest =   { product := \"Lean Audit Kit\", version := \"1.0.0\", releaseState := \"GITHUB_RELEASE_PUBLISHED_PENDING_STOREFRONT\" }",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.importedLanes_nonempty",
+     "module": "LeanAuditKit.Lanes",
+     "axioms": [],
+     "statement": "LeanAuditKit.importedLanes ≠ []",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.manifestConsistent",
+     "module": "LeanAuditKit.Manifest",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "LeanAuditKit.expectedManifest.product = \"Lean Audit Kit\" ∧   LeanAuditKit.expectedManifest.version = LeanAuditKit.version ∧     LeanAuditKit.expectedManifest.releaseState = \"GITHUB_RELEASE_PUBLISHED_PENDING_STOREFRONT\"",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.no_false_certificate",
+     "module": "LeanAuditKit.ProducerCertificate",
+     "axioms": [],
+     "statement": "¬Nonempty (LeanAuditKit.ProducerCertificate False)",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.producerLane_present",
+     "module": "LeanAuditKit.Lanes",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "LeanAuditKit.LaneId.producer ∈ LeanAuditKit.importedLanes",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.selfCheck",
+     "module": "LeanAuditKit.Core",
+     "axioms": [],
+     "statement": "LeanAuditKit.version = \"1.0.0\"",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanAuditKit.version.eq_1",
+     "module": "LeanAuditKit.Manifest",
+     "axioms": [],
+     "statement": "LeanAuditKit.version = \"1.0.0\"",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "examples/clean/Main.lean",
+     "linha": 1,
+     "nome": "clean_example",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "examples/contains-admit/Main.lean",
+     "linha": 1,
+     "nome": "bad_admit",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial)"
+     }
+    },
+    {
+     "arquivo": "examples/contains-axiom/Main.lean",
+     "linha": 2,
+     "nome": "explosion",
+     "status": "condicional",
+     "axioms": [
+      "hiddenOracle"
+     ]
+    },
+    {
+     "arquivo": "examples/contains-sorry/Main.lean",
+     "linha": 1,
+     "nome": "bad_sorry",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial)"
+     }
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 16,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

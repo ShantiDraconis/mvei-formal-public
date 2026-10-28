@@ -1,0 +1,16 @@
+import Riemann.external.FinalExternalCertificate
+
+namespace Riemann.external
+
+def CERTIFICATE_TYPE : String := "RIEMANN_FINAL_EXTERNAL_CERTIFICATE"
+def FAIL_CLOSED : Bool := true
+def ENDPOINT_TYPED : Bool := true
+def PRODUCER_STATE : String := "OPEN_MATH"
+def ENDPOINT_BRIDGE_MATH_STATE : String := "PROVED_EXTERNAL_BAEZ_DUARTE"
+def ENDPOINT_BRIDGE_FORMAL_STATE : String := "OPEN_FORMALIZATION"
+def MATERIAL_OPEN_MATH_GAPS : Nat := 1
+def FINAL_PROOF_STATE : String := "READY_CONDITIONAL"
+def FINAL_EXTERNAL_CERTIFICATE_STATE : String := "READY_CONDITIONAL"
+def RH_CLAIMS_COUNT : Nat := 0
+
+end Riemann.external

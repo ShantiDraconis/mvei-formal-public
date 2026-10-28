@@ -1,0 +1,505 @@
+--- a/src/lean/Harappan/Phonology.lean
++++ b/src/lean/Harappan/Phonology.lean
+@@ -1,3 +1,5 @@
++import Harappan.BasicTypes
++
+ /-
+   Harappan Universal System - Phonology Module
+   
+@@ -14,7 +16,7 @@
+ 
+ namespace Harappan.Phonology
+ 
+-/-- Archetype classes representing universal phoneme categories -/
++/- Archetype classes representing universal phoneme categories -/
+ inductive ArchetypeClass where
+   | luminous    -- Light, fire, sun
+   | aquatic     -- Water, flow, moon
+@@ -22,7 +24,7 @@
+   | aerial      -- Air, breath, spirit
+   deriving DecidableEq, Repr
+ 
+-/-- Place of articulation for consonants -/
++/- Place of articulation for consonants -/
+ inductive Place where
+   | bilabial
+   | labiodental
+@@ -36,7 +38,7 @@
+   | glottal
+   deriving DecidableEq, Repr
+ 
+-/-- Manner of articulation -/
++/- Manner of articulation -/
+ inductive Manner where
+   | plosive
+   | nasal
+@@ -49,13 +51,13 @@
+   | affricate
+   deriving DecidableEq, Repr
+ 
+-/-- Voicing feature -/
++/- Voicing feature -/
+ inductive Voicing where
+   | voiced
+   | voiceless
+   deriving DecidableEq, Repr
+ 
+-/-- A phoneme with its articulatory features -/
++/- A phoneme with its articulatory features -/
+ structure Phoneme where
+   symbol : String
+   place : Place
+@@ -64,14 +66,14 @@
+   archetype : ArchetypeClass
+   deriving Repr
+ 
+-/-- Phonetic feature vector for distance calculations -/
++/- Phonetic feature vector for distance calculations -/
+ structure FeatureVector where
+   place_value : Nat
+   manner_value : Nat
+   voicing_value : Nat
+   deriving Repr
+ 
+-/-- Convert place to numeric value -/
++/- Convert place to numeric value -/
+ def Place.toNat : Place → Nat
+   | bilabial => 0
+   | labiodental => 1
+@@ -84,7 +86,7 @@
+   | pharyngeal => 8
+   | glottal => 9
+ 
+-/-- Convert manner to numeric value -/
++/- Convert manner to numeric value -/
+ def Manner.toNat : Manner → Nat
+   | plosive => 0
+   | nasal => 1
+@@ -96,43 +98,43 @@
+   | lateral_approximant => 7
+   | affricate => 8
+ 
+-/-- Convert voicing to numeric value -/
++/- Convert voicing to numeric value -/
+ def Voicing.toNat : Voicing → Nat
+   | voiced => 1
+   | voiceless => 0
+ 
+-/-- Extract feature vector from phoneme -/
++/- Extract feature vector from phoneme -/
+ def Phoneme.toFeatureVector (p : Phoneme) : FeatureVector :=
+   { place_value := p.place.toNat,
+     manner_value := p.manner.toNat,
+     voicing_value := p.voicing.toNat }
+ 
+-/-- Absolute difference helper -/
++/- Absolute difference helper -/
+ def absDiff (a b : Nat) : Nat :=
+   if a ≥ b then a - b else b - a
+ 
+-/-- Calculate phonetic distance between feature vectors -/
++/- Calculate phonetic distance between feature vectors -/
+ def featureDistance (v1 v2 : FeatureVector) : Nat :=
+   absDiff v1.place_value v2.place_value +
+   absDiff v1.manner_value v2.manner_value +
+   absDiff v1.voicing_value v2.voicing_value
+ 
+-/-- Calculate phonetic distance between phonemes -/
++/- Calculate phonetic distance between phonemes -/
+ def phoneticDistance (p1 p2 : Phoneme) : Nat :=
+   featureDistance p1.toFeatureVector p2.toFeatureVector
+ 
+-/-- Two phonemes are equivalent if they have the same archetype class -/
++/- Two phonemes are equivalent if they have the same archetype class -/
+ def archetypeEquivalent (p1 p2 : Phoneme) : Prop :=
+   p1.archetype = p2.archetype
+ 
+-/-- Archetype equivalence is reflexive -/
++/- Archetype equivalence is reflexive -/
+ theorem archetypeEquivalent_refl (p : Phoneme) : archetypeEquivalent p p := rfl
+ 
+-/-- Archetype equivalence is symmetric -/
++/- Archetype equivalence is symmetric -/
+ theorem archetypeEquivalent_symm {p1 p2 : Phoneme} 
+     (h : archetypeEquivalent p1 p2) : archetypeEquivalent p2 p1 := h.symm
+ 
+-/-- Archetype equivalence is transitive -/
++/- Archetype equivalence is transitive -/
+ theorem archetypeEquivalent_trans {p1 p2 p3 : Phoneme}
+     (h1 : archetypeEquivalent p1 p2) (h2 : archetypeEquivalent p2 p3) :
+     archetypeEquivalent p1 p3 := h1.trans h2
+@@ -181,7 +183,7 @@
+     simp at *
+     exact ⟨h1, h2, h3⟩
+ 
+-/-- Phonetic distance is zero iff phonemes have same features -/
++/- Phonetic distance is zero iff phonemes have same features -/
+ theorem distance_zero_iff_equal_features (p1 p2 : Phoneme) :
+     phoneticDistance p1 p2 = 0 ↔ p1.toFeatureVector = p2.toFeatureVector := by
+   constructor
+@@ -200,20 +202,20 @@
+     simp [absDiff]
+     split <;> rfl
+ 
+-/-- Every phoneme belongs to exactly one archetype class -/
++/- Every phoneme belongs to exactly one archetype class -/
+ theorem phoneme_has_unique_archetype (p : Phoneme) :
+     ∃! c : ArchetypeClass, p.archetype = c :=
+   ⟨p.archetype, rfl, fun _ h => h.symm⟩
+ 
+-/-- The collapse operator maps phonemes to their archetype class -/
++/- The collapse operator maps phonemes to their archetype class -/
+ def collapseOperator (p : Phoneme) : ArchetypeClass := p.archetype
+ 
+-/-- Collapse preserves archetype equivalence -/
++/- Collapse preserves archetype equivalence -/
+ theorem collapse_preserves_equivalence {p1 p2 : Phoneme}
+     (h : archetypeEquivalent p1 p2) :
+     collapseOperator p1 = collapseOperator p2 := h
+ 
+-/-- All phonemes collapse to one of four classes -/
++/- All phonemes collapse to one of four classes -/
+ theorem universal_collapse (p : Phoneme) :
+     collapseOperator p = ArchetypeClass.luminous ∨
+     collapseOperator p = ArchetypeClass.aquatic ∨
+@@ -229,7 +231,6 @@
+   Formal axioms and theorems for phonological analysis.
+ -/
+ 
+-import Harappan.BasicTypes
+ 
+ namespace Harappan.Phonology
+ 
+--- a/src/lean/Harappan/SemanticAxioms.lean
++++ b/src/lean/Harappan/SemanticAxioms.lean
+@@ -1,3 +1,5 @@
++import Harappan.BasicTypes
++
+ /-
+   Harappan Universal System - Semantic Axioms Module
+   
+@@ -13,7 +15,7 @@
+ 
+ namespace Harappan.SemanticAxioms
+ 
+-/-- Semantic field categories -/
++/- Semantic field categories -/
+ inductive SemanticField where
+   | elements    -- Water, fire, earth, air
+   | celestial   -- Sun, moon, stars
+@@ -27,7 +29,7 @@
+   | number      -- Numerals
+   deriving DecidableEq, Repr
+ 
+-/-- Universal concept with semantic properties -/
++/- Universal concept with semantic properties -/
+ structure Concept where
+   name : String
+   field : SemanticField
+@@ -35,7 +37,7 @@
+   proto_form : String
+   deriving Repr
+ 
+-/-- Semantic relation types -/
++/- Semantic relation types -/
+ inductive SemanticRelation where
+   | synonymy      -- Same meaning
+   | antonymy      -- Opposite meaning
+@@ -46,7 +48,7 @@
+   | association   -- General association
+   deriving DecidableEq, Repr
+ 
+-/-- A semantic link between concepts -/
++/- A semantic link between concepts -/
+ structure SemanticLink where
+   source : Concept
+   target : Concept
+@@ -54,41 +56,41 @@
+   strength : Float
+   deriving Repr
+ 
+-/-- Semantic network as a list of links -/
++/- Semantic network as a list of links -/
+ structure SemanticNetwork where
+   concepts : List Concept
+   links : List SemanticLink
+   deriving Repr
+ 
+-/-- Two concepts are semantically equivalent if they have same meaning -/
++/- Two concepts are semantically equivalent if they have same meaning -/
+ def semanticEquivalent (c1 c2 : Concept) : Prop :=
+   c1.name = c2.name ∧ c1.field = c2.field
+ 
+-/-- Semantic equivalence is reflexive -/
++/- Semantic equivalence is reflexive -/
+ theorem semanticEquivalent_refl (c : Concept) : semanticEquivalent c c :=
+   ⟨rfl, rfl⟩
+ 
+-/-- Semantic equivalence is symmetric -/
++/- Semantic equivalence is symmetric -/
+ theorem semanticEquivalent_symm {c1 c2 : Concept}
+     (h : semanticEquivalent c1 c2) : semanticEquivalent c2 c1 :=
+   ⟨h.1.symm, h.2.symm⟩
+ 
+-/-- Semantic equivalence is transitive -/
++/- Semantic equivalence is transitive -/
+ theorem semanticEquivalent_trans {c1 c2 c3 : Concept}
+     (h1 : semanticEquivalent c1 c2) (h2 : semanticEquivalent c2 c3) :
+     semanticEquivalent c1 c3 :=
+   ⟨h1.1.trans h2.1, h1.2.trans h2.2⟩
+ 
+-/-- Archetype preservation: equivalent concepts have same archetype -/
++/- Archetype preservation: equivalent concepts have same archetype -/
+ def preservesArchetype (c1 c2 : Concept) : Prop :=
+   semanticEquivalent c1 c2 → c1.archetype = c2.archetype
+ 
+-/-- Semantic field axiom: every concept belongs to exactly one field -/
++/- Semantic field axiom: every concept belongs to exactly one field -/
+ theorem concept_unique_field (c : Concept) :
+     ∃! f : SemanticField, c.field = f :=
+   ⟨c.field, rfl, fun _ h => h.symm⟩
+ 
+-/-- Synonymy is symmetric -/
++/- Synonymy is symmetric -/
+ theorem synonymy_symmetric (l : SemanticLink) 
+     (h : l.relation = SemanticRelation.synonymy) :
+     ∃ l' : SemanticLink, l'.source = l.target ∧ l'.target = l.source ∧ 
+@@ -97,7 +99,7 @@
+            relation := SemanticRelation.synonymy, strength := l.strength }, 
+          rfl, rfl, rfl⟩
+ 
+-/-- Hypernymy and hyponymy are inverse relations -/
++/- Hypernymy and hyponymy are inverse relations -/
+ theorem hypernymy_hyponymy_inverse (l : SemanticLink)
+     (h : l.relation = SemanticRelation.hypernymy) :
+     ∃ l' : SemanticLink, l'.source = l.target ∧ l'.target = l.source ∧
+@@ -106,14 +108,14 @@
+            relation := SemanticRelation.hyponymy, strength := l.strength },
+          rfl, rfl, rfl⟩
+ 
+-/-- Valid archetype predicate -/
++/- Valid archetype predicate -/
+ def validArchetype (s : String) : Prop :=
+   s = "luminous" ∨ s = "aquatic" ∨ s = "terrestrial" ∨ s = "aerial" ∨ s = "undefined"
+ 
+-/-- Axiom: All concepts have valid archetypes -/
++/- Axiom: All concepts have valid archetypes -/
+ axiom concept_valid_archetype : ∀ c : Concept, c.archetype.length > 0 → validArchetype c.archetype
+ 
+-/-- The universal meaning axiom: all concepts derive from archetypes -/
++/- The universal meaning axiom: all concepts derive from archetypes -/
+ theorem universal_meaning_axiom (c : Concept) :
+     c.archetype.length > 0 → 
+     c.archetype = "luminous" ∨ 
+@@ -124,24 +126,24 @@
+   intro h
+   exact concept_valid_archetype c h
+ 
+-/-- Semantic coherence: links in same field have higher strength -/
++/- Semantic coherence: links in same field have higher strength -/
+ def semanticCoherence (l : SemanticLink) : Prop :=
+   l.source.field = l.target.field → l.strength > 0.5
+ 
+-/-- Network connectivity: every concept is reachable -/
++/- Network connectivity: every concept is reachable -/
+ def isConnected (net : SemanticNetwork) : Prop :=
+   ∀ c1 c2 : Concept, c1 ∈ net.concepts → c2 ∈ net.concepts →
+     ∃ path : List SemanticLink, 
+       path.length > 0 ∧ 
+       (∀ l ∈ path, l ∈ net.links)
+ 
+-/-- Proto-form derivation: semantic equivalents have related proto-forms -/
++/- Proto-form derivation: semantic equivalents have related proto-forms -/
+ def relatedProtoForms (c1 c2 : Concept) : Prop :=
+   semanticEquivalent c1 c2 → 
+   c1.proto_form.take 2 = c2.proto_form.take 2 ∨
+   c1.proto_form = c2.proto_form
+ 
+-/-- The symbolic correspondence theorem -/
++/- The symbolic correspondence theorem -/
+ theorem symbolic_correspondence (c1 c2 : Concept)
+     (h : c1.field = c2.field) (ha : c1.archetype = c2.archetype) :
+     ∃ relation : SemanticRelation,
+@@ -155,7 +157,6 @@
+   Formal axioms for semantic analysis.
+ -/
+ 
+-import Harappan.BasicTypes
+ 
+ namespace Harappan.Semantics
+ 
+--- a/src/lean/Harappan/UniversalGrammar.lean
++++ b/src/lean/Harappan/UniversalGrammar.lean
+@@ -1,3 +1,6 @@
++import Harappan.BasicTypes
++import Harappan.Phonology
++
+ /-
+   Harappan Universal System - Universal Grammar Module
+   
+@@ -13,7 +16,7 @@
+ 
+ namespace Harappan.UniversalGrammar
+ 
+-/-- Basic syntactic categories -/
++/- Basic syntactic categories -/
+ inductive SyntacticCategory where
+   | N   -- Noun
+   | V   -- Verb
+@@ -23,7 +26,7 @@
+   | C   -- Complementizer
+   deriving DecidableEq, Repr
+ 
+-/-- Word order typologies -/
++/- Word order typologies -/
+ inductive WordOrder where
+   | SOV  -- Subject-Object-Verb
+   | SVO  -- Subject-Verb-Object
+@@ -33,7 +36,7 @@
+   | OSV  -- Object-Subject-Verb
+   deriving DecidableEq, Repr
+ 
+-/-- Grammatical features -/
++/- Grammatical features -/
+ inductive GrammaticalFeature where
+   | number_sg
+   | number_pl
+@@ -49,7 +52,7 @@
+   | tense_future
+   deriving DecidableEq, Repr
+ 
+-/-- A grammatical rule specification -/
++/- A grammatical rule specification -/
+ structure GrammaticalRule where
+   name : String
+   left_side : SyntacticCategory
+@@ -57,13 +60,13 @@
+   features : List GrammaticalFeature
+   deriving Repr
+ 
+-/-- A phrase structure -/
++/- A phrase structure -/
+ inductive Phrase where
+   | terminal : String → SyntacticCategory → Phrase
+   | nonTerminal : SyntacticCategory → List Phrase → Phrase
+   deriving Repr
+ 
+-/-- Universal Grammar parameters -/
++/- Universal Grammar parameters -/
+ structure UGParameters where
+   head_initial : Bool      -- Head-initial vs head-final
+   pro_drop : Bool          -- Pro-drop parameter
+@@ -71,21 +74,21 @@
+   wh_movement : Bool       -- Wh-movement parameter
+   deriving Repr
+ 
+-/-- Check if word order is head-initial -/
++/- Check if word order is head-initial -/
+ def WordOrder.isHeadInitial : WordOrder → Bool
+   | SVO => true
+   | VSO => true
+   | VOS => true
+   | _ => false
+ 
+-/-- Check if word order is head-final -/
++/- Check if word order is head-final -/
+ def WordOrder.isHeadFinal : WordOrder → Bool
+   | SOV => true
+   | OVS => true
+   | OSV => true
+   | _ => false
+ 
+-/-- Universal Grammar principles -/
++/- Universal Grammar principles -/
+ structure UGPrinciples where
+   binary_branching : Bool        -- All branching is binary
+   structure_dependence : Bool    -- Operations depend on structure
+@@ -93,24 +96,24 @@
+   subjacency : Bool              -- Movement bounded by nodes
+   deriving Repr
+ 
+-/-- Default universal principles (all true) -/
++/- Default universal principles (all true) -/
+ def defaultPrinciples : UGPrinciples :=
+   { binary_branching := true,
+     structure_dependence := true,
+     c_command := true,
+     subjacency := true }
+ 
+-/-- Phrase depth calculation -/
++/- Phrase depth calculation -/
+ def Phrase.depth : Phrase → Nat
+   | terminal _ _ => 1
+   | nonTerminal _ children => 1 + (children.map Phrase.depth).foldl max 0
+ 
+-/-- Count terminals in phrase -/
++/- Count terminals in phrase -/
+ def Phrase.terminalCount : Phrase → Nat
+   | terminal _ _ => 1
+   | nonTerminal _ children => (children.map Phrase.terminalCount).foldl (·+·) 0
+ 
+-/-- The Universal Grammar Collapse Theorem:
++/- The Universal Grammar Collapse Theorem:
+     All surface grammatical variations reduce to a finite set of parameters -/
+ theorem universal_grammar_collapse (params : UGParameters) :
+     ∃ (word_order : WordOrder), 
+@@ -120,17 +123,17 @@
+   · exact ⟨WordOrder.SVO, fun _ => rfl, fun hn => absurd h hn⟩
+   · exact ⟨WordOrder.SOV, fun hi => absurd hi h, fun _ => rfl⟩
+ 
+-/-- Word order determines adposition type -/
++/- Word order determines adposition type -/
+ def adpositionType (order : WordOrder) : String :=
+   if order.isHeadInitial then "preposition" else "postposition"
+ 
+-/-- Head-initial languages have prepositions -/
++/- Head-initial languages have prepositions -/
+ theorem head_initial_prepositions (order : WordOrder) 
+     (h : order.isHeadInitial) :
+     adpositionType order = "preposition" := by
+   simp [adpositionType, h]
+ 
+-/-- Head-final languages have postpositions -/
++/- Head-final languages have postpositions -/
+ theorem head_final_postpositions (order : WordOrder)
+     (h : order.isHeadFinal) :
+     adpositionType order = "postposition" := by
+@@ -142,13 +145,13 @@
+   | OSV => simp [WordOrder.isHeadInitial] at hc
+   | _ => simp [WordOrder.isHeadFinal] at h
+ 
+-/-- Binary branching constraint -/
++/- Binary branching constraint -/
+ def satisfiesBinaryBranching : Phrase → Bool
+   | Phrase.terminal _ _ => true
+   | Phrase.nonTerminal _ children =>
+       children.length ≤ 2 && children.all satisfiesBinaryBranching
+ 
+-/-- Every well-formed phrase satisfies binary branching -/
++/- Every well-formed phrase satisfies binary branching -/
+ theorem wellformed_binary (p : Phrase) (principles : UGPrinciples)
+     (h : principles.binary_branching) (hw : satisfiesBinaryBranching p) :
+     ∀ child ∈ (match p with 
+@@ -162,11 +165,11 @@
+       simp [satisfiesBinaryBranching] at hw
+       exact hw.2 child hm
+ 
+-/-- Feature agreement principle -/
++/- Feature agreement principle -/
+ def agreesInFeature (f : GrammaticalFeature) (p1 p2 : List GrammaticalFeature) : Bool :=
+   (f ∈ p1) = (f ∈ p2)
+ 
+-/-- Agreement is symmetric -/
++/- Agreement is symmetric -/
+ theorem agreement_symmetric (f : GrammaticalFeature) (p1 p2 : List GrammaticalFeature) :
+     agreesInFeature f p1 p2 = agreesInFeature f p2 p1 := by
+   simp [agreesInFeature]
+@@ -176,8 +179,6 @@
+   Formal axioms for universal grammar theory.
+ -/
+ 
+-import Harappan.BasicTypes
+-import Harappan.Phonology
+ 
+ namespace Harappan.UniversalGrammar
+ 

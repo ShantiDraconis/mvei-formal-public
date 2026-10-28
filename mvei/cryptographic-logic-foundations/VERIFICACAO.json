@@ -1,0 +1,745 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/cryptographic-logic-foundations",
+ "verified_commit": "6a4ece53b5f0df5bf095a8f5500b4f2bd9d1c9eb",
+ "projects": [
+  {
+   "repo": "cryptographic-logic-foundations",
+   "path": ".",
+   "toolchain": "leanprover/lean4:v4.3.0",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "o download do Mathlib falhou: error: ./lakefile.lean:16:8: error: '_package' has already been declared | error: ./lakefile.lean:18:15: error: unexpected token; expected command | error: ./lakefile.lean: package configuration has errors",
+   "sorry_warnings": 11,
+   "reconstructed": true,
+   "bridges": [
+    {
+     "repo": "cryptographic-logic-foundations",
+     "project": ".",
+     "theorem": "no_leak_between_levels",
+     "statement": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    }
+   ],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "HasAccess.eq_1",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ (requiredLevel : SecurityLevel), HasAccess SecurityLevel.Classified requiredLevel = True",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_2",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "HasAccess SecurityLevel.Restricted SecurityLevel.Classified = False",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_3",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ (requiredLevel : SecurityLevel),   (requiredLevel = SecurityLevel.Classified → False) → HasAccess SecurityLevel.Restricted requiredLevel = True",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_4",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "HasAccess SecurityLevel.Protected SecurityLevel.Classified = False",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_5",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "HasAccess SecurityLevel.Protected SecurityLevel.Restricted = False",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_6",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ (requiredLevel : SecurityLevel),   (requiredLevel = SecurityLevel.Classified → False) →     (requiredLevel = SecurityLevel.Restricted → False) → HasAccess SecurityLevel.Protected requiredLevel = True",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_7",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "HasAccess SecurityLevel.Public SecurityLevel.Public = True",
+     "status": "fechado"
+    },
+    {
+     "name": "HasAccess.eq_8",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ (requiredLevel : SecurityLevel),   (requiredLevel = SecurityLevel.Public → False) → HasAccess SecurityLevel.Public requiredLevel = False",
+     "status": "fechado"
+    },
+    {
+     "name": "SecureData.mk.inj",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ {content : String} {level : SecurityLevel} {hash content_1 : String} {level_1 : SecurityLevel} {hash_1 : String},   { content := content, level := level, hash := hash } = { content := content_1, level := level_1, hash := hash_1 } →     content = content_1 ∧ level = level_1 ∧ hash = hash_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecureData.mk.injEq",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (content : String) (level : SecurityLevel) (hash content_1 : String) (level_1 : SecurityLevel) (hash_1 : String),   ({ content := content, level := level, hash := hash } = { content := content_1, level := level_1, hash := hash_1 }) =     (content = content_1 ∧ level = level_1 ∧ hash = hash_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SecureData.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ (content : String) (level : SecurityLevel) (hash : String),   sizeOf { content := content, level := level, hash := hash } = 1 + sizeOf content + sizeOf level + sizeOf hash",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityLevel.Classified.sizeOf_spec",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "sizeOf SecurityLevel.Classified = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityLevel.Protected.sizeOf_spec",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "sizeOf SecurityLevel.Protected = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityLevel.Public.sizeOf_spec",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "sizeOf SecurityLevel.Public = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityLevel.Restricted.sizeOf_spec",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "sizeOf SecurityLevel.Restricted = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityLevel.ofNat_toCtorIdx",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [],
+     "statement": "∀ (x : SecurityLevel), SecurityLevel.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "no_leak_between_levels",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [
+      "sorryAx"
+     ],
+     "statement": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "type_safety_preserved",
+     "module": "proofs.lean4.core.TypeSafety",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (data : SecureData) (requiredLevel : SecurityLevel),   HasAccess data.level requiredLevel → data.level = requiredLevel ∨ ∃ higher, data.level = higher",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `Main, .submodules `«formal-proofs», .one `foundation, .submodules `kernel, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "CryptographicLogic/TriStability.lean",
+     "linha": 31,
+     "nome": "TriStability.system_phase_transition",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "CryptographicLogic/TriStability.lean",
+     "linha": 64,
+     "nome": "TriStability.sovereign_zero_vulnerability",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "CryptographicLogic/TriStability.lean",
+     "linha": 82,
+     "nome": "TriStability.transition_preserves_security",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal-proofs/lean/SovereignCore.lean",
+     "linha": 11,
+     "nome": "infinite_protection_mesh",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '././.lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Complexity/P_eq_NP.olean' of module Mathlib.Complexity.P_eq_NP does not exist"
+    },
+    {
+     "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
+     "linha": 103,
+     "nome": "Universe00.BootSequence.triple_signature_required",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
+     "linha": 116,
+     "nome": "Universe00.BootSequence.boot_sequence_chronological",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
+     "linha": 127,
+     "nome": "Universe00.BootSequence.panic_encrypts_gamma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "foundation.lean",
+     "linha": 110,
+     "nome": "Foundation.verified_sound",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "kernel/layer0-symmetry/IDENTITY_CONSTANT.lean",
+     "linha": 39,
+     "nome": "Universe00.Layer0.layer0_integrity",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx",
+      "Universe00.Layer0.I"
+     ]
+    },
+    {
+     "arquivo": "kernel/memory-quadrants/QUADRANT_SYSTEM.lean",
+     "linha": 96,
+     "nome": "Universe00.MemoryQuadrants.gamma_encryption_invariant",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "kernel/microkernel/VERIFIED_CORE.lean",
+     "linha": 59,
+     "nome": "Universe00.Microkernel.security_enforcement",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
+     "linha": 39,
+     "nome": "portfolio_consistency",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
+     "linha": 59,
+     "nome": "auth_signature_valid",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
+     "linha": 81,
+     "nome": "sync_108hz_coherent",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
+     "linha": 100,
+     "nome": "mkVerifiedPortfolio_consistent",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "proofs/lean4/core/SecurityProperties.lean",
+     "linha": 36,
+     "nome": "signature_unforgeable",
+     "status": "erro",
+     "axioms": [],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    },
+    {
+     "arquivo": "proofs/lean4/core/SecurityProperties.lean",
+     "linha": 57,
+     "nome": "dual_signature_stronger",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "proofs/lean4/core/SecurityProperties.lean",
+     "linha": 68,
+     "nome": "authenticated_implies_valid",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "provenance/timestamp_proof.lean",
+     "linha": 27,
+     "nome": "TimestampProof.temporal_transitive",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provenance/timestamp_proof.lean",
+     "linha": 150,
+     "nome": "TimestampProof.timestamp_immutability",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "provenance/timestamp_proof.lean",
+     "linha": 235,
+     "nome": "TimestampProof.chain_integrity_preserved",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx",
+      "TimestampProof.encode",
+      "TimestampProof.hash_function"
+     ]
+    },
+    {
+     "arquivo": "provenance/timestamp_proof.lean",
+     "linha": 256,
+     "nome": "TimestampProof.temporal_consistency_monotonic",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx",
+      "TimestampProof.encode",
+      "TimestampProof.hash_function"
+     ]
+    },
+    {
+     "arquivo": "security/crypto/crypto_verification.lean",
+     "linha": 183,
+     "nome": "CryptoVerification.collision_implies_second_preimage",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "security/crypto/crypto_verification.lean",
+     "linha": 199,
+     "nome": "CryptoVerification.encryption_correctness_required",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "security/crypto/crypto_verification.lean",
+     "linha": 209,
+     "nome": "CryptoVerification.signature_correctness",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "security/invariants/state_invariants.lean",
+     "linha": 101,
+     "nome": "StateInvariants.log_immutability_preserved",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "security/invariants/state_invariants.lean",
+     "linha": 131,
+     "nome": "StateInvariants.integrity_always_verifiable",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean",
+     "linha": 24,
+     "nome": "SystemCore.protection_always_positive",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean",
+     "linha": 29,
+     "nome": "SystemCore.neon_max_protection",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/CookLevin.lean",
+     "linha": 27,
+     "nome": "PvsNP.cook_levin_sat_npcomplete",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/SAT_Complexity.lean",
+     "linha": 32,
+     "nome": "PvsNP.sat_in_np",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/SAT_Complexity.lean",
+     "linha": 41,
+     "nome": "PvsNP.p_eq_np_implies_sat_polynomial",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean",
+     "linha": 16,
+     "nome": "RiemannHypothesis.zeta_functional_equation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean",
+     "linha": 21,
+     "nome": "RiemannHypothesis.riemann_hypothesis",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean",
+     "linha": 26,
+     "nome": "RiemannHypothesis.critical_line_hypothesis",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "zkp/zkp_foundation.lean",
+     "linha": 203,
+     "nome": "ZKPFoundation.zkp_correctness",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "zkp/zkp_foundation.lean",
+     "linha": 226,
+     "nome": "ZKPFoundation.commitment_secure",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "zkp/zkp_foundation.lean",
+     "linha": 240,
+     "nome": "ZKPFoundation.zk_preserves_privacy",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "teorema aberto",
+     "nome": "no_leak_between_levels",
+     "enunciado": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 17,
+    "aberto-sorry": 1,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "cryptographic-logic-foundations",
+   "path": "formal/lean4",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": false,
+   "build_ok": false,
+   "build_seconds": 4.7,
+   "build_error": "error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././SovereignCore.lean:49:2: no goals to be solved | error: ././././SovereignCore.lean:86:3: unknown tactic",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "formal/lean4/SovereignCore.lean",
+     "linha": 42,
+     "nome": "securityVerification_in_P",
+     "status": "erro",
+     "axioms": [],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial)"
+     }
+    },
+    {
+     "arquivo": "formal/lean4/SovereignCore.lean",
+     "linha": 54,
+     "nome": "stateInvariant_preserved",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean4/SovereignCore.lean",
+     "linha": 80,
+     "nome": "exponential_defense_growth",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean4/SovereignCore.lean",
+     "linha": 87,
+     "nome": "no_reversion_to_insecure",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean4/SovereignCore.lean",
+     "linha": 106,
+     "nome": "identity_protection",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "cryptographic-logic-foundations",
+   "path": "provers/lean",
+   "toolchain": "leanprover/lean4:v4.3.0",
+   "toolchain_used": "leanprover/lean4:v4.3.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "o download do Mathlib falhou: error: ./lakefile.lean:9:2: error: 'version' is not a field of structure 'Lake.PackageConfig' | error: ./lakefile.lean: package configuration has errors",
+   "sorry_warnings": 4,
+   "reconstructed": true,
+   "bridges": [
+    {
+     "repo": "cryptographic-logic-foundations",
+     "project": "provers/lean",
+     "theorem": "RiemannHypothesis_equiv",
+     "statement": "RiemannHypothesis ↔ NonTrivialZeros ⊆ CriticalLine",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    }
+   ],
+   "declared_axioms": [
+    {
+     "name": "RiemannZeta",
+     "module": "Riemann",
+     "statement": "ℂ → ℂ"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "CriticalLine.proof_1",
+     "module": "Riemann",
+     "axioms": [],
+     "statement": "Nat.AtLeastTwo (0 + 2)",
+     "status": "fechado"
+    },
+    {
+     "name": "RiemannHypothesis.proof_1",
+     "module": "Riemann",
+     "axioms": [],
+     "statement": "Nat.AtLeastTwo (0 + 2)",
+     "status": "fechado"
+    },
+    {
+     "name": "RiemannHypothesis_equiv",
+     "module": "Riemann",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannZeta",
+      "sorryAx"
+     ],
+     "statement": "RiemannHypothesis ↔ NonTrivialZeros ⊆ CriticalLine",
+     "status": "aberto-sorry"
+    }
+   ],
+   "integrity": [],
+   "note": "RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.3.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Complexity, .one `NavierStokes, .one `Riemann, .one `Sovereign]\n",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "provers/lean/Complexity.lean",
+     "linha": 65,
+     "nome": "P_eq_NP_implies_NPComplete_in_P",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "provers/lean/Sovereign.lean",
+     "linha": 25,
+     "nome": "Sovereign.integrityBarrier",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "provers/lean/Sovereign.lean",
+     "linha": 37,
+     "nome": "Sovereign.sovereignIntegrity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "provers/lean/Sovereign.lean",
+     "linha": 65,
+     "nome": "System.universe0Valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "provers/lean/Sovereign.lean",
+     "linha": 69,
+     "nome": "System.universe0Consensus",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "RiemannZeta",
+     "enunciado": "ℂ → ℂ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "RiemannHypothesis_equiv",
+     "enunciado": "RiemannHypothesis ↔ NonTrivialZeros ⊆ CriticalLine",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 2,
+    "aberto-sorry": 1,
+    "condicional": 0
+   }
+  }
+ ]
+}

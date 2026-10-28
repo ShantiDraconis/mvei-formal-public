@@ -1,0 +1,1131 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/sfh-formalization-lab",
+ "verified_commit": "b770052dbe60a6ab123f127ea1b82499619d6f2b",
+ "projects": [
+  {
+   "repo": "sfh-formalization-lab",
+   "path": "formal/lean",
+   "toolchain": "",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "error: ././././Barriers/Relativization.lean:65:36: failed to synthesize | error: ././././Barriers/Relativization.lean:68:30: unknown identifier 'ℕ' | error: ././././Barriers/Relativization.lean:72:16: unknown identifier 'ℕ'",
+   "sorry_warnings": 23,
+   "reconstructed": true,
+   "bridges": [
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L1001_P_poly_definition",
+     "statement": "∀ L ∈ P_poly, ∃ C k, (∀ (n : ℕ), (C n).size ≤ n ^ k) ∧ computes C L",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L1002_P_subset_P_poly",
+     "statement": "P ⊆ P_poly",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L1003_Karp_Lipton",
+     "statement": "NP ⊆ P_poly → PH = Sigma2P",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L1004_Shannon_bound",
+     "statement": "∀ (n : ℕ), ∃ f, circuit_size n f ≥ 2 ^ n / n",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L1005_need_explicit_hardness",
+     "statement": "(∃ L ∈ NP, L ∉ P_poly) → ∃ L ∈ NP, (Explicit fun x => true) ∧ L ∉ P_poly",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    }
+   ],
+   "declared_axioms": [
+    {
+     "name": "Explicit",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "(ℕ → Bool) → Prop"
+    },
+    {
+     "name": "NP",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "Set (Set (List Bool))"
+    },
+    {
+     "name": "P",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "Set (Set (List Bool))"
+    },
+    {
+     "name": "PH",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "Set (Set (List Bool))"
+    },
+    {
+     "name": "RandomBooleanFunction",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "ℕ → Type"
+    },
+    {
+     "name": "Sigma2P",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "Set (Set (List Bool))"
+    },
+    {
+     "name": "circuit_size",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "(n : ℕ) → RandomBooleanFunction n → ℕ"
+    },
+    {
+     "name": "computes",
+     "module": "Complexity.PvsNPCircuits",
+     "statement": "CircuitFamily → Set (List Bool) → Prop"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "BooleanCircuit.mk.inj",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [],
+     "statement": "∀ {size inputs size_1 inputs_1 : ℕ},   { size := size, inputs := inputs } = { size := size_1, inputs := inputs_1 } → size = size_1 ∧ inputs = inputs_1",
+     "status": "fechado"
+    },
+    {
+     "name": "BooleanCircuit.mk.injEq",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (size inputs size_1 inputs_1 : ℕ),   ({ size := size, inputs := inputs } = { size := size_1, inputs := inputs_1 }) = (size = size_1 ∧ inputs = inputs_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "BooleanCircuit.mk.sizeOf_spec",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [],
+     "statement": "∀ (size inputs : ℕ), sizeOf { size := size, inputs := inputs } = 1 + sizeOf size + sizeOf inputs",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP_L1001_P_poly_definition",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [
+      "computes",
+      "sorryAx"
+     ],
+     "statement": "∀ L ∈ P_poly, ∃ C k, (∀ (n : ℕ), (C n).size ≤ n ^ k) ∧ computes C L",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L1002_P_subset_P_poly",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [
+      "P",
+      "computes",
+      "sorryAx"
+     ],
+     "statement": "P ⊆ P_poly",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L1003_Karp_Lipton",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [
+      "NP",
+      "computes",
+      "PH",
+      "Sigma2P",
+      "sorryAx"
+     ],
+     "statement": "NP ⊆ P_poly → PH = Sigma2P",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L1004_Shannon_bound",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [
+      "RandomBooleanFunction",
+      "circuit_size",
+      "sorryAx"
+     ],
+     "statement": "∀ (n : ℕ), ∃ f, circuit_size n f ≥ 2 ^ n / n",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L1005_need_explicit_hardness",
+     "module": "Complexity.PvsNPCircuits",
+     "axioms": [
+      "NP",
+      "computes",
+      "Explicit",
+      "sorryAx"
+     ],
+     "statement": "(∃ L ∈ NP, L ∉ P_poly) → ∃ L ∈ NP, (Explicit fun x => true) ∧ L ∉ P_poly",
+     "status": "aberto-sorry"
+    }
+   ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com Barriers, Complexity, MasterLemma, MillenniumProblems, OpenProblems, StructuralComplexity e o Mathlib v4.19.0 (alguns arquivos com erro)",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `Barriers, .submodules `Complexity, .submodules `MasterLemma, .submodules `MillenniumProblems, .submodules `OpenProblems, .submodules `StructuralComplexity]\n",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "formal/lean/Barriers/Relativization.lean",
+     "linha": 44,
+     "nome": "Barriers.relativization_barrier",
+     "status": "erro",
+     "axioms": [
+      "sorryAx",
+      "Barriers.ComplexityClassWithOracle",
+      "Barriers.Oracle"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/Basic.lean",
+     "linha": 107,
+     "nome": "Complexity.NPC_in_P_implies_P_eq_NP",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/Complexity/Basic.lean",
+     "linha": 120,
+     "nome": "Complexity.P_subset_NP",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/Basic.lean",
+     "linha": 125,
+     "nome": "Complexity.NP_subset_EXP",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/Basic.lean",
+     "linha": 128,
+     "nome": "Complexity.P_neq_EXP",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 35,
+     "nome": "PvsNP_L0001_TM_RAM_equiv",
+     "status": "aberto-sorry",
+     "axioms": [
+      "RAMMachine",
+      "TuringMachine",
+      "sorryAx",
+      "time_complexity"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 40,
+     "nome": "PvsNP_L0001_RAM_Circuit_equiv",
+     "status": "aberto-sorry",
+     "axioms": [
+      "RAMMachine",
+      "UniformCircuit",
+      "sorryAx",
+      "time_complexity"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 56,
+     "nome": "PvsNP_L0002_P_definition",
+     "status": "erro",
+     "axioms": [
+      "TuringMachine",
+      "propext",
+      "sorryAx",
+      "time_complexity"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 76,
+     "nome": "PvsNP_L0003_NP_definition",
+     "status": "erro",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "sorryAx",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 82,
+     "nome": "PvsNP_L0004_P_subset_NP",
+     "status": "erro",
+     "axioms": [
+      "TuringMachine",
+      "Verifier",
+      "propext",
+      "sorryAx",
+      "time_complexity",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 107,
+     "nome": "PvsNP_L0005_reduction_transitive",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 111,
+     "nome": "PvsNP_L0005_reduction_preserves_P",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 128,
+     "nome": "PvsNP_L0006_Cook_Levin",
+     "status": "aberto-sorry",
+     "axioms": [
+      "SAT",
+      "Verifier",
+      "propext",
+      "sorryAx",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 146,
+     "nome": "PvsNP_L0007_ThreeSAT_NP_complete",
+     "status": "aberto-sorry",
+     "axioms": [
+      "ThreeSAT",
+      "Verifier",
+      "propext",
+      "sorryAx",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 164,
+     "nome": "PvsNP_L0008_CLIQUE_NP_complete",
+     "status": "aberto-sorry",
+     "axioms": [
+      "CLIQUE",
+      "Verifier",
+      "propext",
+      "sorryAx",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 167,
+     "nome": "PvsNP_L0008_VertexCover_NP_complete",
+     "status": "aberto-sorry",
+     "axioms": [
+      "Verifier",
+      "VertexCover",
+      "propext",
+      "sorryAx",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
+     "linha": 170,
+     "nome": "PvsNP_L0008_HamiltonianPath_NP_complete",
+     "status": "aberto-sorry",
+     "axioms": [
+      "HamiltonianPath",
+      "Verifier",
+      "propext",
+      "sorryAx",
+      "verifies"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/Basic.lean",
+     "linha": 87,
+     "nome": "MasterLemma.MasterLemma",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/Basic.lean",
+     "linha": 106,
+     "nome": "MasterLemma.no_anomalies_from_master_lemma",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/Basic.lean",
+     "linha": 117,
+     "nome": "MasterLemma.global_implies_local",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 90,
+     "nome": "MasterLemma.PvsNP.shortcut_violates_barriers",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 96,
+     "nome": "MasterLemma.PvsNP.PvsNP_is_MasterLemma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 104,
+     "nome": "MasterLemma.PvsNP.structural_gap_PvsNP",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 112,
+     "nome": "MasterLemma.PvsNP.no_shortcuts_from_PneqNP",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 122,
+     "nome": "MasterLemma.PvsNP.PneqNP_from_no_shortcuts",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 130,
+     "nome": "MasterLemma.PvsNP.respects_time_hierarchy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
+     "linha": 140,
+     "nome": "MasterLemma.PvsNP.respects_space_hierarchy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
+     "linha": 63,
+     "nome": "MasterLemma.ToyExamples.lagrange_via_master_lemma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
+     "linha": 108,
+     "nome": "MasterLemma.ToyExamples.euclidean_via_master_lemma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
+     "linha": 153,
+     "nome": "MasterLemma.ToyExamples.conservation_via_master_lemma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
+     "linha": 158,
+     "nome": "MasterLemma.ToyExamples.toy_examples_unified",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
+     "linha": 62,
+     "nome": "MillenniumProblems.BlockC.pvsnp_is_mother_lemma_instance",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
+     "linha": 105,
+     "nome": "MillenniumProblems.BlockC.barriers_formalize_mother_lemma",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
+     "linha": 128,
+     "nome": "MillenniumProblems.BlockC.pvsnp_has_smallest_gap",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/OpenProblems/PvsNP_Central.lean",
+     "linha": 59,
+     "nome": "PvsNP_resolution_via_circuits",
+     "status": "erro",
+     "axioms": [
+      "CircuitSize",
+      "NP",
+      "P",
+      "SAT",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/OpenProblems/PvsNP_Central.lean",
+     "linha": 113,
+     "nome": "PvsNP_resolution_via_algorithm",
+     "status": "aberto-sorry",
+     "axioms": [
+      "NP",
+      "P",
+      "SAT",
+      "computation_time",
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
+     "linha": 76,
+     "nome": "cost_ge_SC",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
+     "linha": 83,
+     "nome": "SC_poly_of_repr",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
+     "linha": 103,
+     "nome": "SC_monotone",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 105,
+     "nome": "P_neq_NP_equivalence",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 110,
+     "nome": "all_SAT_repr_superpoly",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 139,
+     "nome": "SC_oracle_dependent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 148,
+     "nome": "non_relativizing_requires_structure",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 160,
+     "nome": "natural_proofs_barrier",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 177,
+     "nome": "algebraic_only_implies_algebrizes",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 225,
+     "nome": "separation_via_proxy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
+     "linha": 236,
+     "nome": "ResolutionWidth_lower_bound",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
+     "linha": 50,
+     "nome": "invariance_theorem",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
+     "linha": 64,
+     "nome": "all_repr_superpoly_of_SC_superpoly",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
+     "linha": 73,
+     "nome": "no_escape_hatch",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
+     "linha": 111,
+     "nome": "robustness_oracle_independent_implies_relativizing",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "NP",
+     "enunciado": "Set (Set (List Bool))",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "circuit_size",
+     "enunciado": "(n : ℕ) → RandomBooleanFunction n → ℕ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "computes",
+     "enunciado": "CircuitFamily → Set (List Bool) → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Explicit",
+     "enunciado": "(ℕ → Bool) → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "P",
+     "enunciado": "Set (Set (List Bool))",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "RandomBooleanFunction",
+     "enunciado": "ℕ → Type",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "PH",
+     "enunciado": "Set (Set (List Bool))",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Sigma2P",
+     "enunciado": "Set (Set (List Bool))",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L1001_P_poly_definition",
+     "enunciado": "∀ L ∈ P_poly, ∃ C k, (∀ (n : ℕ), (C n).size ≤ n ^ k) ∧ computes C L",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L1002_P_subset_P_poly",
+     "enunciado": "P ⊆ P_poly",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L1003_Karp_Lipton",
+     "enunciado": "NP ⊆ P_poly → PH = Sigma2P",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L1004_Shannon_bound",
+     "enunciado": "∀ (n : ℕ), ∃ f, circuit_size n f ≥ 2 ^ n / n",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L1005_need_explicit_hardness",
+     "enunciado": "(∃ L ∈ NP, L ∉ P_poly) → ∃ L ∈ NP, (Explicit fun x => true) ∧ L ∉ P_poly",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 3,
+    "aberto-sorry": 5,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "sfh-formalization-lab",
+   "path": "problems/p-vs-np/approximation-logic/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././ApproximationComplexity.lean:80:15: failed to synthesize | error: ././././ApproximationComplexity.lean:92:15: failed to synthesize",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean",
+     "linha": 121,
+     "nome": "ApproximationComplexity.fptas_implies_efficient_arbitrarily_close",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean",
+     "linha": 188,
+     "nome": "ApproximationComplexity.approximation_bridges_p_and_np",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean",
+     "linha": 209,
+     "nome": "ApproximationComplexity.approximation_complexity_spectrum",
+     "status": "erro",
+     "axioms": [],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)"
+     }
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "sfh-formalization-lab",
+   "path": "problems/p-vs-np/formal-proofs/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:22:12: unexpected token 'Σ'; expected '_' or identifier | error: ././././PvsNP.lean:25:14: unexpected token 'Σ'; expected '_' or identifier",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
+     "linha": 92,
+     "nome": "ComplexityTheory.P_subset_NP",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
+     "linha": 127,
+     "nome": "ComplexityTheory.polyTimeReducible_trans",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
+     "linha": 154,
+     "nome": "ComplexityTheory.NPComplete_in_P_implies_P_eq_NP",
+     "status": "erro",
+     "axioms": []
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "sfh-formalization-lab",
+   "path": "problems/p-vs-np/formalization/lean",
+   "toolchain": "leanprover/lean4:v4.3.0",
+   "toolchain_used": "leanprover/lean4:v4.3.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "o download do Mathlib falhou: error: ./.lake/packages/mathlib/lakefile.lean:9:7: error: unexpected token; expected identifier | error: ./.lake/packages/mathlib/lakefile.lean:10:7: error: unexpected token; expected identifier | error: ./.lake/packages/mathlib/lakefile.lean:12:7: error: unexpected token; expected identifier",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: ././././Operators.lean: bad import 'Mathlib.MeasureTheory.Integral.Basic'",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
+     "linha": 96,
+     "nome": "PvsNP.Operators.search_not_reducible_to_verification",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
+     "linha": 156,
+     "nome": "PvsNP.Operators.parallelism_linear_speedup",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
+     "linha": 162,
+     "nome": "PvsNP.Operators.parallelism_preserves_entropy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
+     "linha": 108,
+     "nome": "PvsNP.structural_asymmetry_principle",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
+     "linha": 128,
+     "nome": "PvsNP.p_eq_np_implies_entropy_collapse",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
+     "linha": 151,
+     "nome": "PvsNP.p_eq_np_eliminates_creativity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
+     "linha": 173,
+     "nome": "PvsNP.structural_implies_classical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "sfh-formalization-lab",
+   "path": "problems/p-vs-np/formalizations/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:48:7: failed to infer binder type | error: ././././PvsNP.lean:45:9: failed to infer binder type",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "problems/p-vs-np/formalizations/lean/PvsNP.lean",
+     "linha": 104,
+     "nome": "ComplexityTheory.npComplete_in_p_implies_p_eq_np",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  },
+  {
+   "repo": "sfh-formalization-lab",
+   "path": "proofs/p-vs-np/lean",
+   "toolchain": "",
+   "toolchain_used": "padrão do elan",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 0.0,
+   "build_error": "",
+   "sorry_warnings": 0,
+   "reconstructed": false,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP_Definitions.lean:88:35: unknown identifier 'ℚ' | error: ././././PvsNP_Definitions.lean:88:55: unknown identifier 'ℚ'",
+   "corrections": [],
+   "lakefile_gerado": "",
+   "avulso": true,
+   "salvage": [
+    {
+     "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
+     "linha": 62,
+     "nome": "ComplexityTheory.relativization_barrier",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
+     "linha": 100,
+     "nome": "ComplexityTheory.natural_proofs_barrier",
+     "status": "erro",
+     "axioms": []
+    },
+    {
+     "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
+     "linha": 120,
+     "nome": "ComplexityTheory.algebrization_barrier",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
+     "linha": 132,
+     "nome": "ComplexityTheory.barrier_checklist_lemma",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ]
+    }
+   ],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 0,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

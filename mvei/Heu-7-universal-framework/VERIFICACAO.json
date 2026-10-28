@@ -1,0 +1,826 @@
+{
+ "generated_at": "2026-10-28T16:41:02+00:00",
+ "standard_axioms": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "source_repository": "ShantiDraconis/Heu-7-universal-framework",
+ "verified_commit": "63b80b7623e831645f843e1f04385a1cfe17717a",
+ "projects": [
+  {
+   "repo": "Heu-7-universal-framework",
+   "path": "src/lean",
+   "toolchain": "leanprover/lean4:v4.36.0-rc2",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": false,
+   "build_seconds": 1.6,
+   "build_error": "error: HEU/HEU_Main.lean:20:0: unknown module prefix 'HEU' | error: build failed",
+   "sorry_warnings": 6,
+   "reconstructed": true,
+   "bridges": [],
+   "declared_axioms": [
+    {
+     "name": "HEU.Core.ZF.Choice",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Extensionality",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Foundation",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Infinity",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Ord.wellOrdering",
+     "module": "HEU.Core.ZF.Ordinals",
+     "statement": "∀ (s : List HEU.Core.ZF.Ord), s ≠ [] → ∃ m, m ∈ s ∧ ∀ (x : HEU.Core.ZF.Ord), x ∈ s → m ≤ x"
+    },
+    {
+     "name": "HEU.Core.ZF.Pairing",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.PowerSet",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Replacement",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Separation",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.Union",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "Prop"
+    },
+    {
+     "name": "HEU.Core.ZF.ZFC_consistent",
+     "module": "HEU.Core.ZF.Axioms",
+     "statement": "HEU.Core.ZF.ZFC"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "HEU.Core.ZF.HSet.mk.inj",
+     "module": "HEU.Core.ZF.Sets",
+     "axioms": [],
+     "statement": "∀ {α : Type} {elements elements_1 : List α},   { elements := elements } = { elements := elements_1 } → elements = elements_1",
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Core.ZF.HSet.mk.injEq",
+     "module": "HEU.Core.ZF.Sets",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {α : Type} (elements elements_1 : List α),   ({ elements := elements } = { elements := elements_1 }) = (elements = elements_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Core.ZF.HSet.mk.sizeOf_spec",
+     "module": "HEU.Core.ZF.Sets",
+     "axioms": [],
+     "statement": "∀ {α : Type} [inst : SizeOf α] (elements : List α), sizeOf { elements := elements } = 1 + sizeOf elements",
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Core.ZF.Ord.mk.inj",
+     "module": "HEU.Core.ZF.Ordinals",
+     "axioms": [],
+     "statement": "∀ {val val_1 : Nat}, { val := val } = { val := val_1 } → val = val_1",
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Core.ZF.Ord.mk.injEq",
+     "module": "HEU.Core.ZF.Ordinals",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (val val_1 : Nat), ({ val := val } = { val := val_1 }) = (val = val_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Core.ZF.Ord.mk.sizeOf_spec",
+     "module": "HEU.Core.ZF.Ordinals",
+     "axioms": [],
+     "statement": "∀ (val : Nat), sizeOf { val := val } = 1 + sizeOf val",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com HEU e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././HEU/Core/ZF/Classical.lean:79:2: failed to synthesize | error: Lean exited with code 1)",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `HEU]\n",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "src/lean/HEU/Automation/AICompletion.lean",
+     "linha": 25,
+     "nome": "HEU.Automation.auto_fill",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/Functional/Criticality.lean",
+     "linha": 58,
+     "nome": "HEU.Core.Functional.criticality_dichotomy",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/Functional/LTC.lean",
+     "linha": 80,
+     "nome": "HEU.Core.LTC.completeness",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/Functional/LTC.lean",
+     "linha": 84,
+     "nome": "HEU.Core.LTC.soundness",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/Functional/LTC.lean",
+     "linha": 95,
+     "nome": "HEU.Core.LTC.ltc_extends_classical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/Functional/UBO.lean",
+     "linha": 89,
+     "nome": "HEU.Core.UBO.equilibrium_iff_valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/Functional/UBO.lean",
+     "linha": 94,
+     "nome": "HEU.Core.UBO.equilibrium_transitive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
+     "linha": 18,
+     "nome": "HEU.Core.ZF.dne",
+     "status": "condicional",
+     "axioms": [
+      "HEU.Core.ZF.em"
+     ]
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
+     "linha": 25,
+     "nome": "HEU.Core.ZF.byContradiction",
+     "status": "condicional",
+     "axioms": [
+      "HEU.Core.ZF.em"
+     ]
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
+     "linha": 31,
+     "nome": "HEU.Core.ZF.deMorgan1",
+     "status": "condicional",
+     "axioms": [
+      "HEU.Core.ZF.em"
+     ]
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
+     "linha": 46,
+     "nome": "HEU.Core.ZF.deMorgan2",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
+     "linha": 57,
+     "nome": "HEU.Core.ZF.classicalImpl",
+     "status": "condicional",
+     "axioms": [
+      "HEU.Core.ZF.em"
+     ]
+    },
+    {
+     "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
+     "linha": 69,
+     "nome": "HEU.Core.ZF.peirce",
+     "status": "erro",
+     "axioms": [
+      "HEU.Core.ZF.em"
+     ]
+    },
+    {
+     "arquivo": "src/lean/HEU/Cross/CollapseAnalysis.lean",
+     "linha": 38,
+     "nome": "HEU.Cross.collapse_monotonic",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Cross/CollapseAnalysis.lean",
+     "linha": 52,
+     "nome": "HEU.Cross.collapse_iff_valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Cross/MetaEquivalence.lean",
+     "linha": 38,
+     "nome": "HEU.Cross.ubo_validity_uniform",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Cross/OrdinalComparisons.lean",
+     "linha": 43,
+     "nome": "HEU.Cross.critical_equality",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Cross/UniversalDiagrams.lean",
+     "linha": 76,
+     "nome": "HEU.Cross.all_implies_universal",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/HEU_Main.lean",
+     "linha": 114,
+     "nome": "HEU.all_problems_have_ubo",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/BSD/BSD.lean",
+     "linha": 66,
+     "nome": "HEU.Problems.BSD.BSD_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/Hodge/Hodge.lean",
+     "linha": 67,
+     "nome": "HEU.Problems.Hodge.Hodge_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Critical_NS.lean",
+     "linha": 40,
+     "nome": "HEU.Problems.NS.smooth_is_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Critical_NS.lean",
+     "linha": 45,
+     "nome": "HEU.Problems.NS.blowup_is_subcritical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
+     "linha": 20,
+     "nome": "HEU.Problems.NS.NS_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
+     "linha": 35,
+     "nome": "HEU.Problems.NS.NS_LTC_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
+     "linha": 40,
+     "nome": "HEU.Problems.NS.UBO_valid_implies_NS",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
+     "linha": 46,
+     "nome": "HEU.Problems.NS.NS_implies_UBO_valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
+     "linha": 56,
+     "nome": "HEU.Problems.NS.NS_UBO_biequiv_proof",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/F_NS.lean",
+     "linha": 24,
+     "nome": "HEU.Problems.NS.F_NS_smooth_higher",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/F_NS.lean",
+     "linha": 29,
+     "nome": "HEU.Problems.NS.F_NS_bounded",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
+     "linha": 17,
+     "nome": "HEU.Problems.NS.energy_conservation",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
+     "linha": 22,
+     "nome": "HEU.Problems.NS.enstrophy_bounds_regularity",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
+     "linha": 27,
+     "nome": "HEU.Problems.NS.F_NS_preserves_order",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
+     "linha": 33,
+     "nome": "HEU.Problems.NS.O_NS_reflects_smooth",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
+     "linha": 38,
+     "nome": "HEU.Problems.NS.divergenceFree_helps",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
+     "linha": 43,
+     "nome": "HEU.Problems.NS.high_reynolds_difficulty",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/O_NS.lean",
+     "linha": 41,
+     "nome": "HEU.Problems.NS.NS_equilibrium_iff_NS",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/O_NS.lean",
+     "linha": 46,
+     "nome": "HEU.Problems.NS.O_NS_zero_for_smooth",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/NS/O_NS.lean",
+     "linha": 51,
+     "nome": "HEU.Problems.NS.O_NS_negative_for_blowup",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Critical_PNP.lean",
+     "linha": 34,
+     "nome": "HEU.Problems.PvsNP.poly_is_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Critical_PNP.lean",
+     "linha": 39,
+     "nome": "HEU.Problems.PvsNP.NPComplete_determines_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
+     "linha": 23,
+     "nome": "HEU.Problems.PvsNP.PNP_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
+     "linha": 38,
+     "nome": "HEU.Problems.PvsNP.PNP_LTC_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
+     "linha": 43,
+     "nome": "HEU.Problems.PvsNP.SAT_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
+     "linha": 48,
+     "nome": "HEU.Problems.PvsNP.UBO_valid_implies_P_eq_NP",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
+     "linha": 54,
+     "nome": "HEU.Problems.PvsNP.P_eq_NP_implies_UBO_valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
+     "linha": 64,
+     "nome": "HEU.Problems.PvsNP.PNP_UBO_biequiv_proof",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
+     "linha": 29,
+     "nome": "HEU.Problems.PvsNP.F_PNP_monotone",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
+     "linha": 35,
+     "nome": "HEU.Problems.PvsNP.F_PNP_max_poly",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
+     "linha": 40,
+     "nome": "HEU.Problems.PvsNP.F_PNP_bounded",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
+     "linha": 55,
+     "nome": "HEU.Problems.PvsNP.F_PNP_reflects_gap",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
+     "linha": 19,
+     "nome": "HEU.Problems.PvsNP.P_subset_NP",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
+     "linha": 24,
+     "nome": "HEU.Problems.PvsNP.NPComplete_reduction",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
+     "linha": 30,
+     "nome": "HEU.Problems.PvsNP.F_PNP_preserves_order",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
+     "linha": 36,
+     "nome": "HEU.Problems.PvsNP.O_PNP_reflects_P",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
+     "linha": 41,
+     "nome": "HEU.Problems.PvsNP.SAT_hardest",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
+     "linha": 46,
+     "nome": "HEU.Problems.PvsNP.one_NPComplete_in_P",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
+     "linha": 42,
+     "nome": "HEU.Problems.PvsNP.PNP_equilibrium_iff_P_eq_NP",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
+     "linha": 47,
+     "nome": "HEU.Problems.PvsNP.O_PNP_zero_for_P",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
+     "linha": 52,
+     "nome": "HEU.Problems.PvsNP.O_PNP_negative_for_exp",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
+     "linha": 57,
+     "nome": "HEU.Problems.PvsNP.O_PNP_NP_complete",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Critical_RH.lean",
+     "linha": 59,
+     "nome": "HEU.Problems.RH.RH_implies_full_density",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
+     "linha": 23,
+     "nome": "HEU.Problems.RH.RH_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
+     "linha": 38,
+     "nome": "HEU.Problems.RH.RH_LTC_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
+     "linha": 56,
+     "nome": "HEU.Problems.RH.UBO_valid_implies_RH",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
+     "linha": 62,
+     "nome": "HEU.Problems.RH.RH_implies_UBO_valid",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
+     "linha": 72,
+     "nome": "HEU.Problems.RH.RH_UBO_biequiv_proof",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/F_RH.lean",
+     "linha": 31,
+     "nome": "HEU.Problems.RH.F_RH_monotone",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/F_RH.lean",
+     "linha": 37,
+     "nome": "HEU.Problems.RH.F_RH_max_on_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/F_RH.lean",
+     "linha": 43,
+     "nome": "HEU.Problems.RH.F_RH_bounded",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 20,
+     "nome": "HEU.Problems.RH.criticalLine_unique",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 26,
+     "nome": "HEU.Problems.RH.zeroApprox_bounded",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 31,
+     "nome": "HEU.Problems.RH.F_RH_continuous",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 38,
+     "nome": "HEU.Problems.RH.O_RH_preserves_order",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 44,
+     "nome": "HEU.Problems.RH.equilibrium_decidable",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 59,
+     "nome": "HEU.Problems.RH.ordinal_increases_with_precision",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 65,
+     "nome": "HEU.Problems.RH.UBO_nonneg_under_RH",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
+     "linha": 71,
+     "nome": "HEU.Problems.RH.RH_contrapositive",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
+     "linha": 42,
+     "nome": "HEU.Problems.RH.RH_equilibrium_iff_RH",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
+     "linha": 47,
+     "nome": "HEU.Problems.RH.O_RH_zero_on_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
+     "linha": 53,
+     "nome": "HEU.Problems.RH.O_RH_negative_off_critical",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
+     "linha": 59,
+     "nome": "HEU.Problems.RH.O_RH_monotone",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    },
+    {
+     "arquivo": "src/lean/HEU/Problems/YM/YM.lean",
+     "linha": 64,
+     "nome": "HEU.Problems.YM.YM_equiv",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "o Lean não chegou ao fim do arquivo"
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "HEU.Core.ZF.ZFC_consistent",
+     "enunciado": "HEU.Core.ZF.ZFC",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "HEU.Core.ZF.Ord.wellOrdering",
+     "enunciado": "∀ (s : List HEU.Core.ZF.Ord), s ≠ [] → ∃ m, m ∈ s ∧ ∀ (x : HEU.Core.ZF.Ord), x ∈ s → m ≤ x",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
+   "summary": {
+    "fechado": 6,
+    "aberto-sorry": 0,
+    "condicional": 0
+   }
+  }
+ ]
+}

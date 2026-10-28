@@ -1,0 +1,84 @@
+--- a/lean4/BSD/BSDStatementFormal.lean
++++ b/lean4/BSD/BSDStatementFormal.lean
+@@ -1,3 +1,15 @@
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.Rat.Basic
++import Mathlib.Analysis.Calculus.Deriv
++import Mathlib.Analysis.Calculus.FDeriv
++import Mathlib.Analysis.Calculus.Limits
++import Mathlib.Analysis.SpecialFunctions.Pow
++import Mathlib.MeasureTheory.Integral.Basic
++import Mathlib.Topology.Algebra.Group
++import Mathlib.Data.Complex.Basic
++import Mathlib.Analysis.Calculus.ContDiff
++import Mathlib.NumberTheory.Padics.Padics
++
+ /-
+ ====================================================================================
+ Birch and Swinnerton–Dyer Conjecture — Classical Ultra-Expanded Lean4 Formalization
+@@ -59,15 +71,6 @@
+ ====================================================================================
+ -/
+ 
+-import Mathlib.Data.Real.Basic
+-import Mathlib.Data.Rat.Basic
+-import Mathlib.Analysis.Calculus.Deriv
+-import Mathlib.Analysis.Calculus.FDeriv
+-import Mathlib.Analysis.Calculus.Limits
+-import Mathlib.Analysis.SpecialFunctions.Pow
+-import Mathlib.MeasureTheory.Integral.Basic
+-import Mathlib.Topology.Algebra.Group
+-import Mathlib.Data.Complex.Basic
+ 
+ open Classical Real Complex
+ 
+@@ -490,7 +493,6 @@
+ def ClassicalIntegralExists (f : ℝ → ℝ) (a b : ℝ) : Prop :=
+   ∃ I : ℝ, I = ∫ x in a..b, f x
+ 
+-import Mathlib.Analysis.Calculus.ContDiff
+ 
+ /--
+ Néron differential (forma abstrata, clássica).
+@@ -525,7 +527,6 @@
+ 
+ ====================================================================================
+ -/
+-import Mathlib.NumberTheory.Padics.Padics
+ 
+ variable (E : EllipticCurve ℚ)
+ 
+--- a/lean4/BSD/EllipticCurves.lean
++++ b/lean4/BSD/EllipticCurves.lean
+@@ -1,3 +1,10 @@
++import Mathlib.Data.Rat.Basic
++import Mathlib.Data.Complex.Basic
++import Mathlib/Algebra/Group/Power
++import Mathlib.Data.Real.Basic
++import Mathlib.Analysis.SpecialFunctions.Pow
++import BSD.EllipticCurves
++
+ /-
+   lean4/BSD/EllipticCurves.lean
+ 
+@@ -13,9 +20,6 @@
+   j-invariant, minimal models, and conductor.
+ -/
+ 
+-import Mathlib.Data.Rat.Basic
+-import Mathlib.Data.Complex.Basic
+-import Mathlib/Algebra/Group/Power
+ 
+ namespace BSDFormal
+ 
+@@ -360,10 +364,6 @@
+   No exotic constants are introduced here.
+ -/
+ 
+-import Mathlib.Data.Real.Basic
+-import Mathlib.Data.Complex.Basic
+-import Mathlib.Analysis.SpecialFunctions.Pow
+-import BSD.EllipticCurves
+ 
+ namespace BSDFormal
+ 
