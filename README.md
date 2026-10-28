@@ -70,3 +70,9 @@ The MVEI pipeline that produced these results is in the author's repository and 
 
 31 branch(es) with 236 theorems that exist only on branches and that the Lean kernel closed, each with a certificate (commit, date, history, SHA-256): [`branches/README.md`](branches/README.md).
 <!-- mvei-branches:end -->
+
+<!-- mvei-extra:start -->
+## Other repositories published here
+
+* [`imports/S5-Core-Private/`](imports/S5-Core-Private/) — Lean sources of `ShantiDraconis/S5-Core-Private` at commit `feb8933` (2026-02-10): 3 files; the Lean kernel closed 3 theorems (3 unique, without auto-generated lemmas), 0 conditional, 0 open. Details: [`mvei/S5-Core-Private/README.md`](mvei/S5-Core-Private/README.md).
+<!-- mvei-extra:end -->
