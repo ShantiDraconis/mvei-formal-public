@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T16:41:02+00:00, on commit `51382911549ca362b73b24d57d6b62027282ca7b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-28T19:11:15+00:00, on commit `51382911549ca362b73b24d57d6b62027282ca7b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 0 | 1 | 0 | 1 / 0 / 0 / 1 / 6 |
+| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 0 | 1 | 0 | 1 / 0 / 0 / 2 / 5 |
 | `lean` | padrão do elan | failed | 0 | 0 | 0 | 0 / 2 / 7 / 9 / 0 |
 
 | Closed theorems in this repository | |
@@ -45,8 +45,8 @@ The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting 
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 10 |
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 6 |
+| checked file by file: the written proof does not pass the kernel | 11 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 5 |
 
 ### MVEI corrections
 

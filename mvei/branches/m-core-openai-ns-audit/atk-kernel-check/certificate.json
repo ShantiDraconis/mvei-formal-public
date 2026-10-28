@@ -1,0 +1,89 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/m-core-openai-ns-audit",
+ "branch": "atk-kernel-check",
+ "branch_state": "parada",
+ "head_commit": "f4e694563931fedadb24993278725f1636f5bac1",
+ "head_commit_date": "2026-10-12T21:14:38+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "f4e694563931fedadb24993278725f1636f5bac1",
+   "date": "2026-10-12T21:14:38+01:00",
+   "subject": "atk-ficha: FICHA de matemática nova formalizada (ISK refinado, leis de escala, portões por problema) + propostas de 12/10 avaliadas"
+  },
+  {
+   "commit": "4747a8a295238c100efcf52a4df74bd4550640cb",
+   "date": "2026-10-12T17:47:45+01:00",
+   "subject": "ns_data: campo localizado com S ≠ 0 e lei de escala — refuta as cotas universais dos parâmetros 19–21 e 52"
+  },
+  {
+   "commit": "7d74f788060e48587005a84f2aa0a60d8f6d4463",
+   "date": "2026-10-12T15:25:03+01:00",
+   "subject": "ns_data: integral do resto e estados degenerados (parâmetros 49–53) sobre Taylor–Green"
+  },
+  {
+   "commit": "53dcf0c164596a7f7a1d0ceb3e45a1c6e9f908e1",
+   "date": "2026-10-12T01:46:30+01:00",
+   "subject": "atk-kernel: certificado v2 (6/6) do commit ce4b236"
+  },
+  {
+   "commit": "ce4b23683c03572002092b69a3eb5660fa32e256",
+   "date": "2026-10-12T01:39:34+01:00",
+   "subject": "atk-kernel: NSControl (verificado 48/48 no M-Core)"
+  },
+  {
+   "commit": "cc6c7d382062d8921abb4c8bcc590ae2f0372652",
+   "date": "2026-10-12T00:52:31+01:00",
+   "subject": "atk-kernel: certificado v1 (5/5) do commit 7ce276c, congelado na tag atk-kernel-cert-v1"
+  },
+  {
+   "commit": "7ce276cfd6fd8cd3fb601ebf311bde5043114eef",
+   "date": "2026-10-12T00:44:01+01:00",
+   "subject": "atk-kernel: novos lemas de NavierStokes (mesmos já verificados no M-Core)"
+  },
+  {
+   "commit": "76a85fb79f174bdc02c393945affd7ab239cc7a9",
+   "date": "2026-10-12T00:21:43+01:00",
+   "subject": "ns_data: Taylor–Green 64³ (Re 100/200/400) — razão S/(νz) e C_min"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.34.1"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "ATK.NSControl.weighted_energy_control",
+   "file": "atk-kernel/ATK/NSControl.lean",
+   "line": 17,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {E E' D : ℝ → ℝ} {C θ T : ℝ},   0 ≤ T →     (∀ (t : ℝ), HasDerivAt E (E' t) t) →       Continuous D →         (∀ t ∈ Set.Icc 0 T, E' t + (1 - θ) * D t ≤ C * E t) →           Real.exp (-C * T) * E T + (1 - θ) * ∫ (s : ℝ) in 0..T, Real.exp (-C * s) * D s ≤ E 0"
+  },
+  {
+   "name": "ATK.NavierStokes.absorption_without_remainder_forces_decay",
+   "file": "atk-kernel/ATK/NavierStokes.lean",
+   "line": 84,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {ν z y' bulk tail cB δ : ℝ},   0 < ν → 0 < z → y' / 2 + ν * z = bulk + tail → bulk ≤ cB * ν * z → tail ≤ δ * ν * z → cB + δ < 1 → y' < 0"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "atk-kernel/ATK/NSControl.lean": "92d854c3f260ac63aa8f019ce5306bf5aa347fc3cdf4cc06cd03ee4dcaa8bdd1",
+  "atk-kernel/ATK/NavierStokes.lean": "bd9195d209902297ec822ccd9e4a6adcf921f4e1fd4b95c1afc95aaa01ad5627",
+  "atk-kernel/lakefile.toml": "139e6ddf32cce30e56e879c1770e14aabcae182a42f8f740d7912fbe7fc4946d",
+  "atk-kernel/lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+ },
+ "published_at": "2026-10-28T19:19:18Z",
+ "certificate_sha256": "899202f066a0f7a85bb8558ae8dc22711e915c1377e2e897da53cc000554f060"
+}

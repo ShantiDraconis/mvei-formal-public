@@ -1,0 +1,93 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/continuum-fields-indeterminacy",
+ "branch": "copilot/expand-continuum-fields-analysis",
+ "branch_state": "parada",
+ "head_commit": "0e7def429958fcc4d3e631bcac123eaf9e4e03a2",
+ "head_commit_date": "2026-02-04T18:47:08+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "0e7def429958fcc4d3e631bcac123eaf9e4e03a2",
+   "date": "2026-02-04T18:47:08+00:00",
+   "subject": "Enhance README with quick start and example results"
+  },
+  {
+   "commit": "6fe4948a545f0337c2d0f9d61e3bc1b5e8ce900b",
+   "date": "2026-02-04T18:46:04+00:00",
+   "subject": "Add project summary and final cleanup"
+  },
+  {
+   "commit": "5e954e87753f18b86d959f117a156ca8d7b5ad22",
+   "date": "2026-02-04T18:43:01+00:00",
+   "subject": "Add app launcher, examples, gitignore, and license"
+  },
+  {
+   "commit": "4cabd3387cb13d2e789114df8f30a5672d58eabf",
+   "date": "2026-02-04T18:40:43+00:00",
+   "subject": "Implement comprehensive continuum fields indeterminacy system"
+  },
+  {
+   "commit": "2b28ffd59fab6469ee45448f165c44eb3a6fe939",
+   "date": "2026-02-04T18:34:39+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "field_operator_continuous",
+   "file": "lean/ContinuumFields.lean",
+   "line": 52,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {α : Type u_1} [inst : NormedAddCommGroup α] [inst_1 : NormedSpace ℝ α] (op : FieldOperator α)   (field : ContinuumField α) (t : ℝ), Continuous fun x => (op.L field).φ x t"
+  },
+  {
+   "name": "indeterminacy_nonneg",
+   "file": "lean/ContinuumFields.lean",
+   "line": 41,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ {α : Type u_1} [inst : NormedAddCommGroup α] [inst_1 : NormedSpace ℝ α] [inst_2 : InnerProductSpace ℝ α]   (field : ContinuumField α) (a b t : ℝ), 0 ≤ indeterminacy field a b t"
+  },
+  {
+   "name": "superposition_principle",
+   "file": "lean/ContinuumFields.lean",
+   "line": 59,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ {α : Type u_1} [inst : NormedAddCommGroup α] [inst_1 : NormedSpace ℝ α] (field1 field2 : ContinuumField α)   (c1 c2 : ℝ), ∃ field3, ∀ (x t : ℝ), field3.φ x t = c1 • field1.φ x t + c2 • field2.φ x t"
+  },
+  {
+   "name": "uncertainty_relation",
+   "file": "lean/ContinuumFields.lean",
+   "line": 66,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ {α : Type u_1} [inst : NormedAddCommGroup α] [inst_1 : NormedSpace ℝ α] [inst_2 : InnerProductSpace ℝ α]   (field : ContinuumField α) (a b t : ℝ), indeterminacy field a b t * indeterminacy field a b t ≥ 0"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "lean/ContinuumFields.lean": "a7d3ff4ec7d20bf5c849e7bc7fc0b5f72d2dafd98143dcbcca675f6bf5e02a95"
+ },
+ "published_at": "2026-10-28T19:19:18Z",
+ "certificate_sha256": "0d2d38c69cef55668b83b3c66e3673f635dbfc865b05c919f9fb81ebe60c3474"
+}

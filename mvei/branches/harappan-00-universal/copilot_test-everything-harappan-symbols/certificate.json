@@ -1,0 +1,115 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/test-everything-harappan-symbols",
+ "branch_state": "parada",
+ "head_commit": "05f181c9254428090813829058e99c70b5994dba",
+ "head_commit_date": "2025-11-30T11:33:00+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "05f181c9254428090813829058e99c70b5994dba",
+   "date": "2025-11-30T11:33:00+00:00",
+   "subject": "Add tests, notebooks, LaTeX docs, and documentation"
+  },
+  {
+   "commit": "625238a47ff361ce6e5b59a2d13db029265baac0",
+   "date": "2025-11-30T11:23:42+00:00",
+   "subject": "Add agents, API, CLI, Lean and Coq formal proof modules"
+  },
+  {
+   "commit": "e42d16feef7a85674b79e632139de448ad93b67c",
+   "date": "2025-11-30T11:07:16+00:00",
+   "subject": "Add glyphs, semantics, collapse, agents modules"
+  },
+  {
+   "commit": "70ef7542c75d44de2ba02d53f8cd7f13a7539d39",
+   "date": "2025-11-30T11:02:17+00:00",
+   "subject": "Add Python core, io, analysis, and phonology modules"
+  },
+  {
+   "commit": "bd526ada7d2d87644f60df906d317787430e4af1",
+   "date": "2025-11-30T10:54:42+00:00",
+   "subject": "Add project structure, data files, schemas, and symbolic framework"
+  },
+  {
+   "commit": "d7b75cd82060f782891194399785cd8209ebe05f",
+   "date": "2025-11-30T10:43:05+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Harappan.collapse_energy_bounded",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 39,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(classes : List SymbolicClass) (h_nonempty : classes.length > 0) (h_bounded : ∀ c ∈ classes, c.energy ≤ 1) : collapseEnergy classes ≤ 1"
+  },
+  {
+   "name": "Harappan.high_confidence_uniqueness",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 25,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(sys : ConsistentHypothesisSystem) : ∀ id : SignId, (sys.phonemeHypotheses.filter (fun h => h.signId == id && h.confidence.value > 0.9)).length ≤ 1"
+  },
+  {
+   "name": "Harappan.identity_collapse_preserves",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 46,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c : SymbolicClass) : (performCollapse CollapseOp.identity [c]).resultState = c.state"
+  },
+  {
+   "name": "Harappan.semantic_consistency",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 32,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g : SemanticGraph) (h : g.consistent) : ∀ id : SignId, (g.meaningsFor id).filter (fun m => m.confidence.value > 0.8) |>.length ≤ 1"
+  },
+  {
+   "name": "Harappan.wf_valid_refs",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 62,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(wf : WellFormedAssignment) : wf.phonemes.all (fun h => wf.signs.get? h.signId ≠ none)"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "lakefile.lean": "4ecc5ffb36f81cffd5a7366cf064611ab9a3fdc9f35690abc868ecbbf1a936a4",
+  "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1",
+  "src/lean/Harappan/BasicTypes.lean": "02605cc85aaf438165864da79db72a33425716078943987de6a7ca8c952f5dfc",
+  "src/lean/Harappan/CollapseAxioms.lean": "d8ef43d6582c0cc04f71f958f25a2699d2a35c6714dfb1df38946affe3bb63c4",
+  "src/lean/Harappan/ConsistencyTheorems.lean": "92cf86ef0a8f14d67b84c4c2eb7bff3302dd06a0e91488bfa5e3d4f39949a2c2",
+  "src/lean/Harappan/Phonology.lean": "d653ba34f104fccb12491d2adc6c9cc8feaa95960aef87682a01dbfb7a98bf4a",
+  "src/lean/Harappan/Semantics.lean": "de86e1e8a21420da223651135d1e645699f41aa769f00489dd3c4316f75616af",
+  "src/lean/Harappan/SignSet.lean": "260a28c5090b468346192fd68370f0c57c7e04859ccda9ac9d6b452370379291"
+ },
+ "published_at": "2026-10-28T19:19:18Z",
+ "certificate_sha256": "c8d53ed546680a7609beab9eaad528bd60b423e6cbb0fc47aa2140e8e1a0247e"
+}

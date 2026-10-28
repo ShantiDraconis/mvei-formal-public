@@ -11,13 +11,13 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T16:41:02+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-28T19:11:15+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `codigo` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
 | `formalization` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 5 |
-| `formalization/lean` | v4.19.0 | partial | 12 | 0 | 0 | 2 / 0 / 14 / 40 / 897 |
+| `formalization/lean` | v4.19.0 | partial | 12 | 0 | 0 | 4 / 0 / 22 / 116 / 811 |
 | `proofs/bsd_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 5 / 0 |
 | `proofs/hodge_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 4 / 0 |
 | `proofs/navier_stokes` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 6 |
@@ -29,20 +29,27 @@ MVEI verification of 2026-10-28T16:41:02+00:00, on commit `041a2090e226310380ee3
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 14 |
-| Unique (name + statement) | 14 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 5 |
+| Counting each project | 16 |
+| Unique (name + statement) | 16 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 7 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
+| `LREPropositions.fiber_noncompact` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LREPropositions.residue_accumulation` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.shell_residual_smooth` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.bv_decomposition` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.blowup_criterion` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `RiemannHypothesis.bootstrap_converges` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `RiemannHypothesis.frameworks_equivalent` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.NS.spectralProjection_idempotent` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.NS.frequency_decomposition_energy` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.NavierStokes.energyTransfer_bounded` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.ODE.continuous_ERS_stability` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.ODE.discrete_ERS_stability` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE_RBC_Corrected.supercritical_blowup_exists` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.ODE_comparison` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.gronwall_decay` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.super_poly_dominates` | `formalization/lean (file by file)` | open | `sorryAx` |
@@ -51,18 +58,19 @@ MVEI verification of 2026-10-28T16:41:02+00:00, on commit `041a2090e226310380ee3
 | `UnifiedTheory.potential_nonneg` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UnifiedTheory.canonical_is_minimum` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UnifiedTheory.canonical_strict_local_min` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalConstants.coupling_matrix_stable` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Hodge.StructuralBridge.bridge_hodge_to_curvature` | `proofs/hodge_conjecture (file by file)` | open | `sorryAx`, `Hodge.Foundations.AlgebraicVariety` |
 | `YangMills.StructuralBridge.bridge_mass_gap_to_curvature` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
 | `YangMills.Reduction.main_reduction` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 19 of them (2 closed, 0 conditional, 17 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 350 the kernel has no result:
+The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 29 of them (4 closed, 0 conditional, 25 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 340 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 1 288 |
-| checked file by file: the written proof does not pass the kernel | 62 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 1 202 |
+| checked file by file: the written proof does not pass the kernel | 138 |
 
 ### MVEI corrections
 

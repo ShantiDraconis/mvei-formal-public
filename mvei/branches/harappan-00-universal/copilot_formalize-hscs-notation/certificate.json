@@ -1,0 +1,127 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/formalize-hscs-notation",
+ "branch_state": "parada",
+ "head_commit": "e3bdbd904a717c6bbaf253abb5e090e4f7181b78",
+ "head_commit_date": "2025-12-21T21:52:19+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "e3bdbd904a717c6bbaf253abb5e090e4f7181b78",
+   "date": "2025-12-21T21:52:19+00:00",
+   "subject": "Add HSCS quick start guide - implementation complete"
+  },
+  {
+   "commit": "6ae8a952cdd3bdc05e8e52d571084df6cac3cd9c",
+   "date": "2025-12-21T21:50:48+00:00",
+   "subject": "Complete HSCS implementation with full pipeline demonstration"
+  },
+  {
+   "commit": "466a170afa4f9ef0360ec1820676db63e0050089",
+   "date": "2025-12-21T21:48:23+00:00",
+   "subject": "Add engineering component analyzer and comprehensive documentation"
+  },
+  {
+   "commit": "ca5d8fda8e443fc4032bb4d07fd5b2dd3b7a11ee",
+   "date": "2025-12-21T21:45:00+00:00",
+   "subject": "Add HSCS formalization and transpilation system"
+  },
+  {
+   "commit": "76a9c5a55ec0e27670aceec10104173915fae64c",
+   "date": "2025-12-21T21:39:54+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "compilation_preserves_scope",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 207,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : Sentence) : compile_standard s → ∃ x, InScope x (scopeForLine s.line_number)"
+  },
+  {
+   "name": "complete_page_is_valid_ledger",
+   "file": "formal/lean/IndusLogicGenerated.lean",
+   "line": 749,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": complete_page_ledger"
+  },
+  {
+   "name": "complete_page_ledger_valid",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 344,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(sentences : List Sentence) : (∀ s ∈ sentences, s.line_number ≥ 1001 ∧ s.line_number ≤ 1030) → PageLedger sentences"
+  },
+  {
+   "name": "hscs_is_certification_system",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 224,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (s : Sentence), (s.core.token_type = TokenType.CORE) ∧ (s.seal.token_type = TokenType.SEAL) → ∃ (x : Entity), InScope x (scopeForLine s.line_number)"
+  },
+  {
+   "name": "line_has_unique_scope",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 190,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(line : Nat) : ∃! σ, scopeForLine line = σ"
+  },
+  {
+   "name": "scope_context_free",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 216,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(line : Nat) (s1 s2 : Sentence) : s1.line_number = line → s2.line_number = line → scopeForLine s1.line_number = scopeForLine s2.line_number"
+  },
+  {
+   "name": "scope_deterministic",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 184,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(line1 line2 : Nat) : line1 = line2 → scopeForLine line1 = scopeForLine line2"
+  },
+  {
+   "name": "valid_sentence_has_typed_tokens",
+   "file": "formal/lean/IndusLogic.lean",
+   "line": 175,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : Sentence) : s.core.token_type = TokenType.CORE ∧ s.seal.token_type = TokenType.SEAL ∧ (∀ t ∈ s.metadata, t.token_type = TokenType.MOD)"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "formal/lean/IndusLogic.lean": "d580232a464c1982707c530149fcfc74c166591f51953e3b1a4343104163496b"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "76c0162ff65b4ca51d17a947f866dba9eb84536225382e07e1f1a84e4a2eb5ec"
+}

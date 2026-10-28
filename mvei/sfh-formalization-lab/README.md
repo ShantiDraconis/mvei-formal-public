@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T16:41:02+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-28T19:11:15+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 3 | 0 | 5 | 0 / 0 / 10 / 12 / 29 |
+| `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 3 | 0 | 5 | 1 / 0 / 11 / 13 / 26 |
 | `problems/p-vs-np/approximation-logic/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 1 / 0 / 0 / 2 / 0 |
 | `problems/p-vs-np/formal-proofs/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
 | `problems/p-vs-np/formalization/lean` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 7 |
@@ -24,9 +24,9 @@ MVEI verification of 2026-10-28T16:41:02+00:00, on commit `b770052dbe60a6ab123f1
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 4 |
-| Unique (name + statement) | 4 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 1 |
+| Counting each project | 5 |
+| Unique (name + statement) | 5 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 2 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -47,15 +47,16 @@ MVEI verification of 2026-10-28T16:41:02+00:00, on commit `b770052dbe60a6ab123f1
 | `PvsNP_L0008_VertexCover_NP_complete` | `formal/lean (file by file)` | open | `Verifier`, `VertexCover`, `sorryAx`, `verifies` |
 | `PvsNP_L0008_HamiltonianPath_NP_complete` | `formal/lean (file by file)` | open | `HamiltonianPath`, `Verifier`, `sorryAx`, `verifies` |
 | `PvsNP_resolution_via_algorithm` | `formal/lean (file by file)` | open | `NP`, `P`, `SAT`, `computation_time`, `sorryAx` |
+| `SC_poly_of_repr` | `formal/lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 16 of them (1 closed, 0 conditional, 15 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 58 the kernel has no result:
+The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 18 of them (2 closed, 0 conditional, 16 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 56 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 36 |
-| checked file by file: the written proof does not pass the kernel | 22 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 33 |
+| checked file by file: the written proof does not pass the kernel | 23 |
 
 ### MVEI corrections
 

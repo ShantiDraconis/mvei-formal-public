@@ -1,4 +1,4 @@
-MVEI — log consolidado da verificação (2026-10-28T16:41:02+00:00)
+MVEI — log consolidado da verificação (2026-10-28T19:11:15+00:00)
 Os logs completos de cada compilação no GitHub ficam na página da execução do workflow (Actions).
 
 == Millennium/.  [sem lean-toolchain -> leanprover/lean4:v4.19.0]  FALHOU
@@ -7,9 +7,9 @@ Os logs completos de cada compilação no GitHub ficam na página da execução 
    erro: error: ././././Millennium/Logical/Scenarios.lean:44:36: unexpected token 'namespace'; expected '#guard_msgs', 'abbrev', 'add_decl_doc', 'axiom', 'binder_predicate', 'builtin_dsimproc', 'builtin_dsimproc_decl', 'builtin_grind_propagator', 'builtin_initialize', 'builtin_simproc', 'builtin_simproc_decl', 'class', 'declare_simp_like_tactic', 'declare_syntax_cat', 'def', 'dsimproc', 'dsimproc_decl', 'elab', 'elab_rules', 'example', 'grind_propagator', 'inductive', 'infix', 'infixl', 'infixr', 'initialize', 'instance', 'macro', 'macro_rules', 'notation', 'opaque', 'postfix', 'prefix', 'recommended_s
 
 == Millennium/formal/lean  [leanprover/lean4:v4.36.0-rc2 -> leanprover/lean4:v4.19.0]  FALHOU
-   teoremas: fechados 47, condicionais 6, abertos 1; axiomas declarados 40
-   correções do MVEI: imports-no-topo
-   nota: CORRIGIDO PELO MVEI (imports-no-topo): imports movidos para o início (antes de comentários de módulo ou de documentação) em 20 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com BSD, Core, Millennium, NavierStokes, Problems, PvsNP, RH, TUNS, Unified, UnifiedMath e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: ././././BSD/Classical.lean: bad import 'Mathlib.NumberTheory.EllipticCurve')
+   teoremas: fechados 54, condicionais 12, abertos 2; axiomas declarados 51
+   correções do MVEI: imports-no-topo, renomear-imports-mathlib
+   nota: CORRIGIDO PELO MVEI (imports-no-topo, renomear-imports-mathlib): imports movidos para o início (antes de comentários de módulo ou de documentação) em 20 arquivo(s); 21 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 18 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com BSD, Core, Millennium, NavierStokes, Problems, PvsNP, RH, TUNS, Unified, UnifiedMath e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././Core/MetaTheorem.lean:7:0: unknown module prefix 'UMOS' | error: Lean exited with code 1)
    erro: error: no such file or directory (error code: 2) | error: TUNS/UniversalTime.lean: bad import 'Mathlib.Data.Real.EReal' | error: TUNS/TiagoTheorem.lean: bad import 'TUNS.UniversalTime' | error: TUNS/Framework.lean:84:48: stuck at solving universe constraint
 
 == Millennium/formal/theorems  [leanprover/lean4:v4.12.0 -> leanprover/lean4:v4.12.0]  FALHOU
@@ -25,8 +25,8 @@ Os logs completos de cada compilação no GitHub ficam na página da execução 
 
 == Millennium/lean4  [leanprover/lean4:v4.12.0 -> leanprover/lean4:v4.19.0]  FALHOU
    teoremas: fechados 145, condicionais 0, abertos 10; axiomas declarados 13
-   correções do MVEI: imports-no-topo
-   nota: CORRIGIDO PELO MVEI (imports-no-topo): imports movidos para o início (antes de comentários de módulo ou de documentação) em 20 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com BSD_CONJECTURE_UniversalFunctional, ClassicalExpandedFramework, ClassicalFoundations, ClassicalObstruction, DeltaGap44, EmergentStructures, Framework, GapUniversal, GlobalUnificationTheorem, GridEquat e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: ././././UniversalCriticalFunctional.lean: bad import 'Mathlib.Analysis.Asymptotics.Asymptotics')
+   correções do MVEI: imports-no-topo, renomear-imports-mathlib
+   nota: CORRIGIDO PELO MVEI (imports-no-topo, renomear-imports-mathlib): imports movidos para o início (antes de comentários de módulo ou de documentação) em 20 arquivo(s); 21 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 18 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com BSD_CONJECTURE_UniversalFunctional, ClassicalExpandedFramework, ClassicalFoundations, ClassicalObstruction, DeltaGap44, EmergentStructures, Framework, GapUniversal, GlobalUnificationTheorem, GridEquat e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././ClassicalFoundations.lean:39:0: failed to synthesize | error: ././././ClassicalFoundations.lean:166:90: unsolved goals)
    erro: o download do Mathlib falhou: error: ././lakefile.lean:16:8: error: '_package' has already been declared | error: ././lakefile.lean:31:8: error: '_package' has already been declared | error: ././lakefile.lean:38:8: error: 'mathlib' has already been declared
 
 == Millennium/rh-umi-invariant/formal/lean  [leanprover/lean4:v4.12.0 -> leanprover/lean4:v4.12.0]  FALHOU
@@ -42,8 +42,8 @@ Os logs completos de cada compilação no GitHub ficam na página da execução 
 
 == Millennium/src/lean4  [sem lean-toolchain -> leanprover/lean4:v4.19.0]  FALHOU
    teoremas: fechados 3, condicionais 0, abertos 0; axiomas declarados 0
-   correções do MVEI: imports-no-topo
-   nota: CORRIGIDO PELO MVEI (imports-no-topo): imports movidos para o início (antes de comentários de módulo ou de documentação) em 20 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Main, Millennium, RhPnp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: ././././Millennium/PvsNP.lean: bad import 'Mathlib.Data.Real.ENNReal')
+   correções do MVEI: imports-no-topo, renomear-imports-mathlib
+   nota: CORRIGIDO PELO MVEI (imports-no-topo, renomear-imports-mathlib): imports movidos para o início (antes de comentários de módulo ou de documentação) em 20 arquivo(s); 21 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 18 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Main, Millennium, RhPnp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././RhPnp/ZetaFramework.lean:92:35: unknown constant 'Float.max' | error: Lean exited with code 1)
    erro: o download do Mathlib falhou: error: lakefile.lean:18:8: `_package` has already been declared | error: lakefile.lean:18:8: `_package.name` has already been declared | error: lakefile.lean:29:8: `mathlib` has already been declared
 
 == Millennium/universe00  [sem lean-toolchain -> padrão do elan]  FALHOU
