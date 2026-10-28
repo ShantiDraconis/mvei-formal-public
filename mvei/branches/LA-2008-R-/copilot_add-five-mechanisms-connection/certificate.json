@@ -1,0 +1,77 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/LA-2008-R-",
+ "branch": "copilot/add-five-mechanisms-connection",
+ "branch_state": "parada",
+ "head_commit": "6c72ad2c45565b144214776feabdd5a034c6dbde",
+ "head_commit_date": "2026-04-10T11:59:30+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "6c72ad2c45565b144214776feabdd5a034c6dbde",
+   "date": "2026-04-10T11:59:30+00:00",
+   "subject": "formal: add Lean/Coq/Isabelle/Agda/Python formalizations and LaTeX paper section for RH connections"
+  },
+  {
+   "commit": "1baf93f1853bebe0e8231ab641721ea57c06807d",
+   "date": "2026-04-10T11:36:36+00:00",
+   "subject": "docs: add RH formal connections map (problem-by-problem classification)"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "RHConnections.collatz_has_no_link",
+   "file": "formal/lean/RHConnections.lean",
+   "line": 208,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ c ∈ connectionMap, c.problem = Problem.Collatz ∧ c.connection = ConnectionType.None"
+  },
+  {
+   "name": "RHConnections.connectionMap_nonempty",
+   "file": "formal/lean/RHConnections.lean",
+   "line": 213,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": connectionMap ≠ []"
+  },
+  {
+   "name": "RHConnections.direct_connections_have_mechanisms",
+   "file": "formal/lean/RHConnections.lean",
+   "line": 217,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ c ∈ connectionMap, c.connection = ConnectionType.Direct → c.mechanisms ≠ []"
+  },
+  {
+   "name": "RHConnections.mertens_is_direct",
+   "file": "formal/lean/RHConnections.lean",
+   "line": 199,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ c ∈ connectionMap, c.problem = Problem.MertensMobius ∧ c.connection = ConnectionType.Direct"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "formal/lean/RHConnections.lean": "f7ee96e6dd135163584fec32563163b12d6d7ffe0cbaca75f867e8234a2a7c0a",
+  "formal/lean/lakefile.lean": "2ed17722a5fce9660935dadbd24d5e1f2d69e9bc292ba741345915203068b576"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "145c592eff4f46a7d43547c61f441ee18360dd3d72328a5f41e836239b264d13"
+}

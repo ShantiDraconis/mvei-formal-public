@@ -1,0 +1,379 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/federated-trivalent-manifold",
+ "branch": "copilot/formalizacao-pesquisa-erros",
+ "branch_state": "parada",
+ "head_commit": "9526d34ed3889e8155a32c40eae99030b42fe65f",
+ "head_commit_date": "2026-07-15T11:08:44+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "9526d34ed3889e8155a32c40eae99030b42fe65f",
+   "date": "2026-07-15T11:08:44+00:00",
+   "subject": "Fix comment arithmetic and max-error bound in MedidaClassica.lean"
+  },
+  {
+   "commit": "db7a3f5613d07c98674f649839dfa77d673ab3d2",
+   "date": "2026-07-15T11:07:59+00:00",
+   "subject": "Add MedidaClassica.lean: measure-theoretic Ω=R∪I∪U for 7 Millennium Problems"
+  },
+  {
+   "commit": "815472acf8a2dfcf55e4f0628b45155a8f80f4e6",
+   "date": "2026-07-15T11:04:07+00:00",
+   "subject": "Add Lean 4 formalization: Regra1–Regra7 + Pesquisa + Lake project"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.14.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Dominio.label_injective",
+   "file": "Regra3.lean",
+   "line": 32,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(d1 d2 : Dominio) : d1 ≠ d2 → d1.label ≠ d2.label"
+  },
+  {
+   "name": "Regra1_TeardownObrigatorio",
+   "file": "Regra1.lean",
+   "line": 22,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(s : SystemState) (hport : s.port = \" \") (hopen : s.port_open = true) : ∃ s' : SystemState, s' = teardown s ∧ s'.port_open = false"
+  },
+  {
+   "name": "Regra2_ExistenciaCifracao",
+   "file": "Regra2.lean",
+   "line": 28,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(log : String) (k : Key) (_ : isSensitive log) : ∃ e : EncryptedLog, e = Regra2_LogCifrado log k"
+  },
+  {
+   "name": "Regra3_SeparacaoDominio",
+   "file": "Regra3.lean",
+   "line": 42,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "hkdf_domain_separation",
+    "sorryAx"
+   ],
+   "statement": "(master : MasterSecret) (d1 d2 : Dominio) (h : d1 ≠ d2) : chave_dominio master d1 ≠ chave_dominio master d2"
+  },
+  {
+   "name": "Regra4_Barreira",
+   "file": "Regra4.lean",
+   "line": 43,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ A : Oracle, CryptoAxiom_rel A ∧ ¬ P_ne_NP_rel A"
+  },
+  {
+   "name": "Regra5_Contraposicao",
+   "file": "Regra5.lean",
+   "line": 43,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "Regra5_Conservacao",
+    "sorryAx"
+   ],
+   "statement": "(e : ExodusFunc) (T : Time) : integralExodo e T = 0.0 → ∀ t < T, ¬ exodoPersiste e t"
+  },
+  {
+   "name": "Regra7_MeioNaoColapsa",
+   "file": "Regra7.lean",
+   "line": 57,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": Triv.Meio.next ≠ Triv.Falso ∧ Triv.Meio.next ≠ Triv.Meio"
+  },
+  {
+   "name": "S_total_meio",
+   "file": "Pesquisa.lean",
+   "line": 69,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": pesquisa_atual.regime.toFloat = 0.5"
+  },
+  {
+   "name": "Triv.next_bijective",
+   "file": "Regra7.lean",
+   "line": 53,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": Function.Bijective Triv.next"
+  },
+  {
+   "name": "Triv.next_injective",
+   "file": "Regra7.lean",
+   "line": 40,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": Function.Injective Triv.next"
+  },
+  {
+   "name": "Triv.next_surjective",
+   "file": "Regra7.lean",
+   "line": 45,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": Function.Surjective Triv.next"
+  },
+  {
+   "name": "Triv.period_3",
+   "file": "Regra7.lean",
+   "line": 36,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Triv) : v.next.next.next = v"
+  },
+  {
+   "name": "all_complete",
+   "file": "MedidaClassica.lean",
+   "line": 161,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": tabelaMilenio.all (fun p => p.particao.R + p.particao.I + p.particao.U = 100) = true"
+  },
+  {
+   "name": "bsd_em_aberto",
+   "file": "MedidaClassica.lean",
+   "line": 122,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_BSD.erro > 0"
+  },
+  {
+   "name": "cada_erro_vira_regra",
+   "file": "Pesquisa.lean",
+   "line": 62,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": pesquisa_atual.regime = .Meio ∧ pesquisa_atual.classes.length = 7"
+  },
+  {
+   "name": "crypto_nao_implica_P_ne_NP",
+   "file": "Regra4.lean",
+   "line": 60,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬ (∀ A : Oracle, CryptoAxiom_rel A → P_ne_NP_rel A)"
+  },
+  {
+   "name": "erro_complementar",
+   "file": "MedidaClassica.lean",
+   "line": 37,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ω : OmegaPartition) : ω.R + ω.erro = 100"
+  },
+  {
+   "name": "erro_global_valor",
+   "file": "MedidaClassica.lean",
+   "line": 158,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": erroTotal = 465"
+  },
+  {
+   "name": "hodge_em_aberto",
+   "file": "MedidaClassica.lean",
+   "line": 119,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_Hodge.erro > 0"
+  },
+  {
+   "name": "integral_exodo_nulo",
+   "file": "Regra5.lean",
+   "line": 36,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(T : Time) : integralExodo exodoNulo T = 0.0"
+  },
+  {
+   "name": "ns_em_aberto",
+   "file": "MedidaClassica.lean",
+   "line": 120,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_NavierStokes.erro > 0"
+  },
+  {
+   "name": "poincare_resolvido",
+   "file": "MedidaClassica.lean",
+   "line": 110,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_Poincare.erro = 0"
+  },
+  {
+   "name": "pvsnp_em_aberto",
+   "file": "MedidaClassica.lean",
+   "line": 115,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_PvsNP.erro > 0"
+  },
+  {
+   "name": "pvsnp_max_erro",
+   "file": "MedidaClassica.lean",
+   "line": 123,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": omega_PvsNP.erro ≥ omega_Riemann.erro ∧ omega_PvsNP.erro ≥ omega_Hodge.erro ∧ omega_PvsNP.erro ≥ omega_NavierStokes.erro ∧ omega_PvsNP.erro ≥ omega_YangMills.erro ∧ omega_PvsNP.erro ≥ omega_BSD.erro"
+  },
+  {
+   "name": "regime_meio_enquanto_exodo",
+   "file": "Regra5.lean",
+   "line": 50,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "Regra5_Conservacao",
+    "sorryAx"
+   ],
+   "statement": "(e : ExodusFunc) (T : Time) (h : ∃ t < T, exodoPersiste e t) : integralExodo e T ≠ 0.0"
+  },
+  {
+   "name": "resolvido_iff_erro_zero",
+   "file": "MedidaClassica.lean",
+   "line": 42,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ω : OmegaPartition) : ω.R = 100 ↔ ω.erro = 0"
+  },
+  {
+   "name": "riemann_em_aberto",
+   "file": "MedidaClassica.lean",
+   "line": 118,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_Riemann.erro > 0"
+  },
+  {
+   "name": "tabela_completa",
+   "file": "MedidaClassica.lean",
+   "line": 149,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": tabelaMilenio.length = 7"
+  },
+  {
+   "name": "teardown_closes_port",
+   "file": "Regra1.lean",
+   "line": 14,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : SystemState) : (teardown s).port_open = false"
+  },
+  {
+   "name": "teardown_preserves_port",
+   "file": "Regra1.lean",
+   "line": 18,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : SystemState) : (teardown s).port = s.port"
+  },
+  {
+   "name": "todos_em_meio",
+   "file": "Regra7.lean",
+   "line": 78,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : MillenniumProblem) : estadoInicial p = .Meio"
+  },
+  {
+   "name": "tres_chaves_distintas",
+   "file": "Regra3.lean",
+   "line": 55,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "hkdf_domain_separation",
+    "sorryAx"
+   ],
+   "statement": "(master : MasterSecret) : let k1"
+  },
+  {
+   "name": "ym_em_aberto",
+   "file": "MedidaClassica.lean",
+   "line": 121,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": omega_YangMills.erro > 0"
+  },
+  {
+   "name": "zero_nao_trivial_nao_fora_linha",
+   "file": "Regra6.lean",
+   "line": 44,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Regra6_RiemannZerosAxiom",
+    "sorryAx"
+   ],
+   "statement": "(s : Complex) (hzero : isNonTrivialZero s) (hne : s.re ≠ 0.5) : False"
+  },
+  {
+   "name": "zeros_na_linha_critica_sob_RH",
+   "file": "Regra6.lean",
+   "line": 37,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Regra6_RiemannZerosAxiom",
+    "sorryAx"
+   ],
+   "statement": "(s : Complex) (hzero : isNonTrivialZero s) : s.re = 0.5"
+  }
+ ],
+ "closed": 6,
+ "files_sha256": {
+  "Regra1.lean": "2c23ad758ee823caaab4c82b165f50807c91e23db9fe9bd1ab589112641a0b20",
+  "Regra3.lean": "fb8c040e9af320dc1f099acb469d5921969498e9bc5321ccc55a3ed860582057",
+  "Regra7.lean": "9210b4bdefc48e0452fe38ded0593542631e377634794aa2dc85f92108052ad2",
+  "lakefile.lean": "780a09437cbfa8eb9c3382792265609c99c73354b4009007b6e43eb1079ab47e",
+  "lean-toolchain": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14"
+ },
+ "published_at": "2026-10-28T19:19:15Z",
+ "certificate_sha256": "1477387f9a4fe93aba10f44664065c88caa0b2c2e462e9108542cd2db93ebb1c"
+}

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-28T16:41:02+00:00",
+ "generated_at": "2026-10-28T19:11:15+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -17,9 +17,78 @@
    "build_ok": false,
    "build_seconds": 0.0,
    "build_error": "o download do Mathlib falhou: error: ./lakefile.lean:16:8: error: '_package' has already been declared | error: ./lakefile.lean:18:15: error: unexpected token; expected command | error: ./lakefile.lean: package configuration has errors",
-   "sorry_warnings": 11,
+   "sorry_warnings": 14,
    "reconstructed": true,
    "bridges": [
+    {
+     "repo": "cryptographic-logic-foundations",
+     "project": ".",
+     "theorem": "RiemannHypothesis.critical_line_hypothesis",
+     "statement": "∀ (s : ℂ), RiemannHypothesis.ζ s = 0 ∧ 0 < s.re ∧ s.re < 1 → s.re = 1 / 2",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "cryptographic-logic-foundations",
+     "project": ".",
+     "theorem": "RiemannHypothesis.riemann_hypothesis",
+     "statement": "∀ (s : ℂ), RiemannHypothesis.ζ s = 0 → s.re = 1 / 2 ∨ s.re < 0",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "cryptographic-logic-foundations",
+     "project": ".",
+     "theorem": "RiemannHypothesis.zeta_functional_equation",
+     "statement": "∀ {π : ℂ} (s : ℂ),   s ≠ 0 →     s ≠ 1 →       RiemannHypothesis.ζ s =         2 ^ s * π ^ (s - 1) * Complex.sin (π * s / 2) * Complex.Gamma (1 - s) * RiemannHypothesis.ζ (1 - s)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
     {
      "repo": "cryptographic-logic-foundations",
      "project": ".",
@@ -103,6 +172,42 @@
      "status": "fechado"
     },
     {
+     "name": "RiemannHypothesis.critical_line_hypothesis",
+     "module": "«universe-0-0».Camada1_Provas.lean.MillenniumProblems.RiemannHypothesis.ZetaFunction",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "∀ (s : ℂ), RiemannHypothesis.ζ s = 0 ∧ 0 < s.re ∧ s.re < 1 → s.re = 1 / 2",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "RiemannHypothesis.riemann_hypothesis",
+     "module": "«universe-0-0».Camada1_Provas.lean.MillenniumProblems.RiemannHypothesis.ZetaFunction",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "∀ (s : ℂ), RiemannHypothesis.ζ s = 0 → s.re = 1 / 2 ∨ s.re < 0",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "RiemannHypothesis.zeta_functional_equation",
+     "module": "«universe-0-0».Camada1_Provas.lean.MillenniumProblems.RiemannHypothesis.ZetaFunction",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "∀ {π : ℂ} (s : ℂ),   s ≠ 0 →     s ≠ 1 →       RiemannHypothesis.ζ s =         2 ^ s * π ^ (s - 1) * Complex.sin (π * s / 2) * Complex.Gamma (1 - s) * RiemannHypothesis.ζ (1 - s)",
+     "status": "aberto-sorry"
+    },
+    {
      "name": "SecureData.mk.inj",
      "module": "proofs.lean4.core.TypeSafety",
      "axioms": [],
@@ -180,8 +285,10 @@
     }
    ],
    "integrity": [],
-   "note": "RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
-   "corrections": [],
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib): 1 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
+   "corrections": [
+    "renomear-imports-mathlib"
+   ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `Main, .submodules `«formal-proofs», .one `foundation, .submodules `kernel, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
    "avulso": false,
    "salvage": [
@@ -229,7 +336,7 @@
      "nome": "Universe00.BootSequence.triple_signature_required",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
@@ -237,7 +344,7 @@
      "nome": "Universe00.BootSequence.boot_sequence_chronological",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
@@ -245,7 +352,7 @@
      "nome": "Universe00.BootSequence.panic_encrypts_gamma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "foundation.lean",
@@ -279,7 +386,7 @@
      "nome": "Universe00.Microkernel.security_enforcement",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
@@ -465,30 +572,6 @@
      "axioms": []
     },
     {
-     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean",
-     "linha": 16,
-     "nome": "RiemannHypothesis.zeta_functional_equation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
-    },
-    {
-     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean",
-     "linha": 21,
-     "nome": "RiemannHypothesis.riemann_hypothesis",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
-    },
-    {
-     "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean",
-     "linha": 26,
-     "nome": "RiemannHypothesis.critical_line_hypothesis",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
-    },
-    {
      "arquivo": "zkp/zkp_foundation.lean",
      "linha": 203,
      "nome": "ZKPFoundation.zkp_correctness",
@@ -525,7 +608,7 @@
    ],
    "summary": {
     "fechado": 17,
-    "aberto-sorry": 1,
+    "aberto-sorry": 4,
     "condicional": 0
    }
   },
@@ -536,7 +619,7 @@
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 4.7,
+   "build_seconds": 5.2,
    "build_error": "error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -684,7 +767,7 @@
      "nome": "P_eq_NP_implies_NPComplete_in_P",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1): Unknown command line option | Lean (version 4.3.0, commit 8e5cf6466061, Release)"
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
@@ -692,7 +775,7 @@
      "nome": "Sovereign.integrityBarrier",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1): Unknown command line option | Lean (version 4.3.0, commit 8e5cf6466061, Release)"
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
@@ -700,7 +783,7 @@
      "nome": "Sovereign.sovereignIntegrity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1): Unknown command line option | Lean (version 4.3.0, commit 8e5cf6466061, Release)"
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
@@ -708,7 +791,7 @@
      "nome": "System.universe0Valid",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1): Unknown command line option | Lean (version 4.3.0, commit 8e5cf6466061, Release)"
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
@@ -716,7 +799,7 @@
      "nome": "System.universe0Consensus",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean não chegou ao fim do arquivo"
+     "motivo": "o Lean parou antes do fim do arquivo (código 1): Unknown command line option | Lean (version 4.3.0, commit 8e5cf6466061, Release)"
     }
    ],
    "preenchimento": [

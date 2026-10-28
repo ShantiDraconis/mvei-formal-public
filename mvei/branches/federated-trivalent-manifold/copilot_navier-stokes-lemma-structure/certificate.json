@@ -1,0 +1,100 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/federated-trivalent-manifold",
+ "branch": "copilot/navier-stokes-lemma-structure",
+ "branch_state": "parada",
+ "head_commit": "601d6fb8aee12fa4fa1e4e5acf04464cd9763bf0",
+ "head_commit_date": "2026-09-06T08:33:07+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "601d6fb8aee12fa4fa1e4e5acf04464cd9763bf0",
+   "date": "2026-09-06T08:33:07+00:00",
+   "subject": "Merge main and resolve conflicts in gitignore, README, lakefile, lake-manifest"
+  },
+  {
+   "commit": "a69372cd1433235810ec55cf957f26496e8f9b8a",
+   "date": "2026-08-10T11:29:33+00:00",
+   "subject": "ci: scope workflow token permissions"
+  },
+  {
+   "commit": "79ec80481eee6fe67230f8ee4b03194358ef0574",
+   "date": "2026-08-10T11:27:52+00:00",
+   "subject": "Merge main into branch and resolve lakefile.lean conflict"
+  },
+  {
+   "commit": "3a690c809d8584debcc537ae3ddf7a1074bcee7c",
+   "date": "2026-08-10T08:43:12+00:00",
+   "subject": "Fix kineticEnergy_nonneg proof to avoid positivity tactic"
+  },
+  {
+   "commit": "a957ee5063257a9717879214227555278165b274",
+   "date": "2026-08-10T08:38:58+00:00",
+   "subject": "chore: remove egg-info from tracking and add to .gitignore"
+  },
+  {
+   "commit": "70bd05ab7afc2f1ca68ded723a8f29233fcd4c96",
+   "date": "2026-08-10T08:38:36+00:00",
+   "subject": "Fix setuptools package discovery in pyproject.toml"
+  },
+  {
+   "commit": "391126fc4cf5143e72a6a0879493894d75d4de35",
+   "date": "2026-08-10T08:38:17+00:00",
+   "subject": "fix: configure setuptools package discovery to resolve flat-layout error"
+  },
+  {
+   "commit": "5dc306171c8cc1acfc085e27544af95d83f4bb77",
+   "date": "2026-08-10T08:38:05+00:00",
+   "subject": "Add lake-manifest.json for Lean/mathlib dependencies"
+  },
+  {
+   "commit": "3b9a814ad42acb8013e724e9f7df41c3406bd40b",
+   "date": "2026-08-09T19:24:52+00:00",
+   "subject": "Finalize conservative Navier-Stokes scaffold"
+  },
+  {
+   "commit": "bd2220e372a2dd62998ade0d7c1ba703af3e345a",
+   "date": "2026-08-09T19:02:15+00:00",
+   "subject": "Add conservative Lean Navier-Stokes scaffold"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T19:11:15+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "leanprover/lean4:v4.8.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "kineticEnergy_le_initial_of_antitone",
+   "file": "formal/lean/NavierStokesScaffold.lean",
+   "line": 26,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {V : Type u_1} [inst : NormedAddCommGroup V] (trajectory : ℝ → FluidState V),   (Antitone fun t => kineticEnergy (trajectory t)) →     ∀ t ≥ 0, kineticEnergy (trajectory t) ≤ kineticEnergy (trajectory 0)"
+  },
+  {
+   "name": "kineticEnergy_nonneg",
+   "file": "formal/lean/NavierStokesScaffold.lean",
+   "line": 20,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {V : Type u_1} [inst : NormedAddCommGroup V] (state : FluidState V), 0 ≤ kineticEnergy state"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "formal/lean/NavierStokesScaffold.lean": "9364966fa612d787581f237abb8da7a8b52b1f3445ef08a033f6c255840ffa02",
+  "formal/lean/lake-manifest.json": "35a2f8a89912984aee8d1f968fd7ccb3101aae6df5b439f2f9a8d4638b91473f",
+  "formal/lean/lakefile.lean": "76b86c1c88fbefaa7b84aa38e01d0218fe5c5d7a493bc7218423627f1f1609ff",
+  "formal/lean/lean-toolchain": "61561b06f5587e027815fac8f59bf6ca160dfbf3f7372fc6297664acfd85b8c0"
+ },
+ "published_at": "2026-10-28T19:19:18Z",
+ "certificate_sha256": "9bcf0b6bb7868c5f46cb7c791938c9fd2387b934637332f5a516fb2c64e1ebd0"
+}
