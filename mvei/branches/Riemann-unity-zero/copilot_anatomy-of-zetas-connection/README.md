@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/anatomy-of-zetas-connection` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 24 — closed 9, conditional 0, open 4, proof error 11, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `9c981aee8885871fbdec488d742d975b1eec30569e48706f4d22e46dc13a235a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-unity-zero/copilot_anatomy-of-zetas-connection/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `c40aaf0aa924a52b83454028ef9e5d32d81cde0d946379029ee5851f13763875`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-unity-zero/copilot_anatomy-of-zetas-connection/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

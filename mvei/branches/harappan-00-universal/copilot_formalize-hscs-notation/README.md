@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalize-hscs-notation` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 8 — closed 2, conditional 0, open 1, proof error 4, not reached 1, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `42067a51cd80fce55a4e2b9bf4f3168b9c4f6dfe6b1798b8affff001681f7639`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_formalize-hscs-notation/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `2a4571dfb05949b1b3d7aa8f4855c8b8476ef834ae1e21a2fa79231c3b5d8a38`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_formalize-hscs-notation/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

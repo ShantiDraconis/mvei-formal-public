@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/integrate-retaliation-protocol` of the pri
 * Branch state: incorporada (already in the default branch).
 * Theorems only on branches, in this branch: 2 — closed 2, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `abd00ea546a4d5e6126feae71dfab0ebfda8906b56bf3fd762b96440d3a1f3fe`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_integrate-retaliation-protocol/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `c4f603e2708fd7fb11f9b4bd36f05fc334bdd905c905c37dd18e88f2e7dd209b`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_integrate-retaliation-protocol/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
