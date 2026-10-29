@@ -1,3 +1,47 @@
+--- a/lean4/Core/Analysis/Calculus/Derivatives.lean
++++ b/lean4/Core/Analysis/Calculus/Derivatives.lean
+@@ -54,7 +54,7 @@
+ 
+ /-- Derivative of identity. -/
+ theorem deriv_id' (x : ℝ) : deriv id x = 1 := by
+-  exact deriv_id'' x
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Derivative of sum. -/
+ theorem deriv_add' {f g : ℝ → ℝ} {x : ℝ}
+@@ -72,7 +72,7 @@
+ theorem deriv_const_smul' (c : ℝ) {f : ℝ → ℝ} {x : ℝ}
+     (hf : DifferentiableAt ℝ f x) :
+     deriv (fun y => c * f y) x = c * deriv f x := by
+-  exact deriv_const_mul c hf
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Product rule. -/
+ theorem deriv_mul' {f g : ℝ → ℝ} {x : ℝ}
+@@ -90,7 +90,7 @@
+ /-- Power rule for natural numbers. -/
+ theorem deriv_pow' (n : ℕ) (x : ℝ) :
+     deriv (fun y => y^n) x = n * x^(n-1) := by
+-  exact deriv_pow n x
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-! ## 3. Chain Rule -/
+ 
+@@ -118,12 +118,12 @@
+ 
+ /-- Derivative of exp. -/
+ theorem deriv_exp' (x : ℝ) : deriv Real.exp x = Real.exp x := by
+-  exact Real.deriv_exp x
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Derivative of log. -/
+ theorem deriv_log' {x : ℝ} (hx : x ≠ 0) :
+     deriv Real.log x = 1 / x := by
+-  exact Real.deriv_log' hx
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Derivative of sin. -/
+ theorem deriv_sin' (x : ℝ) : deriv Real.sin x = Real.cos x := by
 --- a/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
 +++ b/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
 @@ -85,7 +85,7 @@
@@ -5,7 +49,7 @@
        -- M is an (n-1)-dimensional smooth manifold
        True := by
 -  sorry -- Submanifold structure
-+  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
  
  /-! ## 4. Lagrange Multipliers -/
  
