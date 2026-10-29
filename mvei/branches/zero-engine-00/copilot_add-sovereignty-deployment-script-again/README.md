@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-sovereignty-deployment-script-again` o
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 11 — closed 6, conditional 0, open 0, proof error 5, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ad43ab7a28486abcaad1d25b074d4a1be660929a2b3a407c1d2857869f659c1d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/zero-engine-00/copilot_add-sovereignty-deployment-script-again/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `9be0ffa71a4d085e4664957293bb76ffa51663a232520655b43d849a89dffa84`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/zero-engine-00/copilot_add-sovereignty-deployment-script-again/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

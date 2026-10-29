@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-latest-docs-for-energy-torus` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 52 — closed 1, conditional 0, open 1, proof error 5, not reached 45, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ed2a7d425066e20e61d2dab0a32be96c8ff2f912a2717fe6cc19e41adeb701dc`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millennium-rh-energy-torus-quantum/copilot_add-latest-docs-for-energy-torus/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `7bbaa35fad3630ac6911191898068eb5334d30d8ce95e7a2e7096d4ea1a21b00`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millennium-rh-energy-torus-quantum/copilot_add-latest-docs-for-energy-torus/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

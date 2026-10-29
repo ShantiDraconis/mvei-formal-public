@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/update-intelligence-report` of the private
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 3, conditional 1, open 0, proof error 0, not reached 0, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ebeaba2a5784108e8b97704bc5f848bd5d59e90de71dc7f345383f6576d1c424`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_update-intelligence-report/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `e2dce6916359d691b753d168897cd49cf43d26ce65148547279ba40dd49bc706`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_update-intelligence-report/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

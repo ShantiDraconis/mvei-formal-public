@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/audit-and-expand-repository` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 13 — closed 1, conditional 0, open 3, proof error 4, not reached 5, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `86eac6187c64987c1b698126b28355ea53880ab1f19c4ea2f6eaad8ae1df4417`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-emergent-logic-/copilot_audit-and-expand-repository/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `8dd9fd0735516ec495736744751b1c1d99dd0ec65c9499fc129a1ccf03c104fe`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-emergent-logic-/copilot_audit-and-expand-repository/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

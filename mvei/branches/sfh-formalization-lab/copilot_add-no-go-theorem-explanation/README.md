@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-no-go-theorem-explanation` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 5 — closed 1, conditional 0, open 2, proof error 2, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `f29a5ee87129ef640d00dd5bb838726f94628e78d3255ba12a45c69a7a95521b`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/sfh-formalization-lab/copilot_add-no-go-theorem-explanation/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `07170078ade4ea972eda9ca6fb50bd659fc9692cb4ece4374f4a0925707aba1a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/sfh-formalization-lab/copilot_add-no-go-theorem-explanation/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

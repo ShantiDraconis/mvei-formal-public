@@ -5,7 +5,7 @@ Lean sources from the branch `audit/temple-holy-of-holies` of the private reposi
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 25 — closed 7, conditional 0, open 0, proof error 0, not reached 18, no result 0.
 * History: 47 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `bc079133f13b20243c72b53b89c966aa2192cc8499906eb3e5ab8249434b12ff`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/audit_temple-holy-of-holies/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `1dd3212d28aba33d1661a597b302c6ff77b9639c6b3896f4ce97daee48b9187c`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/audit_temple-holy-of-holies/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

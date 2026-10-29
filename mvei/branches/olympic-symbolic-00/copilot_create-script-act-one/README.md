@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-script-act-one` of the private repo
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 11 — closed 8, conditional 0, open 0, proof error 3, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `9859b19fce68f434c389f6753a75c562b6065a604dd531bae8ef2975b6a40e89`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/olympic-symbolic-00/copilot_create-script-act-one/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `eef67f4c41fc293e4410502c6bed39a58cce9d1d96f060873382b4b3ff8f5a42`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/olympic-symbolic-00/copilot_create-script-act-one/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

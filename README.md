@@ -66,6 +66,17 @@ MVEI verification of 2026-10-29T18:57:14+00:00. Totals over the 49 repositories:
 The MVEI pipeline that produced these results is in the author's repository and is not public; each `mvei/<repo>/README.md` says how to rebuild a project with `lake build`.
 
 
+<!-- mvei-reformulacoes:start -->
+## Reformulations by MVEI
+
+Kernel-checked theories that MVEI wrote around repositories published here. They are not the author's files and their theorems are not counted in the table above. Build each folder with `lake exe cache get && lake build` (HarappaGerador requires `../HarappaSemantica`).
+
+* [`reformulacoes/HarappaSemantica/`](reformulacoes/HarappaSemantica) — a three-valued (Kleene) semantics for the sign catalog of mishkan-iii-core, the operational grammar of harappan-00-universal written as its own Python implements it, and glyph M216 read with the real zeta function (the author's statement "every nontrivial zero satisfies M216" is exactly the Riemann hypothesis, so it stays open). About mishkan-iii-core, harappan-00-universal. 182 theorems, all closed in the kernel (Lean 4.19.0 + Mathlib v4.19.0, GitHub Actions run 40941602954).
+* [`reformulacoes/HarappaGerador/`](reformulacoes/HarappaGerador) — generated theorems about the reading the catalog declares, each one either proved or refuted with a counterexample, with no invented names (uses HarappaSemantica as a library). About mishkan-iii-core. 45 theorems, all closed in the kernel (Lean 4.19.0 + Mathlib v4.19.0, GitHub Actions run 40941602954).
+
+<!-- mvei-reformulacoes:end -->
+
+
 <!-- mvei-extra:start -->
 ## Other repositories published here
 

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/explore-molecular-architecture` of the pri
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 10 — closed 1, conditional 0, open 0, proof error 9, not reached 0, no result 0.
 * History: 7 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `32e9b0cce9accab37b70a59c099d949c0b61ff26fd8fbcc8bae14037c026386d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_explore-molecular-architecture/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `a163268de645d34139f411c119050209291bfc4ca168bb2b198979174a007ab6`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_explore-molecular-architecture/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

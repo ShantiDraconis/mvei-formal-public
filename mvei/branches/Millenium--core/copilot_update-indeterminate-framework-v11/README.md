@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/update-indeterminate-framework-v11` of the
 * Branch state: incorporada (already in the default branch).
 * Theorems only on branches, in this branch: 58 — closed 6, conditional 0, open 2, proof error 8, not reached 42, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `cf79b1a45e0031fb57cb78c04bce19ca4c18f4739c611dad916b13c2f54ca80d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_update-indeterminate-framework-v11/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `2dcf39fe63570801adfadd0bc278e33bc067741ef7312a1c31ab359cf52959a4`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_update-indeterminate-framework-v11/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

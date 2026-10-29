@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/fix-regime-de-igualdade` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 6 — closed 3, conditional 0, open 0, proof error 3, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `d228ed4cb03e76df4e4e84433cc7517935dc7c9de00b06fc1ea86fc9e08ad51a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_fix-regime-de-igualdade/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `b4e9679ecb19077103ad8e374ad50dffa3b233d06114221885c0aea5b1fad07f`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_fix-regime-de-igualdade/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

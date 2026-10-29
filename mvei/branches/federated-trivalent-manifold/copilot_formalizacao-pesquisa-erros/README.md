@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalizacao-pesquisa-erros` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 35 — closed 6, conditional 0, open 6, proof error 21, not reached 2, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `855c5ff03a3d613fea0d0872c17bcf9a2543325df329e6d320b891bd39a0c7df`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_formalizacao-pesquisa-erros/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `ab2443d3fd293158ce8d101060e3d597dcc84704e369fdd5266473aeca33d9af`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_formalizacao-pesquisa-erros/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

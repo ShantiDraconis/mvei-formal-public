@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/develop-mana-crystallization-process` of t
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 3 — closed 1, conditional 0, open 1, proof error 1, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `10931b63cc374a20e630ff4d628bef8a1142c95b552f622000103c5f39757bb8`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_develop-mana-crystallization-process/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `c27a0fd15f3e256205df6970ebf42d9d4baa8864ba17b78d632d321dec807b57`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_develop-mana-crystallization-process/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

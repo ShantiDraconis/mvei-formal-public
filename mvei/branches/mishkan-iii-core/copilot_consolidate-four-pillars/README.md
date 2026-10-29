@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/consolidate-four-pillars` of the private r
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 28 — closed 7, conditional 2, open 1, proof error 14, not reached 4, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `fc8b81af7301b260d2b289f36329fbad1df1adc43c23400381e70f674fcd48d7`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_consolidate-four-pillars/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `fcf93b983b773472744b740e37dd6609b8f55395989d04de7840801e8c8ba6fc`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_consolidate-four-pillars/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

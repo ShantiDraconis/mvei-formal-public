@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-evidencias-arqueologicas-biologicas` o
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 30 — closed 13, conditional 0, open 0, proof error 14, not reached 3, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `90d68c51729fb1f7bec601f2cee5209237c85bb866d630da86906d3b0a0121dc`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-evidencias-arqueologicas-biologicas/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `57df977c90a690b0da9d1f9804b893361ed672178c4e63e48490d6103712415a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-evidencias-arqueologicas-biologicas/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

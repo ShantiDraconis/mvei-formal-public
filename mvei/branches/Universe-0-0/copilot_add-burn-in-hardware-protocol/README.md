@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-burn-in-hardware-protocol` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 59 — closed 6, conditional 2, open 12, proof error 1, not reached 38, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `1440d0b2940f3f89e023aa2cd4ffd62f5544016fdbcb44f894eb984e56ad7f50`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_add-burn-in-hardware-protocol/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `94aaf5799d8d0f578fbcfdd239a20b3d457c246d113964acdb7feaa5131cdaad`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_add-burn-in-hardware-protocol/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-new-logic-operators` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 19 — closed 8, conditional 1, open 0, proof error 10, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `1bb633c16d2c6627d9d3946470eccedd780c8aa9398ab4b7241e9daf2ac08d43`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-new-logic-operators/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `366f56f79a747b544dadb55482e05faac0820684ddc49e064700515d1933b562`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-new-logic-operators/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

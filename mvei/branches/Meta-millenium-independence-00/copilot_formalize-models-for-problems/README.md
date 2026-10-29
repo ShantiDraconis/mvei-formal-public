@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalize-models-for-problems` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 27 — closed 9, conditional 0, open 1, proof error 1, not reached 16, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `0b3209d722df6373aca0b5c032a5c237b245ef03d93811a55f5963b6f185ed8c`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Meta-millenium-independence-00/copilot_formalize-models-for-problems/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `d07d2105215efc3c3976a3b308332aceef9795042dc2ef7b738901bc0d427446`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Meta-millenium-independence-00/copilot_formalize-models-for-problems/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
