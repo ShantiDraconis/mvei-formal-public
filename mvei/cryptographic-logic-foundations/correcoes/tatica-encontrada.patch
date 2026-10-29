@@ -1,0 +1,29 @@
+--- a/formal/lean4/SovereignCore.lean
++++ b/formal/lean4/SovereignCore.lean
+@@ -44,9 +44,7 @@
+ theorem securityVerification_in_P : 
+   ∀ (id : Identity) (proof : Nat), 
+   ∃ (verify : Nat → Nat → Bool), True := by
+-  intro id proof
+-  exists (fun _ _ => true)
+-  trivial
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (exact?)
+ 
+ -- Core invariant: System cannot transition to unauthorized state
+ def stateInvariant (state : SecurityState) : Prop :=
+--- a/proofs/lean4/core/SecurityProperties.lean
++++ b/proofs/lean4/core/SecurityProperties.lean
+@@ -39,12 +39,7 @@
+     ∀ (sig : CryptoSignature),
+     ValidSignature sig →
+     ∃! (signer : String), sig.signer = signer := by
+-  intro sig h
+-  exists sig.signer
+-  constructor
+-  · rfl
+-  · intro y hy
+-    exact hy.symm
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ -- Dual signature theorem (Shiva & Seth)
+ structure DualSignature where

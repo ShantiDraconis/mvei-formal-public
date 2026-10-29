@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T05:36:17+00:00, on commit `1f57a02dcde2bad96265461e03daa0ab4c9ab798`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T11:55:34+00:00, on commit `1f57a02dcde2bad96265461e03daa0ab4c9ab798`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -88,6 +88,7 @@ The `.lean` files of the verified commit declare 442 `theorem`/`lemma` (counting
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/harappan-00-universal mvei/harappan-00-universal/correcoes/imports-no-topo.patch` (in order, after the ones above)
+* `correcoes/sintaxe-operacional.patch` (55 teoremas L####_syntax_valid com enunciado True; o comentário de cada arquivo propõe o enunciado, 56 file(s)): applies to the published sources: `git apply -p1 --directory=imports/harappan-00-universal mvei/harappan-00-universal/correcoes/sintaxe-operacional.patch` (in order, after the ones above)
 
 ## Files in this folder
 

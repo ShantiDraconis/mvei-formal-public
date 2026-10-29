@@ -6,12 +6,12 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 * Source: `ShantiDraconis/Millennium`, commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa` (2026-10-21T23:18:45Z).
 * 285 files: 275 `.lean` files and the Lake files (`lakefile.*`, `lean-toolchain`, `lake-manifest.json`), plus 3 license or origin file(s) that third-party code requires (`LICENSE`, `rh-ns-cascade/LICENSE`, `rh-umi-invariant/LICENSE`). Paths are the same as in the source repository.
-* Nothing else from the private repository is published (documents, commercial license, prompts, storefront material).
+* Nothing else from the private repository is published (documents, commercial license, prompts, storefront material). The `Contaminated/` folder, which the author quarantined and marked as never evidence, is left out too.
 * `SOURCES.sha256` lists every published file with its SHA-256. From the repository root: `sha256sum -c mvei/Millennium/SOURCES.sha256`.
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T05:36:17+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T11:55:34+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -201,7 +201,7 @@ The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 20 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 18 file(s)): made for the verified commit; it does not apply to the published commit as is
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 7 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 8 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 
 ## Files in this folder
 

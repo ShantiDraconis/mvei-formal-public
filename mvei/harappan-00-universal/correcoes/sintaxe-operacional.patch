@@ -1,0 +1,1484 @@
+--- a/INDUS-KERNEL-CORE/formal/lean/IndusCompilador.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/IndusCompilador.lean
+@@ -0,0 +1,216 @@
++/-
++  IndusCompilador.lean — acrescentado pelo MVEI (correção sintaxe-operacional; não é arquivo do autor).
++
++  A "operational grammar" que os 55 L####.lean propõem no comentário ("The sentence L#### is syntactically valid
++  under the operational grammar") é o compile_sentence de build_indus_kernel.py (INTENT → OP → STATE → RESULT),
++  traduzido aqui função a função com os campos dos 20 glifos das cadeias (data/glyphs_417.json). Uma sentença é
++  sintaticamente válida quando o compilador resolve a operação. `compilador_reproduz_registro` confere que esta
++  tradução dá exatamente o que o autor gravou em data/compiled_first_batch.json.
++-/
++
++namespace IndusKernel.Compilador
++
++/-- Ocorrência de `p` em `s` como substring (o `p in s` do Python). -/
++def prefixoEm (p : List Char) : List Char → Bool
++  | [] => p.isEmpty
++  | c :: r => p.isPrefixOf (c :: r) || prefixoEm p r
++
++def contem (p s : String) : Bool := prefixoEm p.toList s.toList
++
++structure Glifo where
++  id : String
++  nameFunctional : String
++  role : String
++  permission : String
++  vocalization : String
++  deriving DecidableEq, Repr
++
++/-- Os glifos de `data/glyphs_417.json` que aparecem nas 55 cadeias (cópia dos campos). -/
++def glifos : List Glifo :=
++  [⟨"G001", "NUM_TALLY_001", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G002", "NUM_TALLY_002", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G003", "NUM_TALLY_003", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G004", "NUM_TALLY_004", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G005", "NUM_TALLY_005", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G011", "NUM_TALLY_011", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G016", "NUM_TALLY_016", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G020", "NUM_TALLY_020", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G031", "NUM_TALLY_031", "QUANTITY_PARAM", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G041", "CONTAINER_041", "STORAGE_BUFFER", "PROTECTED_ACCESS", ""⟩,
++   ⟨"G061", "CONTAINER_061", "STORAGE_BUFFER", "PROTECTED_ACCESS", ""⟩,
++   ⟨"G101", "GRID_FIELD_101", "ALLOCATION_ZONE", "INSTITUTIONAL_CONTROL", ""⟩,
++   ⟨"G131", "CIRCLE_CYCLE_131", "TEMPORAL_CYCLE", "PUBLIC_VISIBLE", ""⟩,
++   ⟨"G161", "OPERATOR_TRIDENT_161", "ACTION_EXEC", "HIGH_AUTHORITY", ""⟩,
++   ⟨"G201", "HUMAN_AGENT_201", "ACTOR_AGENT", "HIGH_AUTHORITY", ""⟩,
++   ⟨"G251", "ANIMAL_NONFISH_251", "RESOURCE_ASSET", "INSTITUTIONAL_CONTROL", ""⟩,
++   ⟨"G291", "PLANT_CROP_291", "HARVEST_PRODUCE", "INSTITUTIONAL_CONTROL", ""⟩,
++   ⟨"G321", "ABSTRACT_LIGATURE_321", "RELATION_LINK", "PROTECTED_ACCESS", ""⟩,
++   ⟨"G381", "ARCH_BUILDING_381", "STRUCTURE_SPACE", "INSTITUTIONAL_CONTROL", ""⟩,
++   ⟨"G401", "MISC_RARE_401", "SPECIAL_UNIQUE", "HIGH_AUTHORITY", ""⟩]
++
++/-- Os ids do inventário: G001 .. G417. -/
++def pad3 (n : Nat) : String := if n < 10 then "00" ++ toString n else if n < 100 then "0" ++ toString n else toString n
++def inventario : List String := (List.range 417).map fun i => "G" ++ pad3 (i + 1)
++
++/-- `glyphs.get(gid)`: só os 20 glifos acima entram nas cadeias; um token fora do inventário dá `none`. -/
++def buscar (gid : String) : Option Glifo := glifos.find? (·.id == gid)
++
++def prioridade : List String :=
++  ["AUTH_EXEC", "ACTION_EXEC", "FLOW_TRANSFER", "VALIDATION_SEAL", "STORAGE_BUFFER", "HARVEST_PRODUCE"]
++
++/-- `classify_verb`. -/
++def verbo (c : List String) : String :=
++  match prioridade.find? (fun p => c.any fun gid => (buscar gid).any fun g => contem p g.role) with
++  | some p => p
++  | none =>
++    match c with
++    | _ :: b :: _ => match buscar b with
++      | some g => g.role
++      | none => "UNRESOLVED_OPERATION"
++    | _ => "UNRESOLVED_OPERATION"
++
++/-- `classify_subject`: os dois primeiros glifos, em ordem. -/
++def sujeitoDe : List String → String
++  | [] => "COLLECTIVE_ENTITY"
++  | gid :: r => match buscar gid with
++    | none => sujeitoDe r
++    | some g =>
++      if contem "HIGH_AUTHORITY" g.permission || contem "INSTITUTIONAL" g.permission then "INSTITUTIONAL_AUTHORITY"
++      else if contem "AGENT" g.role || contem "ACTOR" g.role then "HUMAN_AGENT"
++      else sujeitoDe r
++
++def sujeito (c : List String) : String := sujeitoDe (c.take 2)
++
++def romano : String → Option Nat
++  | "I" => some 1 | "II" => some 2 | "III" => some 3 | "IV" => some 4 | "V" => some 5 | _ => none
++
++def contagem (c : List String) : Nat :=
++  (c.filter fun gid => (buscar gid).any fun g => contem "NUM_TALLY" g.nameFunctional).length
++
++/-- `find_quantity`. -/
++def quantidadeDe (c : List String) : List String → Option Nat
++  | [] => none
++  | gid :: r => match buscar gid with
++    | none => quantidadeDe c r
++    | some g =>
++      if contem "QUANTITY" g.role || contem "NUM_TALLY" g.nameFunctional then
++        match romano (String.mk (g.vocalization.toList.map Char.toUpper)) with
++        | some n => some n
++        | none => if contagem c > 0 then some (contagem c) else quantidadeDe c r
++      else quantidadeDe c r
++
++def quantidade (c : List String) : Option Nat := quantidadeDe c c
++
++/-- `collect_modifiers`. -/
++def modificadores (c : List String) : List (String × String) :=
++  c.filterMap fun gid => (buscar gid).bind fun g =>
++    if ["DIRECTION", "ORIENT", "TEMPORAL", "CYCLE", "RELATION", "LINK"].any (contem · (String.mk (g.role.toList.map Char.toUpper)))
++    then some (g.role, gid) else none
++
++/-- `synthesize_predicate`. -/
++def predicado (v : String) : String :=
++  if contem "SEAL" v || contem "VALIDATION" v then "VALIDATED_SEALED"
++  else if contem "TRANSFER" v then "TRANSFERRED_COMMITTED"
++  else if contem "AUTH_EXEC" v || contem "ACTION_EXEC" v then "EXECUTED_RECORDED"
++  else if contem "HARVEST" v || contem "PRODUCE" v then "ACCUMULATED_STORED"
++  else if contem "STORAGE" v || contem "BUFFER" v then "STORED_PROTECTED"
++  else "STATE_MODIFIED"
++
++structure Registro where
++  sujeito : String
++  verbo : String
++  quantidade : Option Nat
++  predicado : String
++  modificadores : List (String × String)
++  deriving DecidableEq, Repr
++
++/-- `compile_sentence`. -/
++def compila (c : List String) : Registro :=
++  ⟨sujeito c, verbo c, quantidade c, predicado (verbo c), modificadores c⟩
++
++/-- Sintaticamente válida na gramática operacional do autor: o compilador resolve a operação. -/
++def sintaxeValida (c : List String) : Bool := verbo c != "UNRESOLVED_OPERATION"
++
++/-- As 55 linhas: id, cadeia (de `formal/lean/L####.lean`, igual à de `compiled_first_batch.json`) e o registro que o
++    autor gravou em `compiled_first_batch.json`. -/
++def linhas : List (Nat × List String × Registro) :=
++  [(1001, ["G001", "G020", "G016", "G041"], ⟨"COLLECTIVE_ENTITY", "STORAGE_BUFFER", some 3, "STORED_PROTECTED", []⟩),
++   (1002, ["G201", "G031", "G161", "G291"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1003, ["G001", "G002", "G003", "G004", "G005"], ⟨"COLLECTIVE_ENTITY", "QUANTITY_PARAM", some 5, "STATE_MODIFIED", []⟩),
++   (1004, ["G251", "G031", "G161"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1005, ["G321", "G291", "G161", "G031"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", [("RELATION_LINK", "G321")]⟩),
++   (1006, ["G001", "G001", "G001", "G016", "G201"], ⟨"COLLECTIVE_ENTITY", "QUANTITY_PARAM", some 4, "STATE_MODIFIED", []⟩),
++   (1007, ["G131", "G161", "G201", "G031"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", [("TEMPORAL_CYCLE", "G131")]⟩),
++   (1008, ["G101", "G381", "G201"], ⟨"INSTITUTIONAL_AUTHORITY", "STRUCTURE_SPACE", none, "STATE_MODIFIED", []⟩),
++   (1009, ["G061", "G031", "G001", "G002"], ⟨"COLLECTIVE_ENTITY", "STORAGE_BUFFER", some 3, "STORED_PROTECTED", []⟩),
++   (1010, ["G251", "G161", "G031", "G291"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1011, ["G201", "G201", "G161", "G031"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1012, ["G001", "G011", "G016", "G031"], ⟨"COLLECTIVE_ENTITY", "QUANTITY_PARAM", some 4, "STATE_MODIFIED", []⟩),
++   (1013, ["G291", "G161", "G201"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", none, "EXECUTED_RECORDED", []⟩),
++   (1014, ["G401", "G031", "G201", "G161"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1015, ["G321", "G131", "G161"], ⟨"COLLECTIVE_ENTITY", "ACTION_EXEC", none, "EXECUTED_RECORDED", [("RELATION_LINK", "G321"), ("TEMPORAL_CYCLE", "G131")]⟩),
++   (1016, ["G001", "G001", "G001", "G001", "G011"], ⟨"COLLECTIVE_ENTITY", "QUANTITY_PARAM", some 5, "STATE_MODIFIED", []⟩),
++   (1017, ["G291", "G291", "G031", "G001"], ⟨"INSTITUTIONAL_AUTHORITY", "HARVEST_PRODUCE", some 2, "ACCUMULATED_STORED", []⟩),
++   (1018, ["G201", "G381", "G101", "G131"], ⟨"INSTITUTIONAL_AUTHORITY", "STRUCTURE_SPACE", none, "STATE_MODIFIED", [("TEMPORAL_CYCLE", "G131")]⟩),
++   (1019, ["G061", "G061", "G031", "G161"], ⟨"COLLECTIVE_ENTITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1020, ["G251", "G251", "G161", "G031"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1021, ["G131", "G131", "G201", "G381"], ⟨"COLLECTIVE_ENTITY", "TEMPORAL_CYCLE", none, "STATE_MODIFIED", [("TEMPORAL_CYCLE", "G131"), ("TEMPORAL_CYCLE", "G131")]⟩),
++   (1022, ["G016", "G016", "G016", "G011"], ⟨"COLLECTIVE_ENTITY", "QUANTITY_PARAM", some 4, "STATE_MODIFIED", []⟩),
++   (1023, ["G201", "G161", "G291", "G031"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1024, ["G321", "G161", "G031", "G001"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 2, "EXECUTED_RECORDED", [("RELATION_LINK", "G321")]⟩),
++   (1025, ["G101", "G201", "G161"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", none, "EXECUTED_RECORDED", []⟩),
++   (1026, ["G061", "G161", "G201", "G031"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1027, ["G381", "G201", "G131"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTOR_AGENT", none, "STATE_MODIFIED", [("TEMPORAL_CYCLE", "G131")]⟩),
++   (1028, ["G251", "G291", "G161"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", none, "EXECUTED_RECORDED", []⟩),
++   (1029, ["G001", "G002", "G003", "G011"], ⟨"COLLECTIVE_ENTITY", "QUANTITY_PARAM", some 4, "STATE_MODIFIED", []⟩),
++   (1030, ["G401", "G201", "G161", "G031", "G291"], ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩),
++   (1035, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1037, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1042, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1043, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1050, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1051, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1059, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1060, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1066, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1068, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1073, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1077, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1081, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1086, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1089, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1093, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1096, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1101, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1104, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1109, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1112, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1118, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1121, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1126, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩),
++   (1129, ["Gujarat"], ⟨"COLLECTIVE_ENTITY", "UNRESOLVED_OPERATION", none, "STATE_MODIFIED", []⟩)]
++
++set_option maxRecDepth 400000 in
++theorem glifos_no_inventario : (glifos.all fun g => inventario.contains g.id) = true ∧
++    inventario.contains "Gujarat" = false := by decide
++
++set_option maxRecDepth 400000 in
++/-- O compilador traduzido reproduz exatamente o que o autor gravou para as 55 linhas. -/
++theorem compilador_reproduz_registro : (linhas.all fun l => compila l.2.1 == l.2.2) = true := by decide
++
++set_option maxRecDepth 400000 in
++theorem validas :
++    (linhas.filter fun l => sintaxeValida l.2.1).map (·.1) = [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030] := by decide
++
++set_option maxRecDepth 400000 in
++/-- As 25 com operação não resolvida são exatamente as de cadeia `["Gujarat"]`. -/
++theorem nao_resolvidas :
++    (linhas.filter fun l => !sintaxeValida l.2.1).map (·.1) = [1035, 1037, 1042, 1043, 1050, 1051, 1059, 1060, 1066, 1068, 1073, 1077, 1081, 1086, 1089, 1093, 1096, 1101, 1104, 1109, 1112, 1118, 1121, 1126, 1129] ∧
++    (linhas.filter fun l => l.2.1 = ["Gujarat"]).map (·.1) = [1035, 1037, 1042, 1043, 1050, 1051, 1059, 1060, 1066, 1068, 1073, 1077, 1081, 1086, 1089, 1093, 1096, 1101, 1104, 1109, 1112, 1118, 1121, 1126, 1129] := by decide
++
++/-- A L1030, que a leitura por adjacência rejeitava, compila: autoridade institucional executa e registra. -/
++theorem L1030_compila : compila ["G401", "G201", "G161", "G031", "G291"] =
++    ⟨"INSTITUTIONAL_AUTHORITY", "ACTION_EXEC", some 1, "EXECUTED_RECORDED", []⟩ := by decide
++
++
++end IndusKernel.Compilador
+--- a/INDUS-KERNEL-CORE/formal/lean/L1001.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1001.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1001
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1001_glyph_chain : List String := ["G001", "G020", "G016", "G041"]
+ def L1001_quantity : Nat := 3
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1001 is syntactically valid under the operational grammar."
+ 
+-theorem L1001_syntax_valid : True := by
+-  trivial
++theorem L1001_syntax_valid : Compilador.sintaxeValida L1001_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1002.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1002.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1002
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1002_glyph_chain : List String := ["G201", "G031", "G161", "G291"]
+ def L1002_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1002 is syntactically valid under the operational grammar."
+ 
+-theorem L1002_syntax_valid : True := by
+-  trivial
++theorem L1002_syntax_valid : Compilador.sintaxeValida L1002_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1003.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1003.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1003
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1003_glyph_chain : List String := ["G001", "G002", "G003", "G004", "G005"]
+ def L1003_quantity : Nat := 5
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1003 is syntactically valid under the operational grammar."
+ 
+-theorem L1003_syntax_valid : True := by
+-  trivial
++theorem L1003_syntax_valid : Compilador.sintaxeValida L1003_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1004.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1004.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1004
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1004_glyph_chain : List String := ["G251", "G031", "G161"]
+ def L1004_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1004 is syntactically valid under the operational grammar."
+ 
+-theorem L1004_syntax_valid : True := by
+-  trivial
++theorem L1004_syntax_valid : Compilador.sintaxeValida L1004_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1005.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1005.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1005
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1005_glyph_chain : List String := ["G321", "G291", "G161", "G031"]
+ def L1005_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1005 is syntactically valid under the operational grammar."
+ 
+-theorem L1005_syntax_valid : True := by
+-  trivial
++theorem L1005_syntax_valid : Compilador.sintaxeValida L1005_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1006.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1006.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1006
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1006_glyph_chain : List String := ["G001", "G001", "G001", "G016", "G201"]
+ def L1006_quantity : Nat := 4
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1006 is syntactically valid under the operational grammar."
+ 
+-theorem L1006_syntax_valid : True := by
+-  trivial
++theorem L1006_syntax_valid : Compilador.sintaxeValida L1006_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1007.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1007.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1007
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1007_glyph_chain : List String := ["G131", "G161", "G201", "G031"]
+ def L1007_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1007 is syntactically valid under the operational grammar."
+ 
+-theorem L1007_syntax_valid : True := by
+-  trivial
++theorem L1007_syntax_valid : Compilador.sintaxeValida L1007_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1008.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1008.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1008
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1008_glyph_chain : List String := ["G101", "G381", "G201"]
+ def L1008_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1008 is syntactically valid under the operational grammar."
+ 
+-theorem L1008_syntax_valid : True := by
+-  trivial
++theorem L1008_syntax_valid : Compilador.sintaxeValida L1008_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1009.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1009.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1009
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1009_glyph_chain : List String := ["G061", "G031", "G001", "G002"]
+ def L1009_quantity : Nat := 3
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1009 is syntactically valid under the operational grammar."
+ 
+-theorem L1009_syntax_valid : True := by
+-  trivial
++theorem L1009_syntax_valid : Compilador.sintaxeValida L1009_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1010.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1010.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1010
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1010_glyph_chain : List String := ["G251", "G161", "G031", "G291"]
+ def L1010_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1010 is syntactically valid under the operational grammar."
+ 
+-theorem L1010_syntax_valid : True := by
+-  trivial
++theorem L1010_syntax_valid : Compilador.sintaxeValida L1010_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1011.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1011.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1011
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1011_glyph_chain : List String := ["G201", "G201", "G161", "G031"]
+ def L1011_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1011 is syntactically valid under the operational grammar."
+ 
+-theorem L1011_syntax_valid : True := by
+-  trivial
++theorem L1011_syntax_valid : Compilador.sintaxeValida L1011_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1012.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1012.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1012
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1012_glyph_chain : List String := ["G001", "G011", "G016", "G031"]
+ def L1012_quantity : Nat := 4
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1012 is syntactically valid under the operational grammar."
+ 
+-theorem L1012_syntax_valid : True := by
+-  trivial
++theorem L1012_syntax_valid : Compilador.sintaxeValida L1012_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1013.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1013.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1013
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1013_glyph_chain : List String := ["G291", "G161", "G201"]
+ def L1013_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1013 is syntactically valid under the operational grammar."
+ 
+-theorem L1013_syntax_valid : True := by
+-  trivial
++theorem L1013_syntax_valid : Compilador.sintaxeValida L1013_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1014.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1014.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1014
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1014_glyph_chain : List String := ["G401", "G031", "G201", "G161"]
+ def L1014_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1014 is syntactically valid under the operational grammar."
+ 
+-theorem L1014_syntax_valid : True := by
+-  trivial
++theorem L1014_syntax_valid : Compilador.sintaxeValida L1014_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1015.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1015.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1015
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1015_glyph_chain : List String := ["G321", "G131", "G161"]
+ def L1015_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1015 is syntactically valid under the operational grammar."
+ 
+-theorem L1015_syntax_valid : True := by
+-  trivial
++theorem L1015_syntax_valid : Compilador.sintaxeValida L1015_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1016.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1016.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1016
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1016_glyph_chain : List String := ["G001", "G001", "G001", "G001", "G011"]
+ def L1016_quantity : Nat := 5
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1016 is syntactically valid under the operational grammar."
+ 
+-theorem L1016_syntax_valid : True := by
+-  trivial
++theorem L1016_syntax_valid : Compilador.sintaxeValida L1016_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1017.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1017.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1017
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1017_glyph_chain : List String := ["G291", "G291", "G031", "G001"]
+ def L1017_quantity : Nat := 2
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1017 is syntactically valid under the operational grammar."
+ 
+-theorem L1017_syntax_valid : True := by
+-  trivial
++theorem L1017_syntax_valid : Compilador.sintaxeValida L1017_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1018.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1018.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1018
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1018_glyph_chain : List String := ["G201", "G381", "G101", "G131"]
+ def L1018_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1018 is syntactically valid under the operational grammar."
+ 
+-theorem L1018_syntax_valid : True := by
+-  trivial
++theorem L1018_syntax_valid : Compilador.sintaxeValida L1018_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1019.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1019.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1019
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1019_glyph_chain : List String := ["G061", "G061", "G031", "G161"]
+ def L1019_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1019 is syntactically valid under the operational grammar."
+ 
+-theorem L1019_syntax_valid : True := by
+-  trivial
++theorem L1019_syntax_valid : Compilador.sintaxeValida L1019_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1020.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1020.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1020
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1020_glyph_chain : List String := ["G251", "G251", "G161", "G031"]
+ def L1020_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1020 is syntactically valid under the operational grammar."
+ 
+-theorem L1020_syntax_valid : True := by
+-  trivial
++theorem L1020_syntax_valid : Compilador.sintaxeValida L1020_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1021.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1021.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1021
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1021_glyph_chain : List String := ["G131", "G131", "G201", "G381"]
+ def L1021_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1021 is syntactically valid under the operational grammar."
+ 
+-theorem L1021_syntax_valid : True := by
+-  trivial
++theorem L1021_syntax_valid : Compilador.sintaxeValida L1021_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1022.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1022.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1022
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1022_glyph_chain : List String := ["G016", "G016", "G016", "G011"]
+ def L1022_quantity : Nat := 4
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1022 is syntactically valid under the operational grammar."
+ 
+-theorem L1022_syntax_valid : True := by
+-  trivial
++theorem L1022_syntax_valid : Compilador.sintaxeValida L1022_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1023.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1023.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1023
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1023_glyph_chain : List String := ["G201", "G161", "G291", "G031"]
+ def L1023_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1023 is syntactically valid under the operational grammar."
+ 
+-theorem L1023_syntax_valid : True := by
+-  trivial
++theorem L1023_syntax_valid : Compilador.sintaxeValida L1023_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1024.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1024.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1024
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1024_glyph_chain : List String := ["G321", "G161", "G031", "G001"]
+ def L1024_quantity : Nat := 2
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1024 is syntactically valid under the operational grammar."
+ 
+-theorem L1024_syntax_valid : True := by
+-  trivial
++theorem L1024_syntax_valid : Compilador.sintaxeValida L1024_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1025.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1025.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1025
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1025_glyph_chain : List String := ["G101", "G201", "G161"]
+ def L1025_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1025 is syntactically valid under the operational grammar."
+ 
+-theorem L1025_syntax_valid : True := by
+-  trivial
++theorem L1025_syntax_valid : Compilador.sintaxeValida L1025_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1026.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1026.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1026
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1026_glyph_chain : List String := ["G061", "G161", "G201", "G031"]
+ def L1026_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1026 is syntactically valid under the operational grammar."
+ 
+-theorem L1026_syntax_valid : True := by
+-  trivial
++theorem L1026_syntax_valid : Compilador.sintaxeValida L1026_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1027.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1027.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1027
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1027_glyph_chain : List String := ["G381", "G201", "G131"]
+ def L1027_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1027 is syntactically valid under the operational grammar."
+ 
+-theorem L1027_syntax_valid : True := by
+-  trivial
++theorem L1027_syntax_valid : Compilador.sintaxeValida L1027_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1028.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1028.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1028
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1028_glyph_chain : List String := ["G251", "G291", "G161"]
+ def L1028_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1028 is syntactically valid under the operational grammar."
+ 
+-theorem L1028_syntax_valid : True := by
+-  trivial
++theorem L1028_syntax_valid : Compilador.sintaxeValida L1028_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1029.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1029.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1029
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1029_glyph_chain : List String := ["G001", "G002", "G003", "G011"]
+ def L1029_quantity : Nat := 4
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1029 is syntactically valid under the operational grammar."
+ 
+-theorem L1029_syntax_valid : True := by
+-  trivial
++theorem L1029_syntax_valid : Compilador.sintaxeValida L1029_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1030.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1030.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1030
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1030_glyph_chain : List String := ["G401", "G201", "G161", "G031", "G291"]
+ def L1030_quantity : Nat := 1
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1030 is syntactically valid under the operational grammar."
+ 
+-theorem L1030_syntax_valid : True := by
+-  trivial
++theorem L1030_syntax_valid : Compilador.sintaxeValida L1030_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1035.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1035.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1035
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1035_glyph_chain : List String := ["Gujarat"]
+ def L1035_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1035 is syntactically valid under the operational grammar."
+ 
+-theorem L1035_syntax_valid : True := by
+-  trivial
++theorem L1035_syntax_valid : Compilador.sintaxeValida L1035_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1037.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1037.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1037
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1037_glyph_chain : List String := ["Gujarat"]
+ def L1037_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1037 is syntactically valid under the operational grammar."
+ 
+-theorem L1037_syntax_valid : True := by
+-  trivial
++theorem L1037_syntax_valid : Compilador.sintaxeValida L1037_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1042.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1042.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1042
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1042_glyph_chain : List String := ["Gujarat"]
+ def L1042_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1042 is syntactically valid under the operational grammar."
+ 
+-theorem L1042_syntax_valid : True := by
+-  trivial
++theorem L1042_syntax_valid : Compilador.sintaxeValida L1042_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1043.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1043.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1043
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1043_glyph_chain : List String := ["Gujarat"]
+ def L1043_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1043 is syntactically valid under the operational grammar."
+ 
+-theorem L1043_syntax_valid : True := by
+-  trivial
++theorem L1043_syntax_valid : Compilador.sintaxeValida L1043_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1050.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1050.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1050
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1050_glyph_chain : List String := ["Gujarat"]
+ def L1050_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1050 is syntactically valid under the operational grammar."
+ 
+-theorem L1050_syntax_valid : True := by
+-  trivial
++theorem L1050_syntax_valid : Compilador.sintaxeValida L1050_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1051.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1051.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1051
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1051_glyph_chain : List String := ["Gujarat"]
+ def L1051_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1051 is syntactically valid under the operational grammar."
+ 
+-theorem L1051_syntax_valid : True := by
+-  trivial
++theorem L1051_syntax_valid : Compilador.sintaxeValida L1051_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1059.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1059.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1059
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1059_glyph_chain : List String := ["Gujarat"]
+ def L1059_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1059 is syntactically valid under the operational grammar."
+ 
+-theorem L1059_syntax_valid : True := by
+-  trivial
++theorem L1059_syntax_valid : Compilador.sintaxeValida L1059_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1060.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1060.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1060
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1060_glyph_chain : List String := ["Gujarat"]
+ def L1060_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1060 is syntactically valid under the operational grammar."
+ 
+-theorem L1060_syntax_valid : True := by
+-  trivial
++theorem L1060_syntax_valid : Compilador.sintaxeValida L1060_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1066.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1066.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1066
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1066_glyph_chain : List String := ["Gujarat"]
+ def L1066_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1066 is syntactically valid under the operational grammar."
+ 
+-theorem L1066_syntax_valid : True := by
+-  trivial
++theorem L1066_syntax_valid : Compilador.sintaxeValida L1066_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1068.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1068.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1068
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1068_glyph_chain : List String := ["Gujarat"]
+ def L1068_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1068 is syntactically valid under the operational grammar."
+ 
+-theorem L1068_syntax_valid : True := by
+-  trivial
++theorem L1068_syntax_valid : Compilador.sintaxeValida L1068_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1073.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1073.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1073
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1073_glyph_chain : List String := ["Gujarat"]
+ def L1073_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1073 is syntactically valid under the operational grammar."
+ 
+-theorem L1073_syntax_valid : True := by
+-  trivial
++theorem L1073_syntax_valid : Compilador.sintaxeValida L1073_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1077.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1077.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1077
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1077_glyph_chain : List String := ["Gujarat"]
+ def L1077_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1077 is syntactically valid under the operational grammar."
+ 
+-theorem L1077_syntax_valid : True := by
+-  trivial
++theorem L1077_syntax_valid : Compilador.sintaxeValida L1077_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1081.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1081.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1081
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1081_glyph_chain : List String := ["Gujarat"]
+ def L1081_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1081 is syntactically valid under the operational grammar."
+ 
+-theorem L1081_syntax_valid : True := by
+-  trivial
++theorem L1081_syntax_valid : Compilador.sintaxeValida L1081_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1086.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1086.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1086
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1086_glyph_chain : List String := ["Gujarat"]
+ def L1086_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1086 is syntactically valid under the operational grammar."
+ 
+-theorem L1086_syntax_valid : True := by
+-  trivial
++theorem L1086_syntax_valid : Compilador.sintaxeValida L1086_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1089.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1089.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1089
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1089_glyph_chain : List String := ["Gujarat"]
+ def L1089_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1089 is syntactically valid under the operational grammar."
+ 
+-theorem L1089_syntax_valid : True := by
+-  trivial
++theorem L1089_syntax_valid : Compilador.sintaxeValida L1089_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1093.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1093.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1093
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1093_glyph_chain : List String := ["Gujarat"]
+ def L1093_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1093 is syntactically valid under the operational grammar."
+ 
+-theorem L1093_syntax_valid : True := by
+-  trivial
++theorem L1093_syntax_valid : Compilador.sintaxeValida L1093_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1096.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1096.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1096
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1096_glyph_chain : List String := ["Gujarat"]
+ def L1096_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1096 is syntactically valid under the operational grammar."
+ 
+-theorem L1096_syntax_valid : True := by
+-  trivial
++theorem L1096_syntax_valid : Compilador.sintaxeValida L1096_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1101.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1101.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1101
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1101_glyph_chain : List String := ["Gujarat"]
+ def L1101_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1101 is syntactically valid under the operational grammar."
+ 
+-theorem L1101_syntax_valid : True := by
+-  trivial
++theorem L1101_syntax_valid : Compilador.sintaxeValida L1101_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1104.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1104.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1104
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1104_glyph_chain : List String := ["Gujarat"]
+ def L1104_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1104 is syntactically valid under the operational grammar."
+ 
+-theorem L1104_syntax_valid : True := by
+-  trivial
++theorem L1104_syntax_valid : Compilador.sintaxeValida L1104_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1109.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1109.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1109
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1109_glyph_chain : List String := ["Gujarat"]
+ def L1109_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1109 is syntactically valid under the operational grammar."
+ 
+-theorem L1109_syntax_valid : True := by
+-  trivial
++theorem L1109_syntax_valid : Compilador.sintaxeValida L1109_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1112.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1112.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1112
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1112_glyph_chain : List String := ["Gujarat"]
+ def L1112_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1112 is syntactically valid under the operational grammar."
+ 
+-theorem L1112_syntax_valid : True := by
+-  trivial
++theorem L1112_syntax_valid : Compilador.sintaxeValida L1112_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1118.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1118.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1118
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1118_glyph_chain : List String := ["Gujarat"]
+ def L1118_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1118 is syntactically valid under the operational grammar."
+ 
+-theorem L1118_syntax_valid : True := by
+-  trivial
++theorem L1118_syntax_valid : Compilador.sintaxeValida L1118_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1121.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1121.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1121
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1121_glyph_chain : List String := ["Gujarat"]
+ def L1121_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1121 is syntactically valid under the operational grammar."
+ 
+-theorem L1121_syntax_valid : True := by
+-  trivial
++theorem L1121_syntax_valid : Compilador.sintaxeValida L1121_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1126.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1126.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1126
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1126_glyph_chain : List String := ["Gujarat"]
+ def L1126_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1126 is syntactically valid under the operational grammar."
+ 
+-theorem L1126_syntax_valid : True := by
+-  trivial
++theorem L1126_syntax_valid : Compilador.sintaxeValida L1126_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel
+--- a/INDUS-KERNEL-CORE/formal/lean/L1129.lean
++++ b/INDUS-KERNEL-CORE/formal/lean/L1129.lean
+@@ -7,15 +7,17 @@
+ -- Auto-generated stub for L1129
+ -- This is NOT a proof yet. It is a scaffold for the formal pipeline.
+ 
++import IndusCompilador
++
+ namespace IndusKernel
+ 
+ def L1129_glyph_chain : List String := ["Gujarat"]
+ def L1129_quantity : Nat := 0
+ 
+--- Proposed proposition (to be formalized):
++-- Proposed proposition (formalizada pelo MVEI em IndusCompilador.lean):
+ -- "The sentence L1129 is syntactically valid under the operational grammar."
+ 
+-theorem L1129_syntax_valid : True := by
+-  trivial
++theorem L1129_syntax_valid : Compilador.sintaxeValida L1129_glyph_chain = true := by
++  decide
+ 
+ end IndusKernel

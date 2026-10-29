@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T05:36:17+00:00, on commit `fbe8de962fe32fb68bb4a43a273d893cc6e10d12`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T11:55:34+00:00, on commit `fbe8de962fe32fb68bb4a43a273d893cc6e10d12`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -32,6 +32,10 @@ The `.lean` files of the verified commit declare 7 `theorem`/`lemma` (counting c
 | Reason | Theorems |
 |---|---:|
 | checked file by file: the written proof does not pass the kernel | 5 |
+
+### MVEI corrections
+
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/i-theology-unified mvei/i-theology-unified/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 
 ## Files in this folder
 

@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T05:36:17+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T11:55:34+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -78,7 +78,7 @@ The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/imports-no-topo.patch` (in order, after the ones above)
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 
 ## Files in this folder
 

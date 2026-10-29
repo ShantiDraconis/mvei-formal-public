@@ -1,0 +1,11 @@
+--- a/proofs/lean/divine-phonemes.lean
++++ b/proofs/lean/divine-phonemes.lean
+@@ -144,7 +144,7 @@
+ 
+ theorem most_have_vowel_u :
+   (Entities.all_entities.filter (fun e => e.phoneme.vowel_u)).length >= 3 := by
+-  rfl
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (exact?)
+ 
+ theorem mediation_shared :
+   FunctionalAttribute.Mediation ∈ Entities.yeshua.attributes ∧

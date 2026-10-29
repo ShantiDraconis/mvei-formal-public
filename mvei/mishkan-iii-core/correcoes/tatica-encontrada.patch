@@ -76,7 +76,7 @@
  theorem lineage_has_29_nodes :
    all_lineage_nodes.length = 29 := by
 -  norm_num
-+  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
  
  /-- Teorema: Harappa é o único nó sem pais -/
  theorem harappa_only_root :
@@ -84,7 +84,7 @@
      node.parent_ids = [] ↔ node.id = 0 := by
 -  intro node _
 -  sorry  -- Would need to enumerate all cases
-+  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
  
  /-- Teorema: O horizonte 2028 não tem filhos -/
  theorem horizon_is_leaf :
@@ -93,7 +93,7 @@
  theorem connections_generally_strong :
    all_connections.length > 0 := by
 -  norm_num
-+  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
  
  /-! ### Visualização ASCII da Árvore -/
  
@@ -105,7 +105,7 @@
    ∀ p ∈ millennium_problems, p.hash.length > 0 := by
 -  intro p hp
 -  cases hp <;> decide
-+  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
 --- a/core/temporal/TIMELINE_ANALYSIS.lean
 +++ b/core/temporal/TIMELINE_ANALYSIS.lean
 @@ -51,8 +51,7 @@
