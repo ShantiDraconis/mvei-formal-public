@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T11:55:34+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T18:57:14+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | stable | failed | 0 | 0 | 0 | 32 / 0 / 38 / 149 / 152 |
+| `.` | stable | failed | 0 | 0 | 0 | 42 / 0 / 47 / 130 / 152 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 32 |
-| Unique (name + statement) | 32 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 32 |
+| Counting each project | 42 |
+| Unique (name + statement) | 42 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 42 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -38,9 +38,18 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `459428bdf95732b153401
 | `ComplexDifferentiability.liouville` | `. (file by file)` | open | `sorryAx` |
 | `DerivativesTheory.deriv_inverse'` | `. (file by file)` | open | `sorryAx` |
 | `DerivativesTheory.differentiable_iff_left_right` | `. (file by file)` | open | `sorryAx` |
+| `DerivativesTheory.schwarz_theorem` | `. (file by file)` | open | `sorryAx` |
+| `DerivativesTheory.directional_deriv_eq_gradient` | `. (file by file)` | open | `sorryAx` |
+| `DerivativesTheory.gradient_steepest_ascent` | `. (file by file)` | open | `sorryAx` |
+| `DerivativesTheory.leibniz_rule` | `. (file by file)` | open | `sorryAx` |
 | `DerivativesTheory.lhopital_zero` | `. (file by file)` | open | `sorryAx` |
 | `DerivativesTheory.lhopital_infty` | `. (file by file)` | open | `sorryAx` |
 | `DerivativesTheory.convex_has_subderivative` | `. (file by file)` | open | `sorryAx` |
+| `DerivativesTheory.implicit_deriv` | `. (file by file)` | open | `sorryAx` |
+| `ImplicitFunctionTheory.implicit_function_2d` | `. (file by file)` | open | `sorryAx` |
+| `ImplicitFunctionTheory.implicit_function_deriv` | `. (file by file)` | open | `sorryAx` |
+| `ImplicitFunctionTheory.level_set_graph` | `. (file by file)` | open | `sorryAx` |
+| `ImplicitFunctionTheory.kkt_conditions` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.inverse_function_1d` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.deriv_inverse` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.submersion_has_section` | `. (file by file)` | open | `sorryAx` |
@@ -68,12 +77,12 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `459428bdf95732b153401
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting copies). The kernel checked 70 of them (32 closed, 0 conditional, 38 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 301 the kernel has no result:
+The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting copies). The kernel checked 89 of them (42 closed, 0 conditional, 47 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 282 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 152 |
-| checked file by file: the written proof does not pass the kernel | 149 |
+| checked file by file: the written proof does not pass the kernel | 130 |
 
 ### MVEI corrections
 
