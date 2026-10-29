@@ -1,0 +1,12 @@
+--- a/src/lean/BSD/Cohomology/TateShafarevich.lean
++++ b/src/lean/BSD/Cohomology/TateShafarevich.lean
+@@ -45,7 +45,8 @@
+ -/
+ 
+ /-- Sha is conjectured to be finite -/
+-axiom sha_finite_conjecture : ∀ (E : Sha), True  -- TODO: Sha is finite
++theorem sha_finite_conjecture : ∀ (E : Sha), True  -- TODO: Sha is finite := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-!
+ ## Cassels-Tate Pairing

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-28T19:11:15+00:00",
+ "generated_at": "2026-10-29T01:06:09+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -206,40 +206,85 @@
      "linha": 84,
      "nome": "AntiRHDefinitions.midpoint_is_half",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RHFramework"
+     ],
+     "erro": "linha 87: unsolved goals ρ : NonTrivialZero ⊢ 2⁻¹ = 0.5",
+     "motivo": "importa RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "anti_rh/lean/AntiRHDefinitions.lean",
      "linha": 90,
      "nome": "AntiRHDefinitions.delta_opposite",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RHFramework"
+     ],
+     "erro": "linha 93: unsolved goals ρ : NonTrivialZero ⊢ sorry = -sorry",
+     "motivo": "importa RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "anti_rh/lean/ExplicitFormulaModel.lean",
      "linha": 41,
      "nome": "ExplicitFormulaModel.rh_amplitude_eq_sqrt",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "AntiRHDefinitions",
+      "RHFramework"
+     ]
     },
     {
      "arquivo": "anti_rh/lean/ExplicitFormulaModel.lean",
      "linha": 48,
      "nome": "ExplicitFormulaModel.anti_rh_exceeds_sqrt",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "AntiRHDefinitions",
+      "RHFramework"
+     ],
+     "erro": "linha 59: application type mismatch absurd h hρ argument hρ has type ρ.beta ≠ 1 / 2 : Prop but is expected to have type ¬ρ.beta = 0.5 : Prop",
+     "motivo": "importa AntiRHDefinitions, RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "anti_rh/lean/ExplicitFormulaModel.lean",
      "linha": 61,
      "nome": "ExplicitFormulaModel.amplitude_bound",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "AntiRHDefinitions",
+      "RHFramework"
+     ],
+     "erro": "linha 96: failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Real.instDivInvMonoid', and it does not have executable code",
+     "motivo": "importa AntiRHDefinitions, RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "anti_rh/lean/RHFramework.lean",
@@ -251,7 +296,8 @@
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ]
+     ],
+     "erro": "linha 79: push_neg made no progress"
     },
     {
      "arquivo": "anti_rh/lean/RHFramework.lean",

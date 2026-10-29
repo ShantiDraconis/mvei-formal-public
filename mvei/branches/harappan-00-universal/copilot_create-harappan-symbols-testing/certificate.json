@@ -1,0 +1,212 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/create-harappan-symbols-testing",
+ "branch_state": "parada",
+ "head_commit": "02efd6f7318213fc2dd5c7f7f91ad7eb33b1d336",
+ "head_commit_date": "2025-11-30T11:35:28+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "02efd6f7318213fc2dd5c7f7f91ad7eb33b1d336",
+   "date": "2025-11-30T11:35:28+00:00",
+   "subject": "Add Coq proofs, notebooks, and complete repository structure"
+  },
+  {
+   "commit": "692032cdad5ec131644c28502ea86f69820a71d9",
+   "date": "2025-11-30T11:32:59+00:00",
+   "subject": "Add collapse module, agents, API, CLI, tests, and Lean proofs"
+  },
+  {
+   "commit": "40bf962fa51e442c12063d80c6314cca505a5b7d",
+   "date": "2025-11-30T11:03:03+00:00",
+   "subject": "Add initial repository structure with data files, core models, and analysis modules"
+  },
+  {
+   "commit": "e53825b5902e2c37e8425af08dbe2525d20a6c0e",
+   "date": "2025-11-30T10:43:38+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Harappan.CollapseAxioms.apply_collapse_preserves_id",
+   "file": "src/lean/Harappan/CollapseAxioms.lean",
+   "line": 124,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : CollapseOperator) (state : SymbolicState) : (apply_collapse op state).new_state.sign_id = state.sign_id"
+  },
+  {
+   "name": "Harappan.CollapseAxioms.apply_collapse_to_collapsed",
+   "file": "src/lean/Harappan/CollapseAxioms.lean",
+   "line": 130,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : CollapseOperator) (state : SymbolicState) (h : state.state = CollapseState.collapsed) : (apply_collapse op state).new_state = state"
+  },
+  {
+   "name": "Harappan.CollapseAxioms.reset_produces_zero_zero",
+   "file": "src/lean/Harappan/CollapseAxioms.lean",
+   "line": 145,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(state : SymbolicState) : (zero_zero_reset state).state = CollapseState.zero_zero"
+  },
+  {
+   "name": "Harappan.ConsistencyTheorems.empty_hypotheses_consistent",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 28,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": hypothesis_consistent []"
+  },
+  {
+   "name": "Harappan.ConsistencyTheorems.empty_states_consistent",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 59,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": CollapseSystemConsistent []"
+  },
+  {
+   "name": "Harappan.ConsistencyTheorems.empty_system_consistent",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 111,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ sys : SystemConsistent, sys.signs = []"
+  },
+  {
+   "name": "Harappan.ConsistencyTheorems.no_contradiction",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 66,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : Sign) (h1 h2 : Hypothesis) : h1.sign_id = s.id → h2.sign_id = s.id → h1.meaning = some \" \" → h2.meaning = some \" \" → h1 ∈ s.hypotheses → h2 ∈ s.hypotheses → False → False"
+  },
+  {
+   "name": "Harappan.ConsistencyTheorems.single_hypothesis_coherent",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 88,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : Hypothesis) : interpretation_coherent h"
+  },
+  {
+   "name": "Harappan.ConsistencyTheorems.single_mapping_consistent",
+   "file": "src/lean/Harappan/ConsistencyTheorems.lean",
+   "line": 39,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : Mapping) : mapping_consistent [m]"
+  },
+  {
+   "name": "Harappan.Phonology.phoneme_distance_nonneg",
+   "file": "src/lean/Harappan/Phonology.lean",
+   "line": 170,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(f1 f2 : PhonemeFeatures) : phoneme_distance f1 f2 ≥ 0"
+  },
+  {
+   "name": "Harappan.Phonology.phoneme_distance_symm",
+   "file": "src/lean/Harappan/Phonology.lean",
+   "line": 179,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(f1 f2 : PhonemeFeatures) : phoneme_distance f1 f2 = phoneme_distance f2 f1"
+  },
+  {
+   "name": "Harappan.Phonotactics.cv_valid",
+   "file": "src/lean/Harappan/Phonotactics.lean",
+   "line": 124,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(c v : PhonemeFeatures) (hc : is_consonant c = true) (hv : is_vowel v = true) : validate_sequence [c, v] = .valid"
+  },
+  {
+   "name": "Harappan.Phonotactics.empty_valid",
+   "file": "src/lean/Harappan/Phonotactics.lean",
+   "line": 118,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": validate_sequence [] = .valid"
+  },
+  {
+   "name": "Harappan.Phonotactics.single_valid",
+   "file": "src/lean/Harappan/Phonotactics.lean",
+   "line": 121,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : PhonemeFeatures) : validate_sequence [p] = .valid"
+  },
+  {
+   "name": "Harappan.Semantics.empty_graph_no_edges",
+   "file": "src/lean/Harappan/Semantics.lean",
+   "line": 105,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": let g : SemanticGraph"
+  },
+  {
+   "name": "Harappan.Semantics.node_membership_decidable",
+   "file": "src/lean/Harappan/Semantics.lean",
+   "line": 112,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(g : SemanticGraph) (node : String) : Decidable (has_node g node = true)"
+  },
+  {
+   "name": "Harappan.SignSet.unique_ids_preserved",
+   "file": "src/lean/Harappan/SignSet.lean",
+   "line": 24,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(signs : List Sign) (new_sign : Sign) (h_unique : has_unique_ids signs) (h_new_not_in : ∀ s ∈ signs, s.id ≠ new_sign.id) : has_unique_ids (new_sign :: signs)"
+  },
+  {
+   "name": "Harappan.UniversalGrammar.grammar_has_base_rules",
+   "file": "src/lean/Harappan/UniversalGrammar.lean",
+   "line": 119,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ g : Grammar, g.rules = default_rules → g.rules.length = 5"
+  },
+  {
+   "name": "Harappan.UniversalGrammar.word_is_well_formed",
+   "file": "src/lean/Harappan/UniversalGrammar.lean",
+   "line": 125,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : Word) : well_formed (.word w) = true"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "lakefile.lean": "ed7af4dc7243af3c7d23bd6e513da5b31b686a717ea648693273950832059674",
+  "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1",
+  "src/lean/Harappan/BasicTypes.lean": "3ae89f807e2a03ee901ef5b36de81b661e04f4796a922b09265322d847d142f2",
+  "src/lean/Harappan/CollapseAxioms.lean": "f513ca277a5e08ecf4adfd74c770e82efba9df0c894411e096e93aef4e51e14c",
+  "src/lean/Harappan/Semantics.lean": "3c69578d746b9c191f923bf10fa886f874d3218a06f342ff23e329ffbca7e4d9"
+ },
+ "published_at": "2026-10-29T01:37:17Z",
+ "certificate_sha256": "567f625b3980c4fbd0727448fbecba05519c00eb138866429934bdddfa82d2ff"
+}

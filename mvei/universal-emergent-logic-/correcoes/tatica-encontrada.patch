@@ -1,0 +1,23 @@
+--- a/formalization/lean/NCG/GridOperator.lean
++++ b/formalization/lean/NCG/GridOperator.lean
+@@ -22,17 +22,13 @@
+ /-! ### Lemma 1: Fundamental Spectral Gap -/
+ 
+ theorem ground_state_energy : blockResidue 2 = 0 := by
+-  unfold blockResidue
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ theorem first_excited_energy : blockResidue 3 = 7 := by
+-  unfold blockResidue
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ theorem spectral_gap : blockResidue 3 - blockResidue 2 = fundamentalGap := by
+-  unfold fundamentalGap
+-  rw [ground_state_energy, first_excited_energy]
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- The eigenvalue function is strictly increasing for n ≥ 2 -/
+ theorem blockResidue_increasing (n : ℕ) (h : n ≥ 2) :

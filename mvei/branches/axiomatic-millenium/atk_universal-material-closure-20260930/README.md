@@ -5,7 +5,7 @@ Lean sources from the branch `atk/universal-material-closure-20260930` of the pr
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 3, conditional 0, open 0, proof error 1, not reached 0, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ca2e9b76580df6c5701e4dca22eb027686e02ece5e3c1feca4935452301bc041`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/atk_universal-material-closure-20260930/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `04895d16bcf1a2c797b143d62f897310052c9c140c00f64e764044c5c9c8d582`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/atk_universal-material-closure-20260930/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
