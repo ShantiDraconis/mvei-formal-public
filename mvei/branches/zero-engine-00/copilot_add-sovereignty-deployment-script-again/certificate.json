@@ -1,0 +1,146 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/zero-engine-00",
+ "branch": "copilot/add-sovereignty-deployment-script-again",
+ "branch_state": "parada",
+ "head_commit": "013087b0b4784e01ca554fd6aec2aa538d25a3b8",
+ "head_commit_date": "2026-01-04T04:03:53+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "013087b0b4784e01ca554fd6aec2aa538d25a3b8",
+   "date": "2026-01-04T04:03:53+00:00",
+   "subject": "Fix Lean proof tactics for Boolean contradictions"
+  },
+  {
+   "commit": "8abb3d8343a248d5c2f5bcbc2c8c988b3694a8c7",
+   "date": "2026-01-04T04:01:23+00:00",
+   "subject": "Add comprehensive implementation summary documentation"
+  },
+  {
+   "commit": "10d12eb8ac84381782c6c24e60bb8b55987e1477",
+   "date": "2026-01-04T04:00:05+00:00",
+   "subject": "【天命】Add sovereign architecture deployment with formalized Lean proofs ᚠᛗ𓎉"
+  },
+  {
+   "commit": "c649608c094972342448458bc1b89755c2339316",
+   "date": "2026-01-04T03:44:46+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "ZeroEngine.architecture_unique",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 118,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (t1 t2 : Theory), t1.name = \" \" → t2.name = \" \" → t1.axioms = t2.axioms → t1.is_context_dependent = t2.is_context_dependent → t1 = t2"
+  },
+  {
+   "name": "ZeroEngine.correction_well_defined",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 50,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(f : ℝ → ℝ) : let c"
+  },
+  {
+   "name": "ZeroEngine.infrastructure_robust",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 82,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(sx : OrbitalInterface) (gc : CloudInterface) (h : orbital_sync_compatible sx gc) : sx.sync_enabled = true"
+  },
+  {
+   "name": "ZeroEngine.la2028_correction_exists",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 44,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (f : ℝ → ℝ), ∃ (c : ℝ), c = f 2028"
+  },
+  {
+   "name": "ZeroEngine.la2028_correction_factor",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 32,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (data_stream : ℝ → ℝ), ∃ (correction : ℝ), correction = data_stream la2028_year"
+  },
+  {
+   "name": "ZeroEngine.orbital_sync_reflexive",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 74,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(sx : OrbitalInterface) (gc : CloudInterface) : orbital_sync_compatible sx gc → orbital_sync_compatible sx gc"
+  },
+  {
+   "name": "ZeroEngine.sovereign_architecture_finalized",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 104,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬(∃ (old_theory : Theory), is_old_theory old_theory ∧ ∀ (context : String), old_theory.is_context_dependent = false)"
+  },
+  {
+   "name": "ZeroEngine.spacex_orbital_sync",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 63,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(sx : OrbitalInterface) (gc : CloudInterface) (h_sync : sx.sync_enabled = true) (h_avail : gc.availability ≥ 0.99) (h_latency : gc.latency_ms ≤ 100) : orbital_sync_compatible sx gc"
+  },
+  {
+   "name": "ZeroEngine.system_consistent",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 140,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (sx : OrbitalInterface) (gc : CloudInterface), sx.sync_enabled = true → gc.availability > 0 → ∃ (state : Bool), state = true"
+  },
+  {
+   "name": "ZeroEngine.verification_complete",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 132,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(data_correction : ∃ c, c = (fun _ => 0 : ℝ → ℝ) 2028) (orbital_ready : ∃ sx gc, orbital_sync_compatible sx gc) (architecture_final : ¬∃ t, is_old_theory t ∧ ∀ c, t.is_context_dependent = false) : True"
+  },
+  {
+   "name": "ZeroEngine.zero_engine_sound",
+   "file": "src/formal_verification/ZeroEngine.lean",
+   "line": 149,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": (∀ f, ∃ c, c = f 2028) ∧ (∃ sx gc, orbital_sync_compatible sx gc → sx.sync_enabled = true) ∧ (¬∃ t, is_old_theory t ∧ ∀ c, t.is_context_dependent = false)"
+  }
+ ],
+ "closed": 6,
+ "files_sha256": {
+  "lakefile.lean": "734097a5637f12c420533d87738f72c05ba8e0aed03d5a92c39246ec989bea2e",
+  "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1",
+  "src/formal_verification/ZeroEngine.lean": "15f60121895ee981b6e978a51203696608087fb44c0a9748472f925b0374de59"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "ad43ab7a28486abcaad1d25b074d4a1be660929a2b3a407c1d2857869f659c1d"
+}

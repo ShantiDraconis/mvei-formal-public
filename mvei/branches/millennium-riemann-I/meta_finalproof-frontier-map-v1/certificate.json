@@ -1,0 +1,194 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-riemann-I",
+ "branch": "meta/finalproof-frontier-map-v1",
+ "branch_state": "parada",
+ "head_commit": "46c4714e0d42868152e3a612c9e89004389092d4",
+ "head_commit_date": "2026-09-26T02:09:05+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "46c4714e0d42868152e3a612c9e89004389092d4",
+   "date": "2026-09-26T02:09:05+01:00",
+   "subject": "formal: add inhabited 003 assembly theorem from exact lemmas"
+  },
+  {
+   "commit": "533e324897f0cfcd94fccbf2f7cb01a3b6bc7534",
+   "date": "2026-09-26T02:08:26+01:00",
+   "subject": "formal: add 003 endpoint composition laws"
+  },
+  {
+   "commit": "ca393b77339a5e20cc9e9aef52dfaac6b1fa2fac",
+   "date": "2026-09-26T02:06:54+01:00",
+   "subject": "restore: reinstate 003 fail-closed proof target state"
+  },
+  {
+   "commit": "b9cd2a694dbfd529107e036805e45d26ff5eaf64",
+   "date": "2026-09-26T02:06:51+01:00",
+   "subject": "restore: reinstate 003 fail-closed proof target state"
+  },
+  {
+   "commit": "85c8279fb0e466c6d0260437ce1611a6ae5089c4",
+   "date": "2026-09-26T02:05:27+01:00",
+   "subject": "rollback: remove uninhabited 003 claim, keep certified AXM-002"
+  },
+  {
+   "commit": "c02ff51c9232cb3a91c254785cb9a97075d04ec2",
+   "date": "2026-09-26T02:05:24+01:00",
+   "subject": "rollback: remove uninhabited 003 claim, keep certified AXM-002"
+  },
+  {
+   "commit": "3b4e07470675b5e497d4c89c3b8c36a615844243",
+   "date": "2026-09-26T02:04:25+01:00",
+   "subject": "meta: bind 003 claim to exact Lean proof target"
+  },
+  {
+   "commit": "29569153221479b618bbf2f71feaeee0b0ccb01b",
+   "date": "2026-09-26T02:03:59+01:00",
+   "subject": "formal: add exact 003 endpoint proof target"
+  },
+  {
+   "commit": "336f956bb4e8229e93b8f7cdc230d8be836b6118",
+   "date": "2026-09-26T02:02:17+01:00",
+   "subject": "meta: anchor 003 endpoint claim on certified AXM-002 core B"
+  },
+  {
+   "commit": "af6a370ece5f876c777a2f82f52f7fac14f504d4",
+   "date": "2026-09-26T01:57:33+01:00",
+   "subject": "cert: add preparatory AXM-RH-ENDPOINT-003"
+  },
+  {
+   "commit": "e9275b6a47d1f650805e25328a4d71ffbd056ade",
+   "date": "2026-09-26T01:53:17+01:00",
+   "subject": "cert: bind local FinalProof to certified AXM-CROSS-SIGNATURE-002"
+  },
+  {
+   "commit": "099437ef1f7b2f0e2a89ebcedc139cba0d174610",
+   "date": "2026-09-26T01:51:02+01:00",
+   "subject": "ledger: add local scientific RED view"
+  },
+  {
+   "commit": "556ce1ee2f509899429374bd3a1fae62127d1b1d",
+   "date": "2026-09-26T01:51:00+01:00",
+   "subject": "ledger: add local frontier RED view"
+  },
+  {
+   "commit": "b1325f32c0ecac02d31e20ff7ca7484e98d58ec1",
+   "date": "2026-09-26T01:50:58+01:00",
+   "subject": "cert: add local AXM-CROSS-SIGNATURE-002 claim"
+  },
+  {
+   "commit": "3303f1d61db936977caa2e79984211bf4210f7d9",
+   "date": "2026-09-26T01:16:24+01:00",
+   "subject": "formal: add FinalProof frontier theorem"
+  },
+  {
+   "commit": "703809f6da858fe6d9780095c965de41c789aed6",
+   "date": "2026-09-26T01:12:54+01:00",
+   "subject": "meta: add FinalProof frontier map"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "FinalProof.rh003_all_requirements_iff",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 28,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements),   r.closed ↔     r.gamma_provenance ∧       r.gamma_normalization_contract ∧         r.D_struct_certified ∧           r.D_spectral_certified ∧ r.SpectralExclusion_GREEN ∧ r.axiom_free_classical_endpoint_proof"
+  },
+  {
+   "name": "FinalProof.rh003_assemble",
+   "file": "FinalProof/EndpointProofTarget.lean",
+   "line": 23,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements),   r.gamma_provenance →     r.gamma_normalization_contract →       r.D_struct_certified →         r.D_spectral_certified → r.SpectralExclusion_GREEN → r.axiom_free_classical_endpoint_proof → r.closed"
+  },
+  {
+   "name": "FinalProof.rh003_closes_from_requirements",
+   "file": "FinalProof/EndpointProofTarget.lean",
+   "line": 18,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.closed"
+  },
+  {
+   "name": "FinalProof.rh003_has_D_spectral",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 16,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.D_spectral_certified"
+  },
+  {
+   "name": "FinalProof.rh003_has_D_struct",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 12,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.D_struct_certified"
+  },
+  {
+   "name": "FinalProof.rh003_has_SpectralExclusion",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 20,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.SpectralExclusion_GREEN"
+  },
+  {
+   "name": "FinalProof.rh003_has_axiom_free_endpoint",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 24,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.axiom_free_classical_endpoint_proof"
+  },
+  {
+   "name": "FinalProof.rh003_has_gamma_normalization",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 8,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.gamma_normalization_contract"
+  },
+  {
+   "name": "FinalProof.rh003_has_gamma_provenance",
+   "file": "FinalProof/EndpointLaws.lean",
+   "line": 4,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (r : FinalProof.RH003Requirements), r.closed → r.gamma_provenance"
+  },
+  {
+   "name": "FinalProof.rh_endpoint_unreachable_without_control",
+   "file": "FinalProof/FrontierTheorem.lean",
+   "line": 11,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {A P B : Prop}, FinalProof.RHEndpointFrontier A P B → ¬B"
+  }
+ ],
+ "closed": 10,
+ "files_sha256": {
+  "FinalProof/EndpointLaws.lean": "31cf4dbd85641c05203302f74a57ee022b000d2c8e046dde1f5608e6847e1f3b",
+  "FinalProof/EndpointProofTarget.lean": "79da9f407e7d673e7c460fb4551bf6b0e344305b1044397ea1e8c7833c45d24f",
+  "FinalProof/FrontierTheorem.lean": "cfa0a54c807e43d7e07788df101b90f1f28844f0ecd4703f260c2df946aecb65",
+  "lakefile.lean": "b250ba6438b69a993a366a48c7cb982811a868b94faf8c90429a93399faca955",
+  "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "23740f0ce86645af4e08d68c2817e59a00b557f221f68b432dd2f2168b47a5e6"
+}

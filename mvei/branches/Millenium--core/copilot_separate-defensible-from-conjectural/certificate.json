@@ -1,0 +1,392 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Millenium--core",
+ "branch": "copilot/separate-defensible-from-conjectural",
+ "branch_state": "incorporada",
+ "head_commit": "64e43956afbd6fd29ad9b973eb8389559ba9cfbc",
+ "head_commit_date": "2026-04-08T14:01:47-03:00",
+ "history_not_on_default_branch": [],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.14.0",
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "MillenniumCore.UI.classical_add",
+   "file": "FORMAL/Lean4/Core/Universe.lean",
+   "line": 108,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(a b : ℝ) : UI.Real a +ᵢ UI.Real b = UI.Real (a + b)"
+  },
+  {
+   "name": "MillenniumCore.UI.classical_div",
+   "file": "FORMAL/Lean4/Core/Universe.lean",
+   "line": 99,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(a b : ℝ) (hb : b ≠ 0) : UI.Real a /ᵢ UI.Real b = UI.Real (a / b)"
+  },
+  {
+   "name": "MillenniumCore.UI.ind_ne_zero",
+   "file": "FORMAL/Lean4/Core/Universe.lean",
+   "line": 104,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": 𝕀 ≠ UI.Real 0"
+  },
+  {
+   "name": "MillenniumCore.UI.ind_not_real",
+   "file": "FORMAL/Lean4/Core/Universe.lean",
+   "line": 44,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(r : ℝ) : UI.Ind ≠ UI.Real r"
+  },
+  {
+   "name": "MillenniumCore.UI.real_ne_ind",
+   "file": "FORMAL/Lean4/Core/Universe.lean",
+   "line": 48,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(r : ℝ) : UI.Real r ≠ UI.Ind"
+  },
+  {
+   "name": "MillenniumCore.UI.zero_div_zero",
+   "file": "FORMAL/Lean4/Core/Universe.lean",
+   "line": 93,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": UI.Real 0 /ᵢ UI.Real 0 = 𝕀"
+  },
+  {
+   "name": "TIF.TIF.TIF.A10_nonunique_forbids_collapse",
+   "file": "Core/Collapse.lean",
+   "line": 494,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (h : (resolutionSet σ e).length ≠ 1) : collapseOp σ e = none"
+  },
+  {
+   "name": "TIF.TIF.TIF.A11_local_noncontradiction",
+   "file": "Core/Collapse.lean",
+   "line": 503,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬ satisfies { equations"
+  },
+  {
+   "name": "TIF.TIF.TIF.A15_monotone_refinement",
+   "file": "Core/Collapse.lean",
+   "line": 530,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ σ' : State) (e : Expr) (hext : σ'.extends σ) (hadm : collapseAdmissible σ e) : σ'.constraints.length > 0"
+  },
+  {
+   "name": "TIF.TIF.TIF.A16_collapse_idempotent",
+   "file": "Core/Collapse.lean",
+   "line": 539,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : collapseOp σ e = some v) : collapseOp σ (.term (.cst v)) = some v"
+  },
+  {
+   "name": "TIF.TIF.TIF.A1_existence_base",
+   "file": "Core/Collapse.lean",
+   "line": 419,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ _ : IndetConst, True"
+  },
+  {
+   "name": "TIF.TIF.TIF.A2_existence_classes",
+   "file": "Core/Collapse.lean",
+   "line": 435,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ k : ℕ, ∃ _ : IndetConst, True"
+  },
+  {
+   "name": "TIF.TIF.TIF.A3_not_classical_real",
+   "file": "Core/Collapse.lean",
+   "line": 440,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.TIF.A4_not_classical_complex",
+   "file": "Core/Collapse.lean",
+   "line": 450,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.TIF.A5_distinct_from_classical",
+   "file": "Core/Collapse.lean",
+   "line": 455,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(i : IndetConst) (c : ClassicalConst) : Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.TIF.A6_extended_operators",
+   "file": "Core/Collapse.lean",
+   "line": 460,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ op : ClassicalOp, ∃ extOp : ExtendedOp, extOp = .extended op"
+  },
+  {
+   "name": "TIF.TIF.TIF.A7_extension_coincides_classical",
+   "file": "Core/Collapse.lean",
+   "line": 469,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : ClassicalOp) (t₁ t₂ : Term) (h₁ : t₁.isClassical = true) (h₂ : t₂.isClassical = true) : (Term.app (.classical op) t₁ t₂).isClassical = true"
+  },
+  {
+   "name": "TIF.TIF.TIF.A9_unique_resolution_implies_collapse",
+   "file": "Core/Collapse.lean",
+   "line": 487,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : resolutionSet σ e = [v]) : collapseOp σ e = some v"
+  },
+  {
+   "name": "TIF.TIF.TIF.Collapse_unique",
+   "file": "Core/Collapse.lean",
+   "line": 577,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(e : Expr) (σ : State) (v₁ v₂ : ClassicalConst) (h₁ : Collapse e σ = some v₁) (h₂ : Collapse e σ = some v₂) : v₁ = v₂"
+  },
+  {
+   "name": "TIF.TIF.TIF.classical_reduction",
+   "file": "Core/Collapse.lean",
+   "line": 545,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Formula) (h : universallyValid φ) : classicallyValid φ"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_uniqueness",
+   "file": "Core/Collapse.lean",
+   "line": 554,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v₁ v₂ : ClassicalConst) (h₁ : collapseOp σ e = some v₁) (h₂ : collapseOp σ e = some v₂) : v₁ = v₂"
+  },
+  {
+   "name": "TIF.TIF.TIF.indet_isolation",
+   "file": "Core/Collapse.lean",
+   "line": 562,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Formula) (σ : State) (hφ : ∀ c ∈ σ.constraints, c.sym = .block) : satisfies σ (.atom .top)"
+  },
+  {
+   "name": "TIF.TIF.collapse_A10",
+   "file": "Core/Collapse.lean",
+   "line": 296,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hnone : res Σ φ = none) : collapse res Σ φ = φ"
+  },
+  {
+   "name": "TIF.TIF.collapse_A8",
+   "file": "Core/Collapse.lean",
+   "line": 272,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hcl : classicalFrag φ) : collapse res Σ φ = φ"
+  },
+  {
+   "name": "TIF.TIF.collapse_A9",
+   "file": "Core/Collapse.lean",
+   "line": 287,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) (hres : res Σ φ = some v) : collapse res Σ φ = syntacticCollapse (some v) φ"
+  },
+  {
+   "name": "TIF.TIF.collapse_classical_fragment_stable",
+   "file": "Core/Collapse.lean",
+   "line": 348,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hcl_res : ∀ v, res Σ φ = some v → res Σ (syntacticCollapse (some v) φ) = some v) : ∀ ψ : IndeterminateExpr, classicalFrag ψ → collapse res Σ ψ = ψ"
+  },
+  {
+   "name": "TIF.TIF.collapse_div_zero_form",
+   "file": "Core/Collapse.lean",
+   "line": 378,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) (hform : Σ.equations.any (fun eq => eq.lhs == IndeterminateExpr.indeterminate && eq.rhs == binOp OpSymbol.Div e (const 0)) = true) (res_correct : res Σ (binOp OpSymbol.Div e (const 0)) = some v) : collapse res Σ (binOp OpSymbol.Div e (const 0)) = v"
+  },
+  {
+   "name": "TIF.TIF.collapse_idempotent",
+   "file": "Core/Collapse.lean",
+   "line": 320,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hstable : ∀ v, res Σ φ = some v → res Σ v = some v) : collapse res Σ (collapse res Σ φ) = collapse res Σ φ"
+  },
+  {
+   "name": "TIF.TIF.collapse_implies_rewrite_star",
+   "file": "Core/Collapse.lean",
+   "line": 391,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(res : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr) (Σ : MetaArithmeticState) (φ v : IndeterminateExpr) (hcol : collapse res Σ φ = v) (hv : classicalFrag v) : RewriteStar Σ φ v"
+  },
+  {
+   "name": "TIF.TIF.collapse_recovery",
+   "file": "Core/Collapse.lean",
+   "line": 364,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (v : IndeterminateExpr) (hv : classicalFrag v) (res_correct : res Σ indeterminate = some v) : collapse res Σ indeterminate = v"
+  },
+  {
+   "name": "TIF.adm_empty",
+   "file": "Core/Eval.lean",
+   "line": 101,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) : Adm (State.empty) v"
+  },
+  {
+   "name": "TIF.blocked_of_vacuous",
+   "file": "Core/Collapse.lean",
+   "line": 169,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : Expr α) (hvac : ∀ v : Valuation α, ¬ Adm Σ v) : isBlocked Σ e"
+  },
+  {
+   "name": "TIF.classical_collapse_agreement",
+   "file": "Core/Collapse.lean",
+   "line": 182,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : CExpr α) (v₀ : Valuation α) (c : α) (hadm : ∀ v : Valuation α, Adm Σ v ↔ v = v₀) (heval : evalC v₀ e = some c) : Collapse' Σ (CExpr.embed e) = some c"
+  },
+  {
+   "name": "TIF.collapse'_none_iff",
+   "file": "Core/Collapse.lean",
+   "line": 141,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : Expr α) : Collapse' Σ e = none ↔ ¬(∃ c : α, (∃ v : Valuation α, Adm Σ v) ∧ UniquelyResolves Σ e c)"
+  },
+  {
+   "name": "TIF.evalC_add",
+   "file": "Core/Eval.lean",
+   "line": 146,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.add e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => some (a + b) | _, _ => none"
+  },
+  {
+   "name": "TIF.evalC_const",
+   "file": "Core/Eval.lean",
+   "line": 143,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (c : α) : evalC v (CExpr.const c) = some c"
+  },
+  {
+   "name": "TIF.evalC_div",
+   "file": "Core/Eval.lean",
+   "line": 164,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.div e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => if b = 0 then none else some (a / b) | _, _ => none"
+  },
+  {
+   "name": "TIF.evalC_div_nonzero",
+   "file": "Core/Eval.lean",
+   "line": 170,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) (a b : α) (h₁ : evalC v e₁ = some a) (h₂ : evalC v e₂ = some b) (hb : b ≠ 0) : evalC v (CExpr.div e₁ e₂) = some (a / b)"
+  },
+  {
+   "name": "TIF.evalC_eq_eval",
+   "file": "Core/Eval.lean",
+   "line": 122,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (e : CExpr α) : evalC v e = eval v (CExpr.embed e)"
+  },
+  {
+   "name": "TIF.evalC_mul",
+   "file": "Core/Eval.lean",
+   "line": 158,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.mul e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => some (a * b) | _, _ => none"
+  },
+  {
+   "name": "TIF.evalC_sub",
+   "file": "Core/Eval.lean",
+   "line": 152,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.sub e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => some (a - b) | _, _ => none"
+  },
+  {
+   "name": "TIF.evalC_var",
+   "file": "Core/Eval.lean",
+   "line": 140,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (x : String) : evalC v (CExpr.var x) = some (v x)"
+  },
+  {
+   "name": "TIF.eval_const",
+   "file": "Core/Eval.lean",
+   "line": 81,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "[Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (c : α) : eval v (Expr.const c) = some c"
+  },
+  {
+   "name": "TIF.eval_indet",
+   "file": "Core/Eval.lean",
+   "line": 62,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "[Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (k : IndetClass) : eval v (Expr.indet k) = none"
+  },
+  {
+   "name": "TIF.eval_var",
+   "file": "Core/Eval.lean",
+   "line": 73,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "[Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (x : String) : eval v (Expr.var x) = some (v x)"
+  }
+ ],
+ "closed": 6,
+ "files_sha256": {
+  "FORMAL/Lean4/Core/Universe.lean": "7d2b0585483d9a181b92e128ebb644134d4ad315125aa9536838061ae577cd91",
+  "FORMAL/Lean4/Core/lakefile.lean": "c7722c4abfea2081b63f62abf5cc4ef28a24a14afabd93dc737dc8c39bb7bbe2"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "d479f8c59f8e7a5390f889d2cd9d54299974b46431c43e0d0816fc73b713c9ee"
+}

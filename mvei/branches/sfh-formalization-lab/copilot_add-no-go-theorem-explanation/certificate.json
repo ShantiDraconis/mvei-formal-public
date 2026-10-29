@@ -1,0 +1,86 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/sfh-formalization-lab",
+ "branch": "copilot/add-no-go-theorem-explanation",
+ "branch_state": "parada",
+ "head_commit": "54923127460e63281435ac4be4a38dbd196d5703",
+ "head_commit_date": "2026-02-05T02:27:08+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "54923127460e63281435ac4be4a38dbd196d5703",
+   "date": "2026-02-05T02:27:08+00:00",
+   "subject": "Add core formalizations and implementations"
+  },
+  {
+   "commit": "d094e868df09edf35368375039007b547650ec62",
+   "date": "2026-02-05T02:19:15+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "no_go_theorem",
+   "file": "lean/SFH.lean",
+   "line": 139,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(S : SentienceMeasure) (h_axiom_a : axiom_null_micro_sentience S) (h_axiom_c : axiom_refinement_invariance S) (h_axiom_d : axiom_structural_closure S) : ∀ (X : System), X.vertices.card < ω → S X = 0"
+  },
+  {
+   "name": "positive_sentience_requires_axiom_rejection",
+   "file": "lean/SFH.lean",
+   "line": 158,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : SentienceMeasure) (X : System) (h_positive : S X > 0) : ¬axiom_null_micro_sentience S ∨ ¬axiom_compositional_additivity S ∨ ¬axiom_refinement_invariance S ∨ ¬axiom_structural_closure S"
+  },
+  {
+   "name": "sfh_rejects_axiom_d",
+   "file": "lean/SFH.lean",
+   "line": 192,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(field : SentienceField) (h_field_nonzero : ∃ X, field.field_value X > 0) : ¬axiom_structural_closure (sfh_sentience_measure field)"
+  },
+  {
+   "name": "single_component_zero",
+   "file": "lean/SFH.lean",
+   "line": 131,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : SentienceMeasure) (h_axiom_a : axiom_null_micro_sentience S) (m : Microcomponent) : S (singleton_system m) = 0"
+  },
+  {
+   "name": "zero_preservation_disconnected",
+   "file": "lean/SFH.lean",
+   "line": 106,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : SentienceMeasure) (h_axiom_a : axiom_null_micro_sentience S) (h_axiom_b : axiom_compositional_additivity S) : ∀ (X : System), is_disconnected X → S X = 0"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "lean/SFH.lean": "7598ff173c381fa0fdad5781e435c4252f83946c8bacb69cff84a77914216415"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "f29a5ee87129ef640d00dd5bb838726f94628e78d3255ba12a45c69a7a95521b"
+}

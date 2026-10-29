@@ -1,0 +1,481 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Millennium-rh-energy-torus-quantum",
+ "branch": "copilot/add-latest-docs-for-energy-torus",
+ "branch_state": "parada",
+ "head_commit": "4acc9a232abdbd0d4bf4d76ae6dbc038e772040d",
+ "head_commit_date": "2025-12-02T16:38:14+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "4acc9a232abdbd0d4bf4d76ae6dbc038e772040d",
+   "date": "2025-12-02T16:38:14+00:00",
+   "subject": "Add Isabelle theories, LaTeX papers and documentation"
+  },
+  {
+   "commit": "9e93559e7d74d52b3151564f10068b5ad78ac240",
+   "date": "2025-12-02T16:28:04+00:00",
+   "subject": "Add Python tests, Lean4 and Coq formalization files"
+  },
+  {
+   "commit": "ad282d18656056d0066af7a1815176c81777c3df",
+   "date": "2025-12-02T16:17:31+00:00",
+   "subject": "Add base configuration files and Python source modules"
+  },
+  {
+   "commit": "e5acbcf514fc254c2e7feb7c186b33b69a3f4036",
+   "date": "2025-12-02T16:04:33+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.36.0-rc2"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Riemann.C1_nonneg",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 59,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(cd : CurvatureDecomposition) (σ : ℝ) : 0 ≤ cd.C1 σ"
+  },
+  {
+   "name": "Riemann.C1_symmetric",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 64,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(cd : CurvatureDecomposition) (σ : ℝ) : cd.C1 σ = cd.C1 (1 - σ)"
+  },
+  {
+   "name": "Riemann.C2_symmetric",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 69,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(cd : CurvatureDecomposition) (σ : ℝ) : cd.C2 σ = cd.C2 (1 - σ)"
+  },
+  {
+   "name": "Riemann.RF1_characterization",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hT_large : T > 100) (hwellbehaved : ∀ σ ∈ Set.Ioo 0 1, Differentiable ℝ (fun t => potential σ t)) : RF1Condition w T hT ↔ ∃ ρ : ℂ, IsNontrivialZero ρ ∧ ρ ∉ CriticalLine"
+  },
+  {
+   "name": "Riemann.RF1_creates_extra_critical_points",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 53,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (ev : ExtraValleyMatchingEnergy w T hT) : ∃ (cp1 cp2 : CriticalPoint), cp1.σ = ev.σ₀ ∧ cp2.σ = 1 - ev.σ₀"
+  },
+  {
+   "name": "Riemann.RF1_numerical_criterion",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 59,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (σ₀ : ℝ) (hσ₀ : 0 < σ₀ ∧ σ₀ < 0.5) (hderiv : |deriv (energyFunctional w T hT) σ₀| < ε) (hcurv : deriv (deriv (energyFunctional w T hT)) σ₀ > δ) (henergy : |energyFunctional w T hT σ₀ - energyFunctional w T hT (1/2)| < ε) (hε : ε > 0) (hδ : δ > 0) : True"
+  },
+  {
+   "name": "Riemann.RF1_refutation",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 13,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (ev : ExtraValleyMatchingEnergy w T hT) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "Riemann.RF2_numerical_criterion",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 73,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(H : QuantumHamiltonian) (E₀ E₁ : ℝ) (hE₀ : E₀ = groundStateEnergy H) (hE₁_close : |E₁ - E₀| < ε) (hε : ε > 0) (hε_small : ε < 1e-8) : True"
+  },
+  {
+   "name": "Riemann.RF2_refutation",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 43,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(H : QuantumHamiltonian) (hRF2 : RF2Condition H) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "Riemann.RF3_numerical_criterion",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 98,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(obs : ObservedMorseStructure) (heuler_ok : (obs.count_index_0 : ℤ) - obs.count_index_1 + obs.count_index_2 = 0) (hall_on_critical : ∀ cp ∈ obs.criticalPoints, morseIndex cp = 0 → |cp.σ - 1/2| < ε) (hε : ε > 0) (hε_small : ε < 0.01) : ¬RF3Condition obs standardMorseStructure"
+  },
+  {
+   "name": "Riemann.RF3_refutation",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 73,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(obs : ObservedMorseStructure) (hRF3 : RF3Condition obs standardMorseStructure) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "Riemann.RH_geometric_characterization",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 68,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (H : QuantumHamiltonian) (obs : ObservedMorseStructure) : RiemannHypothesis ↔ (¬RF1Condition w T hT ∧ ¬RF2Condition H ∧ ¬RF3Condition obs standardMorseStructure)"
+  },
+  {
+   "name": "Riemann.RH_implies_standard_morse",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 91,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(hRH : RiemannHypothesis) (obs : ObservedMorseStructure) : ¬RF3Condition obs standardMorseStructure"
+  },
+  {
+   "name": "Riemann.RH_implies_unique_minimum",
+   "file": "src/lean/Riemann/CurvatureDecomposition.lean",
+   "line": 63,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hRH : RiemannHypothesis) : ∀ σ ∈ Set.Ioo 0 1, σ ≠ 1/2 → energyFunctional w T hT (1/2) < energyFunctional w T hT σ"
+  },
+  {
+   "name": "Riemann.any_refutation_implies_not_RH",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (H : QuantumHamiltonian) (obs : ObservedMorseStructure) (hRF1_or_RF2_or_RF3 : RF1Condition w T hT ∨ RF2Condition H ∨ RF3Condition obs standardMorseStructure) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "Riemann.critical_line_angle",
+   "file": "src/lean/Riemann/TorusCompactification.lean",
+   "line": 76,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ p : TorusParameters, ∀ t : ℝ, (stripToAngles p (1/2) t).1 = Real.pi / 2"
+  },
+  {
+   "name": "Riemann.critical_line_is_minimum",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 39,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hdiff2 : ContDiff ℝ 2 (energyFunctional w T hT)) (hcrit : deriv (energyFunctional w T hT) (1/2 : ℝ) = 0) (hcurv : deriv (deriv (energyFunctional w T hT)) (1/2 : ℝ) > 0) : ∃ ε > 0, ∀ σ, |σ - 1/2| < ε → σ ≠ 1/2 → energyFunctional w T hT (1/2) < energyFunctional w T hT σ"
+  },
+  {
+   "name": "Riemann.curvatureC1_nonneg",
+   "file": "src/lean/Riemann/CurvatureDecomposition.lean",
+   "line": 27,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (σ : ℝ) : 0 ≤ curvatureC1 w T hT σ"
+  },
+  {
+   "name": "Riemann.curvatureC1_symmetric",
+   "file": "src/lean/Riemann/CurvatureDecomposition.lean",
+   "line": 42,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (σ : ℝ) (hw : ∀ t, w.w t = w.w (-t)) : curvatureC1 w T hT σ = curvatureC1 w T hT (1 - σ)"
+  },
+  {
+   "name": "Riemann.curvatureC2_symmetric",
+   "file": "src/lean/Riemann/CurvatureDecomposition.lean",
+   "line": 48,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (σ : ℝ) (hw : ∀ t, w.w t = w.w (-t)) : curvatureC2 w T hT σ = curvatureC2 w T hT (1 - σ)"
+  },
+  {
+   "name": "Riemann.energy_derivative_zero_at_half",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 23,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hdiff : Differentiable ℝ (energyFunctional w T hT)) (hsym : ∀ σ, energyFunctional w T hT σ = energyFunctional w T hT (1 - σ)) : deriv (energyFunctional w T hT) (1/2 : ℝ) = 0"
+  },
+  {
+   "name": "Riemann.energy_nonneg",
+   "file": "src/lean/Riemann/WeightAndEnergy.lean",
+   "line": 43,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (σ : ℝ) : 0 ≤ energyFunctional w T hT σ"
+  },
+  {
+   "name": "Riemann.energy_symmetric",
+   "file": "src/lean/Riemann/WeightAndEnergy.lean",
+   "line": 63,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (σ : ℝ) (hw : ∀ t, w.w t = w.w (-t)) : energyFunctional w T hT σ = energyFunctional w T hT (1 - σ)"
+  },
+  {
+   "name": "Riemann.euler_violation_implies_inconsistency",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 55,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(obs : ObservedMorseStructure) (hviolation : (obs.count_index_0 : ℤ) - obs.count_index_1 + obs.count_index_2 ≠ 0) : True"
+  },
+  {
+   "name": "Riemann.extra_valley_search_compact",
+   "file": "src/lean/Riemann/ExtraValleyAxioms.lean",
+   "line": 72,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": IsCompact (Set.Icc (0 : ℝ) 1)"
+  },
+  {
+   "name": "Riemann.extra_valley_symmetry",
+   "file": "src/lean/Riemann/ExtraValleyAxioms.lean",
+   "line": 35,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hw : ∀ t, w.w t = w.w (-t)) (ev : ExtraValley w T hT) : ∃ ev' : ExtraValley w T hT, ev'.σ₀ = 1 - ev.σ₀"
+  },
+  {
+   "name": "Riemann.extra_valleys_paired",
+   "file": "src/lean/Riemann/ExtraValleyAxioms.lean",
+   "line": 58,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hw : ∀ t, w.w t = w.w (-t)) (ev : ExtraValley w T hT) : energyFunctional w T hT ev.σ₀ = energyFunctional w T hT (1 - ev.σ₀)"
+  },
+  {
+   "name": "Riemann.gauss_bonnet",
+   "file": "src/lean/Riemann/TorusCompactification.lean",
+   "line": 70,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : TorusParameters) : ∫ θ₁ in Set.Icc 0 (2 * Real.pi), ∫ θ₂ in Set.Icc 0 (2 * Real.pi), gaussianCurvature p θ₂ * (p.r * (p.R + p.r * Real.cos θ₂)) = 0"
+  },
+  {
+   "name": "Riemann.geometric_equivalences",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 60,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (H : QuantumHamiltonian) (obs : ObservedMorseStructure) : (¬RF1Condition w T hT) ↔ (¬RF2Condition H) ↔ (¬RF3Condition obs standardMorseStructure)"
+  },
+  {
+   "name": "Riemann.minimum_critical_points",
+   "file": "src/lean/Riemann/MorseSetup.lean",
+   "line": 75,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(mi : MorseInequalities) : mi.criticalPoints.length ≥ 4"
+  },
+  {
+   "name": "Riemann.morse_euler",
+   "file": "src/lean/Riemann/MorseSetup.lean",
+   "line": 68,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(mi : MorseInequalities) : (mi.c 0 : ℤ) - mi.c 1 + mi.c 2 = (betti 0 : ℤ) - betti 1 + betti 2"
+  },
+  {
+   "name": "Riemann.no_extra_valleys_consistent_with_RH",
+   "file": "src/lean/Riemann/ExtraValleyAxioms.lean",
+   "line": 65,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (h : ¬RF1Condition w T hT) : True"
+  },
+  {
+   "name": "Riemann.no_refutation_consistent_with_RH",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 48,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (H : QuantumHamiltonian) (obs : ObservedMorseStructure) (hno_RF1 : ¬RF1Condition w T hT) (hno_RF2 : ¬RF2Condition H) (hno_RF3 : ¬RF3Condition obs standardMorseStructure) : True"
+  },
+  {
+   "name": "Riemann.nondegenerate_consistent_with_RH",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 54,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(H : QuantumHamiltonian) (hnondegenerate : groundStateDegeneracy H = 1) : ¬RF2Condition H"
+  },
+  {
+   "name": "Riemann.off_critical_minimum_implies_extra_valley",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 62,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (obs : ObservedMorseStructure) (cp : CriticalPoint) (hcp : cp ∈ obs.criticalPoints) (hmin : morseIndex cp = 0) (hoff : cp.σ ≠ 1/2) : ∃ ev : ExtraValley w T hT, ev.σ₀ = cp.σ"
+  },
+  {
+   "name": "Riemann.positive_curvature_implies_minimum",
+   "file": "src/lean/Riemann/CurvatureDecomposition.lean",
+   "line": 54,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hpos : curvatureC1 w T hT (1/2) + curvatureC2 w T hT (1/2) > 0) : ∃ ε > 0, ∀ σ, |σ - 1/2| < ε → σ ≠ 1/2 → energyFunctional w T hT (1/2) < energyFunctional w T hT σ"
+  },
+  {
+   "name": "Riemann.positive_gap_implies_nondegenerate",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 67,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(H : QuantumHamiltonian) (hgap : spectralGap H > 0) : groundStateDegeneracy H = 1"
+  },
+  {
+   "name": "Riemann.potential_symmetric",
+   "file": "src/lean/Riemann/WeightAndEnergy.lean",
+   "line": 52,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ t : ℝ) : potential σ t = potential (1 - σ) t"
+  },
+  {
+   "name": "Riemann.strip_angles_inverse",
+   "file": "src/lean/Riemann/TorusCompactification.lean",
+   "line": 40,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : TorusParameters) (σ : ℝ) (hσ : 0 ≤ σ ∧ σ ≤ 1) (t : ℝ) (ht : -p.T * Real.pi / 2 < t ∧ t < p.T * Real.pi / 2) : anglesToStrip p (stripToAngles p σ t).1 (stripToAngles p σ t).2 = (σ, t)"
+  },
+  {
+   "name": "Riemann.torus_euler_characteristic",
+   "file": "src/lean/Riemann/TorusCompactification.lean",
+   "line": 67,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (0 : ℤ) = 0"
+  },
+  {
+   "name": "Riemann.unique_minimum_implies_no_RF1",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 37,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : ℝ) (hT : T > 0) (hunique : ∀ σ ∈ Set.Ioo 0 1, σ ≠ 1/2 → energyFunctional w T hT (1/2) < energyFunctional w T hT σ) : ¬RF1Condition w T hT"
+  },
+  {
+   "name": "Riemann.zero_conjugate_symmetry",
+   "file": "src/lean/Riemann/BasicZetaXi.lean",
+   "line": 70,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "Riemann.zeta",
+    "sorryAx"
+   ],
+   "statement": "(ρ : ℂ) (h : IsNontrivialZero ρ) : IsNontrivialZero (conj ρ)"
+  },
+  {
+   "name": "Riemann.zero_symmetry",
+   "file": "src/lean/Riemann/BasicZetaXi.lean",
+   "line": 52,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.zeta",
+    "sorryAx"
+   ],
+   "statement": "(ρ : ℂ) (h : IsNontrivialZero ρ) : IsNontrivialZero (1 - ρ)"
+  },
+  {
+   "name": "Util.ComplexAnalysis.complex_cauchy_schwarz",
+   "file": "src/lean/Util/ComplexAnalysisTools.lean",
+   "line": 28,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(z w : ℂ) : normSq (z * conj w) ≤ normSq z * normSq w"
+  },
+  {
+   "name": "Util.ComplexAnalysis.normSq_conj",
+   "file": "src/lean/Util/ComplexAnalysisTools.lean",
+   "line": 20,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(z : ℂ) : normSq (conj z) = normSq z"
+  },
+  {
+   "name": "Util.ComplexAnalysis.normSq_eq_re_sq_add_im_sq",
+   "file": "src/lean/Util/ComplexAnalysisTools.lean",
+   "line": 11,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(z : ℂ) : normSq z = z.re^2 + z.im^2"
+  },
+  {
+   "name": "Util.ComplexAnalysis.normSq_mul",
+   "file": "src/lean/Util/ComplexAnalysisTools.lean",
+   "line": 16,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(z w : ℂ) : normSq (z * w) = normSq z * normSq w"
+  },
+  {
+   "name": "Util.ComplexAnalysis.re_mul_conj",
+   "file": "src/lean/Util/ComplexAnalysisTools.lean",
+   "line": 24,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(z : ℂ) : (z * conj z).re = normSq z"
+  },
+  {
+   "name": "Util.MeasureTheory.integral_nonneg_of_nonneg",
+   "file": "src/lean/Util/MeasureTheoryTools.lean",
+   "line": 11,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{f : ℝ → ℝ} {a b : ℝ} (hab : a ≤ b) (hf : ∀ x ∈ Set.Icc a b, 0 ≤ f x) : 0 ≤ ∫ x in Set.Icc a b, f x"
+  },
+  {
+   "name": "Util.MeasureTheory.integral_rectangle",
+   "file": "src/lean/Util/MeasureTheoryTools.lean",
+   "line": 25,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{f : ℝ × ℝ → ℝ} {a₁ b₁ a₂ b₂ : ℝ} (h₁ : a₁ ≤ b₁) (h₂ : a₂ ≤ b₂) (hf : Integrable f (productMeasure.restrict (Set.Icc a₁ b₁ ×ˢ Set.Icc a₂ b₂))) : ∫ p in Set.Icc a₁ b₁ ×ˢ Set.Icc a₂ b₂, f p ∂productMeasure = ∫ x in Set.Icc a₁ b₁, ∫ y in Set.Icc a₂ b₂, f (x, y)"
+  },
+  {
+   "name": "Util.TopologyTorus.euler_char_torus",
+   "file": "src/lean/Util/TopologyTorusTools.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (0 : ℤ) = 0"
+  },
+  {
+   "name": "Util.TopologyTorus.euler_from_betti",
+   "file": "src/lean/Util/TopologyTorusTools.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (betti_torus 0 : ℤ) - betti_torus 1 + betti_torus 2 = 0"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "src/lean/Util/ComplexAnalysisTools.lean": "ed1ffab94853e616e3fadfc28612c8aa72b8bd72b54be8c3a17b2f58b30f0911",
+  "src/lean/lakefile.lean": "f876913c34597690fd853f11739d34707083fd86fda321b4d0adb1ea9a25f703"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "ed2a7d425066e20e61d2dab0a32be96c8ff2f912a2717fe6cc19e41adeb701dc"
+}

@@ -1,0 +1,137 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Millennium-rh-energy-torus-quantum",
+ "branch": "copilot/add-refutation-scheme-riemann",
+ "branch_state": "parada",
+ "head_commit": "b477bc116a68a2236d230875e11a1f51b6c1f255",
+ "head_commit_date": "2025-12-02T16:18:51+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "b477bc116a68a2236d230875e11a1f51b6c1f255",
+   "date": "2025-12-02T16:18:51+00:00",
+   "subject": "Improve documentation: clarify Lean4 skeleton is a specification"
+  },
+  {
+   "commit": "79825d689c9d871461dace83e2fe43999b8fe622",
+   "date": "2025-12-02T16:16:48+00:00",
+   "subject": "Add Riemann Hypothesis refutation framework: LaTeX, Lean4, and README"
+  },
+  {
+   "commit": "400d2e2a613deb3021684f7726dc2b7449761e41",
+   "date": "2025-12-02T16:10:26+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "EnergyDerivZeroAtHalf",
+   "file": "RiemannRefutation.lean",
+   "line": 89,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx",
+    "xi"
+   ],
+   "statement": ": deriv (EnergyFunctional T) (1/2 : ℝ) = 0"
+  },
+  {
+   "name": "Framework_Depends_On_Law4",
+   "file": "RiemannRefutation.lean",
+   "line": 220,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx",
+    "xi"
+   ],
+   "statement": ": (∀ ρ : ℂ, ρ ∈ NonTrivialZeros → ρ.re ∈ GlobalMinima T) → (GlobalMinima T ≠ {1/2}) → ¬RiemannHypothesis"
+  },
+  {
+   "name": "LocalPotential_nonneg",
+   "file": "RiemannRefutation.lean",
+   "line": 68,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "xi"
+   ],
+   "statement": "(σ t : ℝ) : 0 ≤ LocalPotential T σ t"
+  },
+  {
+   "name": "MostPlausibleRefutation",
+   "file": "RiemannRefutation.lean",
+   "line": 202,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx",
+    "xi"
+   ],
+   "statement": "(h_strict : ∃ σ₀ : ℝ, 0 < σ₀ ∧ σ₀ < 1 ∧ σ₀ ≠ 1/2 ∧ EnergyFunctional T σ₀ < EnergyFunctional T (1/2)) (h_link : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → EnergyFunctional T ρ.re = MinEnergy T) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "RF1_MinimumOffCriticalLine",
+   "file": "RiemannRefutation.lean",
+   "line": 138,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx",
+    "xi"
+   ],
+   "statement": "(h_regularity : ∀ σ, 0 < σ → σ < 1 → EnergyFunctional T σ = EnergyFunctional T (1 - σ)) (h_displaced : ∃ σ₀ : ℝ, 0 < σ₀ ∧ σ₀ < 1 ∧ σ₀ ≠ 1/2 ∧ EnergyFunctional T σ₀ ≤ EnergyFunctional T (1/2)) (h_link : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → ρ.re ∈ GlobalMinima T) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "RF2_NonPositiveCurvature",
+   "file": "RiemannRefutation.lean",
+   "line": 157,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx",
+    "xi"
+   ],
+   "statement": "(h_morse : ∀ σ t, 0 < σ → σ < 1 → (deriv (fun σ' => LocalPotential T σ' t) σ = 0 → deriv (deriv (fun σ' => LocalPotential T σ' t)) σ ≠ 0)) (h_curvature : deriv (deriv (EnergyFunctional T)) (1/2) ≤ 0) (h_zeros_stable : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → deriv (deriv (EnergyFunctional T)) ρ.re > 0) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "RF3_MultipleMinimalGeodesics",
+   "file": "RiemannRefutation.lean",
+   "line": 186,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx",
+    "xi"
+   ],
+   "statement": "(P : ℝ) (hP : P > 0) (h_multiple : ∃ γ₁ : ℝ → ℝ × ℝ, (∀ t, (γ₁ t).1 ≠ 1/2) ∧ GeodesicEnergy T γ₁ P ≤ GeodesicEnergy T CriticalGeodesic P) (h_zeros_on_minimal : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → ∃ γ, GeodesicEnergy T γ P = sInf { GeodesicEnergy T γ' P | γ' : ℝ → ℝ × ℝ } ∧ ρ.re = (γ 0).1) : ¬RiemannHypothesis"
+  },
+  {
+   "name": "weight_nonneg",
+   "file": "RiemannRefutation.lean",
+   "line": 59,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ t : ℝ, 0 ≤ weight T t"
+  },
+  {
+   "name": "weight_symmetric",
+   "file": "RiemannRefutation.lean",
+   "line": 53,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ t : ℝ, weight T t = weight T (-t)"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "RiemannRefutation.lean": "8a06042e3fd745849c7898110e7f25ae9008d4012e94f61027bdc7e045c8d0db"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "5aec90dbdb66c85598064b8c230eacfd324926e924a1409e4226795e8895a8b4"
+}

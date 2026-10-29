@@ -1,0 +1,95 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-p-vs-np-I",
+ "branch": "atk/truncation-law-pnp-20261005",
+ "branch_state": "parada",
+ "head_commit": "99f2f94ff69f0c6235c8a00a81328276c210fbd8",
+ "head_commit_date": "2026-10-05T15:30:25+02:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "99f2f94ff69f0c6235c8a00a81328276c210fbd8",
+   "date": "2026-10-05T15:30:25+02:00",
+   "subject": "ATK: record material TruncationLaw source and pending PNP adapter"
+  },
+  {
+   "commit": "cd2d813d3ce72924d9f72922691dffeaeda07c92",
+   "date": "2026-10-05T15:28:49+02:00",
+   "subject": "ATK: normalize TruncationLaw audit import"
+  },
+  {
+   "commit": "c36d4255fbc5715f9c4a0a6a096b6b7a5d4630e8",
+   "date": "2026-10-05T15:28:27+02:00",
+   "subject": "ATK: add TruncationLaw axiom audit"
+  },
+  {
+   "commit": "68d366a72c693aad9b115981a71b8ec6db42dbff",
+   "date": "2026-10-05T15:25:54+02:00",
+   "subject": "ATK: add fail-closed material TruncationLaw"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:stable"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "ATKTruncationLaw.exhausted_is_closure",
+   "file": "formal/TruncationLaw.lean",
+   "line": 127,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{Block : Type u} {Endpoint : Prop} (P : BlockingPredicate Block) (produce : (∀ b : Block, ¬ P.IsBlocking b) → ConcreteClosureWitness Endpoint) (h : ∀ b : Block, ¬ P.IsBlocking b) : ConcreteClosureWitness Endpoint"
+  },
+  {
+   "name": "ATKTruncationLaw.loopMeasure_wellFounded",
+   "file": "formal/TruncationLaw.lean",
+   "line": 105,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{State : Type u} (m : WellFoundedLoopMeasure State) : WellFounded (fun a b => m.measure a < m.measure b)"
+  },
+  {
+   "name": "ATKTruncationLaw.loop_is_closure",
+   "file": "formal/TruncationLaw.lean",
+   "line": 111,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{State : Type u} {Endpoint : Prop} (Inv : LoopInvariant State) (produce : ∀ s : State, Inv.holds s → ConcreteClosureWitness Endpoint) {s : State} (hs : Inv.holds s) : ConcreteClosureWitness Endpoint"
+  },
+  {
+   "name": "ATKTruncationLaw.truncate",
+   "file": "formal/TruncationLaw.lean",
+   "line": 72,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{Block : Type u} {State : Type v} {Endpoint : Prop} {P : BlockingPredicate Block} {rank : Block → Nat} {Inv : LoopInvariant State} (r : TruncationRule Block State Endpoint P rank Inv) : ConcreteClosureWitness Endpoint"
+  },
+  {
+   "name": "ATKTruncationLaw.truncate_endpoint",
+   "file": "formal/TruncationLaw.lean",
+   "line": 89,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{Block : Type u} {State : Type v} {Endpoint : Prop} {P : BlockingPredicate Block} {rank : Block → Nat} {Inv : LoopInvariant State} (r : TruncationRule Block State Endpoint P rank Inv) : Endpoint"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "formal/TruncationLaw.lean": "d499838f82e42f9fb6eddaadad6ed135bd2252d738605dd396c6da2447bca6e4",
+  "lake-manifest.json": "a28fc0acc6484617a4c5b8d41ae2caf7b9f1032017012af4f9fa187126011fa8",
+  "lakefile.lean": "eac58114dfc0f420f0ac896cd45294be2383cc4c36ff84de9f296561eb4c8b26",
+  "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "b5023bdbc4fee68dc83d3900d501abb31b74e3a4f8c85d2dabff488fccff6857"
+}

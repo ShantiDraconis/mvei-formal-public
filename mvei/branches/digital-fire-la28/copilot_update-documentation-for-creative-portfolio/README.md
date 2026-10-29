@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/update-documentation-for-creative-portfoli
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 1 — closed 1, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `1ed7ec00a91747f8f10dfb1d17c8d100a6f6e603cecd4816fa83aec40539ca0d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/digital-fire-la28/copilot_update-documentation-for-creative-portfolio/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `8ae0b56e44a382d4eca2b1c89f05c644a7da5bae28146ef2f2fd8269d6984a16`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/digital-fire-la28/copilot_update-documentation-for-creative-portfolio/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
