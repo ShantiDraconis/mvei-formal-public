@@ -1,0 +1,5 @@
+import HarappaSemantica.Catalogo
+import HarappaSemantica.Semantica
+import HarappaSemantica.Sintaxe
+import HarappaSemantica.Compilador
+import HarappaSemantica.M216

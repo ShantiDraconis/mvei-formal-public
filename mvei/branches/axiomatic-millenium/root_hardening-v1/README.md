@@ -5,7 +5,7 @@ Lean sources from the branch `root/hardening-v1` of the private repository `Shan
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 1, conditional 0, open 0, proof error 3, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `f6e40e4be3d1435d3415a77b8eea6f4a2c5ad3d2a6161a65f4a14e31b9d438f7`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/root_hardening-v1/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `0680cf154bf369cc55abcd503658ca059fdc4387d8f5485f06118083d5896dca`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/root_hardening-v1/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
