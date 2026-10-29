@@ -1,0 +1,181 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/update-core-visualization-structure",
+ "branch_state": "parada",
+ "head_commit": "a074c0d1e4696e4101a84578f19927e4510c4bc8",
+ "head_commit_date": "2026-02-28T18:59:28+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "a074c0d1e4696e4101a84578f19927e4510c4bc8",
+   "date": "2026-02-28T18:59:28+00:00",
+   "subject": "Add structural operators article, Lean/Coq/Isabelle formalizations for M165/M166/M359/M369"
+  },
+  {
+   "commit": "2be2cbc8f1e35251c19c0dbed8c4456b9af9a14b",
+   "date": "2026-02-28T18:51:56+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Harappan.StructuralOperators.M165_M369_non_commutative_stratum",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 121,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s1 s2 s3 : State) (h : s1.stratum ≤ s2.stratum) (h2 : s2.stratum ≤ s3.stratum) : let c"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M165_after_M359",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 98,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : State) : M165_convergence (M359_divergence s) = s"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M165_after_M369_well_typed",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 155,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(t : StateTriple) : ∃ s : State, s = M165_convergence { left"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M165_core_absorption_left",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 89,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : State) (h : Core.stratum ≤ s.stratum) : M165_convergence { left"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M165_core_absorption_right",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 94,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : State) (h : s.stratum ≤ Core.stratum) : M165_convergence { left"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M165_idempotent",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 74,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : State) : M165_convergence { left"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M166_double_exceeds_single",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 116,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : State) : (M166_elevation (M166_elevation s)).stratum > (M166_elevation s).stratum"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M166_raises_stratum",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 84,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : State) : (M166_elevation s).stratum > s.stratum"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M166_then_M165_stratum",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 110,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : State) : (M165_convergence { left"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M359_M166_stratum_commutativity",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 148,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : State) : (M359_divergence (M166_elevation s)).left.stratum = (M166_elevation (M359_divergence s).left).stratum"
+  },
+  {
+   "name": "Harappan.StructuralOperators.M369_idempotent",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 104,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : State) : M369_channeling { fst"
+  },
+  {
+   "name": "Harappan.StructuralOperators.all_operators_well_defined",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 201,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": (∀ p : StatePair, ∃ s : State, M165_convergence p = s) ∧ (∀ s : State, ∃ t : State, M166_elevation s = t) ∧ (∀ s : State, ∃ p : StatePair, M359_divergence s = p) ∧ (∀ t : StateTriple, ∃ s : State, M369_channeling t = s)"
+  },
+  {
+   "name": "Harappan.StructuralOperators.emergence_iterate_fixes_core",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 186,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(n : Nat) : emergence_iterate n Core = Core"
+  },
+  {
+   "name": "Harappan.StructuralOperators.emergence_step_fixes_core",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 180,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": emergence_step Core = Core"
+  },
+  {
+   "name": "Harappan.StructuralOperators.structural_operators_consistent",
+   "file": "formal/lean/StructuralOperators.lean",
+   "line": 194,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  }
+ ],
+ "closed": 6,
+ "files_sha256": {
+  "formal/lean/StructuralOperators.lean": "7687fab7eff9fc81febd62d7876c463dc8fa87d5e41d945db03fe6093321e402",
+  "formal/lean/lakefile.lean": "95e693d348b937383c6d100e0d202f934f9187fb66fa317a0a707f41aa76669d",
+  "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-10-29T01:37:17Z",
+ "certificate_sha256": "16ffb0af2e493b447ba546563e1b658f49ff5fd98d502f8425a395e10363bd9e"
+}

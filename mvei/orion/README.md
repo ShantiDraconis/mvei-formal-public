@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `6849ba69e724bbf510d71dc6a065759a91588e99`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `6849ba69e724bbf510d71dc6a065759a91588e99`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|

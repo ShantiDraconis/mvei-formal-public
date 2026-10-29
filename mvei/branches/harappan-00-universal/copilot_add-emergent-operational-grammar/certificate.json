@@ -1,0 +1,95 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/add-emergent-operational-grammar",
+ "branch_state": "parada",
+ "head_commit": "f3291002035039df3e490c1550acfb1ea73c050e",
+ "head_commit_date": "2026-01-28T15:17:46+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "f3291002035039df3e490c1550acfb1ea73c050e",
+   "date": "2026-01-28T15:17:46+00:00",
+   "subject": "Add comprehensive verification summary and documentation"
+  },
+  {
+   "commit": "678f08c357f80801d72f7ccf074494794c058abb",
+   "date": "2026-01-28T15:16:14+00:00",
+   "subject": "Complete formal system translations and implementations"
+  },
+  {
+   "commit": "75571d60034742c2897c9eabee1a6670b5ddba50",
+   "date": "2026-01-28T15:09:51+00:00",
+   "subject": "Complete LaTeX structure for Operational Grammar paper"
+  },
+  {
+   "commit": "b7e16ad5566f192e9c4890483d2e1a85c77ad869",
+   "date": "2026-01-28T15:02:58+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "grammatical_economy",
+   "file": "formal/lean/IndusOperationalGrammar.lean",
+   "line": 93,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(op : FunctionalOperator) : ∃ (s1 s2 : ScopedOperator), s1.operator = op ∧ s2.operator = op ∧ s1.scope ≠ s2.scope"
+  },
+  {
+   "name": "m001_m002_identity",
+   "file": "formal/lean/IndusOperationalGrammar.lean",
+   "line": 69,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) : (M001 op d s).operator = (M002 op d s).operator"
+  },
+  {
+   "name": "m001_m002_scope_distinction",
+   "file": "formal/lean/IndusOperationalGrammar.lean",
+   "line": 74,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) : (M001 op d s).scope ≠ (M002 op d s).scope"
+  },
+  {
+   "name": "non_redundancy",
+   "file": "formal/lean/IndusOperationalGrammar.lean",
+   "line": 137,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : FunctionalOperator) (scope1 scope2 : ScopeOperator) (state1 state2 : OperationalState) (h_scope : scope1 ≠ scope2) : M001 op none state1 ≠ M002 op none state2"
+  },
+  {
+   "name": "scope_independence",
+   "file": "formal/lean/IndusOperationalGrammar.lean",
+   "line": 104,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) (scope1 scope2 : ScopeOperator) : let so1 : ScopedOperator"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "formal/lean/IndusOperationalGrammar.lean": "5376f9217a0358bf9399ec4047feb1d26773ccc2a470caaf0d60401cbb385723",
+  "formal/lean/lakefile.lean": "1364f1839f59969567ec5962e422e641a7027157a980a414cda7958a932ce6a2",
+  "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-10-29T01:37:17Z",
+ "certificate_sha256": "7d6ce11bbbeaf2f7a46786f526e0a5f331c0337570b13da8c2a5f9ecd5832f32"
+}

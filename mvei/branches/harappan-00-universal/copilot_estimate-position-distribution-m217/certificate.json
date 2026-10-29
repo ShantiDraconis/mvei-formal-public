@@ -1,0 +1,89 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/estimate-position-distribution-m217",
+ "branch_state": "parada",
+ "head_commit": "f725c6dd4c492c5012dacda61b34aa290d36dd51",
+ "head_commit_date": "2026-03-17T04:06:58+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "f725c6dd4c492c5012dacda61b34aa290d36dd51",
+   "date": "2026-03-17T04:06:58+00:00",
+   "subject": "M217: positional distribution, co-occurrence, distance metric, hypothesis testing, formal specs (Coq/Lean/Isabelle/Agda), LaTeX"
+  },
+  {
+   "commit": "57c6bdc6a8714058c9ab75474f2ef87ba64f4f27",
+   "date": "2026-03-17T03:50:41+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Harappan.M217Analysis.allInitial_rejectsH0",
+   "file": "formal/lean/M217Analysis.lean",
+   "line": 194,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(n : Nat) (hn : n ≥ 4) : rejectH0 { initial"
+  },
+  {
+   "name": "Harappan.M217Analysis.empty_noReject",
+   "file": "formal/lean/M217Analysis.lean",
+   "line": 201,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": rejectH0 PositionalCounts.empty = false"
+  },
+  {
+   "name": "Harappan.M217Analysis.increment_total",
+   "file": "formal/lean/M217Analysis.lean",
+   "line": 67,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(c : PositionalCounts) (p : Position) : (c.increment p).total = c.total + 1"
+  },
+  {
+   "name": "Harappan.M217Analysis.signDistance_self_zero",
+   "file": "formal/lean/M217Analysis.lean",
+   "line": 114,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(w1 w2 w3 w4 w5 w6 : Nat) (v : GeometricVector) : signDistance w1 w2 w3 w4 w5 w6 v v = 0"
+  },
+  {
+   "name": "Harappan.M217Analysis.signDistance_symm",
+   "file": "formal/lean/M217Analysis.lean",
+   "line": 107,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w1 w2 w3 w4 w5 w6 : Nat) (vi vj : GeometricVector) : signDistance w1 w2 w3 w4 w5 w6 vi vj = signDistance w1 w2 w3 w4 w5 w6 vj vi"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "formal/lean/M217Analysis.lean": "e6c7a7030ae3ff3e0e3f15f6f401b679df4b1171710177d252889f59085138be",
+  "formal/lean/lakefile.lean": "95e693d348b937383c6d100e0d202f934f9187fb66fa317a0a707f41aa76669d",
+  "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-10-29T01:37:17Z",
+ "certificate_sha256": "ca1904a9e006b193d220c7444ea3dfa15107db52c20f79b47eb69acffcf63a0a"
+}

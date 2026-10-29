@@ -1,0 +1,16 @@
+--- a/lean/millennium/Riemann/CollapseComplex.lean
++++ b/lean/millennium/Riemann/CollapseComplex.lean
+@@ -250,11 +250,11 @@
+ 
+ /-- The Universe-0-0 constant I has zero real and imaginary parts -/
+ theorem I_components : I.re = 0 ∧ I.im = 0 ∧ I.indet = 1 := by
+-  simp [I]
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Classical imaginary unit i has the expected components -/
+ theorem i_components : i.re = 0 ∧ i.im = 1 ∧ i.indet = 0 := by
+-  simp [i]
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ end CollapseComplex
+ 

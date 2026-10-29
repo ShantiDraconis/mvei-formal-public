@@ -1,0 +1,84 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/mishkan-iii-core",
+ "branch": "copilot/activate-ip-network-protocol",
+ "branch_state": "parada",
+ "head_commit": "185652d619303a984f83121fbb773a328f8b7bb2",
+ "head_commit_date": "2026-01-14T20:18:42+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "185652d619303a984f83121fbb773a328f8b7bb2",
+   "date": "2026-01-14T20:18:42+00:00",
+   "subject": "Simplify s5_vpn_config to use default values"
+  },
+  {
+   "commit": "20074c3c14467298e49dd7a832f30d60d378b364",
+   "date": "2026-01-14T20:16:47+00:00",
+   "subject": "Add implementation status documentation for tribal network"
+  },
+  {
+   "commit": "e8a7f83011f73ffad11f975529108555e1687e60",
+   "date": "2026-01-14T20:15:20+00:00",
+   "subject": "Implement 12-Tribes-Mesh network protocol with tribal IP registry"
+  },
+  {
+   "commit": "9dd7d5fe33549a5f4941b7ba86e6f2f28b2438f0",
+   "date": "2026-01-14T19:55:41+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "all_nodes_active",
+   "file": "network/TRIBAL_IP_REGISTRY.lean",
+   "line": 130,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (node : TribalNode), node ∈ activate_mesh → node.is_active = true"
+  },
+  {
+   "name": "initial_handshake_succeeds",
+   "file": "network/TRIBAL_IP_REGISTRY.lean",
+   "line": 192,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": initial_handshake.isSome = true"
+  },
+  {
+   "name": "mesh_has_twelve_nodes",
+   "file": "network/TRIBAL_IP_REGISTRY.lean",
+   "line": 121,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": activate_mesh.length = 12"
+  },
+  {
+   "name": "mesh_is_unbreakable",
+   "file": "network/TRIBAL_IP_REGISTRY.lean",
+   "line": 115,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "s5_will_protection"
+   ],
+   "statement": ": ∀ (node : TribalNode), node.protection_level = \" \""
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "network/TRIBAL_IP_REGISTRY.lean": "e7c42e400fbd063419ea0932aec8c4e43c2599103f66c89f7a752501a8722bf2"
+ },
+ "published_at": "2026-10-29T01:37:26Z",
+ "certificate_sha256": "a6df4368159a1356a6dff6751edd3067102a686cbdbff25ed831224215120195"
+}

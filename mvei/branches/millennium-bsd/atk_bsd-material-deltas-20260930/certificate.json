@@ -1,0 +1,72 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-bsd",
+ "branch": "atk/bsd-material-deltas-20260930",
+ "branch_state": "parada",
+ "head_commit": "9d692cb241d1e278869d3b13a20c4894c094a3b6",
+ "head_commit_date": "2026-10-01T01:07:20+02:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "9d692cb241d1e278869d3b13a20c4894c094a3b6",
+   "date": "2026-10-01T01:07:20+02:00",
+   "subject": "ci: kernel-check BSD material delta contract"
+  },
+  {
+   "commit": "f620fd9adb6711cba4ef5ad0aad9c028ace9d4ad",
+   "date": "2026-10-01T01:07:00+02:00",
+   "subject": "formalize fail-closed BSD rank and refined material deltas"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "BSDMaterial.assemble",
+   "file": "formal/BSDMaterialDeltas.lean",
+   "line": 38,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {Scalar : Type} {D : BSDMaterial.BSDDatum Scalar},   BSDMaterial.RankDelta D → BSDMaterial.RefinedDelta D → BSDMaterial.BSDEndpoint D"
+  },
+  {
+   "name": "BSDMaterial.endpoint_iff_deltas",
+   "file": "formal/BSDMaterialDeltas.lean",
+   "line": 30,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {Scalar : Type} (D : BSDMaterial.BSDDatum Scalar),   BSDMaterial.BSDEndpoint D ↔ Nonempty (BSDMaterial.RankDelta D) ∧ Nonempty (BSDMaterial.RefinedDelta D)"
+  },
+  {
+   "name": "BSDMaterial.rank_projection",
+   "file": "formal/BSDMaterialDeltas.lean",
+   "line": 42,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {Scalar : Type} {D : BSDMaterial.BSDDatum Scalar}, BSDMaterial.BSDEndpoint D → Nonempty (BSDMaterial.RankDelta D)"
+  },
+  {
+   "name": "BSDMaterial.refined_projection",
+   "file": "formal/BSDMaterialDeltas.lean",
+   "line": 49,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {Scalar : Type} {D : BSDMaterial.BSDDatum Scalar}, BSDMaterial.BSDEndpoint D → Nonempty (BSDMaterial.RefinedDelta D)"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "formal/BSDMaterialDeltas.lean": "e882e497935a8acbf6b5deef5472b94afd784d57e5e8e4615aee7db9907c9838"
+ },
+ "published_at": "2026-10-29T01:37:26Z",
+ "certificate_sha256": "95d4f62454dcbc304c2f93d0ca18057124cf42973604d287216070e967b5e0d2"
+}

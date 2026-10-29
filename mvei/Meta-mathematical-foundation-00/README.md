@@ -11,12 +11,12 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `51382911549ca362b73b24d57d6b62027282ca7b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `51382911549ca362b73b24d57d6b62027282ca7b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 0 | 1 | 0 | 1 / 0 / 0 / 2 / 5 |
-| `lean` | padrão do elan | failed | 0 | 0 | 0 | 0 / 2 / 7 / 9 / 0 |
+| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 0 | 1 | 0 | 1 / 0 / 1 / 1 / 5 |
+| `lean` | padrão do elan | failed | 0 | 0 | 0 | 0 / 3 / 9 / 6 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
@@ -29,23 +29,27 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `51382911549ca362b73b2
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `instFamilyDefProdNameCustomOutMkName_packageMkStr1ConfigTarget` | `.` | conditional | `Lake.CustomOut.MetaMillennium` |
+| `independence_implies_dual_state` | `. (file by file)` | open | `sorryAx` |
 | `MetaMillennium.dualState_implies_independent` | `lean (file by file)` | conditional | `MetaMillennium.Neg`, `MetaMillennium.Provable`, `MetaMillennium.SatisfiesTheory`, `MetaMillennium.TrueIn`, `MetaMillennium.neg_soundness`, `MetaMillennium.soundness` |
+| `MetaMillennium.indepScheme_implies_dualState` | `lean (file by file)` | open | `sorryAx`, `MetaMillennium.ExtendWith`, `MetaMillennium.Neg`, `MetaMillennium.Provable`, `MetaMillennium.SatisfiesTheory`, `MetaMillennium.TrueIn`, `MetaMillennium.completeness` |
 | `de_intro` | `lean (file by file)` | open | `classical_implies_collapse`, `sorryAx` |
 | `collapse_equiv_symm` | `lean (file by file)` | open | `sorryAx` |
+| `collapse_equiv_trans` | `lean (file by file)` | open | `sorryAx` |
 | `model_divergence_implies_independence` | `lean (file by file)` | open | `Model`, `Provable`, `Satisfies`, `sorryAx` |
 | `central_thesis` | `lean (file by file)` | open | `ArithmeticEncoding`, `BSD`, `ChainHasBreak`, `Consistent`, `EquivalenceChain`, `HasAnalyticObstruction`, `Hodge`, `Model`, `NS_Regular`, `P_ne_NP`, `Provable`, `RH`, `Satisfies`, `Theory`, `YangMills_MassGap`, `ZFC`, `sorryAx` |
 | `h0_implies_h1` | `lean (file by file)` | open | `BSD`, `Consistent`, `Hodge`, `NS_Regular`, `P_ne_NP`, `Provable`, `RH`, `Theory`, `YangMills_MassGap`, `ZFC`, `sorryAx` |
 | `h3_h5_related` | `lean (file by file)` | open | `BSD`, `HasAnalyticObstruction`, `Hodge`, `NS_Regular`, `P_ne_NP`, `RH`, `YangMills_MassGap`, `sorryAx` |
 | `rh_analysis` | `lean (file by file)` | open | `Consistent`, `Provable`, `RH`, `Theory`, `ZFC`, `sorryAx` |
 | `ns_collapse` | `lean (file by file)` | conditional | `NS_Regular` |
+| `ym_spectral` | `lean (file by file)` | conditional | `YangMills_MassGap` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting copies). The kernel checked 10 of them (1 closed, 2 conditional, 7 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 16 the kernel has no result:
+The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting copies). The kernel checked 14 of them (1 closed, 3 conditional, 10 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 12 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 11 |
+| checked file by file: the written proof does not pass the kernel | 7 |
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 5 |
 
 ### MVEI corrections

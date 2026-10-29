@@ -1,0 +1,17 @@
+--- a/lean/Problems/PvsNP/HawkingLimit.lean
++++ b/lean/Problems/PvsNP/HawkingLimit.lean
+@@ -36,11 +36,12 @@
+ 
+ /-- Relativization barrier as essential indeterminacy -/
+ -- Different oracles give different limits
+-axiom relativization_barrier :
++theorem relativization_barrier :
+   ∃ (oracle_A oracle_B : Type),
+     -- With oracle A, P = NP
+     (∃ _proof_A : True, True) ∧  -- Placeholder
+     -- With oracle B, P ≠ NP  
+-    (∃ _proof_B : True, True)    -- Placeholder
++    (∃ _proof_B : True, True)    -- Placeholder := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ end Problems.PvsNP

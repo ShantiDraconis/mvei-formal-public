@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-private-repo-ecletics` of the priva
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 11 — closed 4, conditional 0, open 0, proof error 0, not reached 7, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `74d9631da33318d3c0c4af924d045a7f2511ac4e5f2d4e3dbc30aa92d30d1fa4`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Eclectic_S/copilot_create-private-repo-ecletics/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `89c02d20b6bfa7555d6995a36926cd6c342ca1534962d759f155088dcf2adccd`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Eclectic_S/copilot_create-private-repo-ecletics/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

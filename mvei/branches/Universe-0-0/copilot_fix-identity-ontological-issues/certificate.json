@@ -1,0 +1,129 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/fix-identity-ontological-issues",
+ "branch_state": "parada",
+ "head_commit": "d82c8455342a7ce36e493f8d50977c774fbfe3b2",
+ "head_commit_date": "2025-12-31T02:19:21+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "d82c8455342a7ce36e493f8d50977c774fbfe3b2",
+   "date": "2025-12-31T02:19:21+00:00",
+   "subject": "Add final implementation summary for Regime Equivalence - ready for review"
+  },
+  {
+   "commit": "2fbdb44b9aa519703950d4c85fe4bdf9f5b34aa4",
+   "date": "2025-12-31T02:17:41+00:00",
+   "subject": "Add comprehensive documentation for Regime Equivalence integration and examples"
+  },
+  {
+   "commit": "d7d7bbe56824169d7929de97a2ca6529bf8f44c3",
+   "date": "2025-12-31T02:14:32+00:00",
+   "subject": "Add comprehensive tests for Regime Equivalence - all 33 tests passing"
+  },
+  {
+   "commit": "76da48cdb4da29910dea97a6962570271d9d75a9",
+   "date": "2025-12-31T02:12:04+00:00",
+   "subject": "Add Regime Equivalence Axiom for Constants (REAC) - core implementation"
+  },
+  {
+   "commit": "ba1c3e651d3e9f882f026dcf97505040b9185516",
+   "date": "2025-12-31T02:03:24+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Universe00.RegimeEquivalence.canonical_formulation",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 256,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(c₁ c₂ : ℝ) (R : Regime) : (c₁ ≠ c₂) ∧ (|c₁ - c₂| < R.tolerance → (c₁ ≃ c₂ ⟂ R))"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.constants_as_regime_anchors",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 236,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(c : ℝ) (x : ℝ) (R : Regime) : c = c ∧ (|c - x| < R.tolerance → (c ≃ x ⟂ R))"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.engineering_regime_valid",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 208,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": regime_valid REGIME_ENGINEERING"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.number_theory_regime_valid",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 221,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": regime_valid REGIME_NUMBER_THEORY"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.regime_equiv_refl",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 87,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c : ℝ) (R : Regime) (h : 0 < R.tolerance) (ha : R.is_active = true) : c ≃ c ⟂ R"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.regime_equiv_symm",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 98,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c₁ c₂ : ℝ) (R : Regime) : (c₁ ≃ c₂ ⟂ R) → (c₂ ≃ c₁ ⟂ R)"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.regime_equiv_trans_weak",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 107,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c₁ c₂ c₃ : ℝ) (R : Regime) : (c₁ ≃ c₂ ⟂ R) → (c₂ ≃ c₃ ⟂ R) → (|c₁ - c₃| < R.tolerance + R.tolerance)"
+  },
+  {
+   "name": "Universe00.RegimeEquivalence.strict_regime_implies_equality",
+   "file": "provers/lean/Foundations/RegimeEquivalence.lean",
+   "line": 126,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(c₁ c₂ : ℝ) (R : Regime) (h_strict : R.is_strict = true) : (c₁ ≃ c₂ ⟂ R) → c₁ = c₂"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "provers/lean/Foundations/RegimeEquivalence.lean": "ef23cd28b9ed1456bb74ddc256531ea00ae4506f521227aa426ef11c38be6563"
+ },
+ "published_at": "2026-10-29T01:37:28Z",
+ "certificate_sha256": "477c76d960ef1cef451e4f8c6e70e0de1d8c0a8427b6d022420fd5b2115c0a3a"
+}

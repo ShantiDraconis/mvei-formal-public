@@ -11,20 +11,20 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `provers/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 12 / 6 / 27 / 57 / 168 |
+| `provers/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 13 / 6 / 30 / 53 / 168 |
 | `universe-00/applications/millennium/riemann` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 12 |
-| `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 23 / 81 |
+| `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 1 / 0 / 1 / 22 / 81 |
 | `universe-00/core/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 7 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 12 |
-| Unique (name + statement) | 12 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 12 |
+| Counting each project | 14 |
+| Unique (name + statement) | 14 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 14 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -38,7 +38,9 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `ad86336840111095220c6
 | `Universe00.Complexity.verification_easier_than_search` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.Complexity.Clique_is_NPC` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.Core.infinite_authority` | `provers/lean (file by file)` | conditional | `Universe00.Core.primary_orcid` |
+| `Universe00.Core.orcid_identifies_author` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.Core.primary_orcid` |
 | `Universe00.FluidDynamics.BKM_criterion` | `provers/lean (file by file)` | open | `sorryAx` |
+| `Universe00.FluidDynamics.prodi_serrin_conditions` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.FluidDynamics.weak_implies_smooth_question` | `provers/lean (file by file)` | open | `sorryAx` |
 | `ImpossibilityTheorem.Universe00.Impossibility.field_collapses_with_strong_cancellation` | `provers/lean (file by file)` | open | `sorryAx` |
 | `ImpossibilityTheorem.field_collapses_with_strong_cancellation` | `provers/lean (file by file)` | conditional | `ImpossibilityTheorem.div_zero_const` |
@@ -53,6 +55,7 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `ad86336840111095220c6
 | `LA2028.LA2028_scheduling_complexity` | `provers/lean (file by file)` | open | `sorryAx` |
 | `LA2028.Security.hybrid_system_secure` | `provers/lean (file by file)` | open | `sorryAx`, `LA2028.Security.RiemannHypothesis` |
 | `LA2028.Security.LA2028_scalability` | `provers/lean (file by file)` | open | `sorryAx` |
+| `LA2028.Linker.LA2028_traffic_feasible` | `provers/lean (file by file)` | open | `sorryAx`, `LA2028.Linker.NavierStokes_Solution`, `LA2028.Linker.TransportPlan`, `LA2028.Linker.efficient_plan`, `LA2028.Linker.is_smooth` |
 | `Millennium.Complexity.P_neq_NP_implies_NPComplete_not_in_P` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.TransitionOperator.distance_metric_nonneg` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.TransitionOperator.distance_metric_pos` | `provers/lean (file by file)` | open | `sorryAx` |
@@ -69,16 +72,17 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `ad86336840111095220c6
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 48 of them (12 closed, 6 conditional, 30 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 348 the kernel has no result:
+The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 53 of them (14 closed, 6 conditional, 33 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 343 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 261 |
-| checked file by file: the written proof does not pass the kernel | 87 |
+| checked file by file: the written proof does not pass the kernel | 82 |
 
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 6 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/imports-no-topo.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 
 ## Files in this folder
 

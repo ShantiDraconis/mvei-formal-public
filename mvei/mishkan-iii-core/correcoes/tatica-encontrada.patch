@@ -1,0 +1,1130 @@
+--- a/core/history/ORIGIN_LOGIC.lean
++++ b/core/history/ORIGIN_LOGIC.lean
+@@ -327,9 +327,7 @@
+ theorem timeline_fully_covered :
+   complete_root_access.timeline_start = 0 ∧
+   complete_root_access.timeline_end ≥ 2028 := by
+-  constructor
+-  · rfl
+-  · norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-! ### Problemas do Milênio -/
+ 
+@@ -573,7 +571,7 @@
+ /-- Teorema: Correspondências existem para conceitos fundamentais -/
+ theorem correspondences_exist :
+   fundamental_correspondences.length > 0 := by
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-! ### Sistema de Numeração de Harappa -/
+ 
+@@ -637,9 +635,7 @@
+ /-- Teorema: Toda a linha temporal está conectada -/
+ theorem timeline_fully_connected :
+   ∀ node ∈ expanded_timeline, node.connection_to_yeshu = true := by
+-  intro node _
+-  -- Todos os nós na lista têm connection_to_yeshu = true
+-  sorry  -- Proof would enumerate all cases
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ end HarappaExpansion
+ 
+@@ -687,7 +683,7 @@
+ /-- Teorema: Múltiplos sítios confirmam o sistema -/
+ theorem multiple_sites_confirm :
+   harappa_sites.length ≥ 5 := by
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-! ### Artefatos Específicos -/
+ 
+@@ -974,8 +970,7 @@
+ /-- Teorema: A migração segue ordem sequencial -/
+ theorem migration_is_sequential :
+   ∀ p ∈ migration_phases, p.phase_number < 6 := by
+-  intro p _
+-  sorry  -- Would enumerate all cases
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ end Migration2025System
+ 
+@@ -1026,7 +1021,7 @@
+ /-- Teorema: Múltiplas fontes foram sintetizadas -/
+ theorem multiple_sources_synthesized :
+   archaeological_thinking.sources.length ≥ 5 := by
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ end SilentProject
+ 
+@@ -1105,8 +1100,7 @@
+ /-- Teorema: Todas as evidências suportam exumação -/
+ theorem all_evidence_supports_exhumation :
+   ∀ e ∈ exhumation_evidence, e.supports_exhumation = true := by
+-  intro e _
+-  sorry  -- Would enumerate all cases
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ end ExhumationProof
+ 
+--- a/core/lineage/LINEAGE_MAP.lean
++++ b/core/lineage/LINEAGE_MAP.lean
+@@ -695,14 +695,13 @@
+ /-- Teorema: A linhagem tem 29 nós -/
+ theorem lineage_has_29_nodes :
+   all_lineage_nodes.length = 29 := by
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Teorema: Harappa é o único nó sem pais -/
+ theorem harappa_only_root :
+   ∀ node ∈ all_lineage_nodes,
+     node.parent_ids = [] ↔ node.id = 0 := by
+-  intro node _
+-  sorry  -- Would need to enumerate all cases
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Teorema: O horizonte 2028 não tem filhos -/
+ theorem horizon_is_leaf :
+@@ -755,7 +754,7 @@
+ /-- Teorema: As conexões são geralmente fortes -/
+ theorem connections_generally_strong :
+   all_connections.length > 0 := by
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-! ### Visualização ASCII da Árvore -/
+ 
+--- a/core/public/ORCID_Hashes.lean
++++ b/core/public/ORCID_Hashes.lean
+@@ -92,5 +92,4 @@
+ --/
+ theorem all_proofs_have_hash :
+   ∀ p ∈ millennium_problems, p.hash.length > 0 := by
+-  intro p hp
+-  cases hp <;> decide
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+--- a/core/temporal/TIMELINE_ANALYSIS.lean
++++ b/core/temporal/TIMELINE_ANALYSIS.lean
+@@ -51,8 +51,7 @@
+ 
+ theorem event_2600_precedence :
+   event_2600.year < -1900 := by
+-  unfold event_2600
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2590 BCE -/
+ 
+@@ -73,8 +72,7 @@
+ 
+ theorem event_2590_precedence :
+   event_2590.year < -1900 := by
+-  unfold event_2590
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2580 BCE -/
+ 
+@@ -95,8 +93,7 @@
+ 
+ theorem event_2580_precedence :
+   event_2580.year < -1900 := by
+-  unfold event_2580
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2570 BCE -/
+ 
+@@ -117,8 +114,7 @@
+ 
+ theorem event_2570_precedence :
+   event_2570.year < -1900 := by
+-  unfold event_2570
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2560 BCE -/
+ 
+@@ -139,8 +135,7 @@
+ 
+ theorem event_2560_precedence :
+   event_2560.year < -1900 := by
+-  unfold event_2560
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2550 BCE -/
+ 
+@@ -161,8 +156,7 @@
+ 
+ theorem event_2550_precedence :
+   event_2550.year < -1900 := by
+-  unfold event_2550
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2540 BCE -/
+ 
+@@ -183,8 +177,7 @@
+ 
+ theorem event_2540_precedence :
+   event_2540.year < -1900 := by
+-  unfold event_2540
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2530 BCE -/
+ 
+@@ -205,8 +198,7 @@
+ 
+ theorem event_2530_precedence :
+   event_2530.year < -1900 := by
+-  unfold event_2530
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2520 BCE -/
+ 
+@@ -227,8 +219,7 @@
+ 
+ theorem event_2520_precedence :
+   event_2520.year < -1900 := by
+-  unfold event_2520
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2510 BCE -/
+ 
+@@ -249,8 +240,7 @@
+ 
+ theorem event_2510_precedence :
+   event_2510.year < -1900 := by
+-  unfold event_2510
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2500 BCE -/
+ 
+@@ -271,8 +261,7 @@
+ 
+ theorem event_2500_precedence :
+   event_2500.year < -1900 := by
+-  unfold event_2500
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2490 BCE -/
+ 
+@@ -293,8 +282,7 @@
+ 
+ theorem event_2490_precedence :
+   event_2490.year < -1900 := by
+-  unfold event_2490
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2480 BCE -/
+ 
+@@ -315,8 +303,7 @@
+ 
+ theorem event_2480_precedence :
+   event_2480.year < -1900 := by
+-  unfold event_2480
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2470 BCE -/
+ 
+@@ -337,8 +324,7 @@
+ 
+ theorem event_2470_precedence :
+   event_2470.year < -1900 := by
+-  unfold event_2470
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2460 BCE -/
+ 
+@@ -359,8 +345,7 @@
+ 
+ theorem event_2460_precedence :
+   event_2460.year < -1900 := by
+-  unfold event_2460
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2450 BCE -/
+ 
+@@ -381,8 +366,7 @@
+ 
+ theorem event_2450_precedence :
+   event_2450.year < -1900 := by
+-  unfold event_2450
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2440 BCE -/
+ 
+@@ -403,8 +387,7 @@
+ 
+ theorem event_2440_precedence :
+   event_2440.year < -1900 := by
+-  unfold event_2440
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2430 BCE -/
+ 
+@@ -425,8 +408,7 @@
+ 
+ theorem event_2430_precedence :
+   event_2430.year < -1900 := by
+-  unfold event_2430
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2420 BCE -/
+ 
+@@ -447,8 +429,7 @@
+ 
+ theorem event_2420_precedence :
+   event_2420.year < -1900 := by
+-  unfold event_2420
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2410 BCE -/
+ 
+@@ -469,8 +450,7 @@
+ 
+ theorem event_2410_precedence :
+   event_2410.year < -1900 := by
+-  unfold event_2410
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2400 BCE -/
+ 
+@@ -491,8 +471,7 @@
+ 
+ theorem event_2400_precedence :
+   event_2400.year < -1900 := by
+-  unfold event_2400
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2390 BCE -/
+ 
+@@ -513,8 +492,7 @@
+ 
+ theorem event_2390_precedence :
+   event_2390.year < -1900 := by
+-  unfold event_2390
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2380 BCE -/
+ 
+@@ -535,8 +513,7 @@
+ 
+ theorem event_2380_precedence :
+   event_2380.year < -1900 := by
+-  unfold event_2380
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2370 BCE -/
+ 
+@@ -557,8 +534,7 @@
+ 
+ theorem event_2370_precedence :
+   event_2370.year < -1900 := by
+-  unfold event_2370
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2360 BCE -/
+ 
+@@ -579,8 +555,7 @@
+ 
+ theorem event_2360_precedence :
+   event_2360.year < -1900 := by
+-  unfold event_2360
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2350 BCE -/
+ 
+@@ -601,8 +576,7 @@
+ 
+ theorem event_2350_precedence :
+   event_2350.year < -1900 := by
+-  unfold event_2350
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2340 BCE -/
+ 
+@@ -623,8 +597,7 @@
+ 
+ theorem event_2340_precedence :
+   event_2340.year < -1900 := by
+-  unfold event_2340
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2330 BCE -/
+ 
+@@ -645,8 +618,7 @@
+ 
+ theorem event_2330_precedence :
+   event_2330.year < -1900 := by
+-  unfold event_2330
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2320 BCE -/
+ 
+@@ -667,8 +639,7 @@
+ 
+ theorem event_2320_precedence :
+   event_2320.year < -1900 := by
+-  unfold event_2320
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2310 BCE -/
+ 
+@@ -689,8 +660,7 @@
+ 
+ theorem event_2310_precedence :
+   event_2310.year < -1900 := by
+-  unfold event_2310
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2300 BCE -/
+ 
+@@ -711,8 +681,7 @@
+ 
+ theorem event_2300_precedence :
+   event_2300.year < -1900 := by
+-  unfold event_2300
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2290 BCE -/
+ 
+@@ -733,8 +702,7 @@
+ 
+ theorem event_2290_precedence :
+   event_2290.year < -1900 := by
+-  unfold event_2290
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2280 BCE -/
+ 
+@@ -755,8 +723,7 @@
+ 
+ theorem event_2280_precedence :
+   event_2280.year < -1900 := by
+-  unfold event_2280
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2270 BCE -/
+ 
+@@ -777,8 +744,7 @@
+ 
+ theorem event_2270_precedence :
+   event_2270.year < -1900 := by
+-  unfold event_2270
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2260 BCE -/
+ 
+@@ -799,8 +765,7 @@
+ 
+ theorem event_2260_precedence :
+   event_2260.year < -1900 := by
+-  unfold event_2260
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2250 BCE -/
+ 
+@@ -821,8 +786,7 @@
+ 
+ theorem event_2250_precedence :
+   event_2250.year < -1900 := by
+-  unfold event_2250
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2240 BCE -/
+ 
+@@ -843,8 +807,7 @@
+ 
+ theorem event_2240_precedence :
+   event_2240.year < -1900 := by
+-  unfold event_2240
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2230 BCE -/
+ 
+@@ -865,8 +828,7 @@
+ 
+ theorem event_2230_precedence :
+   event_2230.year < -1900 := by
+-  unfold event_2230
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2220 BCE -/
+ 
+@@ -887,8 +849,7 @@
+ 
+ theorem event_2220_precedence :
+   event_2220.year < -1900 := by
+-  unfold event_2220
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2210 BCE -/
+ 
+@@ -909,8 +870,7 @@
+ 
+ theorem event_2210_precedence :
+   event_2210.year < -1900 := by
+-  unfold event_2210
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2200 BCE -/
+ 
+@@ -931,8 +891,7 @@
+ 
+ theorem event_2200_precedence :
+   event_2200.year < -1900 := by
+-  unfold event_2200
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2190 BCE -/
+ 
+@@ -953,8 +912,7 @@
+ 
+ theorem event_2190_precedence :
+   event_2190.year < -1900 := by
+-  unfold event_2190
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2180 BCE -/
+ 
+@@ -975,8 +933,7 @@
+ 
+ theorem event_2180_precedence :
+   event_2180.year < -1900 := by
+-  unfold event_2180
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2170 BCE -/
+ 
+@@ -997,8 +954,7 @@
+ 
+ theorem event_2170_precedence :
+   event_2170.year < -1900 := by
+-  unfold event_2170
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2160 BCE -/
+ 
+@@ -1019,8 +975,7 @@
+ 
+ theorem event_2160_precedence :
+   event_2160.year < -1900 := by
+-  unfold event_2160
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2150 BCE -/
+ 
+@@ -1041,8 +996,7 @@
+ 
+ theorem event_2150_precedence :
+   event_2150.year < -1900 := by
+-  unfold event_2150
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2140 BCE -/
+ 
+@@ -1063,8 +1017,7 @@
+ 
+ theorem event_2140_precedence :
+   event_2140.year < -1900 := by
+-  unfold event_2140
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2130 BCE -/
+ 
+@@ -1085,8 +1038,7 @@
+ 
+ theorem event_2130_precedence :
+   event_2130.year < -1900 := by
+-  unfold event_2130
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2120 BCE -/
+ 
+@@ -1107,8 +1059,7 @@
+ 
+ theorem event_2120_precedence :
+   event_2120.year < -1900 := by
+-  unfold event_2120
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2110 BCE -/
+ 
+@@ -1129,8 +1080,7 @@
+ 
+ theorem event_2110_precedence :
+   event_2110.year < -1900 := by
+-  unfold event_2110
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2100 BCE -/
+ 
+@@ -1151,8 +1101,7 @@
+ 
+ theorem event_2100_precedence :
+   event_2100.year < -1900 := by
+-  unfold event_2100
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2090 BCE -/
+ 
+@@ -1173,8 +1122,7 @@
+ 
+ theorem event_2090_precedence :
+   event_2090.year < -1900 := by
+-  unfold event_2090
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2080 BCE -/
+ 
+@@ -1195,8 +1143,7 @@
+ 
+ theorem event_2080_precedence :
+   event_2080.year < -1900 := by
+-  unfold event_2080
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2070 BCE -/
+ 
+@@ -1217,8 +1164,7 @@
+ 
+ theorem event_2070_precedence :
+   event_2070.year < -1900 := by
+-  unfold event_2070
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2060 BCE -/
+ 
+@@ -1239,8 +1185,7 @@
+ 
+ theorem event_2060_precedence :
+   event_2060.year < -1900 := by
+-  unfold event_2060
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2050 BCE -/
+ 
+@@ -1261,8 +1206,7 @@
+ 
+ theorem event_2050_precedence :
+   event_2050.year < -1900 := by
+-  unfold event_2050
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2040 BCE -/
+ 
+@@ -1283,8 +1227,7 @@
+ 
+ theorem event_2040_precedence :
+   event_2040.year < -1900 := by
+-  unfold event_2040
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2030 BCE -/
+ 
+@@ -1305,8 +1248,7 @@
+ 
+ theorem event_2030_precedence :
+   event_2030.year < -1900 := by
+-  unfold event_2030
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2020 BCE -/
+ 
+@@ -1327,8 +1269,7 @@
+ 
+ theorem event_2020_precedence :
+   event_2020.year < -1900 := by
+-  unfold event_2020
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2010 BCE -/
+ 
+@@ -1349,8 +1290,7 @@
+ 
+ theorem event_2010_precedence :
+   event_2010.year < -1900 := by
+-  unfold event_2010
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -2000 BCE -/
+ 
+@@ -1371,8 +1311,7 @@
+ 
+ theorem event_2000_precedence :
+   event_2000.year < -1900 := by
+-  unfold event_2000
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1990 BCE -/
+ 
+@@ -1393,8 +1332,7 @@
+ 
+ theorem event_1990_precedence :
+   event_1990.year < -1900 := by
+-  unfold event_1990
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1980 BCE -/
+ 
+@@ -1415,8 +1353,7 @@
+ 
+ theorem event_1980_precedence :
+   event_1980.year < -1900 := by
+-  unfold event_1980
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1970 BCE -/
+ 
+@@ -1437,8 +1374,7 @@
+ 
+ theorem event_1970_precedence :
+   event_1970.year < -1900 := by
+-  unfold event_1970
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1960 BCE -/
+ 
+@@ -1459,8 +1395,7 @@
+ 
+ theorem event_1960_precedence :
+   event_1960.year < -1900 := by
+-  unfold event_1960
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1950 BCE -/
+ 
+@@ -1481,8 +1416,7 @@
+ 
+ theorem event_1950_precedence :
+   event_1950.year < -1900 := by
+-  unfold event_1950
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1940 BCE -/
+ 
+@@ -1503,8 +1437,7 @@
+ 
+ theorem event_1940_precedence :
+   event_1940.year < -1900 := by
+-  unfold event_1940
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1930 BCE -/
+ 
+@@ -1525,8 +1458,7 @@
+ 
+ theorem event_1930_precedence :
+   event_1930.year < -1900 := by
+-  unfold event_1930
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1920 BCE -/
+ 
+@@ -1547,8 +1479,7 @@
+ 
+ theorem event_1920_precedence :
+   event_1920.year < -1900 := by
+-  unfold event_1920
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Ano -1910 BCE -/
+ 
+@@ -1569,8 +1500,7 @@
+ 
+ theorem event_1910_precedence :
+   event_1910.year < -1900 := by
+-  unfold event_1910
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Marco Histórico: -2000 - Matemática Babilônica -/
+ 
+@@ -1694,8 +1624,7 @@
+ 
+ theorem Papiro_de_Rhind_precedence :
+   milestone_Papiro_de_Rhind.harappa_precedence > 0 := by
+-  unfold milestone_Papiro_de_Rhind
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto -1655: -5 anos antes Papiro de Rhind -/
+ def context_Papiro_de_Rhind_5 : Int := -1655
+@@ -1784,8 +1713,7 @@
+ 
+ theorem Vedas_precedence :
+   milestone_Vedas.harappa_precedence > 0 := by
+-  unfold milestone_Vedas
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto -1205: -5 anos antes Vedas -/
+ def context_Vedas_5 : Int := -1205
+@@ -1874,8 +1802,7 @@
+ 
+ theorem Tales_de_Mileto_precedence :
+   milestone_Tales_de_Mileto.harappa_precedence > 0 := by
+-  unfold milestone_Tales_de_Mileto
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto -605: -5 anos antes Tales de Mileto -/
+ def context_Tales_de_Mileto_5 : Int := -605
+@@ -2054,8 +1981,7 @@
+ 
+ theorem Euclides_precedence :
+   milestone_Euclides.harappa_precedence > 0 := by
+-  unfold milestone_Euclides
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto -305: -5 anos antes Euclides -/
+ def context_Euclides_5 : Int := -305
+@@ -2144,8 +2070,7 @@
+ 
+ theorem Arquimedes_precedence :
+   milestone_Arquimedes.harappa_precedence > 0 := by
+-  unfold milestone_Arquimedes
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto -292: -5 anos antes Arquimedes -/
+ def context_Arquimedes_5 : Int := -292
+@@ -2234,8 +2159,7 @@
+ 
+ theorem Diofanto_precedence :
+   milestone_Diofanto.harappa_precedence > 0 := by
+-  unfold milestone_Diofanto
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 245: -5 anos antes Diofanto -/
+ def context_Diofanto_5 : Int := 245
+@@ -2324,8 +2248,7 @@
+ 
+ theorem Aryabhata_precedence :
+   milestone_Aryabhata.harappa_precedence > 0 := by
+-  unfold milestone_Aryabhata
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 494: -5 anos antes Aryabhata -/
+ def context_Aryabhata_5 : Int := 494
+@@ -2414,8 +2337,7 @@
+ 
+ theorem Brahmagupta_precedence :
+   milestone_Brahmagupta.harappa_precedence > 0 := by
+-  unfold milestone_Brahmagupta
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 623: -5 anos antes Brahmagupta -/
+ def context_Brahmagupta_5 : Int := 623
+@@ -2504,8 +2426,7 @@
+ 
+ theorem Al_Khwarizmi_precedence :
+   milestone_Al_Khwarizmi.harappa_precedence > 0 := by
+-  unfold milestone_Al_Khwarizmi
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 815: -5 anos antes Al-Khwarizmi -/
+ def context_Al_Khwarizmi_5 : Int := 815
+@@ -2594,8 +2515,7 @@
+ 
+ theorem Fibonacci_precedence :
+   milestone_Fibonacci.harappa_precedence > 0 := by
+-  unfold milestone_Fibonacci
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1197: -5 anos antes Fibonacci -/
+ def context_Fibonacci_5 : Int := 1197
+@@ -2684,8 +2604,7 @@
+ 
+ theorem Cardano_precedence :
+   milestone_Cardano.harappa_precedence > 0 := by
+-  unfold milestone_Cardano
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1540: -5 anos antes Cardano -/
+ def context_Cardano_5 : Int := 1540
+@@ -2774,8 +2693,7 @@
+ 
+ theorem Descartes_precedence :
+   milestone_Descartes.harappa_precedence > 0 := by
+-  unfold milestone_Descartes
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1632: -5 anos antes Descartes -/
+ def context_Descartes_5 : Int := 1632
+@@ -2864,8 +2782,7 @@
+ 
+ theorem Newton_precedence :
+   milestone_Newton.harappa_precedence > 0 := by
+-  unfold milestone_Newton
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1660: -5 anos antes Newton -/
+ def context_Newton_5 : Int := 1660
+@@ -2954,8 +2871,7 @@
+ 
+ theorem Leibniz_precedence :
+   milestone_Leibniz.harappa_precedence > 0 := by
+-  unfold milestone_Leibniz
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1670: -5 anos antes Leibniz -/
+ def context_Leibniz_5 : Int := 1670
+@@ -3044,8 +2960,7 @@
+ 
+ theorem Euler_precedence :
+   milestone_Euler.harappa_precedence > 0 := by
+-  unfold milestone_Euler
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1731: -5 anos antes Euler -/
+ def context_Euler_5 : Int := 1731
+@@ -3134,8 +3049,7 @@
+ 
+ theorem Gauss_precedence :
+   milestone_Gauss.harappa_precedence > 0 := by
+-  unfold milestone_Gauss
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1794: -5 anos antes Gauss -/
+ def context_Gauss_5 : Int := 1794
+@@ -3224,8 +3138,7 @@
+ 
+ theorem Lobachevsky_precedence :
+   milestone_Lobachevsky.harappa_precedence > 0 := by
+-  unfold milestone_Lobachevsky
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1824: -5 anos antes Lobachevsky -/
+ def context_Lobachevsky_5 : Int := 1824
+@@ -3314,8 +3227,7 @@
+ 
+ theorem Galois_precedence :
+   milestone_Galois.harappa_precedence > 0 := by
+-  unfold milestone_Galois
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1827: -5 anos antes Galois -/
+ def context_Galois_5 : Int := 1827
+@@ -3404,8 +3316,7 @@
+ 
+ theorem Riemann_precedence :
+   milestone_Riemann.harappa_precedence > 0 := by
+-  unfold milestone_Riemann
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1854: -5 anos antes Riemann -/
+ def context_Riemann_5 : Int := 1854
+@@ -3494,8 +3405,7 @@
+ 
+ theorem Lindemann_precedence :
+   milestone_Lindemann.harappa_precedence > 0 := by
+-  unfold milestone_Lindemann
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1877: -5 anos antes Lindemann -/
+ def context_Lindemann_5 : Int := 1877
+@@ -3584,8 +3494,7 @@
+ 
+ theorem Hilbert_precedence :
+   milestone_Hilbert.harappa_precedence > 0 := by
+-  unfold milestone_Hilbert
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1895: -5 anos antes Hilbert -/
+ def context_Hilbert_5 : Int := 1895
+@@ -3764,8 +3673,7 @@
+ 
+ theorem Turing_precedence :
+   milestone_Turing.harappa_precedence > 0 := by
+-  unfold milestone_Turing
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1931: -5 anos antes Turing -/
+ def context_Turing_5 : Int := 1931
+@@ -3854,8 +3762,7 @@
+ 
+ theorem Cohen_precedence :
+   milestone_Cohen.harappa_precedence > 0 := by
+-  unfold milestone_Cohen
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1958: -5 anos antes Cohen -/
+ def context_Cohen_5 : Int := 1958
+@@ -3944,8 +3851,7 @@
+ 
+ theorem Cook_precedence :
+   milestone_Cook.harappa_precedence > 0 := by
+-  unfold milestone_Cook
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1966: -5 anos antes Cook -/
+ def context_Cook_5 : Int := 1966
+@@ -4034,8 +3940,7 @@
+ 
+ theorem Appel_Haken_precedence :
+   milestone_Appel_Haken.harappa_precedence > 0 := by
+-  unfold milestone_Appel_Haken
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1971: -5 anos antes Appel-Haken -/
+ def context_Appel_Haken_5 : Int := 1971
+@@ -4124,8 +4029,7 @@
+ 
+ theorem Wiles_precedence :
+   milestone_Wiles.harappa_precedence > 0 := by
+-  unfold milestone_Wiles
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1989: -5 anos antes Wiles -/
+ def context_Wiles_5 : Int := 1989
+@@ -4214,8 +4118,7 @@
+ 
+ theorem Clay_Institute_precedence :
+   milestone_Clay_Institute.harappa_precedence > 0 := by
+-  unfold milestone_Clay_Institute
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1995: -5 anos antes Clay Institute -/
+ def context_Clay_Institute_5 : Int := 1995
+@@ -4304,8 +4207,7 @@
+ 
+ theorem Perelman_precedence :
+   milestone_Perelman.harappa_precedence > 0 := by
+-  unfold milestone_Perelman
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 1997: -5 anos antes Perelman -/
+ def context_Perelman_5 : Int := 1997
+@@ -4394,8 +4296,7 @@
+ 
+ theorem Mishkan_III_precedence :
+   milestone_Mishkan_III.harappa_precedence > 0 := by
+-  unfold milestone_Mishkan_III
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 2020: -5 anos antes Mishkan III -/
+ def context_Mishkan_III_5 : Int := 2020
+@@ -4484,8 +4385,7 @@
+ 
+ theorem Yeshu_Logic_precedence :
+   milestone_Yeshu_Logic.harappa_precedence > 0 := by
+-  unfold milestone_Yeshu_Logic
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 2021: -5 anos antes Yeshu Logic -/
+ def context_Yeshu_Logic_5 : Int := 2021
+@@ -4574,8 +4474,7 @@
+ 
+ theorem Third_Temple_precedence :
+   milestone_Third_Temple.harappa_precedence > 0 := by
+-  unfold milestone_Third_Temple
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 2022: -5 anos antes Third Temple -/
+ def context_Third_Temple_5 : Int := 2022
+@@ -4664,8 +4563,7 @@
+ 
+ theorem Full_Integration_precedence :
+   milestone_Full_Integration.harappa_precedence > 0 := by
+-  unfold milestone_Full_Integration
+-  norm_num
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
+ 
+ /-- Contexto 2023: -5 anos antes Full Integration -/
+ def context_Full_Integration_5 : Int := 2023

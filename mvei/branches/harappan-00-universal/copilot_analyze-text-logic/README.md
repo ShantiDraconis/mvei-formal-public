@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/analyze-text-logic` of the private reposit
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 12 — closed 1, conditional 0, open 6, proof error 5, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `f9bdd3f535cece20c240c07b09d6e2433c96bc6da3670c81acb4731333e768aa`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_analyze-text-logic/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `f958f8111f7bedc7b05dbf6a58c580d84175f3aaed22371438aa3dfb9da37322`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_analyze-text-logic/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

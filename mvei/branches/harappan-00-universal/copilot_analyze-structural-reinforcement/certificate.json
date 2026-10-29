@@ -1,0 +1,131 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/analyze-structural-reinforcement",
+ "branch_state": "parada",
+ "head_commit": "64b82486d5ffd14f5431b0b179607a845dfde773",
+ "head_commit_date": "2026-02-28T18:55:50+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "64b82486d5ffd14f5431b0b179607a845dfde773",
+   "date": "2026-02-28T18:55:50+00:00",
+   "subject": "feat: add M202 structural stability formalization in LaTeX, Lean 4, Coq, Isabelle/HOL, and Agda"
+  },
+  {
+   "commit": "93be49cd8efe64267842e4274184d4ea00a9a4f3",
+   "date": "2026-02-28T18:47:36+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Harappan.M202.m202_idempotent",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 128,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : M202Sign) (s : SystemState) : m.apply (m.apply s) = m.apply s"
+  },
+  {
+   "name": "Harappan.M202.m202_is_infrastructure",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 124,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : M202Sign) (s : SystemState) : (m.apply s).role = SignRole.Infrastructure"
+  },
+  {
+   "name": "Harappan.M202.m202_is_most_mature",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 149,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": m202Stage = StructuralStage.WithReinforcement"
+  },
+  {
+   "name": "Harappan.M202.m202_load_capacity_eq_two",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 189,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": m202LoadCapacity = 2"
+  },
+  {
+   "name": "Harappan.M202.m202_no_emission",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 175,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": m202Absences.has_emission = false"
+  },
+  {
+   "name": "Harappan.M202.m202_no_internal_division",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 167,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": m202Absences.has_internal_division = false"
+  },
+  {
+   "name": "Harappan.M202.m202_no_projection",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 171,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": m202Absences.has_projection = false"
+  },
+  {
+   "name": "Harappan.M202.m202_prevents_collapse",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 120,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : M202Sign) (s : SystemState) : (m.apply s).collapse = false"
+  },
+  {
+   "name": "Harappan.M202.m202_produces_reinforced",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 108,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : M202Sign) (s : SystemState) : (m.apply s).stability = StabilityLevel.Reinforced"
+  },
+  {
+   "name": "Harappan.M202.m202_redundancy_guarantee",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 193,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(beams_ok : Nat) : beams_ok ≥ 1 → m202LoadCapacity - 1 ≥ beamCapacity"
+  },
+  {
+   "name": "Harappan.M202.m202_redundancy_two",
+   "file": "formal/lean/M202StructuralStability.lean",
+   "line": 116,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : M202Sign) (s : SystemState) : (m.apply s).redundancy = 2"
+  }
+ ],
+ "closed": 10,
+ "files_sha256": {
+  "formal/lean/M202StructuralStability.lean": "0e4860593fbe51a78e1377d935d184a3d31874c0753b9a3147e3ffbcf5fb24a6",
+  "formal/lean/lakefile.lean": "95e693d348b937383c6d100e0d202f934f9187fb66fa317a0a707f41aa76669d",
+  "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-10-29T01:37:17Z",
+ "certificate_sha256": "3db51492c5c8ad248fff0350d14deeddeaf4342478cd9bce17db9295d6bdf08a"
+}
