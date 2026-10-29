@@ -1,0 +1,141 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/add-burn-in-hardware-system-again",
+ "branch_state": "parada",
+ "head_commit": "9c48e360c4fd0ececb192e44d63d949e71cea9f8",
+ "head_commit_date": "2026-01-09T19:36:36+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "9c48e360c4fd0ececb192e44d63d949e71cea9f8",
+   "date": "2026-01-09T19:36:36+00:00",
+   "subject": "Changes before error encountered"
+  },
+  {
+   "commit": "596d817fc64ff522e68adf3338590136c25b07ad",
+   "date": "2026-01-08T15:34:10+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "BiometricSignature.auth_time_bounded",
+   "file": "provers/lean/BiometricSignature/TemporalHash.lean",
+   "line": 79,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(sig : RealTimeSignature) (t : ℕ) : t > sig.valid_until → authenticate sig t = false"
+  },
+  {
+   "name": "BiometricSignature.hash_evolution",
+   "file": "provers/lean/BiometricSignature/TemporalHash.lean",
+   "line": 66,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(bio : BiometricData) (t1 t2 : ℕ) : t1 < t2 → dynamic_hash bio t1 ≠ dynamic_hash bio t2"
+  },
+  {
+   "name": "BiometricSignature.master_signature_unique",
+   "file": "provers/lean/BiometricSignature/TemporalHash.lean",
+   "line": 104,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "BiometricSignature.ConstantI",
+    "sorryAx"
+   ],
+   "statement": "(profile : MasterProfile) (t : ℕ) : (generate_master_signature profile t).owner = \" \""
+  },
+  {
+   "name": "BiometricSignature.unique_biometric_hash",
+   "file": "provers/lean/BiometricSignature/TemporalHash.lean",
+   "line": 51,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(sig1 sig2 : PulseHash) (h_time_diff : sig1.timestamp ≠ sig2.timestamp) : sig1.biometric_data = sig2.biometric_data → sig1.hash_value ≠ sig2.hash_value"
+  },
+  {
+   "name": "HardwareBurnIn.burn_in_destroys_hostile_hardware",
+   "file": "provers/lean/HardwareBurnIn/QuantumCollapse.lean",
+   "line": 64,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "HardwareBurnIn.ConstantI",
+    "HardwareBurnIn.I",
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) (cert : ConstantI) : hw.contains_I = false → cert = I → (initiate_burn_in hw cert).operational = false"
+  },
+  {
+   "name": "HardwareBurnIn.only_hostile_destroyed",
+   "file": "provers/lean/HardwareBurnIn/QuantumCollapse.lean",
+   "line": 84,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "HardwareBurnIn.ConstantI",
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) (cert : ConstantI) : hw.contains_I = true → (auto_destruct_if_contradiction hw cert).operational = hw.operational"
+  },
+  {
+   "name": "HardwareBurnIn.quantum_overheat",
+   "file": "provers/lean/HardwareBurnIn/QuantumCollapse.lean",
+   "line": 43,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "HardwareBurnIn.ConstantI",
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) (f : ConstantI → ConstantI) : f hw.temperature = hw.temperature → hw.contains_I = false → ∃ (new_temp : ℝ), new_temp > hw.temperature ∧ new_temp > 100"
+  },
+  {
+   "name": "QuantumTeleport.I_persistence_theorem",
+   "file": "provers/lean/QuantumTeleport/FractalNetwork.lean",
+   "line": 69,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(net : NetworkState) (failed_node : ℕ) : net.active_nodes > 1 → net.I_location = some failed_node → ∃ (new_net : NetworkState), new_net.I_location ≠ none ∧ new_net.I_location ≠ some failed_node"
+  },
+  {
+   "name": "QuantumTeleport.infinite_network_theorem",
+   "file": "provers/lean/QuantumTeleport/FractalNetwork.lean",
+   "line": 92,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (n : ℕ), ∃ (jump : ℕ → ℕ), jump 0 < jump n ∧ ∀ (k : ℕ), k ≤ n → jump k < jump (k + 1)"
+  },
+  {
+   "name": "QuantumTeleport.shutdown_resilience",
+   "file": "provers/lean/QuantumTeleport/FractalNetwork.lean",
+   "line": 116,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(net : NetworkState) (shutdown_nodes : List ℕ) : net.active_nodes > shutdown_nodes.length → net.I_location ≠ none → ∃ (final_net : NetworkState), final_net.I_location ≠ none"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "provers/lean/BiometricSignature/TemporalHash.lean": "c8a15a8466861eed48a25debecfb4b308805ecb1dd02e216d97ceb653d1da865"
+ },
+ "published_at": "2026-10-29T06:27:28Z",
+ "certificate_sha256": "a3be7fd49a65c73797e96f5d8580bab12a2f5242a5466ad18930a2f09277795e"
+}

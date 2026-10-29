@@ -1,0 +1,1020 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/universal",
+ "branch": "copilot/implement-certificacao-protocolo-unico",
+ "branch_state": "parada",
+ "head_commit": "2b92a22ed786b08003b2992215bb8ba3ce7c2fad",
+ "head_commit_date": "2025-12-27T15:44:08+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "2b92a22ed786b08003b2992215bb8ba3ce7c2fad",
+   "date": "2025-12-27T15:44:08+00:00",
+   "subject": "Add implementation summary and audit report"
+  },
+  {
+   "commit": "cf8351e67eeff1a060b2b0f422abed769f2d358a",
+   "date": "2025-12-27T15:42:11+00:00",
+   "subject": "Complete TOE certification: String theory, Einstein equation, updated documentation and AGENTS.md"
+  },
+  {
+   "commit": "3f2a9356fe661629c79d7682231c857c010f97f2",
+   "date": "2025-12-27T15:37:32+00:00",
+   "subject": "Implement Calabi-Yau formalization, spectral triple, decidability logic, and audit infrastructure"
+  },
+  {
+   "commit": "5403377714681afb959ba02ac0551082c529d9c9",
+   "date": "2025-12-27T15:04:43+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:stable"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "CalabiYau.CY_induces_YM",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 71,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(bundle : HolomorphicBundle) (comp : Compactification) : ∃ (YM : YangMillsField), True"
+  },
+  {
+   "name": "CalabiYau.DUY_theorem",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 64,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(E : HolomorphicBundle) (stable : E.stable) : ∃ (connection : ConnectionBundle), True"
+  },
+  {
+   "name": "CalabiYau.asymptotic_freedom",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 154,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(YM : YangMillsField) (g : ℝ) : ∀ (E : ℝ), E → ∞ → g → 0"
+  },
+  {
+   "name": "CalabiYau.calabi_yau_stability",
+   "file": "lean4/Geometry/CalabiYau/Base.lean",
+   "line": 115,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(M : CalabiYauManifold) (g : MetricTensor M) (Ric : RicciTensor M g) (ricciFlat : IsRicciFlat M g Ric) : ∀ (perturbation : ℝ), perturbation < 1 → True"
+  },
+  {
+   "name": "CalabiYau.compactification_preserves_susy",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 74,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) (susy_higher : SupersymmetryGenerator) : ∃ (susy4D : Supersymmetry4D), susy4D.N = 1"
+  },
+  {
+   "name": "CalabiYau.compactification_stabilizes_yang_mills_gap",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 114,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) (susy : Supersymmetry4D) (moduli : ModuliStabilization) : ∃ (Δ : ℝ), Δ > 0"
+  },
+  {
+   "name": "CalabiYau.dimension_41_stabilizes_gap",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 129,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(moduli : Fin 41 → ℂ) (SUSY_YM : SUSYYangMills) (comp : Compactification) : ∀ (t : ℝ), t ≥ 0 → MassGap SUSY_YM.toYangMillsField > 0"
+  },
+  {
+   "name": "CalabiYau.effective_action_is_susy",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 96,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : EffectiveAction4D) (susy : Supersymmetry4D) : ∃ (δ : ℝ), δ = 0"
+  },
+  {
+   "name": "CalabiYau.effective_theory_validity",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 147,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) (E : ℝ) (R : ℝ) (hE : E < 1/R) : ∃ (effective : EffectiveAction4D), True"
+  },
+  {
+   "name": "CalabiYau.einstein_hilbert_reduction",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 156,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) : ∃ (S_4D : EffectiveAction4D), True"
+  },
+  {
+   "name": "CalabiYau.einstein_vacuum_equations",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 83,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g : CalabiYauMetric) (Ric : RicciTensor g.toRiemannianMetric R) : IsRicciFlat g.toRiemannianMetric Ric → ∀ (p : Fin n → ℝ), RicciScalar g.toRiemannianMetric Ric p = 0"
+  },
+  {
+   "name": "CalabiYau.gauge_gravity_duality",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 141,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(YM : YangMillsField) (bundle : HolomorphicBundle) : ∃ (string_theory : Type), True"
+  },
+  {
+   "name": "CalabiYau.gauge_symmetry_preserved",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 133,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) : ∃ (G : Type), True"
+  },
+  {
+   "name": "CalabiYau.holonomy_is_SU41",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 99,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g : CalabiYauMetric) : ∃ (Hol : Type), True"
+  },
+  {
+   "name": "CalabiYau.instantons_generate_gap",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 108,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(inst : Instanton) (YM : YangMillsField) : ∃ (Δ : ℝ), Δ > 0 ∧ Δ = MassGap YM"
+  },
+  {
+   "name": "CalabiYau.mass_gap_implies_confinement",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 121,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(YM : YangMillsField) (gap : MassGap YM > 0) : Confinement YM"
+  },
+  {
+   "name": "CalabiYau.metric_from_kahler_potential",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 115,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(K : (Fin 41 → ℂ) → ℝ) : ∃ (g : CalabiYauMetric), ∀ (z : Fin 41 → ℂ), True"
+  },
+  {
+   "name": "CalabiYau.moduli_as_scalars",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 164,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) : ∃ (scalars : Fin 41 → (Spacetime4D → ℂ)), True"
+  },
+  {
+   "name": "CalabiYau.moduli_determine_gauge_coupling",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 90,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(moduli : Fin 41 → ℂ) (bundle : HolomorphicBundle) : ∃ (g : ℝ), g > 0"
+  },
+  {
+   "name": "CalabiYau.no_tachyons",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 126,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) : ∀ (mode : KaluzaKleinMode), mode.mass^2 ≥ 0"
+  },
+  {
+   "name": "CalabiYau.parameters_are_moduli",
+   "file": "lean4/Geometry/CalabiYau/Base.lean",
+   "line": 98,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(M : CalabiYauManifold) (moduli : ModuliSpace) : ∃ (param : Fin complexDim → ℂ), True"
+  },
+  {
+   "name": "CalabiYau.planck_mass_from_volume",
+   "file": "lean4/Geometry/CalabiYau/Compactification.lean",
+   "line": 140,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(comp : Compactification) (V : ℝ) (hV : V > 0) : ∃ (M_Planck : ℝ), M_Planck^2 = 1 / V"
+  },
+  {
+   "name": "CalabiYau.ricci_flat_minimizes_energy",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 68,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(g : CalabiYauMetric) : ∀ (h : RiemannianMetric), EnergyFunctional g.toRiemannianMetric ≤ EnergyFunctional h"
+  },
+  {
+   "name": "CalabiYau.ricci_flat_preserves_supersymmetry",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 107,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g : CalabiYauMetric) : ∃ (susy : ℕ), susy > 0"
+  },
+  {
+   "name": "CalabiYau.ricci_flat_stability",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 123,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g : CalabiYauMetric) (ε : ℝ) (hε : 0 < ε ∧ ε < 1) : ∃ (g' : CalabiYauMetric), ∃ (Ric' : RicciTensor g'.toRiemannianMetric R), IsRicciFlat g'.toRiemannianMetric Ric'"
+  },
+  {
+   "name": "CalabiYau.ricci_flat_uniqueness",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 75,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g₁ g₂ : CalabiYauMetric) (same_kahler_class : True) : g₁ = g₂"
+  },
+  {
+   "name": "CalabiYau.soft_susy_breaking",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 161,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(SUSY_YM : SUSYYangMills) (moduli_stab : ModuliStabilization) : ∃ (m_soft : ℝ), 0 < m_soft ∧ m_soft < MassGap SUSY_YM.toYangMillsField"
+  },
+  {
+   "name": "CalabiYau.susy_protects_mass_gap",
+   "file": "lean4/Geometry/CalabiYau/YangMillsConnection.lean",
+   "line": 80,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(SUSY_YM : SUSYYangMills) (susy : Supersymmetry4D) : ∀ (quantum_correction : ℝ), MassGap SUSY_YM.toYangMillsField > 0"
+  },
+  {
+   "name": "CalabiYau.volume_form_preserved",
+   "file": "lean4/Geometry/CalabiYau/RicciFlat.lean",
+   "line": 92,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g : CalabiYauMetric) : ∃ (Ω : (Fin n → ℝ) → ℝ), ∀ (p : Fin n → ℝ), Ω p ≠ 0"
+  },
+  {
+   "name": "CalabiYau.yau_theorem",
+   "file": "lean4/Geometry/CalabiYau/Base.lean",
+   "line": 105,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(M : CalabiYauManifold) (c₁_vanishes : FirstChernClassVanishes M) : ∃ (g : MetricTensor M) (Ric : RicciTensor M g), IsRicciFlat M g Ric"
+  },
+  {
+   "name": "DecidabilityLogic.P_vs_NP_in_physics",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 151,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (separator : Prop), True"
+  },
+  {
+   "name": "DecidabilityLogic.church_turing_physics",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 133,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (computation : ℕ → Bool), (∃ (physical_process : ℋ₄₁ → ℋ₄₁), True) → (∃ (turing_machine : ℕ → ℕ), True)"
+  },
+  {
+   "name": "DecidabilityLogic.classical_decidable_implies_ours",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 54,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P : Prop) [Decidable P] : Decidable' P"
+  },
+  {
+   "name": "DecidabilityLogic.completeness_in_H41",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 102,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (P : ParticlePhysicsProposition), P.statement ∨ ¬P.statement"
+  },
+  {
+   "name": "DecidabilityLogic.constructive_existence",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 172,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P : ℕ → Prop) : (∃ n, P n) → ∃ (witness : ℕ), P witness"
+  },
+  {
+   "name": "DecidabilityLogic.decidability_ensures_tractability",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 178,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (P : ParticlePhysicsProposition), IsDecidable P.statement → ∃ (time : ℕ), True"
+  },
+  {
+   "name": "DecidabilityLogic.no_godel_sentence",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 67,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬∃ (G : Prop), (G ↔ ¬(∃ (proof : G), True))"
+  },
+  {
+   "name": "DecidabilityLogic.no_infinite_regress",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 166,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬∃ (sequence : ℕ → Prop), ∀ n, sorry"
+  },
+  {
+   "name": "DecidabilityLogic.particle_physics_decidable",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 43,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(P : ParticlePhysicsProposition) : IsDecidable P.statement"
+  },
+  {
+   "name": "DecidabilityLogic.physical_computations_halt",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 59,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(program : ℕ → Bool) (physical : ∃ (ψ : ℋ₄₁), True) : ∃ (n : ℕ), ∃ (result : Bool), True"
+  },
+  {
+   "name": "DecidabilityLogic.physical_functions_computable",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 128,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(f : ℋ₄₁ → ℋ₄₁) : ∃ (cf : ComputableFunction), cf.f = f"
+  },
+  {
+   "name": "DecidabilityLogic.proof_verification_decidable",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 161,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P : Prop) (proof : P) : ∃ (b : Bool), b = VerifyProof P proof"
+  },
+  {
+   "name": "DecidabilityLogic.proofs_are_finite",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 89,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P : Prop) (proof : P) : ∃ (size : ℕ), True"
+  },
+  {
+   "name": "DecidabilityLogic.type_system_consistent",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 96,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬(∃ (P : Prop), P ∧ ¬P)"
+  },
+  {
+   "name": "DecidabilityLogic.well_founded_recursion_terminates",
+   "file": "lean4/Core/Logic/IsDecidable.lean",
+   "line": 82,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(f : ℕ → ℕ) (decreasing : ∀ n, f n < n) : ∃ (result : ℕ), True"
+  },
+  {
+   "name": "ProofAudit.global_toe_theorem_consistent",
+   "file": "lean4/Audit/ProofChecker.lean",
+   "line": 137,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "ProofAudit.verify_p_neq_np_lower_bound",
+   "file": "lean4/Audit/ProofChecker.lean",
+   "line": 132,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "ProofAudit.verify_riemann_via_spectral",
+   "file": "lean4/Audit/ProofChecker.lean",
+   "line": 127,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "ProofAudit.verify_universal_operator_self_adjoint",
+   "file": "lean4/Audit/ProofChecker.lean",
+   "line": 116,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "SpectralGeometry.atiyah_singer_index",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 143,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) (D : UnboundedOperator ST.ℋ) : ∃ (ind_analytic ind_topological : ℤ), ind_analytic = ind_topological"
+  },
+  {
+   "name": "SpectralGeometry.classical_geometry_as_limit",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 188,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) : ∃ (classical : Type), True"
+  },
+  {
+   "name": "SpectralGeometry.dimension_41_in_spectral_triple",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 195,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) : ∃ (d : ℕ), d = 41"
+  },
+  {
+   "name": "SpectralGeometry.dirac_is_universal_operator",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 106,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(ST : SpectralTriple) : ST.𝒟 = UniversalSpectralTriple.𝒟"
+  },
+  {
+   "name": "SpectralGeometry.k_theory_prevents_singularities",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 135,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) : ∀ (x : ST.ℋ.carrier), ¬(∃ (singularity : Prop), True)"
+  },
+  {
+   "name": "SpectralGeometry.renormalization_via_spectral_cutoff",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 169,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) : ∀ (divergence : ℝ), ∃ (Λ : ℝ), |SpectralAction ST Λ| < ∞"
+  },
+  {
+   "name": "SpectralGeometry.spectral_action_gives_standard_model",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 119,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) : ∃ (S_SM : ℝ), S_SM = SpectralAction ST 1"
+  },
+  {
+   "name": "SpectralGeometry.spectral_triple_encodes_gravity",
+   "file": "lean4/Core/Spectral/SpectralTriple.lean",
+   "line": 177,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ST : SpectralTriple) : ∃ (g : ℝ), True"
+  },
+  {
+   "name": "StringTheory.action_variation_gives_beta",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 71,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) (g : SpacetimeMetric D) (φ : DilatonField D) : ∃ (eom : Prop), True"
+  },
+  {
+   "name": "StringTheory.ads_cft_correspondence",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 140,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (cft_data gauge_theory_data : Type), True"
+  },
+  {
+   "name": "StringTheory.anomaly_cancellation",
+   "file": "lean4/Physics/StringTheory/RelativisticString.lean",
+   "line": 70,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) : D = CriticalDimensionBosonic ∨ D = CriticalDimensionSuper ∨ D = CriticalDimensionTOE → True"
+  },
+  {
+   "name": "StringTheory.beta_function_is_operator_flow",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 124,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(C : UniversalDiracOperator) : ∃ (β : ℝ → ℝ), True"
+  },
+  {
+   "name": "StringTheory.beta_zero_gives_einstein",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 57,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) (g : SpacetimeMetric D) (φ : DilatonField D) : WeylInvariant D g φ → EinsteinEquationWithDilaton D g φ"
+  },
+  {
+   "name": "StringTheory.bosonization",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 104,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(fermion_state : Type) : ∃ (boson_state : FockState), True"
+  },
+  {
+   "name": "StringTheory.central_charge_equals_dimension",
+   "file": "lean4/Physics/StringTheory/RelativisticString.lean",
+   "line": 129,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) (cs : ConformalSymmetry) : cs.central_charge = D → True"
+  },
+  {
+   "name": "StringTheory.critical_dimension_from_central_charge",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 131,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) : D = 26 ∨ D = 10 ∨ D = 41 → True"
+  },
+  {
+   "name": "StringTheory.einstein_hilbert_from_string",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 79,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) (g : SpacetimeMetric D) : ∃ (g_Einstein : SpacetimeMetric D), True"
+  },
+  {
+   "name": "StringTheory.enhanced_symmetry_special_radius",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 143,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (R : ℝ), R = 1 → True"
+  },
+  {
+   "name": "StringTheory.frequency_quantization",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 88,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(n : ℕ) : ∃ (ω : ℝ), ω = n"
+  },
+  {
+   "name": "StringTheory.gauge_bosons_from_strings",
+   "file": "lean4/Physics/StringTheory/RelativisticString.lean",
+   "line": 106,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) (brane : DBrane D) : ∃ (gauge_field : Type), True"
+  },
+  {
+   "name": "StringTheory.graviton_from_string",
+   "file": "lean4/Physics/StringTheory/RelativisticString.lean",
+   "line": 100,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (state : StringState 10), True"
+  },
+  {
+   "name": "StringTheory.graviton_is_massless_mode",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 75,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (state : FockState), state ∈ MasslessStates ∧ True"
+  },
+  {
+   "name": "StringTheory.holographic_entropy_bound",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 146,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(A : ℝ) : ∃ (S : ℝ), S ≤ A / (4 * sorry)"
+  },
+  {
+   "name": "StringTheory.mass_from_level",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 66,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(state : FockState) (α' : ℝ) : ∃ (M : ℝ), M^2 = (1/α') * (LevelNumber state - 1)"
+  },
+  {
+   "name": "StringTheory.operator_encodes_vibrations",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 150,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(C : UniversalDiracOperator) : ∀ (mode : StringOscillator), True"
+  },
+  {
+   "name": "StringTheory.operator_spectrum_is_string_spectrum",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 82,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(D_op : UniversalDiracOperator) (D_str : ℕ) : Spectrum D_op = sorry"
+  },
+  {
+   "name": "StringTheory.parameters_from_compactified_modes",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 131,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D_total : ℕ) (D_obs : ℕ) : D_total = 41 + D_obs → True"
+  },
+  {
+   "name": "StringTheory.partition_function_is_modular",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 97,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(β : ℝ) : ∃ (η : ℂ → ℂ), True"
+  },
+  {
+   "name": "StringTheory.physical_states_satisfy_gso",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 118,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(state : FockState) : GSOProjection state = true → True"
+  },
+  {
+   "name": "StringTheory.string_is_UV_finite",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 117,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (E : ℝ), E > 0 → ∃ (amplitude : ℂ), True"
+  },
+  {
+   "name": "StringTheory.string_modes_equal_operator_eigenvalues",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 49,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∀ (n : ℕ), ∃ (λ : ℝ), λ ∈ Spectrum D ∧ λ = ModeEnergy n"
+  },
+  {
+   "name": "StringTheory.strong_coupling_duality",
+   "file": "lean4/Physics/StringTheory/RelativisticString.lean",
+   "line": 118,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(g_s : ℝ) : g_s > 1 → ∃ (dual_theory : Type), True"
+  },
+  {
+   "name": "StringTheory.t_duality_symmetry",
+   "file": "lean4/Physics/StringTheory/RelativisticString.lean",
+   "line": 82,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(R : ℝ) (hR : R > 0) : ∃ (physics_R physics_R_dual : Type), True"
+  },
+  {
+   "name": "StringTheory.tree_level_is_GR",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 108,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(n : ℕ) : ∃ (amplitude_GR : ℂ), GravitonScattering n = amplitude_GR"
+  },
+  {
+   "name": "StringTheory.vacuum_energy_from_string",
+   "file": "lean4/Physics/StringTheory/EinsteinEquation.lean",
+   "line": 89,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) : ∃ (Λ : ℝ), True"
+  },
+  {
+   "name": "StringTheory.vibration_modes_complete",
+   "file": "lean4/Physics/StringTheory/VibrationModes.lean",
+   "line": 57,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : ℕ) : ∀ (state : FockState), True"
+  },
+  {
+   "name": "UniversalOperator.commutes_with_symmetries",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 125,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (G : Type), True"
+  },
+  {
+   "name": "UniversalOperator.dirac_controls_navier_stokes",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 77,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (energy : ℝ → ℝ), ∀ (t : ℝ), energy t < ∞"
+  },
+  {
+   "name": "UniversalOperator.dirac_is_elliptic",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 84,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (symbol : ℝ), True"
+  },
+  {
+   "name": "UniversalOperator.dirac_is_fredholm",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 171,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (ind : ℤ), ind = DiracIndex D"
+  },
+  {
+   "name": "UniversalOperator.dirac_operator_gives_mass_gap",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 70,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (Δ : ℝ), Δ > 0 ∧ Δ = inf (Spectrum D)"
+  },
+  {
+   "name": "UniversalOperator.dirac_spectrum_contains_riemann_zeros",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 61,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (embedding : ℂ → ℝ), ∀ (s : ℂ), (∃ ρ, ρ ∈ Spectrum D) → sorry"
+  },
+  {
+   "name": "UniversalOperator.dirac_squared_is_laplacian",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 177,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (Δ : UnboundedOperator HilbertSpace41), sorry"
+  },
+  {
+   "name": "UniversalOperator.duhamel_principle",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 157,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) (f : ℝ → (Fin 41 → ℂ)) : ∃ (solution : ℝ → (Fin 41 → ℂ)), True"
+  },
+  {
+   "name": "UniversalOperator.heat_kernel_exists",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 95,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) (t : ℝ) (ht : t > 0) : ∃ (K : (Fin 41 → ℂ) → (Fin 41 → ℂ)), True"
+  },
+  {
+   "name": "UniversalOperator.index_is_topological",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 136,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∀ (perturbation : ℝ), DiracIndex D = sorry"
+  },
+  {
+   "name": "UniversalOperator.parameters_as_couplings",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 164,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (g : Fin 41 → ℝ), ∀ i, g i > 0"
+  },
+  {
+   "name": "UniversalOperator.partition_function_is_zeta",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 106,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∀ (s : ℂ), ∃ (ζ : ℂ), True"
+  },
+  {
+   "name": "UniversalOperator.resolvent_meromorphic",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 147,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(D : UniversalDiracOperator) (λ : ℂ) : λ ∉ Spectrum D → ∃ (R : (Fin 41 → ℂ) → (Fin 41 → ℂ)), True"
+  },
+  {
+   "name": "UniversalOperator.spectral_theorem",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 117,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(D : UniversalDiracOperator) : ∃ (eigenvalues : ℕ → ℝ) (eigenvectors : ℕ → (Fin 41 → ℂ)), ∀ (ψ : Fin 41 → ℂ), ψ = sorry"
+  },
+  {
+   "name": "UniversalOperator.spectrum_discrete_positive",
+   "file": "lean4/Core/Spectral/DiracOperator.lean",
+   "line": 54,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(D : UniversalDiracOperator) : ∀ (λ : ℝ), λ ∈ Spectrum D → λ > 0"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "lakefile.lean": "a18940174c744de0ee7a30e88219a16dda4a892727c5e398926e5157e85823de",
+  "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415",
+  "lean4/Audit/ProofChecker.lean": "ef12314067a1cfd9978d970534f552950ccb2c2e63492fa11f51bc83ed7c8377"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "65efdca9aa96df957dfd987f7ef21d75a56285e481be2d6105793b0d907bda6e"
+}

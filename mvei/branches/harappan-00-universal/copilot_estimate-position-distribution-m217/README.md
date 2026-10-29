@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/estimate-position-distribution-m217` of th
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 5 — closed 2, conditional 0, open 0, proof error 3, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `7b55e5ff8a1e2e42cb214a643fe0ce607fa277aec66ab69a4594a5f3820a89c3`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_estimate-position-distribution-m217/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `843bbf7c511fbfb25171ff168551b6ce92040dfe39232358bb8f0274ae1ed993`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_estimate-position-distribution-m217/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

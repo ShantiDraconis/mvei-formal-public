@@ -5,7 +5,7 @@ Lean sources from the branch `atk/universal-terminal-composition-20261001` of th
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 4, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `af1dbd59eead4943f56e2e6f8f157854717832923d69374ee469acbc46e52b75`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/atk_universal-terminal-composition-20261001/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `a344eaaa39856b9aefc1a0e2c5a605f531d043be3dcb032b40bc2aab6f24df9c`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/atk_universal-terminal-composition-20261001/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

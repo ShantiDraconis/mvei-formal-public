@@ -1,0 +1,556 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Riemann-energy-proofline",
+ "branch": "copilot/add-final-tree-structure",
+ "branch_state": "parada",
+ "head_commit": "c87b155bfae60825b920c1041f6d4fa649cc351e",
+ "head_commit_date": "2025-12-02T14:05:51+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "c87b155bfae60825b920c1041f6d4fa649cc351e",
+   "date": "2025-12-02T14:05:51+00:00",
+   "subject": "Fix code review issues: Lean config, matplotlib backend, workflow permissions"
+  },
+  {
+   "commit": "c4c2a00bbe91cbd4aeddb46bdb10afe3404e85d4",
+   "date": "2025-12-02T13:59:09+00:00",
+   "subject": "Add complete tree structure for Riemann Energy Proofline project"
+  },
+  {
+   "commit": "c8dbc3970ba35922c21120b970cf5dd0f76b361b",
+   "date": "2025-12-02T13:36:28+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Riemann.Asymptotics.energy_asymptotic_at_one",
+   "file": "src/lean/Riemann/Asymptotics/Edges.lean",
+   "line": 28,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : ∃ C > 0, (fun σ => energyFunctional w σ) ~[nhdsWithin 1 (Set.Iio 1)] (fun σ => C / (1 - σ)^2)"
+  },
+  {
+   "name": "Riemann.Asymptotics.energy_asymptotic_at_zero",
+   "file": "src/lean/Riemann/Asymptotics/Edges.lean",
+   "line": 23,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : ∃ C > 0, (fun σ => energyFunctional w σ) ~[nhdsWithin 0 (Set.Ioi 0)] (fun σ => C / σ^2)"
+  },
+  {
+   "name": "Riemann.Asymptotics.energy_taylor_at_half",
+   "file": "src/lean/Riemann/Asymptotics/Edges.lean",
+   "line": 46,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : ∃ a₂ a₄ : ℝ, a₂ > 0 ∧ ∀ ε, |ε| < 1/2 → |energyFunctional w (1/2 + ε) - energyFunctional w (1/2) - a₂ * ε^2 - a₄ * ε^4| ≤ |ε|^6"
+  },
+  {
+   "name": "Riemann.Asymptotics.xi_large_t_decay",
+   "file": "src/lean/Riemann/Asymptotics/Edges.lean",
+   "line": 35,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : ∃ C > 0, ∀ t : ℝ, |t| > 1 → Complex.abs (riemannXi (σ + t * Complex.I)) ≤ C * |t|^((1/2 - σ)/2) * Real.exp (-Real.pi * |t| / 4)"
+  },
+  {
+   "name": "Riemann.Asymptotics.zero_free_near_one",
+   "file": "src/lean/Riemann/Asymptotics/Edges.lean",
+   "line": 41,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ c > 0, ∀ s : ℂ, s.re > 1 - c / Real.log (|s.im| + 2) → riemannZeta s ≠ 0"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional''_symmetric",
+   "file": "src/lean/Riemann/Energy/SymmetryStationary.lean",
+   "line": 43,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : energyFunctional'' w σ = energyFunctional'' w (1 - σ)"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional'_antisymmetric",
+   "file": "src/lean/Riemann/Energy/SymmetryStationary.lean",
+   "line": 36,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : energyFunctional' w σ = -energyFunctional' w (1 - σ)"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional_continuous",
+   "file": "src/lean/Riemann/Energy/Edef.lean",
+   "line": 52,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : AdmissibleWeight) : ContinuousOn (energyFunctional w) (Set.Ioo 0 1)"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional_odd_derivatives_zero",
+   "file": "src/lean/Riemann/Energy/SymmetryStationary.lean",
+   "line": 50,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (n : ℕ) : Odd n → iteratedDeriv n (energyFunctional w) (1/2) = 0"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional_pos",
+   "file": "src/lean/Riemann/Energy/Edef.lean",
+   "line": 47,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : AdmissibleWeight) (σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : energyFunctional w σ > 0"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional_smooth",
+   "file": "src/lean/Riemann/Energy/Edef.lean",
+   "line": 56,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : AdmissibleWeight) : ContDiffOn ℝ ⊤ (energyFunctional w) (Set.Ioo 0 1)"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional_stationary_half",
+   "file": "src/lean/Riemann/Energy/SymmetryStationary.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : energyFunctional' w (1/2) = 0"
+  },
+  {
+   "name": "Riemann.Energy.energyFunctional_symmetric",
+   "file": "src/lean/Riemann/Energy/SymmetryStationary.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : energyFunctional w σ = energyFunctional w (1 - σ)"
+  },
+  {
+   "name": "Riemann.Gaps.RH_from_gaps",
+   "file": "src/lean/Riemann/Gaps/G3_ZeroMinimumPrinciple.lean",
+   "line": 53,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hG1 : ∀ σ, 0 < σ → σ < 1 → energyFunctional'' w σ > 0) : RiemannHypothesis"
+  },
+  {
+   "name": "Riemann.Gaps.energy_boundary_behavior",
+   "file": "src/lean/Riemann/Gaps/G2_UniqueGlobalMin.lean",
+   "line": 36,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : (∀ M : ℝ, ∃ δ > 0, ∀ σ, (0 < σ ∧ σ < δ) ∨ (1 - δ < σ ∧ σ < 1) → energyFunctional w σ > M)"
+  },
+  {
+   "name": "Riemann.Gaps.energy_strictly_convex",
+   "file": "src/lean/Riemann/Gaps/G1_CurvaturePos.lean",
+   "line": 38,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : StrictConvexOn ℝ (Set.Ioo 0 1) (energyFunctional w)"
+  },
+  {
+   "name": "Riemann.Gaps.energy_tends_to_infinity_at_one",
+   "file": "src/lean/Riemann/Gaps/G2_UniqueGlobalMin.lean",
+   "line": 30,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : Filter.Tendsto (energyFunctional w) (nhdsWithin 1 (Set.Iio 1)) Filter.atTop"
+  },
+  {
+   "name": "Riemann.Gaps.energy_tends_to_infinity_at_zero",
+   "file": "src/lean/Riemann/Gaps/G2_UniqueGlobalMin.lean",
+   "line": 26,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : Filter.Tendsto (energyFunctional w) (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G1",
+   "file": "src/lean/Riemann/Gaps/G1_CurvaturePos.lean",
+   "line": 25,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : energyFunctional'' w σ > 0"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G1_at_half",
+   "file": "src/lean/Riemann/Gaps/G1_CurvaturePos.lean",
+   "line": 44,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : energyFunctional'' w (1/2) > 0"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G1_numerical_evidence",
+   "file": "src/lean/Riemann/Gaps/G1_CurvaturePos.lean",
+   "line": 50,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G2",
+   "file": "src/lean/Riemann/Gaps/G2_UniqueGlobalMin.lean",
+   "line": 41,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hG1 : ∀ σ, 0 < σ → σ < 1 → energyFunctional'' w σ > 0) : ∃! σ₀ : ℝ, σ₀ ∈ Set.Ioo 0 1 ∧ ∀ σ, σ ∈ Set.Ioo 0 1 → σ ≠ σ₀ → energyFunctional w σ₀ < energyFunctional w σ"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G2_location",
+   "file": "src/lean/Riemann/Gaps/G2_UniqueGlobalMin.lean",
+   "line": 54,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hG1 : ∀ σ, 0 < σ → σ < 1 → energyFunctional'' w σ > 0) : ∀ σ, σ ∈ Set.Ioo 0 1 → σ ≠ 1/2 → energyFunctional w (1/2) < energyFunctional w σ"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G3",
+   "file": "src/lean/Riemann/Gaps/G3_ZeroMinimumPrinciple.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hmin : ∀ σ, σ ∈ Set.Ioo 0 1 → σ ≠ 1/2 → energyFunctional w (1/2) < energyFunctional w σ) : RiemannHypothesis"
+  },
+  {
+   "name": "Riemann.Gaps.gap_G3_contrapositive",
+   "file": "src/lean/Riemann/Gaps/G3_ZeroMinimumPrinciple.lean",
+   "line": 47,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hRH_false : ∃ s : ℂ, IsNontrivialZero s ∧ s ∉ criticalLine) : ∃ σ, σ ∈ Set.Ioo 0 1 ∧ σ ≠ 1/2 ∧ energyFunctional w σ ≤ energyFunctional w (1/2)"
+  },
+  {
+   "name": "Riemann.Gaps.off_critical_zero_contribution",
+   "file": "src/lean/Riemann/Gaps/G3_ZeroMinimumPrinciple.lean",
+   "line": 27,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (β γ : ℝ) (hβ : β ≠ 1/2) (h1 : 0 < β) (h2 : β < 1) (hzero : riemannXi (β + γ * Complex.I) = 0) : ∃ ε > 0, energyFunctional w β < energyFunctional w (1/2) - ε ∨ energyFunctional w (1 - β) < energyFunctional w (1/2) - ε"
+  },
+  {
+   "name": "Riemann.Geometry.level_sets_connected",
+   "file": "src/lean/Riemann/Geometry/PotentialValley.lean",
+   "line": 51,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (c : ℝ) (hconv : StrictConvexOn ℝ (Set.Ioo 0 1) (energyFunctional w)) : IsConnected {σ ∈ Set.Ioo 0 1 | energyFunctional w σ ≤ c}"
+  },
+  {
+   "name": "Riemann.Geometry.valley_implies_G2",
+   "file": "src/lean/Riemann/Geometry/PotentialValley.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hv : IsPotentialValley w) : ∃! σ₀ : ℝ, σ₀ ∈ Set.Ioo 0 1 ∧ σ₀ = 1/2 ∧ ∀ σ, σ ∈ Set.Ioo 0 1 → σ ≠ σ₀ → energyFunctional w σ₀ < energyFunctional w σ"
+  },
+  {
+   "name": "Riemann.Operators.energy_as_trace",
+   "file": "src/lean/Riemann/Operators/KernelIntegral.lean",
+   "line": 44,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : ℝ) (h1 : 0 < σ) (h2 : σ < 1) : ∃ K : IntegralKernel, ∃ w, Riemann.Energy.energyFunctional w σ = (kernelTrace K).re"
+  },
+  {
+   "name": "Riemann.Operators.gue_statistics_evidence",
+   "file": "src/lean/Riemann/Operators/ORH_Criterion.lean",
+   "line": 40,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Operators.operator_positivity_implies_curvature",
+   "file": "src/lean/Riemann/Operators/ORH_Criterion.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(K : IntegralKernel) (hpos : IsPositiveKernel K) (w : Riemann.Energy.AdmissibleWeight) : ∀ σ, 0 < σ → σ < 1 → Riemann.Energy.energyFunctional'' w σ ≥ 0"
+  },
+  {
+   "name": "Riemann.Operators.spectral_determinant_relation",
+   "file": "src/lean/Riemann/Operators/ORH_Criterion.lean",
+   "line": 36,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.RMT.keating_snaith_moments",
+   "file": "src/lean/Riemann/RMT/Statistics.lean",
+   "line": 36,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(k : ℕ) : True"
+  },
+  {
+   "name": "Riemann.RMT.level_repulsion",
+   "file": "src/lean/Riemann/RMT/Statistics.lean",
+   "line": 32,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.RMT.montgomery_pair_correlation",
+   "file": "src/lean/Riemann/RMT/Statistics.lean",
+   "line": 24,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.RMT.statistical_tests_pass",
+   "file": "src/lean/Riemann/RMT/Statistics.lean",
+   "line": 40,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Scenarios.arithmetical_consequences",
+   "file": "src/lean/Riemann/Scenarios/Independent.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Scenarios.counterexample_detectable",
+   "file": "src/lean/Riemann/Scenarios/False.lean",
+   "line": 44,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) : RiemannHypothesisFalse → ∃ σ ≠ 1/2, σ ∈ Set.Ioo 0 1 ∧ IsLocalMin (energyFunctional w) σ"
+  },
+  {
+   "name": "Riemann.Scenarios.expert_consensus",
+   "file": "src/lean/Riemann/Scenarios/Independent.lean",
+   "line": 48,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Scenarios.gap_failure_under_rh_false",
+   "file": "src/lean/Riemann/Scenarios/False.lean",
+   "line": 33,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hRH_false : RiemannHypothesisFalse) : ¬(∀ σ, 0 < σ → σ < 1 → energyFunctional'' w σ > 0) ∨ ¬(∀ σ, σ ∈ Set.Ioo 0 1 → σ ≠ 1/2 → energyFunctional w (1/2) < energyFunctional w σ)"
+  },
+  {
+   "name": "Riemann.Scenarios.gaps_hold_under_rh",
+   "file": "src/lean/Riemann/Scenarios/True.lean",
+   "line": 44,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hRH : RiemannHypothesis) : (∀ σ, 0 < σ → σ < 1 → energyFunctional'' w σ > 0) → True"
+  },
+  {
+   "name": "Riemann.Scenarios.gaps_might_be_independent",
+   "file": "src/lean/Riemann/Scenarios/Independent.lean",
+   "line": 43,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Scenarios.independence_heuristic",
+   "file": "src/lean/Riemann/Scenarios/Independent.lean",
+   "line": 40,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "Riemann.Scenarios.independence_implications",
+   "file": "src/lean/Riemann/Scenarios/Independent.lean",
+   "line": 28,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : RHIndependentOfZFC) : True"
+  },
+  {
+   "name": "Riemann.Scenarios.off_critical_zeros_paired",
+   "file": "src/lean/Riemann/Scenarios/False.lean",
+   "line": 49,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(hRH_false : RiemannHypothesisFalse) : ∀ ρ, IsNontrivialZero ρ → ρ.re < 1/2 → IsNontrivialZero (1 - ρ) ∧ (1 - ρ).re > 1/2"
+  },
+  {
+   "name": "Riemann.Scenarios.prime_counting_error",
+   "file": "src/lean/Riemann/Scenarios/True.lean",
+   "line": 27,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(hRH : RiemannHypothesis) : ∃ C > 0, ∀ x > 2, |primeCountingFunction x - logarithmicIntegral x| ≤ C * Real.sqrt x * Real.log x"
+  },
+  {
+   "name": "Riemann.Scenarios.prime_gap_bound",
+   "file": "src/lean/Riemann/Scenarios/True.lean",
+   "line": 36,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(hRH : RiemannHypothesis) : ∃ C > 0, ∀ n : ℕ, n > 1 → (nthPrime (n + 1) : ℝ) - nthPrime n ≤ C * Real.sqrt (nthPrime n) * Real.log (nthPrime n)"
+  },
+  {
+   "name": "Riemann.Scenarios.rh_false_implies_energy_anomaly",
+   "file": "src/lean/Riemann/Scenarios/False.lean",
+   "line": 26,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hRH_false : RiemannHypothesisFalse) : ∃ σ, σ ∈ Set.Ioo 0 1 ∧ σ ≠ 1/2 ∧ energyFunctional w σ ≤ energyFunctional w (1/2)"
+  },
+  {
+   "name": "Riemann.Scenarios.rh_implies_energy_minimum",
+   "file": "src/lean/Riemann/Scenarios/True.lean",
+   "line": 22,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : AdmissibleWeight) (hRH : RiemannHypothesis) : IsPotentialValley w → energyFunctional w (1/2) = sInf (energyFunctional w '' Set.Ioo 0 1)"
+  },
+  {
+   "name": "Riemann.criticalLine_subset_criticalStrip",
+   "file": "src/lean/Riemann/Classical/CriticalStrip.lean",
+   "line": 28,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "Riemann.criticalLine ⊆ Riemann.criticalStrip"
+  },
+  {
+   "name": "Riemann.criticalStrip_ne_zero",
+   "file": "src/lean/Riemann/Classical/CriticalStrip.lean",
+   "line": 37,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ s ∈ Riemann.criticalStrip, s ≠ 0"
+  },
+  {
+   "name": "Riemann.criticalStrip_symmetric",
+   "file": "src/lean/Riemann/Classical/CriticalStrip.lean",
+   "line": 44,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (s : ℂ), s ∈ Riemann.criticalStrip ↔ 1 - s ∈ Riemann.criticalStrip"
+  },
+  {
+   "name": "Riemann.riemannXi_entire",
+   "file": "src/lean/Riemann/Classical/ZetaXi.lean",
+   "line": 34,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "Differentiable ℂ Riemann.riemannXi"
+  },
+  {
+   "name": "Riemann.riemannXi_functional_equation",
+   "file": "src/lean/Riemann/Classical/ZetaXi.lean",
+   "line": 37,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ (s : ℂ), Riemann.riemannXi s = Riemann.riemannXi (1 - s)"
+  },
+  {
+   "name": "Riemann.riemannXi_real_on_critical_line",
+   "file": "src/lean/Riemann/Classical/ZetaXi.lean",
+   "line": 41,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ (t : ℝ), (Riemann.riemannXi (1 / 2 + ↑t * Complex.I)).im = 0"
+  },
+  {
+   "name": "Riemann.zero_counting_asymptotic",
+   "file": "src/lean/Riemann/Classical/Zeros.lean",
+   "line": 50,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(T : ℝ) (hT : T > 0) : ∃ C : ℝ, |zeroCountingFunction T - T / (2 * Real.pi) * Real.log (T / (2 * Real.pi)) + T / (2 * Real.pi)| ≤ C * Real.log T"
+  },
+  {
+   "name": "Riemann.zeros_conjugate",
+   "file": "src/lean/Riemann/Classical/Zeros.lean",
+   "line": 43,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : ℂ) (hs : s ∈ criticalStrip) : riemannXi s = 0 → riemannXi (conj s) = 0"
+  },
+  {
+   "name": "Riemann.zeros_correspondence",
+   "file": "src/lean/Riemann/Classical/ZetaXi.lean",
+   "line": 45,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ (s : ℂ), 0 < s.re → s.re < 1 → (Riemann.riemannZeta s = 0 ↔ Riemann.riemannXi s = 0)"
+  },
+  {
+   "name": "Riemann.zeros_in_critical_strip",
+   "file": "src/lean/Riemann/Classical/Zeros.lean",
+   "line": 29,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : ℂ) (h : riemannZeta s = 0) (h1 : 0 < s.re) (h2 : s.re < 1) : s ∈ criticalStrip"
+  },
+  {
+   "name": "Riemann.zeros_symmetric",
+   "file": "src/lean/Riemann/Classical/Zeros.lean",
+   "line": 36,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : ℂ) (hs : s ∈ criticalStrip) : riemannXi s = 0 → riemannXi (1 - s) = 0"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "src/lean/Riemann/Classical/CriticalStrip.lean": "56f0bd84b57b6327e493f476be063f387b30fe371fd3de39e3761c5ec7e098c9",
+  "src/lean/Riemann/RMT/Statistics.lean": "fc4549d360b8a9159ea8670a2310ab8887f5821b7c2a987f6be29294e85a6e2d",
+  "src/lean/lakefile.lean": "2bdc3f89ba7802557844c77ca0ab6209d17f377075ba588984b128d16805a752",
+  "src/lean/lean-toolchain": "7115ab6bf3a8ed8d1b44d8fbc0403edaf2fca16388024f522c6943a12b51af4c"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "59fe31aa04d14dbbac9f93943c95ed5da2a2eb4da8a4048d72b79c6ac89bed61"
+}

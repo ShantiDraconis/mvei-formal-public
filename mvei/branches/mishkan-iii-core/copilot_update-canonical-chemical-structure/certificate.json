@@ -1,0 +1,119 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/mishkan-iii-core",
+ "branch": "copilot/update-canonical-chemical-structure",
+ "branch_state": "parada",
+ "head_commit": "bd61b51b7f440f6fba81bcff622aacaf64edf755",
+ "head_commit_date": "2026-01-14T19:56:44+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "bd61b51b7f440f6fba81bcff622aacaf64edf755",
+   "date": "2026-01-14T19:56:44+00:00",
+   "subject": "Address code review feedback: fix duplicate logic, ceiling function, and theorem"
+  },
+  {
+   "commit": "c4819ca126c504d000f0d5ae961247b1410b2420",
+   "date": "2026-01-14T19:54:16+00:00",
+   "subject": "Add complete documentation and quick reference guide"
+  },
+  {
+   "commit": "4003f0fc23387a1bb9b6269dddc934b69822f7b1",
+   "date": "2026-01-14T19:52:02+00:00",
+   "subject": "Implement chemical-textual canon with three formulas and tribal consensus"
+  },
+  {
+   "commit": "a2cfd110316efb057e3d307895a09ee78233e971",
+   "date": "2026-01-14T19:43:13+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "MishkanIII.Chemistry.Chometz.chometz_is_valid",
+   "file": "core/chemistry/chometz_formula.lean",
+   "line": 94,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(formula : ChometzFormula) : (4 ≤ formula.acetic_acid_concentration ∧ formula.acetic_acid_concentration ≤ 8) ∧ (20 ≤ formula.temperature ∧ formula.temperature ≤ 25) ∧ (0 < formula.vinegar_volume ∧ 0 < formula.hyssop_mass ∧ 0 < formula.leaching_time)"
+  },
+  {
+   "name": "MishkanIII.Chemistry.Chometz.cycle_completion",
+   "file": "core/chemistry/chometz_formula.lean",
+   "line": 107,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(formula : ChometzFormula) (hyssop : Hyssop) : (0 < formula.vinegar_volume) → (0 < hyssop.dry_mass) → True"
+  },
+  {
+   "name": "MishkanIII.Chemistry.Mana.mana_is_valid",
+   "file": "core/chemistry/mana_formula.lean",
+   "line": 64,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(formula : ManaFormula) : (60 ≤ formula.temperature ∧ formula.temperature ≤ 80) ∧ (0 < formula.acacia_gum ∧ 0 < formula.manitol_tamarix ∧ 0 < formula.acacia_alkaloids)"
+  },
+  {
+   "name": "MishkanIII.Chemistry.Yayin.yayin_is_valid",
+   "file": "core/chemistry/yayin_formula.lean",
+   "line": 88,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(formula : YayinFormula) : (formula.extraction_ratio = 1/5) ∧ (formula.acacia_extract / formula.water = 2 / 100) ∧ (0 < formula.acacia_extract ∧ 0 < formula.water ∧ 0 < formula.honey)"
+  },
+  {
+   "name": "MishkanIII.Core.system_is_valid",
+   "file": "core/mishkan_iii_core.lean",
+   "line": 134,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(system : IntegratedSystem) : True"
+  },
+  {
+   "name": "MishkanIII.Core.three_fundamental_substances",
+   "file": "core/mishkan_iii_core.lean",
+   "line": 79,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": List.length complete_matrix = 3"
+  },
+  {
+   "name": "MishkanIII.Tribes.each_tribe_has_unique_responsibility",
+   "file": "core/tribes/consensus.lean",
+   "line": 131,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (t1 t2 : Tribe), t1 ≠ t2 → tribe_responsibility t1 ≠ tribe_responsibility t2"
+  },
+  {
+   "name": "MishkanIII.Tribes.total_tribes_count",
+   "file": "core/tribes/consensus.lean",
+   "line": 150,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": tribes_per_substance PrimarySubstance.Mana + tribes_per_substance PrimarySubstance.Yayin + tribes_per_substance PrimarySubstance.Chometz + tribes_per_substance PrimarySubstance.Support = 12"
+  }
+ ],
+ "closed": 5,
+ "files_sha256": {
+  "core/chemistry/chometz_formula.lean": "c5b5180634757d398fa0914c3471234ae8df10a9bb9dfe6b24a096846e9866ae",
+  "core/chemistry/mana_formula.lean": "e5b6ecdcb2a019a3f8cd1a52fe77cf6f2df24493bbd32a723ff94a3db44205e2",
+  "core/chemistry/yayin_formula.lean": "7b4de69cecf2f9d60b1c1e2f4801ee741b0bd8be63bae01f9226ff1dba74d7ba",
+  "core/tribes/consensus.lean": "bfac8f4779f66c1c0e6fee1c7758faffe58eed672dcb4374ef67a60d62793801"
+ },
+ "published_at": "2026-10-29T06:27:19Z",
+ "certificate_sha256": "d95d4617ef89e3b5400f2edd95e5a7aa4504f12c148ca3c97d0f3b4e47303e53"
+}

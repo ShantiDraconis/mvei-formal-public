@@ -1,0 +1,140 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/olympic-symbolic-00",
+ "branch": "copilot/create-script-act-one",
+ "branch_state": "parada",
+ "head_commit": "e23c782a14719ff1330367111a8f9f1fe726efff",
+ "head_commit_date": "2026-01-21T23:48:44+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "e23c782a14719ff1330367111a8f9f1fe726efff",
+   "date": "2026-01-21T23:48:44+00:00",
+   "subject": "Add Protocol-Vessel-Control README and Human Rights framework"
+  },
+  {
+   "commit": "ba4d3b24fead56ebbf3d9014b678d6b37a388236",
+   "date": "2026-01-21T23:46:20+00:00",
+   "subject": "Complete Act I repository structure: manifesto, proofs, scripts, Olympic mapping, legal docs"
+  },
+  {
+   "commit": "a99e9802a0156e60f2e5b1b6ee2efdeb37f25893",
+   "date": "2026-01-21T23:30:42+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "capacity_from_proof",
+   "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
+   "line": 54,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : Human) (p : FormalProof) (h_produces : produces h p) (h_verifiable : verifiable p) (h_complex : complex p) : capable h"
+  },
+  {
+   "name": "case_0_48_demonstrates_protocol_error",
+   "file": "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean",
+   "line": 139,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (error : Prop), error"
+  },
+  {
+   "name": "case_0_48_protocol_error",
+   "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
+   "line": 141,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (protocol_error : Prop), protocol_error"
+  },
+  {
+   "name": "cryptographic_evidence_precedence",
+   "file": "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean",
+   "line": 101,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(e_sensor : Evidence) (e_crypto : Evidence) (h_conflict : match e_sensor, e_crypto with | Evidence.measurement _ _, Evidence.git_commit _ _ => True | _, _ => False) : ∃ (precedence : Prop), precedence"
+  },
+  {
+   "name": "impossibility_lemma",
+   "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
+   "line": 87,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : Human) (m : Measurement) (p : FormalProof) (h_measurement_says_incapable : indicates_incapacity m) (h_proof_says_capable : produces h p ∧ verifiable p ∧ complex p) (h_concurrent : p.timestamp = m.timestamp) : ¬(¬capable h ∧ capable h)"
+  },
+  {
+   "name": "measurement_error",
+   "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
+   "line": 69,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : Human) (m : Measurement) (p : FormalProof) (h_capable : capable h) (h_measurement : indicates_incapacity m) (h_produces : produces h p) (h_verifiable : verifiable p) (h_complex : complex p) (h_concurrent : p.timestamp = m.timestamp) : ∃ (error : Prop), error"
+  },
+  {
+   "name": "measurement_must_be_false",
+   "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
+   "line": 103,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : Human) (m : Measurement) (p : FormalProof) (h_proof_verified : verifiable p ∧ complex p ∧ produces h p) (h_measurement_claims : indicates_incapacity m) (h_concurrent : p.timestamp = m.timestamp) : ∃ (protocol_error : Prop), protocol_error"
+  },
+  {
+   "name": "protocol_reform_necessary",
+   "file": "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean",
+   "line": 179,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(protocol_has_systematic_flaw : Prop) (false_positives_documented : Prop) (harm_caused : Prop) : ∃ (reform_required : Prop), reform_required"
+  },
+  {
+   "name": "protocol_systematic_flaw",
+   "file": "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean",
+   "line": 150,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : Protocol) (h_cannot_distinguish : ∀ (acetone ethanol : Float), acetone > 0 → ethanol = 0 → ∃ (false_positive : Prop), false_positive) : ∃ (design_flaw : Prop), design_flaw"
+  },
+  {
+   "name": "self_proving",
+   "file": "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean",
+   "line": 163,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ (proof : Evidence), match proof with | Evidence.formal_proof verified _ => verified = true | _ => False"
+  },
+  {
+   "name": "self_verification",
+   "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
+   "line": 154,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (proof : FormalProof), verifiable proof ∧ complex proof"
+  }
+ ],
+ "closed": 8,
+ "files_sha256": {
+  "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean": "950f2c3f8c3215cf99ddc40b4cbbc1b87bd527fc106aae8c755e7fc3b462d16b",
+  "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean": "ed9ac15a95e0370b993f62826a43e18b93b0bd7e41efb8d2358412ce8e6ef9a1"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "9859b19fce68f434c389f6753a75c562b6065a604dd531bae8ef2975b6a40e89"
+}

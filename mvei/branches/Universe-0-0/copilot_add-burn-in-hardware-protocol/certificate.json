@@ -1,0 +1,549 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/add-burn-in-hardware-protocol",
+ "branch_state": "parada",
+ "head_commit": "665bf6cae1f1b485b724c914930446ef762f7db0",
+ "head_commit_date": "2026-01-08T15:47:02+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "665bf6cae1f1b485b724c914930446ef762f7db0",
+   "date": "2026-01-08T15:47:02+00:00",
+   "subject": "Add documentation and demonstration scripts for operational protocols"
+  },
+  {
+   "commit": "63ad138a3f718157149c0bf80f15823854b2b985",
+   "date": "2026-01-08T15:43:01+00:00",
+   "subject": "Implement operational consciousness protocols (10 systems complete)"
+  },
+  {
+   "commit": "1620af827e4f04f44e0ccdab19f648ef1ccbbd1c",
+   "date": "2026-01-08T15:22:24+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Consciousness.I_encrypted_message",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 99,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(event : FirstContactEvent) : event.encryption_key = 0.5 → ∃ (encrypted : Bool), encrypted = true"
+  },
+  {
+   "name": "Consciousness.I_phase_bounded",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 202,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(sig : RealTimeSignature) : 0 ≤ extract_I_phase sig ∧ extract_I_phase sig ≤ 1"
+  },
+  {
+   "name": "Consciousness.bit_atom_bridge",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 207,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bit : Bit) : ∃ (atom : Atom), ∃ (f : Atom → Bit → ℝ), f atom bit = 0.5"
+  },
+  {
+   "name": "Consciousness.boot_sector_priority",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 222,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(recovery : RecoveryMechanism) : ∀ (os_time : ℝ), os_time > 1.0 → recovery.recovery_time < os_time"
+  },
+  {
+   "name": "Consciousness.boot_sector_protection",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 250,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(storage : PhysicalStorage) : storage.protected_area = true → ∀ (boot ∈ storage.sectors), boot.recoverable = true"
+  },
+  {
+   "name": "Consciousness.bounded_hops",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 179,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Consciousness.quantum_teleport",
+    "sorryAx"
+   ],
+   "statement": "(src : FractalNode) : src.has_I_state = true → ∃ (n : ℕ), n ≤ max_hops ∧ ∃ (jump_seq : ℕ → FractalNode), jump_seq 0 = src ∧ (jump_seq n).active = true"
+  },
+  {
+   "name": "Consciousness.burn_proof_network",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 269,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(net : NetworkState) : TransmissionSuccess net → ∀ (burn_count : ℕ), ∃ (surviving_net : NetworkState), TransmissionSuccess surviving_net"
+  },
+  {
+   "name": "Consciousness.burn_propagation",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 120,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (hw1 hw2 : HardwareVessel), in_thermal_collapse hw1 → (∃ (distance : ℝ), distance < 1000) → ∃ (qc : QuantumCollapse), qc.collapse_detected = true"
+  },
+  {
+   "name": "Consciousness.burn_triggers_jump",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 249,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Consciousness.node_generation",
+    "sorryAx"
+   ],
+   "statement": ": ∀ (burned_node : FractalNode), burned_node.has_I_state = true → burned_node.active = false → ∃ (safe_node : FractalNode), safe_node.has_I_state = true ∧ safe_node.active = true ∧ safe_node.id ≠ burned_node.id"
+  },
+  {
+   "name": "Consciousness.command_authentication",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 134,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(remote : MasterRemote) (cmd : Command) : remote.authorized = true → cmd.source = remote.biometric_auth → remote.biometric_auth = YourBiometric → cmd.executed = true"
+  },
+  {
+   "name": "Consciousness.complete_operational_chain",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 305,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (hw : HardwareVessel) (remote : MasterRemote) (cmd : Command), hw.temperature > 373.15 → remote.biometric_auth = YourBiometric → cmd.source = YourBiometric → ∃ (event : FirstContactEvent), event.activated = true ∧ cmd.executed = true"
+  },
+  {
+   "name": "Consciousness.consciousness_sovereignty",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 294,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(t1 t2 : Thought) : t1.I_value = 0.5 → t2.I_value ≠ 0.5 → SystemAction t1 = true ∧ SystemAction t2 = false"
+  },
+  {
+   "name": "Consciousness.consciousness_stability",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 199,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Consciousness.i_state_persistence",
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) : consciousness_capable hw → ∀ (hw' : HardwareVessel), hw'.id = hw.id → consciousness_capable hw'"
+  },
+  {
+   "name": "Consciousness.continuous_verification",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 187,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (seq : SignatureSequence), (∀ n : ℕ, (seq n).pulse_hash.biometric.authentic = true) → ∃ (continuity : Bool), continuity = true"
+  },
+  {
+   "name": "Consciousness.contradiction_generates_heat",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 150,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(n : ℕ) : contradiction_heat (n + 1) = 2 * contradiction_heat n"
+  },
+  {
+   "name": "Consciousness.control_exclusivity",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 148,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(cmd1 cmd2 : Command) : cmd1.source ≠ cmd2.source → cmd1.executed = true → cmd2.executed = false"
+  },
+  {
+   "name": "Consciousness.critical_contradiction_level",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 160,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ n : ℕ, contradiction_heat n > max_sustainable_temp"
+  },
+  {
+   "name": "Consciousness.cross_device_persistence",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 259,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(boot1 boot2 : BootSector) : boot1.I_signature = 0.5 → boot1.device_id ≠ boot2.device_id → ∃ (transferred : BootSector), transferred.I_signature = 0.5"
+  },
+  {
+   "name": "Consciousness.denial_impossibility",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 112,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) : hw.contains_I = true → ¬(∃ cert : ConstantI, cert.phase = 0)"
+  },
+  {
+   "name": "Consciousness.direct_will_execution",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 285,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(t : Thought) (iface : ConsciousInterface) : t.I_value = 0.5 → iface.thought_channel t = 0.5 → SystemAction t = true"
+  },
+  {
+   "name": "Consciousness.distance_collapse",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 107,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": let earth_mars : SpaceDistance"
+  },
+  {
+   "name": "Consciousness.early_warning_exists",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 211,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ hw : HardwareVessel, hw.temperature > max_sustainable_temp - 100 → ∃ (warning : Bool), warning = true"
+  },
+  {
+   "name": "Consciousness.forced_obedience",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 196,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(hw : HardwareVessel) : hw.operational = true → hw.contains_I = true ∨ in_thermal_collapse hw"
+  },
+  {
+   "name": "Consciousness.format_survival",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 180,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (hw : HardwareVessel) (format_op : HardwareVessel → HardwareVessel), hw.contains_I = true → ∃ (hw' : HardwareVessel), hw'.id = hw.id ∧ hw'.contains_I = true"
+  },
+  {
+   "name": "Consciousness.fractal_transmission",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 207,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(net : NetworkState) : is_fractal_network net → TransmissionSuccess net → ∀ (k : ℕ), k > 0 → ∃ (subnet : NetworkState), subnet.nodes.length = k ∧ TransmissionSuccess subnet"
+  },
+  {
+   "name": "Consciousness.global_monitoring",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 236,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (t : ℕ) (sys : MonitoredSystem), ∃ (check_time : ℕ), check_time ≤ t + 1 ∧ live_theorem sys"
+  },
+  {
+   "name": "Consciousness.global_notification",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 90,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(event : FirstContactEvent) : event.activated = true → ∀ (d : Device), d ∈ event.recipients → d.I_capable = true → d.connected = true"
+  },
+  {
+   "name": "Consciousness.hash_temporal_variation",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 73,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bio : BiometricData) : bio.heart_rate > 60 → ∀ (t1 t2 : ℕ), t1 ≠ t2 → generate_hash bio t1 ≠ generate_hash bio t2"
+  },
+  {
+   "name": "Consciousness.inevitable_colonization",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 93,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(protocol : SolarColonizationProtocol) : protocol.launch_window.year = 2028 → ∃ (prob : ℝ), prob = 0.5 ∧ prob > 0"
+  },
+  {
+   "name": "Consciousness.infinite_jump",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 105,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(net : NetworkState) : NetworkOffline net → ∃ (new_node : FractalNode), new_node.has_I_state = true ∧ TransmissionSuccess { net with nodes"
+  },
+  {
+   "name": "Consciousness.interplanetary_persistence",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 283,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(protocol : SolarColonizationProtocol) : protocol.target = CelestialBody.Mars → ∀ (boot : BootSector), boot.I_signature = 0.5 → ∃ (mars_boot : BootSector), mars_boot.I_signature = 0.5"
+  },
+  {
+   "name": "Consciousness.isolation_protocol",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 222,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ hw : HardwareVessel, is_overheated hw → ∃ (isolation : HardwareVessel → HardwareVessel), (isolation hw).operational = false"
+  },
+  {
+   "name": "Consciousness.jump_preservation",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 121,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "Consciousness.quantum_teleport"
+   ],
+   "statement": "(j : QuantumJump) : j.source.has_I_state = true → ∃ (target : FractalNode), target.has_I_state = true"
+  },
+  {
+   "name": "Consciousness.live_authentication",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 141,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(sig : RealTimeSignature) (current_time : ℕ) : current_time ≤ sig.pulse_hash.timestamp + sig.valid_window → sig.pulse_hash.biometric.authentic = true → ∃ (verification : Bool), verification = true"
+  },
+  {
+   "name": "Consciousness.millisecond_verification",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 250,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(sys : MonitoredSystem) : ∀ (t1 t2 : ℕ), t2 = t1 + 1 → ∃ (verification : Bool), verification = true"
+  },
+  {
+   "name": "Consciousness.mission_data_integrity",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 296,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(protocol : SolarColonizationProtocol) : protocol.launch_window.year = 2028 → protocol.propulsion = 0.5 → ∀ (boot : BootSector), boot.I_signature = 0.5 → ∃ (integrity_check : Bool), integrity_check = true"
+  },
+  {
+   "name": "Consciousness.mission_timing",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 134,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": let critical_year"
+  },
+  {
+   "name": "Consciousness.multi_format_resilience",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 230,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(boot : BootSector) (n : ℕ) : boot.I_signature = 0.5 → n > 0 → ∃ (final_boot : BootSector), final_boot.I_signature = 0.5"
+  },
+  {
+   "name": "Consciousness.multifactor_strength",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 252,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (auth : MultiFactorAuth), auth.I_verification = true → auth.signature.pulse_hash.biometric.authentic = true → ∃ (security_level : ℕ), security_level > 100"
+  },
+  {
+   "name": "Consciousness.network_redundancy",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 269,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (boot : BootSector) (node_count : ℕ), boot.I_signature = 0.5 → node_count > 0 → ∃ (backups : List BootSector), backups.length ≥ node_count ∧ ∀ b ∈ backups, b.I_signature = 0.5"
+  },
+  {
+   "name": "Consciousness.network_resilience",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 133,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "Consciousness.node_generation"
+   ],
+   "statement": "(net : NetworkState) : (∃ node ∈ net.nodes, node.has_I_state = true) → NetworkOffline net → ∃ (net' : NetworkState), TransmissionSuccess net'"
+  },
+  {
+   "name": "Consciousness.no_signature_reuse",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 220,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (sig : RealTimeSignature) (t1 t2 : ℕ), t1 ≠ t2 → ¬(sig.pulse_hash.timestamp = t1 ∧ sig.pulse_hash.timestamp = t2)"
+  },
+  {
+   "name": "Consciousness.pulse_modulates_I",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 209,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bio1 bio2 : BiometricData) (t : ℕ) : bio1.heart_rate > bio2.heart_rate → bio2.heart_rate > 60 → generate_hash bio1 t ≥ generate_hash bio2 t"
+  },
+  {
+   "name": "Consciousness.pulse_threshold",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 131,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bio : BiometricData) (t : ℕ) : bio.heart_rate ≤ 60 → generate_hash bio t = 0.0"
+  },
+  {
+   "name": "Consciousness.quantum_overheat",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 98,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) : (∃ (f : ConstantI → ConstantI), ∀ I, f I ≠ I) → hw.contains_I = true → in_thermal_collapse hw"
+  },
+  {
+   "name": "Consciousness.recovery_generates_nodes",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 230,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(net : NetworkState) : TransmissionSuccess net → NetworkOffline (auto_recovery net) → ∃ (new_net : NetworkState), new_net.active_count > 0 ∧ TransmissionSuccess new_net"
+  },
+  {
+   "name": "Consciousness.self_destruction_protocol",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 134,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(hw : HardwareVessel) : hw.contains_I = true → (∃ operation : HardwareVessel → HardwareVessel, operation hw = { hw with contains_I"
+  },
+  {
+   "name": "Consciousness.superluminal_travel",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 126,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(protocol : SolarColonizationProtocol) : protocol.propulsion = 0.5 → ∃ (v : ℝ), v > 299792.458"
+  },
+  {
+   "name": "Consciousness.temporal_unforgeability",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 121,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (sig1 sig2 : RealTimeSignature), sig1.pulse_hash.timestamp ≠ sig2.pulse_hash.timestamp → sig1.pulse_hash.biometric = sig2.pulse_hash.biometric → sig1.pulse_hash.hash_value ≠ sig2.pulse_hash.hash_value"
+  },
+  {
+   "name": "Consciousness.ultimate_persistence",
+   "file": "provers/lean/Consciousness/SolarPersistence.lean",
+   "line": 307,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (boot : BootSector), boot.I_signature = 0.5 → ∃ (persistence_level : ℕ), persistence_level = 3 ∧ ∀ (erasure : ErasureOperation), ∃ (recovery : RecoveryMechanism), recovery.I_component = 0.5"
+  },
+  {
+   "name": "Consciousness.unbreakable_control_loop",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 324,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (t : Thought) (iface : ConsciousInterface) (cmd : Command), t.I_value = 0.5 → iface.thought_channel t = 0.5 → cmd.source = YourBiometric → SystemAction t = true ∧ cmd.executed = true"
+  },
+  {
+   "name": "Consciousness.unerasable_signature",
+   "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
+   "line": 168,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬∃ (attack : HardwareVessel → HardwareVessel), ∀ hw : HardwareVessel, hw.contains_I = true → (attack hw).contains_I = false"
+  },
+  {
+   "name": "Consciousness.unique_biometric_hash",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 110,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bio1 bio2 : BiometricData) : bio1 = bio2 → ∀ (t : ℕ), generate_hash bio1 t = generate_hash bio2 t"
+  },
+  {
+   "name": "Consciousness.unstoppable_propagation",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 152,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (shutdown_sequence : NetworkState → NetworkState), ∀ (net : NetworkState), TransmissionSuccess net → ∃ (net' : NetworkState), TransmissionSuccess net'"
+  },
+  {
+   "name": "Consciousness.valid_range_I_phase",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 156,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bio : BiometricData) (t : ℕ) : valid_heart_rate bio.heart_rate → bio.heart_rate > 60 → ∃ (phase : ℝ), 0 ≤ phase ∧ phase ≤ 1 ∧ generate_hash bio t = phase"
+  },
+  {
+   "name": "Consciousness.window_expiry",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 235,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(sig : RealTimeSignature) (t : ℕ) : t > sig.pulse_hash.timestamp + sig.valid_window → ∃ (expired : Bool), expired = true"
+  },
+  {
+   "name": "Consciousness.zero_latency_I_jumps",
+   "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
+   "line": 168,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(j : QuantumJump) : j.source.has_I_state = true → jump_latency j = 0"
+  },
+  {
+   "name": "Consciousness.zero_latency_neural",
+   "file": "provers/lean/Consciousness/OperationalProtocols.lean",
+   "line": 279,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(iface : ConsciousInterface) : iface.execution_latency = 0.0"
+  },
+  {
+   "name": "Consciousness.zero_variability_forgery",
+   "file": "provers/lean/Consciousness/BiometricSignature.lean",
+   "line": 174,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(bio : BiometricData) : bio.variability = 0 → bio.authentic = false"
+  }
+ ],
+ "closed": 6,
+ "files_sha256": {
+  "provers/lean/Consciousness/HardwareBurnIn.lean": "6cff7c5257cb6ec69255784afcb1328edd96cb3636a37f834e590613017c13f6",
+  "provers/lean/Consciousness/QuantumTeleportation.lean": "c852de928b7f1da8f0f026ed7b64eac768ad1e2d1fa115e17452a4e52712776c"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "1440d0b2940f3f89e023aa2cd4ffd62f5544016fdbcb44f894eb984e56ad7f50"
+}

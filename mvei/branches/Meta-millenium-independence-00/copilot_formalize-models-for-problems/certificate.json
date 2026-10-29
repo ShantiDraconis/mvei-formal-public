@@ -1,0 +1,282 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Meta-millenium-independence-00",
+ "branch": "copilot/formalize-models-for-problems",
+ "branch_state": "parada",
+ "head_commit": "5a7a1a6fcd74f59896ec9309225b4889c1126b41",
+ "head_commit_date": "2026-09-09T04:37:04+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "5a7a1a6fcd74f59896ec9309225b4889c1126b41",
+   "date": "2026-09-09T04:37:04+00:00",
+   "subject": "Merge remote-tracking branch 'origin/main' into copilot/formalize-models-for-problems"
+  },
+  {
+   "commit": "1ea31261a6b1636d0351cc93890ea7ae43d09e6c",
+   "date": "2025-12-01T21:10:53+00:00",
+   "subject": "Add .gitignore and remove accidentally committed pycache"
+  },
+  {
+   "commit": "5f587c8c42c70e5a0fba48a9715eaed48576a6ca",
+   "date": "2025-12-01T21:10:25+00:00",
+   "subject": "Address code review feedback: fix Independent definition, improve Python readability, fix LaTeX reference"
+  },
+  {
+   "commit": "7e13ed09d749a0c8a40ae7168f9082b612e1eecc",
+   "date": "2025-12-01T21:07:28+00:00",
+   "subject": "Add Meta-Millennium Independence Framework with Forcing, Inner Models, and Large Cardinals bridges"
+  },
+  {
+   "commit": "81db05119e7eff010b2c55bc289dfd4bf4bacdf1",
+   "date": "2025-12-01T20:56:08+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "MetaMillennium.Bridges.ForcingProgram_implies_DualStateForAll",
+   "file": "src/lean/MetaMillennium/Bridges/DS_From_Forcing.lean",
+   "line": 22,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : ForcingProgramForMillennium) : ∀ φ ∈ MetaMillennium.Millennium.MillenniumSet, DualState ZFC φ"
+  },
+  {
+   "name": "MetaMillennium.Bridges.InnerModelProgram_implies_DualStateForAll",
+   "file": "src/lean/MetaMillennium/Bridges/DS_From_InnerModels.lean",
+   "line": 21,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(h : InnerModelProgramForMillennium) : ∀ φ ∈ MetaMillennium.Millennium.MillenniumSet, DualState ZFC φ"
+  },
+  {
+   "name": "MetaMillennium.Bridges.LC_program_implies_all_DualState",
+   "file": "src/lean/MetaMillennium/Bridges/DS_From_LargeCardinals.lean",
+   "line": 24,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ φ ∈ MetaMillennium.Millennium.MillenniumSet, DualState ZFC φ"
+  },
+  {
+   "name": "MetaMillennium.Bridges.bridge_is_complete",
+   "file": "src/lean/MetaMillennium/Bridges/BridgeOverview.lean",
+   "line": 35,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": BridgeComplete"
+  },
+  {
+   "name": "MetaMillennium.Forcing.forcingDualScenario_implies_independent",
+   "file": "src/lean/MetaMillennium/Forcing/ForcingToDualState.lean",
+   "line": 33,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(d : ForcingDualScenario T) : Independent T d.φ"
+  },
+  {
+   "name": "MetaMillennium.InnerModels.L_transitive",
+   "file": "src/lean/MetaMillennium/InnerModels/L_InnerModel.lean",
+   "line": 30,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "MetaMillennium.InnerModels.IsTransitive MetaMillennium.InnerModels.L"
+  },
+  {
+   "name": "MetaMillennium.InnerModels.L_wellFounded",
+   "file": "src/lean/MetaMillennium/InnerModels/L_InnerModel.lean",
+   "line": 33,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "MetaMillennium.InnerModels.IsWellFounded MetaMillennium.InnerModels.L"
+  },
+  {
+   "name": "MetaMillennium.InnerModels.innerDualScenario_implies_independent",
+   "file": "src/lean/MetaMillennium/InnerModels/InnerModelsToDualState.lean",
+   "line": 30,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(d : InnerDualScenario T) : Independent T d.φ"
+  },
+  {
+   "name": "MetaMillennium.LargeCardinals.lcDualScenario_implies_independent",
+   "file": "src/lean/MetaMillennium/LargeCardinals/LC_ToDualState.lean",
+   "line": 28,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(d : LCDualScenario) : Independent ZFC d.φ"
+  },
+  {
+   "name": "MetaMillennium.RH.dualState_implies_indep",
+   "file": "src/lean/MetaMillennium/Problems/RH/RHIndependenceProgram.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(_ : RHDualStateTarget) : RHIndepTarget"
+  },
+  {
+   "name": "MetaMillennium.RH.model_program_implies_indep",
+   "file": "src/lean/MetaMillennium/Problems/RH/RHIndependenceProgram.lean",
+   "line": 52,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(_ : RHModelProgram) : RHIndepTarget"
+  },
+  {
+   "name": "MetaMillennium.Toy.boolBiModel_is_dual",
+   "file": "src/lean/MetaMillennium/Models/ToyModels.lean",
+   "line": 64,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (boolBiModel.Mpos ⊨[BoolTheory] α) ∧ ¬(boolBiModel.Mneg ⊨[BoolTheory] α)"
+  },
+  {
+   "name": "MetaMillennium.Toy.natTheory_consistent",
+   "file": "src/lean/MetaMillennium/Models/ToyModels.lean",
+   "line": 80,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": Consistent NatTheory"
+  },
+  {
+   "name": "MetaMillennium.Toy.toyTheory_consistent",
+   "file": "src/lean/MetaMillennium/Models/ToyModels.lean",
+   "line": 23,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": Consistent ToyTheory"
+  },
+  {
+   "name": "MetaMillennium.Toy.α_independent",
+   "file": "src/lean/MetaMillennium/Models/ToyModels.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": Independent ToyTheory α"
+  },
+  {
+   "name": "MetaMillennium.conj_elim_left",
+   "file": "src/lean/MetaMillennium/Core/LogicBasics.lean",
+   "line": 36,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P Q : Prop), P ∧ Q → P"
+  },
+  {
+   "name": "MetaMillennium.conj_elim_right",
+   "file": "src/lean/MetaMillennium/Core/LogicBasics.lean",
+   "line": 39,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P Q : Prop), P ∧ Q → Q"
+  },
+  {
+   "name": "MetaMillennium.conj_intro",
+   "file": "src/lean/MetaMillennium/Core/LogicBasics.lean",
+   "line": 42,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P Q : Prop), P → Q → P ∧ Q"
+  },
+  {
+   "name": "MetaMillennium.consistent_preserved",
+   "file": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
+   "line": 56,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{T : Theory} [Provable T] (h : Consistent T) : ¬∃ (φ : Sentence T), (T ⊢ φ) ∧ (T ⊢ ∼φ)"
+  },
+  {
+   "name": "MetaMillennium.double_neg_intro",
+   "file": "src/lean/MetaMillennium/Core/LogicBasics.lean",
+   "line": 30,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P : Prop), P → ¬¬P"
+  },
+  {
+   "name": "MetaMillennium.dualState_implies_consistent",
+   "file": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
+   "line": 39,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Sentence T) (h : DualState T φ) : Consistent T"
+  },
+  {
+   "name": "MetaMillennium.dualState_symmetric",
+   "file": "src/lean/MetaMillennium/DualState/DualStateDefinition.lean",
+   "line": 35,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Sentence T) (h : DualState T φ) : DualState T φ"
+  },
+  {
+   "name": "MetaMillennium.independent_implies_undecidable",
+   "file": "src/lean/MetaMillennium/Core/ConsistencyAndIndependence.lean",
+   "line": 42,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ {T : MetaMillennium.Theory} [inst : MetaMillennium.Provable T] (φ : MetaMillennium.Sentence T),   MetaMillennium.Independent T φ → MetaMillennium.Undecidable T φ"
+  },
+  {
+   "name": "MetaMillennium.independent_symmetric",
+   "file": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
+   "line": 45,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Sentence T) : Independent T φ ↔ Independent T (∼φ)"
+  },
+  {
+   "name": "MetaMillennium.modus_ponens",
+   "file": "src/lean/MetaMillennium/Core/LogicBasics.lean",
+   "line": 33,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (P Q : Prop), (P → Q) → P → Q"
+  },
+  {
+   "name": "MetaMillennium.swap_dual",
+   "file": "src/lean/MetaMillennium/DualState/BiModel.lean",
+   "line": 53,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "[Satisfies T] (B : BiModel T) (φ : Sentence T) (h : isDualFor B φ) : isDualFor B.swap (∼φ)"
+  },
+  {
+   "name": "MetaMillennium.swap_swap",
+   "file": "src/lean/MetaMillennium/DualState/BiModel.lean",
+   "line": 50,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(B : BiModel T) : B.swap.swap = B"
+  }
+ ],
+ "closed": 9,
+ "files_sha256": {
+  "src/lean/MetaMillennium/Core/ConsistencyAndIndependence.lean": "e38fb99a7225a5e79f329f9d953b99af11bf950ed6361ac1eec6f387faa61606",
+  "src/lean/MetaMillennium/Core/LogicBasics.lean": "d126e2fde3dd9e7886d859f7e1b059b87f5ab0a6e7ac2ede1125e9decee326e0",
+  "src/lean/MetaMillennium/Core/TheoryAndModel.lean": "6996591e6e1b6daeea85695b3b3f88b0f9fe281d0877861918588bcaa76bedc2",
+  "src/lean/MetaMillennium/DualState/BiModel.lean": "d7164ec3faaa22b196527698718496f1f00a370321870f95ec9d7516da6ce597",
+  "src/lean/MetaMillennium/DualState/DualStateDefinition.lean": "18aed4897df3b6d39e8fdad8c10016b904edc688c02c1f06219f9a8b484d3cd9",
+  "src/lean/MetaMillennium/InnerModels/InnerModelBasics.lean": "f0e6eefbd0e82129c55f656d111138dd83e98e0dcaed68f73b81f22c813b06f2",
+  "src/lean/MetaMillennium/InnerModels/L_InnerModel.lean": "b15333519712159e3755fc1b1a74af844425afad0b88fc99c313fb31f97e1fcc",
+  "src/lean/MetaMillennium/Models/ZFCAbstract.lean": "ef145db739fe6843068d190d8bfea739124919ec509c9604e2c63544a79a8c5e",
+  "src/lean/lakefile.lean": "a415629d8678c95722340f356d01fe41c3cf3078ff49991c6f9b0fd3de2ec830",
+  "src/lean/lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "0b3209d722df6373aca0b5c032a5c237b245ef03d93811a55f5963b6f185ed8c"
+}

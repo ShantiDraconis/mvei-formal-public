@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-evidence-structural-revision` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 2 — closed 2, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `56c197228b3e8d440a483ff30cddfd2a3987222e473001018fae0aa9f34fd70d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-evidence-structural-revision/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `9975ed16910843f4276bb5666bac4bfc326dc22f8000b934142d655b9d29136a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-evidence-structural-revision/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

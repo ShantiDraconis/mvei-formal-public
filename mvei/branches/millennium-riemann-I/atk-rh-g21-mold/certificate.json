@@ -1,0 +1,89 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-riemann-I",
+ "branch": "atk-rh-g21-mold",
+ "branch_state": "parada",
+ "head_commit": "aa9c389d9e33ce0485abcc9f47781b4297598be3",
+ "head_commit_date": "2026-09-26T08:47:06+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "aa9c389d9e33ce0485abcc9f47781b4297598be3",
+   "date": "2026-09-26T08:47:06+01:00",
+   "subject": "ci(rh): add dedicated G2.1 mold gate"
+  },
+  {
+   "commit": "9c57d80dbe9e41c5fb901d4162afcb7240537031",
+   "date": "2026-09-26T08:47:04+01:00",
+   "subject": "feat(rh): add fail-closed G2.1 candidate transfer filter"
+  },
+  {
+   "commit": "0ee73315668b959d5aa68fdc8e8a9a749e95f31e",
+   "date": "2026-09-26T08:47:02+01:00",
+   "subject": "feat(rh): add G2.1 boundary and transfer map"
+  },
+  {
+   "commit": "fc0587f3eaf3cd77644a27bf3eccaf1613f629cb",
+   "date": "2026-09-26T08:46:29+01:00",
+   "subject": "cert(rh): add fail-closed G2.1 mold status"
+  },
+  {
+   "commit": "15100bd39a12bdda8396876b3f78f53c2e095f05",
+   "date": "2026-09-26T08:46:26+01:00",
+   "subject": "feat(rh): formalize G2.1 negative formulation mold"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "MillenniumRiemann.RHG21Mold.RH_formulation_falsified",
+   "file": "lean/millennium/Riemann/RH_G21_Mold.lean",
+   "line": 58,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (C : MillenniumRiemann.RHG21Mold.CandidateRHFormulation), C.candidate → False"
+  },
+  {
+   "name": "MillenniumRiemann.RHG21Mold.RH_formulation_with_alleged_endpoint_falsified",
+   "file": "lean/millennium/Riemann/RH_G21_Mold.lean",
+   "line": 63,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (C : MillenniumRiemann.RHG21Mold.CandidateRHFormulation) (P_alegado : Prop), C.candidate ∧ P_alegado → False"
+  },
+  {
+   "name": "MillenniumRiemann.RHG21Mold.alleged_endpoint_contradiction",
+   "file": "lean/millennium/Riemann/RH_G21_Mold.lean",
+   "line": 21,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {A A' P_alegado : Prop}, MillenniumRiemann.RHG21Mold.FormulationFalsified A A' → A ∧ P_alegado → False"
+  },
+  {
+   "name": "MillenniumRiemann.RHG21Mold.closed",
+   "file": "lean/millennium/Riemann/RH_G21_Mold.lean",
+   "line": 14,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {A A' : Prop}, MillenniumRiemann.RHG21Mold.FormulationFalsified A A' → A → False"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "lakefile.lean": "b250ba6438b69a993a366a48c7cb982811a868b94faf8c90429a93399faca955",
+  "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415",
+  "lean/millennium/Riemann/RH_G21_Mold.lean": "9f4befbed06e634256361a5606bcba425a016734dd82e111a771c9d31a3b9c99"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "79a413cc8b7bcacc08fba322054cd9307837ea205cf1b2323bbf3b9e408d0403"
+}

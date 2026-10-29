@@ -1,0 +1,170 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/universal-emergent-logic-",
+ "branch": "copilot/audit-and-expand-repository",
+ "branch_state": "parada",
+ "head_commit": "f18b1f34272b37f3407b2694531e57e2cdeb9ee1",
+ "head_commit_date": "2025-12-27T15:34:57+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "f18b1f34272b37f3407b2694531e57e2cdeb9ee1",
+   "date": "2025-12-27T15:34:57+00:00",
+   "subject": "Add comprehensive Portuguese guide and quickstart documentation"
+  },
+  {
+   "commit": "303e7c0de53b1404554d8a880a5e17e284d62fc5",
+   "date": "2025-12-27T15:31:20+00:00",
+   "subject": "Add comprehensive formal proof modules: Calabi-Yau, NCG, decidability"
+  },
+  {
+   "commit": "ac104d303cdb65d03e77d17d7364f8d76b59e5ea",
+   "date": "2025-12-27T15:26:23+00:00",
+   "subject": "Add formal proof audit infrastructure and improved definitions"
+  },
+  {
+   "commit": "39a92bec7a3fb4448c1489f87ed91a9695830ae1",
+   "date": "2025-12-27T15:04:37+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "leanprover/lean4:v4.8.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "CalabiYau41.stability_in_moduli",
+   "file": "formalization/lean/Millennium/CalabiYau41.lean",
+   "line": 132,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(params : StabilityParameters) (cy : CalabiYauStructure) : ∃ p : ParameterSpace, p = embedStability params ∧ IsStable cy"
+  },
+  {
+   "name": "Decidability.all_physics_decidable",
+   "file": "formalization/lean/Millennium/Decidability.lean",
+   "line": 71,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(P : H41_Proposition) (h_physical : True) : IsDecidable P"
+  },
+  {
+   "name": "Decidability.brouwer_finite",
+   "file": "formalization/lean/Millennium/Decidability.lean",
+   "line": 139,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(n : ℕ) (f : FiniteHilbertSpace n → FiniteHilbertSpace n) (h_continuous : True) : HasFixedPoint f"
+  },
+  {
+   "name": "Decidability.cannot_derive_false",
+   "file": "formalization/lean/Millennium/Decidability.lean",
+   "line": 128,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": Consistent"
+  },
+  {
+   "name": "Decidability.exists_inefficient_decidable",
+   "file": "formalization/lean/Millennium/Decidability.lean",
+   "line": 115,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ P : H41_Proposition, IsDecidable P ∧ ¬EfficientlyDecidable P"
+  },
+  {
+   "name": "Decidability.no_godel_paradox",
+   "file": "formalization/lean/Millennium/Decidability.lean",
+   "line": 92,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": SystemComplete"
+  },
+  {
+   "name": "MillenniumBasic.Improved.P_subset_NP",
+   "file": "formalization/lean/Millennium/ImprovedBasic.lean",
+   "line": 70,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ L : Language, InP L → InNP L"
+  },
+  {
+   "name": "MillenniumBasic.Improved.poly_not_exp",
+   "file": "formalization/lean/Millennium/ImprovedBasic.lean",
+   "line": 98,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{t : TimeBound} (h_poly : IsPolynomial t) : ¬IsExponential t"
+  },
+  {
+   "name": "NonCommutativeGeometry.k_theory_prevents_singularities",
+   "file": "formalization/lean/Millennium/NonCommutativeGeometry.lean",
+   "line": 100,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(T : SpectralTriple) (h_consistent : True) : ¬HasSingularity T"
+  },
+  {
+   "name": "NonCommutativeGeometry.unified_theory_renormalizable",
+   "file": "formalization/lean/Millennium/NonCommutativeGeometry.lean",
+   "line": 123,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(T : SpectralTriple) (h_unified : True) : IsRenormalizable T"
+  },
+  {
+   "name": "UMI.Improved.compact_selfAdjoint_discrete_spectrum",
+   "file": "formalization/lean/UMI/ImprovedSpectral.lean",
+   "line": 89,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] (T : CompactOp H) (h_sa : ∀ x y, ⟪T.apply x, y⟫_ℝ = ⟪x, T.apply y⟫_ℝ) : ∃ (λs : ℕ → ℝ), (∀ n, λs n ∈ pointSpectrum T.toBoundedLinearOp) ∧ (∀ n, λs n ≥ λs (n + 1)) ∧ (Filter.Tendsto λs Filter.atTop (nhds 0))"
+  },
+  {
+   "name": "UMI.Improved.golden_ratio_property",
+   "file": "formalization/lean/UMI/ImprovedSpectral.lean",
+   "line": 108,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": φ^2 = φ + 1"
+  },
+  {
+   "name": "UMI.Improved.selfAdjoint_real_spectrum",
+   "file": "formalization/lean/UMI/ImprovedSpectral.lean",
+   "line": 78,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] (T : SelfAdjointOp H) (λ : ℂ) : (∃ x : H, x ≠ 0 ∧ T.apply x = (λ.re : ℝ) • x) → λ.im = 0"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "formalization/lean/Millennium/Decidability.lean": "5be11b0146a796fcb13428c51c3fbcd76b7a97bc3022015afb3c977abb12ce3e",
+  "formalization/lean/lakefile.lean": "7f77cbdfca54cf32208c70ba8768c94bfb4ae5c944854c180e80857be7d07b6e",
+  "formalization/lean/lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1"
+ },
+ "published_at": "2026-10-29T06:27:20Z",
+ "certificate_sha256": "86eac6187c64987c1b698126b28355ea53880ab1f19c4ea2f6eaad8ae1df4417"
+}

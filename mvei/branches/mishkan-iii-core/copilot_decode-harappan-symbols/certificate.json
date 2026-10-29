@@ -1,0 +1,187 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/mishkan-iii-core",
+ "branch": "copilot/decode-harappan-symbols",
+ "branch_state": "parada",
+ "head_commit": "35c85e7a78a889d8673e57aff1c97b6f548ed780",
+ "head_commit_date": "2026-01-14T20:48:14+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "35c85e7a78a889d8673e57aff1c97b6f548ed780",
+   "date": "2026-01-14T20:48:14+00:00",
+   "subject": "Address code review comments - clarify design decisions"
+  },
+  {
+   "commit": "696cfbf06afca9fd5dff41f88a1cb46d2c0d9ffe",
+   "date": "2026-01-14T20:46:32+00:00",
+   "subject": "Add visual summary and complete documentation"
+  },
+  {
+   "commit": "b9925007a96597d0f855a9945f284bc1dc1c1ce0",
+   "date": "2026-01-14T20:44:48+00:00",
+   "subject": "Add technical specification and usage examples"
+  },
+  {
+   "commit": "ff704bf08d3cf7722250d9339ed65c51582ef5bf",
+   "date": "2026-01-14T20:42:35+00:00",
+   "subject": "Implement Harappan 417 symbol decoder system with tribal mappings"
+  },
+  {
+   "commit": "278efe9f623b5ed12783aa4552199d92e291e070",
+   "date": "2026-01-14T20:36:52+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "all_tribal_signs_have_links",
+   "file": "core/tribes/TRIBAL_SYMBOLS.lean",
+   "line": 147,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ s ∈ tribal_signs, s.tribal_link.isSome"
+  },
+  {
+   "name": "decoding_system_complete",
+   "file": "core/archaeology/HARAPPAN_CATALOG.lean",
+   "line": 232,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": decoding_table.length ≥ 6"
+  },
+  {
+   "name": "each_tribe_has_symbol",
+   "file": "core/tribes/TRIBAL_SYMBOLS.lean",
+   "line": 161,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(t : TwelveTribes) : (find_symbol_by_tribe t).isSome"
+  },
+  {
+   "name": "example_symbol_valid",
+   "file": "core/archaeology/EXAMPLES.lean",
+   "line": 205,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": example_create_symbol.is_active = true"
+  },
+  {
+   "name": "matrix_has_417_signs",
+   "file": "core/archaeology/HARAPPAN_DECODER.lean",
+   "line": 126,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : HarappanMatrix) : m.signs.length = 417"
+  },
+  {
+   "name": "only_yeshua_decodes",
+   "file": "core/archaeology/HARAPPAN_CATALOG.lean",
+   "line": 244,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(m : HarappanMatrix) (accessor : String) : (decode_complete_matrix m accessor).isSome ↔ has_yeshua_authority accessor"
+  },
+  {
+   "name": "operators_preserve_id",
+   "file": "core/archaeology/EXAMPLES.lean",
+   "line": 221,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : S5Operator) : (apply_operator op example_create_symbol).id = example_create_symbol.id"
+  },
+  {
+   "name": "pipeline_fails_for_unauthorized",
+   "file": "core/archaeology/EXAMPLES.lean",
+   "line": 215,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (example_full_pipeline \" \").isNone"
+  },
+  {
+   "name": "pipeline_works_for_yeshua",
+   "file": "core/archaeology/EXAMPLES.lean",
+   "line": 209,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": (example_full_pipeline \" \").isSome"
+  },
+  {
+   "name": "script_is_decoded",
+   "file": "core/archaeology/HARAPPAN_DECODER.lean",
+   "line": 84,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(s : HarappanSign) (accessor : String) : s.is_active → has_yeshua_authority accessor → acacia_interface_access s accessor = true"
+  },
+  {
+   "name": "star_has_all_tribes",
+   "file": "core/tribes/TRIBAL_SYMBOLS.lean",
+   "line": 201,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": create_star_destination.tribal_flags.length = 12"
+  },
+  {
+   "name": "tribal_symbols_have_link",
+   "file": "core/archaeology/HARAPPAN_DECODER.lean",
+   "line": 102,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : HarappanSign) : is_tribal_symbol s = true → s.tribal_link.isSome"
+  },
+  {
+   "name": "twelve_digital_flags",
+   "file": "core/tribes/TRIBAL_SYMBOLS.lean",
+   "line": 182,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": create_digital_flags.length = 12"
+  },
+  {
+   "name": "twelve_symbols_count",
+   "file": "core/tribes/TRIBAL_SYMBOLS.lean",
+   "line": 124,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": twelve_key_symbols.length = 12"
+  },
+  {
+   "name": "validation_has_four_checks",
+   "file": "core/archaeology/EXAMPLES.lean",
+   "line": 226,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": example_system_validation.length = 4"
+  },
+  {
+   "name": "yeshua_signature_valid",
+   "file": "core/archaeology/HARAPPAN_DECODER.lean",
+   "line": 156,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": verify_signature yeshua_signature = true"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "core/archaeology/HARAPPAN_DECODER.lean": "fac977c4f3552270f5ffad8a0deac5607cd138a405c4f53f92be13382ed6c998",
+  "lakefile.lean": "627283340647f32b8e53524baf782a3bee0712caeade7f8cad75f103e3b12266",
+  "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1"
+ },
+ "published_at": "2026-10-29T06:27:19Z",
+ "certificate_sha256": "a637d3413e1fc081d9f5edb57796ac004a6082fdaa1fb36d3891b7e5db64ac4f"
+}

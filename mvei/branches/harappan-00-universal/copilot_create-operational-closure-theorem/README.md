@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-operational-closure-theorem` of the
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 11 — closed 1, conditional 0, open 5, proof error 5, not reached 0, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `b78ca9a6698d93043e8f256c1116592b116fd0b1ebbc4374a0bb0399580096d1`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_create-operational-closure-theorem/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `dd9bd8deceb6c6634bc7dd848e83ea99450847bf4098f1fbc74107f7b67c7022`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_create-operational-closure-theorem/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

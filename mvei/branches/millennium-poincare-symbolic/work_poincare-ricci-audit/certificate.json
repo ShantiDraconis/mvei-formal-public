@@ -1,0 +1,190 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-poincare-symbolic",
+ "branch": "work/poincare-ricci-audit",
+ "branch_state": "parada",
+ "head_commit": "4d88681d63bf94eb82cea9e585afbb8263881d33",
+ "head_commit_date": "2026-09-20T17:43:40+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "4d88681d63bf94eb82cea9e585afbb8263881d33",
+   "date": "2026-09-20T17:43:40+01:00",
+   "subject": "K1G: certify v4.19 sine bound and target builds"
+  },
+  {
+   "commit": "78a19ab369346280366e2f339ca4cf4c6a616c52",
+   "date": "2026-09-20T17:39:02+01:00",
+   "subject": "K1G: stabilize interval and sine proofs"
+  },
+  {
+   "commit": "61fe58fe38577d90ec87abb9c270d3658e0b29d9",
+   "date": "2026-09-20T17:32:54+01:00",
+   "subject": "K1G: use pinned Mathlib aggregate import"
+  },
+  {
+   "commit": "041f6803c7f3a615ca7db3d15f2911a5c69c6b55",
+   "date": "2026-09-20T17:29:50+01:00",
+   "subject": "K1G: normalize Lake package name"
+  },
+  {
+   "commit": "f09b0d5d3b975bdabca69c706bb90623b80e1bb5",
+   "date": "2026-09-20T17:28:00+01:00",
+   "subject": "K1G: pin Mathlib v4.19.0 manifest"
+  },
+  {
+   "commit": "ac4bd3c8abdfe7cd58a9d9be9c36f612152b925a",
+   "date": "2026-09-20T17:26:57+01:00",
+   "subject": "K1G: formalize round-S3 analytic geometry chain"
+  },
+  {
+   "commit": "2d098d18f75d04053b59869b82c548d1b27ca5e8",
+   "date": "2026-09-20T16:22:50+01:00",
+   "subject": "K1f: namespace Nat transitivity lemma"
+  },
+  {
+   "commit": "39665413d4ff24fd1a32bf2897f8ae5363b739eb",
+   "date": "2026-09-20T16:22:06+01:00",
+   "subject": "K1f: prove arithmetic core with Lean Init only"
+  },
+  {
+   "commit": "ecd98d4efb7e4fe74c071e3153f3b60dd3868219",
+   "date": "2026-09-20T16:21:22+01:00",
+   "subject": "K1f: make Lean hygiene firewall comment-safe"
+  },
+  {
+   "commit": "e6ceb64f71c512cac40a3f77b8f067bdae1f2b19",
+   "date": "2026-09-20T16:20:48+01:00",
+   "subject": "K1f: formalize coarse kappa-two theorem in Lean"
+  },
+  {
+   "commit": "fe4baa20b63ae1e9da6c1b48a8ffc23b10aed27d",
+   "date": "2026-09-20T16:16:14+01:00",
+   "subject": "K1: close round-S3 kappa model fail-closed"
+  },
+  {
+   "commit": "53da85b422c86dba1bffa4e3e5d744143c037af3",
+   "date": "2026-09-20T16:10:34+01:00",
+   "subject": "audit: add fail-closed Poincare Ricci-flow bridge"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Poincare.integral_sin_sq_lower",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 68,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {x : ℝ}, 0 ≤ x → x ≤ 1 → 3 / 16 * x ^ 3 ≤ ∫ (u : ℝ) in 0 ..x, Real.sin u ^ 2"
+  },
+  {
+   "name": "Poincare.k1_coarse_bound_does_not_certify_kappa_three",
+   "file": "lean/Poincare/K1.lean",
+   "line": 64,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "¬∀ (n : ℕ), 27 * n ≤ 25 * n"
+  },
+  {
+   "name": "Poincare.k1_coarse_volume_implies_kappa_two",
+   "file": "lean/Poincare/K1.lean",
+   "line": 45,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (C : Poincare.K1CoarseVolumeCertificate), Poincare.KappaTwoScaled C"
+  },
+  {
+   "name": "Poincare.k1_eighteen_le_twentyFive_mul",
+   "file": "lean/Poincare/K1.lean",
+   "line": 40,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (n : ℕ), 18 * n ≤ 25 * n"
+  },
+  {
+   "name": "Poincare.roundS3_curvatureScale_implies_r_le_a",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 21,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {a r : ℝ}, 0 < a → 0 ≤ r → Poincare.RoundS3CurvatureScale a r → r ≤ a"
+  },
+  {
+   "name": "Poincare.roundS3_curvatureScale_model_kappa_two",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 141,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {a r : ℝ}, 0 < a → 0 ≤ r → Poincare.RoundS3CurvatureScale a r → 2 * r ^ 3 ≤ Poincare.roundS3ModelVolume a r"
+  },
+  {
+   "name": "Poincare.roundS3_geometricBridge_kappa_two",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 163,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (G : Poincare.RoundS3GeometricBridge), 2 * G.r ^ 3 ≤ G.actualVolume"
+  },
+  {
+   "name": "Poincare.roundS3_model_kappa_two",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 130,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {a r : ℝ}, 0 < a → 0 ≤ r → r ≤ a → 2 * r ^ 3 ≤ Poincare.roundS3ModelVolume a r"
+  },
+  {
+   "name": "Poincare.roundS3_model_volume_lower",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 103,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {a r : ℝ}, 0 < a → 0 ≤ r → r ≤ a → 3 * Real.pi / 4 * r ^ 3 ≤ Poincare.roundS3ModelVolume a r"
+  },
+  {
+   "name": "Poincare.sin_sq_lower",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 56,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {u : ℝ}, 0 ≤ u → u ≤ 1 → (3 / 4 * u) ^ 2 ≤ Real.sin u ^ 2"
+  },
+  {
+   "name": "Poincare.sin_three_four_lower",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 36,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {u : ℝ}, 0 ≤ u → u ≤ 1 → 3 / 4 * u ≤ Real.sin u"
+  },
+  {
+   "name": "Poincare.two_lt_three_pi_div_four",
+   "file": "lean/Poincare/K1Geometry.lean",
+   "line": 126,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "2 < 3 * Real.pi / 4"
+  }
+ ],
+ "closed": 12,
+ "files_sha256": {
+  "lake-manifest.json": "ff4f2c3adc83a78769fa2ef871a214eaf625703409378eadb91f15bd0046f96c",
+  "lakefile.toml": "355b1e2dab716bf7224b557ec07548413de113048c7da3767952f04291f0f152",
+  "lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+  "lean/Poincare/K1.lean": "ec8ae77ccd51229a42fadd063a8d28bdc206f7d48a1e27c8361bcb0cc6f164f8",
+  "lean/Poincare/K1Geometry.lean": "65f9f33c2e38a669e26c8e7b04546566078758264d3783a97a2839ef54ac5fc5"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "7e022eeae13b0c2a3899068a93da01f44405f4cd206d7f66775e47c48f614d93"
+}

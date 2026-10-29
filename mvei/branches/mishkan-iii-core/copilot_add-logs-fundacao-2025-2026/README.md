@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-logs-fundacao-2025-2026` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 1, conditional 0, open 1, proof error 2, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `6f74ad6661519ba17b3c1a0d0fa7aec5af1839e193f93c8712d9938397a491ce`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-logs-fundacao-2025-2026/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `6d0727d6c4ed5c37d9176d696a7e225372f51490d2ab0c175b3cd31c459d29e6`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-logs-fundacao-2025-2026/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

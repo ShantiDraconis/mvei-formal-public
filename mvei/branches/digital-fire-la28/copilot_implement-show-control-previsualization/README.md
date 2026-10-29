@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/implement-show-control-previsualization` o
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 1 — closed 1, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `990431b040c14e38bd923cfa88e9397ce4d751443cccab8530f15f553138ac84`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/digital-fire-la28/copilot_implement-show-control-previsualization/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `382ff6857908dac5403ad3748464f0b16505066a6e24eb6b32b12339478ae527`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/digital-fire-la28/copilot_implement-show-control-previsualization/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
