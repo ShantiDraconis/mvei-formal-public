@@ -1,0 +1,163 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/define-error-as-structure",
+ "branch_state": "parada",
+ "head_commit": "a6fc041e58435c6a65ad28789a6bfe6664af3c7b",
+ "head_commit_date": "2025-12-31T17:34:30+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "a6fc041e58435c6a65ad28789a6bfe6664af3c7b",
+   "date": "2025-12-31T17:34:30+00:00",
+   "subject": "Add comprehensive implementation summary for error-as-structure framework"
+  },
+  {
+   "commit": "0db974336fa55a439275176c05a6e188e8972274",
+   "date": "2025-12-31T17:32:57+00:00",
+   "subject": "Add Lean4 formalization of error-as-structure framework"
+  },
+  {
+   "commit": "b2f9c5726b2464752f9b1a57a84d55358fea96a4",
+   "date": "2025-12-31T17:30:20+00:00",
+   "subject": "Integrate error-as-structure with LRE, ontological price, and regime declaration"
+  },
+  {
+   "commit": "244664cb3a50f73b204751d1ed9949793c4e00bf",
+   "date": "2025-12-31T17:26:20+00:00",
+   "subject": "Add error-as-structure core framework: axioms, algebra, and topology"
+  },
+  {
+   "commit": "b5e90fccda793b6753cb2e9901b829ab0bfc2761",
+   "date": "2025-12-31T17:11:34+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Universe00.ErrorStructure.error_add_assoc",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 81,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(ε₁ ε₂ ε₃ : ℝ) : error_add (error_add ε₁ ε₂) ε₃ = error_add ε₁ (error_add ε₂ ε₃)"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_add_comm",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 75,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(ε₁ ε₂ : ℝ) : error_add ε₁ ε₂ = error_add ε₂ ε₁"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_add_zero",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 87,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "(ε : ℝ) : error_add ε 0 = ε"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_composition_preserves_convergence",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 225,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε₁_seq ε₂_seq : ℕ → ℝ) (h₁ : converges_to_zero ε₁_seq) (h₂ : converges_to_zero ε₂_seq) : converges_to_zero (fun n => error_add (ε₁_seq n) (ε₂_seq n))"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_convergence_implies_value_convergence",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 215,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type*} [MetricSpace α] (seq : ℕ → α) (ε_seq : ℕ → ℝ) (classical_value : α) (h_error : converges_to_zero ε_seq) : Filter.Tendsto seq Filter.atTop (nhds classical_value)"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_metric_symm",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 189,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(ε₁ ε₂ : ℝ) : error_metric ε₁ ε₂ = error_metric ε₂ ε₁"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_metric_triangle",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 193,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(ε₁ ε₂ ε₃ : ℝ) : error_metric ε₁ ε₃ ≤ error_metric ε₁ ε₂ + error_metric ε₂ ε₃"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_metric_zero",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 185,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(ε : ℝ) : error_metric ε ε = 0"
+  },
+  {
+   "name": "Universe00.ErrorStructure.error_mul_improves",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 92,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε₁ ε₂ : ℝ) (h₁ : 0 ≤ ε₁) (h₂ : 0 ≤ ε₂) (h₃ : ε₁ ≤ 1) (h₄ : ε₂ ≤ 1) : error_mul ε₁ ε₂ ≤ min ε₁ ε₂"
+  },
+  {
+   "name": "Universe00.ErrorStructure.lre_error_form",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 145,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α β : Type*} [Norm α] (π : α → β) (R : α → α) (h_not_inj : ¬Function.Injective π) : ∃ x : α, 0 < residue_to_error R x"
+  },
+  {
+   "name": "Universe00.ErrorStructure.non_injective_implies_error_barrier",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 243,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α β : Type*} [Norm α] (π : α → β) (R : α → α) (h_not_inj : ¬Function.Injective π) : ∃ ε_star > 0, ∃ x : α, ε_star ≤ residue_to_error R x"
+  },
+  {
+   "name": "Universe00.ErrorStructure.power_amplifies_error",
+   "file": "provers/lean/Foundations/ErrorStructure.lean",
+   "line": 209,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) (n : ℕ) (h : 0 < ε) (hn : 1 < n) : ε < error_propagate_pow ε n"
+  }
+ ],
+ "closed": 5,
+ "files_sha256": {
+  "provers/lean/Foundations/ErrorStructure.lean": "2c489176ab0a76d1b915a2d0a87954d7394af585596d4b9c3dbaf79ddaf7c3e3"
+ },
+ "published_at": "2026-10-29T01:37:28Z",
+ "certificate_sha256": "89123c177b4dc993292d299f03d458b5cab8678c9aae5f83d73ce6ceca348b50"
+}

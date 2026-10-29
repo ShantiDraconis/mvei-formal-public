@@ -1,0 +1,104 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/fix-regime-de-igualdade",
+ "branch_state": "parada",
+ "head_commit": "944fbe44795530205a4dc5592693fdc82ff9fb6b",
+ "head_commit_date": "2025-12-31T17:14:43+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "944fbe44795530205a4dc5592693fdc82ff9fb6b",
+   "date": "2025-12-31T17:14:43+00:00",
+   "subject": "Add comprehensive implementation summary"
+  },
+  {
+   "commit": "95976de98c2f562cca6215a092095a110d95db19",
+   "date": "2025-12-31T17:12:26+00:00",
+   "subject": "Complete Regime Equality framework - all phases done"
+  },
+  {
+   "commit": "44cf7faec6d8ad448ce284f14a29d210c2feefe1",
+   "date": "2025-12-31T17:08:05+00:00",
+   "subject": "Implement Regime Equality framework (Phases 1-4 complete)"
+  },
+  {
+   "commit": "d2fa81ced1e511e0f022ea2c78c3cd4eba02afc5",
+   "date": "2025-12-31T16:57:45+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "RegimeEquality.anti_projection",
+   "file": "provers/lean/RegimeEquality/Core.lean",
+   "line": 130,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type*} {R : RegimeContract α} {a b : α} : (a ≡[R] b) → R.anti_projection a b → a ≠ b"
+  },
+  {
+   "name": "RegimeEquality.arithmetic_protection",
+   "file": "provers/lean/RegimeEquality/Core.lean",
+   "line": 139,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type*} [Ring α] {R : RegimeContract α} {a b : α} : (a ≡[R] b) → R.anti_projection a b → (a + a) ≠ (b + b)"
+  },
+  {
+   "name": "RegimeEquality.contract_violation_implies_invalid",
+   "file": "provers/lean/RegimeEquality/Core.lean",
+   "line": 227,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type*} {R : RegimeContract α} {a b : α} : (∃ c d, R.sufficiency c d ∧ R.anti_projection c d ∧ c = d) → ¬(a ≡[R] b)"
+  },
+  {
+   "name": "RegimeEquality.regime_coherence",
+   "file": "provers/lean/RegimeEquality/Core.lean",
+   "line": 206,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type*} (R : RegimeContract α) : ∀ a b : α, (a ≡[R] b) → R.functional_role a ∧ R.functional_role b"
+  },
+  {
+   "name": "RegimeEquality.regime_refl",
+   "file": "provers/lean/RegimeEquality/Core.lean",
+   "line": 215,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type*} (R : RegimeContract α) (a : α) : R.functional_role a → R.sufficiency a a → a ≡[R] a"
+  },
+  {
+   "name": "RegimeEquality.regime_separation",
+   "file": "provers/lean/RegimeEquality/Core.lean",
+   "line": 106,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type*} : ∀ (a b : α) (R : RegimeContract α) (ε : ℝ), (a ≡[R] b) → ¬(a =[E1] b ∧ ¬R.valid a b)"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "provers/lean/RegimeEquality/Core.lean": "56f1faf18724df14998c68da16c976f219aad57436c2648b7b956fce98eb0a75"
+ },
+ "published_at": "2026-10-29T01:37:28Z",
+ "certificate_sha256": "4881d0ab952e5e86be341b4e5eebc8480e376d3b84b4d7c892e9f01187d6f6f4"
+}

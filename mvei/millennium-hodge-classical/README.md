@@ -11,33 +11,34 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `63d59b2c49c25d98d25ae462a57fe79cae26adfc`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `63d59b2c49c25d98d25ae462a57fe79cae26adfc`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `lean` | v4.12.0 | partial | 19 | 0 | 0 | 72 / 0 / 3 / 62 / 0 |
+| `lean` | v4.12.0 | partial | 19 | 0 | 0 | 97 / 0 / 4 / 36 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 91 |
-| Unique (name + statement) | 89 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 75 |
+| Counting each project | 116 |
+| Unique (name + statement) | 112 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 98 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `Hodge.hodgeForProductOfCurves` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.ellipticCurveHodgeDiamond` | `lean (file by file)` | open | `sorryAx` |
 | `Hodge.hodgeSymmetryHarmonic` | `lean (file by file)` | open | `sorryAx` |
 | `Hodge.hodgeSymmetry'` | `lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 141 `theorem`/`lemma` (counting copies). The kernel checked 79 of them (76 closed, 0 conditional, 3 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 62 the kernel has no result:
+The `.lean` files of the verified commit declare 141 `theorem`/`lemma` (counting copies). The kernel checked 105 of them (101 closed, 0 conditional, 4 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 36 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 62 |
+| checked file by file: the written proof does not pass the kernel | 36 |
 
 ## Files in this folder
 

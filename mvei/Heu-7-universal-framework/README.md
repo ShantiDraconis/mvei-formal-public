@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `63b80b7623e831645f843e1f04385a1cfe17717a`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `63b80b7623e831645f843e1f04385a1cfe17717a`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `src/lean` | v4.19.0 | partial | 6 | 0 | 0 | 1 / 4 / 0 / 1 / 77 |
+| `src/lean` | v4.19.0 | partial | 6 | 0 | 0 | 1 / 5 / 0 / 0 / 77 |
 
 | Closed theorems in this repository | |
 |---|---:|
@@ -31,15 +31,15 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `63b80b7623e831645f843
 | `HEU.Core.ZF.byContradiction` | `src/lean (file by file)` | conditional | `HEU.Core.ZF.em` |
 | `HEU.Core.ZF.deMorgan1` | `src/lean (file by file)` | conditional | `HEU.Core.ZF.em` |
 | `HEU.Core.ZF.classicalImpl` | `src/lean (file by file)` | conditional | `HEU.Core.ZF.em` |
+| `HEU.Core.ZF.peirce` | `src/lean (file by file)` | conditional | `HEU.Core.ZF.em` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting copies). The kernel checked 5 of them (1 closed, 4 conditional, 0 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 78 the kernel has no result:
+The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting copies). The kernel checked 6 of them (1 closed, 5 conditional, 0 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 77 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 77 |
-| checked file by file: the written proof does not pass the kernel | 1 |
 
 ## Files in this folder
 

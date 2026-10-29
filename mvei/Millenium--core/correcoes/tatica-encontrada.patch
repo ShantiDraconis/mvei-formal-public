@@ -1,0 +1,11 @@
+--- a/lean4/Indeterminate.lean
++++ b/lean4/Indeterminate.lean
+@@ -93,7 +93,7 @@
+ theorem zero_div_zero_is_I0 :
+     applyOp '/' (ExtVal.classical 0.0) (ExtVal.classical 0.0) =
+     ExtVal.ind I0 := by
+-  simp [applyOp, I0]
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial)
+ 
+ -- ============================================================
+ -- 6. Axiom 3: Classical Reduction

@@ -1,0 +1,109 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/fix-ambiguous-regime-change",
+ "branch_state": "parada",
+ "head_commit": "d8ef5f4940e41d994c935b55f95b92cf814a5fab",
+ "head_commit_date": "2025-12-31T17:11:24+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "d8ef5f4940e41d994c935b55f95b92cf814a5fab",
+   "date": "2025-12-31T17:11:24+00:00",
+   "subject": "Add implementation summary for regime-indexed equality framework"
+  },
+  {
+   "commit": "0d4bbf436de4ae1a2d66d0509d84a6fed7e139b9",
+   "date": "2025-12-31T17:09:13+00:00",
+   "subject": "Add regime-indexed equality (≡_R) framework: core axioms, guide, Lean4 formalization"
+  },
+  {
+   "commit": "fdc9eca9106827a95a8cd8cde85577199c7a39a2",
+   "date": "2025-12-31T16:59:12+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-28T23:56:08+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "RegimeEquality.pi_not_eq_sqrt10_classical",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 193,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": π_approx ≠ sqrt10_approx"
+  },
+  {
+   "name": "RegimeEquality.pi_regime_eq_sqrt10_discrete",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 187,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": π_approx ≡[DiscreteGeometry] sqrt10_approx"
+  },
+  {
+   "name": "RegimeEquality.projection_creates_regime_eq",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 239,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": "{C D : Type} (π : C → D) (ι : D → C) (R : Regime) (x : C) (h_contract : ∃ c : RegimeContract R C x ((ι ∘ π) x), True) : x ≡[R] ((ι ∘ π) x)"
+  },
+  {
+   "name": "RegimeEquality.regime_eq_not_implies_classical",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 89,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [DecidableEq α] (R : Regime) (a b : α) (h_neq : a ≠ b) : (a ≡[R] b) → ¬(a = b)"
+  },
+  {
+   "name": "RegimeEquality.regime_eq_refl",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 101,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [DecidableEq α] (R : Regime) (a : α) (h_contract : ∃ c : RegimeContract R α a a, True) : a ≡[R] a"
+  },
+  {
+   "name": "RegimeEquality.regime_eq_symm",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 117,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (R : Regime) (a b : α) : (a ≡[R] b) → (b ≡[R] a)"
+  },
+  {
+   "name": "RegimeEquality.regime_eq_trans_same",
+   "file": "provers/lean/RegimeEquality/Basic.lean",
+   "line": 125,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (R : Regime) (a b c : α) : (a ≡[R] b) → (b ≡[R] c) → (a ≡[R] c)"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "provers/lean/RegimeEquality/Basic.lean": "dfe36ada07f2b9583364da261305e05c6342ebab3b22823ff06b9ba2d202dc3e"
+ },
+ "published_at": "2026-10-29T01:37:28Z",
+ "certificate_sha256": "2c7ec7eb85a0973b0ddf107b7b1d77dd4ec39f0edc6df56366e1144cc63ce6c0"
+}

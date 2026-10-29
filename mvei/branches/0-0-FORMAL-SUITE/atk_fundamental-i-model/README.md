@@ -5,7 +5,7 @@ Lean sources from the branch `atk/fundamental-i-model` of the private repository
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 37 — closed 31, conditional 0, open 2, proof error 2, not reached 2, no result 0.
 * History: 29 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `a8143ee2a88caf7b2e52885fe315a0a9a4ac7aa67def54ac6599670f08c4c078`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/0-0-FORMAL-SUITE/atk_fundamental-i-model/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `5c431929f8fd03d1d67a6b757bd6b149bde400b787d7e25cd19d65d8887ce6cc`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/0-0-FORMAL-SUITE/atk_fundamental-i-model/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

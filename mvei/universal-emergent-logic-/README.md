@@ -11,13 +11,13 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `codigo` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
 | `formalization` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 5 |
-| `formalization/lean` | v4.19.0 | partial | 12 | 0 | 0 | 4 / 0 / 22 / 116 / 811 |
+| `formalization/lean` | v4.19.0 | partial | 12 | 0 | 0 | 8 / 0 / 32 / 102 / 811 |
 | `proofs/bsd_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 5 / 0 |
 | `proofs/hodge_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 4 / 0 |
 | `proofs/navier_stokes` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 6 |
@@ -25,13 +25,13 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `041a2090e226310380ee3
 | `proofs/riemann_hypothesis` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 69 |
 | `proofs/yang_mills` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 3 / 0 |
 | `src/lean` | v4.8.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 7 / 0 |
-| `universe00` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 292 |
+| `universe00` | v4.3.0 | failed | 0 | 0 | 0 | 17 / 0 / 2 / 272 / 1 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 16 |
-| Unique (name + statement) | 16 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 7 |
+| Counting each project | 37 |
+| Unique (name + statement) | 36 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 27 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -39,43 +39,56 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `041a2090e226310380ee3
 |---|---|---|---|
 | `LREPropositions.fiber_noncompact` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LREPropositions.residue_accumulation` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `ResidualRegularity.ns_residual_bv` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.shell_residual_smooth` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.bv_decomposition` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.blowup_criterion` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.bootstrap_converges` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.frameworks_equivalent` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.NS.spectralProjection_idempotent` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.NS.spectralProjection_selfAdjoint` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.NS.lerayProjection_orthogonal` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.NS.frequency_decomposition_energy` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.NavierStokes.energyTransfer_bounded` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.NavierStokes.coupling_dominates_dissipation_implies_cascade` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.NavierStokes.coupling_from_spectrum` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.ODE.continuous_ERS_stability` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.ODE.discrete_ERS_stability` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.ODE.discrete_ERS_growth` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE_RBC_Corrected.supercritical_blowup_exists` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE_RBC_Corrected.NavierStokes.NS_blowup_via_supercritical_RBC` | `formalization/lean (file by file)` | open | `sorryAx`, `LRE_RBC_Corrected.NavierStokes.H1_norm`, `LRE_RBC_Corrected.NavierStokes.NS_Solution`, `LRE_RBC_Corrected.NavierStokes.residual_NS` |
 | `Millennium.Lemmas.ODE_comparison` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.gronwall_decay` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.super_poly_dominates` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.golden_ratio_approx` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UnifiedTheory.coupling_symmetric` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UnifiedTheory.coupling_pos_def` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UnifiedTheory.potential_nonneg` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UnifiedTheory.canonical_is_minimum` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UnifiedTheory.canonical_strict_local_min` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalConstants.YangMills.golden_ratio_relation` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UniversalConstants.coupling_matrix_stable` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalisStructuralis.MillenniumProblems.NavierStokes_LRE_equivalence` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Hodge.StructuralBridge.bridge_hodge_to_curvature` | `proofs/hodge_conjecture (file by file)` | open | `sorryAx`, `Hodge.Foundations.AlgebraicVariety` |
 | `YangMills.StructuralBridge.bridge_mass_gap_to_curvature` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
 | `YangMills.Reduction.main_reduction` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
+| `Universe00.Core.ErrorVector.maxError_bounds` | `universe00 (file by file)` | open | `sorryAx` |
+| `Universe00.Core.ErrorVector.minError_bounds` | `universe00 (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 29 of them (4 closed, 0 conditional, 25 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 340 the kernel has no result:
+The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 62 of them (25 closed, 0 conditional, 37 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 307 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 1 202 |
-| checked file by file: the written proof does not pass the kernel | 138 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 911 |
+| checked file by file: the written proof does not pass the kernel | 396 |
 
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 37 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 56 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 
 ## Files in this folder
 

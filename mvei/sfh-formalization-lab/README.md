@@ -11,15 +11,15 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-28T19:11:15+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T01:06:09+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 3 | 0 | 5 | 1 / 0 / 11 / 13 / 26 |
+| `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 3 | 0 | 5 | 1 / 0 / 14 / 10 / 26 |
 | `problems/p-vs-np/approximation-logic/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 1 / 0 / 0 / 2 / 0 |
 | `problems/p-vs-np/formal-proofs/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
-| `problems/p-vs-np/formalization/lean` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 7 |
-| `problems/p-vs-np/formalizations/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 1 / 0 |
+| `problems/p-vs-np/formalization/lean` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 2 / 5 / 0 |
+| `problems/p-vs-np/formalizations/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 0 / 0 |
 | `proofs/p-vs-np/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 4 / 0 |
 
 | Closed theorems in this repository | |
@@ -37,26 +37,32 @@ MVEI verification of 2026-10-28T19:11:15+00:00, on commit `b770052dbe60a6ab123f1
 | `PvsNP_L1003_Karp_Lipton` | `formal/lean` | open | `NP`, `computes`, `PH`, `Sigma2P`, `sorryAx` |
 | `PvsNP_L1004_Shannon_bound` | `formal/lean` | open | `RandomBooleanFunction`, `circuit_size`, `sorryAx` |
 | `PvsNP_L1005_need_explicit_hardness` | `formal/lean` | open | `NP`, `computes`, `Explicit`, `sorryAx` |
+| `Barriers.relativization_barrier` | `formal/lean (file by file)` | open | `sorryAx`, `Barriers.ComplexityClassWithOracle`, `Barriers.Oracle` |
 | `Complexity.P_subset_NP` | `formal/lean (file by file)` | open | `sorryAx` |
 | `Complexity.NP_subset_EXP` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP_L0001_TM_RAM_equiv` | `formal/lean (file by file)` | open | `RAMMachine`, `TuringMachine`, `sorryAx`, `time_complexity` |
 | `PvsNP_L0001_RAM_Circuit_equiv` | `formal/lean (file by file)` | open | `RAMMachine`, `UniformCircuit`, `sorryAx`, `time_complexity` |
+| `PvsNP_L0002_P_definition` | `formal/lean (file by file)` | open | `TuringMachine`, `sorryAx`, `time_complexity` |
 | `PvsNP_L0006_Cook_Levin` | `formal/lean (file by file)` | open | `SAT`, `Verifier`, `sorryAx`, `verifies` |
 | `PvsNP_L0007_ThreeSAT_NP_complete` | `formal/lean (file by file)` | open | `ThreeSAT`, `Verifier`, `sorryAx`, `verifies` |
 | `PvsNP_L0008_CLIQUE_NP_complete` | `formal/lean (file by file)` | open | `CLIQUE`, `Verifier`, `sorryAx`, `verifies` |
 | `PvsNP_L0008_VertexCover_NP_complete` | `formal/lean (file by file)` | open | `Verifier`, `VertexCover`, `sorryAx`, `verifies` |
 | `PvsNP_L0008_HamiltonianPath_NP_complete` | `formal/lean (file by file)` | open | `HamiltonianPath`, `Verifier`, `sorryAx`, `verifies` |
+| `PvsNP_resolution_via_circuits` | `formal/lean (file by file)` | open | `CircuitSize`, `NP`, `P`, `SAT`, `sorryAx` |
 | `PvsNP_resolution_via_algorithm` | `formal/lean (file by file)` | open | `NP`, `P`, `SAT`, `computation_time`, `sorryAx` |
 | `SC_poly_of_repr` | `formal/lean (file by file)` | open | `sorryAx` |
+| `PvsNP.p_eq_np_eliminates_creativity` | `problems/p-vs-np/formalization/lean (file by file)` | open | `sorryAx` |
+| `PvsNP.structural_implies_classical` | `problems/p-vs-np/formalization/lean (file by file)` | open | `sorryAx` |
+| `ComplexityTheory.npComplete_in_p_implies_p_eq_np` | `problems/p-vs-np/formalizations/lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 18 of them (2 closed, 0 conditional, 16 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 56 the kernel has no result:
+The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 24 of them (2 closed, 0 conditional, 22 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 50 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 33 |
-| checked file by file: the written proof does not pass the kernel | 23 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 26 |
+| checked file by file: the written proof does not pass the kernel | 24 |
 
 ### MVEI corrections
 
