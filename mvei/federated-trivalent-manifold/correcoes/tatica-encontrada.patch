@@ -1,0 +1,12 @@
+--- a/formal/lean/Lemas_Master.lean
++++ b/formal/lean/Lemas_Master.lean
+@@ -38,7 +38,8 @@
+ 
+ -- L_A2_3 : Liveness — system visits at least one state (trivial witness)
+ theorem L_A2_3_liveness :
+-    (∃ n : Fin 10, n.val = 0) := by native_decide
++    (∃ n : Fin 10, n.val = 0) := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ -- L_B1 : Saros difference bounded below threshold
+ -- diff = 0.0352 d; represented as 352 / 10000 < 1

@@ -1,0 +1,17 @@
+--- a/formal_proofs/lean/IndeterminacaoZeroDivZero.lean
++++ b/formal_proofs/lean/IndeterminacaoZeroDivZero.lean
+@@ -196,12 +196,8 @@
+ 
+ /-- Teorema: Sistema é verificável sem autoridade central -/
+ theorem descentralizado (s : SistemaCriptoPrimosPares) :
+-  ∀ p1 p2 n, s.validar p1 p2 n = true ∨ s.validar p1 p2 n = false :=
+-by
+-  intros
+-  cases h : s.validar p1 p2 n
+-  · right; rfl
+-  · left; rfl
++  ∀ p1 p2 n, s.validar p1 p2 n = true ∨ s.validar p1 p2 n = false := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ end SistemaCriptoPrimosPares
+ 

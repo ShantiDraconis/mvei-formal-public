@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T05:36:17+00:00, on commit `95e7a6a7a64832ae25a2342445e429eb17a2098c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T11:55:34+00:00, on commit `95e7a6a7a64832ae25a2342445e429eb17a2098c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -58,6 +58,7 @@ The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting 
 ### MVEI corrections
 
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/federated-trivalent-manifold mvei/federated-trivalent-manifold/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/federated-trivalent-manifold mvei/federated-trivalent-manifold/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 
 ## Files in this folder
 
