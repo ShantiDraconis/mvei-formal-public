@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-logic-of-critical-transition` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 11 — closed 1, conditional 0, open 0, proof error 10, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `c4cdf0ddbe64384a693441070ea185a7700712ea2345e3ce958c7e85e67e0218`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-logic-of-critical-transition/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `7cad70147217086650c2a484beafd3334a5f68b9c9e89851ab4c843a7738ab1f`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-logic-of-critical-transition/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/fix-identity-ontological-issues` of the pr
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 8 — closed 3, conditional 0, open 1, proof error 4, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `477c76d960ef1cef451e4f8c6e70e0de1d8c0a8427b6d022420fd5b2115c0a3a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_fix-identity-ontological-issues/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `1573f244ecc3a054c365553ff6a6664224af9ea7e203a36ec69f83431985c4c8`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_fix-identity-ontological-issues/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
