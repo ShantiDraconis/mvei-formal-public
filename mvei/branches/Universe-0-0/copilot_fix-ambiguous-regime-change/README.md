@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/fix-ambiguous-regime-change` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 7 — closed 2, conditional 0, open 3, proof error 2, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `2c7ec7eb85a0973b0ddf107b7b1d77dd4ec39f0edc6df56366e1144cc63ce6c0`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_fix-ambiguous-regime-change/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `dddb19a2c909430ec176ad43efd3ca0ec947a0b7bd9079a72bacc074e35f199c`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_fix-ambiguous-regime-change/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

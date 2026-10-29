@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/update-core-visualization-structure` of th
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 15 — closed 6, conditional 0, open 1, proof error 8, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `16ffb0af2e493b447ba546563e1b658f49ff5fd98d502f8425a395e10363bd9e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_update-core-visualization-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `45ac83900e4a69ea10a462a7c57d3c286d53fff849630aa23b634cdda7d1d316`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_update-core-visualization-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
