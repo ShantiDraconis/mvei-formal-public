@@ -1,0 +1,107 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-riemann-I",
+ "branch": "atk/rh-g21-mold",
+ "branch_state": "parada",
+ "head_commit": "28e80b41662b2ffa59fbce7da6366206b9062b39",
+ "head_commit_date": "2026-09-26T10:35:27+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "28e80b41662b2ffa59fbce7da6366206b9062b39",
+   "date": "2026-09-26T10:35:27+01:00",
+   "subject": "fix(rh): bind scale contradiction to the same formulation"
+  },
+  {
+   "commit": "626dc1934cee9a577b1984995e2e26dc3d3c9388",
+   "date": "2026-09-26T10:35:08+01:00",
+   "subject": "fix(rh): make G2.1 negative mold kernel-pure"
+  },
+  {
+   "commit": "6b6237bc7b8f132db6ab72bc46a2e5cb9079524a",
+   "date": "2026-09-26T01:45:22+01:00",
+   "subject": "ci(rh): add dedicated G2.1 mold certification gate"
+  },
+  {
+   "commit": "187e036f4b787b7b11c217a2114c9e06285cb1bf",
+   "date": "2026-09-26T01:45:09+01:00",
+   "subject": "audit(rh): add fail-closed G2.1 mold status audit"
+  },
+  {
+   "commit": "4e5964e0ac4d63ae9c6158fcf6ea77f35764b750",
+   "date": "2026-09-26T01:45:07+01:00",
+   "subject": "cert(rh): register G2.1 mold boundaries and open obligations"
+  },
+  {
+   "commit": "6fd6d6c86b23b2e8255df89653e72dc45b17d9e3",
+   "date": "2026-09-26T01:45:04+01:00",
+   "subject": "build(rh): include G2.1 mold audit module"
+  },
+  {
+   "commit": "284a941caf238818375446d34c11daa1a9f07338",
+   "date": "2026-09-26T01:44:41+01:00",
+   "subject": "feat(rh): formalize G2.1 negative-formulation mold"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "MillenniumRiemann.Audit.RHG21Mold.closed_negative_lane",
+   "file": "MillenniumRiemann/Audit/RHG21Mold.lean",
+   "line": 89,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (L : MillenniumRiemann.Audit.RHG21Mold.RHClosedNegativeLane), ¬L.A"
+  },
+  {
+   "name": "MillenniumRiemann.Audit.RHG21Mold.formulation_falsified",
+   "file": "MillenniumRiemann/Audit/RHG21Mold.lean",
+   "line": 20,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {A A' : Prop}, MillenniumRiemann.Audit.RHG21Mold.NegativeFormulationMold A A' → A → False"
+  },
+  {
+   "name": "MillenniumRiemann.Audit.RHG21Mold.formulation_not",
+   "file": "MillenniumRiemann/Audit/RHG21Mold.lean",
+   "line": 27,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ {A A' : Prop}, MillenniumRiemann.Audit.RHG21Mold.NegativeFormulationMold A A' → ¬A"
+  },
+  {
+   "name": "MillenniumRiemann.Audit.RHG21Mold.rh_formulation_falsified",
+   "file": "MillenniumRiemann/Audit/RHG21Mold.lean",
+   "line": 61,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (A : MillenniumRiemann.Audit.RHG21Mold.RHRawCandidate) (B : MillenniumRiemann.Audit.RHG21Mold.RHPositiveBoundary),   MillenniumRiemann.Audit.RHG21Mold.RHFormulationFalsificationWitness A B →     MillenniumRiemann.Audit.RHG21Mold.RHRawFormulation A → False"
+  },
+  {
+   "name": "MillenniumRiemann.Audit.RHG21Mold.scale_formulation_falsified",
+   "file": "MillenniumRiemann/Audit/RHG21Mold.lean",
+   "line": 76,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (S : MillenniumRiemann.Audit.RHG21Mold.ScaleConflict), S.A → False"
+  }
+ ],
+ "closed": 5,
+ "files_sha256": {
+  "MillenniumRiemann/Audit/RHG21Mold.lean": "72b43cb18cb9da1917050c33667fef7a76746ac6b1ac8eaac34a55442f889c86",
+  "lakefile.lean": "b250ba6438b69a993a366a48c7cb982811a868b94faf8c90429a93399faca955",
+  "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "650539331af470feef574f24baf77cc18644a25a2294b255dcf1305913e00d38"
+}

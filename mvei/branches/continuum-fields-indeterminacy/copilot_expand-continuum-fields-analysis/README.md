@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/expand-continuum-fields-analysis` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 1, conditional 0, open 3, proof error 0, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `6cbc1af1811824e1b75baa048fc76ae17edd4557b9f8c465ad07518574f06ebb`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/continuum-fields-indeterminacy/copilot_expand-continuum-fields-analysis/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `e2018289cfea84b09438ca8399bb7a679ba919ff182f74a146bcacf70db94fdf`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/continuum-fields-indeterminacy/copilot_expand-continuum-fields-analysis/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

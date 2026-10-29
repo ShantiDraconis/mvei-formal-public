@@ -1,0 +1,78 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/millennium-p-vs-np-I",
+ "branch": "atk/p01-truncation-law-20261005",
+ "branch_state": "parada",
+ "head_commit": "3a50090fd3fa51324a462bf89fe01ade5ddc3f00",
+ "head_commit_date": "2026-10-05T15:26:25+02:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "3a50090fd3fa51324a462bf89fe01ade5ddc3f00",
+   "date": "2026-10-05T15:26:25+02:00",
+   "subject": "ATK: expose material PreservingUnaryWitnessRead contract"
+  },
+  {
+   "commit": "0a4479145873c0aa7009b4751e89dc6604dbd453",
+   "date": "2026-10-05T15:26:08+02:00",
+   "subject": "ATK: add fail-closed TruncationLaw with concrete loop witness"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-10-29T05:36:17+00:00",
+  "lean": [
+   "leanprover/lean4:stable"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "PreservingUnaryWitnessReadContract.witness_is_material",
+   "file": "formal/PreservingUnaryWitnessReadContract.lean",
+   "line": 57,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{State : Type u} {Witness : Type v} {Frame : Type w} (w : ConcreteClosureWitness State Witness Frame) : Nonempty (ReadContract State Witness Frame)"
+  },
+  {
+   "name": "TruncationLaw.loop_requires_witness",
+   "file": "formal/TruncationLaw.lean",
+   "line": 67,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{Block : Type u} {ConcreteClosureWitness : Type v} {IsBlocking : Block → Prop} (r : SearchResult Block ConcreteClosureWitness IsBlocking) (h : ∃ w, r = SearchResult.loopDetected w) : Nonempty ConcreteClosureWitness"
+  },
+  {
+   "name": "TruncationLaw.search_relation_wellFounded",
+   "file": "formal/TruncationLaw.lean",
+   "line": 36,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{State : Type u} (s : WellFoundedSearch State) : WellFounded (fun a b => s.rank a < s.rank b)"
+  },
+  {
+   "name": "TruncationLaw.truncate",
+   "file": "formal/TruncationLaw.lean",
+   "line": 51,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{Block : Type u} {ConcreteClosureWitness : Type v} {Endpoint : Prop} {IsBlocking : Block → Prop} (rule : ClosureRule Block ConcreteClosureWitness Endpoint IsBlocking) (result : SearchResult Block ConcreteClosureWitness IsBlocking) : Endpoint"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "formal/PreservingUnaryWitnessReadContract.lean": "a2b0f7ddbadd480d7807203d83e82048193f6df961c2c27b601b53356c781e07",
+  "formal/TruncationLaw.lean": "c708298f12cbdc60bd93527d231ab1ff13c0b7864100e33ecf0d7051ee9d5d40",
+  "lake-manifest.json": "a28fc0acc6484617a4c5b8d41ae2caf7b9f1032017012af4f9fa187126011fa8",
+  "lakefile.lean": "eac58114dfc0f420f0ac896cd45294be2383cc4c36ff84de9f296561eb4c8b26",
+  "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415"
+ },
+ "published_at": "2026-10-29T06:27:18Z",
+ "certificate_sha256": "ac80231c2d27036f474bb79d842008d6546ffeac4e064da67572dbb231e5ff5f"
+}
