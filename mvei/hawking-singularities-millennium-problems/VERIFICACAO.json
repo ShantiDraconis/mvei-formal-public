@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T11:55:34+00:00",
+ "generated_at": "2026-10-29T18:57:14+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -88,29 +88,6 @@
       "refutar: intro h; exact absurd (@h PUnit) (by simp)",
       "refutar: decide"
      ]
-    },
-    {
-     "repo": "hawking-singularities-millennium-problems",
-     "project": "lean",
-     "theorem": "Problems.PvsNP.pnp_hawking_equivalence",
-     "statement": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
     }
    ],
    "declared_axioms": [
@@ -143,11 +120,6 @@
      "name": "Problems.Hodge.is_algebraic",
      "module": "Problems.Hodge.HawkingLimit",
      "statement": "(X : Problems.Hodge.ProjectiveVariety) → Problems.Hodge.HodgeClass X → Prop"
-    },
-    {
-     "name": "Problems.PvsNP.relativization_barrier",
-     "module": "Problems.PvsNP.HawkingLimit",
-     "statement": "∃ oracle_A oracle_B, (∃ (_ : True), True) ∧ ∃ (_ : True), True"
     }
    ],
    "theorems": [
@@ -394,18 +366,6 @@
      ],
      "statement": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
      "status": "aberto-sorry"
-    },
-    {
-     "name": "Problems.PvsNP.pnp_hawking_equivalence",
-     "module": "Problems.PvsNP.HawkingLimit",
-     "axioms": [
-      "propext",
-      "Quot.sound",
-      "Classical.choice",
-      "sorryAx"
-     ],
-     "statement": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
-     "status": "aberto-sorry"
     }
    ],
    "integrity": [],
@@ -424,6 +384,28 @@
       "Problems.Riemann.HawkingLimit"
      ],
      "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+    },
+    {
+     "arquivo": "lean/Problems/PvsNP/HawkingLimit.lean",
+     "linha": 30,
+     "nome": "Problems.PvsNP.pnp_hawking_equivalence",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean/Problems/PvsNP/HawkingLimit.lean",
+     "linha": 37,
+     "nome": "Problems.PvsNP.relativization_barrier",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ],
+     "erro": "linha 45: function expected at ∃ (_ : True), True term has type Prop"
     },
     {
      "arquivo": "lean/Problems/Riemann/HawkingLimit.lean",
@@ -454,13 +436,6 @@
      "enunciado": "∀ (P : Prop), P = True ∨ P = False → Hawking.HasHawkingFormulation P",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "Problems.PvsNP.relativization_barrier",
-     "enunciado": "∃ oracle_A oracle_B, (∃ (_ : True), True) ∧ ∃ (_ : True), True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
     },
     {
      "tipo": "axioma",
@@ -517,18 +492,11 @@
      "enunciado": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "teorema aberto",
-     "nome": "Problems.PvsNP.pnp_hawking_equivalence",
-     "enunciado": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
-     "resultado": "sem resultado",
-     "tatica": ""
     }
    ],
    "summary": {
     "fechado": 22,
-    "aberto-sorry": 4,
+    "aberto-sorry": 3,
     "condicional": 0
    }
   },
@@ -567,23 +535,30 @@
      "arquivo": "src/lean/Hawking/Core/EssentialSingularity.lean",
      "linha": 54,
      "nome": "Hawking.Core.essential_singularity_causes_failure",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Hawking.Core.Limits"
-     ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/EssentialSingularity.lean",
      "linha": 70,
      "nome": "Hawking.Core.singularity_trichotomy",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Hawking.Core.Limits"
-     ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",

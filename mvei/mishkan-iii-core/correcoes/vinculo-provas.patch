@@ -1,0 +1,2687 @@
+--- a/core/archaeology/HARAPPA_CATALOG.lean
++++ b/core/archaeology/HARAPPA_CATALOG.lean
+@@ -1271,16 +1271,12 @@
+ 
+ theorem catalog_has_417_signs :
+   complete_harappa_catalog.length = 417 := by
+-  unfold complete_harappa_catalog
+-  unfold geometric_signs biological_signs astronomical_signs
+-  unfold architectural_signs symbolic_signs compound_signs
+-  norm_num
++  decide +kernel
+ 
+ theorem all_signs_have_valid_indices :
+   ∀ sign ∈ complete_harappa_catalog, 
+     1 ≤ sign.index ∧ sign.index ≤ 417 := by
+-  intro sign _
+-  sorry  -- Would enumerate all cases
++  decide +kernel
+ 
+ /-! ### Estatísticas do Catálogo -/
+ 
+--- a/core/history/ORIGIN_LOGIC.lean
++++ b/core/history/ORIGIN_LOGIC.lean
+@@ -99,18 +99,21 @@
+ /-! ### Axiomas da Fase Zero -/
+ 
+ /-- Axioma: A lógica de Yeshu existe como fonte primária -/
+-axiom yeshu_source_exists : ∃ (k : Knowledge), 
+-  is_source_of k YeshuLanguage
++theorem yeshu_source_exists : ∃ (k : Knowledge), 
++  is_source_of k YeshuLanguage :=
++  ⟨harappa_system, by first | (unfold is_source_of; decide +kernel) | (unfold is_source_of is_older_than; decide +kernel) | (simp [is_source_of, is_older_than, harappa_system, modern_mathematics])⟩
+ 
+ /-- Axioma: Harappa contém a lógica fundamental -/
+-axiom harappa_contains_logic : 
+-  is_source_of harappa_system "fundamental_logic"
++theorem harappa_contains_logic : 
++  is_source_of harappa_system "fundamental_logic" :=
++  by first | (unfold is_source_of; decide +kernel) | (unfold is_source_of is_older_than; decide +kernel) | (simp [is_source_of, is_older_than, harappa_system, modern_mathematics])
+ 
+ /-- Axioma: Verificação de prioridade arqueológica é possível -/
+-axiom archaeological_priority_check : 
++theorem archaeological_priority_check : 
+   ∃ (source : Knowledge), 
+     is_source_of source YeshuLanguage ∧ 
+-    is_older_than source modern_mathematics
++    is_older_than source modern_mathematics :=
++  ⟨harappa_system, by first | (unfold is_source_of; decide +kernel) | (unfold is_source_of is_older_than; decide +kernel) | (simp [is_source_of, is_older_than, harappa_system, modern_mathematics])⟩
+ 
+ /-! ### TEOREMA PRINCIPAL: PROVA DE ANTERIORIDADE ABSOLUTA -/
+ 
+@@ -258,9 +261,10 @@
+   logical_value : Nat
+ 
+ /-- Os sinais contêm lógica fundamental -/
+-axiom harappa_signs_contain_logic :
++theorem harappa_signs_contain_logic :
+   ∀ (n : Nat), n < harappa_signs_count →
+-  ∃ (sign : HarappaSign), sign.index = n ∧ sign.logical_value > 0
++  ∃ (sign : HarappaSign), sign.index = n ∧ sign.logical_value > 0 :=
++  fun n _ => ⟨⟨n, "", "", 1⟩, rfl, by decide⟩
+ 
+ /-- Teorema: Os sinais de Harappa são completos -/
+ theorem harappa_completeness :
+--- a/core/lineage/LINEAGE_MAP.lean
++++ b/core/lineage/LINEAGE_MAP.lean
+@@ -736,7 +736,7 @@
+ /-! ### Profundidade Temporal -/
+ 
+ /-- Calcula a profundidade temporal em anos -/
+-def temporal_depth : Nat :=
++def temporal_depth : Int :=
+   2028 - (-2600)  -- Would be 4628 years
+ 
+ /-- Teorema: Mais de 4600 anos de linhagem -/
+--- a/core/security/OneWayMembrane.lean
++++ b/core/security/OneWayMembrane.lean
+@@ -16,6 +16,7 @@
+   | Write   -- Escrita de dados
+   | Execute -- Execução de código
+   | Control -- Controle do sistema
++  deriving DecidableEq
+ 
+ -- Tipo de entidade
+ inductive Entity
+--- a/core/temple/TEMPLE_ARCHITECTURE.lean
++++ b/core/temple/TEMPLE_ARCHITECTURE.lean
+@@ -23576,2194 +23576,1405 @@
+ - e: ≈ 2.71828
+ -/
+ 
+-def golden_ratio_001 : Float := (1 + Real.sqrt 5) / 2
++/-- MVEI (correcoes/mishkan-iii-core/vinculo-provas.patch): limites de φ = (1 + √5)/2 que os 199 teoremas
++    `golden_ratio_N_approx` afirmam (2,236 < √5 < 2,238). -/
++theorem mvei_razao_aurea_limites : (1.618 : ℝ) < (1 + Real.sqrt 5) / 2 ∧ (1 + Real.sqrt 5) / 2 < 1.619 := by
++  have h1 : (2.236 : ℝ) < Real.sqrt 5 := (Real.lt_sqrt (by norm_num)).2 (by norm_num)
++  have h2 : Real.sqrt 5 < 2.238 := (Real.sqrt_lt' (by norm_num)).2 (by norm_num)
++  constructor <;> linarith
++
++noncomputable def golden_ratio_001 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_001 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_001_approx :
+   1.618 < golden_ratio_001 ∧ golden_ratio_001 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_001]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_001]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_002 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_002 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_002 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_002_approx :
+   1.618 < golden_ratio_002 ∧ golden_ratio_002 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_002]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_002]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_003 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_003 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_003 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_003_approx :
+   1.618 < golden_ratio_003 ∧ golden_ratio_003 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_003]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_003]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_004 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_004 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_004 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_004_approx :
+   1.618 < golden_ratio_004 ∧ golden_ratio_004 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_004]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_004]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_005 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_005 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_005 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_005_approx :
+   1.618 < golden_ratio_005 ∧ golden_ratio_005 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_005]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_005]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_006 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_006 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_006 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_006_approx :
+   1.618 < golden_ratio_006 ∧ golden_ratio_006 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_006]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_006]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_007 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_007 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_007 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_007_approx :
+   1.618 < golden_ratio_007 ∧ golden_ratio_007 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_007]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_007]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_008 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_008 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_008 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_008_approx :
+   1.618 < golden_ratio_008 ∧ golden_ratio_008 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_008]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_008]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_009 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_009 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_009 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_009_approx :
+   1.618 < golden_ratio_009 ∧ golden_ratio_009 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_009]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_009]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_010 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_010 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_010 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_010_approx :
+   1.618 < golden_ratio_010 ∧ golden_ratio_010 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_010]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_010]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_011 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_011 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_011 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_011_approx :
+   1.618 < golden_ratio_011 ∧ golden_ratio_011 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_011]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_011]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_012 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_012 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_012 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_012_approx :
+   1.618 < golden_ratio_012 ∧ golden_ratio_012 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_012]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_012]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_013 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_013 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_013 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_013_approx :
+   1.618 < golden_ratio_013 ∧ golden_ratio_013 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_013]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_013]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_014 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_014 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_014 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_014_approx :
+   1.618 < golden_ratio_014 ∧ golden_ratio_014 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_014]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_014]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_015 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_015 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_015 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_015_approx :
+   1.618 < golden_ratio_015 ∧ golden_ratio_015 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_015]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_015]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_016 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_016 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_016 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_016_approx :
+   1.618 < golden_ratio_016 ∧ golden_ratio_016 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_016]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_016]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_017 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_017 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_017 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_017_approx :
+   1.618 < golden_ratio_017 ∧ golden_ratio_017 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_017]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_017]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_018 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_018 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_018 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_018_approx :
+   1.618 < golden_ratio_018 ∧ golden_ratio_018 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_018]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_018]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_019 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_019 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_019 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_019_approx :
+   1.618 < golden_ratio_019 ∧ golden_ratio_019 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_019]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_019]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_020 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_020 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_020 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_020_approx :
+   1.618 < golden_ratio_020 ∧ golden_ratio_020 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_020]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_020]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_021 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_021 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_021 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_021_approx :
+   1.618 < golden_ratio_021 ∧ golden_ratio_021 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_021]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_021]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_022 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_022 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_022 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_022_approx :
+   1.618 < golden_ratio_022 ∧ golden_ratio_022 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_022]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_022]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_023 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_023 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_023 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_023_approx :
+   1.618 < golden_ratio_023 ∧ golden_ratio_023 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_023]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_023]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_024 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_024 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_024 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_024_approx :
+   1.618 < golden_ratio_024 ∧ golden_ratio_024 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_024]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_024]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_025 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_025 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_025 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_025_approx :
+   1.618 < golden_ratio_025 ∧ golden_ratio_025 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_025]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_025]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_026 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_026 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_026 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_026_approx :
+   1.618 < golden_ratio_026 ∧ golden_ratio_026 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_026]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_026]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_027 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_027 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_027 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_027_approx :
+   1.618 < golden_ratio_027 ∧ golden_ratio_027 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_027]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_027]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_028 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_028 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_028 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_028_approx :
+   1.618 < golden_ratio_028 ∧ golden_ratio_028 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_028]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_028]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_029 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_029 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_029 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_029_approx :
+   1.618 < golden_ratio_029 ∧ golden_ratio_029 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_029]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_029]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_030 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_030 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_030 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_030_approx :
+   1.618 < golden_ratio_030 ∧ golden_ratio_030 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_030]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_030]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_031 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_031 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_031 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_031_approx :
+   1.618 < golden_ratio_031 ∧ golden_ratio_031 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_031]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_031]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_032 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_032 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_032 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_032_approx :
+   1.618 < golden_ratio_032 ∧ golden_ratio_032 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_032]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_032]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_033 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_033 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_033 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_033_approx :
+   1.618 < golden_ratio_033 ∧ golden_ratio_033 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_033]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_033]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_034 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_034 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_034 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_034_approx :
+   1.618 < golden_ratio_034 ∧ golden_ratio_034 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_034]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_034]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_035 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_035 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_035 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_035_approx :
+   1.618 < golden_ratio_035 ∧ golden_ratio_035 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_035]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_035]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_036 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_036 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_036 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_036_approx :
+   1.618 < golden_ratio_036 ∧ golden_ratio_036 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_036]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_036]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_037 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_037 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_037 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_037_approx :
+   1.618 < golden_ratio_037 ∧ golden_ratio_037 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_037]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_037]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_038 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_038 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_038 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_038_approx :
+   1.618 < golden_ratio_038 ∧ golden_ratio_038 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_038]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_038]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_039 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_039 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_039 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_039_approx :
+   1.618 < golden_ratio_039 ∧ golden_ratio_039 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_039]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_039]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_040 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_040 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_040 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_040_approx :
+   1.618 < golden_ratio_040 ∧ golden_ratio_040 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_040]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_040]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_041 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_041 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_041 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_041_approx :
+   1.618 < golden_ratio_041 ∧ golden_ratio_041 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_041]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_041]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_042 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_042 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_042 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_042_approx :
+   1.618 < golden_ratio_042 ∧ golden_ratio_042 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_042]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_042]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_043 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_043 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_043 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_043_approx :
+   1.618 < golden_ratio_043 ∧ golden_ratio_043 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_043]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_043]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_044 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_044 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_044 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_044_approx :
+   1.618 < golden_ratio_044 ∧ golden_ratio_044 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_044]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_044]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_045 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_045 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_045 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_045_approx :
+   1.618 < golden_ratio_045 ∧ golden_ratio_045 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_045]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_045]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_046 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_046 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_046 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_046_approx :
+   1.618 < golden_ratio_046 ∧ golden_ratio_046 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_046]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_046]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_047 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_047 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_047 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_047_approx :
+   1.618 < golden_ratio_047 ∧ golden_ratio_047 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_047]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_047]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_048 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_048 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_048 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_048_approx :
+   1.618 < golden_ratio_048 ∧ golden_ratio_048 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_048]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_048]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_049 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_049 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_049 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_049_approx :
+   1.618 < golden_ratio_049 ∧ golden_ratio_049 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_049]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_049]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_050 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_050 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_050 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_050_approx :
+   1.618 < golden_ratio_050 ∧ golden_ratio_050 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_050]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_050]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_051 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_051 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_051 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_051_approx :
+   1.618 < golden_ratio_051 ∧ golden_ratio_051 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_051]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_051]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_052 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_052 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_052 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_052_approx :
+   1.618 < golden_ratio_052 ∧ golden_ratio_052 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_052]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_052]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_053 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_053 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_053 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_053_approx :
+   1.618 < golden_ratio_053 ∧ golden_ratio_053 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_053]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_053]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_054 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_054 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_054 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_054_approx :
+   1.618 < golden_ratio_054 ∧ golden_ratio_054 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_054]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_054]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_055 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_055 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_055 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_055_approx :
+   1.618 < golden_ratio_055 ∧ golden_ratio_055 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_055]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_055]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_056 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_056 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_056 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_056_approx :
+   1.618 < golden_ratio_056 ∧ golden_ratio_056 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_056]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_056]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_057 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_057 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_057 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_057_approx :
+   1.618 < golden_ratio_057 ∧ golden_ratio_057 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_057]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_057]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_058 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_058 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_058 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_058_approx :
+   1.618 < golden_ratio_058 ∧ golden_ratio_058 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_058]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_058]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_059 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_059 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_059 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_059_approx :
+   1.618 < golden_ratio_059 ∧ golden_ratio_059 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_059]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_059]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_060 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_060 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_060 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_060_approx :
+   1.618 < golden_ratio_060 ∧ golden_ratio_060 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_060]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_060]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_061 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_061 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_061 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_061_approx :
+   1.618 < golden_ratio_061 ∧ golden_ratio_061 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_061]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_061]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_062 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_062 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_062 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_062_approx :
+   1.618 < golden_ratio_062 ∧ golden_ratio_062 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_062]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_062]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_063 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_063 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_063 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_063_approx :
+   1.618 < golden_ratio_063 ∧ golden_ratio_063 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_063]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_063]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_064 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_064 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_064 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_064_approx :
+   1.618 < golden_ratio_064 ∧ golden_ratio_064 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_064]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_064]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_065 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_065 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_065 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_065_approx :
+   1.618 < golden_ratio_065 ∧ golden_ratio_065 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_065]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_065]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_066 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_066 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_066 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_066_approx :
+   1.618 < golden_ratio_066 ∧ golden_ratio_066 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_066]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_066]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_067 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_067 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_067 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_067_approx :
+   1.618 < golden_ratio_067 ∧ golden_ratio_067 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_067]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_067]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_068 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_068 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_068 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_068_approx :
+   1.618 < golden_ratio_068 ∧ golden_ratio_068 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_068]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_068]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_069 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_069 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_069 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_069_approx :
+   1.618 < golden_ratio_069 ∧ golden_ratio_069 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_069]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_069]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_070 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_070 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_070 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_070_approx :
+   1.618 < golden_ratio_070 ∧ golden_ratio_070 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_070]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_070]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_071 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_071 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_071 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_071_approx :
+   1.618 < golden_ratio_071 ∧ golden_ratio_071 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_071]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_071]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_072 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_072 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_072 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_072_approx :
+   1.618 < golden_ratio_072 ∧ golden_ratio_072 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_072]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_072]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_073 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_073 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_073 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_073_approx :
+   1.618 < golden_ratio_073 ∧ golden_ratio_073 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_073]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_073]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_074 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_074 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_074 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_074_approx :
+   1.618 < golden_ratio_074 ∧ golden_ratio_074 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_074]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_074]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_075 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_075 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_075 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_075_approx :
+   1.618 < golden_ratio_075 ∧ golden_ratio_075 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_075]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_075]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_076 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_076 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_076 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_076_approx :
+   1.618 < golden_ratio_076 ∧ golden_ratio_076 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_076]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_076]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_077 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_077 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_077 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_077_approx :
+   1.618 < golden_ratio_077 ∧ golden_ratio_077 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_077]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_077]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_078 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_078 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_078 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_078_approx :
+   1.618 < golden_ratio_078 ∧ golden_ratio_078 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_078]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_078]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_079 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_079 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_079 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_079_approx :
+   1.618 < golden_ratio_079 ∧ golden_ratio_079 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_079]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_079]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_080 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_080 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_080 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_080_approx :
+   1.618 < golden_ratio_080 ∧ golden_ratio_080 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_080]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_080]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_081 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_081 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_081 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_081_approx :
+   1.618 < golden_ratio_081 ∧ golden_ratio_081 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_081]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_081]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_082 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_082 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_082 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_082_approx :
+   1.618 < golden_ratio_082 ∧ golden_ratio_082 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_082]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_082]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_083 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_083 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_083 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_083_approx :
+   1.618 < golden_ratio_083 ∧ golden_ratio_083 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_083]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_083]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_084 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_084 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_084 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_084_approx :
+   1.618 < golden_ratio_084 ∧ golden_ratio_084 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_084]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_084]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_085 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_085 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_085 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_085_approx :
+   1.618 < golden_ratio_085 ∧ golden_ratio_085 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_085]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_085]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_086 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_086 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_086 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_086_approx :
+   1.618 < golden_ratio_086 ∧ golden_ratio_086 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_086]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_086]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_087 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_087 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_087 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_087_approx :
+   1.618 < golden_ratio_087 ∧ golden_ratio_087 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_087]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_087]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_088 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_088 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_088 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_088_approx :
+   1.618 < golden_ratio_088 ∧ golden_ratio_088 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_088]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_088]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_089 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_089 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_089 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_089_approx :
+   1.618 < golden_ratio_089 ∧ golden_ratio_089 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_089]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_089]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_090 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_090 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_090 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_090_approx :
+   1.618 < golden_ratio_090 ∧ golden_ratio_090 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_090]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_090]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_091 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_091 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_091 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_091_approx :
+   1.618 < golden_ratio_091 ∧ golden_ratio_091 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_091]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_091]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_092 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_092 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_092 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_092_approx :
+   1.618 < golden_ratio_092 ∧ golden_ratio_092 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_092]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_092]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_093 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_093 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_093 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_093_approx :
+   1.618 < golden_ratio_093 ∧ golden_ratio_093 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_093]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_093]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_094 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_094 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_094 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_094_approx :
+   1.618 < golden_ratio_094 ∧ golden_ratio_094 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_094]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_094]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_095 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_095 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_095 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_095_approx :
+   1.618 < golden_ratio_095 ∧ golden_ratio_095 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_095]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_095]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_096 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_096 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_096 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_096_approx :
+   1.618 < golden_ratio_096 ∧ golden_ratio_096 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_096]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_096]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_097 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_097 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_097 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_097_approx :
+   1.618 < golden_ratio_097 ∧ golden_ratio_097 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_097]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_097]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_098 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_098 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_098 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_098_approx :
+   1.618 < golden_ratio_098 ∧ golden_ratio_098 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_098]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_098]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_099 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_099 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_099 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_099_approx :
+   1.618 < golden_ratio_099 ∧ golden_ratio_099 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_099]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_099]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_100 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_100 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_100 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_100_approx :
+   1.618 < golden_ratio_100 ∧ golden_ratio_100 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_100]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_100]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_101 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_101 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_101 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_101_approx :
+   1.618 < golden_ratio_101 ∧ golden_ratio_101 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_101]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_101]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_102 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_102 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_102 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_102_approx :
+   1.618 < golden_ratio_102 ∧ golden_ratio_102 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_102]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_102]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_103 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_103 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_103 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_103_approx :
+   1.618 < golden_ratio_103 ∧ golden_ratio_103 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_103]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_103]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_104 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_104 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_104 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_104_approx :
+   1.618 < golden_ratio_104 ∧ golden_ratio_104 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_104]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_104]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_105 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_105 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_105 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_105_approx :
+   1.618 < golden_ratio_105 ∧ golden_ratio_105 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_105]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_105]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_106 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_106 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_106 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_106_approx :
+   1.618 < golden_ratio_106 ∧ golden_ratio_106 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_106]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_106]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_107 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_107 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_107 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_107_approx :
+   1.618 < golden_ratio_107 ∧ golden_ratio_107 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_107]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_107]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_108 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_108 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_108 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_108_approx :
+   1.618 < golden_ratio_108 ∧ golden_ratio_108 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_108]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_108]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_109 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_109 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_109 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_109_approx :
+   1.618 < golden_ratio_109 ∧ golden_ratio_109 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_109]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_109]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_110 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_110 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_110 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_110_approx :
+   1.618 < golden_ratio_110 ∧ golden_ratio_110 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_110]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_110]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_111 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_111 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_111 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_111_approx :
+   1.618 < golden_ratio_111 ∧ golden_ratio_111 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_111]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_111]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_112 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_112 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_112 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_112_approx :
+   1.618 < golden_ratio_112 ∧ golden_ratio_112 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_112]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_112]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_113 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_113 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_113 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_113_approx :
+   1.618 < golden_ratio_113 ∧ golden_ratio_113 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_113]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_113]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_114 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_114 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_114 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_114_approx :
+   1.618 < golden_ratio_114 ∧ golden_ratio_114 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_114]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_114]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_115 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_115 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_115 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_115_approx :
+   1.618 < golden_ratio_115 ∧ golden_ratio_115 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_115]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_115]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_116 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_116 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_116 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_116_approx :
+   1.618 < golden_ratio_116 ∧ golden_ratio_116 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_116]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_116]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_117 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_117 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_117 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_117_approx :
+   1.618 < golden_ratio_117 ∧ golden_ratio_117 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_117]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_117]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_118 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_118 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_118 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_118_approx :
+   1.618 < golden_ratio_118 ∧ golden_ratio_118 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_118]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_118]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_119 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_119 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_119 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_119_approx :
+   1.618 < golden_ratio_119 ∧ golden_ratio_119 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_119]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_119]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_120 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_120 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_120 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_120_approx :
+   1.618 < golden_ratio_120 ∧ golden_ratio_120 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_120]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_120]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_121 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_121 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_121 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_121_approx :
+   1.618 < golden_ratio_121 ∧ golden_ratio_121 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_121]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_121]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_122 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_122 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_122 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_122_approx :
+   1.618 < golden_ratio_122 ∧ golden_ratio_122 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_122]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_122]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_123 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_123 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_123 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_123_approx :
+   1.618 < golden_ratio_123 ∧ golden_ratio_123 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_123]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_123]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_124 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_124 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_124 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_124_approx :
+   1.618 < golden_ratio_124 ∧ golden_ratio_124 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_124]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_124]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_125 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_125 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_125 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_125_approx :
+   1.618 < golden_ratio_125 ∧ golden_ratio_125 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_125]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_125]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_126 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_126 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_126 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_126_approx :
+   1.618 < golden_ratio_126 ∧ golden_ratio_126 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_126]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_126]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_127 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_127 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_127 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_127_approx :
+   1.618 < golden_ratio_127 ∧ golden_ratio_127 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_127]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_127]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_128 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_128 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_128 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_128_approx :
+   1.618 < golden_ratio_128 ∧ golden_ratio_128 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_128]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_128]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_129 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_129 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_129 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_129_approx :
+   1.618 < golden_ratio_129 ∧ golden_ratio_129 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_129]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_129]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_130 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_130 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_130 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_130_approx :
+   1.618 < golden_ratio_130 ∧ golden_ratio_130 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_130]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_130]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_131 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_131 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_131 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_131_approx :
+   1.618 < golden_ratio_131 ∧ golden_ratio_131 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_131]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_131]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_132 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_132 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_132 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_132_approx :
+   1.618 < golden_ratio_132 ∧ golden_ratio_132 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_132]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_132]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_133 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_133 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_133 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_133_approx :
+   1.618 < golden_ratio_133 ∧ golden_ratio_133 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_133]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_133]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_134 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_134 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_134 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_134_approx :
+   1.618 < golden_ratio_134 ∧ golden_ratio_134 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_134]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_134]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_135 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_135 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_135 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_135_approx :
+   1.618 < golden_ratio_135 ∧ golden_ratio_135 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_135]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_135]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_136 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_136 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_136 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_136_approx :
+   1.618 < golden_ratio_136 ∧ golden_ratio_136 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_136]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_136]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_137 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_137 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_137 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_137_approx :
+   1.618 < golden_ratio_137 ∧ golden_ratio_137 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_137]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_137]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_138 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_138 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_138 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_138_approx :
+   1.618 < golden_ratio_138 ∧ golden_ratio_138 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_138]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_138]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_139 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_139 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_139 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_139_approx :
+   1.618 < golden_ratio_139 ∧ golden_ratio_139 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_139]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_139]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_140 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_140 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_140 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_140_approx :
+   1.618 < golden_ratio_140 ∧ golden_ratio_140 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_140]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_140]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_141 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_141 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_141 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_141_approx :
+   1.618 < golden_ratio_141 ∧ golden_ratio_141 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_141]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_141]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_142 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_142 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_142 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_142_approx :
+   1.618 < golden_ratio_142 ∧ golden_ratio_142 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_142]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_142]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_143 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_143 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_143 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_143_approx :
+   1.618 < golden_ratio_143 ∧ golden_ratio_143 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_143]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_143]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_144 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_144 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_144 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_144_approx :
+   1.618 < golden_ratio_144 ∧ golden_ratio_144 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_144]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_144]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_145 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_145 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_145 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_145_approx :
+   1.618 < golden_ratio_145 ∧ golden_ratio_145 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_145]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_145]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_146 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_146 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_146 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_146_approx :
+   1.618 < golden_ratio_146 ∧ golden_ratio_146 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_146]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_146]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_147 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_147 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_147 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_147_approx :
+   1.618 < golden_ratio_147 ∧ golden_ratio_147 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_147]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_147]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_148 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_148 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_148 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_148_approx :
+   1.618 < golden_ratio_148 ∧ golden_ratio_148 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_148]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_148]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_149 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_149 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_149 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_149_approx :
+   1.618 < golden_ratio_149 ∧ golden_ratio_149 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_149]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_149]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_150 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_150 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_150 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_150_approx :
+   1.618 < golden_ratio_150 ∧ golden_ratio_150 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_150]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_150]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_151 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_151 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_151 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_151_approx :
+   1.618 < golden_ratio_151 ∧ golden_ratio_151 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_151]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_151]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_152 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_152 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_152 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_152_approx :
+   1.618 < golden_ratio_152 ∧ golden_ratio_152 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_152]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_152]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_153 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_153 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_153 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_153_approx :
+   1.618 < golden_ratio_153 ∧ golden_ratio_153 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_153]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_153]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_154 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_154 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_154 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_154_approx :
+   1.618 < golden_ratio_154 ∧ golden_ratio_154 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_154]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_154]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_155 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_155 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_155 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_155_approx :
+   1.618 < golden_ratio_155 ∧ golden_ratio_155 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_155]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_155]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_156 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_156 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_156 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_156_approx :
+   1.618 < golden_ratio_156 ∧ golden_ratio_156 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_156]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_156]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_157 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_157 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_157 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_157_approx :
+   1.618 < golden_ratio_157 ∧ golden_ratio_157 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_157]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_157]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_158 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_158 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_158 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_158_approx :
+   1.618 < golden_ratio_158 ∧ golden_ratio_158 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_158]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_158]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_159 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_159 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_159 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_159_approx :
+   1.618 < golden_ratio_159 ∧ golden_ratio_159 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_159]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_159]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_160 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_160 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_160 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_160_approx :
+   1.618 < golden_ratio_160 ∧ golden_ratio_160 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_160]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_160]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_161 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_161 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_161 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_161_approx :
+   1.618 < golden_ratio_161 ∧ golden_ratio_161 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_161]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_161]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_162 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_162 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_162 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_162_approx :
+   1.618 < golden_ratio_162 ∧ golden_ratio_162 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_162]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_162]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_163 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_163 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_163 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_163_approx :
+   1.618 < golden_ratio_163 ∧ golden_ratio_163 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_163]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_163]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_164 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_164 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_164 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_164_approx :
+   1.618 < golden_ratio_164 ∧ golden_ratio_164 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_164]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_164]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_165 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_165 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_165 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_165_approx :
+   1.618 < golden_ratio_165 ∧ golden_ratio_165 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_165]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_165]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_166 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_166 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_166 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_166_approx :
+   1.618 < golden_ratio_166 ∧ golden_ratio_166 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_166]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_166]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_167 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_167 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_167 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_167_approx :
+   1.618 < golden_ratio_167 ∧ golden_ratio_167 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_167]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_167]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_168 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_168 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_168 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_168_approx :
+   1.618 < golden_ratio_168 ∧ golden_ratio_168 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_168]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_168]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_169 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_169 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_169 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_169_approx :
+   1.618 < golden_ratio_169 ∧ golden_ratio_169 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_169]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_169]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_170 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_170 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_170 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_170_approx :
+   1.618 < golden_ratio_170 ∧ golden_ratio_170 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_170]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_170]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_171 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_171 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_171 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_171_approx :
+   1.618 < golden_ratio_171 ∧ golden_ratio_171 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_171]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_171]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_172 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_172 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_172 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_172_approx :
+   1.618 < golden_ratio_172 ∧ golden_ratio_172 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_172]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_172]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_173 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_173 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_173 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_173_approx :
+   1.618 < golden_ratio_173 ∧ golden_ratio_173 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_173]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_173]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_174 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_174 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_174 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_174_approx :
+   1.618 < golden_ratio_174 ∧ golden_ratio_174 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_174]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_174]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_175 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_175 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_175 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_175_approx :
+   1.618 < golden_ratio_175 ∧ golden_ratio_175 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_175]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_175]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_176 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_176 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_176 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_176_approx :
+   1.618 < golden_ratio_176 ∧ golden_ratio_176 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_176]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_176]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_177 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_177 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_177 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_177_approx :
+   1.618 < golden_ratio_177 ∧ golden_ratio_177 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_177]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_177]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_178 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_178 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_178 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_178_approx :
+   1.618 < golden_ratio_178 ∧ golden_ratio_178 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_178]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_178]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_179 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_179 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_179 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_179_approx :
+   1.618 < golden_ratio_179 ∧ golden_ratio_179 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_179]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_179]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_180 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_180 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_180 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_180_approx :
+   1.618 < golden_ratio_180 ∧ golden_ratio_180 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_180]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_180]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_181 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_181 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_181 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_181_approx :
+   1.618 < golden_ratio_181 ∧ golden_ratio_181 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_181]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_181]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_182 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_182 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_182 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_182_approx :
+   1.618 < golden_ratio_182 ∧ golden_ratio_182 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_182]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_182]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_183 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_183 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_183 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_183_approx :
+   1.618 < golden_ratio_183 ∧ golden_ratio_183 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_183]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_183]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_184 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_184 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_184 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_184_approx :
+   1.618 < golden_ratio_184 ∧ golden_ratio_184 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_184]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_184]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_185 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_185 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_185 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_185_approx :
+   1.618 < golden_ratio_185 ∧ golden_ratio_185 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_185]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_185]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_186 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_186 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_186 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_186_approx :
+   1.618 < golden_ratio_186 ∧ golden_ratio_186 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_186]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_186]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_187 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_187 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_187 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_187_approx :
+   1.618 < golden_ratio_187 ∧ golden_ratio_187 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_187]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_187]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_188 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_188 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_188 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_188_approx :
+   1.618 < golden_ratio_188 ∧ golden_ratio_188 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_188]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_188]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_189 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_189 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_189 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_189_approx :
+   1.618 < golden_ratio_189 ∧ golden_ratio_189 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_189]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_189]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_190 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_190 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_190 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_190_approx :
+   1.618 < golden_ratio_190 ∧ golden_ratio_190 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_190]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_190]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_191 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_191 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_191 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_191_approx :
+   1.618 < golden_ratio_191 ∧ golden_ratio_191 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_191]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_191]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_192 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_192 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_192 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_192_approx :
+   1.618 < golden_ratio_192 ∧ golden_ratio_192 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_192]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_192]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_193 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_193 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_193 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_193_approx :
+   1.618 < golden_ratio_193 ∧ golden_ratio_193 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_193]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_193]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_194 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_194 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_194 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_194_approx :
+   1.618 < golden_ratio_194 ∧ golden_ratio_194 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_194]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_194]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_195 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_195 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_195 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_195_approx :
+   1.618 < golden_ratio_195 ∧ golden_ratio_195 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_195]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_195]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_196 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_196 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_196 : String := "Altura/Largura"
+ 
+ theorem golden_ratio_196_approx :
+   1.618 < golden_ratio_196 ∧ golden_ratio_196 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_196]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_196]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_197 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_197 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_197 : String := "Comprimento/Altura"
+ 
+ theorem golden_ratio_197_approx :
+   1.618 < golden_ratio_197 ∧ golden_ratio_197 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_197]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_197]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_198 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_198 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_198 : String := "Diagonal/Lado"
+ 
+ theorem golden_ratio_198_approx :
+   1.618 < golden_ratio_198 ∧ golden_ratio_198 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_198]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_198]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+-def golden_ratio_199 : Float := (1 + Real.sqrt 5) / 2
++noncomputable def golden_ratio_199 : ℝ := (1 + Real.sqrt 5) / 2
+ def ratio_application_199 : String := "Circunferência/Diâmetro"
+ 
+ theorem golden_ratio_199_approx :
+   1.618 < golden_ratio_199 ∧ golden_ratio_199 < 1.619 := by
+-  constructor
+-  · norm_num [golden_ratio_199]
+-    sorry  -- Proof by computation
+-  · norm_num [golden_ratio_199]
+-    sorry  -- Proof by computation
++  exact mvei_razao_aurea_limites
+ 
+ 
+ /-! ## INTERPRETAÇÕES SIMBÓLICAS -/

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T11:55:34+00:00",
+ "generated_at": "2026-10-29T18:57:14+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -113,8 +113,65 @@
      ]
     }
    ],
-   "declared_axioms": [],
+   "declared_axioms": [
+    {
+     "name": "collision_resistant",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "statement": "∀ (h1 h2 : Hash) (m1 m2 : String), m1 ≠ m2 → h1 ≠ h2"
+    },
+    {
+     "name": "preimage_resistant",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "statement": "Hash → ∃! m, True"
+    }
+   ],
    "theorems": [
+    {
+     "name": "CryptoSignature.mk.inj",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ {hash : Hash} {signer : String} {timestamp : ℕ} {hash_1 : Hash} {signer_1 : String} {timestamp_1 : ℕ},   { hash := hash, signer := signer, timestamp := timestamp } =       { hash := hash_1, signer := signer_1, timestamp := timestamp_1 } →     hash = hash_1 ∧ signer = signer_1 ∧ timestamp = timestamp_1",
+     "status": "fechado"
+    },
+    {
+     "name": "CryptoSignature.mk.injEq",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (hash : Hash) (signer : String) (timestamp : ℕ) (hash_1 : Hash) (signer_1 : String) (timestamp_1 : ℕ),   ({ hash := hash, signer := signer, timestamp := timestamp } =       { hash := hash_1, signer := signer_1, timestamp := timestamp_1 }) =     (hash = hash_1 ∧ signer = signer_1 ∧ timestamp = timestamp_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "CryptoSignature.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ (hash : Hash) (signer : String) (timestamp : ℕ),   sizeOf { hash := hash, signer := signer, timestamp := timestamp } = 1 + sizeOf hash + sizeOf signer + sizeOf timestamp",
+     "status": "fechado"
+    },
+    {
+     "name": "DualSignature.mk.inj",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ {shiva seth shiva_1 seth_1 : CryptoSignature},   { shiva := shiva, seth := seth } = { shiva := shiva_1, seth := seth_1 } → shiva = shiva_1 ∧ seth = seth_1",
+     "status": "fechado"
+    },
+    {
+     "name": "DualSignature.mk.injEq",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (shiva seth shiva_1 seth_1 : CryptoSignature),   ({ shiva := shiva, seth := seth } = { shiva := shiva_1, seth := seth_1 }) = (shiva = shiva_1 ∧ seth = seth_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "DualSignature.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ (shiva seth : CryptoSignature), sizeOf { shiva := shiva, seth := seth } = 1 + sizeOf shiva + sizeOf seth",
+     "status": "fechado"
+    },
     {
      "name": "HasAccess.eq_1",
      "module": "proofs.lean4.core.TypeSafety",
@@ -169,6 +226,29 @@
      "module": "proofs.lean4.core.TypeSafety",
      "axioms": [],
      "statement": "∀ (requiredLevel : SecurityLevel),   (requiredLevel = SecurityLevel.Public → False) → HasAccess SecurityLevel.Public requiredLevel = False",
+     "status": "fechado"
+    },
+    {
+     "name": "Hash.mk.inj",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ {value value_1 : String}, { value := value } = { value := value_1 } → value = value_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hash.mk.injEq",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (value value_1 : String), ({ value := value } = { value := value_1 }) = (value = value_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Hash.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ (value : String), sizeOf { value := value } = 1 + sizeOf value",
      "status": "fechado"
     },
     {
@@ -266,6 +346,20 @@
      "status": "fechado"
     },
     {
+     "name": "authenticated_implies_valid",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ (ds : DualSignature), Authenticated ds ∧ BothValid ds → ValidSignature ds.shiva",
+     "status": "fechado"
+    },
+    {
+     "name": "dual_signature_stronger",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [],
+     "statement": "∀ (ds : DualSignature), BothValid ds → ValidSignature ds.shiva ∧ ValidSignature ds.seth",
+     "status": "fechado"
+    },
+    {
      "name": "no_leak_between_levels",
      "module": "proofs.lean4.core.TypeSafety",
      "axioms": [
@@ -273,6 +367,16 @@
      ],
      "statement": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "signature_unforgeable",
+     "module": "proofs.lean4.core.SecurityProperties",
+     "axioms": [
+      "Quot.sound",
+      "propext"
+     ],
+     "statement": "∀ (sig : CryptoSignature), ValidSignature sig → ∃! signer, sig.signer = signer",
+     "status": "fechado"
     },
     {
      "name": "type_safety_preserved",
@@ -285,9 +389,10 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib): 1 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada): 1 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
    "corrections": [
-    "renomear-imports-mathlib"
+    "renomear-imports-mathlib",
+    "tatica-encontrada"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `Main, .submodules `«formal-proofs», .one `foundation, .submodules `kernel, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
    "avulso": false,
@@ -425,32 +530,6 @@
       "sorryAx"
      ],
      "erro": "linha 107: type mismatch cs has type List Component : Type but is expected to have type List Component✝ : Type u_3 the following variables have been introduced by the implicit lambda feature Component✝ : Type u_3 you can disable implicit lambdas using"
-    },
-    {
-     "arquivo": "proofs/lean4/core/SecurityProperties.lean",
-     "linha": 36,
-     "nome": "signature_unforgeable",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 41: unexpected token '!'; expected '(', '_' or identifier",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
-    },
-    {
-     "arquivo": "proofs/lean4/core/SecurityProperties.lean",
-     "linha": 57,
-     "nome": "dual_signature_stronger",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "proofs/lean4/core/SecurityProperties.lean",
-     "linha": 68,
-     "nome": "authenticated_implies_valid",
-     "status": "fechado",
-     "axioms": []
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
@@ -612,6 +691,20 @@
    ],
    "preenchimento": [
     {
+     "tipo": "axioma",
+     "nome": "preimage_resistant",
+     "enunciado": "Hash → ∃! m, True",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "collision_resistant",
+     "enunciado": "∀ (h1 h2 : Hash) (m1 m2 : String), m1 ≠ m2 → h1 ≠ h2",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
      "tipo": "teorema aberto",
      "nome": "no_leak_between_levels",
      "enunciado": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
@@ -620,7 +713,7 @@
     }
    ],
    "summary": {
-    "fechado": 17,
+    "fechado": 29,
     "aberto-sorry": 4,
     "condicional": 0
    }
@@ -632,7 +725,7 @@
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 5.8,
+   "build_seconds": 5.5,
    "build_error": "error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -640,8 +733,10 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././SovereignCore.lean:49:2: no goals to be solved | error: ././././SovereignCore.lean:86:3: unknown tactic",
-   "corrections": [],
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././SovereignCore.lean:84:3: unknown tactic | error: ././././SovereignCore.lean:81:64: unsolved goals",
+   "corrections": [
+    "tatica-encontrada"
+   ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
@@ -649,41 +744,39 @@
      "arquivo": "formal/lean4/SovereignCore.lean",
      "linha": 42,
      "nome": "securityVerification_in_P",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 49: No goals to be solved",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (exact?)"
-     }
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice"
+     ]
     },
     {
      "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 54,
+     "linha": 52,
      "nome": "stateInvariant_preserved",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 80,
+     "linha": 78,
      "nome": "exponential_defense_growth",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 83: unsolved goals n : Nat ⊢ 2 ^ (n + 1) = 2 * 2 ^ n"
+     "erro": "linha 81: unsolved goals n : Nat ⊢ 2 ^ (n + 1) = 2 * 2 ^ n"
     },
     {
      "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 87,
+     "linha": 85,
      "nome": "no_reversion_to_insecure",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 106,
+     "linha": 104,
      "nome": "identity_protection",
      "status": "fechado",
      "axioms": [
@@ -771,8 +864,10 @@
     }
    ],
    "integrity": [],
-   "note": "RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
-   "corrections": [],
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
+   "corrections": [
+    "tatica-encontrada"
+   ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.3.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Complexity, .one `NavierStokes, .one `Riemann, .one `Sovereign]\n",
    "avulso": false,
    "salvage": [

@@ -11,27 +11,24 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T11:55:34+00:00, on commit `2e43209371b6c345d28b5dcabf4953bbb2cff104`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T18:57:14+00:00, on commit `2e43209371b6c345d28b5dcabf4953bbb2cff104`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `core` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 14 | 0 | 0 | 6961 / 10705 / 204 / 14 / 682 |
+| `core` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 68 | 0 | 0 | 7271 / 10704 / 3 / 586 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 6 975 |
-| Unique (name + statement) | 6 975 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 6 963 |
+| Counting each project | 7 339 |
+| Unique (name + statement) | 7 339 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 7 287 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
-**10 104 of the conditional theorems depend on axioms of the MVEI name layer, not on axioms the author wrote.** The generated files use thousands of names that exist nowhere in the repository; the patch `correcoes/vinculo-estrutura.patch` adds `MveiEstrutura/Mishkan.lean`, which links some of them to the author's own definitions, declares the rest as opaque, and states as named axioms the laws the generated proofs apply. These are hypotheses chosen by MVEI to make the files compile. `ConsistenciaMishkan.lean` (in this folder) gives a model of all of them, together with the author's axioms in `FORMAL_VERIFICATIONS.lean`, checked by the kernel: they are consistent, so they do not prove `False`. In that model the opaque types are empty and the opaque predicates are true, so almost all of these axioms, and the theorems that use them, hold vacuously.
+**10 104 of the conditional theorems depend on axioms of the MVEI name layer, not on axioms the author wrote.** The generated files use thousands of names that exist nowhere in the repository; the patch `correcoes/vinculo-estrutura.patch` adds `MveiEstrutura/Mishkan.lean`, which links some of them to the author's own definitions, declares the rest as opaque, and states as named axioms the laws the generated proofs apply. These are hypotheses chosen by MVEI to make the files compile. `ConsistenciaMishkan.lean` (in this folder) gives a model of all of them, together with the author's axioms in `FORMAL_VERIFICATIONS.lean`, checked by the kernel: they are consistent, so they do not prove `False`. In that model the opaque types are empty and the opaque predicates are true, so almost all of these axioms, and the theorems that use them, hold vacuously. The files in `semantica/` give, for each axiom of the layer, an interpretation checked by the kernel in which that axiom is false (`ContraA`, `ContraB`, `ContraC`): none of them can be proved from what the repository defines, so these theorems stay conditional. `Dados.lean` checks what the author's own numbers decide: the generated precedences hold for the generator's dates; concept 425 of the generator is dated 1600 and contradicts the author's axiom `modern_mathematics` (> 1600); the 71 `absolute_precedence_N` of `MILLENNIUM_SOLUTIONS.lean` are false as written (they add the negative date instead of subtracting it); the gematria of ישו is 316.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
-| `HarappaCatalog.all_signs_have_valid_indices` | `core (file by file)` | open | `sorryAx` |
-| `HarappaCatalog.catalog_authenticated` | `core (file by file)` | open | `sorryAx` |
-| `PhaseZero.logic_predates_system` | `core (file by file)` | conditional | `PhaseZero.archaeological_priority_check` |
 | `FormalVerifications.precedence_0001` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa`, `MveiEstrutura.Mishkan.Formal.datacao_moderna` |
 | `FormalVerifications.precedence_0001_strict` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa` |
 | `FormalVerifications.precedence_0002` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa`, `MveiEstrutura.Mishkan.Formal.datacao_moderna` |
@@ -179,16 +176,18 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `2e43209371b6c345d28b5
 | `FormalVerifications.precedence_0073` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa`, `MveiEstrutura.Mishkan.Formal.datacao_moderna` |
 | `FormalVerifications.precedence_0073_strict` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa` |
 | `FormalVerifications.precedence_0074` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa`, `MveiEstrutura.Mishkan.Formal.datacao_moderna` |
-| … 10759 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| `FormalVerifications.precedence_0074_strict` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa` |
+| `FormalVerifications.precedence_0075` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa`, `MveiEstrutura.Mishkan.Formal.datacao_moderna` |
+| `FormalVerifications.precedence_0075_strict` | `core (file by file)` | conditional | `MveiEstrutura.Mishkan.datacao_harappa` |
+| … 10557 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (counting copies). The kernel checked 17 871 of them (6 962 closed, 10705 conditional, 204 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 696 the kernel has no result:
+The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (counting copies). The kernel checked 17 982 of them (7 275 closed, 10704 conditional, 3 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 585 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 682 |
-| checked file by file: the written proof does not pass the kernel | 14 |
+| checked file by file: the written proof does not pass the kernel | 585 |
 
 ### MVEI corrections
 
@@ -196,6 +195,7 @@ The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (count
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vinculo-estrutura.patch` (arquivos gerados usam ~4 100 nomes que não existem no repositório, 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-estrutura.patch` (in order, after the ones above)
+* `correcoes/vinculo-provas.patch` (provas que não fechavam por erro de tipo (Float onde é real, Nat onde é inteiro), instância de igualdade ausente, catálogo provado só com sorry e axiomas demonstráveis, 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-provas.patch` (in order, after the ones above)
 
 ## Files in this folder
 
@@ -205,6 +205,7 @@ The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (count
 * `SOURCE.json` — source commit, verified commit and dates, machine-readable
 * `SOURCES.sha256` — SHA-256 of every published file
 * `ConsistenciaMishkan.lean` — kernel-checked model of the MVEI name layer's axioms (build it with Lean 4.19 and Mathlib v4.19.0; every axiom of the layer is a `theorem` there, with the same statement)
+* `semantica/` — countermodels (`ContraA`, `ContraB`, `ContraC`: each `falha_X : ¬ (…)` has the statement of axiom X) and `Dados.lean` (what the author's numbers decide); same toolchain
 
 ## Reproduce
 

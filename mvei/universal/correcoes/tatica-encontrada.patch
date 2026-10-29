@@ -1,6 +1,14 @@
 --- a/lean4/Core/Analysis/Calculus/Derivatives.lean
 +++ b/lean4/Core/Analysis/Calculus/Derivatives.lean
-@@ -54,7 +54,7 @@
+@@ -22,6 +22,7 @@
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Comp
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Tactic
+ 
+ namespace DerivativesTheory
+ 
+@@ -54,7 +55,7 @@
  
  /-- Derivative of identity. -/
  theorem deriv_id' (x : ℝ) : deriv id x = 1 := by
@@ -9,7 +17,7 @@
  
  /-- Derivative of sum. -/
  theorem deriv_add' {f g : ℝ → ℝ} {x : ℝ}
-@@ -72,7 +72,7 @@
+@@ -72,7 +73,7 @@
  theorem deriv_const_smul' (c : ℝ) {f : ℝ → ℝ} {x : ℝ}
      (hf : DifferentiableAt ℝ f x) :
      deriv (fun y => c * f y) x = c * deriv f x := by
@@ -18,7 +26,7 @@
  
  /-- Product rule. -/
  theorem deriv_mul' {f g : ℝ → ℝ} {x : ℝ}
-@@ -90,7 +90,7 @@
+@@ -90,7 +91,7 @@
  /-- Power rule for natural numbers. -/
  theorem deriv_pow' (n : ℕ) (x : ℝ) :
      deriv (fun y => y^n) x = n * x^(n-1) := by
@@ -27,7 +35,7 @@
  
  /-! ## 3. Chain Rule -/
  
-@@ -118,12 +118,12 @@
+@@ -118,12 +119,12 @@
  
  /-- Derivative of exp. -/
  theorem deriv_exp' (x : ℝ) : deriv Real.exp x = Real.exp x := by
@@ -44,7 +52,15 @@
  theorem deriv_sin' (x : ℝ) : deriv Real.sin x = Real.cos x := by
 --- a/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
 +++ b/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
-@@ -85,7 +85,7 @@
+@@ -19,6 +19,7 @@
+ 
+ import Mathlib.Analysis.Calculus.Implicit
+ import Mathlib.Analysis.Calculus.LagrangeMultipliers
++import Mathlib.Tactic
+ 
+ namespace ImplicitFunctionTheory
+ 
+@@ -85,7 +86,7 @@
        M = F ⁻¹' {c} ∧
        -- M is an (n-1)-dimensional smooth manifold
        True := by

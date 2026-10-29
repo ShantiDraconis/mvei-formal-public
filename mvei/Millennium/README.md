@@ -11,15 +11,15 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T11:55:34+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 43 | 0 | 5 | 18 / 5 / 19 / 27 / 10 |
-| `formal/lean` | v4.19.0 | partial | 39 | 12 | 2 | 1 / 0 / 24 / 11 / 43 |
+| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 99 | 0 | 5 | 17 / 5 / 16 / 25 / 10 |
+| `formal/lean` | v4.19.0 | partial | 39 | 12 | 2 | 2 / 0 / 23 / 11 / 43 |
 | `formal/theorems` | v4.12.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 7 |
 | `lean` | padrão do elan | failed | 0 | 0 | 0 | 7 / 3 / 14 / 19 / 9 |
-| `lean4` | v4.12.0 | partial | 91 | 0 | 6 | 34 / 13 / 82 / 84 / 133 |
+| `lean4` | v4.12.0 | partial | 123 | 0 | 6 | 40 / 13 / 76 / 83 / 133 |
 | `rh-umi-invariant/formal/lean` | v4.12.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 1 |
 | `src/lean` | v4.19.0 | partial | 13 | 0 | 1 | 5 / 3 / 0 / 7 / 21 |
 | `src/lean4` | v4.19.0 | partial | 3 | 0 | 0 | 3 / 0 / 4 / 3 / 33 |
@@ -27,9 +27,9 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `5c5ec3d9597f5ffd00210
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 257 |
-| Unique (name + statement) | 256 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 98 |
+| Counting each project | 351 |
+| Unique (name + statement) | 350 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 121 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -80,14 +80,10 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `5c5ec3d9597f5ffd00210
 | `meta_unification` | `. (file by file)` | open | `FinalState`, `ThermalTrigger`, `barco_escola`, `solar_colonization`, `sorryAx` |
 | `authority_loop_amplification` | `. (file by file)` | open | `sorryAx`, `truth_server`, `youtube_algorithm_recognition` |
 | `MillenniumGroups.Group2.NavierStokes_Existence_Smoothness` | `. (file by file)` | open | `sorryAx` |
-| `MillenniumGroups.Group3.P_not_EQ_NP_from_Orbit_Separation` | `. (file by file)` | open | `sorryAx` |
-| `MillenniumGroups.Group3.P_not_EQ_NP` | `. (file by file)` | open | `sorryAx` |
-| `MillenniumGroups.Group3.GCT_implies_P_ne_NP` | `. (file by file)` | open | `sorryAx` |
 | `energy_inequality_rh` | `. (file by file)` | open | `sorryAx` |
 | `gaussian_tail_bound` | `. (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.bridge_theorem_bsd` | `formal/lean (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.weak_bsd_l_nonzero` | `formal/lean (file by file)` | open | `sorryAx` |
-| `BSD.Bridge.gross_zagier` | `formal/lean (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.kolyvagin_bsd` | `formal/lean (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.BSD.Bridge.height_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.L`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank`, `BSD.Classical.regulator` |
 | `BSD.Bridge.BSD.Bridge.bsd_via_bridges` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank`, `BSD.Bridge.BSD.Bridge.is_modular` |
@@ -160,12 +156,6 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `5c5ec3d9597f5ffd00210
 | `StructuralInadequacy.inadequacy_from_laws` | `lean4 (file by file)` | conditional | `StructuralInadequacy.ZFC_expressible` |
 | `MillenniumFramework.BSD_bridge_characterization` | `lean4 (file by file)` | open | `sorryAx` |
 | `GlobalMillenniumTheorem.group1_implies_RH` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group1_implies_BSD` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group2_implies_NS` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group2_implies_YM` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group2_implies_Hodge` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group2_implies_Poincare` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group3_implies_PNeqNP` | `lean4 (file by file)` | open | `sorryAx` |
 | `GridEquation.productAnchor_vanishes_at_anchor` | `lean4 (file by file)` | open | `sorryAx` |
 | `GridEquation.gridPotential_nonneg` | `lean4 (file by file)` | open | `sorryAx` |
 | `total_energy_minimum` | `lean4 (file by file)` | open | `sorryAx` |
@@ -185,16 +175,26 @@ MVEI verification of 2026-10-29T11:55:34+00:00, on commit `5c5ec3d9597f5ffd00210
 | `NavierStokes.fiber_diameter_unbounded` | `lean4 (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.displacement_vanishes` | `lean4 (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.real_part_half` | `lean4 (file by file)` | open | `sorryAx` |
-| … 45 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| `RHSpectral.primeSpectralControl` | `lean4 (file by file)` | open | `sorryAx` |
+| `RHSpectral.rh_iff_maxGapZero` | `lean4 (file by file)` | open | `sorryAx` |
+| `SOF.unified_promotion` | `lean4 (file by file)` | conditional | `SOF.axiom_U_promotion` |
+| `SOF.unified_zero_obstruction` | `lean4 (file by file)` | open | `sorryAx`, `SOF.axiom_E_expanded_zero`, `SOF.expanded_incorporation` |
+| `SOF.unified_enables_strong` | `lean4 (file by file)` | conditional | `SOF.axiom_U_promotion` |
+| `SOF.classical_blocks_strong` | `lean4 (file by file)` | open | `sorryAx`, `Lean.ofReduceBool`, `SOF.axiom_A_structure`, `SOF.axiom_C_classical_obstruction` |
+| `StructuralCheckmate.StructuralCheckmate` | `lean4 (file by file)` | conditional | `StructuralCheckmate.AdequacyImpliesUnification`, `StructuralCheckmate.NoUnifyingStructureInClassical` |
+| `StructuralCheckmate.ForcedBifurcation` | `lean4 (file by file)` | conditional | `StructuralCheckmate.AdequacyImpliesUnification`, `StructuralCheckmate.NoUnifyingStructureInClassical` |
+| `StructuralCheckmate.Checkmate` | `lean4 (file by file)` | open | `sorryAx`, `StructuralCheckmate.AdequacyImpliesUnif`, `StructuralCheckmate.NoUnifClassical` |
+| `StructuralCheckmate.strategic_checkmate` | `lean4 (file by file)` | open | `sorryAx`, `StructuralCheckmate.AdequacyImpliesUnif`, `StructuralCheckmate.NoUnifClassical` |
+| … 35 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 259 of them (79 closed, 23 conditional, 157 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 428 the kernel has no result:
+The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 260 of them (90 closed, 23 conditional, 147 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 427 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 281 |
-| checked file by file: the written proof does not pass the kernel | 142 |
+| checked file by file: the written proof does not pass the kernel | 141 |
 | the file did not compile (an error in it or in a file it imports) | 5 |
 
 ### MVEI corrections
