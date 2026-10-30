@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -12,28 +12,30 @@
    "repo": "universal",
    "path": ".",
    "toolchain": "leanprover/lean4:stable",
-   "toolchain_used": "leanprover/lean4:stable",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
    "build_error": "o download do Mathlib falhou: error: lakefile.lean:46:8: `mathlib` has already been declared | error: lakefile.lean:50:9: `Lake.CustomOut.Universal` has already been declared | error: lakefile.lean:50:9: `Universal` has already been declared",
-   "sorry_warnings": 0,
-   "reconstructed": false,
+   "sorry_warnings": 146,
+   "reconstructed": true,
    "bridges": [],
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada): imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s); 6 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: build failed",
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo, renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4): imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s); 57 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 40 arquivo(s); 6 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 38 arquivo(s): abbrev 1, binder 4, docstring 30, import_ausente 2, lambda 91, nomes_mathlib 28, noncomputable 36, notacao 4, notacao_escopo 12, tatica_mathlib 5. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com BSD, Complexity, Core, Fluid, Gravity, Hodge, Horizon, Lakefile, Main, Unified, YangMills, Zeta e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ./././lean4/Complexity/BooleanFunctions.lean:150:39: function expected at | error: ./././lean4/Complexity/BooleanFunctions.lean:150:45: function expected at)",
    "corrections": [
     "imports-no-topo",
-    "tatica-encontrada"
+    "renomear-imports-mathlib",
+    "tatica-encontrada",
+    "vocabulario-lean4"
    ],
-   "lakefile_gerado": "",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \"lean4\"\n  globs := #[.one `BSD.BSDStatementFormal, .one `BSD.BSD_CompleteFramework, .one `BSD.EllipticCurves, .one `BSD.LFunctionDefinition, .one `BSD.MordellWeil, .one `BSD.OrderOfVanishing, .submodules `Complexity, .submodules `Core, .submodules `Fluid, .submodules `Gravity, .submodules `Hodge, .submodules `Horizon, .one `Lakefile, .one `Main, .submodules `Unified, .submodules `YangMills, .submodules `Zeta]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 43,
+     "linha": 47,
      "nome": "ComplexDifferentiability.hasComplexDerivAt_iff",
      "status": "erro",
      "axioms": [
@@ -42,11 +44,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 46: function expected at HasDerivAt term has type ?m.637"
+     "erro": "linha 51: tactic 'rfl' failed, the left-hand side HasComplexDerivAt f f' z is not definitionally equal to the right-hand side HasDerivAt f f' z f : ℂ → ℂ f' z : ℂ ⊢ HasComplexDerivAt f f' z ↔ HasDerivAt f f' z",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧fl"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 54,
+     "linha": 58,
      "nome": "ComplexDifferentiability.cauchy_riemann",
      "status": "erro",
      "axioms": [
@@ -55,11 +59,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 62: application type mismatch (fderiv ℝ u p) ![1, 0] argument ![1, 0] has type Fin (Nat.succ 0).succ → ?m.2184 : Type ?u.2183 but is expected to have type ℝ × ℝ : Type"
+     "erro": "linha 66: application type mismatch (fderiv ℝ u p) ![1, 0] argument ![1, 0] has type Fin (Nat.succ 0).succ → ?m.3170 : Type ?u.3169 but is expected to have type ℝ × ℝ : Type",
+     "coluna": 17,
+     "trecho": "    fderiv ℝ u p ⟦!⟧[1, 0] = fderiv ℝ v p ![0, 1]"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 65,
+     "linha": 69,
      "nome": "ComplexDifferentiability.holomorphic_of_cauchy_riemann",
      "status": "erro",
      "axioms": [
@@ -68,11 +74,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 74: application type mismatch (fderiv ℝ u p) ![1, 0] argument ![1, 0] has type Fin (Nat.succ 0).succ → ?m.6815 : Type ?u.6814 but is expected to have type ℝ × ℝ : Type"
+     "erro": "linha 78: application type mismatch (fderiv ℝ u p) ![1, 0] argument ![1, 0] has type Fin (Nat.succ 0).succ → ?m.7806 : Type ?u.7805 but is expected to have type ℝ × ℝ : Type",
+     "coluna": 19,
+     "trecho": "      fderiv ℝ u p ⟦!⟧[1, 0] = fderiv ℝ v p ![0, 1]"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 85,
+     "linha": 89,
      "nome": "ComplexDifferentiability.holomorphic_continuous",
      "status": "fechado",
      "axioms": [
@@ -83,20 +91,18 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 90,
+     "linha": 94,
      "nome": "ComplexDifferentiability.holomorphic_add",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 95: invalid field 'add', the environment does not contain 'DifferentiableOn.add' hf.right has type DifferentiableOn ℂ f U"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 96,
+     "linha": 100,
      "nome": "ComplexDifferentiability.holomorphic_mul",
      "status": "erro",
      "axioms": [
@@ -105,11 +111,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 101: invalid field 'mul', the environment does not contain 'DifferentiableOn.mul' hf.right has type DifferentiableOn ℂ f U"
+     "erro": "linha 105: invalid field 'mul', the environment does not contain 'DifferentiableOn.mul' hf.right has type DifferentiableOn ℂ f U",
+     "coluna": 15,
+     "trecho": "  exact ⟨hf.1, ⟦h⟧f.2.mul hg.2⟩"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 102,
+     "linha": 106,
      "nome": "ComplexDifferentiability.holomorphic_comp",
      "status": "aberto-sorry",
      "axioms": [
@@ -121,7 +129,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 121,
+     "linha": 125,
      "nome": "ComplexDifferentiability.holomorphic_iff_wirtinger_conj_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -133,33 +141,31 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 135,
+     "linha": 139,
      "nome": "ComplexDifferentiability.holomorphic_real_part_harmonic",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 138: function expected at ContDiffOn term has type ?m.26447"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 141,
+     "linha": 145,
      "nome": "ComplexDifferentiability.holomorphic_imag_part_harmonic",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 144: function expected at ContDiffOn term has type ?m.26663"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 147,
+     "linha": 151,
      "nome": "ComplexDifferentiability.harmonic_conjugate_exists",
      "status": "erro",
      "axioms": [
@@ -168,24 +174,25 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 153: application type mismatch (fderiv ℝ u p) ![1, 0] argument ![1, 0] has type Fin (Nat.succ 0).succ → ?m.27714 : Type ?u.27713 but is expected to have type ℝ × ℝ : Type"
+     "erro": "linha 157: application type mismatch (fderiv ℝ u p) ![1, 0] argument ![1, 0] has type Fin (Nat.succ 0).succ → ?m.29783 : Type ?u.29782 but is expected to have type ℝ × ℝ : Type",
+     "coluna": 19,
+     "trecho": "      fderiv ℝ u p ⟦!⟧[1, 0] = fderiv ℝ v p ![0, 1]"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 162,
+     "linha": 166,
      "nome": "ComplexDifferentiability.conformal_preserves_angles",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 169: function expected at deriv term has type ?m.32301"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 173,
+     "linha": 177,
      "nome": "ComplexDifferentiability.mobius_conformal",
      "status": "aberto-sorry",
      "axioms": [
@@ -197,7 +204,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 179,
+     "linha": 183,
      "nome": "ComplexDifferentiability.holomorphic_has_power_series",
      "status": "aberto-sorry",
      "axioms": [
@@ -209,7 +216,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 189,
+     "linha": 193,
      "nome": "ComplexDifferentiability.power_series_coeff",
      "status": "erro",
      "axioms": [
@@ -218,11 +225,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 194: function expected at iteratedDeriv term has type ?m.35287"
+     "erro": "linha 198: function expected at iteratedDeriv term has type ?m.37240",
+     "coluna": 16,
+     "trecho": "    ∀ n, a n = (⟦i⟧teratedDeriv n f z₀) / n.fact"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 196,
+     "linha": 200,
      "nome": "ComplexDifferentiability.zeros_isolated",
      "status": "aberto-sorry",
      "axioms": [
@@ -234,7 +243,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 211,
+     "linha": 215,
      "nome": "ComplexDifferentiability.zero_factorization",
      "status": "aberto-sorry",
      "axioms": [
@@ -246,7 +255,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 219,
+     "linha": 223,
      "nome": "ComplexDifferentiability.maximum_modulus",
      "status": "aberto-sorry",
      "axioms": [
@@ -258,7 +267,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 230,
+     "linha": 234,
      "nome": "ComplexDifferentiability.open_mapping",
      "status": "aberto-sorry",
      "axioms": [
@@ -270,7 +279,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean",
-     "linha": 237,
+     "linha": 241,
      "nome": "ComplexDifferentiability.liouville",
      "status": "aberto-sorry",
      "axioms": [
@@ -282,7 +291,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 44,
+     "linha": 51,
      "nome": "DerivativesTheory.differentiable_continuous",
      "status": "fechado",
      "axioms": [
@@ -293,7 +302,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 49,
+     "linha": 56,
      "nome": "DerivativesTheory.deriv_const'",
      "status": "fechado",
      "axioms": [
@@ -304,7 +313,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 55,
+     "linha": 62,
      "nome": "DerivativesTheory.deriv_id'",
      "status": "fechado",
      "axioms": [
@@ -315,7 +324,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 59,
+     "linha": 66,
      "nome": "DerivativesTheory.deriv_add'",
      "status": "fechado",
      "axioms": [
@@ -326,7 +335,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 65,
+     "linha": 72,
      "nome": "DerivativesTheory.deriv_sub'",
      "status": "fechado",
      "axioms": [
@@ -337,7 +346,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 71,
+     "linha": 78,
      "nome": "DerivativesTheory.deriv_const_smul'",
      "status": "fechado",
      "axioms": [
@@ -348,7 +357,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 77,
+     "linha": 84,
      "nome": "DerivativesTheory.deriv_mul'",
      "status": "fechado",
      "axioms": [
@@ -359,7 +368,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 83,
+     "linha": 90,
      "nome": "DerivativesTheory.deriv_div'",
      "status": "fechado",
      "axioms": [
@@ -370,7 +379,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 90,
+     "linha": 97,
      "nome": "DerivativesTheory.deriv_pow'",
      "status": "fechado",
      "axioms": [
@@ -381,7 +390,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 95,
+     "linha": 102,
      "nome": "DerivativesTheory.deriv_comp'",
      "status": "fechado",
      "axioms": [
@@ -392,7 +401,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 103,
+     "linha": 110,
      "nome": "DerivativesTheory.HasDerivAt_comp'",
      "status": "fechado",
      "axioms": [
@@ -403,7 +412,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 109,
+     "linha": 116,
      "nome": "DerivativesTheory.deriv_inverse'",
      "status": "aberto-sorry",
      "axioms": [
@@ -415,7 +424,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 119,
+     "linha": 126,
      "nome": "DerivativesTheory.deriv_exp'",
      "status": "fechado",
      "axioms": [
@@ -426,7 +435,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 123,
+     "linha": 130,
      "nome": "DerivativesTheory.deriv_log'",
      "status": "fechado",
      "axioms": [
@@ -437,7 +446,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 128,
+     "linha": 135,
      "nome": "DerivativesTheory.deriv_sin'",
      "status": "erro",
      "axioms": [
@@ -446,11 +455,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 131: unknown constant 'Real.deriv_sin'"
+     "erro": "linha 138: unknown constant 'Real.deriv_sin'",
+     "coluna": 8,
+     "trecho": "  exact ⟦R⟧eal.deriv_sin x"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 132,
+     "linha": 139,
      "nome": "DerivativesTheory.deriv_cos'",
      "status": "erro",
      "axioms": [
@@ -459,11 +470,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 135: unknown constant 'Real.deriv_cos'"
+     "erro": "linha 142: unknown constant 'Real.deriv_cos'",
+     "coluna": 8,
+     "trecho": "  exact ⟦R⟧eal.deriv_cos x"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 150,
+     "linha": 157,
      "nome": "DerivativesTheory.differentiable_iff_left_right",
      "status": "aberto-sorry",
      "axioms": [
@@ -475,7 +488,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 165,
+     "linha": 172,
      "nome": "DerivativesTheory.schwarz_theorem",
      "status": "aberto-sorry",
      "axioms": [
@@ -487,7 +500,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 179,
+     "linha": 186,
      "nome": "DerivativesTheory.directional_deriv_eq_gradient",
      "status": "aberto-sorry",
      "axioms": [
@@ -499,7 +512,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 194,
+     "linha": 201,
      "nome": "DerivativesTheory.gradient_steepest_ascent",
      "status": "aberto-sorry",
      "axioms": [
@@ -511,7 +524,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 210,
+     "linha": 217,
      "nome": "DerivativesTheory.leibniz_rule",
      "status": "aberto-sorry",
      "axioms": [
@@ -523,7 +536,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 218,
+     "linha": 225,
      "nome": "DerivativesTheory.lhopital_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -535,7 +548,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 229,
+     "linha": 236,
      "nome": "DerivativesTheory.lhopital_infty",
      "status": "aberto-sorry",
      "axioms": [
@@ -547,7 +560,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 248,
+     "linha": 255,
      "nome": "DerivativesTheory.convex_has_subderivative",
      "status": "aberto-sorry",
      "axioms": [
@@ -559,7 +572,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Derivatives.lean",
-     "linha": 254,
+     "linha": 261,
      "nome": "DerivativesTheory.implicit_deriv",
      "status": "aberto-sorry",
      "axioms": [
@@ -571,223 +584,328 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean",
-     "linha": 73,
+     "linha": 78,
      "nome": "DifferentiableManifolds.smooth_comp",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean",
-     "linha": 96,
+     "linha": 101,
      "nome": "DifferentiableManifolds.tangent_space_dim",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 105: failed to synthesize AddCommMonoid (TangentSpace M n AM p) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 4,
+     "trecho": "    ⟦M⟧odule.finrank ℝ (TangentSpace"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean",
-     "linha": 128,
+     "linha": 133,
      "nome": "DifferentiableManifolds.lie_bracket_antisymm",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 137: failed to synthesize Neg (VectorField M n AM) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 24,
+     "trecho": "    lieBracket AM X Y = ⟦-⟧lieBracket AM Y X := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean",
-     "linha": 134,
+     "linha": 139,
      "nome": "DifferentiableManifolds.jacobi_identity",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 143: failed to synthesize HAdd (VectorField M n AM) (VectorField M n AM) ?m.12246 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 4,
+     "trecho": "    ⟦l⟧ieBracket AM X (lieBracket AM"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean",
-     "linha": 167,
+     "linha": 172,
      "nome": "DifferentiableManifolds.d_squared_zero",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 176: failed to synthesize OfNat ((p : M) → DifferentialFormAt M n (k + 1 + 1) AM p) 0 numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is (p : M) → DifferentialFormAt M n (k + 1 + 1) AM p ",
+     "coluna": 54,
+     "trecho": "M (exteriorDerivative AM ω) = ⟦0⟧ := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean",
-     "linha": 173,
+     "linha": 178,
      "nome": "DifferentiableManifolds.stokes",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 192: expected token",
+     "coluna": 5,
+     "trecho": "    (⟦∂⟧Ω : Set M) -- Boundary"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 41,
+     "linha": 44,
      "nome": "HigherDerivativesTheory.iteratedDerivative_eq_nthDeriv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 50: unsolved goals case succ f : ℝ → ℝ k : ℕ ih : iteratedDerivative k f = nthDeriv k f ⊢ deriv (nthDeriv k f) = (deriv ∘ deriv^[k]) f",
+     "coluna": 14,
+     "trecho": "  | succ k ih ⟦=⟧>"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 60,
+     "linha": 63,
      "nome": "HigherDerivativesTheory.smooth_add",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 65,
+     "linha": 68,
      "nome": "HigherDerivativesTheory.smooth_mul",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 69,
-     "nome": "HigherDerivativesTheory.smooth_const",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
      "linha": 72,
-     "nome": "HigherDerivativesTheory.smooth_id",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "nome": "HigherDerivativesTheory.smooth_const",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
      "linha": 75,
+     "nome": "HigherDerivativesTheory.smooth_id",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
+     "linha": 78,
      "nome": "HigherDerivativesTheory.smooth_comp",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 86,
+     "linha": 89,
      "nome": "HigherDerivativesTheory.Ck_succ_imp_Ck",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 91,
+     "linha": 94,
      "nome": "HigherDerivativesTheory.smooth_imp_Ck",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 103,
+     "linha": 106,
      "nome": "HigherDerivativesTheory.taylor_lagrange",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 111,
+     "linha": 114,
      "nome": "HigherDerivativesTheory.taylor_integral",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 118,
+     "linha": 121,
      "nome": "HigherDerivativesTheory.taylor_peano",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 134,
+     "linha": 137,
      "nome": "HigherDerivativesTheory.taylor_multivariate",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 150,
+     "linha": 153,
      "nome": "HigherDerivativesTheory.faa_di_bruno",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 170,
+     "linha": 173,
      "nome": "HigherDerivativesTheory.analytic_is_smooth",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 175,
+     "linha": 178,
      "nome": "HigherDerivativesTheory.smooth_not_analytic_example",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 186,
+     "linha": 189,
      "nome": "HigherDerivativesTheory.smoothBump_smooth",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 190,
+     "linha": 193,
      "nome": "HigherDerivativesTheory.smoothBump_compactSupport",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 206,
+     "linha": 209,
      "nome": "HigherDerivativesTheory.exists_smooth_partition_of_unity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 214: failed to synthesize TopologicalSpace M Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 10,
+     "trecho": "    ∃ P : ⟦S⟧moothPartitionOfUnity 𝒰, True"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 220,
+     "linha": 223,
      "nome": "HigherDerivativesTheory.whitney_extension",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 228: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≥ 0 a ≥ 0 a - b ≥ 1 where a := ↑k b := ↑n",
+     "coluna": 69,
+     "trecho": "ive k f x = J.values x ⟨k, by ⟦o⟧mega⟩ := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 227,
+     "linha": 230,
      "nome": "HigherDerivativesTheory.borel_theorem",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/HigherDerivatives.lean",
-     "linha": 246,
+     "linha": 249,
      "nome": "HigherDerivativesTheory.zygmund_between_lip",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 27,
+     "linha": 29,
      "nome": "ImplicitFunctionTheory.implicit_function_2d",
      "status": "aberto-sorry",
      "axioms": [
@@ -799,7 +917,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 41,
+     "linha": 43,
      "nome": "ImplicitFunctionTheory.implicit_function_deriv",
      "status": "aberto-sorry",
      "axioms": [
@@ -811,15 +929,17 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 50,
+     "linha": 52,
      "nome": "ImplicitFunctionTheory.implicit_function_general",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 61: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name"
+     "erro": "linha 63: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name",
+     "coluna": 11,
+     "trecho": "    (hDy : ⟦(⟧fderiv ℝ (fun y => Φ (x₀, y))"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 68,
+     "linha": 70,
      "nome": "ImplicitFunctionTheory.level_set_graph",
      "status": "aberto-sorry",
      "axioms": [
@@ -831,7 +951,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 80,
+     "linha": 82,
      "nome": "ImplicitFunctionTheory.regular_level_set_submanifold",
      "status": "fechado",
      "axioms": [
@@ -842,31 +962,43 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 90,
+     "linha": 92,
      "nome": "ImplicitFunctionTheory.lagrange_multiplier",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 100: unexpected token 'λ'; expected '(', '_' or identifier"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 102,
+     "linha": 104,
      "nome": "ImplicitFunctionTheory.lagrange_multiplier_multiple",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 112: unexpected token 'λ'; expected '(', '_' or identifier"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 114,
+     "linha": 116,
      "nome": "ImplicitFunctionTheory.second_order_max_condition",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 118: unexpected token 'λ'; expected '_' or identifier"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 127,
+     "linha": 129,
      "nome": "ImplicitFunctionTheory.kkt_conditions",
      "status": "aberto-sorry",
      "axioms": [
@@ -878,15 +1010,17 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/ImplicitFunction.lean",
-     "linha": 144,
+     "linha": 146,
      "nome": "ImplicitFunctionTheory.envelope_theorem",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 149: function expected at uncurry term has type ?m.19830"
+     "erro": "linha 151: function expected at uncurry term has type ?m.27550",
+     "coluna": 24,
+     "trecho": "    (hf : ContDiff ℝ 2 (⟦u⟧ncurry f))"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 26,
+     "linha": 31,
      "nome": "InverseFunctionTheory.inverse_function_1d",
      "status": "aberto-sorry",
      "axioms": [
@@ -898,7 +1032,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 40,
+     "linha": 45,
      "nome": "InverseFunctionTheory.deriv_inverse",
      "status": "aberto-sorry",
      "axioms": [
@@ -910,55 +1044,73 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 49,
+     "linha": 54,
      "nome": "InverseFunctionTheory.inverse_function_banach",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 58: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name"
+     "erro": "linha 63: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name",
+     "coluna": 11,
+     "trecho": "    (hf' : ⟦(⟧fderiv ℝ f a).range = ⊤)"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 66,
+     "linha": 71,
      "nome": "InverseFunctionTheory.inverse_smooth",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 73: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name"
+     "erro": "linha 78: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name",
+     "coluna": 11,
+     "trecho": "    (hf' : ⟦(⟧fderiv ℝ f a).range = ⊤)"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 98,
+     "linha": 103,
      "nome": "InverseFunctionTheory.local_diffeo_of_invertible_deriv",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 101: function expected at EuclideanSpace term has type ?m.10411"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 107,
+     "linha": 112,
      "nome": "InverseFunctionTheory.global_inverse",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 118: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name"
+     "erro": "linha 123: invalid field notation, function 'LinearMap.range' does not have argument with type (LinearMap ...) that can be used, it must be explicit or implicit with a unique name",
+     "coluna": 19,
+     "trecho": "    (hderiv : ∀ x, ⟦(⟧fderiv ℝ f x).range = ⊤ ∧ (fd"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 121,
+     "linha": 126,
      "nome": "InverseFunctionTheory.hadamard_global_inverse",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 123: function expected at EuclideanSpace term has type ?m.23692"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 129,
+     "linha": 134,
      "nome": "InverseFunctionTheory.constant_rank",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 134: function expected at EuclideanSpace term has type ?m.30981"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 164,
+     "linha": 169,
      "nome": "InverseFunctionTheory.submersion_has_section",
      "status": "aberto-sorry",
      "axioms": [
@@ -970,7 +1122,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 175,
+     "linha": 180,
      "nome": "InverseFunctionTheory.immersion_locally_injective",
      "status": "aberto-sorry",
      "axioms": [
@@ -982,8 +1134,132 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/InverseFunction.lean",
-     "linha": 185,
+     "linha": 190,
      "nome": "InverseFunctionTheory.ode_flow_exists",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 41,
+     "nome": "JacobiansTheory.jacobian_entry",
+     "status": "erro",
+     "axioms": [],
+     "erro": "linha 46: failed to synthesize RCLike ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 56,
+     "trecho": " = deriv (fun t => f (x + t • ⟦E⟧uclideanSpace.single j 1) i) "
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 54,
+     "nome": "JacobiansTheory.jacobian_comp",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 66,
+     "nome": "JacobiansTheory.jacobian_det_comp",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 75,
+     "nome": "JacobiansTheory.change_of_variables",
+     "status": "erro",
+     "axioms": [],
+     "erro": "linha 86: expected token",
+     "coluna": 4,
+     "trecho": "    ⟦∫⟧ y in V, f y = ∫ x in U, f (φ"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 88,
+     "nome": "JacobiansTheory.polar_jacobian",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 94,
+     "nome": "JacobiansTheory.spherical_jacobian",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 102,
+     "nome": "JacobiansTheory.inverse_function_jacobian",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 117,
+     "nome": "JacobiansTheory.jacobian_inverse",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 136,
+     "nome": "JacobiansTheory.hessian_entry",
+     "status": "erro",
+     "axioms": [],
+     "erro": "linha 142: failed to synthesize RCLike ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 47,
+     "trecho": "=> deriv (fun s => f (x + s • ⟦E⟧uclideanSpace.single j 1 +"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 145,
+     "nome": "JacobiansTheory.hessian_symmetric",
+     "status": "erro",
+     "axioms": [],
+     "erro": "linha 151: invalid field 'IsSymm', the environment does not contain 'Matrix.IsSymm' hessianMatrix f x has type Matrix (Fin n) (Fin n) ℝ",
+     "coluna": 4,
+     "trecho": "    ⟦(⟧hessianMatrix f x).IsSymm := "
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
+     "linha": 161,
+     "nome": "JacobiansTheory.second_deriv_test_min'",
      "status": "erro",
      "axioms": [
       "propext",
@@ -991,129 +1267,61 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 188: unexpected token '/--'; expected 'lemma'"
+     "erro": "linha 168: invalid field 'PosDef', the environment does not contain 'Matrix.PosDef' hessianMatrix f x has type Matrix (Fin n) (Fin n) ℝ",
+     "coluna": 12,
+     "trecho": "    (hpos : ⟦(⟧hessianMatrix f x).PosDef) :"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 36,
-     "nome": "JacobiansTheory.jacobian_entry",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 39: function expected at EuclideanSpace term has type ?m.2163"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 49,
-     "nome": "JacobiansTheory.jacobian_comp",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 54: function expected at EuclideanSpace term has type ?m.9452"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 61,
-     "nome": "JacobiansTheory.jacobian_det_comp",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 64: function expected at EuclideanSpace term has type ?m.23810"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 70,
-     "nome": "JacobiansTheory.change_of_variables",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 81: expected token"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 83,
-     "nome": "JacobiansTheory.polar_jacobian",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 86: function expected at EuclideanSpace term has type ?m.37027"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 89,
-     "nome": "JacobiansTheory.spherical_jacobian",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 92: function expected at EuclideanSpace term has type ?m.40885"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 97,
-     "nome": "JacobiansTheory.inverse_function_jacobian",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 102: function expected at EuclideanSpace term has type ?m.50045"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 112,
-     "nome": "JacobiansTheory.jacobian_inverse",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 115: function expected at EuclideanSpace term has type ?m.54953"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 131,
-     "nome": "JacobiansTheory.hessian_entry",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 134: function expected at EuclideanSpace term has type ?m.58976"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 140,
-     "nome": "JacobiansTheory.hessian_symmetric",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 143: function expected at EuclideanSpace term has type ?m.71567"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 156,
-     "nome": "JacobiansTheory.second_deriv_test_min'",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 159: function expected at EuclideanSpace term has type ?m.74243"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 166,
+     "linha": 171,
      "nome": "JacobiansTheory.second_deriv_test_max'",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 169: function expected at EuclideanSpace term has type ?m.76412"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 178: invalid field 'NegDef', the environment does not contain 'Matrix.NegDef' hessianMatrix f x has type Matrix (Fin n) (Fin n) ℝ",
+     "coluna": 12,
+     "trecho": "    (hneg : ⟦(⟧hessianMatrix f x).NegDef) :"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 200,
+     "linha": 205,
      "nome": "JacobiansTheory.morse_lemma",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 203: function expected at EuclideanSpace term has type ?m.80222"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 218: application type mismatch φ x i argument i has type Fin k : Type but is expected to have type Fin n : Type",
+     "coluna": 45,
+     "trecho": "f x = f p - ∑ i : Fin k, (φ x ⟦i⟧)^2 + ∑ i : Fin (n - k), (φ x"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 223,
+     "linha": 228,
      "nome": "JacobiansTheory.divergence_theorem",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 228: expected token"
+     "erro": "linha 233: expected token",
+     "coluna": 5,
+     "trecho": "    (⟦∂⟧Ω : Set (EuclideanSpace ℝ (Fi"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/Jacobians.lean",
-     "linha": 241,
+     "linha": 246,
      "nome": "JacobiansTheory.curl_antisymm",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "erro": "linha 244: function expected at EuclideanSpace term has type ?m.96070",
      "preenchimento": {
       "resultado": "demonstrável",
       "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
@@ -1123,117 +1331,187 @@
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 26,
      "nome": "MeanValueTheorems.mean_value",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 35,
      "nome": "MeanValueTheorems.mvt_geometric",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 45: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦f⟧ield_simp at heq ⊢"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 47,
      "nome": "MeanValueTheorems.cauchy_mean_value",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 60,
      "nome": "MeanValueTheorems.mean_value_inequality",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 73: linarith failed to find a contradiction case h1.h f : ℝ → ℝ a b : ℝ hab : a < b hfc : ContinuousOn f (Icc a b) hfd : DifferentiableOn ℝ f (Ioo a b) M : ℝ hM : ∀ c ∈ Ioo a b, deriv f c ≤ M c : ℝ hc : c ∈ Ioo a b heq : deriv f c = (f b - f a)",
+     "coluna": 45,
+     "trecho": "a = deriv f c * (b - a) := by ⟦l⟧inarith [heq, hab]"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 77,
      "nome": "MeanValueTheorems.mean_value_bounds",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 89: linarith failed to find a contradiction case h1.h f : ℝ → ℝ a b : ℝ hab : a < b hfc : ContinuousOn f (Icc a b) hfd : DifferentiableOn ℝ f (Ioo a b) m M : ℝ hm : ∀ c ∈ Ioo a b, m ≤ deriv f c hM : ∀ c ∈ Ioo a b, deriv f c ≤ M c : ℝ hc : c ∈ I",
+     "coluna": 26,
+     "trecho": "      _ = f b - f a := by ⟦l⟧inarith [heq, hab]"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 91,
      "nome": "MeanValueTheorems.mean_value_vector",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 102,
      "nome": "MeanValueTheorems.mean_value_path",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 113,
      "nome": "MeanValueTheorems.integral_mean_value",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 121,
      "nome": "MeanValueTheorems.integral_second_mean_value",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 130,
      "nome": "MeanValueTheorems.flett_mvt",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 139,
      "nome": "MeanValueTheorems.pompeiu_mvt",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 145,
      "nome": "MeanValueTheorems.deriv_zero_const",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 161: application type mismatch mean_value_inequality hxa' (DifferentiableOn.mono hf (Icc_subset_Icc_right hx.right)) argument DifferentiableOn.mono hf (Icc_subset_Icc_right hx.right) has type DifferentiableOn ℝ f (Icc a x) : Prop but is expected",
+     "coluna": 39,
+     "trecho": ":= mean_value_inequality hxa' ⟦(⟧hf.mono (Icc_subset_Icc_right"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 169,
      "nome": "MeanValueTheorems.deriv_eq_const_diff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/MeanValueTheorem.lean",
      "linha": 177,
      "nome": "MeanValueTheorems.bernstein_polynomial",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 181: expected no space before",
+     "coluna": 61,
+     "trecho": "|.eval x| ≤ p.natDegree * ‖p‖ ⟦:⟧= by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 40,
+     "linha": 44,
      "nome": "RealDifferentiability.rolle",
      "status": "erro",
      "axioms": [
@@ -1242,11 +1520,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 49: unknown identifier 'exists_deriv_eq_zero'"
+     "erro": "linha 53: application type mismatch exists_deriv_eq_zero hab hfc hfd argument hfd has type DifferentiableOn ℝ f (Ioo a b) : Prop but is expected to have type f a = f b : Prop",
+     "coluna": 37,
+     "trecho": " exists_deriv_eq_zero hab hfc ⟦h⟧fd hfab"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 50,
+     "linha": 54,
      "nome": "RealDifferentiability.rolle_sign",
      "status": "erro",
      "axioms": [
@@ -1255,11 +1535,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 59: invalid field 'hasDerivAt', the environment does not contain 'DifferentiableWithinAt.hasDerivAt' hfd c hc has type DifferentiableWithinAt ℝ f (Ioo a b) c"
+     "erro": "linha 63: invalid field 'hasDerivAt', the environment does not contain 'DifferentiableWithinAt.hasDerivAt' hfd c hc has type DifferentiableWithinAt ℝ f (Ioo a b) c",
+     "coluna": 8,
+     "trecho": "  exact ⟦(⟧hfd c hc).hasDerivAt (Ioo_mem"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 60,
+     "linha": 64,
      "nome": "RealDifferentiability.mean_value_theorem",
      "status": "erro",
      "axioms": [
@@ -1268,11 +1550,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 68: unknown identifier 'exists_deriv_eq_slope'"
+     "erro": "linha 72: unknown identifier 'exists_deriv_eq_slope'",
+     "coluna": 8,
+     "trecho": "  exact ⟦e⟧xists_deriv_eq_slope f hab hf"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 69,
+     "linha": 73,
      "nome": "RealDifferentiability.cauchy_mean_value",
      "status": "erro",
      "axioms": [
@@ -1281,11 +1565,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 89: unknown identifier 'exists_deriv_eq_zero'"
+     "erro": "linha 93: application type mismatch exists_deriv_eq_zero hab hgc hgd argument hgd has type DifferentiableOn ℝ g (Ioo a b) : Prop but is expected to have type g a = g b : Prop",
+     "coluna": 56,
+     "trecho": " exists_deriv_eq_zero hab hgc ⟦h⟧gd heq.symm"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 130,
+     "linha": 134,
      "nome": "RealDifferentiability.nonneg_deriv_mono",
      "status": "erro",
      "axioms": [
@@ -1294,11 +1580,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 139: unknown identifier 'monotoneOn_of_deriv_nonneg'"
+     "erro": "linha 143: unknown identifier 'monotoneOn_of_deriv_nonneg'",
+     "coluna": 8,
+     "trecho": "  exact ⟦m⟧onotoneOn_of_deriv_nonneg (co"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 140,
+     "linha": 144,
      "nome": "RealDifferentiability.pos_deriv_strict_mono",
      "status": "erro",
      "axioms": [
@@ -1307,11 +1595,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 147: unknown identifier 'strictMonoOn_of_deriv_pos'"
+     "erro": "linha 151: unknown identifier 'strictMonoOn_of_deriv_pos'",
+     "coluna": 8,
+     "trecho": "  exact ⟦s⟧trictMonoOn_of_deriv_pos (con"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 148,
+     "linha": 152,
      "nome": "RealDifferentiability.nonpos_deriv_anti",
      "status": "erro",
      "axioms": [
@@ -1320,11 +1610,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 155: unknown identifier 'antitoneOn_of_deriv_nonpos'"
+     "erro": "linha 159: unknown identifier 'antitoneOn_of_deriv_nonpos'",
+     "coluna": 8,
+     "trecho": "  exact ⟦a⟧ntitoneOn_of_deriv_nonpos (co"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 156,
+     "linha": 160,
      "nome": "RealDifferentiability.neg_deriv_strict_anti",
      "status": "erro",
      "axioms": [
@@ -1333,11 +1625,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 163: unknown identifier 'strictAntiOn_of_deriv_neg'"
+     "erro": "linha 167: unknown identifier 'strictAntiOn_of_deriv_neg'",
+     "coluna": 8,
+     "trecho": "  exact ⟦s⟧trictAntiOn_of_deriv_neg (con"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 164,
+     "linha": 168,
      "nome": "RealDifferentiability.convex_deriv_mono",
      "status": "erro",
      "axioms": [
@@ -1346,11 +1640,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 185: unknown constant 'ConvexOn.slope_mono_adjacent'"
+     "erro": "linha 189: unknown constant 'ConvexOn.slope_mono_adjacent'",
+     "coluna": 20,
+     "trecho": "      have hconv := ⟦C⟧onvexOn.slope_mono_adjacent h"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 192,
+     "linha": 196,
      "nome": "RealDifferentiability.nonneg_second_deriv_convex",
      "status": "erro",
      "axioms": [
@@ -1359,11 +1655,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 195: function expected at ContDiffOn term has type ?m.8682"
+     "erro": "linha 206: unknown identifier 'convexOn_of_deriv2_nonneg'",
+     "coluna": 8,
+     "trecho": "  apply ⟦c⟧onvexOn_of_deriv2_nonneg (con"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 212,
+     "linha": 216,
      "nome": "RealDifferentiability.pos_second_deriv_strict_convex",
      "status": "erro",
      "axioms": [
@@ -1372,11 +1670,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 215: function expected at ContDiffOn term has type ?m.9784"
+     "erro": "linha 226: unknown identifier 'strictConvexOn_of_deriv2_pos'",
+     "coluna": 8,
+     "trecho": "  apply ⟦s⟧trictConvexOn_of_deriv2_pos ("
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 237,
+     "linha": 241,
      "nome": "RealDifferentiability.local_extremum_critical",
      "status": "erro",
      "axioms": [
@@ -1385,11 +1685,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 243: function expected at IsLocalMax.deriv_eq_zero hmax term has type deriv f x = 0"
+     "erro": "linha 247: function expected at IsLocalMax.deriv_eq_zero hmax term has type deriv f x = 0",
+     "coluna": 13,
+     "trecho": "  exact ⟨hf, ⟦h⟧max.deriv_eq_zero hf⟩"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 244,
+     "linha": 248,
      "nome": "RealDifferentiability.local_min_critical",
      "status": "erro",
      "axioms": [
@@ -1398,11 +1700,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 250: function expected at IsLocalMin.deriv_eq_zero hmin term has type deriv f x = 0"
+     "erro": "linha 254: function expected at IsLocalMin.deriv_eq_zero hmin term has type deriv f x = 0",
+     "coluna": 13,
+     "trecho": "  exact ⟨hf, ⟦h⟧min.deriv_eq_zero hf⟩"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 251,
+     "linha": 255,
      "nome": "RealDifferentiability.first_deriv_test_max",
      "status": "erro",
      "axioms": [
@@ -1411,11 +1715,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 260: unsolved goals f : ℝ → ℝ c : ℝ hfc : ContinuousAt f c hfd : ∀ᶠ (x : ℝ) in 𝓝 c, DifferentiableAt ℝ f x hpos : ∀ᶠ (x : ℝ) in 𝓝[<] c, 0 < deriv f x hneg : ∀ᶠ (x : ℝ) in 𝓝[>] c, deriv f x < 0 ⊢ IsLocalMax f c"
+     "erro": "linha 264: unsolved goals f : ℝ → ℝ c : ℝ hfc : ContinuousAt f c hfd : ∀ᶠ (x : ℝ) in 𝓝 c, DifferentiableAt ℝ f x hpos : ∀ᶠ (x : ℝ) in 𝓝[<] c, 0 < deriv f x hneg : ∀ᶠ (x : ℝ) in 𝓝[>] c, deriv f x < 0 ⊢ IsLocalMax f c",
+     "coluna": 22,
+     "trecho": "    IsLocalMax f c := ⟦b⟧y"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 305,
+     "linha": 309,
      "nome": "RealDifferentiability.first_deriv_test_min",
      "status": "erro",
      "axioms": [
@@ -1424,11 +1730,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 312: unsolved goals f : ℝ → ℝ c : ℝ hfc : ContinuousAt f c hfd : ∀ᶠ (x : ℝ) in 𝓝 c, DifferentiableAt ℝ f x hneg : ∀ᶠ (x : ℝ) in 𝓝[<] c, deriv f x < 0 hpos : ∀ᶠ (x : ℝ) in 𝓝[>] c, 0 < deriv f x hmax : IsLocalMax (-f) c ⊢ IsLocalMin f c"
+     "erro": "linha 316: unsolved goals f : ℝ → ℝ c : ℝ hfc : ContinuousAt f c hfd : ∀ᶠ (x : ℝ) in 𝓝 c, DifferentiableAt ℝ f x hneg : ∀ᶠ (x : ℝ) in 𝓝[<] c, deriv f x < 0 hpos : ∀ᶠ (x : ℝ) in 𝓝[>] c, 0 < deriv f x hmax : IsLocalMax (-f) c ⊢ IsLocalMin f c",
+     "coluna": 22,
+     "trecho": "    IsLocalMin f c := ⟦b⟧y"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 333,
+     "linha": 337,
      "nome": "RealDifferentiability.second_deriv_test_max",
      "status": "erro",
      "axioms": [
@@ -1437,11 +1745,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 338: function expected at ContDiffAt term has type ?m.13918"
+     "erro": "linha 353: application type mismatch ContDiffAt.differentiableAt hf ?m.17095 argument ?m.17095 has type (1 : ℕ) ≤ 2 : Prop but is expected to have type (1 : WithTop ℕ∞) ≤ 2 : Prop",
+     "coluna": 30,
+     "trecho": "    exact hf.differentiableAt ⟦(⟧by norm_num : 1 ≤ 2) |>.deriv"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 384,
+     "linha": 388,
      "nome": "RealDifferentiability.second_deriv_test_min",
      "status": "erro",
      "axioms": [
@@ -1450,11 +1760,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 387: function expected at ContDiffAt term has type ?m.14900"
+     "erro": "linha 394: unsolved goals f : ℝ → ℝ c : ℝ hf : ContDiffAt ℝ 2 f c hf' : deriv f c = 0 hf'' : 0 < deriv (deriv f) c hmax : IsLocalMax (-f) c ⊢ IsLocalMin f c",
+     "coluna": 22,
+     "trecho": "    IsLocalMin f c := ⟦b⟧y"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 411,
+     "linha": 415,
      "nome": "RealDifferentiability.darboux",
      "status": "erro",
      "axioms": [
@@ -1463,11 +1775,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 432: typeclass instance problem is stuck, it is often due to metavariables NormedAlgebra ?m.18880 ℝ"
+     "erro": "linha 436: typeclass instance problem is stuck, it is often due to metavariables NormedAlgebra ?m.19736 ℝ",
+     "coluna": 11,
+     "trecho": "    exact (⟦d⟧ifferentiableOn_id.mul_const "
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 497,
+     "linha": 501,
      "nome": "RealDifferentiability.deriv_no_jump",
      "status": "aberto-sorry",
      "axioms": [
@@ -1479,33 +1793,31 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 505,
+     "linha": 509,
      "nome": "RealDifferentiability.local_inverse_exists",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 510: function expected at ContDiffAt term has type ?m.19482"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 516,
+     "linha": 520,
      "nome": "RealDifferentiability.deriv_inverse_at",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 519: function expected at ContDiffAt term has type ?m.20435"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 532,
+     "linha": 536,
      "nome": "RealDifferentiability.inflection_second_deriv_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -1517,7 +1829,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 539,
+     "linha": 543,
      "nome": "RealDifferentiability.bounded_deriv_lipschitz",
      "status": "aberto-sorry",
      "axioms": [
@@ -1529,7 +1841,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/RealDifferentiability.lean",
-     "linha": 549,
+     "linha": 553,
      "nome": "RealDifferentiability.lipschitz_const_eq_sup_deriv",
      "status": "aberto-sorry",
      "axioms": [
@@ -1541,7 +1853,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 34,
+     "linha": 41,
      "nome": "TaylorSeriesTheory.taylor_poly_approx",
      "status": "aberto-sorry",
      "axioms": [
@@ -1553,7 +1865,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 40,
+     "linha": 47,
      "nome": "TaylorSeriesTheory.taylor_error_bound",
      "status": "aberto-sorry",
      "axioms": [
@@ -1565,7 +1877,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 58,
+     "linha": 65,
      "nome": "TaylorSeriesTheory.eq_taylor_series",
      "status": "aberto-sorry",
      "axioms": [
@@ -1577,15 +1889,17 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 70,
+     "linha": 77,
      "nome": "TaylorSeriesTheory.hadamard_formula",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 73: type mismatch (limsup (fun n => ‖c n‖ ^ (1 / ↑n)) atTop)⁻¹ has type ℝ : Type but is expected to have type ENNReal : Type"
+     "erro": "linha 80: type mismatch (limsup (fun n => ‖c n‖ ^ (1 / ↑n)) atTop)⁻¹ has type ℝ : Type but is expected to have type ENNReal : Type",
+     "coluna": 28,
+     "trecho": "    radiusOfConvergence c = ⟦(⟧limsup (fun n => ‖c n‖^(1/(n "
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 75,
+     "linha": 82,
      "nome": "TaylorSeriesTheory.converges_inside_radius",
      "status": "erro",
      "axioms": [
@@ -1594,11 +1908,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 78: type mismatch ‖x - a‖ has type ℝ : Type but is expected to have type ENNReal : Type"
+     "erro": "linha 85: type mismatch ‖x - a‖ has type ℝ : Type but is expected to have type ENNReal : Type",
+     "coluna": 10,
+     "trecho": "    (hx : ⟦(⟧‖x - a‖ : ENNReal) < radiusOf"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 81,
+     "linha": 88,
      "nome": "TaylorSeriesTheory.diverges_outside_radius",
      "status": "erro",
      "axioms": [
@@ -1607,11 +1923,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 84: type mismatch ‖x - a‖ has type ℝ : Type but is expected to have type ENNReal : Type"
+     "erro": "linha 91: type mismatch ‖x - a‖ has type ℝ : Type but is expected to have type ENNReal : Type",
+     "coluna": 10,
+     "trecho": "    (hx : ⟦(⟧‖x - a‖ : ENNReal) > radiusOf"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 94,
+     "linha": 101,
      "nome": "TaylorSeriesTheory.analytic_smooth",
      "status": "aberto-sorry",
      "axioms": [
@@ -1623,7 +1941,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 99,
+     "linha": 106,
      "nome": "TaylorSeriesTheory.analytic_add",
      "status": "aberto-sorry",
      "axioms": [
@@ -1635,7 +1953,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 105,
+     "linha": 112,
      "nome": "TaylorSeriesTheory.analytic_mul",
      "status": "aberto-sorry",
      "axioms": [
@@ -1647,7 +1965,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 116,
+     "linha": 123,
      "nome": "TaylorSeriesTheory.cauchy_product_theorem",
      "status": "aberto-sorry",
      "axioms": [
@@ -1659,7 +1977,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 134,
+     "linha": 141,
      "nome": "TaylorSeriesTheory.taylor_exp",
      "status": "erro",
      "axioms": [
@@ -1668,11 +1986,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 140: unknown constant 'Real.exp_eq_exp_ℝ'"
+     "erro": "linha 147: unknown constant 'Real.exp_eq_exp_ℝ'",
+     "coluna": 8,
+     "trecho": "  exact ⟦R⟧eal.exp_eq_exp_ℝ x ▸ exp_eq_s"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 141,
+     "linha": 148,
      "nome": "TaylorSeriesTheory.taylor_sin",
      "status": "aberto-sorry",
      "axioms": [
@@ -1684,7 +2004,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 146,
+     "linha": 153,
      "nome": "TaylorSeriesTheory.taylor_cos",
      "status": "aberto-sorry",
      "axioms": [
@@ -1696,7 +2016,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 151,
+     "linha": 158,
      "nome": "TaylorSeriesTheory.taylor_log",
      "status": "aberto-sorry",
      "axioms": [
@@ -1708,7 +2028,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 156,
+     "linha": 163,
      "nome": "TaylorSeriesTheory.taylor_arctan",
      "status": "erro",
      "axioms": [
@@ -1717,11 +2037,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 159: unknown constant 'Real.arctan'"
+     "erro": "linha 166: unknown constant 'Real.arctan'",
+     "coluna": 4,
+     "trecho": "    ⟦R⟧eal.arctan x = ∑' n, (-1)^n *"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 161,
+     "linha": 168,
      "nome": "TaylorSeriesTheory.binomial_series",
      "status": "aberto-sorry",
      "axioms": [
@@ -1733,23 +2055,27 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 172,
+     "linha": 179,
      "nome": "TaylorSeriesTheory.maclaurin_exp",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 174: failed to synthesize HDiv ℕ ℕ ℝ Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 181: failed to synthesize HDiv ℕ ℕ ℝ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 60,
+     "trecho": "rinSeries Real.exp = fun n => ⟦1⟧ / n.factorial := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 176,
+     "linha": 183,
      "nome": "TaylorSeriesTheory.maclaurin_sin",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 180: failed to synthesize HDiv ℤ ℕ ℝ Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 187: failed to synthesize HDiv ℤ ℕ ℝ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 24,
+     "trecho": "      if n % 2 = 1 then ⟦(⟧-1)^(n/2) / n.factorial else "
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 182,
+     "linha": 189,
      "nome": "TaylorSeriesTheory.taylor_cexp",
      "status": "erro",
      "axioms": [
@@ -1758,11 +2084,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 188: unknown constant 'Complex.exp_eq_exp_ℂ'"
+     "erro": "linha 195: unknown constant 'Complex.exp_eq_exp_ℂ'",
+     "coluna": 8,
+     "trecho": "  exact ⟦C⟧omplex.exp_eq_exp_ℂ z ▸ exp_e"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 189,
+     "linha": 196,
      "nome": "TaylorSeriesTheory.euler_formula",
      "status": "erro",
      "axioms": [
@@ -1771,11 +2099,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 193: type mismatch Complex.exp_mul_I ↑θ has type Complex.exp (↑θ * Complex.I) = Complex.cos ↑θ + Complex.sin ↑θ * Complex.I : Prop but is expected to have type Complex.exp (↑θ * Complex.I) = Complex.cos ↑θ + Complex.I * Complex.sin ↑θ : Prop"
+     "erro": "linha 200: type mismatch Complex.exp_mul_I ↑θ has type Complex.exp (↑θ * Complex.I) = Complex.cos ↑θ + Complex.sin ↑θ * Complex.I : Prop but is expected to have type Complex.exp (↑θ * Complex.I) = Complex.cos ↑θ + Complex.I * Complex.sin ↑θ : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact Complex.exp_mul_I θ"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 201,
+     "linha": 208,
      "nome": "TaylorSeriesTheory.stirling_asymptotic",
      "status": "erro",
      "axioms": [
@@ -1784,11 +2114,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 206: failed to synthesize Top ℝ Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 213: failed to synthesize Top ℝ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 8,
+     "trecho": "      c ⟦⊤⟧ 10 := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Calculus/TaylorSeries.lean",
-     "linha": 221,
+     "linha": 228,
      "nome": "TaylorSeriesTheory.borel_sum_analytic",
      "status": "aberto-sorry",
      "axioms": [
@@ -1800,103 +2132,137 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 43,
+     "linha": 46,
      "nome": "HilbertSpaces.cauchy_schwarz",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 58: unsolved goals case pos E : Type u_1 inst✝¹ : AddCommGroup E inst✝ : Module ℝ E ip : InnerProductStructure E x y : E hy : ip.inner y y = 0 this : y = 0 h1 : ip.inner x 0 = 0 ⊢ 0 ≤ √(ip.inner x x) * √(ip.inner 0 0)",
+     "coluna": 2,
+     "trecho": "  ⟦·⟧ -- If y = 0 (in the inner pr"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 109,
+     "linha": 112,
      "nome": "HilbertSpaces.parallelogram_law",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 138: tactic 'rewrite' failed, did not find instance of the pattern in the target expression ip.inner (x + y) x E : Type u_1 inst✝¹ : AddCommGroup E inst✝ : Module ℝ E ip : InnerProductStructure E x y : E h1 : √(ip.inner (x + y) (x + y)) ^ 2 = ip",
+     "coluna": 14,
+     "trecho": "          rw [⟦i⟧p.inner_add_left x y x, ip.in"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 175,
+     "linha": 178,
      "nome": "HilbertSpaces.pythagorean",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 180: failed to synthesize SeminormedAddCommGroup E Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 33,
+     "trecho": "orem pythagorean {E : Type*} [⟦I⟧nnerProductSpace ℝ E] (x y : "
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 185,
+     "linha": 188,
      "nome": "HilbertSpaces.orthogonalComplement_closed",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 190: failed to synthesize SeminormedAddCommGroup E Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 49,
+     "trecho": "omplement_closed {E : Type*} [⟦I⟧nnerProductSpace ℝ E] (S : Se"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 206,
+     "linha": 209,
      "nome": "HilbertSpaces.exists_closest_point",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 213: failed to synthesize SeminormedAddCommGroup E Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 42,
+     "trecho": "ts_closest_point {E : Type*} [⟦I⟧nnerProductSpace ℝ E] [Comple"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 268,
+     "linha": 271,
      "nome": "HilbertSpaces.orthogonal_decomposition",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 273: failed to synthesize SeminormedAddCommGroup E Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 46,
+     "trecho": "al_decomposition {E : Type*} [⟦I⟧nnerProductSpace ℝ E] [Comple"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 299,
+     "linha": 302,
      "nome": "HilbertSpaces.bessel_inequality",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 307: expected token",
+     "coluna": 14,
+     "trecho": "    ∑ i ∈ S, |⟦⟪⟧x, e i⟫_ℝ|^2 ≤ ‖x‖^2 := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 336,
+     "linha": 339,
      "nome": "HilbertSpaces.parseval_identity",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 343: expected token",
+     "coluna": 11,
+     "trecho": "    ∑' i, |⟦⟪⟧x, e i⟫_ℝ|^2 = ‖x‖^2 := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 342,
+     "linha": 345,
      "nome": "HilbertSpaces.riesz_representation",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 351: expected token",
+     "coluna": 25,
+     "trecho": "    ∃! y : E, ∀ x, f x = ⟦⟪⟧x, y⟫_ℝ := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 350,
+     "linha": 353,
      "nome": "HilbertSpaces.riesz_norm",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 356: expected token",
+     "coluna": 45,
+     "trecho": "] ℝ) (y : E) (hy : ∀ x, f x = ⟦⟪⟧x, y⟫_ℝ) :"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 364,
+     "linha": 367,
      "nome": "HilbertSpaces.adjoint_property",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 372: expected token",
+     "coluna": 4,
+     "trecho": "    ⟦⟪⟧T x, y⟫_ℝ = ⟪x, adjoint' T y⟫"
     },
     {
      "arquivo": "lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean",
-     "linha": 384,
+     "linha": 387,
      "nome": "HilbertSpaces.spectral_theorem_compact",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 389: failed to synthesize SeminormedAddCommGroup E Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 46,
+     "trecho": "_theorem_compact {E : Type*} [⟦I⟧nnerProductSpace ℝ E] [Comple"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 49,
+     "linha": 52,
      "nome": "Integrals.integral_add",
      "status": "erro",
      "axioms": [
@@ -1905,11 +2271,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 54: application type mismatch integral_add hf argument hf has type Integrable f μ : Prop but is expected to have type Measure ?m.3878 : Type u_1"
+     "erro": "linha 57: application type mismatch integral_add hf argument hf has type Integrable f μ : Prop but is expected to have type Measure ?m.3120 : Type u_1",
+     "coluna": 21,
+     "trecho": "  exact integral_add ⟦h⟧f hg"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 55,
+     "linha": 58,
      "nome": "Integrals.integral_smul",
      "status": "fechado",
      "axioms": [
@@ -1920,7 +2288,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 61,
+     "linha": 64,
      "nome": "Integrals.integral_mono",
      "status": "erro",
      "axioms": [
@@ -1929,20 +2297,14 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 67: application type mismatch integral_mono hf argument hf has type Integrable f μ : Prop but is expected to have type Measure ?m.4650 : Type u_1"
+     "erro": "linha 70: application type mismatch integral_mono hf argument hf has type Integrable f μ : Prop but is expected to have type Measure ?m.3892 : Type u_1",
+     "coluna": 22,
+     "trecho": "  exact integral_mono ⟦h⟧f hg hle"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 68,
+     "linha": 71,
      "nome": "Integrals.monotone_convergence",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 73: expected token"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 77,
-     "nome": "Integrals.dominated_convergence",
      "status": "erro",
      "axioms": [
       "propext",
@@ -1950,35 +2312,56 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 84: function expected at 𝓝 term has type ?m.6351"
+     "erro": "linha 79: application type mismatch lintegral_iSup hf hmono argument hmono has type ∀ (n : ℕ), f n ≤ f (n + 1) : Prop but is expected to have type Monotone f : Prop",
+     "coluna": 26,
+     "trecho": "  exact lintegral_iSup hf ⟦h⟧mono"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 87,
+     "linha": 80,
+     "nome": "Integrals.dominated_convergence",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
+     "linha": 90,
      "nome": "Integrals.fatou",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 90: expected token"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 93,
+     "linha": 96,
      "nome": "Integrals.riemann_to_lebesgue",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 98: function expected at IntervalIntegrable term has type ?m.8836"
+     "erro": "linha 101: function expected at IntervalIntegrable term has type ?m.6026",
+     "coluna": 10,
+     "trecho": "    (hf : ⟦I⟧ntervalIntegrable f MeasureTh"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 101,
+     "linha": 104,
      "nome": "Integrals.riemann_lebesgue_eq",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 105: unexpected token '..'; expected ','"
+     "erro": "linha 108: unexpected token '..'; expected ','",
+     "coluna": 12,
+     "trecho": "    ∫ x in a⟦.⟧.b, f x = ∫ x in Set.Icc a b,"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 107,
+     "linha": 110,
      "nome": "Integrals.change_of_variables",
      "status": "erro",
      "axioms": [
@@ -1987,113 +2370,140 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 117: application type mismatch integral_map (Measurable.aemeasurable hφ) fun x => trivial argument fun x => trivial has type ?m.11506 → True : Prop but is expected to have type AEStronglyMeasurable f (Measure.map φ μ) : Prop"
+     "erro": "linha 120: application type mismatch integral_map (Measurable.aemeasurable hφ) fun x => trivial argument fun x => trivial has type ?m.8696 → True : Prop but is expected to have type AEStronglyMeasurable f (Measure.map φ μ) : Prop",
+     "coluna": 37,
+     "trecho": " integral_map hφ.aemeasurable ⟦(⟧fun _ => trivial)"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/Integrals.lean",
-     "linha": 118,
+     "linha": 121,
      "nome": "Integrals.bochner_norm_integral_le",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 121: unexpected token '/--'; expected 'lemma'"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 36,
+     "linha": 38,
      "nome": "SigmaAlgebras.empty_measurable",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 38: unexpected token 'Σ'; expected '_' or identifier"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 42,
+     "linha": 44,
      "nome": "SigmaAlgebras.countable_inter_measurable",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 44: unexpected token 'Σ'; expected '_' or identifier"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 52,
+     "linha": 54,
      "nome": "SigmaAlgebras.finite_union_measurable",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 54: unexpected token 'Σ'; expected '_' or identifier"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Quot.sound"
+     ],
+     "erro": "linha 61: invalid argument, variable is not a proposition or let-declaration",
+     "coluna": 4,
+     "trecho": "    ⟦s⟧imp only [g]"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 96,
+     "linha": 98,
      "nome": "SigmaAlgebras.generator_subset",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 102: tactic 'introN' failed, insufficient number of binders Ω : Type u_1 𝒢 : Set (Set Ω) S : Set Ω hS : S ∈ 𝒢 ⊢ S ∈ sorry"
+     "erro": "linha 104: tactic 'introN' failed, insufficient number of binders Ω : Type u_1 𝒢 : Set (Set Ω) S : Set Ω hS : S ∈ 𝒢 ⊢ S ∈ sorry",
+     "coluna": 8,
+     "trecho": "  intro ⟦«⟧Σ» h𝒢"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 104,
+     "linha": 106,
      "nome": "SigmaAlgebras.generated_smallest",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 106: unexpected token 'Σ'; expected '_' or identifier"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 118,
+     "linha": 120,
      "nome": "SigmaAlgebras.open_measurable",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 120: invalid binder annotation, type is not a class instance ?m.1124 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 122: invalid binder annotation, type is not a class instance ?m.2271 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 37,
+     "trecho": " open_measurable {X : Type*} [⟦T⟧opologicalSpace X] (U : Set X"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 123,
+     "linha": 125,
      "nome": "SigmaAlgebras.closed_measurable",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 125: invalid binder annotation, type is not a class instance ?m.1136 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 127: invalid binder annotation, type is not a class instance ?m.2283 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 39,
+     "trecho": "losed_measurable {X : Type*} [⟦T⟧opologicalSpace X] (C : Set X"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 129,
+     "linha": 131,
      "nome": "SigmaAlgebras.continuous_measurable",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 131: invalid binder annotation, type is not a class instance ?m.1154 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 133: invalid binder annotation, type is not a class instance ?m.2301 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 45,
+     "trecho": "ous_measurable {X Y : Type*} [⟦T⟧opologicalSpace X] [Topologic"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 144,
+     "linha": 146,
      "nome": "SigmaAlgebras.rectangle_measurable",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 146: unexpected token 'Σ'; expected '_' or identifier"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 160,
+     "linha": 162,
      "nome": "SigmaAlgebras.sigma_is_dynkin",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 162: unexpected token 'Σ'; expected '_' or identifier"
+     "erro": "linha 164: function expected at DynkinSystem term has type ?m.4147",
+     "coluna": 50,
+     "trecho": "kin («Σ» : SigmaAlgebra' Ω) : ⟦D⟧ynkinSystem Ω where"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 178,
+     "linha": 180,
      "nome": "SigmaAlgebras.dynkin_pi_lambda",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 182: unexpected token '𝒫'; expected '_' or identifier"
+     "erro": "linha 184: unexpected token '𝒫'; expected '_' or identifier",
+     "coluna": 38,
+     "trecho": "dynkin_pi_lambda (Ω : Type*) (⟦𝒫⟧ : Set (Set Ω)) (𝒟 : DynkinSy"
     },
     {
      "arquivo": "lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean",
-     "linha": 186,
+     "linha": 188,
      "nome": "SigmaAlgebras.monotone_class",
      "status": "aberto-sorry",
      "axioms": [
@@ -2105,423 +2515,578 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 35,
+     "linha": 37,
      "nome": "BaireCategoryTheory.nowhere_dense_iff_compl_dense",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 63,
-     "nome": "BaireCategoryTheory.nowhere_dense_union",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 119,
-     "nome": "BaireCategoryTheory.nowhere_dense_subset",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 140,
-     "nome": "BaireCategoryTheory.meager_countable_union",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 172,
-     "nome": "BaireCategoryTheory.nowhere_dense_is_meager",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 193,
-     "nome": "BaireCategoryTheory.baire_iff_not_meager",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 198,
-     "nome": "BaireCategoryTheory.complete_metric_is_baire",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 205,
-     "nome": "BaireCategoryTheory.locally_compact_hausdorff_is_baire",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 211,
-     "nome": "BaireCategoryTheory.baire_category_theorem",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 217,
-     "nome": "BaireCategoryTheory.dense_Gδ_not_meager",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 230,
-     "nome": "BaireCategoryTheory.residual_is_comeager",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 235,
-     "nome": "BaireCategoryTheory.residual_countable_inter",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 248,
-     "nome": "BaireCategoryTheory.generic_dense_in_baire",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 255,
-     "nome": "BaireCategoryTheory.uniform_boundedness",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 268,
-     "nome": "BaireCategoryTheory.exists_continuous_nowhere_differentiable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 281,
-     "nome": "BaireCategoryTheory.generic_continuous_nowhere_diff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 287,
-     "nome": "BaireCategoryTheory.irrationals_comeager",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 313,
-     "nome": "BaireCategoryTheory.countable_non_condensation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 326,
-     "nome": "BaireCategoryTheory.perfect_uncountable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
-     "linha": 332,
-     "nome": "BaireCategoryTheory.cantor_bendixson",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 53,
-     "nome": "Compactness.compact_iff_seq_compact",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx",
+      "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 57: unknown identifier 'MetricSpaces.MetricSpaceAxioms'"
+     "erro": "linha 50: function expected at hcontra term has type U ∩ (closure S)ᶜ = ∅",
+     "coluna": 12,
+     "trecho": "      exact ⟦h⟧contra ⟨hx, hxnot⟩"
     },
     {
-     "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 64,
-     "nome": "Compactness.seq_compact_implies_limit_point_compact",
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 65,
+     "nome": "BaireCategoryTheory.nowhere_dense_union",
      "status": "erro",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "erro": "linha 67: unknown identifier 'MetricSpaces.PremetricSpace'"
+     "erro": "linha 69: unsolved goals α : Type u_1 inst✝ : TopologicalSpace α S T : Set α hS : interior (closure S) = ∅ hT : interior (closure T) = ∅ hne : (interior (closure S ∪ closure T)).Nonempty ⊢ TopologicalSpace α α : Type u_1 inst✝ : TopologicalSpace α S ",
+     "coluna": 31,
+     "trecho": "   IsNowhereDense' (S ∪ T) := ⟦b⟧y"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 121,
+     "nome": "BaireCategoryTheory.nowhere_dense_subset",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 142,
+     "nome": "BaireCategoryTheory.meager_countable_union",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice"
+     ],
+     "erro": "linha 171: unknown constant 'Nat.mkpair'",
+     "coluna": 8,
+     "trecho": "    use ⟦N⟧at.mkpair n m"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 174,
+     "nome": "BaireCategoryTheory.nowhere_dense_is_meager",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 186: numerals are data in Lean, but the expected type is a proposition x ∈ S : Prop",
+     "coluna": 8,
+     "trecho": "    use ⟦0⟧"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 195,
+     "nome": "BaireCategoryTheory.baire_iff_not_meager",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 200,
+     "nome": "BaireCategoryTheory.complete_metric_is_baire",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 207,
+     "nome": "BaireCategoryTheory.locally_compact_hausdorff_is_baire",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 213,
+     "nome": "BaireCategoryTheory.baire_category_theorem",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 219,
+     "nome": "BaireCategoryTheory.dense_Gδ_not_meager",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 232,
+     "nome": "BaireCategoryTheory.residual_is_comeager",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 237,
+     "nome": "BaireCategoryTheory.residual_countable_inter",
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 250,
+     "nome": "BaireCategoryTheory.generic_dense_in_baire",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 257,
+     "nome": "BaireCategoryTheory.uniform_boundedness",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 268: unknown constant 'NormedAddGroupHom.equicontinuous_of_pointwiseBounded'",
+     "coluna": 8,
+     "trecho": "  exact ⟦N⟧ormedAddGroupHom.equicontinuo"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 270,
+     "nome": "BaireCategoryTheory.exists_continuous_nowhere_differentiable",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 283,
+     "nome": "BaireCategoryTheory.generic_continuous_nowhere_diff",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 287: failed to synthesize AddCommGroup ↑(Icc 0 1) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 26,
+     "trecho": "      ∀ x ∈ Set.Ioo 0 1, ¬⟦D⟧ifferentiableAt ℝ f x) := by"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 289,
+     "nome": "BaireCategoryTheory.irrationals_comeager",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 315,
+     "nome": "BaireCategoryTheory.countable_non_condensation",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 328,
+     "nome": "BaireCategoryTheory.perfect_uncountable",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/BaireCategory.lean",
+     "linha": 334,
+     "nome": "BaireCategoryTheory.cantor_bendixson",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 72,
+     "linha": 57,
+     "nome": "Compactness.compact_iff_seq_compact",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
+     "linha": 68,
+     "nome": "Compactness.seq_compact_implies_limit_point_compact",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
+     "linha": 76,
      "nome": "Compactness.compact_of_hausdorff_is_closed",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 79,
+     "linha": 83,
      "nome": "Compactness.closed_subset_compact",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 85,
+     "linha": 89,
      "nome": "Compactness.finite_union_compact",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 91,
+     "linha": 95,
      "nome": "Compactness.inter_compact_closed",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 103,
+     "linha": 107,
      "nome": "Compactness.heine_borel_real",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 109: invalid field 'isBounded', the environment does not contain 'IsCompact.isBounded' hK has type IsCompact K"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 115: unknown identifier 'isCompact_of_isClosed_isBounded'",
+     "coluna": 10,
+     "trecho": "    exact ⟦i⟧sCompact_of_isClosed_isBounde",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 112,
+     "linha": 116,
      "nome": "Compactness.continuous_image_compact",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 120,
+     "linha": 124,
      "nome": "Compactness.continuous_on_compact_bounded",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 125: invalid field 'isBounded', the environment does not contain 'IsCompact.isBounded' IsCompact.image hK hf has type IsCompact (f '' K)"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 126,
+     "linha": 130,
      "nome": "Compactness.continuous_attains_max",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 131: invalid field 'exists_isMaxOn', the environment does not contain 'IsCompact.exists_isMaxOn' hK has type IsCompact K"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 132,
+     "linha": 136,
      "nome": "Compactness.continuous_attains_min",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 137: invalid field 'exists_isMinOn', the environment does not contain 'IsCompact.exists_isMinOn' hK has type IsCompact K"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 138,
+     "linha": 142,
      "nome": "Compactness.compact_uniform_continuous",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 145: invalid field 'uniformContinuousOn_of_continuous', the environment does not contain 'IsCompact.uniformContinuousOn_of_continuous' hK has type IsCompact K"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 149: invalid field 'uniformContinuousOn_of_continuous', the environment does not contain 'IsCompact.uniformContinuousOn_of_continuous' hK has type IsCompact K",
+     "coluna": 8,
+     "trecho": "  exact ⟦h⟧K.uniformContinuousOn_of_cont",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 146,
+     "linha": 150,
      "nome": "Compactness.tychonoff",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 153: type mismatch isCompact_univ_pi fun i => hK i has type IsCompact (univ.pi fun i => univ) : Prop but is expected to have type IsCompact univ : Prop"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 157: type mismatch isCompact_univ_pi fun i => hK i has type IsCompact (univ.pi fun i => univ) : Prop but is expected to have type IsCompact univ : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact isCompact_univ_pi (fun i",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 154,
+     "linha": 158,
      "nome": "Compactness.product_compact",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 166,
+     "linha": 170,
      "nome": "Compactness.locally_compact_hausdorff_regular",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 177,
+     "linha": 181,
      "nome": "Compactness.one_point_compact",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 180: failed to synthesize TopologicalSpace (OnePointCompactification α) Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 184: failed to synthesize TopologicalSpace (OnePointCompactification α) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 4,
+     "trecho": "    ⟦I⟧sCompact (Set.univ : Set (One",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 182,
+     "linha": 186,
      "nome": "Compactness.stone_cech_exists",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 184: invalid binder annotation, type is not a class instance ?m.4034 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 188: invalid binder annotation, type is not a class instance ?m.3850 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 60,
+     "trecho": " Type*} [TopologicalSpace α] [⟦T⟧3₅Space α] :",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 188,
+     "linha": 192,
      "nome": "Compactness.lebesgue_number_lemma",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 196: invalid field 'exists_forall_ball_subset_sUnion', the environment does not contain 'IsCompact.exists_forall_ball_subset_sUnion' hK has type IsCompact K"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 200: invalid field 'exists_forall_ball_subset_sUnion', the environment does not contain 'IsCompact.exists_forall_ball_subset_sUnion' hK has type IsCompact K",
+     "coluna": 8,
+     "trecho": "  exact ⟦h⟧K.exists_forall_ball_subset_s",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 197,
+     "linha": 201,
      "nome": "Compactness.bolzano_weierstrass",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 203: function expected at 𝓝 term has type ?m.4590"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 208: unknown identifier 'isCompact_of_isClosed_isBounded'",
+     "coluna": 20,
+     "trecho": "  obtain ⟨L, hL⟩ := ⟦i⟧sCompact_of_isClosed_isBounde",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 214,
+     "linha": 218,
      "nome": "Compactness.relatively_compact_bounded",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 218: invalid field 'isBounded', the environment does not contain 'Compactness.IsRelativelyCompact.isBounded' h has type IsRelativelyCompact S"
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Compactness.lean",
-     "linha": 226,
+     "linha": 230,
      "nome": "Compactness.compact_is_countably_compact",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 48,
+     "linha": 51,
      "nome": "Connectedness.connected_iff_clopen",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 53: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.884"
+     "erro": "linha 56: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.884",
+     "coluna": 26,
+     "trecho": "    IsConnectedSpace' α ↔ ⟦I⟧sConnectedClopen := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 95,
+     "linha": 98,
      "nome": "Connectedness.connected_ivt",
      "status": "erro",
      "axioms": [
@@ -2530,41 +3095,49 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 100: unsolved goals α : Type u_1 inst✝¹ : TopologicalSpace α inst✝ : ConnectedSpace α f : α → ℝ hf : Continuous f a b : α y : ℝ ha : f a ≤ y hb : y ≤ f b ⊢ ∃ c, f c = y"
+     "erro": "linha 103: unsolved goals α : Type u_1 inst✝¹ : TopologicalSpace α inst✝ : ConnectedSpace α f : α → ℝ hf : Continuous f a b : α y : ℝ ha : f a ≤ y hb : y ≤ f b ⊢ ∃ c, f c = y",
+     "coluna": 24,
+     "trecho": "    ∃ c : α, f c = y := ⟦b⟧y"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 108,
+     "linha": 111,
      "nome": "Connectedness.connectedComponent_isConnected",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 112: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.1375"
+     "erro": "linha 115: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.1375",
+     "coluna": 8,
+     "trecho": "  exact ⟦i⟧sConnected_connectedComponent"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 113,
+     "linha": 116,
      "nome": "Connectedness.connectedComponent_maximal",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 118: type mismatch IsConnected.subset_connectedComponent hS hx has type S ⊆ connectedComponent x : Prop but is expected to have type S ⊆ connectedComponentOf x : Prop"
+     "erro": "linha 121: type mismatch IsConnected.subset_connectedComponent hS hx has type S ⊆ connectedComponent x : Prop but is expected to have type S ⊆ connectedComponentOf x : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact hS.subset_connectedCompo"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 119,
+     "linha": 122,
      "nome": "Connectedness.same_component_iff",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 128: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.1736"
+     "erro": "linha 131: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.1736",
+     "coluna": 12,
+     "trecho": "    · exact ⟦i⟧sConnected_connectedComponent"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 149,
+     "linha": 152,
      "nome": "Connectedness.path_connected_is_connected",
      "status": "fechado",
      "axioms": [
@@ -2575,7 +3148,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 177,
+     "linha": 180,
      "nome": "Connectedness.pathComponent_isPathConnected",
      "status": "erro",
      "axioms": [
@@ -2584,11 +3157,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 181: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.6631"
+     "erro": "linha 184: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.6631",
+     "coluna": 8,
+     "trecho": "  exact ⟦i⟧sPathConnected_pathComponent"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 182,
+     "linha": 185,
      "nome": "Connectedness.pathComponent_subset_connectedComponent",
      "status": "erro",
      "axioms": [
@@ -2597,21 +3172,24 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 192: type mismatch IsConnected.subset_connectedComponent this hx hy' has type y ∈ connectedComponent x : Prop but is expected to have type y ∈ connectedComponentOf x : Prop"
+     "erro": "linha 195: type mismatch IsConnected.subset_connectedComponent this hx hy' has type y ∈ connectedComponent x : Prop but is expected to have type y ∈ connectedComponentOf x : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact this.subset_connectedCom"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 203,
+     "linha": 206,
      "nome": "Connectedness.loc_path_conn_imp_loc_conn",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 207: tactic 'introN' failed, insufficient number of binders α : Type u_1 inst✝ : TopologicalSpace α h : IsLocallyPathConnectedSpace' α ⊢ IsLocallyConnectedSpace' α"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 230,
+     "linha": 233,
      "nome": "Connectedness.continuous_image_connected",
      "status": "fechado",
      "axioms": [
@@ -2622,7 +3200,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 238,
+     "linha": 241,
      "nome": "Connectedness.continuous_image_path_connected",
      "status": "fechado",
      "axioms": [
@@ -2633,7 +3211,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 244,
+     "linha": 247,
      "nome": "Connectedness.ivt_connected",
      "status": "erro",
      "axioms": [
@@ -2642,11 +3220,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 254: invalid field 'intermediate_value', the environment does not contain 'IsConnected.intermediate_value' hS has type IsConnected S"
+     "erro": "linha 257: invalid field 'intermediate_value', the environment does not contain 'IsConnected.intermediate_value' hS has type IsConnected S",
+     "coluna": 8,
+     "trecho": "  exact ⟦h⟧S.intermediate_value ha hb hf"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 255,
+     "linha": 258,
      "nome": "Connectedness.ivt_interval",
      "status": "fechado",
      "axioms": [
@@ -2657,7 +3237,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 262,
+     "linha": 265,
      "nome": "Connectedness.interval_connected",
      "status": "erro",
      "axioms": [
@@ -2666,300 +3246,429 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 267: typeclass instance problem is stuck, it is often due to metavariables DenselyOrdered ?m.10203"
+     "erro": "linha 270: typeclass instance problem is stuck, it is often due to metavariables DenselyOrdered ?m.9453",
+     "coluna": 8,
+     "trecho": "  exact ⟦i⟧sConnected_Icc"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 268,
+     "linha": 271,
      "nome": "Connectedness.convex_path_connected",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 270: invalid binder annotation, type is not a class instance ?m.10207 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 273: invalid binder annotation, type is not a class instance ?m.9457 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 43,
+     "trecho": "x_path_connected {E : Type*} [⟦N⟧ormedAddCommGroup E] [NormedS"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Connectedness.lean",
-     "linha": 298,
+     "linha": 301,
      "nome": "Connectedness.zero_dim_is_totally_disc",
      "status": "aberto-sorry",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Quot.sound"
      ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 43,
+     "linha": 47,
      "nome": "ContinuityTheory.continuous_iff_preimage_open",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 49,
+     "linha": 53,
      "nome": "ContinuityTheory.continuous_iff_preimage_closed",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 64: tactic 'rewrite' failed, did not find instance of the pattern in the target expression IsClosed ?m.833 case mpr α : Type u_1 β : Type u_2 inst✝¹ : TopologicalSpace α inst✝ : TopologicalSpace β f : α → β h : ∀ (C : Set β), IsClosed C → IsClo",
+     "coluna": 8,
+     "trecho": "    rw [⟦←⟧ isOpen_compl_iff, ← preimage"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 69,
+     "linha": 73,
      "nome": "ContinuityTheory.continuous_iff_seq_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 92,
+     "linha": 96,
      "nome": "ContinuityTheory.epsilon_delta_iff_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 104: type mismatch h has type EpsilonDeltaContinuousAt f x : Prop but is expected to have type ∀ ε > 0, ∃ δ > 0, ∀ ⦃x_1 : α⦄, dist x_1 x < δ → dist (f x_1) (f x) < ε : Prop",
+     "coluna": 4,
+     "trecho": "    ⟦e⟧xact h"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 116,
-     "nome": "ContinuityTheory.uniform_continuous_is_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 122,
-     "nome": "ContinuityTheory.continuous_on_compact_uniform",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 136,
-     "nome": "ContinuityTheory.lipschitz_uniformly_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 143,
-     "nome": "ContinuityTheory.lipschitz_comp",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 165,
-     "nome": "ContinuityTheory.lipschitz_is_holder_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 178,
-     "nome": "ContinuityTheory.holder_is_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 212,
-     "nome": "ContinuityTheory.continuous_iff_semicontinuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 245,
-     "nome": "ContinuityTheory.continuous_comp'",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 254,
-     "nome": "ContinuityTheory.continuousAt_comp'",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 280,
-     "nome": "ContinuityTheory.continuous_add",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 289,
-     "nome": "ContinuityTheory.continuous_mul",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 296,
-     "nome": "ContinuityTheory.continuous_smul'",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 304,
-     "nome": "ContinuityTheory.tietze_extension",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
-     "linha": 313,
-     "nome": "ContinuityTheory.linear_continuous_iff_bounded",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 79,
-     "nome": "HomeomorphismsTheory.homeomorphic_refl",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 83,
-     "nome": "HomeomorphismsTheory.homeomorphic_symm",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 88,
-     "nome": "HomeomorphismsTheory.homeomorphic_trans",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 102,
-     "nome": "HomeomorphismsTheory.compact_invariant",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 110,
-     "nome": "HomeomorphismsTheory.connected_invariant",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 115,
-     "nome": "HomeomorphismsTheory.t2_invariant",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
      "linha": 120,
-     "nome": "HomeomorphismsTheory.interval_homeo_real",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "nome": "ContinuityTheory.uniform_continuous_is_continuous",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
-     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
      "linha": 126,
+     "nome": "ContinuityTheory.continuous_on_compact_uniform",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 140,
+     "nome": "ContinuityTheory.lipschitz_uniformly_continuous",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 147,
+     "nome": "ContinuityTheory.lipschitz_comp",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 169,
+     "nome": "ContinuityTheory.lipschitz_is_holder_one",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 180: unknown identifier 'rpow_one'",
+     "coluna": 15,
+     "trecho": "    simp only [⟦r⟧pow_one]"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 182,
+     "nome": "ContinuityTheory.holder_is_continuous",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 193: failed to prove strict positivity, but it would be possible to prove nonnegativity if desired",
+     "coluna": 4,
+     "trecho": "  · ⟦p⟧ositivity"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 216,
+     "nome": "ContinuityTheory.continuous_iff_semicontinuous",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 229: tactic 'rewrite' failed, did not find instance of the pattern in the target expression ContinuousAt ?m.7068 ?m.7069 case mpr α : Type u_1 inst✝ : TopologicalSpace α f : α → ℝ x : α hL : LowerSemicontinuousAt f x hU : UpperSemicontinuousAt f",
+     "coluna": 8,
+     "trecho": "    rw [⟦M⟧etric.continuousAt_iff]"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 249,
+     "nome": "ContinuityTheory.continuous_comp'",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 258,
+     "nome": "ContinuityTheory.continuousAt_comp'",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 284,
+     "nome": "ContinuityTheory.continuous_add",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 293,
+     "nome": "ContinuityTheory.continuous_mul",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 300,
+     "nome": "ContinuityTheory.continuous_smul'",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 308,
+     "nome": "ContinuityTheory.tietze_extension",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 314: unsolved goals α : Type u_1 inst✝¹ : TopologicalSpace α inst✝ : NormalSpace α C : Set α hC : IsClosed C f : ↑C → ℝ hf : Continuous f ⊢ ∃ g, Continuous g ∧ ∀ (x : ↑C), g ↑x = f x",
+     "coluna": 54,
+     "trecho": "ous g ∧ ∀ x : C, g x = f x := ⟦b⟧y"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Continuity.lean",
+     "linha": 317,
+     "nome": "ContinuityTheory.linear_continuous_iff_bounded",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 329: invalid field 'bound_of_continuous', the environment does not contain 'LinearMap.bound_of_continuous' f has type V →ₗ[K] W",
+     "coluna": 10,
+     "trecho": "    exact ⟦f⟧.bound_of_continuous hf"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 81,
+     "nome": "HomeomorphismsTheory.homeomorphic_refl",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 85,
+     "nome": "HomeomorphismsTheory.homeomorphic_symm",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 90,
+     "nome": "HomeomorphismsTheory.homeomorphic_trans",
+     "status": "fechado",
+     "axioms": [
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 104,
+     "nome": "HomeomorphismsTheory.compact_invariant",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 112,
+     "nome": "HomeomorphismsTheory.connected_invariant",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ],
+     "erro": "linha 116: invalid field 'connectedSpace', the environment does not contain 'Homeomorph.connectedSpace' f has type α ≃ₜ β",
+     "coluna": 8,
+     "trecho": "  exact ⟦f⟧.connectedSpace"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 117,
+     "nome": "HomeomorphismsTheory.t2_invariant",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 122,
+     "nome": "HomeomorphismsTheory.interval_homeo_real",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
+     "linha": 128,
      "nome": "HomeomorphismsTheory.punctured_plane_homeo_cylinder",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 181,
+     "linha": 183,
      "nome": "HomeomorphismsTheory.embedding_homeo_range",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 184: type of theorem 'HomeomorphismsTheory.embedding_homeo_range' is not a proposition {α : Type u_1} → {β : Type u_2} → [inst : TopologicalSpace α] → [inst_1 : TopologicalSpace β] → (f : α → β) → Embedding f → α ≃ₜ ↑(range f)",
+     "coluna": 0,
+     "trecho": "⟦/⟧-- Every embedding gives a ho"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 194,
+     "linha": 196,
      "nome": "HomeomorphismsTheory.open_surjection_quotient",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 201,
+     "linha": 203,
      "nome": "HomeomorphismsTheory.closed_surjection_quotient",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 209: invalid field 'quotientMap', the environment does not contain 'IsClosedMap.quotientMap' hclosed has type IsClosedMap f",
+     "coluna": 8,
+     "trecho": "  exact ⟦h⟧closed.quotientMap hf hsurj"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 218,
+     "linha": 220,
      "nome": "HomeomorphismsTheory.covering_is_local_homeo",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 225,
+     "linha": 227,
      "nome": "HomeomorphismsTheory.invariance_of_domain",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 234,
+     "linha": 236,
      "nome": "HomeomorphismsTheory.classification_1_manifolds",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 242: application type mismatch IsOpen U ∧ U argument U has type Set M : Type u_1 but is expected to have type Prop : Type",
+     "coluna": 50,
+     "trecho": "U : Set M, x ∈ U ∧ IsOpen U ∧ ⟦U⟧ ≃ₜ Set.Ioo (0 : ℝ) 1) :"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 271,
+     "linha": 273,
      "nome": "HomeomorphismsTheory.eval_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/Homeomorphisms.lean",
-     "linha": 277,
+     "linha": 279,
      "nome": "HomeomorphismsTheory.exponential_law",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 280: type of theorem 'HomeomorphismsTheory.exponential_law' is not a proposition {X : Type u_1} → {Y : Type u_2} → {Z : Type u_3} → [inst : TopologicalSpace X] → [inst_1 : TopologicalSpace Y] → [inst_2 : TopologicalSpace Z] → [inst_3 : LocallyCo",
+     "coluna": 0,
+     "trecho": "⟦/⟧-- Exponential law: C(X × Y, "
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 44,
+     "linha": 47,
      "nome": "MetricSpaces.dist_self",
      "status": "fechado",
      "axioms": [
@@ -2970,7 +3679,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 63,
+     "linha": 66,
      "nome": "MetricSpaces.openBall_is_open",
      "status": "fechado",
      "axioms": [
@@ -2981,7 +3690,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 83,
+     "linha": 86,
      "nome": "MetricSpaces.limit_unique",
      "status": "erro",
      "axioms": [
@@ -2990,11 +3699,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 89: unsolved goals α : Type u_1 M : MetricSpaceAxioms α seq : ℕ → α L₁ L₂ : α h1 : ConvergesTo M.toPremetricSpace seq L₁ h2 : ConvergesTo M.toPremetricSpace seq L₂ h : ¬L₁ = L₂ hne : M.dist L₁ L₂ > 0 ⊢ False"
+     "erro": "linha 92: unsolved goals case intro.intro α : Type u_1 M : MetricSpaceAxioms α seq : ℕ → α L₁ L₂ : α h1 : ConvergesTo M.toPremetricSpace seq L₁ h2 : ConvergesTo M.toPremetricSpace seq L₂ h : ¬L₁ = L₂ hne : M.dist L₁ L₂ > 0 ε : ℝ := M.dist L₁ L₂ / 2 h",
+     "coluna": 15,
+     "trecho": "    L₁ = L₂ := ⟦b⟧y"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 119,
+     "linha": 122,
      "nome": "MetricSpaces.convergent_is_Cauchy",
      "status": "fechado",
      "axioms": [
@@ -3005,7 +3716,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 148,
+     "linha": 151,
      "nome": "MetricSpaces.bounded_iff_finite_diameter",
      "status": "aberto-sorry",
      "axioms": [
@@ -3017,7 +3728,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 173,
+     "linha": 176,
      "nome": "MetricSpaces.continuous_comp",
      "status": "fechado",
      "axioms": [
@@ -3028,7 +3739,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 198,
+     "linha": 201,
      "nome": "MetricSpaces.isometry_is_lipschitz",
      "status": "fechado",
      "axioms": [
@@ -3039,7 +3750,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/MetricSpaces.lean",
-     "linha": 275,
+     "linha": 278,
      "nome": "MetricSpaces.totally_bounded_is_bounded",
      "status": "erro",
      "axioms": [
@@ -3048,12 +3759,164 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 290: function expected at hF term has type S = ∅"
+     "erro": "linha 293: function expected at hF term has type S = ∅",
+     "coluna": 11,
+     "trecho": "    exact (⟦h⟧F hx).elim"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 54,
+     "linha": 59,
      "nome": "NormedSpaces.norm_zero",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 63,
+     "nome": "NormedSpaces.norm_neg",
+     "status": "nao_alcancado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 68: unknown identifier 'norm_neg_one'",
+     "coluna": 8,
+     "trecho": "  simp [⟦n⟧orm_neg_one]",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 69,
+     "nome": "NormedSpaces.norm_sub_le",
+     "status": "nao_alcancado",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 74: unsolved goals K : Type u_1 V : Type u_2 inst✝² : NormedField K inst✝¹ : AddCommGroup V inst✝ : Module K V N : NormedSpaceStructure K V v w : V ⊢ N.norm v = N.norm (v - w + w)",
+     "coluna": 44,
+     "trecho": "m v = N.norm ((v - w) + w) := ⟦b⟧y ring_nf",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 149,
+     "nome": "NormedSpaces.EquivalentNorms.refl",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 154,
+     "nome": "NormedSpaces.EquivalentNorms.symm",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 160,
+     "nome": "NormedSpaces.EquivalentNorms.trans",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 195,
+     "nome": "NormedSpaces.unitBall_convex",
+     "status": "nao_alcancado",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 199: failed to synthesize HSMul ℝ V ?m.34300 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 6,
+     "trecho": "      ⟦(⟧1 - t) • v + t • w ∈ closedUn",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 233,
+     "nome": "NormedSpaces.finite_dim_norms_equivalent",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 239: invalid binder annotation, type is not a class instance ?m.44524 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 5,
+     "trecho": "    [⟦F⟧initeDimensional K V]",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
+     "linha": 243,
+     "nome": "NormedSpaces.finite_dim_complete",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "dependencia_com_sorry": [
+      "Core.Analysis.Topology.MetricSpaces"
+     ],
+     "erro": "linha 247: invalid binder annotation, type is not a class instance ?m.45792 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 5,
+     "trecho": "    [⟦F⟧initeDimensional K V]",
+     "motivo": "importa Core.Analysis.Topology.MetricSpaces, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 44,
+     "nome": "ProductTopology.productBasis_isBasis",
+     "status": "erro",
+     "axioms": [],
+     "erro": "linha 47: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace (?m.586 × ?m.587)",
+     "coluna": 4,
+     "trecho": "    ⟦T⟧opologicalSpace.IsTopological"
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 62,
+     "nome": "ProductTopology.fst_continuous",
      "status": "fechado",
      "axioms": [
       "propext",
@@ -3062,21 +3925,75 @@
      ]
     },
     {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 58,
-     "nome": "NormedSpaces.norm_neg",
-     "status": "erro",
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 69,
+     "nome": "ProductTopology.snd_continuous",
+     "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 63: unknown identifier 'norm_neg_one'"
+     ]
     },
     {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 64,
-     "nome": "NormedSpaces.norm_sub_le",
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 74,
+     "nome": "ProductTopology.fst_isOpenMap",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 79,
+     "nome": "ProductTopology.snd_isOpenMap",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 83,
+     "nome": "ProductTopology.continuous_prod_iff",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 96,
+     "nome": "ProductTopology.continuous_prod_mk'",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 110,
+     "nome": "ProductTopology.pi_proj_continuous",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
+     "linha": 115,
+     "nome": "ProductTopology.continuous_pi_iff",
      "status": "erro",
      "axioms": [
       "propext",
@@ -3084,372 +4001,361 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 69: unsolved goals K : Type u_1 V : Type u_2 inst✝² : NormedField K inst✝¹ : AddCommGroup V inst✝ : Module K V N : NormedSpaceStructure K V v w : V ⊢ N.norm v = N.norm (v - w + w)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 144,
-     "nome": "NormedSpaces.EquivalentNorms.refl",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 149,
-     "nome": "NormedSpaces.EquivalentNorms.symm",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 155,
-     "nome": "NormedSpaces.EquivalentNorms.trans",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 190,
-     "nome": "NormedSpaces.unitBall_convex",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 193: unexpected token '∈'; expected ','"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 228,
-     "nome": "NormedSpaces.finite_dim_norms_equivalent",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 234: invalid binder annotation, type is not a class instance ?m.36258 use the command `set_option checkBinderAnnotations false` to disable the check"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/NormedSpaces.lean",
-     "linha": 238,
-     "nome": "NormedSpaces.finite_dim_complete",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 242: invalid binder annotation, type is not a class instance ?m.37526 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 121: typeclass instance problem is stuck, it is often due to metavariables TopologicalSpace ?m.8592",
+     "coluna": 8,
+     "trecho": "  exact ⟦c⟧ontinuous_pi_iff"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 42,
-     "nome": "ProductTopology.productBasis_isBasis",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 60,
-     "nome": "ProductTopology.fst_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 67,
-     "nome": "ProductTopology.snd_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 72,
-     "nome": "ProductTopology.fst_isOpenMap",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 77,
-     "nome": "ProductTopology.snd_isOpenMap",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 81,
-     "nome": "ProductTopology.continuous_prod_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 94,
-     "nome": "ProductTopology.continuous_prod_mk'",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 108,
-     "nome": "ProductTopology.pi_proj_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 113,
-     "nome": "ProductTopology.continuous_pi_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 120,
+     "linha": 122,
      "nome": "ProductTopology.tychonoff'",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 128,
+     "linha": 130,
      "nome": "ProductTopology.prod_compact",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 143,
+     "linha": 145,
      "nome": "ProductTopology.box_finer_than_product",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 148: typeclass instance problem is stuck, it is often due to metavariables (i : ?m.8786) → TopologicalSpace (?m.8787 i)",
+     "coluna": 18,
+     "trecho": "    piTopology' ≤ ⟦b⟧oxTopology := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 155,
+     "linha": 157,
      "nome": "ProductTopology.subspace_open_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 163: type mismatch isOpen_induced_iff.mp hU has type ∃ t, IsOpen t ∧ Subtype.val ⁻¹' t = U : Prop but is expected to have type ∃ V, IsOpen V ∧ U = Subtype.val ⁻¹' V : Prop",
+     "coluna": 4,
+     "trecho": "    ⟦e⟧xact isOpen_induced_iff.mp hU"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 165,
+     "linha": 167,
      "nome": "ProductTopology.subtype_val_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 177,
+     "linha": 179,
      "nome": "ProductTopology.quotient_open_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 182: don't know how to synthesize placeholder for argument 't' context: α : Type u_1 β : Type u_2 inst✝ : TopologicalSpace α f : α → β ⊢ TopologicalSpace α when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in",
+     "coluna": 44,
+     "trecho": "(TopologicalSpace.coinduced f ⟦_⟧) = fun U => IsOpen (f ⁻¹' U)"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 183,
+     "linha": 185,
      "nome": "ProductTopology.quotient_map_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 188: don't know how to synthesize placeholder for argument 't' context: α : Type u_1 β : Type u_2 inst✝ : TopologicalSpace α f : α → β ⊢ TopologicalSpace α when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in",
+     "coluna": 52,
+     "trecho": "(TopologicalSpace.coinduced f ⟦_⟧) f := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 195,
+     "linha": 197,
      "nome": "ProductTopology.sum_inl_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 200,
+     "linha": 202,
      "nome": "ProductTopology.sum_inr_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 204,
+     "linha": 206,
      "nome": "ProductTopology.continuous_sum_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 244,
+     "linha": 246,
      "nome": "ProductTopology.prod_t2",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 251,
+     "linha": 253,
      "nome": "ProductTopology.prod_regular",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 256,
+     "linha": 258,
      "nome": "ProductTopology.countable_prod_metrizable",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 266: invalid binder annotation, type is not a class instance (n : ?m.26352) → ?m.26355 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 35,
+     "trecho": "∀ n, TopologicalSpace (α n)] [⟦∀⟧ n, MetrizableSpace (α n)] :"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/ProductTopology.lean",
-     "linha": 267,
+     "linha": 269,
      "nome": "ProductTopology.finite_prod_metric",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 270: type of theorem 'ProductTopology.finite_prod_metric' is not a proposition {α : Type u_1} → {β : Type u_2} → [inst : PseudoMetricSpace α] → [inst : PseudoMetricSpace β] → PseudoMetricSpace (α × β)",
+     "coluna": 0,
+     "trecho": "⟦/⟧-- Finite product of metric s"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 29,
+     "linha": 31,
      "nome": "StoneWeierstrassTheory.weierstrass_approximation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 37: tactic 'assumption' failed a b : ℝ hab : a < b f : C(↑(Icc a b), ℝ) ε : ℝ hε : ε > 0 p : Polynomial ℝ x : ℝ ⊢ x ∈ Icc a b",
+     "coluna": 50,
+     "trecho": " ℝ, ∀ x ∈ Set.Icc a b, |f ⟨x, ⟦‹⟧_›⟩ - p.eval x| < ε := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 43,
+     "linha": 45,
      "nome": "StoneWeierstrassTheory.bernstein_uniform_convergence",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 66,
+     "linha": 68,
      "nome": "StoneWeierstrassTheory.stone_weierstrass_real",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 73,
+     "linha": 75,
      "nome": "StoneWeierstrassTheory.dense_of_separates",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 81: unsolved goals X : Type u_1 inst✝² : TopologicalSpace X inst✝¹ : CompactSpace X inst✝ : T2Space X A : Subalgebra ℝ C(X, ℝ) hsep : A.SeparatesPoints hconst : ∀ (c : ℝ), const X c ∈ A h1 : 1 ∈ A this : A.topologicalClosure = ⊤ ⊢ Dense ↑A",
+     "coluna": 31,
+     "trecho": "   Dense (A : Set C(X, ℝ)) := ⟦b⟧y"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 91,
+     "linha": 93,
      "nome": "StoneWeierstrassTheory.stone_weierstrass_complex",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 98,
+     "linha": 100,
      "nome": "StoneWeierstrassTheory.stone_weierstrass_locally_compact",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 106: unexpected token '('; expected ')'",
+     "coluna": 24,
+     "trecho": "    (A : Subalgebra ℝ C₀⟦(⟧X, ℝ))"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 109,
+     "linha": 111,
      "nome": "StoneWeierstrassTheory.trigonometric_dense",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 118: failed to synthesize CoeT ℂ x (AddCircle (2 * Real.pi)) (deterministic) timeout at `typeclass`, maximum number of heartbeats (20000) has been reached Use `set_option synthInstance.maxHeartbeats <num>` to set the limit. Additional diagnostic",
+     "coluna": 49,
+     "trecho": "f x = ∑ i, c i * Complex.exp (⟦k⟧ i * x * Complex.I) } := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 127,
+     "linha": 129,
      "nome": "StoneWeierstrassTheory.muntz_szasz",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 133: tactic 'assumption' failed «λ» : ℕ → ℝ «hλ» : ∀ (n : ℕ), 0 ≤ «λ» n f : C(↑(Icc 0 1), ℝ) n : ℕ c : Fin n → ℝ x : ℝ ⊢ x ∈ Icc 0 1",
+     "coluna": 25,
+     "trecho": "              ∀ x, f ⟨x, ⟦‹⟧_›⟩ = ∑ i, c i * x ^ («λ» i) "
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 134,
+     "linha": 136,
      "nome": "StoneWeierstrassTheory.korovkin",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 156,
+     "linha": 158,
      "nome": "StoneWeierstrassTheory.stone_weierstrass_lattice",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 165,
+     "linha": 167,
      "nome": "StoneWeierstrassTheory.moments_determine_distribution",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 174: failed to synthesize NormedAddCommGroup ↑(Icc 0 1) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 18,
+     "trecho": "    (h : ∀ n : ℕ, ⟦∫⟧ x, x ^ n ∂μ = ∫ x, x ^ n ∂ν)"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 186,
+     "linha": 188,
      "nome": "StoneWeierstrassTheory.chebyshev_cos",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 191,
+     "linha": 193,
      "nome": "StoneWeierstrassTheory.chebyshev_best_approx",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 198: failed to synthesize Semiring ↑(Icc (-1) 1) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 35,
+     "trecho": "   ‖f - ⟨fun x => (∑ i, c i * ⟦(⟧chebyshevT i).eval x), sorry⟩"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 199,
+     "linha": 201,
      "nome": "StoneWeierstrassTheory.jackson_theorem",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 209: failed to synthesize HMul (?m.1494971 →+* C(?m.1494969, ?m.1494973)) ℝ ?m.1500205 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 41,
+     "trecho": "⟨fun x => p.eval x, sorry⟩‖ ≤ ⟦C⟧ * ω (1 / n) := by"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/StoneWeierstrass.lean",
-     "linha": 209,
+     "linha": 211,
      "nome": "StoneWeierstrassTheory.stone_weierstrass_vector",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 56,
+     "linha": 59,
      "nome": "UniformSpacesTheory.uniform_open_iff",
      "status": "erro",
      "axioms": [
@@ -3458,11 +4364,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 64: type mismatch h x hx has type {p | p.1 = x → p.2 ∈ S} ∈ 𝓤 α : Prop but is expected to have type ∃ U ∈ 𝓤 α, {y | (x, y) ∈ U} ⊆ S : Prop"
+     "erro": "linha 67: type mismatch h x hx has type {p | p.1 = x → p.2 ∈ S} ∈ 𝓤 α : Prop but is expected to have type ∃ U ∈ 𝓤 α, {y | (x, y) ∈ U} ⊆ S : Prop",
+     "coluna": 4,
+     "trecho": "    ⟦e⟧xact h x hx"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 78,
+     "linha": 81,
      "nome": "UniformSpacesTheory.uniformContinuous_continuous",
      "status": "fechado",
      "axioms": [
@@ -3473,7 +4381,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 84,
+     "linha": 87,
      "nome": "UniformSpacesTheory.uniformContinuous_comp",
      "status": "fechado",
      "axioms": [
@@ -3484,7 +4392,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 102,
+     "linha": 105,
      "nome": "UniformSpacesTheory.convergent_cauchy",
      "status": "erro",
      "axioms": [
@@ -3493,11 +4401,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 105: function expected at 𝓝 term has type ?m.2928"
+     "erro": "linha 109: failed to synthesize F.NeBot Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 8,
+     "trecho": "  exact ⟦C⟧auchy.mono (cauchy_nhds) h"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 118,
+     "linha": 121,
      "nome": "UniformSpacesTheory.closed_in_complete_is_complete",
      "status": "erro",
      "axioms": [
@@ -3506,11 +4416,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 126: application type mismatch IsClosed.mem_of_tendsto hS hF.left argument hF.left has type F.NeBot : Prop but is expected to have type Tendsto ?m.3518 ?m.3519 (nhds ?m.3516) : Prop"
+     "erro": "linha 129: application type mismatch IsClosed.mem_of_tendsto hS hF.left argument hF.left has type F.NeBot : Prop but is expected to have type Tendsto ?m.3621 ?m.3622 (𝓝 ?m.3619) : Prop",
+     "coluna": 28,
+     "trecho": "    apply hS.mem_of_tendsto ⟦(⟧hF.1) (hFS.trans hx)"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 138,
+     "linha": 141,
      "nome": "UniformSpacesTheory.toCompletion_uniformContinuous",
      "status": "erro",
      "axioms": [
@@ -3519,11 +4431,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 141: failed to synthesize UniformSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 144: failed to synthesize UniformSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 4,
+     "trecho": "    ⟦U⟧niformContinuous (toCompletio"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 143,
+     "linha": 146,
      "nome": "UniformSpacesTheory.toCompletion_denseRange",
      "status": "erro",
      "axioms": [
@@ -3532,11 +4446,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 146: failed to synthesize TopologicalSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 149: failed to synthesize TopologicalSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 4,
+     "trecho": "    ⟦D⟧enseRange (toCompletion : α →"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 148,
+     "linha": 151,
      "nome": "UniformSpacesTheory.completion_complete",
      "status": "erro",
      "axioms": [
@@ -3545,11 +4461,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 151: failed to synthesize UniformSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 154: failed to synthesize UniformSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 4,
+     "trecho": "    ⟦C⟧ompleteSpace (completion' α) "
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 153,
+     "linha": 156,
      "nome": "UniformSpacesTheory.completion_universal",
      "status": "erro",
      "axioms": [
@@ -3558,11 +4476,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 158: failed to synthesize UniformSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 161: failed to synthesize UniformSpace (completion' α) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 30,
+     "trecho": "    ∃! g : completion' α → β, ⟦U⟧niformContinuous g ∧ g ∘ toCo"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 183,
+     "linha": 186,
      "nome": "UniformSpacesTheory.totally_bounded_complete_compact",
      "status": "aberto-sorry",
      "axioms": [
@@ -3574,7 +4494,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 196,
+     "linha": 199,
      "nome": "UniformSpacesTheory.uniform_limit_continuous",
      "status": "erro",
      "axioms": [
@@ -3583,11 +4503,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 204: invalid field 'continuous', the environment does not contain 'TendstoUniformly.continuous' h has type TendstoUniformly f g atTop"
+     "erro": "linha 207: invalid field 'continuous', the environment does not contain 'TendstoUniformly.continuous' h has type TendstoUniformly f g atTop",
+     "coluna": 8,
+     "trecho": "  exact ⟦h⟧.continuous (eventually_of_fo"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 212,
+     "linha": 215,
      "nome": "UniformSpacesTheory.fst_uniformContinuous",
      "status": "fechado",
      "axioms": [
@@ -3598,7 +4520,7 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 218,
+     "linha": 221,
      "nome": "UniformSpacesTheory.snd_uniformContinuous",
      "status": "fechado",
      "axioms": [
@@ -3609,15 +4531,17 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 229,
+     "linha": 232,
      "nome": "UniformSpacesTheory.metric_uniformity_basis",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 231: invalid binder annotation, type is not a class instance ?m.4935 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 234: invalid binder annotation, type is not a class instance ?m.5040 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 45,
+     "trecho": "uniformity_basis {α : Type*} [⟦P⟧seudoMetricSpace α] :"
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 242,
+     "linha": 245,
      "nome": "UniformSpacesTheory.separated_t2",
      "status": "fechado",
      "axioms": [
@@ -3628,67 +4552,100 @@
     },
     {
      "arquivo": "lean4/Core/Analysis/Topology/UniformSpaces.lean",
-     "linha": 253,
+     "linha": 256,
      "nome": "UniformSpacesTheory.completelyRegular_uniformizable",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 256: invalid binder annotation, type is not a class instance ?m.5175 use the command `set_option checkBinderAnnotations false` to disable the check"
+     "erro": "linha 259: invalid binder annotation, type is not a class instance ?m.5280 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 26,
+     "trecho": "    [TopologicalSpace α] [⟦T⟧3₅Space α] :"
     },
     {
      "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
-     "linha": 33,
+     "linha": 39,
      "nome": "RH_FullFormal.functional_equation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
-     "linha": 68,
+     "linha": 74,
      "nome": "RH_FullFormal.rh_equiv_xi",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
-     "linha": 97,
+     "linha": 103,
      "nome": "RH_FullFormal.infinitely_many_zeros_on_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
-     "linha": 104,
+     "linha": 110,
      "nome": "RH_FullFormal.selberg_proportion",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
-     "linha": 119,
-     "nome": "RH_FullFormal.rh_implies_lindelof",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
      "linha": 125,
-     "nome": "RH_FullFormal.rh_implies_prime_error",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "nome": "RH_FullFormal.rh_implies_lindelof",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
-     "linha": 129,
+     "linha": 131,
+     "nome": "RH_FullFormal.rh_implies_prime_error",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean",
+     "linha": 135,
      "nome": "RH_FullFormal.rh_implies_prime_gaps",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 139: unknown constant 'Nat.nth'",
+     "coluna": 7,
+     "trecho": "      (⟦N⟧at.nth Nat.Prime (n + 1) - Na"
     }
    ],
    "preenchimento": [],

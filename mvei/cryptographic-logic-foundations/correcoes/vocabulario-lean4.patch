@@ -1,0 +1,195 @@
+--- a/CryptographicLogic/TriStability.lean
++++ b/CryptographicLogic/TriStability.lean
+@@ -1,6 +1,8 @@
+ -- Formalização da Tri-Estabilidade e Aproximação P ≈ NP
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ 
++noncomputable section
++
+ namespace TriStability
+ 
+ -- Definição dos três estados do sistema
+--- a/Main.lean
++++ b/Main.lean
+@@ -1,4 +1,6 @@
+ import CryptographicLogic
+ 
++noncomputable section
++
+ def main : IO Unit :=
+   IO.println "Cryptographic Logic Foundations - Tri-Stability System"
+--- a/formal/lean4/SovereignCore.lean
++++ b/formal/lean4/SovereignCore.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   SovereignCore.lean
+   
+--- a/formal-proofs/lean4/BOOT_SEQUENCE.lean
++++ b/formal-proofs/lean4/BOOT_SEQUENCE.lean
+@@ -13,6 +13,9 @@
+ import Universe00.Layer0
+ import Universe00.Microkernel
+ import Universe00.MemoryQuadrants
++import Mathlib.Tactic
++
++noncomputable section
+ 
+ namespace Universe00.BootSequence
+ 
+--- a/foundation.lean
++++ b/foundation.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Logic.ExistsUnique
+ /-
+   Foundation: Mathematical Axioms of Non-Interference
+   
+--- a/proofs/lean4/core/SecurityProperties.lean
++++ b/proofs/lean4/core/SecurityProperties.lean
+@@ -1,4 +1,6 @@
+ import Mathlib.Tactic
++
++noncomputable section
+ /-
+   Cryptographic Logic Foundations - Universe-0-0
+   Security Properties
+--- a/provenance/timestamp_proof.lean
++++ b/provenance/timestamp_proof.lean
+@@ -1,3 +1,5 @@
++
++noncomputable section
+ /-
+   Timestamp Proof: Data Provenance and Temporal Integrity
+   
+--- a/provers/lean/Complexity.lean
++++ b/provers/lean/Complexity.lean
+@@ -6,11 +6,13 @@
+ 
+ import Mathlib.Computability.Language
+ 
++noncomputable section
++
+ /--
+ A language is a set of strings over some alphabet.
+ In complexity theory, we consider languages as decision problems.
+ --/
+-def Language (α : Type) := Set (List α)
++abbrev Language (α : Type) := Set (List α)
+ 
+ /--
+ The class P consists of all decision problems (languages)
+--- a/provers/lean/NavierStokes.lean
++++ b/provers/lean/NavierStokes.lean
+@@ -7,22 +7,24 @@
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
++noncomputable section
++
+ /--
+ Three-dimensional Euclidean space.
+ --/
+-abbrev ℝ³ := Fin 3 → ℝ
++abbrev «ℝ³» := Fin 3 → ℝ
+ 
+ /--
+ A vector field on ℝ³ × ℝ (space-time).
+ Represents the velocity field of a fluid.
+ --/
+-def VectorField := ℝ³ → ℝ → ℝ³
++def VectorField := «ℝ³» → ℝ → «ℝ³»
+ 
+ /--
+ A scalar field on ℝ³ × ℝ.
+ Represents the pressure field of a fluid.
+ --/
+-def ScalarField := ℝ³ → ℝ → ℝ
++def ScalarField := «ℝ³» → ℝ → ℝ
+ 
+ /--
+ The Navier-Stokes equations describe the motion of viscous fluid substances.
+@@ -90,10 +92,10 @@
+ This is one of the seven Millennium Prize Problems.
+ --/
+ def NavierStokesSmoothnessConjecture : Prop :=
+-  ∀ (u₀ : ℝ³ → ℝ³) (f : VectorField) (ν : ℝ),
++  ∀ (u₀ : «ℝ³» → «ℝ³») (f : VectorField) (ν : ℝ),
+     ν > 0 →
+     IsSmooth u₀ →
+-    (∀ x : ℝ³, (u₀ x).sum = 0) → -- divergence-free condition (simplified)
++    (∀ x : «ℝ³», (u₀ x).sum = 0) → -- divergence-free condition (simplified)
+     HasBoundedEnergy (fun x t => u₀ x) →
+     ∃ (sys : NavierStokesSystem),
+       sys.force = f ∧
+--- a/provers/lean/Riemann.lean
++++ b/provers/lean/Riemann.lean
+@@ -6,6 +6,8 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ 
++noncomputable section
++
+ /--
+ The Riemann Zeta Function (conceptual definition).
+ For Re(s) > 1: ζ(s) = ∑_{n=1}^∞ 1/n^s
+--- a/provers/lean/Sovereign.lean
++++ b/provers/lean/Sovereign.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Sovereign Identity Proof System
+   LA 2028 - Cryptographic Logic Foundations
+@@ -52,7 +53,7 @@
+ 
+ end Sovereign
+ 
+-/-- System-level verification -/
++/- System-level verification -/
+ namespace System
+ 
+ open Sovereign
+--- a/universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean
++++ b/universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean
+@@ -4,6 +4,9 @@
+ 
+ import Mathlib.Data.Fintype.Basic
+ import Mathlib.Order.Basic
++import Mathlib.Tactic.NormNum
++
++noncomputable section
+ 
+ namespace SystemCore
+ 
+--- a/universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/CookLevin.lean
++++ b/universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/CookLevin.lean
+@@ -4,6 +4,9 @@
+ 
+ import Mathlib.Computability.TuringMachine
+ import Mathlib.Data.Fintype.Basic
++import Mathlib.Tactic.Bound
++
++noncomputable section
+ 
+ namespace PvsNP
+ 
+--- a/universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/SAT_Complexity.lean
++++ b/universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/SAT_Complexity.lean
+@@ -6,6 +6,8 @@
+ import Mathlib.Data.Fintype.Basic
+ import Mathlib.Logic.Basic
+ 
++noncomputable section
++
+ namespace PvsNP
+ 
+ /-- Boolean formula representation -/
+--- a/universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean
++++ b/universe-0-0/Camada1_Provas/lean/MillenniumProblems/RiemannHypothesis/ZetaFunction.lean
+@@ -5,6 +5,7 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Analytic.Basic
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace RiemannHypothesis
+ 

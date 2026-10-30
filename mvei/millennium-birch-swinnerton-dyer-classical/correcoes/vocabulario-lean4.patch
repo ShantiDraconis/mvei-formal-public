@@ -1,0 +1,688 @@
+--- a/src/lean/BSD/Auxiliary/GaloisRepresentations.lean
++++ b/src/lean/BSD/Auxiliary/GaloisRepresentations.lean
+@@ -5,6 +5,10 @@
+ -/
+ 
+ import BSD.EllipticCurve.Basic
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Algebra.Field.Rat
++
++noncomputable section
+ 
+ /-!
+ # Galois Representations
+@@ -93,7 +97,7 @@
+     True :=  -- Gal acts on T_ℓ(E) giving ρ_{E,ℓ}
+   trivial
+ 
+-/-- Image of Galois representation -/
++/- Image of Galois representation -/
+ -- For most curves, the image is open in GL_2(ℤ_ℓ)
+ 
+ /-- Serre's open image theorem -/
+--- a/src/lean/BSD/Auxiliary/HeckeOperators.lean
++++ b/src/lean/BSD/Auxiliary/HeckeOperators.lean
+@@ -6,6 +6,12 @@
+ 
+ import BSD.EllipticCurve.Basic
+ import BSD.LFunction.Definition
++import Mathlib.Data.Nat.Prime.Defs
++import BSD.EllipticCurve.Weierstrass
++import Mathlib.Algebra.Field.Rat
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ /-!
+ # Hecke Operators
+@@ -65,8 +71,8 @@
+ /-- A form is a Hecke eigenform if it's an eigenvector for all T_p -/
+ def isEigenform (f : ModularForm lvl) : Prop :=
+   ∀ p : ℕ, Nat.Prime p → p ∣ lvl.N = false →
+-    ∃ λ : ℂ, heckeT p f = {
+-      coefficients := fun n => λ * f.coefficients n
++    ∃ «λ» : ℂ, heckeT p f = {
++      coefficients := fun n => «λ» * f.coefficients n
+       cusp := by sorry
+       normalized := by sorry
+     }
+@@ -74,7 +80,7 @@
+ /-- Eigenvalue for T_p equals the coefficient a_p -/
+ theorem eigenvalue_eq_coeff (f : ModularForm lvl) (hf : isEigenform f)
+     (p : ℕ) [hp : Fact (Nat.Prime p)] (hgood : ¬ p ∣ lvl.N) :
+-    ∃ λ : ℂ, λ = f.coefficients p := by
++    ∃ «λ» : ℂ, «λ» = f.coefficients p := by
+   sorry
+ 
+ /-- Hecke operators commute -/
+@@ -92,7 +98,7 @@
+ 
+ end ModularForm
+ 
+-/-- Connection between modular forms and elliptic curves -/
++/- Connection between modular forms and elliptic curves -/
+ namespace EllipticCurve
+ 
+ variable (E : EllipticCurve ℚ)
+--- a/src/lean/BSD/Auxiliary/HeightPairings.lean
++++ b/src/lean/BSD/Auxiliary/HeightPairings.lean
+@@ -5,6 +5,9 @@
+ -/
+ 
+ import BSD.EllipticCurve.Heights
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Algebra.Field.Rat
++import Mathlib.Data.Real.Basic
+ 
+ /-!
+ # Height Pairings
+--- a/src/lean/BSD/BSD/KnownCases.lean
++++ b/src/lean/BSD/BSD/KnownCases.lean
+@@ -7,6 +7,9 @@
+ import BSD.BSD.Statement
+ import BSD.BSD.WeakBSD
+ import BSD.BSD.StrongBSD
++import Mathlib.Algebra.Field.Rat
++
++noncomputable section
+ 
+ /-!
+ # Known Cases of BSD
+@@ -103,7 +106,7 @@
+ theorem BSD_holds_rank_leq_1' (E : EllipticCurve ℚ) (h : analyticRank E ≤ 1) :
+     WeakBSD E := WeakBSD_holds_rank_leq_1 E h
+ 
+-/-- Strong BSD is known for specific curves -/
++/- Strong BSD is known for specific curves -/
+ -- This would require explicit numerical data
+ 
+ /-! ## Database Curves -/
+@@ -112,7 +115,7 @@
+ structure DatabaseCurve where
+   label : String
+   conductor : ℕ
+-  a1 a2 a3 a4 a6 : ℚ
++  (a1 a2 a3 a4 a6 : ℚ)
+   rank : ℕ
+   torsion : ℕ
+   bsd_verified : Bool
+@@ -150,10 +153,11 @@
+ 
+ /-! ## Future Work -/
+ 
+-/-- Placeholder for rank 2 case (open problem) -/
++/- Placeholder for rank 2 case (open problem) -/
+ -- No theorem; BSD is open for rank ≥ 2
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/BSD/ReductionSchemes.lean
++++ b/src/lean/BSD/BSD/ReductionSchemes.lean
+@@ -5,6 +5,11 @@
+ -/
+ 
+ import BSD.BSD.Statement
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Algebra.Field.Rat
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ /-!
+ # Reduction Schemes for BSD
+@@ -97,11 +102,11 @@
+ 
+ /-! ## Open Problems -/
+ 
+-/-- BSD for rank ≥ 2 requires new ideas -/
++/- BSD for rank ≥ 2 requires new ideas -/
+ -- Currently no known Euler system for rank > 1
+ -- Heegner points only give rank 1
+ 
+-/-- Possible approaches for rank ≥ 2:
++/- Possible approaches for rank ≥ 2:
+     - Darmon's Stark-Heegner points
+     - Higher Chow groups
+     - p-adic L-functions and Iwasawa theory
+--- a/src/lean/BSD/BSD/Statement.lean
++++ b/src/lean/BSD/BSD/Statement.lean
+@@ -7,6 +7,10 @@
+ import BSD.Rank.AlgebraicRank
+ import BSD.Rank.AnalyticRank
+ import BSD.EllipticCurve.Heights
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
++noncomputable section
+ 
+ /-!
+ # The Birch and Swinnerton-Dyer Conjecture - Statement
+@@ -39,7 +43,7 @@
+ /-- The real period is positive -/
+ axiom realPeriod_pos : realPeriod E > 0
+ 
+-/-- Regulator R_E = det(⟨P_i, P_j⟩) for generators P_1, ..., P_r -/
++/- Regulator R_E = det(⟨P_i, P_j⟩) for generators P_1, ..., P_r -/
+ -- Already defined in Heights.lean
+ 
+ /-- The Tamagawa number at a prime p -/
+@@ -128,6 +132,7 @@
+ theorem weak_BSD_plus_sha (h : WeakBSD E) : True := trivial
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/BSD/StrongBSD.lean
++++ b/src/lean/BSD/BSD/StrongBSD.lean
+@@ -1,4 +1,8 @@
+ import BSD.BSD.Statement
++import Mathlib.Data.Nat.Factorial.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
++noncomputable section
+ 
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+@@ -110,10 +114,11 @@
+ /-- Strong BSD holds for CM curves of rank 0 (Coates-Wiles) -/
+ axiom StrongBSD_CM_rank_0 (h : True) (hrank : analyticRank E = 0) : StrongBSD E
+ 
+-/-- Strong BSD can be numerically verified for many curves -/
++/- Strong BSD can be numerically verified for many curves -/
+ -- Cremona's tables verify BSD numerically for all curves of conductor ≤ N
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/BSD/WeakBSD.lean
++++ b/src/lean/BSD/BSD/WeakBSD.lean
+@@ -1,4 +1,5 @@
+ import BSD.BSD.Statement
++import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+@@ -97,10 +98,11 @@
+               algebraicRank E = k) := by
+   sorry
+ 
+-/-- Weak BSD in terms of descent -/
++/- Weak BSD in terms of descent -/
+ -- Would require Selmer groups
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/Cohomology/SelmerGroups.lean
++++ b/src/lean/BSD/Cohomology/SelmerGroups.lean
+@@ -1,4 +1,5 @@
+ import BSD.Cohomology.GaloisCohomology
++local notation "ℕ" => Nat
+ 
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+--- a/src/lean/BSD/Cohomology/TateShafarevich.lean
++++ b/src/lean/BSD/Cohomology/TateShafarevich.lean
+@@ -1,4 +1,5 @@
+ import BSD.Cohomology.SelmerGroups
++import Mathlib.Tactic
+ 
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+--- a/src/lean/BSD/EllipticCurve/Basic.lean
++++ b/src/lean/BSD/EllipticCurve/Basic.lean
+@@ -7,6 +7,8 @@
+ import Mathlib.Algebra.Field.Basic
+ import Mathlib.Data.Rat.Defs
+ 
++noncomputable section
++
+ /-!
+ # Elliptic Curves - Basic Definitions
+ 
+@@ -44,7 +46,7 @@
+ /-- The discriminant of a Weierstrass equation.
+     Δ = -b₂²b₈ - 8b₄³ - 27b₆² + 9b₂b₄b₆ -/
+ def discriminant' (a1 a2 a3 a4 a6 : K) : K :=
+-  let aux := computeAuxiliary K a1 a2 a3 a4 a6
++  let aux := computeAuxiliary K a1 a2 a3 a4 a6;
+   -aux.b2^2 * aux.b8 - 8 * aux.b4^3 - 27 * aux.b6^2 + 9 * aux.b2 * aux.b4 * aux.b6
+ 
+ /-- The c₄ invariant -/
+--- a/src/lean/BSD/EllipticCurve/Classical.lean
++++ b/src/lean/BSD/EllipticCurve/Classical.lean
+@@ -10,6 +10,11 @@
+ import Mathlib.Data.Nat.Prime.Basic
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ /-!
+ # Elliptic Curves - Complete Classical Formalization
+@@ -281,19 +286,19 @@
+         CurvePointClassical.infinity
+       else
+         -- Doubling case: P = Q, use tangent line
+-        let λ := (3 * x₁^2 + 2 * E.coeffs.a2 * x₁ + E.coeffs.a4 - E.coeffs.a1 * y₁) / 
++        let «λ» := (3 * x₁^2 + 2 * E.coeffs.a2 * x₁ + E.coeffs.a4 - E.coeffs.a1 * y₁) / 
+                  (2 * y₁ + E.coeffs.a1 * x₁ + E.coeffs.a3)
+         let ν := (-x₁^3 + E.coeffs.a4 * x₁ + 2 * E.coeffs.a6 - E.coeffs.a3 * y₁) /
+                  (2 * y₁ + E.coeffs.a1 * x₁ + E.coeffs.a3)
+-        let x₃ := λ^2 + E.coeffs.a1 * λ - E.coeffs.a2 - 2 * x₁
+-        let y₃ := -(λ + E.coeffs.a1) * x₃ - ν - E.coeffs.a3
++        let x₃ := «λ»^2 + E.coeffs.a1 * «λ» - E.coeffs.a2 - 2 * x₁
++        let y₃ := -(«λ» + E.coeffs.a1) * x₃ - ν - E.coeffs.a3
+         CurvePointClassical.affine x₃ y₃ (by sorry)
+     else
+       -- General addition case: P ≠ Q
+-      let λ := (y₂ - y₁) / (x₂ - x₁)
++      let «λ» := (y₂ - y₁) / (x₂ - x₁)
+       let ν := (y₁ * x₂ - y₂ * x₁) / (x₂ - x₁)
+-      let x₃ := λ^2 + E.coeffs.a1 * λ - E.coeffs.a2 - x₁ - x₂
+-      let y₃ := -(λ + E.coeffs.a1) * x₃ - ν - E.coeffs.a3
++      let x₃ := «λ»^2 + E.coeffs.a1 * «λ» - E.coeffs.a2 - x₁ - x₂
++      let y₃ := -(«λ» + E.coeffs.a1) * x₃ - ν - E.coeffs.a3
+       CurvePointClassical.affine x₃ y₃ (by sorry)
+ 
+ /-- Addition notation -/
+--- a/src/lean/BSD/EllipticCurve/GroupLaw.lean
++++ b/src/lean/BSD/EllipticCurve/GroupLaw.lean
+@@ -1,6 +1,8 @@
+ import BSD.EllipticCurve.Basic
+ import BSD.EllipticCurve.Weierstrass
+ 
++noncomputable section
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license.
+@@ -79,19 +81,19 @@
+         infinity
+       else
+         -- P = Q (doubling), use tangent line
+-        let λ := (3 * x1^2 + 2 * E.a2 * x1 + E.a4 - E.a1 * y1) /
++        let «λ» := (3 * x1^2 + 2 * E.a2 * x1 + E.a4 - E.a1 * y1) /
+                  (2 * y1 + E.a1 * x1 + E.a3)
+         let ν := (-x1^3 + E.a4 * x1 + 2 * E.a6 - E.a3 * y1) /
+                  (2 * y1 + E.a1 * x1 + E.a3)
+-        let x3 := λ^2 + E.a1 * λ - E.a2 - 2 * x1
+-        let y3 := -(λ + E.a1) * x3 - ν - E.a3
++        let x3 := «λ»^2 + E.a1 * «λ» - E.a2 - 2 * x1
++        let y3 := -(«λ» + E.a1) * x3 - ν - E.a3
+         affine x3 y3 (by sorry)
+     else
+       -- P ≠ Q, use secant line
+-      let λ := (y2 - y1) / (x2 - x1)
++      let «λ» := (y2 - y1) / (x2 - x1)
+       let ν := (y1 * x2 - y2 * x1) / (x2 - x1)
+-      let x3 := λ^2 + E.a1 * λ - E.a2 - x1 - x2
+-      let y3 := -(λ + E.a1) * x3 - ν - E.a3
++      let x3 := «λ»^2 + E.a1 * «λ» - E.a2 - x1 - x2
++      let y3 := -(«λ» + E.a1) * x3 - ν - E.a3
+       affine x3 y3 (by sorry)
+ 
+ instance : Add (Point E) := ⟨add⟩
+@@ -144,6 +146,7 @@
+ end Point
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/EllipticCurve/Heights.lean
++++ b/src/lean/BSD/EllipticCurve/Heights.lean
+@@ -6,6 +6,7 @@
+ 
+ import BSD.EllipticCurve.Basic
+ import BSD.EllipticCurve.GroupLaw
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ 
+ /-!
+ # Heights on Elliptic Curves
+@@ -131,6 +132,7 @@
+   sorry
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/EllipticCurve/Invariants.lean
++++ b/src/lean/BSD/EllipticCurve/Invariants.lean
+@@ -1,6 +1,8 @@
+ import BSD.EllipticCurve.Basic
+ import BSD.EllipticCurve.Weierstrass
+ 
++noncomputable section
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license.
+@@ -32,7 +34,7 @@
+ 
+ /-- The c₆ invariant of an elliptic curve -/
+ def c6 (E : EllipticCurve K) : K :=
+-  let aux := computeAuxiliary K E.a1 E.a2 E.a3 E.a4 E.a6
++  let aux := computeAuxiliary K E.a1 E.a2 E.a3 E.a4 E.a6;
+   -aux.b2^3 + 36 * aux.b2 * aux.b4 - 216 * aux.b6
+ 
+ /-- Relation between discriminant and c₄, c₆: Δ = (c₄³ - c₆²)/1728 -/
+@@ -83,6 +85,7 @@
+   trivial  -- The actual transformation formula is in Weierstrass.lean
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean
++++ b/src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean
+@@ -9,6 +9,11 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ import Mathlib.Data.Rat.Defs
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Data.Real.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ /-!
+ # Regulator and Height Pairing for Elliptic Curves
+@@ -472,7 +477,7 @@
+ example : regulator [point37a1] = neronTateHeight point37a1 := by
+   exact regulator_rank_one point37a1
+ 
+-/-- Example: Rank 2 curve (e.g., 389a1) would have 2×2 regulator -/
++/- Example: Rank 2 curve (e.g., 389a1) would have 2×2 regulator -/
+ -- The computation involves two independent generators
+ 
+ end Examples
+--- a/src/lean/BSD/EllipticCurve/Weierstrass.lean
++++ b/src/lean/BSD/EllipticCurve/Weierstrass.lean
+@@ -5,6 +5,10 @@
+ -/
+ 
+ import BSD.EllipticCurve.Basic
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Algebra.Field.Rat
++
++noncomputable section
+ 
+ /-!
+ # Weierstrass Models
+@@ -97,6 +101,7 @@
+   sorry
+ 
+ end Weierstrass
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/LFunction/AnalyticProperties.lean
++++ b/src/lean/BSD/LFunction/AnalyticProperties.lean
+@@ -5,6 +5,10 @@
+ -/
+ 
+ import BSD.LFunction.Definition
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import BSD.EllipticCurve.Weierstrass
+ 
+ /-!
+ # Analytic Properties of L-Functions
+--- a/src/lean/BSD/LFunction/Definition.lean
++++ b/src/lean/BSD/LFunction/Definition.lean
+@@ -5,6 +5,13 @@
+ -/
+ 
+ import BSD.EllipticCurve.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Data.Nat.Factorial.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ /-!
+ # L-Functions of Elliptic Curves
+@@ -120,6 +127,7 @@
+   deriv^[analyticRank E] (L_function E) 1 / Nat.factorial (analyticRank E)
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/LFunction/EulerFactors.lean
++++ b/src/lean/BSD/LFunction/EulerFactors.lean
+@@ -7,6 +7,11 @@
+ import BSD.EllipticCurve.Basic
+ import BSD.EllipticCurve.Weierstrass
+ import BSD.LFunction.Definition
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ /-!
+ # Euler Factors of L-Functions
+@@ -121,6 +126,7 @@
+   sorry
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/LFunction/FunctionalEquation.lean
++++ b/src/lean/BSD/LFunction/FunctionalEquation.lean
+@@ -6,6 +6,11 @@
+ 
+ import BSD.LFunction.Definition
+ import BSD.LFunction.AnalyticProperties
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ /-!
+ # Functional Equation of L-Functions
+--- a/src/lean/BSD/LFunction/LSeriesExpansionS1.lean
++++ b/src/lean/BSD/LFunction/LSeriesExpansionS1.lean
+@@ -8,6 +8,15 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Data.Complex.Exponential
+ import Mathlib.NumberTheory.ArithmeticFunction
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ /-!
+ # L-Series Expansion at s = 1
+@@ -218,7 +227,7 @@
+   (L.conductor.N : ℂ)^(s/2) * (2 * Real.pi)^(-s) * Complex.Gamma s * LFunctionClassical L s
+ 
+ /-- The root number ε ∈ {-1, +1} -/
+-def RootNumber : Type := { ε : ℤ // ε = 1 ∨ ε = -1 }
++abbrev RootNumber : Type := { ε : ℤ // ε = 1 ∨ ε = -1 }
+ 
+ /-- The root number of an L-function -/
+ axiom rootNumber (L : LSeriesCoefficients) : RootNumber
+--- a/src/lean/BSD/LFunction/SpecialValues.lean
++++ b/src/lean/BSD/LFunction/SpecialValues.lean
+@@ -1,5 +1,7 @@
+ import BSD.LFunction.FunctionalEquationAxioms
+ 
++noncomputable section
++
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+--- a/src/lean/BSD/LFunction/TamagawaNumbers.lean
++++ b/src/lean/BSD/LFunction/TamagawaNumbers.lean
+@@ -7,6 +7,9 @@
+ import Mathlib.NumberTheory.Padics.PadicVal.Basic
+ import Mathlib.Data.Int.Basic
+ import Mathlib.Data.Nat.Prime.Basic
++import Mathlib.Data.Nat.Prime.Defs
++
++noncomputable section
+ 
+ /-!
+ # Tamagawa Numbers for Elliptic Curves
+@@ -329,7 +332,7 @@
+ /-- Data for an elliptic curve over ℚ -/
+ structure EllipticCurveData where
+   /-- Weierstrass coefficients -/
+-  a1 a2 a3 a4 a6 : ℤ
++  (a1 a2 a3 a4 a6 : ℤ)
+   /-- The discriminant is non-zero -/
+   disc_ne_zero : a1^2 * (a1^2 * a6 + 4 * a2 * a6 - a1 * a3 * a4 + a2 * a3^2 - a4^2) -
+                  8 * (2 * a4 + a1 * a3)^3 - 
+@@ -439,7 +442,7 @@
+     }
+   else none
+ 
+-/-- Remaining steps handle additive reduction -/
++/- Remaining steps handle additive reduction -/
+ -- Steps 3-11 of Tate's algorithm handle various additive cases
+ -- Each step involves checking valuations and making coordinate changes
+ 
+--- a/src/lean/BSD/ModularForms/ModularFormsBasic.lean
++++ b/src/lean/BSD/ModularForms/ModularFormsBasic.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+--- a/src/lean/BSD/ModularForms/Newforms.lean
++++ b/src/lean/BSD/ModularForms/Newforms.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 BSD Formalization Project. All rights reserved.
+ Released under MIT license as described in the file LICENSE.
+--- a/src/lean/BSD/Rank/AlgebraicRank.lean
++++ b/src/lean/BSD/Rank/AlgebraicRank.lean
+@@ -8,6 +8,8 @@
+ import BSD.EllipticCurve.GroupLaw
+ import BSD.EllipticCurve.Heights
+ 
++noncomputable section
++
+ /-!
+ # Algebraic Rank of Elliptic Curves
+ 
+@@ -114,6 +116,7 @@
+   sorry
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/Rank/AnalyticRank.lean
++++ b/src/lean/BSD/Rank/AnalyticRank.lean
+@@ -6,6 +6,10 @@
+ 
+ import BSD.LFunction.Definition
+ import BSD.LFunction.AnalyticProperties
++import Mathlib.Data.Nat.Factorial.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
++noncomputable section
+ 
+ /-!
+ # Analytic Rank of Elliptic Curves
+@@ -30,7 +34,7 @@
+ 
+ variable (E : EllipticCurve ℚ)
+ 
+-/-- The analytic rank (already defined in LFunction.Definition) -/
++/- The analytic rank (already defined in LFunction.Definition) -/
+ -- analyticRank is the order of vanishing of L(E, s) at s = 1
+ 
+ /-- Analytic rank is non-negative -/
+@@ -100,10 +104,10 @@
+     omega
+   exact Nat.odd_iff_not_even.mpr hne
+ 
+-/-- Conjectured: analytic rank is bounded (unknown if true) -/
++/- Conjectured: analytic rank is bounded (unknown if true) -/
+ -- No theorem; this is an open question
+ 
+-/-- Known bounds on analytic rank for specific families -/
++/- Known bounds on analytic rank for specific families -/
+ -- Example: for quadratic twists, average rank is bounded
+ 
+ /-- Taylor expansion of L(E, s) at s = 1 -/
+@@ -130,6 +134,7 @@
+   | inr hf => exact hfac hf
+ 
+ end EllipticCurve
++/-
+ Released under MIT license as described in the file LICENSE.
+ Authors: BSD Formalization Team
+ -/
+--- a/src/lean/BSD/Rank/RankEquivalences.lean
++++ b/src/lean/BSD/Rank/RankEquivalences.lean
+@@ -6,6 +6,7 @@
+ 
+ import BSD.Rank.AlgebraicRank
+ import BSD.Rank.AnalyticRank
++import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ /-!
+ # Rank Equivalences and BSD
+@@ -101,13 +102,13 @@
+     ∃ gens : List (Point E), gens.length = algebraicRank E ∧ regulator E gens > 0 := by
+   sorry
+ 
+-/-- Descent bound: algebraic rank ≤ log_2(Selmer) -/
++/- Descent bound: algebraic rank ≤ log_2(Selmer) -/
+ -- This relates to descent methods for bounding the rank
+ 
+-/-- Known: ranks are unbounded (conjecture, but examples show large ranks exist) -/
++/- Known: ranks are unbounded (conjecture, but examples show large ranks exist) -/
+ -- The largest known rank is ≥ 28 (Elkies)
+ 
+-/-- Conjectured distribution: half of curves have rank 0, half have rank 1 -/
++/- Conjectured distribution: half of curves have rank 0, half have rank 1 -/
+ -- Bhargava-Shankar: average rank is bounded
+ 
+ end EllipticCurve
+--- a/src/lean/BSDMeta/DependencyGraph.lean
++++ b/src/lean/BSDMeta/DependencyGraph.lean
+@@ -36,6 +36,6 @@
+   | complete : ModuleStatus
+   | inProgress : ModuleStatus
+   | notStarted : ModuleStatus
+-  | axiom : ModuleStatus  -- Taken as established result
++  | «axiom» : ModuleStatus  -- Taken as established result
+ 
+ end BSD.Meta

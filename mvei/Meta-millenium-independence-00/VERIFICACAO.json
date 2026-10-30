@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,18 +15,146 @@
    "toolchain_used": "leanprover/lean4:v4.3.0",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 7.4,
-   "build_error": "error: > LEAN_PATH=./.lake/build/lib LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.12.15/x64/lib:./.lake/build/lib /mnt/w/elan/toolchains/leanprover--lean4---v4.3.0/bin/lean ./././MetaMillennium/Core/TheoryAndModel.lean -R ././. -o ./.lake/build/lib/MetaMillennium/Core/TheoryAndModel.olean -i ./.lake/build/lib/MetaMillennium/Core/TheoryAndModel.ilean -c ./.lake/build/ir/MetaMillennium/Core/TheoryAndModel.c | error: stdout: | ./././MetaMillennium/Core/TheoryAndModel.lean:36:5: error: unexpected token '∈'; expected ',' | error: external command `/mnt/w/elan/toolchains/leanprover--lean4---v4.3.0/bin/lean` exited with code 1",
-   "sorry_warnings": 0,
-   "reconstructed": false,
-   "bridges": [],
-   "declared_axioms": [],
+   "build_seconds": 8.0,
+   "build_error": "error: > LEAN_PATH=./.lake/build/lib LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.12.15/x64/lib:./.lake/build/lib /mnt/w/elan/toolchains/leanprover--lean4---v4.3.0/bin/lean ./././MetaMillennium/DualState/DualStateDefinition.lean -R ././. -o ./.lake/build/lib/MetaMillennium/DualState/DualStateDefinition.olean -i ./.lake/build/lib/MetaMillennium/DualState/DualStateDefinition.ilean -c ./.lake/build/ir/MetaMillennium/DualState/DualStateDefinition.c | error: stdout: | ./././MetaMillennium/DualState/DualStateDefinition.lean:6:0: error: unknown package 'Mathlib' | ./././MetaMillennium/DualState/DualStateDefinition.lean:11:5: error: unknown namespace 'MetaMillennium.Core'",
+   "sorry_warnings": 2,
+   "reconstructed": true,
+   "bridges": [
+    {
+     "repo": "Meta-millenium-independence-00",
+     "project": "src/lean",
+     "theorem": "MetaMillennium.Core.independence_via_consistency",
+     "statement": "∀ (T : MetaMillennium.Core.Theory) (φ : MetaMillennium.Core.Sentence),   Con(T) → (Ind(T, φ) ↔ Con(T + φ) ∧ Con(T + MetaMillennium.Core.Formula.neg φ))",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "Meta-millenium-independence-00",
+     "project": "src/lean",
+     "theorem": "MetaMillennium.InnerModels.L.proof_1",
+     "statement": "{ id := 0, name := \"L\" } ⊨ₜ MetaMillennium.Core.ZFC",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    }
+   ],
+   "declared_axioms": [
+    {
+     "name": "MetaMillennium.InnerModels.L_is_minimal",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "statement": "∀ (M : MetaMillennium.InnerModels.InnerModel),   MetaMillennium.InnerModels.InnerModel.subset MetaMillennium.InnerModels.L M"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.L_satisfies_AC",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "statement": "MetaMillennium.InnerModels.L.toModel ⊨ { id := 110, repr := \"AC\" }"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.L_satisfies_GCH",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "statement": "MetaMillennium.InnerModels.L.toModel ⊨ { id := 202, repr := \"GCH\" }"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.L_satisfies_VeqL",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "statement": "MetaMillennium.InnerModels.L.toModel ⊨ { id := 200, repr := \"V = L\" }"
+    },
+    {
+     "name": "MetaMillennium.LargeCardinals.AD_inconsistent_with_AC",
+     "module": "MetaMillennium.LargeCardinals.WoodinCardinals",
+     "statement": "¬(True ∧ True)"
+    },
+    {
+     "name": "MetaMillennium.LargeCardinals.woodin_AD_theorem",
+     "module": "MetaMillennium.LargeCardinals.WoodinCardinals",
+     "statement": "(ℕ → ∃ κ, MetaMillennium.LargeCardinals.isWoodin κ) → True"
+    },
+    {
+     "name": "MetaMillennium.Models.measurable_implies_inaccessible",
+     "module": "MetaMillennium.Models.LargeCardinalSkeleton",
+     "statement": "∀ (κ : MetaMillennium.LargeCardinals.Cardinal),   MetaMillennium.LargeCardinals.isMeasurable κ → MetaMillennium.LargeCardinals.isInaccessible κ"
+    },
+    {
+     "name": "MetaMillennium.Models.supercompact_implies_measurable",
+     "module": "MetaMillennium.Models.LargeCardinalSkeleton",
+     "statement": "∀ (κ : MetaMillennium.LargeCardinals.Cardinal),   MetaMillennium.LargeCardinals.isSupercompact κ → MetaMillennium.LargeCardinals.isMeasurable κ"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.BSD_rank_0_1",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "statement": "∀ (E : MetaMillennium.Problems.BSD.EllipticCurve) (L : MetaMillennium.Problems.BSD.LFunction E),   L.analytic_rank ≤ 1 → MetaMillennium.Problems.BSD.BSD_for_curve E"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.P_equals_NP_with_A",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "statement": "MetaMillennium.Problems.PNP.P_oracle MetaMillennium.Problems.PNP.oracle_A =   MetaMillennium.Problems.PNP.NP_oracle MetaMillennium.Problems.PNP.oracle_A"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.P_neq_NP_with_B",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "statement": "MetaMillennium.Problems.PNP.P_oracle MetaMillennium.Problems.PNP.oracle_B ≠   MetaMillennium.Problems.PNP.NP_oracle MetaMillennium.Problems.PNP.oracle_B"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.oracle_A",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "statement": "MetaMillennium.Problems.PNP.Oracle"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.oracle_B",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "statement": "MetaMillennium.Problems.PNP.Oracle"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.mertens_equivalence",
+     "module": "MetaMillennium.Problems.RH.RHEquivalences",
+     "statement": "MetaMillennium.Problems.RH.RH_statement ↔ MetaMillennium.Problems.RH.mertensBound"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.prime_counting_equivalence",
+     "module": "MetaMillennium.Problems.RH.RHEquivalences",
+     "statement": "MetaMillennium.Problems.RH.RH_statement → MetaMillennium.Problems.RH.primeCountingBound"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.robin_equivalence",
+     "module": "MetaMillennium.Problems.RH.RHEquivalences",
+     "statement": "MetaMillennium.Problems.RH.RH_statement ↔ ∀ n > 5040, MetaMillennium.Problems.RH.robinInequality n"
+    }
+   ],
    "theorems": [
     {
      "name": "MetaMillennium.Core.Formula.mk.inj",
      "module": "MetaMillennium.Core.LogicBasics",
      "axioms": [],
-     "statement": "∀ {id : Nat} {repr : String} {id_1 : Nat} {repr_1 : String},   { id := id, repr := repr } = { id := id_1, repr := repr_1 } → id = id_1 ∧ repr = repr_1",
+     "statement": "∀ {id : ℕ} {repr : String} {id_1 : ℕ} {repr_1 : String},   { id := id, repr := repr } = { id := id_1, repr := repr_1 } → id = id_1 ∧ repr = repr_1",
      "status": "fechado"
     },
     {
@@ -35,369 +163,1328 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ (id : Nat) (repr : String) (id_1 : Nat) (repr_1 : String),   ({ id := id, repr := repr } = { id := id_1, repr := repr_1 }) = (id = id_1 ∧ repr = repr_1)",
+     "statement": "∀ (id : ℕ) (repr : String) (id_1 : ℕ) (repr_1 : String),   ({ id := id, repr := repr } = { id := id_1, repr := repr_1 }) = (id = id_1 ∧ repr = repr_1)",
      "status": "fechado"
     },
     {
      "name": "MetaMillennium.Core.Formula.mk.sizeOf_spec",
      "module": "MetaMillennium.Core.LogicBasics",
      "axioms": [],
-     "statement": "∀ (id : Nat) (repr : String), sizeOf { id := id, repr := repr } = 1 + sizeOf id + sizeOf repr",
+     "statement": "∀ (id : ℕ) (repr : String), sizeOf { id := id, repr := repr } = 1 + sizeOf id + sizeOf repr",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.Model.mk.inj",
+     "module": "MetaMillennium.Core.TheoryAndModel",
+     "axioms": [],
+     "statement": "∀ {id : ℕ} {name : String} {id_1 : ℕ} {name_1 : String},   { id := id, name := name } = { id := id_1, name := name_1 } → id = id_1 ∧ name = name_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.Model.mk.injEq",
+     "module": "MetaMillennium.Core.TheoryAndModel",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : ℕ) (name : String) (id_1 : ℕ) (name_1 : String),   ({ id := id, name := name } = { id := id_1, name := name_1 }) = (id = id_1 ∧ name = name_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.Model.mk.sizeOf_spec",
+     "module": "MetaMillennium.Core.TheoryAndModel",
+     "axioms": [],
+     "statement": "∀ (id : ℕ) (name : String), sizeOf { id := id, name := name } = 1 + sizeOf id + sizeOf name",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.Theory.mk.inj",
+     "module": "MetaMillennium.Core.TheoryAndModel",
+     "axioms": [],
+     "statement": "∀ {name : String} {axioms : List MetaMillennium.Core.Sentence} {name_1 : String}   {axioms_1 : List MetaMillennium.Core.Sentence},   { name := name, axioms := axioms } = { name := name_1, axioms := axioms_1 } → name = name_1 ∧ axioms = axioms_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.Theory.mk.injEq",
+     "module": "MetaMillennium.Core.TheoryAndModel",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (name : String) (axioms : List MetaMillennium.Core.Sentence) (name_1 : String)   (axioms_1 : List MetaMillennium.Core.Sentence),   ({ name := name, axioms := axioms } = { name := name_1, axioms := axioms_1 }) = (name = name_1 ∧ axioms = axioms_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.Theory.mk.sizeOf_spec",
+     "module": "MetaMillennium.Core.TheoryAndModel",
+     "axioms": [],
+     "statement": "∀ (name : String) (axioms : List MetaMillennium.Core.Sentence),   sizeOf { name := name, axioms := axioms } = 1 + sizeOf name + sizeOf axioms",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Core.independence_via_consistency",
+     "module": "MetaMillennium.Core.ConsistencyAndIndependence",
+     "axioms": [
+      "sorryAx"
+     ],
+     "statement": "∀ (T : MetaMillennium.Core.Theory) (φ : MetaMillennium.Core.Sentence),   Con(T) → (Ind(T, φ) ↔ Con(T + φ) ∧ Con(T + MetaMillennium.Core.Formula.neg φ))",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.InnerModel.mk.inj",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "axioms": [],
+     "statement": "∀ {toModel : MetaMillennium.Core.Model} {is_transitive contains_ordinals : True}   {satisfies_ZFC : toModel ⊨ₜ MetaMillennium.Core.ZFC} {toModel_1 : MetaMillennium.Core.Model}   {is_transitive_1 contains_ordinals_1 : True} {satisfies_ZFC_1 : toModel_1 ⊨ₜ MetaMillennium.Core.ZFC},   { toModel := toModel, is_transitive := is_transitive, contains_ordinals := contains_ordinals,         satisfies_ZFC :",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.InnerModel.mk.injEq",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (toModel : MetaMillennium.Core.Model) (is_transitive contains_ordinals : True)   (satisfies_ZFC : toModel ⊨ₜ MetaMillennium.Core.ZFC) (toModel_1 : MetaMillennium.Core.Model)   (is_transitive_1 contains_ordinals_1 : True) (satisfies_ZFC_1 : toModel_1 ⊨ₜ MetaMillennium.Core.ZFC),   ({ toModel := toModel, is_transitive := is_transitive, contains_ordinals := contains_ordinals,         satisfies_ZFC",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.InnerModel.mk.sizeOf_spec",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "axioms": [],
+     "statement": "∀ (toModel : MetaMillennium.Core.Model) (is_transitive contains_ordinals : True)   (satisfies_ZFC : toModel ⊨ₜ MetaMillennium.Core.ZFC),   sizeOf       { toModel := toModel, is_transitive := is_transitive, contains_ordinals := contains_ordinals,         satisfies_ZFC := satisfies_ZFC } =     1 + sizeOf toModel + sizeOf is_transitive + sizeOf contains_ordinals",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.InnerModels.L.proof_1",
+     "module": "MetaMillennium.InnerModels.InnerModelBasics",
+     "axioms": [
+      "sorryAx"
+     ],
+     "statement": "{ id := 0, name := \"L\" } ⊨ₜ MetaMillennium.Core.ZFC",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "MetaMillennium.Models.Cardinal.mk.inj",
+     "module": "MetaMillennium.Models.LargeCardinalSkeleton",
+     "axioms": [],
+     "statement": "∀ {index index_1 : ℕ}, { index := index } = { index := index_1 } → index = index_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Models.Cardinal.mk.injEq",
+     "module": "MetaMillennium.Models.LargeCardinalSkeleton",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (index index_1 : ℕ), ({ index := index } = { index := index_1 }) = (index = index_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Models.Cardinal.mk.sizeOf_spec",
+     "module": "MetaMillennium.Models.LargeCardinalSkeleton",
+     "axioms": [],
+     "statement": "∀ (index : ℕ), sizeOf { index := index } = 1 + sizeOf index",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.AxiomaticNumber.mk.inj",
+     "module": "MetaMillennium.NumericClasses.AxiomaticNumbers",
+     "axioms": [],
+     "statement": "∀ {description : String} {determiningAxiom : MetaMillennium.Core.Sentence} {exists_iff_axiom : Prop}   {description_1 : String} {determiningAxiom_1 : MetaMillennium.Core.Sentence} {exists_iff_axiom_1 : Prop},   { description := description, determiningAxiom := determiningAxiom, exists_iff_axiom := exists_iff_axiom } =       { description := description_1, determiningAxiom := determiningAxiom_1, ex",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.AxiomaticNumber.mk.injEq",
+     "module": "MetaMillennium.NumericClasses.AxiomaticNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (description : String) (determiningAxiom : MetaMillennium.Core.Sentence) (exists_iff_axiom : Prop)   (description_1 : String) (determiningAxiom_1 : MetaMillennium.Core.Sentence) (exists_iff_axiom_1 : Prop),   ({ description := description, determiningAxiom := determiningAxiom, exists_iff_axiom := exists_iff_axiom } =       { description := description_1, determiningAxiom := determiningAxiom_1,",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.AxiomaticNumber.mk.sizeOf_spec",
+     "module": "MetaMillennium.NumericClasses.AxiomaticNumbers",
+     "axioms": [],
+     "statement": "∀ (description : String) (determiningAxiom : MetaMillennium.Core.Sentence) (exists_iff_axiom : Prop),   sizeOf { description := description, determiningAxiom := determiningAxiom, exists_iff_axiom := exists_iff_axiom } =     1 + sizeOf description + sizeOf determiningAxiom + sizeOf exists_iff_axiom",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.CriticalZero.mk.inj",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {real_part imag_part : Float} {on_critical_line : real_part = 0.5} {real_part_1 imag_part_1 : Float}   {on_critical_line_1 : real_part_1 = 0.5},   { real_part := real_part, imag_part := imag_part, on_critical_line := on_critical_line } =       { real_part := real_part_1, imag_part := imag_part_1, on_critical_line := on_critical_line_1 } →     real_part = real_part_1 ∧ imag_part = imag_part_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.CriticalZero.mk.injEq",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (real_part imag_part : Float) (on_critical_line : real_part = 0.5) (real_part_1 imag_part_1 : Float)   (on_critical_line_1 : real_part_1 = 0.5),   ({ real_part := real_part, imag_part := imag_part, on_critical_line := on_critical_line } =       { real_part := real_part_1, imag_part := imag_part_1, on_critical_line := on_critical_line_1 }) =     (real_part = real_part_1 ∧ imag_part = imag_part_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.CriticalZero.mk.sizeOf_spec",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (real_part imag_part : Float) (on_critical_line : real_part = 0.5),   sizeOf { real_part := real_part, imag_part := imag_part, on_critical_line := on_critical_line } =     1 + sizeOf real_part + sizeOf imag_part + sizeOf on_critical_line",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.HypotheticalOffLineZero.mk.inj",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {real_part imag_part : Float} {not_on_line : real_part ≠ 0.5} {is_zero : True} {real_part_1 imag_part_1 : Float}   {not_on_line_1 : real_part_1 ≠ 0.5} {is_zero_1 : True},   { real_part := real_part, imag_part := imag_part, not_on_line := not_on_line, is_zero := is_zero } =       { real_part := real_part_1, imag_part := imag_part_1, not_on_line := not_on_line_1, is_zero := is_zero_1 } →     real_",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.HypotheticalOffLineZero.mk.injEq",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (real_part imag_part : Float) (not_on_line : real_part ≠ 0.5) (is_zero : True) (real_part_1 imag_part_1 : Float)   (not_on_line_1 : real_part_1 ≠ 0.5) (is_zero_1 : True),   ({ real_part := real_part, imag_part := imag_part, not_on_line := not_on_line, is_zero := is_zero } =       { real_part := real_part_1, imag_part := imag_part_1, not_on_line := not_on_line_1, is_zero := is_zero_1 }) =     (re",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.HypotheticalOffLineZero.mk.sizeOf_spec",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (real_part imag_part : Float) (not_on_line : real_part ≠ 0.5) (is_zero : True),   sizeOf { real_part := real_part, imag_part := imag_part, not_on_line := not_on_line, is_zero := is_zero } =     1 + sizeOf real_part + sizeOf imag_part + sizeOf is_zero",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.IndependenceNumber.mk.inj",
+     "module": "MetaMillennium.NumericClasses.IndependenceNumbers",
+     "axioms": [],
+     "statement": "∀ {value : Float} {independentProperty : MetaMillennium.Core.Sentence}   {isIndependent : Ind(MetaMillennium.Core.ZFC, independentProperty)} {value_1 : Float}   {independentProperty_1 : MetaMillennium.Core.Sentence}   {isIndependent_1 : Ind(MetaMillennium.Core.ZFC, independentProperty_1)},   { value := value, independentProperty := independentProperty, isIndependent := isIndependent } =       { va",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.IndependenceNumber.mk.injEq",
+     "module": "MetaMillennium.NumericClasses.IndependenceNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (value : Float) (independentProperty : MetaMillennium.Core.Sentence)   (isIndependent : Ind(MetaMillennium.Core.ZFC, independentProperty)) (value_1 : Float)   (independentProperty_1 : MetaMillennium.Core.Sentence)   (isIndependent_1 : Ind(MetaMillennium.Core.ZFC, independentProperty_1)),   ({ value := value, independentProperty := independentProperty, isIndependent := isIndependent } =       { v",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.IndependenceNumber.mk.sizeOf_spec",
+     "module": "MetaMillennium.NumericClasses.IndependenceNumbers",
+     "axioms": [],
+     "statement": "∀ (value : Float) (independentProperty : MetaMillennium.Core.Sentence)   (isIndependent : Ind(MetaMillennium.Core.ZFC, independentProperty)),   sizeOf { value := value, independentProperty := independentProperty, isIndependent := isIndependent } =     1 + sizeOf value + sizeOf independentProperty + sizeOf isIndependent",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.SeparationNumber.mk.inj",
+     "module": "MetaMillennium.NumericClasses.SeparationNumbers",
+     "axioms": [],
+     "statement": "∀ {description : String} {bound : ℕ → ℕ} {threshold : ℕ} {description_1 : String} {bound_1 : ℕ → ℕ} {threshold_1 : ℕ},   { description := description, bound := bound, threshold := threshold } =       { description := description_1, bound := bound_1, threshold := threshold_1 } →     description = description_1 ∧ bound = bound_1 ∧ threshold = threshold_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.SeparationNumber.mk.injEq",
+     "module": "MetaMillennium.NumericClasses.SeparationNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (description : String) (bound : ℕ → ℕ) (threshold : ℕ) (description_1 : String) (bound_1 : ℕ → ℕ) (threshold_1 : ℕ),   ({ description := description, bound := bound, threshold := threshold } =       { description := description_1, bound := bound_1, threshold := threshold_1 }) =     (description = description_1 ∧ bound = bound_1 ∧ threshold = threshold_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.SeparationNumber.mk.sizeOf_spec",
+     "module": "MetaMillennium.NumericClasses.SeparationNumbers",
+     "axioms": [],
+     "statement": "∀ (description : String) (bound : ℕ → ℕ) (threshold : ℕ),   sizeOf { description := description, bound := bound, threshold := threshold } =     1 + sizeOf description + sizeOf threshold",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.NumericClasses.first_zero.proof_1",
+     "module": "MetaMillennium.NumericClasses.CriticalZeroNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "0.5 = 0.5",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.EllipticCurve.mk.inj",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [],
+     "statement": "∀ {id : ℕ} {a1 a2 a3 a4 a6 : ℤ} {id_1 : ℕ} {a1_1 a2_1 a3_1 a4_1 a6_1 : ℤ},   { id := id, a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6 } =       { id := id_1, a1 := a1_1, a2 := a2_1, a3 := a3_1, a4 := a4_1, a6 := a6_1 } →     id = id_1 ∧ a1 = a1_1 ∧ a2 = a2_1 ∧ a3 = a3_1 ∧ a4 = a4_1 ∧ a6 = a6_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.EllipticCurve.mk.injEq",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : ℕ) (a1 a2 a3 a4 a6 : ℤ) (id_1 : ℕ) (a1_1 a2_1 a3_1 a4_1 a6_1 : ℤ),   ({ id := id, a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6 } =       { id := id_1, a1 := a1_1, a2 := a2_1, a3 := a3_1, a4 := a4_1, a6 := a6_1 }) =     (id = id_1 ∧ a1 = a1_1 ∧ a2 = a2_1 ∧ a3 = a3_1 ∧ a4 = a4_1 ∧ a6 = a6_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.EllipticCurve.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [],
+     "statement": "∀ (id : ℕ) (a1 a2 a3 a4 a6 : ℤ),   sizeOf { id := id, a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6 } =     1 + sizeOf id + sizeOf a1 + sizeOf a2 + sizeOf a3 + sizeOf a4 + sizeOf a6",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.LFunction.mk.inj",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [],
+     "statement": "∀ {E : MetaMillennium.Problems.BSD.EllipticCurve} {analytic_rank analytic_rank_1 : ℕ},   { analytic_rank := analytic_rank } = { analytic_rank := analytic_rank_1 } → analytic_rank = analytic_rank_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.LFunction.mk.injEq",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {E : MetaMillennium.Problems.BSD.EllipticCurve} (analytic_rank analytic_rank_1 : ℕ),   ({ analytic_rank := analytic_rank } = { analytic_rank := analytic_rank_1 }) = (analytic_rank = analytic_rank_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.LFunction.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [],
+     "statement": "∀ {E : MetaMillennium.Problems.BSD.EllipticCurve} (analytic_rank : ℕ),   sizeOf { analytic_rank := analytic_rank } = 1 + sizeOf analytic_rank",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.MordellWeilGroup.mk.inj",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [],
+     "statement": "∀ {E : MetaMillennium.Problems.BSD.EllipticCurve} {rank rank_1 : ℕ},   { rank := rank } = { rank := rank_1 } → rank = rank_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.MordellWeilGroup.mk.injEq",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {E : MetaMillennium.Problems.BSD.EllipticCurve} (rank rank_1 : ℕ),   ({ rank := rank } = { rank := rank_1 }) = (rank = rank_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.BSD.MordellWeilGroup.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.BSD.BSDDefinition",
+     "axioms": [],
+     "statement": "∀ {E : MetaMillennium.Problems.BSD.EllipticCurve} (rank : ℕ), sizeOf { rank := rank } = 1 + sizeOf rank",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.BSD.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.BSD = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.Hodge.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.Hodge = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.NS.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.NS = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.PNP.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.PNP = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.Poincare.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.Poincare = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.RH.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.RH = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.YM.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.MillenniumProblem.YM = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.MillenniumProblem.ofNat_toCtorIdx",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "∀ (x : MetaMillennium.Problems.MillenniumProblem),   MetaMillennium.Problems.MillenniumProblem.ofNat (MetaMillennium.Problems.MillenniumProblem.toCtorIdx x) = x",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.InitialData.mk.inj",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [],
+     "statement": "∀ {velocity : MetaMillennium.Problems.NS.VelocityField} {is_smooth : Bool} {energy : Float}   {velocity_1 : MetaMillennium.Problems.NS.VelocityField} {is_smooth_1 : Bool} {energy_1 : Float},   { velocity := velocity, is_smooth := is_smooth, energy := energy } =       { velocity := velocity_1, is_smooth := is_smooth_1, energy := energy_1 } →     velocity = velocity_1 ∧ is_smooth = is_smooth_1 ∧ ene",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.InitialData.mk.injEq",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (velocity : MetaMillennium.Problems.NS.VelocityField) (is_smooth : Bool) (energy : Float)   (velocity_1 : MetaMillennium.Problems.NS.VelocityField) (is_smooth_1 : Bool) (energy_1 : Float),   ({ velocity := velocity, is_smooth := is_smooth, energy := energy } =       { velocity := velocity_1, is_smooth := is_smooth_1, energy := energy_1 }) =     (velocity = velocity_1 ∧ is_smooth = is_smooth_1 ∧",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.InitialData.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [],
+     "statement": "∀ (velocity : MetaMillennium.Problems.NS.VelocityField) (is_smooth : Bool) (energy : Float),   sizeOf { velocity := velocity, is_smooth := is_smooth, energy := energy } =     1 + sizeOf velocity + sizeOf is_smooth + sizeOf energy",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.NSSolution.mk.inj",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [],
+     "statement": "∀ {evolution : Float → MetaMillennium.Problems.NS.VelocityField} {max_time : Float} {is_global is_smooth : Bool}   {evolution_1 : Float → MetaMillennium.Problems.NS.VelocityField} {max_time_1 : Float}   {is_global_1 is_smooth_1 : Bool},   { evolution := evolution, max_time := max_time, is_global := is_global, is_smooth := is_smooth } =       { evolution := evolution_1, max_time := max_time_1, is_g",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.NSSolution.mk.injEq",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (evolution : Float → MetaMillennium.Problems.NS.VelocityField) (max_time : Float) (is_global is_smooth : Bool)   (evolution_1 : Float → MetaMillennium.Problems.NS.VelocityField) (max_time_1 : Float)   (is_global_1 is_smooth_1 : Bool),   ({ evolution := evolution, max_time := max_time, is_global := is_global, is_smooth := is_smooth } =       { evolution := evolution_1, max_time := max_time_1, is_",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.NSSolution.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [],
+     "statement": "∀ (evolution : Float → MetaMillennium.Problems.NS.VelocityField) (max_time : Float) (is_global is_smooth : Bool),   sizeOf { evolution := evolution, max_time := max_time, is_global := is_global, is_smooth := is_smooth } =     1 + sizeOf max_time + sizeOf is_global + sizeOf is_smooth",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.VelocityField.mk.inj",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [],
+     "statement": "∀ {id id_1 : ℕ}, { id := id } = { id := id_1 } → id = id_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.VelocityField.mk.injEq",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id id_1 : ℕ), ({ id := id } = { id := id_1 }) = (id = id_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.NS.VelocityField.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.NS.NSDefinition",
+     "axioms": [],
+     "statement": "∀ (id : ℕ), sizeOf { id := id } = 1 + sizeOf id",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.NP_Language.mk.inj",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {lang_id : ℕ} {verifier : MetaMillennium.Problems.PNP.TuringMachine}   {verify_poly : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0} {lang_id_1 : ℕ}   {verifier_1 : MetaMillennium.Problems.PNP.TuringMachine}   {verify_poly_1 : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0},   { lang_id := lang_id, verifier := verifier, verify_poly := verify_poly } =       { lang_id := lang_id",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.NP_Language.mk.injEq",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (lang_id : ℕ) (verifier : MetaMillennium.Problems.PNP.TuringMachine)   (verify_poly : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0) (lang_id_1 : ℕ)   (verifier_1 : MetaMillennium.Problems.PNP.TuringMachine)   (verify_poly_1 : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0),   ({ lang_id := lang_id, verifier := verifier, verify_poly := verify_poly } =       { lang_id := lang_i",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.NP_Language.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (lang_id : ℕ) (verifier : MetaMillennium.Problems.PNP.TuringMachine)   (verify_poly : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0),   sizeOf { lang_id := lang_id, verifier := verifier, verify_poly := verify_poly } =     1 + sizeOf lang_id + sizeOf verifier + sizeOf verify_poly",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.Oracle.mk.inj",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "axioms": [],
+     "statement": "∀ {id : ℕ} {name : String} {id_1 : ℕ} {name_1 : String},   { id := id, name := name } = { id := id_1, name := name_1 } → id = id_1 ∧ name = name_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.Oracle.mk.injEq",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : ℕ) (name : String) (id_1 : ℕ) (name_1 : String),   ({ id := id, name := name } = { id := id_1, name := name_1 }) = (id = id_1 ∧ name = name_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.Oracle.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.PNP.PNPRelativization",
+     "axioms": [],
+     "statement": "∀ (id : ℕ) (name : String), sizeOf { id := id, name := name } = 1 + sizeOf id + sizeOf name",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.P_Language.mk.inj",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {lang_id : ℕ} {machine : MetaMillennium.Problems.PNP.TuringMachine}   {is_poly : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0} {lang_id_1 : ℕ}   {machine_1 : MetaMillennium.Problems.PNP.TuringMachine}   {is_poly_1 : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0},   { lang_id := lang_id, machine := machine, is_poly := is_poly } =       { lang_id := lang_id_1, machine := machi",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.P_Language.mk.injEq",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (lang_id : ℕ) (machine : MetaMillennium.Problems.PNP.TuringMachine)   (is_poly : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0) (lang_id_1 : ℕ)   (machine_1 : MetaMillennium.Problems.PNP.TuringMachine)   (is_poly_1 : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0),   ({ lang_id := lang_id, machine := machine, is_poly := is_poly } =       { lang_id := lang_id_1, machine := mach",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.P_Language.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (lang_id : ℕ) (machine : MetaMillennium.Problems.PNP.TuringMachine)   (is_poly : MetaMillennium.Problems.PNP.isPolynomialTime fun x => 0),   sizeOf { lang_id := lang_id, machine := machine, is_poly := is_poly } =     1 + sizeOf lang_id + sizeOf machine + sizeOf is_poly",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.SAT.proof_1",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∃ k, ∀ (n : ℕ), (fun x => 0) n ≤ n ^ k",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.TuringMachine.mk.inj",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [],
+     "statement": "∀ {id : ℕ} {description : String} {id_1 : ℕ} {description_1 : String},   { id := id, description := description } = { id := id_1, description := description_1 } →     id = id_1 ∧ description = description_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.TuringMachine.mk.injEq",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : ℕ) (description : String) (id_1 : ℕ) (description_1 : String),   ({ id := id, description := description } = { id := id_1, description := description_1 }) =     (id = id_1 ∧ description = description_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.PNP.TuringMachine.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.PNP.PNPDefinition",
+     "axioms": [],
+     "statement": "∀ (id : ℕ) (description : String), sizeOf { id := id, description := description } = 1 + sizeOf id + sizeOf description",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.ProblemStatus.analyzing.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.ProblemStatus.analyzing = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.ProblemStatus.open_.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.ProblemStatus.open_ = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.ProblemStatus.solved.sizeOf_spec",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.ProblemStatus.solved = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.Complex.mk.inj",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [],
+     "statement": "∀ {re im re_1 im_1 : Float}, { re := re, im := im } = { re := re_1, im := im_1 } → re = re_1 ∧ im = im_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.Complex.mk.injEq",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (re im re_1 im_1 : Float), ({ re := re, im := im } = { re := re_1, im := im_1 }) = (re = re_1 ∧ im = im_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.Complex.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [],
+     "statement": "∀ (re im : Float), sizeOf { re := re, im := im } = 1 + sizeOf re + sizeOf im",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.ZetaFunction.mk.inj",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [],
+     "statement": "∀ {eval eval_1 : Float × Float → Float × Float}, { eval := eval } = { eval := eval_1 } → eval = eval_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.ZetaFunction.mk.injEq",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (eval eval_1 : Float × Float → Float × Float), ({ eval := eval } = { eval := eval_1 }) = (eval = eval_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.ZetaFunction.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [],
+     "statement": "∀ (eval : Float × Float → Float × Float), sizeOf { eval := eval } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.ZetaZero.mk.inj",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [],
+     "statement": "∀ {value : MetaMillennium.Problems.RH.Complex} {is_zero : True} {value_1 : MetaMillennium.Problems.RH.Complex}   {is_zero_1 : True},   { value := value, is_zero := is_zero } = { value := value_1, is_zero := is_zero_1 } → value = value_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.ZetaZero.mk.injEq",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (value : MetaMillennium.Problems.RH.Complex) (is_zero : True) (value_1 : MetaMillennium.Problems.RH.Complex)   (is_zero_1 : True),   ({ value := value, is_zero := is_zero } = { value := value_1, is_zero := is_zero_1 }) = (value = value_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.RH.ZetaZero.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.RH.RHDefinition",
+     "axioms": [],
+     "statement": "∀ (value : MetaMillennium.Problems.RH.Complex) (is_zero : True),   sizeOf { value := value, is_zero := is_zero } = 1 + sizeOf value + sizeOf is_zero",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.E6.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.YM.GaugeGroup.E6 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.E7.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.YM.GaugeGroup.E7 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.E8.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.YM.GaugeGroup.E8 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.F4.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.YM.GaugeGroup.F4 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.G2.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "sizeOf MetaMillennium.Problems.YM.GaugeGroup.G2 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.SO.inj",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ {n n_1 : ℕ}, MetaMillennium.Problems.YM.GaugeGroup.SO n = MetaMillennium.Problems.YM.GaugeGroup.SO n_1 → n = n_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.SO.injEq",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (n n_1 : ℕ), (MetaMillennium.Problems.YM.GaugeGroup.SO n = MetaMillennium.Problems.YM.GaugeGroup.SO n_1) = (n = n_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.SO.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ (n : ℕ), sizeOf (MetaMillennium.Problems.YM.GaugeGroup.SO n) = 1 + sizeOf n",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.SU.inj",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ {n n_1 : ℕ}, MetaMillennium.Problems.YM.GaugeGroup.SU n = MetaMillennium.Problems.YM.GaugeGroup.SU n_1 → n = n_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.SU.injEq",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (n n_1 : ℕ), (MetaMillennium.Problems.YM.GaugeGroup.SU n = MetaMillennium.Problems.YM.GaugeGroup.SU n_1) = (n = n_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.SU.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ (n : ℕ), sizeOf (MetaMillennium.Problems.YM.GaugeGroup.SU n) = 1 + sizeOf n",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.Sp.inj",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ {n n_1 : ℕ}, MetaMillennium.Problems.YM.GaugeGroup.Sp n = MetaMillennium.Problems.YM.GaugeGroup.Sp n_1 → n = n_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.Sp.injEq",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (n n_1 : ℕ), (MetaMillennium.Problems.YM.GaugeGroup.Sp n = MetaMillennium.Problems.YM.GaugeGroup.Sp n_1) = (n = n_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.GaugeGroup.Sp.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ (n : ℕ), sizeOf (MetaMillennium.Problems.YM.GaugeGroup.Sp n) = 1 + sizeOf n",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.MassGap.mk.inj",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {ym : MetaMillennium.Problems.YM.YangMillsTheory} {delta : Float} {is_positive : delta > 0} {delta_1 : Float}   {is_positive_1 : delta_1 > 0},   { delta := delta, is_positive := is_positive } = { delta := delta_1, is_positive := is_positive_1 } → delta = delta_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.MassGap.mk.injEq",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {ym : MetaMillennium.Problems.YM.YangMillsTheory} (delta : Float) (is_positive : delta > 0) (delta_1 : Float)   (is_positive_1 : delta_1 > 0),   ({ delta := delta, is_positive := is_positive } = { delta := delta_1, is_positive := is_positive_1 }) =     (delta = delta_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.MassGap.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {ym : MetaMillennium.Problems.YM.YangMillsTheory} (delta : Float) (is_positive : delta > 0),   sizeOf { delta := delta, is_positive := is_positive } = 1 + sizeOf delta + sizeOf is_positive",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.YangMillsTheory.mk.inj",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ {gauge_group : MetaMillennium.Problems.YM.GaugeGroup} {spacetime_dim : ℕ}   {gauge_group_1 : MetaMillennium.Problems.YM.GaugeGroup} {spacetime_dim_1 : ℕ},   { gauge_group := gauge_group, spacetime_dim := spacetime_dim } =       { gauge_group := gauge_group_1, spacetime_dim := spacetime_dim_1 } →     gauge_group = gauge_group_1 ∧ spacetime_dim = spacetime_dim_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.YangMillsTheory.mk.injEq",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (gauge_group : MetaMillennium.Problems.YM.GaugeGroup) (spacetime_dim : ℕ)   (gauge_group_1 : MetaMillennium.Problems.YM.GaugeGroup) (spacetime_dim_1 : ℕ),   ({ gauge_group := gauge_group, spacetime_dim := spacetime_dim } =       { gauge_group := gauge_group_1, spacetime_dim := spacetime_dim_1 }) =     (gauge_group = gauge_group_1 ∧ spacetime_dim = spacetime_dim_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.YM.YangMillsTheory.mk.sizeOf_spec",
+     "module": "MetaMillennium.Problems.YM.YMDefinition",
+     "axioms": [],
+     "statement": "∀ (gauge_group : MetaMillennium.Problems.YM.GaugeGroup) (spacetime_dim : ℕ),   sizeOf { gauge_group := gauge_group, spacetime_dim := spacetime_dim } = 1 + sizeOf gauge_group + sizeOf spacetime_dim",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.instDecidableEqMillenniumProblem.proof_1",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "∀ (x y : MetaMillennium.Problems.MillenniumProblem),   MetaMillennium.Problems.MillenniumProblem.toCtorIdx x = MetaMillennium.Problems.MillenniumProblem.toCtorIdx y → x = y",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Problems.instDecidableEqMillenniumProblem.proof_2",
+     "module": "MetaMillennium.Problems.MillenniumSentences",
+     "axioms": [],
+     "statement": "∀ (x y : MetaMillennium.Problems.MillenniumProblem),   ¬MetaMillennium.Problems.MillenniumProblem.toCtorIdx x = MetaMillennium.Problems.MillenniumProblem.toCtorIdx y →     x = y → False",
      "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "",
-   "corrections": [],
-   "lakefile_gerado": "",
+   "note": "CORRIGIDO PELO MVEI (vocabulario-lean4): trocas de grafia com o mesmo nome e o mesmo enunciado em 35 arquivo(s): abbrev 9, binder_pred 5, docstring 4, noncomputable 19, notacao 9, repr 1. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Main, MetaMillennium e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
+   "corrections": [
+    "vocabulario-lean4"
+   ],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.3.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Main, .one `MetaMillennium, .submodules `MetaMillennium]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "src/lean/MetaMillennium/Bridges/DS_From_Forcing.lean",
-     "linha": 14,
+     "linha": 16,
      "nome": "MetaMillennium.Bridges.forcing_bridge_theorem",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.InnerModels.L_InnerModel",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 19: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.InnerModels.L_InnerModel, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "coluna": 14,
+     "trecho": "    (hM_T : M ⟦⊨⟧ₜ T)",
+     "motivo": "object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Bridges/BridgeOverview.olean' of module MetaMillennium.Bridges.BridgeOverview does not exist — MetaMillennium.Bridges.BridgeOverview não compilou: /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Bridges/BridgeOverview.lean:6:0: error: object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/ForcingToDualState.olean' of module MetaMillennium.Forcing.ForcingToDualState does not exist | /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Bridg"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Bridges/DS_From_InnerModels.lean",
-     "linha": 13,
+     "linha": 14,
      "nome": "MetaMillennium.Bridges.inner_model_bridge_theorem",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.InnerModels.L_InnerModel",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 19: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.InnerModels.L_InnerModel, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "coluna": 14,
+     "trecho": "    (hM_T : M ⟦⊨⟧ₜ ZFC_full)",
+     "motivo": "object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Bridges/BridgeOverview.olean' of module MetaMillennium.Bridges.BridgeOverview does not exist — MetaMillennium.Bridges.BridgeOverview não compilou: /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Bridges/BridgeOverview.lean:6:0: error: object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/ForcingToDualState.olean' of module MetaMillennium.Forcing.ForcingToDualState does not exist | /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Bridg"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Bridges/DS_From_LargeCardinals.lean",
-     "linha": 14,
+     "linha": 16,
      "nome": "MetaMillennium.Bridges.lc_bridge_theorem",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.InnerModels.L_InnerModel",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 18: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.InnerModels.L_InnerModel, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
-    },
-    {
-     "arquivo": "src/lean/MetaMillennium/Core/ConsistencyAndIndependence.lean",
-     "linha": 40,
-     "nome": "MetaMillennium.Core.independence_via_consistency",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
-     ],
-     "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel"
-     ]
+     "coluna": 28,
+     "trecho": "    (hNoLC : ∀ M : Model, M ⟦⊨⟧ₜ ZFC_full → ¬(M ⊨ LC_measura",
+     "motivo": "object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Bridges/BridgeOverview.olean' of module MetaMillennium.Bridges.BridgeOverview does not exist — MetaMillennium.Bridges.BridgeOverview não compilou: /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Bridges/BridgeOverview.lean:6:0: error: object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/ForcingToDualState.olean' of module MetaMillennium.Forcing.ForcingToDualState does not exist | /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Bridg"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Core/ThreeStateLogic.lean",
      "linha": 64,
      "nome": "MetaMillennium.Core.ThreeState.neg_neg",
      "status": "fechado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel"
-     ]
+     "axioms": []
     },
     {
      "arquivo": "src/lean/MetaMillennium/Core/ThreeStateLogic.lean",
      "linha": 68,
      "nome": "MetaMillennium.Core.ThreeState.neg_neutral",
      "status": "fechado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel"
-     ]
+     "axioms": []
     },
     {
      "arquivo": "src/lean/MetaMillennium/Core/ThreeStateLogic.lean",
      "linha": 71,
      "nome": "MetaMillennium.Core.ThreeState.de_morgan_and",
      "status": "fechado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel"
-     ]
+     "axioms": []
     },
     {
      "arquivo": "src/lean/MetaMillennium/Core/ThreeStateLogic.lean",
      "linha": 76,
      "nome": "MetaMillennium.Core.ThreeState.de_morgan_or",
      "status": "fechado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel"
-     ]
+     "axioms": []
     },
     {
      "arquivo": "src/lean/MetaMillennium/DualState/BiModel.lean",
-     "linha": 37,
+     "linha": 39,
      "nome": "MetaMillennium.DualState.bimodel_eq_iff",
      "status": "fechado",
      "axioms": [
       "propext"
      ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ]
     },
     {
      "arquivo": "src/lean/MetaMillennium/DualState/DualStateDefinition.lean",
-     "linha": 33,
+     "linha": 34,
      "nome": "MetaMillennium.DualState.dual_state_iff_independent",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ],
+     "erro": "linha 45: dependent elimination failed, failed to solve equation List.append T.axioms [φ] = ψ :: as✝",
+     "coluna": 6,
+     "trecho": "      ⟦|⟧ head => exact ds.plus_models"
+    },
+    {
+     "arquivo": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
+     "linha": 12,
+     "nome": "MetaMillennium.DualState.dual_state_symmetric",
      "status": "nao_alcancado",
      "axioms": [
       "sorryAx"
      ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel"
-     ],
-     "erro": "linha 36: unsolved goals case mpr T : Theory φ : Sentence ⊢ Con(T + φ) ∧ Con(T + Formula.neg φ) → DualState.nonEmpty T φ",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
-    },
-    {
-     "arquivo": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
-     "linha": 11,
-     "nome": "MetaMillennium.DualState.dual_state_symmetric",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 15: unexpected token '⟨'; expected '|'",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 15: unsolved goals case model_minus T : Theory φ : Sentence ds : DS(T, φ) ⊢ Model case plus_models_theory T : Theory φ : Sentence ds : DS(T, φ) ⊢ sorryAx Model true ⊨ₜ T case minus_models_theory T : Theory φ : Sentence ds : DS(T, φ) ⊢ ?model_mi",
+     "coluna": 59,
+     "trecho": "DualState.nonEmpty T φ.neg := ⟦b⟧y",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
-     "linha": 44,
+     "linha": 45,
      "nome": "MetaMillennium.DualState.dual_state_refinement",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 48: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 49: type expected, got (T : Theory)",
+     "coluna": 33,
+     "trecho": " (hDecide : ∀ M : Model, M ⊨ₜ ⟦T⟧ → (M ⊨ ψ ∨ M ⊨ ψ.neg)) :",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/DualState/DualStateLemmas.lean",
-     "linha": 51,
+     "linha": 52,
      "nome": "MetaMillennium.DualState.dual_state_is_neutral",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 54: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 55: unknown identifier 'ThreeState.evaluate'",
+     "coluna": 29,
+     "trecho": "    DualState.nonEmpty T φ → ⟦T⟧hreeState.evaluate T φ = Thre",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Forcing/ForcingToDualState.lean",
-     "linha": 15,
+     "linha": 16,
      "nome": "MetaMillennium.Forcing.forcing_creates_bimodel",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 20: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "coluna": 12,
+     "trecho": "    (hM : M ⟦⊨⟧ₜ ZFC_full)",
+     "motivo": "object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/CohenForcing.olean' of module MetaMillennium.Forcing.CohenForcing does not exist — MetaMillennium.Forcing.CohenForcing não compilou: /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Forcing/CohenForcing.lean:6:0: error: object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/GenericFilters.olean' of module MetaMillennium.Forcing.GenericFilters does not exist | /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Forcing/CohenFo"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Forcing/ForcingToDualState.lean",
-     "linha": 32,
+     "linha": 33,
      "nome": "MetaMillennium.Forcing.CH_dual_state",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 38: unexpected token 'sorry'; expected '{' or tactic",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "coluna": 40,
+     "trecho": "ate.nonEmpty ZFC_full CH := by⟦⟧",
+     "motivo": "object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/CohenForcing.olean' of module MetaMillennium.Forcing.CohenForcing does not exist — MetaMillennium.Forcing.CohenForcing não compilou: /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Forcing/CohenForcing.lean:6:0: error: object file '/tmp/mvei-rec-mu7n10e5/p/.lake/mvei-salvage/MetaMillennium/Forcing/GenericFilters.olean' of module MetaMillennium.Forcing.GenericFilters does not exist | /tmp/mvei-rec-mu7n10e5/p/MetaMillennium/Forcing/CohenFo"
     },
     {
      "arquivo": "src/lean/MetaMillennium/InnerModels/InnerModelsToDualState.lean",
-     "linha": 15,
+     "linha": 16,
      "nome": "MetaMillennium.InnerModels.inner_model_creates_bimodel",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.InnerModels.L_InnerModel",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 25: unknown tactic",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.InnerModels.L_InnerModel, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "coluna": 10,
+     "trecho": "    (hN : ⟦N⟧.satisfies_ZFC)",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "src/lean/MetaMillennium/LargeCardinals/LC_ToDualState.lean",
-     "linha": 20,
+     "linha": 22,
      "nome": "MetaMillennium.LargeCardinals.lc_relative_consistency",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.Models.ZFCAbstract"
-     ],
-     "erro": "linha 25: unexpected token '+'; expected ')', ',' or ':'",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     ]
     },
     {
      "arquivo": "src/lean/MetaMillennium/Problems/RH/RHIndependenceProgram.lean",
-     "linha": 21,
+     "linha": 23,
      "nome": "MetaMillennium.Problems.RH.forcing_preserves_RH",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 25: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 26: function expected at GenericFilter term has type ?m.39",
+     "coluna": 34,
+     "trecho": "M : Model, ∀ P : Poset, ∀ G : ⟦G⟧enericFilter P,",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Problems/RH/RHIndependenceProgram.lean",
-     "linha": 29,
+     "linha": 31,
      "nome": "MetaMillennium.Problems.RH.no_forcing_independence",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition",
       "MetaMillennium.Models.ZFCAbstract"
      ],
-     "erro": "linha 33: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 35: function expected at GenericFilter term has type ?m.326",
+     "coluna": 23,
+     "trecho": "  ¬(∃ P : Poset, ∃ G : ⟦G⟧enericFilter P, ∃ M : Model,",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, MetaMillennium.Models.ZFCAbstract, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 17,
+     "linha": 19,
      "nome": "MetaMillennium.Status.toy_consistent",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 24: unknown constant 'CoeFun'",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 26: function expected at Consistent term has type ?m.3",
+     "coluna": 25,
+     "trecho": "theorem toy_consistent : ⟦C⟧onsistent ToyTheory := toyThe",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 25,
+     "linha": 27,
      "nome": "MetaMillennium.Status.toy_alpha_independent",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 27: unknown constant 'CoeFun'",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 29: function expected at Independent term has type ?m.216",
+     "coluna": 32,
+     "trecho": "eorem toy_alpha_independent : ⟦I⟧ndependent ToyTheory α := α_i",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 28,
+     "linha": 30,
      "nome": "MetaMillennium.Status.bimodel_swap_involution",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 31: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 32: function expected at BiModel term has type ?m.435",
+     "coluna": 50,
+     "trecho": "_involution {T : Theory} (B : ⟦B⟧iModel T) : ",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 32,
+     "linha": 34,
      "nome": "MetaMillennium.Status.bool_dual_witness",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 35: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 37: unknown identifier 'boolBiModel.Mpos'",
+     "coluna": 5,
+     "trecho": "    (⟦b⟧oolBiModel.Mpos ⊨[BoolTheory]",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 37,
+     "linha": 39,
      "nome": "MetaMillennium.Status.nat_consistent",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 39: unknown constant 'CoeFun'",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 41: function expected at Consistent term has type ?m.79631",
+     "coluna": 25,
+     "trecho": "theorem nat_consistent : ⟦C⟧onsistent NatTheory := natThe",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 40,
+     "linha": 42,
      "nome": "MetaMillennium.Status.dne",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 42: expected token",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 44: unknown identifier 'double_neg_intro'",
+     "coluna": 36,
+     "trecho": "m dne (P : Prop) : P → ¬¬P := ⟦d⟧ouble_neg_intro P",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Status/ToyTheorems.lean",
-     "linha": 43,
+     "linha": 45,
      "nome": "MetaMillennium.Status.mp",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
-      "MetaMillennium.Core.TheoryAndModel",
       "MetaMillennium.DualState.DualStateDefinition"
      ],
-     "erro": "linha 45: unknown identifier 'modus_ponens'",
-     "motivo": "importa MetaMillennium.Core.TheoryAndModel, MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "erro": "linha 47: unknown identifier 'modus_ponens'",
+     "coluna": 54,
+     "trecho": "(hpq : P → Q) (hp : P) : Q := ⟦m⟧odus_ponens P Q hpq hp",
+     "motivo": "importa MetaMillennium.DualState.DualStateDefinition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     }
    ],
-   "preenchimento": [],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.PNP.P_equals_NP_with_A",
+     "enunciado": "MetaMillennium.Problems.PNP.P_oracle MetaMillennium.Problems.PNP.oracle_A =   MetaMillennium.Problems.PNP.NP_oracle MetaMillennium.Problems.PNP.oracle_A",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.InnerModels.L_satisfies_AC",
+     "enunciado": "MetaMillennium.InnerModels.L.toModel ⊨ { id := 110, repr := \"AC\" }",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.LargeCardinals.woodin_AD_theorem",
+     "enunciado": "(ℕ → ∃ κ, MetaMillennium.LargeCardinals.isWoodin κ) → True",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Models.supercompact_implies_measurable",
+     "enunciado": "∀ (κ : MetaMillennium.LargeCardinals.Cardinal),   MetaMillennium.LargeCardinals.isSupercompact κ → MetaMillennium.LargeCardinals.isMeasurable κ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.PNP.oracle_A",
+     "enunciado": "MetaMillennium.Problems.PNP.Oracle",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.RH.mertens_equivalence",
+     "enunciado": "MetaMillennium.Problems.RH.RH_statement ↔ MetaMillennium.Problems.RH.mertensBound",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.InnerModels.L_satisfies_VeqL",
+     "enunciado": "MetaMillennium.InnerModels.L.toModel ⊨ { id := 200, repr := \"V = L\" }",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.RH.robin_equivalence",
+     "enunciado": "MetaMillennium.Problems.RH.RH_statement ↔ ∀ n > 5040, MetaMillennium.Problems.RH.robinInequality n",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.LargeCardinals.AD_inconsistent_with_AC",
+     "enunciado": "¬(True ∧ True)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.PNP.P_neq_NP_with_B",
+     "enunciado": "MetaMillennium.Problems.PNP.P_oracle MetaMillennium.Problems.PNP.oracle_B ≠   MetaMillennium.Problems.PNP.NP_oracle MetaMillennium.Problems.PNP.oracle_B",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.InnerModels.L_is_minimal",
+     "enunciado": "∀ (M : MetaMillennium.InnerModels.InnerModel),   MetaMillennium.InnerModels.InnerModel.subset MetaMillennium.InnerModels.L M",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.RH.prime_counting_equivalence",
+     "enunciado": "MetaMillennium.Problems.RH.RH_statement → MetaMillennium.Problems.RH.primeCountingBound",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.BSD.BSD_rank_0_1",
+     "enunciado": "∀ (E : MetaMillennium.Problems.BSD.EllipticCurve) (L : MetaMillennium.Problems.BSD.LFunction E),   L.analytic_rank ≤ 1 → MetaMillennium.Problems.BSD.BSD_for_curve E",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Models.measurable_implies_inaccessible",
+     "enunciado": "∀ (κ : MetaMillennium.LargeCardinals.Cardinal),   MetaMillennium.LargeCardinals.isMeasurable κ → MetaMillennium.LargeCardinals.isInaccessible κ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Problems.PNP.oracle_B",
+     "enunciado": "MetaMillennium.Problems.PNP.Oracle",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.InnerModels.L_satisfies_GCH",
+     "enunciado": "MetaMillennium.InnerModels.L.toModel ⊨ { id := 202, repr := \"GCH\" }",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "MetaMillennium.Core.independence_via_consistency",
+     "enunciado": "∀ (T : MetaMillennium.Core.Theory) (φ : MetaMillennium.Core.Sentence),   Con(T) → (Ind(T, φ) ↔ Con(T + φ) ∧ Con(T + MetaMillennium.Core.Formula.neg φ))",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "MetaMillennium.InnerModels.L.proof_1",
+     "enunciado": "{ id := 0, name := \"L\" } ⊨ₜ MetaMillennium.Core.ZFC",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
    "summary": {
-    "fechado": 3,
-    "aberto-sorry": 0,
+    "fechado": 104,
+    "aberto-sorry": 2,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793341397
   }
  ]
 }

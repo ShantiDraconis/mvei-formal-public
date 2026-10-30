@@ -11,31 +11,38 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `54627a7b232420e9872020a99e663832a842967d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `54627a7b232420e9872020a99e663832a842967d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `src/lean` | v4.3.0 | partial | 3 | 0 | 0 | 5 / 0 / 1 / 0 / 20 |
+| `src/lean` | v4.3.0 | partial | 104 | 0 | 2 | 5 / 0 / 1 / 1 / 18 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 8 |
-| Unique (name + statement) | 8 |
+| Counting each project | 109 |
+| Unique (name + statement) | 109 |
 | Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 5 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
-| `MetaMillennium.Core.independence_via_consistency` | `src/lean (file by file)` | open | `sorryAx` |
+| `MetaMillennium.Core.independence_via_consistency` | `src/lean` | open | `sorryAx` |
+| `MetaMillennium.InnerModels.L.proof_1` | `src/lean` | open | `sorryAx` |
+| `MetaMillennium.LargeCardinals.lc_relative_consistency` | `src/lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting copies). The kernel checked 6 of them (5 closed, 0 conditional, 1 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 20 the kernel has no result:
+The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting copies). The kernel checked 7 of them (5 closed, 0 conditional, 2 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 19 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 20 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 18 |
+| checked file by file: the written proof does not pass the kernel | 1 |
+
+### MVEI corrections
+
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 35 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Meta-millenium-independence-00 mvei/Meta-millenium-independence-00/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

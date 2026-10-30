@@ -1,0 +1,1360 @@
+--- a/lean4/BSD/BSDStatementFormal.lean
++++ b/lean4/BSD/BSDStatementFormal.lean
+@@ -9,6 +9,9 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Analysis.Calculus.ContDiff.Basic
+ import Mathlib
++open scoped ENNReal
++
++noncomputable section
+ 
+ /-
+ ====================================================================================
+@@ -134,7 +137,7 @@
+ 
+ /-- Structure of a classical elliptic curve in Weierstrass form over ℚ. -/
+ structure ClassicalEllipticCurve where
+-  a b : ℚ
++  (a b : ℚ)
+   Δ : ℚ                      -- discriminant
+   nonsingular : Δ ≠ 0        -- classical non-singularity condition
+ 
+@@ -864,7 +867,7 @@
+ structure ClassicalPeriodStructure where
+   f : ℝ → ℝ
+   smooth : SmoothRealFunction f
+-  a b : ℝ
++  (a b : ℝ)
+   value : ℝ
+   definition : RealIntegralValue f a b value
+ 
+--- a/lean4/BSD/BSD_CompleteFramework.lean
++++ b/lean4/BSD/BSD_CompleteFramework.lean
+@@ -1,3 +1,9 @@
++import Mathlib.Tactic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Rat.Defs
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ namespace BSDFormal
+ 
+ /-
+--- a/lean4/BSD/EllipticCurves.lean
++++ b/lean4/BSD/EllipticCurves.lean
+@@ -5,6 +5,8 @@
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ import BSD.EllipticCurves
+ 
++noncomputable section
++
+ /-
+   lean4/BSD/EllipticCurves.lean
+ 
+@@ -50,7 +52,7 @@
+ 
+ /-- Raw Weierstrass equation over a field `K`. -/
+ structure WeierstrassEquation where
+-  a1 a2 a3 a4 a6 : K
++  (a1 a2 a3 a4 a6 : K)
+   /-- Discriminant Δ(W). We do *not* compute it here; we just store it. -/
+   discriminant : K
+   /-- Non-singularity: "the discriminant is nonzero" or any equivalent condition.
+--- a/lean4/BSD/LFunctionCoreBridge.lean
++++ b/lean4/BSD/LFunctionCoreBridge.lean
+@@ -20,6 +20,8 @@
+ import BSD.LFunctionDefinition
+ import BSD.BSD_CoreFramework
+ 
++noncomputable section
++
+ namespace BSDFormal
+ 
+ /-!
+--- a/lean4/BSD/LFunctionDefinition.lean
++++ b/lean4/BSD/LFunctionDefinition.lean
+@@ -23,6 +23,9 @@
+ import Mathlib.Data.Nat.Prime.Basic
+ import Mathlib.Topology.Algebra.InfiniteSum.Basic
+ import BSD.EllipticCurves
++import Mathlib.Data.Nat.Prime.Defs
++
++noncomputable section
+ 
+ namespace BSDFormal
+ 
+--- a/lean4/BSD/MordellWeil.lean
++++ b/lean4/BSD/MordellWeil.lean
+@@ -26,6 +26,8 @@
+ import Mathlib
+ import BSD.EllipticCurves
+ 
++noncomputable section
++
+ namespace BSDFormal
+ 
+ /-!
+--- a/lean4/BSD/OrderOfVanishing.lean
++++ b/lean4/BSD/OrderOfVanishing.lean
+@@ -19,6 +19,8 @@
+ import Mathlib.Topology.Algebra.InfiniteSum.Basic
+ import BSD.LFunctionDefinition
+ 
++noncomputable section
++
+ namespace BSDFormal
+ 
+ /-!
+--- a/lean4/Complexity/BooleanFunctions.lean
++++ b/lean4/Complexity/BooleanFunctions.lean
+@@ -31,6 +31,9 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.Matrix.Basic
+ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
++import Mathlib.Tactic.Bound
++
++noncomputable section
+ 
+ open scoped BigOperators
+ 
+@@ -277,7 +280,7 @@
+   definition :
+     ∀ w : Word,
+       languageFromFamily w ↔
+-        let p := encoding.toVec w
++        (let p := encoding.toVec w)
+         in family p.1 p.2 = true
+ 
+ /-
+--- a/lean4/Complexity/Circuits.lean
++++ b/lean4/Complexity/Circuits.lean
+@@ -25,6 +25,8 @@
+ import Mathlib.Data.List.Basic
+ import Complexity.BooleanFunctions
+ 
++noncomputable section
++
+ namespace Complexity
+ namespace Circuits
+ 
+@@ -244,7 +246,7 @@
+   recognition :
+     ∀ w : Word,
+       language w ↔
+-        let p := encoding.toVec w
++        (let p := encoding.toVec w)
+         in Circuit.eval (family.circuitAt p.1) p.2 = true
+ 
+ /-
+@@ -288,7 +290,7 @@
+   satFamily_recognizes_SAT :
+     ∀ w : Word,
+       SATlang w ↔
+-        let p := encoding.toVec w
++        (let p := encoding.toVec w)
+         in Circuit.eval (satFamily.circuitAt p.1) p.2 = true
+ 
+ /--
+--- a/lean4/Complexity/ComplexityMeasures.lean
++++ b/lean4/Complexity/ComplexityMeasures.lean
+@@ -32,6 +32,10 @@
+ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+ import Complexity.BooleanFunctions
+ import Complexity.Circuits
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++
++noncomputable section
+ 
+ open scoped BigOperators
+ 
+--- a/lean4/Complexity/Reductions.lean
++++ b/lean4/Complexity/Reductions.lean
+@@ -37,6 +37,8 @@
+ import Complexity.ComplexityMeasures
+ import Complexity.RelativizationBarriers
+ 
++noncomputable section
++
+ namespace Complexity
+ namespace Reductions
+ 
+@@ -238,8 +240,8 @@
+   /-- Correctness: the reduction is exact. -/
+   correct :
+     ∀ w : Word,
+-      let qs := queries w
+-      let ans := qs.map (fun q => decide (L₂ q))
++      (let qs := queries w)
++      (let ans := qs.map (fun q => decide (L₂ q)))
+       in (decision w ans = true) ↔ L₁ w
+ 
+   /--
+@@ -291,7 +293,7 @@
+ structure ManyOneCompositionSchema
+     (measure : WordMeasure)
+     (L₁ L₂ L₃ : Language) where
+-  g₁₂ g₂₃ g₁₃ : GrowthFunction
++  (g₁₂ g₂₃ g₁₃ : GrowthFunction)
+   red₁₂ : ManyOneReduction measure g₁₂ L₁ L₂
+   red₂₃ : ManyOneReduction measure g₂₃ L₂ L₃
+ 
+@@ -330,7 +332,7 @@
+ structure TuringCompositionSchema
+     (measure : WordMeasure)
+     (L₁ L₂ L₃ : Language) where
+-  g₁₂ g₂₃ g₁₃ : GrowthFunction
++  (g₁₂ g₂₃ g₁₃ : GrowthFunction)
+   red₁₂ : TuringReduction measure g₁₂ L₁ L₂
+   red₂₃ : TuringReduction measure g₂₃ L₂ L₃
+   compositeExists :
+@@ -343,7 +345,7 @@
+ structure TruthTableCompositionSchema
+     (measure : WordMeasure)
+     (L₁ L₂ L₃ : Language) where
+-  g₁₂ g₂₃ g₁₃ : GrowthFunction
++  (g₁₂ g₂₃ g₁₃ : GrowthFunction)
+   red₁₂ : TruthTableReduction measure g₁₂ L₁ L₂
+   red₂₃ : TruthTableReduction measure g₂₃ L₂ L₃
+   compositeExists :
+--- a/lean4/Complexity/RelativizationBarriers.lean
++++ b/lean4/Complexity/RelativizationBarriers.lean
+@@ -23,6 +23,8 @@
+ import Complexity.BooleanFunctions
+ import Complexity.ComplexityMeasures
+ 
++noncomputable section
++
+ namespace Complexity
+ namespace RelativizationBarriers
+ 
+--- a/lean4/Complexity/SATCompleteness.lean
++++ b/lean4/Complexity/SATCompleteness.lean
+@@ -29,6 +29,8 @@
+ import Complexity.BooleanFunctions
+ import Complexity.ComplexityMeasures
+ 
++noncomputable section
++
+ namespace Complexity
+ namespace SATCompleteness
+ 
+--- a/lean4/Complexity/SeparationProgram.lean
++++ b/lean4/Complexity/SeparationProgram.lean
+@@ -33,6 +33,8 @@
+ import Complexity.RelativizationBarriers
+ import Complexity.SATCompleteness
+ 
++noncomputable section
++
+ namespace Complexity
+ namespace SeparationProgram
+ 
+@@ -63,7 +65,7 @@
+ We keep classes abstract: each is a predicate `Language → Prop`.
+ -/
+ structure SeparationStatement where
+-  C₁ C₂ : Language → Prop
++  (C₁ C₂ : Language → Prop)
+   separation : Prop := ∃ L, C₁ L ∧ ¬ C₂ L
+ 
+ 
+@@ -75,7 +77,7 @@
+ We keep this abstract too.
+ -/
+ structure CollapseStatement where
+-  C₁ C₂ : Language → Prop
++  (C₁ C₂ : Language → Prop)
+   collapse : Prop := ∀ L, C₁ L ↔ C₂ L
+ 
+ 
+@@ -181,7 +183,7 @@
+   can be computed by poly-size circuits, then C₁ ≠ C₂.
+ -/
+ structure CircuitLowerBoundSeparation where
+-  C₁ C₂ : Language → Prop
++  (C₁ C₂ : Language → Prop)
+   L : Language
+   inC₂ : C₂ L
+   notInC₁byCircuits :
+@@ -207,7 +209,7 @@
+   - show L reduces to something contradicting completeness assumptions
+ -/
+ structure ReductionSeparation where
+-  C₁ C₂ : Language → Prop
++  (C₁ C₂ : Language → Prop)
+   L : Language
+ 
+   L_in_C₂ : C₂ L
+--- a/lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean
++++ b/lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean
+@@ -22,6 +22,11 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace ComplexDifferentiability
+ 
+--- a/lean4/Core/Analysis/Calculus/Derivatives.lean
++++ b/lean4/Core/Analysis/Calculus/Derivatives.lean
+@@ -23,6 +23,13 @@
+ import Mathlib.Analysis.Calculus.Deriv.Comp
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
+ import Mathlib.Tactic
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++
++noncomputable section
+ 
+ namespace DerivativesTheory
+ 
+--- a/lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean
++++ b/lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean
+@@ -20,6 +20,11 @@
+ 
+ import Mathlib.Geometry.Manifold.IsManifold.Basic
+ import Mathlib.Geometry.Manifold.ContMDiff.Basic
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++open scoped ENNReal Manifold
++
++noncomputable section
+ 
+ namespace DifferentiableManifolds
+ 
+@@ -173,10 +178,10 @@
+ 
+ /-! ## 6. Integration on Manifolds -/
+ 
+-/-- Partition of unity subordinate to atlas. -/
++/- Partition of unity subordinate to atlas. -/
+ -- Smooth partitions of unity exist
+ 
+-/-- Integration of top forms. -/
++/- Integration of top forms. -/
+ -- Integral of n-form on n-manifold
+ 
+ /-- Stokes' theorem. -/
+@@ -203,10 +208,10 @@
+     subst hφ hψ
+     constructor <;> exact contDiff_id.contDiffOn
+ 
+-/-- The n-sphere is a smooth manifold. -/
++/- The n-sphere is a smooth manifold. -/
+ -- Stereographic projection charts
+ 
+-/-- The torus is a smooth manifold. -/
++/- The torus is a smooth manifold. -/
+ -- Product manifold structure
+ 
+ /-! ## 8. Lie Groups -/
+@@ -221,7 +226,7 @@
+ def LieAlgebra (G : Type*) (n : ℕ) (LG : LieGroup G n) : Type :=
+   TangentSpace G n LG.atlas 1
+ 
+-/-- Left-invariant vector fields correspond to Lie algebra elements. -/
++/- Left-invariant vector fields correspond to Lie algebra elements. -/
+ -- Establishes the connection between Lie group and Lie algebra
+ 
+ end DifferentiableManifolds
+--- a/lean4/Core/Analysis/Calculus/HigherDerivatives.lean
++++ b/lean4/Core/Analysis/Calculus/HigherDerivatives.lean
+@@ -22,6 +22,9 @@
+ import Mathlib.Analysis.Calculus.ContDiff.Basic
+ import Mathlib
+ import Mathlib.Analysis.Calculus.Taylor
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace HigherDerivativesTheory
+ 
+--- a/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
++++ b/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
+@@ -20,6 +20,9 @@
+ import Mathlib.Analysis.Calculus.Implicit
+ import Mathlib.Analysis.Calculus.LagrangeMultipliers
+ import Mathlib.Tactic
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.Calculus.Deriv.Basic
+ 
+ namespace ImplicitFunctionTheory
+ 
+@@ -97,7 +100,7 @@
+     (hconstr : g p = 0)
+     (hgrad_g : fderiv ℝ g p ≠ 0)
+     (hmax : IsLocalMax (f ∘ Subtype.val : {x | g x = 0} → ℝ) ⟨p, hconstr⟩) :
+-    ∃ λ : ℝ, fderiv ℝ f p = λ • fderiv ℝ g p := by
++    ∃ «λ» : ℝ, fderiv ℝ f p = «λ» • fderiv ℝ g p := by
+   sorry -- Lagrange multiplier condition
+ 
+ /-- Lagrange multipliers with multiple constraints. -/
+@@ -109,19 +112,19 @@
+     (hg : ∀ i, DifferentiableAt ℝ (g i) p)
+     (hconstr : ∀ i, g i p = 0)
+     (hindep : LinearIndependent ℝ (fun i => fderiv ℝ (g i) p)) :
+-    ∃ λ : Fin m → ℝ, fderiv ℝ f p = ∑ i, λ i • fderiv ℝ (g i) p := by
++    ∃ «λ» : Fin m → ℝ, fderiv ℝ f p = ∑ i, «λ» i • fderiv ℝ (g i) p := by
+   sorry -- Multiple Lagrange multipliers
+ 
+ /-! ## 5. Second-Order Conditions -/
+ 
+ /-- Second-order sufficient condition for constrained maximum. -/
+-theorem second_order_max_condition {f g : ℝ × ℝ → ℝ} {p : ℝ × ℝ} {λ : ℝ}
++theorem second_order_max_condition {f g : ℝ × ℝ → ℝ} {p : ℝ × ℝ} {«λ» : ℝ}
+     (hf : ContDiffAt ℝ 2 f p)
+     (hg : ContDiffAt ℝ 2 g p)
+     (hconstr : g p = 0)
+-    (hfoc : fderiv ℝ f p = λ • fderiv ℝ g p)
++    (hfoc : fderiv ℝ f p = «λ» • fderiv ℝ g p)
+     (hsoc : ∀ v, fderiv ℝ g p v = 0 →
+-      (fderiv ℝ (fderiv ℝ f) p v) v - λ * (fderiv ℝ (fderiv ℝ g) p v) v < 0) :
++      (fderiv ℝ (fderiv ℝ f) p v) v - «λ» * (fderiv ℝ (fderiv ℝ g) p v) v < 0) :
+     IsLocalMax (f ∘ Subtype.val : {x | g x = 0} → ℝ) ⟨p, hconstr⟩ := by
+   sorry -- Second-order condition
+ 
+@@ -154,10 +157,10 @@
+     deriv V θ = fderiv ℝ (fun t => f t (x θ)) θ 1 := by
+   sorry -- Envelope theorem
+ 
+-/-- Roy's identity (consumer theory). -/
++/- Roy's identity (consumer theory). -/
+ -- Relates Marshallian demand to indirect utility
+ 
+-/-- Hotelling's lemma (producer theory). -/
++/- Hotelling's lemma (producer theory). -/
+ -- Relates supply to profit function
+ 
+ end ImplicitFunctionTheory
+--- a/lean4/Core/Analysis/Calculus/InverseFunction.lean
++++ b/lean4/Core/Analysis/Calculus/InverseFunction.lean
+@@ -19,6 +19,12 @@
+ 
+ import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+ import Mathlib.Analysis.Calculus.ContDiff.Basic
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.Calculus.Deriv.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace InverseFunctionTheory
+ 
+@@ -185,10 +191,10 @@
+ 
+ /-! ## 7. Applications -/
+ 
+-/-- Straightening theorem for vector fields. -/
++/- Straightening theorem for vector fields. -/
+ -- Near a regular point, a vector field can be straightened to ∂/∂x₁
+ 
+-/-- Frobenius theorem for integrable distributions. -/
++/- Frobenius theorem for integrable distributions. -/
+ -- Integrable distributions have integral submanifolds
+ 
+ /-- Existence of flow for ODE (via inverse function theorem). -/
+--- a/lean4/Core/Analysis/Calculus/Jacobians.lean
++++ b/lean4/Core/Analysis/Calculus/Jacobians.lean
+@@ -21,6 +21,12 @@
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
+ import Mathlib.Analysis.Calculus.ContDiff.Basic
+ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
++import Mathlib.Analysis.InnerProductSpace.PiL2
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
++noncomputable section
+ 
+ namespace JacobiansTheory
+ 
+--- a/lean4/Core/Analysis/Calculus/MeanValueTheorem.lean
++++ b/lean4/Core/Analysis/Calculus/MeanValueTheorem.lean
+@@ -58,7 +58,7 @@
+       (f b - f a) / (g b - g a) = deriv f c / deriv g c := by
+   sorry -- Cauchy MVT
+ 
+-/-- Application: L'Hôpital's rule proof. -/
++/- Application: L'Hôpital's rule proof. -/
+ -- The Cauchy MVT is the key lemma for L'Hôpital
+ 
+ /-! ## 3. Mean Value Inequality -/
+--- a/lean4/Core/Analysis/Calculus/RealDifferentiability.lean
++++ b/lean4/Core/Analysis/Calculus/RealDifferentiability.lean
+@@ -23,6 +23,10 @@
+ import Mathlib.Analysis.Calculus.LocalExtr.Basic
+ import Mathlib.Analysis.Calculus.MeanValue
+ import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.Calculus.LocalExtr.Rolle
++
++noncomputable section
+ 
+ namespace RealDifferentiability
+ 
+--- a/lean4/Core/Analysis/Calculus/TaylorSeries.lean
++++ b/lean4/Core/Analysis/Calculus/TaylorSeries.lean
+@@ -21,6 +21,16 @@
+ import Mathlib.Analysis.Calculus.Taylor
+ import Mathlib.Analysis.Analytic.Basic
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Data.Nat.Factorial.Basic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
++open scoped NNReal
++
++noncomputable section
+ 
+ namespace TaylorSeriesTheory
+ 
+@@ -209,7 +219,7 @@
+ /-! ## 10. Borel Summation -/
+ 
+ /-- A formal power series. -/
+-def FormalPowerSeries := ℕ → ℝ
++abbrev FormalPowerSeries := ℕ → ℝ
+ 
+ /-- Borel transform of a formal series. -/
+ noncomputable def borelTransform (a : FormalPowerSeries) : ℝ → ℝ :=
+--- a/lean4/Core/Analysis/ComplexAnalysis/CauchyIntegralFormula.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/CauchyIntegralFormula.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace CauchyIntegralFormula
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/ContourIntegrals.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/ContourIntegrals.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ContourIntegrals
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/DirichletSeries.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/DirichletSeries.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace DirichletSeries
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/EntireFunctions.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/EntireFunctions.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace EntireFunctions
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/FunctionalEquation.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/FunctionalEquation.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace FunctionalEquation
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/Holomorphic.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/Holomorphic.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace Holomorphic
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/LaurentSeries.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/LaurentSeries.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace LaurentSeries
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/Meromorphic.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/Meromorphic.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace Meromorphic
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/ResidueTheorem.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/ResidueTheorem.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ResidueTheorem
+ 
+--- a/lean4/Core/Analysis/ComplexAnalysis/RiemannMapping.lean
++++ b/lean4/Core/Analysis/ComplexAnalysis/RiemannMapping.lean
+@@ -12,6 +12,7 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ namespace RiemannMapping
+ 
+--- a/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
+@@ -20,6 +20,9 @@
+ import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.InnerProductSpace.Projection
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++
++noncomputable section
+ 
+ namespace HilbertSpaces
+ 
+@@ -161,10 +164,10 @@
+ /-- A Hilbert space is a complete inner product space. -/
+ class HilbertSpace' (E : Type*) extends InnerProductSpace ℝ E, CompleteSpace E
+ 
+-/-- Example: ℓ² is a Hilbert space. -/
++/- Example: ℓ² is a Hilbert space. -/
+ -- The space of square-summable sequences
+ 
+-/-- Example: L²(μ) is a Hilbert space. -/
++/- Example: L²(μ) is a Hilbert space. -/
+ -- The space of square-integrable functions
+ 
+ /-! ## 3. Orthogonality -/
+@@ -385,10 +388,10 @@
+ /-- Spectral theorem for compact self-adjoint operators. -/
+ theorem spectral_theorem_compact {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+     (T : E →L[ℝ] E) (hT : IsCompactOperator' T) (hsa : IsSelfAdjoint' T) :
+-    ∃ (λ : ℕ → ℝ) (e : ℕ → E),
++    ∃ («λ» : ℕ → ℝ) (e : ℕ → E),
+       IsOrthonormal (Set.range e) ∧
+-      (∀ n, T (e n) = λ n • e n) ∧
+-      Tendsto λ atTop (𝓝 0) := by
++      (∀ n, T (e n) = «λ» n • e n) ∧
++      Tendsto «λ» atTop (𝓝 0) := by
+   sorry -- Spectral theorem
+ 
+ end HilbertSpaces
+--- a/lean4/Core/Analysis/MeasureTheory/Integrals.lean
++++ b/lean4/Core/Analysis/MeasureTheory/Integrals.lean
+@@ -19,6 +19,9 @@
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ import Mathlib.MeasureTheory.Integral.Bochner
+ import Mathlib.MeasureTheory.Integral.Lebesgue
++open scoped ENNReal Topology
++
++noncomputable section
+ 
+ namespace Integrals
+ 
+@@ -118,7 +121,7 @@
+ 
+ /-! ## 6. Vector-Valued Integration -/
+ 
+-/-- Bochner integral for Banach space valued functions. -/
++/- Bochner integral for Banach space valued functions. -/
+ -- The Bochner integral extends Lebesgue integration to Banach space valued functions
+ 
+ /-- Triangle inequality for Bochner integral. -/
+--- a/lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean
++++ b/lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean
+@@ -20,6 +20,8 @@
+ import Mathlib.MeasureTheory.MeasurableSpace.Basic
+ import Mathlib.MeasureTheory.MeasurableSpace.Defs
+ 
++noncomputable section
++
+ namespace SigmaAlgebras
+ 
+ open Set MeasureTheory
+@@ -35,32 +37,32 @@
+     (⋃ n, f n) ∈ measurableSets
+ 
+ /-- The empty set is measurable. -/
+-theorem empty_measurable (Σ : SigmaAlgebra' Ω) : ∅ ∈ Σ.measurableSets := by
+-  have := Σ.compl_mem Set.univ Σ.univ_mem
++theorem empty_measurable («Σ» : SigmaAlgebra' Ω) : ∅ ∈ «Σ».measurableSets := by
++  have := «Σ».compl_mem Set.univ «Σ».univ_mem
+   simp at this
+   exact this
+ 
+ /-- Countable intersections are measurable. -/
+-theorem countable_inter_measurable (Σ : SigmaAlgebra' Ω) (f : ℕ → Set Ω)
+-    (hf : ∀ n, f n ∈ Σ.measurableSets) :
+-    (⋂ n, f n) ∈ Σ.measurableSets := by
+-  have h1 : ∀ n, (f n)ᶜ ∈ Σ.measurableSets := fun n => Σ.compl_mem (f n) (hf n)
+-  have h2 : (⋃ n, (f n)ᶜ) ∈ Σ.measurableSets := Σ.countable_union _ h1
+-  have h3 : (⋃ n, (f n)ᶜ)ᶜ ∈ Σ.measurableSets := Σ.compl_mem _ h2
++theorem countable_inter_measurable («Σ» : SigmaAlgebra' Ω) (f : ℕ → Set Ω)
++    (hf : ∀ n, f n ∈ «Σ».measurableSets) :
++    (⋂ n, f n) ∈ «Σ».measurableSets := by
++  have h1 : ∀ n, (f n)ᶜ ∈ «Σ».measurableSets := fun n => «Σ».compl_mem (f n) (hf n)
++  have h2 : (⋃ n, (f n)ᶜ) ∈ «Σ».measurableSets := «Σ».countable_union _ h1
++  have h3 : (⋃ n, (f n)ᶜ)ᶜ ∈ «Σ».measurableSets := «Σ».compl_mem _ h2
+   convert h3 using 1
+   simp [Set.compl_iUnion]
+ 
+ /-- Finite unions are measurable. -/
+-theorem finite_union_measurable (Σ : SigmaAlgebra' Ω) {n : ℕ} (f : Fin n → Set Ω)
+-    (hf : ∀ i, f i ∈ Σ.measurableSets) :
+-    (⋃ i, f i) ∈ Σ.measurableSets := by
++theorem finite_union_measurable («Σ» : SigmaAlgebra' Ω) {n : ℕ} (f : Fin n → Set Ω)
++    (hf : ∀ i, f i ∈ «Σ».measurableSets) :
++    (⋃ i, f i) ∈ «Σ».measurableSets := by
+   have g : ℕ → Set Ω := fun k => if h : k < n then f ⟨k, h⟩ else ∅
+-  have hg : ∀ k, g k ∈ Σ.measurableSets := fun k => by
++  have hg : ∀ k, g k ∈ «Σ».measurableSets := fun k => by
+     simp only [g]
+     split_ifs with h
+     · exact hf ⟨k, h⟩
+-    · exact empty_measurable Σ
+-  have := Σ.countable_union g hg
++    · exact empty_measurable «Σ»
++  have := «Σ».countable_union g hg
+   convert this using 1
+   ext x
+   simp only [Set.mem_iUnion, g]
+@@ -78,37 +80,37 @@
+ 
+ /-- The σ-algebra generated by a collection of sets. -/
+ def generatedSigmaAlgebra (Ω : Type*) (𝒢 : Set (Set Ω)) : SigmaAlgebra' Ω where
+-  measurableSets := ⋂ Σ : SigmaAlgebra' Ω, (𝒢 ⊆ Σ.measurableSets) → Σ.measurableSets
++  measurableSets := ⋂ «Σ» : SigmaAlgebra' Ω, (𝒢 ⊆ «Σ».measurableSets) → «Σ».measurableSets
+   univ_mem := by
+     simp only [Set.mem_iInter]
+-    intro Σ _
+-    exact Σ.univ_mem
++    intro «Σ» _
++    exact «Σ».univ_mem
+   compl_mem := by
+     intro S hS
+     simp only [Set.mem_iInter] at hS ⊢
+-    intro Σ h𝒢
+-    exact Σ.compl_mem S (hS Σ h𝒢)
++    intro «Σ» h𝒢
++    exact «Σ».compl_mem S (hS «Σ» h𝒢)
+   countable_union := by
+     intro f hf
+     simp only [Set.mem_iInter] at hf ⊢
+-    intro Σ h𝒢
+-    exact Σ.countable_union f (fun n => hf n Σ h𝒢)
++    intro «Σ» h𝒢
++    exact «Σ».countable_union f (fun n => hf n «Σ» h𝒢)
+ 
+ /-- The generating sets are in the generated σ-algebra. -/
+ theorem generator_subset (Ω : Type*) (𝒢 : Set (Set Ω)) :
+     𝒢 ⊆ (generatedSigmaAlgebra Ω 𝒢).measurableSets := by
+   intro S hS
+   simp only [generatedSigmaAlgebra, Set.mem_iInter]
+-  intro Σ h𝒢
++  intro «Σ» h𝒢
+   exact h𝒢 hS
+ 
+ /-- Generated σ-algebra is the smallest containing the generators. -/
+-theorem generated_smallest (Ω : Type*) (𝒢 : Set (Set Ω)) (Σ : SigmaAlgebra' Ω)
+-    (h : 𝒢 ⊆ Σ.measurableSets) :
+-    (generatedSigmaAlgebra Ω 𝒢).measurableSets ⊆ Σ.measurableSets := by
++theorem generated_smallest (Ω : Type*) (𝒢 : Set (Set Ω)) («Σ» : SigmaAlgebra' Ω)
++    (h : 𝒢 ⊆ «Σ».measurableSets) :
++    (generatedSigmaAlgebra Ω 𝒢).measurableSets ⊆ «Σ».measurableSets := by
+   intro S hS
+   simp only [generatedSigmaAlgebra, Set.mem_iInter] at hS
+-  exact hS Σ h
++  exact hS «Σ» h
+ 
+ /-! ## 3. Borel σ-Algebra -/
+ 
+@@ -137,15 +139,15 @@
+ /-! ## 4. Product σ-Algebras -/
+ 
+ /-- Product σ-algebra on Ω × Ω'. -/
+-def productSigmaAlgebra (Ω Ω' : Type*) (Σ : SigmaAlgebra' Ω) (Σ' : SigmaAlgebra' Ω') :
++def productSigmaAlgebra (Ω Ω' : Type*) («Σ» : SigmaAlgebra' Ω) («Σ'» : SigmaAlgebra' Ω') :
+     SigmaAlgebra' (Ω × Ω') :=
+   generatedSigmaAlgebra (Ω × Ω')
+-    { R | ∃ A ∈ Σ.measurableSets, ∃ B ∈ Σ'.measurableSets, R = A ×ˢ B }
++    { R | ∃ A ∈ «Σ».measurableSets, ∃ B ∈ «Σ'».measurableSets, R = A ×ˢ B }
+ 
+ /-- Rectangles are measurable in product σ-algebra. -/
+-theorem rectangle_measurable {Ω Ω' : Type*} (Σ : SigmaAlgebra' Ω) (Σ' : SigmaAlgebra' Ω')
+-    (A : Set Ω) (B : Set Ω') (hA : A ∈ Σ.measurableSets) (hB : B ∈ Σ'.measurableSets) :
+-    A ×ˢ B ∈ (productSigmaAlgebra Ω Ω' Σ Σ').measurableSets := by
++theorem rectangle_measurable {Ω Ω' : Type*} («Σ» : SigmaAlgebra' Ω) («Σ'» : SigmaAlgebra' Ω')
++    (A : Set Ω) (B : Set Ω') (hA : A ∈ «Σ».measurableSets) (hB : B ∈ «Σ'».measurableSets) :
++    A ×ˢ B ∈ (productSigmaAlgebra Ω Ω' «Σ» «Σ'»).measurableSets := by
+   exact generator_subset (Ω × Ω') _ ⟨A, hA, B, hB, rfl⟩
+ 
+ /-! ## 5. Dynkin Systems -/
+@@ -159,18 +161,18 @@
+     Pairwise (Disjoint on f) → (⋃ n, f n) ∈ sets
+ 
+ /-- Every σ-algebra is a Dynkin system. -/
+-theorem sigma_is_dynkin (Σ : SigmaAlgebra' Ω) : DynkinSystem Ω where
+-  sets := Σ.measurableSets
+-  univ_mem := Σ.univ_mem
++theorem sigma_is_dynkin («Σ» : SigmaAlgebra' Ω) : DynkinSystem Ω where
++  sets := «Σ».measurableSets
++  univ_mem := «Σ».univ_mem
+   compl_mem := fun A B hA hB _ => by
+-    have h1 : Aᶜ ∈ Σ.measurableSets := Σ.compl_mem A hA
+-    have h2 : B ∩ Aᶜ ∈ Σ.measurableSets := by
++    have h1 : Aᶜ ∈ «Σ».measurableSets := «Σ».compl_mem A hA
++    have h2 : B ∩ Aᶜ ∈ «Σ».measurableSets := by
+       -- Use finite intersection
+       sorry
+     convert h2 using 1
+     ext x
+     simp [Set.mem_diff]
+-  countable_union_disjoint := fun f hf _ => Σ.countable_union f hf
++  countable_union_disjoint := fun f hf _ => «Σ».countable_union f hf
+ 
+ /-- A π-system is closed under finite intersections. -/
+ def IsPiSystem (Ω : Type*) (𝒫 : Set (Set Ω)) : Prop :=
+@@ -198,31 +200,31 @@
+ /-! ## 7. Sub-σ-Algebras -/
+ 
+ /-- A σ-algebra is a sub-σ-algebra of another. -/
+-def IsSubSigmaAlgebra (Σ₁ Σ₂ : SigmaAlgebra' Ω) : Prop :=
+-  Σ₁.measurableSets ⊆ Σ₂.measurableSets
++def IsSubSigmaAlgebra («Σ₁» «Σ₂» : SigmaAlgebra' Ω) : Prop :=
++  «Σ₁».measurableSets ⊆ «Σ₂».measurableSets
+ 
+ /-- Intersection of σ-algebras is a σ-algebra. -/
+-def interSigmaAlgebra (Σ₁ Σ₂ : SigmaAlgebra' Ω) : SigmaAlgebra' Ω where
+-  measurableSets := Σ₁.measurableSets ∩ Σ₂.measurableSets
+-  univ_mem := ⟨Σ₁.univ_mem, Σ₂.univ_mem⟩
+-  compl_mem := fun S ⟨h1, h2⟩ => ⟨Σ₁.compl_mem S h1, Σ₂.compl_mem S h2⟩
++def interSigmaAlgebra («Σ₁» «Σ₂» : SigmaAlgebra' Ω) : SigmaAlgebra' Ω where
++  measurableSets := «Σ₁».measurableSets ∩ «Σ₂».measurableSets
++  univ_mem := ⟨«Σ₁».univ_mem, «Σ₂».univ_mem⟩
++  compl_mem := fun S ⟨h1, h2⟩ => ⟨«Σ₁».compl_mem S h1, «Σ₂».compl_mem S h2⟩
+   countable_union := fun f hf =>
+-    ⟨Σ₁.countable_union f (fun n => (hf n).1),
+-     Σ₂.countable_union f (fun n => (hf n).2)⟩
++    ⟨«Σ₁».countable_union f (fun n => (hf n).1),
++     «Σ₂».countable_union f (fun n => (hf n).2)⟩
+ 
+ /-! ## 8. Trace σ-Algebra -/
+ 
+ /-- The trace (restriction) of a σ-algebra to a subset. -/
+-def traceSigmaAlgebra (Σ : SigmaAlgebra' Ω) (A : Set Ω) : SigmaAlgebra' A where
+-  measurableSets := { S : Set A | ∃ T ∈ Σ.measurableSets, S = Subtype.val ⁻¹' T }
+-  univ_mem := ⟨Set.univ, Σ.univ_mem, by simp⟩
++def traceSigmaAlgebra («Σ» : SigmaAlgebra' Ω) (A : Set Ω) : SigmaAlgebra' A where
++  measurableSets := { S : Set A | ∃ T ∈ «Σ».measurableSets, S = Subtype.val ⁻¹' T }
++  univ_mem := ⟨Set.univ, «Σ».univ_mem, by simp⟩
+   compl_mem := fun S ⟨T, hT, hS⟩ => by
+-    use Tᶜ, Σ.compl_mem T hT
++    use Tᶜ, «Σ».compl_mem T hT
+     ext x
+     simp [hS]
+   countable_union := fun f hf => by
+     choose T hT using hf
+-    use ⋃ n, T n, Σ.countable_union T (fun n => (hT n).1)
++    use ⋃ n, T n, «Σ».countable_union T (fun n => (hT n).1)
+     ext x
+     simp [(hT · |>.2)]
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/DirichletCharacters.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/DirichletCharacters.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace DirichletCharacters
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/EisensteinSeries.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/EisensteinSeries.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace EisensteinSeries
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/LFunctions.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/LFunctions.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace LFunctions
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ModularForms.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ModularForms.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ModularForms
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ThetaFunctions.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ThetaFunctions.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ThetaFunctions
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ZeroFreeRegions.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ZeroFreeRegions.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ZeroFreeRegions
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ZetaFunctionalEquation.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ZetaFunctionalEquation.lean
+@@ -11,6 +11,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ZetaFunctionalEquation
+ 
+--- a/lean4/Core/Analysis/Topology/BaireCategory.lean
++++ b/lean4/Core/Analysis/Topology/BaireCategory.lean
+@@ -23,6 +23,8 @@
+ import Mathlib
+ import Mathlib
+ 
++noncomputable section
++
+ namespace BaireCategoryTheory
+ 
+ open Set Filter Topology
+@@ -266,10 +268,10 @@
+   exact NormedAddGroupHom.equicontinuous_of_pointwiseBounded
+     (fun i => (T i).toNormedAddGroupHom) h
+ 
+-/-- Open mapping theorem uses Baire category. -/
++/- Open mapping theorem uses Baire category. -/
+ -- The proof relies on showing the image of the unit ball contains an open ball
+ 
+-/-- Closed graph theorem uses Baire category. -/
++/- Closed graph theorem uses Baire category. -/
+ -- If graph is closed, the map is continuous
+ 
+ /-! ## 8. Existence of Pathological Objects -/
+@@ -287,7 +289,7 @@
+ 
+ /-! ## 9. Category vs Measure -/
+ 
+-/-- Meager sets and null sets are different notions. -/
++/- Meager sets and null sets are different notions. -/
+ -- There exist meager sets of full measure (e.g., ℚ is meager but has measure 0)
+ -- There exist non-meager sets of measure 0 (complements of fat Cantor sets)
+ 
+@@ -297,11 +299,11 @@
+ 
+ /-! ## 10. Topological Games -/
+ 
+-/-- Banach-Mazur game characterization of Baire spaces. -/
++/- Banach-Mazur game characterization of Baire spaces. -/
+ -- Player I wins iff the intersection is empty
+ -- Player II has a winning strategy iff the target is comeager
+ 
+-/-- A space is Baire iff Player II has no winning strategy in the Banach-Mazur game
++/- A space is Baire iff Player II has no winning strategy in the Banach-Mazur game
+     for the empty set. -/
+ -- This gives an alternative proof of Baire category theorem
+ 
+--- a/lean4/Core/Analysis/Topology/Compactness.lean
++++ b/lean4/Core/Analysis/Topology/Compactness.lean
+@@ -24,6 +24,10 @@
+ import Mathlib.Topology.Compactness.Compact
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Topology.Separation.Basic
++import Core.Analysis.Topology.MetricSpaces
++open scoped Topology
++
++noncomputable section
+ 
+ namespace Compactness
+ 
+--- a/lean4/Core/Analysis/Topology/Connectedness.lean
++++ b/lean4/Core/Analysis/Topology/Connectedness.lean
+@@ -23,6 +23,9 @@
+ import Mathlib.Topology.Connected.Basic
+ import Mathlib.Topology.Connected.PathConnected
+ import Mathlib.Topology.MetricSpace.Basic
++open scoped Topology
++
++noncomputable section
+ 
+ namespace Connectedness
+ 
+--- a/lean4/Core/Analysis/Topology/Continuity.lean
++++ b/lean4/Core/Analysis/Topology/Continuity.lean
+@@ -24,6 +24,10 @@
+ import Mathlib.Topology.ContinuousMap.Basic
+ import Mathlib.Topology.UniformSpace.Basic
+ import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
++import Mathlib.Tactic.Positivity
++open scoped NNReal
++
++noncomputable section
+ 
+ namespace ContinuityTheory
+ 
+@@ -107,7 +111,7 @@
+ /-- Uniform continuity on a set. -/
+ def UniformlyContinuousOnSet {α β : Type*}
+     [PseudoMetricSpace α] [PseudoMetricSpace β] (f : α → β) (S : Set α) : Prop :=
+-  ∀ ε > 0, ∃ δ > 0, ∀ x y ∈ S, dist x y < δ → dist (f x) (f y) < ε
++  ∀ ε > 0, ∃ δ > 0, ∀ x ∈ S, ∀ y ∈ S, dist x y < δ → dist (f x) (f y) < ε
+ 
+ /-- Uniform continuity globally. -/
+ def UniformlyContinuousGlobal {α β : Type*}
+--- a/lean4/Core/Analysis/Topology/Homeomorphisms.lean
++++ b/lean4/Core/Analysis/Topology/Homeomorphisms.lean
+@@ -23,6 +23,8 @@
+ import Mathlib
+ import Mathlib.Topology.MetricSpace.Basic
+ 
++noncomputable section
++
+ namespace HomeomorphismsTheory
+ 
+ open Set Topology
+@@ -129,7 +131,7 @@
+     ({p : ℝ × ℝ | p ≠ (0, 0)} : Set (ℝ × ℝ)) ≃ₜ' (Set.univ : Set ℝ) ×ˢ (Set.Ioo 0 (2 * Real.pi)) := by
+   sorry -- Requires polar coordinates construction
+ 
+-/-- S¹ × ℝ is homeomorphic to ℝ² \ {0}. -/
++/- S¹ × ℝ is homeomorphic to ℝ² \ {0}. -/
+ -- This is a classical result relating circles to punctured planes
+ 
+ /-! ## 5. Local Homeomorphisms -/
+@@ -242,7 +244,7 @@
+     M ≃ₜ' Set.Icc (0 : ℝ) 1 := by
+   sorry -- Classification theorem
+ 
+-/-- Every surface has a unique smooth structure (in low dimensions). -/
++/- Every surface has a unique smooth structure (in low dimensions). -/
+ -- This is related to the classification of compact surfaces
+ 
+ /-! ## 11. Homeomorphism Groups -/
+@@ -260,7 +262,7 @@
+   mul_one _ := rfl
+   inv_mul_cancel _ := Homeomorph.ext fun _ => rfl
+ 
+-/-- The mapping class group is the homeomorphism group modulo isotopy. -/
++/- The mapping class group is the homeomorphism group modulo isotopy. -/
+ -- MCG(S) = Homeo(S) / Homeo₀(S) where Homeo₀ is the identity component
+ 
+ /-! ## 12. Function Spaces -/
+--- a/lean4/Core/Analysis/Topology/MetricSpaces.lean
++++ b/lean4/Core/Analysis/Topology/MetricSpaces.lean
+@@ -24,6 +24,9 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Topology.MetricSpace.Bounded
+ import Mathlib.Analysis.Normed.Group.Basic
++import Mathlib.Tactic.IntervalCases
++
++noncomputable section
+ 
+ namespace MetricSpaces
+ 
+--- a/lean4/Core/Analysis/Topology/NormedSpaces.lean
++++ b/lean4/Core/Analysis/Topology/NormedSpaces.lean
+@@ -23,6 +23,11 @@
+ import Mathlib.Analysis.Normed.Field.Basic
+ import Mathlib.Analysis.Normed.Group.Basic
+ import Mathlib.Topology.MetricSpace.Basic
++import Core.Analysis.Topology.MetricSpaces
++import Mathlib.Tactic.Bound
++import Mathlib.Tactic.Positivity
++
++noncomputable section
+ 
+ namespace NormedSpaces
+ 
+@@ -190,7 +195,7 @@
+ 
+ /-- The unit ball is convex. -/
+ theorem unitBall_convex (N : NormedSpaceStructure K V) :
+-    ∀ v w ∈ closedUnitBall N, ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
++    ∀ v ∈ closedUnitBall N, ∀ w ∈ closedUnitBall N, ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
+       (1 - t) • v + t • w ∈ closedUnitBall N := by
+   intro v hv w hw t ht0 ht1
+   simp only [closedUnitBall, Set.mem_setOf_eq] at *
+--- a/lean4/Core/Analysis/Topology/ProductTopology.lean
++++ b/lean4/Core/Analysis/Topology/ProductTopology.lean
+@@ -24,6 +24,8 @@
+ import Mathlib
+ import Mathlib.Topology.Order
+ 
++noncomputable section
++
+ namespace ProductTopology
+ 
+ open Set Topology
+@@ -254,7 +256,7 @@
+     [RegularSpace α] [RegularSpace β] : RegularSpace (α × β) := by
+   exact inferInstance
+ 
+-/-- Product of normal spaces need not be normal (counterexample exists). -/
++/- Product of normal spaces need not be normal (counterexample exists). -/
+ -- The Sorgenfrey plane is a famous counterexample
+ 
+ /-! ## 13. Metrizability of Products -/
+--- a/lean4/Core/Analysis/Topology/StoneWeierstrass.lean
++++ b/lean4/Core/Analysis/Topology/StoneWeierstrass.lean
+@@ -23,6 +23,8 @@
+ import Mathlib
+ import Mathlib
+ 
++noncomputable section
++
+ namespace StoneWeierstrassTheory
+ 
+ open Set Topology ContinuousMap
+@@ -116,20 +118,20 @@
+               ∀ x, f x = ∑ i, c i * Complex.exp (k i * x * Complex.I) } := by
+   sorry -- Application of Stone-Weierstrass to circle
+ 
+-/-- Fejér's theorem: Cesàro means of Fourier series converge uniformly. -/
++/- Fejér's theorem: Cesàro means of Fourier series converge uniformly. -/
+ -- This is another approach to density of trigonometric polynomials
+ 
+ /-! ## 6. Müntz-Szász Theorem -/
+ 
+ /-- Müntz-Szász: monomials {x^λₙ} are dense in C[0,1] iff ∑ 1/λₙ = ∞. -/
+-def MuntzCondition (λ : ℕ → ℝ) : Prop :=
+-  0 < λ 0 ∧ StrictMono λ ∧ ∑' n, 1 / λ n = ⊤
++def MuntzCondition («λ» : ℕ → ℝ) : Prop :=
++  0 < fun 0 ∧ StrictMono λ ∧ ∑' n => 1 / «λ» n = ⊤
+ 
+-theorem muntz_szasz (λ : ℕ → ℝ) (hλ : ∀ n, 0 ≤ λ n) :
++theorem muntz_szasz («λ» : ℕ → ℝ) («hλ» : ∀ n, 0 ≤ «λ» n) :
+     Dense { f : C(Set.Icc (0 : ℝ) 1, ℝ) |
+             ∃ (n : ℕ) (c : Fin n → ℝ),
+-              ∀ x, f ⟨x, ‹_›⟩ = ∑ i, c i * x ^ (λ i) } ↔
+-    MuntzCondition λ ∨ (0 ∈ Set.range λ ∧ MuntzCondition (fun n => λ (n + 1))) := by
++              ∀ x, f ⟨x, ‹_›⟩ = ∑ i, c i * x ^ («λ» i) } ↔
++    MuntzCondition «λ» ∨ (0 ∈ Set.range «λ» ∧ MuntzCondition (fun n => «λ» (n + 1))) := by
+   sorry -- Deep theorem in approximation theory
+ 
+ /-! ## 7. Korovkin-Type Theorems -/
+@@ -152,7 +154,7 @@
+ /-- Stone-Weierstrass for lattices: sublattices separating points are dense. -/
+ def IsSubLattice {X : Type*} [TopologicalSpace X]
+     (A : Set C(X, ℝ)) : Prop :=
+-  (∀ f g ∈ A, f ⊔ g ∈ A) ∧ (∀ f g ∈ A, f ⊓ g ∈ A)
++  (∀ f ∈ A, ∀ g ∈ A, f ⊔ g ∈ A) ∧ (∀ f ∈ A, ∀ g ∈ A, f ⊓ g ∈ A)
+ 
+ theorem stone_weierstrass_lattice {X : Type*}
+     [TopologicalSpace X] [CompactSpace X] [T2Space X]
+@@ -173,7 +175,7 @@
+     μ = ν := by
+   sorry -- Stone-Weierstrass + Riesz representation
+ 
+-/-- Universal approximation: neural networks can approximate any continuous function. -/
++/- Universal approximation: neural networks can approximate any continuous function. -/
+ -- This is a consequence of Stone-Weierstrass applied to sigmoidal networks
+ 
+ /-! ## 10. Chebyshev Polynomials -/
+@@ -207,7 +209,7 @@
+       ‖f - ⟨fun x => p.eval x, sorry⟩‖ ≤ C * ω (1 / n) := by
+   sorry -- Quantitative approximation theory
+ 
+-/-- Bernstein's inverse theorem. -/
++/- Bernstein's inverse theorem. -/
+ -- If polynomial approximation is O(n^{-α}), then f is Cα smooth
+ 
+ /-! ## 12. Generalizations -/
+@@ -221,7 +223,7 @@
+     Dense { f : C(X, E) | ∀ φ : E →L[ℝ] ℝ, ⟨fun x => φ (f x), sorry⟩ ∈ A } := by
+   sorry -- Tensor product argument
+ 
+-/-- Stone-Weierstrass for function algebras on non-compact spaces. -/
++/- Stone-Weierstrass for function algebras on non-compact spaces. -/
+ -- Requires dealing with behavior at infinity
+ 
+ end StoneWeierstrassTheory
+--- a/lean4/Core/Analysis/Topology/UniformSpaces.lean
++++ b/lean4/Core/Analysis/Topology/UniformSpaces.lean
+@@ -22,6 +22,10 @@
+ import Mathlib.Topology.UniformSpace.Basic
+ import Mathlib.Topology.UniformSpace.Completion
+ import Mathlib.Topology.UniformSpace.UniformConvergence
++import Mathlib.Data.Real.Basic
++open scoped Topology
++
++noncomputable section
+ 
+ namespace UniformSpacesTheory
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ApproximateFunctionalEquation.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ApproximateFunctionalEquation.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ApproximateFunctionalEquation
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/CriticalStrip.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/CriticalStrip.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace CriticalStrip
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ExplicitFormula.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ExplicitFormula.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ExplicitFormula
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/HadamardFactorization.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/HadamardFactorization.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace HadamardFactorization
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/MeanValues.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/MeanValues.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace MeanValues
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean
+@@ -20,6 +20,16 @@
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.NumberTheory.ArithmeticFunction
+ import Mathlib.Analysis.Complex.Basic
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
++import Mathlib.Data.Nat.Nth
++import Mathlib.Data.Complex.Basic
++open scoped Topology
++
++noncomputable section
+ 
+ namespace RH_FullFormal
+ 
+@@ -31,7 +41,7 @@
+ noncomputable def riemannZeta' (s : ℂ) : ℂ :=
+   ∑' n : ℕ, 1 / (n + 1 : ℂ)^s
+ 
+-/-- Analytic continuation of zeta to ℂ \ {1}. -/
++/- Analytic continuation of zeta to ℂ \ {1}. -/
+ -- The zeta function extends meromorphically to all of ℂ with a simple pole at s = 1
+ 
+ /-- Functional equation: ζ(s) = 2^s π^(s-1) sin(πs/2) Γ(1-s) ζ(1-s). -/
+@@ -153,13 +163,13 @@
+ 
+ /-! ## 8. Connections to Other Problems -/
+ 
+-/-- RH implies: M(x) ≪ x^(1/2+ε) for all ε > 0. -/
++/- RH implies: M(x) ≪ x^(1/2+ε) for all ε > 0. -/
+ -- This would settle the growth rate of the Mertens function
+ 
+-/-- GRH implies: smallest prime in arithmetic progressions. -/
++/- GRH implies: smallest prime in arithmetic progressions. -/
+ -- p(q,a) ≪ q^(2+ε) under GRH
+ 
+-/-- RH has connections to random matrix theory. -/
++/- RH has connections to random matrix theory. -/
+ -- Montgomery's pair correlation conjecture relates zeros to GUE
+ 
+ end RH_FullFormal
+--- a/lean4/Core/Analysis/ZetaAdvanced/RiemannXi.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/RiemannXi.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace RiemannXi
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ZeroDensity.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ZeroDensity.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ZeroDensity
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ZeroDistribution.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ZeroDistribution.lean
+@@ -12,6 +12,7 @@
+ -/
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
+ 
+ namespace ZeroDistribution
+ 

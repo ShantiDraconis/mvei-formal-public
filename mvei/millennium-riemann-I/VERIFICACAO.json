@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,8 +16,8 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (959ms) | ✔ [41/42] Built Cache.Main:c.o (1.1s) | ✔ [42/42] Built cache:exe (831ms)",
-   "sorry_warnings": 13,
+   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (589ms) | ✔ [41/42] Built Cache.Main:c.o (696ms) | ✔ [42/42] Built cache:exe (656ms)",
+   "sorry_warnings": 2,
    "reconstructed": true,
    "bridges": [
     {
@@ -43,12 +43,12 @@
     {
      "name": "Riemann.Sim.analyze_i_kernel_spectrum_external",
      "module": "src.Sim.Bridges",
-     "statement": "{ℝ : Type} → ℝ → IO (List ℝ)"
+     "statement": "ℝ → IO (List ℝ)"
     },
     {
      "name": "Riemann.Sim.compute_zeros_external",
      "module": "src.Sim.Bridges",
-     "statement": "{ℕ : Sort u_1} → {ℂ : Type} → ℕ → IO (List ℂ)"
+     "statement": "ℕ → IO (List ℂ)"
     },
     {
      "name": "Riemann.Sim.computed_zeros_on_critical_line",
@@ -68,7 +68,7 @@
     {
      "name": "Riemann.Sim.load_zeros_from_csv",
      "module": "src.Sim.Bridges",
-     "statement": "{ℂ : Type} → String → IO (List ℂ)"
+     "statement": "String → IO (List ℂ)"
     },
     {
      "name": "Riemann.Sim.numeric_evidence_first_10_13_zeros",
@@ -78,7 +78,7 @@
     {
      "name": "Riemann.Sim.verify_functional_equation_external",
      "module": "src.Sim.Bridges",
-     "statement": "{ℂ : Sort u_1} → ℂ → IO Bool"
+     "statement": "ℂ → IO Bool"
     }
    ],
    "theorems": [
@@ -90,20 +90,233 @@
      ],
      "statement": "∀ (ExactEndpoint : Prop), ExactEndpoint",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.close",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint)   (w : Witness), self.Valid w → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.inj",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} {Valid : Witness → Prop} {produce : Source → ∃ w, Valid w}   {close : ∀ (w : Witness), Valid w → Endpoint} {Valid_1 : Witness → Prop} {produce_1 : Source → ∃ w, Valid_1 w}   {close_1 : ∀ (w : Witness), Valid_1 w → Endpoint},   { Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clos",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.injEq",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint) (Valid_1 : Witness → Prop) (produce_1 : Source → ∃ w, Valid_1 w)   (close_1 : ∀ (w : Witness), Valid_1 w → Endpoint),   ({ Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clo",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.sizeOf_spec",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} [inst : SizeOf Source] [inst_1 : SizeOf Witness]   [inst_2 : SizeOf Endpoint] (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint), sizeOf { Valid := Valid, produce := produce, close := close } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.produce",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint),   Source → ∃ w, self.Valid w",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.endpoint.sizeOf_spec",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.endpoint = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.ofNat_toCtorIdx",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ (x : DirectEndpointRule.Stage), DirectEndpointRule.Stage.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.source.sizeOf_spec",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.source = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.verified.sizeOf_spec",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.verified = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.witness.sizeOf_spec",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.witness = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.decreases",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (self : DirectEndpointRule.StrictProgress State) (s : State), self.rank (self.step s) < self.rank s",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.inj",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} {rank : State → ℕ} {step : State → State} {decreases : ∀ (s : State), rank (step s) < rank s}   {rank_1 : State → ℕ} {step_1 : State → State} {decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s},   { rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 } →     rank = rank_1 ∧ step = step_1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.injEq",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {State : Type u} (rank : State → ℕ) (step : State → State) (decreases : ∀ (s : State), rank (step s) < rank s)   (rank_1 : State → ℕ) (step_1 : State → State) (decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s),   ({ rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 }) =     (rank = rank_1 ∧ step = step_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.sizeOf_spec",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} [inst : SizeOf State] (rank : State → ℕ) (step : State → State)   (decreases : ∀ (s : State), rank (step s) < rank s), sizeOf { rank := rank, step := step, decreases := decreases } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.direct_endpoint",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop},   DirectEndpointRule.Rule Source Witness Endpoint → Source → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.forwardDependency_wellFounded",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "WellFounded DirectEndpointRule.forwardDependency",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.no_infinite_descent",
+     "module": "formal.DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (p : DirectEndpointRule.StrictProgress State), WellFounded fun a b => p.rank a < p.rank b",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.NontrivialZero.in_strip_left",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Riemann.Zeros.NontrivialZero), 0 < self.s.re",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.NontrivialZero.in_strip_right",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : Riemann.Zeros.NontrivialZero), self.s.re < 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.NontrivialZero.is_zero",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "Riemann.Zeros.NontrivialZero → True",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.NontrivialZero.mk.inj",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {s : ℂ} {is_zero : True} {in_strip_left : 0 < s.re} {in_strip_right : s.re < 1} {s_1 : ℂ} {is_zero_1 : True}   {in_strip_left_1 : 0 < s_1.re} {in_strip_right_1 : s_1.re < 1},   { s := s, is_zero := is_zero, in_strip_left := in_strip_left, in_strip_right := in_strip_right } =       { s := s_1, is_zero := is_zero_1, in_strip_left := in_strip_left_1, in_strip_right := in_strip_right_1 } →     s = s",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.NontrivialZero.mk.injEq",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (s : ℂ) (is_zero : True) (in_strip_left : 0 < s.re) (in_strip_right : s.re < 1) (s_1 : ℂ) (is_zero_1 : True)   (in_strip_left_1 : 0 < s_1.re) (in_strip_right_1 : s_1.re < 1),   ({ s := s, is_zero := is_zero, in_strip_left := in_strip_left, in_strip_right := in_strip_right } =       { s := s_1, is_zero := is_zero_1, in_strip_left := in_strip_left_1, in_strip_right := in_strip_right_1 }) =     (s",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.NontrivialZero.mk.sizeOf_spec",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (s : ℂ) (is_zero : True) (in_strip_left : 0 < s.re) (in_strip_right : s.re < 1),   sizeOf { s := s, is_zero := is_zero, in_strip_left := in_strip_left, in_strip_right := in_strip_right } =     1 + sizeOf s + sizeOf is_zero + sizeOf in_strip_left + sizeOf in_strip_right",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.critical_anomalous_exclusive",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (z : Riemann.Zeros.NontrivialZero), ¬(Riemann.Zeros.isCriticalZero z ∧ Riemann.Zeros.isAnomalousZero z)",
+     "status": "fechado"
+    },
+    {
+     "name": "Riemann.Zeros.zero_classification",
+     "module": "cross.lean.Riemann.Zeros.Nontrivial",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (z : Riemann.Zeros.NontrivialZero), Riemann.Zeros.isCriticalZero z ∨ Riemann.Zeros.isAnomalousZero z",
+     "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada): imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s); 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Main, MillenniumRiemann, cross, formal, lean, src e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././Main.lean:12:0: unknown module prefix 'Millennium' | error: Lean exited with code 1)",
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada, vocabulario-lean4, z-provas-reparadas): imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s); 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 57 arquivo(s): comentario 2, docstring 22, lambda 17, lemma 5, nomes_mathlib 3, noncomputable 43, notacao 69, palavra_chave 4, repr 16; 2 prova(s) reescrita(s), conferidas no Lean do projeto: no_infinite_descent, forwardDependency_wellFounded. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com MillenniumRiemann, cross, formal, lean, src e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: build cycle detected: | error: ././././MillenniumRiemann/Tests.lean: bad import 'MillenniumRiemann')",
    "corrections": [
     "imports-no-topo",
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4",
+    "z-provas-reparadas"
    ],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Main, .one `MillenniumRiemann, .submodules `MillenniumRiemann, .submodules `cross, .submodules `formal, .submodules `lean, .submodules `src]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `MillenniumRiemann, .submodules `MillenniumRiemann, .one `cross.lean.Riemann.IKernel.KernelDef, .one `cross.lean.Riemann.INumber, .one `cross.lean.Riemann.Zeros.Nontrivial, .submodules `formal, .one `lean.millennium.Riemann.CollapseComplex, .one `src.Riemann.Core.ZetaDef, .one `src.Riemann.IConstant.ICore, .one `src.Riemann.IKernel.KernelDef, .one `src.Sim.Bridges, .one `src.Sim.Numerics]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 125,
+     "linha": 128,
      "nome": "Collapse.CollapseComplex.ext",
      "status": "erro",
      "axioms": [
@@ -112,11 +325,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 132: unsolved goals case mk.mk re✝¹ im✝¹ indet✝¹ re✝ im✝ indet✝ : ℝ hre : { re := re✝¹, im := im✝¹, indet := indet✝¹ }.re = { re := re✝, im := im✝, indet := indet✝ }.re him : { re := re✝¹, im := im✝¹, indet := indet✝¹ }.im = { re := re✝, im := i"
+     "erro": "linha 135: unsolved goals case mk.mk re✝¹ im✝¹ indet✝¹ re✝ im✝ indet✝ : ℝ hre : { re := re✝¹, im := im✝¹, indet := indet✝¹ }.re = { re := re✝, im := im✝, indet := indet✝ }.re him : { re := re✝¹, im := im✝¹, indet := indet✝¹ }.im = { re := re✝, im := i",
+     "coluna": 13,
+     "trecho": "    z = w := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 135,
+     "linha": 138,
      "nome": "Collapse.CollapseComplex.add_assoc",
      "status": "erro",
      "axioms": [
@@ -125,11 +340,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 138: unsolved goals case hre a b c : CollapseComplex ⊢ (Add.add (Add.add a b) c).re = (Add.add a (Add.add b c)).re case him a b c : CollapseComplex ⊢ (Add.add (Add.add a b) c).im = (Add.add a (Add.add b c)).im case hindet a b c : CollapseComplex"
+     "erro": "linha 141: unsolved goals case hre a b c : CollapseComplex ⊢ (Add.add (Add.add a b) c).re = (Add.add a (Add.add b c)).re case him a b c : CollapseComplex ⊢ (Add.add (Add.add a b) c).im = (Add.add a (Add.add b c)).im case hindet a b c : CollapseComplex",
+     "coluna": 31,
+     "trecho": "   a + b + c = a + (b + c) := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 143,
+     "linha": 146,
      "nome": "Collapse.CollapseComplex.add_comm",
      "status": "erro",
      "axioms": [
@@ -138,11 +355,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 146: unsolved goals case hre a b : CollapseComplex ⊢ (Add.add a b).re = (Add.add b a).re case him a b : CollapseComplex ⊢ (Add.add a b).im = (Add.add b a).im case hindet a b : CollapseComplex ⊢ (Add.add a b).indet = (Add.add b a).indet"
+     "erro": "linha 149: unsolved goals case hre a b : CollapseComplex ⊢ (Add.add a b).re = (Add.add b a).re case him a b : CollapseComplex ⊢ (Add.add a b).im = (Add.add b a).im case hindet a b : CollapseComplex ⊢ (Add.add a b).indet = (Add.add b a).indet",
+     "coluna": 21,
+     "trecho": "    a + b = b + a := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 151,
+     "linha": 154,
      "nome": "Collapse.CollapseComplex.zero_add",
      "status": "erro",
      "axioms": [
@@ -151,11 +370,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 154: unsolved goals case hre a : CollapseComplex ⊢ (Add.add 0 a).re = a.re case him a : CollapseComplex ⊢ (Add.add 0 a).im = a.im case hindet a : CollapseComplex ⊢ (Add.add 0 a).indet = a.indet"
+     "erro": "linha 157: unsolved goals case hre a : CollapseComplex ⊢ (Add.add 0 a).re = a.re case him a : CollapseComplex ⊢ (Add.add 0 a).im = a.im case hindet a : CollapseComplex ⊢ (Add.add 0 a).indet = a.indet",
+     "coluna": 17,
+     "trecho": "    0 + a = a := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 156,
+     "linha": 159,
      "nome": "Collapse.CollapseComplex.add_zero",
      "status": "erro",
      "axioms": [
@@ -164,11 +385,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 159: unsolved goals case hre a : CollapseComplex ⊢ (Add.add a 0).re = a.re case him a : CollapseComplex ⊢ (Add.add a 0).im = a.im case hindet a : CollapseComplex ⊢ (Add.add a 0).indet = a.indet"
+     "erro": "linha 162: unsolved goals case hre a : CollapseComplex ⊢ (Add.add a 0).re = a.re case him a : CollapseComplex ⊢ (Add.add a 0).im = a.im case hindet a : CollapseComplex ⊢ (Add.add a 0).indet = a.indet",
+     "coluna": 17,
+     "trecho": "    a + 0 = a := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 161,
+     "linha": 164,
      "nome": "Collapse.CollapseComplex.add_left_neg",
      "status": "erro",
      "axioms": [
@@ -177,11 +400,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 164: unsolved goals case hre a : CollapseComplex ⊢ (Add.add { re := Real.neg✝ a.re, im := Real.neg✝ a.im, indet := Real.neg✝ a.indet } a).re = re 0 case him a : CollapseComplex ⊢ (Add.add { re := Real.neg✝ a.re, im := Real.neg✝ a.im, indet := Re"
+     "erro": "linha 167: unsolved goals case hre a : CollapseComplex ⊢ (Add.add { re := Real.neg✝ a.re, im := Real.neg✝ a.im, indet := Real.neg✝ a.indet } a).re = re 0 case him a : CollapseComplex ⊢ (Add.add { re := Real.neg✝ a.re, im := Real.neg✝ a.im, indet := Re",
+     "coluna": 18,
+     "trecho": "    -a + a = 0 := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 179,
+     "linha": 182,
      "nome": "Collapse.CollapseComplex.mul_assoc",
      "status": "erro",
      "axioms": [
@@ -190,11 +415,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 182: unsolved goals case hre a b c : CollapseComplex ⊢ (Mul.mul (Mul.mul a b) c).re = (Mul.mul a (Mul.mul b c)).re case him a b c : CollapseComplex ⊢ (Mul.mul (Mul.mul a b) c).im = (Mul.mul a (Mul.mul b c)).im case hindet a b c : CollapseComplex"
+     "erro": "linha 185: unsolved goals case hre a b c : CollapseComplex ⊢ (Mul.mul (Mul.mul a b) c).re = (Mul.mul a (Mul.mul b c)).re case him a b c : CollapseComplex ⊢ (Mul.mul (Mul.mul a b) c).im = (Mul.mul a (Mul.mul b c)).im case hindet a b c : CollapseComplex",
+     "coluna": 31,
+     "trecho": "   a * b * c = a * (b * c) := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 187,
+     "linha": 190,
      "nome": "Collapse.CollapseComplex.mul_comm",
      "status": "erro",
      "axioms": [
@@ -203,11 +430,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 190: unsolved goals case hre a b : CollapseComplex ⊢ (Mul.mul a b).re = (Mul.mul b a).re case him a b : CollapseComplex ⊢ (Mul.mul a b).im = (Mul.mul b a).im case hindet a b : CollapseComplex ⊢ (Mul.mul a b).indet = (Mul.mul b a).indet"
+     "erro": "linha 193: unsolved goals case hre a b : CollapseComplex ⊢ (Mul.mul a b).re = (Mul.mul b a).re case him a b : CollapseComplex ⊢ (Mul.mul a b).im = (Mul.mul b a).im case hindet a b : CollapseComplex ⊢ (Mul.mul a b).indet = (Mul.mul b a).indet",
+     "coluna": 21,
+     "trecho": "    a * b = b * a := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 195,
+     "linha": 198,
      "nome": "Collapse.CollapseComplex.one_mul",
      "status": "erro",
      "axioms": [
@@ -216,11 +445,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 198: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul 1 a).re = a.re case him a : CollapseComplex ⊢ (Mul.mul 1 a).im = a.im case hindet a : CollapseComplex ⊢ (Mul.mul 1 a).indet = a.indet"
+     "erro": "linha 201: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul 1 a).re = a.re case him a : CollapseComplex ⊢ (Mul.mul 1 a).im = a.im case hindet a : CollapseComplex ⊢ (Mul.mul 1 a).indet = a.indet",
+     "coluna": 17,
+     "trecho": "    1 * a = a := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 202,
+     "linha": 205,
      "nome": "Collapse.CollapseComplex.mul_one",
      "status": "erro",
      "axioms": [
@@ -229,11 +460,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 205: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul a 1).re = a.re case him a : CollapseComplex ⊢ (Mul.mul a 1).im = a.im case hindet a : CollapseComplex ⊢ (Mul.mul a 1).indet = a.indet"
+     "erro": "linha 208: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul a 1).re = a.re case him a : CollapseComplex ⊢ (Mul.mul a 1).im = a.im case hindet a : CollapseComplex ⊢ (Mul.mul a 1).indet = a.indet",
+     "coluna": 17,
+     "trecho": "    a * 1 = a := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 209,
+     "linha": 212,
      "nome": "Collapse.CollapseComplex.left_distrib",
      "status": "erro",
      "axioms": [
@@ -242,11 +475,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 212: unsolved goals case hre a b c : CollapseComplex ⊢ (Mul.mul a (Add.add b c)).re = (Add.add (Mul.mul a b) (Mul.mul a c)).re case him a b c : CollapseComplex ⊢ (Mul.mul a (Add.add b c)).im = (Add.add (Mul.mul a b) (Mul.mul a c)).im case hindet"
+     "erro": "linha 215: unsolved goals case hre a b c : CollapseComplex ⊢ (Mul.mul a (Add.add b c)).re = (Add.add (Mul.mul a b) (Mul.mul a c)).re case him a b c : CollapseComplex ⊢ (Mul.mul a (Add.add b c)).im = (Add.add (Mul.mul a b) (Mul.mul a c)).im case hindet",
+     "coluna": 35,
+     "trecho": " * (b + c) = a * b + a * c := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 217,
+     "linha": 220,
      "nome": "Collapse.CollapseComplex.right_distrib",
      "status": "erro",
      "axioms": [
@@ -255,11 +490,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 220: unsolved goals case hre a b c : CollapseComplex ⊢ (Mul.mul (Add.add a b) c).re = (Add.add (Mul.mul a c) (Mul.mul b c)).re case him a b c : CollapseComplex ⊢ (Mul.mul (Add.add a b) c).im = (Add.add (Mul.mul a c) (Mul.mul b c)).im case hindet"
+     "erro": "linha 223: unsolved goals case hre a b c : CollapseComplex ⊢ (Mul.mul (Add.add a b) c).re = (Add.add (Mul.mul a c) (Mul.mul b c)).re case him a b c : CollapseComplex ⊢ (Mul.mul (Add.add a b) c).im = (Add.add (Mul.mul a c) (Mul.mul b c)).im case hindet",
+     "coluna": 35,
+     "trecho": "a + b) * c = a * c + b * c := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 225,
+     "linha": 228,
      "nome": "Collapse.CollapseComplex.zero_mul",
      "status": "erro",
      "axioms": [
@@ -268,11 +505,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 228: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul 0 a).re = re 0 case him a : CollapseComplex ⊢ (Mul.mul 0 a).im = im 0 case hindet a : CollapseComplex ⊢ (Mul.mul 0 a).indet = indet 0"
+     "erro": "linha 231: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul 0 a).re = re 0 case him a : CollapseComplex ⊢ (Mul.mul 0 a).im = im 0 case hindet a : CollapseComplex ⊢ (Mul.mul 0 a).indet = indet 0",
+     "coluna": 17,
+     "trecho": "    0 * a = 0 := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 230,
+     "linha": 233,
      "nome": "Collapse.CollapseComplex.mul_zero",
      "status": "erro",
      "axioms": [
@@ -281,11 +520,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 233: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul a 0).re = re 0 case him a : CollapseComplex ⊢ (Mul.mul a 0).im = im 0 case hindet a : CollapseComplex ⊢ (Mul.mul a 0).indet = indet 0"
+     "erro": "linha 236: unsolved goals case hre a : CollapseComplex ⊢ (Mul.mul a 0).re = re 0 case him a : CollapseComplex ⊢ (Mul.mul a 0).im = im 0 case hindet a : CollapseComplex ⊢ (Mul.mul a 0).indet = indet 0",
+     "coluna": 17,
+     "trecho": "    a * 0 = 0 := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 259,
+     "linha": 262,
      "nome": "Collapse.CollapseComplex.conj_add",
      "status": "erro",
      "axioms": [
@@ -294,11 +535,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 264: unsolved goals case hre z w : CollapseComplex ⊢ (Add.add z w).re = (Add.add { re := z.re, im := -z.im, indet := z.indet } { re := w.re, im := -w.im, indet := w.indet }).re case him z w : CollapseComplex ⊢ -(Add.add z w).im = (Add.add { re :"
+     "erro": "linha 267: unsolved goals case hre z w : CollapseComplex ⊢ (Add.add z w).re = (Add.add { re := z.re, im := -z.im, indet := z.indet } { re := w.re, im := -w.im, indet := w.indet }).re case him z w : CollapseComplex ⊢ -(Add.add z w).im = (Add.add { re :",
+     "coluna": 38,
+     "trecho": " (z + w) = conj z + conj w := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 267,
+     "linha": 270,
      "nome": "Collapse.CollapseComplex.conj_mul",
      "status": "erro",
      "axioms": [
@@ -307,11 +550,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 270: unsolved goals case hre z w : CollapseComplex ⊢ (Mul.mul z w).re = (Mul.mul { re := z.re, im := -z.im, indet := z.indet } { re := w.re, im := -w.im, indet := w.indet }).re case him z w : CollapseComplex ⊢ -(Mul.mul z w).im = (Mul.mul { re :"
+     "erro": "linha 273: unsolved goals case hre z w : CollapseComplex ⊢ (Mul.mul z w).re = (Mul.mul { re := z.re, im := -z.im, indet := z.indet } { re := w.re, im := -w.im, indet := w.indet }).re case him z w : CollapseComplex ⊢ -(Mul.mul z w).im = (Mul.mul { re :",
+     "coluna": 38,
+     "trecho": " (z * w) = conj z * conj w := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 274,
+     "linha": 277,
      "nome": "Collapse.CollapseComplex.conj_conj",
      "status": "aberto-sorry",
      "axioms": [
@@ -323,7 +568,7 @@
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 279,
+     "linha": 282,
      "nome": "Collapse.CollapseComplex.toComplex_add",
      "status": "erro",
      "axioms": [
@@ -332,11 +577,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 284: no applicable extensionality theorem found for ℂ"
+     "erro": "linha 287: no applicable extensionality theorem found for ℂ",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xt <;> simp"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 285,
+     "linha": 288,
      "nome": "Collapse.CollapseComplex.toComplex_mul",
      "status": "erro",
      "axioms": [
@@ -345,11 +592,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 290: no applicable extensionality theorem found for ℂ"
+     "erro": "linha 293: no applicable extensionality theorem found for ℂ",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xt <;> simp [Complex.mul_re, "
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 291,
+     "linha": 294,
      "nome": "Collapse.CollapseComplex.toComplex_ringHom",
      "status": "aberto-sorry",
      "axioms": [
@@ -361,7 +610,7 @@
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 298,
+     "linha": 301,
      "nome": "Collapse.CollapseComplex.kernel_toComplex",
      "status": "erro",
      "axioms": [
@@ -370,11 +619,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 307: no applicable extensionality theorem found for ℂ"
+     "erro": "linha 310: no applicable extensionality theorem found for ℂ",
+     "coluna": 4,
+     "trecho": "    ⟦e⟧xt <;> simp [h1, h2]"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 308,
+     "linha": 311,
      "nome": "Collapse.CollapseComplex.deltaI_add",
      "status": "erro",
      "axioms": [
@@ -383,19 +634,28 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 311: unsolved goals case hre z w : CollapseComplex ⊢ 0 = (Add.add { re := 0, im := 0, indet := z.indet } { re := 0, im := 0, indet := w.indet }).re case him z w : CollapseComplex ⊢ 0 = (Add.add { re := 0, im := 0, indet := z.indet } { re := 0, i"
+     "erro": "linha 314: unsolved goals case hre z w : CollapseComplex ⊢ 0 = (Add.add { re := 0, im := 0, indet := z.indet } { re := 0, im := 0, indet := w.indet }).re case him z w : CollapseComplex ⊢ 0 = (Add.add { re := 0, im := 0, indet := z.indet } { re := 0, i",
+     "coluna": 44,
+     "trecho": "+ w) = deltaI z + deltaI w := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 313,
+     "linha": 316,
      "nome": "Collapse.CollapseComplex.deltaI_smul",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 315: unexpected token 'λ'; expected '_' or identifier"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 319: unsolved goals case hre «λ» : ℝ z : CollapseComplex ⊢ 0 = (Mul.mul { re := «λ», im := 0, indet := 0 } { re := 0, im := 0, indet := z.indet }).re case him «λ» : ℝ z : CollapseComplex ⊢ 0 = (Mul.mul { re := «λ», im := 0, indet := 0 } { re := ",
+     "coluna": 55,
+     "trecho": "z) = ofReal «λ» * deltaI z := ⟦b⟧y"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 318,
+     "linha": 321,
      "nome": "Collapse.CollapseComplex.deltaI_idem",
      "status": "aberto-sorry",
      "axioms": [
@@ -407,7 +667,7 @@
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 323,
+     "linha": 326,
      "nome": "Collapse.CollapseComplex.kernel_deltaI",
      "status": "erro",
      "axioms": [
@@ -416,11 +676,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 329: invalid projection, structure has only 0 field(s) h has type { re := 0, im := 0, indet := z.indet } = 0"
+     "erro": "linha 332: invalid projection, structure has only 0 field(s) h has type { re := 0, im := 0, indet := z.indet } = 0",
+     "coluna": 19,
+     "trecho": "  · intro h; exact ⟦h⟧.2.2"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 331,
+     "linha": 334,
      "nome": "Collapse.CollapseComplex.image_deltaI",
      "status": "erro",
      "axioms": [
@@ -429,11 +691,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 338: invalid projection, structure has only 0 field(s) hz has type { re := 0, im := 0, indet := z.indet } = w"
+     "erro": "linha 341: invalid projection, structure has only 0 field(s) hz has type { re := 0, im := 0, indet := z.indet } = w",
+     "coluna": 11,
+     "trecho": "    exact ⟨⟦h⟧z.1, hz.2.1⟩"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 342,
+     "linha": 345,
      "nome": "Collapse.CollapseComplex.normI_nonneg",
      "status": "fechado",
      "axioms": [
@@ -444,7 +708,7 @@
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 350,
+     "linha": 353,
      "nome": "Collapse.CollapseComplex.normI_eq_zero",
      "status": "erro",
      "axioms": [
@@ -453,11 +717,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 359: omega could not prove the goal: No usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by cons"
+     "erro": "linha 362: omega could not prove the goal: No usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by cons",
+     "coluna": 6,
+     "trecho": "      ⟦o⟧mega"
     },
     {
      "arquivo": "MillenniumRiemann/CollapseComplex.lean",
-     "linha": 370,
+     "linha": 373,
      "nome": "Collapse.CollapseComplex.normI_add_le",
      "status": "erro",
      "axioms": [
@@ -466,424 +732,654 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 377: unknown constant 'Real.sqrt_sum_le'"
+     "erro": "linha 380: unknown constant 'Real.sqrt_sum_le'",
+     "coluna": 10,
+     "trecho": "    apply ⟦R⟧eal.sqrt_sum_le"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 33,
+     "linha": 35,
      "nome": "Collapse.CollapseComplex.toProduct_fromProduct",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 40: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xt <;> simp",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 39,
+     "linha": 41,
      "nome": "Collapse.CollapseComplex.fromProduct_toProduct",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 46: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xt <;> simp",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 45,
+     "linha": 47,
      "nome": "Collapse.CollapseComplex.toProduct_add",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 50: unexpected token ','; expected ':=', 'where' or '|'",
+     "coluna": 57,
+     "trecho": "Product z).1 + (toProduct w).1⟦,⟧ (toProduct z).2 + (toProduct",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 53,
+     "linha": 55,
      "nome": "Collapse.CollapseComplex.toProduct_mul",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 58: unexpected token ','; expected ':=', 'where' or '|'",
+     "coluna": 57,
+     "trecho": "Product z).1 * (toProduct w).1⟦,⟧ (toProduct z).2 * (toProduct",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 61,
+     "linha": 63,
      "nome": "Collapse.CollapseComplex.ring_isomorphism",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 67: unexpected token ','; expected ':=', 'where' or '|'",
+     "coluna": 57,
+     "trecho": "Product z).1 + (toProduct w).1⟦,⟧ (toProduct z).2 + (toProduct",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 84,
+     "linha": 86,
      "nome": "Collapse.CollapseComplex.mul_inv_cancel",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 89,
+     "linha": 91,
      "nome": "Collapse.CollapseComplex.inv_mul_cancel",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 104,
+     "linha": 106,
      "nome": "Collapse.CollapseComplex.pureComplex_closed_add",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 112: linarith failed to find a contradiction case h1.h z w : CollapseComplex hz : z.indet = 0 hw : w.indet = 0 a✝ : (Add.add z w).indet < 0 ⊢ False failed",
+     "coluna": 2,
+     "trecho": "  ⟦l⟧inarith",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 111,
+     "linha": 113,
      "nome": "Collapse.CollapseComplex.pureComplex_closed_mul",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 118: linarith failed to find a contradiction case h1.h z w : CollapseComplex hz : z.indet = 0 hw : w.indet = 0 a✝ : (Mul.mul z w).indet < 0 ⊢ False failed",
+     "coluna": 2,
+     "trecho": "  ⟦l⟧inarith",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 117,
+     "linha": 119,
      "nome": "Collapse.CollapseComplex.pureComplex_has_zero",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 121: unsolved goals ⊢ indet 0 = 0",
+     "coluna": 43,
+     "trecho": "apseComplex) ∈ PureComplex := ⟦b⟧y",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 121,
+     "linha": 123,
      "nome": "Collapse.CollapseComplex.pureComplex_has_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 125,
+     "linha": 127,
      "nome": "Collapse.CollapseComplex.pureIndet_closed_add",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 133: linarith failed to find a contradiction case h1.h z w : CollapseComplex hz : z.re = 0 ∧ z.im = 0 hw : w.re = 0 ∧ w.im = 0 a✝ : (Add.add z w).re < 0 ⊢ False failed",
+     "coluna": 12,
+     "trecho": "  exact ⟨by ⟦l⟧inarith, by linarith⟩",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 132,
+     "linha": 134,
      "nome": "Collapse.CollapseComplex.pureIndet_has_zero",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 136: unsolved goals ⊢ re 0 = 0 ∧ im 0 = 0",
+     "coluna": 49,
+     "trecho": "mplex) ∈ PureIndeterminate := ⟦b⟧y",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 136,
+     "linha": 138,
      "nome": "Collapse.CollapseComplex.deltaI_image_eq_pureIndet",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 147: invalid projection, structure has only 0 field(s) hz has type { re := 0, im := 0, indet := z.indet } = w",
+     "coluna": 11,
+     "trecho": "    exact ⟨⟦h⟧z.1, hz.2.1⟩",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 149,
+     "linha": 151,
      "nome": "Collapse.CollapseComplex.kernel_deltaI_eq_pureComplex",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 157: invalid projection, structure has only 0 field(s) h has type { re := 0, im := 0, indet := z.indet } = 0",
+     "coluna": 19,
+     "trecho": "  · intro h; exact ⟦h⟧.2.2",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 157,
+     "linha": 159,
      "nome": "Collapse.CollapseComplex.conj_pureComplex",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 163,
+     "linha": 165,
      "nome": "Collapse.CollapseComplex.conj_pureIndet",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 170: invalid constructor ⟨...⟩, insufficient number of arguments, constructs 'Eq.refl' does not have explicit fields, but #2 provided",
+     "coluna": 8,
+     "trecho": "  exact ⟦⟨⟧h.1, by linarith, by linarith",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 169,
+     "linha": 171,
      "nome": "Collapse.CollapseComplex.conj_mul_self",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 174: unknown constant 'Complex.conj'",
+     "coluna": 43,
+     "trecho": " (z * conj z) = toComplex z * ⟦C⟧omplex.conj (toComplex z) := ",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 179,
+     "linha": 181,
      "nome": "Collapse.CollapseComplex.normI_smul_nonneg",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 186,
+     "linha": 188,
      "nome": "Collapse.CollapseComplex.normI_mul_le",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 196,
+     "linha": 198,
      "nome": "Collapse.CollapseComplex.i_sq",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 200: unsolved goals case hre ⊢ (Mul.mul { re := 0, im := 1, indet := 0 } { re := 0, im := 1, indet := 0 }).re = -1 case him ⊢ (Mul.mul { re := 0, im := 1, indet := 0 } { re := 0, im := 1, indet := 0 }).im = 0 case hindet ⊢ (Mul.mul { re := 0, im",
+     "coluna": 60,
+     "trecho": " -1, im := 0, indet := 0 } := ⟦b⟧y",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 205,
+     "linha": 207,
      "nome": "Collapse.CollapseComplex.I_sq",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 209: unsolved goals case hre ⊢ (Mul.mul { re := 0, im := 0, indet := 1 } { re := 0, im := 0, indet := 1 }).re = 0 case him ⊢ (Mul.mul { re := 0, im := 0, indet := 1 } { re := 0, im := 0, indet := 1 }).im = 0 case hindet ⊢ (Mul.mul { re := 0, im ",
+     "coluna": 59,
+     "trecho": "= 0, im := 0, indet := 1 } := ⟦b⟧y",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
-     "linha": 210,
+     "linha": 212,
      "nome": "Collapse.CollapseComplex.i_mul_I",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/MillenniumRiemann/CollapseComplex.olean' of module MillenniumRiemann.CollapseComplex does not exist — MillenniumRiemann.CollapseComplex não compilou: /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: (kernel) invalid declaration, it uses unsafe declaration 'Real.instRepr' | /tmp/mvei-rec-_2_pyp7u/p/MillenniumRiemann/CollapseComplex.lean:41:9: error: failed to compile definition, consider marking it as 'noncomputable' be"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumRiemann.CollapseComplex"
+     ],
+     "erro": "linha 216: simp made no progress",
+     "coluna": 10,
+     "trecho": "  ext <;> ⟦s⟧imp",
+     "motivo": "importa MillenniumRiemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "cross/lean/AnomalousZeros.lean",
-     "linha": 257,
+     "linha": 260,
      "nome": "Millennium.Riemann.Anomalous.Theorems.critical_zero_no_I_contribution",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "cross/lean/AnomalousZeros.lean",
-     "linha": 265,
+     "linha": 268,
      "nome": "Millennium.Riemann.Anomalous.Theorems.anomalous_I_contribution",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "cross/lean/AnomalousZeros.lean",
-     "linha": 273,
+     "linha": 276,
      "nome": "Millennium.Riemann.Anomalous.Theorems.collapse_at_I_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/Collapse/Constants.lean",
-     "linha": 29,
+     "linha": 34,
      "nome": "Riemann.Collapse.no_anomalous_from_I_ne_one",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.IKernel.KernelDef",
+      "Riemann.INumber"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/Anomalous.olean' of module Riemann.Zeros.Anomalous does not exist — Riemann.Zeros.Anomalous não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/Anomalous.lean:8:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist"
     },
     {
      "arquivo": "cross/lean/Riemann/Collapse/Constants.lean",
-     "linha": 56,
+     "linha": 61,
      "nome": "Riemann.Collapse.RH_from_I_ne_one",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.IKernel.KernelDef",
+      "Riemann.INumber"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/Anomalous.olean' of module Riemann.Zeros.Anomalous does not exist — Riemann.Zeros.Anomalous não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/Anomalous.lean:8:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist"
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
-     "linha": 80,
+     "linha": 85,
      "nome": "Riemann.INumber.collapse_add_left",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 83: tactic 'rfl' failed, the left-hand side add collapse (regular z✝) is not definitionally equal to the right-hand side collapse case regular ℂ✝ : Type u_1 z✝ : ℂ✝ ⊢ add collapse (regular z✝) = collapse"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
-     "linha": 84,
+     "linha": 89,
      "nome": "Riemann.INumber.collapse_add_right",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 86: tactic 'rfl' failed, the left-hand side add (regular z✝) collapse is not definitionally equal to the right-hand side collapse case regular ℂ✝ : Type u_1 z✝ : ℂ✝ ⊢ add (regular z✝) collapse = collapse"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
-     "linha": 87,
+     "linha": 92,
      "nome": "Riemann.INumber.collapse_mul_left",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 90: tactic 'rfl' failed, the left-hand side mul collapse (regular z✝) is not definitionally equal to the right-hand side collapse case regular ℂ✝ : Type u_1 z✝ : ℂ✝ ⊢ mul collapse (regular z✝) = collapse"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
-     "linha": 91,
+     "linha": 96,
      "nome": "Riemann.INumber.collapse_mul_right",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 93: tactic 'rfl' failed, the left-hand side mul (regular z✝) collapse is not definitionally equal to the right-hand side collapse case regular ℂ✝ : Type u_1 z✝ : ℂ✝ ⊢ mul (regular z✝) collapse = collapse"
-    },
-    {
-     "arquivo": "cross/lean/Riemann/INumber.lean",
-     "linha": 94,
-     "nome": "Riemann.INumber.add_comm",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 97: unsolved goals ℂ : Type u_1 z₁ z₂ : ℂ ⊢ sorry (regular z₁) (regular z₂) = sorry (regular z₂) (regular z₁)"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
      "linha": 99,
-     "nome": "Riemann.INumber.mul_comm",
+     "nome": "Riemann.INumber.add_comm",
      "status": "erro",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "erro": "linha 102: unsolved goals ℂ : Type u_1 z₁ z₂ : ℂ ⊢ sorry (regular z₁) (regular z₂) = sorry (regular z₂) (regular z₁)"
+     "erro": "linha 102: unsolved goals z₁ z₂ : ℂ ⊢ z₁ + z₂ = z₂ + z₁",
+     "coluna": 67,
+     "trecho": " (regular z₂) (regular z₁) := ⟦b⟧y"
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
      "linha": 104,
-     "nome": "Riemann.INumber.add_zero",
+     "nome": "Riemann.INumber.mul_comm",
      "status": "erro",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "erro": "linha 106: unsolved goals ℂ : Type u_1 z : ℂ ⊢ sorry (regular z) (regular (sorry ())) = regular z"
+     "erro": "linha 107: unsolved goals z₁ z₂ : ℂ ⊢ z₁ * z₂ = z₂ * z₁",
+     "coluna": 67,
+     "trecho": " (regular z₂) (regular z₁) := ⟦b⟧y"
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
      "linha": 109,
+     "nome": "Riemann.INumber.add_zero",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 113: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧ing"
+    },
+    {
+     "arquivo": "cross/lean/Riemann/INumber.lean",
+     "linha": 114,
      "nome": "Riemann.INumber.mul_one",
      "status": "erro",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "erro": "linha 111: unsolved goals ℂ : Type u_1 z : ℂ ⊢ sorry (regular z) (regular (sorry ())) = regular z"
+     "erro": "linha 118: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧ing"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
-     "linha": 18,
+     "linha": 21,
      "nome": "Riemann.Zeros.anomalous_zero_off_line",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
-     "linha": 26,
+     "linha": 29,
      "nome": "Riemann.Zeros.anomalous_zero_is_anomalous",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
-     "linha": 32,
+     "linha": 35,
      "nome": "Riemann.Zeros.anomalous_zero_distance_pos",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
-     "linha": 39,
+     "linha": 42,
      "nome": "Riemann.Zeros.anomalous_zero_side",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
-     "linha": 53,
+     "linha": 56,
      "nome": "Riemann.Zeros.anomalous_left_or_right",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-4lf0zo26/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
-     "linha": 16,
+     "linha": 20,
      "nome": "Riemann.Zeros.critical_zero_on_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
-     "linha": 24,
-     "nome": "Riemann.Zeros.critical_zero_is_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
-     "linha": 30,
-     "nome": "Riemann.Zeros.critical_zero_distance",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "cross/lean/Riemann/Zeros/Nontrivial.lean",
-     "linha": 43,
-     "nome": "Riemann.Zeros.zero_classification",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "cross/lean/Riemann/Zeros/Nontrivial.lean",
-     "linha": 51,
-     "nome": "Riemann.Zeros.critical_anomalous_exclusive",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 17,
-     "nome": "DirectEndpointRule.direct_endpoint",
      "status": "fechado",
-     "axioms": []
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 30,
-     "nome": "DirectEndpointRule.no_infinite_descent",
-     "status": "erro",
+     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
+     "linha": 28,
+     "nome": "Riemann.Zeros.critical_zero_is_critical",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 35: application type mismatch InvImage.wf p.rank Nat.lt_wfRel argument Nat.lt_wfRel has type WellFoundedRelation Nat : Type but is expected to have type WellFounded LT.lt : Prop"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 52,
-     "nome": "DirectEndpointRule.forwardDependency_wellFounded",
+     "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
+     "linha": 34,
+     "nome": "Riemann.Zeros.critical_zero_distance",
      "status": "erro",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "erro": "linha 54: application type mismatch InvImage.wf stageRank Nat.lt_wfRel argument Nat.lt_wfRel has type WellFoundedRelation Nat : Type but is expected to have type WellFounded LT.lt : Prop"
+     "erro": "linha 37: unsolved goals z : CriticalZero ⊢ z.s.re - 1 / 2 = 0",
+     "coluna": 38,
+     "trecho": "ceFromCriticalLine z.s = 0 := ⟦b⟧y"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 141,
+     "linha": 145,
      "nome": "Millennium.Riemann.CollapseComplex.add_assoc",
      "status": "erro",
      "axioms": [
@@ -892,11 +1388,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 146: simp made no progress"
+     "erro": "linha 150: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add]"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 152,
+     "linha": 156,
      "nome": "Millennium.Riemann.CollapseComplex.add_comm",
      "status": "erro",
      "axioms": [
@@ -905,11 +1403,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 155: simp made no progress"
+     "erro": "linha 159: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add]"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 161,
+     "linha": 165,
      "nome": "Millennium.Riemann.CollapseComplex.zero_add",
      "status": "erro",
      "axioms": [
@@ -918,11 +1418,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 164: simp made no progress"
+     "erro": "linha 168: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add, zero, Zero"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 170,
+     "linha": 174,
      "nome": "Millennium.Riemann.CollapseComplex.add_zero",
      "status": "erro",
      "axioms": [
@@ -931,11 +1433,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 173: simp made no progress"
+     "erro": "linha 177: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add, zero, Zero"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 179,
+     "linha": 183,
      "nome": "Millennium.Riemann.CollapseComplex.mul_assoc",
      "status": "erro",
      "axioms": [
@@ -944,11 +1448,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 182: simp made no progress"
+     "erro": "linha 186: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul]"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 188,
+     "linha": 192,
      "nome": "Millennium.Riemann.CollapseComplex.mul_comm",
      "status": "erro",
      "axioms": [
@@ -957,11 +1463,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 191: simp made no progress"
+     "erro": "linha 195: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul]"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 197,
+     "linha": 201,
      "nome": "Millennium.Riemann.CollapseComplex.one_mul",
      "status": "erro",
      "axioms": [
@@ -970,11 +1478,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 200: simp made no progress"
+     "erro": "linha 204: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul, one, One.o"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 206,
+     "linha": 210,
      "nome": "Millennium.Riemann.CollapseComplex.mul_one",
      "status": "erro",
      "axioms": [
@@ -983,11 +1493,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 209: simp made no progress"
+     "erro": "linha 213: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul, one, One.o"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 215,
+     "linha": 219,
      "nome": "Millennium.Riemann.CollapseComplex.left_distrib",
      "status": "erro",
      "axioms": [
@@ -996,11 +1508,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 218: simp made no progress"
+     "erro": "linha 222: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, add, Mul.mul, Add.a"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 224,
+     "linha": 228,
      "nome": "Millennium.Riemann.CollapseComplex.right_distrib",
      "status": "erro",
      "axioms": [
@@ -1009,11 +1523,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 227: simp made no progress"
+     "erro": "linha 231: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, add, Mul.mul, Add.a"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 233,
+     "linha": 237,
      "nome": "Millennium.Riemann.CollapseComplex.ofReal_add",
      "status": "erro",
      "axioms": [
@@ -1022,11 +1538,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 237: tactic 'constructor' failed, no applicable constructor found a b : ℝ ⊢ { re := a + b, im := 0, indet := 0 } = { re := a, im := 0, indet := 0 } + { re := b, im := 0, indet := 0 }"
+     "erro": "linha 241: tactic 'constructor' failed, no applicable constructor found a b : ℝ ⊢ { re := a + b, im := 0, indet := 0 } = { re := a, im := 0, indet := 0 } + { re := b, im := 0, indet := 0 }",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 242,
+     "linha": 246,
      "nome": "Millennium.Riemann.CollapseComplex.ofReal_mul",
      "status": "erro",
      "axioms": [
@@ -1035,11 +1553,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 246: tactic 'constructor' failed, no applicable constructor found a b : ℝ ⊢ { re := a * b, im := 0, indet := 0 } = { re := a, im := 0, indet := 0 } * { re := b, im := 0, indet := 0 }"
+     "erro": "linha 250: tactic 'constructor' failed, no applicable constructor found a b : ℝ ⊢ { re := a * b, im := 0, indet := 0 } = { re := a, im := 0, indet := 0 } * { re := b, im := 0, indet := 0 }",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 251,
+     "linha": 255,
      "nome": "Millennium.Riemann.CollapseComplex.I_components",
      "status": "fechado",
      "axioms": [
@@ -1050,7 +1570,7 @@
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseComplex.lean",
-     "linha": 255,
+     "linha": 259,
      "nome": "Millennium.Riemann.CollapseComplex.i_components",
      "status": "fechado",
      "axioms": [
@@ -1061,907 +1581,2014 @@
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Assumptions.lean",
-     "linha": 64,
+     "linha": 65,
      "nome": "Millennium.Riemann.CollapseProof.all_assumptions_stated",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.CollapseProof.CC_consistent",
+      "Millennium.Riemann.CollapseProof.Delta_preserves",
+      "Millennium.Riemann.CollapseProof.I_well_defined",
+      "Millennium.Riemann.CollapseProof.zeta_extends",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 67: unsolved goals h1 : True h2 : 𝕀.indet = 1 ∧ 𝕀.re = 0 ∧ 𝕀.im = 0 h3 : ∀ (s : CollapseComplex), ∃ z, zeta s = z h4 : ∀ (s : CollapseComplex), zeta s = zero → zeta (Δ s) = zero ⊢ True",
+     "coluna": 41,
+     "trecho": "_assumptions_stated : True := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.CriticalStrip, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 21,
+     "linha": 22,
      "nome": "Millennium.Riemann.CollapseProof.symbolicRiemannHypothesis",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 42,
+     "linha": 43,
      "nome": "Millennium.Riemann.CollapseProof.RH_explicit",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 51: invalid constructor ⟨...⟩, insufficient number of arguments, constructs 'Eq.refl' does not have explicit fields, but #3 provided",
+     "coluna": 14,
+     "trecho": "  exact hRH s ⟦⟨⟧hz, hpos, hlt⟩",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.CollapseProof.Assumptions, Millennium.Riemann.CollapseProof.ICollapseLogic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 51,
+     "linha": 52,
      "nome": "Millennium.Riemann.CollapseProof.critical_strip_implies_critical_line",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 59: type mismatch RH_explicit s hz h.left h.right has type s.re = 1 / 2 : Prop but is expected to have type s.re = 2⁻¹ : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact RH_explicit s hz h.1 h.2",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.CollapseProof.Assumptions, Millennium.Riemann.CollapseProof.ICollapseLogic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 59,
+     "linha": 60,
      "nome": "Millennium.Riemann.CollapseProof.no_zeros_left_strip",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 66,
+     "linha": 67,
      "nome": "Millennium.Riemann.CollapseProof.no_zeros_right_strip",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 73,
+     "linha": 74,
      "nome": "Millennium.Riemann.CollapseProof.no_exceptional_zeros",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/Contradiction.lean",
-     "linha": 82,
+     "linha": 83,
      "nome": "Millennium.Riemann.CollapseProof.symbolic_proof_summary",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.CollapseProof.ICollapseLogic",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 28,
+     "linha": 31,
      "nome": "Millennium.Riemann.CollapseProof.not_RH_implies_exceptional",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 41: application type mismatch ⟨hstrip.right, hne⟩ argument hne has type ¬s.re = 2⁻¹ : Prop but is expected to have type s.re ≠ 1 / 2 : Prop",
+     "coluna": 33,
+     "trecho": "xact ⟨hz, hstrip.1, hstrip.2, ⟦h⟧ne⟩",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.CollapseProof.Assumptions, Millennium.Riemann.Core.CriticalStrip, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 43,
+     "linha": 46,
      "nome": "Millennium.Riemann.CollapseProof.singularity_positive",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 51: type mismatch abs_pos.mpr (sub_ne_zero.mpr ez.not_critical) has type 0 < |ez.location.re - 1 / 2| : Prop but is expected to have type ¬ez.location.re - 2⁻¹ = 0 : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact abs_pos.mpr (sub_ne_zero",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.CollapseProof.Assumptions, Millennium.Riemann.Core.CriticalStrip, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 74,
+     "linha": 77,
      "nome": "Millennium.Riemann.CollapseProof.I_times_zero_ne_one",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 79: unsolved goals h : 𝕀 * zero = one h1 : ({ re := 0, im := 0, indet := 1 } * { re := 0, im := 0, indet := 0 }).re = 1 ⊢ False",
+     "coluna": 48,
+     "trecho": "ro_ne_one : 𝕀 * zero ≠ one := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.CollapseProof.Assumptions, Millennium.Riemann.Core.CriticalStrip, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 80,
+     "linha": 83,
      "nome": "Millennium.Riemann.CollapseProof.I_collapse_contradiction",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 86: unsolved goals ez : ExceptionalZero h✝ : True ⊢ False",
+     "coluna": 44,
+     "trecho": "ptionalZero, True) → False := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.CollapseProof.Assumptions, Millennium.Riemann.Core.CriticalStrip, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 93,
+     "linha": 96,
      "nome": "Millennium.Riemann.CollapseProof.I_collapse_alternative",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 101,
+     "linha": 104,
      "nome": "Millennium.Riemann.CollapseProof.not_RH_contradiction",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.CollapseProof.Assumptions",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/ClassicalZeros.lean",
-     "linha": 34,
+     "linha": 37,
      "nome": "Millennium.Riemann.Core.trivial_zero_locations",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
-     "linha": 27,
+     "linha": 30,
      "nome": "Millennium.Riemann.Core.critical_line_in_strip",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.FunctionalEquation"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
-     "linha": 41,
+     "linha": 44,
      "nome": "Millennium.Riemann.Core.functional_symmetry",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.FunctionalEquation"
+     ],
+     "erro": "linha 49: linarith failed to find a contradiction case mp.left.h s : CollapseComplex h1 : 0 < s.re h2 : s.re < 2⁻¹ a✝ : 2⁻¹ ≥ ({ re := 1, im := 0, indet := 0 } - s).re ⊢ False failed",
+     "coluna": 53,
+     "trecho": " ⟨h1, h2⟩ <;> constructor <;> ⟦l⟧inarith",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
-     "linha": 51,
+     "linha": 54,
      "nome": "Millennium.Riemann.Core.on_critical_line_iff",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.FunctionalEquation"
+     ],
+     "erro": "linha 57: unsolved goals s : CollapseComplex ⊢ s.re = 2⁻¹ ↔ s.re - 2⁻¹ = 0",
+     "coluna": 58,
+     "trecho": "e_from_critical_line s = 0 := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/CriticalStrip.lean",
-     "linha": 56,
+     "linha": 59,
      "nome": "Millennium.Riemann.Core.distance_symmetric",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.FunctionalEquation"
+     ],
+     "erro": "linha 65: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [abs_sub_comm]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/FunctionalEquation.lean",
-     "linha": 42,
+     "linha": 45,
      "nome": "Millennium.Riemann.Core.reflection_symmetry",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.functional_equation",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Core/FunctionalEquation.lean",
-     "linha": 52,
+     "linha": 55,
      "nome": "Millennium.Riemann.Core.functional_eq_preserves_strip",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 60: linarith failed to find a contradiction case mp.left.h s : CollapseComplex h : 0 < s.re ∧ s.re < 1 a✝ : 0 ≥ (one - s).re ⊢ False failed",
+     "coluna": 18,
+     "trecho": "  constructor <;> ⟦l⟧inarith",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Examples.lean",
-     "linha": 130,
+     "linha": 134,
      "nome": "Millennium.Riemann.Examples.Transitions.large_transitions",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.NumericalHierarchy",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/ExtendedZeta.olean' of module Millennium.Riemann.ExtendedZeta does not exist — Millennium.Riemann.ExtendedZeta não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/ExtendedZeta.lean:145:30: error: type mismatch | /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/ExtendedZeta.lean:146:8: error: tactic 'introN' failed, insufficient number of binders"
     },
     {
      "arquivo": "lean/millennium/Riemann/Examples.lean",
-     "linha": 171,
+     "linha": 175,
      "nome": "Millennium.Riemann.Examples.OperatorExamples.operators_increase",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.NumericalHierarchy",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/ExtendedZeta.olean' of module Millennium.Riemann.ExtendedZeta does not exist — Millennium.Riemann.ExtendedZeta não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/ExtendedZeta.lean:145:30: error: type mismatch | /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/ExtendedZeta.lean:146:8: error: tactic 'introN' failed, insufficient number of binders"
     },
     {
      "arquivo": "lean/millennium/Riemann/Examples.lean",
-     "linha": 208,
+     "linha": 212,
      "nome": "Millennium.Riemann.Examples.ZetaExamples.critical_point_is_critical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.NumericalHierarchy",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/ExtendedZeta.olean' of module Millennium.Riemann.ExtendedZeta does not exist — Millennium.Riemann.ExtendedZeta não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/ExtendedZeta.lean:145:30: error: type mismatch | /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/ExtendedZeta.lean:146:8: error: tactic 'introN' failed, insufficient number of binders"
     },
     {
      "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
-     "linha": 125,
+     "linha": 129,
      "nome": "Millennium.Riemann.hierarchy_complete",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Millennium/Riemann/SymbolicZeta.olean' of module Millennium.Riemann.SymbolicZeta does not exist — Millennium.Riemann.SymbolicZeta não compilou: /tmp/mvei-rec-_2_pyp7u/p/lean/millennium/Riemann/SymbolicZeta.lean:28:0: error: object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Millennium/Riemann/CollapseComplex.olean' of module Millennium.Riemann.CollapseComplex does not exist"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.NumericalHierarchy",
+      "Millennium.Riemann.SymbolicZeta"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
-     "linha": 136,
+     "linha": 140,
      "nome": "Millennium.Riemann.zeta_universal_preserves_level",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Millennium/Riemann/SymbolicZeta.olean' of module Millennium.Riemann.SymbolicZeta does not exist — Millennium.Riemann.SymbolicZeta não compilou: /tmp/mvei-rec-_2_pyp7u/p/lean/millennium/Riemann/SymbolicZeta.lean:28:0: error: object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Millennium/Riemann/CollapseComplex.olean' of module Millennium.Riemann.CollapseComplex does not exist"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.NumericalHierarchy",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "erro": "linha 145: type mismatch n.promote has type UniversalNumber : Type but is expected to have type NumericalLevel : Type",
+     "coluna": 30,
+     "trecho": "    level (zetaUniversal n) = ⟦p⟧romote n |> level := by",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.NumericalHierarchy, Millennium.Riemann.SymbolicZeta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
-     "linha": 275,
+     "linha": 280,
      "nome": "Millennium.Riemann.Millennium.Riemann.derivative_integral_equality",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Millennium/Riemann/SymbolicZeta.olean' of module Millennium.Riemann.SymbolicZeta does not exist — Millennium.Riemann.SymbolicZeta não compilou: /tmp/mvei-rec-_2_pyp7u/p/lean/millennium/Riemann/SymbolicZeta.lean:28:0: error: object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Millennium/Riemann/CollapseComplex.olean' of module Millennium.Riemann.CollapseComplex does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.NumericalHierarchy",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "erro": "linha 283: ambiguous, possible interpretations UniversalNumber.zero : NumericalLevel → UniversalNumber RefutationComplex.zero : RefutationComplex HorizonComplex.zero : HorizonComplex CollapseComplex.zero : CollapseComplex",
+     "coluna": 34,
+     "trecho": " : s.re ≠ 1/2) (hz : zeta s = ⟦z⟧ero) :",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.NumericalHierarchy, Millennium.Riemann.SymbolicZeta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 171,
+     "linha": 174,
      "nome": "Millennium.Riemann.FormalAxioms.L1_phases_disjoint",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 188,
+     "linha": 191,
      "nome": "Millennium.Riemann.FormalAxioms.L2_phase_completeness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 201,
+     "linha": 204,
      "nome": "Millennium.Riemann.FormalAxioms.L3_Phi_on_critical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 210,
+     "linha": 213,
      "nome": "Millennium.Riemann.FormalAxioms.L4_Phi_zero",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 220,
+     "linha": 223,
      "nome": "Millennium.Riemann.FormalAxioms.L5_strip_bounds",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 225,
+     "linha": 228,
      "nome": "Millennium.Riemann.FormalAxioms.L6_line_in_strip",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 235,
+     "linha": 238,
      "nome": "Millennium.Riemann.FormalAxioms.L7_trivial_outside",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 249,
+     "linha": 252,
      "nome": "Millennium.Riemann.FormalAxioms.L8_nontrivial_in_strip",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 254,
+     "linha": 257,
      "nome": "Millennium.Riemann.FormalAxioms.L9_I_idempotent",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
-     "linha": 394,
+     "linha": 397,
      "nome": "Millennium.Riemann.FormalAxioms.C5_classification_complete",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 161,
+     "linha": 165,
      "nome": "Millennium.Riemann.HorizonComplex.add_assoc",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 170: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 171,
+     "linha": 175,
      "nome": "Millennium.Riemann.HorizonComplex.add_comm",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 178: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 179,
+     "linha": 183,
      "nome": "Millennium.Riemann.HorizonComplex.zero_add",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 186: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add, zero, Zero",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 187,
+     "linha": 191,
      "nome": "Millennium.Riemann.HorizonComplex.mul_assoc",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 194: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 195,
+     "linha": 199,
      "nome": "Millennium.Riemann.HorizonComplex.mul_comm",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 202: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 203,
+     "linha": 207,
      "nome": "Millennium.Riemann.HorizonComplex.one_mul",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 210: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul, one, One.o",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 211,
+     "linha": 215,
      "nome": "Millennium.Riemann.HorizonComplex.left_distrib",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
-     "linha": 219,
-     "nome": "Millennium.Riemann.HorizonComplex.H_components",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 218: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, add, Mul.mul, Add.a",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
      "linha": 223,
+     "nome": "Millennium.Riemann.HorizonComplex.H_components",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
+     "linha": 227,
      "nome": "Millennium.Riemann.HorizonComplex.ofCollapseComplex_add",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 233: tactic 'constructor' failed, no applicable constructor found z w : CollapseComplex ⊢ { re := z.re + w.re, im := z.im + w.im, indet := z.indet + w.indet, horizon := 0 } = { re := z.re, im := z.im, indet := z.indet, horizon := 0 } + { re := w",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor; rfl",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 25,
+     "linha": 28,
      "nome": "Millennium.Riemann.IConstant.Delta_projects",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 30,
+     "linha": 33,
      "nome": "Millennium.Riemann.IConstant.Delta_preserves_im",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 35,
+     "linha": 38,
      "nome": "Millennium.Riemann.IConstant.Delta_deviation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 41,
+     "linha": 44,
      "nome": "Millennium.Riemann.IConstant.Delta_idempotent",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 50: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧ing",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.CriticalStrip, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 48,
+     "linha": 51,
      "nome": "Millennium.Riemann.IConstant.Delta_critical_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 58,
+     "linha": 61,
      "nome": "Millennium.Riemann.IConstant.vertical_symmetry",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta",
+      "Millennium.Riemann.IConstant.Delta_preserves_zeros"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 72,
+     "linha": 75,
      "nome": "Millennium.Riemann.IConstant.collapse_distance_zero_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 77,
+     "linha": 80,
      "nome": "Millennium.Riemann.IConstant.Delta_zero_distance",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 87,
+     "linha": 90,
      "nome": "Millennium.Riemann.IConstant.collapse_equiv_iff",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 20,
-     "nome": "Millennium.Riemann.IConstant.I_real_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 95: tactic 'constructor' failed, target is not an inductive datatype s t : CollapseComplex ⊢ s.im = t.im → s.indet + (s.re - 2⁻¹) = t.indet + (t.re - 2⁻¹)",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.CriticalStrip, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
      "linha": 23,
-     "nome": "Millennium.Riemann.IConstant.I_imag_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "nome": "Millennium.Riemann.IConstant.I_real_zero",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
      "linha": 26,
-     "nome": "Millennium.Riemann.IConstant.I_indet_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "nome": "Millennium.Riemann.IConstant.I_imag_zero",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
      "linha": 29,
+     "nome": "Millennium.Riemann.IConstant.I_indet_one",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
+    },
+    {
+     "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
+     "linha": 32,
      "nome": "Millennium.Riemann.IConstant.I_squared",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 36: tactic 'constructor' failed, no applicable constructor found ⊢ { re := 0, im := 0, indet := 1 } * { re := 0, im := 0, indet := 1 } = { re := 0, im := 0, indet := 1 }",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 38,
+     "linha": 41,
      "nome": "Millennium.Riemann.IConstant.I_times_zero",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 43: unsolved goals ⊢ { re := 0, im := 0, indet := 1 } * { re := 0, im := 0, indet := 0 } = { re := 0, im := 0, indet := 0 }",
+     "coluna": 42,
+     "trecho": "mes_zero : 𝕀 * zero = zero := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 42,
+     "linha": 45,
      "nome": "Millennium.Riemann.IConstant.zero_times_I",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 47: unsolved goals ⊢ { re := 0, im := 0, indet := 0 } * { re := 0, im := 0, indet := 1 } = { re := 0, im := 0, indet := 0 }",
+     "coluna": 42,
+     "trecho": "_times_I : zero * 𝕀 = zero := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 46,
+     "linha": 49,
      "nome": "Millennium.Riemann.IConstant.I_times_one",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 51: unsolved goals ⊢ { re := 0, im := 0, indet := 1 } * { re := 1, im := 0, indet := 0 } = { re := 0, im := 0, indet := 1 }",
+     "coluna": 37,
+     "trecho": " I_times_one : 𝕀 * one = 𝕀 := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 50,
+     "linha": 53,
      "nome": "Millennium.Riemann.IConstant.one_times_I",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 55: unsolved goals ⊢ { re := 1, im := 0, indet := 0 } * { re := 0, im := 0, indet := 1 } = { re := 0, im := 0, indet := 1 }",
+     "coluna": 37,
+     "trecho": " one_times_I : one * 𝕀 = 𝕀 := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 54,
+     "linha": 57,
      "nome": "Millennium.Riemann.IConstant.I_ne_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 60,
+     "linha": 63,
      "nome": "Millennium.Riemann.IConstant.I_ne_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 73,
+     "linha": 76,
      "nome": "Millennium.Riemann.IConstant.I_is_pure",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 81,
+     "linha": 84,
      "nome": "Millennium.Riemann.IConstant.scaleI_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IConstant/ICore.lean",
-     "linha": 85,
+     "linha": 88,
      "nome": "Millennium.Riemann.IConstant.scaleI_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IKernel/KernelDef.lean",
-     "linha": 29,
+     "linha": 31,
      "nome": "Millennium.Riemann.IKernel.kernel_at_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IKernel/KernelDef.lean",
-     "linha": 53,
+     "linha": 55,
      "nome": "Millennium.Riemann.IKernel.kernel_pure_I",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 25,
+     "linha": 28,
      "nome": "Millennium.Riemann.IKernel.zero_integral_characterization",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta",
+      "Millennium.Riemann.IKernel.zeta_integral_rep"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.IConstant.IRegularization"
+     ],
+     "erro": "linha 34: tactic 'rewrite' failed, did not find instance of the pattern in the target expression ITransform (fun t => { re := 1, im := 0, indet := 0 }) s case mp s : CollapseComplex hz : zeta s = zero ⊢ ITransform (fun x => one) s = zero",
+     "coluna": 8,
+     "trecho": "    rw [⟦←⟧ zeta_integral_rep s] at hz",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.IConstant.ICore, Millennium.Riemann.IConstant.IRegularization, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 65,
+     "linha": 68,
      "nome": "Millennium.Riemann.IKernel.functional_eq_from_integral",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.IConstant.IRegularization"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
-     "linha": 351,
+     "linha": 355,
      "nome": "Millennium.Riemann.HierarchyTheorems.operators_monotone",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 368: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
-     "linha": 396,
+     "linha": 400,
      "nome": "Millennium.Riemann.real_subset_complex",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
-     "linha": 401,
+     "linha": 405,
      "nome": "Millennium.Riemann.complex_subset_CC",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/NumericalHierarchy.lean",
-     "linha": 482,
+     "linha": 486,
      "nome": "Millennium.Riemann.number_hierarchy",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 203,
+     "linha": 206,
      "nome": "Millennium.Riemann.RefutationComplex.add_assoc",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ],
+     "erro": "linha 211: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 214,
+     "linha": 217,
      "nome": "Millennium.Riemann.RefutationComplex.add_comm",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ],
+     "erro": "linha 220: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 223,
+     "linha": 226,
      "nome": "Millennium.Riemann.RefutationComplex.zero_add",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ],
+     "erro": "linha 229: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [add, Add.add, zero, Zero",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 232,
+     "linha": 235,
      "nome": "Millennium.Riemann.RefutationComplex.mul_comm",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ],
+     "erro": "linha 238: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 241,
+     "linha": 244,
      "nome": "Millennium.Riemann.RefutationComplex.one_mul",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ],
+     "erro": "linha 247: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [mul, Mul.mul, one, One.o",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 250,
+     "linha": 253,
      "nome": "Millennium.Riemann.RefutationComplex.R_components",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 254,
+     "linha": 257,
      "nome": "Millennium.Riemann.RefutationComplex.R_squared",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ],
+     "erro": "linha 261: tactic 'constructor' failed, no applicable constructor found ⊢ { re := 0, im := 0, indet := 0, horizon := 0, refutation := 1 } * { re := 0, im := 0, indet := 0, horizon := 0, refutation := 1 } = { re := Real.neg✝ 0, im := Real.neg✝ 0, indet",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor; ring",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 263,
+     "linha": 266,
      "nome": "Millennium.Riemann.RefutationComplex.collapse_idempotent",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 268,
+     "linha": 271,
      "nome": "Millennium.Riemann.RefutationComplex.refute_refute",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/RefutationComplex.lean",
-     "linha": 274,
+     "linha": 277,
      "nome": "Millennium.Riemann.RefutationComplex.synthesize_no_refutation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/SymbolicZeta.lean",
-     "linha": 134,
+     "linha": 137,
      "nome": "Millennium.Riemann.symbolicRH_statement",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.zetaSymbolic"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/SymbolicZeta.lean",
-     "linha": 144,
+     "linha": 147,
      "nome": "Millennium.Riemann.functional_equation_symmetry",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.chiSymbolic",
+      "Millennium.Riemann.zetaSymbolic"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex"
+     ],
+     "erro": "linha 158: type mismatch this has type { re := 0, im := 0, indet := 0 } = chiSymbolic s * zetaSymbolic (one - s) : Prop but is expected to have type zetaSymbolic (one - s) = zero : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact this",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/TwoPhaseTheorem.lean",
-     "linha": 259,
+     "linha": 261,
      "nome": "Millennium.Riemann.TwoPhaseTheorem.L5_phases_exclusive",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist — Millennium.Riemann.NumericTransitions não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/NumericTransitions.lean:51:27: error: unexpected token 'to'; expected ')' | /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/NumericTransitions.lean:78:16: error: invalid field 'abs', the environment does not contain 'Real.abs'"
     },
     {
      "arquivo": "lean/millennium/Riemann/TwoPhaseTheorem.lean",
-     "linha": 271,
+     "linha": 273,
      "nome": "Millennium.Riemann.TwoPhaseTheorem.L6_exactly_one_phase",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.RefutationComplex"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist — Millennium.Riemann.NumericTransitions não compilou: /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/NumericTransitions.lean:51:27: error: unexpected token 'to'; expected ')' | /tmp/mvei-rec-4lf0zo26/p/lean/millennium/Riemann/NumericTransitions.lean:78:16: error: invalid field 'abs', the environment does not contain 'Real.abs'"
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 63,
+     "linha": 66,
      "nome": "Millennium.Riemann.Zeros.DeltaCollapse_preserves_im",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 68,
+     "linha": 71,
      "nome": "Millennium.Riemann.Zeros.DeltaCollapse_critical_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 73,
+     "linha": 76,
      "nome": "Millennium.Riemann.Zeros.DeltaCollapse_idempotent",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "erro": "linha 82: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.SymbolicZeta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 146,
+     "linha": 149,
      "nome": "Millennium.Riemann.Zeros.I_collapse_contradiction",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.zetaSymbolic"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 163,
+     "linha": 166,
      "nome": "Millennium.Riemann.Zeros.symbolic_RH_via_I_collapse",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.zetaSymbolic"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 194,
+     "linha": 197,
      "nome": "Millennium.Riemann.Zeros.vertical_symmetry_from_Delta",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.zetaSymbolic",
+      "Millennium.Riemann.Zeros.DeltaCollapse_preserves_zeros"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 210,
+     "linha": 213,
      "nome": "Millennium.Riemann.Zeros.zeros_satisfy_integral_equation",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.zetaSymbolic"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.SymbolicZeta"
+     ],
+     "erro": "linha 220: type mismatch zero has type CollapseComplex : Type but is expected to have type zetaSymbolic s = I_operator (fun x => zero) s : Prop",
+     "coluna": 54,
+     "trecho": "a_integral_representation s = ⟦z⟧ero := by",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.SymbolicZeta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 36,
+     "linha": 37,
      "nome": "Millennium.Riemann.Zeros.reflect_imaginary",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ],
+     "erro": "linha 40: unsolved goals ρ : ZetaZero ⊢ ({ re := 1, im := 0, indet := 0 } - ρ.location).im = -ρ.imagPart",
+     "coluna": 38,
+     "trecho": "ctZero ρ).im = -ρ.imagPart := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.CriticalStrip, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 42,
+     "linha": 43,
      "nome": "Millennium.Riemann.Zeros.reflect_swaps_sides",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ],
+     "erro": "linha 46: unsolved goals ρ : ZetaZero ⊢ ({ re := 1, im := 0, indet := 0 } - ρ.location).re = 1 - ρ.realPart",
+     "coluna": 41,
+     "trecho": "ero ρ).re = 1 - ρ.realPart := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.CriticalStrip, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 47,
+     "linha": 48,
      "nome": "Millennium.Riemann.Zeros.critical_line_fixed_point",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ],
+     "erro": "linha 51: unsolved goals ρ : ZetaZero h : ρ.realPart = 1 / 2 ⊢ ({ re := 1, im := 0, indet := 0 } - ρ.location).re = 1 / 2",
+     "coluna": 37,
+     "trecho": "ectZero ρ).re = ρ.realPart := ⟦b⟧y",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.Core.CriticalStrip, Millennium.Riemann.Core.FunctionalEquation, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 71,
+     "linha": 72,
      "nome": "Millennium.Riemann.Zeros.critical_orbit_size",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 75,
+     "linha": 76,
      "nome": "Millennium.Riemann.Zeros.generic_orbit_size",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 79,
+     "linha": 80,
      "nome": "Millennium.Riemann.Zeros.Delta_unifies_orbit",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Millennium.Riemann.Core.zeta"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Symmetry.lean",
-     "linha": 86,
+     "linha": 87,
      "nome": "Millennium.Riemann.Zeros.vertical_strip_symmetry",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Core.CriticalStrip",
+      "Millennium.Riemann.Core.FunctionalEquation",
+      "Millennium.Riemann.IConstant.DeltaCollapse",
+      "Millennium.Riemann.IConstant.ICore",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
-     "linha": 27,
+     "linha": 30,
      "nome": "Millennium.Riemann.Zeros.trivial_real_axis",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
-     "linha": 32,
+     "linha": 35,
      "nome": "Millennium.Riemann.Zeros.trivial_negative",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
-     "linha": 39,
+     "linha": 42,
      "nome": "Millennium.Riemann.Zeros.trivial_infinite",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
-     "linha": 51,
+     "linha": 54,
      "nome": "Millennium.Riemann.Zeros.trivial_mechanism",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Trivial.lean",
-     "linha": 55,
+     "linha": 58,
      "nome": "Millennium.Riemann.Zeros.trivial_spacing",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Assumptions.lean",
-     "linha": 32,
+     "linha": 34,
      "nome": "Riemann.CollapseProof.collapse_law_critical_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.IConstant.I"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Assumptions.lean",
-     "linha": 39,
+     "linha": 41,
      "nome": "Riemann.CollapseProof.collapse_law_contrapositive",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.IConstant.I"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 46: unknown identifier 'RiemannHypothesis'",
+     "coluna": 12,
+     "trecho": "  unfold RH ⟦R⟧iemannHypothesis",
+     "motivo": "importa Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 18,
      "nome": "Riemann.CollapseProof.RH_by_I_collapse",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.I_ne_one"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.CollapseProof.ICollapseLogic",
+      "Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 32: unknown identifier 'one'",
+     "coluna": 24,
+     "trecho": "  have h_I_eq_one : I = ⟦o⟧ne := not_RH_implies_I_eq_one",
+     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 36,
      "nome": "Riemann.CollapseProof.RH_by_I_collapse_contrapositive",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.I_ne_one"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.CollapseProof.ICollapseLogic",
+      "Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
@@ -1969,265 +3596,518 @@
      "nome": "Riemann.CollapseProof.riemann_hypothesis",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.CollapseProof.ICollapseLogic",
+      "Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 41: type of theorem 'Riemann.CollapseProof.riemann_hypothesis' is not a proposition {RiemannHypothesis : Sort u_1} → RiemannHypothesis",
+     "coluna": 0,
+     "trecho": "⟦/⟧-- The Riemann Hypothesis hol",
+     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 44,
      "nome": "Riemann.CollapseProof.all_nontrivial_zeros_on_critical_line",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.CollapseProof.ICollapseLogic",
+      "Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 48: type mismatch RH_by_I_collapse has type RH : Prop but is expected to have type ∀ (z : NontrivialZero), onCriticalLine z.s : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact RH_by_I_collapse",
+     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 49,
      "nome": "Riemann.CollapseProof.no_nontrivial_zero_off_critical_line",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.I_ne_one"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.CollapseProof.ICollapseLogic",
+      "Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 55: function expected at this term has type RH",
+     "coluna": 11,
+     "trecho": "  exact h (⟦t⟧his z)",
+     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 56,
      "nome": "Riemann.CollapseProof.all_nontrivial_zeros_real_part_half",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.CollapseProof.ICollapseLogic",
+      "Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 18,
+     "linha": 19,
      "nome": "Riemann.CollapseProof.not_RH_means_exists_off_line",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.IConstant.ICore"
+     ],
+     "erro": "linha 24: unknown identifier 'RiemannHypothesis'",
+     "coluna": 12,
+     "trecho": "  unfold RH ⟦R⟧iemannHypothesis at h",
+     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 26,
+     "linha": 27,
      "nome": "Riemann.CollapseProof.not_RH_implies_I_eq_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.IConstant.I"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
-     "linha": 34,
+     "linha": 35,
      "nome": "Riemann.CollapseProof.not_RH_implies_I_eq_one_direct",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.IConstant.I"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.CollapseProof.Assumptions",
+      "Riemann.IConstant.ICore"
+     ]
     },
     {
      "arquivo": "src/Riemann/Core/ClassicalZeros.lean",
-     "linha": 61,
+     "linha": 67,
      "nome": "Riemann.Core.Riemann.Core.trivial_zeros_outside_strip",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_2_pyp7u/p/.lake/mvei-salvage/Riemann/Core/ZetaDef.olean' of module Riemann.Core.ZetaDef does not exist — Riemann.Core.ZetaDef não compilou: /tmp/mvei-rec-_2_pyp7u/p/src/Riemann/Core/ZetaDef.lean:9:5: error: unknown namespace 'Complex' | /tmp/mvei-rec-_2_pyp7u/p/src/Riemann/Core/ZetaDef.lean:16:20: error: expected token"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "erro": "linha 70: application type mismatch inCriticalStrip s argument s has type CollapseComplex : Sort ?u.7333 but is expected to have type ℂ : Type",
+     "coluna": 46,
+     "trecho": "vialZero s → ¬inCriticalStrip ⟦s⟧ := by",
+     "motivo": "importa Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Core/CriticalStrip.lean",
-     "linha": 28,
+     "linha": 32,
      "nome": "Riemann.Core.criticalLineSymmetry",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ]
     },
     {
      "arquivo": "src/Riemann/Core/FunctionalEquation.lean",
-     "linha": 27,
+     "linha": 28,
      "nome": "Riemann.Core.reflectionSymmetry",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ]
     },
     {
      "arquivo": "src/Riemann/Core/FunctionalEquation.lean",
-     "linha": 36,
+     "linha": 37,
      "nome": "Riemann.Core.zeroPairs",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "erro": "linha 40: unknown constant 'Complex.conj'",
+     "coluna": 47,
+     "trecho": "o (1 - s) ∨ isNontrivialZero (⟦C⟧omplex.conj s) := by",
+     "motivo": "importa Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 23,
+     "linha": 26,
      "nome": "Riemann.IConstant.noAnomalousFromI",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.deltaCollapse"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization"
+     ]
     },
     {
      "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 29,
+     "linha": 32,
      "nome": "Riemann.IConstant.symmetryFromI",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.nontrivialInStrip",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.deltaCollapse"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization"
+     ]
     },
     {
      "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
-     "linha": 57,
+     "linha": 60,
      "nome": "Riemann.IConstant.collapseFromAnomalous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.deltaCollapse"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization"
+     ]
     },
     {
      "arquivo": "src/Riemann/IKernel/KernelDef.lean",
-     "linha": 42,
+     "linha": 44,
      "nome": "Riemann.IKernel.gaussianAtZero",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 44: failed to synthesize OfNat ℂ 1 numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is ℂ due to the absence of the instance above Additional diagnostic information may be available using "
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 46: unsolved goals I : ℂ ⊢ sorry () = 1",
+     "coluna": 59,
+     "trecho": ") : gaussianKernel I 0 = 1 := ⟦b⟧y"
     },
     {
      "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 34,
+     "linha": 36,
      "nome": "Riemann.IKernel.zero_integral_equation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization",
+      "Riemann.IKernel.KernelDef"
+     ],
+     "erro": "linha 41: expected token",
+     "coluna": 2,
+     "trecho": "  ⟦∫⟧ t : ℝ, gaussianKernel I t * ",
+     "motivo": "importa Riemann.Core.ZetaDef, Riemann.IConstant.ICore, Riemann.IConstant.IRegularization, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 64,
+     "linha": 66,
      "nome": "Riemann.IKernel.reflection_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.IKernel.zetaI_functional_equation"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization",
+      "Riemann.IKernel.KernelDef"
+     ]
     },
     {
      "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 73,
+     "linha": 75,
      "nome": "Riemann.IKernel.RH_integral_formulation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization",
+      "Riemann.IKernel.KernelDef"
+     ],
+     "erro": "linha 90: function expected at onCriticalLine term has type ?m.2465",
+     "coluna": 32,
+     "trecho": "∀ s : ℂ, isNontrivialZero s → ⟦o⟧nCriticalLine s := by",
+     "motivo": "importa Riemann.Core.ZetaDef, Riemann.IConstant.ICore, Riemann.IConstant.IRegularization, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
-     "linha": 19,
+     "linha": 22,
      "nome": "Riemann.Zeros.nontrivialInStrip'",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
-     "linha": 43,
+     "linha": 46,
      "nome": "Riemann.Zeros.zeroClassification",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
-     "linha": 52,
+     "linha": 55,
      "nome": "Riemann.Zeros.criticalAnomalousExclusive",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
-     "linha": 74,
+     "linha": 77,
      "nome": "Riemann.Zeros.RH_iff_noAnomalous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 13,
+     "linha": 14,
      "nome": "Riemann.Zeros.verticalSymmetry",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 19,
+     "linha": 20,
      "nome": "Riemann.Zeros.horizontalSymmetry",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 25,
+     "linha": 26,
      "nome": "Riemann.Zeros.quartetStructure",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 36,
+     "linha": 37,
      "nome": "Riemann.Zeros.criticalPairStructure",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 43,
+     "linha": 44,
      "nome": "Riemann.Zeros.anomalousBreaksSymmetry",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-4lf0zo26/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-4lf0zo26/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
     },
     {
      "arquivo": "src/Riemann/Zeros/Trivial.lean",
-     "linha": 19,
+     "linha": 23,
      "nome": "Riemann.Zeros.negEvenIsZero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical",
+      "Riemann.Core.zetaTrivialZeros"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.Zeros.Basic"
+     ]
     },
     {
      "arquivo": "src/Riemann/Zeros/Trivial.lean",
-     "linha": 24,
+     "linha": 28,
      "nome": "Riemann.Zeros.trivialNotInStrip",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Core.ZetaDef",
+      "Riemann.Zeros.Basic"
+     ],
+     "erro": "linha 31: function expected at inCriticalStrip term has type ?m.1098",
+     "coluna": 3,
+     "trecho": "  ¬⟦i⟧nCriticalStrip z.s := by",
+     "motivo": "importa Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     }
    ],
    "preenchimento": [
     {
      "tipo": "axioma",
      "nome": "Riemann.Sim.compute_zeros_external",
-     "enunciado": "{ℕ : Sort u_1} → {ℂ : Type} → ℕ → IO (List ℂ)",
+     "enunciado": "ℕ → IO (List ℂ)",
      "resultado": "sem resultado",
      "tatica": ""
     },
     {
      "tipo": "axioma",
      "nome": "Riemann.Sim.verify_functional_equation_external",
-     "enunciado": "{ℂ : Sort u_1} → ℂ → IO Bool",
+     "enunciado": "ℂ → IO Bool",
      "resultado": "sem resultado",
      "tatica": ""
     },
     {
      "tipo": "axioma",
      "nome": "Riemann.Sim.analyze_i_kernel_spectrum_external",
-     "enunciado": "{ℝ : Type} → ℝ → IO (List ℝ)",
+     "enunciado": "ℝ → IO (List ℝ)",
      "resultado": "sem resultado",
      "tatica": ""
     },
     {
      "tipo": "axioma",
      "nome": "Riemann.Sim.load_zeros_from_csv",
-     "enunciado": "{ℂ : Type} → String → IO (List ℂ)",
+     "enunciado": "String → IO (List ℂ)",
      "resultado": "sem resultado",
      "tatica": ""
     }
    ],
    "summary": {
-    "fechado": 0,
+    "fechado": 25,
     "aberto-sorry": 1,
     "condicional": 0
    }

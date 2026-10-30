@@ -1,0 +1,85 @@
+--- a/anti-rh-research-os/lean/AntiRHDefinitions.lean
++++ b/anti-rh-research-os/lean/AntiRHDefinitions.lean
+@@ -5,6 +5,11 @@
+ -- and builds the classification of zero sets.
+ 
+ import AntiRH.RHFramework
++import Mathlib.Tactic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace AntiRH
+ 
+--- a/anti-rh-research-os/lean/ExplicitFormulaModel.lean
++++ b/anti-rh-research-os/lean/ExplicitFormulaModel.lean
+@@ -5,6 +5,8 @@
+ -- resulting amplitude growth.
+ 
+ import AntiRH.AntiRHDefinitions
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
+ 
+ namespace AntiRH.ExplicitFormula
+ 
+@@ -19,7 +21,7 @@
+ -/
+ noncomputable def pairContribution (β γ x : ℝ) (hx : 1 < x) : ℝ :=
+   let logx := Real.log x
+-  let ρsq  := β^2 + γ^2
++  let ρsq  := β^2 + γ^2;
+   -2 * x^β * (β * Real.cos (γ * logx) + γ * Real.sin (γ * logx)) / ρsq
+ 
+ /-- Under RH (β = 1/2), the amplitude is x^{1/2}. -/
+--- a/anti-rh-research-os/lean/RHFramework.lean
++++ b/anti-rh-research-os/lean/RHFramework.lean
+@@ -10,6 +10,13 @@
+ 
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Analysis.SpecialFunctions.Complex.Circle
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace AntiRH
+ 
+--- a/anti_rh/lean/AntiRHDefinitions.lean
++++ b/anti_rh/lean/AntiRHDefinitions.lean
+@@ -14,6 +14,10 @@
+ 
+ import Mathlib.Data.Real.Basic
+ import RHFramework
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.Ring
++
++noncomputable section
+ 
+ namespace AntiRHDefinitions
+ 
+--- a/anti_rh/lean/ExplicitFormulaModel.lean
++++ b/anti_rh/lean/ExplicitFormulaModel.lean
+@@ -22,6 +22,8 @@
+ import RHFramework
+ import AntiRHDefinitions
+ 
++noncomputable section
++
+ namespace ExplicitFormulaModel
+ 
+ open RHFramework AntiRHDefinitions
+--- a/anti_rh/lean/RHFramework.lean
++++ b/anti_rh/lean/RHFramework.lean
+@@ -31,6 +31,8 @@
+ 
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ namespace RHFramework
+ 
+ /-! ## Basic types and definitions -/

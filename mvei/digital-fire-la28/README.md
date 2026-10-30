@@ -11,28 +11,28 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `04b0f2f3b531511e6680b2c9212e62bce0a28aff`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `04b0f2f3b531511e6680b2c9212e62bce0a28aff`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 6 |
+| `formal/lean` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 55 | 0 | 0 | — |
 | `show_control_previsualization/formal/lean` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 6 | 0 | 0 | — |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 6 |
-| Unique (name + statement) | 6 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 2 |
+| Counting each project | 61 |
+| Unique (name + statement) | 61 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 13 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 7 `theorem`/`lemma` (counting copies). The kernel checked 1 of them (1 closed, 0 conditional, 0 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 6 the kernel has no result:
+The `.lean` files of the verified commit declare 7 `theorem`/`lemma` (counting copies). The kernel checked 7 of them (7 closed, 0 conditional, 0 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text.
 
-| Reason | Theorems |
-|---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 6 |
+### MVEI corrections
+
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/digital-fire-la28 mvei/digital-fire-la28/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

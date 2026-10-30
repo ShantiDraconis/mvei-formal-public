@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,7 +16,7 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././LcRh/AnalysisKernel/HilbertForms.lean:22:10: 'LcRh.AnalysisKernel.HilbertForm' has already been declared | error: ././././LcRh/AnalysisKernel/HilbertForms.lean:26:16: type expected, got | error: Lean exited with code 1",
+   "build_error": "error: ././././LcRh/AnalysisKernel/HilbertForms.lean:24:10: 'LcRh.AnalysisKernel.HilbertForm' has already been declared | error: ././././LcRh/AnalysisKernel/HilbertForms.lean:28:16: type expected, got | error: Lean exited with code 1",
    "sorry_warnings": 0,
    "reconstructed": true,
    "bridges": [],
@@ -107,24 +107,34 @@
     {
      "name": "LcRh.AnalysisKernel.CoerciveForm.mk.inj",
      "module": "LcRh.AnalysisKernel.CoercivityForms",
-     "axioms": [],
-     "statement": "∀ {form : Type} {constant : {«ℝ» : Sort u_1} → «ℝ»} {form_1 : Type} {constant_1 : {«ℝ» : Sort u_1} → «ℝ»},   { form := form, constant := constant } = { form := form_1, constant := constant_1 } →     form = form_1 ∧ constant = constant_1",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {form : Type} {constant : ℝ} {form_1 : Type} {constant_1 : ℝ},   { form := form, constant := constant } = { form := form_1, constant := constant_1 } →     form = form_1 ∧ constant = constant_1",
      "status": "fechado"
     },
     {
      "name": "LcRh.AnalysisKernel.CoerciveForm.mk.injEq",
      "module": "LcRh.AnalysisKernel.CoercivityForms",
      "axioms": [
-      "propext"
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
      ],
-     "statement": "∀ (form : Type) (constant : {«ℝ» : Sort u_1} → «ℝ») (form_1 : Type) (constant_1 : {«ℝ» : Sort u_1} → «ℝ»),   ({ form := form, constant := constant } = { form := form_1, constant := constant_1 }) =     (form = form_1 ∧ constant = constant_1)",
+     "statement": "∀ (form : Type) (constant : ℝ) (form_1 : Type) (constant_1 : ℝ),   ({ form := form, constant := constant } = { form := form_1, constant := constant_1 }) =     (form = form_1 ∧ constant = constant_1)",
      "status": "fechado"
     },
     {
      "name": "LcRh.AnalysisKernel.CoerciveForm.mk.sizeOf_spec",
      "module": "LcRh.AnalysisKernel.CoercivityForms",
-     "axioms": [],
-     "statement": "∀ (form : Type) (constant : {«ℝ» : Sort u_1} → «ℝ»), sizeOf { form := form, constant := constant } = 1 + sizeOf form",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (form : Type) (constant : ℝ), sizeOf { form := form, constant := constant } = 1 + sizeOf form + sizeOf constant",
      "status": "fechado"
     },
     {

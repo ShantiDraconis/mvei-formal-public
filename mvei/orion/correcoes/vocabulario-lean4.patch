@@ -1,0 +1,22 @@
+--- a/formalization/lean/OrionHiddenState.lean
++++ b/formalization/lean/OrionHiddenState.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ namespace OrionHiddenState
+ 
+ universe u v
+--- a/formalization/lean/OrionUCIF.lean
++++ b/formalization/lean/OrionUCIF.lean
+@@ -191,9 +191,9 @@
+   exact h (fun _ _ => Wheel.bot, fun _ _ => Wheel.bot)
+ 
+ theorem lemma_l1_identity_checker
+-    (E d Π ν : Nat)
+-    (h : E + ν * d = Π) :
+-    E + ν * d = Π := by
++    (E d «Π» ν : Nat)
++    (h : E + ν * d = «Π») :
++    E + ν * d = «Π» := by
+   exact h
+ 
+ theorem law7_closure_from_detection

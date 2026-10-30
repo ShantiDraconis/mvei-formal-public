@@ -1,0 +1,672 @@
+--- a/formal/lean/Barriers/Relativization.lean
++++ b/formal/lean/Barriers/Relativization.lean
+@@ -1,3 +1,6 @@
++
++noncomputable section
++local notation "ℕ" => Nat
+ /-
+   Barriers to Resolving P vs NP
+   
+@@ -62,10 +65,10 @@
+ -/
+ 
+ /-- A boolean function on n inputs -/
+-def BooleanFunction (n : ℕ) := Fin (2^n) → Bool
++abbrev BooleanFunction (n : ℕ) := Fin (2^n) → Bool
+ 
+ /-- Property of boolean functions that might be used for lower bounds -/
+-def FunctionProperty := ∀ n : ℕ, BooleanFunction n → Prop
++abbrev FunctionProperty := ∀ n : ℕ, BooleanFunction n → Prop
+ 
+ /-- A property is constructive if it can be decided efficiently -/
+ def IsConstructive (P : FunctionProperty) : Prop :=
+--- a/formal/lean/Complexity/Basic.lean
++++ b/formal/lean/Complexity/Basic.lean
+@@ -1,3 +1,6 @@
++
++noncomputable section
++local notation "ℕ" => Nat
+ /-
+   Basic Complexity Theory Definitions
+   
+@@ -13,10 +16,10 @@
+ def Alphabet := Type
+ 
+ /-- A string over an alphabet -/
+-def String (Σ : Alphabet) := List Σ
++abbrev String («Σ» : Alphabet) := List «Σ»
+ 
+ /-- A language is a set of strings -/
+-def Language (Σ : Alphabet) := Set (String Σ)
++abbrev Language («Σ» : Alphabet) := Set (String «Σ»)
+ 
+ /-- Standard binary alphabet -/
+ inductive Binary : Type
+--- a/formal/lean/Complexity/PvsNPCircuits.lean
++++ b/formal/lean/Complexity/PvsNPCircuits.lean
+@@ -10,6 +10,8 @@
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Data.Finset.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Circuit Model Definitions
+ -/
+@@ -21,7 +23,7 @@
+   -- In a full formalization, we'd encode the circuit structure
+ 
+ -- Circuit family: one circuit for each input length
+-def CircuitFamily := ℕ → BooleanCircuit
++abbrev CircuitFamily := ℕ → BooleanCircuit
+ 
+ -- Language computed by circuit family
+ axiom computes (C : CircuitFamily) (L : Set (List Bool)) : Prop
+--- a/formal/lean/Complexity/PvsNPFoundations.lean
++++ b/formal/lean/Complexity/PvsNPFoundations.lean
+@@ -11,6 +11,8 @@
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Data.Finset.Basic
+ 
++noncomputable section
++
+ /-!
+ ## PvsNP-L0001: Computational Model Equivalence
+ 
+@@ -24,7 +26,7 @@
+ axiom UniformCircuit : Type
+ 
+ -- Language is a set of binary strings
+-def Language := Set (List Bool)
++abbrev Language := Set (List Bool)
+ 
+ -- Time complexity for a computational model
+ axiom time_complexity (M : Type) (L : Language) : ℕ → Prop
+@@ -103,7 +105,7 @@
+     (∃ k : ℕ, ∀ x, (f x).length ≤ x.length ^ k) ∧  -- f is poly-time computable
+     (∀ x, x ∈ A ↔ f x ∈ B)                          -- reduction property
+ 
+-notation:50 A " ≤ₚᵐ " B => poly_time_reducible A B
++notation:50 A:51 " ≤ₚᵐ " B:51 => poly_time_reducible A B
+ 
+ theorem PvsNP_L0005_reduction_transitive (A B C : Language) :
+   A ≤ₚᵐ B → B ≤ₚᵐ C → A ≤ₚᵐ C := by
+--- a/formal/lean/MasterLemma/Basic.lean
++++ b/formal/lean/MasterLemma/Basic.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   Master Lemma (Lema-Mãe) - Basic Definitions
+   
+@@ -45,12 +48,12 @@
+ /-! ## Local Configurations -/
+ 
+ /-- A local configuration is a subset of the system -/
+-def LocalConfig (S : Type*) := Set S
++abbrev LocalConfig (S : Type*) := Set S
+ 
+ /-- All local configurations respect the same laws -/
+ def LocallyUniform (S : Type*) [sys : MathSystem S] : Prop :=
+-  ∀ (local : LocalConfig S) (config : sys.Config), 
+-    config ∈ local → sys.Laws config
++  ∀ («local» : LocalConfig S) (config : sys.Config), 
++    config ∈ «local» → sys.Laws config
+ 
+ /-! ## Local Exceptions -/
+ 
+@@ -59,7 +62,7 @@
+   /-- The exception is anomalous (violates expected behavior) -/
+   anomalous : Prop
+   /-- The exception is local (bounded in some sense) -/
+-  local : Prop
++  «local» : Prop
+   /-- The exception is self-sustaining (doesn't immediately contradict axioms) -/
+   selfSustaining : Prop
+ 
+@@ -121,8 +124,8 @@
+   [sys : MathSystem S] 
+   [φ : ConsistencyFunctional S]
+   (h_global : GloballyConsistent S) :
+-  ∀ (local : LocalConfig S), 
+-    (∀ s ∈ local, φ.Φ s < ⊤) := by
++  ∀ («local» : LocalConfig S), 
++    (∀ s ∈ «local», φ.Φ s < ⊤) := by
+   sorry
+ 
+ end MasterLemma
+--- a/formal/lean/MasterLemma/PvsNP.lean
++++ b/formal/lean/MasterLemma/PvsNP.lean
+@@ -8,6 +8,8 @@
+ import MasterLemma.Basic
+ import Complexity.Basic
+ 
++noncomputable section
++
+ namespace MasterLemma.PvsNP
+ 
+ open Complexity
+--- a/formal/lean/MasterLemma/ToyExamples.lean
++++ b/formal/lean/MasterLemma/ToyExamples.lean
+@@ -6,6 +6,9 @@
+ -/
+ 
+ import MasterLemma.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++
++noncomputable section
+ 
+ namespace MasterLemma.ToyExamples
+ 
+@@ -85,7 +88,7 @@
+ 
+ /-- Exception: triangle with wrong angle sum -/
+ structure BadTriangle (E : EuclideanPlane) where
+-  a b c : E.Point
++  (a b c : E.Point)
+   angle_sum : ℝ
+   not_pi : angle_sum ≠ Real.pi
+ 
+@@ -129,7 +132,7 @@
+ 
+ /-- Exception: process that violates conservation -/
+ structure EnergyViolation (sys : ClosedSystem) where
+-  s1 s2 : sys.State
++  (s1 s2 : sys.State)
+   time : ℝ
+   evolution : s2 = sys.evolve s1 time
+   violation : sys.energy s2 ≠ sys.energy s1
+@@ -175,7 +178,7 @@
+ 
+ /-! ## Lessons from Toy Examples -/
+ 
+-/-- 
++/- 
+   Key insights from toy examples:
+   
+   1. Master Lemma WORKS in finite, discrete systems
+--- a/formal/lean/MillenniumProblems/BlockC_PvsNP.lean
++++ b/formal/lean/MillenniumProblems/BlockC_PvsNP.lean
+@@ -10,6 +10,8 @@
+ 
+ import MillenniumProblems.MotherLemma
+ 
++noncomputable section
++
+ namespace MillenniumProblems.BlockC
+ 
+ /-!
+--- a/formal/lean/MillenniumProblems/MotherLemma.lean
++++ b/formal/lean/MillenniumProblems/MotherLemma.lean
+@@ -17,6 +17,9 @@
+ import Mathlib.MeasureTheory.MeasurableSpace.Basic
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ import Mathlib.Topology.Basic
++import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
++
++noncomputable section
+ 
+ /-!
+ # The Mother Lemma Framework
+--- a/formal/lean/StructuralComplexity/Basic.lean
++++ b/formal/lean/StructuralComplexity/Basic.lean
+@@ -18,6 +18,9 @@
+ 
+ import Mathlib.Data.NNReal.Basic
+ import Mathlib.Order.CompleteLattice.Basic
++open scoped NNReal
++
++noncomputable section
+ 
+ /-! ## Computational Objects -/
+ 
+@@ -32,7 +35,7 @@
+ /-! ## Universes and Size Parameters -/
+ 
+ /-- Size parameter for instances of computational objects -/
+-def Size := ℕ
++abbrev Size := ℕ
+ 
+ /-- A family of computational objects indexed by size -/
+ def ObjectFamily := Size → ComputationalObject
+@@ -108,15 +111,15 @@
+ 
+ /-! ## Comments for Future Work -/
+ 
+-/-- TODO: Define specific representation types:
++/- TODO: Define specific representation types:
+     - TuringMachineRep
+     - CircuitRep  
+     - ProofSystemRep
+     - AlgebraicRep
+ -/
+ 
+-/-- TODO: Prove SC is well-defined (bounded below) for reasonable objects -/
++/- TODO: Prove SC is well-defined (bounded below) for reasonable objects -/
+ 
+-/-- TODO: Instantiate Cost for specific formalisms -/
++/- TODO: Instantiate Cost for specific formalisms -/
+ 
+-/-- TODO: Connect to complexity classes (P, NP, etc.) -/
++/- TODO: Connect to complexity classes (P, NP, etc.) -/
+--- a/formal/lean/StructuralComplexity/Examples/SAT.lean
++++ b/formal/lean/StructuralComplexity/Examples/SAT.lean
+@@ -16,6 +16,8 @@
+ import StructuralComplexity.Basic
+ import StructuralComplexity.Robustness
+ 
++noncomputable section
++
+ /-! ## SAT as a Computational Object -/
+ 
+ /-- Boolean formula type -/
+@@ -26,7 +28,7 @@
+   | or : BoolFormula → BoolFormula → BoolFormula
+ 
+ /-- Assignment to Boolean variables -/
+-def Assignment := ℕ → Bool
++abbrev Assignment := ℕ → Bool
+ 
+ /-- Evaluation of formula under assignment -/
+ def eval : BoolFormula → Assignment → Bool := sorry
+@@ -116,7 +118,7 @@
+     ∀ (r : Representation SAT), SuperpolyCost r := by
+   sorry
+ 
+-/-- This includes:
++/- This includes:
+     - Turing machines
+     - Boolean circuits
+     - Proof systems (for UNSAT)
+@@ -142,7 +144,7 @@
+     ∃ (A B : Oracle), SC (SAT_with_oracle A) ≠ SC (SAT_with_oracle B) := by
+   sorry
+ 
+-/-- Therefore: proofs must use internal SAT structure (non-black-box) -/
++/- Therefore: proofs must use internal SAT structure (non-black-box) -/
+ /-- Checkpoint: Does the method use Boolean formula structure? -/
+ def UsesInternalStructure (method : Type) : Prop := sorry
+ 
+@@ -164,7 +166,7 @@
+     blocked_by_cryptography method := by
+   sorry
+ 
+-/-- Structural approach might avoid this by:
++/- Structural approach might avoid this by:
+     - Using non-constructive invariants
+     - Using small (sparse) properties  
+     - Leveraging cross-representation translations
+@@ -181,7 +183,7 @@
+     Algebrizes method := by
+   sorry
+ 
+-/-- Must use non-algebraic structure (combinatorial, topological) -/
++/- Must use non-algebraic structure (combinatorial, topological) -/
+ 
+ /-! ## Falsifiability Checkpoints -/
+ 
+@@ -254,9 +256,9 @@
+ 
+ /-! ## Future Work -/
+ 
+-/-- TODO: Formalize specific proxy invariants -/
+-/-- TODO: Prove robustness for Resolution width → PC degree -/
+-/-- TODO: Find new invariants beyond known proof complexity measures -/
+-/-- TODO: Connect to circuit lower bounds via lifting theorems -/
++/- TODO: Formalize specific proxy invariants -/
++/- TODO: Prove robustness for Resolution width → PC degree -/
++/- TODO: Find new invariants beyond known proof complexity measures -/
++/- TODO: Connect to circuit lower bounds via lifting theorems -/
+ 
+-end StructuralComplexity.SAT
++-- [MVEI] end StructuralComplexity.SAT  -- `end` sem escopo aberto
+--- a/formal/lean/StructuralComplexity/Robustness.lean
++++ b/formal/lean/StructuralComplexity/Robustness.lean
+@@ -18,6 +18,8 @@
+ 
+ import StructuralComplexity.Basic
+ 
++noncomputable section
++
+ /-! ## Translations Between Representations -/
+ 
+ /-- A translation from one representation to another of the same object -/
+@@ -100,9 +102,9 @@
+ 
+ /-! ## Open Questions -/
+ 
+-/-- TODO: Formalize robustness for algebraic systems ↔ Boolean circuits -/
+-/-- TODO: Prove or refute robustness for tensor decompositions ↔ circuits -/
+-/-- TODO: Oracle-dependent robustness (for relativization analysis) -/
++/- TODO: Formalize robustness for algebraic systems ↔ Boolean circuits -/
++/- TODO: Prove or refute robustness for tensor decompositions ↔ circuits -/
++/- TODO: Oracle-dependent robustness (for relativization analysis) -/
+ 
+ /-! ## Barrier Analysis Using Robustness -/
+ 
+@@ -116,7 +118,7 @@
+     Relativizes (method_using_robustness X) := by
+   sorry
+ 
+-/-- Therefore: non-relativizing methods must use oracle-specific structure -/
+-/-- This connects robustness to barrier circumvention -/
++/- Therefore: non-relativizing methods must use oracle-specific structure -/
++/- This connects robustness to barrier circumvention -/
+ 
+-end StructuralComplexity
++-- [MVEI] end StructuralComplexity  -- `end` sem escopo aberto
+--- a/problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean
++++ b/problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean
+@@ -17,6 +17,8 @@
+ import Mathlib.Algebra.Order.Field.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace ApproximationComplexity
+ 
+ /-! ## Basic Definitions -/
+@@ -31,7 +33,7 @@
+   data : I
+   
+ /-- Objective value of a solution -/
+-def ObjectiveValue := ℝ
++abbrev ObjectiveValue := ℝ
+ 
+ /-! ## Complexity Classes -/
+ 
+--- a/problems/p-vs-np/formal-proofs/lean/PvsNP.lean
++++ b/problems/p-vs-np/formal-proofs/lean/PvsNP.lean
+@@ -17,15 +17,17 @@
+ import Mathlib.Logic.Function.Basic
+ import Mathlib.Computability.TuringMachine
+ 
++noncomputable section
++
+ -- Basic alphabet and strings
+-def Alphabet := Finset Char
+-def String (Σ : Alphabet) := List Σ.toList
++abbrev Alphabet := Finset Char
++abbrev String («Σ» : Alphabet) := List «Σ».toList
+ 
+ -- Decision problems as languages
+-def Language (Σ : Alphabet) := Set (String Σ)
++abbrev Language («Σ» : Alphabet) := Set (String «Σ»)
+ 
+ -- Abstract time function
+-def TimeFunction := ℕ → ℕ
++abbrev TimeFunction := ℕ → ℕ
+ 
+ -- Polynomial time predicate
+ def IsPolynomialTime (f : TimeFunction) : Prop :=
+@@ -39,59 +41,59 @@
+ 
+ -- Abstract Turing machine
+ -- (We use an abstract representation rather than concrete tape/state model)
+-structure TuringMachine (Σ : Alphabet) where
+-  accepts : String Σ → Bool
++structure TuringMachine («Σ» : Alphabet) where
++  accepts : String «Σ» → Bool
+   timeFunction : ℕ → ℕ  -- worst-case time on inputs of length n
+ 
+ -- Decidable language in time f
+-def DecidableInTime {Σ : Alphabet} (L : Language Σ) (f : TimeFunction) : Prop :=
+-  ∃ M : TuringMachine Σ, 
++def DecidableInTime {«Σ» : Alphabet} (L : Language «Σ») (f : TimeFunction) : Prop :=
++  ∃ M : TuringMachine «Σ», 
+     (∀ w, w ∈ L ↔ M.accepts w = true) ∧ 
+     (∀ n, M.timeFunction n ≤ f n)
+ 
+ -- Complexity class P
+-def P (Σ : Alphabet) : Set (Language Σ) :=
++def P («Σ» : Alphabet) : Set (Language «Σ») :=
+   { L | ∃ f : TimeFunction, IsPolynomialTime f ∧ DecidableInTime L f }
+ 
+ -- Verifier for NP
+-structure Verifier (Σ : Alphabet) where
+-  verify : String Σ → String Σ → Bool  -- (input, certificate) → Bool
++structure Verifier («Σ» : Alphabet) where
++  verify : String «Σ» → String «Σ» → Bool  -- (input, certificate) → Bool
+   timeFunction : ℕ → ℕ  -- polynomial time bound
+   certificateSize : ℕ → ℕ  -- polynomial certificate size
+   
+ -- NP via verifiers
+-def NP_via_Verifier (Σ : Alphabet) : Set (Language Σ) :=
+-  { L | ∃ V : Verifier Σ,
++def NP_via_Verifier («Σ» : Alphabet) : Set (Language «Σ») :=
++  { L | ∃ V : Verifier «Σ»,
+     Polynomial V.timeFunction ∧
+     Polynomial V.certificateSize ∧
+     (∀ w, w ∈ L ↔ ∃ c, V.verify w c = true ∧ c.length ≤ V.certificateSize w.length) }
+ 
+ -- We define NP as the verifier-based definition
+-def NP (Σ : Alphabet) := NP_via_Verifier Σ
++def NP («Σ» : Alphabet) := NP_via_Verifier «Σ»
+ 
+ -- Polynomial-time mapping reduction
+-def PolyTimeReducible {Σ : Alphabet} (L₁ L₂ : Language Σ) : Prop :=
+-  ∃ (f : String Σ → String Σ) (t : TimeFunction),
++def PolyTimeReducible {«Σ» : Alphabet} (L₁ L₂ : Language «Σ») : Prop :=
++  ∃ (f : String «Σ» → String «Σ») (t : TimeFunction),
+     Polynomial t ∧
+     (∀ w, (f w).length ≤ t w.length) ∧
+     (∀ w, w ∈ L₁ ↔ f w ∈ L₂)
+ 
+-notation:50 L₁ " ≤ₚ " L₂ => PolyTimeReducible L₁ L₂
++notation:50 L₁:51 " ≤ₚ " L₂:51 => PolyTimeReducible L₁ L₂
+ 
+ -- NP-hardness
+-def NPHard {Σ : Alphabet} (L : Language Σ) : Prop :=
+-  ∀ L' ∈ NP Σ, L' ≤ₚ L
++def NPHard {«Σ» : Alphabet} (L : Language «Σ») : Prop :=
++  ∀ L' ∈ NP «Σ», L' ≤ₚ L
+ 
+ -- NP-completeness
+-def NPComplete {Σ : Alphabet} (L : Language Σ) : Prop :=
+-  L ∈ NP Σ ∧ NPHard L
++def NPComplete {«Σ» : Alphabet} (L : Language «Σ») : Prop :=
++  L ∈ NP «Σ» ∧ NPHard L
+ 
+ -- The P vs NP question
+-def P_equals_NP (Σ : Alphabet) : Prop :=
+-  P Σ = NP Σ
++def P_equals_NP («Σ» : Alphabet) : Prop :=
++  P «Σ» = NP «Σ»
+ 
+ -- Key theorem: P ⊆ NP
+-theorem P_subset_NP {Σ : Alphabet} : P Σ ⊆ NP Σ := by
++theorem P_subset_NP {«Σ» : Alphabet} : P «Σ» ⊆ NP «Σ» := by
+   intro L hL
+   -- L ∈ P means there exists a poly-time TM deciding L
+   obtain ⟨f, hpoly, hM⟩ := hL
+@@ -126,7 +128,7 @@
+       exact hc.1
+ 
+ -- Transitivity of polynomial-time reductions
+-theorem polyTimeReducible_trans {Σ : Alphabet} (L₁ L₂ L₃ : Language Σ) :
++theorem polyTimeReducible_trans {«Σ» : Alphabet} (L₁ L₂ L₃ : Language «Σ») :
+     L₁ ≤ₚ L₂ → L₂ ≤ₚ L₃ → L₁ ≤ₚ L₃ := by
+   intro ⟨f, t₁, ht₁⟩ ⟨g, t₂, ht₂⟩
+   -- Compose f and g
+@@ -153,8 +155,8 @@
+     rw [ht₁.2.2 w, ht₂.2.2 (f w)]
+ 
+ -- If any NP-complete problem is in P, then P = NP
+-theorem NPComplete_in_P_implies_P_eq_NP {Σ : Alphabet} (L : Language Σ) :
+-    NPComplete L → L ∈ P Σ → P_equals_NP Σ := by
++theorem NPComplete_in_P_implies_P_eq_NP {«Σ» : Alphabet} (L : Language «Σ») :
++    NPComplete L → L ∈ P «Σ» → P_equals_NP «Σ» := by
+   intro ⟨hNP, hNPHard⟩ hP
+   -- Show NP ⊆ P (we already have P ⊆ NP)
+   ext L'
+@@ -189,16 +191,16 @@
+     exact P_subset_NP hL'
+ 
+ -- SAT is NP-complete (statement only, proof requires formalization of CNF)
+-axiom SAT_is_NPComplete {Σ : Alphabet} : 
+-  ∃ (SAT : Language Σ), NPComplete SAT
++axiom SAT_is_NPComplete {«Σ» : Alphabet} : 
++  ∃ (SAT : Language «Σ»), NPComplete SAT
+ 
+ -- 3-SAT is NP-complete
+-axiom ThreeSAT_is_NPComplete {Σ : Alphabet} :
+-  ∃ (ThreeSAT : Language Σ), NPComplete ThreeSAT
++axiom ThreeSAT_is_NPComplete {«Σ» : Alphabet} :
++  ∃ (ThreeSAT : Language «Σ»), NPComplete ThreeSAT
+ 
+ -- CLIQUE is NP-complete
+-axiom CLIQUE_is_NPComplete {Σ : Alphabet} :
+-  ∃ (CLIQUE : Language Σ), NPComplete CLIQUE
++axiom CLIQUE_is_NPComplete {«Σ» : Alphabet} :
++  ∃ (CLIQUE : Language «Σ»), NPComplete CLIQUE
+ 
+ end ComplexityTheory
+ 
+@@ -222,7 +224,7 @@
+ -- Algebrization (Aaronson-Wigderson)
+ -- Extension of relativization to algebraic oracles
+ axiom Algebrization_Barrier :
+-  ∃ (A B : Set ℕ) (Ã B̃ : ℕ → ℕ),  -- Oracles with algebraic extensions
++  ∃ (A B : Set ℕ) («Ã» B̃ : ℕ → ℕ),  -- Oracles with algebraic extensions
+     (∃ model_A : Type, True) ∧
+     (∃ model_B : Type, True)
+ 
+@@ -233,7 +235,7 @@
+ 
+ -- Goal 1: Formalize complete reductions between NP-complete problems
+ axiom Karp_21_Reductions :
+-  ∀ {Σ : Alphabet}, ∃ problems : Finset (ComplexityTheory.Language Σ),
++  ∀ {«Σ» : Alphabet}, ∃ problems : Finset (ComplexityTheory.Language «Σ»),
+     problems.card = 21 ∧
+     (∀ L ∈ problems, ComplexityTheory.NPComplete L) ∧
+     (∀ L₁ L₂, L₁ ∈ problems → L₂ ∈ problems → L₁ ComplexityTheory.≤ₚ L₂)
+--- a/problems/p-vs-np/formalization/lean/Operators.lean
++++ b/problems/p-vs-np/formalization/lean/Operators.lean
+@@ -12,6 +12,8 @@
+ import Mathlib.Data.Set.Basic
+ import Mathlib
+ 
++noncomputable section
++
+ namespace PvsNP.Operators
+ 
+ /-!
+--- a/problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean
++++ b/problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean
+@@ -15,6 +15,8 @@
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ import Mathlib.Topology.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Core Definitions
+ 
+--- a/problems/p-vs-np/formalizations/lean/PvsNP.lean
++++ b/problems/p-vs-np/formalizations/lean/PvsNP.lean
+@@ -13,13 +13,15 @@
+ import Mathlib.Data.List.Basic
+ import Mathlib.Logic.Function.Basic
+ 
++noncomputable section
++
+ namespace ComplexityTheory
+ 
+ /-- A decision problem is a function from strings to booleans -/
+-def DecisionProblem := List Bool → Bool
++abbrev DecisionProblem := List Bool → Bool
+ 
+ /-- Time complexity function: maps input size to number of steps -/
+-def TimeComplexity := ℕ → ℕ
++abbrev TimeComplexity := ℕ → ℕ
+ 
+ /-- A problem is in TIME(f) if there exists a TM deciding it in time O(f(n)) -/
+ structure InTime (L : DecisionProblem) (f : TimeComplexity) : Prop where
+@@ -70,7 +72,7 @@
+       True) ∧  -- Placeholder
+     (∀ x, L' x = L (f x))
+ 
+-notation:50 L' " ≤ₚ " L => PolyTimeReducible L' L
++notation:50 L':51 " ≤ₚ " L:51 => PolyTimeReducible L' L
+ 
+ /-- A problem is NP-hard if all NP problems reduce to it -/
+ def NPHard (L : DecisionProblem) : Prop :=
+@@ -83,8 +85,8 @@
+ /-- The Boolean Satisfiability Problem (SAT) -/
+ -- A formula is a list of clauses, each clause is a list of literals
+ -- A literal is a variable (represented by ℕ) and a polarity (Bool)
+-def Clause := List (ℕ × Bool)
+-def Formula := List Clause
++abbrev Clause := List (ℕ × Bool)
++abbrev Formula := List Clause
+ 
+ def evalLiteral (lit : ℕ × Bool) (assignment : ℕ → Bool) : Bool :=
+   let (var, pol) := lit
+@@ -113,7 +115,7 @@
+   -- 4. Therefore all NP problems are in P
+   sorry
+ 
+-/-- Distributed Agent Reasoning Framework (Informal) -/
++/- Distributed Agent Reasoning Framework (Informal) -/
+ namespace DistributedReasoning
+ 
+ /-- An agent is a function that takes a proof state and produces a proof step -/
+@@ -135,7 +137,7 @@
+ 
+ end DistributedReasoning
+ 
+-/-- Research directions for distributed agent reasoning on P vs NP -/
++/- Research directions for distributed agent reasoning on P vs NP -/
+ namespace ResearchDirections
+ 
+ /-- Distributed verification of proof attempts -/
+--- a/proofs/p-vs-np/lean/PvsNP_Definitions.lean
++++ b/proofs/p-vs-np/lean/PvsNP_Definitions.lean
+@@ -14,14 +14,17 @@
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Logic.Basic
+ import Mathlib.Data.Set.Basic
++import Mathlib.Algebra.Field.Rat
++
++noncomputable section
+ 
+ namespace ComplexityTheory
+ 
+ /-- A decision problem is a function from strings to booleans -/
+-def DecisionProblem := String → Bool
++abbrev DecisionProblem := String → Bool
+ 
+ /-- Time complexity function: maps input size to time bound -/
+-def TimeComplexity := ℕ → ℕ
++abbrev TimeComplexity := ℕ → ℕ
+ 
+ /-- A problem is in P if it can be solved in polynomial time -/
+ def InP (L : DecisionProblem) : Prop :=
+@@ -31,7 +34,7 @@
+   where time_complexity : DecisionProblem → String → ℕ := sorry
+ 
+ /-- A certificate verifier: checks a proposed solution -/
+-def CertificateVerifier := String → String → Bool
++abbrev CertificateVerifier := String → String → Bool
+ 
+ /-- A problem is in NP if solutions can be verified in polynomial time -/
+ def InNP (L : DecisionProblem) : Prop :=
+@@ -44,7 +47,7 @@
+ def PvsNP_Question : Prop := ∀ L, InNP L → InP L
+ 
+ /-- An oracle is an external "black box" that can answer queries -/
+-def Oracle := String → Bool
++abbrev Oracle := String → Bool
+ 
+ /-- Relativized complexity class: P relative to oracle A -/
+ def InP_Oracle (A : Oracle) (L : DecisionProblem) : Prop :=
+@@ -74,7 +77,7 @@
+   sorry
+ 
+ /-- A property of Boolean functions -/
+-def BooleanProperty := (ℕ → Bool) → Prop
++abbrev BooleanProperty := (ℕ → Bool) → Prop
+ 
+ /-- A property is constructive if there's an efficient algorithm to check it -/
+ def IsConstructive (P : BooleanProperty) : Prop :=

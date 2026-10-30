@@ -1,0 +1,384 @@
+--- a/src/lean/HEU/Automation/AICompletion.lean
++++ b/src/lean/HEU/Automation/AICompletion.lean
+@@ -14,6 +14,8 @@
+ import HEU.Core.Functional.UBO
+ import HEU.Core.Functional.LTC
+ 
++noncomputable section
++
+ namespace HEU.Automation
+ 
+ open HEU.Core.ZF
+@@ -73,7 +75,7 @@
+ def prioritize (skeletons : List ProofSkeleton) : List ProofSkeleton :=
+   skeletons.reverse  -- Placeholder: implement actual prioritization
+ 
+-/-- Expansion directive for Copilot -/
++/- Expansion directive for Copilot -/
+ -- Copilot: When you see "sorry", attempt to:
+ -- 1. Analyze the goal type
+ -- 2. Check available hypotheses
+--- a/src/lean/HEU/Automation/AutoProve.lean
++++ b/src/lean/HEU/Automation/AutoProve.lean
+@@ -11,6 +11,8 @@
+ import HEU.Core.Functional.UBO
+ import HEU.Automation.Tactics
+ 
++noncomputable section
++
+ namespace HEU.Automation
+ 
+ open HEU.Core.ZF
+@@ -37,7 +39,7 @@
+ inductive ProofResult where
+   | success : ProofResult
+   | failure : String → ProofResult
+-  | partial : Nat → ProofResult  -- Number of remaining goals
++  | «partial» : Nat → ProofResult  -- Number of remaining goals
+   deriving Repr
+ 
+ /-- Auto-prove skeleton -/
+--- a/src/lean/HEU/Automation/Tactics.lean
++++ b/src/lean/HEU/Automation/Tactics.lean
+@@ -11,6 +11,8 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Automation
+ 
+ open Lean Meta Elab Tactic
+--- a/src/lean/HEU/Core/Functional/LTC.lean
++++ b/src/lean/HEU/Core/Functional/LTC.lean
+@@ -15,6 +15,7 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.ZF.Classical
+ import HEU.Core.Functional.UBO
++import Mathlib.Tactic
+ 
+ namespace HEU.Core.LTC
+ 
+--- a/src/lean/HEU/Core/Functional/Operators.lean
++++ b/src/lean/HEU/Core/Functional/Operators.lean
+@@ -11,6 +11,7 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.Functional
+ import HEU.Core.Functional.Criticality
++import Mathlib.Tactic
+ 
+ namespace HEU.Core.Functional
+ 
+--- a/src/lean/HEU/Core/Functional/UBO.lean
++++ b/src/lean/HEU/Core/Functional/UBO.lean
+@@ -18,6 +18,8 @@
+ import HEU.Core.Functional.Criticality
+ import HEU.Core.Functional.Operators
+ 
++noncomputable section
++
+ namespace HEU.Core.UBO
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Core/ZF/Ordinals.lean
++++ b/src/lean/HEU/Core/ZF/Ordinals.lean
+@@ -11,6 +11,8 @@
+ 
+ import HEU.Core.ZF.Axioms
+ 
++noncomputable section
++
+ namespace HEU.Core.ZF
+ 
+ /-- Ordinal type representing transfinite ordinals -/
+--- a/src/lean/HEU/Cross/CollapseAnalysis.lean
++++ b/src/lean/HEU/Cross/CollapseAnalysis.lean
+@@ -12,6 +12,8 @@
+ import HEU.Core.Functional.UBO
+ import HEU.Cross.Transitions
+ 
++noncomputable section
++
+ namespace HEU.Cross
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Cross/MetaEquivalence.lean
++++ b/src/lean/HEU/Cross/MetaEquivalence.lean
+@@ -14,6 +14,8 @@
+ import HEU.Problems.PvsNP.Equivalence_PNP
+ import HEU.Problems.NS.Equivalence_NS
+ 
++noncomputable section
++
+ namespace HEU.Cross
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Cross/OrdinalComparisons.lean
++++ b/src/lean/HEU/Cross/OrdinalComparisons.lean
+@@ -13,6 +13,8 @@
+ import HEU.Problems.PvsNP.O_PNP
+ import HEU.Problems.NS.O_NS
+ 
++noncomputable section
++
+ namespace HEU.Cross
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Cross/Transitions.lean
++++ b/src/lean/HEU/Cross/Transitions.lean
+@@ -11,6 +11,8 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Cross
+ 
+ open HEU.Core.ZF
+@@ -23,7 +25,7 @@
+   ordinalChange : Ord
+ 
+ /-- Transition sequence -/
+-def TransitionSeq (X : Type) := List (Transition X)
++abbrev TransitionSeq (X : Type) := List (Transition X)
+ 
+ /-- Compose transitions -/
+ def composeTransitions {X : Type} (t1 t2 : Transition X) : Option (Transition X) :=
+--- a/src/lean/HEU/Cross/UniversalDiagrams.lean
++++ b/src/lean/HEU/Cross/UniversalDiagrams.lean
+@@ -14,6 +14,8 @@
+ import HEU.Problems.PvsNP.X_PNP
+ import HEU.Problems.NS.X_NS
+ 
++noncomputable section
++
+ namespace HEU.Cross
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/HEU_Main.lean
++++ b/src/lean/HEU/HEU_Main.lean
+@@ -71,6 +71,8 @@
+ import HEU.Automation.AutoProve
+ import HEU.Automation.AICompletion
+ 
++noncomputable section
++
+ namespace HEU
+ 
+ open HEU.Core.ZF
+@@ -119,7 +121,7 @@
+     (∃ _ : UBO X_NS, True) :=
+   ⟨⟨UBO_RH, trivial⟩, ⟨UBO_PNP, trivial⟩, ⟨UBO_NS, trivial⟩⟩
+ 
+-/-- Welcome message -/
++/- Welcome message -/
+ #check "Welcome to HEU-7 Universal Framework v1.0.0"
+ 
+ end HEU
+--- a/src/lean/HEU/Problems/BSD/BSD.lean
++++ b/src/lean/HEU/Problems/BSD/BSD.lean
+@@ -10,6 +10,8 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Problems.BSD
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/Hodge/Hodge.lean
++++ b/src/lean/HEU/Problems/Hodge/Hodge.lean
+@@ -10,6 +10,8 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Problems.Hodge
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/NS/Critical_NS.lean
++++ b/src/lean/HEU/Problems/NS/Critical_NS.lean
+@@ -10,6 +10,8 @@
+ import HEU.Problems.NS.X_NS
+ import HEU.Problems.NS.O_NS
+ 
++noncomputable section
++
+ namespace HEU.Problems.NS
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/NS/Equivalence_NS.lean
++++ b/src/lean/HEU/Problems/NS/Equivalence_NS.lean
+@@ -12,6 +12,8 @@
+ import HEU.Problems.NS.O_NS
+ import HEU.Problems.NS.Critical_NS
+ 
++noncomputable section
++
+ namespace HEU.Problems.NS
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/NS/F_NS.lean
++++ b/src/lean/HEU/Problems/NS/F_NS.lean
+@@ -11,6 +11,8 @@
+ import HEU.Core.Functional.Functional
+ import HEU.Problems.NS.X_NS
+ 
++noncomputable section
++
+ namespace HEU.Problems.NS
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/NS/O_NS.lean
++++ b/src/lean/HEU/Problems/NS/O_NS.lean
+@@ -12,6 +12,8 @@
+ import HEU.Problems.NS.X_NS
+ import HEU.Problems.NS.F_NS
+ 
++noncomputable section
++
+ namespace HEU.Problems.NS
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/NS/X_NS.lean
++++ b/src/lean/HEU/Problems/NS/X_NS.lean
+@@ -12,6 +12,8 @@
+ import HEU.Core.ZF.Sets
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Problems.NS
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/PvsNP/Critical_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/Critical_PNP.lean
+@@ -12,6 +12,8 @@
+ import HEU.Problems.PvsNP.X_PNP
+ import HEU.Problems.PvsNP.O_PNP
+ 
++noncomputable section
++
+ namespace HEU.Problems.PvsNP
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean
+@@ -15,6 +15,8 @@
+ import HEU.Problems.PvsNP.O_PNP
+ import HEU.Problems.PvsNP.Critical_PNP
+ 
++noncomputable section
++
+ namespace HEU.Problems.PvsNP
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/PvsNP/F_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/F_PNP.lean
+@@ -12,6 +12,8 @@
+ import HEU.Core.Functional.Functional
+ import HEU.Problems.PvsNP.X_PNP
+ 
++noncomputable section
++
+ namespace HEU.Problems.PvsNP
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/PvsNP/O_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/O_PNP.lean
+@@ -13,6 +13,8 @@
+ import HEU.Problems.PvsNP.X_PNP
+ import HEU.Problems.PvsNP.F_PNP
+ 
++noncomputable section
++
+ namespace HEU.Problems.PvsNP
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/PvsNP/X_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/X_PNP.lean
+@@ -12,6 +12,8 @@
+ import HEU.Core.ZF.Sets
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Problems.PvsNP
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/RH/Critical_RH.lean
++++ b/src/lean/HEU/Problems/RH/Critical_RH.lean
+@@ -15,6 +15,8 @@
+ import HEU.Problems.RH.F_RH
+ import HEU.Problems.RH.O_RH
+ 
++noncomputable section
++
+ namespace HEU.Problems.RH
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/RH/Equivalence_RH.lean
++++ b/src/lean/HEU/Problems/RH/Equivalence_RH.lean
+@@ -15,6 +15,8 @@
+ import HEU.Problems.RH.O_RH
+ import HEU.Problems.RH.Critical_RH
+ 
++noncomputable section
++
+ namespace HEU.Problems.RH
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/RH/F_RH.lean
++++ b/src/lean/HEU/Problems/RH/F_RH.lean
+@@ -13,6 +13,8 @@
+ import HEU.Core.Functional.Functional
+ import HEU.Problems.RH.X_RH
+ 
++noncomputable section
++
+ namespace HEU.Problems.RH
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/RH/O_RH.lean
++++ b/src/lean/HEU/Problems/RH/O_RH.lean
+@@ -13,6 +13,8 @@
+ import HEU.Problems.RH.X_RH
+ import HEU.Problems.RH.F_RH
+ 
++noncomputable section
++
+ namespace HEU.Problems.RH
+ 
+ open HEU.Core.ZF
+--- a/src/lean/HEU/Problems/RH/X_RH.lean
++++ b/src/lean/HEU/Problems/RH/X_RH.lean
+@@ -12,6 +12,8 @@
+ import HEU.Core.ZF.Sets
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Problems.RH
+ 
+ open HEU.Core.ZF
+@@ -21,7 +23,7 @@
+ structure Complex where
+   re : Int
+   im : Int
+-  deriving Repr, DecidableEq
++  deriving DecidableEq
+ 
+ /-- Zero approximation structure -/
+ structure ZeroApprox where
+--- a/src/lean/HEU/Problems/YM/YM.lean
++++ b/src/lean/HEU/Problems/YM/YM.lean
+@@ -10,6 +10,8 @@
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.UBO
+ 
++noncomputable section
++
+ namespace HEU.Problems.YM
+ 
+ open HEU.Core.ZF

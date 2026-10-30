@@ -1,0 +1,43 @@
+--- /dev/null
++++ b/formal/lean/MVEI_Refutacoes.lean
+@@ -0,0 +1,40 @@
++import Block328_372
++import proof
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Harappan.Block328_372 in
++/-- `hatching_reaches_consummated` é falso: de `confirmed` não sai transição nenhuma. -/
++theorem hatching_reaches_consummated_falso :
++    ¬ ∀ «from» : ClosureState, «from» ≠ ClosureState.consummated →
++      validTransition «from» OperatorType.hatching ClosureState.consummated ∨
++      ∃ mid : ClosureState, validTransition «from» OperatorType.prongs mid ∧
++        validTransition mid OperatorType.hatching ClosureState.consummated := by
++  intro h
++  cases h ClosureState.confirmed (fun e => ClosureState.noConfusion e) with
++  | inl hv => exact hv
++  | inr he => match he with
++    | ⟨mid, h1, _⟩ => cases mid <;> exact h1
++
++/-- `rootIsomorphismScope` é falso: o escopo depois de `.scope dom` é `some dom`, e `applyRoot .MLK` não mexe no
++    estado (num estado sem escopo os dois lados diferem). -/
++theorem rootIsomorphismScope_falso :
++    ¬ ∀ (dom : String) (st : State) (r : HebrewRoot),
++      rootOfSymbol (.scope dom) = some r →
++      (applySymbol (.scope dom) st).scope = (applyRoot r st).scope := by
++  intro h
++  have := h "a" emptyState HebrewRoot.MLK rfl
++  exact Option.noConfusion this
++
++/-- `commitCreatesNecessity` é falso para o predicado "não validado": vale no estado vazio e não depois do commit. -/
++theorem commitCreatesNecessity_falso :
++    ¬ ∀ (P : State → Prop) (st : State), P st → box P (applySymbol .commit st) := by
++  intro h
++  have := h (fun s => s.validated = false) emptyState rfl rfl
++  exact Bool.noConfusion this
++
++end MVEI.Refutacoes

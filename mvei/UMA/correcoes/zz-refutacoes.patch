@@ -1,0 +1,37 @@
+--- /dev/null
++++ b/formal_proofs/lean/MVEI_Refutacoes.lean
+@@ -0,0 +1,34 @@
++import IndeterminacaoZeroDivZero
++import universe00_extended
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `BateriaMagnetica.vantagem_longevidade` é falso como o Lean o lê: o corpo só tem `[Field α] [LinearOrder α]`,
++    sem ligar a ordem às operações. Em ZMod 2 (com a ordem de Fin 2), 10 = 0, então 1/10 = 0 (divisão por zero
++    dá 0) e as duas taxas valem 1; com anos = 1 > 0 = 10, a desigualdade estrita 1 > 1 é falsa. -/
++theorem vantagem_longevidade_falso :
++    ¬ ∀ (α : Type) [Field α] [LinearOrder α] (anos : α), anos > 10 →
++      BateriaMagnetica.taxa_degradacao_magnetica anos > BateriaMagnetica.taxa_degradacao_quimica anos := by
++  intro h
++  letI : LinearOrder (ZMod 2) := inferInstanceAs (LinearOrder (Fin 2))
++  have hgt := h (ZMod 2) 1 (by decide)
++  have h10 : (10 : ZMod 2) = 0 := by decide
++  simp only [BateriaMagnetica.taxa_degradacao_magnetica, BateriaMagnetica.taxa_degradacao_quimica] at hgt
++  rw [h10, div_zero, sub_zero] at hgt
++  exact lt_irrefl _ hgt
++
++open Universe00Extended in
++/-- `renewable_target_achievable` é falso: uma geração toda nula (solar = eólica = diesel = total = 0) cumpre a
++    hipótese (0 ≥ 0,6 · 0), mas a porcentagem renovável é 0/0 · 100 = 0 no Lean (divisão por zero dá 0), e 0 ≥ 60
++    é falso. -/
++theorem renewable_target_achievable_falso :
++    ¬ ∀ (gen : PowerGeneration), gen.solar + gen.wind ≥ 0.6 * gen.total → renewable_percentage gen ≥ 60 := by
++  intro h
++  have := h ⟨0, 0, 0, 0, by norm_num, le_rfl, le_rfl, le_rfl⟩ (by norm_num)
++  norm_num [renewable_percentage] at this
++
++end MVEI.Refutacoes

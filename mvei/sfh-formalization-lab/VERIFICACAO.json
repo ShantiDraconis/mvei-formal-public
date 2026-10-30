@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,8 +16,8 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././Barriers/Relativization.lean:65:36: failed to synthesize | error: ././././Barriers/Relativization.lean:68:30: unknown identifier 'ℕ' | error: ././././Barriers/Relativization.lean:72:16: unknown identifier 'ℕ'",
-   "sorry_warnings": 35,
+   "build_error": "error: ././././Barriers/Relativization.lean:76:4: type mismatch | error: Lean exited with code 1 | error: ././././Complexity/Basic.lean:22:36: unknown identifier 'Set'",
+   "sorry_warnings": 39,
    "reconstructed": true,
    "bridges": [
     {
@@ -268,7 +268,7 @@
    "salvage": [
     {
      "arquivo": "formal/lean/Barriers/Relativization.lean",
-     "linha": 44,
+     "linha": 47,
      "nome": "Barriers.relativization_barrier",
      "status": "aberto-sorry",
      "axioms": [
@@ -279,15 +279,17 @@
     },
     {
      "arquivo": "formal/lean/Complexity/Basic.lean",
-     "linha": 107,
+     "linha": 110,
      "nome": "Complexity.NPC_in_P_implies_P_eq_NP",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 109: function expected at Language term has type ?m.2583"
+     "erro": "linha 112: function expected at Language term has type ?m.3602",
+     "coluna": 38,
+     "trecho": "NPC_in_P_implies_P_eq_NP (L : ⟦L⟧anguage Binary) :"
     },
     {
      "arquivo": "formal/lean/Complexity/Basic.lean",
-     "linha": 120,
+     "linha": 123,
      "nome": "Complexity.P_subset_NP",
      "status": "aberto-sorry",
      "axioms": [
@@ -296,7 +298,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/Basic.lean",
-     "linha": 125,
+     "linha": 128,
      "nome": "Complexity.NP_subset_EXP",
      "status": "aberto-sorry",
      "axioms": [
@@ -305,15 +307,17 @@
     },
     {
      "arquivo": "formal/lean/Complexity/Basic.lean",
-     "linha": 128,
+     "linha": 131,
      "nome": "Complexity.P_neq_EXP",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 130: don't know how to synthesize implicit argument 'Set' @EXP ?m.3295 ?m.3296 context: ⊢ ?m.3295 when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved before the declaration body is pr"
+     "erro": "linha 133: don't know how to synthesize implicit argument 'Set' @EXP ?m.4258 ?m.4259 context: ⊢ ?m.4258 when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved before the declaration body is pr",
+     "coluna": 24,
+     "trecho": "theorem P_neq_EXP : P ≠ ⟦E⟧XP := by sorry"
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 35,
+     "linha": 37,
      "nome": "PvsNP_L0001_TM_RAM_equiv",
      "status": "aberto-sorry",
      "axioms": [
@@ -325,7 +329,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 40,
+     "linha": 42,
      "nome": "PvsNP_L0001_RAM_Circuit_equiv",
      "status": "aberto-sorry",
      "axioms": [
@@ -337,7 +341,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 56,
+     "linha": 58,
      "nome": "PvsNP_L0002_P_definition",
      "status": "aberto-sorry",
      "axioms": [
@@ -349,22 +353,21 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 76,
+     "linha": 78,
      "nome": "PvsNP_L0003_NP_definition",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "Verifier",
       "propext",
       "sorryAx",
       "verifies"
-     ],
-     "erro": "linha 80: failed to synthesize Membership (List Bool) Language Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     ]
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 82,
+     "linha": 84,
      "nome": "PvsNP_L0004_P_subset_NP",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "TuringMachine",
       "Verifier",
@@ -372,34 +375,37 @@
       "sorryAx",
       "time_complexity",
       "verifies"
-     ],
-     "erro": "linha 104: failed to synthesize Membership ?m.785 Language Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     ]
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 107,
+     "linha": 109,
      "nome": "PvsNP_L0005_reduction_transitive",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 109: type expected, got (B : Language)"
+     "erro": "linha 111: application type mismatch B ≤ₚᵐ ↑C → A ≤ₚᵐ C argument ↑C → A ≤ₚᵐ C has type Prop : Type but is expected to have type Language : Type",
+     "coluna": 18,
+     "trecho": "  A ≤ₚᵐ B → B ≤ₚᵐ ⟦C⟧ → A ≤ₚᵐ C := by"
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 111,
+     "linha": 113,
      "nome": "PvsNP_L0005_reduction_preserves_P",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 113: type expected, got (B : Language)"
+     "erro": "linha 115: application type mismatch A ≤ₚᵐ ↑B → B ∈ P → A ∈ P argument ↑B → B ∈ P → A ∈ P has type Prop : Type but is expected to have type Language : Type",
+     "coluna": 8,
+     "trecho": "  A ≤ₚᵐ ⟦B⟧ → B ∈ P → A ∈ P := by"
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 128,
+     "linha": 130,
      "nome": "PvsNP_L0006_Cook_Levin",
      "status": "aberto-sorry",
      "axioms": [
@@ -412,7 +418,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 146,
+     "linha": 148,
      "nome": "PvsNP_L0007_ThreeSAT_NP_complete",
      "status": "aberto-sorry",
      "axioms": [
@@ -425,7 +431,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 164,
+     "linha": 166,
      "nome": "PvsNP_L0008_CLIQUE_NP_complete",
      "status": "aberto-sorry",
      "axioms": [
@@ -438,7 +444,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 167,
+     "linha": 169,
      "nome": "PvsNP_L0008_VertexCover_NP_complete",
      "status": "aberto-sorry",
      "axioms": [
@@ -451,7 +457,7 @@
     },
     {
      "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 170,
+     "linha": 172,
      "nome": "PvsNP_L0008_HamiltonianPath_NP_complete",
      "status": "aberto-sorry",
      "axioms": [
@@ -464,139 +470,165 @@
     },
     {
      "arquivo": "formal/lean/MasterLemma/Basic.lean",
-     "linha": 87,
+     "linha": 90,
      "nome": "MasterLemma.MasterLemma",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 97: unexpected token ')'; expected term"
+     "coluna": 7,
+     "trecho": "  [φ : ⟦C⟧onsistencyFunctional S]",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "formal/lean/MasterLemma/Basic.lean",
-     "linha": 106,
+     "linha": 109,
      "nome": "MasterLemma.no_anomalies_from_master_lemma",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 111: unexpected token ')'; expected term"
+     "coluna": 3,
+     "trecho": "  [⟦C⟧onsistencyFunctional S]",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "formal/lean/MasterLemma/Basic.lean",
-     "linha": 117,
+     "linha": 120,
      "nome": "MasterLemma.global_implies_local",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 120: unexpected token ')'; expected term"
+     "coluna": 7,
+     "trecho": "  [φ : ⟦C⟧onsistencyFunctional S]",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 90,
+     "linha": 92,
      "nome": "MasterLemma.PvsNP.shortcut_violates_barriers",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 96,
+     "linha": 98,
      "nome": "MasterLemma.PvsNP.PvsNP_is_MasterLemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 104,
+     "linha": 106,
      "nome": "MasterLemma.PvsNP.structural_gap_PvsNP",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 112,
+     "linha": 114,
      "nome": "MasterLemma.PvsNP.no_shortcuts_from_PneqNP",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 122,
+     "linha": 124,
      "nome": "MasterLemma.PvsNP.PneqNP_from_no_shortcuts",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 130,
+     "linha": 132,
      "nome": "MasterLemma.PvsNP.respects_time_hierarchy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
-     "linha": 140,
+     "linha": 142,
      "nome": "MasterLemma.PvsNP.respects_space_hierarchy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 63,
+     "linha": 65,
      "nome": "MasterLemma.ToyExamples.lagrange_via_master_lemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 108,
+     "linha": 110,
      "nome": "MasterLemma.ToyExamples.euclidean_via_master_lemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 153,
+     "linha": 155,
      "nome": "MasterLemma.ToyExamples.conservation_via_master_lemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 158,
+     "linha": 160,
      "nome": "MasterLemma.ToyExamples.toy_examples_unified",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
-     "linha": 62,
+     "linha": 64,
      "nome": "MillenniumProblems.BlockC.pvsnp_is_mother_lemma_instance",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "MillenniumProblems.MotherLemma"
+     ],
+     "erro": "linha 65: type of theorem 'MillenniumProblems.BlockC.pvsnp_is_mother_lemma_instance' is not a proposition MotherLemmaGap AlgorithmSpace",
+     "coluna": 0,
+     "trecho": "⟦/⟧-- P vs NP exhibits the Mothe",
+     "motivo": "importa MillenniumProblems.MotherLemma, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
-     "linha": 105,
+     "linha": 107,
      "nome": "MillenniumProblems.BlockC.barriers_formalize_mother_lemma",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumProblems.MotherLemma"
+     ],
+     "erro": "linha 116: tactic 'assumption' failed left✝¹ : RelativizationBarrier left✝ : NaturalProofsBarrier right✝ : AlgebrizationBarrier h : ClassicallyProvable (∀ (alg : AlgorithmSpace.carrier), NoPolySAT.holds_on alg) ⊢ False",
+     "coluna": 2,
+     "trecho": "  ⟦t⟧rivial",
+     "motivo": "importa MillenniumProblems.MotherLemma, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
-     "linha": 128,
+     "linha": 130,
      "nome": "MillenniumProblems.BlockC.pvsnp_has_smallest_gap",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "MillenniumProblems.MotherLemma"
+     ]
     },
     {
      "arquivo": "formal/lean/OpenProblems/PvsNP_Central.lean",
@@ -626,123 +658,133 @@
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
-     "linha": 76,
+     "linha": 79,
      "nome": "cost_ge_SC",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
-     "linha": 83,
-     "nome": "SC_poly_of_repr",
      "status": "aberto-sorry",
      "axioms": [
-      "sorryAx"
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ]
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
-     "linha": 103,
+     "linha": 86,
+     "nome": "SC_poly_of_repr",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/StructuralComplexity/Basic.lean",
+     "linha": 106,
      "nome": "SC_monotone",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 106: function expected at poly term has type ?m.6736"
+     "erro": "linha 109: function expected at poly term has type ?m.2032",
+     "coluna": 19,
+     "trecho": "    ∃ poly, SC X ≤ ⟦p⟧oly (SC Y) := by"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 105,
+     "linha": 107,
      "nome": "P_neq_NP_equivalence",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 110,
+     "linha": 112,
      "nome": "all_SAT_repr_superpoly",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 139,
+     "linha": 141,
      "nome": "SC_oracle_dependent",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 148,
+     "linha": 150,
      "nome": "non_relativizing_requires_structure",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 160,
+     "linha": 162,
      "nome": "natural_proofs_barrier",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 177,
+     "linha": 179,
      "nome": "algebraic_only_implies_algebrizes",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 225,
+     "linha": 227,
      "nome": "separation_via_proxy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
-     "linha": 236,
+     "linha": 238,
      "nome": "ResolutionWidth_lower_bound",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
-     "linha": 50,
+     "linha": 52,
      "nome": "invariance_theorem",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
-     "linha": 64,
+     "linha": 66,
      "nome": "all_repr_superpoly_of_SC_superpoly",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
-     "linha": 73,
+     "linha": 75,
      "nome": "no_escape_hatch",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
-     "linha": 111,
+     "linha": 113,
      "nome": "robustness_oracle_independent_implies_relativizing",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     }
    ],
    "preenchimento": [
@@ -859,14 +901,14 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././ApproximationComplexity.lean:80:15: failed to synthesize | error: ././././ApproximationComplexity.lean:92:15: failed to synthesize",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././ApproximationComplexity.lean:142:4: type mismatch | error: ././././ApproximationComplexity.lean:189:9: unexpected token 'instance'; expected '(', '[', '_', '{', '⦃' or identifier",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean",
-     "linha": 121,
+     "linha": 123,
      "nome": "ApproximationComplexity.fptas_implies_efficient_arbitrarily_close",
      "status": "erro",
      "axioms": [
@@ -875,11 +917,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 135: failed to synthesize HMul ℝ ObjectiveValue ?m.8477 Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 142: type mismatch fptas.poly_in_size ε ε_pos has type PolyTime (fptas.runtime ε) : Prop but is expected to have type PolyTime fun n => fptas.runtime ε 1 : Prop",
+     "coluna": 4,
+     "trecho": "  · ⟦e⟧xact fptas.poly_in_size ε ε_p"
     },
     {
      "arquivo": "problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean",
-     "linha": 188,
+     "linha": 190,
      "nome": "ApproximationComplexity.approximation_bridges_p_and_np",
      "status": "fechado",
      "axioms": [
@@ -888,11 +932,13 @@
     },
     {
      "arquivo": "problems/p-vs-np/approximation-logic/lean/ApproximationComplexity.lean",
-     "linha": 209,
+     "linha": 211,
      "nome": "ApproximationComplexity.approximation_complexity_spectrum",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 241: failed to infer binder type",
+     "erro": "linha 243: failed to infer binder type",
+     "coluna": 4,
+     "trecho": "  ∀ ⟦r⟧eal_world_problem,",
      "preenchimento": {
       "resultado": "demonstrável",
       "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
@@ -921,34 +967,52 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:22:12: unexpected token 'Σ'; expected '_' or identifier | error: ././././PvsNP.lean:25:14: unexpected token 'Σ'; expected '_' or identifier",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:25:7: 'String' has already been declared | error: ././././PvsNP.lean:28:41: function expected at",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
-     "linha": 92,
+     "linha": 95,
      "nome": "ComplexityTheory.P_subset_NP",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 94: unexpected token 'Σ'; expected '_' or identifier"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Quot.sound"
+     ],
+     "erro": "linha 110: tactic 'constructor' failed, target is not an inductive datatype case right.right «Σ» : Alphabet L : Language «Σ» f : TimeFunction hpoly : IsPolynomialTime f hM : DecidableInTime L f ⊢ ∀ (w : sorry), w ∈ L ↔ ∃ (c : sorry), Verifier.verify ?",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor"
     },
     {
      "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
-     "linha": 127,
+     "linha": 130,
      "nome": "ComplexityTheory.polyTimeReducible_trans",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 129: unexpected token 'Σ'; expected '_' or identifier"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Quot.sound"
+     ],
+     "erro": "linha 134: tactic 'introN' failed, insufficient number of binders «Σ» : Alphabet L₁ : Language «Σ» L₂ : Language «Σ» L₃ : Language «Σ» ⊢ L₁ ≤ₚ sorry",
+     "coluna": 2,
+     "trecho": "  ⟦i⟧ntro ⟨f, t₁, ht₁⟩ ⟨g, t₂, ht₂"
     },
     {
      "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
-     "linha": 154,
+     "linha": 157,
      "nome": "ComplexityTheory.NPComplete_in_P_implies_P_eq_NP",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 156: unexpected token 'Σ'; expected '_' or identifier"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Quot.sound"
+     ],
+     "erro": "linha 165: unsolved goals case h.mp.intro.intro.intro.intro.w «Σ» : Alphabet L : Language «Σ» hNP : L ∈ NP «Σ» hNPHard : NPHard L L' : Language «Σ» hL' : L' ∈ P «Σ» f : sorry → sorry t : TimeFunction ht : sorry ∧ (sorry → sorry ≤ t sorry) ∧ ∀ (w : sor",
+     "coluna": 2,
+     "trecho": "  ⟦·⟧ intro hL'"
     }
    ],
    "preenchimento": [],
@@ -973,40 +1037,49 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib): 3 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 2 arquivo(s). a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: ././././Operators.lean: bad import 'Mathlib.MeasureTheory.Integral.Basic'",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, vocabulario-lean4): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 18 arquivo(s): abbrev 23, acento 1, docstring 20, end 2, lambda 53, nomes_mathlib 1, noncomputable 18, notacao 3, notacao_escopo 1, palavra_chave 5. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././StructuralAsymmetry.lean:68:40: unknown constant 'Real.exp' | error: ././././StructuralAsymmetry.lean:128:8: failed to synthesize",
    "corrections": [
-    "renomear-imports-mathlib"
+    "renomear-imports-mathlib",
+    "vocabulario-lean4"
    ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
-     "linha": 96,
+     "linha": 98,
      "nome": "PvsNP.Operators.search_not_reducible_to_verification",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 102: expected token"
+     "erro": "linha 103: application type mismatch VerificationOperator β P argument P has type ?m.2398 : Sort ?u.2397 but is expected to have type β → Prop : Type",
+     "coluna": 26,
+     "trecho": "  [VerificationOperator β ⟦P⟧] :"
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
-     "linha": 156,
+     "linha": 158,
      "nome": "PvsNP.Operators.parallelism_linear_speedup",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 160: expected token"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "sorryAx"
+     ]
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
-     "linha": 162,
+     "linha": 164,
      "nome": "PvsNP.Operators.parallelism_preserves_entropy",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 167: expected token"
+     "erro": "linha 167: invalid binder annotation, type is not a class instance ?m.4330 use the command `set_option checkBinderAnnotations false` to disable the check",
+     "coluna": 14,
+     "trecho": "  {α : Type} [⟦S⟧tructuralEntropy α] (n : ℕ) :"
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 108,
+     "linha": 110,
      "nome": "PvsNP.structural_asymmetry_principle",
      "status": "erro",
      "axioms": [
@@ -1015,11 +1088,13 @@
       "Quot.sound",
       "sorryAx"
      ],
-     "erro": "linha 126: failed to synthesize instance Membership (VerificationSpace P) Type"
+     "erro": "linha 128: failed to synthesize instance Membership (VerificationSpace P) Type",
+     "coluna": 8,
+     "trecho": "        ⟦a⟧lg.compute s ∈ VerificationSp"
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 128,
+     "linha": 130,
      "nome": "PvsNP.p_eq_np_implies_entropy_collapse",
      "status": "erro",
      "axioms": [
@@ -1028,11 +1103,13 @@
       "Quot.sound",
       "sorryAx"
      ],
-     "erro": "linha 149: failed to synthesize instance StructuralEntropy (SearchSpace P)"
+     "erro": "linha 151: failed to synthesize instance StructuralEntropy (SearchSpace P)",
+     "coluna": 7,
+     "trecho": "      |⟦S⟧tructuralEntropy.entropy s - "
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 151,
+     "linha": 153,
      "nome": "PvsNP.p_eq_np_eliminates_creativity",
      "status": "aberto-sorry",
      "axioms": [
@@ -1041,7 +1118,7 @@
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 173,
+     "linha": 175,
      "nome": "PvsNP.structural_implies_classical",
      "status": "aberto-sorry",
      "axioms": [
@@ -1074,14 +1151,14 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:48:7: failed to infer binder type | error: ././././PvsNP.lean:45:9: failed to infer binder type",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:50:7: failed to infer binder type | error: ././././PvsNP.lean:47:9: failed to infer binder type",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "problems/p-vs-np/formalizations/lean/PvsNP.lean",
-     "linha": 104,
+     "linha": 106,
      "nome": "ComplexityTheory.npComplete_in_p_implies_p_eq_np",
      "status": "aberto-sorry",
      "axioms": [
@@ -1111,48 +1188,56 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP_Definitions.lean:88:35: unknown identifier 'ℚ' | error: ././././PvsNP_Definitions.lean:88:55: unknown identifier 'ℚ'",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP_Definitions.lean:90:35: unknown identifier 'ℚ' | error: ././././PvsNP_Definitions.lean:90:55: unknown identifier 'ℚ'",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 62,
+     "linha": 64,
      "nome": "ComplexityTheory.relativization_barrier",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 88: unknown identifier 'ℚ'"
+     "erro": "linha 90: unknown identifier 'ℚ'",
+     "coluna": 35,
+     "trecho": " : ℕ, (count_satisfying P n : ⟦ℚ⟧) / (2 ^ (2 ^ n) : ℚ) ≥ 1 / ("
     },
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 100,
+     "linha": 102,
      "nome": "ComplexityTheory.natural_proofs_barrier",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 102: function expected at is_pseudorandom term has type ?m.2848"
+     "erro": "linha 104: function expected at is_pseudorandom term has type ?m.3004",
+     "coluna": 43,
+     "trecho": "ure : ∃ (PRF : ℕ → ℕ → Bool), ⟦i⟧s_pseudorandom PRF) :"
     },
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 120,
+     "linha": 122,
      "nome": "ComplexityTheory.algebrization_barrier",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 128: function expected at algebraic_ext term has type ?m.3391"
+     "erro": "linha 130: function expected at algebraic_ext term has type ?m.3577",
+     "coluna": 35,
+     "trecho": "A : Oracle, ∀ L, InNP_Oracle (⟦a⟧lgebraic_ext A) L → InP_Oracl"
     },
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 132,
+     "linha": 134,
      "nome": "ComplexityTheory.barrier_checklist_lemma",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 142: function expected at Relativizes term has type ?m.3561"
+     "erro": "linha 144: function expected at Relativizes term has type ?m.3761",
+     "coluna": 5,
+     "trecho": "  (¬ ⟦R⟧elativizes proof_technique) ∨"
     }
    ],
    "preenchimento": [],

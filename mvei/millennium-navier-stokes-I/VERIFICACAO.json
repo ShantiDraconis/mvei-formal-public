@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -14,9 +14,9 @@
    "toolchain": "",
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
-   "build_ok": false,
+   "build_ok": true,
    "build_seconds": 0.0,
-   "build_error": "error: DirectEndpointRule.lean:35:21: Application type mismatch: The argument | error: DirectEndpointRule.lean:54:24: Application type mismatch: The argument | error: build failed",
+   "build_error": "",
    "sorry_warnings": 1,
    "reconstructed": true,
    "bridges": [
@@ -49,45 +49,140 @@
      ],
      "statement": "∀ (ExactEndpoint : Prop), ExactEndpoint",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.close",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint)   (w : Witness), self.Valid w → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.inj",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} {Valid : Witness → Prop} {produce : Source → ∃ w, Valid w}   {close : ∀ (w : Witness), Valid w → Endpoint} {Valid_1 : Witness → Prop} {produce_1 : Source → ∃ w, Valid_1 w}   {close_1 : ∀ (w : Witness), Valid_1 w → Endpoint},   { Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clos",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.injEq",
+     "module": "DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint) (Valid_1 : Witness → Prop) (produce_1 : Source → ∃ w, Valid_1 w)   (close_1 : ∀ (w : Witness), Valid_1 w → Endpoint),   ({ Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clo",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} [inst : SizeOf Source] [inst_1 : SizeOf Witness]   [inst_2 : SizeOf Endpoint] (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint), sizeOf { Valid := Valid, produce := produce, close := close } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.produce",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint),   Source → ∃ w, self.Valid w",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.endpoint.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.endpoint = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.ofNat_ctorIdx",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ (x : DirectEndpointRule.Stage), DirectEndpointRule.Stage.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.source.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.source = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.verified.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.verified = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.witness.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.witness = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.decreases",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (self : DirectEndpointRule.StrictProgress State) (s : State), self.rank (self.step s) < self.rank s",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.inj",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} {rank : State → Nat} {step : State → State} {decreases : ∀ (s : State), rank (step s) < rank s}   {rank_1 : State → Nat} {step_1 : State → State} {decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s},   { rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 } →     rank = rank_1 ∧ step = step_1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.injEq",
+     "module": "DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {State : Type u} (rank : State → Nat) (step : State → State) (decreases : ∀ (s : State), rank (step s) < rank s)   (rank_1 : State → Nat) (step_1 : State → State) (decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s),   ({ rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 }) =     (rank = rank_1 ∧ step = step_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} [inst : SizeOf State] (rank : State → Nat) (step : State → State)   (decreases : ∀ (s : State), rank (step s) < rank s), sizeOf { rank := rank, step := step, decreases := decreases } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.direct_endpoint",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (r : DirectEndpointRule.Rule Source Witness Endpoint),   Source → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.forwardDependency_wellFounded",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "WellFounded DirectEndpointRule.forwardDependency",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.no_infinite_descent",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (p : DirectEndpointRule.StrictProgress State), WellFounded fun a b => p.rank a < p.rank b",
+     "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com ATKTerminalStaging, DirectEndpointRule (alguns arquivos com erro)",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com ATKTerminalStaging, DirectEndpointRule",
    "corrections": [],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `ATKTerminalStaging, .one `DirectEndpointRule]\n",
    "avulso": true,
-   "salvage": [
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 17,
-     "nome": "DirectEndpointRule.direct_endpoint",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 30,
-     "nome": "DirectEndpointRule.no_infinite_descent",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 35: Application type mismatch: The argument Nat.lt_wfRel has type WellFoundedRelation Nat of sort `Type` but is expected to have type WellFounded LT.lt of sort `Prop` in the application InvImage.wf p.rank Nat.lt_wfRel"
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 52,
-     "nome": "DirectEndpointRule.forwardDependency_wellFounded",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 54: Application type mismatch: The argument Nat.lt_wfRel has type WellFoundedRelation Nat of sort `Type` but is expected to have type WellFounded LT.lt of sort `Prop` in the application InvImage.wf stageRank Nat.lt_wfRel"
-    }
-   ],
+   "salvage": [],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 17,
     "aberto-sorry": 1,
     "condicional": 0
    }
@@ -97,7 +192,7 @@
    "path": "src/formalization",
    "toolchain": "",
    "toolchain_used": "padrão do elan",
-   "needs_mathlib": false,
+   "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
    "build_error": "",
@@ -107,58 +202,90 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././NS_collapse.lean:46:18: function expected at | error: ././././NS_collapse.lean:47:17: function expected at",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././NS_collapse.lean:21:5: unexpected token 'ℝ'; expected identifier | error: ././././NS_collapse.lean:49:18: function expected at",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "src/formalization/NS_collapse.lean",
-     "linha": 156,
+     "linha": 159,
      "nome": "collapse_contrapositive",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 159: failed to synthesize instance of type class OfNat ℝ 1 numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is ℝ due to the absence of the instance above Hint: Type class instance resoluti"
+     "axioms": [
+      "blowup_enstrophy",
+      "collapse_parameter",
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 166: rcases tactic failed: h_blowup : no_blowup sol → False is not an inductive datatype",
+     "coluna": 9,
+     "trecho": "  obtain ⟦⟨⟧T, hT⟩ := h_blowup"
     },
     {
      "arquivo": "src/formalization/NS_collapse.lean",
-     "linha": 170,
+     "linha": 173,
      "nome": "NS_no_blowup_if_I_ne_1",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 178: failed to synthesize instance of type class OfNat ℝ 1 numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is ℝ due to the absence of the instance above Hint: Type class instance resoluti"
+     "axioms": [
+      "blowup_enstrophy",
+      "collapse_parameter",
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 183: linarith failed to find a contradiction case a NS_solution : Sort u_1 sol : NS_solution h_coherent : ∀ t ≥ 0, I t ≠ 1 t : ℝ a✝ : 0 > t ⊢ False failed",
+     "coluna": 63,
+     "trecho": "ol (fun t => h_coherent t (by ⟦l⟧inarith))"
     },
     {
      "arquivo": "src/formalization/NS_collapse.lean",
-     "linha": 191,
+     "linha": 194,
      "nome": "two_phase_picture",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 197: failed to synthesize instance of type class OfNat ℝ 1 numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is ℝ due to the absence of the instance above Hint: Type class instance resoluti"
+     "status": "aberto-sorry",
+     "axioms": [
+      "blowup_enstrophy",
+      "collapse_parameter",
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "src/formalization/NS_collapse.lean",
-     "linha": 205,
+     "linha": 208,
      "nome": "coherent_implies_global_smoothness",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 208: failed to synthesize instance of type class OfNat ℝ 1 numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is ℝ due to the absence of the instance above Hint: Type class instance resoluti"
+     "erro": "linha 212: function expected at is_smooth term has type ?m.10065",
+     "coluna": 8,
+     "trecho": "  (∀ t, ⟦i⟧s_smooth (sol.u · t)) := by"
     },
     {
      "arquivo": "src/formalization/NS_collapse.lean",
-     "linha": 232,
+     "linha": 235,
      "nome": "smooth_flow_no_defect",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 235: failed to synthesize instance of type class OfNat ℝ 0 numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is ℝ due to the absence of the instance above Hint: Type class instance resoluti"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "src/formalization/NS_collapse.lean",
-     "linha": 237,
+     "linha": 240,
      "nome": "collapse_extreme_defect",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 239: failed to synthesize instance of type class LT ℝ Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     }
    ],
    "preenchimento": [],
@@ -183,14 +310,14 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././global_existence.lean:31:37: expected token | error: ././././global_existence.lean:33:25: unexpected identifier; expected 'lemma'",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././global_existence.lean:31:11: function expected at | error: ././././global_existence.lean:34:30: failed to synthesize",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "src/lean/CI_numbers.lean",
-     "linha": 66,
+     "linha": 69,
      "nome": "NavierStokesCollapse.CINumber.I_mul_I",
      "status": "erro",
      "axioms": [
@@ -199,11 +326,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 68: unsolved goals ⊢ { re := 0, im := Real.mul✝ 0 0 * 2 } = 0 ∧ { re := -Real.mul✝ 0 0 + Real.mul✝ 0 1, im := Real.mul✝ 0 0 + Real.mul✝ 0 1 } = 0 ∧ { re := 0, im := Real.mul✝ 0 0 * 2 } * 2 + { re := -Real.mul✝ 0 0 + Real.mul✝ 1 1, im := Real.mu"
+     "erro": "linha 71: unsolved goals ⊢ { re := 0, im := Real.mul✝ 0 0 * 2 } = 0 ∧ { re := -Real.mul✝ 0 0 + Real.mul✝ 0 1, im := Real.mul✝ 0 0 + Real.mul✝ 0 1 } = 0 ∧ { re := 0, im := Real.mul✝ 0 0 * 2 } * 2 + { re := -Real.mul✝ 0 0 + Real.mul✝ 1 1, im := Real.mu",
+     "coluna": 31,
+     "trecho": "heorem I_mul_I : I * I = S := ⟦b⟧y"
     },
     {
      "arquivo": "src/lean/CI_numbers.lean",
-     "linha": 105,
+     "linha": 108,
      "nome": "NavierStokesCollapse.CINumber.I_isAnomalous",
      "status": "erro",
      "axioms": [
@@ -211,11 +340,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 109: no goals to be solved"
+     "erro": "linha 112: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor"
     },
     {
      "arquivo": "src/lean/CI_numbers.lean",
-     "linha": 112,
+     "linha": 115,
      "nome": "NavierStokesCollapse.CINumber.S_isCollapsed",
      "status": "erro",
      "axioms": [
@@ -223,11 +354,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 116: no goals to be solved"
+     "erro": "linha 119: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact one_ne_zero"
     },
     {
      "arquivo": "src/lean/CI_numbers.lean",
-     "linha": 117,
+     "linha": 120,
      "nome": "NavierStokesCollapse.CINumber.critical_iso_complex",
      "status": "fechado",
      "axioms": [
@@ -238,17 +371,19 @@
     },
     {
      "arquivo": "src/lean/global_existence.lean",
-     "linha": 52,
+     "linha": 55,
      "nome": "NavierStokesCollapse.collapse_lemma_1",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 64: function expected at CollapseAxioms term has type ?m.488"
+     "erro": "linha 67: function expected at CollapseAxioms term has type ?m.3014",
+     "coluna": 14,
+     "trecho": "    (axioms : ⟦C⟧ollapseAxioms constants)"
     },
     {
      "arquivo": "src/lean/global_existence.lean",
-     "linha": 68,
+     "linha": 71,
      "nome": "NavierStokesCollapse.regularity_lemma",
      "status": "fechado",
      "axioms": [
@@ -259,11 +394,13 @@
     },
     {
      "arquivo": "src/lean/global_existence.lean",
-     "linha": 82,
+     "linha": 85,
      "nome": "NavierStokesCollapse.main_theorem",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 99: expected token"
+     "erro": "linha 96: function expected at CollapseAxioms term has type ?m.3136",
+     "coluna": 12,
+     "trecho": "  (axioms : ⟦C⟧ollapseAxioms constants)"
     }
    ],
    "preenchimento": [],

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -12,11 +12,11 @@
    "repo": "orion",
    "path": "formalization/lean",
    "toolchain": "",
-   "toolchain_used": "padrão do elan",
-   "needs_mathlib": false,
-   "build_ok": false,
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": true,
+   "build_ok": true,
    "build_seconds": 0.0,
-   "build_error": "error: OrionUCIF.lean:194:9: expected token | error: build failed",
+   "build_error": "",
    "sorry_warnings": 0,
    "reconstructed": true,
    "bridges": [],
@@ -44,17 +44,17 @@
      "status": "fechado"
     },
     {
-     "name": "OrionHiddenState.DefectMode.ofNat_ctorIdx",
+     "name": "OrionHiddenState.DefectMode.ofNat_toCtorIdx",
      "module": "OrionHiddenState",
      "axioms": [],
-     "statement": "∀ (x : OrionHiddenState.DefectMode), OrionHiddenState.DefectMode.ofNat x.ctorIdx = x",
+     "statement": "∀ (x : OrionHiddenState.DefectMode), OrionHiddenState.DefectMode.ofNat x.toCtorIdx = x",
      "status": "fechado"
     },
     {
      "name": "OrionHiddenState.HiddenStateSystem.mk.inj",
      "module": "OrionHiddenState",
      "axioms": [],
-     "statement": "∀ {X : Type u} {O : Type v} {π : X → O} {residue : X → Nat} {signature : O → Nat} {transfer : Nat → Nat}   {positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x)}   {transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))} {X_1 : Type u} {O_1 : Type v} {π_1 : X_1 → O_1}   {residue_1 : X_1 → Nat} {signature_1 : O_1 → Nat} {transfer_1 : Nat → Nat}   {positivity_1 : ∀ (x : X_1), 0 < r",
+     "statement": "∀ {X : Type u} {O : Type v} {π : X → O} {residue : X → ℕ} {signature : O → ℕ} {transfer : ℕ → ℕ}   {positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x)}   {transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))} {X_1 : Type u} {O_1 : Type v} {π_1 : X_1 → O_1}   {residue_1 : X_1 → ℕ} {signature_1 : O_1 → ℕ} {transfer_1 : ℕ → ℕ}   {positivity_1 : ∀ (x : X_1), 0 < residue_1 x → 0 <",
      "status": "fechado"
     },
     {
@@ -63,14 +63,14 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ (X : Type u) (O : Type v) (π : X → O) (residue : X → Nat) (signature : O → Nat) (transfer : Nat → Nat)   (positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x))   (transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))) (X_1 : Type u) (O_1 : Type v) (π_1 : X_1 → O_1)   (residue_1 : X_1 → Nat) (signature_1 : O_1 → Nat) (transfer_1 : Nat → Nat)   (positivity_1 : ∀ (x : X_1), 0 < r",
+     "statement": "∀ (X : Type u) (O : Type v) (π : X → O) (residue : X → ℕ) (signature : O → ℕ) (transfer : ℕ → ℕ)   (positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x))   (transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))) (X_1 : Type u) (O_1 : Type v) (π_1 : X_1 → O_1)   (residue_1 : X_1 → ℕ) (signature_1 : O_1 → ℕ) (transfer_1 : ℕ → ℕ)   (positivity_1 : ∀ (x : X_1), 0 < residue_1 x → 0 <",
      "status": "fechado"
     },
     {
      "name": "OrionHiddenState.HiddenStateSystem.mk.sizeOf_spec",
      "module": "OrionHiddenState",
      "axioms": [],
-     "statement": "∀ (X : Type u) (O : Type v) (π : X → O) (residue : X → Nat) (signature : O → Nat) (transfer : Nat → Nat)   (positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x))   (transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))),   sizeOf       { X := X, O := O, π := π, residue := residue, signature := signature, transfer := transfer,         positivity := positivity, transferBound := tr",
+     "statement": "∀ (X : Type u) (O : Type v) (π : X → O) (residue : X → ℕ) (signature : O → ℕ) (transfer : ℕ → ℕ)   (positivity : ∀ (x : X), 0 < residue x → 0 < signature (π x))   (transferBound : ∀ (x : X), residue x ≤ transfer (signature (π x))),   sizeOf       { X := X, O := O, π := π, residue := residue, signature := signature, transfer := transfer,         positivity := positivity, transferBound := transferBo",
      "status": "fechado"
     },
     {
@@ -91,7 +91,7 @@
      "name": "OrionHiddenState.boundedHiddenOfBoundedSignature",
      "module": "OrionHiddenState",
      "axioms": [],
-     "statement": "∀ (S : OrionHiddenState.HiddenStateSystem) {B : Nat},   OrionHiddenState.NatMonotone S.transfer →     OrionHiddenState.SignatureBound S B → ∀ (x : S.X), S.residue x ≤ S.transfer B",
+     "statement": "∀ (S : OrionHiddenState.HiddenStateSystem) {B : ℕ},   OrionHiddenState.NatMonotone S.transfer →     OrionHiddenState.SignatureBound S B → ∀ (x : S.X), S.residue x ≤ S.transfer B",
      "status": "fechado"
     },
     {
@@ -100,7 +100,7 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ {defect threshold : Nat},   defect ≠ 0 →     ¬threshold ≤ defect → OrionHiddenState.classifyDefect defect threshold = OrionHiddenState.DefectMode.boundedness",
+     "statement": "∀ {defect threshold : ℕ},   defect ≠ 0 →     ¬threshold ≤ defect → OrionHiddenState.classifyDefect defect threshold = OrionHiddenState.DefectMode.boundedness",
      "status": "fechado"
     },
     {
@@ -109,14 +109,14 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ (threshold : Nat), OrionHiddenState.classifyDefect 0 threshold = OrionHiddenState.DefectMode.collapse",
+     "statement": "∀ (threshold : ℕ), OrionHiddenState.classifyDefect 0 threshold = OrionHiddenState.DefectMode.collapse",
      "status": "fechado"
     },
     {
      "name": "OrionHiddenState.classifyDefect.eq_1",
      "module": "OrionHiddenState",
      "axioms": [],
-     "statement": "∀ (defect threshold : Nat),   OrionHiddenState.classifyDefect defect threshold =     if defect = 0 then OrionHiddenState.DefectMode.collapse     else if threshold ≤ defect then OrionHiddenState.DefectMode.gap else OrionHiddenState.DefectMode.boundedness",
+     "statement": "∀ (defect threshold : ℕ),   OrionHiddenState.classifyDefect defect threshold =     if defect = 0 then OrionHiddenState.DefectMode.collapse     else if threshold ≤ defect then OrionHiddenState.DefectMode.gap else OrionHiddenState.DefectMode.boundedness",
      "status": "fechado"
     },
     {
@@ -125,7 +125,7 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ {defect threshold : Nat},   defect ≠ 0 → threshold ≤ defect → OrionHiddenState.classifyDefect defect threshold = OrionHiddenState.DefectMode.gap",
+     "statement": "∀ {defect threshold : ℕ},   defect ≠ 0 → threshold ≤ defect → OrionHiddenState.classifyDefect defect threshold = OrionHiddenState.DefectMode.gap",
      "status": "fechado"
     },
     {
@@ -141,68 +141,565 @@
      "axioms": [],
      "statement": "∀ (S : OrionHiddenState.HiddenStateSystem) (x : S.X), S.residue x ≤ S.transfer (S.signature (S.π x))",
      "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.BSDInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.BSDInstance) (X : OrionUCIF.State W n m),   self.PΩ_BSD (self.PΩ_BSD X) = self.PΩ_BSD X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.BSDInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_BSD : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_BSD (PΩ_BSD X) = PΩ_BSD X}   {PΩ_BSD_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_BSD_1 (PΩ_BSD_1 X) = PΩ_BSD_1 X},   { PΩ_BSD := PΩ_BSD, idempotent := idempotent } = { PΩ_BSD := PΩ_BSD_1, idempotent := idempot",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.BSDInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_BSD : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_BSD (PΩ_BSD X) = PΩ_BSD X)   (PΩ_BSD_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_BSD_1 (PΩ_BSD_1 X) = PΩ_BSD_1 X),   ({ PΩ_BSD := PΩ_BSD, idempotent := idempotent } = { PΩ_BSD := PΩ_BSD_1, idempotent := idempo",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.BSDInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_BSD : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_BSD (PΩ_BSD X) = PΩ_BSD X),   sizeOf { PΩ_BSD := PΩ_BSD, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.EnergyIdentityL1.identity_holds",
+     "module": "OrionUCIF",
+     "axioms": [
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : OrionUCIF.EnergyIdentityL1), self.dEh_dt + self.nu * self.grad_uh_sq = self.Pi_Lambda",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.EnergyIdentityL1.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [
+      "Classical.choice"
+     ],
+     "statement": "∀ {dEh_dt nu grad_uh_sq Pi_Lambda : Float} {identity_holds : dEh_dt + nu * grad_uh_sq = Pi_Lambda}   {dEh_dt_1 nu_1 grad_uh_sq_1 Pi_Lambda_1 : Float} {identity_holds_1 : dEh_dt_1 + nu_1 * grad_uh_sq_1 = Pi_Lambda_1},   { dEh_dt := dEh_dt, nu := nu, grad_uh_sq := grad_uh_sq, Pi_Lambda := Pi_Lambda, identity_holds := identity_holds } =       { dEh_dt := dEh_dt_1, nu := nu_1, grad_uh_sq := grad_uh_sq",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.EnergyIdentityL1.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "Classical.choice",
+      "propext"
+     ],
+     "statement": "∀ (dEh_dt nu grad_uh_sq Pi_Lambda : Float) (identity_holds : dEh_dt + nu * grad_uh_sq = Pi_Lambda)   (dEh_dt_1 nu_1 grad_uh_sq_1 Pi_Lambda_1 : Float) (identity_holds_1 : dEh_dt_1 + nu_1 * grad_uh_sq_1 = Pi_Lambda_1),   ({ dEh_dt := dEh_dt, nu := nu, grad_uh_sq := grad_uh_sq, Pi_Lambda := Pi_Lambda, identity_holds := identity_holds } =       { dEh_dt := dEh_dt_1, nu := nu_1, grad_uh_sq := grad_uh_s",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.EnergyIdentityL1.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [
+      "Classical.choice"
+     ],
+     "statement": "∀ (dEh_dt nu grad_uh_sq Pi_Lambda : Float) (identity_holds : dEh_dt + nu * grad_uh_sq = Pi_Lambda),   sizeOf       { dEh_dt := dEh_dt, nu := nu, grad_uh_sq := grad_uh_sq, Pi_Lambda := Pi_Lambda,         identity_holds := identity_holds } =     1 + sizeOf dEh_dt + sizeOf nu + sizeOf grad_uh_sq + sizeOf Pi_Lambda + sizeOf identity_holds",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF1Closure.closure",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (self : OrionUCIF.HREF1Closure) (C : Float), self.sup_L < C → self.sup_R < C",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF1Closure.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {sup_L sup_R : Float} {closure : ∀ (C : Float), sup_L < C → sup_R < C} {sup_L_1 sup_R_1 : Float}   {closure_1 : ∀ (C : Float), sup_L_1 < C → sup_R_1 < C},   { sup_L := sup_L, sup_R := sup_R, closure := closure } =       { sup_L := sup_L_1, sup_R := sup_R_1, closure := closure_1 } →     sup_L = sup_L_1 ∧ sup_R = sup_R_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF1Closure.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (sup_L sup_R : Float) (closure : ∀ (C : Float), sup_L < C → sup_R < C) (sup_L_1 sup_R_1 : Float)   (closure_1 : ∀ (C : Float), sup_L_1 < C → sup_R_1 < C),   ({ sup_L := sup_L, sup_R := sup_R, closure := closure } =       { sup_L := sup_L_1, sup_R := sup_R_1, closure := closure_1 }) =     (sup_L = sup_L_1 ∧ sup_R = sup_R_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF1Closure.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (sup_L sup_R : Float) (closure : ∀ (C : Float), sup_L < C → sup_R < C),   sizeOf { sup_L := sup_L, sup_R := sup_R, closure := closure } = 1 + sizeOf sup_L + sizeOf sup_R",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF2L3Conditional.ess_conclusion",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (self : OrionUCIF.HREF2L3Conditional), self.bridge_HA_holds = true → True",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF2L3Conditional.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {bridge_HA_holds : Bool} {ess_conclusion : bridge_HA_holds = true → True} {bridge_HA_holds_1 : Bool}   {ess_conclusion_1 : bridge_HA_holds_1 = true → True},   { bridge_HA_holds := bridge_HA_holds, ess_conclusion := ess_conclusion } =       { bridge_HA_holds := bridge_HA_holds_1, ess_conclusion := ess_conclusion_1 } →     bridge_HA_holds = bridge_HA_holds_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF2L3Conditional.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (bridge_HA_holds : Bool) (ess_conclusion : bridge_HA_holds = true → True) (bridge_HA_holds_1 : Bool)   (ess_conclusion_1 : bridge_HA_holds_1 = true → True),   ({ bridge_HA_holds := bridge_HA_holds, ess_conclusion := ess_conclusion } =       { bridge_HA_holds := bridge_HA_holds_1, ess_conclusion := ess_conclusion_1 }) =     (bridge_HA_holds = bridge_HA_holds_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREF2L3Conditional.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (bridge_HA_holds : Bool) (ess_conclusion : bridge_HA_holds = true → True),   sizeOf { bridge_HA_holds := bridge_HA_holds, ess_conclusion := ess_conclusion } = 1 + sizeOf bridge_HA_holds",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.HREFInstance) (X : OrionUCIF.State W n m),   self.PΩ_HREF (self.PΩ_HREF X) = self.PΩ_HREF X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_HREF : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_HREF (PΩ_HREF X) = PΩ_HREF X}   {PΩ_HREF_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_HREF_1 (PΩ_HREF_1 X) = PΩ_HREF_1 X},   { PΩ_HREF := PΩ_HREF, idempotent := idempotent } = { PΩ_HREF := PΩ_HREF_1, idempoten",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_HREF : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_HREF (PΩ_HREF X) = PΩ_HREF X)   (PΩ_HREF_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_HREF_1 (PΩ_HREF_1 X) = PΩ_HREF_1 X),   ({ PΩ_HREF := PΩ_HREF, idempotent := idempotent } = { PΩ_HREF := PΩ_HREF_1, idempote",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_HREF : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_HREF (PΩ_HREF X) = PΩ_HREF X),   sizeOf { PΩ_HREF := PΩ_HREF, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFLaws.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀   {law1_projection law2_hidden_residue law3_indirect_detection law4_pressure_signature law5_spectral_imprint     law6_focusing law7_critical_closure law1_projection_1 law2_hidden_residue_1 law3_indirect_detection_1     law4_pressure_signature_1 law5_spectral_imprint_1 law6_focusing_1 law7_critical_closure_1 : Prop},   { law1_projection := law1_projection, law2_hidden_residue := law2_hidden_resid",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFLaws.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀   (law1_projection law2_hidden_residue law3_indirect_detection law4_pressure_signature law5_spectral_imprint     law6_focusing law7_critical_closure law1_projection_1 law2_hidden_residue_1 law3_indirect_detection_1     law4_pressure_signature_1 law5_spectral_imprint_1 law6_focusing_1 law7_critical_closure_1 : Prop),   ({ law1_projection := law1_projection, law2_hidden_residue := law2_hidden_resi",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HREFLaws.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀   (law1_projection law2_hidden_residue law3_indirect_detection law4_pressure_signature law5_spectral_imprint     law6_focusing law7_critical_closure : Prop),   sizeOf       { law1_projection := law1_projection, law2_hidden_residue := law2_hidden_residue,         law3_indirect_detection := law3_indirect_detection, law4_pressure_signature := law4_pressure_signature,         law5_spectral_imprint :",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HiddenResidue.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext",
+      "Classical.choice"
+     ],
+     "statement": "∀ {value : Float} {nonneg : value ≥ 0} {value_1 : Float} {nonneg_1 : value_1 ≥ 0},   { value := value, nonneg := nonneg } = { value := value_1, nonneg := nonneg_1 } → value = value_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HiddenResidue.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext",
+      "Classical.choice"
+     ],
+     "statement": "∀ (value : Float) (nonneg : value ≥ 0) (value_1 : Float) (nonneg_1 : value_1 ≥ 0),   ({ value := value, nonneg := nonneg } = { value := value_1, nonneg := nonneg_1 }) = (value = value_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HiddenResidue.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext",
+      "Classical.choice"
+     ],
+     "statement": "∀ (value : Float) (nonneg : value ≥ 0), sizeOf { value := value, nonneg := nonneg } = 1 + sizeOf value + sizeOf nonneg",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HiddenResidue.nonneg",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : OrionUCIF.HiddenResidue), self.value ≥ 0",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HodgeInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.HodgeInstance) (X : OrionUCIF.State W n m),   self.PΩ_Hodge (self.PΩ_Hodge X) = self.PΩ_Hodge X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HodgeInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_Hodge : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_Hodge (PΩ_Hodge X) = PΩ_Hodge X}   {PΩ_Hodge_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_Hodge_1 (PΩ_Hodge_1 X) = PΩ_Hodge_1 X},   { PΩ_Hodge := PΩ_Hodge, idempotent := idempotent } = { PΩ_Hodge := PΩ_Hodge_",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HodgeInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_Hodge : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_Hodge (PΩ_Hodge X) = PΩ_Hodge X)   (PΩ_Hodge_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_Hodge_1 (PΩ_Hodge_1 X) = PΩ_Hodge_1 X),   ({ PΩ_Hodge := PΩ_Hodge, idempotent := idempotent } = { PΩ_Hodge := PΩ_Hodge",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.HodgeInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_Hodge : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_Hodge (PΩ_Hodge X) = PΩ_Hodge X),   sizeOf { PΩ_Hodge := PΩ_Hodge, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.LanguageInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.LanguageInstance) (X : OrionUCIF.State W n m),   self.PΩ_Lang (self.PΩ_Lang X) = self.PΩ_Lang X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.LanguageInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_Lang : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_Lang (PΩ_Lang X) = PΩ_Lang X}   {PΩ_Lang_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_Lang_1 (PΩ_Lang_1 X) = PΩ_Lang_1 X},   { PΩ_Lang := PΩ_Lang, idempotent := idempotent } = { PΩ_Lang := PΩ_Lang_1, idempoten",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.LanguageInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_Lang : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_Lang (PΩ_Lang X) = PΩ_Lang X)   (PΩ_Lang_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_Lang_1 (PΩ_Lang_1 X) = PΩ_Lang_1 X),   ({ PΩ_Lang := PΩ_Lang, idempotent := idempotent } = { PΩ_Lang := PΩ_Lang_1, idempote",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.LanguageInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_Lang : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_Lang (PΩ_Lang X) = PΩ_Lang X),   sizeOf { PΩ_Lang := PΩ_Lang, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.MetricSpaceLike.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {d d_1 : OrionUCIF.State W n m → OrionUCIF.State W n m → ℕ},   { d := d } = { d := d_1 } → d = d_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.MetricSpaceLike.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (d d_1 : OrionUCIF.State W n m → OrionUCIF.State W n m → ℕ),   ({ d := d } = { d := d_1 }) = (d = d_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.MetricSpaceLike.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (d : OrionUCIF.State W n m → OrionUCIF.State W n m → ℕ),   sizeOf { d := d } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.NSInstance) (X : OrionUCIF.State W n m),   self.PΩ_NS (self.PΩ_NS X) = self.PΩ_NS X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_NS : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_NS (PΩ_NS X) = PΩ_NS X}   {PΩ_NS_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_NS_1 (PΩ_NS_1 X) = PΩ_NS_1 X},   { PΩ_NS := PΩ_NS, idempotent := idempotent } = { PΩ_NS := PΩ_NS_1, idempotent := idempotent_1 } → PΩ",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_NS : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_NS (PΩ_NS X) = PΩ_NS X)   (PΩ_NS_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_NS_1 (PΩ_NS_1 X) = PΩ_NS_1 X),   ({ PΩ_NS := PΩ_NS, idempotent := idempotent } = { PΩ_NS := PΩ_NS_1, idempotent := idempotent_1 }) =",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_NS : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_NS (PΩ_NS X) = PΩ_NS X),   sizeOf { PΩ_NS := PΩ_NS, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSSpectralDecomposition.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΛ uℓ uh : OrionUCIF.Matrix W n m → OrionUCIF.Matrix W n m}   {splitLaw incompressibilityLow incompressibilityHigh : Prop}   {PΛ_1 uℓ_1 uh_1 : OrionUCIF.Matrix W n m → OrionUCIF.Matrix W n m}   {splitLaw_1 incompressibilityLow_1 incompressibilityHigh_1 : Prop},   { PΛ := PΛ, uℓ := uℓ, uh := uh, splitLaw := splitLaw, incompressibilityLow := incompressibilityLow,         in",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSSpectralDecomposition.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΛ uℓ uh : OrionUCIF.Matrix W n m → OrionUCIF.Matrix W n m)   (splitLaw incompressibilityLow incompressibilityHigh : Prop)   (PΛ_1 uℓ_1 uh_1 : OrionUCIF.Matrix W n m → OrionUCIF.Matrix W n m)   (splitLaw_1 incompressibilityLow_1 incompressibilityHigh_1 : Prop),   ({ PΛ := PΛ, uℓ := uℓ, uh := uh, splitLaw := splitLaw, incompressibilityLow := incompressibilityLow,         i",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.NSSpectralDecomposition.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΛ uℓ uh : OrionUCIF.Matrix W n m → OrionUCIF.Matrix W n m)   (splitLaw incompressibilityLow incompressibilityHigh : Prop),   sizeOf       { PΛ := PΛ, uℓ := uℓ, uh := uh, splitLaw := splitLaw, incompressibilityLow := incompressibilityLow,         incompressibilityHigh := incompressibilityHigh } =     1 + sizeOf splitLaw + sizeOf incompressibilityLow + si",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.OpenGapRegistry.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀   {B3_NS B4_NS B5_NS B3_YM B4_YM B5_YM B3_Hodge B4_Hodge B5_Hodge B3_NS_1 B4_NS_1 B5_NS_1 B3_YM_1 B4_YM_1 B5_YM_1     B3_Hodge_1 B4_Hodge_1 B5_Hodge_1 : Prop},   { B3_NS := B3_NS, B4_NS := B4_NS, B5_NS := B5_NS, B3_YM := B3_YM, B4_YM := B4_YM, B5_YM := B5_YM,         B3_Hodge := B3_Hodge, B4_Hodge := B4_Hodge, B5_Hodge := B5_Hodge } =       { B3_NS := B3_NS_1, B4_NS := B4_NS_1, B5_NS := B5_NS_1,",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.OpenGapRegistry.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀   (B3_NS B4_NS B5_NS B3_YM B4_YM B5_YM B3_Hodge B4_Hodge B5_Hodge B3_NS_1 B4_NS_1 B5_NS_1 B3_YM_1 B4_YM_1 B5_YM_1     B3_Hodge_1 B4_Hodge_1 B5_Hodge_1 : Prop),   ({ B3_NS := B3_NS, B4_NS := B4_NS, B5_NS := B5_NS, B3_YM := B3_YM, B4_YM := B4_YM, B5_YM := B5_YM,         B3_Hodge := B3_Hodge, B4_Hodge := B4_Hodge, B5_Hodge := B5_Hodge } =       { B3_NS := B3_NS_1, B4_NS := B4_NS_1, B5_NS := B5_NS_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.OpenGapRegistry.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (B3_NS B4_NS B5_NS B3_YM B4_YM B5_YM B3_Hodge B4_Hodge B5_Hodge : Prop),   sizeOf       { B3_NS := B3_NS, B4_NS := B4_NS, B5_NS := B5_NS, B3_YM := B3_YM, B4_YM := B4_YM, B5_YM := B5_YM,         B3_Hodge := B3_Hodge, B4_Hodge := B4_Hodge, B5_Hodge := B5_Hodge } =     1 + sizeOf B3_NS + sizeOf B4_NS + sizeOf B5_NS + sizeOf B3_YM + sizeOf B4_YM + sizeOf B5_YM + sizeOf B3_Hodge +         sizeOf B4_H",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.PvsNPInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.PvsNPInstance) (X : OrionUCIF.State W n m),   self.PΩ_PNP (self.PΩ_PNP X) = self.PΩ_PNP X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.PvsNPInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_PNP : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_PNP (PΩ_PNP X) = PΩ_PNP X}   {PΩ_PNP_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_PNP_1 (PΩ_PNP_1 X) = PΩ_PNP_1 X},   { PΩ_PNP := PΩ_PNP, idempotent := idempotent } = { PΩ_PNP := PΩ_PNP_1, idempotent := idempot",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.PvsNPInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_PNP : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_PNP (PΩ_PNP X) = PΩ_PNP X)   (PΩ_PNP_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_PNP_1 (PΩ_PNP_1 X) = PΩ_PNP_1 X),   ({ PΩ_PNP := PΩ_PNP, idempotent := idempotent } = { PΩ_PNP := PΩ_PNP_1, idempotent := idempo",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.PvsNPInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_PNP : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_PNP (PΩ_PNP X) = PΩ_PNP X),   sizeOf { PΩ_PNP := PΩ_PNP, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.RHInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.RHInstance) (X : OrionUCIF.State W n m),   self.PΩ_RH (self.PΩ_RH X) = self.PΩ_RH X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.RHInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_RH : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_RH (PΩ_RH X) = PΩ_RH X}   {PΩ_RH_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_RH_1 (PΩ_RH_1 X) = PΩ_RH_1 X},   { PΩ_RH := PΩ_RH, idempotent := idempotent } = { PΩ_RH := PΩ_RH_1, idempotent := idempotent_1 } → PΩ",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.RHInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_RH : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_RH (PΩ_RH X) = PΩ_RH X)   (PΩ_RH_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_RH_1 (PΩ_RH_1 X) = PΩ_RH_1 X),   ({ PΩ_RH := PΩ_RH, idempotent := idempotent } = { PΩ_RH := PΩ_RH_1, idempotent := idempotent_1 }) =",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.RHInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_RH : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_RH (PΩ_RH X) = PΩ_RH X),   sizeOf { PΩ_RH := PΩ_RH, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.SpectralDecomposition.decomp_eq",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {V : Type u} [inst : Add V] (self : OrionUCIF.SpectralDecomposition V), self.u = self.u_ell + self.u_h",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.SpectralDecomposition.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {V : Type u} {inst : Add V} {u u_ell u_h : V} {decomp_eq : u = u_ell + u_h} {u_1 u_ell_1 u_h_1 : V}   {decomp_eq_1 : u_1 = u_ell_1 + u_h_1},   { u := u, u_ell := u_ell, u_h := u_h, decomp_eq := decomp_eq } =       { u := u_1, u_ell := u_ell_1, u_h := u_h_1, decomp_eq := decomp_eq_1 } →     u = u_1 ∧ u_ell = u_ell_1 ∧ u_h = u_h_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.SpectralDecomposition.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {V : Type u} [inst : Add V] (u u_ell u_h : V) (decomp_eq : u = u_ell + u_h) (u_1 u_ell_1 u_h_1 : V)   (decomp_eq_1 : u_1 = u_ell_1 + u_h_1),   ({ u := u, u_ell := u_ell, u_h := u_h, decomp_eq := decomp_eq } =       { u := u_1, u_ell := u_ell_1, u_h := u_h_1, decomp_eq := decomp_eq_1 }) =     (u = u_1 ∧ u_ell = u_ell_1 ∧ u_h = u_h_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.SpectralDecomposition.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {V : Type u} [inst : Add V] [inst_1 : SizeOf V] (u u_ell u_h : V) (decomp_eq : u = u_ell + u_h),   sizeOf { u := u, u_ell := u_ell, u_h := u_h, decomp_eq := decomp_eq } =     1 + sizeOf u + sizeOf u_ell + sizeOf u_h + sizeOf decomp_eq",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.YMInstance.idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} (self : OrionUCIF.YMInstance) (X : OrionUCIF.State W n m),   self.PΩ_YM (self.PΩ_YM X) = self.PΩ_YM X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.YMInstance.mk.inj",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} {PΩ_YM : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_YM (PΩ_YM X) = PΩ_YM X}   {PΩ_YM_1 : OrionUCIF.State W n m → OrionUCIF.State W n m}   {idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_YM_1 (PΩ_YM_1 X) = PΩ_YM_1 X},   { PΩ_YM := PΩ_YM, idempotent := idempotent } = { PΩ_YM := PΩ_YM_1, idempotent := idempotent_1 } → PΩ",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.YMInstance.mk.injEq",
+     "module": "OrionUCIF",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {W : Type u} {n m : ℕ} (PΩ_YM : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_YM (PΩ_YM X) = PΩ_YM X)   (PΩ_YM_1 : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent_1 : ∀ (X : OrionUCIF.State W n m), PΩ_YM_1 (PΩ_YM_1 X) = PΩ_YM_1 X),   ({ PΩ_YM := PΩ_YM, idempotent := idempotent } = { PΩ_YM := PΩ_YM_1, idempotent := idempotent_1 }) =",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.YMInstance.mk.sizeOf_spec",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} {n m : ℕ} [inst : SizeOf W] (PΩ_YM : OrionUCIF.State W n m → OrionUCIF.State W n m)   (idempotent : ∀ (X : OrionUCIF.State W n m), PΩ_YM (PΩ_YM X) = PΩ_YM X),   sizeOf { PΩ_YM := PΩ_YM, idempotent := idempotent } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.indirect_absorption_template",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (A θ ν C : ℕ) (E D L Bf : ℕ → ℕ),   (∀ (t : ℕ), E t * (D t * D t) ≤ A * L t + Bf t) →     (∀ (t : ℕ), L t ≤ θ * ν * (D t * D t) + C) → ∀ (t : ℕ), E t * (D t * D t) ≤ A * (θ * ν * (D t * D t) + C) + Bf t",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.law1_projection_from_hypothesis",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} [inst : OrionUCIF.Wheel W] {n m : ℕ}, (OrionUCIF.State W n m → True) → True",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.law7_closure_from_detection",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (R L : ℕ → ℕ) (T B : ℕ), (∀ (t : ℕ), R t ≤ L t) → OrionUCIF.BoundedOn L T B → OrionUCIF.BoundedOn R T B",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.lemma1_well_defined",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} [inst : OrionUCIF.Wheel W] {n m : ℕ} (star : W → W → W) (X : OrionUCIF.State W n m),   ∃ Y, Y = OrionUCIF.κ star X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.lemma3_idempotent",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} [inst : OrionUCIF.Wheel W] {n m : ℕ} (X : OrionUCIF.State W n m),   OrionUCIF.PΩ (OrionUCIF.PΩ X) = OrionUCIF.PΩ X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.lemma4_fixed_point_compatibility",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ {W : Type u} [inst : OrionUCIF.Wheel W] {n m : ℕ} (Φ : OrionUCIF.State W n m → OrionUCIF.State W n m),   (∀ (X : OrionUCIF.State W n m), Φ (OrionUCIF.PΩ X) = OrionUCIF.PΩ X) →     ∀ (X : OrionUCIF.State W n m), Φ (OrionUCIF.PΩ X) = OrionUCIF.PΩ X",
+     "status": "fechado"
+    },
+    {
+     "name": "OrionUCIF.lemma_l1_identity_checker",
+     "module": "OrionUCIF",
+     "axioms": [],
+     "statement": "∀ (E d «Π» ν : ℕ), E + ν * d = «Π» → E + ν * d = «Π»",
+     "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com OrionHiddenState, OrionUCIF (alguns arquivos com erro)",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com OrionHiddenState, OrionUCIF e o Mathlib v4.19.0",
    "corrections": [],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `OrionHiddenState, .one `OrionUCIF]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `OrionHiddenState, .one `OrionUCIF]\n",
    "avulso": true,
-   "salvage": [
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 25,
-     "nome": "OrionUCIF.lemma1_well_defined",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 36,
-     "nome": "OrionUCIF.lemma3_idempotent",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 39,
-     "nome": "OrionUCIF.lemma4_fixed_point_compatibility",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 187,
-     "nome": "OrionUCIF.law1_projection_from_hypothesis",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 192,
-     "nome": "OrionUCIF.lemma_l1_identity_checker",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 194: expected token"
-    },
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 198,
-     "nome": "OrionUCIF.law7_closure_from_detection",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formalization/lean/OrionUCIF.lean",
-     "linha": 206,
-     "nome": "OrionUCIF.indirect_absorption_template",
-     "status": "fechado",
-     "axioms": []
-    }
-   ],
+   "salvage": [],
    "preenchimento": [],
    "summary": {
-    "fechado": 16,
+    "fechado": 87,
     "aberto-sorry": 0,
     "condicional": 0
    }

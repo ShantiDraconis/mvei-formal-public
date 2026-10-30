@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,8 +16,8 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././DualState.lean:155:20: type mismatch | error: Lean exited with code 1 | error: ././././src/lean/MetaMillennium/DualState/DualStateDefinition.lean:7:0: unknown module prefix 'MetaMillennium'",
-   "sorry_warnings": 1,
+   "build_error": "error: ././././src/lean/MetaMillennium/DualState/BiModel.lean:23:20: unknown identifier 'T' | error: Lean exited with code 1 | error: ././././src/lean/MetaMillennium/DualState/NumericClassesCore.lean:14:11: failed to synthesize",
+   "sorry_warnings": 13,
    "reconstructed": true,
    "bridges": [],
    "declared_axioms": [
@@ -43,12 +43,12 @@
    "integrity": [],
    "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com DualState, src e o Mathlib v4.19.0 (alguns arquivos com erro)",
    "corrections": [],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `DualState, .submodules `src]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `DualState, .one `src.lean.Lakefile, .one `src.lean.MetaMillennium.DualState.BiModel, .one `src.lean.MetaMillennium.DualState.NumericClassesCore, .one `src.lean.MetaMillennium.ZFC.Axioms, .one `src.lean.NumericalClasses]\n",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "DualState.lean",
-     "linha": 35,
+     "linha": 39,
      "nome": "independence_implies_dual_state",
      "status": "aberto-sorry",
      "axioms": [
@@ -57,58 +57,77 @@
     },
     {
      "arquivo": "DualState.lean",
-     "linha": 179,
+     "linha": 183,
      "nome": "framework_consistent",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "src/lean/MetaMillennium/DualState/DualStateDefinition.lean",
-     "linha": 40,
+     "linha": 41,
      "nome": "MetaMillennium.DualState.DS_neg",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "MetaMillennium.ZFC.Axioms"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/ZFC/Models.olean' of module MetaMillennium.ZFC.Models does not exist — MetaMillennium.ZFC.Models não compilou: /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/ZFC/Models.lean:19:21: error: unexpected token ':='; expected term | /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/ZFC/Models.lean:27:40: error: failed to infer universe levels in binder type"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Problems/PNPMeta.lean",
-     "linha": 19,
+     "linha": 21,
      "nome": "MetaMillennium.Problems.PNP.PNP_barriers",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "MetaMillennium.DualState.NumericClassesCore",
+      "MetaMillennium.ZFC.Axioms"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/DualState/ProblemsMeta.olean' of module MetaMillennium.DualState.ProblemsMeta does not exist — MetaMillennium.DualState.ProblemsMeta não compilou: /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/DualState/ProblemsMeta.lean:7:0: error: object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/DualState/DualStateDefinition.olean' of module MetaMillennium.DualState.DualStateDefinition does not exist"
     },
     {
      "arquivo": "src/lean/MetaMillennium/Problems/RHMeta.lean",
-     "linha": 29,
+     "linha": 31,
      "nome": "MetaMillennium.Problems.RH.RH_likely_decidable",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "MetaMillennium.DualState.NumericClassesCore",
+      "MetaMillennium.ZFC.Axioms"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/DualState/ProblemsMeta.olean' of module MetaMillennium.DualState.ProblemsMeta does not exist — MetaMillennium.DualState.ProblemsMeta não compilou: /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/DualState/ProblemsMeta.lean:7:0: error: object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/DualState/DualStateDefinition.olean' of module MetaMillennium.DualState.DualStateDefinition does not exist"
     },
     {
      "arquivo": "src/lean/MetaMillennium/ZFC/Independence.lean",
-     "linha": 10,
+     "linha": 11,
      "nome": "MetaMillennium.ZFC.independence_iff_models",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "MetaMillennium.ZFC.Axioms"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/ZFC/Models.olean' of module MetaMillennium.ZFC.Models does not exist — MetaMillennium.ZFC.Models não compilou: /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/ZFC/Models.lean:19:21: error: unexpected token ':='; expected term | /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/ZFC/Models.lean:27:40: error: failed to infer universe levels in binder type"
     },
     {
      "arquivo": "src/lean/MetaMillennium/ZFC/Independence.lean",
-     "linha": 15,
+     "linha": 16,
      "nome": "MetaMillennium.ZFC.independence_neg",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "MetaMillennium.ZFC.Axioms"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-c4njr5hg/p/.lake/mvei-salvage/MetaMillennium/ZFC/Models.olean' of module MetaMillennium.ZFC.Models does not exist — MetaMillennium.ZFC.Models não compilou: /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/ZFC/Models.lean:19:21: error: unexpected token ':='; expected term | /tmp/mvei-rec-c4njr5hg/p/src/lean/MetaMillennium/ZFC/Models.lean:27:40: error: failed to infer universe levels in binder type"
     },
     {
      "arquivo": "src/lean/NumericalClasses.lean",
-     "linha": 291,
+     "linha": 293,
      "nome": "MetaMath.classes_zfc_compatible",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 311: type mismatch Quotient.lift id ⋯ has type Quotient ?m.12607 → (x : ?m.12639) → ?m.12640 x : Sort (imax ?u.12631 ?u.12630) but is expected to have type IndependenceNumber ℤ → MultiModelNumber ℤ : Sort (max 1 ?u.12575)",
+     "erro": "linha 313: type mismatch Quotient.lift id ⋯ has type Quotient ?m.12607 → (x : ?m.12639) → ?m.12640 x : Sort (imax ?u.12631 ?u.12630) but is expected to have type IndependenceNumber ℤ → MultiModelNumber ℤ : Sort (max 1 ?u.12575)",
+     "coluna": 2,
+     "trecho": "  ⟦Q⟧uotient.lift id (fun _ _ h =>",
      "preenchimento": {
       "resultado": "demonstrável",
       "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
@@ -134,254 +153,976 @@
    "repo": "Meta-mathematical-foundation-00",
    "path": "lean",
    "toolchain": "",
-   "toolchain_used": "padrão do elan",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 19.5,
-   "build_error": "Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: MetaMillennium/Basic.lean:157:2: unexpected token 'end'; expected '#guard_msgs', 'abbrev', 'add_decl_doc', 'axiom', 'binder_predicate', 'builtin_cbv_simproc', 'builtin_cbv_simproc_decl', 'builtin_dsimproc', 'builtin_dsimproc_decl', 'builtin_grind_propagator', 'builtin_initialize', 'builtin_simproc', 'builtin_simproc_decl', 'cbv_simproc', 'cbv_simproc_decl', 'class', 'coinductive', 'declare_simp_like_tactic', 'declare_syntax_cat', 'def', 'dsimproc', 'dsimproc_decl', 'elab', 'elab_rules', 'example', 'grind_propagator', 'inductive', 'infix', 'infixl', 'infixr', 'initialize', 'instance', 'macro', 'macro_rules', 'notation', 'opaque', 'postfix', 'prefix', 'rec",
-   "sorry_warnings": 1,
-   "reconstructed": false,
-   "bridges": [],
-   "declared_axioms": [],
-   "theorems": [],
-   "integrity": [],
-   "note": "leitura de axiomas: nenhum módulo compilado encontrado",
-   "corrections": [],
-   "lakefile_gerado": "",
-   "avulso": false,
-   "salvage": [
+   "build_seconds": 18.5,
+   "build_error": "Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: MetaMillennium/NumericClasses.lean:19:53: unexpected token ')'; expected term | error: MetaMillennium/NumericClasses.lean:20:44: unexpected identifier; expected '#guard_msgs', 'abbrev', 'add_decl_doc', 'axiom', 'binder_predicate', 'builtin_cbv_simproc', 'builtin_cbv_simproc_decl', 'builtin_dsimproc', 'builtin_dsimproc_decl', 'builtin_grind_propagator', 'builtin_initialize', 'builtin_simproc', 'builtin_simproc_decl', 'cbv_simproc', 'cbv_simproc_decl', 'class', 'coinductive', 'declare_simp_like_tactic', 'declare_syntax_cat', 'def', 'dsimproc', 'dsimproc_decl', 'elab', 'elab_rules', 'example', 'grind_propagator', 'inductive', 'infix', 'infixl', 'infixr', 'i",
+   "sorry_warnings": 7,
+   "reconstructed": true,
+   "bridges": [
     {
-     "arquivo": "lean/MetaMillennium/Basic.lean",
-     "linha": 95,
-     "nome": "MetaMillennium.dualState_implies_independent",
-     "status": "condicional",
-     "axioms": [
-      "propext",
-      "MetaMillennium.Neg",
-      "MetaMillennium.Provable",
-      "MetaMillennium.SatisfiesTheory",
-      "MetaMillennium.TrueIn",
-      "MetaMillennium.neg_soundness",
-      "MetaMillennium.soundness"
+     "repo": "Meta-mathematical-foundation-00",
+     "project": "lean",
+     "theorem": "MetaMillennium.indepScheme_implies_dualState",
+     "statement": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T),   MetaMillennium.Consistent T → MetaMillennium.IndepScheme T φ → MetaMillennium.DualState T φ",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
      ]
     },
     {
-     "arquivo": "lean/MetaMillennium/Basic.lean",
-     "linha": 116,
-     "nome": "MetaMillennium.indepScheme_implies_dualState",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx",
-      "MetaMillennium.ExtendWith",
-      "MetaMillennium.Neg",
-      "MetaMillennium.Provable",
-      "MetaMillennium.SatisfiesTheory",
-      "MetaMillennium.TrueIn",
-      "MetaMillennium.completeness"
+     "repo": "Meta-mathematical-foundation-00",
+     "project": "lean",
+     "theorem": "h0_implies_h1",
+     "statement": "H0 → H1",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
      ]
     },
     {
-     "arquivo": "lean/ZFCI.lean",
-     "linha": 89,
-     "nome": "collapse_refl",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 95: don't know how to synthesize implicit argument `α` @Eq (?m.7 f a) (C f a) (C f a) context: ℝ : Sort ?u.3 f : ℝ → ℝ a : ℝ ⊢ Sort ?u.7 Note: All parameter types and holes (e.g., `_`) in the header of a theorem are resolved before the proof is"
-    },
-    {
-     "arquivo": "lean/collapse-axioms.lean",
-     "linha": 140,
-     "nome": "profile_determines_collapse",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 147: Failed to infer type of binder `b` Note: All parameter types and holes (e.g., `_`) in the header of a theorem are resolved before the proof is processed; information from the proof cannot be used to infer what these values should be"
-    },
-    {
-     "arquivo": "lean/equivalence-collapse.lean",
-     "linha": 118,
-     "nome": "classical_preserved_nonsingular",
-     "status": "erro",
-     "axioms": [
-      "classical_implies_collapse",
-      "sorryAx"
-     ],
-     "erro": "linha 126: Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression ctx has type `CollapseContext` which does not have the necessary form."
-    },
-    {
-     "arquivo": "lean/equivalence-collapse.lean",
-     "linha": 131,
-     "nome": "equivalence_fragile_at_singularity",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 135: Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression ctx has type `CollapseContext` which does not have the necessary form."
-    },
-    {
-     "arquivo": "lean/equivalence-collapse.lean",
-     "linha": 137,
-     "nome": "de_intro",
-     "status": "aberto-sorry",
-     "axioms": [
-      "classical_implies_collapse",
-      "sorryAx"
+     "repo": "Meta-mathematical-foundation-00",
+     "project": "lean",
+     "theorem": "h3_h5_related",
+     "statement": "H3 → H5",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
      ]
     },
     {
-     "arquivo": "lean/equivalence-collapse.lean",
-     "linha": 145,
-     "nome": "collapse_equiv_refl",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 149: Tactic `rfl` failed: No `[refl]` lemma registered for relation CollapseEquiv Hint: Add the `[refl]` attribute to reflexivity lemmas for `CollapseEquiv` to use this tactic φ : Prop ⊢ φ ≈ φ"
-    },
-    {
-     "arquivo": "lean/equivalence-collapse.lean",
-     "linha": 150,
-     "nome": "collapse_equiv_symm",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
+     "repo": "Meta-mathematical-foundation-00",
+     "project": "lean",
+     "theorem": "independence_via_forcing",
+     "statement": "∀ (φ : Prop), (∃ M, (M ⊨ ZFC) ∧ M ⊨ φ) → (∃ M, (M ⊨ ZFC) ∧ M[G] ⊨ ¬φ) → Con(ZFC) → INDEP(ZFC, φ)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
      ]
     },
     {
-     "arquivo": "lean/equivalence-collapse.lean",
-     "linha": 155,
-     "nome": "collapse_equiv_trans",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
+     "repo": "Meta-mathematical-foundation-00",
+     "project": "lean",
+     "theorem": "model_divergence_implies_independence",
+     "statement": "∀ (T : Theory) (φ : Prop), Con(T) → (∃ M, (M ⊨ T) ∧ M ⊨ φ) → (∃ N, (N ⊨ T) ∧ N ⊨ ¬φ) → INDEP(T, φ)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
      ]
     },
     {
-     "arquivo": "lean/independence-schemes.lean",
-     "linha": 115,
-     "nome": "model_divergence_implies_independence",
-     "status": "aberto-sorry",
-     "axioms": [
-      "Model",
-      "Provable",
-      "Satisfies",
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "lean/independence-schemes.lean",
-     "linha": 144,
-     "nome": "independence_via_forcing",
-     "status": "erro",
-     "axioms": [
-      "ForcingExtension",
-      "Model",
-      "Provable",
-      "Satisfies",
-      "ZFC",
-      "forcing_preserves_zfc",
-      "sorryAx"
-     ],
-     "erro": "linha 167: unexpected token '/--'; expected '#guard_msgs', 'abbrev', 'add_decl_doc', 'axiom', 'binder_predicate', 'builtin_cbv_simproc', 'builtin_cbv_simproc_decl', 'builtin_dsimproc', 'builtin_dsimproc_decl', 'builtin_grind_propagator', 'builtin_init"
-    },
-    {
-     "arquivo": "lean/millennium-meta.lean",
-     "linha": 168,
-     "nome": "central_thesis",
-     "status": "aberto-sorry",
-     "axioms": [
-      "ArithmeticEncoding",
-      "BSD",
-      "ChainHasBreak",
-      "Consistent",
-      "EquivalenceChain",
-      "HasAnalyticObstruction",
-      "Hodge",
-      "Model",
-      "NS_Regular",
-      "P_ne_NP",
-      "Provable",
-      "RH",
-      "Satisfies",
-      "Theory",
-      "YangMills_MassGap",
-      "ZFC",
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "lean/millennium-meta.lean",
-     "linha": 179,
-     "nome": "h0_implies_h1",
-     "status": "aberto-sorry",
-     "axioms": [
-      "BSD",
-      "Consistent",
-      "Hodge",
-      "NS_Regular",
-      "P_ne_NP",
-      "Provable",
-      "RH",
-      "Theory",
-      "YangMills_MassGap",
-      "ZFC",
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "lean/millennium-meta.lean",
-     "linha": 190,
-     "nome": "h3_h5_related",
-     "status": "aberto-sorry",
-     "axioms": [
-      "BSD",
-      "HasAnalyticObstruction",
-      "Hodge",
-      "NS_Regular",
-      "P_ne_NP",
-      "RH",
-      "YangMills_MassGap",
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "lean/millennium-meta.lean",
-     "linha": 197,
-     "nome": "rh_analysis",
-     "status": "aberto-sorry",
-     "axioms": [
-      "Consistent",
-      "Provable",
-      "RH",
-      "Theory",
-      "ZFC",
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "lean/millennium-meta.lean",
-     "linha": 206,
-     "nome": "ns_collapse",
-     "status": "condicional",
-     "axioms": [
-      "NS_Regular"
-     ]
-    },
-    {
-     "arquivo": "lean/millennium-meta.lean",
-     "linha": 211,
-     "nome": "ym_spectral",
-     "status": "condicional",
-     "axioms": [
-      "YangMills_MassGap"
+     "repo": "Meta-mathematical-foundation-00",
+     "project": "lean",
+     "theorem": "rh_analysis",
+     "statement": "Independent ZFC RH ∨ InvolvesCollapse RH",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
      ]
     }
    ],
-   "preenchimento": [],
+   "declared_axioms": [
+    {
+     "name": "ArithmeticEncoding",
+     "module": "«millennium-meta»",
+     "statement": "Prop → ArithmeticLevel"
+    },
+    {
+     "name": "BSD",
+     "module": "«independence-schemes»",
+     "statement": "Prop"
+    },
+    {
+     "name": "ChainHasBreak",
+     "module": "«millennium-meta»",
+     "statement": "(P : Prop) → EquivalenceChain P → Prop"
+    },
+    {
+     "name": "Collapse",
+     "module": "«millennium-meta»",
+     "statement": "(ℝ → ℝ) → ℝ → CollapseValue"
+    },
+    {
+     "name": "CollapseOp",
+     "module": "ZFCI",
+     "statement": "(ℝ → ℝ) → ℝ → CollapseValue"
+    },
+    {
+     "name": "CollapseValue",
+     "module": "«millennium-meta»",
+     "statement": "Type"
+    },
+    {
+     "name": "Consistent",
+     "module": "«millennium-meta»",
+     "statement": "Theory → Prop"
+    },
+    {
+     "name": "EquivalenceChain",
+     "module": "«millennium-meta»",
+     "statement": "Prop → Type"
+    },
+    {
+     "name": "ExtensionAxioms",
+     "module": "«millennium-meta»",
+     "statement": "Prop → Theory"
+    },
+    {
+     "name": "ForcingExtension",
+     "module": "«independence-schemes»",
+     "statement": "Model → Model"
+    },
+    {
+     "name": "HasAnalyticObstruction",
+     "module": "«millennium-meta»",
+     "statement": "Prop → Prop"
+    },
+    {
+     "name": "Hodge",
+     "module": "«independence-schemes»",
+     "statement": "Prop"
+    },
+    {
+     "name": "I",
+     "module": "«millennium-meta»",
+     "statement": "CollapseValue"
+    },
+    {
+     "name": "MetaMillennium.ExtendWith",
+     "module": "MetaMillennium.Basic",
+     "statement": "(T : MetaMillennium.Theory) → MetaMillennium.Sentence T → MetaMillennium.Theory"
+    },
+    {
+     "name": "MetaMillennium.Neg",
+     "module": "MetaMillennium.Basic",
+     "statement": "{T : MetaMillennium.Theory} → MetaMillennium.Sentence T → MetaMillennium.Sentence T"
+    },
+    {
+     "name": "MetaMillennium.Provable",
+     "module": "MetaMillennium.Basic",
+     "statement": "(T : MetaMillennium.Theory) → MetaMillennium.Sentence T → Prop"
+    },
+    {
+     "name": "MetaMillennium.SatisfiesTheory",
+     "module": "MetaMillennium.Basic",
+     "statement": "{T : MetaMillennium.Theory} → MetaMillennium.Model T → Prop"
+    },
+    {
+     "name": "MetaMillennium.TrueIn",
+     "module": "MetaMillennium.Basic",
+     "statement": "{T : MetaMillennium.Theory} → MetaMillennium.Model T → MetaMillennium.Sentence T → Prop"
+    },
+    {
+     "name": "MetaMillennium.completeness",
+     "module": "MetaMillennium.Basic",
+     "statement": "∀ (T : MetaMillennium.Theory), MetaMillennium.Consistent T → ∃ M, MetaMillennium.SatisfiesTheory M"
+    },
+    {
+     "name": "MetaMillennium.liftSentence",
+     "module": "MetaMillennium.Basic",
+     "statement": "{T : MetaMillennium.Theory} →   {φ : MetaMillennium.Sentence T} → MetaMillennium.Sentence T → MetaMillennium.Sentence (T + φ)"
+    },
+    {
+     "name": "MetaMillennium.neg_soundness",
+     "module": "MetaMillennium.Basic",
+     "statement": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T) (M : MetaMillennium.Model T), (M ⊨ ¬ₛφ) ↔ ¬M ⊨ φ"
+    },
+    {
+     "name": "MetaMillennium.soundness",
+     "module": "MetaMillennium.Basic",
+     "statement": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T) (M : MetaMillennium.Model T),   MetaMillennium.Provable T φ → MetaMillennium.SatisfiesTheory M → M ⊨ φ"
+    },
+    {
+     "name": "Model",
+     "module": "«independence-schemes»",
+     "statement": "Type"
+    },
+    {
+     "name": "NS_Regular",
+     "module": "«independence-schemes»",
+     "statement": "Prop"
+    },
+    {
+     "name": "P_ne_NP",
+     "module": "«independence-schemes»",
+     "statement": "Prop"
+    },
+    {
+     "name": "Provable",
+     "module": "«independence-schemes»",
+     "statement": "Theory → Prop → Prop"
+    },
+    {
+     "name": "RH",
+     "module": "«independence-schemes»",
+     "statement": "Prop"
+    },
+    {
+     "name": "Satisfies",
+     "module": "«independence-schemes»",
+     "statement": "Model → Prop → Prop"
+    },
+    {
+     "name": "Theory",
+     "module": "«millennium-meta»",
+     "statement": "Type"
+    },
+    {
+     "name": "YM_MassGap",
+     "module": "«independence-schemes»",
+     "statement": "Prop"
+    },
+    {
+     "name": "YangMills_MassGap",
+     "module": "«millennium-meta»",
+     "statement": "Prop"
+    },
+    {
+     "name": "ZFC",
+     "module": "«independence-schemes»",
+     "statement": "Theory"
+    },
+    {
+     "name": "ZFCI",
+     "module": "«millennium-meta»",
+     "statement": "Theory"
+    },
+    {
+     "name": "collapse_classical",
+     "module": "ZFCI",
+     "statement": "∀ (f : ℝ → ℝ) (a L : ℝ),   (∀ ε > 0, ∃ δ > 0, ∀ (x : ℝ), 0 < |x - a| ∧ |x - a| < δ → |f x - L| < ε) → C f a = CollapseValue.classical L"
+    },
+    {
+     "name": "collapse_classification",
+     "module": "«millennium-meta»",
+     "statement": "∀ P ∈ MillenniumProblems, InvolvesCollapse P → ∃ I, True"
+    },
+    {
+     "name": "collapse_existence",
+     "module": "ZFCI",
+     "statement": "∀ (f : ℝ → ℝ) (a : ℝ), (∃ ε > 0, ∀ (x : ℝ), |x - a| < ε → x ≠ a → f x ≠ f x) → ∃ I, C f a = I"
+    },
+    {
+     "name": "collapse_extensionality",
+     "module": "ZFCI",
+     "statement": "∀ (f g : ℝ → ℝ) (a b : ℝ),   SingularProfile → (∀ ε > 0, ∃ δ > 0, ∀ (x : ℝ), |x - a| < δ → |f x - g (x - a + b)| < ε) → C f a = C g b"
+    },
+    {
+     "name": "completeness",
+     "module": "«independence-schemes»",
+     "statement": "∀ (T : Theory), Con(T) → ∃ M, M ⊨ T"
+    },
+    {
+     "name": "forcing_preserves_zfc",
+     "module": "«independence-schemes»",
+     "statement": "∀ (M : Model), (M ⊨ ZFC) → M[G] ⊨ ZFC"
+    },
+    {
+     "name": "rh_in_zfci",
+     "module": "«millennium-meta»",
+     "statement": "ZFCI ⊢ RH ∨ ZFCI ⊢ ¬RH"
+    },
+    {
+     "name": "zfci_consistency",
+     "module": "ZFCI",
+     "statement": "True"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "ArithmeticLevel.Pi.inj",
+     "module": "«millennium-meta»",
+     "axioms": [],
+     "statement": "∀ {a a_1 : ℕ}, ArithmeticLevel.Pi a = ArithmeticLevel.Pi a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ArithmeticLevel.Pi.injEq",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a a_1 : ℕ), (ArithmeticLevel.Pi a = ArithmeticLevel.Pi a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "ArithmeticLevel.Pi.sizeOf_spec",
+     "module": "«millennium-meta»",
+     "axioms": [],
+     "statement": "∀ (a : ℕ), sizeOf (ArithmeticLevel.Pi a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "ArithmeticLevel.Sigma.inj",
+     "module": "«millennium-meta»",
+     "axioms": [],
+     "statement": "∀ {a a_1 : ℕ}, ArithmeticLevel.Sigma a = ArithmeticLevel.Sigma a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ArithmeticLevel.Sigma.injEq",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a a_1 : ℕ), (ArithmeticLevel.Sigma a = ArithmeticLevel.Sigma a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "ArithmeticLevel.Sigma.sizeOf_spec",
+     "module": "«millennium-meta»",
+     "axioms": [],
+     "statement": "∀ (a : ℕ), sizeOf (ArithmeticLevel.Sigma a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.I.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "sizeOf CollapseValue.I = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.I_diff.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "sizeOf CollapseValue.I_diff = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.I_exp.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "sizeOf CollapseValue.I_exp = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.I_inf.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "sizeOf CollapseValue.I_inf = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.I_one_inf.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "sizeOf CollapseValue.I_one_inf = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.I_zero_inf.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "sizeOf CollapseValue.I_zero_inf = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.classical.inj",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {a a_1 : ℝ}, CollapseValue.classical a = CollapseValue.classical a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.classical.injEq",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (a a_1 : ℝ), (CollapseValue.classical a = CollapseValue.classical a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "CollapseValue.classical.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (a : ℝ), sizeOf (CollapseValue.classical a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Model.mk.inj",
+     "module": "MetaMillennium.Basic",
+     "axioms": [],
+     "statement": "∀ {T : MetaMillennium.Theory} {name name_1 : String}, { name := name } = { name := name_1 } → name = name_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Model.mk.injEq",
+     "module": "MetaMillennium.Basic",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {T : MetaMillennium.Theory} (name name_1 : String), ({ name := name } = { name := name_1 }) = (name = name_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Model.mk.sizeOf_spec",
+     "module": "MetaMillennium.Basic",
+     "axioms": [],
+     "statement": "∀ {T : MetaMillennium.Theory} (name : String), sizeOf { name := name } = 1 + sizeOf name",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Sentence.mk.inj",
+     "module": "MetaMillennium.Basic",
+     "axioms": [],
+     "statement": "∀ {T : MetaMillennium.Theory} {id id_1 : String}, { id := id } = { id := id_1 } → id = id_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Sentence.mk.injEq",
+     "module": "MetaMillennium.Basic",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {T : MetaMillennium.Theory} (id id_1 : String), ({ id := id } = { id := id_1 }) = (id = id_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Sentence.mk.sizeOf_spec",
+     "module": "MetaMillennium.Basic",
+     "axioms": [],
+     "statement": "∀ {T : MetaMillennium.Theory} (id : String), sizeOf { id := id } = 1 + sizeOf id",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Theory.mk.inj",
+     "module": "MetaMillennium.Basic",
+     "axioms": [],
+     "statement": "∀ {name name_1 : String}, { name := name } = { name := name_1 } → name = name_1",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Theory.mk.injEq",
+     "module": "MetaMillennium.Basic",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (name name_1 : String), ({ name := name } = { name := name_1 }) = (name = name_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.Theory.mk.sizeOf_spec",
+     "module": "MetaMillennium.Basic",
+     "axioms": [],
+     "statement": "∀ (name : String), sizeOf { name := name } = 1 + sizeOf name",
+     "status": "fechado"
+    },
+    {
+     "name": "MetaMillennium.dualState_implies_independent",
+     "module": "MetaMillennium.Basic",
+     "axioms": [
+      "MetaMillennium.Provable",
+      "MetaMillennium.Neg",
+      "MetaMillennium.SatisfiesTheory",
+      "MetaMillennium.TrueIn",
+      "MetaMillennium.soundness",
+      "propext",
+      "MetaMillennium.neg_soundness"
+     ],
+     "statement": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T),   MetaMillennium.Consistent T → MetaMillennium.DualState T φ → MetaMillennium.Independent T φ",
+     "status": "condicional"
+    },
+    {
+     "name": "MetaMillennium.indepScheme_implies_dualState",
+     "module": "MetaMillennium.Basic",
+     "axioms": [
+      "MetaMillennium.Provable",
+      "MetaMillennium.Neg",
+      "MetaMillennium.ExtendWith",
+      "MetaMillennium.SatisfiesTheory",
+      "MetaMillennium.TrueIn",
+      "MetaMillennium.completeness",
+      "sorryAx"
+     ],
+     "statement": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T),   MetaMillennium.Consistent T → MetaMillennium.IndepScheme T φ → MetaMillennium.DualState T φ",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "SingularProfile.mk.inj",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {type : CollapseValue} {order : ℕ} {direction : Option Bool} {type_1 : CollapseValue} {order_1 : ℕ}   {direction_1 : Option Bool},   { type := type, order := order, direction := direction } =       { type := type_1, order := order_1, direction := direction_1 } →     type = type_1 ∧ order = order_1 ∧ direction = direction_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SingularProfile.mk.injEq",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (type : CollapseValue) (order : ℕ) (direction : Option Bool) (type_1 : CollapseValue) (order_1 : ℕ)   (direction_1 : Option Bool),   ({ type := type, order := order, direction := direction } =       { type := type_1, order := order_1, direction := direction_1 }) =     (type = type_1 ∧ order = order_1 ∧ direction = direction_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SingularProfile.mk.sizeOf_spec",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (type : CollapseValue) (order : ℕ) (direction : Option Bool),   sizeOf { type := type, order := order, direction := direction } = 1 + sizeOf type + sizeOf order + sizeOf direction",
+     "status": "fechado"
+    },
+    {
+     "name": "central_thesis",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "RH",
+      "P_ne_NP",
+      "NS_Regular",
+      "BSD",
+      "Hodge",
+      "YangMills_MassGap",
+      "Theory",
+      "Consistent",
+      "Provable",
+      "ZFC",
+      "Model",
+      "Satisfies",
+      "ArithmeticEncoding",
+      "HasAnalyticObstruction",
+      "EquivalenceChain",
+      "ChainHasBreak"
+     ],
+     "statement": "MetaMathematicalFramework → ∀ P ∈ MillenniumProblems, Independent ZFC P ∨ InvolvesCollapse P",
+     "status": "condicional"
+    },
+    {
+     "name": "collapse_refl",
+     "module": "ZFCI",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "CollapseOp"
+     ],
+     "statement": "∀ (f : ℝ → ℝ) (a : ℝ), C f a = C f a",
+     "status": "condicional"
+    },
+    {
+     "name": "h0_implies_h1",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "RH",
+      "P_ne_NP",
+      "NS_Regular",
+      "BSD",
+      "Hodge",
+      "YangMills_MassGap",
+      "Theory",
+      "Consistent",
+      "Provable",
+      "ZFC",
+      "sorryAx"
+     ],
+     "statement": "H0 → H1",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "h3_h5_related",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "RH",
+      "P_ne_NP",
+      "NS_Regular",
+      "BSD",
+      "Hodge",
+      "YangMills_MassGap",
+      "HasAnalyticObstruction",
+      "sorryAx"
+     ],
+     "statement": "H3 → H5",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "independence_via_forcing",
+     "module": "«independence-schemes»",
+     "axioms": [
+      "Model",
+      "Satisfies",
+      "ZFC",
+      "ForcingExtension",
+      "Provable",
+      "sorryAx",
+      "forcing_preserves_zfc"
+     ],
+     "statement": "∀ (φ : Prop), (∃ M, (M ⊨ ZFC) ∧ M ⊨ φ) → (∃ M, (M ⊨ ZFC) ∧ M[G] ⊨ ¬φ) → Con(ZFC) → INDEP(ZFC, φ)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "model_divergence_implies_independence",
+     "module": "«independence-schemes»",
+     "axioms": [
+      "Provable",
+      "Model",
+      "Satisfies",
+      "sorryAx"
+     ],
+     "statement": "∀ (T : Theory) (φ : Prop), Con(T) → (∃ M, (M ⊨ T) ∧ M ⊨ φ) → (∃ N, (N ⊨ T) ∧ N ⊨ ¬φ) → INDEP(T, φ)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "ns_collapse",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "NS_Regular"
+     ],
+     "statement": "InvolvesCollapse NS_Regular",
+     "status": "condicional"
+    },
+    {
+     "name": "rh_analysis",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "Theory",
+      "Consistent",
+      "Provable",
+      "ZFC",
+      "RH",
+      "sorryAx"
+     ],
+     "statement": "Independent ZFC RH ∨ InvolvesCollapse RH",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "ym_spectral",
+     "module": "«millennium-meta»",
+     "axioms": [
+      "YangMills_MassGap"
+     ],
+     "statement": "InvolvesCollapse YangMills_MassGap",
+     "status": "condicional"
+    }
+   ],
+   "integrity": [],
+   "note": "CORRIGIDO PELO MVEI (vocabulario-lean4): trocas de grafia com o mesmo nome e o mesmo enunciado em 22 arquivo(s): abbrev 3, docstring 9, end 5, noncomputable 18, notacao 10, repr 1. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com MetaMillennium, ZFCI, collapse-axioms, equivalence-collapse, independence-schemes, millennium-meta e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././MetaMillennium/NumericClasses.lean:19:53: unexpected token ')'; expected term | error: ././././MetaMillennium/NumericClasses.lean:20:44: unexpected identifier; expected '#guard_msgs', 'abbrev', 'add_decl_doc', 'axiom', 'binder_predicate', 'builtin_dsimproc', 'builtin_dsimproc_decl', ')",
+   "corrections": [
+    "vocabulario-lean4"
+   ],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `MetaMillennium, .submodules `MetaMillennium, .one `ZFCI, .one `«collapse-axioms», .one `«equivalence-collapse», .one `«independence-schemes», .one `«millennium-meta»]\n",
+   "avulso": false,
+   "salvage": [
+    {
+     "arquivo": "lean/collapse-axioms.lean",
+     "linha": 143,
+     "nome": "profile_determines_collapse",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "coluna": 4,
+     "trecho": "    ⟦P⟧rofile f a = Profile g b →",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+    },
+    {
+     "arquivo": "lean/equivalence-collapse.lean",
+     "linha": 121,
+     "nome": "classical_preserved_nonsingular",
+     "status": "condicional",
+     "axioms": [
+      "PropCollapse",
+      "classical_implies_collapse",
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean/equivalence-collapse.lean",
+     "linha": 134,
+     "nome": "equivalence_fragile_at_singularity",
+     "status": "aberto-sorry",
+     "axioms": [
+      "PropCollapse",
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean/equivalence-collapse.lean",
+     "linha": 140,
+     "nome": "de_intro",
+     "status": "condicional",
+     "axioms": [
+      "PropCollapse",
+      "classical_implies_collapse",
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean/equivalence-collapse.lean",
+     "linha": 148,
+     "nome": "collapse_equiv_refl",
+     "status": "condicional",
+     "axioms": [
+      "PropCollapse",
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean/equivalence-collapse.lean",
+     "linha": 153,
+     "nome": "collapse_equiv_symm",
+     "status": "condicional",
+     "axioms": [
+      "PropCollapse",
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "lean/equivalence-collapse.lean",
+     "linha": 158,
+     "nome": "collapse_equiv_trans",
+     "status": "condicional",
+     "axioms": [
+      "PropCollapse",
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   ],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.liftSentence",
+     "enunciado": "{T : MetaMillennium.Theory} →   {φ : MetaMillennium.Sentence T} → MetaMillennium.Sentence T → MetaMillennium.Sentence (T + φ)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Provable",
+     "enunciado": "(T : MetaMillennium.Theory) → MetaMillennium.Sentence T → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.ExtendWith",
+     "enunciado": "(T : MetaMillennium.Theory) → MetaMillennium.Sentence T → MetaMillennium.Theory",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.SatisfiesTheory",
+     "enunciado": "{T : MetaMillennium.Theory} → MetaMillennium.Model T → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.neg_soundness",
+     "enunciado": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T) (M : MetaMillennium.Model T), (M ⊨ ¬ₛφ) ↔ ¬M ⊨ φ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.TrueIn",
+     "enunciado": "{T : MetaMillennium.Theory} → MetaMillennium.Model T → MetaMillennium.Sentence T → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.Neg",
+     "enunciado": "{T : MetaMillennium.Theory} → MetaMillennium.Sentence T → MetaMillennium.Sentence T",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.completeness",
+     "enunciado": "∀ (T : MetaMillennium.Theory), MetaMillennium.Consistent T → ∃ M, MetaMillennium.SatisfiesTheory M",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "MetaMillennium.soundness",
+     "enunciado": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T) (M : MetaMillennium.Model T),   MetaMillennium.Provable T φ → MetaMillennium.SatisfiesTheory M → M ⊨ φ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "zfci_consistency",
+     "enunciado": "True",
+     "resultado": "demonstrável",
+     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
+    },
+    {
+     "tipo": "axioma",
+     "nome": "collapse_classical",
+     "enunciado": "∀ (f : ℝ → ℝ) (a L : ℝ),   (∀ ε > 0, ∃ δ > 0, ∀ (x : ℝ), 0 < |x - a| ∧ |x - a| < δ → |f x - L| < ε) → C f a = CollapseValue.classical L",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "collapse_existence",
+     "enunciado": "∀ (f : ℝ → ℝ) (a : ℝ), (∃ ε > 0, ∀ (x : ℝ), |x - a| < ε → x ≠ a → f x ≠ f x) → ∃ I, C f a = I",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "collapse_extensionality",
+     "enunciado": "∀ (f g : ℝ → ℝ) (a b : ℝ),   SingularProfile → (∀ ε > 0, ∃ δ > 0, ∀ (x : ℝ), |x - a| < δ → |f x - g (x - a + b)| < ε) → C f a = C g b",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "CollapseOp",
+     "enunciado": "(ℝ → ℝ) → ℝ → CollapseValue",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "MetaMillennium.indepScheme_implies_dualState",
+     "enunciado": "∀ (T : MetaMillennium.Theory) (φ : MetaMillennium.Sentence T),   MetaMillennium.Consistent T → MetaMillennium.IndepScheme T φ → MetaMillennium.DualState T φ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
    "summary": {
-    "fechado": 0,
-    "aberto-sorry": 0,
-    "condicional": 0
-   }
+    "fechado": 27,
+    "aberto-sorry": 6,
+    "condicional": 5
+   },
+   "hora_commit_mvei": 1793341397
   }
  ]
 }

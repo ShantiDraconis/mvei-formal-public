@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -14,9 +14,9 @@
    "toolchain": "",
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
-   "build_ok": false,
+   "build_ok": true,
    "build_seconds": 0.0,
-   "build_error": "error: DirectEndpointRule.lean:35:21: Application type mismatch: The argument | error: DirectEndpointRule.lean:54:24: Application type mismatch: The argument | error: build failed",
+   "build_error": "",
    "sorry_warnings": 1,
    "reconstructed": true,
    "bridges": [
@@ -49,45 +49,140 @@
      ],
      "statement": "∀ (ExactEndpoint : Prop), ExactEndpoint",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.close",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint)   (w : Witness), self.Valid w → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.inj",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} {Valid : Witness → Prop} {produce : Source → ∃ w, Valid w}   {close : ∀ (w : Witness), Valid w → Endpoint} {Valid_1 : Witness → Prop} {produce_1 : Source → ∃ w, Valid_1 w}   {close_1 : ∀ (w : Witness), Valid_1 w → Endpoint},   { Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clos",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.injEq",
+     "module": "DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint) (Valid_1 : Witness → Prop) (produce_1 : Source → ∃ w, Valid_1 w)   (close_1 : ∀ (w : Witness), Valid_1 w → Endpoint),   ({ Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clo",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} [inst : SizeOf Source] [inst_1 : SizeOf Witness]   [inst_2 : SizeOf Endpoint] (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint), sizeOf { Valid := Valid, produce := produce, close := close } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.produce",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint),   Source → ∃ w, self.Valid w",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.endpoint.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.endpoint = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.ofNat_ctorIdx",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ (x : DirectEndpointRule.Stage), DirectEndpointRule.Stage.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.source.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.source = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.verified.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.verified = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.witness.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.witness = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.decreases",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (self : DirectEndpointRule.StrictProgress State) (s : State), self.rank (self.step s) < self.rank s",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.inj",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} {rank : State → Nat} {step : State → State} {decreases : ∀ (s : State), rank (step s) < rank s}   {rank_1 : State → Nat} {step_1 : State → State} {decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s},   { rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 } →     rank = rank_1 ∧ step = step_1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.injEq",
+     "module": "DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {State : Type u} (rank : State → Nat) (step : State → State) (decreases : ∀ (s : State), rank (step s) < rank s)   (rank_1 : State → Nat) (step_1 : State → State) (decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s),   ({ rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 }) =     (rank = rank_1 ∧ step = step_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} [inst : SizeOf State] (rank : State → Nat) (step : State → State)   (decreases : ∀ (s : State), rank (step s) < rank s), sizeOf { rank := rank, step := step, decreases := decreases } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.direct_endpoint",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (r : DirectEndpointRule.Rule Source Witness Endpoint),   Source → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.forwardDependency_wellFounded",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "WellFounded DirectEndpointRule.forwardDependency",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.no_infinite_descent",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (p : DirectEndpointRule.StrictProgress State), WellFounded fun a b => p.rank a < p.rank b",
+     "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com ATKTerminalStaging, DirectEndpointRule (alguns arquivos com erro)",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com ATKTerminalStaging, DirectEndpointRule",
    "corrections": [],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `ATKTerminalStaging, .one `DirectEndpointRule]\n",
    "avulso": true,
-   "salvage": [
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 17,
-     "nome": "DirectEndpointRule.direct_endpoint",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 30,
-     "nome": "DirectEndpointRule.no_infinite_descent",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 35: Application type mismatch: The argument Nat.lt_wfRel has type WellFoundedRelation Nat of sort `Type` but is expected to have type WellFounded LT.lt of sort `Prop` in the application InvImage.wf p.rank Nat.lt_wfRel"
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 52,
-     "nome": "DirectEndpointRule.forwardDependency_wellFounded",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 54: Application type mismatch: The argument Nat.lt_wfRel has type WellFoundedRelation Nat of sort `Type` but is expected to have type WellFounded LT.lt of sort `Prop` in the application InvImage.wf stageRank Nat.lt_wfRel"
-    }
-   ],
+   "salvage": [],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 17,
     "aberto-sorry": 1,
     "condicional": 0
    }

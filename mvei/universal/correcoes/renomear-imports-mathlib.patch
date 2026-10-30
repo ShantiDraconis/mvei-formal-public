@@ -1,0 +1,474 @@
+--- a/lean4/BSD/BSDStatementFormal.lean
++++ b/lean4/BSD/BSDStatementFormal.lean
+@@ -1,14 +1,14 @@
+ import Mathlib.Data.Real.Basic
+-import Mathlib.Data.Rat.Basic
+-import Mathlib.Analysis.Calculus.Deriv
+-import Mathlib.Analysis.Calculus.FDeriv
+-import Mathlib.Analysis.Calculus.Limits
+-import Mathlib.Analysis.SpecialFunctions.Pow
+-import Mathlib.MeasureTheory.Integral.Basic
+-import Mathlib.Topology.Algebra.Group
++import Mathlib.Data.Rat.Defs
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Analysis.Calculus.FDeriv.Basic
++import Mathlib
++import Mathlib.Analysis.SpecialFunctions.Pow.Real
++import Mathlib
++import Mathlib.Topology.Algebra.Group.Basic
+ import Mathlib.Data.Complex.Basic
+-import Mathlib.Analysis.Calculus.ContDiff
+-import Mathlib.NumberTheory.Padics.Padics
++import Mathlib.Analysis.Calculus.ContDiff.Basic
++import Mathlib
+ 
+ /-
+ ====================================================================================
+--- a/lean4/BSD/EllipticCurves.lean
++++ b/lean4/BSD/EllipticCurves.lean
+@@ -1,8 +1,8 @@
+-import Mathlib.Data.Rat.Basic
++import Mathlib.Data.Rat.Defs
+ import Mathlib.Data.Complex.Basic
+ import Mathlib/Algebra/Group/Power
+ import Mathlib.Data.Real.Basic
+-import Mathlib.Analysis.SpecialFunctions.Pow
++import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ import BSD.EllipticCurves
+ 
+ /-
+--- a/lean4/BSD/LFunctionDefinition.lean
++++ b/lean4/BSD/LFunctionDefinition.lean
+@@ -20,8 +20,8 @@
+ 
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.Complex.Basic
+-import Mathlib.Data.Nat.Prime
+-import Mathlib.Topology.Algebra.InfiniteSum
++import Mathlib.Data.Nat.Prime.Basic
++import Mathlib.Topology.Algebra.InfiniteSum.Basic
+ import BSD.EllipticCurves
+ 
+ namespace BSDFormal
+--- a/lean4/BSD/MordellWeil.lean
++++ b/lean4/BSD/MordellWeil.lean
+@@ -21,9 +21,9 @@
+   can refine with actual proofs.
+ -/
+ 
+-import Mathlib.Data.Rat.Basic
++import Mathlib.Data.Rat.Defs
+ import Mathlib.Algebra.Group.Defs
+-import Mathlib.Algebra.GroupPower
++import Mathlib
+ import BSD.EllipticCurves
+ 
+ namespace BSDFormal
+--- a/lean4/BSD/OrderOfVanishing.lean
++++ b/lean4/BSD/OrderOfVanishing.lean
+@@ -15,8 +15,8 @@
+ -/
+ 
+ import Mathlib.Data.Complex.Basic
+-import Mathlib.Analysis.Calculus.Deriv
+-import Mathlib.Topology.Algebra.InfiniteSum
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Topology.Algebra.InfiniteSum.Basic
+ import BSD.LFunctionDefinition
+ 
+ namespace BSDFormal
+--- a/lean4/Complexity/BooleanFunctions.lean
++++ b/lean4/Complexity/BooleanFunctions.lean
+@@ -30,7 +30,7 @@
+ import Mathlib.Data.Fintype.Basic
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.Matrix.Basic
+-import Mathlib.Algebra.BigOperators.Basic
++import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+ 
+ open scoped BigOperators
+ 
+--- a/lean4/Complexity/ComplexityMeasures.lean
++++ b/lean4/Complexity/ComplexityMeasures.lean
+@@ -29,7 +29,7 @@
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.List.Basic
+-import Mathlib.Algebra.BigOperators.Basic
++import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+ import Complexity.BooleanFunctions
+ import Complexity.Circuits
+ 
+--- a/lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean
++++ b/lean4/Core/Analysis/Calculus/DifferentiableManifolds.lean
+@@ -18,7 +18,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Geometry.Manifold.SmoothManifoldWithCorners
++import Mathlib.Geometry.Manifold.IsManifold.Basic
+ import Mathlib.Geometry.Manifold.ContMDiff.Basic
+ 
+ namespace DifferentiableManifolds
+--- a/lean4/Core/Analysis/Calculus/HigherDerivatives.lean
++++ b/lean4/Core/Analysis/Calculus/HigherDerivatives.lean
+@@ -20,7 +20,7 @@
+ -/
+ 
+ import Mathlib.Analysis.Calculus.ContDiff.Basic
+-import Mathlib.Analysis.Calculus.ContDiff.Polynomial
++import Mathlib
+ import Mathlib.Analysis.Calculus.Taylor
+ 
+ namespace HigherDerivativesTheory
+--- a/lean4/Core/Analysis/Calculus/MeanValueTheorem.lean
++++ b/lean4/Core/Analysis/Calculus/MeanValueTheorem.lean
+@@ -18,7 +18,7 @@
+ -/
+ 
+ import Mathlib.Analysis.Calculus.MeanValue
+-import Mathlib.Analysis.Calculus.MeanValueInequalities
++import Mathlib
+ 
+ namespace MeanValueTheorems
+ 
+--- a/lean4/Core/Analysis/FunctionalAnalysis/BanachSpaces.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/BanachSpaces.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace BanachSpaces
+--- a/lean4/Core/Analysis/FunctionalAnalysis/BoundedOperators.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/BoundedOperators.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace BoundedOperators
+--- a/lean4/Core/Analysis/FunctionalAnalysis/CompactOperators.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/CompactOperators.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace CompactOperators
+--- a/lean4/Core/Analysis/FunctionalAnalysis/Eigenvalues.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/Eigenvalues.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace Eigenvalues
+--- a/lean4/Core/Analysis/FunctionalAnalysis/FredholmOperators.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/FredholmOperators.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace FredholmOperators
+--- a/lean4/Core/Analysis/FunctionalAnalysis/HahnBanach.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/HahnBanach.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace HahnBanach
+--- a/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
+@@ -17,7 +17,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.InnerProductSpace.Projection
+ 
+--- a/lean4/Core/Analysis/FunctionalAnalysis/RieszRepresentation.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/RieszRepresentation.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace RieszRepresentation
+--- a/lean4/Core/Analysis/FunctionalAnalysis/SpectralTheory.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/SpectralTheory.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Analysis.NormedSpace.Basic
++import Mathlib.Analysis.Normed.Module.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ 
+ namespace SpectralTheory
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/DirichletCharacters.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/DirichletCharacters.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace DirichletCharacters
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/EisensteinSeries.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/EisensteinSeries.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace EisensteinSeries
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/LFunctions.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/LFunctions.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace LFunctions
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ModularForms.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ModularForms.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ModularForms
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ThetaFunctions.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ThetaFunctions.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ThetaFunctions
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ZeroFreeRegions.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ZeroFreeRegions.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ZeroFreeRegions
+ 
+--- a/lean4/Core/Analysis/NumberTheoryAnalysis/ZetaFunctionalEquation.lean
++++ b/lean4/Core/Analysis/NumberTheoryAnalysis/ZetaFunctionalEquation.lean
+@@ -10,7 +10,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ZetaFunctionalEquation
+ 
+--- a/lean4/Core/Analysis/Topology/BaireCategory.lean
++++ b/lean4/Core/Analysis/Topology/BaireCategory.lean
+@@ -19,9 +19,9 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Topology.Baire.Basic
+-import Mathlib.Topology.MetricSpace.Baire
+-import Mathlib.Analysis.NormedSpace.BanachSteinhaus
++import Mathlib
++import Mathlib
++import Mathlib
+ 
+ namespace BaireCategoryTheory
+ 
+--- a/lean4/Core/Analysis/Topology/Continuity.lean
++++ b/lean4/Core/Analysis/Topology/Continuity.lean
+@@ -21,7 +21,7 @@
+ -/
+ 
+ import Mathlib.Topology.Basic
+-import Mathlib.Topology.ContinuousFunction.Basic
++import Mathlib.Topology.ContinuousMap.Basic
+ import Mathlib.Topology.UniformSpace.Basic
+ import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+ 
+--- a/lean4/Core/Analysis/Topology/Homeomorphisms.lean
++++ b/lean4/Core/Analysis/Topology/Homeomorphisms.lean
+@@ -19,8 +19,8 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Topology.Homeomorph
+-import Mathlib.Topology.LocalHomeomorph
++import Mathlib.Topology.Homeomorph.Defs
++import Mathlib
+ import Mathlib.Topology.MetricSpace.Basic
+ 
+ namespace HomeomorphismsTheory
+--- a/lean4/Core/Analysis/Topology/ProductTopology.lean
++++ b/lean4/Core/Analysis/Topology/ProductTopology.lean
+@@ -21,7 +21,7 @@
+ -/
+ 
+ import Mathlib.Topology.Constructions
+-import Mathlib.Topology.Product
++import Mathlib
+ import Mathlib.Topology.Order
+ 
+ namespace ProductTopology
+--- a/lean4/Core/Analysis/Topology/StoneWeierstrass.lean
++++ b/lean4/Core/Analysis/Topology/StoneWeierstrass.lean
+@@ -19,9 +19,9 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.Topology.ContinuousFunction.StoneWeierstrass
+-import Mathlib.Topology.ContinuousFunction.Polynomial
+-import Mathlib.Analysis.SpecialFunctions.Polynomials.Chebyshev
++import Mathlib
++import Mathlib
++import Mathlib
+ 
+ namespace StoneWeierstrassTheory
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ApproximateFunctionalEquation.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ApproximateFunctionalEquation.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ApproximateFunctionalEquation
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/CriticalStrip.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/CriticalStrip.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace CriticalStrip
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ExplicitFormula.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ExplicitFormula.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ExplicitFormula
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/HadamardFactorization.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/HadamardFactorization.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace HadamardFactorization
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/MeanValues.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/MeanValues.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace MeanValues
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/RH_FullFormal.lean
+@@ -17,7 +17,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.NumberTheory.ArithmeticFunction
+ import Mathlib.Analysis.Complex.Basic
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/RiemannXi.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/RiemannXi.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace RiemannXi
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ZeroDensity.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ZeroDensity.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ZeroDensity
+ 
+--- a/lean4/Core/Analysis/ZetaAdvanced/ZeroDistribution.lean
++++ b/lean4/Core/Analysis/ZetaAdvanced/ZeroDistribution.lean
+@@ -11,7 +11,7 @@
+   ==============================================================================
+ -/
+ 
+-import Mathlib.NumberTheory.ZetaFunction
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace ZeroDistribution
+ 

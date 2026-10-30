@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `c2faccb496e6f2023be7706ee261e9d17af5a159`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `c2faccb496e6f2023be7706ee261e9d17af5a159`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -38,6 +38,10 @@ The `.lean` files of the verified commit declare 6 `theorem`/`lemma` (counting c
 | Reason | Theorems |
 |---|---:|
 | checked file by file: the written proof does not pass the kernel | 2 |
+
+### MVEI corrections
+
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/indeterminate-collapse-core mvei/indeterminate-collapse-core/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 
