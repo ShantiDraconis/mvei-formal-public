@@ -58,13 +58,40 @@
    ∀ (n : Nat), n < harappa_signs_count →
 -  ∃ (sign : HarappaSign), sign.index = n ∧ sign.logical_value > 0
 +  ∃ (sign : HarappaSign), sign.index = n ∧ sign.logical_value > 0 :=
-+  fun n _ => ⟨⟨n, "", "", 1⟩, rfl, by decide⟩
++  fun n _ => ⟨⟨n, "", "", 1⟩, rfl, Nat.one_pos⟩
  
  /-- Teorema: Os sinais de Harappa são completos -/
  theorem harappa_completeness :
 --- a/core/lineage/LINEAGE_MAP.lean
 +++ b/core/lineage/LINEAGE_MAP.lean
-@@ -736,7 +736,7 @@
+@@ -1,6 +1,8 @@
+ import Mathlib.Data.List.Basic
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Order.Basic
++import Mathlib.Algebra.Order.Field.Rat
++import Mathlib.Tactic.NormNum
+ import Mathlib.Tactic
+ 
+ /-
+@@ -48,7 +50,7 @@
+   target_id : Nat
+   connection_type : String
+   evidence : String
+-  strength : Float  -- 0.0 to 1.0
++  strength : ℚ  -- 0.0 to 1.0
+ 
+ /-! ### HARAPPA (2600-1900 BCE) - Nível 0 (Raiz) -/
+ 
+@@ -712,7 +714,7 @@
+ /-- Teorema: A conexão Harappa → Egito é forte -/
+ theorem harappa_egypt_strong :
+   connection_harappa_egypt.strength > 0.8 := by
+-  norm_num
++  norm_num [connection_harappa_egypt]
+ 
+ /-! ### Caminhos na Árvore -/
+ 
+@@ -736,7 +738,7 @@
  /-! ### Profundidade Temporal -/
  
  /-- Calcula a profundidade temporal em anos -/
@@ -73,6 +100,4548 @@
    2028 - (-2600)  -- Would be 4628 years
  
  /-- Teorema: Mais de 4600 anos de linhagem -/
+@@ -748,9 +750,9 @@
+ /-! ### Força Média das Conexões -/
+ 
+ /-- Calcula força média das conexões -/
+-def average_connection_strength (connections : List LineageConnection) : Float :=
+-  let sum := connections.foldl (fun acc c => acc + c.strength) 0.0
+-  sum / connections.length.toFloat
++def average_connection_strength (connections : List LineageConnection) : ℚ :=
++  let sum := connections.foldl (fun acc c => acc + c.strength) 0
++  sum / (connections.length : ℚ)
+ 
+ /-- Teorema: As conexões são geralmente fortes -/
+ theorem connections_generally_strong :
+@@ -826,7 +828,7 @@
+   historical_verification : String
+   archaeological_evidence : String
+   textual_evidence : String
+-  strength_of_evidence : Float
++  strength_of_evidence : ℚ
+   authenticated_by : String
+ 
+ /-- Certificados de autenticação para nós chave -/
+@@ -889,7 +891,7 @@
+   number_of_nodes : Nat
+   number_of_connections : Nat
+   gaps_identified : List String
+-  completeness_rating : Float
++  completeness_rating : ℚ
+ 
+ def lineage_completeness : CompletenessDeclaration := {
+   start_point := "Harappa (-2600 BCE)",
+@@ -907,7 +909,7 @@
+   lineage_completeness.completeness_rating > 0.90 := by
+   constructor
+   · rfl
+-  · norm_num
++  · norm_num [lineage_completeness]
+ 
+ /-! ### Assinatura do Mapa de Linhagem -/
+ 
+--- a/core/proofs/FORMAL_VERIFICATIONS.lean
++++ b/core/proofs/FORMAL_VERIFICATIONS.lean
+@@ -78690,7 +78690,7 @@
+ theorem meta_0001_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -78744,7 +78744,7 @@
+ theorem meta_0002_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -78798,7 +78798,7 @@
+ theorem meta_0003_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -78852,7 +78852,7 @@
+ theorem meta_0004_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -78906,7 +78906,7 @@
+ theorem meta_0005_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -78960,7 +78960,7 @@
+ theorem meta_0006_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79014,7 +79014,7 @@
+ theorem meta_0007_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79068,7 +79068,7 @@
+ theorem meta_0008_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79122,7 +79122,7 @@
+ theorem meta_0009_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79176,7 +79176,7 @@
+ theorem meta_0010_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79230,7 +79230,7 @@
+ theorem meta_0011_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79284,7 +79284,7 @@
+ theorem meta_0012_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79338,7 +79338,7 @@
+ theorem meta_0013_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79392,7 +79392,7 @@
+ theorem meta_0014_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79446,7 +79446,7 @@
+ theorem meta_0015_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79500,7 +79500,7 @@
+ theorem meta_0016_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79554,7 +79554,7 @@
+ theorem meta_0017_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79608,7 +79608,7 @@
+ theorem meta_0018_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79662,7 +79662,7 @@
+ theorem meta_0019_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79716,7 +79716,7 @@
+ theorem meta_0020_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79770,7 +79770,7 @@
+ theorem meta_0021_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79824,7 +79824,7 @@
+ theorem meta_0022_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79878,7 +79878,7 @@
+ theorem meta_0023_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79932,7 +79932,7 @@
+ theorem meta_0024_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -79986,7 +79986,7 @@
+ theorem meta_0025_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80040,7 +80040,7 @@
+ theorem meta_0026_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80094,7 +80094,7 @@
+ theorem meta_0027_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80148,7 +80148,7 @@
+ theorem meta_0028_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80202,7 +80202,7 @@
+ theorem meta_0029_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80256,7 +80256,7 @@
+ theorem meta_0030_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80310,7 +80310,7 @@
+ theorem meta_0031_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80364,7 +80364,7 @@
+ theorem meta_0032_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80418,7 +80418,7 @@
+ theorem meta_0033_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80472,7 +80472,7 @@
+ theorem meta_0034_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80526,7 +80526,7 @@
+ theorem meta_0035_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80580,7 +80580,7 @@
+ theorem meta_0036_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80634,7 +80634,7 @@
+ theorem meta_0037_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80688,7 +80688,7 @@
+ theorem meta_0038_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80742,7 +80742,7 @@
+ theorem meta_0039_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80796,7 +80796,7 @@
+ theorem meta_0040_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80850,7 +80850,7 @@
+ theorem meta_0041_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80904,7 +80904,7 @@
+ theorem meta_0042_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -80958,7 +80958,7 @@
+ theorem meta_0043_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81012,7 +81012,7 @@
+ theorem meta_0044_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81066,7 +81066,7 @@
+ theorem meta_0045_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81120,7 +81120,7 @@
+ theorem meta_0046_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81174,7 +81174,7 @@
+ theorem meta_0047_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81228,7 +81228,7 @@
+ theorem meta_0048_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81282,7 +81282,7 @@
+ theorem meta_0049_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81336,7 +81336,7 @@
+ theorem meta_0050_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81390,7 +81390,7 @@
+ theorem meta_0051_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81444,7 +81444,7 @@
+ theorem meta_0052_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81498,7 +81498,7 @@
+ theorem meta_0053_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81552,7 +81552,7 @@
+ theorem meta_0054_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81606,7 +81606,7 @@
+ theorem meta_0055_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81660,7 +81660,7 @@
+ theorem meta_0056_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81714,7 +81714,7 @@
+ theorem meta_0057_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81768,7 +81768,7 @@
+ theorem meta_0058_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81822,7 +81822,7 @@
+ theorem meta_0059_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81876,7 +81876,7 @@
+ theorem meta_0060_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81930,7 +81930,7 @@
+ theorem meta_0061_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -81984,7 +81984,7 @@
+ theorem meta_0062_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82038,7 +82038,7 @@
+ theorem meta_0063_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82092,7 +82092,7 @@
+ theorem meta_0064_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82146,7 +82146,7 @@
+ theorem meta_0065_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82200,7 +82200,7 @@
+ theorem meta_0066_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82254,7 +82254,7 @@
+ theorem meta_0067_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82308,7 +82308,7 @@
+ theorem meta_0068_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82362,7 +82362,7 @@
+ theorem meta_0069_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82416,7 +82416,7 @@
+ theorem meta_0070_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82470,7 +82470,7 @@
+ theorem meta_0071_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82524,7 +82524,7 @@
+ theorem meta_0072_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82578,7 +82578,7 @@
+ theorem meta_0073_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82632,7 +82632,7 @@
+ theorem meta_0074_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82686,7 +82686,7 @@
+ theorem meta_0075_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82740,7 +82740,7 @@
+ theorem meta_0076_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82794,7 +82794,7 @@
+ theorem meta_0077_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82848,7 +82848,7 @@
+ theorem meta_0078_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82902,7 +82902,7 @@
+ theorem meta_0079_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -82956,7 +82956,7 @@
+ theorem meta_0080_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83010,7 +83010,7 @@
+ theorem meta_0081_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83064,7 +83064,7 @@
+ theorem meta_0082_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83118,7 +83118,7 @@
+ theorem meta_0083_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83172,7 +83172,7 @@
+ theorem meta_0084_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83226,7 +83226,7 @@
+ theorem meta_0085_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83280,7 +83280,7 @@
+ theorem meta_0086_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83334,7 +83334,7 @@
+ theorem meta_0087_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83388,7 +83388,7 @@
+ theorem meta_0088_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83442,7 +83442,7 @@
+ theorem meta_0089_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83496,7 +83496,7 @@
+ theorem meta_0090_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83550,7 +83550,7 @@
+ theorem meta_0091_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83604,7 +83604,7 @@
+ theorem meta_0092_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83658,7 +83658,7 @@
+ theorem meta_0093_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83712,7 +83712,7 @@
+ theorem meta_0094_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83766,7 +83766,7 @@
+ theorem meta_0095_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83820,7 +83820,7 @@
+ theorem meta_0096_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83874,7 +83874,7 @@
+ theorem meta_0097_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83928,7 +83928,7 @@
+ theorem meta_0098_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -83982,7 +83982,7 @@
+ theorem meta_0099_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84036,7 +84036,7 @@
+ theorem meta_0100_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84090,7 +84090,7 @@
+ theorem meta_0101_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84144,7 +84144,7 @@
+ theorem meta_0102_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84198,7 +84198,7 @@
+ theorem meta_0103_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84252,7 +84252,7 @@
+ theorem meta_0104_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84306,7 +84306,7 @@
+ theorem meta_0105_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84360,7 +84360,7 @@
+ theorem meta_0106_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84414,7 +84414,7 @@
+ theorem meta_0107_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84468,7 +84468,7 @@
+ theorem meta_0108_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84522,7 +84522,7 @@
+ theorem meta_0109_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84576,7 +84576,7 @@
+ theorem meta_0110_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84630,7 +84630,7 @@
+ theorem meta_0111_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84684,7 +84684,7 @@
+ theorem meta_0112_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84738,7 +84738,7 @@
+ theorem meta_0113_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84792,7 +84792,7 @@
+ theorem meta_0114_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84846,7 +84846,7 @@
+ theorem meta_0115_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84900,7 +84900,7 @@
+ theorem meta_0116_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -84954,7 +84954,7 @@
+ theorem meta_0117_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85008,7 +85008,7 @@
+ theorem meta_0118_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85062,7 +85062,7 @@
+ theorem meta_0119_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85116,7 +85116,7 @@
+ theorem meta_0120_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85170,7 +85170,7 @@
+ theorem meta_0121_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85224,7 +85224,7 @@
+ theorem meta_0122_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85278,7 +85278,7 @@
+ theorem meta_0123_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85332,7 +85332,7 @@
+ theorem meta_0124_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85386,7 +85386,7 @@
+ theorem meta_0125_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85440,7 +85440,7 @@
+ theorem meta_0126_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85494,7 +85494,7 @@
+ theorem meta_0127_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85548,7 +85548,7 @@
+ theorem meta_0128_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85602,7 +85602,7 @@
+ theorem meta_0129_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85656,7 +85656,7 @@
+ theorem meta_0130_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85710,7 +85710,7 @@
+ theorem meta_0131_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85764,7 +85764,7 @@
+ theorem meta_0132_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85818,7 +85818,7 @@
+ theorem meta_0133_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85872,7 +85872,7 @@
+ theorem meta_0134_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85926,7 +85926,7 @@
+ theorem meta_0135_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -85980,7 +85980,7 @@
+ theorem meta_0136_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86034,7 +86034,7 @@
+ theorem meta_0137_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86088,7 +86088,7 @@
+ theorem meta_0138_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86142,7 +86142,7 @@
+ theorem meta_0139_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86196,7 +86196,7 @@
+ theorem meta_0140_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86250,7 +86250,7 @@
+ theorem meta_0141_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86304,7 +86304,7 @@
+ theorem meta_0142_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86358,7 +86358,7 @@
+ theorem meta_0143_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86412,7 +86412,7 @@
+ theorem meta_0144_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86466,7 +86466,7 @@
+ theorem meta_0145_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86520,7 +86520,7 @@
+ theorem meta_0146_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86574,7 +86574,7 @@
+ theorem meta_0147_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86628,7 +86628,7 @@
+ theorem meta_0148_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86682,7 +86682,7 @@
+ theorem meta_0149_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86736,7 +86736,7 @@
+ theorem meta_0150_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86790,7 +86790,7 @@
+ theorem meta_0151_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86844,7 +86844,7 @@
+ theorem meta_0152_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86898,7 +86898,7 @@
+ theorem meta_0153_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -86952,7 +86952,7 @@
+ theorem meta_0154_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87006,7 +87006,7 @@
+ theorem meta_0155_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87060,7 +87060,7 @@
+ theorem meta_0156_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87114,7 +87114,7 @@
+ theorem meta_0157_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87168,7 +87168,7 @@
+ theorem meta_0158_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87222,7 +87222,7 @@
+ theorem meta_0159_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87276,7 +87276,7 @@
+ theorem meta_0160_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87330,7 +87330,7 @@
+ theorem meta_0161_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87384,7 +87384,7 @@
+ theorem meta_0162_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87438,7 +87438,7 @@
+ theorem meta_0163_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87492,7 +87492,7 @@
+ theorem meta_0164_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87546,7 +87546,7 @@
+ theorem meta_0165_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87600,7 +87600,7 @@
+ theorem meta_0166_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87654,7 +87654,7 @@
+ theorem meta_0167_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87708,7 +87708,7 @@
+ theorem meta_0168_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87762,7 +87762,7 @@
+ theorem meta_0169_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87816,7 +87816,7 @@
+ theorem meta_0170_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87870,7 +87870,7 @@
+ theorem meta_0171_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87924,7 +87924,7 @@
+ theorem meta_0172_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -87978,7 +87978,7 @@
+ theorem meta_0173_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88032,7 +88032,7 @@
+ theorem meta_0174_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88086,7 +88086,7 @@
+ theorem meta_0175_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88140,7 +88140,7 @@
+ theorem meta_0176_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88194,7 +88194,7 @@
+ theorem meta_0177_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88248,7 +88248,7 @@
+ theorem meta_0178_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88302,7 +88302,7 @@
+ theorem meta_0179_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88356,7 +88356,7 @@
+ theorem meta_0180_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88410,7 +88410,7 @@
+ theorem meta_0181_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88464,7 +88464,7 @@
+ theorem meta_0182_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88518,7 +88518,7 @@
+ theorem meta_0183_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88572,7 +88572,7 @@
+ theorem meta_0184_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88626,7 +88626,7 @@
+ theorem meta_0185_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88680,7 +88680,7 @@
+ theorem meta_0186_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88734,7 +88734,7 @@
+ theorem meta_0187_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88788,7 +88788,7 @@
+ theorem meta_0188_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88842,7 +88842,7 @@
+ theorem meta_0189_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88896,7 +88896,7 @@
+ theorem meta_0190_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -88950,7 +88950,7 @@
+ theorem meta_0191_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89004,7 +89004,7 @@
+ theorem meta_0192_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89058,7 +89058,7 @@
+ theorem meta_0193_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89112,7 +89112,7 @@
+ theorem meta_0194_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89166,7 +89166,7 @@
+ theorem meta_0195_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89220,7 +89220,7 @@
+ theorem meta_0196_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89274,7 +89274,7 @@
+ theorem meta_0197_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89328,7 +89328,7 @@
+ theorem meta_0198_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89382,7 +89382,7 @@
+ theorem meta_0199_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89436,7 +89436,7 @@
+ theorem meta_0200_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89490,7 +89490,7 @@
+ theorem meta_0201_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89544,7 +89544,7 @@
+ theorem meta_0202_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89598,7 +89598,7 @@
+ theorem meta_0203_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89652,7 +89652,7 @@
+ theorem meta_0204_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89706,7 +89706,7 @@
+ theorem meta_0205_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89760,7 +89760,7 @@
+ theorem meta_0206_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89814,7 +89814,7 @@
+ theorem meta_0207_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89868,7 +89868,7 @@
+ theorem meta_0208_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89922,7 +89922,7 @@
+ theorem meta_0209_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -89976,7 +89976,7 @@
+ theorem meta_0210_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90030,7 +90030,7 @@
+ theorem meta_0211_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90084,7 +90084,7 @@
+ theorem meta_0212_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90138,7 +90138,7 @@
+ theorem meta_0213_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90192,7 +90192,7 @@
+ theorem meta_0214_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90246,7 +90246,7 @@
+ theorem meta_0215_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90300,7 +90300,7 @@
+ theorem meta_0216_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90354,7 +90354,7 @@
+ theorem meta_0217_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90408,7 +90408,7 @@
+ theorem meta_0218_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90462,7 +90462,7 @@
+ theorem meta_0219_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90516,7 +90516,7 @@
+ theorem meta_0220_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90570,7 +90570,7 @@
+ theorem meta_0221_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90624,7 +90624,7 @@
+ theorem meta_0222_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90678,7 +90678,7 @@
+ theorem meta_0223_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90732,7 +90732,7 @@
+ theorem meta_0224_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90786,7 +90786,7 @@
+ theorem meta_0225_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90840,7 +90840,7 @@
+ theorem meta_0226_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90894,7 +90894,7 @@
+ theorem meta_0227_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -90948,7 +90948,7 @@
+ theorem meta_0228_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91002,7 +91002,7 @@
+ theorem meta_0229_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91056,7 +91056,7 @@
+ theorem meta_0230_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91110,7 +91110,7 @@
+ theorem meta_0231_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91164,7 +91164,7 @@
+ theorem meta_0232_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91218,7 +91218,7 @@
+ theorem meta_0233_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91272,7 +91272,7 @@
+ theorem meta_0234_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91326,7 +91326,7 @@
+ theorem meta_0235_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91380,7 +91380,7 @@
+ theorem meta_0236_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91434,7 +91434,7 @@
+ theorem meta_0237_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91488,7 +91488,7 @@
+ theorem meta_0238_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91542,7 +91542,7 @@
+ theorem meta_0239_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91596,7 +91596,7 @@
+ theorem meta_0240_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91650,7 +91650,7 @@
+ theorem meta_0241_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91704,7 +91704,7 @@
+ theorem meta_0242_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91758,7 +91758,7 @@
+ theorem meta_0243_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91812,7 +91812,7 @@
+ theorem meta_0244_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91866,7 +91866,7 @@
+ theorem meta_0245_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91920,7 +91920,7 @@
+ theorem meta_0246_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -91974,7 +91974,7 @@
+ theorem meta_0247_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92028,7 +92028,7 @@
+ theorem meta_0248_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92082,7 +92082,7 @@
+ theorem meta_0249_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92136,7 +92136,7 @@
+ theorem meta_0250_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92190,7 +92190,7 @@
+ theorem meta_0251_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92244,7 +92244,7 @@
+ theorem meta_0252_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92298,7 +92298,7 @@
+ theorem meta_0253_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92352,7 +92352,7 @@
+ theorem meta_0254_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92406,7 +92406,7 @@
+ theorem meta_0255_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92460,7 +92460,7 @@
+ theorem meta_0256_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92514,7 +92514,7 @@
+ theorem meta_0257_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92568,7 +92568,7 @@
+ theorem meta_0258_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92622,7 +92622,7 @@
+ theorem meta_0259_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92676,7 +92676,7 @@
+ theorem meta_0260_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92730,7 +92730,7 @@
+ theorem meta_0261_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92784,7 +92784,7 @@
+ theorem meta_0262_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92838,7 +92838,7 @@
+ theorem meta_0263_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92892,7 +92892,7 @@
+ theorem meta_0264_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -92946,7 +92946,7 @@
+ theorem meta_0265_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93000,7 +93000,7 @@
+ theorem meta_0266_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93054,7 +93054,7 @@
+ theorem meta_0267_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93108,7 +93108,7 @@
+ theorem meta_0268_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93162,7 +93162,7 @@
+ theorem meta_0269_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93216,7 +93216,7 @@
+ theorem meta_0270_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93270,7 +93270,7 @@
+ theorem meta_0271_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93324,7 +93324,7 @@
+ theorem meta_0272_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93378,7 +93378,7 @@
+ theorem meta_0273_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93432,7 +93432,7 @@
+ theorem meta_0274_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93486,7 +93486,7 @@
+ theorem meta_0275_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93540,7 +93540,7 @@
+ theorem meta_0276_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93594,7 +93594,7 @@
+ theorem meta_0277_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93648,7 +93648,7 @@
+ theorem meta_0278_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93702,7 +93702,7 @@
+ theorem meta_0279_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93756,7 +93756,7 @@
+ theorem meta_0280_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93810,7 +93810,7 @@
+ theorem meta_0281_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93864,7 +93864,7 @@
+ theorem meta_0282_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93918,7 +93918,7 @@
+ theorem meta_0283_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -93972,7 +93972,7 @@
+ theorem meta_0284_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94026,7 +94026,7 @@
+ theorem meta_0285_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94080,7 +94080,7 @@
+ theorem meta_0286_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94134,7 +94134,7 @@
+ theorem meta_0287_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94188,7 +94188,7 @@
+ theorem meta_0288_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94242,7 +94242,7 @@
+ theorem meta_0289_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94296,7 +94296,7 @@
+ theorem meta_0290_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94350,7 +94350,7 @@
+ theorem meta_0291_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94404,7 +94404,7 @@
+ theorem meta_0292_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94458,7 +94458,7 @@
+ theorem meta_0293_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94512,7 +94512,7 @@
+ theorem meta_0294_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94566,7 +94566,7 @@
+ theorem meta_0295_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94620,7 +94620,7 @@
+ theorem meta_0296_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94674,7 +94674,7 @@
+ theorem meta_0297_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94728,7 +94728,7 @@
+ theorem meta_0298_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94782,7 +94782,7 @@
+ theorem meta_0299_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94836,7 +94836,7 @@
+ theorem meta_0300_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94890,7 +94890,7 @@
+ theorem meta_0301_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94944,7 +94944,7 @@
+ theorem meta_0302_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -94998,7 +94998,7 @@
+ theorem meta_0303_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95052,7 +95052,7 @@
+ theorem meta_0304_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95106,7 +95106,7 @@
+ theorem meta_0305_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95160,7 +95160,7 @@
+ theorem meta_0306_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95214,7 +95214,7 @@
+ theorem meta_0307_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95268,7 +95268,7 @@
+ theorem meta_0308_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95322,7 +95322,7 @@
+ theorem meta_0309_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95376,7 +95376,7 @@
+ theorem meta_0310_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95430,7 +95430,7 @@
+ theorem meta_0311_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95484,7 +95484,7 @@
+ theorem meta_0312_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95538,7 +95538,7 @@
+ theorem meta_0313_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95592,7 +95592,7 @@
+ theorem meta_0314_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95646,7 +95646,7 @@
+ theorem meta_0315_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95700,7 +95700,7 @@
+ theorem meta_0316_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95754,7 +95754,7 @@
+ theorem meta_0317_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95808,7 +95808,7 @@
+ theorem meta_0318_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95862,7 +95862,7 @@
+ theorem meta_0319_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95916,7 +95916,7 @@
+ theorem meta_0320_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -95970,7 +95970,7 @@
+ theorem meta_0321_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96024,7 +96024,7 @@
+ theorem meta_0322_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96078,7 +96078,7 @@
+ theorem meta_0323_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96132,7 +96132,7 @@
+ theorem meta_0324_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96186,7 +96186,7 @@
+ theorem meta_0325_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96240,7 +96240,7 @@
+ theorem meta_0326_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96294,7 +96294,7 @@
+ theorem meta_0327_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96348,7 +96348,7 @@
+ theorem meta_0328_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96402,7 +96402,7 @@
+ theorem meta_0329_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96456,7 +96456,7 @@
+ theorem meta_0330_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96510,7 +96510,7 @@
+ theorem meta_0331_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96564,7 +96564,7 @@
+ theorem meta_0332_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96618,7 +96618,7 @@
+ theorem meta_0333_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96672,7 +96672,7 @@
+ theorem meta_0334_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96726,7 +96726,7 @@
+ theorem meta_0335_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96780,7 +96780,7 @@
+ theorem meta_0336_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96834,7 +96834,7 @@
+ theorem meta_0337_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96888,7 +96888,7 @@
+ theorem meta_0338_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96942,7 +96942,7 @@
+ theorem meta_0339_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -96996,7 +96996,7 @@
+ theorem meta_0340_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97050,7 +97050,7 @@
+ theorem meta_0341_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97104,7 +97104,7 @@
+ theorem meta_0342_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97158,7 +97158,7 @@
+ theorem meta_0343_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97212,7 +97212,7 @@
+ theorem meta_0344_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97266,7 +97266,7 @@
+ theorem meta_0345_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97320,7 +97320,7 @@
+ theorem meta_0346_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97374,7 +97374,7 @@
+ theorem meta_0347_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97428,7 +97428,7 @@
+ theorem meta_0348_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97482,7 +97482,7 @@
+ theorem meta_0349_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97536,7 +97536,7 @@
+ theorem meta_0350_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97590,7 +97590,7 @@
+ theorem meta_0351_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97644,7 +97644,7 @@
+ theorem meta_0352_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97698,7 +97698,7 @@
+ theorem meta_0353_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97752,7 +97752,7 @@
+ theorem meta_0354_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97806,7 +97806,7 @@
+ theorem meta_0355_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97860,7 +97860,7 @@
+ theorem meta_0356_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97914,7 +97914,7 @@
+ theorem meta_0357_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -97968,7 +97968,7 @@
+ theorem meta_0358_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98022,7 +98022,7 @@
+ theorem meta_0359_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98076,7 +98076,7 @@
+ theorem meta_0360_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98130,7 +98130,7 @@
+ theorem meta_0361_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98184,7 +98184,7 @@
+ theorem meta_0362_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98238,7 +98238,7 @@
+ theorem meta_0363_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98292,7 +98292,7 @@
+ theorem meta_0364_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98346,7 +98346,7 @@
+ theorem meta_0365_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98400,7 +98400,7 @@
+ theorem meta_0366_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98454,7 +98454,7 @@
+ theorem meta_0367_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98508,7 +98508,7 @@
+ theorem meta_0368_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98562,7 +98562,7 @@
+ theorem meta_0369_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98616,7 +98616,7 @@
+ theorem meta_0370_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98670,7 +98670,7 @@
+ theorem meta_0371_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98724,7 +98724,7 @@
+ theorem meta_0372_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98778,7 +98778,7 @@
+ theorem meta_0373_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98832,7 +98832,7 @@
+ theorem meta_0374_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98886,7 +98886,7 @@
+ theorem meta_0375_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98940,7 +98940,7 @@
+ theorem meta_0376_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -98994,7 +98994,7 @@
+ theorem meta_0377_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99048,7 +99048,7 @@
+ theorem meta_0378_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99102,7 +99102,7 @@
+ theorem meta_0379_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99156,7 +99156,7 @@
+ theorem meta_0380_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99210,7 +99210,7 @@
+ theorem meta_0381_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99264,7 +99264,7 @@
+ theorem meta_0382_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99318,7 +99318,7 @@
+ theorem meta_0383_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99372,7 +99372,7 @@
+ theorem meta_0384_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99426,7 +99426,7 @@
+ theorem meta_0385_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99480,7 +99480,7 @@
+ theorem meta_0386_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99534,7 +99534,7 @@
+ theorem meta_0387_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99588,7 +99588,7 @@
+ theorem meta_0388_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99642,7 +99642,7 @@
+ theorem meta_0389_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99696,7 +99696,7 @@
+ theorem meta_0390_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99750,7 +99750,7 @@
+ theorem meta_0391_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99804,7 +99804,7 @@
+ theorem meta_0392_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99858,7 +99858,7 @@
+ theorem meta_0393_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99912,7 +99912,7 @@
+ theorem meta_0394_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -99966,7 +99966,7 @@
+ theorem meta_0395_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100020,7 +100020,7 @@
+ theorem meta_0396_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100074,7 +100074,7 @@
+ theorem meta_0397_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100128,7 +100128,7 @@
+ theorem meta_0398_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100182,7 +100182,7 @@
+ theorem meta_0399_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100236,7 +100236,7 @@
+ theorem meta_0400_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100290,7 +100290,7 @@
+ theorem meta_0401_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100344,7 +100344,7 @@
+ theorem meta_0402_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100398,7 +100398,7 @@
+ theorem meta_0403_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100452,7 +100452,7 @@
+ theorem meta_0404_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100506,7 +100506,7 @@
+ theorem meta_0405_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100560,7 +100560,7 @@
+ theorem meta_0406_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100614,7 +100614,7 @@
+ theorem meta_0407_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100668,7 +100668,7 @@
+ theorem meta_0408_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100722,7 +100722,7 @@
+ theorem meta_0409_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100776,7 +100776,7 @@
+ theorem meta_0410_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100830,7 +100830,7 @@
+ theorem meta_0411_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100884,7 +100884,7 @@
+ theorem meta_0412_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100938,7 +100938,7 @@
+ theorem meta_0413_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -100992,7 +100992,7 @@
+ theorem meta_0414_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101046,7 +101046,7 @@
+ theorem meta_0415_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101100,7 +101100,7 @@
+ theorem meta_0416_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101154,7 +101154,7 @@
+ theorem meta_0417_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101208,7 +101208,7 @@
+ theorem meta_0418_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101262,7 +101262,7 @@
+ theorem meta_0419_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101316,7 +101316,7 @@
+ theorem meta_0420_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101370,7 +101370,7 @@
+ theorem meta_0421_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101424,7 +101424,7 @@
+ theorem meta_0422_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101478,7 +101478,7 @@
+ theorem meta_0423_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101532,7 +101532,7 @@
+ theorem meta_0424_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101586,7 +101586,7 @@
+ theorem meta_0425_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101640,7 +101640,7 @@
+ theorem meta_0426_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101694,7 +101694,7 @@
+ theorem meta_0427_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101748,7 +101748,7 @@
+ theorem meta_0428_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101802,7 +101802,7 @@
+ theorem meta_0429_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101856,7 +101856,7 @@
+ theorem meta_0430_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101910,7 +101910,7 @@
+ theorem meta_0431_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -101964,7 +101964,7 @@
+ theorem meta_0432_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102018,7 +102018,7 @@
+ theorem meta_0433_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102072,7 +102072,7 @@
+ theorem meta_0434_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102126,7 +102126,7 @@
+ theorem meta_0435_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102180,7 +102180,7 @@
+ theorem meta_0436_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102234,7 +102234,7 @@
+ theorem meta_0437_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102288,7 +102288,7 @@
+ theorem meta_0438_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102342,7 +102342,7 @@
+ theorem meta_0439_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102396,7 +102396,7 @@
+ theorem meta_0440_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102450,7 +102450,7 @@
+ theorem meta_0441_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102504,7 +102504,7 @@
+ theorem meta_0442_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102558,7 +102558,7 @@
+ theorem meta_0443_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102612,7 +102612,7 @@
+ theorem meta_0444_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102666,7 +102666,7 @@
+ theorem meta_0445_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102720,7 +102720,7 @@
+ theorem meta_0446_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102774,7 +102774,7 @@
+ theorem meta_0447_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102828,7 +102828,7 @@
+ theorem meta_0448_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102882,7 +102882,7 @@
+ theorem meta_0449_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102936,7 +102936,7 @@
+ theorem meta_0450_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -102990,7 +102990,7 @@
+ theorem meta_0451_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103044,7 +103044,7 @@
+ theorem meta_0452_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103098,7 +103098,7 @@
+ theorem meta_0453_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103152,7 +103152,7 @@
+ theorem meta_0454_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103206,7 +103206,7 @@
+ theorem meta_0455_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103260,7 +103260,7 @@
+ theorem meta_0456_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103314,7 +103314,7 @@
+ theorem meta_0457_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103368,7 +103368,7 @@
+ theorem meta_0458_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103422,7 +103422,7 @@
+ theorem meta_0459_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103476,7 +103476,7 @@
+ theorem meta_0460_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103530,7 +103530,7 @@
+ theorem meta_0461_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103584,7 +103584,7 @@
+ theorem meta_0462_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103638,7 +103638,7 @@
+ theorem meta_0463_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103692,7 +103692,7 @@
+ theorem meta_0464_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103746,7 +103746,7 @@
+ theorem meta_0465_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103800,7 +103800,7 @@
+ theorem meta_0466_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103854,7 +103854,7 @@
+ theorem meta_0467_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103908,7 +103908,7 @@
+ theorem meta_0468_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -103962,7 +103962,7 @@
+ theorem meta_0469_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104016,7 +104016,7 @@
+ theorem meta_0470_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104070,7 +104070,7 @@
+ theorem meta_0471_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104124,7 +104124,7 @@
+ theorem meta_0472_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104178,7 +104178,7 @@
+ theorem meta_0473_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104232,7 +104232,7 @@
+ theorem meta_0474_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104286,7 +104286,7 @@
+ theorem meta_0475_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104340,7 +104340,7 @@
+ theorem meta_0476_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104394,7 +104394,7 @@
+ theorem meta_0477_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104448,7 +104448,7 @@
+ theorem meta_0478_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104502,7 +104502,7 @@
+ theorem meta_0479_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104556,7 +104556,7 @@
+ theorem meta_0480_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104610,7 +104610,7 @@
+ theorem meta_0481_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104664,7 +104664,7 @@
+ theorem meta_0482_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104718,7 +104718,7 @@
+ theorem meta_0483_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104772,7 +104772,7 @@
+ theorem meta_0484_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104826,7 +104826,7 @@
+ theorem meta_0485_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104880,7 +104880,7 @@
+ theorem meta_0486_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104934,7 +104934,7 @@
+ theorem meta_0487_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -104988,7 +104988,7 @@
+ theorem meta_0488_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105042,7 +105042,7 @@
+ theorem meta_0489_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105096,7 +105096,7 @@
+ theorem meta_0490_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105150,7 +105150,7 @@
+ theorem meta_0491_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105204,7 +105204,7 @@
+ theorem meta_0492_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105258,7 +105258,7 @@
+ theorem meta_0493_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105312,7 +105312,7 @@
+ theorem meta_0494_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105366,7 +105366,7 @@
+ theorem meta_0495_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105420,7 +105420,7 @@
+ theorem meta_0496_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105474,7 +105474,7 @@
+ theorem meta_0497_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105528,7 +105528,7 @@
+ theorem meta_0498_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105582,7 +105582,7 @@
+ theorem meta_0499_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
+@@ -105636,7 +105636,7 @@
+ theorem meta_0500_decidability :
+   ∀ (system : LogicalSystem),
+   decidable_system system ↔
+-  (∀ (formula : Formula),
++  Nonempty (∀ (formula : Formula),
+     Decidable (derivable system formula)) := by
+   intro system
+   rfl
 --- a/core/security/OneWayMembrane.lean
 +++ b/core/security/OneWayMembrane.lean
 @@ -16,6 +16,7 @@

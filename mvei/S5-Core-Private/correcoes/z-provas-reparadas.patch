@@ -1,0 +1,140 @@
+--- a/lean/HarappanConsensus.lean
++++ b/lean/HarappanConsensus.lean
+@@ -139,11 +139,8 @@
+   (h_consensus : consensusThresholdMet approvals total = true) :
+   approvals * 3 > total * 2 := by
+   unfold consensusThresholdMet at h_consensus
+-  cases h : total > 0
+-  · simp at h_consensus
+-  · cases h2 : approvals * 3 > total * 2
+-    · simp [h, h2] at h_consensus
+-    · exact h2
++  simp only [Bool.and_eq_true, decide_eq_true_eq] at h_consensus
++  exact h_consensus.2
+ 
+ /-- Valid stratum has at least one artifact -/
+ theorem valid_stratum_has_artifacts
+@@ -151,11 +148,8 @@
+   (h_valid : stratumValid s = true) :
+   s.artifacts.length > 0 := by
+   unfold stratumValid at h_valid
+-  cases h1 : s.height > 0
+-  · simp [h1] at h_valid
+-  · cases h2 : s.artifacts.length > 0
+-    · simp [h1, h2] at h_valid
+-    · exact h2
++  simp only [Bool.and_eq_true, decide_eq_true_eq] at h_valid
++  exact h_valid.1.1.2
+ 
+ /-- Network with n nodes can tolerate up to n/3 Byzantine nodes -/
+ theorem network_byzantine_tolerance
+@@ -201,11 +195,8 @@
+   (h_viable : networkViable network = true) :
+   network.totalStake > 0 := by
+   unfold networkViable at h_viable
+-  cases h1 : network.archaeologists.length ≥ 4
+-  · simp [h1] at h_viable
+-  · cases h2 : network.totalStake > 0
+-    · simp [h1, h2] at h_viable
+-    · exact h2
++  simp only [Bool.and_eq_true, decide_eq_true_eq] at h_viable
++  exact h_viable.2
+ 
+ /-- Graceful degradation: network remains functional with validator loss -/
+ def gracefulDegradation (network : HarappanNetwork) (lostValidators : Nat) : Bool :=
+@@ -220,9 +211,8 @@
+   (h_graceful : gracefulDegradation network lost = true) :
+   network.archaeologists.length - lost ≥ 4 := by
+   unfold gracefulDegradation at h_graceful
+-  cases h : network.archaeologists.length - lost ≥ 4
+-  · simp [h] at h_graceful
+-  · exact h
++  simp only [Bool.and_eq_true, decide_eq_true_eq] at h_graceful
++  exact h_graceful.1
+ 
+ /-- Contextual validation considers historical relationships -/
+ structure ContextualValidation where
+@@ -242,13 +232,12 @@
+   (h_sound : contextualValidationSound cv = true) :
+   cv.context.all stratumValid = true := by
+   unfold contextualValidationSound at h_sound
+-  cases h : cv.context.all stratumValid
+-  · simp [h] at h_sound
+-  · exact h
++  simp only [Bool.and_eq_true] at h_sound
++  exact h_sound.1
+ 
+ /-- Long-term preservation: data accessible after N strata -/
+ def longTermPreservation (network : HarappanNetwork) (height : Nat) (n : Nat) : Bool :=
+-  height + n ≤ (network.strata.map (fun s => s.height)).maximum?.getD 0 →
++  height + n ≤ (network.strata.map (fun s => s.height)).max?.getD 0 →
+   preservationIntegrity network height
+ 
+ /-- Archaeological reconstruction: recover state from partial data -/
+--- a/lean/NetworkLogic.lean
++++ b/lean/NetworkLogic.lean
+@@ -179,7 +179,7 @@
+ 
+ /-- Create scalability proof for 10,000 node network -/
+ def createScalabilityProof : ScalabilityProof :=
+-  let net := initializeNetwork 10000 (by norm_num)
++  let net := initializeNetwork 10000 (by decide)
+   {
+     network := net,
+     maxThroughput := 1000000,  -- 1M transactions per second
+--- a/lean/PrimordialLanguage.lean
++++ b/lean/PrimordialLanguage.lean
+@@ -28,6 +28,8 @@
+   | TemporalSingularity : CosmicSource  -- Compressed infinite frequency
+   deriving Repr, DecidableEq
+ 
++instance : ToString CosmicSource := ⟨fun s => reprStr s⟩
++
+ /-- Phoneme derived from cosmic source -/
+ structure CosmicPhoneme where
+   symbol : String
+@@ -313,7 +315,7 @@
+ /-- Collapse semantic superposition based on observer context -/
+ def collapseSemantics (ss : SemanticSuperposition) (ctx : LinguisticContext) : Option QuantumSemantic :=
+   -- Simplified collapse: choose based on emotional intensity
+-  let index := (ctx.emotionalIntensity * ss.states.length.toFloat).floor.toNat
++  let index := (ctx.emotionalIntensity * ss.states.length.toFloat).floor.toUInt64.toNat
+   ss.states.get? (min index (ss.states.length - 1))
+ 
+ -- ============================================================================
+@@ -361,7 +363,7 @@
+ 
+ /-- Check if text contains prohibited terms -/
+ def containsProhibitedTerms (text : String) : Bool :=
+-  prohibitedTerms.any (fun term => text.containsSubstr term)
++  prohibitedTerms.any (fun term => (text.splitOn term).length > 1)
+ 
+ /-- Validate innovation criteria -/
+ structure InnovationValidation where
+@@ -388,7 +390,7 @@
+   p.isValid → p.frequency >= 0 := by
+   intro h
+   simp [CosmicPhoneme.isValid] at h
+-  exact h.left
++  exact h.left.left
+ 
+ /-- Theorem: Normalized semantic superposition has valid amplitudes -/
+ theorem normalized_superposition_valid (ss : SemanticSuperposition) :
+@@ -404,7 +406,7 @@
+   ctx.isValid → ctx.emotionalIntensity ≥ 0 ∧ ctx.emotionalIntensity ≤ 1 := by
+   intro h
+   simp [LinguisticContext.isValid] at h
+-  exact ⟨h.left.left, h.left.right⟩
++  exact ⟨h.left.left.left.left, h.left.left.left.right⟩
+ 
+ /-- Theorem: Morphism composition preserves structure -/
+ theorem morphism_composition_preserves_structure (m1 m2 : LinguisticMorphism) :
+@@ -412,8 +414,6 @@
+   ∃ m3, composeMorphisms m1 m2 = some m3 ∧ m3.source = m1.source ∧ m3.target = m2.target := by
+   intro h
+   simp [composeMorphisms, h]
+-  use { source := m1.source, target := m2.target, name := m2.name ++ "∘" ++ m1.name }
+-  simp
+ 
+ -- ============================================================================
+ -- EXPORT PUBLIC API

@@ -1,0 +1,3472 @@
+--- a/snapshots/Elyon-Public-Proof/MCore/A1Amplitude.lean
++++ b/snapshots/Elyon-Public-Proof/MCore/A1Amplitude.lean
+@@ -1,6 +1,8 @@
+ import MCore.Core
+ import Mathlib
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- Degree-one amplitude homogeneity on a real vector space. -/
+--- a/snapshots/Elyon-Public-Proof/MCore/A2SelfRef.lean
++++ b/snapshots/Elyon-Public-Proof/MCore/A2SelfRef.lean
+@@ -1,6 +1,8 @@
+ import MCore.Core
+ import Mathlib
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ inductive Node where
+--- a/snapshots/Elyon-Public-Proof/MCore/A3Zero.lean
++++ b/snapshots/Elyon-Public-Proof/MCore/A3Zero.lean
+@@ -1,6 +1,8 @@
+ import MCore.Core
+ import Mathlib
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- A quotient-like invariant is undefined at a zero locus until an extension
+--- a/snapshots/Elyon-Public-Proof/MCore/A4Scale.lean
++++ b/snapshots/Elyon-Public-Proof/MCore/A4Scale.lean
+@@ -1,6 +1,8 @@
+ import MCore.Core
+ import Mathlib
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- Problem-specific rescaling action. M-Core does not assume that unrelated
+@@ -10,7 +12,7 @@
+ 
+ /-- Scale criticality means invariance under the adapter's declared scaling. -/
+ def ScaleCritical {U Λ : Type*} (s : Scaling U Λ) (I : U → ℝ) : Prop :=
+-  ∀ λ u, I (s.act λ u) = I u
++  ∀ «λ» u, I (s.act «λ» u) = I u
+ 
+ /-- Calibration constants are data, not theorems. -/
+ structure Calibration where
+--- a/snapshots/Elyon-Public-Proof/MCore/Admissible.lean
++++ b/snapshots/Elyon-Public-Proof/MCore/Admissible.lean
+@@ -3,6 +3,8 @@
+ import MCore.A3Zero
+ import MCore.A4Scale
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- An adapter may enter S only by exposing all four audit obligations.
+--- a/snapshots/Elyon-Public-Proof/MCore/Core.lean
++++ b/snapshots/Elyon-Public-Proof/MCore/Core.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- Scientific status is explicit and never inferred from a filename. -/
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/G1_KAdmissible_to_SignedDepletion.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/G1_KAdmissible_to_SignedDepletion.lean
+@@ -130,7 +130,7 @@
+ /-- The genuinely analytic G1a evolution inequality.  Constructing a value of
+ this structure from an actual NSE solution is OPEN. -/
+ structure JointEvolutionCertificate where
+-  q qDerivative viscousRate production lowerOrder : ℝ → ℝ
++  (q qDerivative viscousRate production lowerOrder : ℝ → ℝ)
+   hq : ∀ t, 0 ≤ q t
+   hViscous : ∀ t, 0 ≤ viscousRate t
+   evolution : ∀ t,
+@@ -208,7 +208,7 @@
+ /-! ## G1d: non-circular time-integrability bookkeeping -/
+ 
+ structure LerayEnergyCertificate where
+-  ν E0 totalGradU2 : ℝ
++  (ν E0 totalGradU2 : ℝ)
+   hν : 0 < ν
+   hE0 : 0 ≤ E0
+   hgrad : 0 ≤ totalGradU2
+@@ -280,7 +280,7 @@
+ 
+ /-- Algebraic G3 reconstruction data. -/
+ structure CriticalReconstruction where
+-  E0 M C : ℝ
++  (E0 M C : ℝ)
+   hE0 : 0 ≤ E0
+   hM : 0 ≤ M
+   hC : 0 ≤ C
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/G1/G1_DynamicCriticalGeometry.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/G1/G1_DynamicCriticalGeometry.lean
+@@ -253,7 +253,7 @@
+       PDE data without importing a critical regularity bound. -/
+   remainder_vanishes : Prop
+   /-- Explicit dependence witness: the L¹ bound on R_ε is controlled by a
+-      constant that depends ONLY on (‖u₀‖₂, ν) and NOT on ε. -/
++      axiom that depends ONLY on (‖u₀‖₂, ν) and NOT on ε. -/
+   remainder_bound_cutoff_free : Prop
+ 
+ /--
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/lean/CriticalBarrier/B2_8_SignedFlux_GapIsolation.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/lean/CriticalBarrier/B2_8_SignedFlux_GapIsolation.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2.8 signed-flux gap isolation
+ 
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/lean/CriticalBarrier/B2_DeterministicParameterChain.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/lean/CriticalBarrier/B2_DeterministicParameterChain.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2 deterministic parameter chain (audit target)
+ 
+@@ -23,7 +25,7 @@
+   C_Bern : Scalar
+   C_Sob : Scalar
+   C_CZ : Scalar
+-  deriving Repr
++  
+ 
+ namespace Parameters
+ 
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/lean/CriticalBarrier/CriticalTailBridge.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/NAVIER_STOKES/bdf538c8/formal/lean/CriticalBarrier/CriticalTailBridge.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ CriticalTailBridge.lean
+ 
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/YANG_MILLS/645b2999/lean/MCore/K13.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/YANG_MILLS/645b2999/lean/MCore/K13.lean
+@@ -1,6 +1,8 @@
+ import MCore.K12
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- Typed physical-state/Hamiltonian interface. K13 does not assert existence. -/
+--- a/snapshots/Elyon-Public-Proof/imports/final-proof/YANG_MILLS/645b2999/lean/MCore/PhysicalGapScaling.lean
++++ b/snapshots/Elyon-Public-Proof/imports/final-proof/YANG_MILLS/645b2999/lean/MCore/PhysicalGapScaling.lean
+@@ -1,5 +1,9 @@
+ import MCore.SpectralExclusion
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Tactic.Positivity
++
++noncomputable section
+ 
+ namespace MCore
+ 
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/30707e68/lean/MCore/Real/P02BoundedComputationClose.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/30707e68/lean/MCore/Real/P02BoundedComputationClose.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P02BoundedComputationSoundness
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02BoundedComputationClose
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/44e3327a/lean/MCore/Real/P01ConstructionClose.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/44e3327a/lean/MCore/Real/P01ConstructionClose.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01VerifierComposition
+ import MCore.Real.P01FinalCertificate
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01ConstructionClose
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/44e3327a/lean/MCore/Real/P01FullVerifierPhysical.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/44e3327a/lean/MCore/Real/P01FullVerifierPhysical.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierStackSemantics
+ import MCore.Real.P01FullVerifierMachine
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysical
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/44e3327a/lean/MCore/Real/P01IntegratedMachine.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/44e3327a/lean/MCore/Real/P01IntegratedMachine.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01WitnessPreservingPrep
+ import MCore.Real.P01FullVerifierPhysicalControl
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01IntegratedMachine
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/a5635895/lean/MCore/Real/P02CandidateCodingFrontier.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/a5635895/lean/MCore/Real/P02CandidateCodingFrontier.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P02UniversalFailureAlgebra
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02CandidateCodingFrontier
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/b406b806/lean/MCore/Real/FinalExternalTwoGap.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/b406b806/lean/MCore/Real/FinalExternalTwoGap.lean
+@@ -3,6 +3,8 @@
+ import MCore.Real.CookNormalizedG3Contract
+ import MCore.Real.FinalExternalCertificate
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace FinalExternalTwoGap
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/c102d9d4/lean/MCore/Real/FinalExternalCertificate.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/c102d9d4/lean/MCore/Real/FinalExternalCertificate.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalCircuitBits
+ import MCore.Real.G3ModelMatch
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace FinalExternalCertificate
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/c102d9d4/lean/MCore/Real/P02G21G22Attack.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/c102d9d4/lean/MCore/Real/P02G21G22Attack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P02TerminalFrontier
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02G21G22Attack
+--- a/snapshots/Elyon-Public-Proof/imports/pnp/d0353f8a/lean/MCore/Real/P01ParserWitnessComposition.lean
++++ b/snapshots/Elyon-Public-Proof/imports/pnp/d0353f8a/lean/MCore/Real/P01ParserWitnessComposition.lean
+@@ -3,6 +3,8 @@
+ import MCore.Real.CanonicalSATWitnessGuessNTM
+ import MCore.Real.P01VerifiedRelation
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01ParserWitnessComposition
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ArtifactAttachment.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ArtifactAttachment.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.DeltaIsolation
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ structure ArtifactAttachment where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/Attack/Beal.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/Attack/Beal.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.ArtifactAttachment
+ 
++noncomputable section
++
+ namespace MCore.FinalFail.Attack.Beal
+ 
+ structure PrimitiveReductionContract where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/Attack/NavierStokes.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/Attack/NavierStokes.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.ArtifactAttachment
+ 
++noncomputable section
++
+ namespace MCore.FinalFail.Attack.NavierStokes
+ 
+ structure CompensatorContract where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/DeltaIsolation.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/DeltaIsolation.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.ExactGapLedger
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ structure IsolatedDelta where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ExactGapLedger.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ExactGapLedger.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.SevenLocalNuclei
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ inductive GapState where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/Master.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/Master.lean
+@@ -9,6 +9,8 @@
+ import MCore.FinalFail.Attack.Beal
+ import MCore.FinalFail.Attack.NavierStokes
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ def masterState : String :=
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ProblemSignature.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ProblemSignature.lean
+@@ -52,7 +52,7 @@
+ structure ClassifiedProblem where
+   Problem : Type
+   signature : ProblemSignature
+-  class : DecimalClass
++  «class» : DecimalClass
+   preserves : BehaviorEquivalent signature class.signature
+ 
+ /-- Compression/retraction duality is recorded as structure, not inferred from
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/RecoveryFirewall.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/RecoveryFirewall.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.ExactGapLedger
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ structure RecoveryFirewall where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/SevenLocalNuclei.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/SevenLocalNuclei.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ inductive ProblemId where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/SevenProblemSignatures.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/SevenProblemSignatures.lean
+@@ -1,6 +1,8 @@
+ import MCore.FinalFail.ProblemSignature
+ import MCore.FinalFail.SevenLocalNuclei
+ 
++noncomputable section
++
+ namespace MCore.FinalFail
+ 
+ def signatureOf : ProblemId → ProblemSignature
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalProofFirewall.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalProofFirewall.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalProofRegistry
+ 
++noncomputable section
++
+ namespace MCore.FinalProof
+ 
+ def FinalProofReady : Prop := provedCount = 7
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalProofRegistry.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalProofRegistry.lean
+@@ -1,5 +1,7 @@
+ import MCore.FinalFail.ExactGapLedger
+ 
++noncomputable section
++
+ namespace MCore.FinalProof
+ 
+ inductive ProblemSlot where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/BridgeSeven.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/BridgeSeven.lean
+@@ -6,6 +6,9 @@
+ import MCore.Real.P02RestrictionFamilyAudit
+ import MCore.Real.Claim6CNFDeficitAudit
+ import MCore.Real.TotalVariableCoverageObligationNorm
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MCore.Real.SevenCertificateBridge
+ 
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/CNFStructure.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/CNFStructure.lean
+@@ -1,5 +1,7 @@
+ import MCore.C12.Families
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/CanonicalCircuitBits.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/CanonicalCircuitBits.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATBoundary
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalCircuitBits
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/CanonicalFinalProof.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/CanonicalFinalProof.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.Model
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalFinalProof
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/CanonicalSATBoundary.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/CanonicalSATBoundary.lean
+@@ -3,6 +3,8 @@
+ import MCore.Real.SATMachine
+ import MCore.Real.FailProofAllGaps
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATBoundary
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim1To7Only.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim1To7Only.lean
+@@ -1,4 +1,7 @@
+ import MCore.Real.BridgeSeven
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MCore.Real.Claim1To7Only
+ 
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim3PersistentFamily.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim3PersistentFamily.lean
+@@ -1,5 +1,7 @@
+ import MCore.C11.BranchingCost
+ 
++noncomputable section
++
+ namespace MCore.Real.Claim3PersistentFamily
+ 
+ open MCore
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim4NormalizedProgress.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim4NormalizedProgress.lean
+@@ -1,6 +1,8 @@
+ import MCore.CircuitC2
+ import MCore.Real.P02BoundedComputationEncoding
+ 
++noncomputable section
++
+ namespace MCore.Real.Claim4NormalizedProgress
+ 
+ open MCore
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim6CNFDeficitAudit.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim6CNFDeficitAudit.lean
+@@ -2,6 +2,9 @@
+ import MCore.C11.BranchingCost
+ import MCore.C10.RestrictionProgress
+ import MCore.Real.P02BoundedComputationEncoding
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MCore.Real.Claim6CNFDeficitAudit
+ 
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim7VariableCoverage.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Claim7VariableCoverage.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P02BoundedComputationEncoding
+ 
++noncomputable section
++
+ namespace MCore.Real.Claim7VariableCoverage
+ 
+ open MCore
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/FailProofAllGaps.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/FailProofAllGaps.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace FailProofAllGaps
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/FinalChain.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/FinalChain.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.SevenExternalCertificate
+ 
++noncomputable section
++
+ namespace MCore.Real.SevenCertificateBridge
+ 
+ /-- The single concrete resolution step induced by the kernel-checked seven-way evidence. -/
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Model.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Model.lean
+@@ -1,5 +1,7 @@
+ import MCore.K5
+ 
++noncomputable section
++
+ namespace MCore.Real
+ 
+ inductive Direction where
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/P02BoundedComputationEncoding.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/P02BoundedComputationEncoding.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalCircuitBits
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02BoundedComputationEncoding
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/P02RestrictionLowerBoundPattern.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/P02RestrictionLowerBoundPattern.lean
+@@ -1,5 +1,7 @@
+ import MCore.C11.BranchingCost
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02RestrictionLowerBoundPattern
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/P02TerminalFrontier.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/P02TerminalFrontier.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalCircuitBits
+ import MCore.Real.FailProofAllGaps
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02TerminalFrontier
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/SATMachine.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/SATMachine.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.Model
+ import MCore.Real.Semantics
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/Semantics.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/Semantics.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CNFStructure
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/SevenExternalCertificate.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/SevenExternalCertificate.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.SevenRealProducer
+ 
++noncomputable section
++
+ namespace MCore.Real.SevenCertificateBridge
+ 
+ /-- The external chain is type-identical to a genuine producer.
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/SevenRealProducer.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/SevenRealProducer.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.BridgeSeven
+ 
++noncomputable section
++
+ namespace MCore.Real.SevenCertificateBridge
+ 
+ /-- Minimal state space for fail-closed resolution of a concrete endpoint. -/
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/Real/TotalVariableCoverageObligationNorm.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/Real/TotalVariableCoverageObligationNorm.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.Claim4NormalizedProgress
+ import MCore.Real.Claim7VariableCoverage
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02Lane4TotalVariableCoverageNorm
+--- a/snapshots/m-core-beal/lean/MCore/Material/Closure.lean
++++ b/snapshots/m-core-beal/lean/MCore/Material/Closure.lean
+@@ -1,4 +1,6 @@
+ import MCore
++
++noncomputable section
+ namespace MCore.Material
+ structure BealDescentClosure (Counterexample Measure : Type) [LT Measure] where
+   measure : Counterexample → Measure
+--- a/snapshots/m-core-beal/lean/MCore/Material/GCDAdapter.lean
++++ b/snapshots/m-core-beal/lean/MCore/Material/GCDAdapter.lean
+@@ -1,5 +1,7 @@
+ import MCore.Material.Closure
+ import MCore.GCDLowerBoundProducer
++
++noncomputable section
+ namespace MCore.Material
+ def BealCanonicalMaterial : Prop := MCore.GCDLowerBoundProducer
+ theorem beal_material_iff_endpoint : MCore.BealConjecture ↔ BealCanonicalMaterial := MCore.bealConjecture_iff_gcdLowerBoundProducer
+--- a/snapshots/m-core-bsd/lean/MCore/Material/Closure.lean
++++ b/snapshots/m-core-bsd/lean/MCore/Material/Closure.lean
+@@ -1,4 +1,6 @@
+ import MCore
++
++noncomputable section
+ namespace MCore.Material
+ structure BSDClosure (RankResidual Torsion Quotient : Prop) where
+   rankResidual : RankResidual
+--- a/snapshots/m-core-bsd/lean/MCore/Material/RankAdapter.lean
++++ b/snapshots/m-core-bsd/lean/MCore/Material/RankAdapter.lean
+@@ -1,5 +1,7 @@
+ import MCore.Material.Closure
+ import MCore.K12
++
++noncomputable section
+ namespace MCore.Material
+ def BSDCanonicalRankMaterial (d : MCore.BSDArithmeticAnalyticData) : Prop := MCore.BSDRankPart d
+ theorem bsd_rank_material_iff_existing_target (d : MCore.BSDArithmeticAnalyticData) : BSDCanonicalRankMaterial d ↔ MCore.BSDRankEquality d.toRankData := MCore.k12_rank_part_iff_k8_target d
+--- a/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgeOpenClosedDuality.lean
++++ b/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgeOpenClosedDuality.lean
+@@ -1,5 +1,7 @@
+ import MCore.BackwardAudit.HodgeRatioCollapse
+ 
++noncomputable section
++
+ namespace MCore.BackwardAudit
+ 
+ /--
+--- a/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgePhaseDistinctness.lean
++++ b/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgePhaseDistinctness.lean
+@@ -1,5 +1,7 @@
+ import MCore.BackwardAudit.HodgeOpenClosedDuality
+ 
++noncomputable section
++
+ namespace MCore.BackwardAudit
+ 
+ /--
+--- a/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgeRatioCollapse.lean
++++ b/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgeRatioCollapse.lean
+@@ -1,5 +1,7 @@
+ import MCore.BackwardAudit.HodgeThreeWayCore
+ 
++noncomputable section
++
+ namespace MCore.BackwardAudit
+ 
+ /--
+--- a/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgeThreeWayCore.lean
++++ b/snapshots/m-core-hodge/lean/MCore/BackwardAudit/HodgeThreeWayCore.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.Tactic
+ import MCore.BackwardAudit.HodgeTerminalCycleCountermodel
+ 
++noncomputable section
++
+ namespace MCore.BackwardAudit
+ 
+ /--
+--- a/snapshots/m-core-hodge/lean/MCore/HodgeUnifiedBuild.lean
++++ b/snapshots/m-core-hodge/lean/MCore/HodgeUnifiedBuild.lean
+@@ -19,6 +19,8 @@
+ import P05.Hodge.HodgeFormalRealization
+ import P05.Hodge.HodgeTheoryComplete
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- Unified build marker: importing this module forces the complete current
+--- a/snapshots/m-core-hodge/lean/MCore/Material/Closure.lean
++++ b/snapshots/m-core-hodge/lean/MCore/Material/Closure.lean
+@@ -1,4 +1,6 @@
+ import MCore
++
++noncomputable section
+ namespace MCore.Material
+ structure HodgeClosure (HodgeClass AlgebraicCycle : Type) where
+   realize : HodgeClass → AlgebraicCycle
+--- a/snapshots/m-core-hodge/lean/P05/Hodge/HodgeFormalRealization.lean
++++ b/snapshots/m-core-hodge/lean/P05/Hodge/HodgeFormalRealization.lean
+@@ -1,6 +1,8 @@
+ import P05.Hodge.MathlibCohomologyCycleClassAdapter
+ import P05.Hodge.HodgeInfrastructureComplete
+ 
++noncomputable section
++
+ namespace P05.Hodge
+ 
+ open MCore
+--- a/snapshots/m-core-hodge/lean/P05/Hodge/HodgeInfrastructureComplete.lean
++++ b/snapshots/m-core-hodge/lean/P05/Hodge/HodgeInfrastructureComplete.lean
+@@ -6,6 +6,8 @@
+ import MCore.BackwardAudit.R3AtomicSpecialization
+ import MCore.BackwardAudit.R3aHilbertProperness
+ 
++noncomputable section
++
+ namespace P05.Hodge
+ 
+ open MCore
+--- a/snapshots/m-core-hodge/lean/P05/Hodge/HodgeTheoryComplete.lean
++++ b/snapshots/m-core-hodge/lean/P05/Hodge/HodgeTheoryComplete.lean
+@@ -5,6 +5,8 @@
+ import MCore.BackwardAudit.R2FiberAlgebraicityBoundary
+ import MCore.BackwardAudit.R3SpecializationBoundary
+ 
++noncomputable section
++
+ namespace P05.Hodge
+ 
+ open MCore
+--- a/snapshots/m-core-hodge/lean/P05/Hodge/MathlibCohomologyCycleClassAdapter.lean
++++ b/snapshots/m-core-hodge/lean/P05/Hodge/MathlibCohomologyCycleClassAdapter.lean
+@@ -1,5 +1,7 @@
+ import P05.Hodge.MathlibCycleClassBridge
+ 
++noncomputable section
++
+ namespace P05.Hodge
+ 
+ open MCore
+--- a/snapshots/m-core-hodge/lean/P05/Hodge/MathlibCycleClassBridge.lean
++++ b/snapshots/m-core-hodge/lean/P05/Hodge/MathlibCycleClassBridge.lean
+@@ -1,5 +1,7 @@
+ import P05.Hodge.MathlibGeometryBridgeProbe
+ 
++noncomputable section
++
+ namespace P05.Hodge
+ 
+ open MCore
+--- a/snapshots/m-core-hodge/lean/P05/Hodge/MathlibGeometryBridgeProbe.lean
++++ b/snapshots/m-core-hodge/lean/P05/Hodge/MathlibGeometryBridgeProbe.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.AlgebraicGeometry.Scheme
+ import MCore.HodgeGeometricBackends
+ 
++noncomputable section
++
+ namespace P05.Hodge
+ 
+ open MCore
+--- a/snapshots/m-core-hodge/open_math/P02RejectionHodgeInvariantProbe.lean
++++ b/snapshots/m-core-hodge/open_math/P02RejectionHodgeInvariantProbe.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P02DeterministicRejectionHodge
+ 
++noncomputable section
++
+ namespace MCore.Hodge
+ 
+ open HodgeRejectionSystem
+--- a/snapshots/m-core-p-vs-np/audit/ATK_EXACT_OPEN_PROOF_FRONTIER_20261009.lean
++++ b/snapshots/m-core-p-vs-np/audit/ATK_EXACT_OPEN_PROOF_FRONTIER_20261009.lean
+@@ -9,6 +9,8 @@
+ import MCore.Real.CanonicalCircuitBits
+ import MCore.Real.G3ModelMatch
+ 
++noncomputable section
++
+ /-! ATK OPEN MATERIAL FRONTIER — sourced exact Lean bodies; not a kernel-certified final proof. -/
+ 
+ 
+--- a/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH01_20261009.lean
++++ b/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH01_20261009.lean
+@@ -1,9 +1,28 @@
++import MCore.Core
++import Mathlib
++import MCore.FinalFail.ExactGapLedger
++import MCore.FinalFail.RecoveryFirewall
++import MCore.FinalFail.DeltaIsolation
++import MCore.FinalFail.ArtifactAttachment
++import MCore.FinalFail.TriadicObstructionCalculus
++import MCore.FinalFail.ClosedCenterHard
++import MCore.FinalFail.FundamentalIndeterminacy
++import MCore.FinalFail.RelationalHardAtom
++import MCore.FinalFail.Attack.Beal
++import MCore.FinalFail.Attack.NavierStokes
++import MCore.FinalFail.UniversalTerminalClosure
++import MCore.FinalFail.RPAConfirmation
++import MCore.FinalFail.RPALattice
++import MCore.FinalFail.RPALatticeCube3
++import MCore.FinalProofRegistry
++import MCore.FinalFail.BoundaryAtoms
++import MCore.FinalFail.SevenLocalNuclei
++
++noncomputable section
+ /- ATK source archive: partial batch; not a terminal certificate; individual Lean modules may conflict when concatenated. -/
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/MCore/A3Zero.lean | blob b654a179a0de5031325fcc5bc62e8714d498e61d -/
+-import MCore.Core
+-import Mathlib
+ 
+ namespace MCore
+ 
+@@ -33,8 +52,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/MCore/A1Amplitude.lean | blob 261996779e5270ba15c8614b3f8e7de413de68ab -/
+-import MCore.Core
+-import Mathlib
+ 
+ namespace MCore
+ 
+@@ -73,16 +90,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Master.lean | blob 42e8e6593133c9bd60df2394b63c4889816c2257 -/
+-import MCore.FinalFail.ExactGapLedger
+-import MCore.FinalFail.RecoveryFirewall
+-import MCore.FinalFail.DeltaIsolation
+-import MCore.FinalFail.ArtifactAttachment
+-import MCore.FinalFail.TriadicObstructionCalculus
+-import MCore.FinalFail.ClosedCenterHard
+-import MCore.FinalFail.FundamentalIndeterminacy
+-import MCore.FinalFail.RelationalHardAtom
+-import MCore.FinalFail.Attack.Beal
+-import MCore.FinalFail.Attack.NavierStokes
+ 
+ namespace MCore.FinalFail
+ 
+@@ -98,10 +105,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalProofRegistry.lean | blob da146e9aff03211b4a0eba3257bc8ca162773133 -/
+-import MCore.FinalFail.UniversalTerminalClosure
+-import MCore.FinalFail.RPAConfirmation
+-import MCore.FinalFail.RPALattice
+-import MCore.FinalFail.RPALatticeCube3
+ 
+ namespace MCore.FinalProof
+ 
+@@ -185,7 +188,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalProofFirewall.lean | blob 98921e6eaaa33b1ecb8ac09a3ad50d3ac1ccd9ae -/
+-import MCore.FinalProofRegistry
+ 
+ namespace MCore.FinalProof
+ 
+@@ -218,7 +220,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/ATK/StructuralDefect.lean | blob b2f8e24382fb4284e9a83116afb38926d7d8bafb -/
+-import Mathlib
+ 
+ namespace MCore.ATK.StructuralDefect
+ 
+@@ -342,7 +343,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/RPALattice.lean | blob 3f4d08972a7b8b1caf2780d97fdc2bae85551ab2 -/
+-import MCore.FinalFail.RPAConfirmation
+ 
+ namespace MCore.FinalFail.RPA
+ 
+@@ -373,7 +373,7 @@
+ /-- Idempotent quotient: only presence/absence of each endpoint remains. -/
+ inductive CanonicalEndpointState
+   | empty
+-  | open
++  | «open»
+   | closed
+   | full
+   deriving DecidableEq, Repr
+@@ -446,7 +446,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Attack/Beal.lean | blob 4cffa2699e58327707686e969da9ab7822b5cc3a -/
+-import MCore.FinalFail.ArtifactAttachment
+ 
+ namespace MCore.FinalFail.Attack.Beal
+ 
+@@ -479,7 +478,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Semantic/BSD.lean | blob 9dd77c44d14f3e458adf269efaaed9d56c8f1f08 -/
+-import MCore.FinalFail.BoundaryAtoms
+ 
+ namespace MCore.FinalFail.Semantic
+ 
+@@ -521,7 +519,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Semantic/Beal.lean | blob 2180a91f98ff3ff56081e23d5aacf0ab47108cad -/
+-import MCore.FinalFail.BoundaryAtoms
+ 
+ namespace MCore.FinalFail.Semantic
+ 
+@@ -558,7 +555,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/BoundaryAtoms.lean | blob 53f0aadced7c97ee75d80dcb71ad96504de0e60a -/
+-import MCore.FinalFail.SevenLocalNuclei
+ 
+ namespace MCore.FinalFail
+ 
+@@ -659,7 +655,6 @@
+ 
+ 
+ /- SOURCE https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Semantic/PvsNP.lean | blob 196c1891220f2082bc213e0aaf2aebcb9927d82e -/
+-import MCore.FinalFail.BoundaryAtoms
+ 
+ namespace MCore.FinalFail.Semantic
+ 
+--- a/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH02_20261009.lean
++++ b/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH02_20261009.lean
+@@ -1,8 +1,30 @@
++import MCore.Core
++import Mathlib
++import MCore.A1Amplitude
++import MCore.A2SelfRef
++import MCore.A3Zero
++import MCore.A4Scale
++import MCore.FinalFail.ExactGapLedger
++import MCore.FinalFail.RecoveryFirewall
++import MCore.FinalFail.DeltaIsolation
++import MCore.FinalFail.ArtifactAttachment
++import MCore.FinalFail.TriadicObstructionCalculus
++import MCore.FinalFail.ClosedCenterHard
++import MCore.FinalFail.FundamentalIndeterminacy
++import MCore.FinalFail.RelationalHardAtom
++import MCore.FinalFail.Attack.Beal
++import MCore.FinalFail.Attack.NavierStokes
++import MCore.FinalFail.UniversalTerminalClosure
++import MCore.FinalFail.RPAConfirmation
++import MCore.FinalFail.RPALattice
++import MCore.FinalFail.RPALatticeCube3
++import MCore.FinalProofRegistry
++import MCore.FinalFail.SevenLocalNuclei
++
++noncomputable section
+ /- ATK BATCH02 — full source archive, not compiled; unique blobs in this batch. -/
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/MCore/A4Scale.lean blob ca603ba7a9530fcec798322f140b5203326a56a7 -/
+-import MCore.Core
+-import Mathlib
+ 
+ namespace MCore
+ 
+@@ -13,7 +35,7 @@
+ 
+ /-- Scale criticality means invariance under the adapter's declared scaling. -/
+ def ScaleCritical {U Λ : Type*} (s : Scaling U Λ) (I : U → ℝ) : Prop :=
+-  ∀ λ u, I (s.act λ u) = I u
++  ∀ «λ» u, I (s.act «λ» u) = I u
+ 
+ /-- Calibration constants are data, not theorems. -/
+ structure Calibration where
+@@ -31,8 +53,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/MCore/A2SelfRef.lean blob 6f6c6050664b759d30427ef696f13d42917723dc -/
+-import MCore.Core
+-import Mathlib
+ 
+ namespace MCore
+ 
+@@ -64,7 +84,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/ATK/StructuralDefect.lean blob b2f8e24382fb4284e9a83116afb38926d7d8bafb -/
+-import Mathlib
+ 
+ namespace MCore.ATK.StructuralDefect
+ 
+@@ -188,10 +207,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/MCore/Admissible.lean blob 42c138699f8bb10d047d6f9405e36ac6b9e8fbc5 -/
+-import MCore.A1Amplitude
+-import MCore.A2SelfRef
+-import MCore.A3Zero
+-import MCore.A4Scale
+ 
+ namespace MCore
+ 
+@@ -219,8 +234,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/MCore/A1Amplitude.lean blob 261996779e5270ba15c8614b3f8e7de413de68ab -/
+-import MCore.Core
+-import Mathlib
+ 
+ namespace MCore
+ 
+@@ -259,16 +272,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Master.lean blob 42e8e6593133c9bd60df2394b63c4889816c2257 -/
+-import MCore.FinalFail.ExactGapLedger
+-import MCore.FinalFail.RecoveryFirewall
+-import MCore.FinalFail.DeltaIsolation
+-import MCore.FinalFail.ArtifactAttachment
+-import MCore.FinalFail.TriadicObstructionCalculus
+-import MCore.FinalFail.ClosedCenterHard
+-import MCore.FinalFail.FundamentalIndeterminacy
+-import MCore.FinalFail.RelationalHardAtom
+-import MCore.FinalFail.Attack.Beal
+-import MCore.FinalFail.Attack.NavierStokes
+ 
+ namespace MCore.FinalFail
+ 
+@@ -284,10 +287,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalProofRegistry.lean blob da146e9aff03211b4a0eba3257bc8ca162773133 -/
+-import MCore.FinalFail.UniversalTerminalClosure
+-import MCore.FinalFail.RPAConfirmation
+-import MCore.FinalFail.RPALattice
+-import MCore.FinalFail.RPALatticeCube3
+ 
+ namespace MCore.FinalProof
+ 
+@@ -371,7 +370,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalProofFirewall.lean blob 98921e6eaaa33b1ecb8ac09a3ad50d3ac1ccd9ae -/
+-import MCore.FinalProofRegistry
+ 
+ namespace MCore.FinalProof
+ 
+@@ -404,7 +402,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/RPALattice.lean blob 3f4d08972a7b8b1caf2780d97fdc2bae85551ab2 -/
+-import MCore.FinalFail.RPAConfirmation
+ 
+ namespace MCore.FinalFail.RPA
+ 
+@@ -435,7 +432,7 @@
+ /-- Idempotent quotient: only presence/absence of each endpoint remains. -/
+ inductive CanonicalEndpointState
+   | empty
+-  | open
++  | «open»
+   | closed
+   | full
+   deriving DecidableEq, Repr
+@@ -508,7 +505,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/Attack/Beal.lean blob 4cffa2699e58327707686e969da9ab7822b5cc3a -/
+-import MCore.FinalFail.ArtifactAttachment
+ 
+ namespace MCore.FinalFail.Attack.Beal
+ 
+@@ -541,7 +537,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/BoundaryAtoms.lean blob 53f0aadced7c97ee75d80dcb71ad96504de0e60a -/
+-import MCore.FinalFail.SevenLocalNuclei
+ 
+ namespace MCore.FinalFail
+ 
+@@ -642,7 +637,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/DeltaIsolation.lean blob 8dab4ed10a59305ffc76aa8e249ebcc66d0c41be -/
+-import MCore.FinalFail.ExactGapLedger
+ 
+ namespace MCore.FinalFail
+ 
+@@ -672,7 +666,6 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/ExactGapLedger.lean blob b1e8bf78f8c38cb682fff19d092bcdc6b908c802 -/
+-import MCore.FinalFail.SevenLocalNuclei
+ 
+ namespace MCore.FinalFail
+ 
+@@ -714,12 +707,11 @@
+ 
+ 
+ /- https://github.com/ShantiDraconis/M-Core/blob/01d8d7660ccfea0285628bd7c5de33a661c4b77c/lean/MCore/FinalFail/RPALatticeCube3.lean blob 6ca8f3c1eeb556611224c8e3d3ab4472e24bbef5 -/
+-import MCore.FinalFail.RPALattice
+ 
+ namespace MCore.FinalFail.RPA
+ 
+ inductive EndpointAtom
+-  | open
++  | «open»
+   | closed
+   deriving DecidableEq, Repr
+ 
+--- a/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH03_20261009.lean
++++ b/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH03_20261009.lean
+@@ -1,7 +1,24 @@
++import MCore.C12.Families
++import MCore.Real.CanonicalSATBoundary
++import MCore.K9
++import MCore.Real.CanonicalPSubsetNP
++import MCore.Real.FailProofAllGaps
++import MCore.Real.Model
++import MCore.Real.CanonicalFinalProof
++import MCore.Real.CNFStructure
++import MCore.Real.Semantics
++import MCore.Real.SATMachine
++import MCore.Real.CanonicalSATNatParserAttack
++import MCore.Real.CanonicalSATFrameAttack
++import MCore.Real.CanonicalSATVerifier
++import MCore.Real.CanonicalSATParserAttack
++import MCore.Real.CanonicalSATNTMAttack
++import MCore.Real.CanonicalSATWitness
++
++noncomputable section
+ /- ATK BATCH03: complete sourced modules, archival concatenation, not a Lean compilation certificate. -/
+ 
+ /- SOURCE lean/MCore/Real/CNFStructure.lean BLOB 83bfd6b26efc506c97f9f2328e0f7996fb44e434 -/
+-import MCore.C12.Families
+ 
+ namespace MCore
+ namespace Real
+@@ -675,7 +692,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalCircuitBits.lean BLOB 95db8597b479638fc0c035e951054d3043782272 -/
+-import MCore.Real.CanonicalSATBoundary
+ 
+ namespace MCore
+ namespace Real
+@@ -865,9 +881,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalComplexityBridge.lean BLOB 0b44ea4c066781a6537a5a600e31e2384a47f8a4 -/
+-import MCore.K9
+-import MCore.Real.CanonicalPSubsetNP
+-import MCore.Real.FailProofAllGaps
+ 
+ namespace MCore
+ namespace Real
+@@ -917,7 +930,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalFinalProof.lean BLOB 247f0e5cef8314c3a3cf3fd6bab87f48eb867c43 -/
+-import MCore.Real.Model
+ 
+ namespace MCore
+ namespace Real
+@@ -1087,7 +1099,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalPSubsetNP.lean BLOB 5ba695ae41be2b0848a518732bcadbc7649f6cd2 -/
+-import MCore.Real.CanonicalFinalProof
+ 
+ namespace MCore
+ namespace Real
+@@ -1361,10 +1372,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATBoundary.lean BLOB 10df41e32aaa8b08f650b8d76b8a85db0ef7afc4 -/
+-import MCore.Real.CNFStructure
+-import MCore.Real.Semantics
+-import MCore.Real.SATMachine
+-import MCore.Real.FailProofAllGaps
+ 
+ namespace MCore
+ namespace Real
+@@ -1449,7 +1456,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATFrameAttack.lean BLOB ec413cf6554179a25eb3b3d5d4d99b1c4fd13842 -/
+-import MCore.Real.CanonicalSATNatParserAttack
+ 
+ namespace MCore
+ namespace Real
+@@ -1783,7 +1789,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATFrameMachineV2.lean BLOB 829e02aef78a7f49b7b09c4a66c95b513bd60c06 -/
+-import MCore.Real.CanonicalSATFrameAttack
+ 
+ namespace MCore
+ namespace Real
+@@ -1963,7 +1968,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATNTMAttack.lean BLOB aafdb20728f951879a4b8286b7e2557264bd8575 -/
+-import MCore.Real.CanonicalSATVerifier
+ 
+ namespace MCore
+ namespace Real
+@@ -2109,7 +2113,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATNatParserAttack.lean BLOB 04bd08e97f24e76cab6403b7bc8753c7f751f5d1 -/
+-import MCore.Real.CanonicalSATParserAttack
+ 
+ namespace MCore
+ namespace Real
+@@ -2247,7 +2250,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATParserAttack.lean BLOB 1b631109f1a2e5f217320fc38dd70cdce6f37c0a -/
+-import MCore.Real.CanonicalSATNTMAttack
+ 
+ namespace MCore
+ namespace Real
+@@ -2613,7 +2615,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATVerifier.lean BLOB 286211091577d66ca401c618fcac6ee91c02f9d0 -/
+-import MCore.Real.CanonicalSATWitness
+ 
+ namespace MCore
+ namespace Real
+--- a/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH04_20261009.lean
++++ b/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH04_20261009.lean
+@@ -1,7 +1,19 @@
++import MCore.Real.CanonicalCircuitBits
++import MCore.Real.CanonicalFinalProof
++import MCore.Real.FailProofAllGaps
++import MCore.Real.SATMachine
++import MCore.Real.FinalProof
++import MCore.Real.Model
++import MCore.K5
++import MCore.Real.CanonicalSATWitness
++import MCore.Real.Semantics
++import MCore.Real.P01EncodedStackEvaluator
++import MCore.Real.P01EncodedEvaluator
++
++noncomputable section
+ /- ATK BATCH04: full source snapshot. Concatenation archival only, not kernel-certified. -/
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATWitness.lean BLOB 0585a266c7722e98b06296fadec948dfbed2763e -/
+-import MCore.Real.CanonicalCircuitBits
+ 
+ namespace MCore
+ namespace Real
+@@ -149,7 +161,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/CanonicalSATWitnessGuessNTM.lean BLOB 48ab49c6059d87231347e3335f5d9dbd87d013cf -/
+-import MCore.Real.CanonicalFinalProof
+ 
+ namespace MCore
+ namespace Real
+@@ -260,7 +271,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/FailProofAllGaps.lean BLOB e2c29e2b8311b64b34b4531ee3c425d9c1f0d091 -/
+-import MCore.Real.CanonicalFinalProof
+ 
+ namespace MCore
+ namespace Real
+@@ -374,7 +384,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/FailProofFiniteAttack.lean BLOB 6875f6fefccc4d203734adfeba4932ee48a524f9 -/
+-import MCore.Real.FailProofAllGaps
+ 
+ namespace MCore
+ namespace Real
+@@ -460,7 +469,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/FinalProof.lean BLOB 2413c8e879fde352ffd186f24a35db2d32f289e9 -/
+-import MCore.Real.SATMachine
+ 
+ namespace MCore
+ namespace Real
+@@ -658,7 +666,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/FinalProofAttack.lean BLOB ad3e12dd8a22a56ed638a264bd8cfa11d700c2a4 -/
+-import MCore.Real.FinalProof
+ 
+ namespace MCore
+ namespace Real
+@@ -776,7 +783,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/MachineRunLemmas.lean BLOB b6caca8af8fbe7962c38c8bf64d4871d69d9cca7 -/
+-import MCore.Real.Model
+ 
+ namespace MCore
+ namespace Real
+@@ -864,7 +870,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/Model.lean BLOB 75dc88485cb60edab758528d9c573b906bcd3c65 -/
+-import MCore.K5
+ 
+ namespace MCore.Real
+ 
+@@ -1000,7 +1005,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01DeterministicNTMEmbedding.lean BLOB de177f5cdceab7676746dfe19278a47a12bb887e -/
+-import MCore.Real.Model
+ 
+ namespace MCore
+ namespace Real
+@@ -1122,9 +1126,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EncodedEvaluator.lean BLOB 381f07e7b70003d8163d54edc5c5d1caaba7020e -/
+-import MCore.Real.CanonicalCircuitBits
+-import MCore.Real.CanonicalSATWitness
+-import MCore.Real.Semantics
+ 
+ namespace MCore
+ namespace Real
+@@ -1270,7 +1271,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EncodedFrameTape.lean BLOB 6119e11fd5589699e63ab15a872a761734e2c0aa -/
+-import MCore.Real.P01EncodedStackEvaluator
+ 
+ namespace MCore
+ namespace Real
+@@ -1404,7 +1404,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EncodedStackEvaluator.lean BLOB 7bf30bbe3489cf801d314635ab10072721f63691 -/
+-import MCore.Real.P01EncodedEvaluator
+ 
+ namespace MCore
+ namespace Real
+--- a/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH05_20261009.lean
++++ b/snapshots/m-core-p-vs-np/audit/ATK_UNIFIED_SOURCE_BATCH05_20261009.lean
+@@ -1,8 +1,24 @@
++import MCore.Real.P01EvalCursorRoundTrip
++import MCore.Real.P01EvalCursorFramePush
++import MCore.Real.P01EvalCursorMachine
++import MCore.Real.P01EvalFramePushMachine
++import MCore.Real.P01EncodedFrameTape
++import MCore.Real.P01FullVerifierPhysicalStackV2
++import MCore.Real.MachineRunLemmas
++import MCore.Real.P01EvalFramePopMachine
++import MCore.Real.P01EvalCursorConsume
++import MCore.Real.P01EncodedStackEvaluator
++import MCore.Real.CanonicalSATNTMAttack
++import MCore.Real.P01FullVerifierPhysical
++import MCore.Real.P01FullVerifierStackSemantics
++import MCore.Real.P01VerifierGateMachine
++import MCore.Real.P01FullVerifierPhysicalMoves
++import MCore.Real.P01FullVerifierPhysicalShuttles
++
++noncomputable section
+ /- ATK BATCH05: full source snapshot. Archival only; no kernel certification implied. -/
+ 
+ /- SOURCE lean/MCore/Real/P01EvalCursorConsume.lean BLOB 730b493a49e2729a2130311ba4f889c2fa4a5b75 -/
+-import MCore.Real.P01EvalCursorRoundTrip
+-import MCore.Real.P01EvalCursorFramePush
+ 
+ namespace MCore
+ namespace Real
+@@ -114,8 +130,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalCursorFramePush.lean BLOB 368d7bfc1ced85f4dd17cb7db7cbf03efab6b8a7 -/
+-import MCore.Real.P01EvalCursorMachine
+-import MCore.Real.P01EvalFramePushMachine
+ 
+ namespace MCore
+ namespace Real
+@@ -207,9 +221,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalCursorMachine.lean BLOB ad4c242831748514b78cddd6ba5c3e5d066cebb0 -/
+-import MCore.Real.P01EncodedFrameTape
+-import MCore.Real.P01FullVerifierPhysicalStackV2
+-import MCore.Real.MachineRunLemmas
+ 
+ namespace MCore
+ namespace Real
+@@ -576,8 +587,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalCursorRoundTrip.lean BLOB 46b6d78f3d1d4772ade8a66249b8ff1c5d953def -/
+-import MCore.Real.P01EvalCursorMachine
+-import MCore.Real.MachineRunLemmas
+ 
+ namespace MCore
+ namespace Real
+@@ -848,8 +857,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalFramePopMachine.lean BLOB 80ac03328cf7387951d7d44d4d9da2614c671075 -/
+-import MCore.Real.P01EncodedFrameTape
+-import MCore.Real.P01FullVerifierPhysicalStackV2
+ 
+ namespace MCore
+ namespace Real
+@@ -1018,7 +1025,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalFramePopMachineV2.lean BLOB 4cde6cb928a3541960d74c272880653fceeffa2c -/
+-import MCore.Real.P01EvalFramePushMachine
+ 
+ namespace MCore
+ namespace Real
+@@ -1267,9 +1273,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalFramePushMachine.lean BLOB 63bba08487b03636194b45fffea80a6fd863233e -/
+-import MCore.Real.P01EncodedFrameTape
+-import MCore.Real.P01FullVerifierPhysicalStackV2
+-import MCore.Real.MachineRunLemmas
+ 
+ namespace MCore
+ namespace Real
+@@ -1450,8 +1453,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalStepFrameRefinement.lean BLOB 0559152d52b8373539df9ba77325c59568359658 -/
+-import MCore.Real.P01EvalFramePushMachine
+-import MCore.Real.P01EvalFramePopMachine
+ 
+ namespace MCore
+ namespace Real
+@@ -1779,9 +1780,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01EvalTagPhysicalRefinement.lean BLOB 140f16c6b576417e68f53759e48bc31e91b032f1 -/
+-import MCore.Real.P01EvalCursorConsume
+-import MCore.Real.P01EvalCursorFramePush
+-import MCore.Real.P01EncodedStackEvaluator
+ 
+ namespace MCore
+ namespace Real
+@@ -1973,7 +1971,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01FinalCertificate.lean BLOB 79e04a486769b1f129c90b0eecb91c2a0828b50b -/
+-import MCore.Real.CanonicalSATNTMAttack
+ 
+ namespace MCore
+ namespace Real
+@@ -2046,9 +2043,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01FullVerifierEvalLocal.lean BLOB f57ddf300dfff95dac2aeee069a2dae18805a7ac -/
+-import MCore.Real.P01FullVerifierPhysical
+-import MCore.Real.P01FullVerifierStackSemantics
+-import MCore.Real.P01VerifierGateMachine
+ 
+ namespace MCore
+ namespace Real
+@@ -2095,9 +2089,6 @@
+ 
+ 
+ /- SOURCE lean/MCore/Real/P01FullVerifierInputShuttleV2.lean BLOB a2d1aad399907e802230c27e1b8e930b7ad3d737 -/
+-import MCore.Real.P01FullVerifierPhysicalStackV2
+-import MCore.Real.P01FullVerifierPhysicalMoves
+-import MCore.Real.P01FullVerifierPhysicalShuttles
+ 
+ namespace MCore
+ namespace Real
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Attack/CanonicalTerminalProducer.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Attack/CanonicalTerminalProducer.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.CanonicalComplexityBridge
+ import MCore.BackwardAudit.OrientedWitnessBoundary
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Attack
+ 
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Material/Closure.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Material/Closure.lean
+@@ -1,4 +1,6 @@
+ import MCore
++
++noncomputable section
+ namespace MCore.Material
+ structure PNPClosure (Instance Witness Machine : Type) where
+   machine : Machine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Material/P01Adapter.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Material/P01Adapter.lean
+@@ -1,5 +1,8 @@
+ import MCore.Material.Closure
+ import MCore.Real.P01FinalCertificate
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ namespace MCore.Material
+ open MCore.Real.P01FinalCertificate
+ 
+--- a/snapshots/m-core-p-vs-np/lean/MCore/MinimalInhabitant.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/MinimalInhabitant.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.CanonicalCircuitBits
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ open Real
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CNFStructure.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CNFStructure.lean
+@@ -1,5 +1,7 @@
+ import MCore.C12.Families
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalCircuitBits.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalCircuitBits.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATBoundary
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalCircuitBits
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalComplexityBridge.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalComplexityBridge.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalPSubsetNP
+ import MCore.Real.FailProofAllGaps
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalComplexityBridge
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalFinalProof.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalFinalProof.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.Model
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalFinalProof
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalPSubsetNP.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalPSubsetNP.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalPSubsetNP
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATBoundary.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATBoundary.lean
+@@ -3,6 +3,8 @@
+ import MCore.Real.SATMachine
+ import MCore.Real.FailProofAllGaps
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATBoundary
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATFrameAttack.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATFrameAttack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATNatParserAttack
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATFrameAttack
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATFrameMachineV2.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATFrameMachineV2.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATFrameAttack
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATFrameMachineV2
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATNTMAttack.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATNTMAttack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATVerifier
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATNTMAttack
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATNatParserAttack.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATNatParserAttack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATParserAttack
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATNatParserAttack
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATParserAttack.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATParserAttack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATNTMAttack
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATParserAttack
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATVerifier.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATVerifier.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATWitness
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATVerifier
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATWitness.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATWitness.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalCircuitBits
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATWitness
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATWitnessGuessNTM.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/CanonicalSATWitnessGuessNTM.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace CanonicalSATWitnessGuessNTM
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/FailProofAllGaps.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/FailProofAllGaps.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace FailProofAllGaps
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/FailProofFiniteAttack.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/FailProofFiniteAttack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.FailProofAllGaps
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace FailProofFiniteAttack
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/FinalProof.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/FinalProof.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.SATMachine
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/FinalProofAttack.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/FinalProofAttack.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.FinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace FinalProofAttack
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/Model.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/Model.lean
+@@ -1,5 +1,7 @@
+ import MCore.K5
+ 
++noncomputable section
++
+ namespace MCore.Real
+ 
+ inductive Direction where
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01DeterministicNTMEmbedding.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01DeterministicNTMEmbedding.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.Model
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01DeterministicNTMEmbedding
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EncodedEvaluator.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EncodedEvaluator.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalSATWitness
+ import MCore.Real.Semantics
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EncodedEvaluator
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EncodedFrameTape.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EncodedFrameTape.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01EncodedStackEvaluator
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EncodedFrameTape
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EncodedStackEvaluator.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EncodedStackEvaluator.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01EncodedEvaluator
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EncodedStackEvaluator
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalCursorConsume.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalCursorConsume.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01EvalCursorRoundTrip
+ import MCore.Real.P01EvalCursorFramePush
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EvalCursorConsume
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalCursorMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalCursorMachine.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EvalCursorMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalCursorRoundTrip.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalCursorRoundTrip.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01EvalCursorMachine
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EvalCursorRoundTrip
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalFramePopMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalFramePopMachine.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01EncodedFrameTape
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EvalFramePopMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalFramePopMachineV2.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalFramePopMachineV2.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01EvalFramePushMachine
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EvalFramePopMachineV2
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalFramePushMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01EvalFramePushMachine.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01EvalFramePushMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FinalCertificate.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FinalCertificate.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATNTMAttack
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FinalCertificate
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierInputShuttleV2.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierInputShuttleV2.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierPhysicalMoves
+ import MCore.Real.P01FullVerifierPhysicalShuttles
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierInputShuttleV2
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierMachine.lean
+@@ -4,6 +4,8 @@
+ import MCore.Real.P01VerifierComposition
+ import MCore.Real.CanonicalCircuitBits
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysical.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysical.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierStackSemantics
+ import MCore.Real.P01FullVerifierMachine
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysical
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalControl.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalControl.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01FullVerifierPhysical
+ import MCore.Real.P01FullVerifierTraversal
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalControl
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalMoves.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalMoves.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01FullVerifierPhysicalControl
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalMoves
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalOps.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalOps.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01FullVerifierStackPrimitiveMachine
+ import MCore.Real.P01FullVerifierEvalLocal
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalOps
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalRefinement.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalRefinement.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierEvalLocal
+ import MCore.Real.P01FullVerifierStackSemantics
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalRefinement
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalRefinementV2.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalRefinementV2.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ import MCore.Real.P01FullVerifierPhysicalShuttles
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalRefinementV2
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalShuttles.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalShuttles.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01FullVerifierPhysicalMoves
+ import MCore.Real.P01FullVerifierPhysical
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalShuttles
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalStackV2.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierPhysicalStackV2.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01FullVerifierPhysicalShuttles
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierPhysicalStackV2
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierSourceRewind.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierSourceRewind.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01FullVerifierPhysicalShuttles
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierSourceRewind
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierStackPrimitiveMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierStackPrimitiveMachine.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierStackPrimitiveMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierStackSemantics.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierStackSemantics.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalCircuitBits
+ import MCore.Real.P01VerifierGateMachine
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierStackSemantics
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierTraversal.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01FullVerifierTraversal.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalSATFrameMachineV2
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01FullVerifierTraversal
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01InputNodePreservingPlan.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01InputNodePreservingPlan.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01PreservingUnaryWitnessMarker
+ import MCore.Real.P01EncodedStackEvaluator
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01InputNodePreservingPlan
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01IntegrationFence.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01IntegrationFence.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATNTMAttack
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01IntegrationFence
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01NTMPhaseSeq.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01NTMPhaseSeq.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.Model
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01NTMPhaseSeq
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PhysicalVerifierBudget.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PhysicalVerifierBudget.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01FullVerifierStackSemantics
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PhysicalVerifierBudget
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PhysicalVerifierFoundations.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PhysicalVerifierFoundations.lean
+@@ -4,6 +4,8 @@
+ import MCore.Real.P01FullVerifierStackSemantics
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PhysicalVerifierFoundations
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PhysicalVerifierUniformCosts.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PhysicalVerifierUniformCosts.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01PhysicalVerifierFoundations
+ import MCore.Real.P01PhysicalVerifierBudget
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PhysicalVerifierUniformCosts
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingMarkerIteration.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingMarkerIteration.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01InputNodePreservingPlan
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PreservingMarkerIteration
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingUnaryReaderCertificate.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingUnaryReaderCertificate.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.P01InputNodePreservingPlan
+ import MCore.Real.P01EvalCursorMachine
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PreservingUnaryReaderCertificate
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingUnaryWitnessMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingUnaryWitnessMachine.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01InputNodePreservingPlan
+ import MCore.Real.P01WitnessIndexedRead
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PreservingUnaryWitnessMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingUnaryWitnessMarker.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01PreservingUnaryWitnessMarker.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01EvalTagPhysicalRefinement
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01PreservingUnaryWitnessMarker
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01SourceCursorInvariant.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01SourceCursorInvariant.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01FullVerifierPhysicalStackV2
+ import MCore.Real.P01FullVerifierPhysicalMoves
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01SourceCursorInvariant
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01VerifierGateMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01VerifierGateMachine.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalFinalProof
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01VerifierGateMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedRead.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedRead.lean
+@@ -2,6 +2,8 @@
+ import MCore.Real.CanonicalSATNatParserAttack
+ import MCore.Real.P01FullVerifierStackSemantics
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01WitnessIndexedRead
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedReadGlobal.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedReadGlobal.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01WitnessIndexedReadProof
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01WitnessIndexedReadGlobal
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedReadMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedReadMachine.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.P01WitnessIndexedRead
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01WitnessIndexedReadMachine
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedReadProof.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessIndexedReadProof.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.P01WitnessIndexedReadMachine
+ import MCore.Real.MachineRunLemmas
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01WitnessIndexedReadProof
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessPreservingPrep.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P01WitnessPreservingPrep.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CanonicalSATWitnessGuessNTM
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P01WitnessPreservingPrep
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/P02RestrictionLowerBoundPattern.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/P02RestrictionLowerBoundPattern.lean
+@@ -1,6 +1,8 @@
+ import MCore.C11.BranchingCost
+ import MCore.Real.CanonicalCircuitBits
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ namespace P02RestrictionLowerBoundPattern
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/SATMachine.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/SATMachine.lean
+@@ -1,6 +1,8 @@
+ import MCore.Real.Model
+ import MCore.Real.Semantics
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/m-core-p-vs-np/lean/MCore/Real/Semantics.lean
++++ b/snapshots/m-core-p-vs-np/lean/MCore/Real/Semantics.lean
+@@ -1,5 +1,7 @@
+ import MCore.Real.CNFStructure
+ 
++noncomputable section
++
+ namespace MCore
+ namespace Real
+ 
+--- a/snapshots/m-core-riemann/audit/FinalEndpoint.lean
++++ b/snapshots/m-core-riemann/audit/FinalEndpoint.lean
+@@ -1,4 +1,7 @@
+ import Mathlib.Analysis.SpecialFunctions.Zeta
++import Mathlib.NumberTheory.LSeries.RiemannZeta
++
++noncomputable section
+ 
+ namespace MCore.Audit
+ 
+--- a/snapshots/m-core-riemann/lean/MCore/Material/Closure.lean
++++ b/snapshots/m-core-riemann/lean/MCore/Material/Closure.lean
+@@ -1,4 +1,8 @@
+ import MCore
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Tactic.Bound
++
++noncomputable section
+ namespace MCore.Material
+ structure RHClosure (DN : Nat → Real) where
+   K0 : Real
+--- a/snapshots/m-core-yang-mills/lean/MCore/Material/Closure.lean
++++ b/snapshots/m-core-yang-mills/lean/MCore/Material/Closure.lean
+@@ -1,4 +1,6 @@
+ import MCore
++
++noncomputable section
+ namespace MCore.Material
+ structure YMClosure (Regulated Physical : Type) where
+   toPhysical : Regulated → Physical
+--- a/snapshots/navier-stokes-critical-barrier-audit/G1_KAdmissible_to_SignedDepletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/G1_KAdmissible_to_SignedDepletion.lean
+@@ -130,7 +130,7 @@
+ /-- The genuinely analytic G1a evolution inequality.  Constructing a value of
+ this structure from an actual NSE solution is OPEN. -/
+ structure JointEvolutionCertificate where
+-  q qDerivative viscousRate production lowerOrder : ℝ → ℝ
++  (q qDerivative viscousRate production lowerOrder : ℝ → ℝ)
+   hq : ∀ t, 0 ≤ q t
+   hViscous : ∀ t, 0 ≤ viscousRate t
+   evolution : ∀ t,
+@@ -208,7 +208,7 @@
+ /-! ## G1d: non-circular time-integrability bookkeeping -/
+ 
+ structure LerayEnergyCertificate where
+-  ν E0 totalGradU2 : ℝ
++  (ν E0 totalGradU2 : ℝ)
+   hν : 0 < ν
+   hE0 : 0 ≤ E0
+   hgrad : 0 ≤ totalGradU2
+@@ -280,7 +280,7 @@
+ 
+ /-- Algebraic G3 reconstruction data. -/
+ structure CriticalReconstruction where
+-  E0 M C : ℝ
++  (E0 M C : ℝ)
+   hE0 : 0 ≤ E0
+   hM : 0 ≤ M
+   hC : 0 ≤ C
+--- a/snapshots/navier-stokes-critical-barrier-audit/Lean/Millennium/CompleteClosure_Targets.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/Lean/Millennium/CompleteClosure_Targets.lean
+@@ -1,4 +1,7 @@
+ import Mathlib.Data.Matrix.Basic
++import Mathlib.Tactic.NormNum
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ noncomputable section
+ open Matrix
+--- a/snapshots/navier-stokes-critical-barrier-audit/MillenniumAudit/StabilizedHypothetical.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/MillenniumAudit/StabilizedHypothetical.lean
+@@ -77,7 +77,7 @@
+   exact Real.sqrt_le_sqrt (by nlinarith [sq_nonneg w])
+ 
+ structure K0DegenerateCertificate where
+-  y z : ℝ
++  (y z : ℝ)
+   hy : 0 ≤ y
+   hz : 0 ≤ z
+   zeroGradient : z = 0 → y = 0
+@@ -97,7 +97,7 @@
+     etaLow δ ≤ constant * Real.sqrt δ
+ 
+ structure WeightedGradientControl where
+-  weightedGradient palinstrophy : ℝ → ℝ
++  (weightedGradient palinstrophy : ℝ → ℝ)
+   hWeighted : ∀ t, 0 ≤ weightedGradient t
+   hPalinstrophy : ∀ t, 0 ≤ palinstrophy t
+   domination : ∀ t, weightedGradient t ≤ palinstrophy t
+@@ -108,7 +108,7 @@
+ 
+ structure LowerSemicontinuityCertificate where
+   regularizedIntegral : ℕ → ℝ
+-  limitIntegral liminfValue : ℝ
++  (limitIntegral liminfValue : ℝ)
+   hRegularized : ∀ k, 0 ≤ regularizedIntegral k
+   hLimit : 0 ≤ limitIntegral
+   liminfBound : limitIntegral ≤ liminfValue
+@@ -124,14 +124,14 @@
+ /-! ## G1a: six evolution-term classes -/
+ 
+ structure SixForces where
+-  commutator transport tail cutoff scaleMotion : ℝ → ℝ
++  (commutator transport tail cutoff scaleMotion : ℝ → ℝ)
+   dissipation : ℝ → ℝ
+ 
+ def SixForces.production (q : SixForces) (t : ℝ) : ℝ :=
+   q.commutator t + q.transport t + q.tail t + q.cutoff t + q.scaleMotion t
+ 
+ structure JointEvolutionCertificate where
+-  q qDerivative lowerOrder : ℝ → ℝ
++  (q qDerivative lowerOrder : ℝ → ℝ)
+   forces : SixForces
+   hq : ∀ t, 0 ≤ q t
+   hDissipation : ∀ t, 0 ≤ forces.dissipation t
+@@ -146,7 +146,7 @@
+ /-! ## G1b/G1c: absorption and principal-value-compatible tail -/
+ 
+ structure AbsorptionCertificate where
+-  γ1 γ2 θTail θCutoff θMotion : ℝ
++  (γ1 γ2 θTail θCutoff θMotion : ℝ)
+   hγ1 : 0 ≤ γ1
+   hγ2 : 0 ≤ γ2
+   hTail : 0 ≤ θTail
+@@ -165,7 +165,7 @@
+   · exact h.strictBudget
+ 
+ structure PrincipalValueTailCertificate where
+-  numerator denominator eta : ℝ → ℝ
++  (numerator denominator eta : ℝ → ℝ)
+   hNumerator : ∀ t, 0 ≤ numerator t
+   hDenominator : ∀ t, 0 ≤ denominator t
+   ratioOnNonzero : ∀ t, denominator t ≠ 0 →
+@@ -207,7 +207,7 @@
+ /-! ## The three aggregated Perelman-like objects -/
+ 
+ structure MonotoneNSEntropy where
+-  entropyDerivative defectEnergy remainder multiplier entropy : ℝ → ℝ
++  (entropyDerivative defectEnergy remainder multiplier entropy : ℝ → ℝ)
+   hDefect : ∀ t, 0 ≤ defectEnergy t
+   identity : ∀ t,
+     entropyDerivative t = defectEnergy t + remainder t
+@@ -230,7 +230,7 @@
+ /-! ## G2/G3/G4 and the conditional F -/
+ 
+ structure EnstrophyState where
+-  y yDerivative z stretch a : ℝ → ℝ
++  (y yDerivative z stretch a : ℝ → ℝ)
+   hy : ∀ t, 0 ≤ y t
+   hz : ∀ t, 0 ≤ z t
+   ha : ∀ t, 0 ≤ a t
+--- a/snapshots/navier-stokes-critical-barrier-audit/PerelmanLikeStabilizationSpec.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/PerelmanLikeStabilizationSpec.lean
+@@ -30,7 +30,7 @@
+ /-- Object 1: a typed entropy identity.  Constructing this certificate from
+ ActualNS is not done by this module. -/
+ structure TypedEntropyCertificate where
+-  entropy dissipation remainder multiplier : ℝ → ℝ
++  (entropy dissipation remainder multiplier : ℝ → ℝ)
+   hDissipation : ∀ t, 0 ≤ dissipation t
+   identity : ∀ t,
+     entropy t + dissipation t = remainder t
+--- a/snapshots/navier-stokes-critical-barrier-audit/audit/multistate-proof-refutation-v1/DeltaUniformity.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/audit/multistate-proof-refutation-v1/DeltaUniformity.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace NSDeltaUniformityAudit
+ 
+ def UniformDelta
+--- a/snapshots/navier-stokes-critical-barrier-audit/audit/multistate-proof-refutation-v1/NS_Multistate.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/audit/multistate-proof-refutation-v1/NS_Multistate.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace NSMultistateAudit
+ 
+ inductive ClosureStatus
+--- a/snapshots/navier-stokes-critical-barrier-audit/audit/multistate-proof-refutation-v1/NearFieldTarget.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/audit/multistate-proof-refutation-v1/NearFieldTarget.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace NSNearFieldAudit
+ 
+ structure TestedPDEIdentity where
+--- a/snapshots/navier-stokes-critical-barrier-audit/audit/producer-first/LegacyWeightedLowCounteraudit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/audit/producer-first/LegacyWeightedLowCounteraudit.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace NSProducerFirst
+ 
+ /-!
+--- a/snapshots/navier-stokes-critical-barrier-audit/audit/producer-first/NSMaterialInhabitant.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/audit/producer-first/NSMaterialInhabitant.lean
+@@ -1,3 +1,5 @@
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
+ /-!
+ NS material inhabitant interface.
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/audit/producer-first/SignedGainCore.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/audit/producer-first/SignedGainCore.lean
+@@ -1,3 +1,5 @@
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
+ /-!
+ Forward-only continuation of audit/producer-first/ProducerFirst.lean.
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/G1/AlignmentTransport.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/G1/AlignmentTransport.lean
+@@ -90,28 +90,28 @@
+ /-- Scale-covariance of rho_star under NS rescaling. -/
+ structure RhoStarScaleCovariance (κ : ℝ) where
+   /-- λ > 0 is the rescaling factor. -/
+-  λ : ℝ
+-  hλ : 0 < λ
++  «λ» : ℝ
++  «hλ» : 0 < «λ»
+   /-- Norms before rescaling. -/
+-  omegaL2 gradOmegaL2 : ℝ
++  (omegaL2 gradOmegaL2 : ℝ)
+   hgrad_pos : 0 < gradOmegaL2
+   /-- Norms after rescaling: caller supplies the values. -/
+-  omegaL2_scaled gradOmegaL2_scaled : ℝ
++  (omegaL2_scaled gradOmegaL2_scaled : ℝ)
+   /-- Under NS rescaling: ‖ω_λ‖₂ = λ^{1/2} ‖ω‖₂. -/
+-  homega_scaled : omegaL2_scaled = Real.sqrt λ * omegaL2
++  homega_scaled : omegaL2_scaled = Real.sqrt «λ» * omegaL2
+   /-- Under NS rescaling: ‖∇ω_λ‖₂ = λ^{3/2} ‖∇ω‖₂. -/
+-  hgrad_scaled : gradOmegaL2_scaled = λ * Real.sqrt λ * gradOmegaL2
++  hgrad_scaled : gradOmegaL2_scaled = «λ» * Real.sqrt «λ» * gradOmegaL2
+ 
+ /-- The scale-covariance law rho_star_λ = λ^{-1} * rho_star follows from the scaling equalities. -/
+ def rhoStarScaleLaw (κ : ℝ) (s : RhoStarScaleCovariance κ) : Prop :=
+   rho_star κ s.omegaL2_scaled s.gradOmegaL2_scaled
+-    = (1 / s.λ) * rho_star κ s.omegaL2 s.gradOmegaL2
++    = (1 / s.«λ») * rho_star κ s.omegaL2 s.gradOmegaL2
+ 
+ /-- The scale law is provable from the equality fields and positivity. -/
+ lemma rhoStarScaleLaw_holds (κ : ℝ) (s : RhoStarScaleCovariance κ) :
+     rhoStarScaleLaw κ s := by
+   simp only [rhoStarScaleLaw, rho_star, s.homega_scaled, s.hgrad_scaled]
+-  have hλ := s.hλ
++  have «hλ» := s.«hλ»
+   have hgrad := s.hgrad_pos
+   field_simp
+   ring
+@@ -222,7 +222,7 @@
+ -/
+ structure V_eff_Data where
+   /-- L² and L∞ norms of vorticity. -/
+-  omegaL2 omegaLinf : ℝ → ℝ    -- t ↦ norms
++  (omegaL2 omegaLinf : ℝ → ℝ)    -- t ↦ norms
+   homegaLinf_pos : ∀ t, 0 < omegaLinf t
+   /-- Effective volume. -/
+   V_eff : ℝ → ℝ
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/G1/DynamicCampanato.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/G1/DynamicCampanato.lean
+@@ -51,12 +51,12 @@
+ -/
+ structure LocalEnergyIdentityData where
+   xiPDE : XiEpsPDE
+-  kappa K omegaL2 gradOmegaL2 r : ℝ
++  (kappa K omegaL2 gradOmegaL2 r : ℝ)
+   hr : 0 < r
+   cutoff : Cutoff kappa K omegaL2 gradOmegaL2
+-  temporal transport stretchNear stretchFar diffusionMain : ℝ
+-  crossCutoffOrderOne crossCutoffOrderTwo crossGradMag drift : ℝ
+-  R1Term R2Term : ℝ
++  (temporal transport stretchNear stretchFar diffusionMain : ℝ)
++  (crossCutoffOrderOne crossCutoffOrderTwo crossGradMag drift : ℝ)
++  (R1Term R2Term : ℝ)
+   /-- Exact test choice: `φ² (ξ_ε - (ξ_ε)_{B_r}) |ω|_ε` with `φ = w_R`. -/
+   tests_XiEpsPDE_exactly : Prop
+   /-- Exact identity with no hidden absorption. -/
+@@ -122,7 +122,7 @@
+ the linear error term in the Campanato step and does not introduce `ρ_*^{-2}`.
+ -/
+ structure FarFieldAveragedBound where
+-  C_far rhoStar r omegaL2 farFieldSqAvg : ℝ
++  (C_far rhoStar r omegaL2 farFieldSqAvg : ℝ)
+   hC_far : 0 ≤ C_far
+   hr : 0 ≤ r
+   hr_le_rhoStar : r ≤ rhoStar
+@@ -161,7 +161,7 @@
+ 
+ /-- One step of the Campanato iteration `J_{r/2} ≤ γ J_r + A r / ρ_*`. -/
+ structure CampanatoIterationStep where
+-  gamma A rhoStar r Jr Jhalf : ℝ
++  (gamma A rhoStar r Jr Jhalf : ℝ)
+   hgamma : 0 ≤ gamma
+   hA : 0 ≤ A
+   hr : 0 ≤ r
+@@ -236,14 +236,14 @@
+ recording merely `γ < 1` is insufficient for the Campanato barrier.
+ -/
+ structure DiffusionHalfContraction where
+-  kappa gammaDiff : ℝ
++  (kappa gammaDiff : ℝ)
+   hkappa : 0 < kappa
+   half_contraction : gammaDiff ≤ (1 : ℝ) / 2
+   produced_by_diffusion : Prop
+ 
+ /-- Signed far-field formulation left open until the cancellation gain is proved. -/
+ structure StretchFarSignedOpenCZ where
+-  rhoStar r betaMissing : ℝ
++  (rhoStar r betaMissing : ℝ)
+   hr : 0 ≤ r
+   hrhoStar : 0 < rhoStar
+   hbetaMissing : 0 < betaMissing
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/G1/G1_DynamicCriticalGeometry.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/G1/G1_DynamicCriticalGeometry.lean
+@@ -48,14 +48,14 @@
+ ||∇ω_λ||₂ = λ^(3/2)||∇ω||₂.
+ -/
+ structure VorticityScalingData where
+-  λ : ℝ
+-  hλ : 0 < λ
++  «λ» : ℝ
++  «hλ» : 0 < «λ»
+   omegaL2 : ℝ
+   gradOmegaL2 : ℝ
+   omegaL2_scaled : ℝ
+   gradOmegaL2_scaled : ℝ
+-  homega : omegaL2_scaled = Real.sqrt λ * omegaL2
+-  hgrad : gradOmegaL2_scaled = λ * Real.sqrt λ * gradOmegaL2
++  homega : omegaL2_scaled = Real.sqrt «λ» * omegaL2
++  hgrad : gradOmegaL2_scaled = «λ» * Real.sqrt «λ» * gradOmegaL2
+ 
+ /--
+ The expected spatial scaling law for ρ_* is exposed as a proposition.
+@@ -63,7 +63,7 @@
+ -/
+ def RhoStarScalesLikeLength (κ : ℝ) (s : VorticityScalingData) : Prop :=
+   rhoStar κ s.omegaL2_scaled s.gradOmegaL2_scaled
+-    = (1 / s.λ) * rhoStar κ s.omegaL2 s.gradOmegaL2
++    = (1 / s.«λ») * rhoStar κ s.omegaL2 s.gradOmegaL2
+ 
+ /--
+ Pairwise directional discrepancy. We use the Gram determinant rather than a
+@@ -207,7 +207,7 @@
+       This is the critical piece: it uses only ‖u₀‖₂ and ν from Leray-Hopf. -/
+   remainder_vanishes : Prop
+   /-- Explicit dependence witness: the L¹ bound on R_ε is controlled by a
+-      constant that depends ONLY on (‖u₀‖₂, ν) and NOT on ε. -/
++      axiom that depends ONLY on (‖u₀‖₂, ν) and NOT on ε. -/
+   remainder_bound_cutoff_free : Prop
+ 
+ /--
+@@ -316,7 +316,7 @@
+ -/
+ structure hDynamic_eps_Statement (C0 : ℝ) (hC0 : 0 ≤ C0) where
+   /-- Parameters. -/
+-  eps theta kappa : ℝ
++  (eps theta kappa : ℝ)
+   heps : 0 < eps
+   htheta : 0 < theta ∧ theta < 1
+   hkappa : 0 < kappa
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/G1/XiEpsPDE.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/G1/XiEpsPDE.lean
+@@ -15,6 +15,7 @@
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ import Mathlib.Data.Matrix.Basic
+ import Mathlib.Data.Real.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Sqrt
+ 
+ noncomputable section G1XiEpsPDESection
+ 
+@@ -93,9 +94,9 @@
+   /-- Exact test by `φ² (ξ_ε - (ξ_ε)_{B_r}) |ω|_ε`, before CZ/Young. -/
+   local_energy_test : Prop
+   /-- Scalar bookkeeping terms for the tested identity. -/
+-  temporal transport stretchNear stretchFar diffusionMain : ℝ
+-  crossCutoffOrderOne crossCutoffOrderTwo crossGradMag drift : ℝ
+-  R1Term R2Term : ℝ
++  (temporal transport stretchNear stretchFar diffusionMain : ℝ)
++  (crossCutoffOrderOne crossCutoffOrderTwo crossGradMag drift : ℝ)
++  (R1Term R2Term : ℝ)
+   /-- Exact identity produced by the PDE test. -/
+   local_energy_identity :
+     temporal =
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/g1/lean/G1Depletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/g1/lean/G1Depletion.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-! Audit-safe G1 interface. No axiom/sorry: the conjectural analytic bridge is a field supplied
+ by a model. Kernel checking proves only the downstream implication. -/
+ namespace G1
+@@ -26,7 +28,7 @@
+ 
+ /-- Exact analytic obligation: this is where localized Biot-Savart/cancellation must be proved. -/
+ structure AnalyticBridge (D : Data) where
+-  M c C δ : ℝ
++  (M c C δ : ℝ)
+   hM : 0 < M
+   hc : 0 < c
+   hC : 0 < C
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_8_AlignmentTarget.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_8_AlignmentTarget.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2.8 Alignment Target
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_8_SignedFlux_GapIsolation.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_8_SignedFlux_GapIsolation.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2.8 signed-flux gap isolation
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_ChainTarget.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_ChainTarget.lean
+@@ -1,6 +1,8 @@
+ import Mathlib
+ import CriticalBarrier.B2_8_AlignmentTarget
+ 
++noncomputable section
++
+ /-!
+ # B2 chain target
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_ClosureObligations.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_ClosureObligations.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2 closure obligations
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_DeterministicParameterChain.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/B2_DeterministicParameterChain.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2 deterministic parameter chain (audit target)
+ 
+@@ -23,7 +25,7 @@
+   C_Bern : Scalar
+   C_Sob : Scalar
+   C_CZ : Scalar
+-  deriving Repr
++  
+ 
+ namespace Parameters
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/BackwardHypotheticalClosureOracle.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/BackwardHypotheticalClosureOracle.lean
+@@ -1,5 +1,7 @@
+ import CriticalBarrier.GlobalRegularityFromG1
+ 
++noncomputable section
++
+ namespace CriticalBarrier.BackwardAudit
+ 
+ variable {State : Type}
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/BackwardWithoutOracle.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/BackwardWithoutOracle.lean
+@@ -1,5 +1,7 @@
+ import CriticalBarrier.GlobalRegularityFromG1
+ 
++noncomputable section
++
+ namespace CriticalBarrier.BackwardAudit
+ 
+ open CriticalBarrier.GlobalRegularityFromG1
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/ClosureTargetTree.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/ClosureTargetTree.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # ClosureTargetTree
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/CriticalTailBridge.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/CriticalTailBridge.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ CriticalTailBridge.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/EndpointInterfaces.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/EndpointInterfaces.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace CriticalBarrier.EndpointInterfaces
+ 
+ /-- Audit-only statuses. These constructors do not prove the propositions they label. -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/G1G4ClosureBlueprint.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/G1G4ClosureBlueprint.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ G1–G4 closure blueprint.
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/GlobalRegularityFromG1.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/GlobalRegularityFromG1.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # GlobalRegularityFromG1
+ 
+@@ -12,10 +14,10 @@
+ 
+ namespace CriticalBarrier.GlobalRegularityFromG1
+ 
+-/-- Abstract state type for a maximal smooth Navier--Stokes trajectory. -/
++/- Abstract state type for a maximal smooth Navier--Stokes trajectory. -/
+ variable {State : Type}
+ 
+-/-- Problem-level predicates. -/
++/- Problem-level predicates. -/
+ variable (ActualNS : State → Prop)
+ variable (UniformEnstrophy : State → Prop)
+ variable (CriticalL3Bound : State → Prop)
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/ResolutionDynamics.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/CriticalBarrier/ResolutionDynamics.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace CriticalBarrier.ResolutionDynamics
+ 
+ /-- Generic proof-state dynamics. `nativeControl` is deliberately abstract:
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/GapCollapseAudit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/GapCollapseAudit.lean
+@@ -79,7 +79,7 @@
+ inductive ProofStatus where
+   | proved
+   | externalClassicalTheorem
+-  | axiom
++  | «axiom»
+   | sorry
+   | admit
+   | truePlaceholder
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/IndeterminateParameterCompletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/IndeterminateParameterCompletion.lean
+@@ -16,6 +16,8 @@
+ import Mathlib.Data.Int.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace AuditCompletion
+ 
+ /-! ## 1. Explicit unresolved-parameter state -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/Millennium/AllClosureTargets.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/Millennium/AllClosureTargets.lean
+@@ -2,6 +2,8 @@
+ import CriticalBarrier.CompleteClosureTargets
+ import CriticalBarrier.B2_ChainTarget
+ 
++noncomputable section
++
+ /-!
+ # Millennium/AllClosureTargets.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/lean/UnifiedAsymptoticLogic.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/lean/UnifiedAsymptoticLogic.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+ UnifiedAsymptoticLogic.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/millennium/lean/MillenniumAudit/CompleteNoSorry.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/millennium/lean/MillenniumAudit/CompleteNoSorry.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # CompleteNoSorry
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/millennium/lean/MillenniumAudit/G1Audit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/millennium/lean/MillenniumAudit/G1Audit.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # G1Audit
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/formal/millennium/lean/MillenniumAudit/HypothesesComplete_v2.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/formal/millennium/lean/MillenniumAudit/HypothesesComplete_v2.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # HypothesesComplete_v2
+ 
+@@ -88,19 +90,19 @@
+ /-- Abstract scaling data for checking rhoStar. -/
+ structure ScalingLaw where
+   scaleState : ℝ → E.State → E.State
+-  omegaL2_scale : ∀ λ s, 0 < λ →
+-    E.omegaL2 (scaleState λ s) = Real.sqrt λ * E.omegaL2 s
+-  gradOmegaL2_scale : ∀ λ s, 0 < λ →
+-    E.gradOmegaL2 (scaleState λ s) = λ * Real.sqrt λ * E.gradOmegaL2 s
++  omegaL2_scale : ∀ «λ» s, 0 < «λ» →
++    E.omegaL2 (scaleState «λ» s) = Real.sqrt «λ» * E.omegaL2 s
++  gradOmegaL2_scale : ∀ «λ» s, 0 < «λ» →
++    E.gradOmegaL2 (scaleState «λ» s) = «λ» * Real.sqrt «λ» * E.gradOmegaL2 s
+ 
+ /-- rhoStar scales as λ⁻¹ once the L² and gradient-L² scaling laws are supplied. -/
+ theorem rhoStar_scale
+-    (S : ScalingLaw E) (κ λ : ℝ) (s : E.State)
+-    (hλ : 0 < λ)
++    (S : ScalingLaw E) (κ «λ» : ℝ) (s : E.State)
++    («hλ» : 0 < «λ»)
+     (hgrad : E.gradOmegaL2 s ≠ 0) :
+-    rhoStar E (S.scaleState λ s) κ = λ⁻¹ * rhoStar E s κ := by
+-  rw [rhoStar, rhoStar, S.omegaL2_scale λ s hλ, S.gradOmegaL2_scale λ s hλ]
+-  have hsqrt : Real.sqrt λ ≠ 0 := ne_of_gt (Real.sqrt_pos.2 hλ)
++    rhoStar E (S.scaleState «λ» s) κ = «λ»⁻¹ * rhoStar E s κ := by
++  rw [rhoStar, rhoStar, S.omegaL2_scale fun s hλ => S.gradOmegaL2_scale «λ» s «hλ»]
++  have hsqrt : Real.sqrt «λ» ≠ 0 := ne_of_gt (Real.sqrt_pos.2 «hλ»)
+   field_simp
+   ring
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_8_AlignmentTarget.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_8_AlignmentTarget.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2.8 Alignment Target
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_8_SignedFlux_GapIsolation.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_8_SignedFlux_GapIsolation.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2.8 signed-flux gap isolation
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_ChainTarget.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_ChainTarget.lean
+@@ -1,6 +1,8 @@
+ import Mathlib
+ import CriticalBarrier.B2_8_AlignmentTarget
+ 
++noncomputable section
++
+ /-!
+ # B2 chain target
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_ClosureObligations.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_ClosureObligations.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2 closure obligations
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_DeterministicParameterChain.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/B2_DeterministicParameterChain.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # B2 deterministic parameter chain (audit target)
+ 
+@@ -23,7 +25,7 @@
+   C_Bern : Scalar
+   C_Sob : Scalar
+   C_CZ : Scalar
+-  deriving Repr
++  
+ 
+ namespace Parameters
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/ClosureTargetTree.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/ClosureTargetTree.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # ClosureTargetTree
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/G1G4ClosureBlueprint.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/G1G4ClosureBlueprint.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ G1–G4 closure blueprint.
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/GlobalRegularityFromG1.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/CriticalBarrier/GlobalRegularityFromG1.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # GlobalRegularityFromG1
+ 
+@@ -12,10 +14,10 @@
+ 
+ namespace CriticalBarrier.GlobalRegularityFromG1
+ 
+-/-- Abstract state type for a maximal smooth Navier--Stokes trajectory. -/
++/- Abstract state type for a maximal smooth Navier--Stokes trajectory. -/
+ variable {State : Type}
+ 
+-/-- Problem-level predicates. -/
++/- Problem-level predicates. -/
+ variable (ActualNS : State → Prop)
+ variable (UniformEnstrophy : State → Prop)
+ variable (CriticalL3Bound : State → Prop)
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/Millennium/AllClosureTargets.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_closure-target-tree-v56/formal/lean/Millennium/AllClosureTargets.lean
+@@ -2,6 +2,8 @@
+ import CriticalBarrier.CompleteClosureTargets
+ import CriticalBarrier.B2_ChainTarget
+ 
++noncomputable section
++
+ /-!
+ # Millennium/AllClosureTargets.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/Lean/Millennium/CompleteClosure_Targets.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/Lean/Millennium/CompleteClosure_Targets.lean
+@@ -1,4 +1,7 @@
+ import Mathlib.Data.Matrix.Basic
++import Mathlib.Tactic.NormNum
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ noncomputable section
+ open Matrix
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/CriticalBarrier/CriticalTailBridge.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/CriticalBarrier/CriticalTailBridge.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ CriticalTailBridge.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/CriticalBarrier/EndpointInterfaces.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/CriticalBarrier/EndpointInterfaces.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ namespace CriticalBarrier.EndpointInterfaces
+ 
+ /-- Audit-only statuses. These constructors do not prove the propositions they label. -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/CriticalBarrier/ResolutionDynamics.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/CriticalBarrier/ResolutionDynamics.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace CriticalBarrier.ResolutionDynamics
+ 
+ /-- Generic proof-state dynamics. `nativeControl` is deliberately abstract:
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/GapCollapseAudit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/GapCollapseAudit.lean
+@@ -79,7 +79,7 @@
+ inductive ProofStatus where
+   | proved
+   | externalClassicalTheorem
+-  | axiom
++  | «axiom»
+   | sorry
+   | admit
+   | truePlaceholder
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/IndeterminateParameterCompletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/IndeterminateParameterCompletion.lean
+@@ -16,6 +16,8 @@
+ import Mathlib.Data.Int.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace AuditCompletion
+ 
+ /-! ## 1. Explicit unresolved-parameter state -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/UnifiedAsymptoticLogic.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_final-two-stage-review-nsb2-20260912/formal/lean/UnifiedAsymptoticLogic.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+ UnifiedAsymptoticLogic.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/Lean/Millennium/CompleteClosure_Targets.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/Lean/Millennium/CompleteClosure_Targets.lean
+@@ -1,4 +1,7 @@
+ import Mathlib.Data.Matrix.Basic
++import Mathlib.Tactic.NormNum
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ noncomputable section
+ open Matrix
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/G1/HypothesesComplete_v2.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/G1/HypothesesComplete_v2.lean
+@@ -74,18 +74,18 @@
+   gradOmegaL2 : ℝ
+   scaledOmegaL2 : ℝ → ℝ
+   scaledGradOmegaL2 : ℝ → ℝ
+-  omega_scale : ∀ λ, 0 < λ → scaledOmegaL2 λ = Real.sqrt λ * omegaL2
+-  grad_scale : ∀ λ, 0 < λ →
+-    scaledGradOmegaL2 λ = λ * Real.sqrt λ * gradOmegaL2
++  omega_scale : ∀ «λ», 0 < «λ» → scaledOmegaL2 «λ» = Real.sqrt «λ» * omegaL2
++  grad_scale : ∀ «λ», 0 < «λ» →
++    scaledGradOmegaL2 «λ» = «λ» * Real.sqrt «λ» * gradOmegaL2
+ 
+ /-- Scale covariance of rhoStar under the supplied norm scaling laws. -/
+ theorem rhoStar_scale
+-    (κ0 λ : ℝ) (S : ScalingData)
+-    (hλ : 0 < λ) (hg : S.gradOmegaL2 ≠ 0) :
+-    rhoStar κ0 (S.scaledOmegaL2 λ) (S.scaledGradOmegaL2 λ)
+-      = λ⁻¹ * rhoStar κ0 S.omegaL2 S.gradOmegaL2 := by
+-  rw [rhoStar, rhoStar, S.omega_scale λ hλ, S.grad_scale λ hλ]
+-  have hsqrt : Real.sqrt λ ≠ 0 := ne_of_gt (Real.sqrt_pos.2 hλ)
++    (κ0 «λ» : ℝ) (S : ScalingData)
++    («hλ» : 0 < «λ») (hg : S.gradOmegaL2 ≠ 0) :
++    rhoStar κ0 (S.scaledOmegaL2 «λ») (S.scaledGradOmegaL2 «λ»)
++      = «λ»⁻¹ * rhoStar κ0 S.omegaL2 S.gradOmegaL2 := by
++  rw [rhoStar, rhoStar, S.omega_scale fun hλ => S.grad_scale «λ» «hλ»]
++  have hsqrt : Real.sqrt «λ» ≠ 0 := ne_of_gt (Real.sqrt_pos.2 «hλ»)
+   field_simp
+   ring
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/g1/lean/G1Depletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/g1/lean/G1Depletion.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-! Audit-safe G1 interface. No axiom/sorry: the conjectural analytic bridge is a field supplied
+ by a model. Kernel checking proves only the downstream implication. -/
+ namespace G1
+@@ -26,7 +28,7 @@
+ 
+ /-- Exact analytic obligation: this is where localized Biot-Savart/cancellation must be proved. -/
+ structure AnalyticBridge (D : Data) where
+-  M c C δ : ℝ
++  (M c C δ : ℝ)
+   hM : 0 < M
+   hc : 0 < c
+   hC : 0 < C
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/CriticalBarrier/CriticalTailBridge.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/CriticalBarrier/CriticalTailBridge.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ CriticalTailBridge.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/CriticalBarrier/EndpointInterfaces.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/CriticalBarrier/EndpointInterfaces.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ namespace CriticalBarrier.EndpointInterfaces
+ 
+ /-- Audit-only statuses. These constructors do not prove the propositions they label. -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/CriticalBarrier/ResolutionDynamics.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/CriticalBarrier/ResolutionDynamics.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace CriticalBarrier.ResolutionDynamics
+ 
+ /-- Generic proof-state dynamics. `nativeControl` is deliberately abstract:
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/GapCollapseAudit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/GapCollapseAudit.lean
+@@ -79,7 +79,7 @@
+ inductive ProofStatus where
+   | proved
+   | externalClassicalTheorem
+-  | axiom
++  | «axiom»
+   | sorry
+   | admit
+   | truePlaceholder
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/IndeterminateParameterCompletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/IndeterminateParameterCompletion.lean
+@@ -16,6 +16,8 @@
+ import Mathlib.Data.Int.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace AuditCompletion
+ 
+ /-! ## 1. Explicit unresolved-parameter state -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/UnifiedAsymptoticLogic.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/lean/UnifiedAsymptoticLogic.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+ UnifiedAsymptoticLogic.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/millennium/lean/MillenniumAudit/CompleteNoSorry.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/millennium/lean/MillenniumAudit/CompleteNoSorry.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # CompleteNoSorry
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/millennium/lean/MillenniumAudit/G1Audit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/millennium/lean/MillenniumAudit/G1Audit.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # G1Audit
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/millennium/lean/MillenniumAudit/HypothesesComplete_v2.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-beta-multiprover-20260913/formal/millennium/lean/MillenniumAudit/HypothesesComplete_v2.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # HypothesesComplete_v2
+ 
+@@ -88,19 +90,19 @@
+ /-- Abstract scaling data for checking rhoStar. -/
+ structure ScalingLaw where
+   scaleState : ℝ → E.State → E.State
+-  omegaL2_scale : ∀ λ s, 0 < λ →
+-    E.omegaL2 (scaleState λ s) = Real.sqrt λ * E.omegaL2 s
+-  gradOmegaL2_scale : ∀ λ s, 0 < λ →
+-    E.gradOmegaL2 (scaleState λ s) = λ * Real.sqrt λ * E.gradOmegaL2 s
++  omegaL2_scale : ∀ «λ» s, 0 < «λ» →
++    E.omegaL2 (scaleState «λ» s) = Real.sqrt «λ» * E.omegaL2 s
++  gradOmegaL2_scale : ∀ «λ» s, 0 < «λ» →
++    E.gradOmegaL2 (scaleState «λ» s) = «λ» * Real.sqrt «λ» * E.gradOmegaL2 s
+ 
+ /-- rhoStar scales as λ⁻¹ once the L² and gradient-L² scaling laws are supplied. -/
+ theorem rhoStar_scale
+-    (S : ScalingLaw E) (κ λ : ℝ) (s : E.State)
+-    (hλ : 0 < λ)
++    (S : ScalingLaw E) (κ «λ» : ℝ) (s : E.State)
++    («hλ» : 0 < «λ»)
+     (hgrad : E.gradOmegaL2 s ≠ 0) :
+-    rhoStar E (S.scaleState λ s) κ = λ⁻¹ * rhoStar E s κ := by
+-  rw [rhoStar, rhoStar, S.omegaL2_scale λ s hλ, S.gradOmegaL2_scale λ s hλ]
+-  have hsqrt : Real.sqrt λ ≠ 0 := ne_of_gt (Real.sqrt_pos.2 hλ)
++    rhoStar E (S.scaleState «λ» s) κ = «λ»⁻¹ * rhoStar E s κ := by
++  rw [rhoStar, rhoStar, S.omegaL2_scale fun s hλ => S.gradOmegaL2_scale «λ» s «hλ»]
++  have hsqrt : Real.sqrt «λ» ≠ 0 := ne_of_gt (Real.sqrt_pos.2 «hλ»)
+   field_simp
+   ring
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-dynamic-q-20260913/formal/G1/G1_DynamicCriticalGeometry.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_g1-dynamic-q-20260913/formal/G1/G1_DynamicCriticalGeometry.lean
+@@ -48,14 +48,14 @@
+ ||∇ω_λ||₂ = λ^(3/2)||∇ω||₂.
+ -/
+ structure VorticityScalingData where
+-  λ : ℝ
+-  hλ : 0 < λ
++  «λ» : ℝ
++  «hλ» : 0 < «λ»
+   omegaL2 : ℝ
+   gradOmegaL2 : ℝ
+   omegaL2_scaled : ℝ
+   gradOmegaL2_scaled : ℝ
+-  homega : omegaL2_scaled = Real.sqrt λ * omegaL2
+-  hgrad : gradOmegaL2_scaled = λ * Real.sqrt λ * gradOmegaL2
++  homega : omegaL2_scaled = Real.sqrt «λ» * omegaL2
++  hgrad : gradOmegaL2_scaled = «λ» * Real.sqrt «λ» * gradOmegaL2
+ 
+ /--
+ The expected spatial scaling law for ρ_* is exposed as a proposition.
+@@ -63,7 +63,7 @@
+ -/
+ def RhoStarScalesLikeLength (κ : ℝ) (s : VorticityScalingData) : Prop :=
+   rhoStar κ s.omegaL2_scaled s.gradOmegaL2_scaled
+-    = (1 / s.λ) * rhoStar κ s.omegaL2 s.gradOmegaL2
++    = (1 / s.«λ») * rhoStar κ s.omegaL2 s.gradOmegaL2
+ 
+ /--
+ Pairwise directional discrepancy. We use the Gram determinant rather than a
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/Lean/Millennium/CompleteClosure_Targets.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/Lean/Millennium/CompleteClosure_Targets.lean
+@@ -1,4 +1,7 @@
+ import Mathlib.Data.Matrix.Basic
++import Mathlib.Tactic.NormNum
++import Mathlib.Data.Real.Basic
++import Mathlib.Data.Complex.Basic
+ 
+ noncomputable section
+ open Matrix
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/CriticalBarrier/CriticalTailBridge.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/CriticalBarrier/CriticalTailBridge.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ CriticalTailBridge.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/CriticalBarrier/EndpointInterfaces.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/CriticalBarrier/EndpointInterfaces.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ namespace CriticalBarrier.EndpointInterfaces
+ 
+ /-- Audit-only statuses. These constructors do not prove the propositions they label. -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/CriticalBarrier/ResolutionDynamics.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/CriticalBarrier/ResolutionDynamics.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace CriticalBarrier.ResolutionDynamics
+ 
+ /-- Generic proof-state dynamics. `nativeControl` is deliberately abstract:
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/GapCollapseAudit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/GapCollapseAudit.lean
+@@ -79,7 +79,7 @@
+ inductive ProofStatus where
+   | proved
+   | externalClassicalTheorem
+-  | axiom
++  | «axiom»
+   | sorry
+   | admit
+   | truePlaceholder
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/IndeterminateParameterCompletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/IndeterminateParameterCompletion.lean
+@@ -16,6 +16,8 @@
+ import Mathlib.Data.Int.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace AuditCompletion
+ 
+ /-! ## 1. Explicit unresolved-parameter state -/
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/UnifiedAsymptoticLogic.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/lean/UnifiedAsymptoticLogic.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+ UnifiedAsymptoticLogic.lean
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/millennium/lean/MillenniumAudit/CompleteNoSorry.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/millennium/lean/MillenniumAudit/CompleteNoSorry.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # CompleteNoSorry
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/millennium/lean/MillenniumAudit/G1Audit.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/branch-snapshots/audit_millennium-multiprover-structure-20260913/formal/millennium/lean/MillenniumAudit/G1Audit.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ /-!
+ # G1Audit
+ 
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/session-scratch-20260913/G1_KAdmissible_to_SignedDepletion.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/session-scratch-20260913/G1_KAdmissible_to_SignedDepletion.lean
+@@ -130,7 +130,7 @@
+ /-- The genuinely analytic G1a evolution inequality.  Constructing a value of
+ this structure from an actual NSE solution is OPEN. -/
+ structure JointEvolutionCertificate where
+-  q qDerivative viscousRate production lowerOrder : ℝ → ℝ
++  (q qDerivative viscousRate production lowerOrder : ℝ → ℝ)
+   hq : ∀ t, 0 ≤ q t
+   hViscous : ∀ t, 0 ≤ viscousRate t
+   evolution : ∀ t,
+@@ -208,7 +208,7 @@
+ /-! ## G1d: non-circular time-integrability bookkeeping -/
+ 
+ structure LerayEnergyCertificate where
+-  ν E0 totalGradU2 : ℝ
++  (ν E0 totalGradU2 : ℝ)
+   hν : 0 < ν
+   hE0 : 0 ≤ E0
+   hgrad : 0 ≤ totalGradU2
+@@ -280,7 +280,7 @@
+ 
+ /-- Algebraic G3 reconstruction data. -/
+ structure CriticalReconstruction where
+-  E0 M C : ℝ
++  (E0 M C : ℝ)
+   hE0 : 0 ≤ E0
+   hM : 0 ≤ M
+   hC : 0 ≤ C
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/session-scratch-20260913/MillenniumAudit/StabilizedHypothetical.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/session-scratch-20260913/MillenniumAudit/StabilizedHypothetical.lean
+@@ -77,7 +77,7 @@
+   exact Real.sqrt_le_sqrt (by nlinarith [sq_nonneg w])
+ 
+ structure K0DegenerateCertificate where
+-  y z : ℝ
++  (y z : ℝ)
+   hy : 0 ≤ y
+   hz : 0 ≤ z
+   zeroGradient : z = 0 → y = 0
+@@ -97,7 +97,7 @@
+     etaLow δ ≤ constant * Real.sqrt δ
+ 
+ structure WeightedGradientControl where
+-  weightedGradient palinstrophy : ℝ → ℝ
++  (weightedGradient palinstrophy : ℝ → ℝ)
+   hWeighted : ∀ t, 0 ≤ weightedGradient t
+   hPalinstrophy : ∀ t, 0 ≤ palinstrophy t
+   domination : ∀ t, weightedGradient t ≤ palinstrophy t
+@@ -108,7 +108,7 @@
+ 
+ structure LowerSemicontinuityCertificate where
+   regularizedIntegral : ℕ → ℝ
+-  limitIntegral liminfValue : ℝ
++  (limitIntegral liminfValue : ℝ)
+   hRegularized : ∀ k, 0 ≤ regularizedIntegral k
+   hLimit : 0 ≤ limitIntegral
+   liminfBound : limitIntegral ≤ liminfValue
+@@ -124,14 +124,14 @@
+ /-! ## G1a: six evolution-term classes -/
+ 
+ structure SixForces where
+-  commutator transport tail cutoff scaleMotion : ℝ → ℝ
++  (commutator transport tail cutoff scaleMotion : ℝ → ℝ)
+   dissipation : ℝ → ℝ
+ 
+ def SixForces.production (q : SixForces) (t : ℝ) : ℝ :=
+   q.commutator t + q.transport t + q.tail t + q.cutoff t + q.scaleMotion t
+ 
+ structure JointEvolutionCertificate where
+-  q qDerivative lowerOrder : ℝ → ℝ
++  (q qDerivative lowerOrder : ℝ → ℝ)
+   forces : SixForces
+   hq : ∀ t, 0 ≤ q t
+   hDissipation : ∀ t, 0 ≤ forces.dissipation t
+@@ -146,7 +146,7 @@
+ /-! ## G1b/G1c: absorption and principal-value-compatible tail -/
+ 
+ structure AbsorptionCertificate where
+-  γ1 γ2 θTail θCutoff θMotion : ℝ
++  (γ1 γ2 θTail θCutoff θMotion : ℝ)
+   hγ1 : 0 ≤ γ1
+   hγ2 : 0 ≤ γ2
+   hTail : 0 ≤ θTail
+@@ -165,7 +165,7 @@
+   · exact h.strictBudget
+ 
+ structure PrincipalValueTailCertificate where
+-  numerator denominator eta : ℝ → ℝ
++  (numerator denominator eta : ℝ → ℝ)
+   hNumerator : ∀ t, 0 ≤ numerator t
+   hDenominator : ∀ t, 0 ≤ denominator t
+   ratioOnNonzero : ∀ t, denominator t ≠ 0 →
+@@ -207,7 +207,7 @@
+ /-! ## The three aggregated Perelman-like objects -/
+ 
+ structure MonotoneNSEntropy where
+-  entropyDerivative defectEnergy remainder multiplier entropy : ℝ → ℝ
++  (entropyDerivative defectEnergy remainder multiplier entropy : ℝ → ℝ)
+   hDefect : ∀ t, 0 ≤ defectEnergy t
+   identity : ∀ t,
+     entropyDerivative t = defectEnergy t + remainder t
+@@ -230,7 +230,7 @@
+ /-! ## G2/G3/G4 and the conditional F -/
+ 
+ structure EnstrophyState where
+-  y yDerivative z stretch a : ℝ → ℝ
++  (y yDerivative z stretch a : ℝ → ℝ)
+   hy : ∀ t, 0 ≤ y t
+   hz : ∀ t, 0 ≤ z t
+   ha : ∀ t, 0 ≤ a t
+--- a/snapshots/navier-stokes-critical-barrier-audit/preservation/session-scratch-20260913/PerelmanLikeStabilizationSpec.lean
++++ b/snapshots/navier-stokes-critical-barrier-audit/preservation/session-scratch-20260913/PerelmanLikeStabilizationSpec.lean
+@@ -30,7 +30,7 @@
+ /-- Object 1: a typed entropy identity.  Constructing this certificate from
+ ActualNS is not done by this module. -/
+ structure TypedEntropyCertificate where
+-  entropy dissipation remainder multiplier : ℝ → ℝ
++  (entropy dissipation remainder multiplier : ℝ → ℝ)
+   hDissipation : ∀ t, 0 ≤ dissipation t
+   identity : ∀ t,
+     entropy t + dissipation t = remainder t

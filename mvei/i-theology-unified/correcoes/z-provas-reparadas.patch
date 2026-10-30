@@ -1,0 +1,86 @@
+--- a/proofs/lean/divine-phonemes.lean
++++ b/proofs/lean/divine-phonemes.lean
+@@ -116,7 +116,7 @@
+ def phonetic_similarity (p1 p2 : Phoneme) : Nat :=
+   let sib_score := if p1.sibilant == p2.sibilant then 1 else 0
+   let vow_score := if p1.vowel_u == p2.vowel_u then 1 else 0
+-  let syl_score := if (p1.syllables - p2.syllables).natAbs <= 1 then 1 else 0
++  let syl_score := if ((p1.syllables : Int) - p2.syllables).natAbs <= 1 then 1 else 0
+   sib_score + vow_score + syl_score
+ 
+ -- Functional overlap measure
+@@ -149,24 +149,15 @@
+ theorem mediation_shared :
+   FunctionalAttribute.Mediation ∈ Entities.yeshua.attributes ∧
+   FunctionalAttribute.Mediation ∈ Entities.exu.attributes := by
+-  constructor <;> rfl
++  constructor <;> simp [Entities.yeshua, Entities.exu]
+ 
+ theorem transformation_universal :
+   ∀ e ∈ Entities.all_entities,
+     FunctionalAttribute.Transformation ∈ e.attributes := by
+   intro e he
+-  cases he with
+-  | head => rfl
+-  | tail _ he' =>
+-    cases he' with
+-    | head => rfl
+-    | tail _ he'' =>
+-      cases he'' with
+-      | head => rfl
+-      | tail _ he''' =>
+-        cases he''' with
+-        | head => rfl
+-        | tail _ he'''' => cases he''''
++  simp only [Entities.all_entities, List.mem_cons, List.mem_singleton, List.not_mem_nil, or_false] at he
++  rcases he with rfl | rfl | rfl | rfl <;>
++    simp [Entities.yeshua, Entities.exu, Entities.shiva, Entities.saturno]
+ 
+ -- Unified theological structure
+ structure TheologicalUnity where
+@@ -179,18 +170,13 @@
+ -- Proof that our four entities form a unified structure
+ theorem divine_phonemes_unified :
+   ∃ (unity : TheologicalUnity), unity.entities = Entities.all_entities := by
+-  apply Exists.intro
+-  constructor
+-  · -- entities
+-    exact Entities.all_entities
+-  · -- min_phonetic_sim
+-    intro e1 e2 he1 he2
+-    -- All combinations have at least sibilant in common
+-    sorry -- Proof by exhaustive case analysis would go here
+-  · -- min_functional_overlap  
+-    intro e1 e2 he1 he2 hne
+-    -- All pairs share at least one functional attribute
+-    sorry -- Proof by exhaustive case analysis would go here
++  refine ⟨⟨Entities.all_entities, ?_, ?_⟩, rfl⟩
++  · intro e1 e2 he1 he2
++    simp only [Entities.all_entities, List.mem_cons, List.mem_singleton, List.not_mem_nil, or_false] at he1 he2
++    rcases he1 with rfl | rfl | rfl | rfl <;> rcases he2 with rfl | rfl | rfl | rfl <;> decide
++  · intro e1 e2 he1 he2 _
++    simp only [Entities.all_entities, List.mem_cons, List.mem_singleton, List.not_mem_nil, or_false] at he1 he2
++    rcases he1 with rfl | rfl | rfl | rfl <;> rcases he2 with rfl | rfl | rfl | rfl <;> decide
+ 
+ -- Complementarity principle
+ def complementary (e1 e2 : DivineEntity) : Prop :=
+@@ -200,15 +186,11 @@
+ theorem yeshua_exu_complementary :
+   complementary Entities.yeshua Entities.exu := by
+   unfold complementary
+-  apply Exists.intro FunctionalAttribute.Sacrifice
+-  apply Exists.intro FunctionalAttribute.Communication
+-  constructor
+-  · rfl
+-  constructor
+-  · rfl
+-  constructor
++  refine ⟨FunctionalAttribute.Sacrifice, FunctionalAttribute.Communication, ?_, ?_, ?_, ?_⟩
++  · simp [Entities.yeshua]
++  · simp [Entities.exu]
+   · intro h; cases h
+-  · rfl
++  · decide
+ 
+ -- Personal religion validity
+ structure PersonalReligion where

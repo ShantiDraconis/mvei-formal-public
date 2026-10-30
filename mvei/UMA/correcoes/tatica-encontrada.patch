@@ -23,3 +23,62 @@
  
  end SistemaCriptoPrimosPares
  
+--- a/formal_proofs/lean/universe00_core.lean
++++ b/formal_proofs/lean/universe00_core.lean
+@@ -11,6 +11,7 @@
+ import Mathlib.Algebra.Group.Defs
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Data.Complex.Basic
++import Mathlib.Tactic
+ 
+ /-!
+ # Universe 00 Core Theory
+@@ -118,8 +119,7 @@
+ theorem transformation_preserves_potential 
+   (m : MaterialState) (c : Configuration) :
+   ∃ (m' : MaterialState), m'.constituents = m.constituents := by
+-  use universe00_transform m c
+-  simp [universe00_transform, reconstruct, decompose]
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Lemma 9.1: Potential Conservation -/
+ lemma potential_conservation_lemma 
+@@ -252,8 +252,7 @@
+   (proof : ZKProof) 
+   (h : proof.valid = true) :
+   ∃ (secret : ℕ), True := by
+-  use 0
+-  trivial
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-! ## Complexity Results -/
+ 
+@@ -291,8 +290,7 @@
+ theorem infinite_recyclability 
+   (m : MaterialState) (n : ℕ) :
+   ∃ (m' : MaterialState), m'.constituents = m.constituents := by
+-  use m
+-  rfl
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Corollary 13.3: Scarcity Resolution -/
+ theorem scarcity_resolution 
+--- a/formal_proofs/lean/universe00_extended.lean
++++ b/formal_proofs/lean/universe00_extended.lean
+@@ -7,6 +7,7 @@
+ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+ import Mathlib.MeasureTheory.Integral.IntervalIntegral
+ import Mathlib.Topology.Instances.Real
++import Mathlib.Tactic
+ 
+ /-!
+ # Extended Universe 00 Theory
+@@ -308,7 +309,7 @@
+   std > 0 →
+   cpk spec_u spec_l mean std > 1.33 →
+   True := by
+-  trivial
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-! ## Measurement and Uncertainty -/
+ 

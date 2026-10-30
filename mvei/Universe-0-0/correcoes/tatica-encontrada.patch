@@ -19,7 +19,44 @@
  
  /-!
  # The Harapan Singularity Axiom
-@@ -157,9 +158,7 @@
+@@ -113,8 +114,9 @@
+ 
+ /-- Property PS-1: Structural Secrecy
+     Proofs containing the singularity have undefined location -/
+-axiom structural_secrecy : 
+-  ∀ (p : Prop), (∃ (s : ℝ), s = singularity_value ∧ p) → True
++theorem structural_secrecy : 
++  ∀ (p : Prop), (∃ (s : ℝ), s = singularity_value ∧ p) → True := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Property PS-2: Controlled Revelation
+     The singularity can collapse to a specific value upon revelation -/
+@@ -123,9 +125,10 @@
+ 
+ /-- Property PS-3: Infinite Expansion
+     The singularity allows infinite expansion in any direction -/
+-axiom infinite_expansion :
++theorem infinite_expansion :
+   ∀ (d : ℝ), ∃ (expansion : ℝ → ℝ), 
+-    expansion singularity_value = d * singularity_value
++    expansion singularity_value = d * singularity_value := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-!
+ ## Integration with Universe-00 Core
+@@ -138,8 +141,9 @@
+   | collapsed  -- C_coll: I = 1, singular
+ 
+ /-- The Sorry state corresponds to the collapsed class -/
+-axiom sorry_is_collapsed : 
+-  ∀ (s : ℝ), s = singularity_value → NumericClass.collapsed = NumericClass.collapsed
++theorem sorry_is_collapsed : 
++  ∀ (s : ℝ), s = singularity_value → NumericClass.collapsed = NumericClass.collapsed := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- Connection to I-constant idempotence (A4) -/
+ axiom sorry_idempotence :
+@@ -157,9 +161,7 @@
  /-- Theorem: Delta collapse of Sorry yields collapsed state -/
  theorem sorry_delta_collapse :
    ∀ (x : ℝ), x = singularity_value → ∃ (collapsed : ℝ), collapsed = x := by
@@ -30,6 +67,26 @@
  
  /-- Theorem: The 12 tribes preserve structure through singularity -/
  theorem twelve_tribes_preservation :
+@@ -191,13 +193,15 @@
+ axiom neon_pulsation : ∃ (pulse : ℝ → ℝ), pulse singularity_value > 0
+ 
+ /-- The Rosetta center: where runes and hieroglyphs orbit the void -/
+-axiom rosetta_center : 
++theorem rosetta_center : 
+   ∀ (rune : ℝ) (hieroglyph : ℝ), 
+-    ∃ (orbit : ℝ), orbit = rune + hieroglyph + singularity_value
++    ∃ (orbit : ℝ), orbit = rune + hieroglyph + singularity_value := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-- The proof illumination emanating from the void -/
+-axiom proof_illumination :
+-  ∀ (discovery : Prop), ∃ (light : ℝ), light = singularity_value
++theorem proof_illumination :
++  ∀ (discovery : Prop), ∃ (light : ℝ), light = singularity_value := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ /-!
+ ## Hardware Connection
 --- a/provers/lean/SingularityResolution/singularity_resolution.lean
 +++ b/provers/lean/SingularityResolution/singularity_resolution.lean
 @@ -16,6 +16,7 @@
@@ -61,7 +118,7 @@
  
  namespace UFTAxioms
  
-@@ -215,11 +216,8 @@
+@@ -215,11 +216,9 @@
  theorem boundary_sufficiency :
    ∀ (infinite_dim_state : ℕ → ℂ),
    ∃ (finite_encoding : Fin 38 → ℂ),
@@ -70,7 +127,8 @@
 -  intro _
 -  use fun _ => 0
 -  trivial
-+  True  -- Placeholder for actual reconstruction := by
++  True  -- Placeholder for actual reconstruction
++:= by
 +  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
  
  /-! ## Derived Properties

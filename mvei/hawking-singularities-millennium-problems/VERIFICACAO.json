@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,8 +16,8 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././Problems/YangMills/HawkingLimit.lean:18:45: unexpected token 'λ'; expected '_' or identifier | error: ././././Problems/YangMills/HawkingLimit.lean:22:41: unexpected token 'λ'; expected '_' or identifier | error: ././././Problems/YangMills/HawkingLimit.lean:37:16: unexpected token 'λ'; expected '(', '[', '_', '{', '⦃' or identifier",
-   "sorry_warnings": 8,
+   "build_error": "error: ././././Problems/PvsNP/HawkingLimit.lean:49:181: unexpected token 'end'; expected '=>' | error: ././././Problems/PvsNP/HawkingLimit.lean:48:4: function expected at | error: Lean exited with code 1",
+   "sorry_warnings": 10,
    "reconstructed": true,
    "bridges": [
     {
@@ -71,6 +71,29 @@
      "project": "lean",
      "theorem": "Problems.NavierStokes.ns_hawking_equivalence",
      "statement": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "hawking-singularities-millennium-problems",
+     "project": "lean",
+     "theorem": "Problems.YangMills.ym_hawking_equivalence",
+     "statement": "Problems.YangMills.YangMillsMassGap ↔   ∃ Δ > 0,     ∀ (A : Problems.YangMills.GaugeField),       ∀ ε > 0, ∃ δ > 0, ∀ («λ» : ℝ), 0 < «λ» → «λ» < δ → Problems.YangMills.H_YM A «λ» ≥ Δ - ε",
      "verdict": "aberta",
      "tactic": "",
      "attempts": [
@@ -366,6 +389,25 @@
      ],
      "statement": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "Problems.YangMills.GaugeField.mk.sizeOf_spec",
+     "module": "Problems.YangMills.HawkingLimit",
+     "axioms": [],
+     "statement": "sizeOf { } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Problems.YangMills.ym_hawking_equivalence",
+     "module": "Problems.YangMills.HawkingLimit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "Problems.YangMills.YangMillsMassGap ↔   ∃ Δ > 0,     ∀ (A : Problems.YangMills.GaugeField),       ∀ ε > 0, ∃ δ > 0, ∀ («λ» : ℝ), 0 < «λ» → «λ» < δ → Problems.YangMills.H_YM A «λ» ≥ Δ - ε",
+     "status": "aberto-sorry"
     }
    ],
    "integrity": [],
@@ -383,11 +425,11 @@
      "dependencia_com_sorry": [
       "Problems.Riemann.HawkingLimit"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-i4ra6opm/p/.lake/mvei-salvage/Problems/PvsNP/HawkingLimit.olean' of module Problems.PvsNP.HawkingLimit does not exist — Problems.PvsNP.HawkingLimit não compilou: /tmp/mvei-rec-i4ra6opm/p/Problems/PvsNP/HawkingLimit.lean:49:181: error: unexpected token 'end'; expected '=>' | /tmp/mvei-rec-i4ra6opm/p/Problems/PvsNP/HawkingLimit.lean:48:4: error: function expected at"
     },
     {
      "arquivo": "lean/Problems/PvsNP/HawkingLimit.lean",
-     "linha": 30,
+     "linha": 33,
      "nome": "Problems.PvsNP.pnp_hawking_equivalence",
      "status": "aberto-sorry",
      "axioms": [
@@ -399,17 +441,19 @@
     },
     {
      "arquivo": "lean/Problems/PvsNP/HawkingLimit.lean",
-     "linha": 37,
+     "linha": 40,
      "nome": "Problems.PvsNP.relativization_barrier",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 45: function expected at ∃ (_ : True), True term has type Prop"
+     "erro": "linha 48: function expected at ∃ (_ : True), True term has type Prop",
+     "coluna": 4,
+     "trecho": "    ⟦(⟧∃ _proof_B : True, True)    -"
     },
     {
      "arquivo": "lean/Problems/Riemann/HawkingLimit.lean",
-     "linha": 50,
+     "linha": 52,
      "nome": "Problems.Riemann.rh_hawking_equivalence",
      "status": "aberto-sorry",
      "axioms": [
@@ -419,14 +463,6 @@
       "Quot.sound",
       "Problems.Riemann.xi"
      ]
-    },
-    {
-     "arquivo": "lean/Problems/YangMills/HawkingLimit.lean",
-     "linha": 32,
-     "nome": "Problems.YangMills.ym_hawking_equivalence",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 37: unexpected token 'λ'; expected '(', '[', '_', '{', '⦃' or identifier"
     }
    ],
    "preenchimento": [
@@ -492,11 +528,18 @@
      "enunciado": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
      "resultado": "sem resultado",
      "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "Problems.YangMills.ym_hawking_equivalence",
+     "enunciado": "Problems.YangMills.YangMillsMassGap ↔   ∃ Δ > 0,     ∀ (A : Problems.YangMills.GaugeField),       ∀ ε > 0, ∃ δ > 0, ∀ («λ» : ℝ), 0 < «λ» → «λ» < δ → Problems.YangMills.H_YM A «λ» ≥ Δ - ε",
+     "resultado": "sem resultado",
+     "tatica": ""
     }
    ],
    "summary": {
-    "fechado": 22,
-    "aberto-sorry": 3,
+    "fechado": 23,
+    "aberto-sorry": 4,
     "condicional": 0
    }
   },
@@ -515,25 +558,33 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Hawking/Core/Limits.lean:51:10: function expected at | error: ././././Hawking/Core/Limits.lean:50:73: unsolved goals",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Hawking/Core/Limits.lean:53:10: function expected at | error: ././././Hawking/Core/Limits.lean:52:73: unsolved goals",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "src/lean/Hawking/BSD/HawkingBSD.lean",
-     "linha": 74,
+     "linha": 76,
      "nome": "Hawking.BSD.bsd_hawking_reformulation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Hawking.BSD.L",
+      "Hawking.BSD.algebraicRank",
+      "Hawking.BSD.analyticRank"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/EssentialSingularity.lean",
-     "linha": 54,
+     "linha": 56,
      "nome": "Hawking.Core.essential_singularity_causes_failure",
      "status": "fechado",
      "axioms": [
@@ -547,7 +598,7 @@
     },
     {
      "arquivo": "src/lean/Hawking/Core/EssentialSingularity.lean",
-     "linha": 70,
+     "linha": 72,
      "nome": "Hawking.Core.singularity_trichotomy",
      "status": "aberto-sorry",
      "axioms": [
@@ -562,40 +613,52 @@
     },
     {
      "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",
-     "linha": 51,
+     "linha": 53,
      "nome": "Hawking.Core.hawking_dichotomy",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",
-     "linha": 67,
+     "linha": 69,
      "nome": "Hawking.Core.regular_implies_problem",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/HawkingFunctional.lean",
-     "linha": 73,
+     "linha": 75,
      "nome": "Hawking.Core.singular_implies_not_problem",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/Limits.lean",
-     "linha": 47,
+     "linha": 49,
      "nome": "Hawking.Core.limit_unique",
      "status": "erro",
      "axioms": [
@@ -604,11 +667,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 50: unsolved goals f : ℂ → ℂ x₀ L₁ L₂ : ℂ h₁ : ComplexLimit f x₀ L₁ h₂ : ComplexLimit f x₀ L₂ ⊢ L₁ = L₂"
+     "erro": "linha 52: unsolved goals f : ℂ → ℂ x₀ L₁ L₂ : ℂ h₁ : ComplexLimit f x₀ L₁ h₂ : ComplexLimit f x₀ L₂ ⊢ L₁ = L₂",
+     "coluna": 73,
+     "trecho": "exLimit f x₀ L₂) : L₁ = L₂ := ⟦b⟧y"
     },
     {
      "arquivo": "src/lean/Hawking/Core/Limits.lean",
-     "linha": 54,
+     "linha": 56,
      "nome": "Hawking.Core.limit_dichotomy",
      "status": "fechado",
      "axioms": [
@@ -619,7 +684,7 @@
     },
     {
      "arquivo": "src/lean/Hawking/Core/Limits.lean",
-     "linha": 61,
+     "linha": 63,
      "nome": "Hawking.Core.limit_add",
      "status": "fechado",
      "axioms": [
@@ -630,7 +695,7 @@
     },
     {
      "arquivo": "src/lean/Hawking/Core/Limits.lean",
-     "linha": 67,
+     "linha": 69,
      "nome": "Hawking.Core.limit_mul",
      "status": "fechado",
      "axioms": [
@@ -641,124 +706,172 @@
     },
     {
      "arquivo": "src/lean/Hawking/Core/USC_HCP.lean",
-     "linha": 26,
+     "linha": 28,
      "nome": "Hawking.Core.usc_negation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/USC_HCP.lean",
-     "linha": 36,
+     "linha": 38,
      "nome": "Hawking.Core.usc_determines_truth",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Core/USC_HCP.lean",
-     "linha": 58,
+     "linha": 60,
      "nome": "Hawking.Core.hcp_non_removable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/Hodge/HawkingHodge.lean",
-     "linha": 67,
+     "linha": 69,
      "nome": "Hawking.Hodge.hodge_hawking_reformulation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Hawking.Hodge.laplacianNorm"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/NavierStokes/HawkingNS.lean",
-     "linha": 60,
+     "linha": 62,
      "nome": "Hawking.NavierStokes.ns_hawking_reformulation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/PvsNP/HawkingPNP.lean",
-     "linha": 75,
+     "linha": 77,
      "nome": "Hawking.PvsNP.pnp_hawking_reformulation",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Hawking.PvsNP.T_NP"
+     ],
      "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 80: unknown constant 'Real.log'",
+     "coluna": 58,
+     "trecho": " n : ℕ, n > 0 → H_PNP n ≤ C * ⟦R⟧eal.log n := by",
+     "motivo": "importa Hawking.Core.EssentialSingularity, Hawking.Core.Limits, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/Hawking/RH/HawkingRH.lean",
-     "linha": 67,
+     "linha": 69,
      "nome": "Hawking.RH.rh_no_off_line_singularities",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Hawking.RH.xi"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
-     "linha": 82,
+     "linha": 84,
      "nome": "Hawking.UST.universal_singularity_theorem",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-ciijn233/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-ciijn233/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
     },
     {
      "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
-     "linha": 94,
+     "linha": 96,
      "nome": "Hawking.UST.structural_unity",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-ciijn233/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-ciijn233/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
     },
     {
      "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
-     "linha": 101,
+     "linha": 103,
      "nome": "Hawking.UST.transfer_principle",
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-ciijn233/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-ciijn233/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
     },
     {
      "arquivo": "src/lean/Hawking/YangMills/HawkingYM.lean",
-     "linha": 76,
+     "linha": 78,
      "nome": "Hawking.YangMills.ym_hawking_reformulation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Hawking.Core.Limits"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Hawking.YangMills.energyAtScale"
      ],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "Hawking.Core.EssentialSingularity",
+      "Hawking.Core.Limits"
+     ]
     }
    ],
    "preenchimento": [],

@@ -1,0 +1,389 @@
+--- a/formal/lean4/PvsNP/AverageParameterized.lean
++++ b/formal/lean4/PvsNP/AverageParameterized.lean
+@@ -11,6 +11,9 @@
+ 
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
++import Mathlib.Data.Nat.Factorial.Basic
++
++noncomputable section
+ 
+ namespace PvsNP
+ 
+@@ -86,7 +89,7 @@
+ def fpt_k_to_k (k : Nat) : Nat := k ^ k
+ 
+ /-- A class of parameters K -/
+-def ParameterClass := Set ParameterFunction
++abbrev ParameterClass := Set ParameterFunction
+ 
+ /-- P is parameter-approximate to NP for class K -/
+ def P_approx_K_NP (K : ParameterClass) : Prop :=
+--- a/formal/lean4/PvsNP/Barriers.lean
++++ b/formal/lean4/PvsNP/Barriers.lean
+@@ -2,6 +2,8 @@
+ import PvsNP.ComplexityClasses
+ import PvsNP.StoneLemma
+ 
++noncomputable section
++
+ /-!
+   # PvsNP.Barriers - Known Barriers to P vs NP
+   
+@@ -93,13 +95,13 @@
+ /-! ## Natural Proofs Barrier -/
+ 
+ /-- A Boolean function on n bits -/
+-def BooleanFunction (n : Nat) := (Fin n → Bool) → Bool
++abbrev BooleanFunction (n : Nat) := (Fin n → Bool) → Bool
+ 
+ /-- The set of all Boolean functions on n bits has size 2^{2^n} -/
+ def numBoolFunctions (n : Nat) : Nat := 2 ^ (2 ^ n)
+ 
+ /-- A property of Boolean functions -/
+-def FunctionProperty := ∀ n : Nat, BooleanFunction n → Prop
++abbrev FunctionProperty := ∀ n : Nat, BooleanFunction n → Prop
+ 
+ /-- 
+   Largeness: property holds for at least 2^{-O(n)} fraction of functions.
+--- a/formal/lean4/PvsNP/Basics.lean
++++ b/formal/lean4/PvsNP/Basics.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-!
+   # PvsNP.Basics - Basic Definitions for P vs NP Formalization
+   
+@@ -32,7 +33,7 @@
+ abbrev Word := List Alphabet
+ 
+ /-- A language is a predicate over words (characteristic function) -/
+-def Language := Word → Prop
++abbrev Language := Word → Prop
+ 
+ /-- The length of a word -/
+ def wordLength (w : Word) : Nat := w.length
+@@ -48,7 +49,7 @@
+ /-- Language membership: w ∈ L -/
+ def inLanguage (w : Word) (L : Language) : Prop := L w
+ 
+-notation:50 w " ∈ᴸ " L => inLanguage w L
++notation:50 w:51 " ∈ᴸ " L:51 => inLanguage w L
+ 
+ /-- The empty language ∅ (no words accepted) -/
+ def emptyLanguage : Language := fun _ => False
+@@ -59,7 +60,7 @@
+ /-- Language complement: w ∈ L̄ ↔ w ∉ L -/
+ def complement (L : Language) : Language := fun w => ¬ L w
+ 
+-notation:max "∁" L => complement L
++notation:max "∁" L:max => complement L
+ 
+ /-- Language union: w ∈ (L₁ ∪ L₂) ↔ w ∈ L₁ ∨ w ∈ L₂ -/
+ def union (L₁ L₂ : Language) : Language := fun w => L₁ w ∨ L₂ w
+--- a/formal/lean4/PvsNP/CircuitComplexity.lean
++++ b/formal/lean4/PvsNP/CircuitComplexity.lean
+@@ -8,6 +8,8 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ 
++noncomputable section
++
+ namespace PvsNP
+ 
+ /-- Gate types in a Boolean circuit -/
+@@ -30,7 +32,7 @@
+ def circuitSize (C : Circuit) : Nat := C.numGates
+ 
+ /-- A circuit family is indexed by input length n -/
+-def CircuitFamily := Nat → Circuit
++abbrev CircuitFamily := Nat → Circuit
+ 
+ /-- A circuit family has size bounded by f(n) -/
+ def sizesBoundedBy (F : CircuitFamily) (f : Nat → Nat) : Prop :=
+--- a/formal/lean4/PvsNP/ComplexityClasses.lean
++++ b/formal/lean4/PvsNP/ComplexityClasses.lean
+@@ -1,6 +1,8 @@
+ import PvsNP.Basics
+ import PvsNP.TuringMachines
+ 
++noncomputable section
++
+ /-!
+   # PvsNP.ComplexityClasses - Complexity Classes P, NP, P/poly
+   
+@@ -152,7 +154,7 @@
+   ∃ f : Word → Word, ∃ k : Nat, k ≥ 1 ∧ 
+     (∀ w, L₁ w ↔ L₂ (f w))  -- Correctness; time bound is implicit
+ 
+-notation:50 L₁ " ≤ₚ " L₂ => polyReduces L₁ L₂
++notation:50 L₁:51 " ≤ₚ " L₂:51 => polyReduces L₁ L₂
+ 
+ /-! ## NP-Hardness and NP-Completeness -/
+ 
+--- a/formal/lean4/PvsNP/HierarchyTheorems.lean
++++ b/formal/lean4/PvsNP/HierarchyTheorems.lean
+@@ -1,5 +1,7 @@
+ import PvsNP.ComplexityClasses
+ 
++noncomputable section
++
+ /-!
+   # PvsNP.HierarchyTheorems - Time and Space Hierarchy Theorems
+   
+@@ -178,7 +180,7 @@
+ theorem PSPACE_subset_EXP : PSPACE ⊆ EXP := by
+   sorry  -- Space s gives time 2^{O(s)}
+ 
+-/-- 
++/- 
+   The Full Hierarchy (what we know):
+   
+   L ⊆ NL ⊆ P ⊆ NP ⊆ PSPACE = NPSPACE ⊆ EXP ⊆ NEXP ⊆ EXPSPACE
+--- a/formal/lean4/PvsNP/MasterTheorem.lean
++++ b/formal/lean4/PvsNP/MasterTheorem.lean
+@@ -14,6 +14,7 @@
+ import PvsNP.SAT_NPCompleteness
+ import PvsNP.StoneLemma
+ import PvsNP.AverageParameterized
++import Mathlib.Tactic
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/Reductions.lean
++++ b/formal/lean4/PvsNP/Reductions.lean
+@@ -1,4 +1,5 @@
+ import PvsNP.ComplexityClasses
++import Mathlib.Tactic
+ 
+ /-!
+   # PvsNP.Reductions - Polynomial-Time Reductions
+@@ -59,7 +60,7 @@
+   ∃ f : WordFunction, isPolyTimeComputable f ∧
+     ∀ x : Word, A x ↔ B (f x)
+ 
+-notation:50 A " ≤ₘᵖ " B => manyOneReducible A B
++notation:50 A:51 " ≤ₘᵖ " B:51 => manyOneReducible A B
+ 
+ /-! ## Reduction Properties -/
+ 
+@@ -148,7 +149,7 @@
+   -- A can be decided in poly-time with oracle access to B
+   True  -- Placeholder
+ 
+-notation:50 A " ≤ₜᵖ " B => turingReducible A B
++notation:50 A:51 " ≤ₜᵖ " B:51 => turingReducible A B
+ 
+ /-- Many-one reduction implies Turing reduction -/
+ theorem manyOne_implies_turing (A B : Language) : A ≤ₘᵖ B → A ≤ₜᵖ B := by
+--- a/formal/lean4/PvsNP/SAT_NPCompleteness.lean
++++ b/formal/lean4/PvsNP/SAT_NPCompleteness.lean
+@@ -1,6 +1,8 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ 
++noncomputable section
++
+ /-!
+   # PvsNP.SAT_NPCompleteness - SAT and NP-Completeness
+   
+--- a/formal/lean4/PvsNP/StoneLemma.lean
++++ b/formal/lean4/PvsNP/StoneLemma.lean
+@@ -9,6 +9,7 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ import PvsNP.CircuitComplexity
++import Mathlib.Tactic
+ 
+ namespace PvsNP
+ 
+--- a/formal/lean4/PvsNP/TuringMachines.lean
++++ b/formal/lean4/PvsNP/TuringMachines.lean
+@@ -1,5 +1,7 @@
+ import PvsNP.Basics
+ 
++noncomputable section
++
+ /-!
+   # PvsNP.TuringMachines - Turing Machine Definitions
+   
+--- a/formal/lean4/tests/sanity.lean
++++ b/formal/lean4/tests/sanity.lean
+@@ -7,6 +7,8 @@
+ import PvsNP.Basics
+ import PvsNP.SAT_NPCompleteness
+ 
++noncomputable section
++
+ namespace PvsNP.Tests
+ 
+ -- Test: Empty word has length 0
+--- a/src/lean4/Barriers.lean
++++ b/src/lean4/Barriers.lean
+@@ -1,6 +1,7 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ import PvsNP.StoneLemma
++import Mathlib.Tactic
+ 
+ /-!
+ # Barriers - Known Barriers to P vs NP Resolution
+@@ -108,13 +109,13 @@
+ /-! ## Section 3: Natural Proofs Barrier (Axiom A6) -/
+ 
+ /-- A Boolean function on n bits -/
+-def BoolFunc (n : Nat) := (Fin n → Bool) → Bool
++abbrev BoolFunc (n : Nat) := (Fin n → Bool) → Bool
+ 
+ /-- The set of all n-bit Boolean functions has size 2^{2^n} -/
+ def numBoolFuncs (n : Nat) : Nat := 2 ^ (2 ^ n)
+ 
+ /-- A property of Boolean functions -/
+-def FuncProperty := ∀ n : Nat, BoolFunc n → Prop
++abbrev FuncProperty := ∀ n : Nat, BoolFunc n → Prop
+ 
+ /--
+ Largeness: A property P is large if it holds for at least 2^{-O(n)}
+--- a/src/lean4/Basics.lean
++++ b/src/lean4/Basics.lean
+@@ -56,7 +56,7 @@
+ /-- Language membership notation: w ∈ L -/
+ def inLanguage (w : Word) (L : Language) : Prop := L w
+ 
+-notation:50 w " ∈ᴸ " L => inLanguage w L
++notation:50 w:51 " ∈ᴸ " L:51 => inLanguage w L
+ 
+ /-! ## Section 3: Special Languages -/
+ 
+@@ -74,7 +74,7 @@
+ /-- Language complement: L̄ = {w : w ∉ L} -/
+ def complement (L : Language) : Language := fun w => ¬ L w
+ 
+-notation:max "∁" L => complement L
++notation:max "∁" L:max => complement L
+ 
+ /-- Language union: L₁ ∪ L₂ = {w : w ∈ L₁ ∨ w ∈ L₂} -/
+ def union (L₁ L₂ : Language) : Language := fun w => L₁ w ∨ L₂ w
+--- a/src/lean4/CircuitComplexity.lean
++++ b/src/lean4/CircuitComplexity.lean
+@@ -1,5 +1,6 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
++import Mathlib.Tactic
+ 
+ /-!
+ # CircuitComplexity - Boolean Circuits and P/poly
+--- a/src/lean4/ComplexityClasses.lean
++++ b/src/lean4/ComplexityClasses.lean
+@@ -1,5 +1,6 @@
+ import PvsNP.Basics
+ import PvsNP.TuringMachines
++import Mathlib.Tactic
+ 
+ /-!
+ # ComplexityClasses - The Classes P, NP, coNP, and P/poly
+--- a/src/lean4/HierarchyTheorems.lean
++++ b/src/lean4/HierarchyTheorems.lean
+@@ -1,5 +1,6 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
++import Mathlib.Tactic
+ 
+ /-!
+ # HierarchyTheorems - Time and Space Hierarchy Theorems
+--- a/src/lean4/MasterTheorem.lean
++++ b/src/lean4/MasterTheorem.lean
+@@ -8,6 +8,8 @@
+ import PvsNP.PeqNP_from_SAT
+ import PvsNP.PneqNP_from_NP_not_in_Ppoly
+ 
++noncomputable section
++
+ /-!
+ # MasterTheorem - The Symbolic Separation Program
+ 
+--- a/src/lean4/PeqNP_from_SAT.lean
++++ b/src/lean4/PeqNP_from_SAT.lean
+@@ -3,6 +3,8 @@
+ import PvsNP.Reductions
+ import PvsNP.SAT_NPCompleteness
+ 
++noncomputable section
++
+ /-!
+ # PeqNP_from_SAT - Branch B: Equality via SAT Algorithm
+ 
+--- a/src/lean4/PneqNP_from_NP_not_in_Ppoly.lean
++++ b/src/lean4/PneqNP_from_NP_not_in_Ppoly.lean
+@@ -1,6 +1,7 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ import PvsNP.CircuitComplexity
++import Mathlib.Tactic
+ 
+ /-!
+ # PneqNP_from_NP_not_in_Ppoly - Branch C: Separation via Circuit Bounds
+--- a/src/lean4/PneqNP_from_Stone.lean
++++ b/src/lean4/PneqNP_from_Stone.lean
+@@ -2,6 +2,7 @@
+ import PvsNP.ComplexityClasses
+ import PvsNP.CircuitComplexity
+ import PvsNP.StoneLemma
++import Mathlib.Tactic
+ 
+ /-!
+ # PneqNP_from_Stone - Branch A: Separation via Stone Lemma
+--- a/src/lean4/Reductions.lean
++++ b/src/lean4/Reductions.lean
+@@ -1,5 +1,6 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
++import Mathlib.Tactic
+ 
+ /-!
+ # Reductions - Polynomial-Time Reductions and NP-Completeness
+@@ -140,7 +141,7 @@
+ def manyOneReducible (A B : Language) : Prop :=
+   ∃ _ : ManyOneReduction A B, True
+ 
+-notation:50 A " ≤ₘᵖ " B => manyOneReducible A B
++notation:50 A:51 " ≤ₘᵖ " B:51 => manyOneReducible A B
+ 
+ /-! ## Section 4: Reduction Properties -/
+ 
+@@ -303,7 +304,7 @@
+   -- A can be decided by a poly-time oracle machine with oracle B
+   True  -- Abstract
+ 
+-notation:50 A " ≤ₜᵖ " B => turingReducible A B
++notation:50 A:51 " ≤ₜᵖ " B:51 => turingReducible A B
+ 
+ /--
+ Many-one reduction implies Turing reduction.
+--- a/src/lean4/SAT_NPCompleteness.lean
++++ b/src/lean4/SAT_NPCompleteness.lean
+@@ -1,6 +1,7 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ import PvsNP.Reductions
++import Mathlib.Tactic
+ 
+ /-!
+ # SAT_NPCompleteness - SAT and Cook-Levin Theorem
+--- a/src/lean4/StoneLemma.lean
++++ b/src/lean4/StoneLemma.lean
+@@ -1,6 +1,7 @@
+ import PvsNP.Basics
+ import PvsNP.ComplexityClasses
+ import PvsNP.CircuitComplexity
++import Mathlib.Tactic
+ 
+ /-!
+ # StoneLemma - The Stone Lemma for Circuit Lower Bounds
+--- a/src/lean4/TuringMachines.lean
++++ b/src/lean4/TuringMachines.lean
+@@ -1,4 +1,5 @@
+ import PvsNP.Basics
++import Mathlib.Tactic
+ 
+ /-!
+ # TuringMachines - Turing Machine Definitions for Complexity Theory

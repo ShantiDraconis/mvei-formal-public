@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -389,17 +389,19 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada): 1 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: no such file or directory (error code: 2) | error: no such file or directory (error code: 2))",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas): 3 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 2 arquivo(s); 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 17 arquivo(s): abbrev 1, binder_pred 3, docstring 1, noncomputable 11, notacao 4; 1 prova(s) reescrita(s), conferidas no Lean do projeto: exponential_defense_growth. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././foundation.lean:81:19: type expected, got | error: ././././foundation.lean:82:28: type expected, got)",
    "corrections": [
     "renomear-imports-mathlib",
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4",
+    "z-provas-reparadas"
    ],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `Main, .submodules `«formal-proofs», .one `foundation, .submodules `kernel, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `Main, .one `«formal-proofs».lean.SovereignCore, .one `foundation, .one `kernel.«layer0-symmetry».IDENTITY_CONSTANT, .one `kernel.«memory-quadrants».QUADRANT_SYSTEM, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "CryptographicLogic/TriStability.lean",
-     "linha": 31,
+     "linha": 33,
      "nome": "TriStability.system_phase_transition",
      "status": "fechado",
      "axioms": [
@@ -410,7 +412,7 @@
     },
     {
      "arquivo": "CryptographicLogic/TriStability.lean",
-     "linha": 64,
+     "linha": 66,
      "nome": "TriStability.sovereign_zero_vulnerability",
      "status": "erro",
      "axioms": [
@@ -419,11 +421,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 72: unsolved goals case Sovereign ⊢ 0.0 = 0"
+     "erro": "linha 74: unsolved goals case Sovereign ⊢ 0.0 = 0",
+     "coluna": 14,
+     "trecho": "  | Sovereign ⟦=⟧> simp [state_vulnerability]"
     },
     {
      "arquivo": "CryptographicLogic/TriStability.lean",
-     "linha": 82,
+     "linha": 84,
      "nome": "TriStability.transition_preserves_security",
      "status": "fechado",
      "axioms": []
@@ -434,35 +438,37 @@
      "nome": "infinite_protection_mesh",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '././.lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Complexity/P_eq_NP.olean' of module Mathlib.Complexity.P_eq_NP does not exist"
+     "coluna": 2,
+     "trecho": "  ⟦I⟧sValid sig → ∀ (attempt : ℕ),",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
-     "linha": 103,
+     "linha": 106,
      "nome": "Universe00.BootSequence.triple_signature_required",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-0xlausgr/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
-     "linha": 116,
+     "linha": 119,
      "nome": "Universe00.BootSequence.boot_sequence_chronological",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-0xlausgr/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
-     "linha": 127,
+     "linha": 130,
      "nome": "Universe00.BootSequence.panic_encrypts_gamma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-0xlausgr/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "foundation.lean",
-     "linha": 110,
+     "linha": 111,
      "nome": "Foundation.verified_sound",
      "status": "fechado",
      "axioms": []
@@ -485,7 +491,9 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 100: unsolved goals mem : IsolatedMemory h : mem.quadrant = Quadrant.Gamma ⊢ (sorry ()).access.encrypted = true"
+     "erro": "linha 100: unsolved goals mem : IsolatedMemory h : mem.quadrant = Quadrant.Gamma ⊢ (sorry ()).access.encrypted = true",
+     "coluna": 85,
+     "trecho": "m).access.encrypted = true := ⟦b⟧y"
     },
     {
      "arquivo": "kernel/microkernel/VERIFIED_CORE.lean",
@@ -493,7 +501,7 @@
      "nome": "Universe00.Microkernel.security_enforcement",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-0xlausgr/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
@@ -503,7 +511,9 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 44: tactic 'introN' failed, insufficient number of binders p : Portfolio h : WellFormed p ⊢ Consistent p"
+     "erro": "linha 44: tactic 'introN' failed, insufficient number of binders p : Portfolio h : WellFormed p ⊢ Consistent p",
+     "coluna": 8,
+     "trecho": "  intro ⟦c⟧ hc"
     },
     {
      "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
@@ -529,11 +539,13 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 107: type mismatch cs has type List Component : Type but is expected to have type List Component✝ : Type u_3 the following variables have been introduced by the implicit lambda feature Component✝ : Type u_3 you can disable implicit lambdas using"
+     "erro": "linha 107: type mismatch cs has type List Component : Type but is expected to have type List Component✝ : Type u_3 the following variables have been introduced by the implicit lambda feature Component✝ : Type u_3 you can disable implicit lambdas using",
+     "coluna": 22,
+     "trecho": "  exists Portfolio.mk ⟦c⟧s (AuthSignatures.mk s1 s2) ("
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
-     "linha": 27,
+     "linha": 29,
      "nome": "TimestampProof.temporal_transitive",
      "status": "fechado",
      "axioms": [
@@ -543,17 +555,19 @@
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
-     "linha": 150,
+     "linha": 152,
      "nome": "TimestampProof.timestamp_immutability",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 163: tactic 'unfold' failed to unfold 'Bool.not' at ¬td1.proof_of_work.hash_output = td2.proof_of_work.hash_output"
+     "erro": "linha 165: tactic 'unfold' failed to unfold 'Bool.not' at ¬td1.proof_of_work.hash_output = td2.proof_of_work.hash_output",
+     "coluna": 9,
+     "trecho": "  unfold ⟦n⟧ot"
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
-     "linha": 235,
+     "linha": 237,
      "nome": "TimestampProof.chain_integrity_preserved",
      "status": "aberto-sorry",
      "axioms": [
@@ -564,7 +578,7 @@
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
-     "linha": 256,
+     "linha": 258,
      "nome": "TimestampProof.temporal_consistency_monotonic",
      "status": "aberto-sorry",
      "axioms": [
@@ -595,7 +609,9 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 215: invalid field notation, type is not of the form (C ...) where C is a constant keys has type ?m.5433"
+     "erro": "linha 215: invalid field notation, type is not of the form (C ...) where C is a constant keys has type ?m.5433",
+     "coluna": 22,
+     "trecho": "  ∀ keys m, ds.verify ⟦k⟧eys.1 m (ds.sign keys.2 m) = "
     },
     {
      "arquivo": "security/invariants/state_invariants.lean",
@@ -617,35 +633,41 @@
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean",
-     "linha": 24,
+     "linha": 26,
      "nome": "SystemCore.protection_always_positive",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 27: unsolved goals case Neon ⊢ 0 < protectionLevel SystemState.Neon case W95 ⊢ 0 < protectionLevel SystemState.W95"
+     "erro": "linha 29: unsolved goals case Neon ⊢ 0 < protectionLevel SystemState.Neon case W95 ⊢ 0 < protectionLevel SystemState.W95",
+     "coluna": 27,
+     "trecho": "  0 < protectionLevel s := ⟦b⟧y"
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean",
-     "linha": 29,
+     "linha": 31,
      "nome": "SystemCore.neon_max_protection",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 32: unsolved goals case Neon ⊢ protectionLevel SystemState.Neon ≥ protectionLevel SystemState.Neon case W95 ⊢ protectionLevel SystemState.Neon ≥ protectionLevel SystemState.W95"
+     "erro": "linha 34: unsolved goals case Neon ⊢ protectionLevel SystemState.Neon ≥ protectionLevel SystemState.Neon case W95 ⊢ protectionLevel SystemState.Neon ≥ protectionLevel SystemState.W95",
+     "coluna": 77,
+     "trecho": "e.Neon ≥ protectionLevel s := ⟦b⟧y"
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/CookLevin.lean",
-     "linha": 27,
+     "linha": 29,
      "nome": "PvsNP.cook_levin_sat_npcomplete",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 29: function expected at NPComplete term has type ?m.1176"
+     "erro": "linha 31: function expected at NPComplete term has type ?m.1176",
+     "coluna": 36,
+     "trecho": "m cook_levin_sat_npcomplete : ⟦N⟧PComplete SAT := by"
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/SAT_Complexity.lean",
-     "linha": 32,
+     "linha": 34,
      "nome": "PvsNP.sat_in_np",
      "status": "aberto-sorry",
      "axioms": [
@@ -655,33 +677,39 @@
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/SAT_Complexity.lean",
-     "linha": 41,
+     "linha": 43,
      "nome": "PvsNP.p_eq_np_implies_sat_polynomial",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 44: don't know how to synthesize implicit argument 'α' @InP ?m.1008 problem context: problem : ?m.1008 → Prop ⊢ Sort ?u.1006 when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved befor"
+     "erro": "linha 46: don't know how to synthesize implicit argument 'α' @InP ?m.1008 problem context: problem : ?m.1008 → Prop ⊢ Sort ?u.1006 when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved befor",
+     "coluna": 29,
+     "trecho": "  (∀ problem, InNP problem → ⟦I⟧nP problem) → InP SAT := by"
     },
     {
      "arquivo": "zkp/zkp_foundation.lean",
-     "linha": 203,
+     "linha": 202,
      "nome": "ZKPFoundation.zkp_correctness",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 224: tactic 'apply' failed, failed to unify ∃ w, zkp.relation ?s w with zkp.relation s w case mpr stmt wit prf : Type u zkp : ZKProofSystem stmt wit prf h_comp : completeness zkp h_sound : soundness zkp s : stmt w : wit p : prf h_verify : zkp.ve"
+     "erro": "linha 223: tactic 'apply' failed, failed to unify ∃ w, zkp.relation ?s w with zkp.relation s w case mpr stmt wit prf : Type u zkp : ZKProofSystem stmt wit prf h_comp : completeness zkp h_sound : soundness zkp s : stmt w : wit p : prf h_verify : zkp.ve",
+     "coluna": 4,
+     "trecho": "    ⟦a⟧pply h_sound"
     },
     {
      "arquivo": "zkp/zkp_foundation.lean",
-     "linha": 226,
+     "linha": 225,
      "nome": "ZKPFoundation.commitment_secure",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 232: unexpected token 'hiding'; expected term"
+     "erro": "linha 231: unexpected token 'hiding'; expected term",
+     "coluna": 14,
+     "trecho": "  binding cs →⟦ ⟧hiding cs →"
     },
     {
      "arquivo": "zkp/zkp_foundation.lean",
-     "linha": 240,
+     "linha": 239,
      "nome": "ZKPFoundation.zk_preserves_privacy",
      "status": "aberto-sorry",
      "axioms": [
@@ -722,71 +750,204 @@
    "repo": "cryptographic-logic-foundations",
    "path": "formal/lean4",
    "toolchain": "",
-   "toolchain_used": "padrão do elan",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
-   "build_ok": false,
-   "build_seconds": 5.5,
-   "build_error": "error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
+   "build_ok": true,
+   "build_seconds": 5.8,
+   "build_error": "(configuração original) error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
-   "declared_axioms": [],
-   "theorems": [],
-   "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././SovereignCore.lean:84:3: unknown tactic | error: ././././SovereignCore.lean:81:64: unsolved goals",
-   "corrections": [
-    "tatica-encontrada"
-   ],
-   "lakefile_gerado": "",
-   "avulso": false,
-   "salvage": [
+   "declared_axioms": [
     {
-     "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 42,
-     "nome": "securityVerification_in_P",
-     "status": "fechado",
+     "name": "securityBreaking_is_NPHard",
+     "module": "SovereignCore",
+     "statement": "∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "ComplexityClass.NP.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "sizeOf ComplexityClass.NP = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ComplexityClass.NPHard.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "sizeOf ComplexityClass.NPHard = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ComplexityClass.P.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "sizeOf ComplexityClass.P = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Identity.mk.inj",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ {publicKey secretProof publicKey_1 secretProof_1 : ℕ},   { publicKey := publicKey, secretProof := secretProof } = { publicKey := publicKey_1, secretProof := secretProof_1 } →     publicKey = publicKey_1 ∧ secretProof = secretProof_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Identity.mk.injEq",
+     "module": "SovereignCore",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (publicKey secretProof publicKey_1 secretProof_1 : ℕ),   ({ publicKey := publicKey, secretProof := secretProof } =       { publicKey := publicKey_1, secretProof := secretProof_1 }) =     (publicKey = publicKey_1 ∧ secretProof = secretProof_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Identity.mk.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (publicKey secretProof : ℕ),   sizeOf { publicKey := publicKey, secretProof := secretProof } = 1 + sizeOf publicKey + sizeOf secretProof",
+     "status": "fechado"
+    },
+    {
+     "name": "ImmutableIdentity.mk.inj",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ {core : Identity} {frozen : Bool} {core_1 : Identity} {frozen_1 : Bool},   { core := core, frozen := frozen } = { core := core_1, frozen := frozen_1 } → core = core_1 ∧ frozen = frozen_1",
+     "status": "fechado"
+    },
+    {
+     "name": "ImmutableIdentity.mk.injEq",
+     "module": "SovereignCore",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (core : Identity) (frozen : Bool) (core_1 : Identity) (frozen_1 : Bool),   ({ core := core, frozen := frozen } = { core := core_1, frozen := frozen_1 }) = (core = core_1 ∧ frozen = frozen_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "ImmutableIdentity.mk.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (core : Identity) (frozen : Bool), sizeOf { core := core, frozen := frozen } = 1 + sizeOf core + sizeOf frozen",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityProblem.BreakingSecurity.inj",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ {a a_1 : Identity}, SecurityProblem.BreakingSecurity a = SecurityProblem.BreakingSecurity a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityProblem.BreakingSecurity.injEq",
+     "module": "SovereignCore",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a a_1 : Identity), (SecurityProblem.BreakingSecurity a = SecurityProblem.BreakingSecurity a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityProblem.BreakingSecurity.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (a : Identity), sizeOf (SecurityProblem.BreakingSecurity a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityState.Authorized.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "sizeOf SecurityState.Authorized = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityState.Unauthorized.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "sizeOf SecurityState.Unauthorized = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityState.W95Neon.sizeOf_spec",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "sizeOf SecurityState.W95Neon = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SecurityState.ofNat_toCtorIdx",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (x : SecurityState), SecurityState.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "exponential_defense_growth",
+     "module": "SovereignCore",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (n : ℕ), securityGrowth (n + 1) = 2 * securityGrowth n",
+     "status": "fechado"
+    },
+    {
+     "name": "identity_protection",
+     "module": "SovereignCore",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : ImmutableIdentity), id.frozen = true → protectIdentity id = id",
+     "status": "fechado"
+    },
+    {
+     "name": "no_reversion_to_insecure",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (s : SecurityState), s = SecurityState.Authorized → s ≠ SecurityState.W95Neon",
+     "status": "fechado"
+    },
+    {
+     "name": "securityVerification_in_P",
+     "module": "SovereignCore",
      "axioms": [
       "propext",
       "Classical.choice"
-     ]
-    },
-    {
-     "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 52,
-     "nome": "stateInvariant_preserved",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 78,
-     "nome": "exponential_defense_growth",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
      ],
-     "erro": "linha 81: unsolved goals n : Nat ⊢ 2 ^ (n + 1) = 2 * 2 ^ n"
+     "statement": "Identity → ℕ → ∃ verify, True",
+     "status": "fechado"
     },
     {
-     "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 85,
-     "nome": "no_reversion_to_insecure",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formal/lean4/SovereignCore.lean",
-     "linha": 104,
-     "nome": "identity_protection",
-     "status": "fechado",
-     "axioms": [
-      "propext"
-     ]
+     "name": "stateInvariant_preserved",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (s : SecurityState), stateInvariant s → s = SecurityState.Authorized",
+     "status": "fechado"
     }
    ],
-   "preenchimento": [],
+   "integrity": [],
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 17 arquivo(s): abbrev 1, binder_pred 3, docstring 1, noncomputable 11, notacao 4; 1 prova(s) reescrita(s), conferidas no Lean do projeto: exponential_defense_growth. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com SovereignCore e o Mathlib v4.19.0 e compilou o que foi possível",
+   "corrections": [
+    "tatica-encontrada",
+    "vocabulario-lean4",
+    "z-provas-reparadas"
+   ],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `SovereignCore]\n",
+   "avulso": false,
+   "salvage": [],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "securityBreaking_is_NPHard",
+     "enunciado": "∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
    "summary": {
-    "fechado": 0,
+    "fechado": 21,
     "aberto-sorry": 0,
     "condicional": 0
    }
@@ -864,16 +1025,18 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 17 arquivo(s): abbrev 1, binder_pred 3, docstring 1, noncomputable 11, notacao 4; 1 prova(s) reescrita(s), conferidas no Lean do projeto: exponential_defense_growth. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
    "corrections": [
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4",
+    "z-provas-reparadas"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.3.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Complexity, .one `NavierStokes, .one `Riemann, .one `Sovereign]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 65,
+     "linha": 67,
      "nome": "P_eq_NP_implies_NPComplete_in_P",
      "status": "aberto-sorry",
      "axioms": [
@@ -884,7 +1047,7 @@
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
-     "linha": 25,
+     "linha": 26,
      "nome": "Sovereign.integrityBarrier",
      "status": "fechado",
      "axioms": [
@@ -893,7 +1056,7 @@
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
-     "linha": 37,
+     "linha": 38,
      "nome": "Sovereign.sovereignIntegrity",
      "status": "condicional",
      "axioms": [
@@ -903,24 +1066,26 @@
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
-     "linha": 65,
+     "linha": 66,
      "nome": "System.universe0Valid",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 67: unsolved goals ⊢ String.length \"789213af821903\" > 0"
+     "erro": "linha 68: unsolved goals ⊢ 0 < String.length \"789213af821903\"",
+     "coluna": 61,
+     "trecho": "se0Identity.isValid = true := ⟦b⟧y"
     },
     {
      "arquivo": "provers/lean/Sovereign.lean",
-     "linha": 69,
+     "linha": 70,
      "nome": "System.universe0Consensus",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
+      "propext",
       "sorryAx"
-     ],
-     "erro": "linha 71: unsolved goals ⊢ ∃ id, id.verified = true ∧ Identity.isValid id = true"
+     ]
     }
    ],
    "preenchimento": [

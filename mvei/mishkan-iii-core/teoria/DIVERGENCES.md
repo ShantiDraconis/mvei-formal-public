@@ -12,6 +12,7 @@ Nenhum usa axioma além de `propext`, `Classical.choice` e `Quot.sound`.
 | 2 | Conceito 425 com data 1600, contra `modern_mathematics` (> 1600) | nenhuma interpretação tem o conceito 425; a exclusão é forçada | `conceito_425`, `nenhum_conceito_425` |
 | 3 | `logical_preservation` sem parênteses em volta do `↔` | o Lean lê `(E₁ → E₂ → (h₁ → h₂)) ↔ (m₁ → m₂)`, falso na interpretação; com parênteses é teorema | `logical_preservation_leitura`, `logical_preservation_falso`, `logical_preservation_com_parenteses` |
 | 4 | 71 `absolute_precedence_N` somam a data negativa de C14 ao ano | as 71 são falsas como escritas e verdadeiras com a diferença | `absolute_precedence_falsas`, `absolute_precedence_pela_diferenca` |
+| 5 | 500 `meta_N_decidability`: `decidable_system system ↔ (∀ formula, Decidable (derivable system formula))` | `Decidable` é um tipo e `↔` só liga proposições: o enunciado não é bem formado; com `Nonempty (…)` (a leitura proposicional) e `decidable_system` definido assim, a prova do autor (`rfl`) fecha | patch `vinculo-provas` (tipo corrigido); `SemanticaMishkan.decidabilidade_classica` |
 
 ## 1. Sinais 21 e 35: classes trocadas
 
@@ -86,6 +87,27 @@ theorem absolute_precedence_001 :
 passa de 4000 e `absolute_precedence_pela_diferenca` que, com publicação − C14, as 71 passam. No pipeline principal
 essas 71 chegam ao kernel e caem com `⊢ False`. A causa não é a precedência do `↔` (isso é a entrada 3), é a
 aritmética do enunciado.
+
+## 5. `meta_N_decidability`: `Decidable` é um tipo
+
+`core/proofs/FORMAL_VERIFICATIONS.lean`, 500 teoremas (`meta_0001_decidability` … `meta_0500_decidability`):
+
+```lean
+theorem meta_0001_decidability :
+  ∀ (system : LogicalSystem),
+  decidable_system system ↔
+  (∀ (formula : Formula),
+    Decidable (derivable system formula)) := by
+  intro system
+  rfl
+```
+
+`Decidable p` é uma classe de dados (`Type`), não uma proposição, e `↔` só aceita proposições: o Lean recusa o
+enunciado ("application type mismatch"). É o único ajuste de enunciado do patch `vinculo-provas`: o lado direito
+vira `Nonempty (∀ formula, Decidable (derivable system formula))`, e `decidable_system` passa a ser essa definição
+(na camada de nomes e na camada concreta). Com isso a prova escrita pelo autor (`intro system; rfl`) fecha sem
+mudança. Lido assim, o enunciado vale para qualquer sistema pela lógica clássica
+(`SemanticaMishkan.decidabilidade_classica`): os 500 são verdadeiros por definição, não dizem nada sobre os sistemas.
 
 ## Reproduzir
 

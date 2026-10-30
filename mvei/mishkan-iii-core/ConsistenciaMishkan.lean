@@ -192,7 +192,9 @@ def valid : Formula → Prop := by intros; exact True
 abbrev sound (s : LogicalSystem) : Prop := ∀ (formula : Formula), derivable s formula → valid formula
 abbrev complete (s : LogicalSystem) : Prop := ∀ (formula : Formula), valid formula → derivable s formula
 abbrev consistent (s : LogicalSystem) : Prop := ∀ (formula : Formula), derivable s formula → derivable s (¬formula) → False
-def decidable_system : LogicalSystem → Prop := by intros; exact True
+-- `Decidable` é um tipo (classe de dados): "o sistema é decidível" como proposição é `Nonempty` da família de
+-- decisões (a mesma leitura de reformulacoes/TeoriaMishkan e de SemanticaMishkan.decidabilidade_classica)
+abbrev decidable_system (s : LogicalSystem) : Prop := Nonempty (∀ (formula : Formula), Decidable (derivable s formula))
 theorem soundness_lemma : ∀ {s : LogicalSystem} {f : Formula}, derives s → derivable s f → valid f := by modelo
 
 -- verify_<P>_N e verify_<P>_N_encoding
@@ -3968,4 +3970,4 @@ end Temple
 /-! ## Sinais 1..417 (1..100 ligados ao catálogo do autor) -/
 end MveiModelo.Mishkan
 
-/-! 1295 opacos com definição, 2452 axiomas da camada e 4 do autor fechados no modelo. -/
+/-! 1294 opacos com definição, 2452 axiomas da camada e 4 do autor fechados no modelo. -/

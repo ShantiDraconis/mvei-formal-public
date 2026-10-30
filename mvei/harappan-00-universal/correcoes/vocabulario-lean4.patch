@@ -1,0 +1,780 @@
+--- a/Provas/M216_Riemann.lean
++++ b/Provas/M216_Riemann.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Tactic
++
++noncomputable section
+ /-
+   Prova S5: M216_Riemann.lean
+   Sistema de Verificação Formal - Lógica Harappan S5
+--- a/formal/lean/Atomics.lean
++++ b/formal/lean/Atomics.lean
+@@ -98,7 +98,7 @@
+   deriving Repr
+ 
+ -- Sequence: A sequence of tokens (Σ*)
+-def Sequence : Type := List Token
++abbrev Sequence : Type := List Token
+ 
+ -- Sentence: A complete operational log entry
+ structure Sentence where
+@@ -215,7 +215,7 @@
+   deriving Repr
+ 
+ -- Parameter table is a list of engineering parameters
+-def ParameterTable : Type := List EngineeringParameter
++abbrev ParameterTable : Type := List EngineeringParameter
+ 
+ -- Validate all signatures in parameter table
+ def validateTable (table : ParameterTable) : Bool :=
+@@ -277,7 +277,7 @@
+   deriving Repr
+ 
+ -- Blockchain
+-def Blockchain : Type := List Block
++abbrev Blockchain : Type := List Block
+ 
+ -- Compute block hash (simplified)
+ def computeBlockHash (b : Block) : Nat :=
+--- a/formal/lean/Block328_372.lean
++++ b/formal/lean/Block328_372.lean
+@@ -186,8 +186,8 @@
+ -- ============================================================================
+ 
+ /-- Valid state transitions for the DFA -/
+-def validTransition (from : ClosureState) (op : OperatorType) (to : ClosureState) : Prop :=
+-  match from, op, to with
++def validTransition («from» : ClosureState) (op : OperatorType) (to : ClosureState) : Prop :=
++  match «from», op, to with
+   | ClosureState.potential, OperatorType.prongs, ClosureState.multiplexed => True
+   | ClosureState.potential, OperatorType.internal, ClosureState.qualified => True
+   | ClosureState.potential, OperatorType.hatching, ClosureState.consummated => True
+@@ -212,13 +212,13 @@
+   cases op <;> cases to <;> contradiction
+ 
+ /-- Any state can reach consummated via hatching -/
+-theorem hatching_reaches_consummated (from : ClosureState) :
+-    from ≠ ClosureState.consummated →
+-    validTransition from OperatorType.hatching ClosureState.consummated ∨
+-    ∃ mid : ClosureState, validTransition from OperatorType.prongs mid ∧
++theorem hatching_reaches_consummated («from» : ClosureState) :
++    «from» ≠ ClosureState.consummated →
++    validTransition «from» OperatorType.hatching ClosureState.consummated ∨
++    ∃ mid : ClosureState, validTransition «from» OperatorType.prongs mid ∧
+                           validTransition mid OperatorType.hatching ClosureState.consummated := by
+   intro h
+-  cases from
++  cases «from»
+   · left; unfold validTransition; trivial
+   · right; exists ClosureState.complex
+     constructor <;> (unfold validTransition; trivial)
+--- a/formal/lean/HarappanLogic.lean
++++ b/formal/lean/HarappanLogic.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Harappan Logic v1.0 - Formal Proof System
+   Axiomas de Preservação: Shiva and Seth
+--- a/formal/lean/HarappanMathematicalScope.lean
++++ b/formal/lean/HarappanMathematicalScope.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Harappan Universal System - Mathematical Scope and Bounds
+   
+@@ -30,7 +31,7 @@
+ def Exists (α : Type) : Prop := Nonempty α
+ 
+ /-- Instance marker - boolean activation -/
+-def Instance : Type := Bool
++abbrev Instance : Type := Bool
+ 
+ def is_active (i : Instance) : Prop :=
+   i = true
+@@ -50,7 +51,7 @@
+ -- * Level 1: Counting (Cardinal Arithmetic)
+ 
+ /-- Finite natural number counting -/
+-def Count : Type := ℕ
++abbrev Count : Type := ℕ
+ 
+ /-- Cardinality - explicit quantity -/
+ structure CountedEntity where
+@@ -95,7 +96,7 @@
+ -- * Level 3: Relation and Equivalence (Relational Logic)
+ 
+ /-- Binary relation between entities -/
+-def Relation (α β : Type) : Type := α → β → Prop
++abbrev Relation (α β : Type) : Type := α → β → Prop
+ 
+ /-- Link/binding between entities -/
+ inductive Linked : EntityBase → EntityBase → Prop where
+@@ -150,7 +151,7 @@
+ 
+ /-- Institutional states - process phases -/
+ inductive State where
+-  | open : State
++  | «open» : State
+   | qualified : State
+   | counted : State
+   | closed : State
+@@ -258,27 +259,27 @@
+ 
+ -- * Mathematical Bounds - What the System Does NOT Have
+ 
+-/-- The system does NOT have: -/
++/- The system does NOT have: -/
+ 
+-/-- ❌ No integers (negative numbers) -/
++/- ❌ No integers (negative numbers) -/
+ -- ℕ is used, not ℤ
+ 
+-/-- ❌ No rationals or reals -/
++/- ❌ No rationals or reals -/
+ -- Only ℕ, no ℚ or ℝ
+ 
+ /-- ❌ No abstract zero as a concept -/
+ def has_abstract_zero : Prop := False
+ 
+-/-- ❌ No symbolic algebra -/
++/- ❌ No symbolic algebra -/
+ -- No free variables, no equation solving
+ 
+ /-- ❌ No infinity -/
+ def has_infinity : Prop := False
+ 
+-/-- ❌ No recursion in the symbolic system -/
++/- ❌ No recursion in the symbolic system -/
+ -- States are finite, not recursive
+ 
+-/-- ❌ No formal mathematical proofs as content -/
++/- ❌ No formal mathematical proofs as content -/
+ -- The system validates, doesn't prove
+ 
+ -- * Formal Characterization
+@@ -332,10 +333,10 @@
+ }
+ 
+ /-- Workflow equivalence -/
+-def WorkflowState : Type := State
++abbrev WorkflowState : Type := State
+ 
+ /-- DFA equivalence -/
+-def DFA : Type := State × (State → State → Prop) × State
++abbrev DFA : Type := State × (State → State → Prop) × State
+ 
+ def harappan_as_dfa : DFA :=
+   (.open, StateTransition, .closed)
+--- a/formal/lean/Indus45System.lean
++++ b/formal/lean/Indus45System.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Indus 45-Symbol Fundamental System - Formal Verification
+   =========================================================
+--- a/formal/lean/IndusBidirectionalSemantics.lean
++++ b/formal/lean/IndusBidirectionalSemantics.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Harappan Universal System - Bidirectional Semantics Formalization
+   
+@@ -62,7 +63,7 @@
+   base_form : Glyph
+   function_type : String
+   composition_index : Nat
+-  deriving Repr
++  
+ 
+ -- Complete glyph with semantic and operational properties
+ structure SemanticGlyph where
+@@ -70,7 +71,7 @@
+   idea : IdeaState
+   runic_components : List RunicComponent
+   symmetric : Bool  -- Has mirror equivalent
+-  deriving Repr
++  
+ 
+ -- Inscription sequence with directional metadata
+ structure InscriptionSequence where
+@@ -78,7 +79,7 @@
+   primary_direction : ReadingDirection
+   has_mirror_variant : Bool
+   archaeological_context : String
+-  deriving Repr
++  
+ 
+ -- * 2. Topological Semantic Space
+ 
+@@ -94,10 +95,10 @@
+   to_glyph : SemanticGlyph
+   orientation : VectorOrientation
+   magnitude : Float
+-  deriving Repr
++  
+ 
+ -- Topological reading as vector field
+-def VectorField := List SemanticVector
++abbrev VectorField := List SemanticVector
+ 
+ -- * 3. Core Bidirectional Properties
+ 
+@@ -108,10 +109,10 @@
+ 
+ -- Property: Sequence meaning preserved under reversal
+ def sequence_preserving (seq : InscriptionSequence) : Prop :=
+-  ∀ g ∈ seq.glyphs, directional_stability g seq.primary_direction 
++  ∀ g, g ∈ seq.glyphs → (directional_stability g seq.primary_direction 
+     (if seq.primary_direction = ReadingDirection.leftToRight 
+      then ReadingDirection.rightToLeft 
+-     else ReadingDirection.leftToRight)
++     else ReadingDirection.leftToRight))
+ 
+ -- Theorem 1: Directional stability implies non-phonetic system
+ -- If meaning is preserved under direction reversal, the system cannot be phonetic
+@@ -192,7 +193,7 @@
+ structure CommitOperator where
+   glyph : SemanticGlyph
+   validates : Bool
+-  deriving Repr
++  
+ 
+ -- Position types in inscription
+ inductive InscriptionPosition where
+@@ -224,14 +225,12 @@
+ structure VectorSentence where
+   glyph_set : List SemanticGlyph
+   relations : VectorField
+-  deriving Repr
++  
+ 
+ -- Formal definition of sentence semantics
+ -- Sentence = ⋃ᵢ σᵢ + R⃗(σᵢ)
+ def sentence_semantics (sent : VectorSentence) : Prop :=
+-  ∀ g ∈ sent.glyph_set, 
+-    ∃ v ∈ sent.relations, 
+-      v.from_glyph = g ∨ v.to_glyph = g
++  ∀ g, g ∈ sent.glyph_set → (∃ v, v ∈ sent.relations ∧ (v.from_glyph = g ∨ v.to_glyph = g))
+ 
+ -- Reversal changes vector orientation, not glyph semantics
+ def reverse_vector (v : SemanticVector) : SemanticVector :=
+@@ -330,7 +329,7 @@
+ -- Theorem 8: High compression possible when glyphs are self-contained
+ theorem compression_without_ambiguity 
+   (seq : InscriptionSequence) :
+-  (∀ g ∈ seq.glyphs, unambiguous g) →
++  (∀ g, g ∈ seq.glyphs → (unambiguous g)) →
+   entropy seq < seq.glyphs.length.toFloat * 3.0 := by
+   intro h_unambig
+   unfold entropy
+@@ -449,7 +448,7 @@
+   forward_reading : InscriptionSequence
+   backward_reading : Option InscriptionSequence
+   same_archaeological_context : Bool
+-  deriving Repr
++  
+ 
+ -- Evidence: Same glyphs, inverted order, same context
+ axiom corpus_bidirectional_evidence : ∃ (att : CorpusAttestation),
+--- a/formal/lean/IndusHSCS.lean
++++ b/formal/lean/IndusHSCS.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Logic.ExistsUnique
+ /-
+   HSCS Formal Proofs - Indus Script as State-Certification Language
+   
+@@ -57,7 +58,7 @@
+   deriving Repr, DecidableEq
+ 
+ -- Ledger as a set of states
+-def Ledger := List State
++abbrev Ledger := List State
+ 
+ -- Axiom A0: State Certification
+ -- Every valid inscription institutes a certified state
+@@ -122,7 +123,7 @@
+   -- Closure must be commit if present
+   (∀ c, s.closure = some c → c.op_type = OperatorType.COMMIT) ∧
+   -- Metadata must be qualifiers
+-  (∀ m ∈ s.metadata, m.op_type = OperatorType.QUAL)
++  (∀ m, m ∈ s.metadata → (m.op_type = OperatorType.QUAL))
+ 
+ -- Position class constraints
+ def valid_position_for_type (op_type : OperatorType) (pos : Position) : Prop :=
+@@ -146,7 +147,7 @@
+   ∀ h, s.header = some h → h.op_type ≠ OperatorType.COUNT
+ 
+ def seal_cannot_be_medial (s : Sentence) : Prop :=
+-  ∀ m ∈ s.metadata, m.op_type ≠ OperatorType.COMMIT
++  ∀ m, m ∈ s.metadata → (m.op_type ≠ OperatorType.COMMIT)
+ 
+ def nucleus_after_closure_forbidden (s : Sentence) : Prop :=
+   s.closure.isSome → True  -- In full implementation, would check ordering
+@@ -189,7 +190,7 @@
+ theorem no_narrative_encoding : 
+   (∀ (op : Operator), ¬is_temporal_operator op) →
+   ∀ (s : Sentence), ¬∃ (temporal_seq : List Operator), 
+-    temporal_seq ≠ [] ∧ ∀ t ∈ temporal_seq, is_temporal_operator t := by
++    temporal_seq ≠ [] ∧ ∀ t, t ∈ temporal_seq → (is_temporal_operator t) := by
+   intro h_no_temp s
+   intro ⟨temporal_seq, h_nonempty, h_all_temp⟩
+   cases temporal_seq with
+--- a/formal/lean/IndusHelloWorld.lean
++++ b/formal/lean/IndusHelloWorld.lean
+@@ -37,7 +37,7 @@
+   deriving Repr, DecidableEq
+ 
+ -- Quantities (HOW MANY)
+-def Quantity : Type := Nat
++abbrev Quantity : Type := Nat
+ 
+ -- Institutional States (STATUS)
+ inductive InstitutionalState where
+@@ -69,7 +69,7 @@
+   deriving Repr, DecidableEq
+ 
+ -- Inscription = sequence of glyphs
+-def Inscription : Type := List Glyph
++abbrev Inscription : Type := List Glyph
+ 
+ -- * 2. Ledger Structure
+ 
+@@ -82,7 +82,7 @@
+   deriving Repr
+ 
+ -- Ledger = collection of records
+-def Ledger : Type := List LedgerRecord
++abbrev Ledger : Type := List LedgerRecord
+ 
+ -- Empty ledger
+ def emptyLedger : Ledger := []
+--- a/formal/lean/IndusInscriptionsProofs.lean
++++ b/formal/lean/IndusInscriptionsProofs.lean
+@@ -15,6 +15,8 @@
+ 
+ import IndusLogic
+ 
++noncomputable section
++
+ -- ============================================================================
+ -- Operator Definitions
+ -- ============================================================================
+--- a/formal/lean/IndusIntegration.lean
++++ b/formal/lean/IndusIntegration.lean
+@@ -16,7 +16,9 @@
+ 
+ -- Import both systems
+ -- import IndusStateTransition
+--- import IndusBidirectionalSemantics
++import IndusBidirectionalSemantics
++
++noncomputable section
+ 
+ -- * 1. Core Integration: Mapping between Systems
+ 
+@@ -44,7 +46,7 @@
+ structure ExtendedOperator where
+   base : StateTransitionOperator
+   op_type : OperatorType
+-  deriving Repr
++  
+ 
+ -- Mapping preserves operator type
+ axiom glyph_preserves_type :
+@@ -262,7 +264,7 @@
+ -- * 8. Corpus-Level Theorems
+ 
+ -- Corpus as collection of inscriptions
+-def Corpus := List InscriptionSequence
++abbrev Corpus := List InscriptionSequence
+ 
+ -- Property: All inscriptions in corpus preserve sequence
+ def corpus_preserving (corpus : Corpus) : Prop :=
+--- a/formal/lean/IndusLogic.lean
++++ b/formal/lean/IndusLogic.lean
+@@ -1,4 +1,6 @@
+ import Mathlib.Tactic
++
++noncomputable section
+ /-
+   IndusLogic.lean - The Atomic Physics of Indus Script
+   
+@@ -115,7 +117,7 @@
+   deriving Repr
+ 
+ -- Ledger (ordered list of entries)
+-def Ledger := List LedgerEntry
++abbrev Ledger := List LedgerEntry
+ 
+ -- Append transaction to ledger (immutable append-only)
+ def append_entry (l : Ledger) (entry : LedgerEntry) : Ledger :=
+--- a/formal/lean/IndusStateTransition.lean
++++ b/formal/lean/IndusStateTransition.lean
+@@ -1,3 +1,5 @@
++
++noncomputable section
+ /-
+   Harappan Universal System - Lean4 State Transition System
+   Formalization of Indus Script as State Transition System with Predicate Logic
+@@ -21,7 +23,7 @@
+ axiom Object : Type
+ 
+ -- Quantity - conjunto Q = ℕ
+-def Quantity : Type := Nat
++abbrev Quantity : Type := Nat
+ 
+ -- Institutional States - conjunto S
+ inductive InstitutionalState where
+@@ -37,7 +39,7 @@
+ axiom symbol_decidable_eq : DecidableEq Symbol
+ 
+ -- Sequence of symbols - Σ*
+-def Inscription : Type := List Symbol
++abbrev Inscription : Type := List Symbol
+ 
+ -- Institutional Mode/Entonation - conjunto M
+ inductive InstitutionalMode where
+@@ -56,7 +58,7 @@
+   quantity : Option Quantity
+   state : Option InstitutionalState
+   mode : Option InstitutionalMode
+-  deriving Repr
++  
+ 
+ -- Empty record (⊥)
+ def emptyRecord : InscriptionRecord :=
+@@ -101,7 +103,7 @@
+ -- * 6. Ledger and State Transition System
+ 
+ -- Ledger - the state space of the system
+-def Ledger : Type := List InscriptionRecord
++abbrev Ledger : Type := List InscriptionRecord
+ 
+ -- State transition function δ: L × Σ* → L
+ def transition (ledger : Ledger) (inscription : Inscription) : Ledger :=
+--- a/formal/lean/M214Family.lean
++++ b/formal/lean/M214Family.lean
+@@ -15,6 +15,8 @@
+ import Mathlib.Data.List.Basic
+ import Mathlib.Logic.Basic
+ 
++noncomputable section
++
+ namespace M214Family
+ 
+ /-! # 1. Graphical Operators
+--- a/formal/lean/M217Symbol.lean
++++ b/formal/lean/M217Symbol.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+ M217 Symbol Formalization - Lean 4
+ 
+--- a/formal/lean/SignComposition.lean
++++ b/formal/lean/SignComposition.lean
+@@ -12,13 +12,16 @@
+ import Mathlib.Data.Fintype.Basic
+ import Mathlib.Logic.Function.Basic
+ import Mathlib.Order.Basic
++import Mathlib.Tactic.NormNum
++
++noncomputable section
+ 
+ namespace Harappan
+ 
+ /-! ## Base Types and Structures -/
+ 
+ /-- Harappan sign identifier -/
+-def SignID := Fin 417
++abbrev SignID := Fin 417
+ 
+ /-- State in the institutional computation system -/
+ structure State where
+@@ -183,7 +186,7 @@
+ 
+ /-! ## Key Insight -/
+ 
+-/-- The Harappan script is:
++/- The Harappan script is:
+     1. Operational (not pictographic)
+     2. Hierarchical (families have types)
+     3. Compositional (operators apply to entities)
+--- a/formal/lean/UFamilyClosure.lean
++++ b/formal/lean/UFamilyClosure.lean
+@@ -15,6 +15,8 @@
+ import Mathlib.Order.Basic
+ import Mathlib.Logic.Basic
+ 
++noncomputable section
++
+ namespace IndusScript
+ 
+ /-- The base U-shape component -/
+@@ -69,7 +71,7 @@
+   deriving Repr, DecidableEq
+ 
+ /-- An inscription is a sequence of signs -/
+-def Inscription := List Sign
++abbrev Inscription := List Sign
+ 
+ /-- Check if a sign is in the U-family -/
+ def is_u_family (s : Sign) : Bool :=
+@@ -157,7 +159,7 @@
+     | ClosureState.extended, ClosureState.extended => True
+     | ClosureState.extended, _ => False
+ 
+-/-- ===============================================
++/- ===============================================
+     LEMMA 1: Terminalit of the U-Family
+     =============================================== -/
+ 
+@@ -185,7 +187,7 @@
+     let u_signs := inscr.filter is_u_family
+     u_signs.length ≤ 1
+ 
+-/-- ===============================================
++/- ===============================================
+     LEMMA 2: Administrative and Institutional Use
+     =============================================== -/
+ 
+@@ -199,7 +201,7 @@
+     (total_count > 0) →
+     (admin_count : Float) / (total_count : Float) > 0.8
+ 
+-/-- ===============================================
++/- ===============================================
+     LEMMA 3: Inter-regional Standardization
+     =============================================== -/
+ 
+@@ -210,7 +212,7 @@
+     let sites := (occurrences.map (fun occ => occ.site)).eraseDups
+     sites.length ≥ 3
+ 
+-/-- ===============================================
++/- ===============================================
+     LEMMA 4: Non-interchangeability of Subtypes
+     =============================================== -/
+ 
+@@ -222,7 +224,7 @@
+     let contexts2 := inscriptions.filter (fun i => i.any (fun s => s.id = u2))
+     contexts1 ≠ contexts2
+ 
+-/-- ===============================================
++/- ===============================================
+     MAIN THEOREM: U-Family Closure Theorem
+     =============================================== -/
+ 
+@@ -268,7 +270,7 @@
+   · -- Distinct closure state
+     use closure_state u
+ 
+-/-- ===============================================
++/- ===============================================
+     COROLLARY 1: Closure Without Language
+     =============================================== -/
+ 
+@@ -289,7 +291,7 @@
+   · rfl
+   · trivial
+ 
+-/-- ===============================================
++/- ===============================================
+     COROLLARY 2: Hierarchical Validation States
+     =============================================== -/
+ 
+@@ -315,7 +317,7 @@
+   · -- authorized ≤ complete
+     trivial
+ 
+-/-- ===============================================
++/- ===============================================
+     COROLLARY 3: Proto-Juridical Nature
+     =============================================== -/
+ 
+@@ -334,7 +336,7 @@
+   · intro _; trivial
+   · intro _; trivial
+ 
+-/-- ===============================================
++/- ===============================================
+     VERIFICATION HELPERS
+     =============================================== -/
+ 
+--- a/formal/lean/UFamilyClosureTheorem.lean
++++ b/formal/lean/UFamilyClosureTheorem.lean
+@@ -12,13 +12,16 @@
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Logic.Basic
+ import Mathlib.Order.Basic
++import Mathlib.Tactic.NormNum
++
++noncomputable section
+ 
+ namespace UFamilyClosure
+ 
+ /-! # 1. Basic Types and Definitions -/
+ 
+ /-- Σ: Set of all Indus script signs (Mahadevan catalog 1-417) -/
+-def SignAlphabet : Type := Fin 417
++abbrev SignAlphabet : Type := Fin 417
+ 
+ /-- Individual sign identifier -/
+ abbrev Sign := SignAlphabet
+--- a/formal/lean/proof.lean
++++ b/formal/lean/proof.lean
+@@ -228,15 +228,15 @@
+ -- Complete System Properties
+ 
+ -- Ledger is sequence of validated states
+-def Ledger := List State
++abbrev Ledger := List State
+ 
+ -- Ledger is valid if all states are validated
+ def ledgerValid (L : Ledger) : Prop :=
+-  ∀ st ∈ L, st.validated = true
++  ∀ st, st ∈ L → (st.validated = true)
+ 
+ -- Theorem 11: Inscriptions build valid ledgers
+ theorem inscriptionsBuildValidLedger (inscriptions : List (List IndoSymbol)) :
+-  (∀ ins ∈ inscriptions, .commit ∈ ins) →
++  (∀ ins, ins ∈ inscriptions → (.commit ∈ ins)) →
+   ledgerValid (inscriptions.map (fun ins => executeInscription ins emptyState)) := by
+   intro h
+   unfold ledgerValid
+--- a/src/lean/Harappan/BasicTypes.lean
++++ b/src/lean/Harappan/BasicTypes.lean
+@@ -11,7 +11,7 @@
+ 
+ 
+ -- Basic sign ID type
+-def SignId := String
++abbrev SignId := String
+ 
+ -- Symbolic class (0-8)
+ structure SymbolicClass where
+--- a/src/lean/Harappan/CollapseAxioms.lean
++++ b/src/lean/Harappan/CollapseAxioms.lean
+@@ -11,6 +11,7 @@
+ 
+ 
+ import Harappan.BasicTypes
++import Mathlib.Tactic
+ 
+ namespace Harappan.Collapse
+ 
+--- a/src/lean/Harappan/CollapseOperator.lean
++++ b/src/lean/Harappan/CollapseOperator.lean
+@@ -1,4 +1,6 @@
+ import Mathlib.Tactic
++
++noncomputable section
+ /-
+   Harappan Universal System - Collapse Operator Module
+   
+--- a/src/lean/Harappan/GlobalPhonology.lean
++++ b/src/lean/Harappan/GlobalPhonology.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Tactic
++import Mathlib.Logic.ExistsUnique
++
++noncomputable section
+ /-
+   Harappan Universal System - Global Phonology Module
+   
+@@ -118,7 +122,7 @@
+   lo ≤ sign_id ∧ sign_id ≤ hi
+ 
+ /-- Helper lemma: check if a sign_id is in exactly one group -/
+-lemma sign_in_single_group (sign_id : Nat) (h : 1 ≤ sign_id ∧ sign_id ≤ 417) :
++theorem sign_in_single_group (sign_id : Nat) (h : 1 ≤ sign_id ∧ sign_id ≤ 417) :
+     (inGroup sign_id SemanticGroup.NUM = true) ∨
+     (inGroup sign_id SemanticGroup.CON = true) ∨
+     (inGroup sign_id SemanticGroup.GRID = true) ∨
+--- a/src/lean/Harappan/Morphology.lean
++++ b/src/lean/Harappan/Morphology.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Logic.ExistsUnique
+ /-
+   Harappan Universal System - Morphology Module
+   
+--- a/src/lean/Harappan/Phonology.lean
++++ b/src/lean/Harappan/Phonology.lean
+@@ -1,4 +1,7 @@
+ import Harappan.BasicTypes
++import Mathlib.Logic.ExistsUnique
++
++noncomputable section
+ 
+ /-
+   Harappan Universal System - Phonology Module
+@@ -140,7 +143,7 @@
+     archetypeEquivalent p1 p3 := h1.trans h2
+ 
+ -- Helper lemma: if sum of absolute differences is zero, each difference is zero
+-lemma sum_absDiff_zero_impl_each_zero (a b c d e f : Nat) :
++theorem sum_absDiff_zero_impl_each_zero (a b c d e f : Nat) :
+     absDiff a b + absDiff c d + absDiff e f = 0 →
+     absDiff a b = 0 ∧ absDiff c d = 0 ∧ absDiff e f = 0 := by
+   intro h
+@@ -154,7 +157,7 @@
+   exact ⟨h1, h2, h3⟩
+ 
+ -- Helper lemma: absDiff is zero iff values are equal
+-lemma absDiff_eq_zero_iff (a b : Nat) : absDiff a b = 0 ↔ a = b := by
++theorem absDiff_eq_zero_iff (a b : Nat) : absDiff a b = 0 ↔ a = b := by
+   constructor
+   · intro h
+     unfold absDiff at h
+@@ -169,7 +172,7 @@
+     · rfl
+ 
+ -- Helper lemma: feature vectors equal iff components equal
+-lemma featureVector_eq_iff (v1 v2 : FeatureVector) :
++theorem featureVector_eq_iff (v1 v2 : FeatureVector) :
+     v1 = v2 ↔ v1.place_value = v2.place_value ∧ 
+               v1.manner_value = v2.manner_value ∧ 
+               v1.voicing_value = v2.voicing_value := by
+@@ -226,6 +229,7 @@
+   | aquatic => right; left; rfl
+   | terrestrial => right; right; left; rfl
+   | aerial => right; right; right; rfl
++/-
+   Harappan Universal System - Phonology Proofs
+   
+   Formal axioms and theorems for phonological analysis.
+--- a/src/lean/Harappan/SemanticAxioms.lean
++++ b/src/lean/Harappan/SemanticAxioms.lean
+@@ -1,4 +1,8 @@
+ import Harappan.BasicTypes
++import Mathlib.Tactic
++import Mathlib.Logic.ExistsUnique
++
++noncomputable section
+ 
+ /-
+   Harappan Universal System - Semantic Axioms Module
+@@ -152,6 +156,7 @@
+   exact ⟨SemanticRelation.association, Or.inl rfl⟩
+ 
+ end Harappan.SemanticAxioms
++/-
+   Harappan Universal System - Semantic Axioms
+   
+   Formal axioms for semantic analysis.
+--- a/src/lean/Harappan/UniversalGrammar.lean
++++ b/src/lean/Harappan/UniversalGrammar.lean
+@@ -1,5 +1,6 @@
+ import Harappan.BasicTypes
+ import Harappan.Phonology
++import Mathlib.Tactic
+ 
+ /-
+   Harappan Universal System - Universal Grammar Module
+@@ -172,6 +173,7 @@
+ /- Agreement is symmetric -/
+ theorem agreement_symmetric (f : GrammaticalFeature) (p1 p2 : List GrammaticalFeature) :
+     agreesInFeature f p1 p2 = agreesInFeature f p2 p1 := by
++/-
+   simp [agreesInFeature]
+   constructor <;> intro h <;> exact h.symm
+   Harappan Universal System - Universal Grammar

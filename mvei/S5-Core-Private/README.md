@@ -5,7 +5,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 ## What is published
 
 * Source: `ShantiDraconis/S5-Core-Private`, commit `feb89339d377722f8749a67abca4932209f003a5` (2026-02-10T12:09:46Z).
-* 3 files: 2 `.lean` files and the Lake files (`lakefile.*`, `lean-toolchain`, `lake-manifest.json`). Paths are the same as in the source repository.
+* 6 files: 5 `.lean` files and the Lake files (`lakefile.*`, `lean-toolchain`, `lake-manifest.json`). Paths are the same as in the source repository.
 * Only the files with theorems the Lean kernel closed are published, with the local files they import; the rest of the repository (including files whose proofs fail, use `sorry` or declare axioms) stays private.
 * The author's identity signature was removed before publishing: the literal is replaced by `[assinatura removida]` in comments and string values, and `lean/ShantiDraconisIdentity.lean` (whose theorems are about that signature) stays private. The replacement does not change any closed theorem; they were checked again in the Lean kernel on the published files (Lean 4.19.0 and 4.35.0). Because of the replacement, the SHA-256 of these files differs from the source commit.
 * Nothing else from the private repository is published (documents, commercial license, prompts, storefront material).
@@ -13,31 +13,42 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `feb89339d377722f8749a67abca4932209f003a5`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `feb89339d377722f8749a67abca4932209f003a5`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `lean` | padrão do elan | failed | 0 | 0 | 0 | 5 / 0 / 0 / 6 / 0 |
+| `lean` | padrão do elan | failed | 0 | 0 | 0 | 17 / 2 / 3 / 5 / 0 |
+| `s5/formal/lean` | v4.19.0 | partial | 20 | 0 | 0 | — |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 5 |
-| Unique (name + statement) | 5 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 5 |
+| Counting each project | 37 |
+| Unique (name + statement) | 37 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 17 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
+| Theorem | Project | State | Axioms beyond the standard three |
+|---|---|---|---|
+| `MillenniumPrize.auxiliary_lemma_1` | `lean (file by file)` | conditional | `MillenniumPrize.ProblemStructure` |
+| `MillenniumPrize.auxiliary_lemma_2` | `lean (file by file)` | conditional | `MillenniumPrize.ProblemStructure`, `MillenniumPrize.key_property` |
+| `MillenniumPrize.RiemannHypothesis.riemann_hypothesis` | `lean (file by file)` | open | `sorryAx` |
+| `MillenniumPrize.RiemannHypothesis.zeros_in_critical_strip` | `lean (file by file)` | open | `sorryAx` |
+| `MillenniumPrize.PvsNP.p_vs_np` | `lean (file by file)` | open | `sorryAx` |
+
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 11 `theorem`/`lemma` (counting copies). The kernel checked 5 of them (5 closed, 0 conditional, 0 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 6 the kernel has no result:
+The `.lean` files of the verified commit declare 27 `theorem`/`lemma` (counting copies). The kernel checked 22 of them (17 closed, 2 conditional, 3 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 5 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 6 |
+| checked file by file: the written proof does not pass the kernel | 5 |
 
 ### MVEI corrections
 
-* `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/S5-Core-Private mvei/S5-Core-Private/correcoes/imports-no-topo.patch` (in order, after the ones above)
+* `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/S5-Core-Private mvei/S5-Core-Private/correcoes/imports-no-topo.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/S5-Core-Private mvei/S5-Core-Private/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/S5-Core-Private mvei/S5-Core-Private/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
 
 ## Files in this folder
 

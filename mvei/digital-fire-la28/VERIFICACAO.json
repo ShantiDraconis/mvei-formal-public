@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -14,72 +14,425 @@
    "toolchain": "",
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
-   "build_ok": false,
+   "build_ok": true,
    "build_seconds": 0.0,
    "build_error": "",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
    "declared_axioms": [],
-   "theorems": [],
-   "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././SEETV5/Axioms.lean:16:2: expected token | error: ././././SEETV5/Axioms.lean:17:8: unexpected identifier; expected 'instance'",
-   "corrections": [],
-   "lakefile_gerado": "",
-   "avulso": true,
-   "salvage": [
+   "theorems": [
     {
-     "arquivo": "formal/lean/SEETV5/Energy.lean",
-     "linha": 4,
-     "nome": "SEETV5.recovery_less_than_or_equal_input",
-     "status": "nao_alcancado",
+     "name": "SEETV5.DMXCommand.mk.inj",
+     "module": "SEETV5.Axioms",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-zd012z76/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+     "statement": "∀ {channel value channel_1 value_1 : Nat},   { channel := channel, value := value } = { channel := channel_1, value := value_1 } →     channel = channel_1 ∧ value = value_1",
+     "status": "fechado"
     },
     {
-     "arquivo": "formal/lean/SEETV5/Energy.lean",
-     "linha": 10,
-     "nome": "SEETV5.zero_recovery_is_dissipative",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-zd012z76/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+     "name": "SEETV5.DMXCommand.mk.injEq",
+     "module": "SEETV5.Axioms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (channel value channel_1 value_1 : Nat),   ({ channel := channel, value := value } = { channel := channel_1, value := value_1 }) =     (channel = channel_1 ∧ value = value_1)",
+     "status": "fechado"
     },
     {
-     "arquivo": "formal/lean/SEETV5/Safety.lean",
-     "linha": 7,
-     "nome": "SEETV5.no_actuation_without_enable",
-     "status": "nao_alcancado",
+     "name": "SEETV5.DMXCommand.mk.sizeOf_spec",
+     "module": "SEETV5.Axioms",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-zd012z76/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+     "statement": "∀ (channel value : Nat), sizeOf { channel := channel, value := value } = 1 + sizeOf channel + sizeOf value",
+     "status": "fechado"
     },
     {
-     "arquivo": "formal/lean/SEETV5/Safety.lean",
-     "linha": 13,
-     "nome": "SEETV5.no_actuation_without_safety",
-     "status": "nao_alcancado",
+     "name": "SEETV5.Efficiency.denominator_nonzero",
+     "module": "SEETV5.Axioms",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-zd012z76/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+     "statement": "∀ (self : SEETV5.Efficiency), self.denominator ≠ 0",
+     "status": "fechado"
     },
     {
-     "arquivo": "formal/lean/SEETV5/ShowLifecycle.lean",
-     "linha": 16,
-     "nome": "SEETV5.boot_to_calibration_valid",
-     "status": "nao_alcancado",
+     "name": "SEETV5.Efficiency.mk.inj",
+     "module": "SEETV5.Axioms",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-zd012z76/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+     "statement": "∀ {numerator denominator : Nat} {denominator_nonzero : denominator ≠ 0} {numerator_1 denominator_1 : Nat}   {denominator_nonzero_1 : denominator_1 ≠ 0},   { numerator := numerator, denominator := denominator, denominator_nonzero := denominator_nonzero } =       { numerator := numerator_1, denominator := denominator_1, denominator_nonzero := denominator_nonzero_1 } →     numerator = numerator_1 ∧ d",
+     "status": "fechado"
     },
     {
-     "arquivo": "formal/lean/SEETV5/Telemetry.lean",
-     "linha": 7,
-     "nome": "SEETV5.telemetry_required_for_pulse",
-     "status": "nao_alcancado",
+     "name": "SEETV5.Efficiency.mk.injEq",
+     "module": "SEETV5.Axioms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (numerator denominator : Nat) (denominator_nonzero : denominator ≠ 0) (numerator_1 denominator_1 : Nat)   (denominator_nonzero_1 : denominator_1 ≠ 0),   ({ numerator := numerator, denominator := denominator, denominator_nonzero := denominator_nonzero } =       { numerator := numerator_1, denominator := denominator_1, denominator_nonzero := denominator_nonzero_1 }) =     (numerator = numerator_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.Efficiency.mk.sizeOf_spec",
+     "module": "SEETV5.Axioms",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-zd012z76/p/.lake/build/lib/lean/SEETV5/Axioms.olean' of module SEETV5.Axioms does not exist"
+     "statement": "∀ (numerator denominator : Nat) (denominator_nonzero : denominator ≠ 0),   sizeOf { numerator := numerator, denominator := denominator, denominator_nonzero := denominator_nonzero } =     1 + sizeOf numerator + sizeOf denominator",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.dmxLoss.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.dmxLoss = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.hallTimeout.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.hallTimeout = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.invalidCommand.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.invalidCommand = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.ofNat_ctorIdx",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (x : SEETV5.FaultType), SEETV5.FaultType.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.overCurrent.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.overCurrent = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.overTemperature.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.overTemperature = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.overVoltage.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.overVoltage = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.FaultType.underVoltage.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.FaultType.underVoltage = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.PowerInput.mk.inj",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ {watts watts_1 : Nat}, { watts := watts } = { watts := watts_1 } → watts = watts_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.PowerInput.mk.injEq",
+     "module": "SEETV5.Axioms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (watts watts_1 : Nat), ({ watts := watts } = { watts := watts_1 }) = (watts = watts_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.PowerInput.mk.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (watts : Nat), sizeOf { watts := watts } = 1 + sizeOf watts",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.PowerRecovered.mk.inj",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ {watts watts_1 : Nat}, { watts := watts } = { watts := watts_1 } → watts = watts_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.PowerRecovered.mk.injEq",
+     "module": "SEETV5.Axioms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (watts watts_1 : Nat), ({ watts := watts } = { watts := watts_1 }) = (watts = watts_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.PowerRecovered.mk.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (watts : Nat), sizeOf { watts := watts } = 1 + sizeOf watts",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.Pulse.mk.inj",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ {id : Nat} {enabled : Bool} {id_1 : Nat} {enabled_1 : Bool},   { id := id, enabled := enabled } = { id := id_1, enabled := enabled_1 } → id = id_1 ∧ enabled = enabled_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.Pulse.mk.injEq",
+     "module": "SEETV5.Axioms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id : Nat) (enabled : Bool) (id_1 : Nat) (enabled_1 : Bool),   ({ id := id, enabled := enabled } = { id := id_1, enabled := enabled_1 }) = (id = id_1 ∧ enabled = enabled_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.Pulse.mk.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (id : Nat) (enabled : Bool), sizeOf { id := id, enabled := enabled } = 1 + sizeOf id + sizeOf enabled",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SafetyState.ofNat_ctorIdx",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (x : SEETV5.SafetyState), SEETV5.SafetyState.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SafetyState.safe.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SafetyState.safe = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SafetyState.unsafe.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SafetyState.unsafe = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.armed.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.armed = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.boot.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.boot = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.braking.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.braking = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.calibration.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.calibration = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.fault.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.fault = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.idle.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.idle = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.ofNat_ctorIdx",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (x : SEETV5.ShowLifecycleStage), SEETV5.ShowLifecycleStage.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.running.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.running = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.ShowLifecycleStage.shutdown.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.ShowLifecycleStage.shutdown = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.armed.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.armed = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.boot.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.boot = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.braking.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.braking = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.calibration.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.calibration = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.fault.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.fault = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.idle.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.idle = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.ofNat_ctorIdx",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (x : SEETV5.SystemState), SEETV5.SystemState.ofNat x.ctorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.running.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.running = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.SystemState.shutdown.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "sizeOf SEETV5.SystemState.shutdown = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.TelemetryRecord.mk.inj",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ {pulseId inputWatts recoveredWatts pulseId_1 inputWatts_1 recoveredWatts_1 : Nat},   { pulseId := pulseId, inputWatts := inputWatts, recoveredWatts := recoveredWatts } =       { pulseId := pulseId_1, inputWatts := inputWatts_1, recoveredWatts := recoveredWatts_1 } →     pulseId = pulseId_1 ∧ inputWatts = inputWatts_1 ∧ recoveredWatts = recoveredWatts_1",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.TelemetryRecord.mk.injEq",
+     "module": "SEETV5.Axioms",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (pulseId inputWatts recoveredWatts pulseId_1 inputWatts_1 recoveredWatts_1 : Nat),   ({ pulseId := pulseId, inputWatts := inputWatts, recoveredWatts := recoveredWatts } =       { pulseId := pulseId_1, inputWatts := inputWatts_1, recoveredWatts := recoveredWatts_1 }) =     (pulseId = pulseId_1 ∧ inputWatts = inputWatts_1 ∧ recoveredWatts = recoveredWatts_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.TelemetryRecord.mk.sizeOf_spec",
+     "module": "SEETV5.Axioms",
+     "axioms": [],
+     "statement": "∀ (pulseId inputWatts recoveredWatts : Nat),   sizeOf { pulseId := pulseId, inputWatts := inputWatts, recoveredWatts := recoveredWatts } =     1 + sizeOf pulseId + sizeOf inputWatts + sizeOf recoveredWatts",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.boot_to_calibration_valid",
+     "module": "SEETV5.ShowLifecycle",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "SEETV5.ValidTransition SEETV5.SystemState.boot SEETV5.SystemState.calibration",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.dissipative.eq_1",
+     "module": "SEETV5.Energy",
+     "axioms": [],
+     "statement": "∀ (input : SEETV5.PowerInput) (recovered : SEETV5.PowerRecovered),   SEETV5.dissipative input recovered = (recovered.watts ≤ input.watts)",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.no_actuation_without_enable",
+     "module": "SEETV5.Safety",
+     "axioms": [],
+     "statement": "∀ (enable : Bool) (safety : SEETV5.SafetyState), SEETV5.actuationAllowed enable safety → enable = true",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.no_actuation_without_safety",
+     "module": "SEETV5.Safety",
+     "axioms": [],
+     "statement": "∀ (enable : Bool) (safety : SEETV5.SafetyState),   SEETV5.actuationAllowed enable safety → safety = SEETV5.SafetyState.safe",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.recovery_less_than_or_equal_input",
+     "module": "SEETV5.Energy",
+     "axioms": [],
+     "statement": "∀ (input : SEETV5.PowerInput) (recovered : SEETV5.PowerRecovered),   SEETV5.dissipative input recovered → recovered.watts ≤ input.watts",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.telemetry_required_for_pulse",
+     "module": "SEETV5.Telemetry",
+     "axioms": [],
+     "statement": "∀ (p : SEETV5.Pulse) (t : SEETV5.TelemetryRecord), SEETV5.TelemetryForPulse p t → t.pulseId = p.id",
+     "status": "fechado"
+    },
+    {
+     "name": "SEETV5.zero_recovery_is_dissipative",
+     "module": "SEETV5.Energy",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (input : SEETV5.PowerInput), SEETV5.dissipative input { watts := 0 }",
+     "status": "fechado"
     }
    ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com SEETV5",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `SEETV5]\n",
+   "avulso": true,
+   "salvage": [],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 55,
     "aberto-sorry": 0,
     "condicional": 0
    }

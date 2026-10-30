@@ -8,7 +8,7 @@
  
  namespace Problems.PvsNP
  
-@@ -36,11 +37,12 @@
+@@ -36,11 +37,13 @@
  
  /-- Relativization barrier as essential indeterminacy -/
  -- Different oracles give different limits
@@ -19,7 +19,8 @@
      (∃ _proof_A : True, True) ∧  -- Placeholder
      -- With oracle B, P ≠ NP  
 -    (∃ _proof_B : True, True)    -- Placeholder
-+    (∃ _proof_B : True, True)    -- Placeholder := by
++    (∃ _proof_B : True, True)    -- Placeholder
++:= by
 +  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith)
  
  end Problems.PvsNP

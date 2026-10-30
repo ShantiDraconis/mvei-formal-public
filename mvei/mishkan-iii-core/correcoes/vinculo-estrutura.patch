@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/core/MveiEstrutura/Mishkan.lean
-@@ -0,0 +1,4321 @@
+@@ -0,0 +1,4323 @@
 +/-
 +  MveiEstrutura/Mishkan.lean — camada de nomes do MVEI para os arquivos gerados de mishkan-iii-core.
 +  NÃO é do autor; gerado por tools/estrutura_mishkan.py.
@@ -136,7 +136,9 @@
 +abbrev sound (s : LogicalSystem) : Prop := ∀ (formula : Formula), derivable s formula → valid formula
 +abbrev complete (s : LogicalSystem) : Prop := ∀ (formula : Formula), valid formula → derivable s formula
 +abbrev consistent (s : LogicalSystem) : Prop := ∀ (formula : Formula), derivable s formula → derivable s (¬formula) → False
-+opaque decidable_system : LogicalSystem → Prop
++-- `Decidable` é um tipo (classe de dados): "o sistema é decidível" como proposição é `Nonempty` da família de
++-- decisões (a mesma leitura de reformulacoes/TeoriaMishkan e de SemanticaMishkan.decidabilidade_classica)
++abbrev decidable_system (s : LogicalSystem) : Prop := Nonempty (∀ (formula : Formula), Decidable (derivable s formula))
 +axiom soundness_lemma : ∀ {s : LogicalSystem} {f : Formula}, derives s → derivable s f → valid f
 +
 +-- verify_<P>_N e verify_<P>_N_encoding

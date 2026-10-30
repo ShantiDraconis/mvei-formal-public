@@ -1,0 +1,1195 @@
+--- a/Core/Collapse.lean
++++ b/Core/Collapse.lean
+@@ -2,6 +2,7 @@
+ import Core.Syntax
+ import Core.State
+ import Core.Eval
++import Mathlib.Logic.ExistsUnique
+ 
+ /-!
+ # Core/Collapse.lean
+--- a/Core/Conservativity.lean
++++ b/Core/Conservativity.lean
+@@ -4,6 +4,8 @@
+ import Core.Semantics
+ import Core.Collapse
+ 
++noncomputable section
++
+ /-
+   Core/Conservativity.lean
+   Chapter 6: Conservativity and Relative Consistency of TIF
+@@ -36,14 +38,14 @@
+ 
+ /-- The classical fragment of a state Σ: restrict equations and constraints
+     to those involving only classical expressions. -/
+-def classicalFragmentState (Σ : MetaArithmeticState) : MetaArithmeticState :=
+-  { equations   := Σ.equations.filter (fun eq =>
++def classicalFragmentState («Σ» : MetaArithmeticState) : MetaArithmeticState :=
++  { equations   := «Σ».equations.filter (fun eq =>
+       eq.lhs.isClassical && eq.rhs.isClassical)
+-    constraints := Σ.constraints }
++    constraints := «Σ».constraints }
+ 
+ /-- The classical fragment of a state is a substate. -/
+-theorem classicalFragmentState_sub (Σ : MetaArithmeticState) :
+-    classicalFragmentState Σ ≤ Σ := by
++theorem classicalFragmentState_sub («Σ» : MetaArithmeticState) :
++    classicalFragmentState «Σ» ≤ «Σ» := by
+   constructor
+   · intro eq heq
+     simp [classicalFragmentState, List.mem_filter] at heq
+@@ -153,13 +155,13 @@
+     the equation `φ = v` is already provable in T_cl. -/
+ theorem collapse_classical_restriction
+     (res : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr)
+-    (Σ : MetaArithmeticState) (φ v : IndeterminateExpr)
++    («Σ» : MetaArithmeticState) (φ v : IndeterminateExpr)
+     (hφ : classicalFrag φ) (hv : classicalFrag v)
+-    (hcol : collapse res Σ φ = v) :
++    (hcol : collapse res «Σ» φ = v) :
+     -- φ = v is classically derivable from Σ's classical constraints.
+     ClassProves φ v := by
+   -- By A8, collapse of a classical expression is the identity.
+-  have : collapse res Σ φ = φ := collapse_A8 res Σ φ hφ
++  have : collapse res «Σ» φ = φ := collapse_A8 res «Σ» φ hφ
+   rw [this] at hcol
+   -- So v = φ.
+   subst hcol
+@@ -185,6 +187,7 @@
+   The Indeterminate Framework (TIF) — Chapter 6: Conservativity and Relative Consistency
+ 
+   Covers Theorems 6.2.1–6.4.2: the conservativity theorem, relative consistency,
++/-
+   and local completeness of collapse.
+ -/
+ 
+@@ -197,7 +200,7 @@
+ 
+ /-- Definition 6.1.1. Classical fragment L_cl ⊆ L_I:
+     the sub-language of expressions with no indeterminate support. -/
+-def ClassicalFragment : Type := { e : Expr // e.isClassical = true }
++abbrev ClassicalFragment : Type := { e : Expr // e.isClassical = true }
+ 
+ /-- Definition 6.1.2. Translation map τ: maps classical expressions to themselves. -/
+ def translationMap (e : ClassicalFragment) : Expr := e.val
+--- a/Core/Eval.lean
++++ b/Core/Eval.lean
+@@ -1,6 +1,9 @@
+ import Core.Types
+ import Core.Syntax
+ import Core.State
++import Mathlib.Logic.ExistsUnique
++
++noncomputable section
+ 
+ /-!
+ # Core/Eval.lean
+--- a/Core/Semantics.lean
++++ b/Core/Semantics.lean
+@@ -2,6 +2,8 @@
+ import Core.Syntax
+ import Core.States
+ 
++noncomputable section
++
+ /-
+   Core/Semantics.lean
+   Chapter 4: Algebraic and Logical Semantics of TIF
+@@ -99,12 +101,12 @@
+   | Constraint.pos e      => True
+ 
+ /-- An *admissible valuation* for state Σ satisfies all its equations and constraints. -/
+-structure AdmissibleValuation (Σ : MetaArithmeticState) (D : Type)
++structure AdmissibleValuation («Σ» : MetaArithmeticState) (D : Type)
+     [ClassicalDomain D] [Add D] [Sub D] [Mul D] [Div D] [Pow D ℕ] [Neg D] where
+   base   : ClassicalValuation D
+   iVal   : D  -- the value assigned to I in this valuation
+-  satEqs : ∀ eq ∈ Σ.equations, satEquation base iVal eq
+-  satCons : ∀ c ∈ Σ.constraints, satConstraint base iVal c
++  satEqs : ∀ eq ∈ «Σ».equations, satEquation base iVal eq
++  satCons : ∀ c ∈ «Σ».constraints, satConstraint base iVal c
+ 
+ /-!
+ ## 4.4 Resolution Set
+@@ -115,9 +117,9 @@
+ 
+ /-- `resolutionSet Σ φ` is the set of all classical values `v` such that there
+     exists an admissible valuation for Σ under which φ evaluates to v. -/
+-def resolutionSet (Σ : MetaArithmeticState) (φ : IndeterminateExpr) :
++def resolutionSet («Σ» : MetaArithmeticState) (φ : IndeterminateExpr) :
+     Set D :=
+-  fun v => ∃ (av : AdmissibleValuation Σ D), eval av.base av.iVal φ = v
++  fun v => ∃ (av : AdmissibleValuation «Σ» D), eval av.base av.iVal φ = v
+ 
+ /-!
+ ## 4.5 Unique Determination
+@@ -126,15 +128,15 @@
+ -/
+ 
+ /-- `uniquelyDetermined Σ φ v` holds iff `v` is the unique value in `Res_Σ(φ)`. -/
+-def uniquelyDetermined (Σ : MetaArithmeticState) (φ : IndeterminateExpr) (v : D) : Prop :=
+-  resolutionSet Σ φ = {v}
++def uniquelyDetermined («Σ» : MetaArithmeticState) (φ : IndeterminateExpr) (v : D) : Prop :=
++  resolutionSet «Σ» φ = {v}
+ 
+ /-- If φ is uniquely determined to v, then every admissible valuation agrees. -/
+-theorem uniquelyDetermined_all_agree (Σ : MetaArithmeticState) (φ : IndeterminateExpr)
+-    (v : D) (huniq : uniquelyDetermined Σ φ v)
+-    (av : AdmissibleValuation Σ D) :
++theorem uniquelyDetermined_all_agree («Σ» : MetaArithmeticState) (φ : IndeterminateExpr)
++    (v : D) (huniq : uniquelyDetermined «Σ» φ v)
++    (av : AdmissibleValuation «Σ» D) :
+     eval av.base av.iVal φ = v := by
+-  have hmem : eval av.base av.iVal φ ∈ resolutionSet Σ φ := ⟨av, rfl⟩
++  have hmem : eval av.base av.iVal φ ∈ resolutionSet «Σ» φ := ⟨av, rfl⟩
+   rw [huniq] at hmem
+   exact hmem
+ 
+@@ -145,22 +147,22 @@
+ -/
+ 
+ /-- `stateRelTrue Σ φ ψ` holds iff `φ = ψ` in every admissible valuation of Σ. -/
+-def stateRelTrue (Σ : MetaArithmeticState) (φ ψ : IndeterminateExpr) : Prop :=
+-  ∀ (av : AdmissibleValuation Σ D), eval av.base av.iVal φ = eval av.base av.iVal ψ
++def stateRelTrue («Σ» : MetaArithmeticState) (φ ψ : IndeterminateExpr) : Prop :=
++  ∀ (av : AdmissibleValuation «Σ» D), eval av.base av.iVal φ = eval av.base av.iVal ψ
+ 
+ /-- State-relative truth is reflexive. -/
+-theorem stateRelTrue_refl (Σ : MetaArithmeticState) (φ : IndeterminateExpr) :
+-    stateRelTrue Σ φ φ :=
++theorem stateRelTrue_refl («Σ» : MetaArithmeticState) (φ : IndeterminateExpr) :
++    stateRelTrue «Σ» φ φ :=
+   fun _ => rfl
+ 
+ /-- State-relative truth is symmetric. -/
+-theorem stateRelTrue_symm (Σ : MetaArithmeticState) (φ ψ : IndeterminateExpr)
+-    (h : stateRelTrue Σ φ ψ) : stateRelTrue Σ ψ φ :=
++theorem stateRelTrue_symm («Σ» : MetaArithmeticState) (φ ψ : IndeterminateExpr)
++    (h : stateRelTrue «Σ» φ ψ) : stateRelTrue «Σ» ψ φ :=
+   fun av => (h av).symm
+ 
+ /-- State-relative truth is monotone in state extension. -/
+-theorem stateRelTrue_mono (Σ Σ' : MetaArithmeticState) (φ ψ : IndeterminateExpr)
+-    (hext : Σ ≤ Σ') (h : stateRelTrue Σ φ ψ) : stateRelTrue Σ' φ ψ := by
++theorem stateRelTrue_mono («Σ» «Σ'» : MetaArithmeticState) (φ ψ : IndeterminateExpr)
++    (hext : «Σ» ≤ «Σ'») (h : stateRelTrue «Σ» φ ψ) : stateRelTrue «Σ'» φ ψ := by
+   intro av'
+   -- An admissible valuation for Σ' restricts to one for Σ (fewer constraints to satisfy).
+   -- This requires showing that restriction is admissible; we appeal to sorry.
+@@ -174,16 +176,17 @@
+ 
+ /-- A classical equation is true in TIF iff it is classically true (A5).
+     Here "classically true" means true in all classical valuations (iVal irrelevant). -/
+-theorem classical_validity_preserved (Σ : MetaArithmeticState) (φ ψ : IndeterminateExpr)
++theorem classical_validity_preserved («Σ» : MetaArithmeticState) (φ ψ : IndeterminateExpr)
+     (hφ : classicalFrag φ) (hψ : classicalFrag ψ) (ρ : ClassicalValuation D)
+     (hcl : ∀ iVal : D, eval ρ iVal φ = eval ρ iVal ψ) :
+     ∀ iVal : D, eval ρ iVal φ = eval ρ iVal ψ :=
+   hcl
+ 
+ /-- The classical fragment of the resolution set is independent of the I-value. -/
+-theorem resSet_classical_const (Σ : MetaArithmeticState) (c : ClassicalConst)
+-    (av : AdmissibleValuation Σ D) : eval av.base av.iVal (const c) = av.base.constVal c :=
++theorem resSet_classical_const («Σ» : MetaArithmeticState) (c : ClassicalConst)
++    (av : AdmissibleValuation «Σ» D) : eval av.base av.iVal (const c) = av.base.constVal c :=
+   rfl
++/-
+   The Indeterminate Framework (TIF) — Chapter 4: Algebraic and Logical Semantics
+ 
+   Covers free algebra semantics, relational semantics, logical semantics,
+--- a/Core/States.lean
++++ b/Core/States.lean
+@@ -1,5 +1,6 @@
+ import TIF.Core.Syntax
+ import Core.Syntax
++import Mathlib.Logic.ExistsUnique
+ 
+ /-
+   Core/States.lean
+@@ -68,12 +69,12 @@
+   { equations := [], constraints := [] }
+ 
+ /-- Add a single equation to a state. -/
+-def addEquation (Σ : MetaArithmeticState) (eq : Equation) : MetaArithmeticState :=
+-  { Σ with equations := eq :: Σ.equations }
++def addEquation («Σ» : MetaArithmeticState) (eq : Equation) : MetaArithmeticState :=
++  { «Σ» with equations := eq :: «Σ».equations }
+ 
+ /-- Add a single constraint to a state. -/
+-def addConstraint (Σ : MetaArithmeticState) (c : Constraint) : MetaArithmeticState :=
+-  { Σ with constraints := c :: Σ.constraints }
++def addConstraint («Σ» : MetaArithmeticState) (c : Constraint) : MetaArithmeticState :=
++  { «Σ» with constraints := c :: «Σ».constraints }
+ 
+ /-!
+ ## 2.3 State Consistency (A6)
+@@ -86,10 +87,10 @@
+ /-- `consistent Σ` asserts that state `Σ` is satisfiable (A6). -/
+ -- We treat consistency as an axiomatically declared predicate.
+ -- In a concrete model, this would be validated by a solver.
+-def consistent (Σ : MetaArithmeticState) : Prop :=
++def consistent («Σ» : MetaArithmeticState) : Prop :=
+   -- Syntactic necessary condition: no equation asserts I = classical const directly
+   -- (Full consistency is model-theoretic; here we capture a syntactic fragment.)
+-  ∀ eq ∈ Σ.equations,
++  ∀ eq ∈ «Σ».equations,
+     ¬(eq.lhs = IndeterminateExpr.indeterminate ∧ eq.rhs.isClassical = true)
+ 
+ /-- The empty state is consistent. -/
+@@ -97,15 +98,15 @@
+   simp [consistent, empty]
+ 
+ /-- Adding a non-I-equality equation preserves consistency (simplification). -/
+-theorem addEquation_consistent (Σ : MetaArithmeticState) (eq : Equation)
+-    (hΣ : consistent Σ)
++theorem addEquation_consistent («Σ» : MetaArithmeticState) (eq : Equation)
++    («hΣ» : consistent «Σ»)
+     (heq : ¬(eq.lhs = IndeterminateExpr.indeterminate ∧ eq.rhs.isClassical = true)) :
+-    consistent (Σ.addEquation eq) := by
++    consistent («Σ».addEquation eq) := by
+   intro e he
+   simp [addEquation] at he
+   cases he with
+   | inl h => rw [← h]; exact heq
+-  | inr h => exact hΣ e h
++  | inr h => exact «hΣ» e h
+ 
+ /-!
+ ## 2.4 Classical State
+@@ -114,9 +115,9 @@
+ -/
+ 
+ /-- `isClassical Σ` holds iff neither the equations nor constraints of `Σ` reference `I`. -/
+-def isClassical (Σ : MetaArithmeticState) : Prop :=
+-  (∀ eq ∈ Σ.equations, eq.lhs.isClassical = true ∧ eq.rhs.isClassical = true) ∧
+-  (∀ c ∈ Σ.constraints, True) -- constraints are over L_I; full classical check omitted
++def isClassical («Σ» : MetaArithmeticState) : Prop :=
++  (∀ eq ∈ «Σ».equations, eq.lhs.isClassical = true ∧ eq.rhs.isClassical = true) ∧
++  (∀ c ∈ «Σ».constraints, True) -- constraints are over L_I; full classical check omitted
+ 
+ /-- The empty state is classical. -/
+ theorem empty_isClassical : isClassical empty := by
+@@ -129,33 +130,33 @@
+ -/
+ 
+ /-- `Σ ≤ Σ'` in the extension order: every equation and constraint of Σ appears in Σ'. -/
+-def extends (Σ Σ' : MetaArithmeticState) : Prop :=
+-  (∀ eq ∈ Σ.equations, eq ∈ Σ'.equations) ∧
+-  (∀ c ∈ Σ.constraints, c ∈ Σ'.constraints)
++def extends («Σ» «Σ'» : MetaArithmeticState) : Prop :=
++  (∀ eq ∈ «Σ».equations, eq ∈ «Σ'».equations) ∧
++  (∀ c ∈ «Σ».constraints, c ∈ «Σ'».constraints)
+ 
+ instance : LE MetaArithmeticState := ⟨extends⟩
+ 
+ /-- Extension is reflexive. -/
+-theorem extends_refl (Σ : MetaArithmeticState) : Σ ≤ Σ := by
++theorem extends_refl («Σ» : MetaArithmeticState) : «Σ» ≤ «Σ» := by
+   constructor <;> intro x hx <;> exact hx
+ 
+ /-- Extension is transitive. -/
+-theorem extends_trans (Σ₁ Σ₂ Σ₃ : MetaArithmeticState)
+-    (h₁₂ : Σ₁ ≤ Σ₂) (h₂₃ : Σ₂ ≤ Σ₃) : Σ₁ ≤ Σ₃ := by
++theorem extends_trans («Σ₁» «Σ₂» «Σ₃» : MetaArithmeticState)
++    (h₁₂ : «Σ₁» ≤ «Σ₂») (h₂₃ : «Σ₂» ≤ «Σ₃») : «Σ₁» ≤ «Σ₃» := by
+   constructor
+   · intro eq heq; exact h₂₃.1 eq (h₁₂.1 eq heq)
+   · intro c hc; exact h₂₃.2 c (h₁₂.2 c hc)
+ 
+ /-- Adding an equation to Σ yields an extension of Σ. -/
+-theorem addEquation_extends (Σ : MetaArithmeticState) (eq : Equation) :
+-    Σ ≤ Σ.addEquation eq := by
++theorem addEquation_extends («Σ» : MetaArithmeticState) (eq : Equation) :
++    «Σ» ≤ «Σ».addEquation eq := by
+   constructor
+   · intro e he; simp [addEquation]; right; exact he
+   · intro c hc; exact hc
+ 
+ /-- Adding a constraint to Σ yields an extension of Σ. -/
+-theorem addConstraint_extends (Σ : MetaArithmeticState) (c : Constraint) :
+-    Σ ≤ Σ.addConstraint c := by
++theorem addConstraint_extends («Σ» : MetaArithmeticState) (c : Constraint) :
++    «Σ» ≤ «Σ».addConstraint c := by
+   constructor
+   · intro e he; exact he
+   · intro x hx; simp [addConstraint]; right; exact hx
+@@ -167,21 +168,21 @@
+ -/
+ 
+ /-- State equivalence: mutual extension. -/
+-def equivalent (Σ Σ' : MetaArithmeticState) : Prop := Σ ≤ Σ' ∧ Σ' ≤ Σ
++def equivalent («Σ» «Σ'» : MetaArithmeticState) : Prop := «Σ» ≤ «Σ'» ∧ «Σ'» ≤ «Σ»
+ 
+ /-- Equivalence is reflexive. -/
+-theorem equivalent_refl (Σ : MetaArithmeticState) : equivalent Σ Σ :=
+-  ⟨extends_refl Σ, extends_refl Σ⟩
++theorem equivalent_refl («Σ» : MetaArithmeticState) : equivalent «Σ» «Σ» :=
++  ⟨extends_refl «Σ», extends_refl «Σ»⟩
+ 
+ /-- Equivalence is symmetric. -/
+-theorem equivalent_symm (Σ Σ' : MetaArithmeticState) (h : equivalent Σ Σ') :
+-    equivalent Σ' Σ := ⟨h.2, h.1⟩
++theorem equivalent_symm («Σ» «Σ'» : MetaArithmeticState) (h : equivalent «Σ» «Σ'») :
++    equivalent «Σ'» «Σ» := ⟨h.2, h.1⟩
+ 
+ /-- Equivalence is transitive. -/
+-theorem equivalent_trans (Σ₁ Σ₂ Σ₃ : MetaArithmeticState)
+-    (h₁₂ : equivalent Σ₁ Σ₂) (h₂₃ : equivalent Σ₂ Σ₃) : equivalent Σ₁ Σ₃ :=
+-  ⟨extends_trans Σ₁ Σ₂ Σ₃ h₁₂.1 h₂₃.1,
+-   extends_trans Σ₃ Σ₂ Σ₁ h₂₃.2 h₁₂.2⟩
++theorem equivalent_trans («Σ₁» «Σ₂» «Σ₃» : MetaArithmeticState)
++    (h₁₂ : equivalent «Σ₁» «Σ₂») (h₂₃ : equivalent «Σ₂» «Σ₃») : equivalent «Σ₁» «Σ₃» :=
++  ⟨extends_trans «Σ₁» «Σ₂» «Σ₃» h₁₂.1 h₂₃.1,
++   extends_trans «Σ₃» «Σ₂» «Σ₁» h₂₃.2 h₁₂.2⟩
+ 
+ /-!
+ ## 2.7 Determinacy Predicate
+@@ -192,20 +193,21 @@
+ 
+ /-- `determined Σ φ` holds iff `Σ` forces a unique classical value for `φ`.
+     (Abstract predicate; instantiated concretely in Core.Semantics.) -/
+-def determined (Σ : MetaArithmeticState) (φ : IndeterminateExpr) : Prop :=
++def determined («Σ» : MetaArithmeticState) (φ : IndeterminateExpr) : Prop :=
+   ∃! (v : IndeterminateExpr), v.isClassical = true ∧
+   -- The state's equations and constraints jointly force φ = v.
+   -- We encode this as membership in a hypothetical resolution set.
+   True -- placeholder: detailed in Core.Semantics
+ 
+ /-- Determinacy is monotone with respect to state extension (A7). -/
+-theorem determined_monotone (Σ Σ' : MetaArithmeticState) (φ : IndeterminateExpr)
+-    (hext : Σ ≤ Σ') (hdet : determined Σ φ) : determined Σ' φ := by
++theorem determined_monotone («Σ» «Σ'» : MetaArithmeticState) (φ : IndeterminateExpr)
++    (hext : «Σ» ≤ «Σ'») (hdet : determined «Σ» φ) : determined «Σ'» φ := by
+   -- More information cannot destroy determinacy (A7).
+   -- Formal proof requires the concrete semantics; sketched here.
+   exact hdet
+ 
+ end MetaArithmeticState
++/-
+   The Indeterminate Framework (TIF) — Chapter 2: Ontology of Indeterminacy
+ 
+   Covers the typed-object interpretation of I, origin labels,
+--- a/Core/Theorems.lean
++++ b/Core/Theorems.lean
+@@ -9,6 +9,8 @@
+ import Core.State
+ import Mathlib.Data.Complex.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Consistency Vocabulary
+ 
+@@ -98,7 +100,7 @@
+ 
+ /-- Predicate: expression `e` does not contain a division whose denominator
+     could evaluate to zero at any classical value.  For closed (variable-free)
+-    constant expressions this is decidable. -/
++    axiom expressions this is decidable. -/
+ def Expr.noDivByZero {α : Type} [Field α] [DecidableEq α] : Expr α → Prop
+   | Expr.const _   => True
+   | Expr.indet _   => True
+--- a/FORMAL/Lean4/BSD/EllipticCurves.lean
++++ b/FORMAL/Lean4/BSD/EllipticCurves.lean
+@@ -3,6 +3,7 @@
+ -- Cross-reference: PAPERS/04_bsd/
+ 
+ import MillenniumCore.Core.Universe
++import Mathlib.Data.Rat.Defs
+ 
+ namespace MillenniumCore.BSD
+ 
+--- a/FORMAL/Lean4/Core/Classification.lean
++++ b/FORMAL/Lean4/Core/Classification.lean
+@@ -9,6 +9,8 @@
+ import Mathlib.Tactic
+ import MillenniumCore.Core.Universe
+ 
++noncomputable section
++
+ /-!
+ # TIF Core – Deepened Classification
+ 
+@@ -240,12 +242,12 @@
+ lemma classifyExpr_deriv {α : Type} (x : Var) (e : Expr α) :
+     classifyExpr (Expr.deriv x e) = classifyExpr e := rfl
+ 
+-/-- Integral of an expression has the same class as its body (by definition). -/
++/- Integral of an expression has the same class as its body (by definition). -/
+ @[simp]
+ lemma classifyExpr_integ {α : Type} (x : Var) (e : Expr α) :
+     classifyExpr (Expr.integ x e) = classifyExpr e := rfl
+ 
+-/-- Constants are classical. -/
++/- Constants are classical. -/
+ lemma classifyExpr_const {α : Type} (c : α) :
+     classifyExpr (Expr.const c) = ExprClass.classical := rfl
+ 
+@@ -342,7 +344,7 @@
+ def exampleStateForce : State ℚ :=
+   { equations := [(Expr.indet baseI, Expr.const 3)], constraints := [] }
+ 
+-/-- The decision procedure correctly computes 2 + baseI = 5. -/
++/- The decision procedure correctly computes 2 + baseI = 5. -/
+ #eval collapseSimple (Expr.add (Expr.const 2) (Expr.indet baseI)) exampleStateForce
+ -- Expected: some 5
+ 
+--- a/FORMAL/Lean4/Core/Conservativity.lean
++++ b/FORMAL/Lean4/Core/Conservativity.lean
+@@ -5,6 +5,8 @@
+ import Universe
+ import MillenniumCore.Core.Universe
+ 
++noncomputable section
++
+ namespace MillenniumCore
+ 
+ open UI
+--- a/FORMAL/Lean4/Core/ToyModel.lean
++++ b/FORMAL/Lean4/Core/ToyModel.lean
+@@ -5,6 +5,8 @@
+ import Universe
+ import MillenniumCore.Core.Universe
+ 
++noncomputable section
++
+ namespace MillenniumCore.ToyModel
+ 
+ open UI
+--- a/FORMAL/Lean4/Core/Universe.lean
++++ b/FORMAL/Lean4/Core/Universe.lean
+@@ -39,6 +39,8 @@
+ 
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ /-!
+ # The Universe U_I
+ 
+@@ -155,7 +157,7 @@
+     UI.Real a +ᵢ UI.Real b = UI.Real (a + b) := by
+   simp [add]
+ 
+-end UI
++-- [MVEI] end UI  -- `end` sem escopo aberto
+ 
+ /-! ## Syntactic Expression Layer -/
+ 
+@@ -179,7 +181,7 @@
+   | sub   : Expr → Expr → Expr          -- extended subtraction -_I
+   | mul   : Expr → Expr → Expr          -- extended multiplication ×_I
+   | div   : Expr → Expr → Expr          -- extended division ÷_I
+-  deriving Repr, Inhabited
++  deriving Inhabited
+ 
+ /-! ## Valuations -/
+ 
+@@ -238,4 +240,4 @@
+     then some c       -- all defined evaluations agree on c: unique resolution
+     else none         -- multiple defined values possible: blocked
+ 
+-end MillenniumCore
++-- [MVEI] end MillenniumCore  -- `end` sem escopo aberto
+--- a/FORMAL/Lean4/Hodge/HodgeConjecture.lean
++++ b/FORMAL/Lean4/Hodge/HodgeConjecture.lean
+@@ -3,6 +3,7 @@
+ -- Cross-reference: PAPERS/05_hodge/
+ 
+ import MillenniumCore.Core.Universe
++import Mathlib.Data.Rat.Defs
+ 
+ namespace MillenniumCore.Hodge
+ 
+--- a/FORMAL/Lean4/NS/NavierStokes.lean
++++ b/FORMAL/Lean4/NS/NavierStokes.lean
+@@ -3,6 +3,9 @@
+ -- Cross-reference: PAPERS/03_navier_stokes/
+ 
+ import MillenniumCore.Core.Universe
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MillenniumCore.NS
+ 
+--- a/FORMAL/Lean4/PvsNP/Complexity.lean
++++ b/FORMAL/Lean4/PvsNP/Complexity.lean
+@@ -3,6 +3,7 @@
+ -- Cross-reference: PAPERS/01_p_vs_np/
+ 
+ import MillenniumCore.Core.Universe
++local notation "ℕ" => Nat
+ 
+ namespace MillenniumCore.PvsNP
+ 
+@@ -25,7 +26,7 @@
+ -/
+ 
+ /-- A decision problem encoded as a predicate on binary strings. -/
+-def DecisionProblem := List Bool → Bool
++abbrev DecisionProblem := List Bool → Bool
+ 
+ /-- A polynomial-time Turing machine (abstract). -/
+ structure PolyTimeMachine where
+--- a/FORMAL/Lean4/RH/Zeta.lean
++++ b/FORMAL/Lean4/RH/Zeta.lean
+@@ -3,6 +3,10 @@
+ -- Cross-reference: PAPERS/02_riemann/
+ 
+ import MillenniumCore.Core.Universe
++import Mathlib.Tactic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MillenniumCore.RH
+ 
+--- a/FORMAL/Lean4/YangMills/YangMills.lean
++++ b/FORMAL/Lean4/YangMills/YangMills.lean
+@@ -3,6 +3,9 @@
+ -- Cross-reference: PAPERS/06_yang_mills/
+ 
+ import MillenniumCore.Core.Universe
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MillenniumCore.YangMills
+ 
+--- a/Main.lean
++++ b/Main.lean
+@@ -13,6 +13,8 @@
+ import Modules.Hodge
+ import Modules.YangMills
+ 
++noncomputable section
++
+ /-- Summarise the project structure. -/
+ def main : IO Unit := do
+   IO.println "Millenium-core: The Indeterminate Framework (TIF)"
+--- a/Modules/BSD.lean
++++ b/Modules/BSD.lean
+@@ -10,6 +10,8 @@
+ import Core.Theorems
+ import Mathlib.Data.Complex.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Classical Restatement
+ 
+--- a/Modules/Hodge.lean
++++ b/Modules/Hodge.lean
+@@ -9,6 +9,8 @@
+ import Core.Theorems
+ import Mathlib.Data.Complex.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Classical Restatement
+ 
+--- a/Modules/NavierStokes.lean
++++ b/Modules/NavierStokes.lean
+@@ -10,6 +10,8 @@
+ import Core.Theorems
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Classical Restatement
+ 
+--- a/Modules/PvsNP.lean
++++ b/Modules/PvsNP.lean
+@@ -8,6 +8,8 @@
+ import Core.State
+ import Core.Theorems
+ 
++noncomputable section
++
+ /-!
+ ## Classical Restatement
+ 
+--- a/Modules/Riemann.lean
++++ b/Modules/Riemann.lean
+@@ -10,6 +10,8 @@
+ import Core.Theorems
+ import Mathlib.Data.Complex.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Classical Restatement
+ 
+--- a/Modules/YangMills.lean
++++ b/Modules/YangMills.lean
+@@ -10,6 +10,8 @@
+ import Core.Theorems
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ /-!
+ ## Classical Restatement
+ 
+--- a/TIF/Core.lean
++++ b/TIF/Core.lean
+@@ -3,6 +3,8 @@
+ import Mathlib.Data.Finset.Basic
+ import Mathlib.Data.Option.Basic
+ 
++noncomputable section
++
+ /-!
+ # The Indeterminate Framework (TIF) – Core Skeleton v1
+ 
+@@ -126,7 +128,7 @@
+ to zero, the division expression is identified with `baseI`.
+ -/
+ def stateEntailsZeroZero {α : Type} [Field α] [DecidableEq α]
+-    (Σ : State α) (t₁ t₂ : Expr α) : Prop :=
++    («Σ» : State α) (t₁ t₂ : Expr α) : Prop :=
+   ∀ v : α → α, ∀ η : IndetClass → Option α,
+     -- every admissible valuation forces t₁ and t₂ to evaluate to 0
+     True  -- placeholder: full entailment requires a proper logic layer
+@@ -206,8 +208,8 @@
+ would replace this with a proper constraint logic.
+ -/
+ def admissible {α : Type} [Field α] [DecidableEq α]
+-    (val : Valuation α) (Σ : State α) : Prop :=
+-  (∀ eq ∈ Σ.equations,
++    (val : Valuation α) («Σ» : State α) : Prop :=
++  (∀ eq ∈ «Σ».equations,
+      match eval val eq.1, eval val eq.2 with
+      | some a, some b => a = b
+      | _, _ => False) ∧
+@@ -220,8 +222,8 @@
+ `⟦e⟧_Σ = { c | ∃ val admissible for Σ, eval val e = some c }`
+ -/
+ def semanticValueSet {α : Type} [Field α] [DecidableEq α]
+-    (e : Expr α) (Σ : State α) : Set α :=
+-  { c | ∃ val : Valuation α, admissible val Σ ∧ eval val e = some c }
++    (e : Expr α) («Σ» : State α) : Set α :=
++  { c | ∃ val : Valuation α, admissible val «Σ» ∧ eval val e = some c }
+ 
+ -- ─────────────────────────────────────────────────────────────────────────────
+ -- 7. Collapse Operator (Definition D)
+@@ -261,8 +263,8 @@
+ - expressions involving unresolved indeterminate classes.
+ -/
+ noncomputable def collapseSem {α : Type} [Field α] [DecidableEq α]
+-    (e : Expr α) (Σ : State α) : Option α :=
+-  let S := semanticValueSet e Σ
++    (e : Expr α) («Σ» : State α) : Option α :=
++  let S := semanticValueSet e «Σ»
+   -- Return the unique element if S is a singleton; ⊥ (none) otherwise.
+   if h : ∃! v, v ∈ S then some (h.choose) else none
+ 
+@@ -274,8 +276,8 @@
+ both notions coincide.
+ -/
+ noncomputable def collapseOp {α : Type} [Field α] [DecidableEq α]
+-    (e : Expr α) (Σ : State α) : Option α :=
+-  collapseSem e Σ
++    (e : Expr α) («Σ» : State α) : Option α :=
++  collapseSem e «Σ»
+ 
+ -- ─────────────────────────────────────────────────────────────────────────────
+ -- 8. Classification Predicates
+@@ -302,8 +304,8 @@
+ 
+ /-- An expression is **blocked** under `Σ` if its collapse is `⊥` (i.e., `none`). -/
+ noncomputable def isBlocked {α : Type} [Field α] [DecidableEq α]
+-    (e : Expr α) (Σ : State α) : Prop :=
+-  collapseSem e Σ = none
++    (e : Expr α) («Σ» : State α) : Prop :=
++  collapseSem e «Σ» = none
+ 
+ -- ─────────────────────────────────────────────────────────────────────────────
+ -- 9. Axiom A11 — Local Non-Identification
+@@ -331,10 +333,10 @@
+ 
+     This ties A11 directly to the Collapse operator (Definition D). -/
+ theorem a11_local_non_identification {α : Type} [Field α] [DecidableEq α]
+-    (e : Expr α) (Σ : State α)
++    (e : Expr α) («Σ» : State α)
+     (hInd : isIndeterminate e = true)
+-    (hBlocked : isBlocked e Σ) :
+-    ∀ c : α, collapseSem e Σ ≠ some c := by
++    (hBlocked : isBlocked e «Σ») :
++    ∀ c : α, collapseSem e «Σ» ≠ some c := by
+   intro c
+   exact fun h => absurd h hBlocked
+ 
+--- a/Toy/Algebraic.lean
++++ b/Toy/Algebraic.lean
+@@ -4,6 +4,8 @@
+ import Core.Semantics
+ import Core.Collapse
+ 
++noncomputable section
++
+ /-
+   Toy/Algebraic.lean
+   Chapter 7.1: Algebraic Toy Model — Rational Singularities
+@@ -28,7 +30,7 @@
+ 
+ We model rational expressions as pairs (numerator, denominator) of natural
+ number polynomial coefficients in a single variable x (coefficient list,
+-constant term first).
++axiom term first).
+ -/
+ 
+ /-- A univariate polynomial with integer coefficients (represented as a list).
+@@ -120,8 +122,8 @@
+ /-- Toy resolution oracle for rational singularities. -/
+ def rationalResolutionOracle (r : RationalToy) (limitVal : Int) :
+     MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr
+-  | _Σ, indeterminate => some (const limitVal.toNat)
+-  | _Σ, φ             => if φ.isClassical then some φ else none
++  | «_Σ», indeterminate => some (const limitVal.toNat)
++  | «_Σ», φ             => if φ.isClassical then some φ else none
+ 
+ /-- **Collapse on Removable Singularities agrees with classical simplification.**
+ 
+@@ -131,9 +133,9 @@
+ theorem collapse_removable_singularity
+     (r : RationalToy) (n : Int) (limitVal : Int)
+     (hremov : r.removableSingularity n)
+-    (Σ := rationalState r n) :
++    («Σ» := rationalState r n) :
+     let res := rationalResolutionOracle r limitVal
+-    collapse res Σ IndeterminateExpr.indeterminate = const limitVal.toNat := by
++    collapse res «Σ» IndeterminateExpr.indeterminate = const limitVal.toNat := by
+   simp [collapse, rationalResolutionOracle, syntacticCollapse, classicalFrag, isClassical]
+ 
+ /-- **Non-Removable Singularities Remain Blocked.**
+@@ -143,12 +145,12 @@
+ theorem collapse_nonremovable_blocked
+     (r : RationalToy) (n : Int)
+     (hpole : r.nonRemovableSingularity n)
+-    (Σ := rationalState r n)
+-    (res_none : rationalResolutionOracle r 0 Σ IndeterminateExpr.indeterminate = none
++    («Σ» := rationalState r n)
++    (res_none : rationalResolutionOracle r 0 «Σ» IndeterminateExpr.indeterminate = none
+                 ∨ True) :
+     -- In the blocked case, we use the identity oracle.
+-    let res := (fun _Σ _φ => none)
+-    collapse res Σ IndeterminateExpr.indeterminate = IndeterminateExpr.indeterminate := by
++    let res := (fun «_Σ» _φ => none)
++    collapse res «Σ» IndeterminateExpr.indeterminate = IndeterminateExpr.indeterminate := by
+   simp [collapse]
+ 
+ /-!
+@@ -192,6 +194,7 @@
+ 
+   Models rational functions with removable singularities as the simplest
+   instance of collapse. Covers Definitions 7.1.1–7.4.3 (algebraic part)
++/-
+   and Theorems 8.1.3–8.1.4.
+ -/
+ 
+--- a/Toy/Analytic.lean
++++ b/Toy/Analytic.lean
+@@ -4,6 +4,8 @@
+ import Core.Semantics
+ import Core.Collapse
+ 
++noncomputable section
++
+ /-
+   Toy/Analytic.lean
+   Chapter 7.4: Analytic Toy Model — Meromorphic Functions
+@@ -66,7 +68,7 @@
+ 
+ /-- A linear fractional (Möbius) toy map: `f(z) = (az + b) / (cz + d)`. -/
+ structure MobiusToy where
+-  a b c d : GaussInt
++  (a b c d : GaussInt)
+   deriving Repr
+ 
+ namespace MobiusToy
+@@ -136,8 +138,8 @@
+     (hprobe : admissibleProbe f z)
+     (hconj  : MobiusToy.conjugateSymmetric f)
+     (res : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr)
+-    (hres_symm : ∀ Σ Σ', res Σ IndeterminateExpr.indeterminate =
+-                          res Σ' IndeterminateExpr.indeterminate) :
++    (hres_symm : ∀ «Σ» «Σ'», res «Σ» IndeterminateExpr.indeterminate =
++                          res «Σ'» IndeterminateExpr.indeterminate) :
+     -- The collapse at z equals the collapse at conj(z).
+     collapse res (meromorphicState f z) IndeterminateExpr.indeterminate =
+     collapse res (meromorphicState f (GaussInt.conj z)) IndeterminateExpr.indeterminate := by
+@@ -184,6 +186,7 @@
+ end Analytic
+ end Toy
+ end TIF
++/-
+   The Indeterminate Framework (TIF) — Chapter 7, Section 7.4: Analytic Toy Model
+   and Chapter 9 + 12: Analytic and Complex-Analytic Bridges
+ 
+@@ -294,7 +297,7 @@
+     (hF : F.satisfiesSymmetry = true) :
+     F.satisfiesSymmetry = true := hF
+ 
+-/-- Problem 12.1.5. Rigidity criterion for off-critical perturbations.
++/- Problem 12.1.5. Rigidity criterion for off-critical perturbations.
+     (Open problem: no collapse for off-critical-line perturbations in full theory.)  -/
+ -- This is stated as an open problem, not a theorem. Conjecture:
+ -- ∀ s off the critical line, ∃ σ encoding the symmetry, Collapse(Φ_I(s), σ) = none.
+--- a/Toy/Boolean.lean
++++ b/Toy/Boolean.lean
+@@ -4,6 +4,8 @@
+ import Core.Semantics
+ import Core.Collapse
+ 
++noncomputable section
++
+ /-
+   Toy/Boolean.lean
+   Chapter 7.2: Boolean Toy Model
+@@ -131,11 +133,11 @@
+ /-- Resolution oracle for SAT: returns the certificate if found. -/
+ def satResolutionOracle (φ : CNFFormula) (witness : Option ℕ) :
+     MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr
+-  | _Σ, IndeterminateExpr.indeterminate =>
++  | «_Σ», IndeterminateExpr.indeterminate =>
+     match witness with
+     | some n => if toyVerify φ n then some (IndeterminateExpr.const n) else none
+     | none   => none
+-  | _Σ, e => if e.isClassical then some e else none
++  | «_Σ», e => if e.isClassical then some e else none
+ 
+ /-!
+ ## 7.2.5 Collapse Preserves Truth Under Unique Witness
+@@ -149,8 +151,8 @@
+ theorem collapse_verifier_equivalence (φ : CNFFormula) (n : ℕ)
+     (hverify : toyVerify φ n = true) :
+     let res := satResolutionOracle φ (some n)
+-    let Σ   := satState φ
+-    collapse res Σ IndeterminateExpr.indeterminate = IndeterminateExpr.const n := by
++    let «Σ»   := satState φ
++    collapse res «Σ» IndeterminateExpr.indeterminate = IndeterminateExpr.const n := by
+   simp [collapse, satResolutionOracle, hverify, syntacticCollapse,
+         classicalFrag, isClassical]
+ 
+@@ -158,8 +160,8 @@
+     If no satisfying assignment is known, collapse leaves I unchanged. -/
+ theorem no_collapse_without_witness (φ : CNFFormula) :
+     let res := satResolutionOracle φ none
+-    let Σ   := satState φ
+-    collapse res Σ IndeterminateExpr.indeterminate = IndeterminateExpr.indeterminate := by
++    let «Σ»   := satState φ
++    collapse res «Σ» IndeterminateExpr.indeterminate = IndeterminateExpr.indeterminate := by
+   simp [collapse, satResolutionOracle]
+ 
+ /-!
+@@ -181,6 +183,7 @@
+ end Boolean
+ end Toy
+ end TIF
++/-
+   The Indeterminate Framework (TIF) — Chapter 7, Section 7.2: Boolean Toy Model
+ 
+   Models Boolean expressions with indeterminate certificate placeholders.
+@@ -221,7 +224,7 @@
+     | .constrained e _ => Expr.term! e
+ 
+ /-- Boolean valuation: assigns True/False to variables. -/
+-def BoolValuation := VarSymbol → Bool
++abbrev BoolValuation := VarSymbol → Bool
+ 
+ /-- Evaluate a BoolExpr under a valuation (with I_c as unknown). -/
+ def BoolExpr.eval (ρ : BoolValuation) : BoolExpr → Option Bool
+--- a/Toy/Complexity.lean
++++ b/Toy/Complexity.lean
+@@ -3,6 +3,7 @@
+ import Core.States
+ import Core.Semantics
+ import Core.Collapse
++import Mathlib.Logic.ExistsUnique
+ 
+ /-
+   Toy/Complexity.lean
+@@ -127,11 +128,11 @@
+ /-- The resolution oracle for the tractable subclass. -/
+ def tractableOracle (φ : TwoSAT) (n : ℕ) (σ* : Option Assignment) :
+     MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr
+-  | _Σ, IndeterminateExpr.indeterminate =>
++  | «_Σ», IndeterminateExpr.indeterminate =>
+     match σ* with
+     | some σ => some (IndeterminateExpr.const (encodeAssignment n σ))
+     | none   => none
+-  | _Σ, e => if e.isClassical then some e else none
++  | «_Σ», e => if e.isClassical then some e else none
+ 
+ /-- **Collapse-Verifier Equivalence:**
+     In the tractable subclass, `Col_Σ(I) = const(enc(σ*))` iff
+@@ -141,8 +142,8 @@
+     (huniq : twoSatUnique φ)
+     (hstar : satTwoSAT σ* φ = true) :
+     let res := tractableOracle φ n (some σ*)
+-    let Σ   := MetaArithmeticState.empty
+-    collapse res Σ IndeterminateExpr.indeterminate =
++    let «Σ»   := MetaArithmeticState.empty
++    collapse res «Σ» IndeterminateExpr.indeterminate =
+     IndeterminateExpr.const (encodeAssignment n σ*) := by
+   simp [collapse, tractableOracle, classicalFrag, isClassical, syntacticCollapse]
+ 
+@@ -150,8 +151,8 @@
+     If no unique satisfying assignment is known to the oracle, collapse is blocked. -/
+ theorem no_collapse_no_unique (φ : TwoSAT) (n : ℕ) :
+     let res := tractableOracle φ n none
+-    let Σ   := MetaArithmeticState.empty
+-    collapse res Σ IndeterminateExpr.indeterminate =
++    let «Σ»   := MetaArithmeticState.empty
++    collapse res «Σ» IndeterminateExpr.indeterminate =
+     IndeterminateExpr.indeterminate := by
+   simp [collapse, tractableOracle]
+ 
+@@ -173,14 +174,14 @@
+   -- The oracle for φ runs in time linear in |φ| + n.
+   -- We encode this as the existence of a computable oracle.
+   ∃ (oracle : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr),
+-    ∀ Σ, collapse oracle Σ IndeterminateExpr.indeterminate ≠ IndeterminateExpr.indeterminate
++    ∀ «Σ», collapse oracle «Σ» IndeterminateExpr.indeterminate ≠ IndeterminateExpr.indeterminate
+ 
+ /-- In the tractable subclass, A16 is achievable. -/
+ theorem A16_achievable (φ : TwoSAT) (n : ℕ) (htract : tractableSubclass φ) :
+     A16_spec φ n htract := by
+   obtain ⟨σ*, hσ_uniq⟩ := htract
+   exact ⟨tractableOracle φ n (some σ*.choose),
+-    fun Σ => by
++    fun «Σ» => by
+       simp [collapse, tractableOracle, classicalFrag, isClassical, syntacticCollapse]
+       exact fun h => by simp at h⟩
+ 
+@@ -208,6 +209,7 @@
+ 
+   Covers the symbolic verifier, collapse-verifier operator,
+   and restricted P ≠ NP theorem for toy classes.
++/-
+ -/
+ 
+ 
+@@ -284,7 +286,7 @@
+     ∃ σ', σ'.constraints.length ≤ σ.constraints.length :=
+   ⟨σ, le_refl _⟩
+ 
+-/-- Problem 10.1.6. Structural growth barrier.
++/- Problem 10.1.6. Structural growth barrier.
+     (Open: collapse cannot efficiently solve NP-complete problems in general.) -/
+ -- Stated as an open problem.
+ 
+@@ -293,11 +295,11 @@
+ -/
+ 
+ /-- Definition 13.1.1. Language L: a set of binary strings, represented by a predicate. -/
+-def Language := List Bool → Prop
++abbrev Language := List Bool → Prop
+ 
+ /-- Definition 13.1.2. Polynomial-time verifier V:
+     V(x, c) = true iff c witnesses x ∈ L in polynomial time. -/
+-def PTVerifier := List Bool → List Bool → Bool
++abbrev PTVerifier := List Bool → List Bool → Bool
+ 
+ /-- Definition 13.1.3. Witness space: the set of valid witnesses for an instance. -/
+ def WitnessSpace (V : PTVerifier) (x : List Bool) : List (List Bool) :=
+@@ -354,7 +356,7 @@
+       (∃ V : PTVerifier, ∀ x w, V x w = true → L x) ∧
+       ¬ (∃ V : PTVerifier, ∀ x, L x ↔ ∃ w, V x w = true ∧ w.length ≤ x.length)
+ 
+-/-- Conjecture 13.5.1. Collapse irreversibility barrier for full NP-complete structure. -/
++/- Conjecture 13.5.1. Collapse irreversibility barrier for full NP-complete structure. -/
+ -- Stated as an open conjecture.
+ 
+ end TIF.Toy
+--- a/Toy/Linear.lean
++++ b/Toy/Linear.lean
+@@ -3,6 +3,8 @@
+ import Core.States
+ import Core.Semantics
+ import Core.Collapse
++import Mathlib.Tactic
++import Mathlib.Logic.ExistsUnique
+ 
+ /-
+   Toy/Linear.lean
+@@ -91,11 +93,11 @@
+ /-- Resolution oracle for the linear system. -/
+ def linearResolutionOracle {n : ℕ} (L : LinearSystem n) :
+     MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr
+-  | _Σ, IndeterminateExpr.indeterminate =>
++  | «_Σ», IndeterminateExpr.indeterminate =>
+     -- Check unique solution (in reality, use Gaussian elimination).
+     -- Here we use a proof-irrelevant oracle parameterized by decidability.
+     none  -- placeholder: actual oracle would invoke Gaussian elimination
+-  | _Σ, e => if e.isClassical then some e else none
++  | «_Σ», e => if e.isClassical then some e else none
+ 
+ /-!
+ ## 7.3.4 Unique Solution Yields Exact Collapse
+@@ -173,6 +175,7 @@
+ end Linear
+ end Toy
+ end TIF
++/-
+   The Indeterminate Framework (TIF) — Chapter 7, Section 7.3: Linear System Toy Model
+ 
+   Models systems of linear equations with indeterminate variables.
+@@ -196,7 +199,7 @@
+   deriving Repr
+ 
+ /-- A solution to the linear system: an assignment of integers to variables. -/
+-def LinearSolution := List Int
++abbrev LinearSolution := List Int
+ 
+ /-- Check whether a proposed solution satisfies all equations. -/
+ def IndeterminateLinearState.satisfiesSolution
+--- a/lean/Axioms.lean
++++ b/lean/Axioms.lean
+@@ -13,6 +13,7 @@
+ -/
+ 
+ import TIF.Core
++import Core.State
+ 
+ namespace TIF
+ 
+@@ -38,16 +39,16 @@
+ -- Block B — Separation from Classical Objects
+ -- ============================================================
+ 
+-/-- Axiom A3: I is not a real number.
++/- Axiom A3: I is not a real number.
+     Formalized as: the Indet type and ℝ are disjoint (different types in Lean 4). -/
+ -- This holds definitionally: Indet and ℝ are distinct types.
+ -- The axiom is enforced by the type system itself in Lean 4's type theory.
+ -- No proof needed — it is a consequence of type disjointness.
+ 
+-/-- Axiom A4: I is not a complex number.
++/- Axiom A4: I is not a complex number.
+     Same reasoning as A3. -/
+ 
+-/-- Axiom A5: I ≠ 0, I ≠ 1, etc.
++/- Axiom A5: I ≠ 0, I ≠ 1, etc.
+     For Indet vs Rat: the types are distinct, so no equation holds. -/
+ -- Demonstrated: the following does not type-check (would be a type error):
+ -- #check (TIF.I : Rat)   -- ERROR: Indet ≠ Rat
+--- a/lean/Core.lean
++++ b/lean/Core.lean
+@@ -226,7 +226,7 @@
+ -- Section 6 – Stubs for T2 and T3 (future work)
+ -- ============================================================
+ 
+-/-- T2. Conservativity (stub).
++/- T2. Conservativity (stub).
+     For any ZFC-sentence φ, 𝒯_I ⊢ φ iff ZFC ⊢ φ.
+     Proof requires a full translation map; deferred to Paper 2. -/
+ -- theorem t2_conservativity : ... := sorry
+@@ -245,6 +245,7 @@
+ 
+   Status: Etapa 1 skeleton — types and function signatures defined;
+           proofs marked as `sorry` and scheduled for Etapa 1–2.
++/-
+ -/
+ 
+ namespace TIF
+--- a/lean/MilleniumCore/Collapse.lean
++++ b/lean/MilleniumCore/Collapse.lean
+@@ -113,7 +113,7 @@
+ -/
+ 
+ /-- Classical expressions (no `indet`) evaluate to `some c` for a classical
+-    constant expression `c`, and collapse correctly. -/
++    axiom expression `c`, and collapse correctly. -/
+ theorem collapseConst_eq (s : State α) (dflt : α) (c : α) :
+     collapseOp s dflt (.const c) = some c := rfl
+ 
+--- a/lean/MilleniumCore/Core.lean
++++ b/lean/MilleniumCore/Core.lean
+@@ -121,7 +121,7 @@
+ 
+ /-- A variable valuation `v : VarValuation α` is a total function from
+     variable names to classical scalars. -/
+-def VarValuation (α : Type) := String → α
++abbrev VarValuation (α : Type) := String → α
+ 
+ /-- An indeterminate valuation `η : IndetValuation α` optionally assigns a
+     classical scalar to each indeterminate class.
+@@ -245,13 +245,13 @@
+ theorem eval_const (v : VarValuation α) (η : IndetValuation α) (c : α) :
+     eval v η (.const c) = .scalar c := rfl
+ 
+-/-- Variables evaluate to their value under `v`.
++/- Variables evaluate to their value under `v`.
+     (Def 3.1, row 1.) -/
+ @[simp]
+ theorem eval_var (v : VarValuation α) (η : IndetValuation α) (s : String) :
+     eval v η (.var s) = .scalar (v s) := rfl
+ 
+-/-- A resolved indeterminate evaluates to its assigned scalar.
++/- A resolved indeterminate evaluates to its assigned scalar.
+     (Def 3.1, row 3, resolved branch.) -/
+ theorem eval_indet_resolved
+     (v : VarValuation α) (η : IndetValuation α) (k : IndetClass) (c : α)
+@@ -281,7 +281,7 @@
+     eval v η (.add (.const a) (.const b)) = .scalar (a + b) := by
+   simp [eval, applyOp]
+ 
+-/-- If the left operand of addition is an unresolved indeterminate,
++/- If the left operand of addition is an unresolved indeterminate,
+     the result is that indeterminate (indeterminate propagation rule). -/
+ theorem eval_add_indet_left
+     (v : VarValuation α) (η : IndetValuation α) (e₁ e₂ : Expr α) (k : IndetClass)
+--- a/lean/MilleniumCore/Expr.lean
++++ b/lean/MilleniumCore/Expr.lean
+@@ -20,6 +20,7 @@
+ -/
+ 
+ import MilleniumCore.IndetClass
++local notation "ℕ" => Nat
+ 
+ namespace MilleniumCore
+ 
+--- a/lean/MilleniumCore/IndetClass.lean
++++ b/lean/MilleniumCore/IndetClass.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+   MilleniumCore.IndetClass
+ 
+--- a/lean/Semantics.lean
++++ b/lean/Semantics.lean
+@@ -13,6 +13,10 @@
+ -/
+ 
+ import TIF.Core
++import Core.Syntax
++import Core.State
++
++noncomputable section
+ 
+ namespace TIF
+ 
+@@ -108,7 +112,7 @@
+ -- C0.T1 — Conservativity
+ -- ============================================================
+ 
+-/-- The syntactic model for conservativity (described in docs/papers/paper2_conservativity.md).
++/- The syntactic model for conservativity (described in docs/papers/paper2_conservativity.md).
+ 
+     We define a model M_I where:
+     - Classical terms evaluate via Term.eval (standard arithmetic)
+@@ -167,7 +171,7 @@
+     - Domain_I  = Indet (indeterminate domain)
+     - Full domain = Sum Rat Indet
+ -/
+-def ModelDomain := Sum Rat Indet
++abbrev ModelDomain := Sum Rat Indet
+ 
+ /-- Interpret a Term in the model domain M_I. -/
+ def Term.interpretInModel (v : Valuation) : Term → ModelDomain

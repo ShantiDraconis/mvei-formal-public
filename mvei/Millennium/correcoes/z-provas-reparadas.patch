@@ -1,0 +1,725 @@
+--- a/formal/lean/Unified/UniversalOperators.lean
++++ b/formal/lean/Unified/UniversalOperators.lean
+@@ -30,7 +30,7 @@
+ /-- A zero is on the critical line iff Δ_RH = 0 -/
+ theorem on_critical_line_iff_delta_zero (ρ : ℂ) :
+     ρ.re = 1/2 ↔ delta_RH ρ = 0 := by
+-  simp [delta_RH]
++  simp [delta_RH, sub_eq_zero]
+ 
+ /-- The RH statement in delta form -/
+ def RH_statement (zeros : Set ℂ) : Prop :=
+--- a/lean/ParityGap.lean
++++ b/lean/ParityGap.lean
+@@ -70,7 +70,8 @@
+ /-- Horizontal Transfer: If Δ_NP(L_ρ) ≠ 0, then Δ_RH(ρ) ≠ 0 -/
+ theorem horizontal_transfer :
+   ∀ (ρ : ZetaZero), delta_NP (L_rho ρ) ≠ 0 → delta_RH ρ ≠ 0 := by
+-  intro ρ h
++  intro ρ h hr
++  apply h
+   have h_bal := balance_zero ρ
+   simp [balance] at h_bal
+   linarith
+--- a/lean/RHPvsNP/Basic.lean
++++ b/lean/RHPvsNP/Basic.lean
+@@ -5,6 +5,7 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.Nat.Prime.Defs
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ 
+ noncomputable section
+ 
+@@ -61,13 +62,14 @@
+ 
+ /-- The von Mangoldt function Λ(n) -/
+ noncomputable def vonMangoldt (n : ℕ) : ℝ :=
++  haveI := Classical.propDecidable
+   if h : ∃ p k, Nat.Prime p ∧ k ≥ 1 ∧ n = p ^ k
+-  then Real.log (Classical.choose h)
++  then Real.log ((Classical.choose h : ℕ) : ℝ)
+   else 0
+ 
+ /-- The Chebyshev function ψ(x) = Σ_{n ≤ x} Λ(n) -/
+ noncomputable def chebyshevPsi (x : ℝ) : ℝ :=
+-  ∑ n in Finset.filter (fun n => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
++  ∑ n in Finset.filter (fun n : ℕ => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
+ 
+ /-- Prime stability condition with exponent α -/
+ def PrimeStability (α : ℝ) : Prop :=
+--- a/lean/RHPvsNP/DeltaOperators.lean
++++ b/lean/RHPvsNP/DeltaOperators.lean
+@@ -102,17 +102,6 @@
+ theorem parallel_structure :
+     (RiemannHypothesis ↔ ∀ ρ : ZetaZero, DeltaRH ρ = 0) ∧
+     (PEqualsNP ↔ ∀ L : Language, InNP L → DeltaNP L = 0) := by
+-  constructor
+-  · exact rh_equiv_real_part_half.symm.trans (by
+-      constructor
+-      · intro h ρ
+-        have := h ρ
+-        unfold DeltaRH
+-        linarith
+-      · intro h ρ
+-        have := h ρ
+-        unfold DeltaRH at this
+-        linarith)
+-  · rfl
++  exact ⟨Iff.rfl, Iff.rfl⟩
+ 
+ end RHPvsNP
+--- a/lean/RHPvsNP/Invariance.lean
++++ b/lean/RHPvsNP/Invariance.lean
+@@ -117,8 +117,8 @@
+     (h_neutral : IsNeutralFormula φ)
+     (h_provable : ProvableFromCore ax φ) :
+     ∀ s ∈ allScenarios ax, ProvableInScenario s φ := by
+-  intro s hs
+-  exact invariance_theorem ax φ h_neutral h_provable s (by simp [allScenarios] at hs; cases hs <;> rfl)
++  intro s _
++  trivial
+ 
+ /-- The 44-state framework (conceptual) -/
+ inductive ExtendedState
+--- a/lean/RHPvsNP/ZetaZeros.lean
++++ b/lean/RHPvsNP/ZetaZeros.lean
+@@ -46,9 +46,8 @@
+ theorem contribution_order (ρ : ZetaZero) (x : ℝ) (hx : x ≥ 2) :
+     ContributionMagnitude ρ x = x ^ ρ.val.re / Complex.abs ρ.val := by
+   unfold ContributionMagnitude ExplicitFormulaContribution
+-  simp [Complex.abs_div, Complex.abs_neg]
+-  ring_nf
+-  sorry -- Requires complex power properties
++  show ‖-((x : ℂ) ^ ρ.val) / ρ.val‖ = x ^ ρ.val.re / ‖ρ.val‖
++  rw [norm_div, norm_neg, Complex.norm_cpow_eq_rpow_re_of_pos (by linarith)]
+ 
+ /-- Off-line zeros contribute more to the error -/
+ theorem off_line_dominates (ρ₁ ρ₂ : ZetaZero)
+--- a/lean/RiemannHypothesis/ExplicitFormula.lean
++++ b/lean/RiemannHypothesis/ExplicitFormula.lean
+@@ -18,7 +18,8 @@
+ /-- The von Mangoldt function Λ(n) -/
+ noncomputable def vonMangoldt (n : ℕ) : ℝ :=
+   if n.Prime then Real.log n
+-  else if ∃ p k, p.Prime ∧ k ≥ 2 ∧ n = p ^ k then
++  else haveI := Classical.propDecidable
++  if ∃ p k, p.Prime ∧ k ≥ 2 ∧ n = p ^ k then
+     Real.log (Nat.minFac n)
+   else 0
+ 
+--- a/lean/RiemannHypothesis/Invariance.lean
++++ b/lean/RiemannHypothesis/Invariance.lean
+@@ -146,15 +146,14 @@
+ 
+ /-- In scenario T2, we have RH and P ≠ NP -/
+ theorem t2_has_rh : Formula.atom "RH" ∈ T Scenario.T2 := by
+-  simp [T, scenario_axioms]
++  exact Or.inr (Or.inl rfl)
+ 
+ theorem t2_has_p_neq_np : Formula.atom "P≠NP" ∈ T Scenario.T2 := by
+-  simp [T, scenario_axioms]
++  exact Or.inr (Or.inr rfl)
+ 
+ /-- In scenario T9, neither RH nor P vs NP is determined -/
+ theorem t9_minimal : T Scenario.T9 = Ax_B := by
+   simp [T, scenario_axioms]
+-  rfl
+ 
+ /-! ## Consistency Considerations -/
+ 
+--- a/lean/RiemannHypothesis/Operators.lean
++++ b/lean/RiemannHypothesis/Operators.lean
+@@ -74,6 +74,7 @@
+   -- This represents the limit superior of the normalized gap
+   -- In a full implementation, this would use Filter.limsup
+   -- For now, we provide a concrete bound based on the definition
++  haveI := Classical.propDecidable
+   if h : ∃ k : ℕ, ∀ n : ℕ, C_det L n ≤ n ^ k + k then 0
+   else 1  -- If L is not in P, gap grows
+ 
+@@ -154,24 +155,14 @@
+ /-- Under RH, F_RH(T) = 0 for all T -/
+ theorem rh_implies_f_rh_zero (zeros : List ℂ) (T : ℝ) 
+     (h : ∀ ρ ∈ zeros, Δ_RH ρ = 0) : F_RH zeros T = 0 := by
+-  simp [F_RH]
+-  split
+-  · rfl
+-  · -- relevant.length ≠ 0 case
+-    have h_all_zero : ∀ ρ ∈ zeros.filter (fun ρ => |ρ.im| ≤ T), |Δ_RH ρ| = 0 := by
+-      intro ρ hρ
+-      simp [List.mem_filter] at hρ
+-      rw [h ρ hρ.1]
+-      simp
+-    have : (zeros.filter (fun ρ => |ρ.im| ≤ T)).map (fun ρ => |Δ_RH ρ|) = 
+-           List.replicate (zeros.filter (fun ρ => |ρ.im| ≤ T)).length 0 := by
+-      apply List.eq_replicate.2
+-      constructor
+-      · rfl
+-      · intro x hx
+-        obtain ⟨ρ, hρ, rfl⟩ := List.mem_map.1 hx
+-        exact h_all_zero ρ hρ
+-    simp [this, List.sum_replicate, zero_div]
++  have hs : ((zeros.filter (fun ρ => |ρ.im| ≤ T)).map (fun ρ => |Δ_RH ρ|)).sum = 0 := by
++    apply List.sum_eq_zero
++    intro x hx
++    obtain ⟨ρ, hρ, rfl⟩ := List.mem_map.1 hx
++    rw [h ρ (List.mem_of_mem_filter hρ)]
++    simp
++  unfold F_RH
++  simp only [hs, zero_div, ite_self]
+ 
+ /-- Under P = NP, F_NP(X) is bounded -/
+ theorem p_eq_np_implies_f_np_bounded (languages : List Language) :
+--- a/lean/RiemannHypothesis/Scenarios.lean
++++ b/lean/RiemannHypothesis/Scenarios.lean
+@@ -18,6 +18,7 @@
+ | True      -- Proven true
+ | False     -- Proven false
+ | Independent  -- Independent of the axiom system
++deriving DecidableEq
+ 
+ /-- The 9 possible scenarios -/
+ structure ScenarioConfig where
+--- a/lean/YangMills/MassGap.lean
++++ b/lean/YangMills/MassGap.lean
+@@ -200,7 +200,7 @@
+     let lattice_error := 0.1
+     let analytic_prediction := glueball_mass_GeV
+     abs (analytic_prediction - lattice_prediction) ≤ lattice_error := by
+-  norm_num [glueball_mass_GeV]
++  norm_num [glueball_mass_GeV, abs_le]
+ 
+ /-- Experimental candidates exist -/
+ axiom experimental_candidates_exist : True
+--- a/universe00/Universe00/Core/Aggregation.lean
++++ b/universe00/Universe00/Core/Aggregation.lean
+@@ -28,7 +28,28 @@
+     (he : ∀ e ∈ errors, 0 ≤ e ∧ e ≤ 1)
+     (hlen : weights.length = errors.length) :
+     0 ≤ aggregateError weights errors ∧ aggregateError weights errors ≤ 100 := by
+-  sorry
++  obtain ⟨hw0, hw1⟩ := hw
++  have key : ∀ (ws es : List ℝ), (∀ w ∈ ws, 0 ≤ w) → (∀ e ∈ es, 0 ≤ e ∧ e ≤ 1) → ws.length = es.length →
++      0 ≤ (List.zipWith (· * ·) ws es).sum ∧ (List.zipWith (· * ·) ws es).sum ≤ ws.sum := by
++    intro ws
++    induction ws with
++    | nil => intro es _ _ _; simp
++    | cons w ws ih =>
++      intro es h0 he hl
++      cases es with
++      | nil => simp at hl
++      | cons e es =>
++        have hw' := h0 w List.mem_cons_self
++        have he' := he e List.mem_cons_self
++        have r := ih es (fun x hx => h0 x (List.mem_cons_of_mem _ hx))
++          (fun x hx => he x (List.mem_cons_of_mem _ hx)) (by simpa using hl)
++        simp only [List.zipWith_cons_cons, List.sum_cons]
++        constructor
++        · nlinarith [mul_nonneg hw' he'.1]
++        · nlinarith [mul_le_mul_of_nonneg_left he'.2 hw']
++  have k := key weights errors hw0 he hlen
++  unfold aggregateError
++  constructor <;> nlinarith [k.1, k.2, hw1]
+ 
+ /-- Equal weights for n parameters -/
+ def equalWeights (n : ℕ) (hn : n > 0) : List ℝ :=
+@@ -37,7 +58,14 @@
+ /-- Theorem: equal weights are valid -/
+ theorem equalWeights_valid (n : ℕ) (hn : n > 0) :
+     validWeights (equalWeights n hn) := by
+-  sorry
++  unfold validWeights equalWeights
++  have hn' : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
++  constructor
++  · intro w hw
++    rw [List.eq_of_mem_replicate hw]
++    positivity
++  · rw [List.sum_replicate, nsmul_eq_mul]
++    field_simp
+ 
+ /-- Aggregate an error vector using equal weights -/
+ def aggregateErrorVector (ev : ErrorVector) (hn : ev.length > 0) : ℝ :=
+@@ -61,6 +89,8 @@
+ /-- Theorem: max aggregation with valid weights equals 100 -/
+ theorem maxAggregation_eq_100 (weights : List ℝ) (hw : validWeights weights) :
+     maxAggregation weights hw = 100 := by
+-  sorry
++  unfold maxAggregation
++  rw [hw.2]
++  ring
+ 
+ end ErrorAggregation
+--- a/universe00/Universe00/Core/Error.lean
++++ b/universe00/Universe00/Core/Error.lean
+@@ -26,10 +26,8 @@
+   { components := List.replicate n 0
+   , valid := by
+       intro e he
+-      simp [List.replicate] at he
+-      cases he
+-      · rw [‹e = 0›]; constructor <;> norm_num
+-      · contradiction }
++      rw [List.eq_of_mem_replicate he]
++      constructor <;> norm_num }
+ 
+ /-- Check if all components of the error vector are zero -/
+ def isZero (ev : ErrorVector) : Prop :=
+@@ -37,13 +35,13 @@
+ 
+ /-- The maximum error in the vector -/
+ def max (ev : ErrorVector) : ℝ :=
+-  ev.components.foldr (fun e acc => max e acc) 0
++  ev.components.foldr (fun e acc => Max.max e acc) 0
+ 
+ /-- The minimum error in the vector -/
+ def min (ev : ErrorVector) : ℝ :=
+   match ev.components with
+   | [] => 0
+-  | h :: t => t.foldr (fun e acc => min e acc) h
++  | h :: t => t.foldr (fun e acc => Min.min e acc) h
+ 
+ /-- The number of components in the error vector -/
+ def length (ev : ErrorVector) : ℕ :=
+@@ -63,18 +61,42 @@
+ 
+ /-- Theorem: Maximum error is in [0,1] -/
+ theorem max_valid (ev : ErrorVector) : 0 ≤ ev.max ∧ ev.max ≤ 1 := by
+-  sorry -- Requires inductive proof over list structure
++  obtain ⟨l, hv⟩ := ev
++  unfold ErrorVector.max
++  simp only
++  induction l with
++  | nil => simp
++  | cons a t ih =>
++    have ha := hv a List.mem_cons_self
++    have ht := ih (fun e he => hv e (List.mem_cons_of_mem _ he))
++    simp only [List.foldr_cons]
++    exact ⟨le_max_of_le_right ht.1, max_le ha.2 ht.2⟩
+ 
+ /-- Theorem: Minimum error is in [0,1] -/
+ theorem min_valid (ev : ErrorVector) : 0 ≤ ev.min ∧ ev.min ≤ 1 := by
+-  sorry -- Requires case analysis and induction
++  obtain ⟨l, hv⟩ := ev
++  unfold ErrorVector.min
++  simp only
++  match l, hv with
++  | [], _ => simp
++  | h :: t, hv =>
++    simp only
++    have hh := hv h List.mem_cons_self
++    have aux : ∀ (s : List ℝ) (x : ℝ), 0 ≤ x ∧ x ≤ 1 → (∀ e ∈ s, 0 ≤ e ∧ e ≤ 1) →
++        0 ≤ s.foldr (fun e acc => Min.min e acc) x ∧ s.foldr (fun e acc => Min.min e acc) x ≤ 1 := by
++      intro s x hx hs
++      induction s with
++      | nil => simpa using hx
++      | cons a r ih =>
++        have ha := hs a List.mem_cons_self
++        have hr := ih (fun e he => hs e (List.mem_cons_of_mem _ he))
++        simp only [List.foldr_cons]
++        exact ⟨le_min ha.1 hr.1, min_le_of_left_le ha.2⟩
++    exact aux t h hh (fun e he => hv e (List.mem_cons_of_mem _ he))
+ 
+ /-- Theorem: Zero vector has all components zero -/
+ theorem zero_is_zero (n : ℕ) : isZero (zero n) := by
+   intro e he
+-  simp [zero, List.replicate] at he
+-  cases he
+-  · exact ‹e = 0›
+-  · contradiction
++  exact List.eq_of_mem_replicate he
+ 
+ end ErrorVector
+--- a/universe00/Universe00/Core/Ledger.lean
++++ b/universe00/Universe00/Core/Ledger.lean
+@@ -60,7 +60,8 @@
+     valid := by
+       intro e he
+       simp [errors] at he
+-      sorry -- Requires proof that parameter errors satisfy bounds
++      obtain ⟨p, _, rfl⟩ := he
++      exact p.valid
+   }
+   let total := aggregateError weights errors
+   let status := ProblemStatus.fromErrorVector ev
+@@ -72,7 +73,7 @@
+   , status := status
+   , param_weight_consistent := by simp [weights, ErrorAggregation.equalWeights]
+   , weights_valid := ErrorAggregation.equalWeights_valid params.length hn
+-  , error_vector_consistent := by simp [ev, errors]
++  , error_vector_consistent := by simp [ev, errors, ErrorVector.length]
+   , error_components_match := by rfl
+   , total_error_is_aggregate := by rfl
+   , status_consistent := by rfl }
+@@ -111,7 +112,27 @@
+ /-- Theorem: a solved ledger has zero total error -/
+ theorem solved_means_zero_error (ledger : ProblemLedger) :
+     ledger.isSolved → ledger.totalError = 0 := by
+-  sorry
++  intro h
++  have hp : ledger.status = ProblemStatus.proved := by
++    unfold isSolved at h
++    cases hst : ledger.status <;> simp_all [ProblemStatus.isProved]
++  have hz := ProblemStatus.proved_means_zero ledger.errorVector (ledger.status_consistent.symm.trans hp)
++  rw [ledger.total_error_is_aggregate]
++  unfold aggregateError
++  have key : ∀ (ws es : List ℝ), (∀ e ∈ es, e = 0) → (List.zipWith (· * ·) ws es).sum = 0 := by
++    intro ws
++    induction ws with
++    | nil => intro es _; simp
++    | cons w ws ih =>
++      intro es he
++      cases es with
++      | nil => simp
++      | cons e es =>
++        simp only [List.zipWith_cons_cons, List.sum_cons]
++        rw [he e List.mem_cons_self, ih es (fun x hx => he x (List.mem_cons_of_mem _ hx))]
++        ring
++  rw [key _ _ hz]
++  ring
+ 
+ /-- Theorem: zero total error means solved -/
+ theorem zero_error_means_solved (ledger : ProblemLedger) :
+--- a/universe00/Universe00/Core/Monotonicity.lean
++++ b/universe00/Universe00/Core/Monotonicity.lean
+@@ -25,8 +25,8 @@
+ 
+ /-- A sequence of errors is monotone decreasing -/
+ def monotoneSequence (errors : List ℝ) : Prop :=
+-  ∀ i j, i < j → j < errors.length →
+-    errors.get ⟨j, by assumption⟩ ≤ errors.get ⟨i, by sorry⟩
++  ∀ i j (hij : i < j) (hj : j < errors.length),
++    errors.get ⟨j, hj⟩ ≤ errors.get ⟨i, Nat.lt_trans hij hj⟩
+ 
+ /-- Pointwise monotonicity for error vectors -/
+ def monotoneErrorVectorProgress (ev1 ev2 : ErrorVector) : Prop :=
+@@ -35,33 +35,56 @@
+ /-- Strict progress: at least one error decreased and none increased -/
+ def strictProgress (ev1 ev2 : ErrorVector) : Prop :=
+   ErrorVector.dominates ev2 ev1 ∧
+-  ∃ i h, ErrorVector.get ev2 i h < ErrorVector.get ev1 i h
++  ∃ i h h', ErrorVector.get ev2 i h < ErrorVector.get ev1 i h'
+ 
+ /-- A progress history: sequence of error vectors -/
+ structure ProgressHistory where
+   steps : List ErrorVector
+-  monotone : ∀ i j, i < j → j < steps.length →
+-    monotoneErrorVectorProgress (steps.get ⟨i, by sorry⟩) (steps.get ⟨j, by sorry⟩)
++  monotone : ∀ i j (hij : i < j) (hj : j < steps.length),
++    monotoneErrorVectorProgress (steps.get ⟨i, Nat.lt_trans hij hj⟩) (steps.get ⟨j, hj⟩)
+ 
+ /-- Theorem: in a monotone sequence, the last element has minimum total error -/
+ theorem monotone_minimizes_final (history : ProgressHistory)
+     (hne : history.steps.length > 0) :
+-    ∀ i, i < history.steps.length - 1 →
+-      (history.steps.get ⟨history.steps.length - 1, by sorry⟩).normL1 ≤
+-      (history.steps.get ⟨i, by sorry⟩).normL1 := by
+-  sorry
++    ∀ i (hi : i < history.steps.length - 1),
++      (history.steps.get ⟨history.steps.length - 1, by omega⟩).normL1 ≤
++      (history.steps.get ⟨i, by omega⟩).normL1 := by
++  intro i hi
++  have key : ∀ (l1 l2 : List ℝ), l1.length = l2.length →
++      (∀ k (h1 : k < l1.length) (h2 : k < l2.length), l1.get ⟨k, h1⟩ ≤ l2.get ⟨k, h2⟩) →
++      l1.foldr (· + ·) 0 ≤ l2.foldr (· + ·) 0 := by
++    intro l1
++    induction l1 with
++    | nil => intro l2 hl _; cases l2 with
++      | nil => exact le_refl _
++      | cons _ _ => simp at hl
++    | cons a t ih =>
++      intro l2 hl hle
++      cases l2 with
++      | nil => simp at hl
++      | cons b u =>
++        simp only [List.foldr_cons]
++        have h0 := hle 0 (by simp) (by simp)
++        have hr := ih u (by simpa using hl)
++          (fun k h1 h2 => hle (k + 1) (by simpa using h1) (by simpa using h2))
++        simp only [List.get_eq_getElem, List.getElem_cons_zero] at h0
++        exact add_le_add h0 hr
++  have hd := history.monotone i (history.steps.length - 1) hi (by omega)
++  obtain ⟨hl, hle⟩ := hd
++  exact key _ _ hl (fun k h1 h2 => hle k h1 h2)
+ 
+ /-- Theorem: strict progress is irreflexive -/
+ theorem strictProgress_irrefl (ev : ErrorVector) :
+     ¬strictProgress ev ev := by
+-  sorry
++  rintro ⟨_, i, h, h', hlt⟩
++  exact lt_irrefl _ hlt
+ 
+ /-- Theorem: monotone progress is transitive -/
+ theorem monotoneProgress_trans {ev1 ev2 ev3 : ErrorVector}
+     (h12 : monotoneErrorVectorProgress ev1 ev2)
+     (h23 : monotoneErrorVectorProgress ev2 ev3) :
+     monotoneErrorVectorProgress ev1 ev3 := by
+-  sorry
++  exact ErrorVector.dominates_trans h23 h12
+ 
+ /-
+ REGIME CHANGES:
+--- a/universe00/Universe00/Core/Status.lean
++++ b/universe00/Universe00/Core/Status.lean
+@@ -22,7 +22,7 @@
+ namespace ProblemStatus
+ 
+ /-- Compute status from an error vector -/
+-def fromErrorVector (ev : ErrorVector) : ProblemStatus :=
++noncomputable def fromErrorVector (ev : ErrorVector) : ProblemStatus :=
+   if h : ∀ e ∈ ev.components, e = 0 then
+     ProblemStatus.proved
+   else
+@@ -55,7 +55,7 @@
+ theorem zero_is_proved (n : ℕ) :
+     fromErrorVector (ErrorVector.zero n) = proved := by
+   unfold fromErrorVector
+-  simp [ErrorVector.zero_is_zero]
++  exact dif_pos (ErrorVector.zero_is_zero n)
+ 
+ /-- Theorem: if status is proved, then error vector is zero -/
+ theorem proved_means_zero (ev : ErrorVector) :
+--- a/universe00/Universe00/Core/Vector.lean
++++ b/universe00/Universe00/Core/Vector.lean
+@@ -14,24 +14,56 @@
+ 
+ /-- Pointwise maximum of two error vectors of the same length -/
+ def pointwiseMax (ev1 ev2 : ErrorVector) (h : ev1.length = ev2.length) : ErrorVector :=
+-  { components := List.zipWith max ev1.components ev2.components
++  { components := List.zipWith Max.max ev1.components ev2.components
+   , valid := by
+       intro e he
+-      sorry -- Requires proof that max preserves [0,1] bounds }
++      have aux : ∀ (l1 l2 : List ℝ), e ∈ List.zipWith Max.max l1 l2 → ∃ a ∈ l1, ∃ b ∈ l2, e = Max.max a b := by
++        intro l1
++        induction l1 with
++        | nil => intro l2 h; simp at h
++        | cons a t ih =>
++          intro l2 h
++          cases l2 with
++          | nil => simp at h
++          | cons b u =>
++            rw [List.zipWith_cons_cons, List.mem_cons] at h
++            rcases h with h | h
++            · exact ⟨a, List.mem_cons_self, b, List.mem_cons_self, h⟩
++            · obtain ⟨a', ha', b', hb', h'⟩ := ih u h
++              exact ⟨a', List.mem_cons_of_mem _ ha', b', List.mem_cons_of_mem _ hb', h'⟩
++      obtain ⟨a, ha, b, hb, rfl⟩ := aux _ _ he
++      exact ⟨le_max_of_le_left (ev1.valid a ha).1, max_le (ev1.valid a ha).2 (ev2.valid b hb).2⟩ }
+ 
+ /-- Pointwise minimum of two error vectors of the same length -/
+ def pointwiseMin (ev1 ev2 : ErrorVector) (h : ev1.length = ev2.length) : ErrorVector :=
+-  { components := List.zipWith min ev1.components ev2.components
++  { components := List.zipWith Min.min ev1.components ev2.components
+   , valid := by
+       intro e he
+-      sorry -- Requires proof that min preserves [0,1] bounds }
++      have aux : ∀ (l1 l2 : List ℝ), e ∈ List.zipWith Min.min l1 l2 → ∃ a ∈ l1, ∃ b ∈ l2, e = Min.min a b := by
++        intro l1
++        induction l1 with
++        | nil => intro l2 h; simp at h
++        | cons a t ih =>
++          intro l2 h
++          cases l2 with
++          | nil => simp at h
++          | cons b u =>
++            rw [List.zipWith_cons_cons, List.mem_cons] at h
++            rcases h with h | h
++            · exact ⟨a, List.mem_cons_self, b, List.mem_cons_self, h⟩
++            · obtain ⟨a', ha', b', hb', h'⟩ := ih u h
++              exact ⟨a', List.mem_cons_of_mem _ ha', b', List.mem_cons_of_mem _ hb', h'⟩
++      obtain ⟨a, ha, b, hb, rfl⟩ := aux _ _ he
++      exact ⟨le_min (ev1.valid a ha).1 (ev2.valid b hb).1, min_le_of_left_le (ev1.valid a ha).2⟩ }
+ 
+ /-- Scalar multiplication of an error vector by a value in [0,1] -/
+ def scalarMul (ev : ErrorVector) (c : ℝ) (hc : 0 ≤ c ∧ c ≤ 1) : ErrorVector :=
+   { components := ev.components.map (· * c)
+   , valid := by
+       intro e he
+-      sorry -- Requires proof that multiplication by [0,1] preserves bounds }
++      obtain ⟨a, ha, rfl⟩ := List.mem_map.mp he
++      have h := ev.valid a ha
++      exact ⟨mul_nonneg h.1 hc.1, by nlinarith [h.1, h.2, hc.1, hc.2]⟩ }
+ 
+ /-- Euclidean norm (L2) of the error vector -/
+ def norm (ev : ErrorVector) : ℝ :=
+@@ -48,12 +80,33 @@
+ /-- Theorem: L1 norm is in [0, n] for n components -/
+ theorem normL1_bounds (ev : ErrorVector) :
+     0 ≤ ev.normL1 ∧ ev.normL1 ≤ ev.length := by
+-  sorry
++  obtain ⟨l, hv⟩ := ev
++  unfold normL1 length
++  simp only
++  induction l with
++  | nil => simp
++  | cons a t ih =>
++    have ha := hv a List.mem_cons_self
++    have ht := ih (fun e he => hv e (List.mem_cons_of_mem _ he))
++    simp only [List.foldr_cons, List.length_cons]
++    push_cast
++    constructor <;> linarith [ha.1, ha.2, ht.1, ht.2]
+ 
+ /-- Theorem: L2 norm is in [0, sqrt(n)] for n components -/
+ theorem norm_bounds (ev : ErrorVector) :
+     0 ≤ ev.norm ∧ ev.norm ≤ Real.sqrt ev.length := by
+-  sorry
++  obtain ⟨l, hv⟩ := ev
++  unfold norm length
++  simp only
++  refine ⟨Real.sqrt_nonneg _, Real.sqrt_le_sqrt ?_⟩
++  induction l with
++  | nil => simp
++  | cons a t ih =>
++    have ha := hv a List.mem_cons_self
++    have ht := ih (fun e he => hv e (List.mem_cons_of_mem _ he))
++    simp only [List.map_cons, List.foldr_cons, List.length_cons]
++    push_cast
++    nlinarith [ha.1, ha.2, ht]
+ 
+ /-- Theorem: L-infinity norm equals max -/
+ theorem normLInf_eq_max (ev : ErrorVector) : ev.normLInf = ev.max := by
+@@ -62,21 +115,25 @@
+ /-- Comparison: one error vector dominates another if all components are ≤ -/
+ def dominates (ev1 ev2 : ErrorVector) : Prop :=
+   ev1.length = ev2.length ∧
+-  ∀ i h, ev1.get i h ≤ ev2.get i h
++  ∀ i (h : i < ev1.length) (h' : i < ev2.length), ev1.get i h ≤ ev2.get i h'
+ 
+ /-- Strict improvement: all components strictly decrease -/
+ def strictlyDominates (ev1 ev2 : ErrorVector) : Prop :=
+   ev1.length = ev2.length ∧
+-  ∀ i h, ev1.get i h < ev2.get i h
++  ∀ i (h : i < ev1.length) (h' : i < ev2.length), ev1.get i h < ev2.get i h'
+ 
+ /-- Theorem: dominates is reflexive -/
+ theorem dominates_refl (ev : ErrorVector) : dominates ev ev := by
+-  sorry
++  exact ⟨rfl, fun i h h' => le_refl _⟩
+ 
+ /-- Theorem: dominates is transitive -/
+ theorem dominates_trans {ev1 ev2 ev3 : ErrorVector}
+     (h12 : dominates ev1 ev2) (h23 : dominates ev2 ev3) :
+     dominates ev1 ev3 := by
+-  sorry
++  obtain ⟨l12, d12⟩ := h12
++  obtain ⟨l23, d23⟩ := h23
++  refine ⟨l12.trans l23, fun i h h' => ?_⟩
++  have h2 : i < ev2.length := l12 ▸ h
++  exact le_trans (d12 i h h2) (d23 i h2 h')
+ 
+ end ErrorVector
+--- a/universe00/Universe00/Examples/BSD_Ledger.lean
++++ b/universe00/Universe00/Examples/BSD_Ledger.lean
+@@ -7,9 +7,11 @@
+ import Universe00.Problems.BSD
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace Examples.BSD
+ 
+-open BSD
++open _root_.BSD
+ 
+ /-- Example 1: Current state -/
+ def example1_currentState : ProblemLedger :=
+--- a/universe00/Universe00/Examples/NS_Ledger.lean
++++ b/universe00/Universe00/Examples/NS_Ledger.lean
+@@ -7,6 +7,8 @@
+ import Universe00.Problems.NavierStokes
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace Examples.NS
+ 
+ open NavierStokes
+--- a/universe00/Universe00/Examples/RH_Ledger.lean
++++ b/universe00/Universe00/Examples/RH_Ledger.lean
+@@ -7,6 +7,8 @@
+ import Universe00.Problems.Riemann
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace Examples.RH
+ 
+ open RiemannHypothesis
+--- a/universe00/Universe00/Problems/BSD.lean
++++ b/universe00/Universe00/Problems/BSD.lean
+@@ -46,7 +46,7 @@
+     params.leadingTermError,
+     params.shaControlError
+   ]
+-  ProblemLedger.withEqualWeights "Birch and Swinnerton-Dyer" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "Birch and Swinnerton-Dyer" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors are measured -/
+ /-
+--- a/universe00/Universe00/Problems/Hodge.lean
++++ b/universe00/Universe00/Problems/Hodge.lean
+@@ -37,7 +37,7 @@
+ /-- Create the problem ledger for Hodge conjecture -/
+ def createLedger (params : HodgeParameters) : ProblemLedger :=
+   let paramList := [params.algebraicDistanceError, params.generalityCoverageError]
+-  ProblemLedger.withEqualWeights "Hodge Conjecture" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "Hodge Conjecture" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors are measured -/
+ /-
+--- a/universe00/Universe00/Problems/NavierStokes.lean
++++ b/universe00/Universe00/Problems/NavierStokes.lean
+@@ -46,7 +46,7 @@
+     params.timeGlobalityError,
+     params.initialDataCoverage
+   ]
+-  ProblemLedger.withEqualWeights "Navier-Stokes" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "Navier-Stokes" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors are measured -/
+ /-
+--- a/universe00/Universe00/Problems/Poincare.lean
++++ b/universe00/Universe00/Problems/Poincare.lean
+@@ -34,7 +34,7 @@
+ /-- Create the problem ledger for Poincaré -/
+ def createLedger (params : PoincareParameters) : ProblemLedger :=
+   let paramList := [params.classificationError]
+-  ProblemLedger.withEqualWeights "Poincaré Conjecture" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "Poincaré Conjecture" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors were measured -/
+ /-
+--- a/universe00/Universe00/Problems/PvsNP.lean
++++ b/universe00/Universe00/Problems/PvsNP.lean
+@@ -38,7 +38,7 @@
+ /-- Create the problem ledger for P vs NP -/
+ def createLedger (params : PvsNPParameters) : ProblemLedger :=
+   let paramList := [params.lowerBoundStrength, params.barrierError]
+-  ProblemLedger.withEqualWeights "P vs NP" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "P vs NP" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors are measured -/
+ /-
+--- a/universe00/Universe00/Problems/Riemann.lean
++++ b/universe00/Universe00/Problems/Riemann.lean
+@@ -37,7 +37,7 @@
+ /-- Create the problem ledger for RH -/
+ def createLedger (params : RHParameters) : ProblemLedger :=
+   let paramList := [params.localDeviation, params.globalCoverage]
+-  ProblemLedger.withEqualWeights "Riemann Hypothesis" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "Riemann Hypothesis" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors are measured -/
+ /-
+--- a/universe00/Universe00/Problems/YangMills.lean
++++ b/universe00/Universe00/Problems/YangMills.lean
+@@ -46,7 +46,7 @@
+     params.continuumLimitError,
+     params.axiomatizationError
+   ]
+-  ProblemLedger.withEqualWeights "Yang-Mills Mass Gap" paramList (by norm_num)
++  ProblemLedger.withEqualWeights "Yang-Mills Mass Gap" paramList (Nat.zero_lt_succ _)
+ 
+ /- Documentation: How errors are measured -/
+ /-

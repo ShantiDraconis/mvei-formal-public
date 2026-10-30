@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -12,112 +12,190 @@
    "repo": "LA-2008-R-",
    "path": "anti-rh-research-os/lean",
    "toolchain": "",
-   "toolchain_used": "padrão do elan",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "",
+   "build_error": "error: ././././LogicalStatus.lean:73:18: failed to synthesize | error: ././././LogicalStatus.lean:75:0: aborting evaluation since the expression depends on the 'sorry' axiom, which can lead to runtime instability and crashes. | error: ././././LogicalStatus.lean:76:0: aborting evaluation since the expression depends on the 'sorry' axiom, which can lead to runtime instability and crashes.",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
    "declared_axioms": [],
-   "theorems": [],
+   "theorems": [
+    {
+     "name": "AntiRH.NontrivialZero.hlb",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : AntiRH.NontrivialZero), 0 < self.ρ.re",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.NontrivialZero.hub",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : AntiRH.NontrivialZero), self.ρ.re < 1",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.NontrivialZero.hzero",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : AntiRH.NontrivialZero), AntiRH.ζ self.ρ = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.NontrivialZero.mk.inj",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {ρ : ℂ} {hzero : AntiRH.ζ ρ = 0} {hlb : 0 < ρ.re} {hub : ρ.re < 1} {ρ_1 : ℂ} {hzero_1 : AntiRH.ζ ρ_1 = 0}   {hlb_1 : 0 < ρ_1.re} {hub_1 : ρ_1.re < 1},   { ρ := ρ, hzero := hzero, hlb := hlb, hub := hub } = { ρ := ρ_1, hzero := hzero_1, hlb := hlb_1, hub := hub_1 } →     ρ = ρ_1",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.NontrivialZero.mk.injEq",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (ρ : ℂ) (hzero : AntiRH.ζ ρ = 0) (hlb : 0 < ρ.re) (hub : ρ.re < 1) (ρ_1 : ℂ) (hzero_1 : AntiRH.ζ ρ_1 = 0)   (hlb_1 : 0 < ρ_1.re) (hub_1 : ρ_1.re < 1),   ({ ρ := ρ, hzero := hzero, hlb := hlb, hub := hub } = { ρ := ρ_1, hzero := hzero_1, hlb := hlb_1, hub := hub_1 }) =     (ρ = ρ_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.NontrivialZero.mk.sizeOf_spec",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (ρ : ℂ) (hzero : AntiRH.ζ ρ = 0) (hlb : 0 < ρ.re) (hub : ρ.re < 1),   sizeOf { ρ := ρ, hzero := hzero, hlb := hlb, hub := hub } = 1 + sizeOf ρ + sizeOf hzero + sizeOf hlb + sizeOf hub",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.RH.eq_1",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "AntiRH.RH = ∀ (z : AntiRH.NontrivialZero), AntiRH.onCriticalLine z",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.rh_antiRH_exclusive",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "AntiRH.RH → AntiRH.antiRH → False",
+     "status": "fechado"
+    },
+    {
+     "name": "AntiRH.rh_dichotomy",
+     "module": "RHFramework",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "AntiRH.RH ∨ AntiRH.antiRH",
+     "status": "fechado"
+    }
+   ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././AntiRHDefinitions.lean:7:0: unknown module prefix 'AntiRH' | error: Lean exited with code 1",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com LogicalStatus, RHFramework e o Mathlib v4.19.0 (alguns arquivos com erro)",
    "corrections": [],
-   "lakefile_gerado": "",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `LogicalStatus, .one `RHFramework]\n",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "anti-rh-research-os/lean/AntiRHDefinitions.lean",
-     "linha": 30,
+     "linha": 35,
      "nome": "AntiRH.z_delta_split",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/AntiRHDefinitions.lean",
-     "linha": 46,
+     "linha": 51,
      "nome": "AntiRH.z_delta_disjoint",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/AntiRHDefinitions.lean",
-     "linha": 55,
+     "linha": 60,
      "nome": "AntiRH.antiRH_iff_shift",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/AntiRHDefinitions.lean",
-     "linha": 64,
+     "linha": 69,
      "nome": "AntiRH.shift_bounds",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/AntiRHDefinitions.lean",
-     "linha": 85,
+     "linha": 90,
      "nome": "AntiRH.functional_partner_off_line",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/ExplicitFormulaModel.lean",
-     "linha": 24,
+     "linha": 26,
      "nome": "AntiRH.ExplicitFormula.rh_amplitude",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/ExplicitFormulaModel.lean",
-     "linha": 49,
+     "linha": 51,
      "nome": "AntiRH.ExplicitFormula.anti_rh_amplitude_dominates",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     },
     {
      "arquivo": "anti-rh-research-os/lean/ExplicitFormulaModel.lean",
-     "linha": 57,
+     "linha": 59,
      "nome": "AntiRH.ExplicitFormula.error_bound_grows",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "anti-rh-research-os/lean/RHFramework.lean",
-     "linha": 63,
-     "nome": "AntiRH.rh_antiRH_exclusive",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "anti-rh-research-os/lean/RHFramework.lean",
-     "linha": 69,
-     "nome": "AntiRH.rh_dichotomy",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
+     "motivo": "unknown module prefix 'AntiRH' No directory 'AntiRH' or file 'AntiRH.olean' in the search path entries: /tmp/mvei-rec-ta0fhbvo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/lean ././.lak"
     }
    ],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 9,
     "aberto-sorry": 0,
     "condicional": 0
    }
@@ -130,7 +208,7 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././RHFramework.lean:53:4: failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Real.instDivInvMonoid', and it does not have executable code | error: ././././RHFramework.lean:79:6: push_neg made no progress | error: Lean exited with code 1",
+   "build_error": "error: ././././RHFramework.lean:81:6: push_neg made no progress | error: Lean exited with code 1 | error: build failed",
    "sorry_warnings": 0,
    "reconstructed": true,
    "bridges": [],
@@ -203,41 +281,35 @@
    "salvage": [
     {
      "arquivo": "anti_rh/lean/AntiRHDefinitions.lean",
-     "linha": 84,
+     "linha": 88,
      "nome": "AntiRHDefinitions.midpoint_is_half",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
      "dependencia_com_sorry": [
       "RHFramework"
-     ],
-     "erro": "linha 87: unsolved goals ρ : NonTrivialZero ⊢ 2⁻¹ = 0.5",
-     "motivo": "importa RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     ]
     },
     {
      "arquivo": "anti_rh/lean/AntiRHDefinitions.lean",
-     "linha": 90,
+     "linha": 94,
      "nome": "AntiRHDefinitions.delta_opposite",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
      "dependencia_com_sorry": [
       "RHFramework"
-     ],
-     "erro": "linha 93: unsolved goals ρ : NonTrivialZero ⊢ sorry = -sorry",
-     "motivo": "importa RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     ]
     },
     {
      "arquivo": "anti_rh/lean/ExplicitFormulaModel.lean",
-     "linha": 41,
+     "linha": 43,
      "nome": "ExplicitFormulaModel.rh_amplitude_eq_sqrt",
      "status": "fechado",
      "axioms": [
@@ -252,7 +324,7 @@
     },
     {
      "arquivo": "anti_rh/lean/ExplicitFormulaModel.lean",
-     "linha": 48,
+     "linha": 50,
      "nome": "ExplicitFormulaModel.anti_rh_exceeds_sqrt",
      "status": "nao_alcancado",
      "axioms": [
@@ -265,14 +337,16 @@
       "AntiRHDefinitions",
       "RHFramework"
      ],
-     "erro": "linha 59: application type mismatch absurd h hρ argument hρ has type ρ.beta ≠ 1 / 2 : Prop but is expected to have type ¬ρ.beta = 0.5 : Prop",
+     "erro": "linha 61: application type mismatch absurd h hρ argument hρ has type ρ.beta ≠ 1 / 2 : Prop but is expected to have type ¬ρ.beta = 0.5 : Prop",
+     "coluna": 21,
+     "trecho": "    · exact absurd h ⟦h⟧ρ",
      "motivo": "importa AntiRHDefinitions, RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "anti_rh/lean/ExplicitFormulaModel.lean",
-     "linha": 61,
+     "linha": 63,
      "nome": "ExplicitFormulaModel.amplitude_bound",
-     "status": "nao_alcancado",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
@@ -282,13 +356,11 @@
      "dependencia_com_sorry": [
       "AntiRHDefinitions",
       "RHFramework"
-     ],
-     "erro": "linha 96: failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Real.instDivInvMonoid', and it does not have executable code",
-     "motivo": "importa AntiRHDefinitions, RHFramework, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     ]
     },
     {
      "arquivo": "anti_rh/lean/RHFramework.lean",
-     "linha": 71,
+     "linha": 73,
      "nome": "RHFramework.rh_or_anti_rh",
      "status": "erro",
      "axioms": [
@@ -297,11 +369,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 79: push_neg made no progress"
+     "erro": "linha 81: push_neg made no progress",
+     "coluna": 6,
+     "trecho": "      ⟦p⟧ush_neg at h"
     },
     {
      "arquivo": "anti_rh/lean/RHFramework.lean",
-     "linha": 81,
+     "linha": 83,
      "nome": "RHFramework.rh_iff_delta_zero",
      "status": "fechado",
      "axioms": [
@@ -312,7 +386,7 @@
     },
     {
      "arquivo": "anti_rh/lean/RHFramework.lean",
-     "linha": 86,
+     "linha": 88,
      "nome": "RHFramework.anti_rh_iff_nonzero_delta",
      "status": "fechado",
      "axioms": [

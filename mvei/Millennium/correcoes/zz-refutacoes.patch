@@ -1,0 +1,75 @@
+--- /dev/null
++++ b/lean/MVEI_Refutacoes.lean
+@@ -0,0 +1,33 @@
++import NavierStokes.LRE
++import RiemannHypothesis.ExplicitFormula
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open NavierStokes.LRE in
++/-- `compression_barrier` é falso: `ControlsResidual` só pede a cota superior `R x ≤ F (π x)`, e uma constante
++    grande controla qualquer resíduo limitado. Com C = Bool, D = Unit, R true = 0, R false = 1 e F = 1, a projeção
++    não é injetiva, o resíduo difere na mesma fibra e mesmo assim F controla R. -/
++theorem compression_barrier_falso :
++    ¬ ∀ (C D : Type) (pi : C → D) (R : C → ℝ) (F : D → ℝ), NonInjective pi →
++      (∃ x y : C, pi x = pi y ∧ R x ≠ R y) → ¬ ControlsResidual pi R F := by
++  intro h
++  refine h Bool Unit (fun _ => ()) (fun b => if b then 0 else 1) (fun _ => 1)
++    ⟨true, false, by decide, rfl⟩ ⟨true, false, rfl, by norm_num⟩ ?_
++  intro x
++  cases x <;> norm_num
++
++/-- `RiemannHypothesis.off_line_contribution_dominates` é falso como o Lean o lê: em `∀ ε > 0` sem tipo, ε vira
++    natural (o expoente de `^`), e 1/2 + ε = ε em ℕ (1/2 = 0); com σ = 1 e ε = 1 o enunciado pede x¹ > x¹ para todo
++    x grande. (Com ε real também falha: para ε ≥ σ − 1/2 a potência da direita cresce mais.) -/
++theorem off_line_contribution_dominates_falso :
++    ¬ ∀ (σ : ℝ), σ > 1/2 → ∀ ε > 0, ∃ x₀ : ℝ, ∀ x > x₀, x ^ σ > x ^ (1/2 + ε) := by
++  intro h
++  obtain ⟨x₀, hx₀⟩ := h 1 (by norm_num) 1 (by norm_num)
++  have := hx₀ (x₀ + 1) (by linarith)
++  norm_num at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/universe00/MVEI_Refutacoes.lean
+@@ -0,0 +1,36 @@
++import Universe00.Core.Ledger
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `ProblemLedger.zero_error_means_solved` é falso: com pesos 1 e 0, o erro total só vê o primeiro parâmetro; um
++    segundo parâmetro com erro 1 (e peso 0) deixa o total em 0 e o status em aberto. -/
++theorem zero_error_means_solved_falso :
++    ¬ ∀ ledger : ProblemLedger, ledger.totalError = 0 → ledger.isSolved := by
++  intro h
++  let p0 : MeasuredParameter ℝ := ⟨0, 0, by norm_num⟩
++  let p1 : MeasuredParameter ℝ := ⟨0, 1, by norm_num⟩
++  let ev : ErrorVector := ⟨[0, 1], by intro e he; simp at he; rcases he with rfl | rfl <;> norm_num⟩
++  have hnz : ¬ ∀ e ∈ ev.components, e = 0 := by
++    intro hz; have := hz 1 (by simp [ev]); norm_num at this
++  let L : ProblemLedger :=
++    { name := "contraexemplo"
++      parameters := [p0, p1]
++      weights := [1, 0]
++      errorVector := ev
++      totalError := 0
++      status := ProblemStatus.fromErrorVector ev
++      param_weight_consistent := rfl
++      weights_valid := ⟨by intro w hw; simp at hw; rcases hw with rfl | rfl <;> norm_num, by norm_num⟩
++      error_vector_consistent := rfl
++      error_components_match := rfl
++      total_error_is_aggregate := by simp [aggregateError, ev]
++      status_consistent := rfl }
++  have hs := h L rfl
++  simp only [ProblemLedger.isSolved, L, ProblemStatus.fromErrorVector, dif_neg hnz] at hs
++  exact absurd hs (by decide)
++
++end MVEI.Refutacoes

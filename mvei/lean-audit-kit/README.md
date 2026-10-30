@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `853c03113860fe4468e6ce3b23845d4ce9780c0e`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `853c03113860fe4468e6ce3b23845d4ce9780c0e`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | v4.19.0 | OK | 16 | 0 | 0 | 1 / 1 / 2 / 0 / 0 |
+| `.` | v4.19.0 | OK | 16 | 0 | 0 | 2 / 1 / 1 / 0 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 17 |
-| Unique (name + statement) | 17 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 8 |
+| Counting each project | 18 |
+| Unique (name + statement) | 18 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 9 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -29,11 +29,10 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `853c03113860fe4468e6c
 |---|---|---|---|
 | `bad_admit` | `. (file by file)` | open | `sorryAx` |
 | `explosion` | `. (file by file)` | conditional | `hiddenOracle` |
-| `bad_sorry` | `. (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 10 `theorem`/`lemma` (counting copies). The kernel checked 10 of them (7 closed, 1 conditional, 2 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text.
+The `.lean` files of the verified commit declare 10 `theorem`/`lemma` (counting copies). The kernel checked 10 of them (8 closed, 1 conditional, 1 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text.
 
 ### MVEI corrections
 

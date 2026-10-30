@@ -1,0 +1,71 @@
+--- a/src/formalization/NS_collapse.lean
++++ b/src/formalization/NS_collapse.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Tactic
++
++noncomputable section
+ /-
+   Navier-Stokes Regularity via Symbolic Collapse
+   ================================================
+@@ -116,12 +119,12 @@
+ 
+ /-- Extended energy functional:
+     Φ_NS(I,u;t) = E(t) + α·ℰ(t) + β·D(t) + γ·||∇·u||² + λ·F(I,u,t) -/
+-def Phi_NS (α β γ λ : ℝ) (sol : NS_solution) (t : ℝ) : ℝ :=
++def Phi_NS (α β γ «λ» : ℝ) (sol : NS_solution) (t : ℝ) : ℝ :=
+   E sol t 
+   + α * ℰ sol t 
+   + β * D sol t 
+   + γ * (divergence_L2_norm sol t)^2
+-  + λ * vorticity_coupling sol t
++  + «λ» * vorticity_coupling sol t
+ 
+ -- ===========================================================================
+ -- SECTION 5: Blow-up and Collapse
+--- a/src/lean/CI_numbers.lean
++++ b/src/lean/CI_numbers.lean
+@@ -11,6 +11,9 @@
+ 
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Analysis.Normed.Field.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++
++noncomputable section
+ 
+ namespace NavierStokesCollapse
+ 
+@@ -100,8 +103,8 @@
+ I-norm on Cᵢ:
+ ‖(z, a, s)‖ᵢ = √(|z|² + λ|a|² + μ|s|²)
+ -/
+-noncomputable def normI (x : CINumber) (λ μ : ℝ) : ℝ :=
+-  Real.sqrt (Complex.abs x.z ^ 2 + λ * Complex.abs x.a ^ 2 + μ * Complex.abs x.s ^ 2)
++noncomputable def normI (x : CINumber) («λ» μ : ℝ) : ℝ :=
++  Real.sqrt (Complex.abs x.z ^ 2 + «λ» * Complex.abs x.a ^ 2 + μ * Complex.abs x.s ^ 2)
+ 
+ /-- I is in the anomalous class -/
+ theorem I_isAnomalous : isAnomalous I := by
+--- a/src/lean/collapse_axioms.lean
++++ b/src/lean/collapse_axioms.lean
+@@ -11,6 +11,9 @@
+ 
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.Normed.Field.Basic
++import Mathlib.Tactic.Bound
++
++noncomputable section
+ 
+ namespace NavierStokesCollapse
+ 
+--- a/src/lean/global_existence.lean
++++ b/src/lean/global_existence.lean
+@@ -10,6 +10,9 @@
+ -/
+ 
+ import Mathlib.Analysis.InnerProductSpace.Basic
++open scoped ENNReal NNReal
++
++noncomputable section
+ 
+ namespace NavierStokesCollapse
+ 

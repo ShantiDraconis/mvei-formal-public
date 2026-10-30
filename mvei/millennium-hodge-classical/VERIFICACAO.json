@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.12.0",
    "needs_mathlib": true,
    "build_ok": false,
-   "build_seconds": 1.5,
+   "build_seconds": 1.8,
    "build_error": "error: no such file or directory (error code: 2) | error: build failed",
    "sorry_warnings": 1,
    "reconstructed": false,
@@ -26,7 +26,49 @@
      "name": "Hodge.AlgebraicCycle.mk.sizeOf_spec",
      "module": "Hodge.Cycles.AlgebraicCycles",
      "axioms": [],
-     "statement": "∀ {Variety : Sort u_1} {ℕ : Sort u_2} {X : Variety} {p : ℕ} [inst : SizeOf Variety] [inst_1 : SizeOf ℕ], sizeOf { } = 1",
+     "statement": "∀ {Variety : Sort u_1} {X : Variety} {p : Nat} [inst : SizeOf Variety], sizeOf { } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.CohomologyClass.mk.sizeOf_spec",
+     "module": "Hodge.Cohomology.Singular",
+     "axioms": [],
+     "statement": "∀ {Variety : Sort u_1} {X : Variety} {k : Nat} {R : Hodge.CohomologyCoefficients} [inst : SizeOf Variety],   sizeOf { } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.CohomologyCoefficients.C.sizeOf_spec",
+     "module": "Hodge.Cohomology.Singular",
+     "axioms": [],
+     "statement": "sizeOf Hodge.CohomologyCoefficients.C = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.CohomologyCoefficients.Q.sizeOf_spec",
+     "module": "Hodge.Cohomology.Singular",
+     "axioms": [],
+     "statement": "sizeOf Hodge.CohomologyCoefficients.Q = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.CohomologyCoefficients.R.sizeOf_spec",
+     "module": "Hodge.Cohomology.Singular",
+     "axioms": [],
+     "statement": "sizeOf Hodge.CohomologyCoefficients.R = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.CohomologyCoefficients.Z.sizeOf_spec",
+     "module": "Hodge.Cohomology.Singular",
+     "axioms": [],
+     "statement": "sizeOf Hodge.CohomologyCoefficients.Z = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.FormPQ.mk.sizeOf_spec",
+     "module": "Hodge.HodgeStructure.Forms_pq",
+     "axioms": [],
+     "statement": "∀ {SmoothVariety : Sort u_1} {X : SmoothVariety} {p q : Nat} [inst : SizeOf SmoothVariety], sizeOf { } = 1",
      "status": "fechado"
     },
     {
@@ -60,6 +102,13 @@
       "Classical.choice"
      ],
      "statement": "∀ (toVarietyOverC : Hodge.VarietyOverC), sizeOf { toVarietyOverC := toVarietyOverC } = 1 + sizeOf toVarietyOverC",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.SingularCohomology.mk.sizeOf_spec",
+     "module": "Hodge.Cohomology.Singular",
+     "axioms": [],
+     "statement": "∀ {Variety : Sort u_1} {X : Variety} {k : Nat} {R : Hodge.CohomologyCoefficients} [inst : SizeOf Variety],   sizeOf { } = 1",
      "status": "fechado"
     },
     {
@@ -166,130 +215,173 @@
      "status": "fechado"
     },
     {
+     "name": "Hodge.dSplits",
+     "module": "Hodge.HodgeStructure.Forms_pq",
+     "axioms": [],
+     "statement": "∀ {SmoothVariety : Sort u_1} (X : SmoothVariety) (p q : Nat), Hodge.FormPQ X p q → True",
+     "status": "fechado"
+    },
+    {
      "name": "Hodge.deRhamComparison",
      "module": "Hodge.Cohomology.Comparison",
      "axioms": [],
-     "statement": "∀ {SmoothVariety : Sort u_1} {ℕ : Sort u_2}, SmoothVariety → ℕ → True",
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → True",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.delBarSquaredZero",
+     "module": "Hodge.HodgeStructure.Forms_pq",
+     "axioms": [],
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → Nat → True",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.delDelBarAnticommute",
+     "module": "Hodge.HodgeStructure.Forms_pq",
+     "axioms": [],
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → Nat → True",
+     "status": "fechado"
+    },
+    {
+     "name": "Hodge.delSquaredZero",
+     "module": "Hodge.HodgeStructure.Forms_pq",
+     "axioms": [],
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → Nat → True",
      "status": "fechado"
     },
     {
      "name": "Hodge.dolbeaultComparison",
      "module": "Hodge.Cohomology.Comparison",
      "axioms": [],
-     "statement": "∀ {SmoothVariety : Sort u_1} {ℕ : Sort u_2}, SmoothVariety → ℕ → ℕ → True",
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → Nat → True",
      "status": "fechado"
     },
     {
      "name": "Hodge.hodgeDecompositionTheorem",
      "module": "Hodge.Cohomology.Comparison",
      "axioms": [],
-     "statement": "∀ {SmoothVariety : Sort u_1} {ℕ : Sort u_2}, SmoothVariety → ℕ → True",
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → True",
      "status": "fechado"
     },
     {
      "name": "Hodge.hodgeSymmetry",
      "module": "Hodge.Cohomology.Comparison",
      "axioms": [],
-     "statement": "∀ {SmoothVariety : Sort u_1} {ℕ : Sort u_2}, SmoothVariety → ℕ → ℕ → True",
+     "statement": "∀ {SmoothVariety : Sort u_1}, SmoothVariety → Nat → Nat → True",
      "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "MÓDULOS INDIVIDUAIS: o alvo padrão do lakefile não existe; os 28 arquivos .lean foram compilados como alvos de módulo, com o lakefile original (alguns com erro)",
-   "corrections": [],
+   "note": "CORRIGIDO PELO MVEI (vocabulario-lean4): trocas de grafia com o mesmo nome e o mesmo enunciado em 22 arquivo(s): abbrev 5, noncomputable 2, notacao 22. MÓDULOS INDIVIDUAIS: o alvo padrão do lakefile não existe; os 28 arquivos .lean foram compilados como alvos de módulo, com o lakefile original (alguns com erro)",
+   "corrections": [
+    "vocabulario-lean4"
+   ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
     {
-     "arquivo": "lean/src/Hodge/Cohomology/DeRham.lean",
-     "linha": 46,
-     "nome": "Hodge.deRhamTheorem",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
      "arquivo": "lean/src/Hodge/Cohomology/SheafCohomology.lean",
-     "linha": 44,
+     "linha": 45,
      "nome": "Hodge.serreDuality",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 46: invalid field notation, type is not of the form (C ...) where C is a constant X has type SmoothVariety"
+     "coluna": 70,
+     "trecho": " (n k : ℕ) (F : CoherentSheaf ⟦X⟧.toVariety) :",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/HodgeConjectureTarget.lean",
      "linha": 20,
      "nome": "Hodge.hodgeConjectureMain",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 28: function expected at HodgeConjectureFull term has type ?m.9"
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull X := by",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/HodgeConjectureTarget.lean",
      "linha": 34,
      "nome": "Hodge.hodgeViaMotive",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 37: function expected at HodgeConjectureFull term has type ?m.43"
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull X := by",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/HodgeConjectureTarget.lean",
      "linha": 41,
      "nome": "Hodge.hodgeConstructive",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 45: function expected at HodgeConjectureFull term has type ?m.79"
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull X := by",
+     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 22,
+     "linha": 23,
      "nome": "Hodge.lefschetz11",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 29: function expected at HodgeConjectureStatement term has type ?m.9"
+     "erro": "linha 30: function expected at HodgeConjectureStatement term has type ?m.1287",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureStatement X 1 :"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 34,
+     "linha": 35,
      "nome": "Hodge.hodgeCodeim0",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 37: function expected at HodgeConjectureStatement term has type ?m.43"
+     "erro": "linha 38: function expected at HodgeConjectureStatement term has type ?m.1321",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureStatement X 0 :"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 39,
+     "linha": 40,
      "nome": "Hodge.hodgeTopCodeim",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 42: function expected at HodgeConjectureStatement term has type ?m.85"
+     "erro": "linha 43: function expected at HodgeConjectureStatement term has type ?m.1357",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureStatement X n :"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 44,
+     "linha": 45,
      "nome": "Hodge.hodgeForCurves",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 47: function expected at HodgeConjectureFull term has type ?m.127"
+     "erro": "linha 48: function expected at HodgeConjectureFull term has type ?m.1397",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull C := by"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 49,
+     "linha": 50,
      "nome": "Hodge.hodgeForSurfaces",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 52: function expected at HodgeConjectureFull term has type ?m.167"
+     "erro": "linha 53: function expected at HodgeConjectureFull term has type ?m.1437",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull S := by"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 54,
+     "linha": 55,
      "nome": "Hodge.hodgeForAbelianLowDim",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 57: function expected at HodgeConjectureFull term has type ?m.209"
+     "erro": "linha 58: function expected at HodgeConjectureFull term has type ?m.1479",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull A := by"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/KnownCases.lean",
-     "linha": 59,
+     "linha": 60,
      "nome": "Hodge.hodgeForProductOfCurves",
      "status": "aberto-sorry",
      "axioms": [
@@ -306,7 +398,9 @@
      "nome": "Hodge.hodgeImpliesForHyperplane",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 26: function expected at HodgeConjectureFull term has type ?m.13"
+     "erro": "linha 26: function expected at HodgeConjectureFull term has type ?m.13",
+     "coluna": 14,
+     "trecho": "    (hodgeX : ⟦H⟧odgeConjectureFull X) :"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/Reductions.lean",
@@ -316,7 +410,9 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 32: function expected at HodgeConjectureFull term has type ?m.72"
+     "erro": "linha 32: function expected at HodgeConjectureFull term has type ?m.72",
+     "coluna": 56,
+     "trecho": "oothProjectiveVariety, True → ⟦H⟧odgeConjectureFull A)"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/Reductions.lean",
@@ -324,7 +420,9 @@
      "nome": "Hodge.standardBImpliesHodge",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 41: function expected at HodgeConjectureFull term has type ?m.119"
+     "erro": "linha 41: function expected at HodgeConjectureFull term has type ?m.119",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull X := by"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/Reductions.lean",
@@ -332,7 +430,9 @@
      "nome": "Hodge.standardDImpliesHodge",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 47: function expected at HodgeConjectureFull term has type ?m.159"
+     "erro": "linha 47: function expected at HodgeConjectureFull term has type ?m.159",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull X := by"
     },
     {
      "arquivo": "lean/src/Hodge/Conjecture/Reductions.lean",
@@ -342,170 +442,182 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 52: function expected at HodgeConjectureFull term has type ?m.199"
+     "erro": "linha 52: function expected at HodgeConjectureFull term has type ?m.199",
+     "coluna": 14,
+     "trecho": "    (hodgeX : ⟦H⟧odgeConjectureFull X)"
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 127,
+     "linha": 129,
      "nome": "Hodge.equivalenceHierarchy",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 152,
+     "linha": 154,
      "nome": "Hodge.chow0IsZ",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 157,
+     "linha": 159,
      "nome": "Hodge.chow1IsPic",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 166,
+     "linha": 168,
      "nome": "Hodge.movingLemma",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 173: function expected at AlgebraicCycleClassical term has type ?m.710"
+     "erro": "linha 175: function expected at AlgebraicCycleClassical term has type ?m.3140",
+     "coluna": 9,
+     "trecho": "    (Z : ⟦A⟧lgebraicCycleClassical X.toVa"
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 193,
+     "linha": 195,
      "nome": "Hodge.intersectionCommutative",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 198,
+     "linha": 200,
      "nome": "Hodge.intersectionAssociative",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 203,
+     "linha": 205,
      "nome": "Hodge.chowRingGradedCommutative",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 224,
+     "linha": 226,
      "nome": "Hodge.cycleClassCompatibleWithIntersection",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 229,
+     "linha": 231,
      "nome": "Hodge.cycleClassFunctorialPullback",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 234,
+     "linha": 236,
      "nome": "Hodge.cycleClassFunctorialPushforward",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 239,
+     "linha": 241,
      "nome": "Hodge.cycleClassLandsInPP",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 251: invalid field notation, type is not of the form (C ...) where C is a constant X has type SmoothProjectiveVariety",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     "erro": "linha 253: invalid field notation, type is not of the form (C ...) where C is a constant X has type SmoothProjectiveVariety",
+     "coluna": 20,
+     "trecho": "  ChowGroupRational ⟦X⟧.toSmoothVariety.toVariety p "
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 356,
+     "linha": 358,
      "nome": "Hodge.intermediateJacobian1",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean",
-     "linha": 361,
+     "linha": 363,
      "nome": "Hodge.intermediateJacobianN",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/ChowGroups.lean",
-     "linha": 44,
+     "linha": 45,
      "nome": "Hodge.chow0IsZ",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/ChowGroups.lean",
-     "linha": 47,
+     "linha": 48,
      "nome": "Hodge.chow1IsPic",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/CycleClassMap.lean",
-     "linha": 46,
+     "linha": 47,
      "nome": "Hodge.cycleClassLandsInHodge",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 48: function expected at AlgebraicCycle term has type ?m.3595"
+     "erro": "linha 49: function expected at AlgebraicCycle term has type ?m.4821",
+     "coluna": 64,
+     "trecho": ": SmoothVariety) (p : ℕ) (Z : ⟦A⟧lgebraicCycle X.toVariety p) "
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/CycleClassMap.lean",
-     "linha": 51,
+     "linha": 52,
      "nome": "Hodge.cycleClassCompatible",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 54: function expected at AlgebraicCycle term has type ?m.3639"
+     "erro": "linha 55: function expected at AlgebraicCycle term has type ?m.4858",
+     "coluna": 9,
+     "trecho": "    (Z : ⟦A⟧lgebraicCycle X p) (W : Algeb"
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/CycleClassMap.lean",
-     "linha": 57,
+     "linha": 58,
      "nome": "Hodge.cycleClassPullback",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 60: type expected, got (Y : Variety)"
+     "erro": "linha 61: type expected, got (Y : Variety)",
+     "coluna": 9,
+     "trecho": "    (f : ⟦Y⟧ → X) (Z : AlgebraicCycle X p"
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/IntersectionProduct.lean",
-     "linha": 40,
+     "linha": 42,
      "nome": "Hodge.movingLemma",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 42: function expected at AlgebraicCycle term has type ?m.581"
+     "erro": "linha 44: function expected at AlgebraicCycle term has type ?m.3068",
+     "coluna": 55,
+     "trecho": "SmoothVariety) (p q : ℕ) (Z : ⟦A⟧lgebraicCycle X.toVariety p) "
     },
     {
      "arquivo": "lean/src/Hodge/Cycles/IntersectionProduct.lean",
-     "linha": 50,
+     "linha": 52,
      "nome": "Hodge.intersectionCommutative",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 53: function expected at AlgebraicCycle term has type ?m.1040"
+     "erro": "linha 55: function expected at AlgebraicCycle term has type ?m.3509",
+     "coluna": 9,
+     "trecho": "    (Z : ⟦A⟧lgebraicCycle X p) (W : Algeb"
     },
     {
      "arquivo": "lean/src/Hodge/Examples/AbelianVarietiesLowDim.lean",
@@ -522,7 +634,9 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 39: invalid field notation, type is not of the form (C ...) where C is a constant A has type AbelianVariety"
+     "erro": "linha 39: invalid field notation, type is not of the form (C ...) where C is a constant A has type AbelianVariety",
+     "coluna": 69,
+     "trecho": "nVariety) (g p q : ℕ) (hdim : ⟦A⟧.dimension = g) :"
     },
     {
      "arquivo": "lean/src/Hodge/Examples/AbelianVarietiesLowDim.lean",
@@ -539,7 +653,9 @@
      "nome": "Hodge.mattuckTheorem",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 55: invalid field notation, type is not of the form (C ...) where C is a constant A has type AbelianVariety"
+     "erro": "linha 55: invalid field notation, type is not of the form (C ...) where C is a constant A has type AbelianVariety",
+     "coluna": 52,
+     "trecho": " (A : AbelianVariety) (hdim : ⟦A⟧.dimension ≤ 3) :"
     },
     {
      "arquivo": "lean/src/Hodge/Examples/AbelianVarietiesLowDim.lean",
@@ -547,7 +663,9 @@
      "nome": "Hodge.hodgeForEllipticProducts",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 64: function expected at HodgeConjectureFull term has type ?m.349"
+     "erro": "linha 64: function expected at HodgeConjectureFull term has type ?m.349",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull (productOf"
     },
     {
      "arquivo": "lean/src/Hodge/Examples/K3SurfacesSketch.lean",
@@ -563,6 +681,8 @@
      "status": "erro",
      "axioms": [],
      "erro": "linha 46: unknown identifier 'PicardGroup'",
+     "coluna": 47,
+     "trecho": "oup (S : K3Surface) : Type := ⟦P⟧icardGroup S.toSmoothProjecti",
      "preenchimento": {
       "resultado": "demonstrável",
       "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
@@ -574,7 +694,9 @@
      "nome": "Hodge.k3HighPicardRank",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 53: function expected at HodgeConjectureFull term has type ?m.119"
+     "erro": "linha 53: function expected at HodgeConjectureFull term has type ?m.119",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull S.toSmooth"
     },
     {
      "arquivo": "lean/src/Hodge/Examples/K3SurfacesSketch.lean",
@@ -592,279 +714,232 @@
     },
     {
      "arquivo": "lean/src/Hodge/Examples/ProjectiveSpace.lean",
-     "linha": 25,
+     "linha": 26,
      "nome": "Hodge.projectiveSpaceCohomology",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 27: failed to synthesize LE ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Examples/ProjectiveSpace.lean",
-     "linha": 30,
+     "linha": 31,
      "nome": "Hodge.projectiveSpaceHodgeNumbers",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Examples/ProjectiveSpace.lean",
-     "linha": 35,
+     "linha": 36,
      "nome": "Hodge.projectiveSpaceHodgeDiamond",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Examples/ProjectiveSpace.lean",
-     "linha": 40,
+     "linha": 41,
      "nome": "Hodge.projectiveSpaceHodgeClasses",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 42: failed to synthesize LE ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/Examples/ProjectiveSpace.lean",
-     "linha": 45,
+     "linha": 46,
      "nome": "Hodge.hodgeForProjectiveSpace",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 48: function expected at HodgeConjectureFull term has type ?m.104"
-    },
-    {
-     "arquivo": "lean/src/Hodge/HodgeStructure/Forms_pq.lean",
-     "linha": 41,
-     "nome": "Hodge.dSplits",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "lean/src/Hodge/HodgeStructure/Forms_pq.lean",
-     "linha": 46,
-     "nome": "Hodge.delSquaredZero",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "lean/src/Hodge/HodgeStructure/Forms_pq.lean",
-     "linha": 51,
-     "nome": "Hodge.delBarSquaredZero",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "lean/src/Hodge/HodgeStructure/Forms_pq.lean",
-     "linha": 56,
-     "nome": "Hodge.delDelBarAnticommute",
-     "status": "fechado",
-     "axioms": []
+     "erro": "linha 49: function expected at HodgeConjectureFull term has type ?m.1351",
+     "coluna": 4,
+     "trecho": "    ⟦H⟧odgeConjectureFull (projectiv"
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 50,
+     "linha": 53,
      "nome": "Hodge.innerProductL2_pos_def",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 55,
+     "linha": 58,
      "nome": "Hodge.innerProductL2_hermitian",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 72,
+     "linha": 75,
      "nome": "Hodge.hodgeStarIsometry",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 77,
+     "linha": 80,
      "nome": "Hodge.hodgeStarSquared",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 82,
+     "linha": 85,
      "nome": "Hodge.hodgeStarOnPQForms",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 99,
+     "linha": 102,
      "nome": "Hodge.dAdjointProperty",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 104,
+     "linha": 107,
      "nome": "Hodge.dAdjointFormula",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 135,
+     "linha": 138,
      "nome": "Hodge.laplacianSelfAdjoint",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 140,
+     "linha": 143,
      "nome": "Hodge.laplacianNonNegative",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 150,
+     "linha": 153,
      "nome": "Hodge.harmonicIffClosedCoClosed",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 167,
+     "linha": 170,
      "nome": "Hodge.dimHarmonicEqualsBetti",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 178,
+     "linha": 181,
      "nome": "Hodge.hodgeExistence",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 185: function expected at DifferentialForm term has type ?m.4611"
+     "erro": "linha 188: function expected at DifferentialForm term has type ?m.5299",
+     "coluna": 9,
+     "trecho": "    (α : ⟦D⟧ifferentialForm X.toSmoothVar"
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 188,
+     "linha": 191,
      "nome": "Hodge.hodgeUniqueness",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 193,
+     "linha": 196,
      "nome": "Hodge.hodgeIsomorphism",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 207,
+     "linha": 210,
      "nome": "Hodge.hodgeOrthogonalDecomposition",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 216,
+     "linha": 219,
      "nome": "Hodge.decompositionOrthogonal",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 227,
+     "linha": 230,
      "nome": "Hodge.harmonicProjectionOrthogonal",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 232,
+     "linha": 235,
      "nome": "Hodge.harmonicSplitByType",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 245,
+     "linha": 248,
      "nome": "Hodge.harmonicPQIsDelBarClosed",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 250,
+     "linha": 253,
      "nome": "Hodge.harmonicPQIsDelClosed",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 255,
+     "linha": 258,
      "nome": "Hodge.harmonicDolbeaultIsomorphism",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 268,
+     "linha": 271,
      "nome": "Hodge.hodgeSymmetryHarmonic",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
-     ]
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 273,
+     "linha": 276,
      "nome": "Hodge.serreDualityHarmonic",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 278,
+     "linha": 281,
      "nome": "Hodge.bettiFromHodge",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 283,
+     "linha": 286,
      "nome": "Hodge.lefschetzPreservesHarmonic",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 292,
+     "linha": 295,
      "nome": "Hodge.hardLefschetzHarmonic",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 294: failed to synthesize LE ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean",
-     "linha": 301,
+     "linha": 304,
      "nome": "Hodge.lefschetzDecompositionHarmonic",
      "status": "fechado",
      "axioms": []
@@ -894,234 +969,229 @@
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 58,
+     "linha": 60,
      "nome": "Hodge.dolbeaultTheorem",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 63,
+     "linha": 65,
      "nome": "Hodge.dolbeaultFiniteDim",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 68,
+     "linha": 70,
      "nome": "Hodge.hodgeDecompositionTheorem",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 77,
+     "linha": 79,
      "nome": "Hodge.hodgeDecompositionOrthogonal",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 82,
+     "linha": 84,
      "nome": "Hodge.hodgeDolbeaultIso",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 87,
+     "linha": 89,
      "nome": "Hodge.hodgeHarmonicIso",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 92,
+     "linha": 94,
      "nome": "Hodge.hodgeConjugationSymmetry",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 101,
+     "linha": 103,
      "nome": "Hodge.hodgeNumberSymmetry",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 106,
+     "linha": 108,
      "nome": "Hodge.hodgeSerreDuality",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 111,
+     "linha": 113,
      "nome": "Hodge.hodgeNumberSerreDuality",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 116,
+     "linha": 118,
      "nome": "Hodge.hodgeDiamondSymmetry",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 178,
+     "linha": 180,
      "nome": "Hodge.decompositionFromFiltration",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 183,
+     "linha": 185,
      "nome": "Hodge.filtrationOpposite",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 188,
+     "linha": 190,
      "nome": "Hodge.griffithsTransversality",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 209,
+     "linha": 211,
      "nome": "Hodge.fundamentalClassIsHodge",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 214,
+     "linha": 216,
      "nome": "Hodge.hyperplaneClassIsHodge",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 219,
+     "linha": 221,
      "nome": "Hodge.cycleClassIsHodge",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 238,
+     "linha": 240,
      "nome": "Hodge.projectiveIsPolarized",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 243,
+     "linha": 245,
      "nome": "Hodge.polarizationFromKahler",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 257,
+     "linha": 259,
      "nome": "Hodge.hardLefschetzTyped",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 260: failed to synthesize HAdd ℕ ℕ ?m.985 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 267,
+     "linha": 269,
      "nome": "Hodge.lefschetzDecompByType",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 296,
+     "linha": 298,
      "nome": "Hodge.periodMapHolomorphic",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 301,
+     "linha": 303,
      "nome": "Hodge.periodMapHorizontal",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 320,
+     "linha": 322,
      "nome": "Hodge.delignesMixedHodge",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 325,
+     "linha": 327,
      "nome": "Hodge.smoothProjectiveIsPure",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 330,
+     "linha": 332,
      "nome": "Hodge.morphismsAreStrict",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 335,
+     "linha": 337,
      "nome": "Hodge.hodgeConjectureAsSurjectivity",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 344,
+     "linha": 346,
      "nome": "Hodge.hodgeP1IsLefschetz",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 349,
+     "linha": 351,
      "nome": "Hodge.hodgeTrueForDivisors",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean",
-     "linha": 354,
+     "linha": 356,
      "nome": "Hodge.hodgeStableUnderCorrespondence",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeRiemannRelations.lean",
-     "linha": 33,
+     "linha": 34,
      "nome": "Hodge.hodgeRiemannRelations",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 36: failed to synthesize HAdd ℕ ℕ ?m.356 Additional diagnostic information may be available using the `set_option diagnostics true` command."
+     "erro": "linha 37: function expected at PrimitiveCohomology term has type ?m.268",
+     "coluna": 27,
+     "trecho": "    (hpq : p + q = k) (α : ⟦P⟧rimitiveCohomology X k) :"
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/HodgeRiemannRelations.lean",
-     "linha": 39,
+     "linha": 40,
      "nome": "Hodge.hodgeRiemannPositivity",
      "status": "fechado",
      "axioms": []
@@ -1135,136 +1205,131 @@
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 59,
+     "linha": 60,
      "nome": "Hodge.HermitianMetric.form_is_11",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 61: function expected at HermitianMetric term has type ?m.93"
+     "erro": "linha 62: function expected at HermitianMetric term has type ?m.1371",
+     "coluna": 60,
+     "trecho": "s_11 (X : SmoothVariety) (h : ⟦H⟧ermitianMetric X) :"
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 110,
+     "linha": 111,
      "nome": "Hodge.kahlerIdentity1",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 115,
+     "linha": 116,
      "nome": "Hodge.kahlerIdentity2",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 120,
+     "linha": 121,
      "nome": "Hodge.kahlerIdentity3",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 125,
+     "linha": 126,
      "nome": "Hodge.kahlerIdentity4",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 152,
+     "linha": 153,
      "nome": "Hodge.laplaciansEqual",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 162,
+     "linha": 163,
      "nome": "Hodge.hodgeRepresentative",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 175,
+     "linha": 176,
      "nome": "Hodge.fubiniStudyGeneratesH2",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 180,
+     "linha": 181,
      "nome": "Hodge.projectiveIsKahlerClassical",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 202,
+     "linha": 203,
      "nome": "Hodge.kahlerConeNonempty",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 207,
+     "linha": 208,
      "nome": "Hodge.kodairaEmbedding",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 212,
+     "linha": 213,
      "nome": "Hodge.harmonicDecomposition",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 221,
+     "linha": 222,
      "nome": "Hodge.harmonicDolbeaultIso",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 226,
+     "linha": 227,
      "nome": "Hodge.hodgeFromHarmonic",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 246,
+     "linha": 247,
      "nome": "Hodge.chernEqualsLeviCivita",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean",
-     "linha": 251,
+     "linha": 252,
      "nome": "Hodge.curvatureDefinesChernClasses",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/LefschetzOperator.lean",
-     "linha": 38,
+     "linha": 39,
      "nome": "Hodge.hardLefschetz",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 40: failed to synthesize LE ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "lean/src/Hodge/HodgeStructure/LefschetzOperator.lean",
-     "linha": 47,
+     "linha": 48,
      "nome": "Hodge.lefschetzDecomposition",
      "status": "fechado",
      "axioms": []
@@ -1272,7 +1337,7 @@
    ],
    "preenchimento": [],
    "summary": {
-    "fechado": 19,
+    "fechado": 30,
     "aberto-sorry": 0,
     "condicional": 0
    }

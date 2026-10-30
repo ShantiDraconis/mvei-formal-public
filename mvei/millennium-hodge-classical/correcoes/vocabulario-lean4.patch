@@ -1,0 +1,198 @@
+--- a/lean/src/Hodge/Basics/LineBundles.lean
++++ b/lean/src/Hodge/Basics/LineBundles.lean
+@@ -35,7 +35,7 @@
+   mk ::
+ 
+ /-- The Picard group of line bundles up to isomorphism. -/
+-def PicardGroup (V : Variety) : Type := LineBundleData V -- Simplified
++abbrev PicardGroup (V : Variety) : Type := LineBundleData V -- Simplified
+ 
+ /-- First Chern class of a line bundle. -/
+ def firstChernClass (V : Variety) (L : LineBundleData V) : ℕ := 0 -- Placeholder
+--- a/lean/src/Hodge/Basics/Projective.lean
++++ b/lean/src/Hodge/Basics/Projective.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Basics/Schemes.lean
++++ b/lean/src/Hodge/Basics/Schemes.lean
+@@ -7,6 +7,8 @@
+ import Mathlib.AlgebraicGeometry.Scheme
+ import Mathlib.AlgebraicGeometry.Morphisms.Basic
+ 
++noncomputable section
++
+ /-!
+ # Schemes
+ 
+--- a/lean/src/Hodge/Cohomology/Comparison.lean
++++ b/lean/src/Hodge/Cohomology/Comparison.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Cohomology/DeRham.lean
++++ b/lean/src/Hodge/Cohomology/DeRham.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Cohomology/SheafCohomology.lean
++++ b/lean/src/Hodge/Cohomology/SheafCohomology.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Cohomology/Singular.lean
++++ b/lean/src/Hodge/Cohomology/Singular.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Conjecture/KnownCases.lean
++++ b/lean/src/Hodge/Conjecture/KnownCases.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Conjecture/Statement.lean
++++ b/lean/src/Hodge/Conjecture/Statement.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -26,7 +27,7 @@
+   SingularCohomology X.toSmoothVariety.toVariety (2 * p) CohomologyCoefficients.Q
+ 
+ /-- The space of Hodge classes Hdg^p(X). -/
+-def HodgeClassSpace (X : KahlerManifold) (p : ℕ) : Type := HodgeClass X p
++abbrev HodgeClassSpace (X : KahlerManifold) (p : ℕ) : Type := HodgeClass X p
+ 
+ notation "Hdg^" p "(" X ")" => HodgeClassSpace X p
+ 
+--- a/lean/src/Hodge/Cycles/AlgebraicCycles.lean
++++ b/lean/src/Hodge/Cycles/AlgebraicCycles.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -27,7 +28,7 @@
+   mk ::
+ 
+ /-- The group of algebraic cycles Z^p(X). -/
+-def CycleGroup (X : Variety) (p : ℕ) : Type := AlgebraicCycle X p
++abbrev CycleGroup (X : Variety) (p : ℕ) : Type := AlgebraicCycle X p
+ 
+ /-- Zero cycle (empty sum). -/
+ def zeroCycle (X : Variety) (p : ℕ) : AlgebraicCycle X p := AlgebraicCycle.mk
+--- a/lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean
++++ b/lean/src/Hodge/Cycles/AlgebraicCyclesClassical.lean
+@@ -1,3 +1,5 @@
++local notation "ℕ" => Nat
++local notation "ℤ" => Int
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Cycles/ChowGroups.lean
++++ b/lean/src/Hodge/Cycles/ChowGroups.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+@@ -38,7 +39,7 @@
+ notation "CH^" p "(" X ")" => ChowGroup X p
+ 
+ /-- The rationalized Chow group CH^p(X)_ℚ. -/
+-def ChowGroupQ (X : Variety) (p : ℕ) : Type := ChowGroup X p -- Tensor with ℚ
++abbrev ChowGroupQ (X : Variety) (p : ℕ) : Type := ChowGroup X p -- Tensor with ℚ
+ 
+ notation "CH^" p "(" X ")_ℚ" => ChowGroupQ X p
+ 
+--- a/lean/src/Hodge/Cycles/CycleClassMap.lean
++++ b/lean/src/Hodge/Cycles/CycleClassMap.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Cycles/IntersectionProduct.lean
++++ b/lean/src/Hodge/Cycles/IntersectionProduct.lean
+@@ -1,3 +1,5 @@
++local notation "ℕ" => Nat
++local notation "ℤ" => Int
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/Examples/K3SurfacesSketch.lean
++++ b/lean/src/Hodge/Examples/K3SurfacesSketch.lean
+@@ -43,7 +43,7 @@
+   trivial
+ 
+ /-- The Picard group of a K3 surface. -/
+-def k3PicardGroup (S : K3Surface) : Type := PicardGroup S.toSmoothProjectiveVariety.toSmoothVariety.toVariety
++abbrev k3PicardGroup (S : K3Surface) : Type := PicardGroup S.toSmoothProjectiveVariety.toSmoothVariety.toVariety
+ 
+ /-- Picard rank of K3 surface (1 ≤ ρ ≤ 20). -/
+ def k3PicardRank (S : K3Surface) : ℕ := 0 -- Placeholder
+--- a/lean/src/Hodge/Examples/ProjectiveSpace.lean
++++ b/lean/src/Hodge/Examples/ProjectiveSpace.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/HodgeStructure/Forms_pq.lean
++++ b/lean/src/Hodge/HodgeStructure/Forms_pq.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean
++++ b/lean/src/Hodge/HodgeStructure/HarmonicFormsClassical.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean
++++ b/lean/src/Hodge/HodgeStructure/HodgeDecompositionClassical.lean
+@@ -1,3 +1,5 @@
++local notation "ℕ" => Nat
++local notation "ℤ" => Int
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/HodgeStructure/HodgeRiemannRelations.lean
++++ b/lean/src/Hodge/HodgeStructure/HodgeRiemannRelations.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Data.Rat.Defs
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean
++++ b/lean/src/Hodge/HodgeStructure/KahlerManifoldsClassical.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.
+--- a/lean/src/Hodge/HodgeStructure/LefschetzOperator.lean
++++ b/lean/src/Hodge/HodgeStructure/LefschetzOperator.lean
+@@ -1,3 +1,4 @@
++local notation "ℕ" => Nat
+ /-
+ Copyright (c) 2025 ShantiDraconis. All rights reserved.
+ Released under MIT license.

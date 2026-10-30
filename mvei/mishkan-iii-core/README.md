@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `2e43209371b6c345d28b5dcabf4953bbb2cff104`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `2e43209371b6c345d28b5dcabf4953bbb2cff104`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `core` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 68 | 0 | 0 | 7271 / 10704 / 3 / 586 / 0 |
+| `core` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 68 | 0 | 0 | 7279 / 10704 / 3 / 578 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 7 339 |
-| Unique (name + statement) | 7 339 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 7 287 |
+| Counting each project | 7 347 |
+| Unique (name + statement) | 7 347 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 7 295 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -187,7 +187,8 @@ The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (count
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 585 |
+| checked file by file: the written proof does not pass the kernel | 577 |
+| the file did not compile (an error in it or in a file it imports) | 8 |
 
 ### MVEI corrections
 
@@ -195,7 +196,8 @@ The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (count
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vinculo-estrutura.patch` (arquivos gerados usam ~4 100 nomes que não existem no repositório, 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-estrutura.patch` (in order, after the ones above)
-* `correcoes/vinculo-provas.patch` (provas que não fechavam por erro de tipo (Float onde é real, Nat onde é inteiro), instância de igualdade ausente, catálogo provado só com sorry, axiomas demonstráveis e nomes acentuados que o Lean não lê, 6 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-provas.patch` (in order, after the ones above)
+* `correcoes/vinculo-provas.patch` (provas que não fechavam por erro de tipo (Float onde é real, Nat onde é inteiro), instância de igualdade ausente, catálogo provado só com sorry, axiomas demonstráveis e nomes acentuados que o Lean não lê, 7 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-provas.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 10 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -12,173 +12,345 @@
    "repo": "i-constant-core",
    "path": "formal",
    "toolchain": "",
-   "toolchain_used": "padrão do elan",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": true,
-   "build_ok": false,
+   "build_ok": true,
    "build_seconds": 0.0,
    "build_error": "",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
    "declared_axioms": [],
-   "theorems": [],
+   "theorems": [
+    {
+     "name": "DirectEndpointRule.Rule.close",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint)   (w : Witness), self.Valid w → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.inj",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} {Valid : Witness → Prop} {produce : Source → ∃ w, Valid w}   {close : ∀ (w : Witness), Valid w → Endpoint} {Valid_1 : Witness → Prop} {produce_1 : Source → ∃ w, Valid_1 w}   {close_1 : ∀ (w : Witness), Valid_1 w → Endpoint},   { Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clos",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.injEq",
+     "module": "DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint) (Valid_1 : Witness → Prop) (produce_1 : Source → ∃ w, Valid_1 w)   (close_1 : ∀ (w : Witness), Valid_1 w → Endpoint),   ({ Valid := Valid, produce := produce, close := close } =       { Valid := Valid_1, produce := produce_1, close := clo",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.mk.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} [inst : SizeOf Source] [inst_1 : SizeOf Witness]   [inst_2 : SizeOf Endpoint] (Valid : Witness → Prop) (produce : Source → ∃ w, Valid w)   (close : ∀ (w : Witness), Valid w → Endpoint), sizeOf { Valid := Valid, produce := produce, close := close } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Rule.produce",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop} (self : DirectEndpointRule.Rule Source Witness Endpoint),   Source → ∃ w, self.Valid w",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.endpoint.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.endpoint = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.ofNat_toCtorIdx",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ (x : DirectEndpointRule.Stage), DirectEndpointRule.Stage.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.source.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.source = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.verified.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.verified = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.Stage.witness.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "sizeOf DirectEndpointRule.Stage.witness = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.decreases",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (self : DirectEndpointRule.StrictProgress State) (s : State), self.rank (self.step s) < self.rank s",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.inj",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} {rank : State → Nat} {step : State → State} {decreases : ∀ (s : State), rank (step s) < rank s}   {rank_1 : State → Nat} {step_1 : State → State} {decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s},   { rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 } →     rank = rank_1 ∧ step = step_1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.injEq",
+     "module": "DirectEndpointRule",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {State : Type u} (rank : State → Nat) (step : State → State) (decreases : ∀ (s : State), rank (step s) < rank s)   (rank_1 : State → Nat) (step_1 : State → State) (decreases_1 : ∀ (s : State), rank_1 (step_1 s) < rank_1 s),   ({ rank := rank, step := step, decreases := decreases } =       { rank := rank_1, step := step_1, decreases := decreases_1 }) =     (rank = rank_1 ∧ step = step_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.StrictProgress.mk.sizeOf_spec",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} [inst : SizeOf State] (rank : State → Nat) (step : State → State)   (decreases : ∀ (s : State), rank (step s) < rank s), sizeOf { rank := rank, step := step, decreases := decreases } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.direct_endpoint",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {Source : Prop} {Witness : Type u} {Endpoint : Prop},   DirectEndpointRule.Rule Source Witness Endpoint → Source → Endpoint",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.forwardDependency_wellFounded",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "WellFounded DirectEndpointRule.forwardDependency",
+     "status": "fechado"
+    },
+    {
+     "name": "DirectEndpointRule.no_infinite_descent",
+     "module": "DirectEndpointRule",
+     "axioms": [],
+     "statement": "∀ {State : Type u} (p : DirectEndpointRule.StrictProgress State), WellFounded fun a b => p.rank a < p.rank b",
+     "status": "fechado"
+    }
+   ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././DirectEndpointRule.lean:35:21: application type mismatch | error: ././././DirectEndpointRule.lean:54:24: application type mismatch",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com DirectEndpointRule e o Mathlib v4.19.0",
    "corrections": [],
-   "lakefile_gerado": "",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `DirectEndpointRule]\n",
    "avulso": true,
    "salvage": [
     {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 17,
-     "nome": "DirectEndpointRule.direct_endpoint",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 30,
-     "nome": "DirectEndpointRule.no_infinite_descent",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 35: application type mismatch InvImage.wf p.rank Nat.lt_wfRel argument Nat.lt_wfRel has type WellFoundedRelation Nat : Type but is expected to have type WellFounded LT.lt : Prop"
-    },
-    {
-     "arquivo": "formal/DirectEndpointRule.lean",
-     "linha": 52,
-     "nome": "DirectEndpointRule.forwardDependency_wellFounded",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 54: application type mismatch InvImage.wf stageRank Nat.lt_wfRel argument Nat.lt_wfRel has type WellFoundedRelation Nat : Type but is expected to have type WellFounded LT.lt : Prop"
-    },
-    {
      "arquivo": "formal/IConstant.lean",
-     "linha": 75,
+     "linha": 77,
      "nome": "IConstant.I_decomposition",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 81,
+     "linha": 83,
      "nome": "IConstant.Delta_existence",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 91,
+     "linha": 93,
      "nome": "IConstant.limit_with_I",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 97: failed to synthesize OfNat Prop 0 numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is Prop due to the absence of the instance above Additional diagnostic information may be available ",
+     "coluna": 29,
+     "trecho": "  ∃ (L : ℝ), (∀ ε > 0, ∃ δ > ⟦0⟧, ∀ x, 0 < |x - a| < δ → |f x",
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 97,
+     "linha": 99,
      "nome": "IConstant.I_absorption",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 103,
+     "linha": 105,
      "nome": "IConstant.Delta_bound",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 107,
+     "linha": 109,
      "nome": "IConstant.Delta_positive",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 117,
+     "linha": 119,
      "nome": "IConstant.collapse_conserves",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 122: type expected, got (c.conserves_info : True)",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧.conserves_info := by",
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 132,
+     "linha": 134,
      "nome": "IConstant.I_idempotent_add",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 136,
+     "linha": 138,
      "nome": "IConstant.I_idempotent_mul",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 144,
+     "linha": 146,
      "nome": "IConstant.I_resolves_indeterminate",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 150: failed to synthesize OfNat Prop 0 numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is Prop due to the absence of the instance above Additional diagnostic information may be available ",
+     "coluna": 19,
+     "trecho": "    ∀ ε > 0, ∃ δ > ⟦0⟧, ∀ x, 0 < |x - a| < δ → ",
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 166,
+     "linha": 168,
      "nome": "IConstant.level_hierarchy",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 172: omega could not prove the goal: No usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by cons",
+     "coluna": 56,
+     "trecho": "> simp [level_order] at h <;> ⟦o⟧mega",
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 197,
+     "linha": 199,
      "nome": "IConstant.operator_completeness",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 204: type mismatch Pi has type (?m.16364 → ?m.16365) → ?m.16364 → ?m.16365 : Type (max ?u.16362 ?u.16363) but is expected to have type IConstant → IConstant : Type (max (?u.16237 + 1) (?u.16239 + 1))",
+     "coluna": 24,
+     "trecho": "      (∀ op ∈ seq, op = ⟦P⟧i ∨ op = Sigma ∨ op = DeltaOp",
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 205,
+     "linha": 207,
      "nome": "IConstant.Delta_unique",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 213,
+     "linha": 215,
      "nome": "IConstant.I_nontrivial",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 218: type mismatch r has type ℝ : Type but is expected to have type Type ?u.36055 : Type (?u.36055 + 1)",
+     "coluna": 30,
+     "trecho": "  ¬(∃ (r : ℝ), ∀ x, i.value = ⟦r⟧) := by",
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     },
     {
      "arquivo": "formal/IConstant.lean",
-     "linha": 228,
+     "linha": 230,
      "nome": "consistency_equivalent_to_ZFC",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "import_trocado": [
+      "Mathlib.Analysis.SpecialFunctions.Trigonometric"
+     ]
     }
    ],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 17,
     "aberto-sorry": 0,
     "condicional": 0
    }

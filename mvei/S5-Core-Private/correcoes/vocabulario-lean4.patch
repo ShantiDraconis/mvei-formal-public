@@ -1,0 +1,100 @@
+--- a/lean/HarappanConsensus.lean
++++ b/lean/HarappanConsensus.lean
+@@ -40,7 +40,7 @@
+   mark : String
+   orcid : String
+   timestamp : Nat
+-  protected : Bool
++  «protected» : Bool
+   deriving Repr
+ 
+ /-- Default project signature -/
+@@ -313,10 +313,10 @@
+     byzantineThreshold := 1  -- Can tolerate 1 Byzantine node out of 4
+   }
+ 
+-/-- Verify the example network is viable -/
++/- Verify the example network is viable -/
+ #eval networkViable exampleNetwork
+ 
+-/-- Summary of key guarantees -/
++/- Summary of key guarantees -/
+ /-!
+ ## Dholavira Consensus Guarantees
+ 
+--- a/lean/MillenniumPrizeTemplate.lean
++++ b/lean/MillenniumPrizeTemplate.lean
+@@ -6,6 +6,8 @@
+ import Mathlib.NumberTheory.ZetaFunction
+ import Mathlib.Topology.Basic
+ 
++noncomputable section
++
+ -- COPYRIGHT (C) 2026 SHIVA AND SETH - ALL RIGHTS RESERVED
+ -- LOGIC SECURED UNDER ORCID 0009-0006-6874-3910
+ -- PROTOCOL: INFINITE BARRIERS / NEON FILTER
+@@ -113,7 +115,7 @@
+   **Network Scale**: 10^11
+   **Security Level**: Maximum
+ -/
+-def ideas_bell_integration : Type := Unit
++abbrev ideas_bell_integration : Type := Unit
+ 
+ /-! ## Verification Steps -/
+ 
+@@ -170,6 +172,7 @@
+ -/
+ 
+ end MillenniumPrize
++/-
+ This template provides a structured framework for formalizing proofs related to 
+ the Millennium Prize Problems in Lean 4, following the Shanti Draconis protocol.
+ 
+--- a/lean/PrimordialLanguage.lean
++++ b/lean/PrimordialLanguage.lean
+@@ -330,7 +331,7 @@
+ /-- Primordial sentence -/
+ structure PrimordialSentence where
+   words : List PrimordialWord
+-  axiom : Option PrimordialAxiom
++  «axiom» : Option PrimordialAxiom
+   geometricEncoding : List GeometricCharacter
+   deriving Repr
+ 
+@@ -346,7 +347,7 @@
+       context := { emotionalIntensity := 0.5, quantumState := 1,
+                    entropyLevel := 0.5, informationDensity := 1.0 } }
+   ],
+-  axiom := some PrimordialAxiom.InfinityEqualsVoid,
++  «axiom» := some PrimordialAxiom.InfinityEqualsVoid,
+   geometricEncoding := [geoChar_chi, geoChar_omega, geoChar_theta]
+ }
+ 
+--- a/s5/formal/lean/S5/Core/Types.lean
++++ b/s5/formal/lean/S5/Core/Types.lean
+@@ -6,13 +6,13 @@
+ namespace S5.Core
+ 
+ /-- Claim identifier -/
+-def ClaimID := String
++abbrev ClaimID := String
+ 
+ /-- Source/Evidence identifier -/
+-def SourceID := String
++abbrev SourceID := String
+ 
+ /-- SHA256 hash for evidence verification -/
+-def Hash := String
++abbrev Hash := String
+ 
+ /-- Track identifier (A = novel logic, B = classical alternative) -/
+ inductive Track where
+@@ -22,7 +22,7 @@
+ 
+ /-- Claim status -/
+ inductive ClaimStatus where
+-  | open : ClaimStatus
++  | «open» : ClaimStatus
+   | proven : ClaimStatus
+   | refuted : ClaimStatus
+   | pending_review : ClaimStatus

@@ -1,0 +1,329 @@
+--- a/lean/Hawking/EssentialSingularity.lean
++++ b/lean/Hawking/EssentialSingularity.lean
+@@ -8,6 +8,8 @@
+ import Mathlib.Analysis.Complex.CauchyIntegral
+ import Hawking.LimitFailure
+ 
++noncomputable section
++
+ namespace Hawking
+ 
+ /-- A function has an essential singularity at x₀ in the sense of complex analysis -/
+--- a/lean/Hawking/LimitFailure.lean
++++ b/lean/Hawking/LimitFailure.lean
+@@ -8,6 +8,8 @@
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
+ import Mathlib.Topology.MetricSpace.Basic
+ 
++noncomputable section
++
+ namespace Hawking
+ 
+ /-- A limit fails to exist at a point -/
+--- a/lean/Hawking/UniversalFunctional.lean
++++ b/lean/Hawking/UniversalFunctional.lean
+@@ -7,6 +7,8 @@
+ import Hawking.LimitFailure
+ import Hawking.EssentialSingularity
+ 
++noncomputable section
++
+ namespace Hawking
+ 
+ /-- A Hawking Functional for a problem -/
+--- a/lean/MainTheorem.lean
++++ b/lean/MainTheorem.lean
+@@ -30,7 +30,7 @@
+     ∃ H : HawkingFunctional, True := by  -- Simplified statement
+   cases P <;> exact ⟨sorry, trivial⟩
+ 
+-/-- Main Theorem Statement (informal) -/
++/- Main Theorem Statement (informal) -/
+ /-
+   Theorem (Universal Singularity Principle):
+   
+--- a/lean/Problems/BSD/HawkingLimit.lean
++++ b/lean/Problems/BSD/HawkingLimit.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.UniversalFunctional
+ 
++noncomputable section
++
+ namespace Problems.BSD
+ 
+ open Hawking
+--- a/lean/Problems/Hodge/HawkingLimit.lean
++++ b/lean/Problems/Hodge/HawkingLimit.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.UniversalFunctional
+ 
++noncomputable section
++
+ namespace Problems.Hodge
+ 
+ open Hawking
+--- a/lean/Problems/NavierStokes/HawkingLimit.lean
++++ b/lean/Problems/NavierStokes/HawkingLimit.lean
+@@ -6,12 +6,14 @@
+ 
+ import Hawking.UniversalFunctional
+ 
++noncomputable section
++
+ namespace Problems.NavierStokes
+ 
+ open Hawking
+ 
+ /-- Velocity field type (simplified) -/
+-def VelocityField := ℝ × ℝ × ℝ → ℝ → (ℝ × ℝ × ℝ)
++abbrev VelocityField := ℝ × ℝ × ℝ → ℝ → (ℝ × ℝ × ℝ)
+ 
+ /-- Gradient norm of velocity field -/
+ noncomputable def gradientNorm (u : VelocityField) (x : ℝ × ℝ × ℝ) (t : ℝ) : ℝ :=
+--- a/lean/Problems/PvsNP/HawkingLimit.lean
++++ b/lean/Problems/PvsNP/HawkingLimit.lean
+@@ -6,13 +6,16 @@
+ 
+ import Hawking.UniversalFunctional
+ import Mathlib.Tactic
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++
++noncomputable section
+ 
+ namespace Problems.PvsNP
+ 
+ open Hawking
+ 
+ /-- Time complexity function type -/
+-def TimeComplexity := ℕ → ℕ
++abbrev TimeComplexity := ℕ → ℕ
+ 
+ /-- Polynomial bound -/
+ def IsPolynomial (T : TimeComplexity) : Prop :=
+--- a/lean/Problems/Riemann/HawkingLimit.lean
++++ b/lean/Problems/Riemann/HawkingLimit.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.UniversalFunctional
+ 
++noncomputable section
++
+ namespace Problems.Riemann
+ 
+ open Hawking
+--- a/lean/Problems/YangMills/HawkingLimit.lean
++++ b/lean/Problems/YangMills/HawkingLimit.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.UniversalFunctional
+ 
++noncomputable section
++
+ namespace Problems.YangMills
+ 
+ open Hawking
+@@ -15,12 +17,12 @@
+   -- Placeholder for gauge field data
+ 
+ /-- Energy functional at scale λ -/
+-noncomputable def E_lambda (A : GaugeField) (λ : ℝ) : ℝ :=
++noncomputable def E_lambda (A : GaugeField) («λ» : ℝ) : ℝ :=
+   sorry -- Placeholder
+ 
+ /-- The Yang-Mills Hawking Functional -/
+-noncomputable def H_YM (A : GaugeField) (λ : ℝ) : ℝ :=
+-  E_lambda A λ
++noncomputable def H_YM (A : GaugeField) («λ» : ℝ) : ℝ :=
++  E_lambda A «λ»
+ 
+ /-- Mass gap: positive lower bound on spectrum -/
+ def HasMassGap (Δ : ℝ) : Prop :=
+@@ -34,7 +36,7 @@
+ theorem ym_hawking_equivalence :
+     YangMillsMassGap ↔ 
+     ∃ Δ > 0, ∀ A : GaugeField, ∀ ε > 0, 
+-      ∃ δ > 0, ∀ λ, 0 < λ → λ < δ → H_YM A λ ≥ Δ - ε := by
++      ∃ δ > 0, ∀ «λ», 0 < «λ» → «λ» < δ → H_YM A «λ» ≥ Δ - ε := by
+   sorry
+ 
+ end Problems.YangMills
+--- a/src/lean/Hawking/BSD/HawkingBSD.lean
++++ b/src/lean/Hawking/BSD/HawkingBSD.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.Core.USC_HCP
+ 
++noncomputable section
++
+ namespace Hawking.BSD
+ 
+ open Hawking.Core
+--- a/src/lean/Hawking/Core/EssentialSingularity.lean
++++ b/src/lean/Hawking/Core/EssentialSingularity.lean
+@@ -7,6 +7,8 @@
+ 
+ import Hawking.Core.Limits
+ 
++noncomputable section
++
+ namespace Hawking.Core
+ 
+ open Filter Topology
+--- a/src/lean/Hawking/Core/HawkingFunctional.lean
++++ b/src/lean/Hawking/Core/HawkingFunctional.lean
+@@ -7,6 +7,8 @@
+ 
+ import Hawking.Core.EssentialSingularity
+ 
++noncomputable section
++
+ namespace Hawking.Core
+ 
+ open Filter Topology
+--- a/src/lean/Hawking/Core/Limits.lean
++++ b/src/lean/Hawking/Core/Limits.lean
+@@ -9,6 +9,8 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Order.Filter.Basic
+ 
++noncomputable section
++
+ namespace Hawking.Core
+ 
+ open Filter Topology
+--- a/src/lean/Hawking/Core/USC_HCP.lean
++++ b/src/lean/Hawking/Core/USC_HCP.lean
+@@ -7,6 +7,8 @@
+ 
+ import Hawking.Core.HawkingFunctional
+ 
++noncomputable section
++
+ namespace Hawking.Core
+ 
+ open Filter Topology
+--- a/src/lean/Hawking/Hodge/HawkingHodge.lean
++++ b/src/lean/Hawking/Hodge/HawkingHodge.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.Core.USC_HCP
+ 
++noncomputable section
++
+ namespace Hawking.Hodge
+ 
+ open Hawking.Core
+--- a/src/lean/Hawking/NavierStokes/HawkingNS.lean
++++ b/src/lean/Hawking/NavierStokes/HawkingNS.lean
+@@ -6,12 +6,14 @@
+ 
+ import Hawking.Core.USC_HCP
+ 
++noncomputable section
++
+ namespace Hawking.NavierStokes
+ 
+ open Hawking.Core
+ 
+ /-- Velocity field type (3D incompressible) -/
+-def VelocityField := ℝ × ℝ × ℝ → ℝ × ℝ × ℝ → ℝ × ℝ × ℝ  -- (x, t) → u
++abbrev VelocityField := ℝ × ℝ × ℝ → ℝ × ℝ × ℝ → ℝ × ℝ × ℝ  -- (x, t) → u
+ 
+ /-- Gradient norm (simplified) -/
+ noncomputable def gradientNorm (u : VelocityField) (t : ℝ) : ℝ :=
+--- a/src/lean/Hawking/PvsNP/HawkingPNP.lean
++++ b/src/lean/Hawking/PvsNP/HawkingPNP.lean
+@@ -5,13 +5,16 @@
+ -/
+ 
+ import Hawking.Core.USC_HCP
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++
++noncomputable section
+ 
+ namespace Hawking.PvsNP
+ 
+ open Hawking.Core
+ 
+ /-- Time complexity function -/
+-def TimeComplexity := ℕ → ℕ
++abbrev TimeComplexity := ℕ → ℕ
+ 
+ /-- Polynomial time: T(n) ≤ n^k for some k -/
+ def IsPolynomial (T : TimeComplexity) : Prop :=
+--- a/src/lean/Hawking/RH/HawkingRH.lean
++++ b/src/lean/Hawking/RH/HawkingRH.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.Core.USC_HCP
+ 
++noncomputable section
++
+ namespace Hawking.RH
+ 
+ open Hawking.Core
+--- a/src/lean/Hawking/UST/UniversalSingularityTheorem.lean
++++ b/src/lean/Hawking/UST/UniversalSingularityTheorem.lean
+@@ -12,6 +12,9 @@
+ import Hawking.BSD.HawkingBSD
+ import Hawking.Hodge.HawkingHodge
+ import Hawking.YangMills.HawkingYM
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace Hawking.UST
+ 
+@@ -108,7 +111,7 @@
+     True := by
+   trivial
+ 
+-/-- Remark: This is a meta-conjecture -/
++/- Remark: This is a meta-conjecture -/
+ -- The Universal Singularity Theorem should be understood as a research program
+ -- rather than a proven mathematical result. It suggests:
+ -- 1. All Millennium Problems have a common structure
+--- a/src/lean/Hawking/YangMills/HawkingYM.lean
++++ b/src/lean/Hawking/YangMills/HawkingYM.lean
+@@ -6,6 +6,8 @@
+ 
+ import Hawking.Core.USC_HCP
+ 
++noncomputable section
++
+ namespace Hawking.YangMills
+ 
+ open Hawking.Core
+@@ -33,7 +35,7 @@
+   massGap theory > 0
+ 
+ /-- Scale parameter λ -/
+-def Scale := ℝ
++abbrev Scale := ℝ
+ 
+ /-- Energy at scale λ -/
+ noncomputable axiom energyAtScale : YangMillsTheory → Scale → ℝ
+@@ -41,8 +43,8 @@
+ /-- The YM-Hawking Functional:
+     H_YM(λ) = E_λ(A) = lowest non-zero energy at scale λ
+ -/
+-noncomputable def H_YM (theory : YangMillsTheory) (λ : Scale) : ℝ :=
+-  energyAtScale theory λ
++noncomputable def H_YM (theory : YangMillsTheory) («λ» : Scale) : ℝ :=
++  energyAtScale theory «λ»
+ 
+ /-- The Yang-Mills Existence and Mass Gap Problem -/
+ def YangMillsMassGap : Prop :=
+@@ -50,8 +52,8 @@
+ 
+ /-- Hawking Functional for YM -/
+ noncomputable def YMHawkingFunctional (theory : YangMillsTheory) : HawkingFunctional where
+-  domain := {λ : ℂ | λ.re > 0}
+-  functional := fun λ => (H_YM theory λ.re : ℂ)
++  domain := {«λ» : ℂ | «λ».re > 0}
++  functional := fun «λ» => (H_YM theory «λ».re : ℂ)
+   criticalPoint := 0  -- UV limit λ → 0
+   critical_in_boundary := Or.inr rfl
+ 

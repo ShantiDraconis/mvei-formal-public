@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -14,85 +14,278 @@
    "toolchain": "",
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
-   "build_ok": false,
+   "build_ok": true,
    "build_seconds": 0.0,
    "build_error": "",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
    "declared_axioms": [],
-   "theorems": [],
-   "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile, mas o código também não compila: error: ././././divine-phonemes.lean:119:22: invalid field 'natAbs', the environment does not contain 'Nat.natAbs' | error: ././././divine-phonemes.lean:152:18: tactic 'rfl' failed, the left-hand side",
-   "corrections": [],
-   "lakefile_gerado": "",
-   "avulso": true,
-   "salvage": [
+   "theorems": [
     {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 126,
-     "nome": "all_have_sibilants",
-     "status": "fechado",
-     "axioms": []
+     "name": "DivineEntity.mk.inj",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ {name : String} {phoneme : Phoneme} {attributes : List FunctionalAttribute} {name_1 : String} {phoneme_1 : Phoneme}   {attributes_1 : List FunctionalAttribute},   { name := name, phoneme := phoneme, attributes := attributes } =       { name := name_1, phoneme := phoneme_1, attributes := attributes_1 } →     name = name_1 ∧ phoneme = phoneme_1 ∧ attributes = attributes_1",
+     "status": "fechado"
     },
     {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 144,
-     "nome": "most_have_vowel_u",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 148,
-     "nome": "mediation_shared",
-     "status": "erro",
+     "name": "DivineEntity.mk.injEq",
+     "module": "«divine-phonemes»",
      "axioms": [
-      "sorryAx"
+      "propext"
      ],
-     "erro": "linha 152: Tactic `rfl` failed: The left-hand side Entities.yeshua.attributes is not definitionally equal to the right-hand side FunctionalAttribute.Mediation case left ⊢ FunctionalAttribute.Mediation ∈ Entities.yeshua.attributes"
+     "statement": "∀ (name : String) (phoneme : Phoneme) (attributes : List FunctionalAttribute) (name_1 : String) (phoneme_1 : Phoneme)   (attributes_1 : List FunctionalAttribute),   ({ name := name, phoneme := phoneme, attributes := attributes } =       { name := name_1, phoneme := phoneme_1, attributes := attributes_1 }) =     (name = name_1 ∧ phoneme = phoneme_1 ∧ attributes = attributes_1)",
+     "status": "fechado"
     },
     {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 153,
-     "nome": "transformation_universal",
-     "status": "erro",
+     "name": "DivineEntity.mk.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (name : String) (phoneme : Phoneme) (attributes : List FunctionalAttribute),   sizeOf { name := name, phoneme := phoneme, attributes := attributes } =     1 + sizeOf name + sizeOf phoneme + sizeOf attributes",
+     "status": "fechado"
+    },
+    {
+     "name": "Entities.all_entities.eq_1",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "Entities.all_entities = [Entities.yeshua, Entities.exu, Entities.shiva, Entities.saturno]",
+     "status": "fechado"
+    },
+    {
+     "name": "Entities.exu.eq_1",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "Entities.exu =   { name := \"Exu\", phoneme := DivineName.exu,     attributes :=       [FunctionalAttribute.Mediation, FunctionalAttribute.Communication, FunctionalAttribute.Liminality,         FunctionalAttribute.Transformation] }",
+     "status": "fechado"
+    },
+    {
+     "name": "Entities.saturno.eq_1",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "Entities.saturno =   { name := \"Saturno\", phoneme := DivineName.saturno,     attributes :=       [FunctionalAttribute.TimeControl, FunctionalAttribute.Liminality, FunctionalAttribute.Transformation,         FunctionalAttribute.Renewal] }",
+     "status": "fechado"
+    },
+    {
+     "name": "Entities.shiva.eq_1",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "Entities.shiva =   { name := \"Shiva\", phoneme := DivineName.shiva,     attributes :=       [FunctionalAttribute.Destruction, FunctionalAttribute.Transformation, FunctionalAttribute.Renewal,         FunctionalAttribute.Liminality] }",
+     "status": "fechado"
+    },
+    {
+     "name": "Entities.yeshua.eq_1",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "Entities.yeshua =   { name := \"Yeshua\", phoneme := DivineName.yeshua,     attributes :=       [FunctionalAttribute.Mediation, FunctionalAttribute.Sacrifice, FunctionalAttribute.Renewal,         FunctionalAttribute.Transformation] }",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Communication.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Communication = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Destruction.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Destruction = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Liminality.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Liminality = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Mediation.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Mediation = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Renewal.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Renewal = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Sacrifice.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Sacrifice = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.TimeControl.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.TimeControl = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "FunctionalAttribute.Transformation.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "sizeOf FunctionalAttribute.Transformation = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "PersonalReligion.mk.inj",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ {entities : List DivineEntity} {syncretism_informed respects_traditions peaceful_practice : Bool}   {entities_1 : List DivineEntity} {syncretism_informed_1 respects_traditions_1 peaceful_practice_1 : Bool},   { entities := entities, syncretism_informed := syncretism_informed, respects_traditions := respects_traditions,         peaceful_practice := peaceful_practice } =       { entities := entiti",
+     "status": "fechado"
+    },
+    {
+     "name": "PersonalReligion.mk.injEq",
+     "module": "«divine-phonemes»",
      "axioms": [
-      "sorryAx"
+      "propext"
      ],
-     "erro": "linha 159: Tactic `rfl` failed: The left-hand side Entities.yeshua.attributes is not definitionally equal to the right-hand side FunctionalAttribute.Transformation case head ⊢ FunctionalAttribute.Transformation ∈ Entities.yeshua.attributes"
+     "statement": "∀ (entities : List DivineEntity) (syncretism_informed respects_traditions peaceful_practice : Bool)   (entities_1 : List DivineEntity) (syncretism_informed_1 respects_traditions_1 peaceful_practice_1 : Bool),   ({ entities := entities, syncretism_informed := syncretism_informed, respects_traditions := respects_traditions,         peaceful_practice := peaceful_practice } =       { entities := entit",
+     "status": "fechado"
     },
     {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 178,
-     "nome": "divine_phonemes_unified",
-     "status": "erro",
+     "name": "PersonalReligion.mk.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (entities : List DivineEntity) (syncretism_informed respects_traditions peaceful_practice : Bool),   sizeOf       { entities := entities, syncretism_informed := syncretism_informed, respects_traditions := respects_traditions,         peaceful_practice := peaceful_practice } =     1 + sizeOf entities + sizeOf syncretism_informed + sizeOf respects_traditions + sizeOf peaceful_practice",
+     "status": "fechado"
+    },
+    {
+     "name": "Phoneme.mk.inj",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ {sibilant vowel_u : Bool} {syllables : Nat} {sibilant_1 vowel_u_1 : Bool} {syllables_1 : Nat},   { sibilant := sibilant, vowel_u := vowel_u, syllables := syllables } =       { sibilant := sibilant_1, vowel_u := vowel_u_1, syllables := syllables_1 } →     sibilant = sibilant_1 ∧ vowel_u = vowel_u_1 ∧ syllables = syllables_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Phoneme.mk.injEq",
+     "module": "«divine-phonemes»",
      "axioms": [
-      "sorryAx"
+      "propext"
      ],
-     "erro": "linha 183: Tactic `constructor` failed: no applicable constructor found case h ⊢ TheologicalUnity.entities ?w = Entities.all_entities"
+     "statement": "∀ (sibilant vowel_u : Bool) (syllables : Nat) (sibilant_1 vowel_u_1 : Bool) (syllables_1 : Nat),   ({ sibilant := sibilant, vowel_u := vowel_u, syllables := syllables } =       { sibilant := sibilant_1, vowel_u := vowel_u_1, syllables := syllables_1 }) =     (sibilant = sibilant_1 ∧ vowel_u = vowel_u_1 ∧ syllables = syllables_1)",
+     "status": "fechado"
     },
     {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 199,
-     "nome": "yeshua_exu_complementary",
-     "status": "erro",
+     "name": "Phoneme.mk.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (sibilant vowel_u : Bool) (syllables : Nat),   sizeOf { sibilant := sibilant, vowel_u := vowel_u, syllables := syllables } =     1 + sizeOf sibilant + sizeOf vowel_u + sizeOf syllables",
+     "status": "fechado"
+    },
+    {
+     "name": "TheologicalUnity.min_functional_overlap",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (self : TheologicalUnity) (e1 e2 : DivineEntity),   e1 ∈ self.entities → e2 ∈ self.entities → e1 ≠ e2 → functional_overlap e1 e2 ≥ 1",
+     "status": "fechado"
+    },
+    {
+     "name": "TheologicalUnity.min_phonetic_sim",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (self : TheologicalUnity) (e1 e2 : DivineEntity),   e1 ∈ self.entities → e2 ∈ self.entities → phonetic_similarity e1.phoneme e2.phoneme ≥ 1",
+     "status": "fechado"
+    },
+    {
+     "name": "TheologicalUnity.mk.inj",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ {entities : List DivineEntity}   {min_phonetic_sim :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities → e2 ∈ entities → phonetic_similarity e1.phoneme e2.phoneme ≥ 1}   {min_functional_overlap :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities → e2 ∈ entities → e1 ≠ e2 → functional_overlap e1 e2 ≥ 1}   {entities_1 : List DivineEntity}   {min_phonetic_sim_1 :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities_1 →",
+     "status": "fechado"
+    },
+    {
+     "name": "TheologicalUnity.mk.injEq",
+     "module": "«divine-phonemes»",
      "axioms": [
-      "sorryAx"
+      "propext"
      ],
-     "erro": "linha 206: Tactic `rfl` failed: The left-hand side Entities.yeshua.attributes is not definitionally equal to the right-hand side FunctionalAttribute.Sacrifice case left ⊢ FunctionalAttribute.Sacrifice ∈ Entities.yeshua.attributes"
+     "statement": "∀ (entities : List DivineEntity)   (min_phonetic_sim :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities → e2 ∈ entities → phonetic_similarity e1.phoneme e2.phoneme ≥ 1)   (min_functional_overlap :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities → e2 ∈ entities → e1 ≠ e2 → functional_overlap e1 e2 ≥ 1)   (entities_1 : List DivineEntity)   (min_phonetic_sim_1 :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities_1 →",
+     "status": "fechado"
     },
     {
-     "arquivo": "proofs/lean/divine-phonemes.lean",
-     "linha": 226,
-     "nome": "religion_is_valid",
-     "status": "fechado",
-     "axioms": []
+     "name": "TheologicalUnity.mk.sizeOf_spec",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (entities : List DivineEntity)   (min_phonetic_sim :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities → e2 ∈ entities → phonetic_similarity e1.phoneme e2.phoneme ≥ 1)   (min_functional_overlap :     ∀ (e1 e2 : DivineEntity), e1 ∈ entities → e2 ∈ entities → e1 ≠ e2 → functional_overlap e1 e2 ≥ 1),   sizeOf       { entities := entities, min_phonetic_sim := min_phonetic_sim, min_functional_overlap := mi",
+     "status": "fechado"
+    },
+    {
+     "name": "all_have_sibilants",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "∀ (e : DivineEntity), e ∈ Entities.all_entities → e.phoneme.sibilant = true",
+     "status": "fechado"
+    },
+    {
+     "name": "divine_phonemes_unified",
+     "module": "«divine-phonemes»",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∃ unity, unity.entities = Entities.all_entities",
+     "status": "fechado"
+    },
+    {
+     "name": "mediation_shared",
+     "module": "«divine-phonemes»",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "FunctionalAttribute.Mediation ∈ Entities.yeshua.attributes ∧ FunctionalAttribute.Mediation ∈ Entities.exu.attributes",
+     "status": "fechado"
+    },
+    {
+     "name": "most_have_vowel_u",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "(List.filter (fun e => e.phoneme.vowel_u) Entities.all_entities).length ≥ 3",
+     "status": "fechado"
+    },
+    {
+     "name": "religion_is_valid",
+     "module": "«divine-phonemes»",
+     "axioms": [],
+     "statement": "this_religion.syncretism_informed = true ∧   this_religion.respects_traditions = true ∧ this_religion.peaceful_practice = true",
+     "status": "fechado"
+    },
+    {
+     "name": "transformation_universal",
+     "module": "«divine-phonemes»",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (e : DivineEntity), e ∈ Entities.all_entities → FunctionalAttribute.Transformation ∈ e.attributes",
+     "status": "fechado"
+    },
+    {
+     "name": "yeshua_exu_complementary",
+     "module": "«divine-phonemes»",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "complementary Entities.yeshua Entities.exu",
+     "status": "fechado"
     }
    ],
+   "integrity": [],
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com divine-phonemes",
+   "corrections": [],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `«divine-phonemes»]\n",
+   "avulso": true,
+   "salvage": [],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 34,
     "aberto-sorry": 0,
     "condicional": 0
    }

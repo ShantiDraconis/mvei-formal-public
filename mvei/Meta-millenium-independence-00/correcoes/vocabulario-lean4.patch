@@ -1,0 +1,470 @@
+--- a/src/lean/Main.lean
++++ b/src/lean/Main.lean
+@@ -12,6 +12,8 @@
+ import MetaMillennium.DualState.DualStateLemmas
+ import MetaMillennium.Problems.MillenniumSentences
+ 
++noncomputable section
++
+ def main : IO Unit := do
+   IO.println "Meta-Millennium Independence Framework"
+   IO.println "======================================"
+--- a/src/lean/MetaMillennium/Bridges/BridgeOverview.lean
++++ b/src/lean/MetaMillennium/Bridges/BridgeOverview.lean
+@@ -7,6 +7,8 @@
+ import MetaMillennium.InnerModels.InnerModelsToDualState
+ import MetaMillennium.LargeCardinals.LC_ToDualState
+ 
++noncomputable section
++
+ namespace MetaMillennium.Bridges
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Bridges/DS_From_Forcing.lean
++++ b/src/lean/MetaMillennium/Bridges/DS_From_Forcing.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.Bridges.BridgeOverview
+ 
++noncomputable section
++
+ namespace MetaMillennium.Bridges
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Bridges/DS_From_InnerModels.lean
++++ b/src/lean/MetaMillennium/Bridges/DS_From_InnerModels.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.Bridges.BridgeOverview
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.Bridges
+ 
+--- a/src/lean/MetaMillennium/Bridges/DS_From_LargeCardinals.lean
++++ b/src/lean/MetaMillennium/Bridges/DS_From_LargeCardinals.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.Bridges.BridgeOverview
+ 
++noncomputable section
++
+ namespace MetaMillennium.Bridges
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Core/TheoryAndModel.lean
++++ b/src/lean/MetaMillennium/Core/TheoryAndModel.lean
+@@ -33,9 +33,9 @@
+ 
+ /-- A model satisfies a theory if it satisfies all axioms -/
+ def Model.satisfiesTheory (M : Model) (T : Theory) : Prop :=
+-  ∀ φ ∈ T.axioms, Satisfies M φ
++  ∀ φ, φ ∈ T.axioms → (Satisfies M φ)
+ 
+-notation:50 M " ⊨ₜ " T => Model.satisfiesTheory M T
++notation:50 M:51 " ⊨ₜ " T:51 => Model.satisfiesTheory M T
+ 
+ /-- ZFC as a theory (abstract) -/
+ def ZFC : Theory := {
+--- a/src/lean/MetaMillennium/DualState/BiModel.lean
++++ b/src/lean/MetaMillennium/DualState/BiModel.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.DualState
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/DualState/DualStateDefinition.lean
++++ b/src/lean/MetaMillennium/DualState/DualStateDefinition.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.Core.ConsistencyAndIndependence
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.DualState
+ 
+--- a/src/lean/MetaMillennium/DualState/DualStateLemmas.lean
++++ b/src/lean/MetaMillennium/DualState/DualStateLemmas.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.DualState.BiModel
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.DualState
+ 
+--- a/src/lean/MetaMillennium/Forcing/ForcingBasics.lean
++++ b/src/lean/MetaMillennium/Forcing/ForcingBasics.lean
+@@ -9,7 +9,7 @@
+ 
+ open MetaMillennium.Models
+ 
+-/-- Re-export the forcing skeleton -/
++/- Re-export the forcing skeleton -/
+ export MetaMillennium.Models (Poset Condition Dense Filter GenericFilter forcing_extension)
+ 
+ /-- Maximum element of a poset -/
+--- a/src/lean/MetaMillennium/Forcing/ForcingToDualState.lean
++++ b/src/lean/MetaMillennium/Forcing/ForcingToDualState.lean
+@@ -6,6 +6,7 @@
+ import MetaMillennium.Forcing.CohenForcing
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.Models.ZFCAbstract
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.Forcing
+ 
+--- a/src/lean/MetaMillennium/Forcing/GenericFilters.lean
++++ b/src/lean/MetaMillennium/Forcing/GenericFilters.lean
+@@ -15,7 +15,7 @@
+     ∃ G : GenericFilter P, True
+ 
+ /-- The generic object: what G "codes" -/
+-def genericObject (P : Poset) (G : GenericFilter P) : Type := Condition P
++abbrev genericObject (P : Poset) (G : GenericFilter P) : Type := Condition P
+ 
+ /-- Name for a set in the forcing language -/
+ structure Name (P : Poset) where
+--- a/src/lean/MetaMillennium/InnerModels/InnerModelsToDualState.lean
++++ b/src/lean/MetaMillennium/InnerModels/InnerModelsToDualState.lean
+@@ -6,6 +6,7 @@
+ import MetaMillennium.InnerModels.L_InnerModel
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.Models.ZFCAbstract
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.InnerModels
+ 
+--- a/src/lean/MetaMillennium/InnerModels/L_InnerModel.lean
++++ b/src/lean/MetaMillennium/InnerModels/L_InnerModel.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.InnerModels.InnerModelBasics
+ 
++noncomputable section
++
+ namespace MetaMillennium.InnerModels
+ 
+ /-- The Lα hierarchy -/
+@@ -13,10 +15,10 @@
+   | n + 1 => Nat  -- Placeholder for L_{n+1} = Def(L_n)
+ 
+ /-- Definable powerset -/
+-def Def (X : Type) : Type := X  -- Placeholder
++abbrev Def (X : Type) : Type := X  -- Placeholder
+ 
+ /-- L is the union of all Lα -/
+-def L_as_union : Type := Nat  -- Placeholder
++abbrev L_as_union : Type := Nat  -- Placeholder
+ 
+ /-- Constructibility: x is constructible if x ∈ L -/
+ def isConstructible (x : Nat) : Prop := True  -- x ∈ L
+--- a/src/lean/MetaMillennium/LargeCardinals/LC_ToDualState.lean
++++ b/src/lean/MetaMillennium/LargeCardinals/LC_ToDualState.lean
+@@ -7,6 +7,8 @@
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.Models.ZFCAbstract
+ 
++noncomputable section
++
+ namespace MetaMillennium.LargeCardinals
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/LargeCardinals/LargeCardinalAxioms.lean
++++ b/src/lean/MetaMillennium/LargeCardinals/LargeCardinalAxioms.lean
+@@ -9,7 +9,7 @@
+ 
+ open MetaMillennium.Models
+ 
+-/-- Re-export large cardinal definitions -/
++/- Re-export large cardinal definitions -/
+ export MetaMillennium.Models (
+   Cardinal isInaccessible isMahlo isMeasurable isWoodin isSupercompact
+   LC_inaccessible LC_measurable LC_woodin LC_supercompact
+--- a/src/lean/MetaMillennium/Models/ForcingSkeleton.lean
++++ b/src/lean/MetaMillennium/Models/ForcingSkeleton.lean
+@@ -28,7 +28,7 @@
+ 
+ /-- A dense set in a poset -/
+ def Dense (P : Poset) (D : Set (Condition P)) : Prop :=
+-  ∀ p : Condition P, ∃ q ∈ D, P.le q p
++  ∀ p : Condition P, ∃ q, q ∈ D ∧ (P.le q p)
+ 
+ /-- A filter in a poset -/
+ structure Filter (P : Poset) where
+@@ -40,7 +40,7 @@
+   upward : ∀ p q, p ∈ elements → P.le p q → q ∈ elements
+   /-- Directed -/
+   directed : ∀ p q, p ∈ elements → q ∈ elements →
+-    ∃ r ∈ elements, P.le r p ∧ P.le r q
++    ∃ r, r ∈ elements ∧ (P.le r p ∧ P.le r q)
+ 
+ /-- Generic filter: meets all dense sets -/
+ structure GenericFilter (P : Poset) extends Filter P where
+--- a/src/lean/MetaMillennium/Models/ToyModels.lean
++++ b/src/lean/MetaMillennium/Models/ToyModels.lean
+@@ -6,6 +6,8 @@
+ import MetaMillennium.Core.ConsistencyAndIndependence
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Models
+ 
+ open MetaMillennium.Core
+@@ -36,7 +38,7 @@
+ /-- Model with two elements (for AtLeastTwo) -/
+ def pairModel : Model := { id := 2, name := "Pair" }
+ 
+-/-- Demonstration: both models satisfy ToyTheory -/
++/- Demonstration: both models satisfy ToyTheory -/
+ -- This is a toy example of how different models can satisfy the same theory
+ -- but differ on additional sentences
+ 
+--- a/src/lean/MetaMillennium/NumericClasses/AxiomaticNumbers.lean
++++ b/src/lean/MetaMillennium/NumericClasses/AxiomaticNumbers.lean
+@@ -19,7 +19,7 @@
+   exists_iff_axiom : Prop  -- Placeholder for the equivalence
+ 
+ /-- The class of axiomatic numbers -/
+-def A_ax : Type := AxiomaticNumber
++abbrev A_ax : Type := AxiomaticNumber
+ 
+ notation "𝔄_ax" => A_ax
+ 
+--- a/src/lean/MetaMillennium/NumericClasses/IndependenceNumbers.lean
++++ b/src/lean/MetaMillennium/NumericClasses/IndependenceNumbers.lean
+@@ -22,7 +22,7 @@
+   isIndependent : Independent ZFC independentProperty
+ 
+ /-- The class of independence numbers -/
+-def I_ind : Type := IndependenceNumber
++abbrev I_ind : Type := IndependenceNumber
+ 
+ notation "𝕀_ind" => I_ind
+ 
+--- a/src/lean/MetaMillennium/NumericClasses/MultiModelNumbers.lean
++++ b/src/lean/MetaMillennium/NumericClasses/MultiModelNumbers.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.NumericClasses.AxiomaticNumbers
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.NumericClasses
+ 
+@@ -21,7 +22,7 @@
+   values_differ : value_in_M1 ≠ value_in_M2
+ 
+ /-- The class of multi-model numbers -/
+-def M_multi : Type := MultiModelNumber
++abbrev M_multi : Type := MultiModelNumber
+ 
+ notation "𝕄" => M_multi
+ 
+--- a/src/lean/MetaMillennium/NumericClasses/RegularityNumbers.lean
++++ b/src/lean/MetaMillennium/NumericClasses/RegularityNumbers.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.NumericClasses.IndependenceNumbers
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.NumericClasses
+ 
+--- a/src/lean/MetaMillennium/NumericClasses/SeparationNumbers.lean
++++ b/src/lean/MetaMillennium/NumericClasses/SeparationNumbers.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.NumericClasses.IndependenceNumbers
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.NumericClasses
+ 
+@@ -34,6 +35,6 @@
+ 
+ /-- Super-polynomial growth -/
+ def isSuperPolynomial (f : Nat → Nat) : Prop :=
+-  ∀ k : Nat, ∃ n₀ : Nat, ∀ n ≥ n₀, f n > polynomial k n
++  ∀ k : Nat, ∃ n₀ : Nat, ∀ n, n ≥ n₀ → (f n > polynomial k n)
+ 
+ end MetaMillennium.NumericClasses
+--- a/src/lean/MetaMillennium/Problems/BSD/BSDIndependenceProgram.lean
++++ b/src/lean/MetaMillennium/Problems/BSD/BSDIndependenceProgram.lean
+@@ -6,6 +6,8 @@
+ import MetaMillennium.Problems.BSD.BSDDefinition
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.BSD
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Problems/Hodge/HodgeIndependenceProgram.lean
++++ b/src/lean/MetaMillennium/Problems/Hodge/HodgeIndependenceProgram.lean
+@@ -6,6 +6,8 @@
+ import MetaMillennium.Problems.Hodge.HodgeDefinition
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.Hodge
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Problems/NS/NSIndependenceProgram.lean
++++ b/src/lean/MetaMillennium/Problems/NS/NSIndependenceProgram.lean
+@@ -6,6 +6,8 @@
+ import MetaMillennium.Problems.NS.NSDefinition
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.NS
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Problems/PNP/PNPDefinition.lean
++++ b/src/lean/MetaMillennium/Problems/PNP/PNPDefinition.lean
+@@ -4,6 +4,7 @@
+ -/
+ 
+ import MetaMillennium.Core.TheoryAndModel
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.Problems.PNP
+ 
+@@ -17,7 +18,7 @@
+   description : String
+ 
+ /-- Time complexity function -/
+-def TimeComplexity := Nat → Nat
++abbrev TimeComplexity := Nat → Nat
+ 
+ /-- Polynomial time: there exists k such that time ≤ n^k -/
+ def isPolynomialTime (t : TimeComplexity) : Prop :=
+--- a/src/lean/MetaMillennium/Problems/PNP/PNPIndependenceProgram.lean
++++ b/src/lean/MetaMillennium/Problems/PNP/PNPIndependenceProgram.lean
+@@ -7,6 +7,8 @@
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.Models.ZFCAbstract
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.PNP
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Problems/PNP/PNPRelativization.lean
++++ b/src/lean/MetaMillennium/Problems/PNP/PNPRelativization.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.Problems.PNP.PNPDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.PNP
+ 
+ /-- An oracle -/
+@@ -13,12 +15,12 @@
+   name : String
+ 
+ /-- P with oracle O -/
+-def P_oracle (O : Oracle) : Type := P_Language  -- Placeholder
++abbrev P_oracle (O : Oracle) : Type := P_Language  -- Placeholder
+ 
+ /-- NP with oracle O -/
+-def NP_oracle (O : Oracle) : Type := NP_Language  -- Placeholder
++abbrev NP_oracle (O : Oracle) : Type := NP_Language  -- Placeholder
+ 
+-/-- Baker-Gill-Solovay Theorem (1975) -/
++/- Baker-Gill-Solovay Theorem (1975) -/
+ -- There exist oracles A and B such that:
+ -- P^A = NP^A and P^B ≠ NP^B
+ 
+--- a/src/lean/MetaMillennium/Problems/RH/RHDefinition.lean
++++ b/src/lean/MetaMillennium/Problems/RH/RHDefinition.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.Core.TheoryAndModel
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.RH
+ 
+ open MetaMillennium.Core
+@@ -19,7 +21,7 @@
+ structure Complex where
+   re : Float
+   im : Float
+-  deriving Repr
++  
+ 
+ /-- A zero of the zeta function -/
+ structure ZetaZero where
+--- a/src/lean/MetaMillennium/Problems/RH/RHEquivalences.lean
++++ b/src/lean/MetaMillennium/Problems/RH/RHEquivalences.lean
+@@ -5,6 +5,8 @@
+ 
+ import MetaMillennium.Problems.RH.RHDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.RH
+ 
+ /-- Euler's gamma constant -/
+@@ -15,7 +17,7 @@
+   True  -- σ(n) < e^γ n log(log(n))
+ 
+ /-- Robin's theorem: RH ↔ Robin's inequality for n > 5040 -/
+-axiom robin_equivalence : RH_statement ↔ (∀ n > 5040, robinInequality n)
++axiom robin_equivalence : RH_statement ↔ (∀ n, n > 5040 → (robinInequality n))
+ 
+ /-- Prime counting function equivalence -/
+ -- RH implies |π(x) - li(x)| = O(√x log x)
+--- a/src/lean/MetaMillennium/Problems/RH/RHIndependenceProgram.lean
++++ b/src/lean/MetaMillennium/Problems/RH/RHIndependenceProgram.lean
+@@ -7,6 +7,8 @@
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.Models.ZFCAbstract
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.RH
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Problems/YM/YMIndependenceProgram.lean
++++ b/src/lean/MetaMillennium/Problems/YM/YMIndependenceProgram.lean
+@@ -6,6 +6,8 @@
+ import MetaMillennium.Problems.YM.YMDefinition
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.YM
+ 
+ open MetaMillennium.Core
+--- a/src/lean/MetaMillennium/Status/OpenConjectures.lean
++++ b/src/lean/MetaMillennium/Status/OpenConjectures.lean
+@@ -8,6 +8,8 @@
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.Problems.MillenniumSentences
+ 
++noncomputable section
++
+ namespace MetaMillennium.Status
+ 
+ open MetaMillennium
+--- a/src/lean/MetaMillennium/Status/ToyTheorems.lean
++++ b/src/lean/MetaMillennium/Status/ToyTheorems.lean
+@@ -10,6 +10,8 @@
+ import MetaMillennium.DualState.BiModel
+ import MetaMillennium.Models.ToyModels
+ 
++noncomputable section
++
+ namespace MetaMillennium.Status
+ 
+ open MetaMillennium

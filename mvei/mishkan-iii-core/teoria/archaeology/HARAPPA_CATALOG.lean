@@ -1,6 +1,8 @@
 import Mathlib.Data.List.Basic
 import Mathlib.Data.Nat.Basic
 
+noncomputable section
+
 /-
   CATÁLOGO COMPLETO DOS 417 SINAIS DE HARAPPA
   

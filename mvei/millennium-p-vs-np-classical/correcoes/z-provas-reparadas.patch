@@ -1,0 +1,34 @@
+--- a/src/lean4/Basics.lean
++++ b/src/lean4/Basics.lean
+@@ -51,7 +51,7 @@
+ def Language := Word → Prop
+ 
+ instance : Membership Word Language where
+-  mem w L := L w
++  mem L w := L w
+ 
+ /-- Language membership notation: w ∈ L -/
+ def inLanguage (w : Word) (L : Language) : Prop := L w
+@@ -136,8 +136,7 @@
+   intro w
+   constructor
+   · intro h
+-    by_contra hNot
+-    exact h hNot
++    exact Classical.byContradiction fun hNot => h hNot
+   · intro h hNot
+     exact hNot h
+ 
+@@ -219,9 +218,9 @@
+     | inl h2 => exact Or.inl ⟨h1, h2⟩
+     | inr h3 => exact Or.inr ⟨h1, h3⟩
+   · intro h
+-    cases h with
+-    | inl ⟨h1, h2⟩ => exact ⟨h1, Or.inl h2⟩
+-    | inr ⟨h1, h3⟩ => exact ⟨h1, Or.inr h3⟩
++    match h with
++    | Or.inl ⟨h1, h2⟩ => exact ⟨h1, Or.inl h2⟩
++    | Or.inr ⟨h1, h3⟩ => exact ⟨h1, Or.inr h3⟩
+ 
+ /-! ## Section 6: Numerical Constants -/
+ 

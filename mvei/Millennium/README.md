@@ -11,31 +11,33 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 99 | 0 | 5 | 17 / 5 / 16 / 25 / 10 |
-| `formal/lean` | v4.19.0 | partial | 39 | 12 | 2 | 2 / 0 / 23 / 11 / 43 |
-| `formal/theorems` | v4.12.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 7 |
-| `lean` | padrão do elan | failed | 0 | 0 | 0 | 7 / 3 / 14 / 19 / 9 |
-| `lean4` | v4.12.0 | partial | 123 | 0 | 6 | 40 / 13 / 76 / 83 / 133 |
-| `rh-umi-invariant/formal/lean` | v4.12.0 | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 1 |
-| `src/lean` | v4.19.0 | partial | 13 | 0 | 1 | 5 / 3 / 0 / 7 / 21 |
-| `src/lean4` | v4.19.0 | partial | 3 | 0 | 0 | 3 / 0 / 4 / 3 / 33 |
-| `universe00` | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 1 / 24 |
+| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 128 | 2 | 5 | 18 / 6 / 18 / 19 / 10 |
+| `formal/lean` | v4.19.0 | partial | 62 | 18 | 2 | 6 / 2 / 23 / 10 / 30 |
+| `formal/theorems` | v4.12.0 | failed | 0 | 0 | 0 | 3 / 3 / 0 / 0 / 1 |
+| `lean` | v4.19.0 | partial | 80 | 9 | 4 | 6 / 9 / 11 / 6 / 5 |
+| `lean4` | v4.12.0 | partial | 386 | 6 | 6 | 75 / 20 / 112 / 75 / 48 |
+| `rh-umi-invariant/formal/lean` | v4.12.0 | OK | 0 | 2 | 0 | — |
+| `src/lean` | v4.19.0 | partial | 13 | 0 | 1 | 5 / 4 / 0 / 6 / 21 |
+| `src/lean4` | v4.3.0 | partial | 3 | 0 | 0 | 5 / 0 / 4 / 1 / 33 |
+| `universe00` | v4.19.0 | partial | 31 | 0 | 0 | 3 / 0 / 0 / 1 / 11 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 351 |
-| Unique (name + statement) | 350 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 121 |
+| Counting each project | 824 |
+| Unique (name + statement) | 822 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 218 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `ComplexityCurvature.rh_implies_phi_image_gaps` | `.` | open | `sorryAx`, `ComplexityCurvature.Φ`, `ComplexityCurvature.f`, `ComplexityCurvature.gap_control`, `ComplexityCurvature.f_zero` |
+| `DeltaGapFramework.T1_conditional_equivalence` | `.` | conditional | `DeltaGapFramework.ZetaZeros`, `DeltaGapFramework.NPLanguage`, `DeltaGapFramework.C_det`, `DeltaGapFramework.C_ndet`, `DeltaGapFramework.Phi`, `DeltaGapFramework.f`, `DeltaGapFramework.f_zero` |
+| `DeltaGapFramework.T4_transfer` | `.` | conditional | `DeltaGapFramework.ZetaZeros`, `DeltaGapFramework.NPLanguage`, `DeltaGapFramework.Phi`, `DeltaGapFramework.C_det`, `DeltaGapFramework.C_ndet`, `DeltaGapFramework.f`, `DeltaGapFramework.L2_approximate_transfer` |
 | `MillenniumGroups.Group1.BSD_Conjecture_Analytic` | `.` | open | `sorryAx` |
 | `MillenniumGroups.Group1.Riemann_Hypothesis` | `.` | open | `sorryAx` |
 | `MillenniumGroups.Group1.Spectral_LFunction_Theorem` | `.` | open | `sorryAx` |
@@ -47,6 +49,7 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210
 | `LGMathOS.Hodge.HodgeClass.mk.injEq` | `formal/lean` | conditional | `LGMathOS.Hodge.ProjectiveVariety` |
 | `LGMathOS.Hodge.HodgeClass.mk.sizeOf_spec` | `formal/lean` | conditional | `LGMathOS.Hodge.ProjectiveVariety` |
 | `LGMathOS.Poincare.poincare_conjecture` | `formal/lean` | open | `LGMathOS.Poincare.Manifold3`, `LGMathOS.Poincare.simply_connected`, `LGMathOS.Poincare.is_closed`, `LGMathOS.Poincare.homeomorphic`, `LGMathOS.Poincare.S3`, `sorryAx` |
+| `Millennium.ImpossibilityClassical` | `formal/lean` | conditional | `Millennium.StrongSolutionP`, `Millennium.AdequateP`, `Millennium.StrongSolutionImpliesAdequateP`, `Millennium.HasBridge`, `Millennium.AdequatePImpliesBridge`, `Millennium.NoBridgeInScl` |
 | `Millennium.NavierStokes.LocalEnergyBound.decay` | `formal/lean` | conditional | `Millennium.NavierStokes.SobolevH1` |
 | `Millennium.NavierStokes.LocalEnergyBound.initial` | `formal/lean` | conditional | `Millennium.NavierStokes.SobolevH1` |
 | `Millennium.NavierStokes.LocalEnergyBound.nonneg` | `formal/lean` | conditional | `Millennium.NavierStokes.SobolevH1` |
@@ -54,12 +57,38 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210
 | `Millennium.NavierStokes.VorticityControl.locally_bounded` | `formal/lean` | conditional | `Millennium.NavierStokes.SobolevH1` |
 | `Millennium.NavierStokes.VorticityControl.no_concentration` | `formal/lean` | conditional | `Millennium.NavierStokes.SobolevH1` |
 | `Millennium.NavierStokes.bridge_navier_stokes` | `formal/lean` | open | `Millennium.NavierStokes.SobolevH1`, `sorryAx` |
+| `Millennium.NoGlobalAdequacy` | `formal/lean` | conditional | `Millennium.Adequate`, `Millennium.NotAdequateScl` |
+| `Millennium.NoLocalAdequacy` | `formal/lean` | conditional | `Millennium.AdequateP`, `Millennium.HasBridge`, `Millennium.AdequatePImpliesBridge`, `Millennium.NoBridgeInScl` |
+| `Millennium.poincare_no_strong` | `formal/lean` | conditional | `Millennium.StrongSolutionP`, `Millennium.AdequateP`, `Millennium.StrongSolutionImpliesAdequateP`, `Millennium.HasBridge`, `Millennium.AdequatePImpliesBridge`, `Millennium.NoBridgeInScl` |
+| `Millennium.poincare_weak` | `formal/lean` | conditional | `Millennium.WeakSolutionP`, `Millennium.PoincareWeakSolution` |
+| `Millennium.weak_without_strong_consistent` | `formal/lean` | conditional | `Millennium.WeakSolutionP`, `Millennium.StrongSolutionP`, `Millennium.PoincareWeakSolution`, `Millennium.AdequateP`, `Millennium.StrongSolutionImpliesAdequateP`, `Millennium.HasBridge`, `Millennium.AdequatePImpliesBridge`, `Millennium.NoBridgeInScl` |
+| `DeltaGap44.DeltaGap44Structure.law1` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.DeltaGap44Structure.law2` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.DeltaGap44Structure.law4` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.DeltaGap44Structure.mk.inj` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.DeltaGap44Structure.mk.injEq` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.DeltaGap44Structure.mk.sizeOf_spec` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.DeltaGap44Structure.phi_exists` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.Theorem1` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaGap44.Theorem2` | `lean` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `RHPvsNP.off_line_dominates` | `lean` | open | `sorryAx` |
+| `RHPvsNP.p_subset_np` | `lean` | open | `sorryAx` |
+| `RHPvsNP.scenario_gap_connection` | `lean` | open | `sorryAx` |
+| `RiemannHypothesis.p_eq_np_implies_f_np_bounded` | `lean` | open | `sorryAx` |
 | `GapUniversal.gap_implies_undeterminable` | `lean4` | open | `sorryAx` |
+| `LocalGlobal.Instances.PvsNP.gap_nonneg` | `lean4` | conditional | `LocalGlobal.Instances.PvsNP.det_ge_ndet` |
+| `Millennium.Delta.IClass.mk.inj` | `lean4` | conditional | `Millennium.Delta.I` |
+| `Millennium.Delta.IClass.mk.injEq` | `lean4` | conditional | `Millennium.Delta.I` |
+| `Millennium.Delta.IClass.mk.sizeOf_spec` | `lean4` | conditional | `Millennium.Delta.I` |
 | `RH_NP.deltaSpectrum_under_RH` | `lean4` | open | `sorryAx` |
 | `RiemannHypothesis.critical_line_is_stable` | `lean4` | open | `sorryAx` |
 | `RiemannHypothesis.primes_block_zeros` | `lean4` | open | `sorryAx` |
 | `RiemannHypothesis.primes_zeros_equivalence` | `lean4` | open | `sorryAx` |
 | `RiemannHypothesis.zero_off_line_contradicts_prime_bound` | `lean4` | open | `sorryAx` |
+| `allLawsHold` | `lean4` | conditional | `lawA1`, `lawL1_unified`, `lawC1`, `lawS1` |
+| `masterTheorem` | `lean4` | conditional | `lawA1` |
+| `UMI_RH.I_RH.eq_1` | `rh-umi-invariant/formal/lean` | conditional | `UMI_RH.d` |
+| `UMI_RH.RH_equiv_I` | `rh-umi-invariant/formal/lean` | conditional | `UMI_RH.RH`, `UMI_RH.d`, `UMI_RH.NB_BD_anchor` |
 | `Millennium.Zeta.rh_equivalence` | `src/lean` | open | `sorryAx` |
 | `LocalGlobal.Instances.Poincare.Poincare_solved` | `. (file by file)` | conditional | `LocalGlobal.Instances.Poincare.Perelman` |
 | `LocalGlobalFramework.all_clay_iff_all_bridge` | `. (file by file)` | open | `sorryAx`, `LocalGlobalFramework.LFunction`, `LocalGlobalFramework.NS_InitialData`, `LocalGlobalFramework.clay_equiv_bridge_i`, `LocalGlobalFramework.ns_inv`, `LocalGlobalFramework.ns_loc`, `LocalGlobalFramework.rh_inv`, `LocalGlobalFramework.rh_loc` |
@@ -74,20 +103,25 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210
 | `BSD_No_Strong_Solution` | `. (file by file)` | open | `Axiom_A_Adequacy`, `Axiom_E_Evidence`, `sorryAx` |
 | `Hodge_No_Strong_Solution` | `. (file by file)` | open | `Axiom_A_Adequacy`, `Axiom_E_Evidence`, `sorryAx` |
 | `YM_No_Strong_Solution` | `. (file by file)` | open | `Axiom_A_Adequacy`, `Axiom_E_Evidence`, `sorryAx` |
-| `DeltaGapFramework.T1_conditional_equivalence` | `. (file by file)` | conditional | `DeltaGapFramework.C_det`, `DeltaGapFramework.C_ndet`, `DeltaGapFramework.NPLanguage`, `DeltaGapFramework.Phi`, `DeltaGapFramework.ZetaZeros`, `DeltaGapFramework.f`, `DeltaGapFramework.f_zero` |
 | `StructuralInsufficiency.theorem_B` | `. (file by file)` | open | `sorryAx`, `StructuralInsufficiency.WeakSol` |
 | `TUSC.TUSC_existence` | `. (file by file)` | open | `sorryAx`, `TUSC.BlockA`, `TUSC.BlockB`, `TUSC.BlockC`, `TUSC.BlockD`, `TUSC.F_AC`, `TUSC.F_AG`, `TUSC.F_AN`, `TUSC.F_CN`, `TUSC.F_GN` |
+| `final_five_stability` | `. (file by file)` | conditional | `FinalState`, `ThermalTrigger` |
+| `trigger_cascade` | `. (file by file)` | conditional | `FinalState`, `ThermalTrigger`, `thermal_trigger_activation` |
+| `infinite_growth_convergence` | `. (file by file)` | open | `FinalState`, `ThermalTrigger`, `sorryAx` |
 | `meta_unification` | `. (file by file)` | open | `FinalState`, `ThermalTrigger`, `barco_escola`, `solar_colonization`, `sorryAx` |
 | `authority_loop_amplification` | `. (file by file)` | open | `sorryAx`, `truth_server`, `youtube_algorithm_recognition` |
 | `MillenniumGroups.Group2.NavierStokes_Existence_Smoothness` | `. (file by file)` | open | `sorryAx` |
 | `energy_inequality_rh` | `. (file by file)` | open | `sorryAx` |
+| `oscillation_cancellation` | `. (file by file)` | open | `sorryAx`, `ζ` |
 | `gaussian_tail_bound` | `. (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.bridge_theorem_bsd` | `formal/lean (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.weak_bsd_l_nonzero` | `formal/lean (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.kolyvagin_bsd` | `formal/lean (file by file)` | open | `sorryAx` |
 | `BSD.Bridge.BSD.Bridge.height_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.L`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank`, `BSD.Classical.regulator` |
-| `BSD.Bridge.BSD.Bridge.bsd_via_bridges` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank`, `BSD.Bridge.BSD.Bridge.is_modular` |
+| `BSD.Bridge.BSD.Bridge.bsd_via_bridges` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.L`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank`, `BSD.Bridge.BSD.Bridge.is_modular` |
 | `BSD.Classical.weak_bsd_gap` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.L`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank` |
+| `Millennium.adequate_implies_unifying` | `formal/lean (file by file)` | conditional | `Millennium.Adequate` |
+| `Millennium.local_to_global_adequacy` | `formal/lean (file by file)` | conditional | `Millennium.Adequate`, `Millennium.AdequateGlobal_iff`, `Millennium.AdequateP` |
 | `PvsNP.Bridge.cook_levin` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.bridge_theorem_separation` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.relativization_barrier` | `formal/lean (file by file)` | open | `sorryAx` |
@@ -96,34 +130,39 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210
 | `PvsNP.Bridge.NP_subset_PSPACE` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.PSPACE_subset_EXP` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.pvsnp_dichotomy` | `formal/lean (file by file)` | open | `sorryAx` |
-| `PvsNP.Bridge.natural_proof_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Bridge.is_natural_proof`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.TuringMachine`, `PvsNP.Classical.ntime_complexity`, `PvsNP.Classical.time_complexity` |
-| `PvsNP.Bridge.non_relativizing_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Bridge.NP_relative`, `PvsNP.Bridge.Oracle`, `PvsNP.Bridge.P_relative`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.TuringMachine`, `PvsNP.Classical.ntime_complexity`, `PvsNP.Classical.time_complexity` |
-| `PvsNP.Bridge.tuns_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Bridge.UniversalSpectrum`, `PvsNP.Bridge.complexity_spectrum`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.TuringMachine`, `PvsNP.Classical.ntime_complexity`, `PvsNP.Classical.time_complexity` |
+| `PvsNP.Bridge.natural_proof_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Bridge.is_natural_proof`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.TuringMachine`, `PvsNP.Classical.accepts`, `PvsNP.Classical.ntime_complexity`, `PvsNP.Classical.time_complexity` |
+| `PvsNP.Bridge.non_relativizing_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Bridge.NP_relative`, `PvsNP.Bridge.Oracle`, `PvsNP.Bridge.P_relative`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.TuringMachine`, `PvsNP.Classical.accepts`, `PvsNP.Classical.ntime_complexity`, `PvsNP.Classical.time_complexity` |
+| `PvsNP.Bridge.tuns_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Bridge.UniversalSpectrum`, `PvsNP.Bridge.complexity_spectrum`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.TuringMachine`, `PvsNP.Classical.accepts`, `PvsNP.Classical.ntime_complexity`, `PvsNP.Classical.time_complexity` |
 | `PvsNP.Bridge.arithmetic_bridge` | `formal/lean (file by file)` | open | `sorryAx`, `PvsNP.Classical.NondeterministicTM`, `PvsNP.Classical.ntime_complexity` |
 | `RH.Bridge.rh_implies_prime_bound` | `formal/lean (file by file)` | open | `sorryAx` |
 | `RH.Bridge.rh_iff_li_criterion` | `formal/lean (file by file)` | open | `sorryAx` |
 | `RH.Bridge.RH.Bridge.rh_bridge_existence` | `formal/lean (file by file)` | open | `sorryAx`, `RH.Classical.ζ` |
 | `Millennium.RH.bridge_rh` | `formal/lean (file by file)` | open | `sorryAx` |
 | `Millennium.RH.classical_rh_from_bridge` | `formal/lean (file by file)` | open | `sorryAx` |
-| `DeltaGap44.Theorem1` | `lean (file by file)` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
-| `DeltaGap44.Theorem2` | `lean (file by file)` | conditional | `DeltaGap44.C_det`, `DeltaGap44.C_ndet`, `DeltaGap44.Phi` |
+| `DeltaCollapse.extended_completeness` | `formal/theorems (file by file)` | conditional | `DeltaCollapse.Delta`, `DeltaCollapse.I`, `DeltaCollapse.extended_solutions` |
+| `DeltaCollapse.main_delta_collapse_theorem` | `formal/theorems (file by file)` | conditional | `DeltaCollapse.Delta`, `DeltaCollapse.I`, `DeltaCollapse.extended_solutions` |
+| `DeltaCollapse.strict_extension` | `formal/theorems (file by file)` | conditional | `DeltaCollapse.Delta`, `DeltaCollapse.I`, `DeltaCollapse.extended_solutions` |
 | `NavierStokes.lyapunov_decreases` | `lean (file by file)` | open | `sorryAx` |
+| `NavierStokes.energy_decay_exponential` | `lean (file by file)` | open | `sorryAx` |
 | `NavierStokes.converges_to_critical_point` | `lean (file by file)` | open | `sorryAx` |
 | `NavierStokes.rh_coupling_ensures_stability` | `lean (file by file)` | open | `sorryAx` |
 | `NavierStokes.rh_violation_allows_singularities` | `lean (file by file)` | open | `sorryAx` |
-| `RH_implies_all_poly` | `lean (file by file)` | open | `Phi`, `balance_zero`, `delta_NP`, `sorryAx` |
+| `vertical_transfer` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
+| `horizontal_transfer` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
+| `all_in_variety` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
+| `image_in_fiber` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
+| `RH_implies_all_poly` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
 | `balance_well_defined` | `lean (file by file)` | conditional | `Phi`, `delta_NP` |
-| `RHPvsNP.p_subset_np` | `lean (file by file)` | open | `sorryAx` |
-| `RHPvsNP.scenario_gap_connection` | `lean (file by file)` | open | `sorryAx` |
-| `RHPvsNP.off_line_dominates` | `lean (file by file)` | open | `sorryAx` |
-| `RHPvsNP.aggregate_gap_zero_under_rh` | `lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.zero_contribution_magnitude` | `lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.off_line_contribution_dominates` | `lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.primes_dont_let` | `lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.definitional_results_invariant` | `lean (file by file)` | open | `sorryAx`, `RiemannHypothesis.Ax_B` |
-| `RiemannHypothesis.p_eq_np_implies_f_np_bounded` | `lean (file by file)` | open | `sorryAx` |
-| `ClassicalExpandedFramework.WeakSol_implies_StrongSol_Expanded` | `lean4 (file by file)` | open | `sorryAx` |
-| `ClassicalExpandedFramework.WeakSol_iff_StrongSol_Expanded` | `lean4 (file by file)` | open | `sorryAx` |
+| `RiemannHypothesis.t2_has_rh` | `lean (file by file)` | conditional | `RiemannHypothesis.Ax_B` |
+| `RiemannHypothesis.t2_has_p_neq_np` | `lean (file by file)` | conditional | `RiemannHypothesis.Ax_B` |
+| `RiemannHypothesis.t9_minimal` | `lean (file by file)` | conditional | `RiemannHypothesis.Ax_B` |
+| `YangMills.mass_gap_from_spectral` | `lean (file by file)` | open | `sorryAx` |
+| `YangMills.mass_gap_equals_golden_ratio` | `lean (file by file)` | open | `sorryAx` |
+| `ClassicalExpandedFramework.no_StrongSol_Classical` | `lean4 (file by file)` | open | `sorryAx` |
 | `ClassicalExpandedFramework.LogicalSpace_equal` | `lean4 (file by file)` | conditional | `ClassicalExpandedFramework.conservative_extension` |
 | `ClassicalExpandedFramework.structural_gap_theorem` | `lean4 (file by file)` | open | `sorryAx` |
 | `Classical_System_Insufficient` | `lean4 (file by file)` | open | `Axiom_A_Adequacy`, `Axiom_E_Evidence`, `sorryAx` |
@@ -146,62 +185,27 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5c5ec3d9597f5ffd00210
 | `DeltaGap44.severe_obstruction_threshold` | `lean4 (file by file)` | open | `sorryAx` |
 | `DeltaGap44.no_strong_solution_classical` | `lean4 (file by file)` | open | `sorryAx` |
 | `DeltaGap44.structural_impossibility` | `lean4 (file by file)` | open | `sorryAx` |
-| `DeltaGap44.break_break_theorem` | `lean4 (file by file)` | open | `sorryAx` |
-| `DeltaGap44.spectrum_is_bidimensional` | `lean4 (file by file)` | open | `sorryAx` |
-| `DeltaGap44.rh_pvsnp_independent` | `lean4 (file by file)` | open | `sorryAx` |
-| `DeltaGap44.independent_regime_summary` | `lean4 (file by file)` | open | `sorryAx` |
-| `StructuralInadequacy.no_universal_category` | `lean4 (file by file)` | open | `sorryAx` |
-| `StructuralInadequacy.no_universal_space` | `lean4 (file by file)` | open | `sorryAx` |
-| `StructuralInadequacy.inadequacy_theorem` | `lean4 (file by file)` | conditional | `StructuralInadequacy.law_S1_singularity_failure` |
-| `StructuralInadequacy.inadequacy_from_laws` | `lean4 (file by file)` | conditional | `StructuralInadequacy.ZFC_expressible` |
-| `MillenniumFramework.BSD_bridge_characterization` | `lean4 (file by file)` | open | `sorryAx` |
-| `GlobalMillenniumTheorem.group1_implies_RH` | `lean4 (file by file)` | open | `sorryAx` |
-| `GridEquation.productAnchor_vanishes_at_anchor` | `lean4 (file by file)` | open | `sorryAx` |
-| `GridEquation.gridPotential_nonneg` | `lean4 (file by file)` | open | `sorryAx` |
-| `total_energy_minimum` | `lean4 (file by file)` | open | `sorryAx` |
-| `torsion_tension_equivalence` | `lean4 (file by file)` | open | `grid_induces_metric`, `grid_potential_minimum`, `phase_oscillator_isomorphism`, `riemannZeta`, `sorryAx` |
-| `hadamard_anchoring` | `lean4 (file by file)` | open | `riemannZeta`, `sorryAx` |
-| `rh_from_grid_hypothesis` | `lean4 (file by file)` | open | `grid_induces_metric`, `grid_potential_minimum`, `phase_oscillator_isomorphism`, `riemannZeta`, `sorryAx` |
-| `MillenniumGroups.Group1.Spectral_LFunction_Theorem` | `lean4 (file by file)` | open | `sorryAx`, `MillenniumGroups.Group1.algebraicRank`, `MillenniumGroups.Group1.orderOfZero` |
-| `MillenniumGroups.Group1.Riemann_Hypothesis` | `lean4 (file by file)` | open | `sorryAx`, `MillenniumGroups.Group1.RiemannZeta`, `MillenniumGroups.Group1.algebraicRank`, `MillenniumGroups.Group1.orderOfZero` |
-| `MillenniumGroups.Group2.Global_Regularity_of_Geometric_Flows` | `lean4 (file by file)` | open | `sorryAx`, `MillenniumGroups.Group2.SmoothManifold`, `MillenniumGroups.Group2.Tensor` |
-| `MillenniumGroups.Group2.NavierStokes_Existence_Smoothness` | `lean4 (file by file)` | open | `sorryAx`, `MillenniumGroups.Group2.NSFlow`, `MillenniumGroups.Group2.SmoothManifold`, `MillenniumGroups.Group2.Tensor` |
-| `LocalGlobal.MetaTheorem.at_least_one_solved` | `lean4 (file by file)` | conditional | `LocalGlobal.MetaTheorem.poincare_solved` |
-| `MMEU.MMEU.emergence_theorem` | `lean4 (file by file)` | open | `sorryAx` |
-| `MMEU.new_structures_emerge` | `lean4 (file by file)` | open | `sorryAx` |
-| `NavierStokes.pi_not_injective` | `lean4 (file by file)` | open | `sorryAx` |
-| `NavierStokes.LRE.ns_compression_barrier` | `lean4 (file by file)` | open | `sorryAx`, `NavierStokes.LRE.LerayHopfSolution`, `NavierStokes.LRE.R_critical`, `NavierStokes.LRE.dissipation`, `NavierStokes.LRE.energy`, `NavierStokes.LRE.ns_residual_variation` |
-| `NavierStokes.energy_projection_not_injective` | `lean4 (file by file)` | open | `sorryAx` |
-| `NavierStokes.fiber_diameter_unbounded` | `lean4 (file by file)` | open | `sorryAx` |
-| `RiemannHypothesis.displacement_vanishes` | `lean4 (file by file)` | open | `sorryAx` |
-| `RiemannHypothesis.real_part_half` | `lean4 (file by file)` | open | `sorryAx` |
-| `RHSpectral.primeSpectralControl` | `lean4 (file by file)` | open | `sorryAx` |
-| `RHSpectral.rh_iff_maxGapZero` | `lean4 (file by file)` | open | `sorryAx` |
-| `SOF.unified_promotion` | `lean4 (file by file)` | conditional | `SOF.axiom_U_promotion` |
-| `SOF.unified_zero_obstruction` | `lean4 (file by file)` | open | `sorryAx`, `SOF.axiom_E_expanded_zero`, `SOF.expanded_incorporation` |
-| `SOF.unified_enables_strong` | `lean4 (file by file)` | conditional | `SOF.axiom_U_promotion` |
-| `SOF.classical_blocks_strong` | `lean4 (file by file)` | open | `sorryAx`, `Lean.ofReduceBool`, `SOF.axiom_A_structure`, `SOF.axiom_C_classical_obstruction` |
-| `StructuralCheckmate.StructuralCheckmate` | `lean4 (file by file)` | conditional | `StructuralCheckmate.AdequacyImpliesUnification`, `StructuralCheckmate.NoUnifyingStructureInClassical` |
-| `StructuralCheckmate.ForcedBifurcation` | `lean4 (file by file)` | conditional | `StructuralCheckmate.AdequacyImpliesUnification`, `StructuralCheckmate.NoUnifyingStructureInClassical` |
-| `StructuralCheckmate.Checkmate` | `lean4 (file by file)` | open | `sorryAx`, `StructuralCheckmate.AdequacyImpliesUnif`, `StructuralCheckmate.NoUnifClassical` |
-| `StructuralCheckmate.strategic_checkmate` | `lean4 (file by file)` | open | `sorryAx`, `StructuralCheckmate.AdequacyImpliesUnif`, `StructuralCheckmate.NoUnifClassical` |
-| … 35 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| … 117 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 260 of them (90 closed, 23 conditional, 147 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 427 the kernel has no result:
+The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 409 of them (168 closed, 57 conditional, 184 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 278 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 281 |
-| checked file by file: the written proof does not pass the kernel | 141 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 158 |
+| checked file by file: the written proof does not pass the kernel | 110 |
 | the file did not compile (an error in it or in a file it imports) | 5 |
+| the file compiled, but the name did not appear in the kernel (private, mutual or macro-generated) | 5 |
 
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 20 file(s)): made for the verified commit; it does not apply to the published commit as is
-* `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 18 file(s)): made for the verified commit; it does not apply to the published commit as is
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 8 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 23 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 11 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 222 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 27 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
 ## Files in this folder
 

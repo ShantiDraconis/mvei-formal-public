@@ -1,0 +1,379 @@
+--- a/i-foundations.lean
++++ b/i-foundations.lean
+@@ -13,6 +13,8 @@
+ import Mathlib.Algebra.Field.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace IConstant
+ 
+ universe u
+@@ -175,9 +177,9 @@
+ 
+ end IField
+ 
+-/---------------------------------------------------------------/
+-/-- Um modelo concreto: o corpo dos reais com `I = 1`. -/
+-/---------------------------------------------------------------/
++/--------------------------------------------------------------/
++/- Um modelo concreto: o corpo dos reais com `I = 1`. -/
++/--------------------------------------------------------------/
+ 
+ /--
+ Instância concreta de `IField ℝ`.
+--- a/src/FormalSuite/Core/MeasurePDE.lean
++++ b/src/FormalSuite/Core/MeasurePDE.lean
+@@ -15,6 +15,8 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import FormalSuite.Core.Prelude
+ 
++noncomputable section
++
+ /-!
+ # Measure Theory and PDE Structures
+ 
+@@ -94,7 +96,7 @@
+ lemma L2Norm.zero_val (α : Type*) [NormedAddCommGroup α] :
+     (L2Norm.zero α).val = 0 := rfl
+ 
+-/--
++/-
+ H¹ Sobolev norm structure.
+ 
+ The H¹ norm combines the L² norm of the function with the
+@@ -153,7 +155,7 @@
+ @[simp]
+ lemma EnergyFunctional.zero_energy : EnergyFunctional.zero.energy = 0 := rfl
+ 
+-/--
++/-
+ Energy dissipation rate (for viscous fluids).
+ 
+ For Navier-Stokes: dE/dt ≤ -ν ∫_Ω |∇u|² dx
+--- a/src/FormalSuite/Core/Prelude.lean
++++ b/src/FormalSuite/Core/Prelude.lean
+@@ -16,6 +16,8 @@
+ import Mathlib.Analysis.Normed.Field.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ /-!
+ # FormalSuite Prelude
+ 
+@@ -68,7 +70,7 @@
+ @[simp]
+ lemma square_def {α : Type*} [Monoid α] (x : α) : square x = x * x := rfl
+ 
+-/-- Cube of a value in a monoid. -/
++/- Cube of a value in a monoid. -/
+ def cube {α : Type*} [Monoid α] (x : α) : α := x * x * x
+ 
+ @[simp]
+@@ -129,11 +131,11 @@
+ @[simp]
+ lemma Complex.re_one' : Complex.re 1 = 1 := Complex.one_re
+ 
+-/-- Im(1) = 0. -/
++/- Im(1) = 0. -/
+ @[simp]
+ lemma Complex.im_one' : Complex.im 1 = 0 := Complex.one_im
+ 
+-/-- The critical line s = 1/2 + it for real t. -/
++/- The critical line s = 1/2 + it for real t. -/
+ noncomputable def criticalLine (t : ℝ) : ℂ := ⟨1/2, t⟩
+ 
+ @[simp]
+--- a/src/FormalSuite/Geometry/Cone00.lean
++++ b/src/FormalSuite/Geometry/Cone00.lean
+@@ -25,6 +25,8 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ 
++noncomputable section
++
+ /-!
+ # Geometric Cone Structures
+ 
+@@ -186,7 +188,7 @@
+   unfold distToVertex
+   simp
+ 
+-/-- Scaling affects distance to vertex linearly (for λ ≥ 0). -/
++/- Scaling affects distance to vertex linearly (for λ ≥ 0). -/
+ lemma distToVertex_smul {n : ℕ} (x : Fin n → ℝ) (c : ℝ) (hc : 0 ≤ c) :
+     distToVertex (c • x) = c * distToVertex x := by
+   unfold distToVertex
+@@ -248,7 +250,7 @@
+   ext x
+   simp [Cone.I_scaled, IField.I_eq_one]
+ 
+-/--
++/-
+ The vertex is I-invariant: I · vertex = vertex.
+ -/
+ lemma vertex_I_invariant {n : ℕ} (C : Cone n) :
+--- a/src/FormalSuite/I/Foundations.lean
++++ b/src/FormalSuite/I/Foundations.lean
+@@ -21,11 +21,13 @@
+ 
+ import FormalSuite.Core.Prelude
+ 
++noncomputable section
++
+ /-!
+ # IField Foundations
+ 
+ This module establishes the axiomatic foundation for the symbolic
+-constant `I`, which we treat as an abstract element satisfying
++axiom `I`, which we treat as an abstract element satisfying
+ specific algebraic properties.
+ 
+ ## Philosophy
+@@ -96,7 +98,7 @@
+ lemma I_mul_self' : 𝓘 * 𝓘 = (𝓘 : α) :=
+   IField.I_mul_self (α := α)
+ 
+-/-- `𝓘 ≠ 0`. -/
++/- `𝓘 ≠ 0`. -/
+ lemma I_ne_zero' : (𝓘 : α) ≠ 0 :=
+   IField.I_ne_zero (α := α)
+ 
+@@ -223,7 +225,7 @@
+ lemma I_pow_two : (𝓘 : α) ^ 2 = (𝓘 : α) := by
+   simpa [pow_two, I_mul_self']
+ 
+-/--
++/-
+ For any `n ≥ 1`, `𝓘ⁿ = 𝓘`.
+ 
+ Since `𝓘 = 1` and `1ⁿ = 1` in any field.
+@@ -249,15 +251,15 @@
+ @[simp]
+ lemma I_mul_one : 𝓘 * (1 : α) = (𝓘 : α) := by simp
+ 
+-/-- `1 * 𝓘 = 𝓘`. -/
++/- `1 * 𝓘 = 𝓘`. -/
+ @[simp]
+ lemma one_mul_I : (1 : α) * 𝓘 = (𝓘 : α) := by simp
+ 
+-/-- `𝓘 + 0 = 𝓘`. -/
++/- `𝓘 + 0 = 𝓘`. -/
+ @[simp]
+ lemma I_add_zero : 𝓘 + (0 : α) = (𝓘 : α) := by simp
+ 
+-/-- `𝓘 is invertible (since 𝓘 = 1). -/
++/- `𝓘 is invertible (since 𝓘 = 1). -/
+ lemma I_inv : (𝓘 : α)⁻¹ = (1 : α) := by
+   simp [I_eq_one]
+ 
+--- a/src/FormalSuite/I/OperatorAlgebra.lean
++++ b/src/FormalSuite/I/OperatorAlgebra.lean
+@@ -24,6 +24,8 @@
+ import FormalSuite.I.Foundations
+ import Mathlib.Algebra.Module.LinearMap.Basic
+ 
++noncomputable section
++
+ /-!
+ # I-Parameterized Operator Algebra
+ 
+@@ -284,7 +286,7 @@
+   projectors : List (IProjector α V)
+   /-- Projectors sum to identity. -/
+   sum_to_id : projectors.foldl (fun acc P => acc + P.toLinearMap) 0 = LinearMap.id
+-  /-- Projectors are mutually orthogonal (PᵢPⱼ = 0 for i ≠ j). -/
++  /- Projectors are mutually orthogonal (PᵢPⱼ = 0 for i ≠ j). -/
+   -- orthogonal : ∀ (i j : Fin projectors.length), i ≠ j →
+   --   (projectors.get i).toLinearMap.comp (projectors.get j).toLinearMap = 0
+ 
+--- a/src/FormalSuite/NavierStokes/CollapseLemmaNS.lean
++++ b/src/FormalSuite/NavierStokes/CollapseLemmaNS.lean
+@@ -23,6 +23,8 @@
+ import FormalSuite.I.Foundations
+ import FormalSuite.I.OperatorAlgebra
+ 
++noncomputable section
++
+ /-!
+ # Collapse Lemma for Navier-Stokes
+ 
+@@ -119,7 +121,7 @@
+   unfold I_energy
+   simp [IField.I_eq_one]
+ 
+-/--
++/-
+ Energy bound structure: E(t) ≤ C for some constant C.
+ -/
+ structure EnergyBound where
+--- a/src/FormalSuite/NavierStokes/PDEEnergyInequalities.lean
++++ b/src/FormalSuite/NavierStokes/PDEEnergyInequalities.lean
+@@ -18,6 +18,8 @@
+ import FormalSuite.Core.MeasurePDE
+ import FormalSuite.I.Foundations
+ 
++noncomputable section
++
+ /-!
+ # PDE Energy Inequalities
+ 
+@@ -111,7 +113,7 @@
+   /-- Decay rate. -/
+   decayRate : ℝ
+   /-- Decay rate is positive. -/
+-  λ_pos : 0 < decayRate
++  «λ_pos» : 0 < decayRate
+   /-- Energy at time t. -/
+   E : ℝ → ℝ
+   /-- Energy is non-negative. -/
+@@ -138,31 +140,31 @@
+     · linarith
+     · intro t _
+       have h := ed.decay_bound t (by linarith)
+-      have hexp : 0 < Real.exp (-ed.λ * t) := Real.exp_pos _
+-      have hbound : ed.E₀ * Real.exp (-ed.λ * t) ≤ 0 := by
++      have hexp : 0 < Real.exp (-ed.«λ» * t) := Real.exp_pos _
++      have hbound : ed.E₀ * Real.exp (-ed.«λ» * t) ≤ 0 := by
+         apply mul_nonpos_of_nonpos_of_nonneg hE₀
+         linarith
+       linarith [ed.E_nonneg t]
+   · -- If E₀ > 0
+     push_neg at hE₀
+     -- Choose T such that E₀ * exp(-λT) < ε
+-    use (Real.log (ed.E₀ / ε) / ed.λ) + 1
++    use (Real.log (ed.E₀ / ε) / ed.«λ») + 1
+     constructor
+     · -- Show T > 0
+       have h1 : ed.E₀ / ε > 0 := div_pos hE₀ hε
+-      have h2 : Real.log (ed.E₀ / ε) / ed.λ > -1 := by
++      have h2 : Real.log (ed.E₀ / ε) / ed.«λ» > -1 := by
+         by_cases hlog : Real.log (ed.E₀ / ε) ≥ 0
+         · apply div_nonneg hlog (le_of_lt ed.decayRate_pos) |>.trans_lt
+           linarith
+         · push_neg at hlog
+-          have : Real.log (ed.E₀ / ε) / ed.λ ≥ Real.log (ed.E₀ / ε) := by
++          have : Real.log (ed.E₀ / ε) / ed.«λ» ≥ Real.log (ed.E₀ / ε) := by
+             apply le_div_iff ed.decayRate_pos |>.mpr
+-            have hλle : ed.λ ≤ 1 ∨ 1 < ed.λ := le_or_lt ed.λ 1
+-            cases hλle with
++            have «hλle» : ed.«λ» ≤ 1 ∨ 1 < ed.«λ» := le_or_lt ed.«λ» 1
++            cases «hλle» with
+             | inl h => linarith [mul_le_of_le_one_right (le_of_lt hlog) h]
+             | inr h =>
+               have := mul_lt_mul_of_pos_right hlog (lt_trans (by linarith : (0:ℝ) < 1) h)
+-              linarith [mul_comm ed.λ (Real.log (ed.E₀ / ε))]
++              linarith [mul_comm ed.«λ» (Real.log (ed.E₀ / ε))]
+           linarith
+       linarith
+     · intro t ht
+@@ -171,17 +173,17 @@
+       -- Since t ≥ T = log(E₀/ε)/λ + 1 > log(E₀/ε)/λ
+       -- We have λt > log(E₀/ε), so -λt < -log(E₀/ε) = log(ε/E₀)
+       -- Thus exp(-λt) < ε/E₀, so E₀ * exp(-λt) < ε
+-      have ht' : t > Real.log (ed.E₀ / ε) / ed.λ := by linarith
+-      have hλt : ed.λ * t > Real.log (ed.E₀ / ε) := by
++      have ht' : t > Real.log (ed.E₀ / ε) / ed.«λ» := by linarith
++      have «hλt» : ed.«λ» * t > Real.log (ed.E₀ / ε) := by
+         rw [gt_iff_lt, ← div_lt_iff ed.decayRate_pos]
+         exact ht'
+-      have hexp : Real.exp (-ed.λ * t) < ε / ed.E₀ := by
++      have hexp : Real.exp (-ed.«λ» * t) < ε / ed.E₀ := by
+         rw [Real.exp_lt_iff_lt_log (div_pos hε hE₀)]
+         simp only [neg_mul]
+         rw [Real.log_div (ne_of_gt hε) (ne_of_gt hE₀)]
+         linarith
+       calc ed.E t
+-        ≤ ed.E₀ * Real.exp (-ed.λ * t) := h
++        ≤ ed.E₀ * Real.exp (-ed.«λ» * t) := h
+       _ < ed.E₀ * (ε / ed.E₀) := by apply mul_lt_mul_of_pos_left hexp hE₀
+       _ = ε := by field_simp
+ 
+@@ -259,11 +261,11 @@
+   unfold I_L2_norm
+   simp [IField.I_eq_one]
+ 
+-/--
++/-
+ I-scaled energy decay preserves the decay property.
+ -/
+ lemma I_preserves_decay (ed : EnergyDecay) (t : ℝ) (ht : t ≥ 0) :
+-    I_L2_norm (ed.E t) ≤ I_L2_norm ed.E₀ * Real.exp (-ed.λ * t) := by
++    I_L2_norm (ed.E t) ≤ I_L2_norm ed.E₀ * Real.exp (-ed.«λ» * t) := by
+   simp
+   exact ed.decay_bound t ht
+ 
+--- a/src/FormalSuite/Zeta/CollapseLemmaRH.lean
++++ b/src/FormalSuite/Zeta/CollapseLemmaRH.lean
+@@ -25,6 +25,8 @@
+ import FormalSuite.Zeta.ZetaIFormal
+ import FormalSuite.I.OperatorAlgebra
+ 
++noncomputable section
++
+ /-!
+ # Collapse Lemma for Riemann Hypothesis
+ 
+--- a/src/FormalSuite/Zeta/ZetaIFormal.lean
++++ b/src/FormalSuite/Zeta/ZetaIFormal.lean
+@@ -30,6 +30,8 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Topology.Basic
+ 
++noncomputable section
++
+ /-!
+ # I-Normalized Zeta Structures
+ 
+@@ -112,7 +114,7 @@
+ @[simp]
+ lemma criticalLineParam_im (t : ℝ) : (criticalLineParam t).im = t := rfl
+ 
+-/--
++/-
+ The parameterization lands on the critical line.
+ -/
+ lemma criticalLineParam_mem (t : ℝ) : criticalLineParam t ∈ CriticalLine := by
+@@ -136,7 +138,7 @@
+ lemma reflection_im (s : ℂ) : (reflection s).im = -s.im := by
+   simp [reflection]
+ 
+-/--
++/-
+ Reflection is an involution.
+ -/
+ @[simp]
+@@ -144,7 +146,7 @@
+   unfold reflection
+   ring
+ 
+-/--
++/-
+ Reflection preserves the critical strip.
+ -/
+ lemma reflection_mem_criticalStrip {s : ℂ} (hs : s ∈ CriticalStrip) :
+@@ -305,7 +307,7 @@
+   unfold I_normalized
+   simp [IField.I_eq_one]
+ 
+-/--
++/-
+ I-normalized zeros remain in the critical strip.
+ -/
+ lemma AbstractZero.I_normalized_in_strip (z : AbstractZero) :
+--- a/test/Geometry/Cone00Spec.lean
++++ b/test/Geometry/Cone00Spec.lean
+@@ -53,9 +53,9 @@
+   exact distToVertex_nonneg x
+ 
+ /-- Test: Scaling distance by positive factor. -/
+-example (x : Fin 3 → ℝ) (λ : ℝ) (hλ : 0 ≤ λ) :
+-    distToVertex (λ • x) = λ * distToVertex x := by
+-  exact distToVertex_smul x λ hλ
++example (x : Fin 3 → ℝ) («λ» : ℝ) («hλ» : 0 ≤ «λ») :
++    distToVertex («λ» • x) = «λ» * distToVertex x := by
++  exact distToVertex_smul x «λ» «hλ»
+ 
+ /-!
+ ## Collapse Tests

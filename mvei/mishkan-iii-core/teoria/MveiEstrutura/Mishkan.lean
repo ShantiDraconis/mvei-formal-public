@@ -14,6 +14,8 @@
 import archaeology.HARAPPA_CATALOG
 import MveiEstrutura.Teoria.Dados
 
+noncomputable section
+
 set_option autoImplicit false
 
 universe u v
@@ -249,7 +251,9 @@ def valid (f : Formula) : Prop := f
 abbrev sound (s : LogicalSystem) : Prop := ∀ (formula : Formula), derivable s formula → valid formula
 abbrev complete (s : LogicalSystem) : Prop := ∀ (formula : Formula), valid formula → derivable s formula
 abbrev consistent (s : LogicalSystem) : Prop := ∀ (formula : Formula), derivable s formula → derivable s (¬formula) → False
-def decidable_system (s : LogicalSystem) : Prop := Nonempty (∀ f, Decidable (derivable s f))
+-- `Decidable` é um tipo (classe de dados): "o sistema é decidível" como proposição é `Nonempty` da família de
+-- decisões (a mesma leitura de reformulacoes/TeoriaMishkan e de SemanticaMishkan.decidabilidade_classica)
+abbrev decidable_system (s : LogicalSystem) : Prop := Nonempty (∀ (formula : Formula), Decidable (derivable s formula))
 theorem soundness_lemma : ∀ {s : LogicalSystem} {f : Formula}, derives s → derivable s f → valid f := by
   intro _ _ hs hd
   exact hd hs
