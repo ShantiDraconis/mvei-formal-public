@@ -1,0 +1,1706 @@
+--- a/provers/lean/Complexity.lean
++++ b/provers/lean/Complexity.lean
+@@ -16,6 +16,8 @@
+ import Mathlib.Data.Nat.Basic
+ import Mathlib.Logic.Basic
+ 
++noncomputable section
++
+ namespace Universe00.Complexity
+ 
+ /-!
+@@ -47,13 +49,13 @@
+ /-! ## Basic Definitions -/
+ 
+ /-- Alphabet type (can be extended) -/
+-def Alphabet : Type := Fin 2
++abbrev Alphabet : Type := Fin 2
+ 
+ /-- A string is a list of alphabet symbols -/
+-def String : Type := List Alphabet
++abbrev String : Type := List Alphabet
+ 
+ /-- A language is a set of strings -/
+-def Language : Type := String → Prop
++abbrev Language : Type := String → Prop
+ 
+ /-! ## Complexity Classes -/
+ 
+@@ -92,7 +94,7 @@
+   correctness : ∀ w, L1 w ↔ L2 (reduction w)
+   time_complexity : ∀ w, sorry  -- reduction runs in time_bound
+ 
+-notation:50 L1 " ≤ₚ " L2 => PolynomialReduction L1 L2
++notation:50 L1:51 " ≤ₚ " L2:51 => PolynomialReduction L1 L2
+ 
+ /-! ## Basic Properties of Complexity Classes -/
+ 
+--- a/provers/lean/Core/AuthorAuthority.lean
++++ b/provers/lean/Core/AuthorAuthority.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Core/AuthorAuthority.lean
+   
+--- a/provers/lean/FluidDynamics.lean
++++ b/provers/lean/FluidDynamics.lean
+@@ -15,6 +15,9 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Topology.MetricSpace.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace Universe00.FluidDynamics
+ 
+@@ -47,16 +50,16 @@
+ /-! ## Basic Structures -/
+ 
+ /-- Three-dimensional Euclidean space -/
+-abbrev ℝ³ := Fin 3 → ℝ
++abbrev «ℝ³» := Fin 3 → ℝ
+ 
+ /-- Time parameter -/
+ abbrev Time := ℝ
+ 
+ /-- A vector field maps space-time to vectors -/
+-def VectorField := ℝ³ × Time → ℝ³
++def VectorField := «ℝ³» × Time → «ℝ³»
+ 
+ /-- A scalar field (for pressure) -/
+-def ScalarField := ℝ³ × Time → ℝ
++def ScalarField := «ℝ³» × Time → ℝ
+ 
+ /-! ## Differential Operators -/
+ 
+@@ -93,12 +96,12 @@
+ /-! ## Initial and Boundary Conditions -/
+ 
+ /-- Initial condition for velocity -/
+-structure InitialCondition (u : VectorField) (u₀ : ℝ³ → ℝ³) : Prop where
++structure InitialCondition (u : VectorField) (u₀ : «ℝ³» → «ℝ³») : Prop where
+   initial_value : ∀ x, u (x, 0) = u₀ x
+   incompressible_init : sorry  -- div u₀ = 0
+ 
+ /-- Boundary condition (zero at boundary for simplicity) -/
+-structure BoundaryCondition (u : VectorField) (Ω : Set ℝ³) : Prop where
++structure BoundaryCondition (u : VectorField) (Ω : Set «ℝ³») : Prop where
+   zero_on_boundary : ∀ x t, x ∈ frontier Ω → u (x, t) = 0
+ 
+ /-! ## Energy and Regularity -/
+@@ -131,7 +134,7 @@
+ /-! ## Existence Results -/
+ 
+ /-- Local existence of smooth solutions (known result) -/
+-theorem local_existence (u₀ : ℝ³ → ℝ³) (f : VectorField) 
++theorem local_existence (u₀ : «ℝ³» → «ℝ³») (f : VectorField) 
+     (h_smooth : sorry) (h_energy : sorry) :
+   ∃ T > 0, ∃ u : VectorField, ∃ p : ScalarField,
+     NavierStokes u p f ∧ 
+@@ -161,10 +164,10 @@
+ structure NavierStokesGlobalRegularity where
+   /-- One of the following must hold -/
+   dichotomy : 
+-    (∀ u₀ : ℝ³ → ℝ³, ∀ f : VectorField, sorry → sorry →
++    (∀ u₀ : «ℝ³» → «ℝ³», ∀ f : VectorField, sorry → sorry →
+       ∃ u : VectorField, ∃ p : ScalarField,
+         NavierStokes u p f ∧ InitialCondition u u₀ ∧ GloballyRegular u) ∨
+-    (∃ u₀ : ℝ³ → ℝ³, ∃ f : VectorField, sorry → sorry →
++    (∃ u₀ : «ℝ³» → «ℝ³», ∃ f : VectorField, sorry → sorry →
+       ∀ u : VectorField, ∀ p : ScalarField,
+         NavierStokes u p f → InitialCondition u u₀ → HasBlowUp u)
+ 
+@@ -210,7 +213,7 @@
+   energy_inequality : sorry  -- Energy is non-increasing
+ 
+ /-- Weak solutions always exist (Leray, 1934) -/
+-theorem weak_solution_exists (u₀ : ℝ³ → ℝ³) (f : VectorField) :
++theorem weak_solution_exists (u₀ : «ℝ³» → «ℝ³») (f : VectorField) :
+   ∃ u : VectorField, ∃ p : ScalarField, WeakSolution u p f := by
+   sorry  -- Classical result
+ 
+--- a/provers/lean/Foundations/DistinctionAxioms.lean
++++ b/provers/lean/Foundations/DistinctionAxioms.lean
+@@ -12,6 +12,10 @@
+ import Universe00.Foundations.LogicAndSetsDelta
+ import Universe00.Foundations.NumericClassesI
+ import Mathlib.Data.Real.Basic
++import Mathlib.Tactic.NormNum
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace Universe00.Foundations.Distinction
+ 
+--- a/provers/lean/Foundations/DistinctionExamples.lean
++++ b/provers/lean/Foundations/DistinctionExamples.lean
+@@ -9,6 +9,11 @@
+ -/
+ 
+ import Universe00.Foundations.DistinctionAxioms
++import Mathlib.Tactic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace Universe00.Foundations.Distinction.Examples
+ 
+--- a/provers/lean/Foundations/ImpossibilityTheorem.lean
++++ b/provers/lean/Foundations/ImpossibilityTheorem.lean
+@@ -3,6 +3,8 @@
+ import Mathlib.Tactic
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ /-
+   Impossibility Theorem for 0/0 in Fields
+   
+@@ -113,7 +115,7 @@
+   have : (1 : F) ≠ 0 := one_ne_zero
+   exact this (by assumption)
+ 
+-end FieldCollapse
++end Impossibility  -- [MVEI] era: end FieldCollapse
+ 
+ section WeakCancellation
+ 
+@@ -293,7 +295,8 @@
+ 
+ end Summary
+ 
+-end ImpossibilityTheorem
++end Universe00  -- [MVEI] era: end ImpossibilityTheorem
++/-
+ Standard field cancellation: if c ≠ 0 and a·c = b·c, then a = b 
+ -/
+ theorem field_cancellation {a b c : F} (hc : c ≠ 0) (h : a * c = b * c) : a = b := by
+@@ -396,7 +399,7 @@
+   intros F _ _ td
+   exact nontrivial_field_no_strong_cancellation td
+ 
+-end Universe00.Impossibility
++end ImpossibilityTheorem.FieldCollapse  -- [MVEI] era: end Universe00.Impossibility
+ 
+ /-!
+ ## Extension: Sketch of Totalized Algebra
+--- a/provers/lean/Foundations/ImpossibilityTheorems.lean
++++ b/provers/lean/Foundations/ImpossibilityTheorems.lean
+@@ -11,6 +11,9 @@
+ 
+ import Mathlib.Algebra.Field.Defs
+ import Mathlib.Algebra.Ring.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace Universe00.Foundations.Impossibility
+ 
+--- a/provers/lean/Foundations/LogicAndSetsDelta.lean
++++ b/provers/lean/Foundations/LogicAndSetsDelta.lean
+@@ -12,6 +12,8 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Analysis.Complex.Basic
+ 
++noncomputable section
++
+ /-!
+ # ZFC-Δ: Set Theory with Delta Extension
+ 
+--- a/provers/lean/Foundations/NumericClassesI.lean
++++ b/provers/lean/Foundations/NumericClassesI.lean
+@@ -9,6 +9,10 @@
+ -/
+ 
+ import Universe00.Foundations.LogicAndSetsDelta
++import Mathlib.Tactic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace Universe00.Foundations
+ 
+--- a/provers/lean/Foundations/RiemannHypothesis.lean
++++ b/provers/lean/Foundations/RiemannHypothesis.lean
+@@ -15,6 +15,8 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
++noncomputable section
++
+ namespace Universe00.Foundations.RiemannHypothesis
+ 
+ open Universe00.Foundations
+@@ -73,7 +75,7 @@
+ /-! ## I-Parameter Representation -/
+ 
+ /-- The I-parameter as a real value in [0, 1] representing the collapse phase -/
+-def i_parameter : Type := {r : ℝ // 0 ≤ r ∧ r ≤ 1}
++abbrev i_parameter : Type := {r : ℝ // 0 ≤ r ∧ r ≤ 1}
+ 
+ /-- I = 0 represents coherent phase (no collapse) -/
+ def coherent_phase : i_parameter := ⟨0, by norm_num, by norm_num⟩
+--- a/provers/lean/Foundations/SorrySingularity.lean
++++ b/provers/lean/Foundations/SorrySingularity.lean
+@@ -17,6 +17,8 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ /-!
+ # The Harapan Singularity Axiom
+ 
+--- a/provers/lean/Foundations/StructuralResidueFramework.lean
++++ b/provers/lean/Foundations/StructuralResidueFramework.lean
+@@ -13,6 +13,8 @@
+ import Mathlib.Analysis.Normed.Group.Basic
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ namespace Universe00.StructuralResidue
+ 
+ /-! ## Core Definitions -/
+@@ -116,7 +118,7 @@
+   | mk : RiemannHypothesis
+ 
+ /-- Complex numbers representing potential zeros -/
+-def RH_Domain := ℂ
++abbrev RH_Domain := ℂ
+ 
+ /-- RH residue: distance from critical line -/
+ def rh_residue (ρ : ℂ) : ℝ := |ρ.re - 1/2|
+--- a/provers/lean/LA2028_Applications/SchedulingComplexity.lean
++++ b/provers/lean/LA2028_Applications/SchedulingComplexity.lean
+@@ -199,7 +199,7 @@
+ 
+ /-! ## Notas de Implementação -/
+ 
+-/--
++/-
+ **Algoritmos Sugeridos para LA2028:**
+ 
+ 1. **Constraint Programming (CP):**
+--- a/provers/lean/LA2028_Applications/SecurityReductions.lean
++++ b/provers/lean/LA2028_Applications/SecurityReductions.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-!
+ # Reduções de Segurança Baseadas na Hipótese de Riemann
+ 
+@@ -34,7 +35,7 @@
+ /-! ## Definições de Segurança -/
+ 
+ /-- Tamanho de chave em bits -/
+-def KeySize := Nat
++abbrev KeySize := Nat
+ 
+ /-- Tipo abstrato para algoritmos de ataque -/
+ structure Attack where
+@@ -108,7 +109,7 @@
+ 
+ /-! ## Segurança de RSA e Distribuição de Primos -/
+ 
+-/--
++/-
+ **Fatoração RSA:** A segurança de RSA depende da dificuldade de fatorar
+ o módulo N = p × q, onde p e q são primos grandes.
+ 
+@@ -265,7 +266,7 @@
+ 
+ /-! ## Notas de Implementação -/
+ 
+-/--
++/-
+ **Implementações Recomendadas:**
+ 
+ 1. **RSA:** OpenSSL, libsodium
+--- a/provers/lean/LRE/StructuralResidue.lean
++++ b/provers/lean/LRE/StructuralResidue.lean
+@@ -3,6 +3,11 @@
+ import Mathlib.GroupTheory.QuotientGroup.Basic
+ import Mathlib.Topology.Basic
+ import Mathlib.Data.Set.Basic
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.Ring
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ /-
+   Lei do Resíduo Estrutural (LRE) — Law of Structural Residue
+@@ -606,7 +611,7 @@
+       exact hfix x
+     exact hr this
+ 
+-end LRE
++-- [MVEI] end LRE  -- `end` sem escopo aberto
+ 
+ /-! ## Documentation
+ 
+--- a/provers/lean/Linker.lean
++++ b/provers/lean/Linker.lean
+@@ -263,19 +263,19 @@
+ teoria fundamental às aplicações LA2028.
+ -/
+ 
+-/-- **Exportação 1:** Limites de escalonamento -/
++/- **Exportação 1:** Limites de escalonamento -/
+ export scheduling_limits_from_PvsNP
+ export LA2028_requires_approximation
+ 
+-/-- **Exportação 2:** Validação de segurança -/
++/- **Exportação 2:** Validação de segurança -/
+ export security_from_Riemann
+ export LA2028_key_size_validated
+ 
+-/-- **Exportação 3:** Viabilidade de tráfego -/
++/- **Exportação 3:** Viabilidade de tráfego -/
+ export traffic_management_from_NS
+ export LA2028_traffic_feasible
+ 
+-/-- **Exportação 4:** Metas energéticas -/
++/- **Exportação 4:** Metas energéticas -/
+ export energy_optimization_from_YM
+ export LA2028_energy_target_achievable
+ 
+--- a/provers/lean/Millennium/Complexity.lean
++++ b/provers/lean/Millennium/Complexity.lean
+@@ -17,6 +17,8 @@
+ import Mathlib.Logic.Basic
+ import Mathlib.Data.Nat.Basic
+ 
++noncomputable section
++
+ namespace Millennium.Complexity
+ 
+ /-!
+@@ -46,17 +48,17 @@
+ /-! ## Basic Definitions -/
+ 
+ /-- A decision problem is a function from strings to booleans -/
+-def DecisionProblem := String → Bool
++abbrev DecisionProblem := String → Bool
+ 
+ /-- A language is a set of strings -/
+-def Language := Set String
++abbrev Language := Set String
+ 
+-/-- A Turing machine decides a language if it halts on all inputs
++/- A Turing machine decides a language if it halts on all inputs
+     and accepts exactly the strings in the language -/
+ -- Note: Full formalization requires Turing machine model from mathlib
+ 
+ /-- Time complexity: number of steps as a function of input length -/
+-def TimeComplexity := ℕ → ℕ
++abbrev TimeComplexity := ℕ → ℕ
+ 
+ /-- A language L is in TIME(f) if there exists a Turing machine that
+     decides L in time O(f(n)) where n is the input length -/
+@@ -73,7 +75,7 @@
+   { L | ∃ k : ℕ, InTimeClass L (fun n => n ^ k) }
+ 
+ /-- A verifier is a Turing machine that takes a string and a certificate -/
+-def Verifier := String → String → Bool
++abbrev Verifier := String → String → Bool
+ 
+ /-- A language L is in NP if there exists a polynomial-time verifier V such that:
+     - If x ∈ L, there exists a certificate c with V(x,c) = true
+--- a/provers/lean/Millennium/Riemann.lean
++++ b/provers/lean/Millennium/Riemann.lean
+@@ -15,6 +15,9 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace Millennium.RiemannHypothesis
+ 
+@@ -45,7 +48,7 @@
+ 
+ /-! ## Basic Definitions -/
+ 
+-/-- The Riemann zeta function (imported from mathlib) -/
++/- The Riemann zeta function (imported from mathlib) -/
+ -- Uses Mathlib's riemannZeta function
+ 
+ /-- A complex number s is in the critical strip if 0 < Re(s) < 1 -/
+--- a/provers/lean/MillenniumProblems/Complexity.lean
++++ b/provers/lean/MillenniumProblems/Complexity.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.Computability.Language
+ import Mathlib.Computability.TMComputable
+ 
++noncomputable section
++
+ /-!
+ # P vs NP Problem - Formal Statement
+ 
+@@ -44,7 +46,7 @@
+ -/
+ 
+ /-- A language is a set of strings over a finite alphabet -/
+-def Language := Set (List ℕ)
++abbrev Language := Set (List ℕ)
+ 
+ /-!
+ ## Polynomial Time Decidability
+@@ -113,7 +115,7 @@
+     (∀ w : List ℕ, w ∈ L₁ ↔ f w ∈ L₂) ∧
+     (∀ w : List ℕ, "f computes in time O(|w|^k)")
+ 
+-notation:50 L₁ " ≤ₚ " L₂ => PolyTimeReducible L₁ L₂
++notation:50 L₁:51 " ≤ₚ " L₂:51 => PolyTimeReducible L₁ L₂
+ 
+ /-- NP-Complete languages -/
+ def IsNPComplete (L : Language) : Prop :=
+--- a/provers/lean/MillenniumProblems/NavierStokes.lean
++++ b/provers/lean/MillenniumProblems/NavierStokes.lean
+@@ -3,6 +3,8 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.MeasureTheory.Integral.Bochner
+ 
++noncomputable section
++
+ /-!
+ # Navier-Stokes Existence and Smoothness - Formal Statement
+ 
+@@ -57,10 +59,10 @@
+ -/
+ 
+ /-- The spatial domain (3D space) -/
+-def Ω := ℝ × ℝ × ℝ
++abbrev Ω := ℝ × ℝ × ℝ
+ 
+ /-- Time domain -/
+-def TimeInterval := Set ℝ
++abbrev TimeInterval := Set ℝ
+ 
+ /-- Velocity field: space × time → velocity vector -/
+ def VelocityField := Ω → ℝ → (ℝ × ℝ × ℝ)
+--- a/provers/lean/MillenniumProblems/RiemannHypothesis.lean
++++ b/provers/lean/MillenniumProblems/RiemannHypothesis.lean
+@@ -1,5 +1,9 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++
++noncomputable section
+ 
+ /-!
+ # Riemann Hypothesis - Formal Statement
+--- a/provers/lean/NetworkConnectivity/Basic.lean
++++ b/provers/lean/NetworkConnectivity/Basic.lean
+@@ -9,6 +9,8 @@
+ import Universe00.Foundations.Basic
+ import Universe00.Foundations.IConstant
+ import Universe00.Foundations.Collapse
++import Mathlib.Tactic
++import Mathlib.Data.Rat.Defs
+ 
+ /-!
+ # Network Connectivity and System Resilience
+--- a/provers/lean/RHGeometry/ComplexTransition.lean
++++ b/provers/lean/RHGeometry/ComplexTransition.lean
+@@ -35,6 +35,11 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+ import Mathlib.Topology.MetricSpace.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
++
++noncomputable section
+ 
+ namespace Universe00.RHGeometry
+ 
+--- a/provers/lean/RHGeometry/FlowTensor.lean
++++ b/provers/lean/RHGeometry/FlowTensor.lean
+@@ -37,6 +37,9 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+ import Mathlib.Data.Fintype.Card
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++
++noncomputable section
+ 
+ namespace Universe00.RHGeometry
+ 
+--- a/provers/lean/Riemann/ZerosStructure.lean
++++ b/provers/lean/Riemann/ZerosStructure.lean
+@@ -10,6 +10,12 @@
+ 
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Algebra.Star.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ -- Basic complex number type from Mathlib
+ open Complex
+@@ -88,17 +94,17 @@
+     s := conj z.s
+     is_zero := conjugate_symmetry z.s z.is_zero
+     in_strip_left := by
+-      simp [Complex.conj]
++      simp [(starRingEnd ℂ)]
+       exact z.in_strip_left
+     in_strip_right := by
+-      simp [Complex.conj]
++      simp [(starRingEnd ℂ)]
+       exact z.in_strip_right
+     not_trivial := by
+       intro h
+       obtain ⟨n, hn, hs⟩ := h
+       apply z.not_trivial
+       use n, hn
+-      simp [Complex.conj] at hs
++      simp [(starRingEnd ℂ)] at hs
+       convert hs using 1
+       ext <;> simp
+   }
+@@ -150,12 +156,12 @@
+   · -- Show z3.s = 1 - conj z.s
+     calc z3.s = conj z2.s := h3
+          _ = conj (1 - z.s) := by rw [h2]
+-         _ = 1 - conj z.s := by simp [Complex.conj]
++         _ = 1 - conj z.s := by simp [(starRingEnd ℂ)]
+   constructor
+   · -- Show z.s ≠ conj z.s (i.e., s is not real)
+     intro heq
+     have : z.s.im = 0 := by
+-      have : (conj z.s).im = -z.s.im := by simp [Complex.conj]
++      have : (conj z.s).im = -z.s.im := by simp [(starRingEnd ℂ)]
+       rw [← heq] at this
+       linarith
+     -- If s is real and off critical line, then Re(s) ≠ 1/2 but Im(s) = 0
+@@ -179,7 +185,7 @@
+     intro heq
+     have hr : z.s.re = 1/2 := by
+       have h := congr_arg Complex.re heq
+-      simp [Complex.conj] at h
++      simp [(starRingEnd ℂ)] at h
+       linarith
+     exact z.off_line hr
+ 
+--- a/provers/lean/RiemannHypothesis/DeltaCollapse.lean
++++ b/provers/lean/RiemannHypothesis/DeltaCollapse.lean
+@@ -12,6 +12,9 @@
+ import RiemannHypothesis.IConstant
+ import RiemannHypothesis.RegularizedZeta
+ import Universe00.Foundations.LogicAndSetsDelta
++import Mathlib.NumberTheory.LSeries.RiemannZeta
++
++noncomputable section
+ 
+ namespace RiemannHypothesis
+ 
+--- a/provers/lean/RiemannHypothesis/IConstant.lean
++++ b/provers/lean/RiemannHypothesis/IConstant.lean
+@@ -18,6 +18,10 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Data.Complex.Exponential
+ import Mathlib.Analysis.Complex.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace RiemannHypothesis
+ 
+--- a/provers/lean/RiemannHypothesis/InfiniteFrequencyRefutation.lean
++++ b/provers/lean/RiemannHypothesis/InfiniteFrequencyRefutation.lean
+@@ -12,6 +12,12 @@
+ import RiemannHypothesis.IConstant
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Data.Complex.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
++
++noncomputable section
+ 
+ namespace RiemannHypothesis.InfiniteFrequency
+ 
+@@ -75,7 +81,7 @@
+   h_pythagoras : Complex.abs Z_n = Real.sqrt (a_n^2 + b^2)
+ 
+ /-- The network is composed of nodes indexed by natural numbers -/
+-def InfiniteNetwork := ℕ → NetworkNode
++abbrev InfiniteNetwork := ℕ → NetworkNode
+ 
+ /-- Network stability: 10^11 connections -/
+ def networkConnections : ℕ := 10^11
+--- a/provers/lean/RiemannHypothesis/RegularizedZeta.lean
++++ b/provers/lean/RiemannHypothesis/RegularizedZeta.lean
+@@ -12,6 +12,9 @@
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Data.Complex.Exponential
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace RiemannHypothesis
+ 
+--- a/provers/lean/RiemannHypothesis/RiemannProof.lean
++++ b/provers/lean/RiemannHypothesis/RiemannProof.lean
+@@ -12,6 +12,7 @@
+ import RiemannHypothesis.IConstant
+ import RiemannHypothesis.RegularizedZeta
+ import RiemannHypothesis.DeltaCollapse
++import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
+ namespace RiemannHypothesis
+ 
+@@ -35,16 +36,16 @@
+ 
+ /-! ## Summary of the Framework -/
+ 
+-/-- The I-constant is a phase parameter representing system coherence -/
++/- The I-constant is a phase parameter representing system coherence -/
+ #check I_phase
+ 
+-/-- Fundamental axiom: I ≠ 1 -/
++/- Fundamental axiom: I ≠ 1 -/
+ #check i_neq_one
+ 
+-/-- The regularized zeta function -/
++/- The regularized zeta function -/
+ #check zeta_I
+ 
+-/-- The collapse theorem -/
++/- The collapse theorem -/
+ #check delta_collapse_theorem
+ 
+ /-! ## Main Theorem Statement -/
+@@ -62,7 +63,7 @@
+ 
+ /-! ## Proof Outline -/
+ 
+-/--
++/-
+   Proof Structure:
+   
+   1. **Setup**: Define I ∈ [0,1] with I ≠ 1
+@@ -150,7 +151,7 @@
+ 
+ /-! ## Formal Verification Status -/
+ 
+-/--
++/-
+   FORMALIZATION STATUS:
+   
+   ✓ Axioms defined (I ≠ 1, phase structure, collapse laws)
+--- a/provers/lean/S5_Singularity_Kernel.lean
++++ b/provers/lean/S5_Singularity_Kernel.lean
+@@ -15,6 +15,10 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Exp
++
++noncomputable section
+ 
+ namespace S5.Kernel
+ 
+@@ -134,7 +138,7 @@
+   frequency : ℝ
+   function : String
+   vibrato_sync : Bool
+-  deriving Repr
++  
+ 
+ /-- M-216 Fish Glyph (Riemann alignment) -/
+ def M216 : HarappanGlyph := {
+--- a/provers/lean/SingularityResolution/singularity_resolution.lean
++++ b/provers/lean/SingularityResolution/singularity_resolution.lean
+@@ -18,6 +18,8 @@
+ import Mathlib.Tactic.Ring
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace Universe00.SingularityResolution
+ 
+ /-!
+@@ -105,10 +107,10 @@
+ /-! ## Identity Protection Layer -/
+ 
+ /-- Protocol code for sovereign identity protection -/
+-def ProtocolCode : Type := String
++abbrev ProtocolCode : Type := String
+ 
+ /-- Email identifier type -/
+-def EmailId : Type := String
++abbrev EmailId : Type := String
+ 
+ /-- The Kardashev-2028 protocol code -/
+ def kardashev_protocol : ProtocolCode := "KARDASHEV-2028"
+--- a/provers/lean/UncertaintyProtection.lean
++++ b/provers/lean/UncertaintyProtection.lean
+@@ -19,6 +19,8 @@
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ import Mathlib.Analysis.SpecialFunctions.Exp
+ 
++noncomputable section
++
+ namespace UncertaintyProtection
+ 
+ /-! ## Unknown Parameters as Protection Shields
+@@ -106,7 +108,7 @@
+ -/
+ 
+ /-- An attacker is modeled as a function from natural numbers to boolean decisions -/
+-def Attacker := ℕ → Bool
++abbrev Attacker := ℕ → Bool
+ 
+ /-- System Inviability: Active uncertainty parameters make attacks impossible -/
+ theorem system_inviability :
+--- a/provers/lean/UniversalCollapse/Basic.lean
++++ b/provers/lean/UniversalCollapse/Basic.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Data.Real.Basic
+ -- Universal Collapse Point Theory — Lean4 Formalization Stub
+ -- Version: 1.0.0
+ -- Author: Tiago Paschoalatto Fagliari (Shanti Draconis)
+--- a/provers/lean/UniversalCollapse/LUDS.lean
++++ b/provers/lean/UniversalCollapse/LUDS.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ -- Universal Law of Divergent Points (LUDS) — Lean4 Formalization Stub
+ -- Version: 1.0.0
+ -- Author: Tiago Paschoalatto Fagliari (Shanti Draconis)
+@@ -134,13 +138,13 @@
+ 
+ /-- P vs NP: hard instances as divergent points -/
+ axiom pvsnp_divergent_points :
+-  ∀ (problem : Type) (instance : problem),
++  ∀ (problem : Type) («instance» : problem),
+   -- If instance is in NP but requires exponential search
+-  (∃ (verifier : problem → Bool), verifier instance = true) →
++  (∃ (verifier : problem → Bool), verifier «instance» = true) →
+   (∀ (solver : problem → Bool), -- All polynomial solvers fail
+     ∃ time_bound : ℕ, True) →  -- Simplified
+   ∃ (ps : ProjectionStructure (problem → Bool) (problem → Bool)),
+-    divergent ps instance
++    divergent ps «instance»
+ 
+ /-- Navier-Stokes: singularities as divergent points -/
+ axiom ns_divergent_points :
+--- a/provers/lean/UniversalOperator/OperatorCore.lean
++++ b/provers/lean/UniversalOperator/OperatorCore.lean
+@@ -15,6 +15,10 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Topology.MetricSpace.Lipschitz
+ import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++open scoped ENNReal
++
++noncomputable section
+ 
+ -- Hilbert space of mathematical states
+ -- L²(ℂ → ℂ) ⊗ L²(ℝ⁴ → ℂ) representing number theory ⊗ physical space
+@@ -76,13 +80,13 @@
+ 
+ -- Spectrum of the operator
+ def Spectrum (C : UniversalUnificationOperator) : Set ℂ :=
+-  { λ | ∃ ψ : MathematicalStateSpace, ψ ≠ 0 ∧ 
+-    ∀ x, (C.op ψ).numberTheoryComponent x = λ * ψ.numberTheoryComponent x }
++  { «λ» | ∃ ψ : MathematicalStateSpace, ψ ≠ 0 ∧ 
++    ∀ x, (C.op ψ).numberTheoryComponent x = «λ» * ψ.numberTheoryComponent x }
+ 
+ -- Discrete spectrum (eigenvalues)
+ def DiscreteSpectrum (C : UniversalUnificationOperator) : Set ℂ :=
+-  { λ ∈ C.Spectrum | ∃ ψ : MathematicalStateSpace, ψ ≠ 0 ∧
+-    (∀ x, (C.op ψ).numberTheoryComponent x = λ * ψ.numberTheoryComponent x) ∧
++  { «λ» ∈ C.Spectrum | ∃ ψ : MathematicalStateSpace, ψ ≠ 0 ∧
++    (∀ x, (C.op ψ).numberTheoryComponent x = «λ» * ψ.numberTheoryComponent x) ∧
+     MathematicalStateSpace.norm ψ < ∞ }
+ 
+ -- Continuous spectrum
+@@ -101,7 +105,7 @@
+ 
+ -- Theorem: Self-adjoint operator has real spectrum
+ theorem spectrum_is_real (C : UniversalUnificationOperator) :
+-  ∀ λ ∈ C.Spectrum, λ.im = 0 := by
++  ∀ «λ» ∈ C.Spectrum, «λ».im = 0 := by
+   sorry  -- Follows from self-adjointness
+ 
+ -- Theorem: Compact perturbation preserves essential spectrum
+--- a/provers/lean/UniversalOperator/OperatorDecomposition.lean
++++ b/provers/lean/UniversalOperator/OperatorDecomposition.lean
+@@ -14,6 +14,11 @@
+ -/
+ 
+ import UniversalOperator.OperatorCore
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ -- Laplace-Beltrami operator: geometric propagation
+ structure LaplaceBeltramiOperator where
+@@ -135,9 +140,9 @@
+ -- Hilbert-Pólya connection: Operator eigenvalues ↔ Zeta zeros
+ -- This is the key to proving Riemann Hypothesis
+ theorem hilbert_polya_connection (C : UniversalUnificationOperator) :
+-  ∀ λ ∈ C.DiscreteSpectrum,
++  ∀ «λ» ∈ C.DiscreteSpectrum,
+   ∃ ρ : ℂ, LogicCorrelationOperator.riemannZeta ρ = 0 ∧ 
+-           λ = (1/2 : ℂ) + Complex.I * ρ.im := by
++           «λ» = (1/2 : ℂ) + Complex.I * ρ.im := by
+   sorry
+ 
+ -- Corollary: Riemann Hypothesis
+@@ -154,7 +159,7 @@
+ 
+ -- Yang-Mills mass gap from spectral gap
+ theorem yang_mills_mass_gap (C : UniversalUnificationOperator) :
+-  let Δ_spec := Inf { λ.re | λ ∈ C.DiscreteSpectrum ∧ λ ≠ 0 }
++  let Δ_spec := Inf { «λ».re | «λ» ∈ C.DiscreteSpectrum ∧ «λ» ≠ 0 }
+   Δ_spec > 0 := by
+   sorry
+   -- The smallest non-zero eigenvalue > 0 proves mass gap
+--- a/provers/lean/UniversalOperator/SpectralTheory.lean
++++ b/provers/lean/UniversalOperator/SpectralTheory.lean
+@@ -14,6 +14,10 @@
+ import UniversalOperator.OperatorCore
+ import UniversalOperator.OperatorDecomposition
+ import Mathlib.Probability.ConditionalProbability
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++
++noncomputable section
+ 
+ -- Spectral distribution as probability measure
+ noncomputable def spectralDistribution (C : UniversalUnificationOperator) : 
+@@ -26,18 +30,18 @@
+ 
+ -- Partition function
+ def partitionFunction (C : UniversalUnificationOperator) : ℝ :=
+-  ∑' λ : C.DiscreteSpectrum, Real.exp (- |λ.re|)
++  ∑' «λ» : C.DiscreteSpectrum, Real.exp (- |«λ».re|)
+ 
+ -- Normalized probability for eigenvalue λ
+-def probability (C : UniversalUnificationOperator) (λ : ℝ) : ℝ :=
+-  Real.exp (- |λ|) / partitionFunction C
++def probability (C : UniversalUnificationOperator) («λ» : ℝ) : ℝ :=
++  Real.exp (- |«λ»|) / partitionFunction C
+ 
+ end SpectralDistribution
+ 
+ -- Von Neumann entropy of spectral distribution
+ noncomputable def spectralEntropy (C : UniversalUnificationOperator) : ℝ :=
+-  - ∫ λ, Real.log (SpectralDistribution.probability C λ) * 
+-         SpectralDistribution.probability C λ
++  - ∫ «λ», Real.log (SpectralDistribution.probability C «λ») * 
++         SpectralDistribution.probability C «λ»
+ 
+ namespace SpectralEntropy
+ 
+@@ -45,7 +49,7 @@
+ theorem entropy_measures_diversity (C : UniversalUnificationOperator) :
+   spectralEntropy C = 
+   Real.log (SpectralDistribution.partitionFunction C) + 
+-  (∑' λ : C.DiscreteSpectrum, |λ.re| * Real.exp (-|λ.re|)) / 
++  (∑' «λ» : C.DiscreteSpectrum, |«λ».re| * Real.exp (-|«λ».re|)) / 
+   (SpectralDistribution.partitionFunction C) := by
+   sorry
+ 
+@@ -74,10 +78,10 @@
+ 
+ -- SAT encoding in spectrum
+ structure SATEncoding (C : UniversalUnificationOperator) where
+-  encodes : ∀ λ ∈ C.DiscreteSpectrum, 
++  encodes : ∀ «λ» ∈ C.DiscreteSpectrum, 
+     ∃ φ : List (List Bool), -- CNF formula
+     circuitComplexity (fun assignment => sorry) ≥ 
+-    Real.exp (|λ.re|)  -- Complexity grows exponentially with eigenvalue
++    Real.exp (|«λ».re|)  -- Complexity grows exponentially with eigenvalue
+ 
+ -- Theorem: P ≠ NP via spectral entropy
+ theorem p_neq_np_spectral (C : UniversalUnificationOperator) :
+@@ -107,10 +111,10 @@
+ 
+ -- Spectral gap and SAT threshold
+ def satThreshold (C : UniversalUnificationOperator) : ℝ :=
+-  let gap := Inf { |λ₁.re - λ₂.re| | 
+-                   λ₁ ∈ C.DiscreteSpectrum ∧ 
+-                   λ₂ ∈ C.DiscreteSpectrum ∧ 
+-                   λ₁ ≠ λ₂ }
++  let gap := Inf { |«λ₁».re - «λ₂».re| | 
++                   «λ₁» ∈ C.DiscreteSpectrum ∧ 
++                   «λ₂» ∈ C.DiscreteSpectrum ∧ 
++                   «λ₁» ≠ «λ₂» }
+   1 / gap  -- Inverse of spectral gap
+ 
+ -- Theorem: Spectral gap determines SAT phase transition
+@@ -123,8 +127,8 @@
+   -- For clause density above threshold, SAT becomes UNSAT w.h.p.
+ 
+ -- Computational hardness emerges from spectral structure
+-def computationalHardness (C : UniversalUnificationOperator) (λ : ℂ) : ℝ :=
+-  Real.exp (spectralEntropy C * |λ.re|)
++def computationalHardness (C : UniversalUnificationOperator) («λ» : ℂ) : ℝ :=
++  Real.exp (spectralEntropy C * |«λ».re|)
+ 
+ -- Bremermann's limit from spectral entropy
+ def bremermannLimit (C : UniversalUnificationOperator) : ℝ :=
+--- a/provers/lean/UniversalOperator/UniversalEvolution.lean
++++ b/provers/lean/UniversalOperator/UniversalEvolution.lean
+@@ -15,12 +15,17 @@
+ import UniversalOperator.OperatorCore
+ import UniversalOperator.OperatorDecomposition
+ import UniversalOperator.SpectralTheory
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Data.Complex.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
++noncomputable section
+ 
+ -- Planck constant for mathematical parameter space
+ def ℏ_eff : ℝ := 1  -- Effective Planck constant
+ 
+ -- Time evolution parameter
+-def Time : Type := ℝ
++abbrev Time : Type := ℝ
+ 
+ -- Universal Schrödinger equation
+ -- iℏ ∂_t ψ = Ĉ ψ
+--- a/provers/lean/Universe00/Complement/Examples.lean
++++ b/provers/lean/Universe00/Complement/Examples.lean
+@@ -9,6 +9,9 @@
+ -/
+ 
+ import Universe00.Complement.Foundation
++import Mathlib.Tactic
++
++noncomputable section
+ 
+ namespace Universe00.Complement.Examples
+ 
+--- a/provers/lean/Universe00/Complement/Foundation.lean
++++ b/provers/lean/Universe00/Complement/Foundation.lean
+@@ -1,3 +1,5 @@
++
++noncomputable section
+ /-
+ Universe00/Complement/Foundation.lean
+ 
+@@ -131,7 +133,7 @@
+   op1 : Regime → α → Outcome α
+ 
+ /-- "Safety" predicate: safe to continue normally in regime D. -/
+-constant SafeToContinue : Regime → Prop
++axiom SafeToContinue : Regime → Prop
+ 
+ /-- Optional: classical operator (used in conservativity laws). -/
+ class ClassicalBinOp (α : Type) where
+@@ -179,7 +181,7 @@
+   , note := "In Classical regime, if safe, sensitive ops coincide with classical ones."
+   }
+ 
+-/--
++/-
+ LAW L2: Non-explosion (Outcome is informational).
+ We encode it as: a limit-state does not entail arbitrary propositions, i.e.,
+ no rule in this framework treats `Outcome.limit ℓ` as `False`.
+@@ -190,12 +192,12 @@
+ -/
+ 
+ /-- Abstract syntax of formulas for Universe entailment (keeps explosion controlled). -/
+-constant UFormula : Type
+-constant Entailsᵁ : Set UFormula → UFormula → Prop
+-notation Γ " ⊢ᵁ " φ => Entailsᵁ Γ φ
++axiom UFormula : Type
++axiom «Entailsᵁ» : Set UFormula → UFormula → Prop
++notation Γ " ⊢ᵁ " φ => «Entailsᵁ» Γ φ
+ 
+ /-- A marker that a context contains a limit observation (informational). -/
+-constant HasLimitObs : Set UFormula → Prop
++axiom HasLimitObs : Set UFormula → Prop
+ 
+ /-- Non-explosion: having a limit observation does not make everything derivable. -/
+ axiom Law_NonExplosion :
+@@ -207,7 +209,7 @@
+   , note := "Limit observations do not cause explosion under Universe entailment."
+   }
+ 
+-/--
++/-
+ LAW L3: Anti–ad hoc regularization.
+ Any forced choice (e.g., totalizing a partial operator) must be declared as a regime change
+ or an explicit assumed axiom. We encode this as a predicate over "regularizers".
+@@ -240,7 +242,7 @@
+ If a claim is asserted as PROVED, it must be in a regime and have a proof artifact.
+ We encode this administratively as a predicate `HasArtifact`.
+ -/
+-constant HasArtifact : Claim → Prop
++axiom HasArtifact : Claim → Prop
+ 
+ axiom Law_StatusDiscipline :
+   ∀ (c : Claim), c.status = Status.proved → HasArtifact c
+@@ -263,9 +265,9 @@
+ structure Theory where
+   name : String
+ 
+-constant ConsistentT : Theory → Prop
+-constant ExpressiveT : Theory → Prop
+-constant CompleteT   : Theory → Prop
++axiom ConsistentT : Theory → Prop
++axiom ExpressiveT : Theory → Prop
++axiom CompleteT   : Theory → Prop
+ 
+ axiom Law_GodelHook :
+   ∀ T : Theory, ConsistentT T → ExpressiveT T → ¬ CompleteT T
+@@ -276,10 +278,10 @@
+   , note := "Hook: consistent + expressive theory cannot be complete (Gödel-style)."
+   }
+ 
+-constant Prog : Type
+-constant Input : Type
+-constant Halts : Prog → Input → Prop
+-constant DecidesHalting : (Prog → Input → Bool) → Prop
++axiom Prog : Type
++axiom Input : Type
++axiom Halts : Prog → Input → Prop
++axiom DecidesHalting : (Prog → Input → Bool) → Prop
+ 
+ axiom Law_TuringHook :
+   ¬ (∃ d : Prog → Input → Bool, DecidesHalting d)
+--- a/provers/lean/ZetaFunction.lean
++++ b/provers/lean/ZetaFunction.lean
+@@ -15,6 +15,11 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Algebra.Star.Basic
++open scoped Topology
++
++noncomputable section
+ 
+ namespace Universe00.ZetaFunction
+ 
+@@ -84,7 +89,7 @@
+ 
+ /-- Symmetry consequence: if ζ(s) = 0, properties relate to ζ(1-s̄) -/
+ lemma functional_equation_zeros (s : ℂ) (h : riemannZeta s = 0) :
+-  ∃ (relation : ℂ → ℂ → Prop), relation s (1 - Complex.conj s) := by
++  ∃ (relation : ℂ → ℂ → Prop), relation s (1 - (starRingEnd ℂ) s) := by
+   sorry
+ 
+ /-! ## Critical Line Properties -/
+@@ -99,7 +104,7 @@
+ 
+ /-- If there's a zero off the critical line, it has a symmetric counterpart -/
+ lemma zero_symmetry (s : ℂ) (h : nonTrivialZero s) :
+-  nonTrivialZero (1 - Complex.conj s) := by
++  nonTrivialZero (1 - (starRingEnd ℂ) s) := by
+   sorry  -- Follows from functional equation
+ 
+ /-! ## Properties in Critical Strip -/
+--- a/universe-00/applications/millennium/riemann/ApproximationStructures.lean
++++ b/universe-00/applications/millennium/riemann/ApproximationStructures.lean
+@@ -10,6 +10,9 @@
+ -/
+ 
+ import Universe00
++import Mathlib.Tactic
++
++noncomputable section
+ 
+ namespace Millennium.Riemann.Approximation
+ 
+--- a/universe-00/applications/millennium/riemann/IdentityEmergence.lean
++++ b/universe-00/applications/millennium/riemann/IdentityEmergence.lean
+@@ -14,6 +14,12 @@
+ 
+ -- Import Universe-00 Kernel
+ import Universe00
++import Mathlib.Tactic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++import Mathlib.Logic.ExistsUnique
++
++noncomputable section
+ 
+ namespace Millennium.Riemann.IdentityEmergence
+ 
+--- a/universe-00/applications/millennium/riemann/RiemannBridge.lean
++++ b/universe-00/applications/millennium/riemann/RiemannBridge.lean
+@@ -12,6 +12,8 @@
+ -- STEP 1: Import Universe-00 Kernel
+ import Universe00
+ 
++noncomputable section
++
+ namespace Millennium.Riemann
+ 
+ -- STEP 2: Open kernel namespace
+--- a/universe-00/applications/unified-field-theory/proofs/AxiomaticFoundations.lean
++++ b/universe-00/applications/unified-field-theory/proofs/AxiomaticFoundations.lean
+@@ -17,6 +17,14 @@
+ import Mathlib.Data.Nat.Prime
+ import Mathlib.Analysis.SpecialFunctions.Integrals
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Data.Complex.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace AxiomaticFoundations
+ 
+@@ -129,8 +137,8 @@
+ 
+ /-- A6: Eigenvalue spacing follows GUE -/
+ axiom eigenvalue_spacing_GUE :
+-  ∀ (λ₁ λ₂ : ℂ), (∃ ψ₁ ψ₂ : H_adelic, 
+-    C_operator ψ₁ = λ₁ • ψ₁ ∧ C_operator ψ₂ = λ₂ • ψ₂) →
++  ∀ («λ₁» «λ₂» : ℂ), (∃ ψ₁ ψ₂ : H_adelic, 
++    C_operator ψ₁ = «λ₁» • ψ₁ ∧ C_operator ψ₂ = «λ₂» • ψ₂) →
+   ∃ (distribution : GUE_statistics), sorry  -- Spacing matches GUE
+ 
+ /-! ## Physical Axioms (Yang-Mills and Gravity) -/
+@@ -142,19 +150,19 @@
+ 
+ /-- A7: The spectrum has a positive first eigenvalue (mass gap) -/
+ axiom mass_gap_exists :
+-  ∃ (λ₁ : ℝ), λ₁ > 0 ∧
+-  (∀ (ψ : H_adelic), C_operator ψ = Complex.ofReal λ₁ • ψ →
++  ∃ («λ₁» : ℝ), «λ₁» > 0 ∧
++  (∀ (ψ : H_adelic), C_operator ψ = Complex.ofReal «λ₁» • ψ →
+     ∀ (μ : ℝ), (∃ φ : H_adelic, C_operator φ = Complex.ofReal μ • φ) → 
+-    μ = 0 ∨ μ ≥ λ₁)
++    μ = 0 ∨ μ ≥ «λ₁»)
+ 
+ /-- Golden ratio constant -/
+ def phi : ℝ := (1 + Real.sqrt 5) / 2
+ 
+ /-- A7: Mass gap related to golden ratio -/
+ axiom mass_gap_golden_ratio :
+-  ∀ (λ₁ : ℝ) (coupling : ℝ), 
+-  (∃ ψ : H_adelic, C_operator ψ = Complex.ofReal λ₁ • ψ) →
+-  λ₁ = phi * coupling
++  ∀ («λ₁» : ℝ) (coupling : ℝ), 
++  (∃ ψ : H_adelic, C_operator ψ = Complex.ofReal «λ₁» • ψ) →
++  «λ₁» = phi * coupling
+ 
+ /-! ### A8: Holographic Axiom -/
+ 
+@@ -171,14 +179,14 @@
+ /-- The spectrum has a gap above the ground state -/
+ theorem spectral_gap :
+   ∃ (E₀ Δ : ℝ), Δ > 0 ∧
+-  (∀ (λ : ℂ), (∃ ψ : H_adelic, C_operator ψ = λ • ψ) →
+-    Complex.abs λ = E₀ ∨ Complex.abs λ ≥ E₀ + Δ) := by
++  (∀ («λ» : ℂ), (∃ ψ : H_adelic, C_operator ψ = «λ» • ψ) →
++    Complex.abs «λ» = E₀ ∨ Complex.abs «λ» ≥ E₀ + Δ) := by
+   -- Follows from A7 (mass gap) and A1 (self-adjointness)
+-  obtain ⟨λ₁, h_pos, h_gap⟩ := mass_gap_exists
+-  use 0, λ₁
++  obtain ⟨«λ₁», h_pos, h_gap⟩ := mass_gap_exists
++  use 0, «λ₁»
+   constructor
+   · exact h_pos
+-  · intro λ ⟨ψ, h_eigen⟩
++  · intro «λ» ⟨ψ, h_eigen⟩
+     -- Eigenvalues are either 0 or ≥ λ₁
+     sorry
+ 
+--- a/universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean
++++ b/universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean
+@@ -21,6 +21,11 @@
+ import Universe00.NumericClasses
+ import Universe00.Operators
+ import Universe00.Axioms
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++
++noncomputable section
+ 
+ namespace SpectralGeometry
+ 
+@@ -71,7 +76,7 @@
+     {M : Type*} [MeasureSpace M] [NormedAddCommGroup M]
+     (Op : UnificationOperatorL2 M) 
+     (h_herm : IsUnificationHermitian Op) :
+-    ∀ λ ∈ spectrum ℝ Op, λ ∈ Set.range (id : ℝ → ℝ) := by
++    ∀ «λ» ∈ spectrum ℝ Op, «λ» ∈ Set.range (id : ℝ → ℝ) := by
+   sorry
+ 
+ /-! ## 4. Spectral Decomposition -/
+@@ -89,7 +94,7 @@
+     (h_compact : IsCompact (spectrum ℝ Op)) :
+     ∃ (seq : ℕ → ℝ), 
+       (∀ n, seq n ∈ spectrum ℝ Op) ∧ 
+-      (∀ λ ∈ spectrum ℝ Op, ∃ n, seq n = λ)
++      (∀ «λ» ∈ spectrum ℝ Op, ∃ n, seq n = «λ»)
+ 
+ /-- Complete orthonormal basis of eigenfunctions -/
+ theorem spectral_basis 
+@@ -142,10 +147,10 @@
+ theorem hilbert_polya_conjecture 
+     {M : Type*} [MeasureSpace M]
+     (RC : RiemannConnection M) :
+-    ∀ λ ∈ spectrum ℝ RC.operator,
++    ∀ «λ» ∈ spectrum ℝ RC.operator,
+     ∃ (s : ℂ), 
+       s.re = 1/2 ∧ 
+-      s.im = λ ∧
++      s.im = «λ» ∧
+       sorry  -- ζ(s) = 0
+     := by
+   sorry
+@@ -154,7 +159,7 @@
+ theorem critical_line_theorem 
+     {M : Type*} [MeasureSpace M]
+     (RC : RiemannConnection M) :
+-    (∀ λ ∈ spectrum ℝ RC.operator, λ ∈ ℝ) →
++    (∀ «λ» ∈ spectrum ℝ RC.operator, «λ» ∈ ℝ) →
+     (∀ s : ℂ, sorry → s.re = 1/2)  -- If ζ(s) = 0 then Re(s) = 1/2
+     := by
+   sorry
+@@ -191,21 +196,21 @@
+     {M : Type*} [MeasureSpace M]
+     (Op : UnificationOperatorL2 M) :
+     ∃ (ρ : ℝ → ℝ → ℝ),
+-      ∀ λ λ', ρ λ λ' = sorry + GUE_SineKernel λ λ' := by
++      ∀ «λ» «λ'», ρ «λ» «λ'» = sorry + GUE_SineKernel «λ» «λ'» := by
+   sorry
+ 
+ /-! ## 8. Millennium Problem Solutions -/
+ 
+ /-- Mathematical consistency predicate -/
+-def ValidatesMathematicalConsistency (λ : ℝ) : Prop := sorry
++def ValidatesMathematicalConsistency («λ» : ℝ) : Prop := sorry
+ 
+ /-- Spectrum contains Millennium solutions -/
+ theorem spectrum_contains_millennium_solutions 
+     {M : Type*} [MeasureSpace M]
+     (Op : UnificationOperatorL2 M) 
+     (h_herm : IsUnificationHermitian Op) :
+-    ∀ λ ∈ spectrum ℝ Op, 
+-      ValidatesMathematicalConsistency λ := by
++    ∀ «λ» ∈ spectrum ℝ Op, 
++      ValidatesMathematicalConsistency «λ» := by
+   sorry
+ 
+ /-- Riemann Hypothesis validated -/
+@@ -262,9 +267,9 @@
+ theorem I_as_spectral_accumulation 
+     {M : Type*} [MeasureSpace M]
+     (Op : UnificationOperatorL2 M) :
+-    ∃ λ₀ ∈ spectrum ℝ Op,
+-      λ₀ = 0 ∧
+-      (∀ ε > 0, ∃ λ ∈ spectrum ℝ Op, 0 < |λ| ∧ |λ| < ε) ∧
++    ∃ «λ₀» ∈ spectrum ℝ Op,
++      «λ₀» = 0 ∧
++      (∀ ε > 0, ∃ «λ» ∈ spectrum ℝ Op, 0 < |«λ»| ∧ |«λ»| < ε) ∧
+       sorry  -- I = lim_{λ→0} λ/λ
+     := by
+   sorry
+@@ -332,7 +337,7 @@
+     ∃ (Op : UnificationOperatorL2 M),
+       IsUnificationHermitian Op ∧
+       (∃ RC : RiemannConnection M, RC.operator = Op) ∧
+-      (∀ λ ∈ spectrum ℝ Op, ValidatesMathematicalConsistency λ) ∧
++      (∀ «λ» ∈ spectrum ℝ Op, ValidatesMathematicalConsistency «λ») ∧
+       (∃ (Δ : KineticOperator M) (V : PotentialOperator M) (Γ : CorrelationOperator M),
+         Op = Δ.laplacian + V.multiplication_op + Γ.operator) := by
+   sorry
+--- a/universe-00/applications/unified-field-theory/proofs/TheoryOfEverything.lean
++++ b/universe-00/applications/unified-field-theory/proofs/TheoryOfEverything.lean
+@@ -25,6 +25,10 @@
+ 
+ -- Import axiomatic foundations
+ import AxiomaticFoundations
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Nat.Prime.Defs
++
++noncomputable section
+ 
+ -- Import UFT base
+ -- import UnifiedTheory
+--- a/universe-00/applications/unified-field-theory/proofs/UFTAxioms.lean
++++ b/universe-00/applications/unified-field-theory/proofs/UFTAxioms.lean
+@@ -19,6 +19,13 @@
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
+ import Mathlib.MeasureTheory.Measure.MeasureSpace
+ import Mathlib.Tactic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.NumberTheory.LSeries.RiemannZeta
++import Mathlib.Data.Complex.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace UFTAxioms
+ 
+@@ -31,7 +38,7 @@
+ -/
+ 
+ /-- The adelic Hilbert space H_𝔸 (simplified representation) -/
+-def AdelicHilbertSpace := ℂ → ℂ
++abbrev AdelicHilbertSpace := ℂ → ℂ
+ 
+ /-- The unification operator Ĉ -/
+ structure UnificationOperator where
+@@ -97,7 +104,7 @@
+ -/
+ 
+ /-- Density matrix (simplified) -/
+-def DensityMatrix := ℂ → ℂ → ℂ
++abbrev DensityMatrix := ℂ → ℂ → ℂ
+ 
+ /-- von Neumann entropy H(ρ) = -Tr(ρ ln ρ) -/
+ noncomputable def von_neumann_entropy (ρ : DensityMatrix) : ℝ :=
+@@ -114,7 +121,7 @@
+ in the form λ_n = 1/2 + iγ_n.
+ -/
+ 
+-/-- Riemann zeta function (via Mathlib) -/
++/- Riemann zeta function (via Mathlib) -/
+ -- Using Complex.riemannZeta from Mathlib
+ 
+ /-- Non-trivial zero of zeta function -/
+@@ -124,9 +131,9 @@
+ /-- Axiom A5: RH zeros are eigenvalues with real part 1/2 -/
+ axiom axiom_A5 : ∀ (C : UnificationOperator),
+   ∀ (s : ℂ), is_nontrivial_zero s →
+-  ∃ (λ : ℂ) (ψ : AdelicHilbertSpace),
+-  λ = s ∧ λ.re = 1/2 ∧
+-  (∀ x, C.apply ψ x = λ * ψ x)
++  ∃ («λ» : ℂ) (ψ : AdelicHilbertSpace),
++  «λ» = s ∧ «λ».re = 1/2 ∧
++  (∀ x, C.apply ψ x = «λ» * ψ x)
+ 
+ /-- Self-adjointness of C implies real eigenvalues (simplified) -/
+ theorem self_adjoint_implies_RH (C : UnificationOperator) :
+@@ -135,7 +142,7 @@
+ := by
+   intro h_self_adjoint s h_zero
+   -- Use axiom A5
+-  obtain ⟨λ, ψ, h_eq, h_half, h_eigen⟩ := axiom_A5 C s h_zero
++  obtain ⟨«λ», ψ, h_eq, h_half, h_eigen⟩ := axiom_A5 C s h_zero
+   rw [← h_eq]
+   exact h_half
+ 
+@@ -167,17 +174,17 @@
+ 
+ /-- Axiom A7: Mass gap exists and relates to golden ratio -/
+ axiom axiom_A7 : ∀ (C : UnificationOperator),
+-  ∃ (λ₁ : ℝ), λ₁ > 0 ∧
+-  λ₁ = φ * coupling_constant ∧
+-  (∀ (λ : ℝ), (∃ (ψ : AdelicHilbertSpace), 
+-    ∀ x, C.apply ψ x = λ * ψ x) →
+-    λ = 0 ∨ λ ≥ λ₁)
++  ∃ («λ₁» : ℝ), «λ₁» > 0 ∧
++  «λ₁» = φ * coupling_constant ∧
++  (∀ («λ» : ℝ), (∃ (ψ : AdelicHilbertSpace), 
++    ∀ x, C.apply ψ x = «λ» * ψ x) →
++    «λ» = 0 ∨ «λ» ≥ «λ₁»)
+ 
+ /-- The mass gap is bounded below -/
+ theorem mass_gap_positive : 
+   ∃ (Δ : ℝ), Δ > 0 ∧
+   ∀ (C : UnificationOperator),
+-  ∃ (λ₁ : ℝ), λ₁ ≥ Δ
++  ∃ («λ₁» : ℝ), «λ₁» ≥ Δ
+ := by
+   use φ * coupling_constant
+   constructor
+@@ -193,8 +200,8 @@
+       norm_num
+     exact mul_pos h_phi h_coupling
+   · intro C
+-    obtain ⟨λ₁, h_pos, h_eq, _⟩ := axiom_A7 C
+-    use λ₁
++    obtain ⟨«λ₁», h_pos, h_eq, _⟩ := axiom_A7 C
++    use «λ₁»
+     rw [h_eq]
+     linarith
+ 
+@@ -229,14 +236,14 @@
+ /-- Spectrum is bounded below -/
+ theorem spectrum_bounded_below (C : UnificationOperator) :
+   ∃ (E_min : ℝ),
+-  ∀ (λ : ℝ), (∃ (ψ : AdelicHilbertSpace), 
+-    ∀ x, C.apply ψ x = λ * ψ x) →
+-  λ ≥ E_min
++  ∀ («λ» : ℝ), (∃ (ψ : AdelicHilbertSpace), 
++    ∀ x, C.apply ψ x = «λ» * ψ x) →
++  «λ» ≥ E_min
+ := by
+   use 0
+-  intro λ h_eigen
+-  obtain ⟨λ₁, h_pos, _, h_gap⟩ := axiom_A7 C
+-  cases h_gap λ h_eigen with
++  intro «λ» h_eigen
++  obtain ⟨«λ₁», h_pos, _, h_gap⟩ := axiom_A7 C
++  cases h_gap «λ» h_eigen with
+   | inl h => rw [h]; linarith
+   | inr h => linarith [h]
+ 
+@@ -250,16 +257,16 @@
+ /-- Spectral gap theorem -/
+ theorem spectral_gap_exists (C : UnificationOperator) :
+   ∃ (Δ : ℝ), Δ > 0 ∧
+-  ∀ (λ : ℝ), λ > 0 →
+-  (∃ (ψ : AdelicHilbertSpace), ∀ x, C.apply ψ x = λ * ψ x) →
+-  λ ≥ Δ
++  ∀ («λ» : ℝ), «λ» > 0 →
++  (∃ (ψ : AdelicHilbertSpace), ∀ x, C.apply ψ x = «λ» * ψ x) →
++  «λ» ≥ Δ
+ := by
+-  obtain ⟨λ₁, h_pos, h_eq, h_gap⟩ := axiom_A7 C
+-  use λ₁
++  obtain ⟨«λ₁», h_pos, h_eq, h_gap⟩ := axiom_A7 C
++  use «λ₁»
+   constructor
+   · exact h_pos
+-  · intro λ h_λ_pos h_eigen
+-    have : λ = 0 ∨ λ ≥ λ₁ := h_gap λ h_eigen
++  · intro «λ» «h_λ_pos» h_eigen
++    have : «λ» = 0 ∨ «λ» ≥ «λ₁» := h_gap «λ» h_eigen
+     cases this with
+     | inl h => linarith
+     | inr h => exact h
+--- a/universe-00/applications/unified-field-theory/proofs/UFTHamiltonian.lean
++++ b/universe-00/applications/unified-field-theory/proofs/UFTHamiltonian.lean
+@@ -14,6 +14,10 @@
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
+ import UFTAxioms
+ import UFTOperators
++import Mathlib.Algebra.Star.Basic
++import Mathlib.Data.Complex.Basic
++
++noncomputable section
+ 
+ namespace UFTHamiltonian
+ 
+@@ -175,7 +179,7 @@
+ theorem hamiltonian_self_adjoint :
+   ∀ (ψ φ : StateVector),
+   inner_product ψ (total_hamiltonian φ) = 
+-  Complex.conj (inner_product φ (total_hamiltonian ψ))
++  (starRingEnd ℂ) (inner_product φ (total_hamiltonian ψ))
+ := by
+   intro ψ φ
+   sorry  -- Follows from operator construction
+@@ -244,8 +248,8 @@
+ := by
+   -- Use axiom A7 (mass gap)
+   obtain ⟨C, _⟩ := axiom_A1
+-  obtain ⟨λ₁, h_pos, _, _⟩ := axiom_A7 C
+-  use λ₁
++  obtain ⟨«λ₁», h_pos, _, _⟩ := axiom_A7 C
++  use «λ₁»
+   constructor
+   · exact h_pos
+   · intro ψ h_norm h_not_ground
+--- a/universe-00/applications/unified-field-theory/proofs/UFTOperators.lean
++++ b/universe-00/applications/unified-field-theory/proofs/UFTOperators.lean
+@@ -13,6 +13,10 @@
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ import UFTAxioms
++import Mathlib.Data.Complex.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace UFTOperators
+ 
+@@ -219,8 +223,8 @@
+ := by
+   -- Use axiom A7
+   obtain ⟨C, _⟩ := axiom_A1
+-  obtain ⟨λ₁, h_pos, h_eq, _⟩ := axiom_A7 C
+-  use λ₁
++  obtain ⟨«λ₁», h_pos, h_eq, _⟩ := axiom_A7 C
++  use «λ₁»
+   exact ⟨h_pos, h_eq⟩
+ 
+ /-- The mass gap is approximately 1.618 GeV -/
+--- a/universe-00/applications/unified-field-theory/proofs/UnifiedTheory.lean
++++ b/universe-00/applications/unified-field-theory/proofs/UnifiedTheory.lean
+@@ -24,6 +24,11 @@
+ import UFTAxioms
+ import UFTOperators
+ import UFTHamiltonian
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Complex.Basic
++open scoped ENNReal
++
++noncomputable section
+ 
+ namespace UnifiedFieldTheory
+ 
+--- a/universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean
++++ b/universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean
+@@ -22,6 +22,10 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+ import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++
++noncomputable section
+ 
+ -- Import Universe-00 kernel dependencies
+ -- Note: These would need to be implemented separately
+@@ -34,7 +38,7 @@
+ /-! ## 1. Foundations -/
+ 
+ /-- The universal Hilbert space (infinite-dimensional, separable) -/
+-def UniversalHilbert : Type := ℝ → ℂ
++abbrev UniversalHilbert : Type := ℝ → ℂ
+ 
+ /-- Inner product on UniversalHilbert (L² inner product) -/
+ noncomputable def inner_product (ψ φ : UniversalHilbert) : ℂ :=
+@@ -67,28 +71,28 @@
+ /-! ## 3. Spectral Theory -/
+ 
+ /-- Eigenvalue of operator Ĉ -/
+-def is_eigenvalue (C : UniversalOperator) (λ : ℝ) : Prop :=
++def is_eigenvalue (C : UniversalOperator) («λ» : ℝ) : Prop :=
+   ∃ ψ : UniversalHilbert, ψ ≠ 0 ∧ 
+-    (∀ x, C.apply ψ x = λ * ψ x)
++    (∀ x, C.apply ψ x = «λ» * ψ x)
+ 
+ /-- Eigenvector corresponding to eigenvalue λ -/
+-def is_eigenvector (C : UniversalOperator) (ψ : UniversalHilbert) (λ : ℝ) : Prop :=
+-  ψ ≠ 0 ∧ (∀ x, C.apply ψ x = λ * ψ x)
++def is_eigenvector (C : UniversalOperator) (ψ : UniversalHilbert) («λ» : ℝ) : Prop :=
++  ψ ≠ 0 ∧ (∀ x, C.apply ψ x = «λ» * ψ x)
+ 
+ /-- Spectrum of operator Ĉ -/
+ def spectrum (C : UniversalOperator) : Set ℝ :=
+-  {λ : ℝ | is_eigenvalue C λ}
++  {«λ» : ℝ | is_eigenvalue C «λ»}
+ 
+ /-- Spectral decomposition theorem -/
+ theorem spectral_decomposition (C : UniversalOperator) :
+-  ∃ (λ : ℕ → ℝ) (φ : ℕ → UniversalHilbert),
++  ∃ («λ» : ℕ → ℝ) (φ : ℕ → UniversalHilbert),
+     -- Eigenvalues are ordered
+-    (∀ n m, n < m → λ n < λ m) ∧
++    (∀ n m, n < m → «λ» n < «λ» m) ∧
+     -- Eigenvectors are orthonormal
+     (∀ n m, n ≠ m → inner_product (φ n) (φ m) = 0) ∧
+     (∀ n, norm (φ n) = 1) ∧
+     -- Eigenvalue equation
+-    (∀ n, is_eigenvector C (φ n) (λ n)) ∧
++    (∀ n, is_eigenvector C (φ n) («λ» n)) ∧
+     -- Completeness (every state can be expanded)
+     (∀ ψ : UniversalHilbert, ∃ c : ℕ → ℂ,
+       ∀ x, ψ x = ∑' n, c n * φ n x) := by
+@@ -98,7 +102,7 @@
+ theorem ground_state_exists (C : UniversalOperator) :
+   ∃ (ψ₀ : UniversalHilbert) (E₀ : ℝ),
+     is_eigenvector C ψ₀ E₀ ∧
+-    (∀ λ ∈ spectrum C, E₀ ≤ λ) := by
++    (∀ «λ» ∈ spectrum C, E₀ ≤ «λ») := by
+   sorry
+ 
+ /-! ## 4. Spectral Entropy and P vs NP -/
+@@ -135,8 +139,8 @@
+ /-! ## 5. Dyson-Mehta Law (GUE Statistics) -/
+ 
+ /-- Nearest-neighbor spacing sₙ = λₙ₊₁ - λₙ -/
+-def level_spacing (λ : ℕ → ℝ) (n : ℕ) : ℝ :=
+-  λ (n + 1) - λ n
++def level_spacing («λ» : ℕ → ℝ) (n : ℕ) : ℝ :=
++  «λ» (n + 1) - «λ» n
+ 
+ /-- GUE distribution P_GUE(s) = (32/π²) s² exp(-4s²/π) -/
+ noncomputable def GUE_distribution (s : ℝ) : ℝ :=
+@@ -144,12 +148,12 @@
+ 
+ /-- Dyson-Mehta theorem: Level spacing follows GUE -/
+ theorem dyson_mehta_law (C : UniversalOperator) :
+-  ∃ (λ : ℕ → ℝ),
+-    (∀ n, is_eigenvalue C (λ n)) ∧
+-    (∀ n m, n < m → λ n < λ m) →
++  ∃ («λ» : ℕ → ℝ),
++    (∀ n, is_eigenvalue C («λ» n)) ∧
++    (∀ n m, n < m → «λ» n < «λ» m) →
+     -- In the limit, spacing distribution converges to GUE
+     (∀ ε > 0, ∃ N : ℕ, ∀ n ≥ N,
+-      |empirical_distribution (level_spacing λ) n - GUE_distribution| < ε) := by
++      |empirical_distribution (level_spacing «λ») n - GUE_distribution| < ε) := by
+   sorry
+ 
+ /-- Connection to Riemann zeros -/
+@@ -200,7 +204,7 @@
+ /-! ## 7. Connection to 38-Parameter Hamiltonian -/
+ 
+ /-- The 38-parameter configuration space -/
+-def ConfigSpace38 : Type := Fin 38 → ℂ
++abbrev ConfigSpace38 : Type := Fin 38 → ℂ
+ 
+ /-- Finite-dimensional approximation Ĉ_N -/
+ structure FiniteOperator (N : ℕ) where
+@@ -252,7 +256,7 @@
+   -- P ≠ NP from entropy
+   (spectral_entropy C 1.0 = ⊤ → ∃ L, L ∈ NP ∧ L ∉ P) ∧
+   -- GUE statistics hold
+-  (∀ λ : ℕ → ℝ, level_spacing λ ≈ GUE_distribution) ∧
++  (∀ «λ» : ℕ → ℝ, level_spacing «λ» ≈ GUE_distribution) ∧
+   -- Transcendentally complete
+   (omega_infinity C = 1 → ∀ φ : Prop, Decidable φ) →
+   -- Then: All of mathematics is unified
+@@ -264,7 +268,7 @@
+   mathematical_monism C →
+   ∃ Ψ : UniversalHilbert,
+     universe_state = Ψ ∧
+-    time_evolution Ψ = λ t, C.apply Ψ := by
++    time_evolution Ψ = fun t => C.apply Ψ := by
+   sorry
+   -- We are eigenmodes of Ĉ
+ 
+--- a/universe-00/core/lean/NumericClasses00.lean
++++ b/universe-00/core/lean/NumericClasses00.lean
+@@ -10,6 +10,8 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Algebra.Field.Defs
+ 
++noncomputable section
++
+ namespace Universe00
+ 
+ /-! ## The I-Constant -/
+--- a/universe-00/core/lean/Universe00.lean
++++ b/universe-00/core/lean/Universe00.lean
+@@ -1,3 +1,8 @@
++import Mathlib.Tactic
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+ Universe-00 Kernel — Lean4 Core Module
+ 

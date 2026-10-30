@@ -1,0 +1,732 @@
+--- a/formal/lean/Atomics.lean
++++ b/formal/lean/Atomics.lean
+@@ -100,6 +100,8 @@
+ -- Sequence: A sequence of tokens (Σ*)
+ abbrev Sequence : Type := List Token
+ 
++instance : Repr Sequence := inferInstanceAs (Repr (List Token))
++
+ -- Sentence: A complete operational log entry
+ structure Sentence where
+   tokens : Sequence
+@@ -165,8 +167,7 @@
+   isWellFormed seq = true := by
+   unfold matchesPattern1 at h
+   split at h
+-  · unfold isWellFormed
+-    simp
++  · rfl
+   · contradiction
+ 
+ -- Theorem 3: Atomic state is deterministic from sentence
+@@ -203,7 +204,7 @@
+ theorem signature_valid_reflexive (as : AtomicState) :
+   verifySignature (signAtomicState as) = true := by
+   unfold verifySignature signAtomicState computeChecksum
+-  rfl
++  exact decide_eq_true rfl
+ 
+ -- * 8. Engineering Parameter Table
+ 
+@@ -229,10 +230,9 @@
+   (h1 : validateTable table = true)
+   (h2 : verifySignature param.signature = true) :
+   validateTable (param :: table) = true := by
+-  unfold validateTable
+-  simp [h2, h1]
+-  unfold validateTable at h1
+-  exact h1
++  show (verifySignature param.signature && validateTable table) = true
++  rw [h2, h1]
++  rfl
+ 
+ -- * 9. Compliance Testing (Repetitions in lines 1002-1011)
+ 
+@@ -252,11 +252,8 @@
+   (h2 : matchesSpecification spec item2 = true) :
+   matchesSpecification item1 item2 = true := by
+   unfold matchesSpecification at *
+-  cases h1' : (spec.field = item1.field && spec.operations.length = item1.operations.length && spec.terminator = item1.terminator)
+-  · contradiction
+-  · cases h2' : (spec.field = item2.field && spec.operations.length = item2.operations.length && spec.terminator = item2.terminator)
+-    · contradiction
+-    · simp_all
++  simp only [Bool.and_eq_true, decide_eq_true_eq] at *
++  exact ⟨⟨h1.1.1.symm.trans h2.1.1, h1.1.2.symm.trans h2.1.2⟩, h1.2.symm.trans h2.2⟩
+ 
+ -- * 10. Blockchain/Immutable Transaction Chain
+ 
+--- a/formal/lean/Block328_372.lean
++++ b/formal/lean/Block328_372.lean
+@@ -73,7 +73,7 @@
+ 
+ namespace SymbolId
+ 
+-def mk (n : Nat) (h : 328 ≤ n ∧ n ≤ 372) : SymbolId := ⟨n, h⟩
++-- `SymbolId.mk` é o construtor da estrutura (mesma assinatura): a redefinição era rejeitada como duplicada
+ 
+ instance : OfNat SymbolId n where
+   ofNat := 
+@@ -133,19 +133,23 @@
+      computeState ops == ClosureState.complex ∨
+      computeState ops == ClosureState.consummated) := by
+   intro h
+-  unfold computeState
+-  split
+-  · contradiction
+-  · simp
+-    split
+-    · right; left; rfl
+-    · split
+-      · right; right; rfl
+-      · split
+-        · split
+-          · left; rfl
+-          · sorry -- Can be proven with more detail
+-        · sorry
++  match ops, h with
++  | [], h => exact nomatch h
++  | [⟨t, p⟩], h =>
++    cases t
++    · exact Or.inl rfl
++    all_goals exact nomatch h
++  | o1 :: o2 :: rest, _ =>
++    apply Or.inr
++    unfold computeState
++    have hl : (o1 :: o2 :: rest).length > 1 := Nat.succ_lt_succ (Nat.succ_pos _)
++    cases hh : (o1 :: o2 :: rest).any (fun op => op.opType == OperatorType.hatching)
++    · apply Or.inl
++      simp only [hh, hl, ite_false, ite_true]
++      rfl
++    · apply Or.inr
++      simp only [hh, ite_true]
++      rfl
+ 
+ /-- Law 2: H indicates final state collapse -/
+ theorem hatching_is_final (ops : List Operator) :
+@@ -209,7 +213,7 @@
+ theorem consummated_is_final (op : OperatorType) (to : ClosureState) :
+     ¬validTransition ClosureState.consummated op to := by
+   intro h
+-  cases op <;> cases to <;> contradiction
++  cases op <;> cases to <;> exact h
+ 
+ /-- Any state can reach consummated via hatching -/
+ theorem hatching_reaches_consummated («from» : ClosureState) :
+@@ -219,18 +223,10 @@
+                           validTransition mid OperatorType.hatching ClosureState.consummated := by
+   intro h
+   cases «from»
+-  · left; unfold validTransition; trivial
+-  · right; exists ClosureState.complex
+-    constructor <;> (unfold validTransition; trivial)
+-  · right; exists ClosureState.complex
+-    constructor <;> (unfold validTransition; trivial)
+-  · sorry -- Can continue for other states
+-  · sorry
+-  · contradiction
+-  · sorry
+-  · sorry
+-  · sorry
+-  · sorry
++  all_goals first
++    | exact Or.inl trivial
++    | exact absurd rfl h
++    | sorry  -- falso: de confirmed, reinforced e exceptional não sai transição nenhuma
+ 
+ -- ============================================================================
+ -- Global Law Verification
+@@ -282,8 +278,7 @@
+     classifySymbol id = SymbolGroup.groupA := by
+   intro h
+   unfold classifySymbol
+-  simp
+-  omega
++  exact if_pos h.2
+ 
+ /-- Symbol 346 is in group D and is the only symbol with sole hatching -/
+ theorem symbol_346_is_unique (id : SymbolId) :
+@@ -291,8 +286,8 @@
+     classifySymbol id = SymbolGroup.groupD := by
+   intro h
+   unfold classifySymbol
+-  simp [h]
+-  decide
++  rw [h]
++  rfl
+ 
+ -- ============================================================================
+ -- Verification Certificates
+@@ -315,7 +310,7 @@
+     cup.stableBase = true ∧ 
+     cup.bilateralSymmetry = true ∧
+     cup.structuralClass = "closure" := by
+-  constructor <;> rfl
++  exact ⟨rfl, rfl, rfl, rfl⟩
+ 
+ /-- Main verification certificate -/
+ theorem block_328_372_verified : 
+--- a/formal/lean/CorpusAtomics.lean
++++ b/formal/lean/CorpusAtomics.lean
+@@ -1011,37 +1011,4 @@
+ -- Table validation theorem
+ theorem table_1_30_valid :
+   validateTable engineeringTable_1_30 = true := by
+-  unfold validateTable engineeringTable_1_30
+-  simp
+-  constructor
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
++  rfl
+--- a/formal/lean/Examples.lean
++++ b/formal/lean/Examples.lean
+@@ -122,19 +122,16 @@
+ -- Prove items match specification
+ theorem test1_matches_spec :
+   matchesSpecification spec_atomic test1_atomic = true := by
+-  unfold matchesSpecification
+-  simp
++  rfl
+   
+ theorem test2_matches_spec :
+   matchesSpecification spec_atomic test2_atomic = true := by
+-  unfold matchesSpecification
+-  simp
++  rfl
+ 
+ -- Production line is compliant
+ theorem production_compliant :
+   productionLineCompliant spec_atomic [test1_atomic, test2_atomic] = true := by
+-  unfold productionLineCompliant
+-  simp [test1_matches_spec, test2_matches_spec]
++  rfl
+ 
+ -- * Example 5: Blockchain Transaction Chain
+ 
+@@ -188,8 +185,7 @@
+ -- Prove the table is valid (all signatures verify)
+ theorem table_valid :
+   validateTable engineering_table = true := by
+-  unfold validateTable engineering_table
+-  simp [example1_valid, example2_valid, example3_valid]
++  rfl
+ 
+ -- * Interpretation Summary
+ 
+--- a/formal/lean/GeneratedAtomics.lean
++++ b/formal/lean/GeneratedAtomics.lean
+@@ -351,17 +351,4 @@
+ -- Table validation theorem
+ theorem table_1_10_valid :
+   validateTable engineeringTable_1_10 = true := by
+-  unfold validateTable engineeringTable_1_10
+-  simp
+-  constructor
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
+-  · rfl
++  rfl
+--- a/formal/lean/HarappaMain.lean
++++ b/formal/lean/HarappaMain.lean
+@@ -137,8 +137,8 @@
+ theorem glyph_classification_preserved (g : HarappanGlyph) :
+   let (prob, gtype) := analyze_glyph_probability g
+   prob >= 10 ∧ prob <= 100 := by
+-  simp [analyze_glyph_probability]
+-  split <;> split <;> split <;> decide
++  cases g with
++  | mk s c p f => cases c <;> cases p <;> exact And.intro (Nat.le_of_ble_eq_true rfl) (Nat.le_of_ble_eq_true rfl)
+ 
+ /-
+   Teorema de Autenticidade: Toda análise válida requer verificação de copyright
+@@ -149,7 +149,6 @@
+   let (prob, gtype) := analyze_glyph_probability g
+   exists prob
+   exists gtype
+-  rfl
+ 
+ -- ============================================================================
+ -- Parte 5: Exemplos de Uso e Demonstração
+--- a/formal/lean/IndusHelloWorld.lean
++++ b/formal/lean/IndusHelloWorld.lean
+@@ -295,10 +295,19 @@
+     isComplete (parseInscription gs) = true →
+     (execute L gs).length = L.length + 1 := by
+   intro L gs h
+-  simp [execute, h]
+-  split
+-  · simp [addRecord]
+-  · contradiction
++  unfold execute
++  simp only [h, ite_true]
++  revert h
++  generalize parseInscription gs = pr
++  intro h
++  unfold isComplete at h
++  unfold toRecord
++  cases he : pr.entity with
++  | none => simp [he, Option.isSome] at h
++  | some e =>
++    cases ho : pr.object with
++    | none => simp [he, ho, Option.isSome] at h
++    | some o => rfl
+ 
+ -- * 12. Correctness Properties
+ 
+@@ -312,9 +321,7 @@
+   | some r => recordValid r
+   | none => False
+   := by
+-  simp [executeHelloWorld, execute, HelloWorld, parseInscription, 
+-        parseGlyph, emptyParse, isComplete, toRecord, addRecord, 
+-        getFirstRecord, recordValid]
++  exact Nat.zero_lt_one
+ 
+ -- * 13. Equivalence Properties
+ 
+@@ -338,10 +345,7 @@
+   | some r => recordEquiv r expectedHelloWorldRecord
+   | none => False
+   := by
+-  simp [executeHelloWorld, execute, HelloWorld, parseInscription,
+-        parseGlyph, emptyParse, isComplete, toRecord, addRecord,
+-        getFirstRecord, recordEquiv, expectedHelloWorldRecord]
+-  constructor <;> rfl
++  exact ⟨rfl, rfl, rfl, rfl⟩
+ 
+ -- * 14. Meta-Theorems (About the System)
+ 
+@@ -349,13 +353,13 @@
+ theorem system_has_valid_inscription :
+   ∃ (gs : Inscription), isComplete (parseInscription gs) = true := by
+   exists HelloWorld
+-  rfl
+ 
+ -- The system can produce non-empty ledgers
+ theorem system_produces_ledgers :
+   ∃ (L : Ledger), L ≠ emptyLedger := by
+   exists executeHelloWorld
+-  simp [executeHelloWorld, execute, HelloWorld]
++  intro h
++  exact nomatch h
+ 
+ -- * 15. Documentation
+ 
+--- a/formal/lean/IndusStateTransition.lean
++++ b/formal/lean/IndusStateTransition.lean
+@@ -232,9 +232,7 @@
+   let L2 := updateLedger L1 w2
+   ∃ L', L2 = (parse w2) :: (parse w1) :: L' := by
+   intro L1 L2
+-  unfold updateLedger transition at L1 L2
+-  exists L
+-  rfl
++  exact ⟨L, rfl⟩
+ 
+ -- * 13. Composition of Operators
+ 
+@@ -250,7 +248,6 @@
+   transactionValid (composeInscription e o q s m) := by
+   unfold transactionValid composeInscription
+   simp [setMode, setState, setQuantity, setObject, setEntity, emptyRecord]
+-  trivial
+ 
+ -- * 14. The "Gold Standard" Formula
+ 
+--- a/formal/lean/IndusUniversalPrimitives.lean
++++ b/formal/lean/IndusUniversalPrimitives.lean
+@@ -230,29 +230,8 @@
+     "PLANT_CROP", "ABSTRACT", "RITUAL", "ARCH_BUILDING"] → 
+   (familyToPrimitive family).isSome := by
+   intro family h
+-  cases h with
+-  | inl h => simp [familyToPrimitive, h]
+-  | inr h => cases h with
+-    | inl h => simp [familyToPrimitive, h]
+-    | inr h => cases h with
+-      | inl h => simp [familyToPrimitive, h]
+-      | inr h => cases h with
+-        | inl h => simp [familyToPrimitive, h]
+-        | inr h => cases h with
+-          | inl h => simp [familyToPrimitive, h]
+-          | inr h => cases h with
+-            | inl h => simp [familyToPrimitive, h]
+-            | inr h => cases h with
+-              | inl h => simp [familyToPrimitive, h]
+-              | inr h => cases h with
+-                | inl h => simp [familyToPrimitive, h]
+-                | inr h => cases h with
+-                  | inl h => simp [familyToPrimitive, h]
+-                  | inr h => cases h with
+-                    | inl h => simp [familyToPrimitive, h]
+-                    | inr h => cases h with
+-                      | inl h => simp [familyToPrimitive, h]
+-                      | inr h => simp [familyToPrimitive, h]
++  repeat (cases h; decide; rename_i h)
++  cases h
+ 
+ -- * 8. Compositional Capacity
+ 
+@@ -317,7 +296,7 @@
+ -- Theorem 7: Hello World symbols are well-defined
+ theorem hello_world_symbols_valid :
+   H191.id = 191 ∧ H041.id = 41 ∧ H151.id = 151 := by
+-  constructor <;> rfl
++  exact ⟨rfl, rfl, rfl⟩
+ 
+ -- * 10. Primitive to Symbol Range Mapping
+ 
+@@ -446,7 +425,6 @@
+ theorem composition_rules_finite : 
+   ∃ (n : Nat), n = 4 := by  -- 4 spatial rules
+   exists 4
+-  rfl
+ 
+ -- * 17. Documentation
+ 
+--- a/formal/lean/proof.lean
++++ b/formal/lean/proof.lean
+@@ -89,21 +89,30 @@
+   .commit ∈ symbols →
+   (executeInscription symbols st).validated = true := by
+   intro h
+-  induction symbols with
+-  | nil => contradiction
++  have pres : ∀ (l : List IndoSymbol) (st : State), st.validated = true →
++      (executeInscription l st).validated = true := by
++    intro l
++    induction l with
++    | nil => intro st h; exact h
++    | cons s rest ih =>
++      intro st h
++      apply ih
++      cases s with
++      | scope d => exact h
++      | entity e => exact h
++      | quantity n =>
++        show (match st.entities with
++          | e :: _ => { st with quantities := (e, n) :: st.quantities }
++          | [] => st).validated = true
++        split <;> exact h
++      | qualifier q => exact h
++      | commit => rfl
++  induction symbols generalizing st with
++  | nil => cases h
+   | cons s rest ih =>
+-    simp [executeInscription]
+     cases h with
+-    | inl h_eq =>
+-      rw [h_eq]
+-      simp [applySymbol]
+-      induction rest with
+-      | nil => rfl
+-      | cons s' rest' ih' =>
+-        simp [executeInscription, applySymbol]
+-        cases s' <;> simp [applySymbol] <;> exact ih'
+-    | inr h_in =>
+-      exact ih h_in
++    | head => exact pres rest (applySymbol .commit st) rfl
++    | tail _ h => exact ih (applySymbol s st) h
+ 
+ -- Theorem 3: Scope establishes domain
+ theorem scopeEstablishesDomain (dom : String) (st : State) :
+@@ -144,24 +153,32 @@
+   isCanonical symbols = true →
+   (executeInscription symbols st).validated = true := by
+   intro h
+-  unfold isCanonical at h
+-  match symbols with
+-  | .scope _ :: rest =>
+-    simp at h
+-    match hr : rest.reverse with
+-    | .commit :: _ =>
+-      apply sealIsValid
+-      have : .commit ∈ symbols := by
+-        simp [symbols]
+-        right
+-        have : .commit ∈ rest := by
+-          have := List.mem_reverse.mpr
+-          simp [hr]
+-          left
+-          rfl
+-        exact this
+-      exact this
+-    | _ => simp [hr] at h
++  apply sealIsValid
++  match symbols, h with
++  | [], h => cases h
++  | .entity _ :: _, h => cases h
++  | .quantity _ :: _, h => cases h
++  | .qualifier _ :: _, h => cases h
++  | .commit :: _, h => cases h
++  | .scope _ :: rest, h =>
++    apply List.Mem.tail
++    simp only [isCanonical] at h
++    have hr : ∃ t, rest.reverse = IndoSymbol.commit :: t := by
++      split at h
++      · rename_i t heq
++        exact ⟨t, heq⟩
++      · cases h
++    have hmem : ∀ l : List IndoSymbol, IndoSymbol.commit ∈ l ++ [IndoSymbol.commit] := by
++      intro l
++      induction l with
++      | nil => exact List.Mem.head _
++      | cons x xs ih => exact List.Mem.tail _ ih
++    match hr with
++    | ⟨t, ht⟩ =>
++      have e : rest = t.reverse ++ [IndoSymbol.commit] := by
++        rw [← List.reverse_reverse rest, ht, List.reverse_cons]
++      rw [e]
++      exact hmem _
+ 
+ -- Hebrew Root Semantics
+ 
+@@ -240,12 +257,13 @@
+   ledgerValid (inscriptions.map (fun ins => executeInscription ins emptyState)) := by
+   intro h
+   unfold ledgerValid
+-  intro st h_in
+-  simp [List.mem_map] at h_in
+-  obtain ⟨ins, h_ins_mem, h_eq⟩ := h_in
+-  rw [← h_eq]
+-  apply sealIsValid
+-  exact h ins h_ins_mem
++  induction inscriptions with
++  | nil => intro st h_in; cases h_in
++  | cons ins rest ih =>
++    intro st h_in
++    cases h_in with
++    | head => exact sealIsValid ins emptyState (h ins (List.Mem.head _))
++    | tail _ h_in => exact ih (fun i hi => h i (List.Mem.tail _ hi)) st h_in
+ 
+ -- Example: Seal M-314
+ 
+@@ -265,15 +283,14 @@
+   stateM314.validated = true := by
+   unfold stateM314
+   apply sealIsValid
+-  simp [sealM314]
++  exact List.Mem.tail _ (List.Mem.tail _ (List.Mem.tail _ (List.Mem.head _)))
+ 
+ -- Theorem 13: M-314 has correct structure
+ theorem M314CorrectStructure :
+   stateM314.scope = some "administrative" ∧
+   "jar" ∈ stateM314.entities ∧
+   ("jar", 11) ∈ stateM314.quantities := by
+-  unfold stateM314 sealM314 executeInscription emptyState applySymbol
+-  simp
++  decide
+ 
+ -- Main Results
+ 
+@@ -290,7 +307,6 @@
+   ∃ transition : State × List IndoSymbol × State, transition = (st1, inscription, st2) := by
+   intro h
+   exists (st1, inscription, st2)
+-  rw [h]
+ 
+ -- The system is deterministic
+ theorem systemIsDeterministic (inscription : List IndoSymbol) (st : State) :
+--- a/src/lean/Harappan/CollapseOperator.lean
++++ b/src/lean/Harappan/CollapseOperator.lean
+@@ -113,11 +113,8 @@
+ /-- Every collapse result is indeterminate -/
+ theorem collapse_is_indeterminate (s : Symbol) :
+     isIndeterminate (collapse s) := by
+-  cases s.archetype with
+-  | luminous => left; rfl
+-  | aquatic => right; left; rfl
+-  | terrestrial => right; right; left; rfl
+-  | aerial => right; right; right; rfl
++  unfold isIndeterminate collapse
++  cases s.archetype <;> simp
+ 
+ /-- Collapse preserves semantic field associations -/
+ structure SemanticAssociation where
+@@ -163,11 +160,8 @@
+   use protoSymbol (I s)
+   constructor
+   · rfl
+-  · cases s.archetype with
+-    | luminous => left; rfl
+-    | aquatic => right; left; rfl
+-    | terrestrial => right; right; left; rfl
+-    | aerial => right; right; right; rfl
++  · unfold I
++    cases s.archetype <;> simp [protoSymbol]
+ 
+ /-- The symbolic equation: I = 0/0 represents undefined origin -/
+ theorem symbolic_origin : 
+--- a/src/lean/Harappan/GlobalPhonology.lean
++++ b/src/lean/Harappan/GlobalPhonology.lean
+@@ -136,7 +136,7 @@
+     (inGroup sign_id SemanticGroup.RIT = true) ∨
+     (inGroup sign_id SemanticGroup.ARCH = true) ∨
+     (inGroup sign_id SemanticGroup.MISC = true) := by
+-  unfold inGroup groupRange at *
++  simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq]
+   -- Proof by exhaustive case analysis on ranges
+   omega
+ 
+@@ -151,42 +151,42 @@
+   -- We use omega to handle the arithmetic constraints
+   cases' hex with h1 h2
+   · use SemanticGroup.NUM; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.CON; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.GRID; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.CHEV; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.CIRC; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.OPER; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.HUM; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.ANIM; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.PLANT; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.ABSTR; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.RIT; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   cases' h2 with h1 h2
+   · use SemanticGroup.ARCH; constructor; exact h1
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+   · use SemanticGroup.MISC; constructor; exact h2
+-    intro g hg; cases g <;> (try rfl) <;> unfold groupRange at * <;> omega
++    intro g hg; cases g <;> (try rfl) <;> simp only [inGroup, groupRange, Bool.and_eq_true, decide_eq_true_eq] at * <;> omega
+ 
+ /-- Axiom: Phonemes in the same semantic group share related meanings -/
+ axiom semantic_coherence (p1 p2 : GlobalPhoneme) :
+@@ -294,7 +294,7 @@
+                                               inGroup sign_id SemanticGroup.ARCH ∨
+                                               inGroup sign_id SemanticGroup.MISC) :
+     1 ≤ sign_id ∧ sign_id ≤ totalSigns := by
+-  unfold inGroup groupRange totalSigns at *
++  simp only [inGroup, groupRange, totalSigns, Bool.and_eq_true, decide_eq_true_eq] at *
+   -- Each group's range is a subset of [1, 417]
+   -- We prove by cases on which group contains the sign
+   cases h with
+--- a/src/lean/Harappan/Morphology.lean
++++ b/src/lean/Harappan/Morphology.lean
+@@ -123,7 +123,7 @@
+ theorem morpheme_composition_assoc (m1 m2 m3 : Morpheme) :
+     combineMorphemes [m1, m2, m3] = 
+     combineMorphemes [m1] ++ combineMorphemes [m2, m3] := by
+-  simp [combineMorphemes, String.intercalate]
++  simp [combineMorphemes, String.intercalate, String.intercalate.go, String.append_assoc]
+ 
+ /-- Universal root preservation: combining preserves root meaning -/
+ def preservesRootMeaning (prefix_m : Morpheme) (root : Morpheme) : Prop :=
+--- a/src/lean/Harappan/Phonology.lean
++++ b/src/lean/Harappan/Phonology.lean
+@@ -165,11 +165,8 @@
+     · omega
+     · omega
+   · intro h
+-    unfold absDiff
+-    rw [h]
+-    split
+-    · rfl
+-    · rfl
++    subst h
++    simp [absDiff]
+ 
+ -- Helper lemma: feature vectors equal iff components equal
+ theorem featureVector_eq_iff (v1 v2 : FeatureVector) :
+@@ -195,15 +192,14 @@
+     have ⟨h1, h2, h3⟩ := sum_absDiff_zero_impl_each_zero _ _ _ _ _ _ h
+     rw [featureVector_eq_iff]
+     constructor
+-    · exact absDiff_eq_zero_iff.mp h1
++    · exact (absDiff_eq_zero_iff _ _).mp h1
+     constructor
+-    · exact absDiff_eq_zero_iff.mp h2
+-    · exact absDiff_eq_zero_iff.mp h3
++    · exact (absDiff_eq_zero_iff _ _).mp h2
++    · exact (absDiff_eq_zero_iff _ _).mp h3
+   · intro h
+     unfold phoneticDistance featureDistance
+     rw [h]
+     simp [absDiff]
+-    split <;> rfl
+ 
+ /- Every phoneme belongs to exactly one archetype class -/
+ theorem phoneme_has_unique_archetype (p : Phoneme) :
+@@ -224,11 +220,8 @@
+     collapseOperator p = ArchetypeClass.aquatic ∨
+     collapseOperator p = ArchetypeClass.terrestrial ∨
+     collapseOperator p = ArchetypeClass.aerial := by
+-  cases p.archetype with
+-  | luminous => left; rfl
+-  | aquatic => right; left; rfl
+-  | terrestrial => right; right; left; rfl
+-  | aerial => right; right; right; rfl
++  unfold collapseOperator
++  cases p.archetype <;> simp
+ /-
+   Harappan Universal System - Phonology Proofs
+   

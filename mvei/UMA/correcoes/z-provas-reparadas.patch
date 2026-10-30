@@ -1,0 +1,55 @@
+--- a/formal_proofs/lean/universe00_extended.lean
++++ b/formal_proofs/lean/universe00_extended.lean
+@@ -67,7 +67,7 @@
+ /-- Theorem: Compensation degrades with sea state -/
+ theorem compensation_degrades (n m : ℕ) (h : n < m) (hm : m ≤ 6) :
+   compensation_effectiveness m ≤ compensation_effectiveness n := by
+-  sorry
++  interval_cases m <;> interval_cases n <;> norm_num [compensation_effectiveness]
+ 
+ /-! ## Material Properties -/
+ 
+@@ -149,7 +149,6 @@
+ theorem titanium_better_than_aluminum :
+   strength_to_weight titanium > strength_to_weight aluminum := by
+   unfold strength_to_weight titanium aluminum
+-  simp
+   norm_num
+ 
+ /-! ## Energy Systems -/
+@@ -251,10 +250,7 @@
+   classify_flow Re = FlowRegime.Turbulent := by
+   intros Re hRe
+   unfold classify_flow
+-  simp
+-  constructor
+-  · linarith
+-  · linarith
++  rw [if_neg (by linarith), if_neg (by linarith)]
+ 
+ /-! ## Control Systems -/
+ 
+@@ -291,7 +287,9 @@
+   snr1 > 0 →
+   snr2 > snr1 →
+   shannon_capacity bw snr2 > shannon_capacity bw snr1 := by
+-  sorry
++  intro bw snr1 snr2 hbw h1 h12
++  unfold shannon_capacity
++  exact mul_lt_mul_of_pos_left (Real.log_lt_log (by linarith) (by linarith)) hbw
+ 
+ /-! ## Statistical Process Control -/
+ 
+@@ -478,7 +476,11 @@
+   energy > 0 →
+   ci > 0 →
+   carbon_footprint energy rf2 ci < carbon_footprint energy rf1 ci := by
+-  sorry
++  intro energy ci rf1 rf2 _ _ _ _ h12 he hci
++  unfold carbon_footprint
++  have h : 1 - rf2 < 1 - rf1 := by linarith
++  have := mul_lt_mul_of_pos_left h he
++  exact mul_lt_mul_of_pos_right this hci
+ 
+ /-! ## Summary -/
+ 

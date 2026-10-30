@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5f63f2d4b914170231fa9cf875956027cede152d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5f63f2d4b914170231fa9cf875956027cede152d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -32,6 +32,10 @@ The `.lean` files of the verified commit declare 16 `theorem`/`lemma` (counting 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: the written proof does not pass the kernel | 13 |
+
+### MVEI corrections
+
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Genesis_Elyon mvei/Genesis_Elyon/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

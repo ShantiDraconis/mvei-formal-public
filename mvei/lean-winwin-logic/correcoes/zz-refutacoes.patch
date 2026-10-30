@@ -1,0 +1,23 @@
+--- /dev/null
++++ b/MVEI_Refutacoes.lean
+@@ -0,0 +1,20 @@
++import LeanWinWinLogic
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `bebedor` é falso: com duas pessoas, uma que bebe (x) e outra que não, `¬ ∀ y, bebe y` vale, `bebe x` vale e
++    `∀ y, bebe y` não; o paradoxo do bebedor verdadeiro é `∃ x, bebe x → ∀ y, bebe y`. -/
++theorem bebedor_falso :
++    ¬ ∀ {Person : Type} (Drinks : Person → Prop) (x : Person),
++      ((∀ y, Drinks y) ∨ ¬ (∀ y, Drinks y)) →
++      LeanWinWinLogic.WinWin (∀ y, Drinks y) (Drinks x → ∀ y, Drinks y) := by
++  intro h
++  have nao : ¬ ∀ y : Bool, y = true := fun hall => Bool.noConfusion (hall false)
++  have w := h (Person := Bool) (fun b => b = true) true (Or.inr nao)
++  exact Bool.noConfusion (w.viaNeg nao rfl false)
++
++end MVEI.Refutacoes

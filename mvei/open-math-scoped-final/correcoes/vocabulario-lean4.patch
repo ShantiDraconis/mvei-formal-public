@@ -1,0 +1,258 @@
+--- a/RIEMANN/MCore/RH/NB/HilbertData.lean
++++ b/RIEMANN/MCore/RH/NB/HilbertData.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.InnerProductSpace.Projection
+ 
++noncomputable section
++
+ namespace MCore.RH.NB
+ 
+ structure NBHilbertData where
+@@ -18,7 +20,7 @@
+ 
+ variable (D : NBHilbertData)
+ 
+-def GeneratorFamily := ℕ → D.H
++abbrev GeneratorFamily := ℕ → D.H
+ 
+ def finiteGenerators (rho : D.GeneratorFamily) (N : ℕ) : Set D.H :=
+   Set.range (fun n : Fin N => rho n)
+--- a/RIEMANN/MCore/RH/NB/QuantitativeUpperBound.lean
++++ b/RIEMANN/MCore/RH/NB/QuantitativeUpperBound.lean
+@@ -1,5 +1,7 @@
+ import MCore.RH.NB.ZeroLimitFrontier
+ 
++noncomputable section
++
+ namespace MCore.RH.NB
+ namespace NBHilbertData
+ 
+--- a/RIEMANN/MCore/RH/NB/ZeroLimitFrontier.lean
++++ b/RIEMANN/MCore/RH/NB/ZeroLimitFrontier.lean
+@@ -1,5 +1,7 @@
+ import MCore.RH.NB.Limit
+ 
++noncomputable section
++
+ namespace MCore.RH.NB
+ namespace NBHilbertData
+ 
+--- a/RIEMANN/Riemann/claims/Claim1_FinalScoped.lean
++++ b/RIEMANN/Riemann/claims/Claim1_FinalScoped.lean
+@@ -1,5 +1,7 @@
+ import Riemann.frozen.vanishing_upper_bound_green_5c66f8dc
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ open MCore.RH.NB
+--- a/RIEMANN/Riemann/claims/Claim2_A14Refuted.lean
++++ b/RIEMANN/Riemann/claims/Claim2_A14Refuted.lean
+@@ -1,5 +1,7 @@
+ import Riemann.refutedRoutes.A14NonImplication
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ open Riemann.refutedRoutes
+--- a/RIEMANN/Riemann/claims/Claim3_ExternalFailClosed.lean
++++ b/RIEMANN/Riemann/claims/Claim3_ExternalFailClosed.lean
+@@ -1,6 +1,8 @@
+ import Riemann.frozen.vanishing_upper_bound_green_5c66f8dc
+ import Riemann.refutedRoutes.A14NonImplication
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ /-
+--- a/RIEMANN/Riemann/claims/Claim4_EndpointTyped.lean
++++ b/RIEMANN/Riemann/claims/Claim4_EndpointTyped.lean
+@@ -1,5 +1,7 @@
+ import Riemann.full.Endpoint
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ def CLAIM_4_ID : String := "RH_ENDPOINT_TYPED"
+--- a/RIEMANN/Riemann/claims/Claim5_UnconditionalVUB.lean
++++ b/RIEMANN/Riemann/claims/Claim5_UnconditionalVUB.lean
+@@ -1,5 +1,7 @@
+ import Riemann.full.Obligations
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ open MCore.RH.NB
+--- a/RIEMANN/Riemann/claims/Claim6_DNLimitZero.lean
++++ b/RIEMANN/Riemann/claims/Claim6_DNLimitZero.lean
+@@ -1,6 +1,8 @@
+ import Riemann.claims.Claim5_UnconditionalVUB
+ import Riemann.frozen.vanishing_upper_bound_green_5c66f8dc
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ def CLAIM_6_ID : String := "DNLIMIT_ZERO_FROM_PRODUCER"
+--- a/RIEMANN/Riemann/claims/Claim7_EndpointBridge.lean
++++ b/RIEMANN/Riemann/claims/Claim7_EndpointBridge.lean
+@@ -1,5 +1,7 @@
+ import Riemann.claims.Claim6_DNLimitZero
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ def CLAIM_7_ID : String := "DNLIMIT_ZERO_TO_RH_BRIDGE"
+--- a/RIEMANN/Riemann/claims/Claim8_RiemannComplete.lean
++++ b/RIEMANN/Riemann/claims/Claim8_RiemannComplete.lean
+@@ -1,5 +1,7 @@
+ import Riemann.claims.Claim7_EndpointBridge
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ def CLAIM_8_ID : String := "RIEMANN_COMPLETE"
+--- a/RIEMANN/Riemann/claims/ClaimsRegistry.lean
++++ b/RIEMANN/Riemann/claims/ClaimsRegistry.lean
+@@ -2,6 +2,8 @@
+ import Riemann.claims.Claim2_A14Refuted
+ import Riemann.claims.Claim3_ExternalFailClosed
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ def CLAIMS_TOTAL : Nat := 3
+--- a/RIEMANN/Riemann/claims/FullClaimsRegistry.lean
++++ b/RIEMANN/Riemann/claims/FullClaimsRegistry.lean
+@@ -4,6 +4,8 @@
+ import Riemann.claims.Claim7_EndpointBridge
+ import Riemann.claims.Claim8_RiemannComplete
+ 
++noncomputable section
++
+ namespace Riemann.claims
+ 
+ def FULL_CLAIMS_TOTAL : Nat := 5
+--- a/RIEMANN/Riemann/external/ExternalCertificate.lean
++++ b/RIEMANN/Riemann/external/ExternalCertificate.lean
+@@ -2,6 +2,8 @@
+ import Riemann.claims.ClaimsRegistry
+ import Riemann.refutedRoutes.A14NonImplication
+ 
++noncomputable section
++
+ namespace Riemann.external
+ 
+ open MCore.RH.NB
+--- a/RIEMANN/Riemann/external/ExternalStatus.lean
++++ b/RIEMANN/Riemann/external/ExternalStatus.lean
+@@ -1,5 +1,7 @@
+ import Riemann.external.ExternalCertificate
+ 
++noncomputable section
++
+ namespace Riemann.external
+ 
+ def CERTIFICATE_TYPE : String := "SCOPED_EXTERNAL_CERTIFICATE"
+--- a/RIEMANN/Riemann/external/FinalExternalCertificate.lean
++++ b/RIEMANN/Riemann/external/FinalExternalCertificate.lean
+@@ -1,6 +1,8 @@
+ import Riemann.full.FinalProof
+ import Riemann.claims.FullClaimsRegistry
+ 
++noncomputable section
++
+ namespace Riemann.external
+ 
+ structure FinalExternalCertificate where
+--- a/RIEMANN/Riemann/external/FinalExternalStatus.lean
++++ b/RIEMANN/Riemann/external/FinalExternalStatus.lean
+@@ -1,5 +1,7 @@
+ import Riemann.external.FinalExternalCertificate
+ 
++noncomputable section
++
+ namespace Riemann.external
+ 
+ def CERTIFICATE_TYPE : String := "RIEMANN_FINAL_EXTERNAL_CERTIFICATE"
+--- a/RIEMANN/Riemann/full/Endpoint.lean
++++ b/RIEMANN/Riemann/full/Endpoint.lean
+@@ -1,5 +1,7 @@
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
++noncomputable section
++
+ namespace Riemann.full
+ 
+ /-- Exact Mathlib endpoint used by the historical K8 certificate. -/
+--- a/RIEMANN/Riemann/full/Obligations.lean
++++ b/RIEMANN/Riemann/full/Obligations.lean
+@@ -1,6 +1,8 @@
+ import Riemann.full.Endpoint
+ import MCore.RH.NB.QuantitativeUpperBound
+ 
++noncomputable section
++
+ namespace Riemann.full
+ 
+ open MCore.RH.NB
+--- a/RIEMANN/Riemann/refuted-routes/A14NonImplication.lean
++++ b/RIEMANN/Riemann/refuted-routes/A14NonImplication.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace Riemann.refutedRoutes
+ 
+ inductive ZeroDirection where
+--- a/RIEMANN/Riemann/refutedRoutes/A14NonImplication.lean
++++ b/RIEMANN/Riemann/refutedRoutes/A14NonImplication.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace Riemann.refutedRoutes
+ 
+ inductive ZeroDirection where
+--- a/RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/K8.lean
++++ b/RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/K8.lean
+@@ -1,6 +1,8 @@
+ import MCore.K7
+ import Mathlib.NumberTheory.LSeries.RiemannZeta
+ 
++noncomputable section
++
+ namespace MCore
+ 
+ /-- K8 uses Mathlib's exact formal statement of the Riemann hypothesis.
+--- a/RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/RH/NB/ZeroLimitFrontier.lean
++++ b/RIEMANN/public-archive/imports/final-proof/RIEMANN/ad3011f1/lean/MCore/RH/NB/ZeroLimitFrontier.lean
+@@ -1,5 +1,7 @@
+ import MCore.RH.NB.Limit
+ 
++noncomputable section
++
+ namespace MCore.RH.NB
+ namespace NBHilbertData
+ 
+--- a/RIEMANN/scoped/FinalClaim.lean
++++ b/RIEMANN/scoped/FinalClaim.lean
+@@ -1,5 +1,7 @@
+ import MCore.RH.NB.ZeroLimitFrontier
+ 
++noncomputable section
++
+ /-!
+ # Riemann scoped final claim
+ 

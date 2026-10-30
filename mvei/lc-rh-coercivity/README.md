@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5283a63651a53c57fc3e8d11972f2169e38de3c6`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5283a63651a53c57fc3e8d11972f2169e38de3c6`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -28,6 +28,7 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `5283a63651a53c57fc3e8
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/lc-rh-coercivity mvei/lc-rh-coercivity/correcoes/imports-no-topo.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/lc-rh-coercivity mvei/lc-rh-coercivity/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

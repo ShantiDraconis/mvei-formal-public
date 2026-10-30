@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `44edb40cb18d994ff785d95e56d78767d0d5d15c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `44edb40cb18d994ff785d95e56d78767d0d5d15c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -98,6 +98,8 @@ The `.lean` files of the verified commit declare 225 `theorem`/`lemma` (counting
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 12 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 30 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
 
 ## Files in this folder
 

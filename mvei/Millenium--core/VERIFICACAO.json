@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -18,178 +18,379 @@
    "build_seconds": 0.0,
    "build_error": "o download do Mathlib falhou: error: ././lakefile.lean:5:10: error: type mismatch | error: ././lakefile.lean:9:8: error: '_package' has already been declared | error: ././lakefile.lean:16:8: error: '_package' has already been declared",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
-   "declared_axioms": [],
-   "theorems": [],
+   "declared_axioms": [
+    {
+     "name": "ClassicalScalar",
+     "module": "Core.Types",
+     "statement": "Type"
+    },
+    {
+     "name": "classicalScalarInhabited",
+     "module": "Core.Types",
+     "statement": "Inhabited ClassicalScalar"
+    }
+   ],
+   "theorems": [
+    {
+     "name": "ExtOp.add.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf ExtOp.add = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ExtOp.div.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf ExtOp.div = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ExtOp.mul.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf ExtOp.mul = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "ExtOp.ofNat_toCtorIdx",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ (x : ExtOp), ExtOp.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "ExtOp.sub.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf ExtOp.sub = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "IndClass.mk.inj",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ {index index_1 : Nat}, { index := index } = { index := index_1 } → index = index_1",
+     "status": "fechado"
+    },
+    {
+     "name": "IndClass.mk.injEq",
+     "module": "Core.Types",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (index index_1 : Nat), ({ index := index } = { index := index_1 }) = (index = index_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "IndClass.mk.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ (index : Nat), sizeOf { index := index } = 1 + sizeOf index",
+     "status": "fechado"
+    },
+    {
+     "name": "OriginTag.custom.inj",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ {label label_1 : String}, OriginTag.custom label = OriginTag.custom label_1 → label = label_1",
+     "status": "fechado"
+    },
+    {
+     "name": "OriginTag.custom.injEq",
+     "module": "Core.Types",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (label label_1 : String), (OriginTag.custom label = OriginTag.custom label_1) = (label = label_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "OriginTag.custom.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ (label : String), sizeOf (OriginTag.custom label) = 1 + sizeOf label",
+     "status": "fechado"
+    },
+    {
+     "name": "OriginTag.infMinusInf.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf OriginTag.infMinusInf = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OriginTag.oscillatory.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf OriginTag.oscillatory = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "OriginTag.zeroOverZero.sizeOf_spec",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "sizeOf OriginTag.zeroOverZero = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "instDecidableEqExtOp.proof_1",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ (x y : ExtOp), x.toCtorIdx = y.toCtorIdx → x = y",
+     "status": "fechado"
+    },
+    {
+     "name": "instDecidableEqExtOp.proof_2",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "∀ (x y : ExtOp), ¬x.toCtorIdx = y.toCtorIdx → x = y → False",
+     "status": "fechado"
+    },
+    {
+     "name": "separation_of_sorts",
+     "module": "Core.Types",
+     "axioms": [],
+     "statement": "IndClass → True",
+     "status": "fechado"
+    }
+   ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada): imports movidos para o início (antes de comentários de módulo ou de documentação) em 13 arquivo(s); 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s). a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: build failed",
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada, vocabulario-lean4): imports movidos para o início (antes de comentários de módulo ou de documentação) em 13 arquivo(s); 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 36 arquivo(s): abbrev 8, comentario 9, constant 3, docstring 14, end 2, import_ausente 3, lambda 159, noncomputable 23, notacao 15, repr 1. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Core, Main, Modules, TIF e o Mathlib v4.14.0 e compilou o que foi possível (erros restantes: error: ././././Core/Syntax.lean:35:11: failed to synthesize | error: ././././Core/Syntax.lean:107:11: failed to synthesize)",
    "corrections": [
     "imports-no-topo",
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4"
    ],
-   "lakefile_gerado": "",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.14.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Core.Collapse, .one `Core.Eval, .one `Core.Rewrite, .one `Core.Rewriting, .one `Core.State, .one `Core.Syntax, .one `Core.Theorems, .one `Core.Types, .one `Main, .submodules `Modules, .one `TIF, .submodules `TIF]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "Core/Collapse.lean",
-     "linha": 41,
+     "linha": 42,
      "nome": "collapse_requires_state",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Collapse.lean",
-     "linha": 49,
+     "linha": 50,
      "nome": "collapse_soundness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Collapse.lean",
-     "linha": 75,
+     "linha": 76,
      "nome": "collapse_completeness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Collapse.lean",
-     "linha": 93,
+     "linha": 94,
      "nome": "collapse_blocked_of_non_unique",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Collapse.lean",
-     "linha": 105,
+     "linha": 106,
      "nome": "no_arbitrary_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 43,
+     "linha": 45,
      "nome": "TIF.classicalFragmentState_sub",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 70,
+     "linha": 72,
      "nome": "TIF.conservativity_theorem",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 102,
+     "linha": 104,
      "nome": "TIF.no_spurious_classicals",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 119,
+     "linha": 121,
      "nome": "TIF.relative_consistency",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 143,
+     "linha": 145,
      "nome": "TIF.collapse_classical_restriction",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 179,
+     "linha": 181,
      "nome": "TIF.conservativity_boundary",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 215,
+     "linha": 218,
      "nome": "TIF.TIF.conservativity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 226,
+     "linha": 229,
      "nome": "TIF.TIF.operator_conservativity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 233,
+     "linha": 236,
      "nome": "TIF.TIF.no_spurious_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 253,
+     "linha": 256,
      "nome": "TIF.TIF.relative_consistency",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 262,
+     "linha": 265,
      "nome": "TIF.TIF.nonderivability_of_contradiction",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 277,
+     "linha": 280,
      "nome": "TIF.TIF.local_completeness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Conservativity.lean",
-     "linha": 284,
+     "linha": 287,
      "nome": "TIF.TIF.local_completeness_exact",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Eval.lean",
-     "linha": 61,
+     "linha": 64,
      "nome": "classical_agreement",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Eval.lean",
-     "linha": 112,
+     "linha": 115,
      "nome": "classical_stability_mono",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Rewrite.lean",
@@ -197,7 +398,7 @@
      "nome": "rewrite_preserves_semValueSet",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Rewrite.lean",
@@ -205,7 +406,7 @@
      "nome": "rewrite_preserves_wellFormed",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-40ed8suo/p/Core/Syntax.lean:107:11: error: failed to synthesize"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist — Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize"
     },
     {
      "arquivo": "Core/Rewriting.lean",
@@ -213,7 +414,7 @@
      "nome": "confluence",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Rewriting.lean",
@@ -221,418 +422,512 @@
      "nome": "termination",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 65,
+     "linha": 67,
      "nome": "TIF.eval_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 131,
+     "linha": 133,
      "nome": "TIF.uniquelyDetermined_all_agree",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 150,
+     "linha": 152,
      "nome": "TIF.stateRelTrue_refl",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 155,
+     "linha": 157,
      "nome": "TIF.stateRelTrue_symm",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 160,
+     "linha": 162,
      "nome": "TIF.stateRelTrue_mono",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 168,
+     "linha": 170,
      "nome": "TIF.classical_validity_preserved",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 182,
+     "linha": 184,
      "nome": "TIF.resSet_classical_const",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 291,
+     "linha": 294,
      "nome": "TIF.TIF.collapse_soundness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 300,
+     "linha": 303,
      "nome": "TIF.TIF.collapse_completeness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
-    },
-    {
-     "arquivo": "Core/Semantics.lean",
-     "linha": 307,
-     "nome": "TIF.TIF.soundness_of_collapse",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
      "linha": 310,
-     "nome": "TIF.TIF.uniqueness_implies_recovery",
+     "nome": "TIF.TIF.soundness_of_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Semantics.lean",
-     "linha": 320,
+     "linha": 313,
+     "nome": "TIF.TIF.uniqueness_implies_recovery",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
+    },
+    {
+     "arquivo": "Core/Semantics.lean",
+     "linha": 323,
      "nome": "TIF.TIF.classical_preserves_semantics",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/States.olean' of module TIF.Core.States does not exist — TIF.Core.States não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/States.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 94,
+     "linha": 95,
      "nome": "TIF.MetaArithmeticState.empty_consistent",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 98,
+     "linha": 99,
      "nome": "TIF.MetaArithmeticState.addEquation_consistent",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 120,
+     "linha": 121,
      "nome": "TIF.MetaArithmeticState.empty_isClassical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 137,
+     "linha": 138,
      "nome": "TIF.MetaArithmeticState.extends_refl",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 141,
+     "linha": 142,
      "nome": "TIF.MetaArithmeticState.extends_trans",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 148,
+     "linha": 149,
      "nome": "TIF.MetaArithmeticState.addEquation_extends",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 155,
+     "linha": 156,
      "nome": "TIF.MetaArithmeticState.addConstraint_extends",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 171,
+     "linha": 172,
      "nome": "TIF.MetaArithmeticState.equivalent_refl",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 175,
+     "linha": 176,
      "nome": "TIF.MetaArithmeticState.equivalent_symm",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 179,
+     "linha": 180,
      "nome": "TIF.MetaArithmeticState.equivalent_trans",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 200,
+     "linha": 201,
      "nome": "TIF.MetaArithmeticState.determined_monotone",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 320,
+     "linha": 322,
      "nome": "TIF.TIF.typed_object_interpretation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 334,
+     "linha": 336,
      "nome": "TIF.TIF.no_forced_classical_identity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/States.lean",
-     "linha": 340,
+     "linha": 342,
      "nome": "TIF.TIF.ontological_separation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Syntax.olean' of module TIF.Core.Syntax does not exist — TIF.Core.Syntax não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:35:11: error: failed to synthesize | /tmp/mvei-rec-f3kp2w3c/p/Core/Syntax.lean:107:11: error: failed to synthesize",
+     "ponte_de_modulo": {
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Core/Theorems.lean",
-     "linha": 37,
+     "linha": 39,
      "nome": "relative_consistency",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Theorems.lean",
-     "linha": 48,
+     "linha": 50,
      "nome": "conservativity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Theorems.lean",
-     "linha": 60,
+     "linha": 62,
      "nome": "collapse_criterion",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Theorems.lean",
-     "linha": 75,
+     "linha": 77,
      "nome": "indet_neq_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Theorems.lean",
-     "linha": 112,
+     "linha": 114,
      "nome": "collapse_returns_const",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Core/Theorems.lean",
-     "linha": 141,
+     "linha": 143,
      "nome": "collapse_classical_succeeds",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "Core/Types.lean",
-     "linha": 90,
-     "nome": "separation_of_sorts",
-     "status": "fechado",
-     "axioms": []
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "FORMAL/Lean4/PvsNP/Complexity.lean",
-     "linha": 51,
+     "linha": 52,
      "nome": "MillenniumCore.PvsNP.P_subset_NP",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/MillenniumCore/Core/Universe.olean' of module MillenniumCore.Core.Universe does not exist — MillenniumCore.Core.Universe não compilou: /tmp/mvei-rec-f3kp2w3c/p/FORMAL/Lean4/Core/Universe.lean:124:4: error: invalid pattern, constructor or constant marked with '[match_pattern]' expected | /tmp/mvei-rec-f3kp2w3c/p/FORMAL/Lean4/Core/Universe.lean:136:20: error: unknown identifier 'add' at quotation precheck; you can use `set_option quo",
+     "ponte_de_modulo": {
+      "MillenniumCore.Core.Universe": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "FORMAL/Lean4/RH/Zeta.lean",
-     "linha": 79,
+     "linha": 83,
      "nome": "MillenniumCore.RH.symmetry_fixes_critical_line",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/MillenniumCore/Core/Universe.olean' of module MillenniumCore.Core.Universe does not exist — MillenniumCore.Core.Universe não compilou: /tmp/mvei-rec-f3kp2w3c/p/FORMAL/Lean4/Core/Universe.lean:124:4: error: invalid pattern, constructor or constant marked with '[match_pattern]' expected | /tmp/mvei-rec-f3kp2w3c/p/FORMAL/Lean4/Core/Universe.lean:136:20: error: unknown identifier 'add' at quotation precheck; you can use `set_option quo",
+     "ponte_de_modulo": {
+      "MillenniumCore.Core.Universe": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Modules/BSD.lean",
-     "linha": 52,
+     "linha": 54,
      "nome": "rank_order_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/BSD.lean",
-     "linha": 66,
+     "linha": 68,
      "nome": "birch_swinnerton_dyer",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/Hodge.lean",
-     "linha": 44,
+     "linha": 46,
      "nome": "collapse_implies_algebraic",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/Hodge.lean",
-     "linha": 59,
+     "linha": 61,
      "nome": "hodge_conjecture",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/NavierStokes.lean",
-     "linha": 57,
+     "linha": 59,
      "nome": "energy_estimate_with_reg",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/NavierStokes.lean",
-     "linha": 70,
+     "linha": 72,
      "nome": "collapse_to_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/NavierStokes.lean",
-     "linha": 84,
+     "linha": 86,
      "nome": "navier_stokes_global_existence_or_blowup",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/PvsNP.lean",
-     "linha": 77,
+     "linha": 79,
      "nome": "p_characterisation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/PvsNP.lean",
-     "linha": 85,
+     "linha": 87,
      "nome": "np_hardness_transfer",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/PvsNP.lean",
-     "linha": 99,
+     "linha": 101,
      "nome": "p_neq_np",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/Riemann.lean",
-     "linha": 56,
+     "linha": 58,
      "nome": "symmetry_forcing",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/Riemann.lean",
-     "linha": 71,
+     "linha": 73,
      "nome": "exclusion_of_deviation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/Riemann.lean",
-     "linha": 86,
+     "linha": 88,
      "nome": "riemann_hypothesis",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/YangMills.lean",
-     "linha": 46,
+     "linha": 48,
      "nome": "mass_gap_from_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "Modules/YangMills.lean",
-     "linha": 61,
+     "linha": 63,
      "nome": "yang_mills_mass_gap",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/State.olean' of module Core.State does not exist — Core.State não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/State.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist"
     },
     {
      "arquivo": "TIF/Core.lean",
-     "linha": 307,
+     "linha": 309,
      "nome": "a11_local_non_identification",
      "status": "erro",
-     "axioms": [],
-     "erro": "linha 334: unexpected token 'Σ'; expected '_' or identifier"
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "erro": "linha 341: application type mismatch absurd h hBlocked argument hBlocked has type isBlocked e «Σ» : Prop but is expected to have type ¬collapseSem e «Σ» = some c : Prop",
+     "coluna": 26,
+     "trecho": "  exact fun h => absurd h ⟦h⟧Blocked"
     },
     {
      "arquivo": "TIF/Core.lean",
-     "linha": 340,
+     "linha": 342,
      "nome": "classical_eval_some",
      "status": "erro",
      "axioms": [
@@ -640,292 +935,477 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 378: invalid constructor ⟨...⟩, expected type must be an inductive type c₂ = 0 → False"
+     "erro": "linha 380: invalid constructor ⟨...⟩, expected type must be an inductive type c₂ = 0 → False",
+     "coluna": 14,
+     "trecho": "      · exact ⟦⟨⟧0, by simp [hz]⟩"
     },
     {
      "arquivo": "Toy/Algebraic.lean",
-     "linha": 125,
+     "linha": 127,
      "nome": "TIF.Toy.Algebraic.collapse_removable_singularity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Algebraic.lean",
-     "linha": 138,
+     "linha": 140,
      "nome": "TIF.Toy.Algebraic.collapse_nonremovable_blocked",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Algebraic.lean",
-     "linha": 222,
+     "linha": 225,
      "nome": "TIF.Toy.removable_singularity_collapses",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Algebraic.lean",
-     "linha": 232,
+     "linha": 235,
      "nome": "TIF.Toy.nonremovable_singularity_blocked",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Algebraic.lean",
-     "linha": 257,
+     "linha": 260,
      "nome": "TIF.Toy.factor_collapse_compatible",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Algebraic.lean",
-     "linha": 265,
+     "linha": 268,
      "nome": "TIF.Toy.classical_polynomial_preservation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 123,
+     "linha": 125,
      "nome": "TIF.Toy.Analytic.symmetry_preservation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 159,
+     "linha": 161,
      "nome": "TIF.Toy.Analytic.criticalFunctional_zero_iff_symmetric",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 212,
+     "linha": 215,
      "nome": "TIF.Toy.symmetry_preserved_under_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 252,
+     "linha": 255,
      "nome": "TIF.Toy.classical_limit_recovery",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 259,
+     "linha": 262,
      "nome": "TIF.Toy.constraint_sensitive_regularization",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 284,
+     "linha": 287,
      "nome": "TIF.Toy.conjugation_preservation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Analytic.lean",
-     "linha": 290,
+     "linha": 293,
      "nome": "TIF.Toy.functional_symmetry_inheritance",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Boolean.lean",
-     "linha": 99,
+     "linha": 101,
      "nome": "TIF.Toy.Boolean.toyVerify_sound",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Boolean.lean",
-     "linha": 104,
+     "linha": 106,
      "nome": "TIF.Toy.Boolean.toyVerify_complete",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Boolean.lean",
-     "linha": 139,
+     "linha": 141,
      "nome": "TIF.Toy.Boolean.collapse_verifier_equivalence",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Boolean.lean",
-     "linha": 156,
+     "linha": 158,
      "nome": "TIF.Toy.Boolean.no_collapse_without_witness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Boolean.lean",
-     "linha": 242,
+     "linha": 245,
      "nome": "TIF.Toy.toy_verifier_soundness",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Boolean.lean",
-     "linha": 253,
+     "linha": 256,
      "nome": "TIF.Toy.collapse_preserves_boolean_truth",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 121,
+     "linha": 122,
      "nome": "TIF.Toy.Complexity.encode_decode",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 135,
+     "linha": 136,
      "nome": "TIF.Toy.Complexity.collapse_verifier_equiv_tractable",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 148,
+     "linha": 149,
      "nome": "TIF.Toy.Complexity.no_collapse_no_unique",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 177,
+     "linha": 178,
      "nome": "TIF.Toy.Complexity.A16_achievable",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 235,
+     "linha": 237,
      "nome": "TIF.Toy.collapse_verifier_equiv",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 271,
+     "linha": 273,
      "nome": "TIF.Toy.toy_verifier_soundness_complexity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 278,
+     "linha": 280,
      "nome": "TIF.Toy.tractable_collapse_criterion",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 321,
+     "linha": 323,
      "nome": "TIF.Toy.soundness_yes_instances",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 329,
+     "linha": 331,
      "nome": "TIF.Toy.soundness_no_instances",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 336,
+     "linha": 338,
      "nome": "TIF.Toy.agreement_classical_verifier",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Complexity.lean",
-     "linha": 341,
+     "linha": 343,
      "nome": "TIF.Toy.structural_growth_witness_space",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Linear.lean",
-     "linha": 99,
+     "linha": 101,
      "nome": "TIF.Toy.Linear.unique_solution_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Linear.lean",
-     "linha": 117,
+     "linha": 119,
      "nome": "TIF.Toy.Linear.multiple_solutions_blocked",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Linear.lean",
-     "linha": 133,
+     "linha": 135,
      "nome": "TIF.Toy.Linear.no_solution_blocked",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Linear.lean",
-     "linha": 220,
+     "linha": 223,
      "nome": "TIF.Toy.unique_linear_solution_collapses",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "Toy/Linear.lean",
-     "linha": 234,
+     "linha": 237,
      "nome": "TIF.Toy.multiple_solutions_block_collapse",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'TIF' No directory 'TIF' or file 'TIF.olean' in the search path entries: /tmp/mvei-rec-40ed8suo/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.lake/packages/bat"
+     "motivo": "object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/TIF/Core/Collapse.olean' of module TIF.Core.Collapse does not exist — TIF.Core.Collapse não compilou: /tmp/mvei-rec-f3kp2w3c/p/Core/Collapse.lean:1:0: error: object file '/tmp/mvei-rec-f3kp2w3c/p/.lake/mvei-salvage/Core/Syntax.olean' of module Core.Syntax does not exist",
+     "ponte_de_modulo": {
+      "TIF.Core.Collapse": "prefixo do pacote",
+      "TIF.Core.States": "prefixo do pacote",
+      "TIF.Core.Syntax": "prefixo do pacote"
+     }
     }
    ],
-   "preenchimento": [],
+   "preenchimento": [
+    {
+     "tipo": "axioma",
+     "nome": "classicalScalarInhabited",
+     "enunciado": "Inhabited ClassicalScalar",
+     "resultado": "sem resultado",
+     "tatica": ""
+    }
+   ],
    "summary": {
-    "fechado": 0,
+    "fechado": 17,
     "aberto-sorry": 0,
     "condicional": 0
    }
@@ -945,216 +1425,225 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s). a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Classification.lean:5:0: unknown module prefix 'MillenniumCore' | error: Lean exited with code 1",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 36 arquivo(s): abbrev 8, comentario 9, constant 3, docstring 14, end 2, import_ausente 3, lambda 159, noncomputable 23, notacao 15, repr 1. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Universe.lean:124:4: invalid pattern, constructor or constant marked with '[match_pattern]' expected | error: ././././Universe.lean:136:20: unknown identifier 'add' at quotation precheck; you can use `set_option quotPrecheck false` to disable this check.",
    "corrections": [
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4"
    ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 233,
+     "linha": 235,
      "nome": "MillenniumCore.Classification.classifyExpr_deriv",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 242,
+     "linha": 244,
      "nome": "MillenniumCore.Classification.classifyExpr_integ",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 247,
+     "linha": 249,
      "nome": "MillenniumCore.Classification.classifyExpr_const",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 251,
+     "linha": 253,
      "nome": "MillenniumCore.Classification.classifyExpr_var",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 255,
+     "linha": 257,
      "nome": "MillenniumCore.Classification.classifyExpr_indet",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 259,
+     "linha": 261,
      "nome": "MillenniumCore.Classification.pureIndeterminate_collapse_dichotomy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 270,
+     "linha": 272,
      "nome": "MillenniumCore.Classification.mixed_collapse_dichotomy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 280,
+     "linha": 282,
      "nome": "MillenniumCore.Classification.classical_eval_indet_independent",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 309,
+     "linha": 311,
      "nome": "MillenniumCore.Classification.classical_collapse_unique",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 347,
+     "linha": 349,
      "nome": "MillenniumCore.Classification.collapseSimple_forced",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 361,
+     "linha": 363,
      "nome": "MillenniumCore.Classification.deriv_of_classical_is_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Classification.lean",
-     "linha": 372,
+     "linha": 374,
      "nome": "MillenniumCore.Classification.integ_of_pureIndeterminate_is_pureIndeterminate",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'MillenniumCore' No directory 'MillenniumCore' or file 'MillenniumCore.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Conservativity.lean",
-     "linha": 28,
+     "linha": 30,
      "nome": "MillenniumCore.classical_ne_ind",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Conservativity.lean",
-     "linha": 36,
+     "linha": 38,
      "nome": "MillenniumCore.ofReal_injective",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Conservativity.lean",
-     "linha": 42,
+     "linha": 44,
      "nome": "MillenniumCore.div_classical_eq",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Conservativity.lean",
-     "linha": 47,
+     "linha": 49,
      "nome": "MillenniumCore.add_preserves_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Conservativity.lean",
-     "linha": 52,
+     "linha": 54,
      "nome": "MillenniumCore.mul_preserves_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Conservativity.lean",
-     "linha": 57,
+     "linha": 59,
      "nome": "MillenniumCore.div_preserves_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/ToyModel.lean",
-     "linha": 50,
+     "linha": 52,
      "nome": "MillenniumCore.ToyModel.M₂.zero_div_zero_m2",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/ToyModel.lean",
-     "linha": 54,
+     "linha": 56,
      "nome": "MillenniumCore.ToyModel.M₂.ind_add_absorb",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/ToyModel.lean",
-     "linha": 58,
+     "linha": 60,
      "nome": "MillenniumCore.ToyModel.M₂.add_comm",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "unknown module prefix 'Universe' No directory 'Universe' or file 'Universe.olean' in the search path entries: /tmp/mvei-rec-fhqtyile/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib ././.la"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Universe.lean",
-     "linha": 137,
+     "linha": 139,
      "nome": "zero_div_zero",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 141: unknown identifier 'UI.Real'"
+     "erro": "linha 143: unknown identifier 'UI.Real'",
+     "coluna": 24,
+     "trecho": "theorem zero_div_zero : ⟦U⟧I.Real 0 /ᵢ UI.Real 0 = 𝕀 := "
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Universe.lean",
-     "linha": 143,
+     "linha": 145,
      "nome": "classical_div",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 146: unknown identifier 'UI.Real'"
+     "erro": "linha 148: unknown identifier 'UI.Real'",
+     "coluna": 4,
+     "trecho": "    ⟦U⟧I.Real a /ᵢ UI.Real b = UI.Re"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Universe.lean",
-     "linha": 148,
+     "linha": 150,
      "nome": "ind_ne_zero",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 150: unknown identifier 'UI.Real'"
+     "erro": "linha 152: unknown identifier 'UI.Real'",
+     "coluna": 26,
+     "trecho": "theorem ind_ne_zero : 𝕀 ≠ ⟦U⟧I.Real 0 := by"
     },
     {
      "arquivo": "FORMAL/Lean4/Core/Universe.lean",
-     "linha": 152,
+     "linha": 154,
      "nome": "classical_add",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 155: elaboration function for '«term_+ᵢ_»' has not been implemented UI.Real a +ᵢ UI.Real b"
+     "erro": "linha 157: elaboration function for '«term_+ᵢ_»' has not been implemented UI.Real a +ᵢ UI.Real b",
+     "coluna": 4,
+     "trecho": "    ⟦U⟧I.Real a +ᵢ UI.Real b = UI.Re"
     }
    ],
    "preenchimento": [],
@@ -1571,11 +2060,12 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Axioms, Core, MilleniumCore, Semantics e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././Axioms.lean:15:0: unknown module prefix 'TIF' | error: Lean exited with code 1)",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 36 arquivo(s): abbrev 8, comentario 9, constant 3, docstring 14, end 2, lambda 159, noncomputable 23, notacao 15, repr 1. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Core, MilleniumCore e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././MilleniumCore/IndetClass.lean:31:4: 'MilleniumCore.IndetClass.mk' has already been declared | error: Lean exited with code 1)",
    "corrections": [
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4"
    ],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Axioms, .one `Core, .one `MilleniumCore, .submodules `MilleniumCore, .one `Semantics]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Core, .one `MilleniumCore, .submodules `MilleniumCore]\n",
    "avulso": false,
    "salvage": [
     {
@@ -1583,8 +2073,19 @@
      "linha": 18,
      "nome": "TIF.A1_existence",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 27: unknown identifier 'TIF.I'",
+     "coluna": 45,
+     "trecho": "tence : ∃ _ : Indet, True := ⟨⟦T⟧IF.I, trivial⟩",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
@@ -1592,23 +2093,55 @@
      "nome": "TIF.A2_origin",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 34: unknown identifier 'Term.binOp'",
+     "coluna": 5,
+     "trecho": "    (⟦T⟧erm.binOp .divI (.const 0) (.",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
      "linha": 36,
      "nome": "TIF.A5_not_classical",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 58: unknown identifier 'Term.indet'",
+     "coluna": 18,
+     "trecho": "    ¬ (∃ r : Rat, ⟦T⟧erm.indet Indet.base = Term.c",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
      "linha": 61,
      "nome": "TIF.A6_total",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 69: invalid field notation, type is not of the form (C ...) where C is a constant Term has type Sort u_2",
+     "coluna": 3,
+     "trecho": "  ⟨⟦T⟧erm.binOp op t₁ t₂, trivial⟩",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
@@ -1616,7 +2149,16 @@
      "nome": "TIF.A7_classical_addI",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 75: unknown identifier 'Term.binOp'",
+     "coluna": 5,
+     "trecho": "    (⟦T⟧erm.binOp .addI (.const a) (.",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
@@ -1624,15 +2166,31 @@
      "nome": "TIF.A7_classical_subI",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 79: unknown identifier 'Term.binOp'",
+     "coluna": 5,
+     "trecho": "    (⟦T⟧erm.binOp .subI (.const a) (.",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
      "linha": 81,
      "nome": "TIF.A7_classical_mulI",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ],
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
@@ -1640,7 +2198,16 @@
      "nome": "TIF.A7_classical_divI",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 88: unknown identifier 'Term.binOp'",
+     "coluna": 5,
+     "trecho": "    (⟦T⟧erm.binOp .divI (.const n) (.",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
@@ -1648,7 +2215,16 @@
      "nome": "TIF.A7_zero_divI",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 93: unknown identifier 'Term.binOp'",
+     "coluna": 5,
+     "trecho": "    (⟦T⟧erm.binOp .divI (.const n) (.",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Axioms.lean",
@@ -1656,7 +2232,16 @@
      "nome": "TIF.A11_noncontradiction",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 139: unknown identifier 'Term.indet'",
+     "coluna": 4,
+     "trecho": "    ⟦T⟧erm.indet Indet.base ≠ Term.c",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Core.lean",
@@ -1667,7 +2252,9 @@
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 161: unknown constant 'List.isEmpty_append'"
+     "erro": "linha 161: unknown constant 'List.isEmpty_append'",
+     "coluna": 26,
+     "trecho": "      simp [Term.support, ⟦L⟧ist.isEmpty_append] at h"
     },
     {
      "arquivo": "lean/Core.lean",
@@ -1695,39 +2282,45 @@
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 223: application type mismatch Exists.intro ?m.18166 rfl argument rfl has type ?m.18174 = ?m.18174 : Prop but is expected to have type (match match CollapseResult.value 1 1, match List.find? (fun eq => eq.lhs == Term.indet I₀) σ.equations with |"
+     "erro": "linha 223: application type mismatch Exists.intro ?m.18166 rfl argument rfl has type ?m.18174 = ?m.18174 : Prop but is expected to have type (match match CollapseResult.value 1 1, match List.find? (fun eq => eq.lhs == Term.indet I₀) σ.equations with |",
+     "coluna": 12,
+     "trecho": "  exact ⟨_, ⟦r⟧fl⟩"
     },
     {
      "arquivo": "lean/Core.lean",
-     "linha": 270,
+     "linha": 271,
      "nome": "TIF.indetClass_zero",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "lean/Core.lean",
-     "linha": 273,
+     "linha": 274,
      "nome": "TIF.indetClass_distinct",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 279: application type mismatch Indet.cls.inj h' argument h' has type k = j : Prop but is expected to have type Indet.cls k = Indet.cls j : Prop"
+     "erro": "linha 280: application type mismatch Indet.cls.inj h' argument h' has type k = j : Prop but is expected to have type Indet.cls k = Indet.cls j : Prop",
+     "coluna": 25,
+     "trecho": "  exact h (Indet.cls.inj ⟦h⟧')"
     },
     {
      "arquivo": "lean/Core.lean",
-     "linha": 514,
+     "linha": 515,
      "nome": "TIF.rewrite_preserves_wf",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 526: simp_all made no progress"
+     "erro": "linha 527: simp_all made no progress",
+     "coluna": 12,
+     "trecho": "  all_goals ⟦s⟧imp_all [Term.wellFormed]"
     },
     {
      "arquivo": "lean/Core.lean",
-     "linha": 527,
+     "linha": 528,
      "nome": "TIF.classical_stable",
      "status": "erro",
      "axioms": [
@@ -1735,7 +2328,9 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 533: unsolved goals case h_1 σ : State t : Term x✝ : RewriteResult a✝ : Term h : t.hasIndet = false heq✝ : sorry σ t = RewriteResult.rewritten a✝ ⊢ a✝.hasIndet = false"
+     "erro": "linha 534: unsolved goals case h_1 σ : State t : Term x✝ : RewriteResult a✝ : Term h : t.hasIndet = false heq✝ : sorry σ t = RewriteResult.rewritten a✝ ⊢ a✝.hasIndet = false",
+     "coluna": 31,
+     "trecho": "   | .normal       => True := ⟦b⟧y"
     },
     {
      "arquivo": "lean/MilleniumCore/Collapse.lean",
@@ -1743,7 +2338,7 @@
      "nome": "MilleniumCore.collapseOp_eq_collapseSem",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-8z6cvuvz/p/.lake/mvei-salvage/MilleniumCore/Eval.olean' of module MilleniumCore.Eval does not exist — MilleniumCore.Eval não compilou: /tmp/mvei-rec-8z6cvuvz/p/MilleniumCore/Eval.lean:25:0: error: object file '/tmp/mvei-rec-8z6cvuvz/p/.lake/mvei-salvage/MilleniumCore/State.olean' of module MilleniumCore.State does not exist"
     },
     {
      "arquivo": "lean/MilleniumCore/Collapse.lean",
@@ -1751,79 +2346,163 @@
      "nome": "MilleniumCore.collapseConst_eq",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "motivo": "object file '/tmp/mvei-rec-8z6cvuvz/p/.lake/mvei-salvage/MilleniumCore/Eval.olean' of module MilleniumCore.Eval does not exist — MilleniumCore.Eval não compilou: /tmp/mvei-rec-8z6cvuvz/p/MilleniumCore/Eval.lean:25:0: error: object file '/tmp/mvei-rec-8z6cvuvz/p/.lake/mvei-salvage/MilleniumCore/State.olean' of module MilleniumCore.State does not exist"
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 65,
+     "linha": 67,
      "nome": "TIF.classical_singleton_resolution",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 75: invalid field notation, type is not of the form (C ...) where C is a constant t has type Term",
+     "coluna": 55,
+     "trecho": "on_resolution (t : Term) (h : ⟦t⟧.isClassical = true) (σ : Sta",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 128,
+     "linha": 130,
      "nome": "TIF.ground_classical_eval",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 133: invalid field notation, type is not of the form (C ...) where C is a constant t has type Term",
+     "coluna": 47,
+     "trecho": "assical_eval (t : Term) (ht : ⟦t⟧.isGround = true) (v₁ v₂ : Va",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 141,
+     "linha": 143,
      "nome": "TIF.C0_conservativity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 150: invalid field notation, type is not of the form (C ...) where C is a constant t₁ has type Term",
+     "coluna": 10,
+     "trecho": "    (h₁ : ⟦t⟧₁.isGround = true) (h₂ : t₂.i",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 187,
+     "linha": 189,
      "nome": "TIF.model_I_not_classical",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 192: invalid dotted identifier notation, expected type is not of the form (... → C ...) where C is a constant ?m.351",
+     "coluna": 40,
+     "trecho": "nterpretInModel (fun _ => 0) (⟦.⟧indet .base) ≠ .inl 0 := by",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 192,
+     "linha": 194,
      "nome": "TIF.model_zero_div_zero",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 198: invalid dotted identifier notation, expected type is not of the form (... → C ...) where C is a constant ?m.530",
+     "coluna": 9,
+     "trecho": "        (⟦.⟧binOp .divI (.const 0) (.cons",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 198,
+     "linha": 200,
      "nome": "TIF.C1_relative_consistency",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 205: invalid field notation, type is not of the form (C ...) where C is a constant Term has type Sort u_1",
+     "coluna": 13,
+     "trecho": "    True := ⟨⟦T⟧erm.interpretInModel (fun _ =",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 204,
+     "linha": 206,
      "nome": "TIF.C2_collapse_completeness_var",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 216: unknown constant 'State.empty.addConstraint'",
+     "coluna": 13,
+     "trecho": "    let σ := ⟦S⟧tate.empty.addConstraint (.ex",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 217,
+     "linha": 219,
      "nome": "TIF.C2_binOp_collapses",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 221: type expected, got (State : Type → Type)",
+     "coluna": 60,
+     "trecho": " : ExtOp) (t₁ t₂ : Term) (σ : ⟦S⟧tate) (v₁ v₂ : Rat) :",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "lean/Semantics.lean",
-     "linha": 226,
+     "linha": 228,
      "nome": "TIF.F3_T1_collapse_correct",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "dependencia_com_sorry": [
+      "TIF.Core"
+     ],
+     "erro": "linha 236: type expected, got (State : Type → Type)",
+     "coluna": 47,
+     "trecho": "lapse_correct (t : Term) (σ : ⟦S⟧tate) (r : Rat)",
+     "motivo": "importa TIF.Core, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "TIF.Core": "outra pasta do repositório"
+     }
     }
    ],
    "preenchimento": [],
@@ -1840,7 +2519,7 @@
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 6.4,
+   "build_seconds": 5.1,
    "build_error": "(configuração original) error: ././lakefile.lean:5:10: error: type mismatch | error: ././lakefile.lean: package configuration has errors",
    "sorry_warnings": 0,
    "reconstructed": true,
@@ -2155,9 +2834,10 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Indeterminate e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 36 arquivo(s): abbrev 8, comentario 9, constant 3, docstring 14, end 2, import_ausente 3, lambda 159, noncomputable 23, notacao 15, repr 1. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Indeterminate e compilou o que foi possível",
    "corrections": [
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Indeterminate]\n",
    "avulso": false,

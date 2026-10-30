@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T18:57:14+00:00",
+ "generated_at": "2026-10-30T08:01:18+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -14,9 +14,9 @@
    "toolchain": "leanprover/lean4:v4.36.0-rc2",
    "toolchain_used": "leanprover/lean4:v4.36.0-rc2",
    "needs_mathlib": true,
-   "build_ok": false,
-   "build_seconds": 2.1,
-   "build_error": "Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: no such file or directory (error code: 2) | error: build failed",
+   "build_ok": true,
+   "build_seconds": 2.5,
+   "build_error": "(configuração original) Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: no such file or directory (error code: 2) | error: build failed",
    "sorry_warnings": 0,
    "reconstructed": true,
    "bridges": [],
@@ -95,93 +95,161 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada): 2 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s). RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com NavierStokes, Universe00, YangMills e o Mathlib v4.36.0-rc2 e compilou o que foi possível (erros restantes: error: NavierStokes.lean:14:0: unknown module prefix 'Universe00' | error: YangMills.lean:13:0: unknown module prefix 'Universe00')",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4): 2 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 5 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 8 arquivo(s): abbrev 4, nomes_mathlib 4, noncomputable 8, notacao_escopo 1, palavra_chave 4. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Universe00 e o Mathlib v4.36.0-rc2 e compilou o que foi possível",
    "corrections": [
     "renomear-imports-mathlib",
-    "tatica-encontrada"
+    "tatica-encontrada",
+    "vocabulario-lean4"
    ],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.36.0-rc2\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `NavierStokes, .one `Universe00, .one `YangMills]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.36.0-rc2\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Universe00]\n",
    "avulso": false,
    "salvage": [
     {
      "arquivo": ".formal_foundations/lean/NavierStokes.lean",
-     "linha": 69,
+     "linha": 72,
      "nome": "NavierStokes.navier_stokes_parametrization",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 87: linarith failed to find a contradiction case h.left u : VelocityField p : PressureField h_ns : NavierStokesEqs u p x : ℝ a✝ : 1 + x < 0 ⊢ False failed",
+     "coluna": 4,
+     "trecho": "    ⟦l⟧inarith",
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/NavierStokes.lean",
-     "linha": 99,
+     "linha": 102,
      "nome": "NavierStokes.stabilization_maintains_operational_bounds",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/NavierStokes.lean",
-     "linha": 112,
+     "linha": 115,
      "nome": "NavierStokes.turbulence_parametric_control",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 126: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce case h u : VelocityField p : PressureField h_ns : NavierStokesEqs u p ε_crit : ℕ h_pos : ε_crit > 0 ⊢ ↑ε_crit > 0 ∧ ∀ (V : Set (ℝ × ℝ × ℝ)), ",
+     "coluna": 8,
+     "trecho": "  intro ⟦V⟧ h_turb",
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 47,
+     "linha": 49,
      "nome": "YangMills.mass_gap_exists",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 69,
+     "linha": 71,
      "nome": "YangMills.energy_quantization",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 79,
+     "linha": 81,
      "nome": "YangMills.reset_consumes_mass_gap",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 88: type expected, got (state_after.energy_nonneg : 0 ≤ state_after.energy)",
+     "coluna": 14,
+     "trecho": "  (h_nonneg : ⟦s⟧tate_after.energy_nonneg) →",
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 91,
+     "linha": 93,
      "nome": "YangMills.confinement_below_gap",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 100,
+     "linha": 102,
      "nome": "YangMills.reset_reversibility",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 114,
+     "linha": 116,
      "nome": "YangMills.energy_stability",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     },
     {
      "arquivo": ".formal_foundations/lean/YangMills.lean",
-     "linha": 124,
+     "linha": 126,
      "nome": "YangMills.yang_mills_analogy",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Universe00": "prefixo do pacote"
+     }
     }
    ],
    "preenchimento": [
@@ -221,14 +289,14 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: ././././universe00_core.lean: bad import 'Mathlib.Data.Nat.Prime'",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././IndeterminacaoZeroDivZero.lean:55:15: failed to synthesize | error: ././././IndeterminacaoZeroDivZero.lean:72:0: unsolved goals",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 36,
+     "linha": 38,
      "nome": "IndeterminacaoContextual.resolver_bem_definida",
      "status": "fechado",
      "axioms": [
@@ -239,7 +307,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 62,
+     "linha": 64,
      "nome": "SistemaTransformacao.transformacao_valor_zero",
      "status": "erro",
      "axioms": [
@@ -248,31 +316,37 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 70: unsolved goals case h α : Type u_1 inst✝¹ : Field α inst✝ : LinearOrder α s : SistemaTransformacao α h : s.valor_inicial = 0 h_denom : s.energia_degradacao ≠ 0 ⊢ 0 = s.energia_processo"
+     "erro": "linha 72: unsolved goals case h α : Type u_1 inst✝¹ : Field α inst✝ : LinearOrder α s : SistemaTransformacao α h : s.valor_inicial = 0 h_denom : s.energia_degradacao ≠ 0 ⊢ 0 = s.energia_processo",
+     "coluna": 0,
+     "trecho": "⟦b⟧y"
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 113,
+     "linha": 115,
      "nome": "ProtocoloCivilizacaoAutonoma.autossuficiencia_minima",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 115: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.4797"
+     "erro": "linha 117: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.4797",
+     "coluna": 37,
+     "trecho": " autossuficiencia_minima (p : ⟦P⟧rotocoloCivilizacaoAutonoma α"
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 124,
+     "linha": 126,
      "nome": "ProtocoloCivilizacaoAutonoma.independencia_logistica_absoluta_alcancavel",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 127: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.5402"
+     "erro": "linha 129: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.5402",
+     "coluna": 9,
+     "trecho": "  ∃ (p : ⟦P⟧rotocoloCivilizacaoAutonoma α"
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 154,
+     "linha": 156,
      "nome": "BateriaMagnetica.energia_perpetua",
      "status": "aberto-sorry",
      "axioms": [
@@ -284,7 +358,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 166,
+     "linha": 168,
      "nome": "BateriaMagnetica.vantagem_longevidade",
      "status": "aberto-sorry",
      "axioms": [
@@ -294,7 +368,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 197,
+     "linha": 199,
      "nome": "SistemaCriptoPrimosPares.descentralizado",
      "status": "fechado",
      "axioms": [
@@ -305,7 +379,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 204,
+     "linha": 206,
      "nome": "independencia_logistica_absoluta_viavel",
      "status": "erro",
      "axioms": [
@@ -314,199 +388,376 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 213: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.10388"
+     "erro": "linha 215: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.10388",
+     "coluna": 11,
+     "trecho": "  ∃ (pca : ⟦P⟧rotocoloCivilizacaoAutonoma ℝ"
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 110,
+     "linha": 113,
      "nome": "Universe00.pure_potential_unity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 116,
+     "linha": 119,
      "nome": "Universe00.transformation_preserves_potential",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 123,
+     "linha": 125,
      "nome": "Universe00.potential_conservation_lemma",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.potential_conservation"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 130,
+     "linha": 132,
      "nome": "Universe00.decomposition_completeness",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 136: unsolved goals case h m : MaterialState ⊢ 1 ≤ m.constituents",
+     "coluna": 51,
+     "trecho": ", a.count = m.constituents := ⟦b⟧y",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 137,
+     "linha": 139,
      "nome": "Universe00.reconstruction_sufficiency",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.configuration_realizable"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 163,
+     "linha": 165,
      "nome": "Universe00.prime_security_hardness",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "erro": "linha 173: unknown constant 'Nat.mul_lt_mul'",
+     "coluna": 12,
+     "trecho": "      apply ⟦N⟧at.mul_lt_mul",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 190,
+     "linha": 192,
      "nome": "Universe00.motion_nullification",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 198: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧ing_nf",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 214,
+     "linha": 216,
      "nome": "Universe00.fleet_optimization",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 249,
+     "linha": 251,
      "nome": "Universe00.zero_knowledge_security",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 280,
+     "linha": 281,
      "nome": "Universe00.waste_elimination",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.pure_potential_exists"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 289,
+     "linha": 290,
      "nome": "Universe00.infinite_recyclability",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
      "linha": 296,
      "nome": "Universe00.scarcity_resolution",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 304: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧fl",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
      "linha": 316,
      "nome": "Universe00.precision_achievable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
      "linha": 362,
      "nome": "Universe00.validation_sound",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
      "linha": 371,
      "nome": "Universe00.system_integration",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.pure_potential_exists"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 63,
+     "linha": 66,
      "nome": "Universe00Extended.compensation_degrades",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 144,
+     "linha": 147,
      "nome": "Universe00Extended.titanium_better_than_aluminum",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 181,
+     "linha": 184,
      "nome": "Universe00Extended.sufficient_generation_positive",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 190,
+     "linha": 193,
      "nome": "Universe00Extended.renewable_target_achievable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 207,
+     "linha": 210,
      "nome": "Universe00Extended.negative_gibbs_spontaneous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 243,
+     "linha": 246,
      "nome": "Universe00Extended.high_reynolds_turbulent",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 254: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 283,
+     "linha": 286,
      "nome": "Universe00Extended.higher_snr_increases_capacity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 304,
+     "linha": 307,
      "nome": "Universe00Extended.high_cpk_capable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 468,
+     "linha": 471,
      "nome": "Universe00Extended.higher_renewable_reduces_carbon",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
     }
    ],
    "preenchimento": [],
@@ -531,186 +782,342 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: no such file or directory (error code: 2) | error: ././././UMA_Foundation.lean: bad import 'Mathlib.Data.Nat.Prime'",
+   "note": "AVULSO: arquivos .lean sem lakefile; nenhum arquivo compilou",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 33,
+     "linha": 38,
      "nome": "UMA.Singularity.sinc_removable_singularity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 42,
+     "linha": 47,
      "nome": "UMA.Singularity.lhopital_rule_zero_over_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 74,
+     "linha": 79,
      "nome": "UMA.PrimeSync.prime_proximity",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 85: typeclass instance problem is stuck, it is often due to metavariables FloorSemiring (?m.6542 p)",
+     "coluna": 57,
+     "trecho": "|Int.ofNat p - Int.ofNat n| ≤ ⟦I⟧nt.log n := by",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 82,
+     "linha": 87,
      "nome": "UMA.PrimeSync.prime_frequencies_independent",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "erro": "linha 94: invalid field notation, type is not of the form (C ...) where C is a constant Nat.Prime.coprime_iff_not_dvd has type Nat.Prime ?m.6949 → (Nat.Coprime ?m.6949 ?m.6950 ↔ ¬?m.6949 ∣ ?m.6950)",
+     "coluna": 8,
+     "trecho": "  exact ⟦N⟧at.Prime.coprime_iff_not_dvd.",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 90,
+     "linha": 95,
      "nome": "UMA.PrimeSync.no_resonance_buildup",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 137,
+     "linha": 142,
      "nome": "UMA.Gyroscope.quaternion_no_gimbal_lock",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 153,
+     "linha": 158,
      "nome": "UMA.Gyroscope.gyroscopic_stability",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 174,
+     "linha": 179,
      "nome": "UMA.Logistics.triangle_inequality",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 182,
+     "linha": 187,
      "nome": "UMA.Logistics.nearest_neighbor_approximation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 223,
+     "linha": 228,
      "nome": "UMA.NewMath.real_embeds_in_singularity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 235: unsolved goals r : ℝ ⊢ Filter.map (fun x => r) (𝓝[≠] 0) ≤ 𝓝 r",
+     "coluna": 26,
+     "trecho": "  use ⟨fun _ => r, 0, ⟨r, ⟦b⟧y simp [Filter.Tendsto]⟩⟩",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 246,
+     "linha": 251,
      "nome": "UMA.Soundness.uma_framework_sound",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
-    },
-    {
-     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 31,
-     "nome": "Universe00.zero_over_zero_is_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "erro": "linha 262: failed to infer binder type when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved before the declaration body is processed",
+     "coluna": 13,
+     "trecho": "    (∀ p₁ p₂ ⟦p⟧₃, UMA.Logistics.distance p₁ ",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
      "linha": 34,
+     "nome": "Universe00.zero_over_zero_is_one",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
+    },
+    {
+     "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
+     "linha": 37,
      "nome": "Universe00.lhopital_zero_form",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 45,
+     "linha": 48,
      "nome": "Universe00.unique_prime_factorization",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 61,
+     "linha": 64,
      "nome": "Universe00.prime_event_collision_free",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 86,
+     "linha": 89,
      "nome": "Universe00.gyro_stability",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 111,
+     "linha": 114,
      "nome": "Universe00.tmfm_energy_conservation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 136,
+     "linha": 139,
      "nome": "Universe00.normal_implies_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 157,
+     "linha": 160,
      "nome": "Universe00.system_is_antifragile",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 174,
+     "linha": 177,
      "nome": "Universe00.swarm_learning_superlinear",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 183: linarith failed to find a contradiction case h n : ℕ f : ℝ hn : n ≥ 2 hf : f > 0 h1 : ↑n * f * (↑n - 1) = ↑n * f * ↑n - ↑n * f h2 : ↑n ≥ 2 a✝ : ↑n * f ≥ ↑n * f * (↑n - 1) ⊢ False failed",
+     "coluna": 2,
+     "trecho": "  ⟦n⟧linarith [sq_nonneg ((n : ℝ) ",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 196,
+     "linha": 199,
      "nome": "Universe00.blockchain_unique_ids",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "erro": "linha 206: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≥ 0 a ≥ 0 a - b ≥ 0 where a := ↑i b := ↑blocks.length",
+     "coluna": 25,
+     "trecho": "      (blocks.get ⟨i, by ⟦o⟧mega⟩).block_id ≠ (blocks.get",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 225,
+     "linha": 228,
      "nome": "Universe00.universe00_stability",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "o Lean parou antes do fim do arquivo (código 1)"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.NumberTheory.Primes"
+     ]
     }
    ],
    "preenchimento": [],

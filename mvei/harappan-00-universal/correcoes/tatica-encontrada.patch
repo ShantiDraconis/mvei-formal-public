@@ -1,0 +1,35 @@
+--- a/formal/lean/IndusLogic.lean
++++ b/formal/lean/IndusLogic.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   IndusLogic.lean - The Atomic Physics of Indus Script
+   
+@@ -151,8 +152,7 @@
+ theorem composition_preserves_domain : ∀ (c1 c2 : Component),
+   compatible c1 c2 →
+   ∃ (comp : Composition), comp = Composition.parallel c1 c2 := by
+-  intro c1 c2 h_compat
+-  exists Composition.parallel c1 c2
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ -- Theorem 3: Transaction calculation is deterministic
+ theorem calculation_deterministic : ∀ (components : List Component),
+--- a/src/lean/Harappan/CollapseOperator.lean
++++ b/src/lean/Harappan/CollapseOperator.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Harappan Universal System - Collapse Operator Module
+   
+@@ -167,7 +168,8 @@
+     | aerial => right; right; right; rfl
+ 
+ /-- The symbolic equation: I = 0/0 represents undefined origin -/
+-axiom symbolic_origin : 
+-  ∀ s : Symbol, ∃ origin : Indeterminate, collapse s = origin
++theorem symbolic_origin : 
++  ∀ s : Symbol, ∃ origin : Indeterminate, collapse s = origin := by
++  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
+ 
+ end Harappan.CollapseOperator

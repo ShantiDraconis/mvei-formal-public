@@ -1,0 +1,343 @@
+--- a/DualState.lean
++++ b/DualState.lean
+@@ -1,3 +1,7 @@
++import Mathlib.Data.Complex.Basic
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   Meta-Mathematical Foundation: Dual-State Hypothesis
+   
+--- a/lean/MetaMillennium/Basic.lean
++++ b/lean/MetaMillennium/Basic.lean
+@@ -1,3 +1,5 @@
++
++noncomputable section
+ /-
+   Meta-Mathematical Foundation for Millennium Problems Independence
+ 
+@@ -147,7 +149,7 @@
+ 
+ /-! ## Remarks -/
+ 
+-/-- 
++/- 
+   REMARK (Meta-Status):
+   In the current state of mathematics, it is NOT KNOWN whether 
+   MillenniumIndependence is true. In this work, we treat
+--- a/lean/ZFCI.lean
++++ b/lean/ZFCI.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   ZFCI.lean
+   Meta-Mathematical Foundations 0/0
+@@ -108,18 +111,18 @@
+ ## Example Collapses
+ -/
+ 
+-/-- Example: sin(x)/x at 0 has collapse I -/
++/- Example: sin(x)/x at 0 has collapse I -/
+ -- axiom sinx_over_x_collapse : C (fun x => Real.sin x / x) 0 = CollapseValue.I
+ 
+-/-- Example: x/x at 0 has collapse I -/
++/- Example: x/x at 0 has collapse I -/
+ -- axiom x_over_x_collapse : C (fun x => x / x) 0 = CollapseValue.I
+ 
+ /-!
+ ## Connection to ZFC
+ -/
+ 
+-/-- ZFC^I extends ZFC: any ZFC theorem remains valid -/
++/- ZFC^I extends ZFC: any ZFC theorem remains valid -/
+ -- This would require formal ZFC development
+ -- theorem zfc_embedding : ∀ φ : ZFC.Formula, ZFC.provable φ → ZFCI.provable φ := ...
+ 
+-end -- module
++-- [MVEI] end   -- `end` sem escopo aberto-- module
+--- a/lean/collapse-axioms.lean
++++ b/lean/collapse-axioms.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   collapse-axioms.lean
+   Meta-Mathematical Foundations 0/0
+@@ -46,7 +49,7 @@
+   | I_inf : CollapseValue          -- Infinite collapse
+   | I_spec : ℕ → CollapseValue     -- Spectral collapse
+   | classical : ℝ → CollapseValue  -- Non-singular
+-  deriving Repr
++  
+ 
+ /-!
+ ## Equivalence Collapse Axiom
+@@ -74,7 +77,7 @@
+ ## Spectrum Collapse Axiom
+ -/
+ 
+-/-- For operators on Banach spaces with spectral singularities -/
++/- For operators on Banach spaces with spectral singularities -/
+ -- axiom spectral_collapse :
+ --   ∀ (T : BanachSpace → BanachSpace) (λ : ℂ),
+ --     IsSpectralSingularity T λ →
+@@ -149,4 +152,4 @@
+     Collapse f a = Collapse g b :=
+   profile_collapse_equiv
+ 
+-end -- module
++-- [MVEI] end   -- `end` sem escopo aberto-- module
+--- a/lean/equivalence-collapse.lean
++++ b/lean/equivalence-collapse.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   equivalence-collapse.lean
+   Meta-Mathematical Foundations 0/0
+@@ -158,4 +161,4 @@
+   intro φ ψ χ h1 h2
+   exact h1.trans h2
+ 
+-end -- module
++-- [MVEI] end   -- `end` sem escopo aberto-- module
+--- a/lean/independence-schemes.lean
++++ b/lean/independence-schemes.lean
+@@ -1,3 +1,5 @@
++
++noncomputable section
+ /-
+   independence-schemes.lean
+   Meta-Mathematical Foundations 0/0
+@@ -18,7 +20,7 @@
+ -/
+ 
+ /-- A theory (simplified as a set of propositions) -/
+-def Theory : Type := List Prop
++abbrev Theory : Type := List Prop
+ 
+ /-- Provability relation (abstract) -/
+ axiom Provable : Theory → Prop → Prop
+@@ -164,10 +166,10 @@
+ ## Applications
+ -/
+ 
+-/-- Potential independence of RH -/
++/- Potential independence of RH -/
+ -- theorem rh_independence : INDEP(ZFC, RH) := by sorry
+ 
+-/-- Potential independence of P ≠ NP -/
++/- Potential independence of P ≠ NP -/
+ -- theorem p_np_independence : INDEP(ZFC, P_ne_NP) := by sorry
+ 
+-end -- module
++-- [MVEI] end   -- `end` sem escopo aberto-- module
+--- a/lean/millennium-meta.lean
++++ b/lean/millennium-meta.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   millennium-meta.lean
+   Meta-Mathematical Foundations 0/0
+@@ -227,4 +230,4 @@
+     InvolvesCollapse P →
+     ∃ I : CollapseValue, True  -- Associated collapse type
+ 
+-end -- module
++-- [MVEI] end   -- `end` sem escopo aberto-- module
+--- a/src/lean/MetaMillennium/DualState/BiModel.lean
++++ b/src/lean/MetaMillennium/DualState/BiModel.lean
+@@ -32,7 +32,7 @@
+   Mneg  : Model T    -- M⁻ (false-branch)
+ /- Later you can enrich with maps ι⁺, ι⁻, relations, etc. -/
+ 
+-/-- For now, we abstract a satisfaction relation on each side. -/
++/- For now, we abstract a satisfaction relation on each side. -/
+ variable {T : Theory} [Satisfies T]
+ 
+ /-- Type alias for the collection of all BiModels of a theory T.
+--- a/src/lean/MetaMillennium/DualState/DualStateAxioms.lean
++++ b/src/lean/MetaMillennium/DualState/DualStateAxioms.lean
+@@ -5,6 +5,9 @@
+ -/
+ 
+ import MetaMillennium.DualState.DualStateDefinition
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ 
+ namespace MetaMillennium.DualState
+ 
+@@ -25,7 +28,7 @@
+ axiom L4_model_lattice : True  -- The model classes form a complete lattice
+ 
+ /-- Dual-state magnitude type -/
+-def DSMagnitude := ℝ≥0
++abbrev DSMagnitude := ℝ≥0
+ 
+ /-- Axiom S1: Magnitude exists -/
+ axiom S1_magnitude (φ : Prop) : DSMagnitude
+--- a/src/lean/MetaMillennium/DualState/DualStateDefinition.lean
++++ b/src/lean/MetaMillennium/DualState/DualStateDefinition.lean
+@@ -5,6 +5,7 @@
+ -/
+ 
+ import MetaMillennium.ZFC.Models
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.DualState
+ 
+--- a/src/lean/MetaMillennium/DualState/NumericClassesCore.lean
++++ b/src/lean/MetaMillennium/DualState/NumericClassesCore.lean
+@@ -1,3 +1,6 @@
++import Mathlib.Data.Real.Basic
++
++noncomputable section
+ /-
+   MetaMillennium.DualState.NumericClassesCore
+   
+--- a/src/lean/MetaMillennium/DualState/ProblemsMeta.lean
++++ b/src/lean/MetaMillennium/DualState/ProblemsMeta.lean
+@@ -7,6 +7,8 @@
+ import MetaMillennium.DualState.DualStateDefinition
+ import MetaMillennium.DualState.NumericClassesCore
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems
+ 
+ open MetaMillennium.DualState
+--- a/src/lean/MetaMillennium/Experiments/IndependenceSchemes.lean
++++ b/src/lean/MetaMillennium/Experiments/IndependenceSchemes.lean
+@@ -6,6 +6,8 @@
+ 
+ import MetaMillennium.DualState.DualStateDefinition
+ 
++noncomputable section
++
+ namespace MetaMillennium.Experiments
+ 
+ open MetaMillennium.DualState
+--- a/src/lean/MetaMillennium/Problems/BSDMeta.lean
++++ b/src/lean/MetaMillennium/Problems/BSDMeta.lean
+@@ -6,6 +6,8 @@
+ 
+ import MetaMillennium.DualState.ProblemsMeta
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.BSD
+ 
+ open MetaMillennium.DualState.NumericClasses
+--- a/src/lean/MetaMillennium/Problems/HodgeMeta.lean
++++ b/src/lean/MetaMillennium/Problems/HodgeMeta.lean
+@@ -6,6 +6,8 @@
+ 
+ import MetaMillennium.DualState.ProblemsMeta
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.Hodge
+ 
+ open MetaMillennium.DualState.NumericClasses
+--- a/src/lean/MetaMillennium/Problems/NSMeta.lean
++++ b/src/lean/MetaMillennium/Problems/NSMeta.lean
+@@ -6,6 +6,8 @@
+ 
+ import MetaMillennium.DualState.ProblemsMeta
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.NS
+ 
+ open MetaMillennium.DualState.NumericClasses
+--- a/src/lean/MetaMillennium/Problems/PNPMeta.lean
++++ b/src/lean/MetaMillennium/Problems/PNPMeta.lean
+@@ -6,6 +6,8 @@
+ 
+ import MetaMillennium.DualState.ProblemsMeta
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.PNP
+ 
+ open MetaMillennium.DualState
+--- a/src/lean/MetaMillennium/Problems/RHMeta.lean
++++ b/src/lean/MetaMillennium/Problems/RHMeta.lean
+@@ -6,12 +6,14 @@
+ 
+ import MetaMillennium.DualState.ProblemsMeta
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.RH
+ 
+ open MetaMillennium.DualState
+ open MetaMillennium.DualState.NumericClasses
+ 
+-/-- RH formalization placeholder -/
++/- RH formalization placeholder -/
+ -- The actual RH involves complex analysis beyond current Lean libraries
+ 
+ /-- Independence number for RH (estimated) -/
+--- a/src/lean/MetaMillennium/Problems/YMMeta.lean
++++ b/src/lean/MetaMillennium/Problems/YMMeta.lean
+@@ -6,6 +6,8 @@
+ 
+ import MetaMillennium.DualState.ProblemsMeta
+ 
++noncomputable section
++
+ namespace MetaMillennium.Problems.YM
+ 
+ open MetaMillennium.DualState.NumericClasses
+--- a/src/lean/MetaMillennium/ZFC/Axioms.lean
++++ b/src/lean/MetaMillennium/ZFC/Axioms.lean
+@@ -13,7 +13,7 @@
+   /-- Membership relation -/
+   mem : Set → Set → Prop
+ 
+-notation:50 x " ∈ " y => SetTheory.mem x y
++notation:50 x:51 " ∈ " y:51 => SetTheory.mem x y
+ 
+ /-- Extensionality axiom -/
+ axiom extensionality {S : SetTheory} : ∀ x y : S.Set, (∀ z, z ∈ x ↔ z ∈ y) → x = y
+--- a/src/lean/MetaMillennium/ZFC/Independence.lean
++++ b/src/lean/MetaMillennium/ZFC/Independence.lean
+@@ -5,6 +5,7 @@
+ -/
+ 
+ import MetaMillennium.ZFC.Models
++import Mathlib.Tactic
+ 
+ namespace MetaMillennium.ZFC
+ 
+--- a/src/lean/MetaMillennium/ZFC/Models.lean
++++ b/src/lean/MetaMillennium/ZFC/Models.lean
+@@ -16,7 +16,7 @@
+   satisfies_axioms : True  -- Would include actual axiom satisfaction
+ 
+ /-- The class of all models of ZFC -/
+-def ModZFC : Type* := Model
++abbrev ModZFC : Type* := Model
+ 
+ /-- A sentence is true in a model -/
+ def satisfies (M : Model) (φ : Prop) : Prop := φ
+--- a/src/lean/NumericalClasses.lean
++++ b/src/lean/NumericalClasses.lean
+@@ -19,6 +19,9 @@
+ import Mathlib.Data.Rat.Defs
+ import Mathlib.Data.Setoid.Basic
+ import Mathlib.Logic.Equiv.Basic
++import Mathlib.Algebra.Field.Rat
++
++noncomputable section
+ 
+ universe u v
+ 

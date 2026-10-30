@@ -1,0 +1,11 @@
+--- a/formal/lean4/SovereignCore.lean
++++ b/formal/lean4/SovereignCore.lean
+@@ -82,7 +82,7 @@
+   ∀ (n : Nat), securityGrowth (n + 1) = 2 * securityGrowth n := by
+   intro n
+   unfold securityGrowth
+-  ring
++  rw [Nat.pow_succ, Nat.mul_comm]
+ 
+ -- Core security property: Non-reversion to insecure state
+ theorem no_reversion_to_insecure :

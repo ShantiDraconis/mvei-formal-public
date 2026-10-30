@@ -11,18 +11,18 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `405bd93a8ba2e1da819acdd5ebf3eed49f167d51`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `405bd93a8ba2e1da819acdd5ebf3eed49f167d51`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 22 | 0 | 3 | 0 / 0 / 2 / 2 / 1 |
-| `src/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 4 / 0 / 1 / 1 / 15 |
+| `lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 23 | 0 | 4 | 0 / 0 / 2 / 1 / 1 |
+| `src/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 10 / 0 / 6 / 1 / 4 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 26 |
-| Unique (name + statement) | 26 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 11 |
+| Counting each project | 33 |
+| Unique (name + statement) | 33 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 17 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -31,22 +31,29 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `405bd93a8ba2e1da819ac
 | `Problems.BSD.bsd_hawking_equivalence` | `lean` | open | `Problems.BSD.analytic_rank`, `Problems.BSD.algebraic_rank`, `Problems.BSD.L_function`, `sorryAx` |
 | `Problems.Hodge.hodge_hawking_equivalence` | `lean` | open | `Problems.Hodge.is_algebraic`, `sorryAx` |
 | `Problems.NavierStokes.ns_hawking_equivalence` | `lean` | open | `sorryAx` |
+| `Problems.YangMills.ym_hawking_equivalence` | `lean` | open | `sorryAx` |
 | `Problems.PvsNP.pnp_hawking_equivalence` | `lean (file by file)` | open | `sorryAx` |
 | `Problems.Riemann.rh_hawking_equivalence` | `lean (file by file)` | open | `sorryAx`, `Problems.Riemann.xi` |
+| `Hawking.BSD.bsd_hawking_reformulation` | `src/lean (file by file)` | open | `sorryAx`, `Hawking.BSD.L`, `Hawking.BSD.algebraicRank`, `Hawking.BSD.analyticRank` |
 | `Hawking.Core.singularity_trichotomy` | `src/lean (file by file)` | open | `sorryAx` |
+| `Hawking.Hodge.hodge_hawking_reformulation` | `src/lean (file by file)` | open | `sorryAx`, `Hawking.Hodge.laplacianNorm` |
+| `Hawking.NavierStokes.ns_hawking_reformulation` | `src/lean (file by file)` | open | `sorryAx` |
+| `Hawking.RH.rh_no_off_line_singularities` | `src/lean (file by file)` | open | `sorryAx`, `Hawking.RH.xi` |
+| `Hawking.YangMills.ym_hawking_reformulation` | `src/lean (file by file)` | open | `sorryAx`, `Hawking.YangMills.energyAtScale` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 33 `theorem`/`lemma` (counting copies). The kernel checked 15 of them (9 closed, 0 conditional, 6 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 18 the kernel has no result:
+The `.lean` files of the verified commit declare 33 `theorem`/`lemma` (counting copies). The kernel checked 27 of them (15 closed, 0 conditional, 12 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 6 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 16 |
-| checked file by file: the written proof does not pass the kernel | 2 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 5 |
+| checked file by file: the written proof does not pass the kernel | 1 |
 
 ### MVEI corrections
 
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/hawking-singularities-millennium-problems mvei/hawking-singularities-millennium-problems/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 21 file(s)): applies to the published sources: `git apply -p1 --directory=imports/hawking-singularities-millennium-problems mvei/hawking-singularities-millennium-problems/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

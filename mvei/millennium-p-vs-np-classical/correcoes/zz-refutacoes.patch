@@ -1,0 +1,26 @@
+--- /dev/null
++++ b/src/lean4/MVEI_Refutacoes.lean
+@@ -0,0 +1,23 @@
++import PvsNP.ComplexityClasses
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `NP_eq_NP_verifier` é falso com as definições do repositório: `NTIME` só pede uma máquina (os predicados de
++    aceitação e tempo são `True`), então a linguagem vazia está em NP; já um verificador exige
++    `L w ↔ ∃ c, |c| ≤ p(|w|)`, cujo lado direito vale sempre (c = []), o que só a linguagem universal satisfaz. -/
++theorem NP_eq_NP_verifier_falso : ¬ (PvsNP.NPClass = PvsNP.NPClass_verifier) := by
++  intro h
++  have hNP : PvsNP.emptyLanguage ∈ PvsNP.NPClass := by
++    refine ⟨1, le_refl 1, ?_⟩
++    exact ⟨{ numStates := 3, initialState := ⟨0⟩, isAccepting := fun _ => False, isRejecting := fun _ => False,
++             branchingFactor := 1, branching_positive := le_refl 1,
++             accept_reject_disjoint := fun _ h => h.elim }, trivial, trivial⟩
++  rw [h] at hNP
++  obtain ⟨v, _⟩ := hNP
++  exact (v.correctness []).mpr ⟨[], Nat.zero_le _⟩
++
++end MVEI.Refutacoes

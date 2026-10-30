@@ -1,0 +1,11 @@
+--- a/src/lean/BSD/EllipticCurve/Basic.lean
++++ b/src/lean/BSD/EllipticCurve/Basic.lean
+@@ -84,7 +84,7 @@
+ 
+ /-- Short Weierstrass form: y² = x³ + Ax + B
+     Only valid when char(K) ≠ 2, 3 -/
+-structure ShortWeierstrass where
++structure ShortWeierstrass (K : Type u) [Field K] where
+   A : K
+   B : K
+   non_singular : 4 * A^3 + 27 * B^2 ≠ 0

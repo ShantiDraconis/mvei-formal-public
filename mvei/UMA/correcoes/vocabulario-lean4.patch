@@ -1,0 +1,162 @@
+--- a/.formal_foundations/lean/NavierStokes.lean
++++ b/.formal_foundations/lean/NavierStokes.lean
+@@ -15,16 +15,19 @@
+ import Mathlib.Analysis.Calculus.FDeriv.Basic
+ import Mathlib.MeasureTheory.Integral.Lebesgue.Basic
+ import Mathlib.Analysis.Normed.Module.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++
++noncomputable section
+ 
+ namespace NavierStokes
+ 
+ open Universe00
+ 
+ /-- 3D velocity field -/
+-def VelocityField := ℝ × ℝ × ℝ → ℝ → (ℝ × ℝ × ℝ)
++abbrev VelocityField := ℝ × ℝ × ℝ → ℝ → (ℝ × ℝ × ℝ)
+ 
+ /-- Pressure field -/
+-def PressureField := ℝ × ℝ × ℝ → ℝ → ℝ
++abbrev PressureField := ℝ × ℝ × ℝ → ℝ → ℝ
+ 
+ /--
+ Turbulence parameter: integrated vorticity over the spatial region `V`.
+--- a/.formal_foundations/lean/Universe00.lean
++++ b/.formal_foundations/lean/Universe00.lean
+@@ -12,6 +12,8 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Topology.Basic
+ 
++noncomputable section
++
+ -- Core Universe 00 namespace
+ namespace Universe00
+ 
+@@ -30,7 +32,7 @@
+     system.error < ε  -- system operates within error bounds
+ 
+ /-- Critical error threshold -/
+-def CriticalError : Type := { ε : ℝ // ε > 0 }
++abbrev CriticalError : Type := { ε : ℝ // ε > 0 }
+ 
+ /-- System remains operational below critical error -/
+ def Operational (state : PhysicalState) (ε_crit : CriticalError) : Prop :=
+--- a/.formal_foundations/lean/YangMills.lean
++++ b/.formal_foundations/lean/YangMills.lean
+@@ -14,6 +14,8 @@
+ import Mathlib.Analysis.SpecialFunctions.Exp
+ import Mathlib.Data.Real.Basic
+ 
++noncomputable section
++
+ namespace YangMills
+ 
+ open Universe00
+--- a/formal_proofs/lean/IndeterminacaoZeroDivZero.lean
++++ b/formal_proofs/lean/IndeterminacaoZeroDivZero.lean
+@@ -14,6 +14,8 @@
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ /-! ## Definição da Indeterminação Contextual -/
+ 
+ /-- 
+--- a/formal_proofs/lean/universe00_core.lean
++++ b/formal_proofs/lean/universe00_core.lean
+@@ -12,6 +12,9 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Tactic
++import Mathlib.Data.Nat.Prime.Defs
++
++noncomputable section
+ 
+ /-!
+ # Universe 00 Core Theory
+--- a/formal_proofs/lean/universe00_extended.lean
++++ b/formal_proofs/lean/universe00_extended.lean
+@@ -9,6 +9,8 @@
+ import Mathlib.Topology.Instances.Real
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ /-!
+ # Extended Universe 00 Theory
+ 
+@@ -78,7 +80,7 @@
+ 
+ /-- Material properties -/
+ structure Material where
+-  class : MaterialClass
++  «class» : MaterialClass
+   density : ℝ
+   melting_point : ℝ
+   tensile_strength : ℝ
+@@ -100,7 +102,7 @@
+ 
+ /-- Example material: Steel -/
+ def steel : Material := {
+-  class := MaterialClass.Metal
++  «class» := MaterialClass.Metal
+   density := 7.85
+   melting_point := 1811
+   tensile_strength := 400
+@@ -115,7 +117,7 @@
+ 
+ /-- Example material: Aluminum -/
+ def aluminum : Material := {
+-  class := MaterialClass.Metal
++  «class» := MaterialClass.Metal
+   density := 2.70
+   melting_point := 933
+   tensile_strength := 310
+@@ -130,7 +132,7 @@
+ 
+ /-- Example material: Titanium -/
+ def titanium : Material := {
+-  class := MaterialClass.Metal
++  «class» := MaterialClass.Metal
+   density := 4.51
+   melting_point := 1941
+   tensile_strength := 900
+@@ -345,7 +347,7 @@
+ /-! ## Fleet Coordination -/
+ 
+ /-- 3D Position -/
+-def Position := ℝ × ℝ × ℝ
++abbrev Position := ℝ × ℝ × ℝ
+ 
+ /-- Distance between positions -/
+ def distance (p1 p2 : Position) : ℝ :=
+--- a/formal_verification/UMA_Foundation.lean
++++ b/formal_verification/UMA_Foundation.lean
+@@ -19,6 +19,12 @@
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Data.Nat.Prime
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Nat.Prime.Defs
++open scoped Topology
++
++noncomputable section
+ 
+ /-! ## Singularity Resolution Theory -/
+ 
+--- a/formal_verification/lean/UNIVERSE_00_AXIOMS.lean
++++ b/formal_verification/lean/UNIVERSE_00_AXIOMS.lean
+@@ -19,6 +19,10 @@
+ import Mathlib.Algebra.Field.Basic
+ import Mathlib.Analysis.Calculus.Deriv.Basic
+ import Mathlib.NumberTheory.Primes
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Data.Nat.Prime.Defs
++
++noncomputable section
+ 
+ namespace Universe00
+ 

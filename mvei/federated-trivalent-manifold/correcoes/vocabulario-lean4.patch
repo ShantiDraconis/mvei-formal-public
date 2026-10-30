@@ -1,0 +1,129 @@
+--- a/ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean
++++ b/ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean
+@@ -16,6 +16,9 @@
+ import Mathlib.Data.Fin.Basic
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Topology.Algebra.Order.LiminfLimsup
++import Mathlib.Analysis.Calculus.Deriv.Basic
++
++noncomputable section
+ 
+ -- ─────────────────────────────────────────────────────────────────────────────
+ -- PHASE 1 — Finite / Barrier Lemmas (100% closeable, no tanh, no sorry)
+--- a/FTM/EvidenceStates.lean
++++ b/FTM/EvidenceStates.lean
+@@ -15,7 +15,7 @@
+ inductive TruthStatus
+   | proved
+   | refuted
+-  | open
++  | «open»
+   | independentOfAxioms
+   | inconsistentPremises
+   | illPosed
+--- a/formal/lean/AnomalyKernel.lean
++++ b/formal/lean/AnomalyKernel.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace AnomalyKernel
+ 
+ def seffSquared (alpha beta t e : ℝ) : ℝ :=
+--- a/formal/lean/Behaviors.lean
++++ b/formal/lean/Behaviors.lean
+@@ -40,6 +40,8 @@
+ import Mathlib.Data.Nat.Defs
+ import Mathlib.Algebra.Order.Field.Basic
+ 
++noncomputable section
++
+ -- ─────────────────────────────────────────────────────────────────────────────
+ -- Core definitions
+ -- ─────────────────────────────────────────────────────────────────────────────
+--- a/formal/lean/FiniteEvidence.lean
++++ b/formal/lean/FiniteEvidence.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.Data.Nat.Defs
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace FiniteEvidence
+ 
+ /-- A toy sequence that agrees with zero up to a finite cutoff and differs after it.
+--- a/formal/lean/FiniteScale.lean
++++ b/formal/lean/FiniteScale.lean
+@@ -1,5 +1,7 @@
+ import Mathlib
+ 
++noncomputable section
++
+ namespace FiniteScale
+ 
+ /-- Finite resource comparison; not equality of complexity classes. -/
+--- a/formal/lean/FlowOperators.lean
++++ b/formal/lean/FlowOperators.lean
+@@ -1,4 +1,5 @@
+ import Trivalent
++import Mathlib.Tactic
+ 
+ structure State5 where
+   x : Rat
+--- a/formal/lean/Lemas_Master.lean
++++ b/formal/lean/Lemas_Master.lean
+@@ -13,6 +13,8 @@
+ import Mathlib.Data.Fin.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ -- ──────────────────────────────────────────────────────────────────────────────
+ -- PHASE 1 — 99% acceptance — Bounded / Barrier Results
+ -- ──────────────────────────────────────────────────────────────────────────────
+--- a/formal/lean/NumeroComComportamento.lean
++++ b/formal/lean/NumeroComComportamento.lean
+@@ -43,6 +43,8 @@
+ import Mathlib.Data.Nat.Defs
+ import Mathlib.Algebra.Order.Field.Basic
+ 
++noncomputable section
++
+ -- ════════════════════════════════════════════════════════════════════════════
+ -- ANDAR 0 — TOPOGRAFIA
+ -- Cada observação numérica vira um objeto tipado com provenance.
+--- a/formal/lean/PvsNP_ComoNumeros.lean
++++ b/formal/lean/PvsNP_ComoNumeros.lean
+@@ -35,6 +35,8 @@
+ import Mathlib.Data.Nat.Defs
+ import Mathlib.Logic.Basic
+ 
++noncomputable section
++
+ -- ════════════════════════════════════════════════════════════════════════════
+ -- §1 — GÖDEL NUMBERING
+ -- Cada símbolo do alfabeto Σ recebe um número primo distinto.
+--- a/formal/lean/RadialGeometry.lean
++++ b/formal/lean/RadialGeometry.lean
+@@ -1,6 +1,8 @@
+ import Mathlib.Data.Real.Basic
+ import Mathlib.Tactic
+ 
++noncomputable section
++
+ namespace RadialGeometry
+ 
+ /-- Squared radius of the midpoint of a generic reflected pair. -/
+--- a/hub/formal/lean/FTMHub/Audit.lean
++++ b/hub/formal/lean/FTMHub/Audit.lean
+@@ -9,7 +9,7 @@
+   | equivalent
+   | conjectural
+   | refuted
+-  | open
++  | «open»
+   deriving DecidableEq
+ 
+ def statusAllowsAutomaticProof : Status → Bool

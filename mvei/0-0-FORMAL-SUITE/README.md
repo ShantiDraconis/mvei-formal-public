@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-29T18:57:14+00:00, on commit `fcc67dd53fa0e6d37c0c0c2f8bf682813e8c7850`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T08:01:18+00:00, on commit `fcc67dd53fa0e6d37c0c0c2f8bf682813e8c7850`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | v4.12.0 | partial | 81 | 0 | 0 | 13 / 0 / 2 / 10 / 43 |
+| `.` | v4.12.0 | partial | 81 | 0 | 0 | 28 / 0 / 10 / 9 / 21 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 94 |
-| Unique (name + statement) | 94 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 62 |
+| Counting each project | 109 |
+| Unique (name + statement) | 109 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 77 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -29,15 +29,27 @@ MVEI verification of 2026-10-29T18:57:14+00:00, on commit `fcc67dd53fa0e6d37c0c0
 |---|---|---|---|
 | `FormalSuite.Geometry.collapse_to_fixed_point` | `. (file by file)` | open | `sorryAx` |
 | `FormalSuite.IOperatorAlgebra.projector_complement_sum` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.NavierStokes.I_energy_bounded` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.NavierStokes.I_preserves_energy_bound` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.NavierStokes.I_energy_bounded_by_initial` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.Zeta.Collapse.collapse_lemma` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.Zeta.Collapse.abstract_zero_collapse` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.Zeta.Collapse.zeros_collapse_to_critical_line` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.Zeta.Collapse.zero_I_scaling_trivial` | `. (file by file)` | open | `sorryAx` |
+| `FormalSuite.Zeta.AbstractZero.I_normalized_in_strip` | `. (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 102 `theorem`/`lemma` (counting copies). The kernel checked 60 of them (58 closed, 0 conditional, 2 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 42 the kernel has no result:
+The `.lean` files of the verified commit declare 102 `theorem`/`lemma` (counting copies). The kernel checked 83 of them (73 closed, 0 conditional, 10 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 19 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 32 |
-| checked file by file: the written proof does not pass the kernel | 10 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 10 |
+| checked file by file: the written proof does not pass the kernel | 9 |
+
+### MVEI corrections
+
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 11 file(s)): applies to the published sources: `git apply -p1 --directory=imports/0-0-FORMAL-SUITE mvei/0-0-FORMAL-SUITE/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 
