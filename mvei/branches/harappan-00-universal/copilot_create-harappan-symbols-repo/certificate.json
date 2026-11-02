@@ -53,9 +53,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-10-30T16:50:26+00:00",
   "lean": [
-   "leanprover/lean4:v4.3.0"
+   "leanprover/lean4:v4.19.0"
   ],
   "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
   "standard_axioms": [
@@ -69,7 +69,7 @@
    "name": "Harappan.Collapse.annihilate_voids",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 69,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : (applyOperator .annihilate st).state = CollapseState.void"
   },
@@ -77,7 +77,7 @@
    "name": "Harappan.Collapse.annihilate_zero_energy",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 74,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : (applyOperator .annihilate st).energy = 0.0"
   },
@@ -85,7 +85,7 @@
    "name": "Harappan.Collapse.collapse_reduces_superposition",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 142,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : st.state = CollapseState.superposed → st.meanings.length > 1 → (applyOperator .unify st).meanings.length ≤ 1"
   },
@@ -93,7 +93,7 @@
    "name": "Harappan.Collapse.dual_annihilation_void",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 107,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(s1 s2 : SymbolicState) : areDual s1 s2 = true → ∃ result, annihilateDual s1 s2 = some result ∧ result.state = CollapseState.void"
   },
@@ -101,7 +101,7 @@
    "name": "Harappan.Collapse.empty_sequence_identity",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 118,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : collapseSequence [] st = st"
   },
@@ -109,7 +109,7 @@
    "name": "Harappan.Collapse.energy_nonneg",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 79,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) (op : CollapseOperator) : st.energy ≥ 0 → (applyOperator op st).energy ≥ 0"
   },
@@ -117,7 +117,7 @@
    "name": "Harappan.Collapse.no_deadlock",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 133,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : canTransition st = true"
   },
@@ -125,7 +125,7 @@
    "name": "Harappan.Collapse.observe_collapses",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 64,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : (applyOperator .observe st).state = CollapseState.collapsed"
   },
@@ -133,7 +133,7 @@
    "name": "Harappan.Collapse.unify_idempotent",
    "file": "src/lean/Harappan/CollapseAxioms.lean",
    "line": 57,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(st : SymbolicState) : st.state = CollapseState.collapsed → (applyOperator .unify st).state = CollapseState.collapsed"
   },
@@ -141,7 +141,7 @@
    "name": "Harappan.Consistency.add_consistent_preserves",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 107,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(tc : TotalConsistency) (sid : SignId) (p : String) : hypothesisConsistent tc sid p = true → hypothesisConsistent tc sid p = true"
   },
@@ -149,7 +149,7 @@
    "name": "Harappan.Consistency.mapping_is_function",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 66,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(f : SignId → Option String) : ∀ sid, (∃! v, f sid = some v) ∨ f sid = none"
   },
@@ -157,7 +157,7 @@
    "name": "Harappan.Consistency.phoneme_mapping_deterministic",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 40,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(pc : PhonemeConsistency) (sid : SignId) : ∀ p1 p2 : String, pc.mapping sid = some p1 → pc.mapping sid = some p2 → p1 = p2"
   },
@@ -165,7 +165,7 @@
    "name": "Harappan.Consistency.position_valid",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 127,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(p : Position) : p = Position.initial ∨ p = Position.medial ∨ p = Position.final ∨ p = Position.any"
   },
@@ -173,7 +173,7 @@
    "name": "Harappan.Consistency.sign_identity_unique",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 25,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(s1 s2 : Sign) : s1.id = s2.id → s1 = s2 → s1.id = s2.id"
   },
@@ -181,7 +181,7 @@
    "name": "Harappan.Consistency.wellformed_no_selfloops",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 86,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(g : Semantics.SemanticGraph) : hasNoSelfLoops g = true → ∀ e ∈ g.edges, e.from ≠ e.to"
   },
@@ -189,89 +189,87 @@
    "name": "Harappan.Phonology.PhonemeInventory.count_sum",
    "file": "src/lean/Harappan/Phonology.lean",
    "line": 137,
-   "state": "aberto-sorry",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(inv : PhonemeInventory) : inv.phonemes.length = inv.vowelCount + inv.consonantCount"
   },
   {
    "name": "Harappan.Phonology.phonemeDistance_nonneg",
    "file": "src/lean/Harappan/Phonology.lean",
    "line": 82,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(p1 p2 : Phoneme) : phonemeDistance p1 p2 ≥ 0"
   },
   {
    "name": "Harappan.Phonology.phonemeDistance_self",
    "file": "src/lean/Harappan/Phonology.lean",
    "line": 105,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(p : Phoneme) : phonemeDistance p p = 0"
   },
   {
    "name": "Harappan.Phonology.phonemeDistance_symm",
    "file": "src/lean/Harappan/Phonology.lean",
    "line": 91,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(p1 p2 : Phoneme) : phonemeDistance p1 p2 = phonemeDistance p2 p1"
   },
   {
    "name": "Harappan.Phonotactics.empty_violates_standard",
    "file": "src/lean/Harappan/Phonotactics.lean",
    "line": 107,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
-   "statement": ": standardPhonotactics.validate [] SignSet.empty = true"
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "Harappan.Phonotactics.standardPhonotactics.validate [] Harappan.SignSet.empty = true"
   },
   {
    "name": "Harappan.Phonotactics.singleton_wellformed",
    "file": "src/lean/Harappan/Phonotactics.lean",
    "line": 113,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(s : SignId) : checkLengthConstraint [s] 1 26 = true"
+   "statement": "∀ (s : SignId), Harappan.Phonotactics.checkLengthConstraint [s] 1 26 = true"
   },
   {
    "name": "Harappan.Semantics.SemanticGraph.edge_nodes_exist",
    "file": "src/lean/Harappan/Semantics.lean",
    "line": 117,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
-   "statement": "(g : SemanticGraph) (e : SemanticEdge) : e ∈ g.edges → g.hasNode e.from ∧ g.hasNode e.to"
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ (g : Harappan.Semantics.SemanticGraph) (e : Harappan.Semantics.SemanticEdge),   e ∈ g.edges → g.hasNode e.from = true ∧ g.hasNode e.to = true"
   },
   {
    "name": "Harappan.Semantics.SemanticSystem.category_partition",
    "file": "src/lean/Harappan/Semantics.lean",
    "line": 134,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
-   "statement": "(sys : SemanticSystem) : sys.hypotheses.length = sys.categoryCount .noun + sys.categoryCount .verb + sys.categoryCount .adjective + sys.categoryCount .determinative + sys.categoryCount .numeral + sys.categoryCount .pronoun + sys.categoryCount .particle + sys.categoryCount .unknown"
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ (sys : Harappan.Semantics.SemanticSystem),   sys.hypotheses.length =     sys.categoryCount Harappan.Semantics.SemanticCategory.noun +                   sys.categoryCount Harappan.Semantics.SemanticCategory.verb +                 sys.categoryCount Harappan.Semantics.SemanticCategory.adjective +               sys.categoryCount Harappan.Semantics.SemanticCategory.determinative +             sys.cat"
   },
   {
    "name": "Harappan.SignSet.lookup_deterministic",
    "file": "src/lean/Harappan/SignSet.lean",
    "line": 38,
-   "state": "erro",
+   "state": "aberto-sorry",
    "axioms_beyond_standard": [
     "sorryAx"
    ],
-   "statement": "(ss : SignSet) (sid : SignId) : ∀ s1 s2 : Sign, ss.get sid = some s1 → ss.get sid = some s2 → s1 = s2"
+   "statement": "∀ (ss : Harappan.SignSet) (sid : SignId) (s1 s2 : Sign), ss.get sid = some s1 → ss.get sid = some s2 → s1 = s2"
   },
   {
    "name": "Harappan.UniversalGrammar.universal_vowels_consonants",
    "file": "src/lean/Harappan/UniversalGrammar.lean",
    "line": 84,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "(inv : Phonology.PhonemeInventory) : inv.vowelCount > 0 ∨ inv.consonantCount > 0"
   },
@@ -281,7 +279,7 @@
    "line": 80,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": standardSignIds.length = 15"
+   "statement": "Harappan.standardSignIds.length = 15"
   },
   {
    "name": "Harappan.standardSignIds_valid",
@@ -291,16 +289,17 @@
    "axioms_beyond_standard": [
     "Lean.ofReduceBool"
    ],
-   "statement": ": standardSignIds.all (fun s => isValidSignId ⟨s⟩)"
+   "statement": "(Harappan.standardSignIds.all fun s => Harappan.isValidSignId { value := s }) = true"
   }
  ],
- "closed": 1,
+ "closed": 2,
  "files_sha256": {
   "lakefile.lean": "dac04bcef04812beb8e0bc40af06de64042cd87fe10e4d2aeecd7aac72bf875d",
   "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1",
   "src/lean/Harappan/BasicTypes.lean": "5bd70df0c25bb0454b3df65d788b48d6e2ef96f912a9eb6f157ba15b3d541614",
+  "src/lean/Harappan/Phonotactics.lean": "f04012da6c60d5815541ff9ae0862783d9e990f12c58a74e54a3d59acb6159cc",
   "src/lean/Harappan/SignSet.lean": "bfe442220ca7835e517bac2450d2bc2e051a8758c09e3a37e627a5d7fbd4872b"
  },
- "published_at": "2026-10-29T20:15:54Z",
- "certificate_sha256": "1f4654df33553aa3188271c9f6c6554616da2676b8d271717858d87220b8d0be"
+ "published_at": "2026-11-02T20:55:35Z",
+ "certificate_sha256": "21a4cee23fbe058a1e32477768f80545dc30f8079e47542047d93b985925a2ee"
 }

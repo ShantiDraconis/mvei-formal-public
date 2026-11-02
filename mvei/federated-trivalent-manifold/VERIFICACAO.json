@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T08:01:18+00:00",
+ "generated_at": "2026-10-30T16:50:26+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,12 +15,43 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 12.2,
-   "build_error": "",
+   "build_seconds": 14.2,
+   "build_error": "(configuração original) ",
    "sorry_warnings": 0,
-   "reconstructed": false,
+   "reconstructed": true,
    "bridges": [],
-   "declared_axioms": [],
+   "declared_axioms": [
+    {
+     "name": "Beale_Kato_Majda_no_tanh",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "statement": "∀ ν > 0,   ∀ T_star > 0,     ∀ (norm_omega_Linfty norm_u_Hs : ℝ → ℝ),       (∃ C, ∀ n > 0, ∑ k ∈ Finset.range n, norm_omega_Linfty (T_star * ↑k / ↑n) * (T_star / ↑n) ≤ C) →         ∃ M, ∀ (t : ℝ), 0 ≤ t → t < T_star → norm_u_Hs t ≤ M"
+    },
+    {
+     "name": "L_C1_ERes_omega_zero",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "statement": "∀ (E_Res : ℕ → ℝ), False → ∀ ε > 0, ∃ N, |E_Res N| < ε"
+    },
+    {
+     "name": "L_C2_Nmax_omega_infty",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "statement": "∀ (N_max : ℕ → ℝ), False → ∀ (M : ℝ), ∃ n, N_max n > M"
+    },
+    {
+     "name": "L_C3_e_nonneg_natural",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "statement": "∀ (e : ℝ → ℝ), False → ∀ t ≥ 0, e t ≥ 0"
+    },
+    {
+     "name": "a_priori_energy_bound_no_tanh",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "statement": "∀ ν > 0, ∀ (norm_u : ℝ → ℝ) (norm_u0 : ℝ), (∀ (t : ℝ), norm_u t ≥ 0) → norm_u 0 = norm_u0 → ∀ T ≥ 0, norm_u T ≤ norm_u0"
+    },
+    {
+     "name": "energy_identity_L2",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "statement": "∀ ν > 0,   (ℝ → ℝ) →     ∀ (norm_u norm_grad_u : ℝ → ℝ),       (∀ (t : ℝ), norm_u t ≥ 0) →         (∀ (t : ℝ), norm_grad_u t ≥ 0) → ∀ (t : ℝ), HasDerivAt (fun t => norm_u t / 2) (-(ν * norm_grad_u t)) t"
+    }
+   ],
    "theorems": [
     {
      "name": "FTM.Audit.mk.inj",
@@ -691,7 +722,7 @@
      "name": "FTM.FlowSurgeryProgram.entropyMonotone",
      "module": "FTM.PoincareMethod",
      "axioms": [],
-     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (t : Nat) (x : P.State),   P.Admissible x → self.entropy x ≤ self.entropy (self.advance t x)",
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (t : ℕ) (x : P.State),   P.Admissible x → self.entropy x ≤ self.entropy (self.advance t x)",
      "status": "fechado"
     },
     {
@@ -705,7 +736,7 @@
      "name": "FTM.FlowSurgeryProgram.mk.inj",
      "module": "FTM.PoincareMethod",
      "axioms": [],
-     "statement": "∀ {P : FTM.Problem} {evolve : Nat → P.State → P.State} {singular : P.State → Bool} {surgery : P.State → P.State}   {entropy : P.State → Int} {complexity : P.State → Nat} {terminal : P.State → Prop} {advance : Nat → P.State → P.State}   {semanticInvariant : ∀ (t : Nat) (x : P.State), P.Admissible x → P.Admissible (advance t x)}   {entropyMonotone : ∀ (t : Nat) (x : P.State), P.Admissible x → entrop",
+     "statement": "∀ {P : FTM.Problem} {evolve : ℕ → P.State → P.State} {singular : P.State → Bool} {surgery : P.State → P.State}   {entropy : P.State → ℤ} {complexity : P.State → ℕ} {terminal : P.State → Prop} {advance : ℕ → P.State → P.State}   {semanticInvariant : ∀ (t : ℕ) (x : P.State), P.Admissible x → P.Admissible (advance t x)}   {entropyMonotone : ∀ (t : ℕ) (x : P.State), P.Admissible x → entropy x ≤ entrop",
      "status": "fechado"
     },
     {
@@ -714,28 +745,28 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ {P : FTM.Problem} (evolve : Nat → P.State → P.State) (singular : P.State → Bool) (surgery : P.State → P.State)   (entropy : P.State → Int) (complexity : P.State → Nat) (terminal : P.State → Prop) (advance : Nat → P.State → P.State)   (semanticInvariant : ∀ (t : Nat) (x : P.State), P.Admissible x → P.Admissible (advance t x))   (entropyMonotone : ∀ (t : Nat) (x : P.State), P.Admissible x → entrop",
+     "statement": "∀ {P : FTM.Problem} (evolve : ℕ → P.State → P.State) (singular : P.State → Bool) (surgery : P.State → P.State)   (entropy : P.State → ℤ) (complexity : P.State → ℕ) (terminal : P.State → Prop) (advance : ℕ → P.State → P.State)   (semanticInvariant : ∀ (t : ℕ) (x : P.State), P.Admissible x → P.Admissible (advance t x))   (entropyMonotone : ∀ (t : ℕ) (x : P.State), P.Admissible x → entropy x ≤ entrop",
      "status": "fechado"
     },
     {
      "name": "FTM.FlowSurgeryProgram.mk.sizeOf_spec",
      "module": "FTM.PoincareMethod",
      "axioms": [],
-     "statement": "∀ {P : FTM.Problem} (evolve : Nat → P.State → P.State) (singular : P.State → Bool) (surgery : P.State → P.State)   (entropy : P.State → Int) (complexity : P.State → Nat) (terminal : P.State → Prop) (advance : Nat → P.State → P.State)   (semanticInvariant : ∀ (t : Nat) (x : P.State), P.Admissible x → P.Admissible (advance t x))   (entropyMonotone : ∀ (t : Nat) (x : P.State), P.Admissible x → entrop",
+     "statement": "∀ {P : FTM.Problem} (evolve : ℕ → P.State → P.State) (singular : P.State → Bool) (surgery : P.State → P.State)   (entropy : P.State → ℤ) (complexity : P.State → ℕ) (terminal : P.State → Prop) (advance : ℕ → P.State → P.State)   (semanticInvariant : ∀ (t : ℕ) (x : P.State), P.Admissible x → P.Admissible (advance t x))   (entropyMonotone : ∀ (t : ℕ) (x : P.State), P.Admissible x → entropy x ≤ entrop",
      "status": "fechado"
     },
     {
      "name": "FTM.FlowSurgeryProgram.noCollapse",
      "module": "FTM.PoincareMethod",
      "axioms": [],
-     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (C : Int),   ∃ K, ∀ (x : P.State), P.Admissible x → self.entropy x ≤ C → self.complexity x ≤ K",
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (C : ℤ),   ∃ K, ∀ (x : P.State), P.Admissible x → self.entropy x ≤ C → self.complexity x ≤ K",
      "status": "fechado"
     },
     {
      "name": "FTM.FlowSurgeryProgram.semanticInvariant",
      "module": "FTM.PoincareMethod",
      "axioms": [],
-     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (t : Nat) (x : P.State),   P.Admissible x → P.Admissible (self.advance t x)",
+     "statement": "∀ {P : FTM.Problem} (self : FTM.FlowSurgeryProgram P) (t : ℕ) (x : P.State),   P.Admissible x → P.Admissible (self.advance t x)",
      "status": "fechado"
     },
     {
@@ -781,7 +812,7 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ (a : FTM.Millennium.AdapterSpec), a ∈ FTM.Millennium.adapters → a.audit.unlocked = false",
+     "statement": "∀ a ∈ FTM.Millennium.adapters, a.audit.unlocked = false",
      "status": "fechado"
     },
     {
@@ -825,7 +856,7 @@
      "name": "FTM.Renormalization.ScaledDrift.mk.inj",
      "module": "FTM.Renormalization",
      "axioms": [],
-     "statement": "∀ {sign : FTM.Renormalization.DriftSign} {magnitude : Nat} {sign_1 : FTM.Renormalization.DriftSign} {magnitude_1 : Nat},   { sign := sign, magnitude := magnitude } = { sign := sign_1, magnitude := magnitude_1 } →     sign = sign_1 ∧ magnitude = magnitude_1",
+     "statement": "∀ {sign : FTM.Renormalization.DriftSign} {magnitude : ℕ} {sign_1 : FTM.Renormalization.DriftSign} {magnitude_1 : ℕ},   { sign := sign, magnitude := magnitude } = { sign := sign_1, magnitude := magnitude_1 } →     sign = sign_1 ∧ magnitude = magnitude_1",
      "status": "fechado"
     },
     {
@@ -834,21 +865,21 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ (sign : FTM.Renormalization.DriftSign) (magnitude : Nat) (sign_1 : FTM.Renormalization.DriftSign) (magnitude_1 : Nat),   ({ sign := sign, magnitude := magnitude } = { sign := sign_1, magnitude := magnitude_1 }) =     (sign = sign_1 ∧ magnitude = magnitude_1)",
+     "statement": "∀ (sign : FTM.Renormalization.DriftSign) (magnitude : ℕ) (sign_1 : FTM.Renormalization.DriftSign) (magnitude_1 : ℕ),   ({ sign := sign, magnitude := magnitude } = { sign := sign_1, magnitude := magnitude_1 }) =     (sign = sign_1 ∧ magnitude = magnitude_1)",
      "status": "fechado"
     },
     {
      "name": "FTM.Renormalization.ScaledDrift.mk.sizeOf_spec",
      "module": "FTM.Renormalization",
      "axioms": [],
-     "statement": "∀ (sign : FTM.Renormalization.DriftSign) (magnitude : Nat),   sizeOf { sign := sign, magnitude := magnitude } = 1 + sizeOf sign + sizeOf magnitude",
+     "statement": "∀ (sign : FTM.Renormalization.DriftSign) (magnitude : ℕ),   sizeOf { sign := sign, magnitude := magnitude } = 1 + sizeOf sign + sizeOf magnitude",
      "status": "fechado"
     },
     {
      "name": "FTM.Renormalization.boundaryDrift_strictly_negative",
      "module": "FTM.Renormalization",
      "axioms": [],
-     "statement": "∀ (e : Nat), FTM.Renormalization.IsStrictlyNegative (FTM.Renormalization.boundaryDrift e)",
+     "statement": "∀ (e : ℕ), FTM.Renormalization.IsStrictlyNegative (FTM.Renormalization.boundaryDrift e)",
      "status": "fechado"
     },
     {
@@ -857,7 +888,7 @@
      "axioms": [
       "propext"
      ],
-     "statement": "∀ (N n : Nat),   (if FTM.Truncation.cutoff N n = true then FTM.Truncation.cutoff N n else false) = FTM.Truncation.cutoff N n",
+     "statement": "∀ (N n : ℕ), (if FTM.Truncation.cutoff N n = true then FTM.Truncation.cutoff N n else false) = FTM.Truncation.cutoff N n",
      "status": "fechado"
     },
     {
@@ -867,21 +898,21 @@
       "Quot.sound",
       "propext"
      ],
-     "statement": "∀ {α : Type} [inst : Zero α] (N : Nat) (x : Nat → α),   FTM.Truncation.project N (FTM.Truncation.project N x) = FTM.Truncation.project N x",
+     "statement": "∀ {α : Type} [inst : Zero α] (N : ℕ) (x : ℕ → α),   FTM.Truncation.project N (FTM.Truncation.project N x) = FTM.Truncation.project N x",
      "status": "fechado"
     },
     {
      "name": "FTM.WMonotone.le_add_right",
      "module": "FTM.WMonotone",
      "axioms": [],
-     "statement": "∀ (a b : Nat), a ≤ a + b",
+     "statement": "∀ (a b : ℕ), a ≤ a + b",
      "status": "fechado"
     },
     {
      "name": "FTM.WMonotone.step_strictly_grows",
      "module": "FTM.WMonotone",
      "axioms": [],
-     "statement": "∀ (w score : Nat), w < FTM.WMonotone.step w score",
+     "statement": "∀ (w score : ℕ), w < FTM.WMonotone.step w score",
      "status": "fechado"
     },
     {
@@ -890,88 +921,149 @@
      "axioms": [],
      "statement": "∀ (P : FTM.Problem), FTM.FlowSurgeryProgram P → ∀ (x : P.State), P.Admissible x → P.Target x",
      "status": "fechado"
+    },
+    {
+     "name": "L_A1_1_ERes_finite",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "Lean.ofReduceBool"
+     ],
+     "statement": "∃ n, ↑↑n / 100000 = 5 / 100000",
+     "status": "condicional"
+    },
+    {
+     "name": "L_A1_2_Nmax_bound",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ],
+     "statement": "25516 < 26000",
+     "status": "condicional"
+    },
+    {
+     "name": "L_A2_1_e_nl_bound",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ],
+     "statement": "111 < 10000",
+     "status": "condicional"
+    },
+    {
+     "name": "L_A2_2_e_linear_negative",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ],
+     "statement": "e_linear_sign_no_tanh = false",
+     "status": "condicional"
+    },
+    {
+     "name": "L_A2_3_liveness",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "Lean.ofReduceBool"
+     ],
+     "statement": "∃ n, ↑n = 0",
+     "status": "condicional"
+    },
+    {
+     "name": "L_B1_Saros_diff_finite",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ],
+     "statement": "352 < 10000",
+     "status": "condicional"
+    },
+    {
+     "name": "L_B2_Res_bound",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "Lean.ofReduceBool"
+     ],
+     "statement": "1000000 < 1000104 ∧ 1000104 < 2000000",
+     "status": "condicional"
+    },
+    {
+     "name": "ns_global_regularity_no_tanh_final",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "Lean.ofReduceBool",
+      "a_priori_energy_bound_no_tanh"
+     ],
+     "statement": "∀ ν > 0,   ∀ (norm_u : ℝ → ℝ) (norm_u0 : ℝ),     (∀ (t : ℝ), norm_u t ≥ 0) →       norm_u 0 = norm_u0 → 25516 < 26000 ∧ 111 < 10000 ∧ 352 < 10000 ∧ ∀ T ≥ 0, norm_u T ≤ norm_u0",
+     "status": "condicional"
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 9 arquivo(s): noncomputable 8, notacao 1.",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com ANALISE_TANH_PARA_H1, FTM e o Mathlib v4.19.0 e compilou o que foi possível",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4"
    ],
-   "lakefile_gerado": "",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `ANALISE_TANH_PARA_H1, .one `FTM, .submodules `FTM]\n",
    "avulso": false,
-   "salvage": [
+   "salvage": [],
+   "preenchimento": [
     {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 21,
-     "nome": "L_A1_1_ERes_finite",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
+     "tipo": "axioma",
+     "nome": "L_C2_Nmax_omega_infty",
+     "enunciado": "∀ (N_max : ℕ → ℝ), False → ∀ (M : ℝ), ∃ n, N_max n > M",
+     "resultado": "demonstrável",
+     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
     },
     {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 32,
-     "nome": "L_A1_2_Nmax_bound",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
+     "tipo": "axioma",
+     "nome": "Beale_Kato_Majda_no_tanh",
+     "enunciado": "∀ ν > 0,   ∀ T_star > 0,     ∀ (norm_omega_Linfty norm_u_Hs : ℝ → ℝ),       (∃ C, ∀ n > 0, ∑ k ∈ Finset.range n, norm_omega_Linfty (T_star * ↑k / ↑n) * (T_star / ↑n) ≤ C) →         ∃ M, ∀ (t : ℝ), 0 ≤ t → t < T_star → norm_u_Hs t ≤ M",
+     "resultado": "sem resultado",
+     "tatica": ""
     },
     {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 39,
-     "nome": "L_A2_1_e_nl_bound",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
+     "tipo": "axioma",
+     "nome": "L_C1_ERes_omega_zero",
+     "enunciado": "∀ (E_Res : ℕ → ℝ), False → ∀ ε > 0, ∃ N, |E_Res N| < ε",
+     "resultado": "demonstrável",
+     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
     },
     {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 51,
-     "nome": "L_A2_2_e_linear_negative",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
+     "tipo": "axioma",
+     "nome": "L_C3_e_nonneg_natural",
+     "enunciado": "∀ (e : ℝ → ℝ), False → ∀ t ≥ 0, e t ≥ 0",
+     "resultado": "demonstrável",
+     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
     },
     {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 54,
-     "nome": "L_A2_3_liveness",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
+     "tipo": "axioma",
+     "nome": "a_priori_energy_bound_no_tanh",
+     "enunciado": "∀ ν > 0, ∀ (norm_u : ℝ → ℝ) (norm_u0 : ℝ), (∀ (t : ℝ), norm_u t ≥ 0) → norm_u 0 = norm_u0 → ∀ T ≥ 0, norm_u T ≤ norm_u0",
+     "resultado": "sem resultado",
+     "tatica": ""
     },
     {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 59,
-     "nome": "L_B1_Saros_diff_finite",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
-    },
-    {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 66,
-     "nome": "L_B2_Res_bound",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
-    },
-    {
-     "arquivo": "ANALISE_TANH_PARA_H1/Lemas_Master_F3_sem_tanh_Lean4.lean",
-     "linha": 156,
-     "nome": "ns_global_regularity_no_tanh_final",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Mathlib' No directory 'Mathlib' or file 'Mathlib.olean' in the search path entries: /mnt/w/mvei/trabalho/federated-trivalent-manifold/.lake/mvei-salvage ././.lake/build/lib/lean"
+     "tipo": "axioma",
+     "nome": "energy_identity_L2",
+     "enunciado": "∀ ν > 0,   (ℝ → ℝ) →     ∀ (norm_u norm_grad_u : ℝ → ℝ),       (∀ (t : ℝ), norm_u t ≥ 0) →         (∀ (t : ℝ), norm_grad_u t ≥ 0) → ∀ (t : ℝ), HasDerivAt (fun t => norm_u t / 2) (-(ν * norm_grad_u t)) t",
+     "resultado": "sem resultado",
+     "tatica": ""
     }
    ],
-   "preenchimento": [],
    "summary": {
     "fechado": 120,
     "aberto-sorry": 0,
-    "condicional": 0
-   }
+    "condicional": 8
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "federated-trivalent-manifold",
@@ -980,7 +1072,7 @@
    "toolchain_used": "leanprover/lean4:v4.8.0",
    "needs_mathlib": true,
    "build_ok": false,
-   "build_seconds": 1.1,
+   "build_seconds": 1.2,
    "build_error": "error: no such file or directory (error code: 2) | error: build failed",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -1694,7 +1786,8 @@
     "fechado": 28,
     "aberto-sorry": 0,
     "condicional": 1
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "federated-trivalent-manifold",
@@ -1703,7 +1796,7 @@
    "toolchain_used": "leanprover/lean4:v4.8.0",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 5.0,
+   "build_seconds": 6.0,
    "build_error": "",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -1890,7 +1983,8 @@
     "fechado": 23,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   }
  ]
 }

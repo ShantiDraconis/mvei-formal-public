@@ -11,20 +11,20 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T08:01:18+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `provers/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 17 | 1 | 3 | 22 / 11 / 54 / 72 / 105 |
+| `provers/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 30 | 1 | 3 | 15 / 11 / 60 / 64 / 105 |
 | `universe-00/applications/millennium/riemann` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 4 / 0 / 8 |
-| `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 1 / 1 / 5 / 23 / 75 |
+| `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 2 / 1 / 5 / 22 / 75 |
 | `universe-00/core/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 0 / 7 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 40 |
-| Unique (name + statement) | 40 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 30 |
+| Counting each project | 47 |
+| Unique (name + statement) | 47 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 33 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -43,8 +43,12 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `ad86336840111095220c6
 | `Universe00.Complexity.Clique_is_NPC` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.Core.authority_level_zero` | `provers/lean (file by file)` | conditional | `Universe00.Core.primary_orcid` |
 | `Universe00.Core.orcid_identifies_author` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.Core.primary_orcid` |
+| `Universe00.FluidDynamics.local_existence` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.FluidDynamics.ν` |
+| `Universe00.FluidDynamics.global_regularity_consequence` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.FluidDynamics.ν` |
+| `Universe00.FluidDynamics.energy_estimate` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.FluidDynamics.ν` |
 | `Universe00.FluidDynamics.BKM_criterion` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.FluidDynamics.prodi_serrin_conditions` | `provers/lean (file by file)` | open | `sorryAx` |
+| `Universe00.FluidDynamics.weak_solution_exists` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.FluidDynamics.weak_implies_smooth_question` | `provers/lean (file by file)` | open | `sorryAx` |
 | `ImpossibilityTheorem.Universe00.Impossibility.field_collapses_with_strong_cancellation` | `provers/lean (file by file)` | open | `sorryAx` |
 | `ImpossibilityTheorem.field_collapses_with_strong_cancellation` | `provers/lean (file by file)` | conditional | `ImpossibilityTheorem.div_zero_const` |
@@ -63,12 +67,14 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `ad86336840111095220c6
 | `residue_in_kernel` | `provers/lean (file by file)` | open | `sorryAx` |
 | `non_trivial_kernel_implies_residue` | `provers/lean (file by file)` | open | `sorryAx` |
 | `universal_zero_residue_implies_injective` | `provers/lean (file by file)` | open | `sorryAx` |
+| `i_phase_properties` | `provers/lean (file by file)` | open | `sorryAx` |
 | `LA2028.Linker.LA2028_traffic_feasible` | `provers/lean (file by file)` | open | `sorryAx`, `LA2028.Linker.NavierStokes_Solution`, `LA2028.Linker.TransportPlan`, `LA2028.Linker.efficient_plan`, `LA2028.Linker.is_smooth` |
 | `Millennium.Complexity.P_neq_NP_implies_NPComplete_not_in_P` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.TransitionOperator.distance_metric_nonneg` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.TransitionOperator.distance_metric_pos` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.TransitionOperator.apply_toward_critical_line` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.DualZeroStates.inverse_magnitude_grows` | `provers/lean (file by file)` | open | `sorryAx` |
+| `Universe00.RHGeometry.DualZeroStates.inverse_phase_preserved` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.triangle_inequality` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.dual_zeros_same_singularity` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.RHGeometry.FlowTensor.row_sum_preserved_under_permute` | `provers/lean (file by file)` | open | `sorryAx` |
@@ -114,12 +120,12 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `ad86336840111095220c6
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 106 of them (25 closed, 13 conditional, 68 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 290 the kernel has no result:
+The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 115 of them (28 closed, 13 conditional, 74 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 281 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 195 |
-| checked file by file: the written proof does not pass the kernel | 95 |
+| checked file by file: the written proof does not pass the kernel | 86 |
 
 ### MVEI corrections
 

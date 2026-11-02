@@ -28,8 +28,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-10-30T16:50:26+00:00",
   "lean": [
+   "leanprover/lean4:v4.19.0",
    "leanprover/lean4:v4.3.0",
    "padrão do elan"
   ],
@@ -45,11 +46,9 @@
    "name": "grammatical_economy",
    "file": "formal/lean/IndusOperationalGrammar.lean",
    "line": 93,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
-   "statement": "(op : FunctionalOperator) : ∃ (s1 s2 : ScopedOperator), s1.operator = op ∧ s2.operator = op ∧ s1.scope ≠ s2.scope"
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∀ (op : FunctionalOperator), ∃ s1 s2, s1.operator = op ∧ s2.operator = op ∧ s1.scope ≠ s2.scope"
   },
   {
    "name": "m001_m002_identity",
@@ -57,7 +56,7 @@
    "line": 69,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) : (M001 op d s).operator = (M002 op d s).operator"
+   "statement": "∀ (op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState),   (M001 op d s).operator = (M002 op d s).operator"
   },
   {
    "name": "m001_m002_scope_distinction",
@@ -65,7 +64,7 @@
    "line": 74,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) : (M001 op d s).scope ≠ (M002 op d s).scope"
+   "statement": "∀ (op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState),   (M001 op d s).scope ≠ (M002 op d s).scope"
   },
   {
    "name": "non_redundancy",
@@ -73,7 +72,7 @@
    "line": 137,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(op : FunctionalOperator) (scope1 scope2 : ScopeOperator) (state1 state2 : OperationalState) (h_scope : scope1 ≠ scope2) : M001 op none state1 ≠ M002 op none state2"
+   "statement": "∀ (op : FunctionalOperator) (scope1 scope2 : ScopeOperator) (state1 state2 : OperationalState),   scope1 ≠ scope2 → M001 op none state1 ≠ M002 op none state2"
   },
   {
    "name": "scope_independence",
@@ -81,15 +80,15 @@
    "line": 104,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) (scope1 scope2 : ScopeOperator) : let so1 : ScopedOperator"
+   "statement": "∀ (op : FunctionalOperator) (d : Option DomainModifier) (s : OperationalState) (scope1 scope2 : ScopeOperator),   let so1 := { operator := op, scope := scope1, domain := d, state := s };   let so2 := { operator := op, scope := scope2, domain := d, state := s };   so1.operator = so2.operator"
   }
  ],
- "closed": 4,
+ "closed": 5,
  "files_sha256": {
   "formal/lean/IndusOperationalGrammar.lean": "5376f9217a0358bf9399ec4047feb1d26773ccc2a470caaf0d60401cbb385723",
   "formal/lean/lakefile.lean": "63e6e97517a826c8b09fd5c2fa23de9d4cab3b0db14ac5b16af0b33b0a09d7ba",
   "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
  },
- "published_at": "2026-10-29T20:15:54Z",
- "certificate_sha256": "59e9787b98364d31ed1383fd6b0530cd9938f9483424460aefc0a77260203898"
+ "published_at": "2026-11-02T20:55:35Z",
+ "certificate_sha256": "3ff06f5d3d3e6788234ac69164f9e552e62d39c0b071f1a1454e8cc8dd5cbae3"
 }

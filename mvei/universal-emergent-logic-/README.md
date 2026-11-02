@@ -11,27 +11,27 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T16:50:26+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `codigo` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
 | `formalization` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 4 / 0 |
-| `formalization/lean` | v4.19.0 | partial | 21 | 0 | 8 | 15 / 1 / 90 / 99 / 740 |
+| `formalization/lean` | v4.19.0 | partial | 25 | 0 | 14 | 16 / 2 / 99 / 94 / 728 |
 | `proofs/bsd_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 4 / 1 / 0 |
 | `proofs/hodge_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 3 / 0 |
-| `proofs/navier_stokes` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 6 |
+| `proofs/navier_stokes` (no lakefile; project assembled by MVEI) | v4.19.0 | OK | 0 | 0 | 3 | 0 / 0 / 4 / 1 / 1 |
 | `proofs/p_vs_np` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 19 |
 | `proofs/riemann_hypothesis` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 0 / 69 |
 | `proofs/yang_mills` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 4 / 1 / 0 |
 | `src/lean` | v4.8.0 | failed | 0 | 0 | 0 | 0 / 0 / 1 / 0 / 6 |
-| `universe00` | v4.3.0 | failed | 0 | 0 | 0 | 21 / 0 / 12 / 2 / 257 |
+| `universe00` | v4.3.0 | partial | 19 | 0 | 0 | 11 / 0 / 13 / 2 / 255 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 57 |
-| Unique (name + statement) | 56 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 41 |
+| Counting each project | 71 |
+| Unique (name + statement) | 70 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 44 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -40,15 +40,27 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 | `LRE.NavierStokes.coupling_dominates_dissipation_implies_cascade` | `formalization/lean` | open | `sorryAx` |
 | `LRE.NavierStokes.coupling_from_spectrum` | `formalization/lean` | open | `sorryAx` |
 | `LRE.NavierStokes.energyTransfer_bounded` | `formalization/lean` | open | `sorryAx` |
+| `Residual_Blowup_Criterion` | `formalization/lean` | open | `sorryAx` |
 | `UnifiedTheory.canonical_is_minimum` | `formalization/lean` | open | `sorryAx` |
 | `UnifiedTheory.canonical_strict_local_min` | `formalization/lean` | open | `sorryAx` |
 | `UnifiedTheory.coupling_pos_def` | `formalization/lean` | open | `sorryAx` |
 | `UnifiedTheory.coupling_symmetric` | `formalization/lean` | open | `sorryAx` |
 | `UnifiedTheory.potential_nonneg` | `formalization/lean` | open | `sorryAx` |
+| `blowup_time_sharp` | `formalization/lean` | open | `sorryAx` |
+| `critical_threshold_characterization` | `formalization/lean` | open | `sorryAx` |
+| `integrate_Z_bound` | `formalization/lean` | open | `sorryAx` |
+| `subcritical_stability` | `formalization/lean` | open | `sorryAx` |
+| `substitution_transform` | `formalization/lean` | open | `sorryAx` |
+| `NavierStokes.InitialData.mk.inj` | `proofs/navier_stokes` | open | `sorryAx` |
+| `NavierStokes.InitialData.mk.injEq` | `proofs/navier_stokes` | open | `sorryAx` |
+| `NavierStokes.InitialData.mk.sizeOf_spec` | `proofs/navier_stokes` | open | `sorryAx` |
 | `HCS_RBC.rbc_stabilization_pure` | `formalization (file by file)` | open | `sorryAx` |
 | `YourProblem_equivalence` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `YourProblem_has_counterexample` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `YourProblem_classification` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.fiber_nonempty` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.fibers_partition` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.residual_feedback` | `formalization/lean (file by file)` | open | `sorryAx`, `LRE.lre_axiom_3` |
 | `LREPropositions.fiber_noncompact` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LREPropositions.residue_accumulation` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LREPropositions.projection_unstable` | `formalization/lean (file by file)` | open | `sorryAx` |
@@ -57,12 +69,9 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 | `ResidualRegularity.shell_residual_smooth` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.bv_decomposition` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ResidualRegularity.blowup_criterion` | `formalization/lean (file by file)` | open | `sorryAx` |
-| `Residual_Blowup_Criterion` | `formalization/lean (file by file)` | open | `sorryAx` |
-| `substitution_transform` | `formalization/lean (file by file)` | open | `sorryAx` |
-| `integrate_Z_bound` | `formalization/lean (file by file)` | open | `sorryAx` |
-| `critical_threshold_characterization` | `formalization/lean (file by file)` | open | `sorryAx` |
-| `subcritical_stability` | `formalization/lean (file by file)` | open | `sorryAx` |
-| `blowup_time_sharp` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.ERS.finite_time_blowup` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.ERS.exponential_growth_discrete` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.exponential_growth_from_discrete_ERS` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `BSD_conjecture` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `ranks_match_no_holonomy` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `BSD_formula_iff_zero_residue` | `formalization/lean (file by file)` | open | `sorryAx` |
@@ -96,6 +105,11 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 | `LRE.ODE.discrete_ERS_stability` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.ODE.discrete_ERS_growth` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `collatz_is_resolvable` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.exact_on_section_implies_stronger_bound` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.toy_model_positive_coupling` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.toy_model_obstruction` | `formalization/lean (file by file)` | conditional | `LRE.LRE.toy_model_obstruction` |
+| `LRE.residual_holonomy_lemma` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `LRE.structural_incompleteness` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE_RBC_Corrected.supercritical_blowup_exists` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE_RBC_Corrected.NavierStokes.NS_blowup_via_supercritical_RBC` | `formalization/lean (file by file)` | open | `sorryAx`, `LRE_RBC_Corrected.NavierStokes.H1_norm`, `LRE_RBC_Corrected.NavierStokes.NS_Solution`, `LRE_RBC_Corrected.NavierStokes.residual_NS` |
 | `Millennium.Stability.riemann_as_fixed_point` | `formalization/lean (file by file)` | open | `sorryAx` |
@@ -110,6 +124,7 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 | `Millennium.Lemmas.ODE_comparison` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.gronwall_decay` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.super_poly_dominates` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `Millennium.Lemmas.shannon_entropy_nonneg` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Millennium.Lemmas.golden_ratio_approx` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `BSD.tamagawa_distribution` | `formalization/lean (file by file)` | open | `sorryAx`, `BSD.EllipticCurve`, `BSD.analytic_rank` |
 | `BSD.bsd_numerical_verification` | `formalization/lean (file by file)` | open | `sorryAx`, `BSD.EllipticCurve`, `BSD.analytic_rank` |
@@ -137,12 +152,20 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 | `Unified.Problems.RH.refined_implies_classical` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `Unified.Problems.YM.refined_implies_classical` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `UniversalisStructuralis.MillenniumProblems.NavierStokes_LRE_equivalence` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalisStructuralis.MillenniumProblems.YangMills_LRE_equivalence` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalisStructuralis.UniversalisStructuralis_Hypothesis` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalisStructuralis.MillenniumProblems_Interdependence` | `formalization/lean (file by file)` | open | `sorryAx` |
+| `UniversalisStructuralis.problem_transformation` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `BSD.LocalLemmas.κ_BSD_positive` | `proofs/bsd_conjecture (file by file)` | open | `sorryAx` |
 | `BSD.LocalLemmas.rank_equals_analytic_rank` | `proofs/bsd_conjecture (file by file)` | open | `sorryAx`, `BSD.Foundations.EllipticCurve`, `BSD.Foundations.Rank` |
 | `BSD.StructuralBridge.bridge_ranks_to_curvature` | `proofs/bsd_conjecture (file by file)` | open | `sorryAx`, `BSD.Foundations.EllipticCurve`, `BSD.Foundations.Rank` |
 | `BSD.Reduction.main_reduction` | `proofs/bsd_conjecture (file by file)` | open | `sorryAx`, `BSD.Foundations.EllipticCurve`, `BSD.Foundations.Rank` |
 | `Hodge.LocalLemmas.κ_Hodge_positive` | `proofs/hodge_conjecture (file by file)` | open | `sorryAx` |
 | `Hodge.StructuralBridge.bridge_hodge_to_curvature` | `proofs/hodge_conjecture (file by file)` | open | `sorryAx`, `Hodge.Foundations.AlgebraicVariety` |
+| `NavierStokes.κ_NS_positive` | `proofs/navier_stokes (file by file)` | open | `sorryAx` |
+| `NavierStokes.energy_inequality` | `proofs/navier_stokes (file by file)` | open | `sorryAx` |
+| `NavierStokes.cubic_obstruction` | `proofs/navier_stokes (file by file)` | open | `sorryAx` |
+| `NavierStokes.bridge_smoothness_to_curvature` | `proofs/navier_stokes (file by file)` | open | `sorryAx` |
 | `YangMills.LocalLemmas.κ_YM_positive` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
 | `YangMills.LocalLemmas.mass_gap_positive` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
 | `YangMills.StructuralBridge.bridge_mass_gap_to_curvature` | `proofs/yang_mills (file by file)` | open | `sorryAx` |
@@ -154,6 +177,7 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 | `ErrorAggregation.proven_of_aggregate_zero` | `universe00 (file by file)` | open | `sorryAx` |
 | `ErrorAggregation.aggregate_monotone` | `universe00 (file by file)` | open | `sorryAx` |
 | `Universe00.Core.Aggregation.weightedSum_bounds` | `universe00 (file by file)` | open | `sorryAx` |
+| `Universe00.Core.Aggregation.aggregateError_bounds` | `universe00 (file by file)` | open | `sorryAx` |
 | `Universe00.Core.Aggregation.uniform_weights_valid` | `universe00 (file by file)` | open | `sorryAx` |
 | `Universe00.Core.ErrorVector.maxError_bounds` | `universe00 (file by file)` | open | `sorryAx` |
 | `Universe00.Core.ErrorVector.minError_bounds` | `universe00 (file by file)` | open | `sorryAx` |
@@ -163,12 +187,12 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `041a2090e226310380ee3
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 159 of them (36 closed, 1 conditional, 122 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 210 the kernel has no result:
+The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 182 of them (38 closed, 2 conditional, 142 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 187 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 1 097 |
-| checked file by file: the written proof does not pass the kernel | 113 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 1 078 |
+| checked file by file: the written proof does not pass the kernel | 109 |
 
 ### MVEI corrections
 
