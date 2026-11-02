@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T08:01:18+00:00",
+ "generated_at": "2026-10-30T16:50:26+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.36.0-rc2",
    "needs_mathlib": true,
    "build_ok": true,
-   "build_seconds": 2.5,
+   "build_seconds": 2.2,
    "build_error": "(configuração original) Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: no such file or directory (error code: 2) | error: build failed",
    "sorry_warnings": 0,
    "reconstructed": true,
@@ -95,11 +95,13 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4): 2 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 5 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 8 arquivo(s): abbrev 4, nomes_mathlib 4, noncomputable 8, notacao_escopo 1, palavra_chave 4. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Universe00 e o Mathlib v4.36.0-rc2 e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): 2 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 5 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 8 arquivo(s): abbrev 4, nomes_mathlib 7, noncomputable 8, notacao_escopo 1, palavra_chave 4; 5 prova(s) reescrita(s), conferidas no Lean do projeto: compensation_degrades, higher_snr_increases_capacity, higher_renewable_reduces_carbon, titanium_better_than_aluminum, high_reynolds_turbulent; 2 negação(ões) provada(s) no kernel: vantagem_longevidade, renewable_target_achievable. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Universe00 e o Mathlib v4.36.0-rc2 e compilou o que foi possível",
    "corrections": [
     "renomear-imports-mathlib",
     "tatica-encontrada",
-    "vocabulario-lean4"
+    "vocabulario-lean4",
+    "z-provas-reparadas",
+    "zz-refutacoes"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.36.0-rc2\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Universe00]\n",
    "avulso": false,
@@ -272,7 +274,8 @@
     "fechado": 5,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "UMA",
@@ -393,8 +396,32 @@
      "trecho": "  ∃ (pca : ⟦P⟧rotocoloCivilizacaoAutonoma ℝ"
     },
     {
+     "arquivo": "formal_proofs/lean/MVEI_Refutacoes.lean",
+     "linha": 9,
+     "nome": "MVEI.Refutacoes.vantagem_longevidade_falso",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "unknown module prefix 'IndeterminacaoZeroDivZero' No directory 'IndeterminacaoZeroDivZero' or file 'IndeterminacaoZeroDivZero.olean' in the search path entries: /tmp/mvei-rec-ktuqvol8/p/.lake/mvei-sal",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
+    },
+    {
+     "arquivo": "formal_proofs/lean/MVEI_Refutacoes.lean",
+     "linha": 25,
+     "nome": "MVEI.Refutacoes.renewable_target_achievable_falso",
+     "status": "nao_alcancado",
+     "axioms": [],
+     "motivo": "unknown module prefix 'IndeterminacaoZeroDivZero' No directory 'IndeterminacaoZeroDivZero' or file 'IndeterminacaoZeroDivZero.olean' in the search path entries: /tmp/mvei-rec-ktuqvol8/p/.lake/mvei-sal",
+     "import_trocado": [
+      "Mathlib.Data.Nat.Prime",
+      "Mathlib.Topology.Instances.Real"
+     ]
+    },
+    {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 113,
+     "linha": 114,
      "nome": "Universe00.pure_potential_unity",
      "status": "fechado",
      "axioms": [
@@ -408,7 +435,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 119,
+     "linha": 120,
      "nome": "Universe00.transformation_preserves_potential",
      "status": "fechado",
      "axioms": [
@@ -422,7 +449,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 125,
+     "linha": 126,
      "nome": "Universe00.potential_conservation_lemma",
      "status": "condicional",
      "axioms": [
@@ -437,7 +464,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 132,
+     "linha": 133,
      "nome": "Universe00.decomposition_completeness",
      "status": "erro",
      "axioms": [
@@ -446,7 +473,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 136: unsolved goals case h m : MaterialState ⊢ 1 ≤ m.constituents",
+     "erro": "linha 137: unsolved goals case h m : MaterialState ⊢ 1 ≤ m.constituents",
      "coluna": 51,
      "trecho": ", a.count = m.constituents := ⟦b⟧y",
      "import_trocado": [
@@ -455,7 +482,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 139,
+     "linha": 140,
      "nome": "Universe00.reconstruction_sufficiency",
      "status": "condicional",
      "axioms": [
@@ -470,14 +497,14 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 165,
+     "linha": 166,
      "nome": "Universe00.prime_security_hardness",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 173: unknown constant 'Nat.mul_lt_mul'",
+     "erro": "linha 174: unknown constant 'Nat.mul_lt_mul'",
      "coluna": 12,
      "trecho": "      apply ⟦N⟧at.mul_lt_mul",
      "import_trocado": [
@@ -486,7 +513,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 192,
+     "linha": 193,
      "nome": "Universe00.motion_nullification",
      "status": "erro",
      "axioms": [
@@ -494,7 +521,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 198: no goals to be solved",
+     "erro": "linha 199: no goals to be solved",
      "coluna": 2,
      "trecho": "  ⟦r⟧ing_nf",
      "import_trocado": [
@@ -503,7 +530,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 216,
+     "linha": 217,
      "nome": "Universe00.fleet_optimization",
      "status": "fechado",
      "axioms": [
@@ -517,7 +544,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 251,
+     "linha": 252,
      "nome": "Universe00.zero_knowledge_security",
      "status": "fechado",
      "axioms": [
@@ -529,7 +556,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 281,
+     "linha": 282,
      "nome": "Universe00.waste_elimination",
      "status": "condicional",
      "axioms": [
@@ -544,7 +571,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 290,
+     "linha": 291,
      "nome": "Universe00.infinite_recyclability",
      "status": "fechado",
      "axioms": [
@@ -558,7 +585,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 296,
+     "linha": 297,
      "nome": "Universe00.scarcity_resolution",
      "status": "erro",
      "axioms": [
@@ -566,7 +593,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 304: no goals to be solved",
+     "erro": "linha 305: no goals to be solved",
      "coluna": 2,
      "trecho": "  ⟦r⟧fl",
      "import_trocado": [
@@ -575,7 +602,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 316,
+     "linha": 317,
      "nome": "Universe00.precision_achievable",
      "status": "fechado",
      "axioms": [
@@ -589,7 +616,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 362,
+     "linha": 363,
      "nome": "Universe00.validation_sound",
      "status": "fechado",
      "axioms": [
@@ -603,7 +630,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 371,
+     "linha": 372,
      "nome": "Universe00.system_integration",
      "status": "condicional",
      "axioms": [
@@ -620,10 +647,9 @@
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
      "linha": 66,
      "nome": "Universe00Extended.compensation_degrades",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
@@ -649,7 +675,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 184,
+     "linha": 183,
      "nome": "Universe00Extended.sufficient_generation_positive",
      "status": "fechado",
      "axioms": [
@@ -664,7 +690,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 193,
+     "linha": 192,
      "nome": "Universe00Extended.renewable_target_achievable",
      "status": "aberto-sorry",
      "axioms": [
@@ -680,7 +706,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 210,
+     "linha": 209,
      "nome": "Universe00Extended.negative_gibbs_spontaneous",
      "status": "fechado",
      "axioms": [
@@ -695,18 +721,14 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 246,
+     "linha": 245,
      "nome": "Universe00Extended.high_reynolds_turbulent",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 254: simp made no progress",
-     "coluna": 2,
-     "trecho": "  ⟦s⟧imp",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime",
       "Mathlib.Topology.Instances.Real"
@@ -714,12 +736,11 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 286,
+     "linha": 282,
      "nome": "Universe00Extended.higher_snr_increases_capacity",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
@@ -730,7 +751,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 307,
+     "linha": 305,
      "nome": "Universe00Extended.high_cpk_capable",
      "status": "fechado",
      "axioms": [
@@ -745,12 +766,11 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 471,
+     "linha": 469,
      "nome": "Universe00Extended.higher_renewable_reduces_carbon",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
@@ -765,7 +785,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "UMA",
@@ -789,7 +810,7 @@
    "salvage": [
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 38,
+     "linha": 39,
      "nome": "UMA.Singularity.sinc_removable_singularity",
      "status": "aberto-sorry",
      "axioms": [
@@ -804,7 +825,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 47,
+     "linha": 48,
      "nome": "UMA.Singularity.lhopital_rule_zero_over_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -819,11 +840,11 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 79,
+     "linha": 80,
      "nome": "UMA.PrimeSync.prime_proximity",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 85: typeclass instance problem is stuck, it is often due to metavariables FloorSemiring (?m.6542 p)",
+     "erro": "linha 86: typeclass instance problem is stuck, it is often due to metavariables FloorSemiring (?m.6542 p)",
      "coluna": 57,
      "trecho": "|Int.ofNat p - Int.ofNat n| ≤ ⟦I⟧nt.log n := by",
      "import_trocado": [
@@ -832,14 +853,14 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 87,
+     "linha": 88,
      "nome": "UMA.PrimeSync.prime_frequencies_independent",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 94: invalid field notation, type is not of the form (C ...) where C is a constant Nat.Prime.coprime_iff_not_dvd has type Nat.Prime ?m.6949 → (Nat.Coprime ?m.6949 ?m.6950 ↔ ¬?m.6949 ∣ ?m.6950)",
+     "erro": "linha 95: invalid field notation, type is not of the form (C ...) where C is a constant Nat.Prime.coprime_iff_not_dvd has type Nat.Prime ?m.6949 → (Nat.Coprime ?m.6949 ?m.6950 ↔ ¬?m.6949 ∣ ?m.6950)",
      "coluna": 8,
      "trecho": "  exact ⟦N⟧at.Prime.coprime_iff_not_dvd.",
      "import_trocado": [
@@ -848,7 +869,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 95,
+     "linha": 96,
      "nome": "UMA.PrimeSync.no_resonance_buildup",
      "status": "aberto-sorry",
      "axioms": [
@@ -861,7 +882,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 142,
+     "linha": 143,
      "nome": "UMA.Gyroscope.quaternion_no_gimbal_lock",
      "status": "aberto-sorry",
      "axioms": [
@@ -876,7 +897,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 158,
+     "linha": 159,
      "nome": "UMA.Gyroscope.gyroscopic_stability",
      "status": "fechado",
      "axioms": [
@@ -890,7 +911,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 179,
+     "linha": 180,
      "nome": "UMA.Logistics.triangle_inequality",
      "status": "aberto-sorry",
      "axioms": [
@@ -905,7 +926,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 187,
+     "linha": 188,
      "nome": "UMA.Logistics.nearest_neighbor_approximation",
      "status": "aberto-sorry",
      "axioms": [
@@ -920,7 +941,7 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 228,
+     "linha": 229,
      "nome": "UMA.NewMath.real_embeds_in_singularity",
      "status": "erro",
      "axioms": [
@@ -929,7 +950,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 235: unsolved goals r : ℝ ⊢ Filter.map (fun x => r) (𝓝[≠] 0) ≤ 𝓝 r",
+     "erro": "linha 236: unsolved goals r : ℝ ⊢ Filter.map (fun x => r) (𝓝[≠] 0) ≤ 𝓝 r",
      "coluna": 26,
      "trecho": "  use ⟨fun _ => r, 0, ⟨r, ⟦b⟧y simp [Filter.Tendsto]⟩⟩",
      "import_trocado": [
@@ -938,11 +959,11 @@
     },
     {
      "arquivo": "formal_verification/UMA_Foundation.lean",
-     "linha": 251,
+     "linha": 252,
      "nome": "UMA.Soundness.uma_framework_sound",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 262: failed to infer binder type when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved before the declaration body is processed",
+     "erro": "linha 263: failed to infer binder type when the resulting type of a declaration is explicitly provided, all holes (e.g., `_`) in the header are resolved before the declaration body is processed",
      "coluna": 13,
      "trecho": "    (∀ p₁ p₂ ⟦p⟧₃, UMA.Logistics.distance p₁ ",
      "import_trocado": [
@@ -951,7 +972,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 34,
+     "linha": 35,
      "nome": "Universe00.zero_over_zero_is_one",
      "status": "fechado",
      "axioms": [
@@ -966,7 +987,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 37,
+     "linha": 38,
      "nome": "Universe00.lhopital_zero_form",
      "status": "aberto-sorry",
      "axioms": [
@@ -982,7 +1003,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 48,
+     "linha": 49,
      "nome": "Universe00.unique_prime_factorization",
      "status": "aberto-sorry",
      "axioms": [
@@ -996,7 +1017,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 64,
+     "linha": 65,
      "nome": "Universe00.prime_event_collision_free",
      "status": "aberto-sorry",
      "axioms": [
@@ -1009,7 +1030,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 89,
+     "linha": 90,
      "nome": "Universe00.gyro_stability",
      "status": "fechado",
      "axioms": [
@@ -1024,7 +1045,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 114,
+     "linha": 115,
      "nome": "Universe00.tmfm_energy_conservation",
      "status": "fechado",
      "axioms": [
@@ -1039,7 +1060,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 139,
+     "linha": 140,
      "nome": "Universe00.normal_implies_critical",
      "status": "fechado",
      "axioms": [
@@ -1054,7 +1075,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 160,
+     "linha": 161,
      "nome": "Universe00.system_is_antifragile",
      "status": "fechado",
      "axioms": [
@@ -1069,7 +1090,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 177,
+     "linha": 178,
      "nome": "Universe00.swarm_learning_superlinear",
      "status": "erro",
      "axioms": [
@@ -1078,7 +1099,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 183: linarith failed to find a contradiction case h n : ℕ f : ℝ hn : n ≥ 2 hf : f > 0 h1 : ↑n * f * (↑n - 1) = ↑n * f * ↑n - ↑n * f h2 : ↑n ≥ 2 a✝ : ↑n * f ≥ ↑n * f * (↑n - 1) ⊢ False failed",
+     "erro": "linha 184: linarith failed to find a contradiction case h n : ℕ f : ℝ hn : n ≥ 2 hf : f > 0 h1 : ↑n * f * (↑n - 1) = ↑n * f * ↑n - ↑n * f h2 : ↑n ≥ 2 a✝ : ↑n * f ≥ ↑n * f * (↑n - 1) ⊢ False failed",
      "coluna": 2,
      "trecho": "  ⟦n⟧linarith [sq_nonneg ((n : ℝ) ",
      "import_trocado": [
@@ -1088,14 +1109,14 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 199,
+     "linha": 200,
      "nome": "Universe00.blockchain_unique_ids",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 206: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≥ 0 a ≥ 0 a - b ≥ 0 where a := ↑i b := ↑blocks.length",
+     "erro": "linha 207: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≥ 0 a ≥ 0 a - b ≥ 0 where a := ↑i b := ↑blocks.length",
      "coluna": 25,
      "trecho": "      (blocks.get ⟨i, by ⟦o⟧mega⟩).block_id ≠ (blocks.get",
      "import_trocado": [
@@ -1105,7 +1126,7 @@
     },
     {
      "arquivo": "formal_verification/lean/UNIVERSE_00_AXIOMS.lean",
-     "linha": 228,
+     "linha": 229,
      "nome": "Universe00.universe00_stability",
      "status": "aberto-sorry",
      "axioms": [
@@ -1125,7 +1146,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   }
  ]
 }

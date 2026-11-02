@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T08:01:18+00:00",
+ "generated_at": "2026-10-30T16:50:26+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -17,9 +17,285 @@
    "build_ok": false,
    "build_seconds": 0.0,
    "build_error": "error: ././././Barriers/Relativization.lean:76:4: type mismatch | error: Lean exited with code 1 | error: ././././Complexity/Basic.lean:22:36: unknown identifier 'Set'",
-   "sorry_warnings": 39,
+   "sorry_warnings": 41,
    "reconstructed": true,
    "bridges": [
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0001_RAM_Circuit_equiv",
+     "statement": "∀ (L : Language) (k : ℕ), time_complexity RAMMachine L k → ∃ c, time_complexity UniformCircuit L (c * k)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0001_TM_RAM_equiv",
+     "statement": "∀ (L : Language) (k : ℕ), time_complexity TuringMachine L k → ∃ c, time_complexity RAMMachine L (c * k)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0002_P_definition",
+     "statement": "∀ L ∈ P, ∃ k M, ∀ (x : List Bool), time_complexity TuringMachine L (x.length ^ k)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0003_NP_definition",
+     "statement": "∀ L ∈ NP, ∃ k V, ∀ (x : List Bool), x ∈ L ↔ ∃ w, w.length ≤ x.length ^ k ∧ verifies V x w = true",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0004_P_subset_NP",
+     "statement": "P ⊆ NP",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0005_reduction_preserves_P",
+     "statement": "∀ (A B : Language), A ≤ₚᵐ B → B ∈ P → A ∈ P",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0005_reduction_transitive",
+     "statement": "∀ (A B C : Language), A ≤ₚᵐ B → B ≤ₚᵐ C → A ≤ₚᵐ C",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0006_Cook_Levin",
+     "statement": "NP_complete SAT",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0007_ThreeSAT_NP_complete",
+     "statement": "NP_complete ThreeSAT",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0008_CLIQUE_NP_complete",
+     "statement": "NP_complete CLIQUE",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0008_HamiltonianPath_NP_complete",
+     "statement": "NP_complete HamiltonianPath",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "sfh-formalization-lab",
+     "project": "formal/lean",
+     "theorem": "PvsNP_L0008_VertexCover_NP_complete",
+     "statement": "NP_complete VertexCover",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
     {
      "repo": "sfh-formalization-lab",
      "project": "formal/lean",
@@ -138,9 +414,19 @@
    ],
    "declared_axioms": [
     {
+     "name": "CLIQUE",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Language"
+    },
+    {
      "name": "Explicit",
      "module": "Complexity.PvsNPCircuits",
      "statement": "(ℕ → Bool) → Prop"
+    },
+    {
+     "name": "HamiltonianPath",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Language"
     },
     {
      "name": "NP",
@@ -158,14 +444,49 @@
      "statement": "Set (Set (List Bool))"
     },
     {
+     "name": "RAMMachine",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Type"
+    },
+    {
      "name": "RandomBooleanFunction",
      "module": "Complexity.PvsNPCircuits",
      "statement": "ℕ → Type"
     },
     {
+     "name": "SAT",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Language"
+    },
+    {
      "name": "Sigma2P",
      "module": "Complexity.PvsNPCircuits",
      "statement": "Set (Set (List Bool))"
+    },
+    {
+     "name": "ThreeSAT",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Language"
+    },
+    {
+     "name": "TuringMachine",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Type"
+    },
+    {
+     "name": "UniformCircuit",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Type"
+    },
+    {
+     "name": "Verifier",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Type"
+    },
+    {
+     "name": "VertexCover",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Language"
     },
     {
      "name": "circuit_size",
@@ -176,6 +497,21 @@
      "name": "computes",
      "module": "Complexity.PvsNPCircuits",
      "statement": "CircuitFamily → Set (List Bool) → Prop"
+    },
+    {
+     "name": "polynomial_equiv",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "∀ (M₁ M₂ : Type) (L : Language) (k : ℕ), time_complexity M₁ L k → ∃ c, time_complexity M₂ L (c * k)"
+    },
+    {
+     "name": "time_complexity",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Type → Language → ℕ → Prop"
+    },
+    {
+     "name": "verifies",
+     "module": "Complexity.PvsNPFoundations",
+     "statement": "Verifier → List Bool → List Bool → Bool"
     }
    ],
    "theorems": [
@@ -201,6 +537,155 @@
      "axioms": [],
      "statement": "∀ (size inputs : ℕ), sizeOf { size := size, inputs := inputs } = 1 + sizeOf size + sizeOf inputs",
      "status": "fechado"
+    },
+    {
+     "name": "PvsNP_L0001_RAM_Circuit_equiv",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "time_complexity",
+      "RAMMachine",
+      "UniformCircuit",
+      "sorryAx"
+     ],
+     "statement": "∀ (L : Language) (k : ℕ), time_complexity RAMMachine L k → ∃ c, time_complexity UniformCircuit L (c * k)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0001_TM_RAM_equiv",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "time_complexity",
+      "TuringMachine",
+      "RAMMachine",
+      "sorryAx"
+     ],
+     "statement": "∀ (L : Language) (k : ℕ), time_complexity TuringMachine L k → ∃ c, time_complexity RAMMachine L (c * k)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0002_P_definition",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "TuringMachine",
+      "time_complexity",
+      "propext",
+      "sorryAx"
+     ],
+     "statement": "∀ L ∈ P, ∃ k M, ∀ (x : List Bool), time_complexity TuringMachine L (x.length ^ k)",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0003_NP_definition",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "verifies",
+      "sorryAx"
+     ],
+     "statement": "∀ L ∈ NP, ∃ k V, ∀ (x : List Bool), x ∈ L ↔ ∃ w, w.length ≤ x.length ^ k ∧ verifies V x w = true",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0004_P_subset_NP",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "TuringMachine",
+      "time_complexity",
+      "propext",
+      "Verifier",
+      "verifies",
+      "sorryAx"
+     ],
+     "statement": "P ⊆ NP",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0005_reduction_preserves_P",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "propext",
+      "TuringMachine",
+      "time_complexity",
+      "sorryAx"
+     ],
+     "statement": "∀ (A B : Language), A ≤ₚᵐ B → B ∈ P → A ∈ P",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0005_reduction_transitive",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "propext",
+      "sorryAx"
+     ],
+     "statement": "∀ (A B C : Language), A ≤ₚᵐ B → B ≤ₚᵐ C → A ≤ₚᵐ C",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0006_Cook_Levin",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "verifies",
+      "SAT",
+      "sorryAx"
+     ],
+     "statement": "NP_complete SAT",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0007_ThreeSAT_NP_complete",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "verifies",
+      "ThreeSAT",
+      "sorryAx"
+     ],
+     "statement": "NP_complete ThreeSAT",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0008_CLIQUE_NP_complete",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "verifies",
+      "CLIQUE",
+      "sorryAx"
+     ],
+     "statement": "NP_complete CLIQUE",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0008_HamiltonianPath_NP_complete",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "verifies",
+      "HamiltonianPath",
+      "sorryAx"
+     ],
+     "statement": "NP_complete HamiltonianPath",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP_L0008_VertexCover_NP_complete",
+     "module": "Complexity.PvsNPFoundations",
+     "axioms": [
+      "Verifier",
+      "propext",
+      "verifies",
+      "VertexCover",
+      "sorryAx"
+     ],
+     "statement": "NP_complete VertexCover",
+     "status": "aberto-sorry"
     },
     {
      "name": "PvsNP_L1001_P_poly_definition",
@@ -316,159 +801,6 @@
      "trecho": "theorem P_neq_EXP : P ≠ ⟦E⟧XP := by sorry"
     },
     {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 37,
-     "nome": "PvsNP_L0001_TM_RAM_equiv",
-     "status": "aberto-sorry",
-     "axioms": [
-      "RAMMachine",
-      "TuringMachine",
-      "sorryAx",
-      "time_complexity"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 42,
-     "nome": "PvsNP_L0001_RAM_Circuit_equiv",
-     "status": "aberto-sorry",
-     "axioms": [
-      "RAMMachine",
-      "UniformCircuit",
-      "sorryAx",
-      "time_complexity"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 58,
-     "nome": "PvsNP_L0002_P_definition",
-     "status": "aberto-sorry",
-     "axioms": [
-      "TuringMachine",
-      "propext",
-      "sorryAx",
-      "time_complexity"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 78,
-     "nome": "PvsNP_L0003_NP_definition",
-     "status": "aberto-sorry",
-     "axioms": [
-      "Verifier",
-      "propext",
-      "sorryAx",
-      "verifies"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 84,
-     "nome": "PvsNP_L0004_P_subset_NP",
-     "status": "aberto-sorry",
-     "axioms": [
-      "TuringMachine",
-      "Verifier",
-      "propext",
-      "sorryAx",
-      "time_complexity",
-      "verifies"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 109,
-     "nome": "PvsNP_L0005_reduction_transitive",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 111: application type mismatch B ≤ₚᵐ ↑C → A ≤ₚᵐ C argument ↑C → A ≤ₚᵐ C has type Prop : Type but is expected to have type Language : Type",
-     "coluna": 18,
-     "trecho": "  A ≤ₚᵐ B → B ≤ₚᵐ ⟦C⟧ → A ≤ₚᵐ C := by"
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 113,
-     "nome": "PvsNP_L0005_reduction_preserves_P",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 115: application type mismatch A ≤ₚᵐ ↑B → B ∈ P → A ∈ P argument ↑B → B ∈ P → A ∈ P has type Prop : Type but is expected to have type Language : Type",
-     "coluna": 8,
-     "trecho": "  A ≤ₚᵐ ⟦B⟧ → B ∈ P → A ∈ P := by"
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 130,
-     "nome": "PvsNP_L0006_Cook_Levin",
-     "status": "aberto-sorry",
-     "axioms": [
-      "SAT",
-      "Verifier",
-      "propext",
-      "sorryAx",
-      "verifies"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 148,
-     "nome": "PvsNP_L0007_ThreeSAT_NP_complete",
-     "status": "aberto-sorry",
-     "axioms": [
-      "ThreeSAT",
-      "Verifier",
-      "propext",
-      "sorryAx",
-      "verifies"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 166,
-     "nome": "PvsNP_L0008_CLIQUE_NP_complete",
-     "status": "aberto-sorry",
-     "axioms": [
-      "CLIQUE",
-      "Verifier",
-      "propext",
-      "sorryAx",
-      "verifies"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 169,
-     "nome": "PvsNP_L0008_VertexCover_NP_complete",
-     "status": "aberto-sorry",
-     "axioms": [
-      "Verifier",
-      "VertexCover",
-      "propext",
-      "sorryAx",
-      "verifies"
-     ]
-    },
-    {
-     "arquivo": "formal/lean/Complexity/PvsNPFoundations.lean",
-     "linha": 172,
-     "nome": "PvsNP_L0008_HamiltonianPath_NP_complete",
-     "status": "aberto-sorry",
-     "axioms": [
-      "HamiltonianPath",
-      "Verifier",
-      "propext",
-      "sorryAx",
-      "verifies"
-     ]
-    },
-    {
      "arquivo": "formal/lean/MasterLemma/Basic.lean",
      "linha": 90,
      "nome": "MasterLemma.MasterLemma",
@@ -504,7 +836,7 @@
      "nome": "MasterLemma.PvsNP.shortcut_violates_barriers",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
@@ -512,7 +844,7 @@
      "nome": "MasterLemma.PvsNP.PvsNP_is_MasterLemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
@@ -520,7 +852,7 @@
      "nome": "MasterLemma.PvsNP.structural_gap_PvsNP",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
@@ -528,7 +860,7 @@
      "nome": "MasterLemma.PvsNP.no_shortcuts_from_PneqNP",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
@@ -536,7 +868,7 @@
      "nome": "MasterLemma.PvsNP.PneqNP_from_no_shortcuts",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
@@ -544,7 +876,7 @@
      "nome": "MasterLemma.PvsNP.respects_time_hierarchy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/PvsNP.lean",
@@ -552,39 +884,39 @@
      "nome": "MasterLemma.PvsNP.respects_space_hierarchy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 65,
+     "linha": 66,
      "nome": "MasterLemma.ToyExamples.lagrange_via_master_lemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 110,
+     "linha": 111,
      "nome": "MasterLemma.ToyExamples.euclidean_via_master_lemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 155,
+     "linha": 156,
      "nome": "MasterLemma.ToyExamples.conservation_via_master_lemma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MasterLemma/ToyExamples.lean",
-     "linha": 160,
+     "linha": 161,
      "nome": "MasterLemma.ToyExamples.toy_examples_unified",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/MasterLemma/Basic.olean' of module MasterLemma.Basic does not exist — MasterLemma.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:30:26: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/MasterLemma/Basic.lean:34:52: error: application type mismatch"
     },
     {
      "arquivo": "formal/lean/MillenniumProblems/BlockC_PvsNP.lean",
@@ -696,7 +1028,7 @@
      "nome": "P_neq_NP_equivalence",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -704,7 +1036,7 @@
      "nome": "all_SAT_repr_superpoly",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -712,7 +1044,7 @@
      "nome": "SC_oracle_dependent",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -720,7 +1052,7 @@
      "nome": "non_relativizing_requires_structure",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -728,7 +1060,7 @@
      "nome": "natural_proofs_barrier",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -736,7 +1068,7 @@
      "nome": "algebraic_only_implies_algebrizes",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -744,7 +1076,7 @@
      "nome": "separation_via_proxy",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Examples/SAT.lean",
@@ -752,7 +1084,7 @@
      "nome": "ResolutionWidth_lower_bound",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
@@ -760,7 +1092,7 @@
      "nome": "invariance_theorem",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
@@ -768,7 +1100,7 @@
      "nome": "all_repr_superpoly_of_SC_superpoly",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
@@ -776,7 +1108,7 @@
      "nome": "no_escape_hatch",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     },
     {
      "arquivo": "formal/lean/StructuralComplexity/Robustness.lean",
@@ -784,7 +1116,7 @@
      "nome": "robustness_oracle_independent_implies_relativizing",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-_y5u7zve/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_y5u7zve/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
+     "motivo": "object file '/tmp/mvei-rec-_gssfqfx/p/.lake/mvei-salvage/StructuralComplexity/Basic.olean' of module StructuralComplexity.Basic does not exist — StructuralComplexity.Basic não compilou: /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:71:32: error: failed to synthesize | /tmp/mvei-rec-_gssfqfx/p/StructuralComplexity/Basic.lean:109:19: error: function expected at"
     }
    ],
    "preenchimento": [
@@ -845,6 +1177,146 @@
      "tatica": ""
     },
     {
+     "tipo": "axioma",
+     "nome": "ThreeSAT",
+     "enunciado": "Language",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "CLIQUE",
+     "enunciado": "Language",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "polynomial_equiv",
+     "enunciado": "∀ (M₁ M₂ : Type) (L : Language) (k : ℕ), time_complexity M₁ L k → ∃ c, time_complexity M₂ L (c * k)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "time_complexity",
+     "enunciado": "Type → Language → ℕ → Prop",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "SAT",
+     "enunciado": "Language",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "VertexCover",
+     "enunciado": "Language",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "HamiltonianPath",
+     "enunciado": "Language",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "verifies",
+     "enunciado": "Verifier → List Bool → List Bool → Bool",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0001_RAM_Circuit_equiv",
+     "enunciado": "∀ (L : Language) (k : ℕ), time_complexity RAMMachine L k → ∃ c, time_complexity UniformCircuit L (c * k)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0001_TM_RAM_equiv",
+     "enunciado": "∀ (L : Language) (k : ℕ), time_complexity TuringMachine L k → ∃ c, time_complexity RAMMachine L (c * k)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0002_P_definition",
+     "enunciado": "∀ L ∈ P, ∃ k M, ∀ (x : List Bool), time_complexity TuringMachine L (x.length ^ k)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0003_NP_definition",
+     "enunciado": "∀ L ∈ NP, ∃ k V, ∀ (x : List Bool), x ∈ L ↔ ∃ w, w.length ≤ x.length ^ k ∧ verifies V x w = true",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0004_P_subset_NP",
+     "enunciado": "P ⊆ NP",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0005_reduction_preserves_P",
+     "enunciado": "∀ (A B : Language), A ≤ₚᵐ B → B ∈ P → A ∈ P",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0005_reduction_transitive",
+     "enunciado": "∀ (A B C : Language), A ≤ₚᵐ B → B ≤ₚᵐ C → A ≤ₚᵐ C",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0006_Cook_Levin",
+     "enunciado": "NP_complete SAT",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0007_ThreeSAT_NP_complete",
+     "enunciado": "NP_complete ThreeSAT",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0008_CLIQUE_NP_complete",
+     "enunciado": "NP_complete CLIQUE",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0008_HamiltonianPath_NP_complete",
+     "enunciado": "NP_complete HamiltonianPath",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "PvsNP_L0008_VertexCover_NP_complete",
+     "enunciado": "NP_complete VertexCover",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
      "tipo": "teorema aberto",
      "nome": "PvsNP_L1001_P_poly_definition",
      "enunciado": "∀ L ∈ P_poly, ∃ C k, (∀ (n : ℕ), (C n).size ≤ n ^ k) ∧ computes C L",
@@ -882,9 +1354,10 @@
    ],
    "summary": {
     "fechado": 3,
-    "aberto-sorry": 5,
+    "aberto-sorry": 17,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "sfh-formalization-lab",
@@ -950,7 +1423,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "sfh-formalization-lab",
@@ -967,14 +1441,14 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:25:7: 'String' has already been declared | error: ././././PvsNP.lean:28:41: function expected at",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP.lean:24:7: 'String' has already been declared | error: ././././PvsNP.lean:27:41: function expected at",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
-     "linha": 95,
+     "linha": 94,
      "nome": "ComplexityTheory.P_subset_NP",
      "status": "erro",
      "axioms": [
@@ -982,13 +1456,13 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 110: tactic 'constructor' failed, target is not an inductive datatype case right.right «Σ» : Alphabet L : Language «Σ» f : TimeFunction hpoly : IsPolynomialTime f hM : DecidableInTime L f ⊢ ∀ (w : sorry), w ∈ L ↔ ∃ (c : sorry), Verifier.verify ?",
-     "coluna": 2,
-     "trecho": "  ⟦c⟧onstructor"
+     "erro": "linha 102: invalid {...} notation, structure type expected ∃ k, ∀ (n : ℕ), Verifier.timeFunction ?intro.intro.w n ≤ n ^ k + k",
+     "coluna": 6,
+     "trecho": "  use ⟦{⟧"
     },
     {
      "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
-     "linha": 130,
+     "linha": 129,
      "nome": "ComplexityTheory.polyTimeReducible_trans",
      "status": "erro",
      "axioms": [
@@ -996,13 +1470,13 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 134: tactic 'introN' failed, insufficient number of binders «Σ» : Alphabet L₁ : Language «Σ» L₂ : Language «Σ» L₃ : Language «Σ» ⊢ L₁ ≤ₚ sorry",
-     "coluna": 2,
-     "trecho": "  ⟦i⟧ntro ⟨f, t₁, ht₁⟩ ⟨g, t₂, ht₂"
+     "erro": "linha 145: tactic 'apply' failed, failed to unify t₂ ?n ≤ ?n ^ k₂ + k₂ with t₂ (t₁ n) ≤ t₂ (n ^ k₁ + k₁) «Σ» : Alphabet L₁ : Language «Σ» L₂ : Language «Σ» L₃ : Language «Σ» f : sorry → sorry t₁ : TimeFunction ht₁ : Polynomial t₁ ∧ (sorry → sorry ≤ t₁",
+     "coluna": 10,
+     "trecho": "          ⟦a⟧pply hk₂"
     },
     {
      "arquivo": "problems/p-vs-np/formal-proofs/lean/PvsNP.lean",
-     "linha": 157,
+     "linha": 156,
      "nome": "ComplexityTheory.NPComplete_in_P_implies_P_eq_NP",
      "status": "erro",
      "axioms": [
@@ -1010,7 +1484,7 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 165: unsolved goals case h.mp.intro.intro.intro.intro.w «Σ» : Alphabet L : Language «Σ» hNP : L ∈ NP «Σ» hNPHard : NPHard L L' : Language «Σ» hL' : L' ∈ P «Σ» f : sorry → sorry t : TimeFunction ht : sorry ∧ (sorry → sorry ≤ t sorry) ∧ ∀ (w : sor",
+     "erro": "linha 164: unsolved goals case h.mp.intro.intro.intro.intro.w «Σ» : Alphabet L : Language «Σ» hNP : L ∈ NP «Σ» hNPHard : NPHard L L' : Language «Σ» hL' : L' ∈ P «Σ» f : sorry → sorry t : TimeFunction ht : Polynomial t ∧ (sorry → sorry ≤ t sorry) ∧ ∀ (",
      "coluna": 2,
      "trecho": "  ⟦·⟧ intro hL'"
     }
@@ -1020,7 +1494,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1037,7 +1512,7 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, vocabulario-lean4): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 18 arquivo(s): abbrev 23, acento 1, docstring 20, end 2, lambda 53, nomes_mathlib 1, noncomputable 18, notacao 3, notacao_escopo 1, palavra_chave 5. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././StructuralAsymmetry.lean:68:40: unknown constant 'Real.exp' | error: ././././StructuralAsymmetry.lean:128:8: failed to synthesize",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, vocabulario-lean4): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 18 arquivo(s): abbrev 23, acento 1, campos_multiplos 2, docstring 20, end 2, instancia_mensuravel 1, lambda 53, nomes_mathlib 1, noncomputable 18, notacao 3, notacao_escopo 1, palavra_chave 5, precedencia 3, tipos_numericos 1. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././StructuralAsymmetry.lean:68:40: unknown constant 'Real.exp' | error: ././././StructuralAsymmetry.lean:128:8: failed to synthesize",
    "corrections": [
     "renomear-imports-mathlib",
     "vocabulario-lean4"
@@ -1134,7 +1609,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1171,7 +1647,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1188,54 +1665,54 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP_Definitions.lean:90:35: unknown identifier 'ℚ' | error: ././././PvsNP_Definitions.lean:90:55: unknown identifier 'ℚ'",
+   "note": "AVULSO: arquivos .lean sem lakefile; a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././PvsNP_Definitions.lean:105:43: function expected at | error: ././././PvsNP_Definitions.lean:107:18: function expected at",
    "corrections": [],
    "lakefile_gerado": "",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 64,
+     "linha": 65,
      "nome": "ComplexityTheory.relativization_barrier",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
+      "propext",
       "sorryAx"
-     ],
-     "erro": "linha 90: unknown identifier 'ℚ'",
-     "coluna": 35,
-     "trecho": " : ℕ, (count_satisfying P n : ⟦ℚ⟧) / (2 ^ (2 ^ n) : ℚ) ≥ 1 / ("
+     ]
     },
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 102,
+     "linha": 103,
      "nome": "ComplexityTheory.natural_proofs_barrier",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 104: function expected at is_pseudorandom term has type ?m.3004",
+     "erro": "linha 105: function expected at is_pseudorandom term has type ?m.2654",
      "coluna": 43,
      "trecho": "ure : ∃ (PRF : ℕ → ℕ → Bool), ⟦i⟧s_pseudorandom PRF) :"
     },
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 122,
+     "linha": 123,
      "nome": "ComplexityTheory.algebrization_barrier",
      "status": "erro",
      "axioms": [
+      "propext",
       "sorryAx"
      ],
-     "erro": "linha 130: function expected at algebraic_ext term has type ?m.3577",
+     "erro": "linha 131: function expected at algebraic_ext term has type ?m.3293",
      "coluna": 35,
      "trecho": "A : Oracle, ∀ L, InNP_Oracle (⟦a⟧lgebraic_ext A) L → InP_Oracl"
     },
     {
      "arquivo": "proofs/p-vs-np/lean/PvsNP_Definitions.lean",
-     "linha": 134,
+     "linha": 135,
      "nome": "ComplexityTheory.barrier_checklist_lemma",
      "status": "erro",
      "axioms": [
+      "propext",
       "sorryAx"
      ],
-     "erro": "linha 144: function expected at Relativizes term has type ?m.3761",
+     "erro": "linha 145: function expected at Relativizes term has type ?m.3565",
      "coluna": 5,
      "trecho": "  (¬ ⟦R⟧elativizes proof_technique) ∨"
     }
@@ -1245,7 +1722,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   }
  ]
 }

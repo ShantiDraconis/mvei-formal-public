@@ -1158,10 +1158,10 @@
  axiom zero_functional_symmetry (ρ : ZetaZero) :
 --- a/lean/RiemannHypothesis/ExplicitFormula.lean
 +++ b/lean/RiemannHypothesis/ExplicitFormula.lean
-@@ -8,6 +8,8 @@
- import Mathlib.Data.Complex.Basic
+@@ -9,6 +9,8 @@
  import Mathlib.Analysis.SpecialFunctions.Pow.Real
  import Mathlib.NumberTheory.ArithmeticFunction
+ import Mathlib.Tactic
 +import Mathlib.Analysis.SpecialFunctions.Log.Basic
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
  
@@ -1566,7 +1566,7 @@
  import Mathlib.Data.Complex.Basic
  import Mathlib.Data.Real.Basic
  import Mathlib.Topology.Basic
-+import Mathlib.Tactic.Linarith
++import Mathlib.Tactic
 +
 +noncomputable section
  
@@ -1607,17 +1607,16 @@
    Float is used as a placeholder for ℝ (Real). A full formalization
 --- a/lean4/Groups/Group3_Complexity.lean
 +++ b/lean4/Groups/Group3_Complexity.lean
-@@ -8,6 +8,9 @@
- 
+@@ -9,6 +9,8 @@
  import Mathlib.Data.Real.Basic
  import Mathlib.Data.Nat.Defs
-+import Mathlib.Tactic
-+
-+noncomputable section
  
++noncomputable section
++
  namespace MillenniumGroups.Group3
  
-@@ -240,6 +243,7 @@
+ /-!
+@@ -240,6 +242,7 @@
  theorem P_ne_NP_iff_SAT_not_in_P :
    ComplexityClass.P ≠ ComplexityClass.NP ↔ ¬ InClassP SAT := by
    sorry
@@ -2706,17 +2705,16 @@
  def coherence_functional (θ : Fin 19 → ℂ) (θ_bar : Fin 19 → ℂ) : ℂ :=
 --- a/lean4/UnifiedSystem.lean
 +++ b/lean4/UnifiedSystem.lean
-@@ -1,6 +1,9 @@
- import Mathlib.Data.Real.Basic
+@@ -2,6 +2,8 @@
  import Mathlib.Data.Set.Basic
  import Mathlib.Logic.Basic
-+import Mathlib.Tactic
-+
-+noncomputable section
  
++noncomputable section
++
  /-
    UnifiedSystem.lean
-@@ -230,7 +233,7 @@
+   Formal Definition of the Three Mathematical Systems: S_cl, S_exp, S_new
+@@ -230,7 +232,7 @@
  -- ANALOGY WITH NUMBER SYSTEMS
  -- ============================================
  
@@ -2725,7 +2723,7 @@
    The relationship is analogous to: ℤ ⊂ ℚ ⊂ ℝ
    
    - S_cl is like ℤ (the "integers" of mathematics)
-@@ -317,6 +320,7 @@
+@@ -317,6 +319,7 @@
      (∀ (p : Problem), Obstruction S_new.toMathSystem p = 0) ∧
      (∀ (p : Problem), WeakSol S_new.toMathSystem p ↔ StrongSol S_new.toMathSystem p) := by
    sorry  -- Existence is axiomatized in the construction
@@ -2733,7 +2731,7 @@
    The Unified Mathematical System S_new
    
    This file formalizes the three-system architecture:
-@@ -354,13 +358,13 @@
+@@ -354,13 +357,13 @@
    (∀ φ : S₁.Language, S₁.isTrue φ → 
       ∃ ψ : S₂.Language, S₂.isTrue ψ)
  

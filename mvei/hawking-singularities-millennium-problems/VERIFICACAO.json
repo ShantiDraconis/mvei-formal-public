@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T08:01:18+00:00",
+ "generated_at": "2026-10-30T16:50:26+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,7 +16,7 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././Problems/PvsNP/HawkingLimit.lean:49:181: unexpected token 'end'; expected '=>' | error: ././././Problems/PvsNP/HawkingLimit.lean:48:4: function expected at | error: Lean exited with code 1",
+   "build_error": "error: ././././Problems/Riemann/HawkingLimit.lean:48:71: fields missing: 'criticalInBoundary' | error: Lean exited with code 1 | error: build failed",
    "sorry_warnings": 10,
    "reconstructed": true,
    "bridges": [
@@ -71,6 +71,29 @@
      "project": "lean",
      "theorem": "Problems.NavierStokes.ns_hawking_equivalence",
      "statement": "∀ (u : Problems.NavierStokes.VelocityField),   Problems.NavierStokes.GlobalRegularity u ↔     ∀ T > 0, ∃ L, Filter.Tendsto (fun t => Problems.NavierStokes.H_NS u t) (nhdsWithin T (Set.Iio T)) (nhds L)",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "hawking-singularities-millennium-problems",
+     "project": "lean",
+     "theorem": "Problems.PvsNP.pnp_hawking_equivalence",
+     "statement": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
      "verdict": "aberta",
      "tactic": "",
      "attempts": [
@@ -391,6 +414,28 @@
      "status": "aberto-sorry"
     },
     {
+     "name": "Problems.PvsNP.pnp_hawking_equivalence",
+     "module": "Problems.PvsNP.HawkingLimit",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "Problems.PvsNP.relativization_barrier",
+     "module": "Problems.PvsNP.HawkingLimit",
+     "axioms": [
+      "Quot.sound",
+      "propext"
+     ],
+     "statement": "∃ oracle_A oracle_B, (∃ (_ : True), True) ∧ ∃ (_ : True), True",
+     "status": "fechado"
+    },
+    {
      "name": "Problems.YangMills.GaugeField.mk.sizeOf_spec",
      "module": "Problems.YangMills.HawkingLimit",
      "axioms": [],
@@ -420,36 +465,16 @@
      "arquivo": "lean/MainTheorem.lean",
      "linha": 27,
      "nome": "Hawking.Main.universal_singularity_principle",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Problems.Riemann.HawkingLimit"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-i4ra6opm/p/.lake/mvei-salvage/Problems/PvsNP/HawkingLimit.olean' of module Problems.PvsNP.HawkingLimit does not exist — Problems.PvsNP.HawkingLimit não compilou: /tmp/mvei-rec-i4ra6opm/p/Problems/PvsNP/HawkingLimit.lean:49:181: error: unexpected token 'end'; expected '=>' | /tmp/mvei-rec-i4ra6opm/p/Problems/PvsNP/HawkingLimit.lean:48:4: error: function expected at"
-    },
-    {
-     "arquivo": "lean/Problems/PvsNP/HawkingLimit.lean",
-     "linha": 33,
-     "nome": "Problems.PvsNP.pnp_hawking_equivalence",
      "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "lean/Problems/PvsNP/HawkingLimit.lean",
-     "linha": 40,
-     "nome": "Problems.PvsNP.relativization_barrier",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
      ],
-     "erro": "linha 48: function expected at ∃ (_ : True), True term has type Prop",
-     "coluna": 4,
-     "trecho": "    ⟦(⟧∃ _proof_B : True, True)    -"
+     "dependencia_com_sorry": [
+      "Problems.Riemann.HawkingLimit"
+     ]
     },
     {
      "arquivo": "lean/Problems/Riemann/HawkingLimit.lean",
@@ -531,6 +556,13 @@
     },
     {
      "tipo": "teorema aberto",
+     "nome": "Problems.PvsNP.pnp_hawking_equivalence",
+     "enunciado": "Problems.PvsNP.P_eq_NP ↔   ∀ (T_NP T_P : Problems.PvsNP.TimeComplexity),     Problems.PvsNP.IsPolynomial T_P → ∃ M, ∀ (n : ℕ), Problems.PvsNP.H_PNP T_NP T_P n ≤ M * Real.log ↑n",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
      "nome": "Problems.YangMills.ym_hawking_equivalence",
      "enunciado": "Problems.YangMills.YangMillsMassGap ↔   ∃ Δ > 0,     ∀ (A : Problems.YangMills.GaugeField),       ∀ ε > 0, ∃ δ > 0, ∀ («λ» : ℝ), 0 < «λ» → «λ» < δ → Problems.YangMills.H_YM A «λ» ≥ Δ - ε",
      "resultado": "sem resultado",
@@ -538,10 +570,11 @@
     }
    ],
    "summary": {
-    "fechado": 23,
-    "aberto-sorry": 4,
+    "fechado": 24,
+    "aberto-sorry": 5,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   },
   {
    "repo": "hawking-singularities-millennium-problems",
@@ -784,24 +817,21 @@
     },
     {
      "arquivo": "src/lean/Hawking/PvsNP/HawkingPNP.lean",
-     "linha": 77,
+     "linha": 78,
      "nome": "Hawking.PvsNP.pnp_hawking_reformulation",
-     "status": "nao_alcancado",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Hawking.PvsNP.T_NP"
+      "Hawking.PvsNP.T_NP",
+      "Hawking.PvsNP.T_P"
      ],
      "dependencia_com_sorry": [
       "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
-     ],
-     "erro": "linha 80: unknown constant 'Real.log'",
-     "coluna": 58,
-     "trecho": " n : ℕ, n > 0 → H_PNP n ≤ C * ⟦R⟧eal.log n := by",
-     "motivo": "importa Hawking.Core.EssentialSingularity, Hawking.Core.Limits, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     ]
     },
     {
      "arquivo": "src/lean/Hawking/RH/HawkingRH.lean",
@@ -822,7 +852,7 @@
     },
     {
      "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
-     "linha": 84,
+     "linha": 85,
      "nome": "Hawking.UST.universal_singularity_theorem",
      "status": "nao_alcancado",
      "axioms": [],
@@ -830,11 +860,11 @@
       "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "object file '/tmp/mvei-rec-ciijn233/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-ciijn233/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
+     "motivo": "object file '/tmp/mvei-rec-3thjz5u6/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-3thjz5u6/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
     },
     {
      "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
-     "linha": 96,
+     "linha": 97,
      "nome": "Hawking.UST.structural_unity",
      "status": "nao_alcancado",
      "axioms": [],
@@ -842,11 +872,11 @@
       "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "object file '/tmp/mvei-rec-ciijn233/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-ciijn233/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
+     "motivo": "object file '/tmp/mvei-rec-3thjz5u6/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-3thjz5u6/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
     },
     {
      "arquivo": "src/lean/Hawking/UST/UniversalSingularityTheorem.lean",
-     "linha": 103,
+     "linha": 104,
      "nome": "Hawking.UST.transfer_principle",
      "status": "nao_alcancado",
      "axioms": [],
@@ -854,7 +884,7 @@
       "Hawking.Core.EssentialSingularity",
       "Hawking.Core.Limits"
      ],
-     "motivo": "object file '/tmp/mvei-rec-ciijn233/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-ciijn233/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
+     "motivo": "object file '/tmp/mvei-rec-3thjz5u6/p/.lake/mvei-salvage/Hawking/RH/HawkingRH.olean' of module Hawking.RH.HawkingRH does not exist — Hawking.RH.HawkingRH não compilou: /tmp/mvei-rec-3thjz5u6/p/Hawking/RH/HawkingRH.lean:55:70: error: unexpected identifier; expected 'lemma'"
     },
     {
      "arquivo": "src/lean/Hawking/YangMills/HawkingYM.lean",
@@ -879,7 +909,8 @@
     "fechado": 0,
     "aberto-sorry": 0,
     "condicional": 0
-   }
+   },
+   "hora_commit_mvei": 1793349359
   }
  ]
 }

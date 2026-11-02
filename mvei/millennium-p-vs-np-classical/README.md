@@ -11,24 +11,77 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T08:01:18+00:00, on commit `1990622af0a0c2ebcbe450979ba48f62025c736d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T16:50:26+00:00, on commit `1990622af0a0c2ebcbe450979ba48f62025c736d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean4` | v4.36.0-rc2 | failed | 0 | 0 | 0 | — |
-| `formal/lean4/PvsNP` | padrão do elan | failed | 0 | 0 | 0 | 2 / 0 / 0 / 1 / 42 |
-| `src/lean4` | padrão do elan | failed | 0 | 0 | 0 | 33 / 0 / 29 / 0 / 62 |
+| `formal/lean4` | v4.36.0-rc2 | partial | 60 | 0 | 24 | — |
+| `formal/lean4/PvsNP` | v4.19.0 | OK | 14 | 0 | 0 | 6 / 0 / 29 / 1 / 6 |
+| `src/lean4` | padrão do elan | failed | 0 | 0 | 0 | 40 / 0 / 38 / 0 / 46 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 35 |
-| Unique (name + statement) | 33 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 32 |
+| Counting each project | 120 |
+| Unique (name + statement) | 98 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 55 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
+| `PvsNP.L_strictly_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.NPComplete_in_P_implies_P_eq_NP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.NP_eq_NP_verifier` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.NP_strictly_subset_NEXP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.NP_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.PSPACE_subset_EXP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_closed_complement` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_eq_NP_iff` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_eq_NP_iff_NPC_in_P` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_eq_P'` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_strictly_subset_EXP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_subset_NP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_subset_NP_inter_coNP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.P_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.SAT_NP_hard` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.SAT_in_NP` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.ThreeSAT_is_NPComplete` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.cook_levin` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.eq_of_SAT_in_P` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.eq_of_npc_in_p` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.manyOne_NP_closed` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.manyOne_P_closed` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.space_hierarchy` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.time_hierarchy` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.natural_proofs_insufficient` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.proof_must_not_algebrize` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_subset_Ppoly` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.sep_of_NP_not_in_Ppoly` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_eq_P'` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.NP_eq_NP_verifier` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_subset_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_closed_complement` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_subset_NP_inter_coNP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_eq_NP_iff` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.eq_of_npc_in_p` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_eq_NP_iff_NPC_in_P` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.time_hierarchy` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_strictly_subset_EXP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.space_hierarchy` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.L_strictly_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.NP_strictly_subset_NEXP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.P_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.NP_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.PSPACE_subset_EXP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.manyOne_P_closed` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.manyOne_NP_closed` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.NPComplete_in_P_implies_P_eq_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.SAT_in_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.SAT_NP_hard` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.cook_levin` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.eq_of_SAT_in_P` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.ThreeSAT_is_NPComplete` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.sep_of_stone` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.baker_gill_solovay` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.proof_must_not_relativize` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.natural_proofs_barrier` | `src/lean4 (file by file)` | open | `sorryAx` |
@@ -45,6 +98,13 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.NP_strictly_subset_NEXP` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.complexity_landscape` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.EXP_ne_NEXP_implies_P_ne_NP` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.PeqNP_from_SAT` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.PeqNP_from_SAT_detailed` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.PeqNP_from_SAT_explicit` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.P_neq_NP_implies_SAT_not_in_P` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.NPC_in_P_implies_P_eq_NP` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.P_eq_NP_from_3SAT` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.SAT_in_P_gives_universal_algorithm` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.PneqNP_from_NPnotPpoly` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.PneqNP_from_witness` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.PneqNP_from_NPnotPpoly_detailed` | `src/lean4 (file by file)` | open | `sorryAx` |
@@ -54,6 +114,8 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.P_eq_NP_implies_not_Stone` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.eq_of_NPC_in_P` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.P_eq_NP_iff_NPC_in_P` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.cook_levin` | `src/lean4 (file by file)` | open | `sorryAx` |
+| `PvsNP.eq_of_SAT_in_P` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.sep_of_stone` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.CLIQUE_candidate` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.PARITY_linear_lower_bound` | `src/lean4 (file by file)` | open | `sorryAx` |
@@ -61,11 +123,11 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `1990622af0a0c2ebcbe45
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 168 `theorem`/`lemma` (counting copies). The kernel checked 63 of them (34 closed, 0 conditional, 29 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 105 the kernel has no result:
+The `.lean` files of the verified commit declare 168 `theorem`/`lemma` (counting copies). The kernel checked 115 of them (48 closed, 0 conditional, 67 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 53 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 104 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 52 |
 | checked file by file: the written proof does not pass the kernel | 1 |
 
 ### MVEI corrections

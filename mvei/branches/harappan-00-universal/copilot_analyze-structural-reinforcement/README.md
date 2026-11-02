@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/analyze-structural-reinforcement` of the private repository `ShantiDraconis/harappan-00-universal`, commit `64b82486d5ffd14f5431b0b179607a845dfde773` (2026-02-28T18:55:50+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 11 — closed 10, conditional 0, open 0, proof error 1, not reached 0, no result 0.
+* Theorems only on branches, in this branch: 11 — closed 11, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `43725fe208f016296f8d34466e32e3cd50d2608d2d99a3c14039115df70b5344`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_analyze-structural-reinforcement/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `2187b4cab43430a57305e5d36a7edd6de14b62a27a763fc1b5ac963da34ea2ae`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_analyze-structural-reinforcement/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -20,5 +20,5 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `Harappan.M202.m202_no_projection` | `formal/lean/M202StructuralStability.lean`:171 | fechado |
 | `Harappan.M202.m202_prevents_collapse` | `formal/lean/M202StructuralStability.lean`:120 | fechado |
 | `Harappan.M202.m202_produces_reinforced` | `formal/lean/M202StructuralStability.lean`:108 | fechado |
-| `Harappan.M202.m202_redundancy_guarantee` | `formal/lean/M202StructuralStability.lean`:193 | erro |
+| `Harappan.M202.m202_redundancy_guarantee` | `formal/lean/M202StructuralStability.lean`:193 | fechado |
 | `Harappan.M202.m202_redundancy_two` | `formal/lean/M202StructuralStability.lean`:116 | fechado |
