@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-sara-ardente-connection` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 3 — closed 1, conditional 0, open 0, proof error 2, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `b10607ffcca22238dfd4582b7637e1076d8abce57870ee52674c24515b05490a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-sara-ardente-connection/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `b6ec01c48d5de24ee407fec603553261429f6cec886b56132f0272f0a5d5b540`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_add-sara-ardente-connection/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

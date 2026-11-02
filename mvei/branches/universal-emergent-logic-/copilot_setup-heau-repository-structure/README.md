@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/setup-heau-repository-structure` of the pr
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 7 — closed 7, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `699a935c7391e767a463b6a65961220d4cd810eed52f6e1655cf489b299e22ba`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-emergent-logic-/copilot_setup-heau-repository-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `df8c741b5b17115cbbe72ee723a5ad18e972c3361c18a0f997ad2f9a9ff55449`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-emergent-logic-/copilot_setup-heau-repository-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

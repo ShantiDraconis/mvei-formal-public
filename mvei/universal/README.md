@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T08:01:18+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T16:50:26+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | v4.19.0 | failed | 0 | 0 | 0 | 99 / 0 / 116 / 144 / 12 |
+| `.` | v4.19.0 | failed | 0 | 0 | 0 | 99 / 0 / 118 / 142 / 12 |
 
 | Closed theorems in this repository | |
 |---|---:|
@@ -107,6 +107,7 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `459428bdf95732b153401
 | `TaylorSeriesTheory.taylor_sin` | `. (file by file)` | open | `sorryAx` |
 | `TaylorSeriesTheory.taylor_cos` | `. (file by file)` | open | `sorryAx` |
 | `TaylorSeriesTheory.taylor_log` | `. (file by file)` | open | `sorryAx` |
+| `TaylorSeriesTheory.taylor_arctan` | `. (file by file)` | open | `sorryAx` |
 | `TaylorSeriesTheory.binomial_series` | `. (file by file)` | open | `sorryAx` |
 | `TaylorSeriesTheory.borel_sum_analytic` | `. (file by file)` | open | `sorryAx` |
 | `Integrals.dominated_convergence` | `. (file by file)` | open | `sorryAx` |
@@ -143,14 +144,15 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `459428bdf95732b153401
 | `RH_FullFormal.selberg_proportion` | `. (file by file)` | open | `sorryAx` |
 | `RH_FullFormal.rh_implies_lindelof` | `. (file by file)` | open | `sorryAx` |
 | `RH_FullFormal.rh_implies_prime_error` | `. (file by file)` | open | `sorryAx` |
+| `RH_FullFormal.rh_implies_prime_gaps` | `. (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting copies). The kernel checked 215 of them (99 closed, 0 conditional, 116 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 156 the kernel has no result:
+The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting copies). The kernel checked 217 of them (99 closed, 0 conditional, 118 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 154 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 144 |
+| checked file by file: the written proof does not pass the kernel | 142 |
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 12 |
 
 ### MVEI corrections

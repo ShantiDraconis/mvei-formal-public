@@ -23,9 +23,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-10-30T16:50:26+00:00",
   "lean": [
-   "padrão do elan"
+   "leanprover/lean4:v4.19.0"
   ],
   "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
   "standard_axioms": [
@@ -44,7 +44,7 @@
     "sorryAx",
     "xi"
    ],
-   "statement": ": deriv (EnergyFunctional T) (1/2 : ℝ) = 0"
+   "statement": "∀ (T : ℝ), deriv (EnergyFunctional T) (1 / 2) = 0"
   },
   {
    "name": "Framework_Depends_On_Law4",
@@ -55,7 +55,7 @@
     "sorryAx",
     "xi"
    ],
-   "statement": ": (∀ ρ : ℂ, ρ ∈ NonTrivialZeros → ρ.re ∈ GlobalMinima T) → (GlobalMinima T ≠ {1/2}) → ¬RiemannHypothesis"
+   "statement": "∀ (T : ℝ), (∀ ρ ∈ NonTrivialZeros, ρ.re ∈ GlobalMinima T) → GlobalMinima T ≠ {1 / 2} → ¬RiemannHypothesis"
   },
   {
    "name": "LocalPotential_nonneg",
@@ -65,7 +65,7 @@
    "axioms_beyond_standard": [
     "xi"
    ],
-   "statement": "(σ t : ℝ) : 0 ≤ LocalPotential T σ t"
+   "statement": "∀ (T σ t : ℝ), 0 ≤ LocalPotential T σ t"
   },
   {
    "name": "MostPlausibleRefutation",
@@ -76,7 +76,7 @@
     "sorryAx",
     "xi"
    ],
-   "statement": "(h_strict : ∃ σ₀ : ℝ, 0 < σ₀ ∧ σ₀ < 1 ∧ σ₀ ≠ 1/2 ∧ EnergyFunctional T σ₀ < EnergyFunctional T (1/2)) (h_link : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → EnergyFunctional T ρ.re = MinEnergy T) : ¬RiemannHypothesis"
+   "statement": "∀ (T : ℝ),   (∃ σ₀, 0 < σ₀ ∧ σ₀ < 1 ∧ σ₀ ≠ 1 / 2 ∧ EnergyFunctional T σ₀ < EnergyFunctional T (1 / 2)) →     (∀ ρ ∈ NonTrivialZeros, EnergyFunctional T ρ.re = MinEnergy T) → ¬RiemannHypothesis"
   },
   {
    "name": "RF1_MinimumOffCriticalLine",
@@ -87,7 +87,7 @@
     "sorryAx",
     "xi"
    ],
-   "statement": "(h_regularity : ∀ σ, 0 < σ → σ < 1 → EnergyFunctional T σ = EnergyFunctional T (1 - σ)) (h_displaced : ∃ σ₀ : ℝ, 0 < σ₀ ∧ σ₀ < 1 ∧ σ₀ ≠ 1/2 ∧ EnergyFunctional T σ₀ ≤ EnergyFunctional T (1/2)) (h_link : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → ρ.re ∈ GlobalMinima T) : ¬RiemannHypothesis"
+   "statement": "∀ (T : ℝ),   (∀ (σ : ℝ), 0 < σ → σ < 1 → EnergyFunctional T σ = EnergyFunctional T (1 - σ)) →     (∃ σ₀, 0 < σ₀ ∧ σ₀ < 1 ∧ σ₀ ≠ 1 / 2 ∧ EnergyFunctional T σ₀ ≤ EnergyFunctional T (1 / 2)) →       (∀ ρ ∈ NonTrivialZeros, ρ.re ∈ GlobalMinima T) → ¬RiemannHypothesis"
   },
   {
    "name": "RF2_NonPositiveCurvature",
@@ -98,7 +98,7 @@
     "sorryAx",
     "xi"
    ],
-   "statement": "(h_morse : ∀ σ t, 0 < σ → σ < 1 → (deriv (fun σ' => LocalPotential T σ' t) σ = 0 → deriv (deriv (fun σ' => LocalPotential T σ' t)) σ ≠ 0)) (h_curvature : deriv (deriv (EnergyFunctional T)) (1/2) ≤ 0) (h_zeros_stable : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → deriv (deriv (EnergyFunctional T)) ρ.re > 0) : ¬RiemannHypothesis"
+   "statement": "∀ (T : ℝ),   (∀ (σ t : ℝ),       0 < σ →         σ < 1 → deriv (fun σ' => LocalPotential T σ' t) σ = 0 → deriv (deriv fun σ' => LocalPotential T σ' t) σ ≠ 0) →     deriv (deriv (EnergyFunctional T)) (1 / 2) ≤ 0 →       (∀ ρ ∈ NonTrivialZeros, deriv (deriv (EnergyFunctional T)) ρ.re > 0) → ¬RiemannHypothesis"
   },
   {
    "name": "RF3_MultipleMinimalGeodesics",
@@ -109,7 +109,7 @@
     "sorryAx",
     "xi"
    ],
-   "statement": "(P : ℝ) (hP : P > 0) (h_multiple : ∃ γ₁ : ℝ → ℝ × ℝ, (∀ t, (γ₁ t).1 ≠ 1/2) ∧ GeodesicEnergy T γ₁ P ≤ GeodesicEnergy T CriticalGeodesic P) (h_zeros_on_minimal : ∀ ρ : ℂ, ρ ∈ NonTrivialZeros → ∃ γ, GeodesicEnergy T γ P = sInf { GeodesicEnergy T γ' P | γ' : ℝ → ℝ × ℝ } ∧ ρ.re = (γ 0).1) : ¬RiemannHypothesis"
+   "statement": "∀ (T P : ℝ),   P > 0 →     (∃ γ₁, (∀ (t : ℝ), (γ₁ t).1 ≠ 1 / 2) ∧ GeodesicEnergy T γ₁ P ≤ GeodesicEnergy T CriticalGeodesic P) →       (∀ ρ ∈ NonTrivialZeros, ∃ γ, GeodesicEnergy T γ P = sInf {x | ∃ γ', GeodesicEnergy T γ' P = x} ∧ ρ.re = (γ 0).1) →         ¬RiemannHypothesis"
   },
   {
    "name": "weight_nonneg",
@@ -117,7 +117,7 @@
    "line": 59,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∀ t : ℝ, 0 ≤ weight T t"
+   "statement": "∀ (T t : ℝ), 0 ≤ weight T t"
   },
   {
    "name": "weight_symmetric",
@@ -125,13 +125,13 @@
    "line": 53,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∀ t : ℝ, weight T t = weight T (-t)"
+   "statement": "∀ (T t : ℝ), weight T t = weight T (-t)"
   }
  ],
  "closed": 2,
  "files_sha256": {
   "RiemannRefutation.lean": "8a06042e3fd745849c7898110e7f25ae9008d4012e94f61027bdc7e045c8d0db"
  },
- "published_at": "2026-10-29T20:16:01Z",
- "certificate_sha256": "a2d397ef8e2b9278496b275a341fa9a932925aac6d3ddc3bf76c38391fe31abf"
+ "published_at": "2026-11-02T20:55:42Z",
+ "certificate_sha256": "023f1d528e25ed15e744341e2426ce88fe3f76ad51b21af0aaa71a71a2776368"
 }

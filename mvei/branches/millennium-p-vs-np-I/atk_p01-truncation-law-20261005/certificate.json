@@ -18,9 +18,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-10-30T16:50:26+00:00",
   "lean": [
-   "leanprover/lean4:stable"
+   "leanprover/lean4:v4.19.0"
   ],
   "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
   "standard_axioms": [
@@ -36,13 +36,13 @@
    "line": 57,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "{State : Type u} {Witness : Type v} {Frame : Type w} (w : ConcreteClosureWitness State Witness Frame) : Nonempty (ReadContract State Witness Frame)"
+   "statement": "∀ {State : Type u} {Witness : Type v} {Frame : Type w},   PreservingUnaryWitnessReadContract.ConcreteClosureWitness State Witness Frame →     Nonempty (PreservingUnaryWitnessReadContract.ReadContract State Witness Frame)"
   },
   {
    "name": "TruncationLaw.loop_requires_witness",
    "file": "formal/TruncationLaw.lean",
    "line": 67,
-   "state": "fechado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "{Block : Type u} {ConcreteClosureWitness : Type v} {IsBlocking : Block → Prop} (r : SearchResult Block ConcreteClosureWitness IsBlocking) (h : ∃ w, r = SearchResult.loopDetected w) : Nonempty ConcreteClosureWitness"
   },
@@ -50,29 +50,26 @@
    "name": "TruncationLaw.search_relation_wellFounded",
    "file": "formal/TruncationLaw.lean",
    "line": 36,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "{State : Type u} (s : WellFoundedSearch State) : WellFounded (fun a b => s.rank a < s.rank b)"
   },
   {
    "name": "TruncationLaw.truncate",
    "file": "formal/TruncationLaw.lean",
    "line": 51,
-   "state": "fechado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "{Block : Type u} {ConcreteClosureWitness : Type v} {Endpoint : Prop} {IsBlocking : Block → Prop} (rule : ClosureRule Block ConcreteClosureWitness Endpoint IsBlocking) (result : SearchResult Block ConcreteClosureWitness IsBlocking) : Endpoint"
   }
  ],
- "closed": 3,
+ "closed": 1,
  "files_sha256": {
   "formal/PreservingUnaryWitnessReadContract.lean": "a2b0f7ddbadd480d7807203d83e82048193f6df961c2c27b601b53356c781e07",
-  "formal/TruncationLaw.lean": "c708298f12cbdc60bd93527d231ab1ff13c0b7864100e33ecf0d7051ee9d5d40",
   "lake-manifest.json": "a28fc0acc6484617a4c5b8d41ae2caf7b9f1032017012af4f9fa187126011fa8",
   "lakefile.lean": "eac58114dfc0f420f0ac896cd45294be2383cc4c36ff84de9f296561eb4c8b26",
   "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415"
  },
- "published_at": "2026-10-29T20:16:01Z",
- "certificate_sha256": "8ef4187b89f542432e9e218b10646da6b89a9b91512bb469158ae999c498b7b0"
+ "published_at": "2026-11-02T20:55:42Z",
+ "certificate_sha256": "3c869ee554fde4fc11b64685e5a0cbdc95a32d5fa97209fa02ae56cceffc3156"
 }

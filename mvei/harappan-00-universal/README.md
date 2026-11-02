@@ -11,27 +11,32 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T08:01:18+00:00, on commit `1f57a02dcde2bad96265461e03daa0ab4c9ab798`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T16:50:26+00:00, on commit `1f57a02dcde2bad96265461e03daa0ab4c9ab798`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `INDUS-KERNEL-CORE/formal/lean` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 55 | 0 | 0 | — |
 | `Provas` | v4.3.0 | failed | 0 | 0 | 0 | 2 / 0 / 2 / 7 / 0 |
 | `docs/9_IMPLEMENTATION/lean` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 116 | 1 | 0 | — |
-| `formal/lean` | v4.3.0 | partial | 538 | 3 | 0 | 74 / 14 / 15 / 61 / 38 |
-| `src/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 229 | 6 | 0 | 11 / 1 / 0 / 5 / 0 |
+| `formal/lean` | v4.3.0 | partial | 567 | 3 | 5 | 72 / 16 / 6 / 55 / 46 |
+| `src/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 230 | 6 | 0 | 11 / 1 / 0 / 5 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 1 025 |
-| Unique (name + statement) | 926 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 295 |
+| Counting each project | 1 053 |
+| Unique (name + statement) | 954 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 296 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `domain_collapse_consistency` | `docs/9_IMPLEMENTATION/lean` | conditional | `domain_collapse_consistency_axiom` |
+| `Harappan.closure_on_entity_certified` | `formal/lean` | open | `sorryAx` |
+| `Harappan.closure_preserves_structure` | `formal/lean` | open | `sorryAx` |
+| `Harappan.compositional_sign_valid` | `formal/lean` | open | `sorryAx` |
+| `Harappan.entity_modifies_state` | `formal/lean` | open | `sorryAx` |
+| `Harappan.execution_is_composition` | `formal/lean` | open | `sorryAx` |
 | `authorized_requires_quantity_orig` | `formal/lean` | conditional | `commits_are_well_formed` |
 | `domain_collapse_consistency` | `formal/lean` | conditional | `domain_collapse_consistency_axiom` |
 | `final_implies_validated_orig` | `formal/lean` | conditional | `commits_are_well_formed` |
@@ -57,31 +62,24 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `1f57a02dcde2bad962654
 | `state_transition_bidirection_invariant` | `formal/lean (file by file)` | conditional | `Glyph` |
 | `corpus_validates_bidirectional` | `formal/lean (file by file)` | conditional | `Glyph` |
 | `hscs_is_formal_certification_system` | `formal/lean (file by file)` | conditional | `state_certification`, `verbal_absence_temporal` |
-| `collapse_determines_orientation` | `formal/lean (file by file)` | open | `sorryAx` |
 | `selfExecution` | `formal/lean (file by file)` | conditional | `Entity`, `Object`, `Symbol`, `parse` |
 | `stateTransitionDeterministic` | `formal/lean (file by file)` | conditional | `Entity`, `Object`, `Symbol`, `parse` |
 | `commitImpliesValid` | `formal/lean (file by file)` | conditional | `Entity`, `Object` |
 | `closureValidates` | `formal/lean (file by file)` | conditional | `Entity`, `Object` |
 | `ledgerGrows` | `formal/lean (file by file)` | conditional | `Entity`, `Object`, `Symbol`, `parse` |
-| `Harappan.closure_preserves_structure` | `formal/lean (file by file)` | open | `sorryAx` |
-| `Harappan.entity_modifies_state` | `formal/lean (file by file)` | open | `sorryAx` |
-| `Harappan.sign394_deterministic` | `formal/lean (file by file)` | open | `sorryAx` |
-| `Harappan.closure_on_entity_certified` | `formal/lean (file by file)` | open | `sorryAx` |
-| `Harappan.compositional_sign_valid` | `formal/lean (file by file)` | open | `sorryAx` |
-| `Harappan.execution_is_composition` | `formal/lean (file by file)` | open | `sorryAx` |
-| `UFamilyClosure.proto_juridical` | `formal/lean (file by file)` | open | `sorryAx` |
+| `inscriptionOrdering` | `formal/lean (file by file)` | conditional | `Entity`, `Object`, `Symbol`, `parse` |
+| `compositionValid` | `formal/lean (file by file)` | conditional | `Entity`, `Object` |
 | `UFamilyClosure.automaton_correct` | `formal/lean (file by file)` | open | `sorryAx` |
-| `UFamilyClosure.ufamily_complete_closure_system` | `formal/lean (file by file)` | open | `sorryAx` |
 | `Harappan.SemanticAxioms.universal_meaning_axiom` | `src/lean (file by file)` | conditional | `Harappan.SemanticAxioms.concept_valid_archetype` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 442 `theorem`/`lemma` (counting copies). The kernel checked 334 of them (292 closed, 25 conditional, 17 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 108 the kernel has no result:
+The `.lean` files of the verified commit declare 442 `theorem`/`lemma` (counting copies). The kernel checked 332 of them (292 closed, 27 conditional, 13 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 110 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 73 |
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 35 |
+| checked file by file: the written proof does not pass the kernel | 67 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 43 |
 
 ### MVEI corrections
 

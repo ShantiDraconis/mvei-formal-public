@@ -11,25 +11,25 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-10-30T16:50:26+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 128 | 2 | 5 | 18 / 6 / 18 / 19 / 10 |
-| `formal/lean` | v4.19.0 | partial | 62 | 18 | 2 | 6 / 2 / 23 / 10 / 30 |
+| `formal/lean` | v4.19.0 | partial | 79 | 18 | 2 | 6 / 2 / 22 / 8 / 30 |
 | `formal/theorems` | v4.12.0 | failed | 0 | 0 | 0 | 3 / 3 / 0 / 0 / 1 |
-| `lean` | v4.19.0 | partial | 80 | 9 | 4 | 6 / 9 / 11 / 6 / 5 |
-| `lean4` | v4.12.0 | partial | 386 | 6 | 6 | 75 / 20 / 112 / 75 / 48 |
+| `lean` | v4.19.0 | partial | 81 | 9 | 7 | 8 / 9 / 8 / 5 / 5 |
+| `lean4` | v4.12.0 | partial | 432 | 6 | 6 | 76 / 21 / 112 / 71 / 48 |
 | `rh-umi-invariant/formal/lean` | v4.12.0 | OK | 0 | 2 | 0 | — |
 | `src/lean` | v4.19.0 | partial | 13 | 0 | 1 | 5 / 4 / 0 / 6 / 21 |
 | `src/lean4` | v4.3.0 | partial | 3 | 0 | 0 | 5 / 0 / 4 / 1 / 33 |
-| `universe00` | v4.19.0 | partial | 31 | 0 | 0 | 3 / 0 / 0 / 1 / 11 |
+| `universe00` | v4.19.0 | partial | 32 | 0 | 0 | 3 / 0 / 0 / 1 / 11 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 824 |
-| Unique (name + statement) | 822 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 218 |
+| Counting each project | 892 |
+| Unique (name + statement) | 890 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 229 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -74,7 +74,10 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5c5ec3d9597f5ffd00210
 | `RHPvsNP.off_line_dominates` | `lean` | open | `sorryAx` |
 | `RHPvsNP.p_subset_np` | `lean` | open | `sorryAx` |
 | `RHPvsNP.scenario_gap_connection` | `lean` | open | `sorryAx` |
+| `RiemannHypothesis.off_line_contribution_dominates` | `lean` | open | `sorryAx` |
 | `RiemannHypothesis.p_eq_np_implies_f_np_bounded` | `lean` | open | `sorryAx` |
+| `RiemannHypothesis.primes_dont_let` | `lean` | open | `sorryAx` |
+| `RiemannHypothesis.zero_contribution_magnitude` | `lean` | open | `sorryAx` |
 | `GapUniversal.gap_implies_undeterminable` | `lean4` | open | `sorryAx` |
 | `LocalGlobal.Instances.PvsNP.gap_nonneg` | `lean4` | conditional | `LocalGlobal.Instances.PvsNP.det_ge_ndet` |
 | `Millennium.Delta.IClass.mk.inj` | `lean4` | conditional | `Millennium.Delta.I` |
@@ -124,7 +127,6 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5c5ec3d9597f5ffd00210
 | `Millennium.local_to_global_adequacy` | `formal/lean (file by file)` | conditional | `Millennium.Adequate`, `Millennium.AdequateGlobal_iff`, `Millennium.AdequateP` |
 | `PvsNP.Bridge.cook_levin` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.bridge_theorem_separation` | `formal/lean (file by file)` | open | `sorryAx` |
-| `PvsNP.Bridge.relativization_barrier` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.P_subset_NP` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.time_hierarchy` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.NP_subset_PSPACE` | `formal/lean (file by file)` | open | `sorryAx` |
@@ -153,9 +155,6 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5c5ec3d9597f5ffd00210
 | `image_in_fiber` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
 | `RH_implies_all_poly` | `lean (file by file)` | conditional | `Phi`, `balance_zero`, `delta_NP` |
 | `balance_well_defined` | `lean (file by file)` | conditional | `Phi`, `delta_NP` |
-| `RiemannHypothesis.zero_contribution_magnitude` | `lean (file by file)` | open | `sorryAx` |
-| `RiemannHypothesis.off_line_contribution_dominates` | `lean (file by file)` | open | `sorryAx` |
-| `RiemannHypothesis.primes_dont_let` | `lean (file by file)` | open | `sorryAx` |
 | `RiemannHypothesis.definitional_results_invariant` | `lean (file by file)` | open | `sorryAx`, `RiemannHypothesis.Ax_B` |
 | `RiemannHypothesis.t2_has_rh` | `lean (file by file)` | conditional | `RiemannHypothesis.Ax_B` |
 | `RiemannHypothesis.t2_has_p_neq_np` | `lean (file by file)` | conditional | `RiemannHypothesis.Ax_B` |
@@ -185,16 +184,17 @@ MVEI verification of 2026-10-30T08:01:18+00:00, on commit `5c5ec3d9597f5ffd00210
 | `DeltaGap44.severe_obstruction_threshold` | `lean4 (file by file)` | open | `sorryAx` |
 | `DeltaGap44.no_strong_solution_classical` | `lean4 (file by file)` | open | `sorryAx` |
 | `DeltaGap44.structural_impossibility` | `lean4 (file by file)` | open | `sorryAx` |
+| `MillenniumFramework.BSD_bridge_characterization` | `lean4 (file by file)` | open | `sorryAx` |
 | … 117 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 409 of them (168 closed, 57 conditional, 184 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 278 the kernel has no result:
+The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 411 of them (170 closed, 58 conditional, 183 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 276 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 158 |
-| checked file by file: the written proof does not pass the kernel | 110 |
+| checked file by file: the written proof does not pass the kernel | 108 |
 | the file did not compile (an error in it or in a file it imports) | 5 |
 | the file compiled, but the name did not appear in the kernel (private, mutual or macro-generated) | 5 |
 
@@ -202,7 +202,7 @@ The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 20 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 23 file(s)): made for the verified commit; it does not apply to the published commit as is
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 11 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 12 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 222 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 27 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/zz-refutacoes.patch` (in order, after the ones above)

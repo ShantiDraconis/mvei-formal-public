@@ -33,7 +33,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-10-30T16:50:26+00:00",
   "lean": [
    "leanprover/lean4:v4.15.0"
   ],
@@ -51,17 +51,15 @@
    "line": 112,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(species : AcaciaSpecies) : dmt_content species > 0"
+   "statement": "∀ (species : MishkanIII.Chemistry.AcaciaSpecies), MishkanIII.Chemistry.dmt_content species > 0"
   },
   {
    "name": "MishkanIII.Chemistry.ark_dmt_resonance",
    "file": "MishkanIII/Chemistry.lean",
    "line": 148,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
-   "statement": ": field_interaction ark_field dmt_pure % 320 = 0"
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "MishkanIII.Chemistry.field_interaction MishkanIII.Chemistry.ark_field MishkanIII.Chemistry.dmt_pure % 320 = 0"
   },
   {
    "name": "MishkanIII.Chemistry.ark_properly_configured",
@@ -69,7 +67,7 @@
    "line": 282,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ark_hardware.molecule = dmt_pure ∧ ark_hardware.field.frequency = 320 ∧ dmt_content ark_hardware.source > 0"
+   "statement": "MishkanIII.Chemistry.ark_hardware.molecule = MishkanIII.Chemistry.dmt_pure ∧   MishkanIII.Chemistry.ark_hardware.field.frequency = 320 ∧     MishkanIII.Chemistry.dmt_content MishkanIII.Chemistry.ark_hardware.source > 0"
   },
   {
    "name": "MishkanIII.Chemistry.dmt_high_affinity",
@@ -77,27 +75,23 @@
    "line": 210,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": dmt_5ht2a_binding.affinity < 10"
+   "statement": "MishkanIII.Chemistry.dmt_5ht2a_binding.affinity < 10"
   },
   {
    "name": "MishkanIII.Chemistry.dmt_oxide_weight",
    "file": "MishkanIII/Chemistry.lean",
    "line": 56,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
-   "statement": ": molecular_weight dmt_oxide = 204"
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "MishkanIII.Chemistry.molecular_weight MishkanIII.Chemistry.dmt_oxide = 204"
   },
   {
    "name": "MishkanIII.Chemistry.dmt_preserved_3000_years",
    "file": "MishkanIII/Chemistry.lean",
    "line": 249,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
-   "statement": ": dmt_preservation 3000 1 ≥ 70"
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "MishkanIII.Chemistry.dmt_preservation 3000 1 ≥ 70"
   },
   {
    "name": "MishkanIII.Chemistry.dmt_preserved_excellent",
@@ -105,17 +99,15 @@
    "line": 241,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(years : Nat) : dmt_preservation years 2 = 100"
+   "statement": "∀ (years : ℕ), MishkanIII.Chemistry.dmt_preservation years 2 = 100"
   },
   {
    "name": "MishkanIII.Chemistry.dmt_weight",
    "file": "MishkanIII/Chemistry.lean",
    "line": 49,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
-   "statement": ": molecular_weight dmt_pure = 188"
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "MishkanIII.Chemistry.molecular_weight MishkanIII.Chemistry.dmt_pure = 188"
   },
   {
    "name": "MishkanIII.Chemistry.oxidation_produces_oxide",
@@ -123,7 +115,7 @@
    "line": 85,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": apply_transition dmt_pure OxygenTransition.state0_to_state1 = dmt_oxide"
+   "statement": "MishkanIII.Chemistry.apply_transition MishkanIII.Chemistry.dmt_pure     MishkanIII.Chemistry.OxygenTransition.state0_to_state1 =   MishkanIII.Chemistry.dmt_oxide"
   },
   {
    "name": "MishkanIII.Chemistry.yishai_in_vibrations",
@@ -131,13 +123,13 @@
    "line": 180,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": dmt_cn_stretch.wavenumber = 320 ∧ dmt_ring_deform.wavenumber = 320"
+   "statement": "MishkanIII.Chemistry.dmt_cn_stretch.wavenumber = 320 ∧ MishkanIII.Chemistry.dmt_ring_deform.wavenumber = 320"
   },
   {
    "name": "MishkanIII.Examples.all_temples_share_signature",
    "file": "MishkanIII/Examples.lean",
    "line": 148,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ t ∈ temple_network, t.foundation.identifier = \" \""
   },
@@ -145,7 +137,7 @@
    "name": "MishkanIII.Examples.default_meets_all_requirements",
    "file": "MishkanIII/Examples.lean",
    "line": 189,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": ": default_foundation.identifier = \" \" ∧ default_foundation.botany = \" \" ∧ default_foundation.archaeology = \" \" ∧ default_foundation.legal_status = \" \""
   },
@@ -153,7 +145,7 @@
    "name": "MishkanIII.Examples.foundation_has_protection",
    "file": "MishkanIII/Examples.lean",
    "line": 177,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ (f : Foundation), f.identifier = \" \" → ∃ (layers : Nat), layers > 0"
   },
@@ -161,7 +153,7 @@
    "name": "MishkanIII.Examples.validate_complete_foundation",
    "file": "MishkanIII/Examples.lean",
    "line": 101,
-   "state": "nao_alcancado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": ": ∃ (f : Foundation), f.identifier = \" \" ∧ is_immutable f.botany ∧ f.archaeology = \" \" ∧ f.legal_status = \" \""
   },
@@ -169,17 +161,15 @@
    "name": "MishkanIII.Operators.hakal_boundary_divides",
    "file": "MishkanIII/Operators.lean",
    "line": 64,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(n : Nat) [h : HakalSpace α] : (n * h.boundary) % h.boundary = 0"
   },
   {
    "name": "MishkanIII.Operators.hakal_boundary_positive",
    "file": "MishkanIII/Operators.lean",
    "line": 56,
-   "state": "fechado",
+   "state": "nao_checado",
    "axioms_beyond_standard": [],
    "statement": "[h : HakalSpace α] : h.boundary > 0"
   },
@@ -187,131 +177,105 @@
    "name": "MishkanIII.Operators.harmonic_closed_under_addition",
    "file": "MishkanIII/Operators.lean",
    "line": 136,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(f1 f2 : Nat) : is_harmonic f1 → is_harmonic f2 → is_harmonic (f1 + f2)"
   },
   {
    "name": "MishkanIII.Operators.harmonic_closed_under_multiplication",
    "file": "MishkanIII/Operators.lean",
    "line": 143,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(f : Nat) (n : Nat) : is_harmonic f → is_harmonic (n * f)"
   },
   {
    "name": "MishkanIII.Operators.network_maintains_harmony",
    "file": "MishkanIII/Operators.lean",
    "line": 159,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(t : Nat) : is_harmonic (network_growth t)"
   },
   {
    "name": "MishkanIII.Operators.protected_preserves_signature",
    "file": "MishkanIII/Operators.lean",
    "line": 90,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "[h : HakalSpace α] (pk : ProtectedKnowledge α) : pk.total % h.boundary = 0"
   },
   {
    "name": "MishkanIII.Operators.sod_assoc",
    "file": "MishkanIII/Operators.lean",
    "line": 40,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(a b : Nat) : sod_multiply Nat (a * b) = a * sod_multiply Nat b"
   },
   {
    "name": "MishkanIII.Operators.sod_preserves_signature",
    "file": "MishkanIII/Operators.lean",
    "line": 48,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "(n : Nat) : sod_multiply Nat n % 320 = 0"
   },
   {
    "name": "MishkanIII.Operators.yeshu_necessarily_protected",
    "file": "MishkanIII/Operators.lean",
    "line": 119,
-   "state": "aberto-sorry",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": "[h : HakalSpace α] : ∀ (pk : ProtectedKnowledge α), pk.total % h.boundary = 0"
   },
   {
    "name": "MishkanIII.default_foundation_valid",
    "file": "MishkanIII/Foundation/ThesisBase.lean",
    "line": 178,
-   "state": "condicional",
-   "axioms_beyond_standard": [
-    "MishkanIII.infinite_protection_of_yeshu"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": ": is_immutable default_foundation.botany"
   },
   {
    "name": "MishkanIII.harappan_continuity",
    "file": "MishkanIII/Foundation/ThesisBase.lean",
    "line": 112,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": ": ∀ (f : Foundation), f.archaeology = \" \" → ∃ (temples : Nat), temples > 0"
   },
   {
    "name": "MishkanIII.matter_spirit_inseparability",
    "file": "MishkanIII/Foundation/ThesisBase.lean",
    "line": 145,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "MishkanIII.infinite_protection_of_yeshu",
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": ": ∀ (f : Foundation), f.identifier = \" \" → is_immutable f.botany ∧ f.archaeology = \" \" ∧ f.legal_status = \" \""
   },
   {
    "name": "MishkanIII.religious_sovereignty",
    "file": "MishkanIII/Foundation/ThesisBase.lean",
    "line": 127,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": ": ∀ (f : Foundation), f.legal_status = \" \" → f.identifier = \" \" → ∃ (protection : String), protection = \" \""
   },
   {
    "name": "MishkanIII.thesis_is_unbreakable",
    "file": "MishkanIII/Foundation/ThesisBase.lean",
    "line": 58,
-   "state": "condicional",
-   "axioms_beyond_standard": [
-    "MishkanIII.infinite_protection_of_yeshu"
-   ],
+   "state": "nao_checado",
+   "axioms_beyond_standard": [],
    "statement": ": ∀ (f : Foundation), f.identifier = \" \" → is_immutable f.botany"
   }
  ],
- "closed": 7,
+ "closed": 10,
  "files_sha256": {
   "MishkanIII/Chemistry.lean": "88dfb67dfae5bec8f91b496d7ad30123e2f6b2872f1485f6aff516f25e9cc674",
-  "MishkanIII/Operators.lean": "71dd0be04d2ffd79080dfdaf1bfb5f32a70aca0b74fdaaded33dd86e0fbd0b5d",
   "lakefile.lean": "bfc09d15c4e829c8ad296f2b76357757f01b8321fb4ebbcfcc68a97252622213",
   "lean-toolchain": "aff3a276fcd1daa6f311e07baf168d5c0c89a3ddad4cd4e8de3e2ec779504e46"
  },
- "published_at": "2026-10-29T20:16:02Z",
- "certificate_sha256": "fcf93b983b773472744b740e37dd6609b8f55395989d04de7840801e8c8ba6fc"
+ "published_at": "2026-11-02T20:55:43Z",
+ "certificate_sha256": "7db0f52fe523a5c69ed38c741e96a57b89ac8d564a394682781f2b44b358f2fc"
 }
