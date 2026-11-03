@@ -465,7 +465,7 @@
  /-- Existence of flow for ODE (via inverse function theorem). -/
 --- a/lean4/Core/Analysis/Calculus/Jacobians.lean
 +++ b/lean4/Core/Analysis/Calculus/Jacobians.lean
-@@ -21,6 +21,12 @@
+@@ -21,6 +21,14 @@
  import Mathlib.Analysis.Calculus.FDeriv.Basic
  import Mathlib.Analysis.Calculus.ContDiff.Basic
  import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
@@ -473,6 +473,8 @@
 +import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 +import Mathlib.Analysis.Calculus.ContDiff.Defs
 +import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.LinearAlgebra.Matrix.Symmetric
++import Mathlib.MeasureTheory.Integral.Bochner.Basic
 +
 +noncomputable section
  
@@ -504,7 +506,7 @@
  
 --- a/lean4/Core/Analysis/Calculus/TaylorSeries.lean
 +++ b/lean4/Core/Analysis/Calculus/TaylorSeries.lean
-@@ -21,6 +21,16 @@
+@@ -21,6 +21,17 @@
  import Mathlib.Analysis.Calculus.Taylor
  import Mathlib.Analysis.Analytic.Basic
  import Mathlib.Analysis.SpecialFunctions.Pow.Real
@@ -515,13 +517,14 @@
 +import Mathlib.Data.Nat.Factorial.Basic
 +import Mathlib.Data.Complex.Basic
 +import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
++import Mathlib.MeasureTheory.Integral.Bochner.Basic
 +open scoped NNReal
 +
 +noncomputable section
  
  namespace TaylorSeriesTheory
  
-@@ -209,7 +219,7 @@
+@@ -209,7 +220,7 @@
  /-! ## 10. Borel Summation -/
  
  /-- A formal power series. -/
@@ -632,17 +635,18 @@
  
 --- a/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
 +++ b/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
-@@ -20,6 +20,9 @@
+@@ -20,6 +20,10 @@
  import Mathlib.Analysis.Normed.Module.Basic
  import Mathlib.Analysis.InnerProductSpace.Basic
  import Mathlib.Analysis.InnerProductSpace.Projection
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
++open scoped InnerProductSpace
 +
 +noncomputable section
  
  namespace HilbertSpaces
  
-@@ -161,10 +164,10 @@
+@@ -161,10 +165,10 @@
  /-- A Hilbert space is a complete inner product space. -/
  class HilbertSpace' (E : Type*) extends InnerProductSpace ℝ E, CompleteSpace E
  
@@ -655,7 +659,7 @@
  -- The space of square-integrable functions
  
  /-! ## 3. Orthogonality -/
-@@ -385,10 +388,10 @@
+@@ -385,10 +389,10 @@
  /-- Spectral theorem for compact self-adjoint operators. -/
  theorem spectral_theorem_compact {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
      (T : E →L[ℝ] E) (hT : IsCompactOperator' T) (hsa : IsSelfAdjoint' T) :
@@ -671,17 +675,18 @@
  end HilbertSpaces
 --- a/lean4/Core/Analysis/MeasureTheory/Integrals.lean
 +++ b/lean4/Core/Analysis/MeasureTheory/Integrals.lean
-@@ -19,6 +19,9 @@
+@@ -19,6 +19,10 @@
  import Mathlib.MeasureTheory.Measure.MeasureSpace
  import Mathlib.MeasureTheory.Integral.Bochner
  import Mathlib.MeasureTheory.Integral.Lebesgue
++import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 +open scoped ENNReal Topology
 +
 +noncomputable section
  
  namespace Integrals
  
-@@ -118,7 +121,7 @@
+@@ -118,7 +122,7 @@
  
  /-! ## 6. Vector-Valued Integration -/
  

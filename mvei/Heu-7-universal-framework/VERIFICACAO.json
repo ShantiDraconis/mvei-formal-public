@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T16:50:26+00:00",
+ "generated_at": "2026-11-03T08:19:01+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": true,
    "build_ok": false,
-   "build_seconds": 1.2,
+   "build_seconds": 1.4,
    "build_error": "error: HEU/HEU_Main.lean:20:0: unknown module prefix 'HEU' | error: build failed",
    "sorry_warnings": 6,
    "reconstructed": true,
@@ -137,13 +137,15 @@
      "arquivo": "src/lean/HEU/Automation/AICompletion.lean",
      "linha": 27,
      "nome": "HEU.Automation.auto_fill",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
       "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
       "HEU.Core.ZF.Classical"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Core/Functional/Criticality.lean",
@@ -161,59 +163,74 @@
      "arquivo": "src/lean/HEU/Core/Functional/LTC.lean",
      "linha": 81,
      "nome": "HEU.Core.LTC.completeness",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Core/Functional/LTC.lean",
      "linha": 85,
      "nome": "HEU.Core.LTC.soundness",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Core/Functional/LTC.lean",
      "linha": 96,
      "nome": "HEU.Core.LTC.ltc_extends_classical",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "sorryAx"
+     ],
      "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
       "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
       "HEU.Core.ZF.Classical"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "erro": "linha 100: ambiguous, possible interpretations _root_.em P : P ∨ ¬P ZF.em P : P ∨ ¬P",
+     "coluna": 8,
+     "trecho": "  exact ⟦e⟧m P",
+     "motivo": "importa HEU.Core.Functional.Criticality, HEU.Core.Functional.Functional, HEU.Core.Functional.Operators, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/HEU/Core/Functional/UBO.lean",
      "linha": 91,
      "nome": "HEU.Core.UBO.equilibrium_iff_valid",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Core/Functional/UBO.lean",
      "linha": 96,
      "nome": "HEU.Core.UBO.equilibrium_transitive",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Core/ZF/Classical.lean",
@@ -271,57 +288,77 @@
      "arquivo": "src/lean/HEU/Cross/CollapseAnalysis.lean",
      "linha": 40,
      "nome": "HEU.Cross.collapse_monotonic",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Cross/CollapseAnalysis.lean",
      "linha": 54,
      "nome": "HEU.Cross.collapse_iff_valid",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Cross/MetaEquivalence.lean",
      "linha": 40,
      "nome": "HEU.Cross.ubo_validity_uniform",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS",
+      "HEU.Problems.PvsNP.Critical_PNP",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Cross/OrdinalComparisons.lean",
      "linha": 45,
      "nome": "HEU.Cross.critical_equality",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/O_RH.olean' of module HEU.Problems.RH.O_RH does not exist — HEU.Problems.RH.O_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/O_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Cross/UniversalDiagrams.lean",
      "linha": 78,
      "nome": "HEU.Cross.all_implies_universal",
      "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ],
+     "erro": "linha 86: function expected at hRH term has type RH_equilibrium",
+     "coluna": 22,
+     "trecho": "  | fromRH x => exact ⟦h⟧RH x",
+     "motivo": "importa HEU.Core.Functional.Criticality, HEU.Core.Functional.Functional, HEU.Core.Functional.Operators, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/HEU/HEU_Main.lean",
@@ -330,648 +367,902 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "HEU.Automation.AutoProve",
+      "HEU.Core.Functional.Criticality",
       "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
       "HEU.Core.ZF.Classical",
-      "HEU.Core.ZF.Encodings"
+      "HEU.Core.ZF.Encodings",
+      "HEU.Cross.UniversalDiagrams",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.Lemmas_NS",
+      "HEU.Problems.NS.X_NS",
+      "HEU.Problems.PvsNP.Critical_PNP",
+      "HEU.Problems.RH.Critical_RH",
+      "HEU.Problems.YM.YM"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+     "motivo": "object file '/tmp/mvei-rec-e1m39nuv/p/.lake/mvei-salvage/HEU/Problems/RH/Lemmas_RH.olean' of module HEU.Problems.RH.Lemmas_RH does not exist — HEU.Problems.RH.Lemmas_RH não compilou: /tmp/mvei-rec-e1m39nuv/p/HEU/Problems/RH/Lemmas_RH.lean:45:0: error: type of theorem 'HEU.Problems.RH.equilibrium_decidable' is not a proposition"
     },
     {
      "arquivo": "src/lean/HEU/Problems/BSD/BSD.lean",
      "linha": 68,
      "nome": "HEU.Problems.BSD.BSD_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/Hodge/Hodge.lean",
      "linha": 69,
      "nome": "HEU.Problems.Hodge.Hodge_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Critical_NS.lean",
      "linha": 42,
      "nome": "HEU.Problems.NS.smooth_is_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Critical_NS.lean",
      "linha": 47,
      "nome": "HEU.Problems.NS.blowup_is_subcritical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
      "linha": 22,
      "nome": "HEU.Problems.NS.NS_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
      "linha": 37,
      "nome": "HEU.Problems.NS.NS_LTC_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
      "linha": 42,
      "nome": "HEU.Problems.NS.UBO_valid_implies_NS",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
      "linha": 48,
      "nome": "HEU.Problems.NS.NS_implies_UBO_valid",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
      "linha": 58,
      "nome": "HEU.Problems.NS.NS_UBO_biequiv_proof",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/F_NS.lean",
      "linha": 26,
      "nome": "HEU.Problems.NS.F_NS_smooth_higher",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/F_NS.lean",
      "linha": 31,
      "nome": "HEU.Problems.NS.F_NS_bounded",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
      "linha": 17,
      "nome": "HEU.Problems.NS.energy_conservation",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
       "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
      "linha": 22,
      "nome": "HEU.Problems.NS.enstrophy_bounds_regularity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
      "linha": 27,
      "nome": "HEU.Problems.NS.F_NS_preserves_order",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
      "linha": 33,
      "nome": "HEU.Problems.NS.O_NS_reflects_smooth",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
      "linha": 38,
      "nome": "HEU.Problems.NS.divergenceFree_helps",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Lemmas_NS.lean",
      "linha": 43,
      "nome": "HEU.Problems.NS.high_reynolds_difficulty",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/NS/X_NS.olean' of module HEU.Problems.NS.X_NS does not exist — HEU.Problems.NS.X_NS não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/NS/X_NS.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.NS.Critical_NS",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/O_NS.lean",
      "linha": 43,
      "nome": "HEU.Problems.NS.NS_equilibrium_iff_NS",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/O_NS.lean",
      "linha": 48,
      "nome": "HEU.Problems.NS.O_NS_zero_for_smooth",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/O_NS.lean",
      "linha": 53,
      "nome": "HEU.Problems.NS.O_NS_negative_for_blowup",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators",
+      "HEU.Problems.NS.X_NS"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Critical_PNP.lean",
      "linha": 36,
      "nome": "HEU.Problems.PvsNP.poly_is_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Critical_PNP.lean",
      "linha": 41,
      "nome": "HEU.Problems.PvsNP.NPComplete_determines_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
      "linha": 25,
      "nome": "HEU.Problems.PvsNP.PNP_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
      "linha": 40,
      "nome": "HEU.Problems.PvsNP.PNP_LTC_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
      "linha": 45,
      "nome": "HEU.Problems.PvsNP.SAT_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
      "linha": 50,
      "nome": "HEU.Problems.PvsNP.UBO_valid_implies_P_eq_NP",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
      "linha": 56,
      "nome": "HEU.Problems.PvsNP.P_eq_NP_implies_UBO_valid",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean",
      "linha": 66,
      "nome": "HEU.Problems.PvsNP.PNP_UBO_biequiv_proof",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
      "linha": 31,
      "nome": "HEU.Problems.PvsNP.F_PNP_monotone",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
      "linha": 37,
      "nome": "HEU.Problems.PvsNP.F_PNP_max_poly",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
      "linha": 42,
      "nome": "HEU.Problems.PvsNP.F_PNP_bounded",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/F_PNP.lean",
      "linha": 57,
      "nome": "HEU.Problems.PvsNP.F_PNP_reflects_gap",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
      "linha": 19,
      "nome": "HEU.Problems.PvsNP.P_subset_NP",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
       "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
      "linha": 24,
      "nome": "HEU.Problems.PvsNP.NPComplete_reduction",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
      "linha": 30,
      "nome": "HEU.Problems.PvsNP.F_PNP_preserves_order",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
      "linha": 36,
      "nome": "HEU.Problems.PvsNP.O_PNP_reflects_P",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
      "linha": 41,
      "nome": "HEU.Problems.PvsNP.SAT_hardest",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/Lemmas_PNP.lean",
      "linha": 46,
      "nome": "HEU.Problems.PvsNP.one_NPComplete_in_P",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/PvsNP/X_PNP.olean' of module HEU.Problems.PvsNP.X_PNP does not exist — HEU.Problems.PvsNP.X_PNP não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/PvsNP/X_PNP.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.PvsNP.Critical_PNP"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
      "linha": 44,
      "nome": "HEU.Problems.PvsNP.PNP_equilibrium_iff_P_eq_NP",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
      "linha": 49,
      "nome": "HEU.Problems.PvsNP.O_PNP_zero_for_P",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
      "linha": 54,
      "nome": "HEU.Problems.PvsNP.O_PNP_negative_for_exp",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/PvsNP/O_PNP.lean",
      "linha": 59,
      "nome": "HEU.Problems.PvsNP.O_PNP_NP_complete",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Critical_RH.lean",
      "linha": 61,
      "nome": "HEU.Problems.RH.RH_implies_full_density",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist — HEU.Core.Functional.Criticality não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:22:24: error: type expected, got | /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/Criticality.lean:26:53: error: unknown constant 'HEU.Core.Functional.CriticalThreshold.mk._flat_ctor'"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
      "linha": 25,
      "nome": "HEU.Problems.RH.RH_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
      "linha": 40,
      "nome": "HEU.Problems.RH.RH_LTC_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
      "linha": 58,
      "nome": "HEU.Problems.RH.UBO_valid_implies_RH",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
      "linha": 64,
      "nome": "HEU.Problems.RH.RH_implies_UBO_valid",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Equivalence_RH.lean",
      "linha": 74,
      "nome": "HEU.Problems.RH.RH_UBO_biequiv_proof",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/F_RH.lean",
      "linha": 33,
      "nome": "HEU.Problems.RH.F_RH_monotone",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/F_RH.lean",
      "linha": 39,
      "nome": "HEU.Problems.RH.F_RH_max_on_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/F_RH.lean",
      "linha": 45,
      "nome": "HEU.Problems.RH.F_RH_bounded",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 20,
      "nome": "HEU.Problems.RH.criticalLine_unique",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 26,
      "nome": "HEU.Problems.RH.zeroApprox_bounded",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 31,
      "nome": "HEU.Problems.RH.F_RH_continuous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 38,
      "nome": "HEU.Problems.RH.O_RH_preserves_order",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
@@ -980,101 +1271,138 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
       "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "erro": "linha 45: type of theorem 'HEU.Problems.RH.equilibrium_decidable' is not a proposition Decidable RH_equilibrium",
+     "coluna": 0,
+     "trecho": "⟦/⟧-- Lemma: Equilibrium is deci",
+     "motivo": "importa HEU.Core.Functional.Criticality, HEU.Core.Functional.Functional, HEU.Core.Functional.LTC, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 59,
      "nome": "HEU.Problems.RH.ordinal_increases_with_precision",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 65,
      "nome": "HEU.Problems.RH.UBO_nonneg_under_RH",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/Lemmas_RH.lean",
      "linha": 71,
      "nome": "HEU.Problems.RH.RH_contrapositive",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional",
-      "HEU.Core.ZF.Classical"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Problems/RH/X_RH.olean' of module HEU.Problems.RH.X_RH does not exist — HEU.Problems.RH.X_RH não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Problems/RH/X_RH.lean:11:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.LTC",
+      "HEU.Core.Functional.Operators",
+      "HEU.Core.ZF.Classical",
+      "HEU.Problems.RH.Critical_RH"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
      "linha": 44,
      "nome": "HEU.Problems.RH.RH_equilibrium_iff_RH",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
      "linha": 49,
      "nome": "HEU.Problems.RH.O_RH_zero_on_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
      "linha": 55,
      "nome": "HEU.Problems.RH.O_RH_negative_off_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/RH/O_RH.lean",
      "linha": 61,
      "nome": "HEU.Problems.RH.O_RH_monotone",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/YM/YM.lean",
      "linha": 66,
      "nome": "HEU.Problems.YM.YM_equiv",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "HEU.Core.Functional.Functional"
+     "status": "aberto-sorry",
+     "axioms": [
+      "sorryAx"
      ],
-     "motivo": "object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/UBO.olean' of module HEU.Core.Functional.UBO does not exist — HEU.Core.Functional.UBO não compilou: /tmp/mvei-rec-fgjasqir/p/HEU/Core/Functional/UBO.lean:16:0: error: object file '/tmp/mvei-rec-fgjasqir/p/.lake/mvei-salvage/HEU/Core/Functional/Criticality.olean' of module HEU.Core.Functional.Criticality does not exist"
+     "dependencia_com_sorry": [
+      "HEU.Core.Functional.Criticality",
+      "HEU.Core.Functional.Functional",
+      "HEU.Core.Functional.Operators"
+     ]
     }
    ],
    "preenchimento": [
@@ -1098,7 +1426,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793349359
+   "hora_commit_mvei": 1793652851
   }
  ]
 }

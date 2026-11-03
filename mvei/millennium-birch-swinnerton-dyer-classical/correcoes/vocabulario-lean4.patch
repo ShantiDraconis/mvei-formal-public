@@ -106,7 +106,7 @@
    rank : ℕ
    torsion : ℕ
    bsd_verified : Bool
-@@ -150,10 +153,11 @@
+@@ -150,7 +153,7 @@
  
  /-! ## Future Work -/
  
@@ -115,10 +115,6 @@
  -- No theorem; BSD is open for rank ≥ 2
  
  end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/BSD/ReductionSchemes.lean
 +++ b/src/lean/BSD/BSD/ReductionSchemes.lean
 @@ -5,6 +5,11 @@
@@ -169,14 +165,6 @@
  -- Already defined in Heights.lean
  
  /-- The Tamagawa number at a prime p -/
-@@ -128,6 +132,7 @@
- theorem weak_BSD_plus_sha (h : WeakBSD E) : True := trivial
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/BSD/StrongBSD.lean
 +++ b/src/lean/BSD/BSD/StrongBSD.lean
 @@ -1,4 +1,8 @@
@@ -188,7 +176,7 @@
  
  /-
  Copyright (c) 2025 BSD Formalization Project. All rights reserved.
-@@ -110,10 +114,11 @@
+@@ -110,7 +114,7 @@
  /-- Strong BSD holds for CM curves of rank 0 (Coates-Wiles) -/
  axiom StrongBSD_CM_rank_0 (h : True) (hrank : analyticRank E = 0) : StrongBSD E
  
@@ -197,10 +185,6 @@
  -- Cremona's tables verify BSD numerically for all curves of conductor ≤ N
  
  end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/BSD/WeakBSD.lean
 +++ b/src/lean/BSD/BSD/WeakBSD.lean
 @@ -1,4 +1,5 @@
@@ -209,7 +193,7 @@
  
  /-
  Copyright (c) 2025 BSD Formalization Project. All rights reserved.
-@@ -97,10 +98,11 @@
+@@ -97,7 +98,7 @@
                algebraicRank E = k) := by
    sorry
  
@@ -218,10 +202,6 @@
  -- Would require Selmer groups
  
  end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/Cohomology/SelmerGroups.lean
 +++ b/src/lean/BSD/Cohomology/SelmerGroups.lean
 @@ -1,4 +1,5 @@
@@ -263,19 +243,20 @@
  /-- The c₄ invariant -/
 --- a/src/lean/BSD/EllipticCurve/Classical.lean
 +++ b/src/lean/BSD/EllipticCurve/Classical.lean
-@@ -10,6 +10,11 @@
+@@ -10,6 +10,12 @@
  import Mathlib.Data.Nat.Prime.Basic
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
 +import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.LinearAlgebra.Matrix.Symmetric
 +import Mathlib.Data.Real.Basic
 +
 +noncomputable section
  
  /-!
  # Elliptic Curves - Complete Classical Formalization
-@@ -281,19 +286,19 @@
+@@ -281,19 +287,19 @@
          CurvePointClassical.infinity
        else
          -- Doubling case: P = Q, use tangent line
@@ -301,6 +282,15 @@
        CurvePointClassical.affine x₃ y₃ (by sorry)
  
  /-- Addition notation -/
+@@ -337,7 +343,7 @@
+   zero_add := add_infinity_left
+   add_zero := add_infinity_right
+   neg := CurvePointClassical.neg
+-  add_left_neg := fun P => by
++  neg_add_cancel := fun P => by
+     -- Need to show (-P) + P = O
+     -- This follows from add_neg P which shows P + (-P) = O
+     -- Combined with commutativity
 --- a/src/lean/BSD/EllipticCurve/GroupLaw.lean
 +++ b/src/lean/BSD/EllipticCurve/GroupLaw.lean
 @@ -1,6 +1,8 @@
@@ -338,14 +328,15 @@
        affine x3 y3 (by sorry)
  
  instance : Add (Point E) := ⟨add⟩
-@@ -144,6 +146,7 @@
- end Point
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
+@@ -133,7 +135,7 @@
+   zero_add := infinity_add
+   add_zero := add_infinity
+   neg := neg
+-  add_left_neg := by
++  neg_add_cancel := by
+     intro P
+     have h := add_neg_self P
+     simp only [Neg.neg, neg] at h ⊢
 --- a/src/lean/BSD/EllipticCurve/Heights.lean
 +++ b/src/lean/BSD/EllipticCurve/Heights.lean
 @@ -6,6 +6,7 @@
@@ -356,14 +347,6 @@
  
  /-!
  # Heights on Elliptic Curves
-@@ -131,6 +132,7 @@
-   sorry
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/EllipticCurve/Invariants.lean
 +++ b/src/lean/BSD/EllipticCurve/Invariants.lean
 @@ -1,6 +1,8 @@
@@ -384,21 +367,14 @@
    -aux.b2^3 + 36 * aux.b2 * aux.b4 - 216 * aux.b6
  
  /-- Relation between discriminant and c₄, c₆: Δ = (c₄³ - c₆²)/1728 -/
-@@ -83,6 +85,7 @@
-   trivial  -- The actual transformation formula is in Weierstrass.lean
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean
 +++ b/src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean
-@@ -9,6 +9,11 @@
+@@ -9,6 +9,12 @@
  import Mathlib.Analysis.InnerProductSpace.Basic
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import Mathlib.Data.Rat.Defs
 +import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.LinearAlgebra.Matrix.Symmetric
 +import Mathlib.Data.Real.Basic
 +open scoped ENNReal
 +
@@ -406,7 +382,7 @@
  
  /-!
  # Regulator and Height Pairing for Elliptic Curves
-@@ -472,7 +477,7 @@
+@@ -472,7 +478,7 @@
  example : regulator [point37a1] = neronTateHeight point37a1 := by
    exact regulator_rank_one point37a1
  
@@ -428,14 +404,6 @@
  
  /-!
  # Weierstrass Models
-@@ -97,6 +101,7 @@
-   sorry
- 
- end Weierstrass
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/LFunction/AnalyticProperties.lean
 +++ b/src/lean/BSD/LFunction/AnalyticProperties.lean
 @@ -5,6 +5,10 @@
@@ -465,14 +433,6 @@
  
  /-!
  # L-Functions of Elliptic Curves
-@@ -120,6 +127,7 @@
-   deriv^[analyticRank E] (L_function E) 1 / Nat.factorial (analyticRank E)
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/LFunction/EulerFactors.lean
 +++ b/src/lean/BSD/LFunction/EulerFactors.lean
 @@ -7,6 +7,11 @@
@@ -487,20 +447,12 @@
  
  /-!
  # Euler Factors of L-Functions
-@@ -121,6 +126,7 @@
-   sorry
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/LFunction/FunctionalEquation.lean
 +++ b/src/lean/BSD/LFunction/FunctionalEquation.lean
-@@ -6,6 +6,11 @@
- 
+@@ -7,6 +7,11 @@
  import BSD.LFunction.Definition
  import BSD.LFunction.AnalyticProperties
+ import Mathlib.Tactic
 +import Mathlib.Data.Nat.Prime.Defs
 +import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 +import Mathlib.Data.Complex.Basic
@@ -601,14 +553,6 @@
  /-!
  # Algebraic Rank of Elliptic Curves
  
-@@ -114,6 +116,7 @@
-   sorry
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/Rank/AnalyticRank.lean
 +++ b/src/lean/BSD/Rank/AnalyticRank.lean
 @@ -6,6 +6,10 @@
@@ -644,14 +588,6 @@
  -- Example: for quadratic twists, average rank is bounded
  
  /-- Taylor expansion of L(E, s) at s = 1 -/
-@@ -130,6 +134,7 @@
-   | inr hf => exact hfac hf
- 
- end EllipticCurve
-+/-
- Released under MIT license as described in the file LICENSE.
- Authors: BSD Formalization Team
- -/
 --- a/src/lean/BSD/Rank/RankEquivalences.lean
 +++ b/src/lean/BSD/Rank/RankEquivalences.lean
 @@ -6,6 +6,7 @@

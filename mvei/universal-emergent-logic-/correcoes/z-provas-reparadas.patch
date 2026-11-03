@@ -1,0 +1,442 @@
+--- a/universe00/Universe00/Core/Aggregation.lean
++++ b/universe00/Universe00/Core/Aggregation.lean
+@@ -47,19 +47,65 @@
+ theorem aggregate_nonneg (w : Weights) (e : ErrorVector) :
+     0 ≤ aggregateError w e := by
+   unfold aggregateError weightedSum
+-  sorry -- Technical: product of non-negatives is non-negative
++  suffices H : ∀ a b : List ℝ, (∀ x ∈ a, 0 ≤ x) → (∀ x ∈ b, 0 ≤ x) →
++      0 ≤ (List.zipWith (· * ·) a b).sum from
++    mul_nonneg (by norm_num) (H _ _ w.nonneg (fun x hx => (e.valid x hx).1))
++  intro a
++  induction a with
++  | nil => intro b _ _; simp
++  | cons x t ih =>
++    intro b ha hb
++    cases b with
++    | nil => simp
++    | cons y u =>
++      simp only [List.zipWith_cons_cons, List.sum_cons]
++      exact add_nonneg (mul_nonneg (ha x (List.mem_cons.mpr (Or.inl rfl))) (hb y (List.mem_cons.mpr (Or.inl rfl))))
++        (ih u (fun z hz => ha z (List.mem_cons.mpr (Or.inr hz))) (fun z hz => hb z (List.mem_cons.mpr (Or.inr hz))))
+ 
+ theorem aggregate_le_hundred (w : Weights) (e : ErrorVector)
+     (h_dim : w.values.length = e.components.length) :
+     aggregateError w e ≤ 100 := by
+   unfold aggregateError weightedSum
+-  sorry -- Technical: weighted average of values ≤1 with weights summing to 1
++  suffices H : ∀ a b : List ℝ, (∀ x ∈ a, 0 ≤ x) → (∀ x ∈ b, x ≤ 1) →
++      (List.zipWith (· * ·) a b).sum ≤ a.sum by
++    have := H _ _ w.nonneg (fun x hx => (e.valid x hx).2)
++    rw [w.sum_one] at this
++    linarith
++  intro a
++  induction a with
++  | nil => intro b _ _; simp
++  | cons x t ih =>
++    intro b ha hb
++    have hx : 0 ≤ x := ha x (List.mem_cons.mpr (Or.inl rfl))
++    have ht : ∀ z ∈ t, 0 ≤ z := fun z hz => ha z (List.mem_cons.mpr (Or.inr hz))
++    cases b with
++    | nil =>
++      simp only [List.zipWith_nil_right, List.sum_nil, List.sum_cons]
++      exact add_nonneg hx (List.sum_nonneg ht)
++    | cons y u =>
++      simp only [List.zipWith_cons_cons, List.sum_cons]
++      have hy : y ≤ 1 := hb y (List.mem_cons.mpr (Or.inl rfl))
++      have h1 : x * y ≤ x := mul_le_of_le_one_right hx hy
++      have h2 := ih u ht (fun z hz => hb z (List.mem_cons.mpr (Or.inr hz)))
++      linarith
+ 
+ -- Zero error vector gives zero aggregate
+ theorem aggregate_zero_of_proven (w : Weights) (e : ErrorVector)
+     (h : e.is_proven) : aggregateError w e = 0 := by
+   unfold aggregateError weightedSum
+-  sorry -- Technical: all errors are 0, so weighted sum is 0
++  suffices H : ∀ a b : List ℝ, (∀ x ∈ b, x = 0) → (List.zipWith (· * ·) a b).sum = 0 by
++    rw [H _ _ h, mul_zero]
++  intro a
++  induction a with
++  | nil => intro b _; simp
++  | cons x t ih =>
++    intro b hb
++    cases b with
++    | nil => simp
++    | cons y u =>
++      simp only [List.zipWith_cons_cons, List.sum_cons]
++      rw [hb y (List.mem_cons.mpr (Or.inl rfl)), ih u (fun z hz => hb z (List.mem_cons.mpr (Or.inr hz)))]
++      ring
+ 
+ -- If aggregate is zero, all weighted components must be zero
+ theorem proven_of_aggregate_zero (w : Weights) (e : ErrorVector)
+@@ -83,11 +129,12 @@
+      intros w hw
+      simp [List.mem_replicate] at hw
+      rcases hw with ⟨_, rfl⟩
+-     exact div_nonneg (by norm_num) (Nat.cast_nonneg n),
++     first
++       | exact inv_nonneg.mpr (Nat.cast_nonneg n)
++       | exact div_nonneg zero_le_one (Nat.cast_nonneg n),
+    by
+      simp [List.sum_replicate]
+-     field_simp
+-     ring⟩
++     try field_simp⟩
+ 
+ -- Construction: custom weights from a list with proof
+ def customWeights (ws : List ℝ) 
+@@ -173,7 +220,30 @@
+ theorem weightedSum_bounds (weights errors : List ℝ) 
+     (h : validAggregation weights errors) :
+   0 ≤ weightedSum weights errors ∧ weightedSum weights errors ≤ 1 := by
+-  sorry -- Proof by induction on lists
++  obtain ⟨⟨hsum, hw⟩, _, he⟩ := h
++  unfold weightedSum
++  suffices H : ∀ a b : List ℝ, (∀ x ∈ a, 0 ≤ x) → (∀ x ∈ b, 0 ≤ x ∧ x ≤ 1) →
++      0 ≤ (List.zipWith (· * ·) a b).sum ∧ (List.zipWith (· * ·) a b).sum ≤ a.sum by
++    have := H weights errors (fun x hx => (hw x hx).1) he
++    exact ⟨this.1, by linarith [this.2]⟩
++  intro a
++  induction a with
++  | nil => intro b _ _; simp
++  | cons x t ih =>
++    intro b ha hb
++    have hx : 0 ≤ x := ha x (List.mem_cons.mpr (Or.inl rfl))
++    have ht : ∀ z ∈ t, 0 ≤ z := fun z hz => ha z (List.mem_cons.mpr (Or.inr hz))
++    cases b with
++    | nil =>
++      simp only [List.zipWith_nil_right, List.sum_nil, List.sum_cons]
++      exact ⟨le_refl 0, add_nonneg hx (List.sum_nonneg ht)⟩
++    | cons y u =>
++      simp only [List.zipWith_cons_cons, List.sum_cons]
++      have hy := hb y (List.mem_cons.mpr (Or.inl rfl))
++      have h1 : x * y ≤ x := mul_le_of_le_one_right hx hy.2
++      have h0 : 0 ≤ x * y := mul_nonneg hx hy.1
++      have h2 := ih u ht (fun z hz => hb z (List.mem_cons.mpr (Or.inr hz)))
++      exact ⟨by linarith [h2.1], by linarith [h2.2]⟩
+ 
+ /-- Theorem: If aggregation is valid, aggregateError is in [0,100] -/
+ theorem aggregateError_bounds (weights errors : List ℝ)
+@@ -196,7 +266,20 @@
+     (h : validAggregation weights errors)
+     (hz : ∀ e ∈ errors, e = 0) :
+   aggregateError weights errors = 0 := by
+-  sorry -- Proof by induction
++  unfold aggregateError
++  suffices H : ∀ a b : List ℝ, (∀ x ∈ b, x = 0) → (List.zipWith (· * ·) a b).sum = 0 by
++    rw [H _ _ hz, mul_zero]
++  intro a
++  induction a with
++  | nil => intro b _; simp
++  | cons x t ih =>
++    intro b hb
++    cases b with
++    | nil => simp
++    | cons y u =>
++      simp only [List.zipWith_cons_cons, List.sum_cons]
++      rw [hb y (List.mem_cons.mpr (Or.inl rfl)), ih u (fun z hz => hb z (List.mem_cons.mpr (Or.inr hz)))]
++      ring
+ 
+ /-- If any error is positive and its weight is positive, aggregate is positive -/
+ theorem aggregate_positive_of_error_positive (weights errors : List ℝ)
+@@ -219,7 +302,15 @@
+ /-- Uniform weights are valid -/
+ theorem uniform_weights_valid (n : ℕ) (hn : n > 0) :
+     validWeights (List.replicate n (1 / (n : ℝ))) := by
+-  sorry -- Proof involves sum of replicated list
++  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
++  refine ⟨?_, ?_⟩
++  · rw [List.sum_replicate, nsmul_eq_mul]
++    field_simp
++  · intro w hw
++    rw [List.eq_of_mem_replicate hw]
++    refine ⟨div_nonneg zero_le_one hn'.le, ?_⟩
++    rw [div_le_one hn']
++    exact_mod_cast hn
+ 
+ end Aggregation
+ 
+--- a/universe00/Universe00/Core/Error.lean
++++ b/universe00/Universe00/Core/Error.lean
+@@ -49,7 +49,7 @@
+ -- Decidable equality
+ instance : DecidableEq Error := fun e₁ e₂ =>
+   if h : e₁.val = e₂.val then
+-    isTrue (by cases e₁; cases e₂; simp [h])
++    isTrue (by cases e₁; cases e₂; simp only at h; subst h; rfl)
+   else
+     isFalse (by intro contra; cases contra; contradiction)
+ 
+@@ -80,7 +80,7 @@
+ 
+ theorem refines_trans {e₁ e₂ e₃ : Error}
+     (h₁ : refines e₁ e₂) (h₂ : refines e₂ e₃) : refines e₁ e₃ :=
+-  le_trans h₁ h₂
++  show e₁.val ≤ e₃.val from le_trans h₁ h₂
+ 
+ -- An error is proven when it equals zero
+ def is_proven (e : Error) : Prop :=
+--- a/universe00/Universe00/Core/Ledger.lean
++++ b/universe00/Universe00/Core/Ledger.lean
+@@ -80,10 +80,10 @@
+   let status := statusFromError ev
+   ⟨name, desc, params, weights, ev, total, status,
+    h_dim,
+-   by simp [extractErrorVector],
++   List.length_map ..,
+    rfl,
+    ⟨ErrorAggregation.aggregate_nonneg weights ev,
+-    ErrorAggregation.aggregate_le_hundred weights ev (by simp [extractErrorVector]; exact h_dim)⟩⟩
++    ErrorAggregation.aggregate_le_hundred weights ev (h_dim.trans (List.length_map ..).symm)⟩⟩
+ 
+ -- Check if ledger represents a proved problem
+ def is_proved (ledger : ProblemLedger) : Prop :=
+@@ -146,7 +146,7 @@
+ def example_ledger : ProblemLedger :=
+   let param := MeasuredParameter.mk' ℝ 0.0 0.5 (by norm_num) (by norm_num)
+   let weights := ErrorAggregation.uniformWeights 1 (by norm_num)
+-  mk' "Example Problem" "A simple test problem" [param] weights (by simp)
++  mk' "Example Problem" "A simple test problem" [param] weights rfl
+ 
+ -- The example should be open with 50% error
+ example : example_ledger.totalError = 50 := by
+@@ -267,11 +267,9 @@
+     dim_match := by
+       constructor
+       · unfold ErrorVector.dim
+-        simp [extractErrors]
+-        exact hdim
++        exact (List.length_map ..).symm
+       · unfold ErrorVector.dim
+-        simp [extractErrors]
+-        exact hdim.symm
++        exact (List.length_map ..).trans hdim
+     weights_valid := hweights
+     total_correct := rfl
+     status_correct := rfl
+@@ -313,7 +311,42 @@
+     (h : ledger.totalError = 0)
+     (hw : ∀ w ∈ ledger.weights, w > 0) :
+   isSolved ledger := by
+-  sorry -- Requires proof that zero aggregate implies all components zero
++  unfold isSolved
++  rw [ledger.status_correct, status_proved_iff_zero_error]
++  have h0 : (List.zipWith (· * ·) ledger.weights ledger.errorVector.components).sum = 0 := by
++    have := ledger.total_correct
++    unfold aggregateError at this
++    linarith
++  have hlen : ledger.weights.length = ledger.errorVector.components.length := ledger.dim_match.2.symm
++  suffices H : ∀ (a b : List ℝ), a.length = b.length → (∀ x ∈ a, 0 < x) → (∀ x ∈ b, 0 ≤ x) →
++      0 ≤ (List.zipWith (· * ·) a b).sum ∧ ((List.zipWith (· * ·) a b).sum = 0 → ∀ e ∈ b, e = 0) from
++    (H _ _ hlen hw (fun x hx => (ledger.errorVector.valid x hx).1)).2 h0
++  intro a
++  induction a with
++  | nil =>
++    intro b hl _ _
++    cases b with
++    | nil => exact ⟨by simp, fun _ e he => by cases he⟩
++    | cons _ _ => simp at hl
++  | cons x t ih =>
++    intro b hl ha hb
++    cases b with
++    | nil => simp at hl
++    | cons y u =>
++      simp only [List.zipWith_cons_cons, List.sum_cons]
++      have hx : 0 < x := ha x (List.mem_cons.mpr (Or.inl rfl))
++      have hy : 0 ≤ y := hb y (List.mem_cons.mpr (Or.inl rfl))
++      have ih' := ih u (by simpa using hl) (fun z hz => ha z (List.mem_cons.mpr (Or.inr hz)))
++        (fun z hz => hb z (List.mem_cons.mpr (Or.inr hz)))
++      have hxy : 0 ≤ x * y := mul_nonneg hx.le hy
++      refine ⟨add_nonneg hxy ih'.1, fun hs e he => ?_⟩
++      have h1 : x * y = 0 := by linarith [ih'.1]
++      have h2 : (List.zipWith (· * ·) t u).sum = 0 := by linarith [ih'.1]
++      rcases List.mem_cons.mp he with rfl | he'
++      · rcases mul_eq_zero.mp h1 with h3 | h3
++        · linarith
++        · exact h3
++      · exact ih'.2 h2 e he'
+ 
+ /-- Get the i-th parameter -/
+ def getParameter (ledger : ProblemLedger) (i : Fin ledger.parameters.length) :
+@@ -336,7 +369,7 @@
+       newParams[i].error ≤ ledger.parameters[i.cast h_len].error) :
+   ProblemLedger :=
+   mk ledger.name newParams ledger.weights
+-    (h_len.trans ledger.dim_match.1.trans ledger.dim_match.2)
++    (h_len.trans (ledger.dim_match.1.trans ledger.dim_match.2))
+     ledger.weights_valid
+ 
+ end ProblemLedger
+--- a/universe00/Universe00/Core/Monotonicity.lean
++++ b/universe00/Universe00/Core/Monotonicity.lean
+@@ -53,7 +53,7 @@
+ theorem progress_trans {e₁ e₂ e₃ : ℝ}
+     (h₁ : ProgressValid e₂ e₁) (h₂ : ProgressValid e₃ e₂) :
+     ProgressValid e₃ e₁ :=
+-  le_trans h₂ h₁
++  le_trans h₁ h₂
+ 
+ -- Zero is the terminal state: no further progress possible
+ theorem zero_terminal (e : ℝ) (h : e = 0) (h' : ProgressValid e' e) :
+@@ -194,9 +194,7 @@
+   constructor
+   · exact h₃
+   · unfold strictProgress at h₂
+-    calc
+-      e₂ < e₁ := h₂
+-      _ ≤ 1 := h₁.2
++    exact (lt_of_lt_of_le h₂ h₁.2).le
+ 
+ /-- Transitivity of progress -/
+ theorem progress_transitive (e₁ e₂ e₃ : ℝ)
+--- a/universe00/Universe00/Core/Status.lean
++++ b/universe00/Universe00/Core/Status.lean
+@@ -51,6 +51,7 @@
+ 
+ -- Determine status from error vector
+ def statusFromError (E : ErrorVector) : ProblemStatus :=
++  haveI := Classical.propDecidable
+   if E.is_proven then
+     ProblemStatus.proved
+   else
+@@ -93,7 +94,10 @@
+     (h_status₂ : statusFromError E₂ = ProblemStatus.proved) :
+     statusFromError E₁ = ProblemStatus.proved ∨
+     statusFromError E₁ = ProblemStatus.open := by
+-  sorry -- Technical: if E₂ proven, E₁ must also be proven by monotonicity
++  unfold statusFromError
++  split
++  · exact Or.inl rfl
++  · exact Or.inr rfl
+ 
+ -- Examples of status determination
+ 
+@@ -105,7 +109,6 @@
+ example : poincare_status = ProblemStatus.proved := by
+   unfold poincare_status statusFromError
+   simp [ErrorVector.is_proven, ErrorVector.zero]
+-  sorry -- Technical detail
+ 
+ -- Example 2: An open problem with positive errors
+ def open_problem_status : ProblemStatus :=
+@@ -115,7 +118,7 @@
+ example : open_problem_status = ProblemStatus.open := by
+   unfold open_problem_status statusFromError
+   simp [ErrorVector.is_proven, ErrorVector.singleton]
+-  sorry -- Technical detail
++  norm_num
+ 
+ -- The status is not an opinion.
+ -- It is a direct, mechanical consequence of the error vector.
+@@ -176,6 +179,7 @@
+ 
+ /-- Alternative: decide based on whether error vector is zero -/
+ def statusFromErrorVector (E : ErrorVector) : ProblemStatus :=
++  haveI := Classical.propDecidable
+   if E.isZero then
+     ProblemStatus.proved
+   else
+@@ -185,19 +189,15 @@
+   statusFromError E = ProblemStatus.proved ↔ ∀ e ∈ E.components, e = 0 := by
+   unfold statusFromError
+   split_ifs with h
+-  · simp [h]
+-  · simp
+-    intro h'
+-    exact h h'
++  · exact iff_of_true rfl h
++  · exact iff_of_false (by intro hc; cases hc) h
+ 
+ theorem status_open_iff_positive_error (E : ErrorVector) :
+   statusFromError E = ProblemStatus.open ↔ ∃ e ∈ E.components, e ≠ 0 := by
+   unfold statusFromError
+   split_ifs with h
+-  · simp
+-    intro e he hnz
+-    exact h e he ▸ hnz rfl
+-  · simp
++  · exact iff_of_false (by intro hc; cases hc) (fun ⟨e, he, hne⟩ => hne (h e he))
++  · refine iff_of_true rfl ?_
+     push_neg at h
+     exact h
+ 
+--- a/universe00/Universe00/Core/Vector.lean
++++ b/universe00/Universe00/Core/Vector.lean
+@@ -52,17 +52,15 @@
+ 
+ -- Get component by index
+ def get (v : ErrorVector) (i : Fin v.dim) : ℝ :=
+-  v.components.get ⟨i.val, by
+-    simp [dim]
+-    exact i.isLt⟩
++  v.components.get ⟨i.val, i.isLt⟩
+ 
+ -- All components are in [0,1]
+ theorem component_nonneg (v : ErrorVector) (i : Fin v.dim) : 0 ≤ v.get i := by
+-  have h := v.valid (v.get i) (List.get_mem v.components i.val _)
++  have h := v.valid (v.get i) (List.get_mem _ _)
+   exact h.1
+ 
+ theorem component_le_one (v : ErrorVector) (i : Fin v.dim) : v.get i ≤ 1 := by
+-  have h := v.valid (v.get i) (List.get_mem v.components i.val _)
++  have h := v.valid (v.get i) (List.get_mem _ _)
+   exact h.2
+ 
+ -- Check if all components are zero (proven)
+@@ -98,11 +96,11 @@
+ 
+ theorem norm_linf_nonneg (v : ErrorVector) : 0 ≤ v.norm_linf := by
+   unfold norm_linf
+-  induction v.components with
+-  | nil => simp; norm_num
+-  | cons head tail ih =>
+-    simp [List.foldl]
+-    sorry -- Technical detail: max preserves non-negativity
++  suffices h : ∀ (l : List ℝ) (a : ℝ), a ≤ l.foldl max a from h _ 0
++  intro l
++  induction l with
++  | nil => intro a; exact le_refl a
++  | cons x t ih => intro a; exact le_trans (le_max_left a x) (ih (max a x))
+ 
+ -- Proven iff L¹ norm is zero
+ theorem proven_iff_norm_zero (v : ErrorVector) :
+@@ -111,11 +109,23 @@
+   · intro h
+     unfold is_proven at h
+     unfold norm_l1
+-    sorry -- Technical: all zeros sum to zero
++    exact List.sum_eq_zero h
+   · intro h
+     unfold is_proven
+     unfold norm_l1 at h
+-    sorry -- Technical: zero sum implies all components zero (given non-negativity)
++    suffices H : ∀ l : List ℝ, (∀ e ∈ l, 0 ≤ e) → l.sum = 0 → ∀ e ∈ l, e = 0 from
++      H _ (fun e he => (v.valid e he).1) h
++    intro l
++    induction l with
++    | nil => intro _ _ e he; cases he
++    | cons x t ih =>
++      intro hn hs e he
++      have hx : 0 ≤ x := hn x (List.mem_cons.mpr (Or.inl rfl))
++      have ht : 0 ≤ t.sum := List.sum_nonneg (fun y hy => hn y (List.mem_cons.mpr (Or.inr hy)))
++      rw [List.sum_cons] at hs
++      rcases List.mem_cons.mp he with rfl | he'
++      · linarith
++      · exact ih (fun y hy => hn y (List.mem_cons.mpr (Or.inr hy))) (by linarith) e he'
+ 
+ -- Refinement: vector v₁ refines v₂ if each component decreases
+ def refines (v₁ v₂ : ErrorVector) : Prop :=
+@@ -185,10 +195,9 @@
+   components := ev.components.map f
+   valid := by
+     intro e he
+-    cases List.mem_map.mp he with
+-    | intro e' ⟨he', hmap⟩ =>
+-      rw [← hmap]
+-      exact hf e' (ev.valid e' he')
++    obtain ⟨e', he', hmap⟩ := List.mem_map.mp he
++    rw [← hmap]
++    exact hf e' (ev.valid e' he')
+ 
+ /-- Filter error components by a predicate -/
+ def filter (ev : ErrorVector) (p : ℝ → Bool) : ErrorVector where

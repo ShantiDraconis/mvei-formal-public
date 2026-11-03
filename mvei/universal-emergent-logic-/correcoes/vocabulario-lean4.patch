@@ -122,15 +122,7 @@
  
  /-
  LRE (Lógica da Representação Estrutural) - Basic Definitions
-@@ -221,6 +225,7 @@
-   0  -- Placeholder
- 
- end LRE
-+/-
- # LRE: Lógica de Resíduo Estrutural (Structural Residue Logic)
- ## Basic Definitions
- 
-@@ -334,13 +339,13 @@
+@@ -336,13 +340,13 @@
    /-- Scaling transformation -/
    scale : ℝ → C → C
    /-- Scaling is positive -/
@@ -149,7 +141,7 @@
  
  /-- **Axiom LRE-3: Non-Controllable Residue**
      
-@@ -448,7 +453,7 @@
+@@ -450,7 +454,7 @@
      intro i _
      exact sq_nonneg _
  
@@ -591,27 +583,21 @@
 +
 +noncomputable section
  
- # LRE Core: Projective System
- 
-@@ -36,6 +39,7 @@
- ## Main Definition
- 
- * `ProjectiveSystem` - Abstract projection π: C → D with spaces C and D
-+/-
- 
- ## References
+ namespace LRE
  
 --- a/formalization/lean/LRE/Core/ProjectiveSystem.lean
 +++ b/formalization/lean/LRE/Core/ProjectiveSystem.lean
-@@ -6,6 +6,7 @@
- import Mathlib.Analysis.SpecialFunctions.Pow.Real
- import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
- import Mathlib
+@@ -18,6 +18,9 @@
+ import Mathlib.MeasureTheory.Integral.Bochner
+ import Mathlib.MeasureTheory.Measure.AEMeasurable
+ import Mathlib.MeasureTheory.Function.EssSup
 +open scoped ENNReal NNReal
++
++noncomputable section
  
- /-
- Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -49,6 +50,8 @@
+ namespace LRE
+ 
+@@ -43,6 +46,8 @@
    μ : Measure C
    [sigma_finite_μ : SigmaFinite μ]
  
@@ -620,7 +606,7 @@
  /-! ## Residue Structure -/
  
  /-- The residue R measures the "hidden information" or "vertical component"
-@@ -89,7 +92,7 @@
+@@ -83,7 +88,7 @@
    is bounded below by K times the measure of B -/
    curvature_cond : ∀ (B : Set sys.D) (hB : MeasurableSet B) 
        (hB_pos : 0 < sys.μ (sys.π ⁻¹' B)),
@@ -629,44 +615,6 @@
      essSup res.R (sys.μ.restrict fiber_B) - 
      essInf res.R (sys.μ.restrict fiber_B) ≥ K
  
-@@ -157,6 +160,7 @@
- 1. Non-injectivity: π⁻¹(x) = {(x, y) : y ∈ ℝ}
- 2. Unbounded residue on each fiber
- 3. Non-control: R cannot be bounded by any function of x alone
-+/-
- -/
- 
- 
-@@ -237,7 +241,7 @@
-   the residue varies by at least K·μ(B) across the fiber -/
-   curvature_condition : ∀ (B : Set sys.D), MeasurableSet B → 
-     μ (sys.π ⁻¹' B) > 0 →
--    let fiber_B := sys.π ⁻¹' B
-+    (let fiber_B := sys.π ⁻¹' B)
-     ∃ (u v : sys.C), u ∈ fiber_B ∧ v ∈ fiber_B ∧ 
-       (sys.R u).toReal - (sys.R v).toReal ≥ K
- 
-@@ -314,15 +318,15 @@
- structure ScaleAction (L : LRESystem) where
-   action : ℝ>0 → L.C → L.C
-   -- Compatibilidade com a projeção
--  compat : ∀ (λ : ℝ>0) (u : L.C), 
--    ∃ (S : ℝ>0 → L.D → L.D), L.π (action λ u) = S λ (L.π u)
-+  compat : ∀ («λ» : ℝ>0) (u : L.C), 
-+    ∃ (S : ℝ>0 → L.D → L.D), L.π (action «λ» u) = S «λ» (L.π u)
-   -- Propriedade de grupo
--  groupLaw : ∀ (λ μ : ℝ>0) (u : L.C), 
--    action λ (action μ u) = action (λ * μ) u
-+  groupLaw : ∀ («λ» μ : ℝ>0) (u : L.C), 
-+    action «λ» (action μ u) = action («λ» * μ) u
- 
- /-- Espaço crítico: configurações invariantes por reescala -/
- def criticalSpace (L : LRESystem) (SA : ScaleAction L) : Set L.C :=
--  {u : L.C | ∀ (λ : ℝ>0), L.residual (SA.action λ u) = L.residual u}
-+  {u : L.C | ∀ («λ» : ℝ>0), L.residual (SA.action «λ» u) = L.residual u}
- 
- /-- Operador de acoplamento residual -/
- structure CouplingOperator (L : LRESystem) where
 --- a/formalization/lean/LRE/Core/QuantitativeExamples.lean
 +++ b/formalization/lean/LRE/Core/QuantitativeExamples.lean
 @@ -10,6 +10,8 @@
@@ -700,15 +648,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -127,6 +131,7 @@
- where c, c₀ are in the same fiber with R(c₀) = 0.
- 
- Corollary: If E(c₀) = 0 (exact at center), then E(c) ≥ κ R(c).
-+/-
- 
- ## Proof Structure
- 
-@@ -356,7 +361,7 @@
+@@ -363,7 +367,7 @@
  
  /-! ## Toy Model Verification -/
  
@@ -717,7 +657,7 @@
    toyModel : ProjectionSystem where
      C := ℝ × ℝ
      D := ℝ
-@@ -448,6 +453,7 @@
+@@ -455,6 +459,7 @@
  * `EhresmannConnection` - Connection on the projection with horizontal distribution
  * `ResidualStructure` - Residue function measuring vertical component
  * `quantitative_closure_obstruction` - Main theorem with explicit bounds
@@ -725,7 +665,7 @@
  * `toyProjectiveSystem` - Concrete ℝ² → ℝ example
  * `toy_closure_obstruction_explicit` - Toy model verification
  
-@@ -812,7 +818,7 @@
+@@ -819,7 +824,7 @@
  
  /-! ## Summary and Interpretation -/
  
@@ -746,12 +686,13 @@
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
 --- a/formalization/lean/LRE/Core/ResidualRegularity.lean
 +++ b/formalization/lean/LRE/Core/ResidualRegularity.lean
-@@ -15,6 +15,10 @@
+@@ -15,6 +15,11 @@
  import Mathlib.MeasureTheory.Function.LocallyIntegrable
  import Mathlib.Analysis.Calculus.Deriv.Basic
  import Mathlib.Topology.MetricSpace.Basic
 +import Mathlib.Analysis.SpecialFunctions.Exp
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 +
 +noncomputable section
  
@@ -908,7 +849,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -78,10 +81,10 @@
+@@ -54,10 +57,10 @@
  /-! ## Sobolev Space Structure (Simplified) -/
  
  /-- H^{1/2} Sobolev space (placeholder) -/
@@ -921,7 +862,7 @@
  
  /-! ## Leray Projection -/
  
-@@ -105,7 +108,7 @@
+@@ -81,7 +84,7 @@
  /-! ## Reynolds Stress Tensor -/
  
  /-- The Reynolds stress represents the residual coupling -/
@@ -930,7 +871,7 @@
    sorry  -- ⟨u' ⊗ u'⟩ where u' is fluctuation
  
  /-! ## Closure Problem -/
-@@ -316,6 +319,7 @@
+@@ -323,6 +326,7 @@
  This file applies the LRE framework to the Navier-Stokes equations,
  showing how the closure problem in turbulence is an instance of
  the general closure obstruction theorem.
@@ -938,7 +879,7 @@
  
  ## Setup
  
-@@ -339,11 +343,11 @@
+@@ -346,11 +350,11 @@
  
  /-- Critical Sobolev space H^{1/2}(ℝ³) - simplified definition -/
  abbrev H_half : Type := 
@@ -964,7 +905,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -72,10 +75,10 @@
+@@ -51,10 +54,10 @@
  /-! ## Computational Space Structure (Highly Abstract) -/
  
  /-- Space of computational certificates/witnesses -/
@@ -977,7 +918,7 @@
  
  /-! ## Projection from Solutions to Instances -/
  
-@@ -181,7 +184,7 @@
+@@ -160,7 +163,7 @@
  
  /-! ## Philosophical Implications -/
  
@@ -986,7 +927,7 @@
  If P ≠ NP is a manifestation of residual structure, then:
  
  1. **Complexity is Geometric**: Computational hardness is a geometric
-@@ -197,7 +200,7 @@
+@@ -176,7 +179,7 @@
  
  /-! ## Open Questions -/
  
@@ -995,7 +936,7 @@
  1. Can we make the certificate space C and measure μ mathematically precise?
  
  2. Is there a natural Ehresmann connection on computational solution spaces?
-@@ -216,10 +219,10 @@
+@@ -223,10 +226,10 @@
  /-! ## Computational Traces -/
  
  /-- A computational trace: sequence of configurations -/
@@ -1008,7 +949,7 @@
  
  /-! ## Complexity Residue -/
  
-@@ -243,9 +246,9 @@
+@@ -250,9 +253,9 @@
  /-- Conjecture: If P ≠ NP, then complexity residue satisfies NC -/
  axiom PvsNP_implies_NC :
    (∀ (problem : PTimeProperty), 
@@ -1021,7 +962,7 @@
    ∃ μ : MeasureTheory.Measure PvsNPSystem.C,
      NonControl PvsNPSystem μ
  
-@@ -276,7 +279,7 @@
+@@ -283,7 +286,7 @@
  
  /-! ## Disclaimer -/
  
@@ -1252,15 +1193,7 @@
  the vertical component represents the residual coupling term K(R, sgn) 
  mentioned in the problem statement.
  
-@@ -176,6 +179,7 @@
- a function of the projection alone. -/
- 
- end ResidualCoupling
-+/-
- Ehresmann connections and curvature for the LRE framework.
- 
- This file defines:
-@@ -192,8 +196,8 @@
+@@ -194,8 +197,8 @@
  
  variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
  variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
@@ -1311,53 +1244,18 @@
  def ParallelTransport (sys : ProjectionSystem) (conn : EhresmannConnection sys)
 --- a/formalization/lean/LRE/Geometry/Holonomy.lean
 +++ b/formalization/lean/LRE/Geometry/Holonomy.lean
-@@ -6,6 +6,10 @@
- import Mathlib.Analysis.SpecialFunctions.Exp
+@@ -4,6 +4,10 @@
  import Mathlib.MeasureTheory.Integral.IntervalIntegral
+ import LRE.Core.Basic
  import Mathlib.Analysis.Calculus.Deriv.Basic
 +import Mathlib.Data.Real.Basic
-+open scoped ENNReal Manifold
++open scoped ENNReal
 +
 +noncomputable section
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -38,14 +42,14 @@
- 
- variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
- variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
--variable {C : Type*} [TopologicalSpace C] [ChartedSpace E C] [SmoothManifoldWithCorners (𝓘(ℝ, E)) C]
--variable {D : Type*} [TopologicalSpace D] [ChartedSpace F D] [SmoothManifoldWithCorners (𝓘(ℝ, F)) D]
-+variable {C : Type*} [TopologicalSpace C] [ChartedSpace E C] [IsManifold (𝓘(ℝ, E)) ((⊤ : ℕ∞) : WithTop ℕ∞) C]
-+variable {D : Type*} [TopologicalSpace D] [ChartedSpace F D] [IsManifold (𝓘(ℝ, F)) ((⊤ : ℕ∞) : WithTop ℕ∞) D]
- 
- /-! ## Paths and Curves -/
- 
- /-- A smooth path in the base space D -/
- structure SmoothPath (D : Type*) [TopologicalSpace D] [ChartedSpace F D] 
--    [SmoothManifoldWithCorners (𝓘(ℝ, F)) D] where
-+    [IsManifold (𝓘(ℝ, F)) ((⊤ : ℕ∞) : WithTop ℕ∞) D] where
-   /-- The path function γ: [0,1] → D -/
-   path : ℝ → D
-   /-- The path is smooth -/
-@@ -55,7 +59,7 @@
- 
- /-- A closed loop is a path where γ(0) = γ(1) -/
- structure ClosedLoop (D : Type*) [TopologicalSpace D] [ChartedSpace F D] 
--    [SmoothManifoldWithCorners (𝓘(ℝ, F)) D] extends SmoothPath D where
-+    [IsManifold (𝓘(ℝ, F)) ((⊤ : ℕ∞) : WithTop ℕ∞) D] extends SmoothPath D where
-   /-- The path closes -/
-   closes : path 0 = path 1
- 
-@@ -208,6 +212,7 @@
- Hol(γ) = exp(∬_{A_γ} Ω)
- 
- where A_γ is the area enclosed by γ and Ω is the curvature 2-form.
-+/-
- 
- ## Physical Interpretation
- 
-@@ -224,7 +229,7 @@
+@@ -37,7 +41,7 @@
  /-! ## Parallel Transport -/
  
  /-- A curve in the base space D -/
@@ -1366,7 +1264,7 @@
  
  /-- A curve in the total space C that projects to a base curve -/
  structure LiftedCurve (γ : BaseCurve) where
-@@ -362,6 +367,7 @@
+@@ -175,6 +179,7 @@
  
  In the toy model, if you follow a path in D (the projected space),
  the corresponding path in C (lifted via the connection) may end up
@@ -1398,23 +1296,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -48,6 +53,7 @@
- The connection tells us how to "lift" a path in D to a path in C. The curvature
- measures how much the residue changes when we follow a closed loop in D.
- Non-zero curvature means the residue cannot be eliminated by coordinate changes.
-+/-
- -/
- 
- 
-@@ -174,6 +180,7 @@
- ## Curvature 2-Form
- 
-   Ω = dω = (∂A/∂y) dx ∧ dy
-+/-
- 
- Explicit calculation:
-   ∂A/∂y = ∂²Φ/∂x∂y + γ(∂R/∂y + y·∂²R/∂y²)
-@@ -206,7 +213,7 @@
+@@ -53,7 +58,7 @@
    -/
    curvature_condition : ∀ (B : Set sys.D), MeasurableSet B → 
      0 < μ (sys.π ⁻¹' B) →
@@ -1423,12 +1305,18 @@
      ∃ (M_sup M_inf : ℝ≥0∞), 
        (∀ᵐ u ∂(μ.restrict fiber_B), sys.R u ≤ M_sup) ∧
        (∀ε > 0, 0 < μ {u ∈ fiber_B | M_inf - ε < sys.R u}) ∧
-@@ -394,7 +401,8 @@
-     |curvatureFeedback Φ γ k x y| ≤ |k| * |curvature2Form Φ γ x y| * (1 + |y|) := by
+@@ -300,6 +305,7 @@
+ ## Curvature 2-Form
+ 
+   Ω = dω = (∂A/∂y) dx ∧ dy
++/-
+ 
+ Explicit calculation:
+   ∂A/∂y = ∂²Φ/∂x∂y + γ(∂R/∂y + y·∂²R/∂y²)
+@@ -405,6 +411,7 @@
    sorry
  
--end LRE
-+-- [MVEI] end LRE  -- `end` sem escopo aberto
+ end LRE
 +/-
  This file develops the theory of curvature for Ehresmann connections
  on projection systems, with emphasis on how curvature measures the 
@@ -1614,15 +1502,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -76,6 +79,7 @@
-       ∀ E : TotalSpace, residual E = 0 }
- 
- end LRE.BSD
-+/-
- # Birch and Swinnerton-Dyer Conjecture Model (LRE Instantiation)
- 
- This file instantiates the LRE framework for the Birch and Swinnerton-Dyer
-@@ -236,7 +240,7 @@
+@@ -241,7 +244,7 @@
  -/
  axiom BSDLRE : LRETheorem BSDSystem AnalyticPrediction
  
@@ -1631,7 +1511,7 @@
  Interpretation: Even knowing L(E, s) completely, you need additional
  arithmetic structure to pin down rank and Sha exactly.
  
-@@ -244,7 +248,7 @@
+@@ -249,7 +252,7 @@
  (arithmetic and analytic), and the residual measures the gap.
  -/
  
@@ -1640,7 +1520,7 @@
  The BSD conjecture in classical form:
  
  1. L(E, 1) = 0 with multiplicity r ⟺ rank(E(ℚ)) = r
-@@ -259,7 +263,7 @@
+@@ -264,7 +267,7 @@
  - Sha: Tate-Shafarevich group (conjecturally finite)
  -/
  
@@ -1649,7 +1529,7 @@
  BSD in LRE terms:
  
  The BSD conjecture states that the residual R is always zero:
-@@ -274,7 +278,7 @@
+@@ -279,7 +282,7 @@
  - Deep connection to modularity (Wiles, Taylor, et al.)
  -/
  
@@ -1660,10 +1540,10 @@
  Unlike PDEs (continuous evolution) or complexity (discrete growth),
 --- a/formalization/lean/LRE/Millennium/BSD.lean
 +++ b/formalization/lean/LRE/Millennium/BSD.lean
-@@ -5,6 +5,10 @@
- import LRE.ERS
+@@ -6,6 +6,10 @@
  import Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass
  import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Tactic
 +import Mathlib.Data.Complex.Basic
 +open scoped ENNReal NNReal
 +
@@ -1671,7 +1551,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -48,13 +52,13 @@
+@@ -49,13 +53,13 @@
  /-! ## Elliptic Curve Spaces -/
  
  /-- Elliptic curve over ℚ -/
@@ -1688,15 +1568,7 @@
  
  /-! ## Ranks -/
  
-@@ -216,6 +220,7 @@
- between these two worlds.
- 
- BSD says: this residue is zero. The LRE theorem says: this is a very
-+/-
- special property that requires deep arithmetic harmony.
- 
- ## Main Results
-@@ -303,7 +308,7 @@
+@@ -309,7 +313,7 @@
    /-- Based on which properties? (zeros, special values, etc.) -/
    method : String
  
@@ -1705,7 +1577,7 @@
  namespace RankPredictor
  
  /-- Predict rank from order of vanishing at s=1 (assumes BSD) -/
-@@ -364,7 +369,7 @@
+@@ -370,7 +374,7 @@
      have := h E
      simp [this]
  
@@ -1714,7 +1586,7 @@
  
  /-- BSD holds for curves with analytic rank 0 or 1 (Gross-Zagier, Kolyvagin) -/
  axiom bsd_rank_0_or_1 : ∀ E : C, analyticRank E ≤ 1 → R E = 0
-@@ -413,7 +418,7 @@
+@@ -419,7 +423,7 @@
  
  /-! ## Philosophical Interpretation -/
  
@@ -1743,10 +1615,10 @@
 +-- [MVEI] end BSD_LRE_UC  -- `end` sem escopo aberto
 --- a/formalization/lean/LRE/Millennium/Hodge.lean
 +++ b/formalization/lean/LRE/Millennium/Hodge.lean
-@@ -37,13 +37,16 @@
- import LRE.Unified.Core
+@@ -38,13 +38,16 @@
  import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
  import Mathlib.Topology.Category.TopCat.Limits.Products
+ import Mathlib.Tactic
 +open scoped NNReal
 +
 +noncomputable section
@@ -1813,15 +1685,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -161,6 +164,7 @@
-   sorry
- 
- end LRE.NS
-+/-
- # Navier-Stokes Model (LRE Instantiation)
- 
- This file instantiates the LRE framework for the 3D Navier-Stokes equations.
-@@ -298,7 +302,7 @@
+@@ -303,7 +306,7 @@
  axiom NavierStokesLRE (Λ : CutoffParam) : 
    LRETheorem (NavierStokesSystem Λ) ClosureModel
  
@@ -1927,15 +1791,7 @@
  
  /-! ## Projection -/
  
-@@ -166,6 +169,7 @@
- - **D**: Space of "instances + polynomial-time verifier"
-   (the observable/efficiently computable part)
- - **π**: "Forget search structure, keep only verification relation"
-+/-
- - **R(x)**: Minimal computational cost to find witness when one exists
-   (e.g., circuit size, decision tree depth, search tree size)
- 
-@@ -208,7 +212,7 @@
+@@ -213,7 +216,7 @@
  - Branching structure
  -/
  structure CompleteComputationalSpace (prob : SearchProblem) where
@@ -1944,7 +1800,7 @@
    /-- The complete search structure (simplified as Nat for now) -/
    searchStructure : ℕ
  
-@@ -309,7 +313,7 @@
+@@ -314,7 +317,7 @@
  axiom PvsNPLRE (prob : SearchProblem) (isNPComplete : Prop) : 
    isNPComplete → LRETheorem (PvsNPSystem prob) (PolyTimeAlgorithm prob)
  
@@ -1978,15 +1834,7 @@
  
  /-! ## Certificate Mapping -/
  
-@@ -183,6 +186,7 @@
- 1. **LRE Theorem**: Any polynomial-time decision algorithm has error ≥ κ·R
- 2. **Discrete ERS**: R(n+1) ≥ αⁿ·R(n) for hard instances
- 3. **Complexity Gap**: If ERS shows exponential growth, then P ≠ NP
-+/-
- -/
- 
- 
-@@ -260,7 +264,7 @@
+@@ -265,7 +268,7 @@
    /-- Time complexity bound -/
    time_bound : ∃ (poly : ℕ → ℕ), ∀ x, time x ≤ poly (P.size x)
  
@@ -1995,7 +1843,7 @@
  namespace DecisionAlgorithm
  
  /-- Brute force search: try all possible certificates -/
-@@ -318,7 +322,7 @@
+@@ -323,7 +326,7 @@
  theorem ers_hard_instances (hardness : ℕ → C P) :
      ∃ (α β : ℕ → ℝ≥0∞),
      DiscreteERS (fun n => R P (hardness n)) α β ∧
@@ -2004,7 +1852,7 @@
    -- For hard instances of SAT, TSP, etc., the search space grows exponentially
    -- This gives α ≥ 2 (or more), leading to exponential growth
    sorry
-@@ -329,7 +333,7 @@
+@@ -334,7 +337,7 @@
  then P ≠ NP -/
  theorem p_ne_np_from_ers
      (hard_family : ℕ → C P)
@@ -2013,7 +1861,7 @@
      -- Then P ≠ NP (no poly-time algorithm solves all instances)
      ¬ ∃ (alg : DecisionAlgorithm P), ∀ c : C P, ClosureError.E alg c = 0 := by
    -- If such an algorithm existed, it would contradict the LRE theorem
-@@ -370,7 +374,7 @@
+@@ -375,7 +378,7 @@
  
  /-! ## Philosophical Interpretation -/
  
@@ -2063,20 +1911,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -157,10 +160,11 @@
- 
- ## Key Insight
- 
--RH is equivalent to a coercivity bound: λ_min(B_T) ≥ c > 0
-+RH is equivalent to a coercivity bound: «λ_min»(B_T) ≥ c > 0
- 
- The LRE obstruction: any purely analytic closure that ignores fine
- arithmetic structure generates residual error.
-+/-
- 
- ## References
- 
-@@ -277,7 +281,7 @@
+@@ -282,7 +285,7 @@
  -/
  axiom RiemannLRE : LRETheorem RiemannSystem AnalyticClosure
  
@@ -2085,7 +1920,7 @@
  Interpretation: The irregular distribution of primes creates a residual
  structure that purely analytic methods cannot eliminate.
  
-@@ -288,7 +292,7 @@
+@@ -293,7 +296,7 @@
  understanding the deep connection between analytic and arithmetic.
  -/
  
@@ -2260,15 +2095,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -75,6 +78,7 @@
-       ∃ (Δ : ℝ), Δ > 0 ∧ ∀ A : TotalSpace, residual A ≥ ENNReal.ofReal Δ ∨ residual A = 0 }
- 
- end LRE.YangMills
-+/-
- # Yang-Mills Mass Gap Model (LRE Instantiation)
- 
- This file instantiates the LRE framework for the Yang-Mills mass gap problem.
-@@ -111,12 +115,12 @@
+@@ -116,12 +119,12 @@
  
  For now, we simplify.
  -/
@@ -2283,7 +2110,7 @@
  
  /--
  The complete space C: all gauge connections (smooth or distributional).
-@@ -206,7 +210,7 @@
+@@ -211,7 +214,7 @@
  -/
  axiom YangMillsLRE : LRETheorem YangMillsSystem EffectiveTheory
  
@@ -2292,7 +2119,7 @@
  Interpretation: The residual gauge energy R(A) represents structure
  that cannot be "gauged away" or eliminated by choosing a clever gauge.
  
-@@ -214,7 +218,7 @@
+@@ -219,7 +222,7 @@
  then the theory has a mass gap m.
  -/
  
@@ -2301,7 +2128,7 @@
  The mass gap problem in LRE terms:
  
  The Yang-Mills mass gap problem asks:
-@@ -258,7 +262,7 @@
+@@ -263,7 +266,7 @@
  axiom YangMillsMassGapConjecture :
    ∃ (H : YangMillsHamiltonian), ∃ m : ℝ, HasMassGap H m
  
@@ -2312,17 +2139,17 @@
  If R(A) ≥ m > 0 for all non-vacuum A, and the LRE theorem holds,
 --- a/formalization/lean/LRE/Millennium/YangMills.lean
 +++ b/formalization/lean/LRE/Millennium/YangMills.lean
-@@ -4,6 +4,9 @@
- import LRE.MillenniumCore
+@@ -5,6 +5,9 @@
  import LRE.ERS
  import Mathlib.Geometry.Manifold.VectorBundle.Basic
+ import Mathlib.Tactic
 +open scoped ENNReal NNReal
 +
 +noncomputable section
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -47,13 +50,13 @@
+@@ -48,13 +51,13 @@
  /-! ## Yang-Mills Spaces -/
  
  /-- Space of gauge connections (gauge fields) on 4D manifold -/
@@ -2339,7 +2166,7 @@
  
  /-! ## Yang-Mills Action -/
  
-@@ -108,7 +111,7 @@
+@@ -109,7 +112,7 @@
  /-! ## Mass Gap Criterion -/
  
  /-- Spectrum of the Hamiltonian -/
@@ -2348,7 +2175,7 @@
  
  /-- The mass gap is the difference between ground state and first excited state -/
  def MassGap : ℝ≥0 :=
-@@ -161,7 +164,7 @@
+@@ -162,7 +165,7 @@
  /-! ## Lattice Gauge Theory -/
  
  /-- Discretized version on lattice -/
@@ -2357,7 +2184,7 @@
  
  /-- Continuum limit and mass gap -/
  theorem lattice_continuum_limit :
-@@ -173,7 +176,7 @@
+@@ -174,7 +177,7 @@
  /-! ## Quantum Field Theory Framework -/
  
  /-- Path integral measure -/
@@ -2366,15 +2193,7 @@
  
  /-- Schwinger functions and mass gap -/
  theorem schwinger_functions_exponential_decay :
-@@ -213,6 +216,7 @@
- ## Main Results
- 
- 1. **LRE Theorem**: Any gauge choice has residual action ≥ κ
-+/-
- 2. **ERS**: Evolution of the residue under renormalization group flow
- 3. **Mass Gap**: Δ > 0 ⟺ inf R > 0 over all physical states
- -/
-@@ -285,7 +289,7 @@
+@@ -291,7 +294,7 @@
    /-- Existence: every gauge class has a representative satisfying the condition -/
    exists_rep : ∀ d : D, ∃ A : C, π A = d ∧ condition A
  
@@ -2383,7 +2202,7 @@
  namespace GaugeChoice
  
  /-- Lorenz gauge: ∂μAμ = 0 -/
-@@ -367,7 +371,7 @@
+@@ -373,7 +376,7 @@
  theorem mass_gap_is_spectral_gap :
      mass_gap ↔ ∃ Δ > 0, ∀ op : residue_operator, 
        (0 ∉ spectrum_residue op) ∧ 
@@ -2392,7 +2211,7 @@
    sorry
  
  /-! ## Lattice Formulation -/
-@@ -388,7 +392,7 @@
+@@ -394,7 +397,7 @@
  
  /-! ## Philosophical Interpretation -/
  
@@ -2615,18 +2434,7 @@
  
 --- a/formalization/lean/LRE/MillenniumProblems.lean
 +++ b/formalization/lean/LRE/MillenniumProblems.lean
-@@ -10,6 +10,10 @@
- import LRE.MillenniumProblems.YangMills
- import LRE.MillenniumProblems.BSD
- import LRE.MillenniumProblems.Unified
-+import Mathlib.Data.Real.Basic
-+open scoped ENNReal NNReal
-+
-+noncomputable section
- 
- /-
- Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -445,7 +449,7 @@
+@@ -444,7 +444,7 @@
  
  /-! ## 8. CONCLUSÃO: O MANIFESTO LRE -/
  
@@ -2635,33 +2443,18 @@
  
  Todos os problemas do Milênio são instâncias da mesma estrutura projetiva.
  O "resíduo estrutural" R mede a informação perdida pela projeção π: C → D.
-@@ -467,7 +471,7 @@
- # LRE Reformulation of Millennium Problems
+@@ -537,6 +537,10 @@
  
- This module provides a complete reformulation of the Clay Mathematics Institute
--Millennium Problems through the lens of **Lei do Resíduo Estrutural (LRE)**.
-+Millennium Problems through the lens of **Lei do «Resíduo» Estrutural (LRE)**.
+ ```lean
+ import LRE.MillenniumProblems
++import Mathlib.Data.Real.Basic
++open scoped NNReal
++
++noncomputable section
  
- ## The Central Insight
+ open LRE.MillenniumProblems
  
-@@ -558,7 +562,7 @@
- ## References
- 
- - Problem statement: User request for "análise profunda e reformulação dos problemas do Milênio"
--- Framework: Lei do Resíduo Estrutural (LRE)
-+- Framework: Lei do «Resíduo» Estrutural (LRE)
- - Mathematical foundations: Differential geometry, measure theory, topology
- 
- ## Disclaimer
-@@ -567,6 +571,7 @@
- They represent a research program, not completed proofs.
- The value is in:
- - Identifying the common structure
-+/-
- - Suggesting computational approaches
- - Providing geometric intuition
- - Unifying disparate problems
-@@ -620,7 +625,7 @@
+@@ -625,7 +629,7 @@
  
  /-! ## Summary Statement -/
  
@@ -3128,15 +2921,7 @@
  
  The Navier-Stokes flow on the complete space C (all velocity fields)
  is projected down to the observable space D (low-frequency modes).
-@@ -259,6 +263,7 @@
- - **Second term on right**: Energy removal by viscous dissipation
- 
- **Blow-up occurs** if and only if κ·‖Ω‖ dominates ν·β·‖R‖ as t → T,
-+/-
- meaning curvature grows faster than viscosity can dissipate.
- 
- ## Main Results
-@@ -292,7 +297,7 @@
+@@ -294,7 +298,7 @@
    divergence_free : True  -- Placeholder for proper div operator
  
  /-- The configuration space for Navier-Stokes -/
@@ -3145,7 +2930,7 @@
  
  /-! ## Energy and Norms -/
  
-@@ -488,7 +493,7 @@
+@@ -490,7 +494,7 @@
  
  /-! ## Proof Strategy Outline -/
  
@@ -3378,10 +3163,10 @@
  
 --- a/formalization/lean/LRE/OtherProblems/Collatz.lean
 +++ b/formalization/lean/LRE/OtherProblems/Collatz.lean
-@@ -36,6 +36,9 @@
- 
+@@ -37,6 +37,9 @@
  import LRE.Unified.Core
  import Mathlib.Data.Nat.Basic
+ import Mathlib.Tactic
 +open scoped NNReal
 +
 +noncomputable section
@@ -3420,17 +3205,17 @@
 +-- [MVEI] end LRE_UC_Protocol  -- `end` sem escopo aberto
 --- a/formalization/lean/LRE/PvsNP.lean
 +++ b/formalization/lean/LRE/PvsNP.lean
-@@ -5,6 +5,9 @@
- import LRE.Basic
- import Mathlib.Analysis.InnerProductSpace.Basic
- import Mathlib.Topology.MetricSpace.Basic
+@@ -18,6 +18,9 @@
+ import Mathlib
+ import Mathlib.Algebra.Polynomial.Basic
+ import Mathlib.Data.Real.Basic
 +open scoped ENNReal
 +
 +noncomputable section
  
- /-
- P vs NP via Residual Emergent Logic (LRE)
-@@ -30,14 +33,14 @@
+ namespace LRE.PvsNP
+ 
+@@ -26,14 +29,14 @@
  section Complexity
  
  /-- Time complexity as a function from input size to steps -/
@@ -3447,7 +3232,7 @@
  
  end Complexity
  
-@@ -89,14 +92,14 @@
+@@ -85,14 +88,14 @@
  /-- The complete space C: all (instance, certificate) pairs where certificate is valid -/
  structure CompleteSpace (prob : NP_Problem) where
    /-- The instance -/
@@ -3464,7 +3249,7 @@
  
  /-- Projection π: C → D, mapping (x, y) ↦ y -/
  def projection (prob : NP_Problem) : CompleteSpace prob → ReducedSpace prob :=
-@@ -226,7 +229,7 @@
+@@ -222,7 +225,7 @@
  
  section Interpretation
  
@@ -3473,7 +3258,7 @@
      verification (polynomial) and search (potentially exponential).
      
      Key insights:
-@@ -263,7 +266,7 @@
+@@ -259,7 +262,7 @@
  
  section UnifiedFramework
  
@@ -3482,26 +3267,9 @@
      
      | Aspect           | Navier-Stokes        | P vs NP                    |
      |------------------|----------------------|----------------------------|
-@@ -282,6 +285,7 @@
- -/
- 
- end UnifiedFramework
-+/-
- LRE Application: P vs NP via Geometry of Search Space
- -/
- 
-@@ -323,7 +327,7 @@
- 
- /-- Complete space: instances with certificates -/
- structure InstanceCertificatePair (I : InstanceSpace) (W : CertificateSpace) where
--  instance : I.carrier
-+  «instance» : I.carrier
-   certificate : W.carrier
-   valid : W.verify certificate = true
- 
 --- a/formalization/lean/LRE/QuantitativeObstruction.lean
 +++ b/formalization/lean/LRE/QuantitativeObstruction.lean
-@@ -3,6 +3,9 @@
+@@ -37,6 +37,9 @@
  import Mathlib.Geometry.Manifold.IsManifold.Basic
  import Mathlib.Geometry.Manifold.ContMDiff.Basic
  import Mathlib.Topology.Basic
@@ -3509,25 +3277,8 @@
 +
 +noncomputable section
  
- /-
- Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -693,7 +696,7 @@
- /-- The toy model: C = ℝ², D = ℝ, π(x,y) = x -/
- def toySystem : ProjectiveSystem where
- and projected dynamics X_D. Assume the coupling hypothesis (H) holds with
--constant κ > 0.
-+axiom κ > 0.
+ namespace LRE
  
- Then, for any closure X_D_cl, the closure error satisfies:
-   E(c) + E(c₀) ≥ κ · R(c)
-@@ -701,6 +704,7 @@
- 
- In particular, if the closure is exact at the reference point (E(c₀) = 0), then:
-   E(c) ≥ κ · R(c)
-+/-
- -/
- theorem quantitative_closure_obstruction 
-     (sys : ProjectiveSystem)
 --- a/formalization/lean/LRE/RBC.lean
 +++ b/formalization/lean/LRE/RBC.lean
 @@ -5,6 +5,7 @@
@@ -3710,17 +3461,18 @@
  Every major open problem can be understood as asking whether a residual R
 --- a/formalization/lean/LRE/YangMills/MassGap.lean
 +++ b/formalization/lean/LRE/YangMills/MassGap.lean
-@@ -24,6 +24,9 @@
+@@ -24,6 +24,10 @@
  import UMI.Core
  import Mathlib.Data.Real.Basic
  import Mathlib.Analysis.SpecialFunctions.Pow.Real
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
++open scoped InnerProductSpace
 +
 +noncomputable section
  
  namespace LRE.YangMills.MassGap
  
-@@ -54,7 +57,7 @@
+@@ -54,7 +58,7 @@
  -/
  structure YangMillsOperator (H : AdelicHilbertSpace) extends UnificationOperator H where
    gauge_invariance : ∀ (gauge_transform : H.completion → H.completion), sorry
@@ -4420,7 +4172,7 @@
  end BerryKeating
 --- a/formalization/lean/Millennium/UnifiedTheory/CoreTheory.lean
 +++ b/formalization/lean/Millennium/UnifiedTheory/CoreTheory.lean
-@@ -5,6 +5,12 @@
+@@ -5,6 +5,13 @@
  import Mathlib.LinearAlgebra.Matrix.PosDef
  import Mathlib.Data.Real.Basic
  import Mathlib.Data.Fin.Basic
@@ -4428,12 +4180,13 @@
 +import Mathlib.Analysis.SpecialFunctions.Exp
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
 +import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.LinearAlgebra.Matrix.Symmetric
 +
 +noncomputable section
  
  /-!
  # Unified Theory Core
-@@ -25,7 +31,7 @@
+@@ -25,7 +32,7 @@
  -/
  
  /-- The 38-dimensional parameter space -/
@@ -4866,18 +4619,19 @@
  
 --- a/formalization/lean/UMI/Core.lean
 +++ b/formalization/lean/UMI/Core.lean
-@@ -11,6 +11,10 @@
+@@ -11,6 +11,11 @@
  import Mathlib.Analysis.SpecialFunctions.Exp
  import Mathlib.Analysis.Calculus.FDeriv.Basic
  import Mathlib.Topology.MetricSpace.Basic
 +import Mathlib.Tactic.Positivity
 +import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
++open scoped InnerProductSpace
 +
 +noncomputable section
  
  /-! ## Hilbert Space Structures -/
  
-@@ -73,8 +77,8 @@
+@@ -73,8 +78,8 @@
    self_adjoint : ∀ x y, ⟪approx_sequence 0 |>.apply x, y⟫_ℝ = ⟪x, (approx_sequence 0).apply y⟫_ℝ
  
  /-- Extract the limiting operator from the unification operator -/
@@ -4888,7 +4642,7 @@
  
  /-! ## Borel Functional Calculus -/
  
-@@ -84,20 +88,20 @@
+@@ -84,20 +89,20 @@
  while maintaining infinite-dimensional structure.
  -/
  axiom borel_functional_calculus {H : AdelicHilbertSpace} 
@@ -5142,15 +4896,16 @@
  -- Access parameters by name
 --- a/formalization/lean/Unified/Kernel.lean
 +++ b/formalization/lean/Unified/Kernel.lean
-@@ -28,6 +28,8 @@
+@@ -27,6 +27,9 @@
+ import Mathlib
  import Mathlib.LinearAlgebra.Matrix.PosDef
  import Mathlib.Analysis.InnerProductSpace.PiL2
- 
-+noncomputable section
++open scoped InnerProductSpace
 +
++noncomputable section
+ 
  namespace Unified
  
- open Matrix
 --- a/formalization/lean/Unified/Problems/BSD.lean
 +++ b/formalization/lean/Unified/Problems/BSD.lean
 @@ -26,6 +26,8 @@
@@ -5899,7 +5654,7 @@
  abbrev EmergentOperator := EmergentTheta.EmergentOperator
 --- a/src/lean/EmergentTheta/Conjectures/RiemannHypothesis.lean
 +++ b/src/lean/EmergentTheta/Conjectures/RiemannHypothesis.lean
-@@ -2,6 +2,8 @@
+@@ -1,6 +1,8 @@
  import Mathlib
  import EmergentTheta.Core.Framework
  
@@ -5907,17 +5662,8 @@
 +
  namespace EmergentTheta
  
- open Complex
-@@ -10,7 +12,7 @@
- Abstract placeholder for the Riemann zeta function.
- In the real project, this would import a proper definition.
- -/
--constant zeta : ℂ → ℂ
-+axiom zeta : ℂ → ℂ
- 
- def is_non_trivial_zero (s : ℂ) : Prop :=
-   zeta s = 0 ∧ 0 < s.re ∧ s.re < 1
-@@ -61,12 +63,12 @@
+ /-- Zeros não triviais da função zeta de Riemann. -/
+@@ -32,12 +34,12 @@
    ∀ χ : DirichletCharacter, ∀ s : ℂ, is_GRH_zero χ s → s.re = (1 / 2 : ℝ)
  
  /-- Conjecturas de Hardy–Littlewood para k-tuplas de primos. -/
@@ -6022,14 +5768,15 @@
  
  /-
    Aggregation.lean
-@@ -108,6 +113,7 @@
-   uniformWeights 3 (by norm_num)
+@@ -100,7 +105,7 @@
+       | tail _ ht =>
+         cases ht with
+         | head => norm_num
+-        | tail _ ht' => exact absurd ht' (List.not_mem_nil w))
++        | tail _ ht' => exact absurd ht' ((fun h => nomatch h)))
+     (by norm_num)
  
- end ErrorAggregation
-+/-
- 
- -- The aggregate error is not a heuristic.
- -- It is a precise, measurable coordinate showing how far we are from proof.
+ -- Example: three parameters with equal weight
 --- a/universe00/Universe00/Core/Error.lean
 +++ b/universe00/Universe00/Core/Error.lean
 @@ -1,5 +1,10 @@
@@ -6043,14 +5790,6 @@
  
  /-
    Error.lean
-@@ -124,6 +129,7 @@
-         _ = 1 := hsum⟩⟩
- 
- end Error
-+/-
- 
- -- The error is not a bug in the proof.
- -- It is the proof itself, expressed as a coordinate in [0,1].
 --- a/universe00/Universe00/Core/Ledger.lean
 +++ b/universe00/Universe00/Core/Ledger.lean
 @@ -5,6 +5,8 @@
@@ -6062,14 +5801,14 @@
  /-
    Ledger.lean
    
-@@ -168,6 +170,7 @@
-   Universe00.Core.Ledger
-   
-   The central Problem Ledger structure
-+/-
-   
-   A ProblemLedger ties together all aspects of a mathematical problem:
-   - Named parameters with their errors
+@@ -200,6 +202,7 @@
+   - status = statusFromError errorVector
+ -/
+ structure ProblemLedger where
++  mkCampos ::
+   /-- Name of the mathematical problem -/
+   name : String
+   /-- List of measured parameters defining the problem -/
 --- a/universe00/Universe00/Core/Monotonicity.lean
 +++ b/universe00/Universe00/Core/Monotonicity.lean
 @@ -2,6 +2,8 @@
@@ -6081,14 +5820,6 @@
  /-
    Monotonicity.lean
    
-@@ -123,6 +125,7 @@
-         none
- 
- end Monotonicity
-+/-
- 
- -- Monotonicity is not negotiable.
- -- It is the spine of this framework.
 --- a/universe00/Universe00/Core/Parameter.lean
 +++ b/universe00/Universe00/Core/Parameter.lean
 @@ -1,4 +1,8 @@
@@ -6100,23 +5831,14 @@
  
  /-
    Parameter.lean
-@@ -17,6 +21,7 @@
+@@ -114,6 +118,7 @@
+   Invariant: 0 ≤ error ≤ 1
  -/
- 
- -- MeasuredParameter: A value with explicit, bounded error
-+/-
  structure MeasuredParameter (α : Type) where
++  mkCampos ::
+   /-- The value of the parameter -/
    value : α
-   error : ℝ  -- Normalized error in [0,1]
-@@ -153,6 +158,6 @@
-   isProven p ↔ p.error = 0 :=
-   Iff.rfl
- 
--end MeasuredParameter
-+end Core  -- [MVEI] era: end MeasuredParameter
- 
--end Universe00.Core
-+end Universe00  -- [MVEI] era: end Universe00.Core
+   /-- The epistemic error associated with this parameter -/
 --- a/universe00/Universe00/Core/Status.lean
 +++ b/universe00/Universe00/Core/Status.lean
 @@ -1,6 +1,8 @@
@@ -6128,7 +5850,7 @@
  /-
    Status.lean
    
-@@ -20,15 +22,16 @@
+@@ -20,7 +22,7 @@
  inductive ProblemStatus
    | proved   -- All errors are exactly zero
    | refuted  -- Errors have a positive structural lower bound
@@ -6137,17 +5859,35 @@
  
  namespace ProblemStatus
  
- -- String representation
-+/-
+@@ -28,7 +30,7 @@
  def toString : ProblemStatus → String
    | proved => "PROVED (E = 0)"
    | refuted => "REFUTED (E ≥ ε > 0 structurally)"
 -  | open => "OPEN (E > 0, limit unknown)"
 +  | «open» => "OPEN (E > 0, limit unknown)"
-   Universe00.Core.Status
-   
-   Problem status determination
-@@ -53,7 +56,7 @@
+ 
+ instance : ToString ProblemStatus where
+   toString := toString
+@@ -37,13 +39,13 @@
+ instance : DecidableEq ProblemStatus
+   | proved, proved => isTrue rfl
+   | refuted, refuted => isTrue rfl
+-  | open, open => isTrue rfl
++  | «open», «open» => isTrue rfl
+   | proved, refuted => isFalse (by intro h; cases h)
+-  | proved, open => isFalse (by intro h; cases h)
++  | proved, «open» => isFalse (by intro h; cases h)
+   | refuted, proved => isFalse (by intro h; cases h)
+-  | refuted, open => isFalse (by intro h; cases h)
+-  | open, proved => isFalse (by intro h; cases h)
+-  | open, refuted => isFalse (by intro h; cases h)
++  | refuted, «open» => isFalse (by intro h; cases h)
++  | «open», proved => isFalse (by intro h; cases h)
++  | «open», refuted => isFalse (by intro h; cases h)
+ 
+ end ProblemStatus
+ 
+@@ -144,7 +146,7 @@
  inductive ProblemStatus
    | proved    -- All errors are zero
    | refuted   -- Positive error with proven lower bound
@@ -6156,7 +5896,7 @@
    deriving Repr, DecidableEq
  
  namespace ProblemStatus
-@@ -62,7 +65,7 @@
+@@ -153,7 +155,7 @@
  def toString : ProblemStatus → String
    | proved => "PROVED"
    | refuted => "REFUTED"
@@ -6165,57 +5905,35 @@
  
  instance : ToString ProblemStatus where
    toString := toString
-@@ -71,13 +74,13 @@
- instance : DecidableEq ProblemStatus
-   | proved, proved => isTrue rfl
-   | refuted, refuted => isTrue rfl
--  | open, open => isTrue rfl
-+  | «open», open => isTrue rfl
-   | proved, refuted => isFalse (by intro h; cases h)
-   | proved, open => isFalse (by intro h; cases h)
-   | refuted, proved => isFalse (by intro h; cases h)
-   | refuted, open => isFalse (by intro h; cases h)
--  | open, proved => isFalse (by intro h; cases h)
--  | open, refuted => isFalse (by intro h; cases h)
-+  | «open», proved => isFalse (by intro h; cases h)
-+  | «open», refuted => isFalse (by intro h; cases h)
- 
- end ProblemStatus
- 
-@@ -152,7 +155,7 @@
- -- The status is not an opinion.
- -- It is a direct, mechanical consequence of the error vector.
- -- No interpretation. No debate. Just measurement.
--end ProblemStatus
-+end Core  -- [MVEI] era: end ProblemStatus
- 
- /--
-   Determine problem status from error vector.
-@@ -224,4 +227,4 @@
-         h ≥ rs.lowerBound := rs.irreducible h (by simp)
-         _ > 0 := rs.positive
- 
--end Universe00.Core
-+end ProblemStatus.Universe00  -- [MVEI] era: end Universe00.Core
 --- a/universe00/Universe00/Core/Vector.lean
 +++ b/universe00/Universe00/Core/Vector.lean
-@@ -1,6 +1,8 @@
+@@ -1,5 +1,8 @@
  import Universe00.Core.Error
  import Mathlib.Data.List.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Sqrt
 +
++noncomputable section
+ 
  /-
    Vector.lean
-   
-@@ -141,6 +143,7 @@
- -- It is the primary object.
- -- Proof = E → 0.
- -- Refutation = ∃ε > 0, E ≥ ε always.
-+/-
-   Universe00.Core.Vector
-   
-   Vector operations for error components
+@@ -25,7 +28,7 @@
+ 
+ -- Empty error vector (trivially proven)
+ def empty : ErrorVector :=
+-  ⟨[], by intros e h; exact absurd h (List.not_mem_nil e)⟩
++  ⟨[], by intros e h; exact absurd h ((fun h => nomatch h))⟩
+ 
+ -- Single error
+ def singleton (e : ℝ) (h₁ : 0 ≤ e) (h₂ : e ≤ 1) : ErrorVector :=
+@@ -33,7 +36,7 @@
+     intros x hx
+     cases hx with
+     | head => exact ⟨h₁, h₂⟩
+-    | tail _ ht => exact absurd ht (List.not_mem_nil x)⟩
++    | tail _ ht => exact absurd ht ((fun h => nomatch h))⟩
+ 
+ -- Zero vector: all components are zero (proven)
+ def zero (n : ℕ) : ErrorVector :=
 --- a/universe00/Universe00/Examples/BSD_Ledger.lean
 +++ b/universe00/Universe00/Examples/BSD_Ledger.lean
 @@ -1,6 +1,8 @@
@@ -6227,14 +5945,6 @@
  /-
    BSD_Ledger.lean
    
-@@ -151,6 +153,7 @@
- 
- -- This example demonstrates:
- -- 1. Staged progress: rank 0,1 → rank 0,1,2 → complete
-+/-
- -- 2. Each stage reduces error monotonically
- -- 3. Clear visualization of progress path
- -- 4. How partial results contribute measurably to the whole
 --- a/universe00/Universe00/Examples/NS_Ledger.lean
 +++ b/universe00/Universe00/Examples/NS_Ledger.lean
 @@ -17,6 +17,8 @@
@@ -6379,13 +6089,3 @@
  
  /-- The error components are independent -/
  theorem errors_independent (params1 params2 : YangMillsParameters) :
---- a/universe00/Universe00.lean
-+++ b/universe00/Universe00.lean
-@@ -15,6 +15,7 @@
- import Universe00.Examples.RH_Ledger
- import Universe00.Examples.NS_Ledger
- import Universe00.Examples.BSD_Ledger
-+/-
- 
- /-
-   Universe00.lean

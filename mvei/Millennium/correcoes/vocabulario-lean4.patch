@@ -140,14 +140,6 @@
  
  /-- The rank of E(ℚ) via Mordell-Weil theorem -/
  def algebraic_rank (E : EllipticCurveQ) : ℕ := 0  -- TODO: Implement rank computation
-@@ -200,6 +204,7 @@
- 
- /-- Statement suitable for Clay prize submission -/
- def clay_bsd_statement : Prop := full_bsd_conjecture
-+/-
- Bridge Theorem for Birch and Swinnerton-Dyer Conjecture
- 
- Conditional theorems that would establish BSD if certain properties hold.
 --- a/formal/lean/BSD/Classical.lean
 +++ b/formal/lean/BSD/Classical.lean
 @@ -7,6 +7,8 @@
@@ -225,15 +217,7 @@
  /-
    Millennium Structural Refutation - Framework
    
-@@ -94,6 +96,7 @@
- Framework.lean - Core framework structure for Millennium Problems
- 
- This file defines the abstract framework structure F = (X, LocalOps, GlobalInv, loc, inv)
-+/-
- that underlies the Local-Global approach to the Millennium Prize Problems.
- -/
- 
-@@ -186,6 +189,7 @@
+@@ -188,6 +190,7 @@
    Core definitions for the Local-Global Millennium OS Framework.
    
    This file defines the fundamental structure used to formalize
@@ -393,15 +377,7 @@
        (Φ.extract_local (0, t) (x, r)).energy.bounded) →
      Φ.consistency →
      ∃ (sol : NSSolution), is_global_smooth sol := by
-@@ -199,6 +202,7 @@
-   clay_ns_existence ∨ clay_ns_blowup
- 
- end NavierStokes.Bridge
-+/-
- Bridge Theorem for Navier-Stokes Regularity
- 
- This file contains conditional theorems that would prove NS regularity
-@@ -218,7 +222,7 @@
+@@ -220,7 +223,7 @@
    t₁ ≤ t₂ → Energy flow t₂ ≤ Energy flow t₁
  
  /-- Vorticity field ω = ∇ × u -/
@@ -496,14 +472,6 @@
  
  /-
  Navier-Stokes Framework in Lean
-@@ -31,6 +34,7 @@
- /-- Navier-Stokes regularity: no blowup (infinite time) -/
- def NavierStokesRegularity : Prop :=
-   ∀ u : VelocityField, blowupTime u = ∞ → Δ_NS u = 0
-+/-
- NS.lean
- 
- Navier-Stokes formalization as a Framework.
 --- a/formal/lean/Problems/PvsNP.lean
 +++ b/formal/lean/Problems/PvsNP.lean
 @@ -6,6 +6,9 @@
@@ -518,24 +486,17 @@
  axiom NPLanguage : Type
 --- a/formal/lean/Problems/RH.lean
 +++ b/formal/lean/Problems/RH.lean
-@@ -3,6 +3,8 @@
+@@ -1,6 +1,9 @@
+ import UnifiedMath.Framework
  import UnifiedMath.TUNS
  import TUNS.Framework
- 
-+noncomputable section
++import Mathlib.Data.Real.Basic
 +
- /-
- Riemann Hypothesis framework in Lean 4.
- -/
-@@ -35,6 +37,7 @@
-     exact h ρ.val ρ.property
-   · intro h ρ hρ
-     exact h ⟨ρ, hρ⟩
-+/-
- Riemann Hypothesis Framework in Lean
++noncomputable section
  
- Framework formalization for RH.
-@@ -61,6 +64,7 @@
+ /-
+ Riemann Hypothesis Framework in Lean
+@@ -29,6 +32,7 @@
  theorem rh_iff_critical_line :
    RiemannHypothesis ↔ ∀ ρ : ℂ, (ρ ≠ 0 ∧ True) → RHFramework.glob ρ = true := by
    sorry  -- Proof outline
@@ -545,24 +506,16 @@
  Riemann Hypothesis formalization as a Framework.
 --- a/formal/lean/PvsNP/BridgeTheorem.lean
 +++ b/formal/lean/PvsNP/BridgeTheorem.lean
-@@ -3,6 +3,8 @@
- import PvsNP.Classical
+@@ -13,6 +13,8 @@
+ import Mathlib.Data.Finset.Basic
  import Mathlib.Computability.TuringMachine
  
 +noncomputable section
 +
- /-
- Copyright (c) 2024 LG-Math-OS Project. All rights reserved.
- Released under MIT license.
-@@ -10,6 +12,7 @@
- PvsNP/BridgeTheorem.lean - Bridge Theorem for P vs NP Problem
+ namespace PvsNP.Bridge
  
- This file establishes the bridge theorem connecting local circuit complexity
-+/-
- to global computational complexity classes, following Clay Mathematics
- Institute standards.
- -/
-@@ -43,7 +46,7 @@
+ /-!
+@@ -36,7 +38,7 @@
  -/
  
  /-- A decision problem / language -/
@@ -571,7 +524,7 @@
  
  /-- A Turing machine (placeholder) -/
  structure TuringMachine where
-@@ -108,7 +111,7 @@
+@@ -101,7 +103,7 @@
  /-- Local computational data for an instance -/
  structure LocalComputationalData where
    problem : Language
@@ -621,49 +574,15 @@
  def ClassP : Set Language := sorry
 --- a/formal/lean/RH/BridgeTheorem.lean
 +++ b/formal/lean/RH/BridgeTheorem.lean
-@@ -3,6 +3,9 @@
+@@ -13,6 +13,8 @@
+ import Mathlib.Analysis.Complex.Basic
  import Mathlib.NumberTheory.LSeries.RiemannZeta
- import RH.Classical
- import Mathlib.Analysis.SpecialFunctions.Complex.Log
-+import Mathlib.Data.Complex.Basic
-+
+ 
 +noncomputable section
- 
- /-
- Copyright (c) 2024 LG-Math-OS Project. All rights reserved.
-@@ -184,6 +187,7 @@
- Bridge Theorem for Riemann Hypothesis
- 
- This file contains the "bridge theorem" that connects classical definitions
-+/-
- to potential proof strategies. This follows the Clay Institute format:
- stating conditional theorems of the form "If Property X holds, then RH is true."
- -/
-@@ -204,18 +208,20 @@
-   /-- T is self-adjoint -/
-   self_adjoint : ∀ x y : H, ⟪T x, y⟫_ℂ = ⟪x, T y⟫_ℂ
- 
-+attribute [instance] SpectralOperator.inner
 +
- /-- The spectrum of an operator encodes the imaginary parts of zeta zeros -/
- def SpectrumEncodesZeros (op : SpectralOperator) : Prop :=
--  ∀ ρ : ℂ, NonTrivialZero ρ → ∃ λ : ℝ, ρ.im = λ ∧ 
--    (∃ v : op.H, v ≠ 0 ∧ op.T v = (λ : ℂ) • v)
-+  ∀ ρ : ℂ, NonTrivialZero ρ → ∃ «λ» : ℝ, ρ.im = «λ» ∧ 
-+    (∃ v : op.H, v ≠ 0 ∧ op.T v = («λ» : ℂ) • v)
+ namespace RH.Bridge
  
- /-- Bridge Theorem 1 (Hilbert-Pólya approach):
-     If there exists a self-adjoint operator whose spectrum encodes the zeros,
-     and certain regularity conditions hold, then RH is true. -/
- theorem hilbert_polya_bridge (op : SpectralOperator) 
-     (h_spectrum : SpectrumEncodesZeros op)
--    (h_regularity : ∀ λ : ℝ, (∃ v : op.H, v ≠ 0 ∧ op.T v = (λ : ℂ) • v) → 
--      ∃ ρ : ℂ, NonTrivialZero ρ ∧ ρ.im = λ) :
-+    (h_regularity : ∀ «λ» : ℝ, (∃ v : op.H, v ≠ 0 ∧ op.T v = («λ» : ℂ) • v) → 
-+      ∃ ρ : ℂ, NonTrivialZero ρ ∧ ρ.im = «λ») :
-     RiemannHypothesis := by
-   sorry  -- Proof sketch:
-   -- 1. Self-adjoint operators have real spectrum
+ /-!
 --- a/formal/lean/RH/Classical.lean
 +++ b/formal/lean/RH/Classical.lean
 @@ -8,6 +8,8 @@
@@ -916,14 +835,6 @@
  /-
    Main Delta Collapse Theorem
    Lean 4 Formalization
-@@ -326,6 +328,7 @@
- - Symbolic indetermination operator I
- - Delta collapse operator ∆
- - Local-Global bridge structure
-+/-
- -/
- 
- -- TODO: Import individual module theorems
 --- a/formal-proofs/Sovereignty.lean
 +++ b/formal-proofs/Sovereignty.lean
 @@ -1,3 +1,6 @@
@@ -1079,11 +990,10 @@
  
 --- a/lean/RHPvsNP/CircuitComplexity.lean
 +++ b/lean/RHPvsNP/CircuitComplexity.lean
-@@ -11,6 +11,10 @@
+@@ -11,6 +11,9 @@
  import Mathlib.Data.Real.Basic
  import Mathlib.Data.Complex.Basic
- import Mathlib.Analysis.SpecialFunctions.Log
-+import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
 +open scoped ENNReal
 +
 +noncomputable section
@@ -1370,10 +1280,11 @@
  end YangMills
 --- a/lean4/BSD_CONJECTURE_UniversalFunctional.lean
 +++ b/lean4/BSD_CONJECTURE_UniversalFunctional.lean
-@@ -9,6 +9,7 @@
+@@ -9,6 +9,8 @@
  
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import UniversalCriticalFunctional
++import Mathlib.Data.Real.Basic
 +open scoped ENNReal
  
  noncomputable section
@@ -1551,15 +1462,16 @@
  /-- The critical line Re(s) = 1/2 in the complex plane -/
 --- a/lean4/GridZetaCoupling.lean
 +++ b/lean4/GridZetaCoupling.lean
-@@ -17,6 +17,8 @@
+@@ -16,6 +16,9 @@
+ import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
  import Mathlib.Analysis.Calculus.Deriv.Basic
  import Mathlib.Topology.MetricSpace.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 +
++noncomputable section
+ 
  /-! ## Basic Definitions -/
  
- /-- The complex plane -/
 --- a/lean4/Groups/Group1_LFunctions.lean
 +++ b/lean4/Groups/Group1_LFunctions.lean
 @@ -9,6 +9,9 @@
@@ -1592,19 +1504,6 @@
  
  namespace MillenniumGroups.Group2
  
-@@ -280,10 +283,11 @@
-   SmoothForAllTime F ↔ Delta_Flow F = 0 := by
-   sorry
-   GROUP 2 — CURVATURE, FLOWS, REGULARITY
--  (Navier-Stokes + Yang-Mills + Hodge + Poincaré)
-+  (Navier-Stokes + Yang-Mills + Hodge + «Poincaré»)
- 
-   This file formalizes the geometric flow approach that unifies
-   these four Millennium problems via a single regularity theorem.
-+/-
-   
-   Note: This is a skeleton formalization without Mathlib imports.
-   Float is used as a placeholder for ℝ (Real). A full formalization
 --- a/lean4/Groups/Group3_Complexity.lean
 +++ b/lean4/Groups/Group3_Complexity.lean
 @@ -9,6 +9,8 @@
@@ -1616,14 +1515,6 @@
  namespace MillenniumGroups.Group3
  
  /-!
-@@ -240,6 +242,7 @@
- theorem P_ne_NP_iff_SAT_not_in_P :
-   ComplexityClass.P ≠ ComplexityClass.NP ↔ ¬ InClassP SAT := by
-   sorry
-+/-
-   GROUP 3 — COMPLEXITY AND ORBITS
-   (P vs NP via Geometric Complexity Theory)
- 
 --- a/lean4/Groups/Groups.lean
 +++ b/lean4/Groups/Groups.lean
 @@ -31,6 +31,8 @@
@@ -1732,10 +1623,11 @@
  
 --- a/lean4/HODGE_CONJECTURE_UniversalFunctional.lean
 +++ b/lean4/HODGE_CONJECTURE_UniversalFunctional.lean
-@@ -9,6 +9,7 @@
+@@ -9,6 +9,8 @@
  
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import UniversalCriticalFunctional
++import Mathlib.Data.Real.Basic
 +open scoped ENNReal
  
  noncomputable section
@@ -1781,15 +1673,16 @@
  /-- The core Local→Global Framework structure.
 --- a/lean4/LocalGlobal/Gap.lean
 +++ b/lean4/LocalGlobal/Gap.lean
-@@ -11,6 +11,8 @@
+@@ -10,6 +10,9 @@
+ import Mathlib.Data.Real.Basic
  import Mathlib.Data.Complex.Basic
  import Mathlib.Analysis.SpecialFunctions.Pow.Real
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Sqrt
 +
++noncomputable section
+ 
  namespace LocalGlobal.Gap
  
- /-- Abstract gap operator type -/
 --- a/lean4/LocalGlobal/Instances/BSD.lean
 +++ b/lean4/LocalGlobal/Instances/BSD.lean
 @@ -9,6 +9,8 @@
@@ -1873,43 +1766,7 @@
  
 --- a/lean4/MMEU/Basic.lean
 +++ b/lean4/MMEU/Basic.lean
-@@ -1,5 +1,8 @@
- import Mathlib.Data.Real.Basic
- import Mathlib.Data.NNReal.Basic
-+open scoped NNReal
-+
-+noncomputable section
- 
- namespace MMEU
- 
-@@ -16,7 +19,7 @@
-   geometric : ℝ
-   arithmetic : ℝ
-   computational : ℝ
--  deriving Repr
-+  
- 
- /-- Universal spectrum split into four components. -/
- structure UniversalSpectrum (σ : Type _) where
-@@ -30,7 +33,7 @@
- structure UniversalTime (X : Type _) where
-   flow : ℝ → X → X
-   group_law : Prop
--  deriving Repr
-+  
- 
- /-- Cross-domain bridges unify structures between compatible frameworks. -/
- structure CrossDomainBridge (A B : Type _) where
-@@ -78,7 +81,7 @@
-   entropy : ℝ
-   metricSymm : Prop
-   metricPos : Prop
--  deriving Repr
-+  
- 
- /-- The nine emergent objects captured by the MMEU layer. -/
- def emergentObjects : List String :=
-@@ -124,7 +127,7 @@
+@@ -31,7 +31,7 @@
    /-- Problem identifier -/
    name : String
    /-- The universal structure -/
@@ -1918,7 +1775,7 @@
    /-- The critical subset where the condition is tested -/
    critical_domain : Type*
  
-@@ -357,7 +360,7 @@
+@@ -264,7 +264,7 @@
  /--
    Singularity level (0-6 hierarchy).
  -/
@@ -2071,23 +1928,24 @@
  
  /-
  Copyright (c) 2025 Millennium Project. All rights reserved.
+@@ -207,7 +210,7 @@
+ 
+ /-! ## Documentation -/
+ 
+-/-- 
++/- 
+ ## Summary
+ 
+ This formalization establishes:
 @@ -239,7 +242,7 @@
  - `/latex/navier-stokes-formal-closure.tex`
  -/
  
 -end
 +-- [MVEI] end  -- `end` sem escopo aberto
+ 
+ /-
  # Formal Closure of Navier-Stokes: LRE-NS Framework
- 
- This file contains the formal definitions and theorem statements for the
-@@ -249,6 +252,7 @@
- 1. Non-injectivity of energy projection π
- 2. Compression barrier theorem (impossibility of energy-based control)
- 3. Critical bridge theorem (R ↔ regularity)
-+/-
- 4. Blow-up characterization
- 
- All gaps are closed except the Clay Institute decision problem itself.
 --- a/lean4/NavierStokes/LRE_CompressionBarrier.lean
 +++ b/lean4/NavierStokes/LRE_CompressionBarrier.lean
 @@ -11,6 +11,8 @@
@@ -2149,15 +2007,7 @@
  -- Basic types for the framework
  universe u
  
-@@ -253,6 +255,7 @@
-   
-   This module formalizes the concept of mathematical domains that resist
-   unification - pairs of mathematical areas where no structure-preserving
-+/-
-   map exists between them.
- -/
- 
-@@ -299,8 +302,8 @@
+@@ -301,8 +303,8 @@
  def NonUnifiable (D₁ D₂ : MathDomain) : Prop :=
    ∀ φ : StructurePreservingMap D₁ D₂, ¬φ.preserves_structure
  
@@ -2212,47 +2062,52 @@
    /-- Global invariant preservation -/
 --- a/lean4/P_VS_NP_UniversalFunctional.lean
 +++ b/lean4/P_VS_NP_UniversalFunctional.lean
-@@ -9,6 +9,7 @@
+@@ -9,6 +9,8 @@
  
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import UniversalCriticalFunctional
++import Mathlib.Data.Real.Basic
 +open scoped ENNReal
  
  noncomputable section
  
 --- a/lean4/RHPrimeStability.lean
 +++ b/lean4/RHPrimeStability.lean
-@@ -13,6 +13,8 @@
+@@ -12,6 +12,9 @@
+ import Mathlib.Analysis.SpecialFunctions.Complex.Log
  import Mathlib.NumberTheory.ArithmeticFunction
  import Mathlib.Topology.Basic
- 
-+noncomputable section
++import Mathlib.Data.Complex.Basic
 +
++noncomputable section
+ 
  /-!
  # Prime-Controlled Zero Stability
- 
 --- a/lean4/RHSpectral/Basic.lean
 +++ b/lean4/RHSpectral/Basic.lean
-@@ -13,6 +13,8 @@
+@@ -12,6 +12,9 @@
+ import Mathlib.Data.Complex.Basic
  import Mathlib.Data.Real.Basic
  import Mathlib.Algebra.Order.Field.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
 +
++noncomputable section
+ 
  namespace RHSpectral
  
- /-! ## Basic Definitions -/
 --- a/lean4/RiemannZerosPrimes.lean
 +++ b/lean4/RiemannZerosPrimes.lean
-@@ -14,6 +14,8 @@
+@@ -13,6 +13,10 @@
+ import Mathlib.NumberTheory.PrimeCounting
  import Mathlib.Data.Complex.Basic
  import Mathlib.Topology.MetricSpace.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Data.Real.Basic
 +
++noncomputable section
+ 
  open Complex Real
  
- namespace RiemannHypothesis
 --- a/lean4/SOF/Axioms.lean
 +++ b/lean4/SOF/Axioms.lean
 @@ -8,6 +8,8 @@
@@ -2273,17 +2128,6 @@
  
  /-- 1. Preserves classical truths -/
  axiom classical_preservation : ∀ (P : Prop), P → P
---- a/lean4/StructuralCheckmate.lean
-+++ b/lean4/StructuralCheckmate.lean
-@@ -522,7 +522,7 @@
- -/
- 
- /-- The bifurcation lemma: anyone claiming adequacy must provide U -/
--lemma bifurcation (S : System) (h : Adequate S) : ∃ U, UnifEstrutura S U := by
-+theorem bifurcation (S : System) (h : Adequate S) : ∃ U, UnifEstrutura S U := by
-   exact AdequacyImpliesUnif S h
- 
- /-- Corollary: Classical inadequacy follows from lack of unifying structure -/
 --- a/lean4/StructuralInadequacy.lean
 +++ b/lean4/StructuralInadequacy.lean
 @@ -1,3 +1,7 @@
@@ -2393,6 +2237,22 @@
  /- 
    Layer 1: Analytic Structures
    
+@@ -10,13 +12,13 @@
+ structure Complex where
+   re : Float
+   im : Float
+-deriving Repr, BEq
++deriving BEq
+ 
+ /-- A non-trivial zero of the Riemann zeta function -/
+ structure RiemannZero where
+   s : Complex
+   -- Constraint: ζ(s) = 0 and 0 < Re(s) < 1
+-deriving Repr
++
+ 
+ /-! ## Structure 1: Stratified Zero Classes -/
+ 
 --- a/lean4/Structures/Layer4_Topological.lean
 +++ b/lean4/Structures/Layer4_Topological.lean
 @@ -7,6 +7,7 @@
@@ -2593,15 +2453,16 @@
  def idx_ρ_NS  : ι := ⟨11, by decide⟩
 --- a/lean4/Unified/Kernel.lean
 +++ b/lean4/Unified/Kernel.lean
-@@ -3,6 +3,8 @@
+@@ -2,6 +2,9 @@
+ import Mathlib
  import Mathlib.LinearAlgebra.Matrix.PosDef
  import Mathlib.Analysis.InnerProductSpace.PiL2
- 
-+noncomputable section
++open scoped InnerProductSpace
 +
++noncomputable section
+ 
  namespace Unified
  
- open Matrix
 --- a/lean4/Unified/Problems/BSD.lean
 +++ b/lean4/Unified/Problems/BSD.lean
 @@ -1,6 +1,8 @@
@@ -2681,16 +2542,17 @@
  /-
 --- a/lean4/UnifiedFieldTheory.lean
 +++ b/lean4/UnifiedFieldTheory.lean
-@@ -12,6 +12,8 @@
+@@ -11,6 +11,9 @@
+ import Mathlib.Analysis.Complex.Basic
  import Mathlib.Topology.Instances.Complex
  import Mathlib.LinearAlgebra.Matrix.Hermitian
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Exp
 +
++noncomputable section
+ 
  namespace UnifiedFieldTheory
  
- /-- Configuration space: 38-dimensional Kähler manifold -/
-@@ -20,10 +22,10 @@
+@@ -20,10 +23,10 @@
    dim_eq : dimension = 38
  
  /-- Complex parameter in the configuration space -/
@@ -2705,16 +2567,16 @@
  def coherence_functional (θ : Fin 19 → ℂ) (θ_bar : Fin 19 → ℂ) : ℂ :=
 --- a/lean4/UnifiedSystem.lean
 +++ b/lean4/UnifiedSystem.lean
-@@ -2,6 +2,8 @@
+@@ -23,6 +23,8 @@
  import Mathlib.Data.Set.Basic
  import Mathlib.Logic.Basic
  
 +noncomputable section
 +
- /-
-   UnifiedSystem.lean
-   Formal Definition of the Three Mathematical Systems: S_cl, S_exp, S_new
-@@ -230,7 +232,7 @@
+ namespace UnifiedSystem
+ 
+ /-- A mathematical problem specification -/
+@@ -229,7 +231,7 @@
  -- ANALOGY WITH NUMBER SYSTEMS
  -- ============================================
  
@@ -2723,38 +2585,18 @@
    The relationship is analogous to: ℤ ⊂ ℚ ⊂ ℝ
    
    - S_cl is like ℤ (the "integers" of mathematics)
-@@ -317,6 +319,7 @@
-     (∀ (p : Problem), Obstruction S_new.toMathSystem p = 0) ∧
-     (∀ (p : Problem), WeakSol S_new.toMathSystem p ↔ StrongSol S_new.toMathSystem p) := by
-   sorry  -- Existence is axiomatized in the construction
-+/-
-   The Unified Mathematical System S_new
-   
-   This file formalizes the three-system architecture:
-@@ -354,13 +357,13 @@
-   (∀ φ : S₁.Language, S₁.isTrue φ → 
-      ∃ ψ : S₂.Language, S₂.isTrue ψ)
- 
--notation:50 S₁ " ⊆ₛ " S₂ => Subsystem S₁ S₂
-+notation:50 S₁:51 " ⊆ₛ " S₂:51 => Subsystem S₁ S₂
- 
- /-- Systems are equivalent if mutually subsystems -/
- def SystemEquiv (S₁ S₂ : MathSystem) : Prop :=
-   Subsystem S₁ S₂ ∧ Subsystem S₂ S₁
- 
--notation:50 S₁ " ≡ₛ " S₂ => SystemEquiv S₁ S₂
-+notation:50 S₁:51 " ≡ₛ " S₂:51 => SystemEquiv S₁ S₂
- 
- -- ============================================
- -- SECTION 2: OBSTRUCTION OPERATOR Ω
 --- a/lean4/UnifiedTheory/CoreTheory.lean
 +++ b/lean4/UnifiedTheory/CoreTheory.lean
-@@ -8,10 +8,12 @@
+@@ -7,11 +7,16 @@
+ import Mathlib.LinearAlgebra.Matrix.PosDef
  import Mathlib.Data.Real.Basic
  import Mathlib.Data.Fin.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 +
++noncomputable section
+ 
  namespace UnifiedTheory
  
  /-- Parameter space: 38 dimensional real vector space -/
@@ -2765,10 +2607,14 @@
  def canonical_parameters : ParameterSpace := fun i =>
 --- a/lean4/UnifiedTheory/RiemannHypothesis.lean
 +++ b/lean4/UnifiedTheory/RiemannHypothesis.lean
-@@ -7,6 +7,9 @@
+@@ -7,6 +7,13 @@
  import Mathlib.NumberTheory.LSeries.RiemannZeta
  import Mathlib.Analysis.Asymptotics.Asymptotics
  import UnifiedTheory.CoreTheory
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Data.Complex.Basic
 +open scoped ENNReal
 +
 +noncomputable section
@@ -2777,18 +2623,18 @@
  
 --- a/lean4/Universal/Basics.lean
 +++ b/lean4/Universal/Basics.lean
-@@ -8,7 +8,7 @@
+@@ -4,6 +4,8 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Topology.Basic
+ 
++noncomputable section
++
+ universe u v w
  
  namespace Universal
- 
--/-- Um domínio matemático abstrato como no framework:
-+/- Um domínio matemático abstrato como no framework:
- /-- Um domínio matemático abstrato como no seu framework:
-     X = espaço de estados
-     L = estrutura local
 --- a/lean4/Universal/Bridges.lean
 +++ b/lean4/Universal/Bridges.lean
-@@ -2,15 +2,17 @@
+@@ -2,6 +2,8 @@
  import Universal.Basics
  import Universal.Domains
  
@@ -2796,18 +2642,7 @@
 +
  namespace Universal
  
--/-- Estrutura de "ponte" entre dois domínios: versão simples da `Bridge`. -/
-+/- Estrutura de "ponte" entre dois domínios: versão simples da `Bridge`. -/
- /-- Estrutura de "ponte" entre dois domínios: versão simples da sua Bridge. -/
- structure Bridge (A B : MathDomain) where
-   Φ : A.L → B.G
-   commutes : ∀ x : A.X, Φ (A.loc x) = B.glob x
- 
--/-- Pacote de pontes entre blocos de domínios (AN ↔ AR, GEO ↔ COMP). 
-+/- Pacote de pontes entre blocos de domínios (AN ↔ AR, GEO ↔ COMP). 
-     
-     This is the initial bridge system. Additional bridges can be added as needed:
-     - More PAN bridges connecting Analytic-Spectral ↔ Arithmetic domains
+ /-- Estrutura de "ponte" entre dois domínios: versão simples da `Bridge`. -/
 --- a/lean4/Universal/Domains.lean
 +++ b/lean4/Universal/Domains.lean
 @@ -1,6 +1,8 @@
@@ -2819,15 +2654,6 @@
  namespace Universal
  
  /-- Identificadores simbólicos para os 14 domínios. -/
-@@ -23,7 +25,7 @@
- 
- open DomainId
- 
--/-- Estrutura que emparelha um `DomainId` com um `MathDomain`. -/
-+/- Estrutura que emparelha um `DomainId` com um `MathDomain`. -/
- /-- Estrutura que emparelha um DomainId com um MathDomain. -/
- structure LabeledDomain where
-   id  : DomainId
 --- a/lean4/Universal/Examples.lean
 +++ b/lean4/Universal/Examples.lean
 @@ -3,6 +3,8 @@
@@ -2872,27 +2698,19 @@
  namespace Universal
  
  /-- Pacote com tudo que o TUNS precisa:
-@@ -55,7 +57,7 @@
-   -- deixamos como `sorry` por enquanto.
-   sorry
- 
--/-- Se você preferir trabalhar com um axioma (para usar o TUNS como "postulado"), 
-+/- Se você preferir trabalhar com um axioma (para usar o TUNS como "postulado"), 
-   by
-     -- Aqui entra a parte de pesquisa profunda.
-     -- Formalmente, você pode começar modelando Spec_univ, E_univ, T_univ
 --- a/lean4/Universal/UniversalStructures.lean
 +++ b/lean4/Universal/UniversalStructures.lean
-@@ -3,6 +3,8 @@
+@@ -2,6 +2,9 @@
+ import Universal.Basics
  import Universal.Domains
  import Mathlib.Data.SetLike.Basic
- 
-+noncomputable section
++import Mathlib.Data.Complex.Basic
 +
++noncomputable section
+ 
  namespace Universal
  
- open Complex
-@@ -13,8 +15,8 @@
+@@ -13,8 +16,8 @@
  
  /-- Espectro universal como união dos espectros dos domínios da família. -/
  def universalSpectrum (F : DomainFamily) [∀ A, HasSpectrum A] : Set ℂ :=
@@ -2903,37 +2721,31 @@
  
  /-- Energia universal como visão em produto somando os componentes. -/
  def universalEnergy (F : DomainFamily) :
-@@ -22,7 +24,7 @@
- | ⟨A, x⟩ => A.energy x
- 
- /-- Tempo universal: uma ação do ℝ sobre um domínio, usando `timeParam`. -/
--    d ∈ F.toList ∧ λ ∈ (HasSpectrum.spectrum d.dom) }
-+    d ∈ F.toList ∧ «λ» ∈ (HasSpectrum.spectrum d.dom) }
- 
- /-- Energia universal como visão em produto somando os componentes. -/
- def universalEnergy (F : DomainFamily) :
 --- a/lean4/Universal/examples/ToyModel.lean
 +++ b/lean4/Universal/examples/ToyModel.lean
-@@ -5,6 +5,8 @@
+@@ -4,6 +4,9 @@
+ import Universal.Basics
  import Universal.Domains
  import Universal.UniversalStructures
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Exp
 +
++noncomputable section
+ 
  namespace Universal.Examples
  
- open Universal
 --- a/lean4/UniversalCriticalFunctional.lean
 +++ b/lean4/UniversalCriticalFunctional.lean
-@@ -29,6 +29,7 @@
+@@ -29,6 +29,9 @@
  import Mathlib.MeasureTheory.Integral.IntervalIntegral
  import Mathlib.Analysis.Asymptotics.Asymptotics
  import Mathlib.Topology.MetricSpace.Basic
++import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Data.Real.Basic
 +open scoped ENNReal
  
  noncomputable section
  
-@@ -44,6 +45,8 @@
+@@ -44,6 +47,8 @@
    [TopologicalSpace : TopologicalSpace T]
    [LinearOrder : LinearOrder T]
  
@@ -3032,16 +2844,17 @@
 +-- [MVEI] end UniversalUnification  -- `end` sem escopo aberto
 --- a/lean4/UniversalUnification/UniversalEnergy.lean
 +++ b/lean4/UniversalUnification/UniversalEnergy.lean
-@@ -21,6 +21,8 @@
+@@ -20,6 +20,9 @@
+ import Mathlib.Data.Real.Basic
  import UniversalUnification.MathDomain
  import UniversalUnification.UniversalOperators
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Sqrt
 +
++noncomputable section
+ 
  universe u v w
  
- open MathDomain
-@@ -146,4 +148,4 @@
+@@ -146,4 +149,4 @@
                     E.E_arithmetic x = 0 ∧ E.E_computational x = 0 := by
    sorry  -- Follows from sqrt properties
  
@@ -3119,16 +2932,17 @@
 +-- [MVEI] end UniversalUnification  -- `end` sem escopo aberto
 --- a/lean4/UniversalUnification/UniversalTime.lean
 +++ b/lean4/UniversalUnification/UniversalTime.lean
-@@ -20,6 +20,8 @@
+@@ -19,6 +19,9 @@
+ import Mathlib.Algebra.Group.Defs
  import Mathlib.Data.Real.Basic
  import UniversalUnification.MathDomain
- 
-+noncomputable section
++import Mathlib.Data.Complex.Basic
 +
++noncomputable section
+ 
  universe u v w
  
- open MathDomain
-@@ -152,4 +154,4 @@
+@@ -152,4 +155,4 @@
    intro t
    exact ⟨τ.τ t, rfl⟩
  
@@ -3136,24 +2950,16 @@
 +-- [MVEI] end UniversalUnification  -- `end` sem escopo aberto
 --- a/lean4/UniversalUnification.lean
 +++ b/lean4/UniversalUnification.lean
-@@ -12,6 +12,8 @@
+@@ -45,6 +45,8 @@
  import Mathlib.Data.Complex.Basic
  import Mathlib.Topology.Basic
  
 +noncomputable section
 +
- /-
- Copyright (c) 2025 ShantiDraconis. All rights reserved.
- Released under Apache 2.0 license as described in the file LICENSE.
-@@ -32,6 +34,7 @@
- * `CategoryOfProblems` - Category Prob
- * `Bridges` - Bridge functors (PDE-Arithmetic, Geometry-Complexity)
- * `TUNS` - Main theorem
-+/-
+ universe u v w
  
- -/
- 
-@@ -168,7 +171,7 @@
+ namespace UniversalUnification
+@@ -169,7 +171,7 @@
  
  /-- Universal Spectrum -/
  def UniversalSpectrum (Domains : DomainIndex → Framework) : Type :=
@@ -3164,10 +2970,11 @@
  structure UniversalEnergy where
 --- a/lean4/YANG_MILLS_UniversalFunctional.lean
 +++ b/lean4/YANG_MILLS_UniversalFunctional.lean
-@@ -9,6 +9,7 @@
+@@ -9,6 +9,8 @@
  
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import UniversalCriticalFunctional
++import Mathlib.Data.Real.Basic
 +open scoped ENNReal
  
  noncomputable section
@@ -3293,14 +3100,6 @@
  
  /-! ### Time Complexity Classes -/
  
-@@ -195,6 +199,7 @@
- 
- /- NP = ⋃_{k≥1} NTIME(n^k) -/
- def NP_class : Set Language := Set.univ
-+/-
-   The Delta_NP operator.
- 
-   Measures the computational gap between P and NP.
 --- a/src/lean/Millennium/Complexity/Turing.lean
 +++ b/src/lean/Millennium/Complexity/Turing.lean
 @@ -3,6 +3,7 @@
@@ -3418,14 +3217,6 @@
  
  namespace DeltaRH
  
-@@ -147,6 +150,7 @@
-   rfl
- 
- end DeltaRH
-+/-
-   The Delta_RH operator.
- 
-   Δ_RH(ρ) = |Re(ρ) - 1/2|
 --- a/src/lean/Millennium/Zeta/XiFunction.lean
 +++ b/src/lean/Millennium/Zeta/XiFunction.lean
 @@ -8,6 +8,8 @@
@@ -3471,17 +3262,18 @@
  /-- Abstract representation of an elliptic curve over ℚ -/
 --- a/src/lean4/Millennium/CoreDelta.lean
 +++ b/src/lean4/Millennium/CoreDelta.lean
-@@ -2,6 +2,9 @@
+@@ -2,6 +2,10 @@
  import Mathlib.Data.Fintype.Basic
  import Mathlib.Logic.Equiv.Basic
  import Mathlib.Logic.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
 +import Mathlib.Tactic
 +
 +noncomputable section
  
  /-
    CoreDelta.lean
-@@ -86,6 +89,7 @@
+@@ -86,6 +90,7 @@
    - A delta invariant Δ_k : X_k → ℝ
    
    The main theorem states that all problems are true iff all deltas
@@ -3489,7 +3281,7 @@
    are zero on their critical subsets.
  -/
  
-@@ -233,7 +237,7 @@
+@@ -233,7 +238,7 @@
  /-! ## Groups (State Configurations) -/
  
  /-- A state configuration assigns to each problem whether it is "near-solved" -/
@@ -3498,7 +3290,7 @@
  
  /-- The group of points where problems in J are ε-close and others are not -/
  def group (ε : ℝ) (J : Finset ProblemIndex) (p : DeltaPoint F) : Prop :=
-@@ -249,7 +253,7 @@
+@@ -249,7 +254,7 @@
  /-- Number of problems -/
  def count : ℕ := 7
  
@@ -3626,16 +3418,18 @@
  
 --- a/src/lean4/Millennium/RH.lean
 +++ b/src/lean4/Millennium/RH.lean
-@@ -4,6 +4,8 @@
+@@ -3,6 +3,10 @@
+ import Millennium.CoreDelta
  import Mathlib.Data.Real.Basic
  import Mathlib.Analysis.SpecialFunctions.Pow.Real
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Sqrt
 +
++noncomputable section
+ 
  /-
    RH.lean
-   Lean4 formalization of the Riemann Hypothesis Δ-formulation
-@@ -19,6 +21,7 @@
+@@ -19,6 +23,7 @@
      Δ_RH(s) = |Re(s) - 1/2|
      
    RH ⟺ ∀ s ∈ X_RH, Δ_RH(s) = 0
@@ -3643,7 +3437,7 @@
  -/
  
  
-@@ -163,6 +166,7 @@
+@@ -163,6 +168,7 @@
    
    Main theorem:
      RH ⟺ ∀ρ ∈ non-trivial zeros, Δ_RH(ρ) = 0

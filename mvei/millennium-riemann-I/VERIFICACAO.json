@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T16:50:26+00:00",
+ "generated_at": "2026-11-03T08:19:01+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,7 +16,7 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (587ms) | ✔ [41/42] Built Cache.Main:c.o (583ms) | ✔ [42/42] Built cache:exe (683ms)",
+   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (631ms) | ✔ [41/42] Built Cache.Main:c.o (644ms) | ✔ [42/42] Built cache:exe (742ms)",
    "sorry_warnings": 2,
    "reconstructed": true,
    "bridges": [
@@ -1179,24 +1179,42 @@
      "linha": 34,
      "nome": "Riemann.Collapse.no_anomalous_from_I_ne_one",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Collapse.IConstant"
+     ],
      "dependencia_com_sorry": [
       "Riemann.IKernel.KernelDef",
-      "Riemann.INumber"
+      "Riemann.INumber",
+      "Riemann.Zeros.Anomalous",
+      "Riemann.Zeros.CriticalLine"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/Anomalous.olean' of module Riemann.Zeros.Anomalous does not exist — Riemann.Zeros.Anomalous não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/Anomalous.lean:8:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist"
+     "erro": "linha 40: invalid constructor ⟨...⟩, expected type must be an inductive type False → False",
+     "coluna": 8,
+     "trecho": "  intro ⟦⟨⟧z, _⟩",
+     "motivo": "importa Riemann.IKernel.KernelDef, Riemann.INumber, Riemann.Zeros.Anomalous, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "cross/lean/Riemann/Collapse/Constants.lean",
      "linha": 61,
      "nome": "Riemann.Collapse.RH_from_I_ne_one",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Collapse.IConstant"
+     ],
      "dependencia_com_sorry": [
       "Riemann.IKernel.KernelDef",
-      "Riemann.INumber"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/Anomalous.olean' of module Riemann.Zeros.Anomalous does not exist — Riemann.Zeros.Anomalous não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/Anomalous.lean:8:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist"
+      "Riemann.INumber",
+      "Riemann.Zeros.Anomalous",
+      "Riemann.Zeros.CriticalLine"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/INumber.lean",
@@ -1304,41 +1322,82 @@
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
      "linha": 21,
      "nome": "Riemann.Zeros.anomalous_zero_off_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Zeros.CriticalLine"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
      "linha": 29,
      "nome": "Riemann.Zeros.anomalous_zero_is_anomalous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Zeros.CriticalLine"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
      "linha": 35,
      "nome": "Riemann.Zeros.anomalous_zero_distance_pos",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Zeros.CriticalLine"
+     ],
+     "erro": "linha 41: type mismatch abs_pos.mpr (sub_ne_zero.mpr z.off_line) has type 0 < |z.s.re - 1 / 2| : Prop but is expected to have type ¬z.s.re - 2⁻¹ = 0 : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact abs_pos.mpr (sub_ne_zero",
+     "motivo": "importa Riemann.Zeros.CriticalLine, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
      "linha": 42,
      "nome": "Riemann.Zeros.anomalous_zero_side",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Zeros.CriticalLine"
+     ],
+     "erro": "linha 47: omega could not prove the goal: No usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by cons",
+     "coluna": 2,
+     "trecho": "  ⟦o⟧mega",
+     "motivo": "importa Riemann.Zeros.CriticalLine, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/Anomalous.lean",
      "linha": 56,
      "nome": "Riemann.Zeros.anomalous_left_or_right",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Zeros/CriticalLine.olean' of module Riemann.Zeros.CriticalLine does not exist — Riemann.Zeros.CriticalLine não compilou: /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:26:4: error: invalid declaration name 'Riemann.Zeros.CriticalZero.toNontrivialZero', structure 'Riemann.Zeros.CriticalZero' has field 'toNontrivialZero' | /tmp/mvei-rec-vpesx_aj/p/cross/lean/Riemann/Zeros/CriticalLine.lean:37:38: er"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.Zeros.CriticalLine"
+     ]
     },
     {
      "arquivo": "cross/lean/Riemann/Zeros/CriticalLine.lean",
@@ -2040,40 +2099,50 @@
      "arquivo": "lean/millennium/Riemann/Examples.lean",
      "linha": 134,
      "nome": "Millennium.Riemann.Examples.Transitions.large_transitions",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.ExtendedZeta",
       "Millennium.Riemann.NumericalHierarchy",
       "Millennium.Riemann.SymbolicZeta"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/ExtendedZeta.olean' of module Millennium.Riemann.ExtendedZeta does not exist — Millennium.Riemann.ExtendedZeta não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/ExtendedZeta.lean:145:30: error: type mismatch | /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/ExtendedZeta.lean:146:8: error: tactic 'introN' failed, insufficient number of binders"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Examples.lean",
      "linha": 175,
      "nome": "Millennium.Riemann.Examples.OperatorExamples.operators_increase",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.ExtendedZeta",
       "Millennium.Riemann.NumericalHierarchy",
       "Millennium.Riemann.SymbolicZeta"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/ExtendedZeta.olean' of module Millennium.Riemann.ExtendedZeta does not exist — Millennium.Riemann.ExtendedZeta não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/ExtendedZeta.lean:145:30: error: type mismatch | /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/ExtendedZeta.lean:146:8: error: tactic 'introN' failed, insufficient number of binders"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Examples.lean",
      "linha": 212,
      "nome": "Millennium.Riemann.Examples.ZetaExamples.critical_point_is_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
+      "Millennium.Riemann.ExtendedZeta",
       "Millennium.Riemann.NumericalHierarchy",
       "Millennium.Riemann.SymbolicZeta"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/ExtendedZeta.olean' of module Millennium.Riemann.ExtendedZeta does not exist — Millennium.Riemann.ExtendedZeta não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/ExtendedZeta.lean:145:30: error: type mismatch | /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/ExtendedZeta.lean:146:8: error: tactic 'introN' failed, insufficient number of binders"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/ExtendedZeta.lean",
@@ -2133,131 +2202,201 @@
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 174,
      "nome": "Millennium.Riemann.FormalAxioms.L1_phases_disjoint",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 191,
      "nome": "Millennium.Riemann.FormalAxioms.L2_phase_completeness",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 204,
      "nome": "Millennium.Riemann.FormalAxioms.L3_Phi_on_critical",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+     "erro": "linha 208: invalid field 'abs', the environment does not contain 'Real.abs' 1 - z.indet has type ℝ",
+     "coluna": 25,
+     "trecho": "  D11_Phi z = z.im ^ 2 * ⟦(⟧1 - z.indet).abs := by",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, Millennium.Riemann.NumericTransitions, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 213,
      "nome": "Millennium.Riemann.FormalAxioms.L4_Phi_zero",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+     "erro": "linha 222: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [sub_self]",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, Millennium.Riemann.NumericTransitions, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 223,
      "nome": "Millennium.Riemann.FormalAxioms.L5_strip_bounds",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 228,
      "nome": "Millennium.Riemann.FormalAxioms.L6_line_in_strip",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+     "erro": "linha 236: unsolved goals case left z : CollapseComplex h : z.re = criticalLineValue ⊢ 0 < criticalLineValue",
+     "coluna": 2,
+     "trecho": "  ⟦·⟧ norm_num",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, Millennium.Riemann.NumericTransitions, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 238,
      "nome": "Millennium.Riemann.FormalAxioms.L7_trivial_outside",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 252,
      "nome": "Millennium.Riemann.FormalAxioms.L8_nontrivial_in_strip",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 257,
      "nome": "Millennium.Riemann.FormalAxioms.L9_I_idempotent",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+     "erro": "linha 264: tactic 'constructor' failed, no applicable constructor found ⊢ { re := 0, im := 0, indet := 1 } * { re := 0, im := 0, indet := 1 } = { re := 0, im := 0, indet := 1 }",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧onstructor; ring",
+     "motivo": "importa Millennium.Riemann.CollapseComplex, Millennium.Riemann.HorizonComplex, Millennium.Riemann.NumericTransitions, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "lean/millennium/Riemann/FormalAxioms.lean",
      "linha": 397,
      "nome": "Millennium.Riemann.FormalAxioms.C5_classification_complete",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
-      "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/TwoPhaseTheorem.olean' of module Millennium.Riemann.TwoPhaseTheorem does not exist — Millennium.Riemann.TwoPhaseTheorem não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/TwoPhaseTheorem.lean:25:0: error: object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist"
+      "Millennium.Riemann.NumericTransitions",
+      "Millennium.Riemann.RefutationComplex",
+      "Millennium.Riemann.TwoPhaseTheorem"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/HorizonComplex.lean",
@@ -3146,27 +3285,35 @@
      "arquivo": "lean/millennium/Riemann/TwoPhaseTheorem.lean",
      "linha": 261,
      "nome": "Millennium.Riemann.TwoPhaseTheorem.L5_phases_exclusive",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.NumericTransitions",
       "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist — Millennium.Riemann.NumericTransitions não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/NumericTransitions.lean:51:27: error: unexpected token 'to'; expected ')' | /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/NumericTransitions.lean:78:16: error: invalid field 'abs', the environment does not contain 'Real.abs'"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/TwoPhaseTheorem.lean",
      "linha": 273,
      "nome": "Millennium.Riemann.TwoPhaseTheorem.L6_exactly_one_phase",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
       "Millennium.Riemann.CollapseComplex",
       "Millennium.Riemann.HorizonComplex",
+      "Millennium.Riemann.NumericTransitions",
       "Millennium.Riemann.RefutationComplex"
-     ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Millennium/Riemann/NumericTransitions.olean' of module Millennium.Riemann.NumericTransitions does not exist — Millennium.Riemann.NumericTransitions não compilou: /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/NumericTransitions.lean:51:27: error: unexpected token 'to'; expected ')' | /tmp/mvei-rec-vpesx_aj/p/lean/millennium/Riemann/NumericTransitions.lean:78:16: error: invalid field 'abs', the environment does not contain 'Real.abs'"
+     ]
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
@@ -3987,44 +4134,80 @@
      "linha": 14,
      "nome": "Riemann.Zeros.verticalSymmetry",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
+      "Riemann.Core.FunctionalEquation",
       "Riemann.Core.ZetaDef"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
+     "erro": "linha 18: unknown identifier 'reflectionPair'",
+     "coluna": 22,
+     "trecho": "  obtain ⟨z', hz'⟩ := ⟦r⟧eflectionPair z",
+     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
      "linha": 20,
      "nome": "Riemann.Zeros.horizontalSymmetry",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
+      "Riemann.Core.FunctionalEquation",
       "Riemann.Core.ZetaDef"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
+     "erro": "linha 24: unknown identifier 'conjugatePair'",
+     "coluna": 22,
+     "trecho": "  obtain ⟨z', hz'⟩ := ⟦c⟧onjugatePair z",
+     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
      "linha": 26,
      "nome": "Riemann.Zeros.quartetStructure",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
+      "Riemann.Core.FunctionalEquation",
       "Riemann.Core.ZetaDef"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
+     "erro": "linha 32: invalid field notation, type is not of the form (C ...) where C is a constant z has type AnomalousZero",
+     "coluna": 11,
+     "trecho": "    z₁.s = ⟦z⟧.s ∧",
+     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
      "linha": 37,
      "nome": "Riemann.Zeros.criticalPairStructure",
      "status": "nao_alcancado",
-     "axioms": [],
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
      "dependencia_com_sorry": [
+      "Riemann.Core.FunctionalEquation",
       "Riemann.Core.ZetaDef"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
+     "erro": "linha 41: unknown constant 'Complex.conj'",
+     "coluna": 32,
+     "trecho": "∃ z' : NontrivialZero, z'.s = ⟦C⟧omplex.conj z.s ∧ ",
+     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
@@ -4033,9 +4216,13 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
+      "Riemann.Core.FunctionalEquation",
       "Riemann.Core.ZetaDef"
      ],
-     "motivo": "object file '/tmp/mvei-rec-vpesx_aj/p/.lake/mvei-salvage/Riemann/Core/FunctionalEquation.olean' of module Riemann.Core.FunctionalEquation does not exist — Riemann.Core.FunctionalEquation não compilou: /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:24: error: unknown constant 'Real.pi' | /tmp/mvei-rec-vpesx_aj/p/src/Riemann/Core/FunctionalEquation.lean:16:43: error: unknown constant 'Complex.Gamma'"
+     "erro": "linha 47: invalid field notation, type is not of the form (C ...) where C is a constant z has type AnomalousZero",
+     "coluna": 2,
+     "trecho": "  ⟦z⟧.s ≠ 1 - z.s ∧ z.s ≠ Complex.",
+     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "src/Riemann/Zeros/Trivial.lean",
@@ -4111,7 +4298,7 @@
     "aberto-sorry": 1,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793349359
+   "hora_commit_mvei": 1793652851
   }
  ]
 }

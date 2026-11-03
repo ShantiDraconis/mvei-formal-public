@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `51382911549ca362b73b24d57d6b62027282ca7b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `51382911549ca362b73b24d57d6b62027282ca7b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 0 | 1 | 0 | 1 / 0 / 1 / 1 / 5 |
+| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 0 | 1 | 0 | 1 / 0 / 3 / 1 / 3 |
 | `lean` | v4.19.0 | partial | 27 | 5 | 6 | 0 / 5 / 1 / 0 / 1 |
 
 | Closed theorems in this repository | |
@@ -41,6 +41,8 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `51382911549ca362b73b2
 | `rh_analysis` | `lean` | open | `Theory`, `Consistent`, `Provable`, `ZFC`, `RH`, `sorryAx` |
 | `ym_spectral` | `lean` | conditional | `YangMills_MassGap` |
 | `independence_implies_dual_state` | `. (file by file)` | open | `sorryAx` |
+| `MetaMillennium.ZFC.independence_iff_models` | `. (file by file)` | open | `sorryAx` |
+| `MetaMillennium.ZFC.independence_neg` | `. (file by file)` | open | `sorryAx` |
 | `classical_preserved_nonsingular` | `lean (file by file)` | conditional | `PropCollapse`, `classical_implies_collapse` |
 | `equivalence_fragile_at_singularity` | `lean (file by file)` | open | `PropCollapse`, `sorryAx` |
 | `de_intro` | `lean (file by file)` | conditional | `PropCollapse`, `classical_implies_collapse` |
@@ -50,11 +52,11 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `51382911549ca362b73b2
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting copies). The kernel checked 19 of them (1 closed, 10 conditional, 8 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 7 the kernel has no result:
+The `.lean` files of the verified commit declare 26 `theorem`/`lemma` (counting copies). The kernel checked 21 of them (1 closed, 10 conditional, 10 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 5 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 6 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 4 |
 | checked file by file: the written proof does not pass the kernel | 1 |
 
 ### MVEI corrections

@@ -57,7 +57,7 @@
  
  namespace BSD.Bridge
  
-@@ -202,8 +205,6 @@
+@@ -206,8 +209,6 @@
  Conditional theorems that would establish BSD if certain properties hold.
  -/
  
@@ -82,7 +82,7 @@
  
  namespace Millennium
  
-@@ -95,7 +97,6 @@
+@@ -97,7 +99,6 @@
  that underlies the Local-Global approach to the Millennium Prize Problems.
  -/
  
@@ -112,7 +112,7 @@
  
  namespace NavierStokes.Bridge
  
-@@ -202,8 +205,6 @@
+@@ -204,8 +207,6 @@
  if certain properties can be established.
  -/
  
@@ -140,7 +140,7 @@
  
  /-- NS Framework: X = velocity fields, L = initial data, G = regularity -/
  axiom VelocityField : Type
-@@ -33,8 +36,6 @@
+@@ -35,8 +38,6 @@
  Navier-Stokes formalization as a Framework.
  -/
  
@@ -151,21 +151,14 @@
  
 --- a/formal/lean/Problems/RH.lean
 +++ b/formal/lean/Problems/RH.lean
-@@ -1,8 +1,12 @@
-+import Unified.Framework
+@@ -1,11 +1,13 @@
 +import UnifiedMath.Framework
 +import UnifiedMath.TUNS
 +import TUNS.Framework
 +
  /-
- Riemann Hypothesis framework in Lean 4.
- -/
+ Riemann Hypothesis Framework in Lean
  
--import Unified.Framework
- 
- -- Placeholder for Riemann zeta function (requires proper Mathlib implementation)
- axiom ζ : ℂ → ℂ
-@@ -36,8 +40,6 @@
  Framework formalization for RH.
  -/
  
@@ -174,71 +167,13 @@
  
  /-- RH Framework: X = zeros, L = Im(ρ), G = on critical line? -/
  def RHFramework : Framework :=
-@@ -64,7 +66,6 @@
+@@ -32,7 +34,6 @@
  Riemann Hypothesis formalization as a Framework.
  -/
  
 -import TUNS.Framework
  
  namespace TUNS.Problems
- 
---- a/formal/lean/PvsNP/BridgeTheorem.lean
-+++ b/formal/lean/PvsNP/BridgeTheorem.lean
-@@ -1,3 +1,8 @@
-+import Mathlib.Tactic
-+import Mathlib.Data.Finset.Basic
-+import PvsNP.Classical
-+import Mathlib.Computability.TuringMachine
-+
- /-
- Copyright (c) 2024 LG-Math-OS Project. All rights reserved.
- Released under MIT license.
-@@ -9,15 +14,11 @@
- Institute standards.
- -/
- 
--import Mathlib.Tactic
--import Mathlib.Data.Finset.Basic
- Bridge Theorem for P vs NP
- 
- Conditional theorems that would resolve P vs NP if certain properties hold.
- -/
- 
--import PvsNP.Classical
--import Mathlib.Computability.TuringMachine
- 
- namespace PvsNP.Bridge
- 
---- a/formal/lean/RH/BridgeTheorem.lean
-+++ b/formal/lean/RH/BridgeTheorem.lean
-@@ -1,3 +1,9 @@
-+import Mathlib.Tactic
-+import Mathlib.Analysis.Complex.Basic
-+import Mathlib.NumberTheory.ZetaFunction
-+import RH.Classical
-+import Mathlib.Analysis.SpecialFunctions.Complex.Log
-+
- /-
- Copyright (c) 2024 LG-Math-OS Project. All rights reserved.
- Released under MIT license.
-@@ -9,9 +15,6 @@
- Mathematics Institute standards.
- -/
- 
--import Mathlib.Tactic
--import Mathlib.Analysis.Complex.Basic
--import Mathlib.NumberTheory.ZetaFunction
- 
- namespace RH.Bridge
- 
-@@ -185,8 +188,6 @@
- stating conditional theorems of the form "If Property X holds, then RH is true."
- -/
- 
--import RH.Classical
--import Mathlib.Analysis.SpecialFunctions.Complex.Log
- 
- namespace RH.Bridge
  
 --- a/formal/theorems/main_delta_collapse.lean
 +++ b/formal/theorems/main_delta_collapse.lean
@@ -267,7 +202,7 @@
  
  /-!
  # The Delta Collapse Framework
-@@ -34,9 +38,6 @@
+@@ -314,9 +318,6 @@
  -- Main Delta Collapse Theorem - Lean 4
  -- Unified proof of the Millennium Prize Problems via ∆-framework
  
@@ -337,7 +272,7 @@
  
  /-! ## Notation and Conventions -/
  
-@@ -250,10 +254,6 @@
+@@ -252,10 +256,6 @@
  All gaps are closed except the Clay Institute decision problem itself.
  -/
  
@@ -373,81 +308,6 @@
 -import Mathlib.Data.Real.Basic
  
  namespace Clay
- 
---- a/lean4/UnifiedSystem.lean
-+++ b/lean4/UnifiedSystem.lean
-@@ -1,3 +1,7 @@
-+import Mathlib.Data.Real.Basic
-+import Mathlib.Data.Set.Basic
-+import Mathlib.Logic.Basic
-+
- /-
-   UnifiedSystem.lean
-   Formal Definition of the Three Mathematical Systems: S_cl, S_exp, S_new
-@@ -19,9 +23,6 @@
-   - WeakSol ↔ StrongSol in S_new
- -/
- 
--import Mathlib.Data.Real.Basic
--import Mathlib.Data.Set.Basic
--import Mathlib.Logic.Basic
- 
- namespace UnifiedSystem
- 
-@@ -326,7 +327,6 @@
-   Main result: S_new is a conservative extension where Ω = 0
- -/
- 
--import Mathlib.Data.Real.Basic
- 
- namespace UnifiedSystem
- 
---- a/lean4/UniversalUnification.lean
-+++ b/lean4/UniversalUnification.lean
-@@ -1,3 +1,17 @@
-+import UniversalUnification.MathDomain
-+import UniversalUnification.UniversalOperators
-+import UniversalUnification.UniversalSpectrum
-+import UniversalUnification.UniversalEnergy
-+import UniversalUnification.UniversalTime
-+import UniversalUnification.CategoryOfProblems
-+import UniversalUnification.Bridges
-+import UniversalUnification.TUNS
-+import Mathlib.CategoryTheory.Category.Basic
-+import Mathlib.CategoryTheory.Functor.Basic
-+import Mathlib.Data.Real.Basic
-+import Mathlib.Data.Complex.Basic
-+import Mathlib.Topology.Basic
-+
- /-
- Copyright (c) 2025 ShantiDraconis. All rights reserved.
- Released under Apache 2.0 license as described in the file LICENSE.
-@@ -21,14 +35,6 @@
- 
- -/
- 
--import UniversalUnification.MathDomain
--import UniversalUnification.UniversalOperators
--import UniversalUnification.UniversalSpectrum
--import UniversalUnification.UniversalEnergy
--import UniversalUnification.UniversalTime
--import UniversalUnification.CategoryOfProblems
--import UniversalUnification.Bridges
--import UniversalUnification.TUNS
- # Universal Unification Framework - Lean 4 Formalization
- 
- This file formalizes the Universal Unification of 14 Comparable Mathematical Domains.
-@@ -37,11 +43,6 @@
- Date: 2025
- -/
- 
--import Mathlib.CategoryTheory.Category.Basic
--import Mathlib.CategoryTheory.Functor.Basic
--import Mathlib.Data.Real.Basic
--import Mathlib.Data.Complex.Basic
--import Mathlib.Topology.Basic
- 
- universe u v w
  
 --- a/src/lean/Millennium/Complexity/DeltaNP.lean
 +++ b/src/lean/Millennium/Complexity/DeltaNP.lean
@@ -583,7 +443,7 @@
      L₁ ≤_m L₂ if there exists f ∈ P such that ∀ x, x ∈ L₁ ⟺ f(x) ∈ L₂
  -/
  def PolynomialReduction : Language → Language → Prop := fun _ _ => True
-@@ -182,23 +184,22 @@
+@@ -182,16 +184,16 @@
  
  /-! ### Time Complexity Classes -/
  
@@ -602,8 +462,9 @@
 -/-- NP = ⋃_{k≥1} NTIME(n^k) -/
 +/- NP = ⋃_{k≥1} NTIME(n^k) -/
  def NP_class : Set Language := Set.univ
-   The Delta_NP operator.
  
+ /-
+@@ -200,7 +202,6 @@
    Measures the computational gap between P and NP.
  -/
  
@@ -630,7 +491,7 @@
  
  open Complex
  
-@@ -152,7 +154,6 @@
+@@ -154,7 +156,6 @@
    Measures deviation from the critical line.
  -/
  

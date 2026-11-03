@@ -24,16 +24,17 @@
  Instância concreta de `IField ℝ`.
 --- a/src/FormalSuite/Core/MeasurePDE.lean
 +++ b/src/FormalSuite/Core/MeasurePDE.lean
-@@ -15,6 +15,8 @@
+@@ -14,6 +14,9 @@
+ import Mathlib.Analysis.Normed.Group.Basic
  import Mathlib.Topology.MetricSpace.Basic
  import FormalSuite.Core.Prelude
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Sqrt
 +
++noncomputable section
+ 
  /-!
  # Measure Theory and PDE Structures
- 
-@@ -94,7 +96,7 @@
+@@ -94,7 +97,7 @@
  lemma L2Norm.zero_val (α : Type*) [NormedAddCommGroup α] :
      (L2Norm.zero α).val = 0 := rfl
  
@@ -42,7 +43,7 @@
  H¹ Sobolev norm structure.
  
  The H¹ norm combines the L² norm of the function with the
-@@ -153,7 +155,7 @@
+@@ -153,7 +156,7 @@
  @[simp]
  lemma EnergyFunctional.zero_energy : EnergyFunctional.zero.energy = 0 := rfl
  
@@ -87,16 +88,18 @@
  @[simp]
 --- a/src/FormalSuite/Geometry/Cone00.lean
 +++ b/src/FormalSuite/Geometry/Cone00.lean
-@@ -25,6 +25,8 @@
+@@ -24,6 +24,10 @@
+ import FormalSuite.I.Foundations
  import Mathlib.Analysis.InnerProductSpace.Basic
  import Mathlib.Topology.MetricSpace.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 +
++noncomputable section
+ 
  /-!
  # Geometric Cone Structures
- 
-@@ -186,7 +188,7 @@
+@@ -186,7 +190,7 @@
    unfold distToVertex
    simp
  
@@ -105,7 +108,7 @@
  lemma distToVertex_smul {n : ℕ} (x : Fin n → ℝ) (c : ℝ) (hc : 0 ≤ c) :
      distToVertex (c • x) = c * distToVertex x := by
    unfold distToVertex
-@@ -248,7 +250,7 @@
+@@ -248,7 +252,7 @@
    ext x
    simp [Cone.I_scaled, IField.I_eq_one]
  
@@ -210,16 +213,18 @@
  structure EnergyBound where
 --- a/src/FormalSuite/NavierStokes/PDEEnergyInequalities.lean
 +++ b/src/FormalSuite/NavierStokes/PDEEnergyInequalities.lean
-@@ -18,6 +18,8 @@
+@@ -17,6 +17,10 @@
+ 
  import FormalSuite.Core.MeasurePDE
  import FormalSuite.I.Foundations
- 
-+noncomputable section
++import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Analysis.SpecialFunctions.Exp
 +
++noncomputable section
+ 
  /-!
  # PDE Energy Inequalities
- 
-@@ -111,7 +113,7 @@
+@@ -111,7 +115,7 @@
    /-- Decay rate. -/
    decayRate : ℝ
    /-- Decay rate is positive. -/
@@ -228,7 +233,7 @@
    /-- Energy at time t. -/
    E : ℝ → ℝ
    /-- Energy is non-negative. -/
-@@ -138,31 +140,31 @@
+@@ -138,31 +142,31 @@
      · linarith
      · intro t _
        have h := ed.decay_bound t (by linarith)
@@ -268,7 +273,7 @@
            linarith
        linarith
      · intro t ht
-@@ -171,17 +173,17 @@
+@@ -171,17 +175,17 @@
        -- Since t ≥ T = log(E₀/ε)/λ + 1 > log(E₀/ε)/λ
        -- We have λt > log(E₀/ε), so -λt < -log(E₀/ε) = log(ε/E₀)
        -- Thus exp(-λt) < ε/E₀, so E₀ * exp(-λt) < ε
@@ -290,7 +295,7 @@
        _ < ed.E₀ * (ε / ed.E₀) := by apply mul_lt_mul_of_pos_left hexp hE₀
        _ = ε := by field_simp
  
-@@ -259,11 +261,11 @@
+@@ -259,11 +263,11 @@
    unfold I_L2_norm
    simp [IField.I_eq_one]
  
@@ -306,15 +311,16 @@
  
 --- a/src/FormalSuite/Zeta/CollapseLemmaRH.lean
 +++ b/src/FormalSuite/Zeta/CollapseLemmaRH.lean
-@@ -25,6 +25,8 @@
+@@ -24,6 +24,9 @@
+ 
  import FormalSuite.Zeta.ZetaIFormal
  import FormalSuite.I.OperatorAlgebra
- 
-+noncomputable section
++import Mathlib.Data.Complex.Basic
 +
++noncomputable section
+ 
  /-!
  # Collapse Lemma for Riemann Hypothesis
- 
 --- a/src/FormalSuite/Zeta/ZetaIFormal.lean
 +++ b/src/FormalSuite/Zeta/ZetaIFormal.lean
 @@ -30,6 +30,8 @@
@@ -377,3 +383,16 @@
  
  /-!
  ## Collapse Tests
+--- a/test/Zeta/ZetaISpec.lean
++++ b/test/Zeta/ZetaISpec.lean
+@@ -9,6 +9,10 @@
+ 
+ import FormalSuite.Zeta.ZetaIFormal
+ import FormalSuite.Zeta.CollapseLemmaRH
++import Mathlib.Data.Complex.Basic
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.PushNeg
+ 
+ /-!
+ # Zeta I Tests

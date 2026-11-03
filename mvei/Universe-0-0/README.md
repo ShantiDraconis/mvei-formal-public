@@ -11,20 +11,20 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `provers/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 30 | 1 | 3 | 15 / 11 / 60 / 64 / 105 |
+| `provers/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 30 | 1 | 3 | 15 / 11 / 65 / 64 / 100 |
 | `universe-00/applications/millennium/riemann` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 4 / 0 / 8 |
-| `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 2 / 1 / 5 / 22 / 75 |
+| `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 5 / 1 / 31 / 22 / 46 |
 | `universe-00/core/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 0 / 7 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 47 |
-| Unique (name + statement) | 47 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 33 |
+| Counting each project | 50 |
+| Unique (name + statement) | 50 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 36 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -97,6 +97,11 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ad86336840111095220c6
 | `UncertaintyProtection.protection_bounded` | `provers/lean (file by file)` | open | `sorryAx` |
 | `spectrum_is_real` | `provers/lean (file by file)` | open | `sorryAx` |
 | `fredholm_essential_spectrum` | `provers/lean (file by file)` | open | `sorryAx` |
+| `riemann_hypothesis` | `provers/lean (file by file)` | open | `sorryAx`, `LogicCorrelationOperator.riemannZeta` |
+| `spectral_entropy_circuit_complexity` | `provers/lean (file by file)` | open | `sorryAx` |
+| `riemann_resonances` | `provers/lean (file by file)` | open | `sorryAx`, `LogicCorrelationOperator.riemannZeta` |
+| `yang_mills_gap_evolution` | `provers/lean (file by file)` | open | `sorryAx` |
+| `hodge_monodromy` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.ZetaFunction.zeta_convergence` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.ZetaFunction.zeta_pole_at_one` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.ZetaFunction.functional_equation_zeros` | `provers/lean (file by file)` | open | `sorryAx` |
@@ -113,6 +118,32 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ad86336840111095220c6
 | `AxiomaticFoundations.finite_approximation` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx`, `AxiomaticFoundations.H_adelic` |
 | `UFTAxioms.ground_state_energy_zero` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
 | `UFTAxioms.spectral_gap_exists` | `universe-00/applications/unified-field-theory/proofs (file by file)` | conditional | `UFTAxioms.axiom_A7` |
+| `UFTHamiltonian.kinetic_energy_nonneg` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.potential_convex_at_minimum` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.hamiltonian_self_adjoint` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.hamiltonian_bounded_below` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.ground_state_exists` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.ground_state_unique` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.first_excited_energy` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.time_evolution_unitary` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.ground_state_stationary` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTHamiltonian.ground_state_solves_all` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTOperators.ns_operator_bounds_energy` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTOperators.bsd_rank_equality` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTOperators.hodge_classes_algebraic` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTOperators.ym_mass_gap_numerical` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTOperators.operators_are_coupled` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UFTOperators.coupling_antisymmetric` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.ground_state_unique` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.pnp_separated_via_entropy` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.ns_regular_via_energy` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.ym_mass_gap_via_axiom` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.potential_convex` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.millennium_unification` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.simultaneous_resolution` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.uft_universe00_compatible` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.hamiltonian_computable` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| `UnifiedFieldTheory.ground_state_variational` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
 | `UniversalUnificationOperator.spectral_decomposition` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
 | `UniversalUnificationOperator.ground_state_exists` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
 | `Universe00.zero_div_zero_is_I` | `universe-00/core/lean (file by file)` | open | `sorryAx`, `Universe00.div_I` |
@@ -120,18 +151,19 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ad86336840111095220c6
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 115 of them (28 closed, 13 conditional, 74 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 281 the kernel has no result:
+The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 149 of them (31 closed, 13 conditional, 105 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 247 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 195 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 161 |
 | checked file by file: the written proof does not pass the kernel | 86 |
 
 ### MVEI corrections
 
+* `correcoes/a-arquivos-corrompidos.patch` (arquivo corrompido no repositório (merge add/add resolvido aceitando os dois lados: linhas das duas versões intercaladas), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/a-arquivos-corrompidos.patch` (in order, after the ones above)
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 6 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 10 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 55 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 * `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Universe-0-0 mvei/Universe-0-0/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
 

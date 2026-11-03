@@ -11,25 +11,25 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 128 | 2 | 5 | 18 / 6 / 18 / 19 / 10 |
-| `formal/lean` | v4.19.0 | partial | 79 | 18 | 2 | 6 / 2 / 22 / 8 / 30 |
+| `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 128 | 2 | 5 | 18 / 6 / 19 / 19 / 9 |
+| `formal/lean` | v4.19.0 | partial | 79 | 18 | 2 | 6 / 3 / 28 / 8 / 23 |
 | `formal/theorems` | v4.12.0 | failed | 0 | 0 | 0 | 3 / 3 / 0 / 0 / 1 |
-| `lean` | v4.19.0 | partial | 81 | 9 | 7 | 8 / 9 / 8 / 5 / 5 |
-| `lean4` | v4.12.0 | partial | 432 | 6 | 6 | 76 / 21 / 112 / 71 / 48 |
+| `lean` | v4.19.0 | partial | 82 | 9 | 7 | 8 / 9 / 8 / 5 / 5 |
+| `lean4` | v4.12.0 | partial | 432 | 6 | 6 | 80 / 22 / 117 / 72 / 37 |
 | `rh-umi-invariant/formal/lean` | v4.12.0 | OK | 0 | 2 | 0 | — |
-| `src/lean` | v4.19.0 | partial | 13 | 0 | 1 | 5 / 4 / 0 / 6 / 21 |
+| `src/lean` | v4.19.0 | partial | 13 | 0 | 1 | 17 / 5 / 4 / 6 / 4 |
 | `src/lean4` | v4.3.0 | partial | 3 | 0 | 0 | 5 / 0 / 4 / 1 / 33 |
-| `universe00` | v4.19.0 | partial | 32 | 0 | 0 | 3 / 0 / 0 / 1 / 11 |
+| `universe00` | v4.19.0 | partial | 32 | 0 | 0 | 5 / 0 / 9 / 1 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 892 |
-| Unique (name + statement) | 890 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 229 |
+| Counting each project | 911 |
+| Unique (name + statement) | 910 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 248 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -112,6 +112,7 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `5c5ec3d9597f5ffd00210
 | `meta_unification` | `. (file by file)` | open | `FinalState`, `ThermalTrigger`, `barco_escola`, `solar_colonization`, `sorryAx` |
 | `authority_loop_amplification` | `. (file by file)` | open | `sorryAx`, `truth_server`, `youtube_algorithm_recognition` |
 | `MillenniumGroups.Group2.NavierStokes_Existence_Smoothness` | `. (file by file)` | open | `sorryAx` |
+| `gronwall_energy_bound` | `. (file by file)` | open | `sorryAx` |
 | `energy_inequality_rh` | `. (file by file)` | open | `sorryAx` |
 | `oscillation_cancellation` | `. (file by file)` | open | `sorryAx`, `ζ` |
 | `gaussian_tail_bound` | `. (file by file)` | open | `sorryAx` |
@@ -123,6 +124,12 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `5c5ec3d9597f5ffd00210
 | `BSD.Classical.weak_bsd_gap` | `formal/lean (file by file)` | open | `sorryAx`, `BSD.Classical.EllipticCurve`, `BSD.Classical.L`, `BSD.Classical.ord_s_1`, `BSD.Classical.rank` |
 | `Millennium.adequate_implies_unifying` | `formal/lean (file by file)` | conditional | `Millennium.Adequate` |
 | `Millennium.local_to_global_adequacy` | `formal/lean (file by file)` | conditional | `Millennium.Adequate`, `Millennium.AdequateGlobal_iff`, `Millennium.AdequateP` |
+| `NavierStokes.Bridge.lps_criterion` | `formal/lean (file by file)` | open | `sorryAx` |
+| `NavierStokes.Bridge.bkm_criterion` | `formal/lean (file by file)` | open | `sorryAx` |
+| `NavierStokes.Bridge.ns_2d_global_existence` | `formal/lean (file by file)` | open | `sorryAx` |
+| `NavierStokes.Bridge.ns_local_existence` | `formal/lean (file by file)` | open | `sorryAx` |
+| `rh_characterization` | `formal/lean (file by file)` | conditional | `ζ` |
+| `rh_iff_critical_line` | `formal/lean (file by file)` | open | `sorryAx`, `ζ` |
 | `PvsNP.Bridge.cook_levin` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.bridge_theorem_separation` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.P_subset_NP` | `formal/lean (file by file)` | open | `sorryAx` |
@@ -139,6 +146,7 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `5c5ec3d9597f5ffd00210
 | `RH.Bridge.RH.Bridge.rh_bridge_existence` | `formal/lean (file by file)` | open | `sorryAx`, `RH.Classical.ζ` |
 | `Millennium.RH.bridge_rh` | `formal/lean (file by file)` | open | `sorryAx` |
 | `Millennium.RH.classical_rh_from_bridge` | `formal/lean (file by file)` | open | `sorryAx` |
+| `TUNS.universal_spectrum_unique` | `formal/lean (file by file)` | open | `sorryAx` |
 | `DeltaCollapse.extended_completeness` | `formal/theorems (file by file)` | conditional | `DeltaCollapse.Delta`, `DeltaCollapse.I`, `DeltaCollapse.extended_solutions` |
 | `DeltaCollapse.main_delta_collapse_theorem` | `formal/theorems (file by file)` | conditional | `DeltaCollapse.Delta`, `DeltaCollapse.I`, `DeltaCollapse.extended_solutions` |
 | `DeltaCollapse.strict_extension` | `formal/theorems (file by file)` | conditional | `DeltaCollapse.Delta`, `DeltaCollapse.I`, `DeltaCollapse.extended_solutions` |
@@ -175,33 +183,26 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `5c5ec3d9597f5ffd00210
 | `ClassicalObstruction.no_strong_solution_RH` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
 | `ClassicalObstruction.no_strong_solution_BSD` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
 | `ClassicalObstruction.no_strong_solution_Hodge` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
-| `ClassicalObstruction.no_strong_solution_NS` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
-| `ClassicalObstruction.no_strong_solution_YM` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
-| `ClassicalObstruction.no_strong_solution_PvsNP` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
-| `ClassicalObstruction.no_strong_solution_Poincare` | `lean4 (file by file)` | open | `sorryAx`, `ClassicalObstruction.E1_unification_bound`, `ClassicalObstruction.E2_bridge_bound`, `ClassicalObstruction.E3_singularity_bound`, `ClassicalObstruction.E4_expressivity_bound`, `ClassicalObstruction.Law_7_1`, `ClassicalObstruction.S_cl`, `ClassicalObstruction.StrongSolution_p`, `ClassicalObstruction.op_B`, `ClassicalObstruction.op_Exp`, `ClassicalObstruction.op_Sing_unif`, `ClassicalObstruction.op_U` |
-| `DeltaGap44.severe_obstruction_threshold` | `lean4 (file by file)` | open | `sorryAx` |
-| `DeltaGap44.no_strong_solution_classical` | `lean4 (file by file)` | open | `sorryAx` |
-| `DeltaGap44.structural_impossibility` | `lean4 (file by file)` | open | `sorryAx` |
-| `MillenniumFramework.BSD_bridge_characterization` | `lean4 (file by file)` | open | `sorryAx` |
-| … 117 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| … 145 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 411 of them (170 closed, 58 conditional, 183 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 276 the kernel has no result:
+The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 456 of them (187 closed, 61 conditional, 208 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 231 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 158 |
-| checked file by file: the written proof does not pass the kernel | 108 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 112 |
+| checked file by file: the written proof does not pass the kernel | 109 |
 | the file did not compile (an error in it or in a file it imports) | 5 |
 | the file compiled, but the name did not appear in the kernel (private, mutual or macro-generated) | 5 |
 
 ### MVEI corrections
 
-* `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 20 file(s)): made for the verified commit; it does not apply to the published commit as is
-* `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 23 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/a-arquivos-corrompidos.patch` (arquivo corrompido no repositório (merge add/add resolvido aceitando os dois lados: linhas das duas versões intercaladas), 23 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/a-arquivos-corrompidos.patch` (in order, after the ones above)
+* `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 16 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 24 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 12 file(s)): made for the verified commit; it does not apply to the published commit as is
-* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 222 file(s)): made for the verified commit; it does not apply to the published commit as is
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 221 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 27 file(s)): made for the verified commit; it does not apply to the published commit as is
 * `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Millennium mvei/Millennium/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
