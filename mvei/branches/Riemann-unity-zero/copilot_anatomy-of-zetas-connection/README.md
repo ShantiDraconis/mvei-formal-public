@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/anatomy-of-zetas-connection` of the private repository `ShantiDraconis/Riemann-unity-zero`, commit `d4651e791c3c1fd1f4333fe73e23b76555bd90e5` (2026-01-17T07:06:17+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 24 — closed 9, conditional 0, open 4, proof error 11, not reached 0, no result 0.
+* Theorems only on branches, in this branch: 24 — closed 11, conditional 0, open 5, proof error 8, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `c40aaf0aa924a52b83454028ef9e5d32d81cde0d946379029ee5851f13763875`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-unity-zero/copilot_anatomy-of-zetas-connection/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `7ffb1cc31436e167e5de3fc7c5f09b7745af0c3004d2ce3b4b6af643c35b1a5e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-unity-zero/copilot_anatomy-of-zetas-connection/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -13,7 +13,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 |---|---|---|
 | `RiemannGeometry.angle_approx` | `formal/lean/RiemannGeometry.lean`:48 | aberto-sorry |
 | `RiemannGeometry.angle_is_acute` | `formal/lean/RiemannGeometry.lean`:243 | aberto-sorry |
-| `RiemannGeometry.angle_value` | `formal/lean/RiemannGeometry.lean`:45 | erro |
+| `RiemannGeometry.angle_value` | `formal/lean/RiemannGeometry.lean`:45 | fechado |
 | `RiemannGeometry.critical_line_bisects_base` | `formal/lean/RiemannGeometry.lean`:202 | erro |
 | `RiemannGeometry.critical_value_is_midpoint` | `formal/lean/RiemannGeometry.lean`:194 | fechado |
 | `RiemannGeometry.fundamental_vector_magnitude` | `formal/lean/RiemannGeometry.lean`:189 | fechado |
@@ -28,9 +28,9 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `RiemannGeometry.mirror_involution` | `formal/lean/RiemannGeometry.lean`:134 | erro |
 | `RiemannGeometry.mirror_preserves_critical_line` | `formal/lean/RiemannGeometry.lean`:125 | erro |
 | `RiemannGeometry.origin_on_hypotenuse` | `formal/lean/RiemannGeometry.lean`:60 | fechado |
-| `RiemannGeometry.scale_invariance` | `formal/lean/RiemannGeometry.lean`:212 | erro |
+| `RiemannGeometry.scale_invariance` | `formal/lean/RiemannGeometry.lean`:212 | aberto-sorry |
 | `RiemannGeometry.slope_equals_half` | `formal/lean/RiemannGeometry.lean`:105 | erro |
-| `RiemannGeometry.slope_is_tangent` | `formal/lean/RiemannGeometry.lean`:115 | erro |
+| `RiemannGeometry.slope_is_tangent` | `formal/lean/RiemannGeometry.lean`:115 | fechado |
 | `RiemannGeometry.symmetric_distances` | `formal/lean/RiemannGeometry.lean`:154 | fechado |
 | `RiemannGeometry.unique_intersection` | `formal/lean/RiemannGeometry.lean`:222 | erro |
 | `RiemannGeometry.unity_origin_mirror` | `formal/lean/RiemannGeometry.lean`:141 | erro |

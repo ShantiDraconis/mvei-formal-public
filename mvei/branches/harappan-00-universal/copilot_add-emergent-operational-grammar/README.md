@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-emergent-operational-grammar` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 5 — closed 5, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `3ff06f5d3d3e6788234ac69164f9e552e62d39c0b071f1a1454e8cc8dd5cbae3`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_add-emergent-operational-grammar/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `61eec7244d264ae35d9de7a3a08ab593077fd72003045b184ba5bdbebc924816`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_add-emergent-operational-grammar/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

@@ -38,7 +38,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-30T16:50:26+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.19.0",
    "padrão do elan"
@@ -55,7 +55,7 @@
    "name": "Universe00.Core.LimitTheorems.first_limit_dominates",
    "file": "provers/lean/Universe00/Core/LimitState.lean",
    "line": 211,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (r1 r2 : LimitReason) (f : α → Outcome β) : Outcome.bind (Outcome.limit r1) f = Outcome.limit r1"
   },
@@ -63,7 +63,7 @@
    "name": "Universe00.Core.LimitTheorems.limit_not_explosion",
    "file": "provers/lean/Universe00/Core/LimitState.lean",
    "line": 184,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (ls : LimitState) : ∀ (a b : α), a ≠ b → ¬(Outcome.limit ls.reason = Outcome.value a ∧ Outcome.limit ls.reason = Outcome.value b)"
   },
@@ -71,7 +71,7 @@
    "name": "Universe00.Core.LimitTheorems.limit_preserved_by_map",
    "file": "provers/lean/Universe00/Core/LimitState.lean",
    "line": 192,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (f : α → β) (ls : LimitState) : Outcome.map f (Outcome.limit ls.reason) = Outcome.limit ls.reason"
   },
@@ -79,7 +79,7 @@
    "name": "Universe00.Core.LimitTheorems.resolution_requires_declaration",
    "file": "provers/lean/Universe00/Core/LimitState.lean",
    "line": 198,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (ls : LimitState) (result : Outcome α) : result ≠ Outcome.limit ls.reason → ∃ (res : LimitResolution), res.limitState = ls"
   },
@@ -151,7 +151,7 @@
    "name": "Universe00.Core.RegimeTheorems.reframe_identity",
    "file": "provers/lean/Universe00/Core/Regime.lean",
    "line": 229,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (r : Regime) (o : Outcome α) : let trans"
   },
@@ -159,7 +159,7 @@
    "name": "Universe00.Core.RegimeTheorems.reframe_preserves_value",
    "file": "provers/lean/Universe00/Core/Regime.lean",
    "line": 221,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (trans : RegimeTransition) (a : α) : ∃ r, reframe trans (Outcome.value a) = Outcome.value a ∨ reframe trans (Outcome.value a) = Outcome.limit r"
   },
@@ -167,31 +167,37 @@
    "name": "Universe00.Core.RegimeTheorems.transition_requires_declaration",
    "file": "provers/lean/Universe00/Core/Regime.lean",
    "line": 236,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (r1 r2 : Regime) (o : Outcome α) : r1 ≠ r2 → ∃ (trans : RegimeTransition), trans.source = r1 ∧ trans.target = r2"
   },
   {
    "name": "Universe00.Core.StatusTheorems.conjectural_isolation",
    "file": "provers/lean/Universe00/Core/Status.lean",
    "line": 248,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(g : DependencyGraph) (proved conj : Statement) : proved.status.isProved → conj.status.isConjectural → ¬(conj.content ∈ proved.dependencies)"
   },
   {
    "name": "Universe00.Core.StatusTheorems.proved_with_trusted_deps_is_trusted",
    "file": "provers/lean/Universe00/Core/Status.lean",
    "line": 233,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(stmt : Statement) (g : DependencyGraph) : stmt.status.isProved → (∀ dep ∈ stmt.dependencies, ∃ s ∈ g.statements, s.content = dep ∧ s.isTrusted) → g.getTrustLevel stmt.content = \" \" ∨ g.getTrustLevel stmt.content = \" \""
   },
   {
    "name": "Universe00.Laws.AntiAdHocTheorems.applied_regularizations_traceable",
    "file": "provers/lean/Universe00/Laws/AntiAdHoc.lean",
    "line": 223,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (reg : Regularization) (ls : LimitState) (v : α) : applyRegularization reg ls v ≠ Outcome.value v ∨ reg.status.isProved ∨ reg.status.isAssumed"
   },
@@ -199,15 +205,17 @@
    "name": "Universe00.Laws.AntiAdHocTheorems.regularization_has_method",
    "file": "provers/lean/Universe00/Laws/AntiAdHoc.lean",
    "line": 218,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(reg : Regularization) : reg.method ≠ \"\""
   },
   {
    "name": "Universe00.Laws.AntiAdHocTheorems.regularization_has_status",
    "file": "provers/lean/Universe00/Laws/AntiAdHoc.lean",
    "line": 212,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "(reg : Regularization) : ∃ (s : ProofStatus), reg.status = s"
   },
@@ -215,39 +223,47 @@
    "name": "Universe00.Laws.ClassicalContrast.universe00_non_explosion",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 101,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(p : Prop) (r : LimitReason) : ¬((Outcome.limit r : Outcome Prop) = Outcome.value p)"
   },
   {
    "name": "Universe00.Laws.ConservativityTheorems.classical_no_explosion",
    "file": "provers/lean/Universe00/Laws/Conservativity.lean",
    "line": 166,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (classical : α) (valid : Prop) : valid → ∀ (b : α), classical ≠ b → Outcome.value classical ≠ Outcome.value b"
   },
   {
    "name": "Universe00.Laws.ConservativityTheorems.conservativity_implies_preservation",
    "file": "provers/lean/Universe00/Laws/Conservativity.lean",
    "line": 155,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (classical : α) (valid : Prop) : valid → ∀ (f : α → α), ∃ (result : Outcome α), result = Outcome.map f (Outcome.value classical)"
   },
   {
    "name": "Universe00.Laws.ConservativityTheorems.conservativity_regime_aware",
    "file": "provers/lean/Universe00/Laws/Conservativity.lean",
    "line": 176,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (classical : α) (regime : Regime) : regime = Regime.Classical → ∃ (result : Outcome α), result = Outcome.value classical"
   },
   {
    "name": "Universe00.Laws.ExplicitRegimeTheorems.laws_have_regime",
    "file": "provers/lean/Universe00/Laws/ExplicitRegimes.lean",
    "line": 215,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "(law : Law) : ∃ (r : Regime), law.regime = r"
   },
@@ -255,23 +271,27 @@
    "name": "Universe00.Laws.ExplicitRegimeTheorems.operations_have_regime",
    "file": "provers/lean/Universe00/Laws/ExplicitRegimes.lean",
    "line": 208,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (op : RegimeAwareOperation α) : ∃ (r : Regime), op.regime = r"
   },
   {
    "name": "Universe00.Laws.ExplicitRegimeTheorems.regime_awareness_explicit",
    "file": "provers/lean/Universe00/Laws/ExplicitRegimes.lean",
    "line": 227,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (op : RegimeAwareOperation α) (r : Regime) : op.validInRegime r = true ∨ op.validInRegime r = false"
   },
   {
    "name": "Universe00.Laws.ExplicitRegimeTheorems.theorems_have_regime",
    "file": "provers/lean/Universe00/Laws/ExplicitRegimes.lean",
    "line": 221,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "(thm : ScopedTheorem) : ∃ (r : Regime), thm.regime = r"
   },
@@ -279,7 +299,7 @@
    "name": "Universe00.Laws.NonExplosionProperties.limits_dont_contaminate",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 140,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (r : LimitReason) (a b : α) : Outcome.value a ≠ Outcome.limit r → Outcome.value b ≠ Outcome.limit r → ∀ (f : α → α), Outcome.value (f a) ≠ Outcome.limit r"
   },
@@ -287,7 +307,7 @@
    "name": "Universe00.Laws.NonExplosionProperties.limits_isolated",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 126,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (r : LimitReason) (a : α) : ∀ (f : Outcome α → Outcome α), f (Outcome.limit r) = Outcome.limit r ∨ ∃ r', f (Outcome.limit r) = Outcome.limit r'"
   },
@@ -295,15 +315,17 @@
    "name": "Universe00.Laws.NonExplosionProperties.non_explosion_preserved_by_bind",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 158,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "Universe00.Laws.NonExplosionProperties.non_explosion_preserved_by_bind"
+   ],
    "statement": "{α β : Type u} (r : LimitReason) (f : α → Outcome β) : ∀ (b : β), Outcome.bind (Outcome.limit r) f ≠ Outcome.value b"
   },
   {
    "name": "Universe00.Laws.NonExplosionProperties.non_explosion_preserved_by_map",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 151,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (f : α → β) (r : LimitReason) : ∀ (b : β), Outcome.map f (Outcome.limit r) ≠ Outcome.value b"
   },
@@ -311,7 +333,7 @@
    "name": "Universe00.Laws.NonExplosionTheorems.compatible_with_conservativity",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 212,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (classical : α) (r : LimitReason) : Outcome.value classical ≠ Outcome.limit r"
   },
@@ -319,31 +341,37 @@
    "name": "Universe00.Laws.NonExplosionTheorems.compatible_with_preservation",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 219,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "Universe00.Laws.NonExplosionTheorems.compatible_with_preservation"
+   ],
    "statement": "{α β : Type u} (r : LimitReason) (f : α → Outcome β) : ∀ (b : β), Outcome.bind (Outcome.limit r) f ≠ Outcome.value b"
   },
   {
    "name": "Universe00.Laws.NonExplosionTheorems.ensures_soundness",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 227,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(p q : Prop) (r : LimitReason) : (Outcome.limit r : Outcome Prop) ≠ Outcome.value p → (Outcome.limit r : Outcome Prop) ≠ Outcome.value q → ¬(p ∧ ¬p)"
   },
   {
    "name": "Universe00.Laws.PreservationTheorems.limits_are_sticky",
    "file": "provers/lean/Universe00/Laws/Preservation.lean",
    "line": 177,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α β : Type u} (r : LimitReason) (f : α → Outcome β) : ∀ (g : Outcome α → Outcome β), g (Outcome.limit r) = Outcome.bind (Outcome.limit r) f → g (Outcome.limit r) = Outcome.limit r"
   },
   {
    "name": "Universe00.Laws.PreservationTheorems.map_preserves_limit_property",
    "file": "provers/lean/Universe00/Laws/Preservation.lean",
    "line": 168,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (f : α → β) (o : Outcome α) : o.isLimit → (Outcome.map f o).isLimit"
   },
@@ -351,7 +379,7 @@
    "name": "Universe00.Laws.PreservationTheorems.no_arbitrary_choices",
    "file": "provers/lean/Universe00/Laws/Preservation.lean",
    "line": 187,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (trigger : LimitTrigger) : ∀ (a : α), ¬∃ (h : Outcome α = Outcome.value a), (match trigger with | LimitTrigger.arbitraryChoice _ => True | _ => False)"
   },
@@ -359,7 +387,7 @@
    "name": "Universe00.Laws.PreservationTheorems.preservation_transitive",
    "file": "provers/lean/Universe00/Laws/Preservation.lean",
    "line": 161,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α β γ : Type u} (f : α → Outcome β) (g : β → Outcome γ) (r : LimitReason) : let comp"
   },
@@ -367,31 +395,37 @@
    "name": "Universe00.Laws.TraceabilityTheorems.assumed_has_id",
    "file": "provers/lean/Universe00/Laws/Traceability.lean",
    "line": 296,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(claim : TraceableClaim) : claim.status.isAssumed → ∃ (id : String), claim.status.getReference = id"
   },
   {
    "name": "Universe00.Laws.TraceabilityTheorems.proved_has_path",
    "file": "provers/lean/Universe00/Laws/Traceability.lean",
    "line": 288,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(claim : TraceableClaim) : claim.status.isProved → ∃ (path : String), claim.status.getReference = path"
   },
   {
    "name": "Universe00.Laws.TraceabilityTheorems.traceability_ensures_accountability",
    "file": "provers/lean/Universe00/Laws/Traceability.lean",
    "line": 310,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(claim : TraceableClaim) : claim.location ≠ \"\""
   },
   {
    "name": "Universe00.Laws.TraceabilityTheorems.traceable_has_status",
    "file": "provers/lean/Universe00/Laws/Traceability.lean",
    "line": 282,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "(claim : TraceableClaim) : ∃ (s : ProofStatus), claim.status = s"
   },
@@ -399,7 +433,7 @@
    "name": "Universe00.Laws.classical_not_limit",
    "file": "provers/lean/Universe00/Laws/Conservativity.lean",
    "line": 38,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (classicalResult : α) (isClassicallyProved : Prop) : isClassicallyProved → ∀ (r : LimitReason), Outcome.value classicalResult ≠ Outcome.limit r"
   },
@@ -407,7 +441,7 @@
    "name": "Universe00.Laws.limit_propagates_through_bind",
    "file": "provers/lean/Universe00/Laws/Preservation.lean",
    "line": 61,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (r : LimitReason) (f : α → Outcome β) : Outcome.bind (Outcome.limit r) f = Outcome.limit r"
   },
@@ -415,7 +449,7 @@
    "name": "Universe00.Laws.limit_propagates_through_map",
    "file": "provers/lean/Universe00/Laws/Preservation.lean",
    "line": 55,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (f : α → β) (r : LimitReason) : Outcome.map f (Outcome.limit r) = Outcome.limit r"
   },
@@ -423,31 +457,37 @@
    "name": "Universe00.Laws.limit_reason_preserved",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 52,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (r : LimitReason) : ∀ (o : Outcome α), o = Outcome.limit r → o.getLimitReason = some r"
   },
   {
    "name": "Universe00.Laws.no_explosion_to_limit",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 43,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (r1 r2 : LimitReason) : r1 ≠ r2 → (Outcome.limit r1 : Outcome α) ≠ Outcome.limit r2"
   },
   {
    "name": "Universe00.Laws.no_explosion_to_value",
    "file": "provers/lean/Universe00/Laws/NonExplosion.lean",
    "line": 36,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (r : LimitReason) (a : α) : (Outcome.limit r : Outcome α) ≠ Outcome.value a"
   },
   {
    "name": "Universe00.Operators.BasicTheorems.compose_assoc",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 195,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(f : α → Outcome β) (g : β → Outcome γ) (h : γ → Outcome δ) : ∀ (a : α), composeOp (composeOp f g) h a = composeOp f (composeOp g h) a"
   },
@@ -455,7 +495,7 @@
    "name": "Universe00.Operators.BasicTheorems.filter_limit",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 182,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : α → Bool) (r r' : LimitReason) : filter p r (Outcome.limit r') = Outcome.limit r'"
   },
@@ -463,7 +503,7 @@
    "name": "Universe00.Operators.BasicTheorems.filter_value",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 176,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : α → Bool) (r : LimitReason) (a : α) : filter p r (Outcome.value a) = if p a then Outcome.value a else Outcome.limit r"
   },
@@ -471,7 +511,7 @@
    "name": "Universe00.Operators.BasicTheorems.liftA2_limit_left",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 164,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(f : α → β → γ) (r : LimitReason) (ob : Outcome β) : liftA2 f (Outcome.limit r) ob = Outcome.limit r"
   },
@@ -479,7 +519,7 @@
    "name": "Universe00.Operators.BasicTheorems.liftA2_limit_right",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 169,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(f : α → β → γ) (oa : Outcome α) (r : LimitReason) : liftA2 f oa (Outcome.limit r) = match oa with | Outcome.limit r' => Outcome.limit r' | Outcome.value _ => Outcome.limit r"
   },
@@ -487,7 +527,7 @@
    "name": "Universe00.Operators.BasicTheorems.recover_limit",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 191,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(f : LimitReason → Outcome α) (r : LimitReason) : recover f (Outcome.limit r) = f r"
   },
@@ -495,7 +535,7 @@
    "name": "Universe00.Operators.BasicTheorems.recover_value",
    "file": "provers/lean/Universe00/Operators/Basic.lean",
    "line": 186,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(f : LimitReason → Outcome α) (a : α) : recover f (Outcome.value a) = Outcome.value a"
   },
@@ -503,7 +543,7 @@
    "name": "Universe00.Operators.ClassicalComparison.universe00_more_explicit",
    "file": "provers/lean/Universe00/Operators/SafeDivision.lean",
    "line": 207,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} [Field α] [DecidableEq α] (a : α) : ∃ r, universe00Div a 0 = Outcome.limit r"
   },
@@ -511,7 +551,7 @@
    "name": "Universe00.Operators.SafeDecisionTheorems.decidable_has_value",
    "file": "provers/lean/Universe00/Operators/SafeDecision.lean",
    "line": 150,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : Prop) [Decidable p] : ∃ b, decideOutcome p = Outcome.value b"
   },
@@ -519,7 +559,7 @@
    "name": "Universe00.Operators.SafeDecisionTheorems.decision_respects_equivalence",
    "file": "provers/lean/Universe00/Operators/SafeDecision.lean",
    "line": 165,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p q : Prop) [Decidable p] [Decidable q] (h : p ↔ q) : decideOutcome p = decideOutcome q"
   },
@@ -527,7 +567,7 @@
    "name": "Universe00.Operators.SafeDecisionTheorems.undecidable_has_limit",
    "file": "provers/lean/Universe00/Operators/SafeDecision.lean",
    "line": 159,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(prob : DecisionProblem) (h : ¬prob.isDecidable) : ∃ r, solveDecisionProblem prob = Outcome.limit r"
   },
@@ -535,7 +575,7 @@
    "name": "Universe00.Operators.SafeDivisionTheorems.sdiv_nonzero_classical",
    "file": "provers/lean/Universe00/Operators/SafeDivision.lean",
    "line": 94,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : α) (h : b ≠ 0) : sdivClassical a b = Outcome.value (a / b)"
   },
@@ -543,7 +583,7 @@
    "name": "Universe00.Operators.SafeDivisionTheorems.sdiv_preserves_mul",
    "file": "provers/lean/Universe00/Operators/SafeDivision.lean",
    "line": 114,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b c : α) (hb : b ≠ 0) (hc : c ≠ 0) : liftA2 (· * ·) (sdivClassical a b) (sdivClassical a c) = Outcome.value ((a / b) * (a / c))"
   },
@@ -551,7 +591,7 @@
    "name": "Universe00.Operators.SafeDivisionTheorems.sdiv_total_meadow",
    "file": "provers/lean/Universe00/Operators/SafeDivision.lean",
    "line": 105,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : α) : ∃ c, sdivMeadow a b = Outcome.value c"
   },
@@ -559,7 +599,7 @@
    "name": "Universe00.Operators.SafeDivisionTheorems.sdiv_zero_classical",
    "file": "provers/lean/Universe00/Operators/SafeDivision.lean",
    "line": 99,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a : α) : ∃ r, sdivClassical a 0 = Outcome.limit r"
   },
@@ -567,15 +607,20 @@
    "name": "Universe00.Operators.sdivIFramework_is_regularization",
    "file": "provers/lean/Universe00/Operators/SafeDivision.lean",
    "line": 173,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} [Field α] [DecidableEq α] (I : α) (h : I * 0 = 0) : ∀ a b, ∃ c, sdivIFramework I h a b = Outcome.value c ∨ sdivIFramework I h a b = Outcome.limit LimitReason.divisionByZero ∨ sdivIFramework I h a b = Outcome.limit (LimitReason.structuralBoundary \" \")"
   }
  ],
- "closed": 8,
+ "closed": 29,
  "files_sha256": {
-  "provers/lean/Universe00/Core/Outcome.lean": "9540e320b7efe0b7d00e20ede59a8bec27be46c8d09249a214d7e17264e8760a"
+  "provers/lean/Universe00/Core/LimitState.lean": "637b80df89937cbe9029eb518f4ad6b3302d6c4111cdecb232a85b253b03c335",
+  "provers/lean/Universe00/Core/Outcome.lean": "9540e320b7efe0b7d00e20ede59a8bec27be46c8d09249a214d7e17264e8760a",
+  "provers/lean/Universe00/Core/Regime.lean": "11bbc43ec88a953fd8c25e77dd65f5520f3cc78c53cec9183c62bf88674a0139",
+  "provers/lean/Universe00/Operators/Basic.lean": "394080bc20a2b2bec1cab384fa9a8bf89856e62f25566b1d3200d4ccea902b2d",
+  "provers/lean/Universe00/Operators/SafeDecision.lean": "6c804f634bbc771cf91311a1a008048c61da8d624d3514a128e5cac46fc59997",
+  "provers/lean/Universe00/Operators/SafeDivision.lean": "456509dd1ce48b226ff266cfe948a088de9487418fcffe5c5c623ac323f471b3"
  },
- "published_at": "2026-11-02T20:55:45Z",
- "certificate_sha256": "80a3733fb4ddb5fc55097896307704e297b1c4d91f16fb18e0c2f5a7cde7b208"
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "5ee0209b0838b0cde36656019827c131d709e13b31cb3b88f51f4bea83eba5e4"
 }

@@ -28,7 +28,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.3.0"
   ],
@@ -44,15 +44,17 @@
    "name": "RiemannUnityZero.complete_transubstantiation",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 129,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": (∃ h : ℝ, h = criticalHeight ∧ h > 0) ∧ (∃ u : ℝ, u = unityValue ∧ u = 1) ∧ (1 / (2 * criticalHeight) = unityValue) ∧ (Tendsto (fun x : ℝ => sqrt (x^2 + criticalHeight^2)) (nhds 0) (nhds criticalHeight))"
   },
   {
    "name": "RiemannUnityZero.critical_base_height_ratio_limit",
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 50,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(s : ℕ → ℝ) (h_pos : ∀ n, s n > 0) (h_lim : Filter.Tendsto s Filter.atTop (nhds 0)) : Filter.Tendsto (fun n => s n / criticalHeight) Filter.atTop (nhds 0)"
   },
@@ -60,7 +62,7 @@
    "name": "RiemannUnityZero.critical_height_unity_exact",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 52,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": 1 / (2 * criticalHeight) = unityValue"
   },
@@ -69,7 +71,9 @@
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 105,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": sqrt (0 ^ 2 + criticalHeight ^ 2) = criticalHeight"
   },
   {
@@ -77,7 +81,9 @@
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 118,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(x : ℝ) (hx : x > 0) : sqrt (x ^ 2 + criticalHeight ^ 2) > criticalHeight"
   },
   {
@@ -85,14 +91,16 @@
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 95,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ x : ℝ, x ≥ 0 → sqrt (x ^ 2 + criticalHeight ^ 2) ≥ criticalHeight"
   },
   {
    "name": "RiemannUnityZero.critical_line_boundary",
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 132,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(s : ℂ) : isCriticalLine s ↔ ¬isConvergentRegion s ∧ ¬isDivergentRegion s"
   },
@@ -101,7 +109,9 @@
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 66,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : ℂ) (h : isCriticalLine s) : isCriticalLine (conjugatePoint s)"
   },
   {
@@ -109,14 +119,16 @@
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 59,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(t : ℝ) : conjugatePoint ⟨criticalValue, t⟩ = ⟨criticalValue, -t⟩"
   },
   {
    "name": "RiemannUnityZero.critical_line_exhibits_unity",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 93,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : CriticalLinePoint) : 1 / (2 * criticalHeight) = unityValue"
   },
@@ -125,7 +137,9 @@
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 103,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(t : ℝ) : let s : ℂ"
   },
   {
@@ -140,7 +154,7 @@
    "name": "RiemannUnityZero.critical_line_natural_center",
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 147,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ δ > 0, ∃ s1 s2 : ℂ, s1.re = criticalValue - δ ∧ s2.re = criticalValue + δ ∧ isConvergentRegion s1 ∧ isDivergentRegion s2"
   },
@@ -149,14 +163,16 @@
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 26,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : ℂ) (h : isCriticalLine s) : isCriticalLine (reflectAcrossCritical s)"
   },
   {
    "name": "RiemannUnityZero.critical_line_unique",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 177,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∃! σ : ℝ, σ > 0 ∧ σ < 1 ∧ σ = criticalValue"
   },
@@ -165,14 +181,16 @@
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 81,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ σ : ℝ, (∀ t : ℝ, 1 / (2 * σ) = unityValue) → σ = criticalValue"
   },
   {
    "name": "RiemannUnityZero.critical_line_zero_distance",
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 47,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(s : ℂ) (h : isCriticalLine s) : distanceToCriticalLine s = 0"
   },
@@ -196,7 +214,7 @@
    "name": "RiemannUnityZero.critical_triangle_pythagorean",
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 82,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(x : ℝ) (hx : x ≥ 0) : let t"
   },
@@ -212,7 +230,7 @@
    "name": "RiemannUnityZero.critical_value_special",
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 95,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": criticalValue = 1 - criticalValue"
   },
@@ -220,15 +238,17 @@
    "name": "RiemannUnityZero.difference_quadratic_order",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 31,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(C : ℝ) (hC : C = 1 / (2 * criticalHeight)) : ∀ x : ℝ, 0 ≤ x → x ≤ 1 → sqrt (x^2 + criticalHeight^2) - criticalHeight ≤ C * x^2 + x^4"
   },
   {
    "name": "RiemannUnityZero.functional_equation_critical_line",
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 118,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(t : ℝ) : let s : ℂ"
   },
@@ -237,7 +257,9 @@
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 35,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(h : ℝ) (h_pos : h > 0) : Filter.Tendsto (fun x : ℝ => sqrt (x ^ 2 + h ^ 2)) (nhds 0) (nhds h)"
   },
   {
@@ -253,7 +275,9 @@
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 110,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(t : Triangle) (h : t.height ≥ t.baseLength) (hb : t.baseLength > 0) : t.hypotenuse / t.baseLength ≥ 1"
   },
   {
@@ -284,24 +308,30 @@
    "name": "RiemannUnityZero.hypotenuse_taylor_approximation",
    "file": "lean/RiemannUnityZero/TriangleGeometry.lean",
    "line": 64,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(h : ℝ) (h_pos : h > 0) : ∀ ε > 0, ∃ δ > 0, ∀ x : ℝ, 0 < x → x < δ → |sqrt (x ^ 2 + h ^ 2) - (h + x ^ 2 / (2 * h))| < ε * x ^ 2"
   },
   {
    "name": "RiemannUnityZero.imaginary_becomes_substance",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 60,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": Tendsto (fun x : ℝ => sqrt (x^2 + criticalHeight^2)) (nhds 0) (nhds criticalHeight)"
   },
   {
    "name": "RiemannUnityZero.imaginary_not_abstract",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 154,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∃ h : ℝ, h > 0 ∧ Tendsto (fun x : ℝ => sqrt (x^2 + h^2)) (nhds 0) (nhds h)"
   },
   {
@@ -309,7 +339,9 @@
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 73,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ t : ℝ) (h : σ ≥ 0) : let s1 : ℂ"
   },
   {
@@ -324,8 +356,10 @@
    "name": "RiemannUnityZero.ratio_approaches_unity",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 42,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": Tendsto (fun x : ℝ => (sqrt (x^2 + criticalHeight^2) - criticalHeight) / x^2) (nhdsWithin 0 (Set.Ioi 0)) (nhds unityValue)"
   },
   {
@@ -333,7 +367,9 @@
    "file": "lean/RiemannUnityZero/Symmetry.lean",
    "line": 37,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : ℂ) : distanceToCriticalLine s = distanceToCriticalLine (reflectAcrossCritical s)"
   },
   {
@@ -350,7 +386,7 @@
    "name": "RiemannUnityZero.step1_base_to_zero",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 98,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(s : ℕ → ℝ) (h_pos : ∀ n, s n > 0) (h_lim : Tendsto s atTop (nhds 0)) : ∀ ε > 0, ∃ N, ∀ n ≥ N, s n < ε"
   },
@@ -358,24 +394,30 @@
    "name": "RiemannUnityZero.step2_hypotenuse_to_height",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 114,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : ℕ → ℝ) (h_pos : ∀ n, s n ≥ 0) (h_lim : Tendsto s atTop (nhds 0)) : Tendsto (fun n => (criticalTriangle (s n) (h_pos n)).hypotenuse) atTop (nhds criticalHeight)"
   },
   {
    "name": "RiemannUnityZero.step3_ratio_to_unity",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 123,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ ε > 0, ∃ δ > 0, ∀ x : ℝ, 0 < x → x < δ → |(sqrt (x^2 + criticalHeight^2) - criticalHeight) / x^2 - unityValue| < ε"
   },
   {
    "name": "RiemannUnityZero.transubstantiation_of_unity",
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 20,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ ε > 0, ∃ δ > 0, ∀ x : ℝ, 0 < x → x < δ → |((sqrt (x^2 + criticalHeight^2) - criticalHeight) / x^2) - unityValue| < ε"
   },
   {
@@ -383,7 +425,9 @@
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 68,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∃! h : ℝ, h > 0 ∧ 1 / (2 * h) = unityValue"
   },
   {
@@ -391,16 +435,21 @@
    "file": "lean/RiemannUnityZero/MainTheorem.lean",
    "line": 165,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∃! h : ℝ, h > 0 ∧ 1 / (2 * h) = 1"
   }
  ],
- "closed": 5,
+ "closed": 16,
  "files_sha256": {
   "lean/RiemannUnityZero/BasicDefinitions.lean": "03197ba12ea323c037d3f40958892c333f9d2f75ffb53a186e9b5f16c1030455",
+  "lean/RiemannUnityZero/MainTheorem.lean": "787d9430b93ea87456848804aaa459e44fa29cbf234a89570aeae5ea4d2eeced",
+  "lean/RiemannUnityZero/Symmetry.lean": "44b06b2c55acbafc79d0d0f2f439af335d8b974dca82a2bfe9bc26f8ceba44ee",
+  "lean/RiemannUnityZero/TriangleGeometry.lean": "af8733a72f5097ceca7c5d8a2eed495eeafb1d67fa6363d3da1e159d92f422bc",
   "lean/lakefile.lean": "c589eb7dfb74e5bcda3ace56c248675639fc3c90e5ab544b1db2dd386a58ce84",
   "lean/lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1"
  },
- "published_at": "2026-10-29T20:16:04Z",
- "certificate_sha256": "eb85f3612a373deb80bf1bff29755603d561829958197d582d987285906122a3"
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "36ce42dc91a9d43d6ec16e875678fdcbeee9fceb2705e4d563425ceeeda63951"
 }

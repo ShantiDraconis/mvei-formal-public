@@ -1,0 +1,367 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Eclectic_S",
+ "branch": "copilot/add-internal-proof-structure",
+ "branch_state": "parada",
+ "head_commit": "3585ddb9ffb2faae2f74bd7c5c9211bfb8639ea6",
+ "head_commit_date": "2025-12-29T02:13:58+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "3585ddb9ffb2faae2f74bd7c5c9211bfb8639ea6",
+   "date": "2025-12-29T02:13:58+00:00",
+   "subject": "Add proof scaffolds for Yang-Mills, Hodge Conjecture, and Birch-Swinnerton-Dyer"
+  },
+  {
+   "commit": "678649ae19c4739078d732604accaccdaf68ff58",
+   "date": "2025-12-29T02:08:38+00:00",
+   "subject": "Add proof scaffolds for Riemann Hypothesis, P vs NP, and Navier-Stokes"
+  },
+  {
+   "commit": "d8f4d0c4b1be116d14d3904dd9fab55e89a19519",
+   "date": "2025-12-29T01:50:48+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "BirchSwinnertonDyer.ConsistencyChecks.mordell_weil_holds",
+   "file": "ecletics/problems/birch_swinnerton_dyer/consistency_checks.lean",
+   "line": 16,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "BirchSwinnertonDyer.Foundations.EllipticCurve"
+   ],
+   "statement": ": ∀ E : EllipticCurve, True"
+  },
+  {
+   "name": "BirchSwinnertonDyer.ConsistencyChecks.rank_0_consistent",
+   "file": "ecletics/problems/birch_swinnerton_dyer/consistency_checks.lean",
+   "line": 39,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "BirchSwinnertonDyer.Foundations.EllipticCurve",
+    "BirchSwinnertonDyer.MainTheorem.bsd_rank_0_proven"
+   ],
+   "statement": ": ∀ E : EllipticCurve, order_of_vanishing E = 0 → rank E = 0"
+  },
+  {
+   "name": "BirchSwinnertonDyer.MainTheorem.bsd_strong_form",
+   "file": "ecletics/problems/birch_swinnerton_dyer/main_theorem.lean",
+   "line": 26,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "BirchSwinnertonDyer.Foundations.EllipticCurve",
+    "sorryAx"
+   ],
+   "statement": ": ∀ E : EllipticCurve, (rank E = order_of_vanishing E) ∧ True"
+  },
+  {
+   "name": "BirchSwinnertonDyer.MainTheorem.bsd_weak_form",
+   "file": "ecletics/problems/birch_swinnerton_dyer/main_theorem.lean",
+   "line": 17,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "BirchSwinnertonDyer.Foundations.EllipticCurve",
+    "sorryAx"
+   ],
+   "statement": ": ∀ E : EllipticCurve, rank E = order_of_vanishing E"
+  },
+  {
+   "name": "HodgeConjecture.ConsistencyChecks.algebraic_is_hodge",
+   "file": "ecletics/problems/hodge_conjecture/consistency_checks.lean",
+   "line": 16,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "HodgeConjecture.Foundations.AlgebraicCycle",
+    "HodgeConjecture.Foundations.AlgebraicVariety",
+    "HodgeConjecture.Foundations.CohomologyGroup",
+    "HodgeConjecture.LocalLemmas.algebraic_implies_hodge"
+   ],
+   "statement": ": ∀ (X : AlgebraicVariety) (k : ℕ) (α : CohomologyGroup X (2*k)), is_algebraic_class X k α → is_hodge_class X k α"
+  },
+  {
+   "name": "HodgeConjecture.ConsistencyChecks.hodge_decomposition_well_defined",
+   "file": "ecletics/problems/hodge_conjecture/consistency_checks.lean",
+   "line": 32,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "HodgeConjecture.Foundations.AlgebraicVariety",
+    "HodgeConjecture.Foundations.ProjectiveVariety"
+   ],
+   "statement": ": ∀ X : AlgebraicVariety, ProjectiveVariety X → True"
+  },
+  {
+   "name": "HodgeConjecture.MainTheorem.hodge_conjecture_statement",
+   "file": "ecletics/problems/hodge_conjecture/main_theorem.lean",
+   "line": 17,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "HodgeConjecture.Foundations.AlgebraicCycle",
+    "HodgeConjecture.Foundations.AlgebraicVariety",
+    "HodgeConjecture.Foundations.CohomologyGroup",
+    "HodgeConjecture.Foundations.ProjectiveVariety",
+    "HodgeConjecture.Foundations.SmoothVariety",
+    "sorryAx"
+   ],
+   "statement": ": ∀ (X : AlgebraicVariety) (k : ℕ) (α : CohomologyGroup X (2*k)), ProjectiveVariety X → SmoothVariety X → is_hodge_class X k α → is_algebraic_class X k α"
+  },
+  {
+   "name": "NavierStokes.ConsistencyChecks.energy_finite_preserved",
+   "file": "ecletics/problems/navier_stokes/consistency_checks.lean",
+   "line": 42,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "NavierStokes.Foundations.Real",
+    "NavierStokes.Foundations.TimeInterval",
+    "NavierStokes.Foundations.Vector3"
+   ],
+   "statement": ": ∀ sys : NavierStokesSystem, ∀ t : TimeInterval, True"
+  },
+  {
+   "name": "NavierStokes.ConsistencyChecks.weak_existence_is_known",
+   "file": "ecletics/problems/navier_stokes/consistency_checks.lean",
+   "line": 16,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "NavierStokes.Foundations.Real",
+    "NavierStokes.Foundations.TimeInterval",
+    "NavierStokes.Foundations.Vector3",
+    "NavierStokes.MainTheorem.weak_solutions_exist"
+   ],
+   "statement": ": ∀ initial : InitialData, ∃ sys : NavierStokesSystem, is_weak_solution sys"
+  },
+  {
+   "name": "NavierStokes.MainTheorem.navier_stokes_global_smooth",
+   "file": "ecletics/problems/navier_stokes/main_theorem.lean",
+   "line": 17,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "NavierStokes.Foundations.Real",
+    "NavierStokes.Foundations.TimeInterval",
+    "NavierStokes.Foundations.Vector3",
+    "sorryAx"
+   ],
+   "statement": ": ∀ (initial : InitialData), ∃ sys : NavierStokesSystem, is_smooth_solution sys ∧ (∀ t : TimeInterval, True)"
+  },
+  {
+   "name": "PvsNP.ConsistencyChecks.NPC_implies_in_NP",
+   "file": "ecletics/problems/p_vs_np/consistency_checks.lean",
+   "line": 40,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "PvsNP.Foundations.Language",
+    "PvsNP.Foundations.poly_time_reducible",
+    "sorryAx"
+   ],
+   "statement": ": ∀ L : Language, is_NP_complete L → NP L"
+  },
+  {
+   "name": "PvsNP.ConsistencyChecks.NP_well_defined",
+   "file": "ecletics/problems/p_vs_np/consistency_checks.lean",
+   "line": 64,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "PvsNP.ConsistencyChecks.P_subset_NP_is_trivial",
+   "file": "ecletics/problems/p_vs_np/consistency_checks.lean",
+   "line": 16,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "PvsNP.Foundations.Language",
+    "PvsNP.LocalLemmas.P_subseteq_NP",
+    "sorryAx"
+   ],
+   "statement": ": ∀ L : Language, P L → NP L"
+  },
+  {
+   "name": "PvsNP.ConsistencyChecks.P_well_defined",
+   "file": "ecletics/problems/p_vs_np/consistency_checks.lean",
+   "line": 58,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "PvsNP.ConsistencyChecks.not_both",
+   "file": "ecletics/problems/p_vs_np/consistency_checks.lean",
+   "line": 25,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "PvsNP.Foundations.Language",
+    "sorryAx"
+   ],
+   "statement": ": ¬(P_equals_NP ∧ P_not_equals_NP)"
+  },
+  {
+   "name": "PvsNP.ConsistencyChecks.reduction_well_defined",
+   "file": "ecletics/problems/p_vs_np/consistency_checks.lean",
+   "line": 65,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": True"
+  },
+  {
+   "name": "PvsNP.MainTheorem.P_equals_NP_statement",
+   "file": "ecletics/problems/p_vs_np/main_theorem.lean",
+   "line": 28,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "PvsNP.Foundations.Language",
+    "sorryAx"
+   ],
+   "statement": ": ∀ L : Language, NP L → P L"
+  },
+  {
+   "name": "PvsNP.MainTheorem.P_neq_NP_via_SAT",
+   "file": "ecletics/problems/p_vs_np/main_theorem.lean",
+   "line": 36,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "PvsNP.Foundations.Language",
+    "PvsNP.Reduction.core_implies_full",
+    "sorryAx"
+   ],
+   "statement": ": ¬P SAT → P_not_equals_NP"
+  },
+  {
+   "name": "PvsNP.MainTheorem.P_not_equals_NP_statement",
+   "file": "ecletics/problems/p_vs_np/main_theorem.lean",
+   "line": 17,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "PvsNP.Foundations.Language",
+    "sorryAx"
+   ],
+   "statement": ": ∃ L : Language, NP L ∧ ¬P L"
+  },
+  {
+   "name": "RiemannHypothesis.ConsistencyChecks.critical_line_in_strip",
+   "file": "ecletics/problems/riemann_hypothesis/consistency_checks.lean",
+   "line": 20,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "RiemannHypothesis.Foundations.Complex",
+    "RiemannHypothesis.Foundations.Complex.re",
+    "sorryAx"
+   ],
+   "statement": ": ∀ s : Complex, on_critical_line s → in_critical_strip s"
+  },
+  {
+   "name": "RiemannHypothesis.ConsistencyChecks.main_theorem_well_typed",
+   "file": "ecletics/problems/riemann_hypothesis/consistency_checks.lean",
+   "line": 75,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "RiemannHypothesis.Foundations.Complex",
+    "RiemannHypothesis.Foundations.Complex.re",
+    "sorryAx"
+   ],
+   "statement": ": (∀ s : Complex, is_nontrivial_zero s → on_critical_line s) = riemann_hypothesis"
+  },
+  {
+   "name": "RiemannHypothesis.ConsistencyChecks.nontrivial_implies_zero",
+   "file": "ecletics/problems/riemann_hypothesis/consistency_checks.lean",
+   "line": 30,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "RiemannHypothesis.Foundations.Complex",
+    "RiemannHypothesis.Foundations.Complex.re",
+    "sorryAx"
+   ],
+   "statement": ": ∀ s : Complex, is_nontrivial_zero s → is_zero_of_zeta s"
+  },
+  {
+   "name": "RiemannHypothesis.ConsistencyChecks.rh_preserves_symmetry",
+   "file": "ecletics/problems/riemann_hypothesis/consistency_checks.lean",
+   "line": 40,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "RiemannHypothesis.Foundations.Complex",
+    "RiemannHypothesis.Foundations.Complex.re",
+    "sorryAx"
+   ],
+   "statement": ": riemann_hypothesis → (∀ s : Complex, is_nontrivial_zero s → is_nontrivial_zero ⟨1 - Complex.re s, Complex.im s⟩)"
+  },
+  {
+   "name": "RiemannHypothesis.MainTheorem.riemann_hypothesis_statement",
+   "file": "ecletics/problems/riemann_hypothesis/main_theorem.lean",
+   "line": 23,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "RiemannHypothesis.Foundations.Complex",
+    "RiemannHypothesis.Foundations.Complex.re",
+    "sorryAx"
+   ],
+   "statement": ": ∀ s : Complex, is_nontrivial_zero s → on_critical_line s"
+  },
+  {
+   "name": "RiemannHypothesis.MainTheorem.riemann_hypothesis_via_reduction",
+   "file": "ecletics/problems/riemann_hypothesis/main_theorem.lean",
+   "line": 31,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "RiemannHypothesis.Foundations.Complex",
+    "RiemannHypothesis.Foundations.Complex.re",
+    "RiemannHypothesis.Reduction.reduction_theorem",
+    "sorryAx"
+   ],
+   "statement": ": core_statement → riemann_hypothesis"
+  },
+  {
+   "name": "YangMills.ConsistencyChecks.classical_is_well_defined",
+   "file": "ecletics/problems/yang_mills/consistency_checks.lean",
+   "line": 16,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "YangMills.MainTheorem.classical_theory_exists"
+   ],
+   "statement": ": ∃ A : GaugeField, True"
+  },
+  {
+   "name": "YangMills.ConsistencyChecks.energy_nonnegative",
+   "file": "ecletics/problems/yang_mills/consistency_checks.lean",
+   "line": 39,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "YangMills.Foundations.HilbertSpace",
+    "YangMills.Foundations.LieGroup",
+    "YangMills.Foundations.Operator"
+   ],
+   "statement": ": ∀ qft : QuantumYangMillsTheory, True"
+  },
+  {
+   "name": "YangMills.MainTheorem.yang_mills_existence_and_mass_gap",
+   "file": "ecletics/problems/yang_mills/main_theorem.lean",
+   "line": 17,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "YangMills.Foundations.HilbertSpace",
+    "YangMills.Foundations.LieGroup",
+    "YangMills.Foundations.Operator",
+    "sorryAx"
+   ],
+   "statement": ": ∃ qft : QuantumYangMillsTheory, (∀ True, True) ∧ has_mass_gap qft"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "ecletics/problems/p_vs_np/consistency_checks.lean": "b0f6b2d92d54e02eaba1f88a1eacf0080bce756a38375321f84f2fb7e15ef7b0"
+ },
+ "published_at": "2026-11-03T11:27:58Z",
+ "certificate_sha256": "7f4e788d4ac19d482d93ad07b4e2d0639adbf5b3d2e1db8a35bc7686832e9229"
+}

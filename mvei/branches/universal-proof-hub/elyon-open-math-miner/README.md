@@ -3,9 +3,9 @@
 Lean sources from the branch `elyon-open-math-miner` of the private repository `ShantiDraconis/universal-proof-hub`, commit `11f7479bf76eb28cd58af8c8b0d5c924acb8655c` (2026-09-27T21:01:49+01:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 9 — closed 8, conditional 0, open 0, proof error 0, not reached 0, no result 1.
+* Theorems only on branches, in this branch: 9 — closed 9, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 42 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `0bd2dec21c0905285dead1a8e349e82cdf86858b7885704ff62f748d4968728e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-proof-hub/elyon-open-math-miner/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `ab3eb840eade2b666a37c6e34c837513883632922593feaa7fc84dbedde71f34`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-proof-hub/elyon-open-math-miner/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -19,4 +19,4 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `OpenMathMiner.realization_selects_branch` | `open-math-miner/src/OpenMathMiner/DualState.lean`:43 | fechado |
 | `OpenMathMiner.separate_branch_closed` | `open-math-miner/src/OpenMathMiner/DualState.lean`:23 | fechado |
 | `OpenMathMiner.transportSolved` | `open-math-miner/src/OpenMathMiner/Bridge.lean`:15 | fechado |
-| `solvedB` | `open-math-miner/tests/Smoke.lean`:28 | nao_checado |
+| `solvedB` | `open-math-miner/tests/Smoke.lean`:28 | fechado |

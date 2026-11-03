@@ -28,7 +28,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.3.0"
   ],
@@ -68,7 +68,7 @@
    "name": "Harappan.ConsistencyTheorems.empty_hypotheses_consistent",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 28,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": hypothesis_consistent []"
   },
@@ -77,7 +77,9 @@
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 59,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": CollapseSystemConsistent []"
   },
   {
@@ -92,7 +94,7 @@
    "name": "Harappan.ConsistencyTheorems.no_contradiction",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 66,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(s : Sign) (h1 h2 : Hypothesis) : h1.sign_id = s.id → h2.sign_id = s.id → h1.meaning = some \" \" → h2.meaning = some \" \" → h1 ∈ s.hypotheses → h2 ∈ s.hypotheses → False → False"
   },
@@ -100,7 +102,7 @@
    "name": "Harappan.ConsistencyTheorems.single_hypothesis_coherent",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 88,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(h : Hypothesis) : interpretation_coherent h"
   },
@@ -108,7 +110,7 @@
    "name": "Harappan.ConsistencyTheorems.single_mapping_consistent",
    "file": "src/lean/Harappan/ConsistencyTheorems.lean",
    "line": 39,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(m : Mapping) : mapping_consistent [m]"
   },
@@ -136,7 +138,7 @@
    "name": "Harappan.Phonotactics.cv_valid",
    "file": "src/lean/Harappan/Phonotactics.lean",
    "line": 124,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(c v : PhonemeFeatures) (hc : is_consonant c = true) (hv : is_vowel v = true) : validate_sequence [c, v] = .valid"
   },
@@ -144,7 +146,7 @@
    "name": "Harappan.Phonotactics.empty_valid",
    "file": "src/lean/Harappan/Phonotactics.lean",
    "line": 118,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": validate_sequence [] = .valid"
   },
@@ -152,7 +154,7 @@
    "name": "Harappan.Phonotactics.single_valid",
    "file": "src/lean/Harappan/Phonotactics.lean",
    "line": 121,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : PhonemeFeatures) : validate_sequence [p] = .valid"
   },
@@ -179,14 +181,16 @@
    "file": "src/lean/Harappan/SignSet.lean",
    "line": 24,
    "state": "erro",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(signs : List Sign) (new_sign : Sign) (h_unique : has_unique_ids signs) (h_new_not_in : ∀ s ∈ signs, s.id ≠ new_sign.id) : has_unique_ids (new_sign :: signs)"
   },
   {
    "name": "Harappan.UniversalGrammar.grammar_has_base_rules",
    "file": "src/lean/Harappan/UniversalGrammar.lean",
    "line": 119,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ g : Grammar, g.rules = default_rules → g.rules.length = 5"
   },
@@ -195,18 +199,25 @@
    "file": "src/lean/Harappan/UniversalGrammar.lean",
    "line": 125,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(w : Word) : well_formed (.word w) = true"
   }
  ],
- "closed": 3,
+ "closed": 11,
  "files_sha256": {
   "lakefile.lean": "ed7af4dc7243af3c7d23bd6e513da5b31b686a717ea648693273950832059674",
   "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1",
   "src/lean/Harappan/BasicTypes.lean": "3ae89f807e2a03ee901ef5b36de81b661e04f4796a922b09265322d847d142f2",
   "src/lean/Harappan/CollapseAxioms.lean": "f513ca277a5e08ecf4adfd74c770e82efba9df0c894411e096e93aef4e51e14c",
-  "src/lean/Harappan/Semantics.lean": "3c69578d746b9c191f923bf10fa886f874d3218a06f342ff23e329ffbca7e4d9"
+  "src/lean/Harappan/ConsistencyTheorems.lean": "0bd2570651d7f246defc9513794497bb65acabb0ecac98090f923ea9aedb8cb4",
+  "src/lean/Harappan/Phonology.lean": "70fe13dfb5c629fab4d95e8fd56416eb22e0f51ab0cd014f6e86acf00390c68e",
+  "src/lean/Harappan/Phonotactics.lean": "6ef513331f80df891dd66ee084e62d6a935329f25387fbd458110cfbbd71e9bc",
+  "src/lean/Harappan/Semantics.lean": "3c69578d746b9c191f923bf10fa886f874d3218a06f342ff23e329ffbca7e4d9",
+  "src/lean/Harappan/SignSet.lean": "68480046570dd71c9f736b331162ca28b94f6deb042d1cdb1260b613fb50d5d5",
+  "src/lean/Harappan/UniversalGrammar.lean": "7840ac8ee905111098686cb1174a80e6d8d748346a6a4b2f564548e4d6fa91e6"
  },
- "published_at": "2026-10-29T20:15:54Z",
- "certificate_sha256": "6ee393a7942aec60e7f4db4275400a9d0de8e0bc3796e8f7ec10eae988ae54d2"
+ "published_at": "2026-11-03T11:27:59Z",
+ "certificate_sha256": "b278b93b6d1aa23c656fbb3d3294d9cd8dcf954bc93428ee24e79fd771d4140e"
 }

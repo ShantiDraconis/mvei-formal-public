@@ -3,20 +3,20 @@
 Lean sources from the branch `copilot/formalizacao-pesquisa-erros` of the private repository `ShantiDraconis/federated-trivalent-manifold`, commit `9526d34ed3889e8155a32c40eae99030b42fe65f` (2026-07-15T11:08:44+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 35 — closed 6, conditional 0, open 6, proof error 21, not reached 2, no result 0.
+* Theorems only on branches, in this branch: 35 — closed 7, conditional 2, open 9, proof error 15, not reached 2, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ab2443d3fd293158ce8d101060e3d597dcc84704e369fdd5266473aeca33d9af`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_formalizacao-pesquisa-erros/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `9980c420597ba4e8f3c1e5fc7591f24f1cd2afec6ac91d23b90a25ab3b9fd0d3`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_formalizacao-pesquisa-erros/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
 | Theorem | File | State |
 |---|---|---|
 | `Dominio.label_injective` | `Regra3.lean`:32 | fechado |
-| `Regra1_TeardownObrigatorio` | `Regra1.lean`:22 | erro |
+| `Regra1_TeardownObrigatorio` | `Regra1.lean`:22 | fechado |
 | `Regra2_ExistenciaCifracao` | `Regra2.lean`:28 | aberto-sorry |
-| `Regra3_SeparacaoDominio` | `Regra3.lean`:42 | erro |
+| `Regra3_SeparacaoDominio` | `Regra3.lean`:42 | aberto-sorry |
 | `Regra4_Barreira` | `Regra4.lean`:43 | erro |
-| `Regra5_Contraposicao` | `Regra5.lean`:43 | erro |
+| `Regra5_Contraposicao` | `Regra5.lean`:43 | condicional |
 | `Regra7_MeioNaoColapsa` | `Regra7.lean`:57 | fechado |
 | `S_total_meio` | `Pesquisa.lean`:69 | nao_alcancado |
 | `Triv.next_bijective` | `Regra7.lean`:53 | erro |
@@ -35,10 +35,10 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `poincare_resolvido` | `MedidaClassica.lean`:110 | erro |
 | `pvsnp_em_aberto` | `MedidaClassica.lean`:115 | erro |
 | `pvsnp_max_erro` | `MedidaClassica.lean`:123 | erro |
-| `regime_meio_enquanto_exodo` | `Regra5.lean`:50 | erro |
-| `resolvido_iff_erro_zero` | `MedidaClassica.lean`:42 | erro |
+| `regime_meio_enquanto_exodo` | `Regra5.lean`:50 | condicional |
+| `resolvido_iff_erro_zero` | `MedidaClassica.lean`:42 | aberto-sorry |
 | `riemann_em_aberto` | `MedidaClassica.lean`:118 | erro |
-| `tabela_completa` | `MedidaClassica.lean`:149 | erro |
+| `tabela_completa` | `MedidaClassica.lean`:149 | aberto-sorry |
 | `teardown_closes_port` | `Regra1.lean`:14 | fechado |
 | `teardown_preserves_port` | `Regra1.lean`:18 | fechado |
 | `todos_em_meio` | `Regra7.lean`:78 | fechado |

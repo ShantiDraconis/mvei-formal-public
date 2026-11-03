@@ -28,7 +28,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-30T16:50:26+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.19.0"
   ],
@@ -92,31 +92,37 @@
    "name": "Universe00.Core.Regime.conservativeExtension_refl",
    "file": "Universe00/Core/Regime.lean",
    "line": 126,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(r : Regime) : conservativeExtension r r = true"
   },
   {
    "name": "Universe00.Core.Regime.conservativeExtension_trans",
    "file": "Universe00/Core/Regime.lean",
    "line": 134,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(r1 r2 r3 : Regime) : conservativeExtension r1 r2 = true → conservativeExtension r2 r3 = true → conservativeExtension r1 r3 = true"
   },
   {
    "name": "Universe00.Examples.claimIsVerified",
    "file": "Universe00/Examples/Division.lean",
    "line": 122,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": divisionClaim.isProved = true"
   },
   {
    "name": "Universe00.Examples.classicalCompositionIsLimit",
    "file": "Universe00/Examples/Division.lean",
    "line": 69,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": ": ∃ ℓ : LimitState, classicalComposition = Outcome.limit ℓ"
   },
@@ -124,7 +130,7 @@
    "name": "Universe00.Examples.classicalIsLimit",
    "file": "Universe00/Examples/Division.lean",
    "line": 41,
-   "state": "nao_checado",
+   "state": "nao_alcancado",
    "axioms_beyond_standard": [],
    "statement": ": ∃ ℓ : LimitState, classicalExample = Outcome.limit ℓ"
   },
@@ -132,7 +138,7 @@
    "name": "Universe00.Examples.meadowCompositionIsValue",
    "file": "Universe00/Examples/Division.lean",
    "line": 79,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": meadowComposition = Outcome.value 0"
   },
@@ -140,7 +146,7 @@
    "name": "Universe00.Examples.meadowIsValue",
    "file": "Universe00/Examples/Division.lean",
    "line": 56,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": meadowExample = Outcome.value 0"
   },
@@ -148,7 +154,7 @@
    "name": "Universe00.Examples.normalPreserved",
    "file": "Universe00/Examples/Division.lean",
    "line": 91,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": normalDivision = Outcome.value 10"
   },
@@ -156,7 +162,7 @@
    "name": "Universe00.Laws.classical_embedding_preserves",
    "file": "Universe00/Laws/Conservativity.lean",
    "line": 99,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (x : α) : (classical_embedding x).isValue = true"
   },
@@ -164,7 +170,7 @@
    "name": "Universe00.Laws.classical_logic_preserved",
    "file": "Universe00/Laws/NonExplosion.lean",
    "line": 104,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": False → ∀ (P : Prop), P"
   },
@@ -172,7 +178,7 @@
    "name": "Universe00.Laws.classical_regime_faithful",
    "file": "Universe00/Laws/Conservativity.lean",
    "line": 51,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} : Universe00.Core.Regime.Classical = Universe00.Core.Regime.Classical"
   },
@@ -180,15 +186,17 @@
    "name": "Universe00.Laws.composition_preserves_first_limit",
    "file": "Universe00/Laws/Preservation.lean",
    "line": 90,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α β γ : Type u} (f : α → Outcome β) (g : β → Outcome γ) (ℓ : LimitState) : ((Outcome.limit ℓ : Outcome α) >>= f) >>= g = (Outcome.limit ℓ : Outcome γ)"
   },
   {
    "name": "Universe00.Laws.incompatible_regimes_detected",
    "file": "Universe00/Laws/ExplicitRegimes.lean",
    "line": 107,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α β γ : Type u} (op1 : RegimeIndexedOp α β) (op2 : RegimeIndexedOp β γ) : ¬regimesCompatible op1.regime op2.regime → ∃ ℓ : LimitState, True"
   },
@@ -196,7 +204,7 @@
    "name": "Universe00.Laws.limit_excludes_value",
    "file": "Universe00/Laws/Preservation.lean",
    "line": 104,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (ℓ : LimitState) : ¬ ∃ (a : α), (Outcome.limit ℓ : Outcome α) = Outcome.value a"
   },
@@ -204,7 +212,7 @@
    "name": "Universe00.Laws.limit_no_explosion",
    "file": "Universe00/Laws/NonExplosion.lean",
    "line": 60,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (ℓ : LimitState) (P Q : Prop) : (∃ (x : Outcome α), x = Outcome.limit ℓ) → ¬(P ∧ Q) ∨ (P ∧ Q)"
   },
@@ -212,7 +220,7 @@
    "name": "Universe00.Laws.limit_not_false",
    "file": "Universe00/Laws/NonExplosion.lean",
    "line": 36,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (ℓ : LimitState) (arb : α) : ¬ ((Outcome.limit ℓ : Outcome α) = Outcome.value arb)"
   },
@@ -220,15 +228,17 @@
    "name": "Universe00.Laws.limits_have_structure",
    "file": "Universe00/Laws/NonExplosion.lean",
    "line": 79,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(ℓ : LimitState) : ∃ reason : String, ℓ = LimitState.ArbitraryChoice reason ∨ ℓ = LimitState.LostUniqueness reason ∨ ℓ = LimitState.Contradiction reason ∨ ℓ = LimitState.Undecidable reason ∨ ℓ = LimitState.RegimeBoundary reason"
   },
   {
    "name": "Universe00.Laws.map_preserves_limit",
    "file": "Universe00/Laws/Preservation.lean",
    "line": 136,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α β : Type u} (f : α → β) (ℓ : LimitState) : Outcome.map f (Outcome.limit ℓ : Outcome α) = (Outcome.limit ℓ : Outcome β)"
   },
@@ -236,7 +246,7 @@
    "name": "Universe00.Laws.no_unlabeled_claims",
    "file": "Universe00/Laws/Traceability.lean",
    "line": 116,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} : ∀ (x : α), ∃ (c : Claim α), c.statement = x"
   },
@@ -244,31 +254,46 @@
    "name": "Universe00.Laws.status_weakens",
    "file": "Universe00/Laws/Traceability.lean",
    "line": 67,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α β : Type u} (c1 : Claim α) (c2 : Claim β) : let combined"
   },
   {
    "name": "Universe00.Operators.sdiv_boundary_at_zero",
    "file": "Universe00/Operators/SafeDiv.lean",
    "line": 96,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} [Div α] [BEq α] [OfNat α 0] (n : α) : ∃ ℓ : LimitState, sdiv Regime.Classical α n 0 = Outcome.limit ℓ"
   },
   {
    "name": "Universe00.Operators.sdiv_preserves_classical",
    "file": "Universe00/Operators/SafeDiv.lean",
    "line": 82,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} [Div α] [BEq α] [OfNat α 0] (n d : α) (h : d ≠ 0) : ∃ v : α, sdiv Regime.Classical α n d = Outcome.value v"
   }
  ],
- "closed": 6,
+ "closed": 18,
  "files_sha256": {
-  "Universe00/Core/Outcome.lean": "aa1739c4e42e8d2b1ec7629867618a64c6b0d4bc64d66087c78030c406e61df6"
+  "Universe00/Core/Outcome.lean": "aa1739c4e42e8d2b1ec7629867618a64c6b0d4bc64d66087c78030c406e61df6",
+  "Universe00/Core/Regime.lean": "5f84386a06058d5c9cf4cfa5e835bf87ae14a53dcbed2a8a6a85c0f9b62149e6",
+  "Universe00/Core/Status.lean": "ae8759d24fbd7e2dd476c81f52c99df2488869e6a19d69e4fb78e01ac64c8b46",
+  "Universe00/Examples/Division.lean": "3bebf883d93617a92999f191a2a2ebe2da57960e00d136a1ff76489c6ab3fe3c",
+  "Universe00/Laws/Conservativity.lean": "06c6a81e59fb76b95f03bacf9b4e43f01d78efdfaa9e82cad2fe9eb9b80763ff",
+  "Universe00/Laws/ExplicitRegimes.lean": "f796527a16bb904831a37c54403979a6bf4ca8cccf9831d0eecce27876cf1b26",
+  "Universe00/Laws/NonExplosion.lean": "97802fe493e3339efc8692175c86992139024d1472d3785f4f9143793fe079db",
+  "Universe00/Laws/Preservation.lean": "e2e8e24784e16bf101d3308b266a31071ab3f1ee04aaa1b9242f620c5f7102d9",
+  "Universe00/Laws/Traceability.lean": "92fc53efcf9969ba6e699807e8df3eab5a6a9fe491f56b4d1f7e8aeaabc13316",
+  "Universe00/Operators/SafeDiv.lean": "953f74f3d454654902285312f7972c92365b8458dac7fde9d7cc21573d18575f"
  },
- "published_at": "2026-11-02T20:55:45Z",
- "certificate_sha256": "17cbbb9a68b6143bd85596031ac2993a7b082f31ff95e0ad8ff4c5a4e44c22a0"
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "26f95aaff369c6dcbc894efb0ef7b43d950142726504bb99327fcb8bad2ec95a"
 }

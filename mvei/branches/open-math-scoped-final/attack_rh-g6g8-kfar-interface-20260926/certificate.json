@@ -503,7 +503,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-30T16:50:26+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.19.0"
   ],
@@ -527,16 +527,20 @@
    "name": "Riemann.audit.concrete_decay_to_DNLimit_zero",
    "file": "RIEMANN/Riemann/audit/DenseConversationCertification.lean",
    "line": 25,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(delta : ℝ) {D : NBHilbertData} {rho : D.GeneratorFamily} (T : SNToDNTransport D rho (concreteMobiusVasyuninData delta).global) (hdecay : CONCRETE_BALANCED_MOBIUS_ESTERMANN_DECAY delta) : D.DNLimit rho = 0"
   },
   {
    "name": "Riemann.audit.concrete_decay_to_RH",
    "file": "RIEMANN/Riemann/audit/DenseConversationCertification.lean",
    "line": 34,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(delta : ℝ) {D : NBHilbertData} {rho : D.GeneratorFamily} (T : SNToDNTransport D rho (concreteMobiusVasyuninData delta).global) (hdecay : CONCRETE_BALANCED_MOBIUS_ESTERMANN_DECAY delta) (B : Riemann.full.EndpointBridge (concrete_decay_to_DN delta T hdecay).toVanishingProducer) : Riemann.full.RiemannHypothesis"
   },
   {
@@ -583,7 +587,7 @@
    "name": "Riemann.claims.BalancedDyadicBlock.E_coeff_nonneg",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 60,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(A : MultiStateSNData) (N : ℕ) (B : BalancedDyadicBlock) : 0 ≤ B.E_coeff A N"
   },
@@ -591,40 +595,50 @@
    "name": "Riemann.claims.BalancedDyadicBlock.E_mod_nonneg",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 66,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) (B : BalancedDyadicBlock) : 0 ≤ B.E_mod A N"
   },
   {
    "name": "Riemann.claims.BalancedDyadicBlock.contribution_sq_le_energy",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 72,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) (B : BalancedDyadicBlock) : (B.contribution A N) ^ 2 ≤ B.E_coeff A N * B.E_mod A N"
   },
   {
    "name": "Riemann.claims.BalancedMobiusEstermannHabitant.closes_weighted_modular_decay",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 258,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{A : MultiStateSNData} (H : BalancedMobiusEstermannHabitant A) : WEIGHTED_MODULAR_BILINEAR_DECAY A"
   },
   {
    "name": "Riemann.claims.BalancedMobiusEstermannHabitant.eps_nonneg",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 236,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{A : MultiStateSNData} (H : BalancedMobiusEstermannHabitant A) : ∀ N, 0 ≤ balancedBlockEps A N"
   },
   {
    "name": "Riemann.claims.CorrelatedBalancedHabitant.closes_weighted_modular_decay",
    "file": "RIEMANN/Riemann/claims/Claim5_CorrelatedBalancedDecay.lean",
    "line": 43,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{A : MultiStateSNData} (H : CorrelatedBalancedHabitant A) : WEIGHTED_MODULAR_BILINEAR_DECAY A"
   },
   {
@@ -695,7 +709,7 @@
    "name": "Riemann.claims.ModularBlockEnergyData.eps_nonneg",
    "file": "RIEMANN/Riemann/claims/Claim5_MultiStateWeightedModularDecay.lean",
    "line": 190,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{SN : ℕ → ℝ} (B : ModularBlockEnergyData SN) : ∀ N, 0 ≤ B.eps N"
   },
@@ -703,15 +717,17 @@
    "name": "Riemann.claims.ModularBlockEnergyData.global_abs_le_eps",
    "file": "RIEMANN/Riemann/claims/Claim5_MultiStateWeightedModularDecay.lean",
    "line": 197,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{SN : ℕ → ℝ} (B : ModularBlockEnergyData SN) : ∀ N, |SN N| ≤ B.eps N"
   },
   {
    "name": "Riemann.claims.MultiStateSNData.global_eq_bouquet",
    "file": "RIEMANN/Riemann/claims/Claim5_MultiStateWeightedModularDecay.lean",
    "line": 59,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(A : MultiStateSNData) (N : ℕ) : A.global N = Real.log N * ∑ d in Finset.range N, ((1 : ℝ) / (d + 1 : ℝ)) * (∑ u in Finset.range N, ∑ v in Finset.range N, A.petal N d u v)"
   },
@@ -719,15 +735,17 @@
    "name": "Riemann.claims.PersistentBalancedBlockLowerBound.forbids_decay",
    "file": "RIEMANN/Riemann/claims/Claim5_CoarseEnergyNondecayCriterion.lean",
    "line": 13,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{A : MultiStateSNData} (P : PersistentBalancedBlockLowerBound A) : ¬ Filter.Tendsto (balancedBlockEps A) Filter.atTop (nhds 0)"
   },
   {
    "name": "Riemann.claims.RiemannHabitant.kfar_vanishes",
    "file": "RIEMANN/Riemann/claims/Claim5_RiemannHabitant.lean",
    "line": 29,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{SN : ℕ → ℝ} (H : RiemannHabitant SN) : Filter.Tendsto SN Filter.atTop (nhds 0)"
   },
@@ -735,7 +753,7 @@
    "name": "Riemann.claims.RiemannUnconditionalClosureCertificate.enableTheorem",
    "file": "RIEMANN/Riemann/claims/Claim5_RiemannHabitant.lean",
    "line": 69,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(C : RiemannUnconditionalClosureCertificate) : Riemann.full.RiemannHypothesis"
   },
@@ -743,7 +761,7 @@
    "name": "Riemann.claims.StructuralNumber.structural_number_closure",
    "file": "RIEMANN/Riemann/claims/Claim9_StructuralMultiStateTheorem.lean",
    "line": 72,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(Q : StructuralNumber) (L : IntrinsicClosureLaw Q) {ProblemObject : Type} {FinalClaim : ProblemObject → Prop} (M : Manifestation Q ProblemObject FinalClaim) (s : Q.State) (hs : Q.closedStart s) : ∃ t : Q.State, Reachable Q s t ∧ Q.terminal t ∧ FinalClaim (M.realize t)"
   },
@@ -751,7 +769,7 @@
    "name": "Riemann.claims.WEIGHTED_MODULAR_BILINEAR_DECAY",
    "file": "RIEMANN/Riemann/claims/WeightedModularBilinearDecay.lean",
    "line": 88,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{S : ℕ → ℝ} (C : WeightedModularBilinearDecayCertificate S) : Tendsto S atTop (nhds 0)"
   },
@@ -759,7 +777,7 @@
    "name": "Riemann.claims.WeightedModularBilinearData.S_eq_weighted_roses",
    "file": "RIEMANN/Riemann/claims/WeightedModularBilinearDecay.lean",
    "line": 47,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(W : WeightedModularBilinearData) (N : ℕ) : W.S N = Real.log N * ∑ d in W.dSupport N, (1 / (d : ℝ)) * ∑ uv in W.petalSupport N d, W.petal N d uv.1 uv.2"
   },
@@ -767,7 +785,7 @@
    "name": "Riemann.claims.WeightedModularBilinearData.rose_eq_sum_dyadicBlocks",
    "file": "RIEMANN/Riemann/claims/WeightedModularBilinearDecay.lean",
    "line": 60,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(W : WeightedModularBilinearData) (N d : ℕ) (blocks : Finset (Finset (ℕ × ℕ))) (hpartition : W.petalSupport N d = blocks.biUnion id) (hdisjoint : (blocks : Set (Finset (ℕ × ℕ))).PairwiseDisjoint id) : W.rose N d = ∑ b in blocks, W.dyadicBlock N d b"
   },
@@ -775,7 +793,7 @@
    "name": "Riemann.claims.WeightedModularBilinearDecayCertificate.tendsto_zero",
    "file": "RIEMANN/Riemann/claims/Claim5_MultiStateWeightedModularDecay.lean",
    "line": 84,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{SN : ℕ → ℝ} (C : WeightedModularBilinearDecayCertificate SN) : Filter.Tendsto SN Filter.atTop (nhds 0)"
   },
@@ -815,48 +833,60 @@
    "name": "Riemann.claims.balancedBlockKey_mem",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 115,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(N d u v : ℕ) (hd : d < N) (hu : u < N) (hv : v < N) : balancedBlockKey d u v ∈ balancedDyadicBlocks N"
   },
   {
    "name": "Riemann.claims.balancedTriples_mapsTo_blocks",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 130,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(N : ℕ) : ∀ x ∈ balancedTriples N, balancedBlockKey x.1 x.2.1 x.2.2 ∈ balancedDyadicBlocks N"
   },
   {
    "name": "Riemann.claims.block_contribution_abs_le_energy",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 197,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) (B : BalancedDyadicBlock) : |B.contribution A N| ≤ Real.sqrt (B.E_coeff A N * B.E_mod A N)"
   },
   {
    "name": "Riemann.claims.block_contribution_eq_fiber",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 140,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) (B : BalancedDyadicBlock) : B.contribution A N = ∑ x ∈ balancedTriples N with balancedBlockKey x.1 x.2.1 x.2.2 = B, balancedTripleTerm A N x"
   },
   {
    "name": "Riemann.claims.concreteCorrelatedDecay_closes_weighted_modular",
    "file": "RIEMANN/Riemann/claims/Claim5_CorrelatedBalancedDecay.lean",
    "line": 66,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(delta : ℝ) (hdecay : CONCRETE_CORRELATED_BALANCED_DECAY delta) : WEIGHTED_MODULAR_BILINEAR_DECAY (concreteMobiusVasyuninData delta)"
   },
   {
    "name": "Riemann.claims.concreteDecay_closes_weighted_modular",
    "file": "RIEMANN/Riemann/claims/Claim5_ConcreteMobiusVasyuninData.lean",
    "line": 66,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(delta : ℝ) (hdecay : CONCRETE_BALANCED_MOBIUS_ESTERMANN_DECAY delta) : WEIGHTED_MODULAR_BILINEAR_DECAY (concreteMobiusVasyuninData delta)"
   },
   {
@@ -871,7 +901,7 @@
    "name": "Riemann.claims.concrete_global_eq_explicit",
    "file": "RIEMANN/Riemann/claims/Claim5_ConcreteMobiusVasyuninData.lean",
    "line": 77,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(delta : ℝ) (N : ℕ) : (concreteMobiusVasyuninData delta).global N = Real.log N * ∑ d in Finset.range N, ((1 : ℝ) / (d + 1 : ℝ)) * (∑ u in Finset.range N, ∑ v in Finset.range N, if balancedFarActive delta N d u v then mobiusTaperCoeff N ((d + 1) * (u + 1)) * mobiusTaperCoeff N ((d + 1) * (v + 1)) * vasyuninSymmetricKernel (u + 1) (v + 1) else 0)"
   },
@@ -879,8 +909,10 @@
    "name": "Riemann.claims.correlatedBlockEps_nonneg",
    "file": "RIEMANN/Riemann/claims/Claim5_CorrelatedBalancedDecay.lean",
    "line": 9,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) : ∀ N, 0 ≤ correlatedBlockEps A N"
   },
   {
@@ -903,24 +935,30 @@
    "name": "Riemann.claims.global_abs_le_balancedBlockEps",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 214,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) : |A.global N| ≤ balancedBlockEps A N"
   },
   {
    "name": "Riemann.claims.global_abs_le_correlatedBlockEps",
    "file": "RIEMANN/Riemann/claims/Claim5_CorrelatedBalancedDecay.lean",
    "line": 16,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) : |A.global N| ≤ correlatedBlockEps A N"
   },
   {
    "name": "Riemann.claims.global_eq_sum_block_contributions",
    "file": "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean",
    "line": 163,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (N : ℕ) : A.global N = ∑ B in balancedDyadicBlocks N, B.contribution A N"
   },
   {
@@ -935,32 +973,40 @@
    "name": "Riemann.claims.mobiusLinearTaper_tendsto_one",
    "file": "RIEMANN/Riemann/claims/Claim5_MobiusTaperAsymptotics.lean",
    "line": 9,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(n : ℕ) (hn : 1 ≤ n) : Filter.Tendsto (fun N : ℕ => mobiusLinearTaper N n) Filter.atTop (nhds 1)"
   },
   {
    "name": "Riemann.claims.mobiusTaperCoeff_three_tendsto_one",
    "file": "RIEMANN/Riemann/claims/Claim5_MobiusTaperAsymptotics.lean",
    "line": 40,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": Filter.Tendsto (fun N : ℕ => mobiusTaperCoeff N 3) Filter.atTop (nhds 1)"
   },
   {
    "name": "Riemann.claims.mobiusTaperCoeff_two_tendsto_one",
    "file": "RIEMANN/Riemann/claims/Claim5_MobiusTaperAsymptotics.lean",
    "line": 33,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": Filter.Tendsto (fun N : ℕ => mobiusTaperCoeff N 2) Filter.atTop (nhds 1)"
   },
   {
    "name": "Riemann.claims.modular_block_energy_vanishing_implies_weighted_decay",
    "file": "RIEMANN/Riemann/claims/Claim5_MultiStateWeightedModularDecay.lean",
    "line": 245,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : MultiStateSNData) (h : MODULAR_BLOCK_ENERGY_VANISHING A) : WEIGHTED_MODULAR_BILINEAR_DECAY A"
   },
   {
@@ -991,7 +1037,7 @@
    "name": "Riemann.claims.riemann_unconditional_claim_ready_implies_RH",
    "file": "RIEMANN/Riemann/claims/Claim5_RiemannHabitant.lean",
    "line": 88,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(h : RIEMANN_UNCONDITIONAL_CLAIM_READY) : Riemann.full.RiemannHypothesis"
   },
@@ -999,15 +1045,17 @@
    "name": "Riemann.claims.structural_law_enables_riemann_decay",
    "file": "RIEMANN/Riemann/claims/Claim9_StructuralMultiStateTheorem.lean",
    "line": 112,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(Q : StructuralNumber) (L : Q.IntrinsicClosureLaw) (A : RiemannStructuralAdapter Q delta) (s : Q.State) (hs : Q.closedStart s) : CONCRETE_CORRELATED_BALANCED_DECAY delta"
   },
   {
    "name": "Riemann.claims.tendsto_log_nat_atTop",
    "file": "RIEMANN/Riemann/claims/Claim5_MobiusTaperAsymptotics.lean",
    "line": 4,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": Filter.Tendsto (fun N : ℕ => Real.log (N : ℝ)) Filter.atTop Filter.atTop"
   },
@@ -1015,23 +1063,27 @@
    "name": "Riemann.claims.vasyuninSymmetricKernel_two_three",
    "file": "RIEMANN/Riemann/claims/Claim5_ConcreteMobiusVasyuninData.lean",
    "line": 96,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": vasyuninSymmetricKernel 2 3 = 1 / (18 * Real.sqrt 3)"
   },
   {
    "name": "Riemann.claims.vasyuninSymmetricKernel_two_three_ne_zero",
    "file": "RIEMANN/Riemann/claims/Claim5_ConcreteMobiusVasyuninData.lean",
    "line": 105,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": vasyuninSymmetricKernel 2 3 ≠ 0"
   },
   {
    "name": "Riemann.claims.weightedModularBilinearOpenMath_closes",
    "file": "RIEMANN/Riemann/claims/WeightedModularBilinearDecay.lean",
    "line": 108,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(W : WeightedModularBilinearData) (h : WeightedModularBilinearOpenMath W) : Tendsto W.S atTop (nhds 0)"
   },
@@ -1047,7 +1099,7 @@
    "name": "Riemann.full.ALL_CLOSURES_TO_RH",
    "file": "RIEMANN/Riemann/full/AllClosuresToTheorem.lean",
    "line": 8,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{D : NBHilbertData} {rho : D.GeneratorFamily} (S : AnalyticTailSolution D rho) (B : EndpointBridge S.toVanishingProducer) : RiemannHypothesis"
   },
@@ -1063,7 +1115,7 @@
    "name": "Riemann.full.MinimalUnconditionalRHCertificate.enableTheorem",
    "file": "RIEMANN/Riemann/full/MinimalUnconditionalRHCertificate.lean",
    "line": 17,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(C : MinimalUnconditionalRHCertificate) : RiemannHypothesis"
   },
@@ -1071,7 +1123,7 @@
    "name": "Riemann.full.UnconditionalRHClaimCertificate.enableTheorem",
    "file": "RIEMANN/Riemann/full/UnconditionalClaimCertificate.lean",
    "line": 16,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(C : UnconditionalRHClaimCertificate) : RiemannHypothesis"
   },
@@ -1079,7 +1131,7 @@
    "name": "Riemann.full.finalOpenMathClosureRequirement_to_RH",
    "file": "RIEMANN/Riemann/full/AllClosuresToTheorem.lean",
    "line": 36,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(h : FinalOpenMathClosureRequirement) : RiemannHypothesis"
   },
@@ -1087,7 +1139,7 @@
    "name": "Riemann.full.minimal_unconditional_rh_ready_implies_RH",
    "file": "RIEMANN/Riemann/full/MinimalUnconditionalRHCertificate.lean",
    "line": 50,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(h : MINIMAL_UNCONDITIONAL_RH_READY) : RiemannHypothesis"
   },
@@ -1095,7 +1147,7 @@
    "name": "Riemann.full.unconditional_claim_ready_implies_RH",
    "file": "RIEMANN/Riemann/full/UnconditionalClaimCertificate.lean",
    "line": 32,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(h : UNCONDITIONAL_RH_CLAIM_READY) : RiemannHypothesis"
   },
@@ -1103,7 +1155,7 @@
    "name": "Riemann.structural.FormulationProfile.framework_incomplete_of_missing",
    "file": "RIEMANN/Riemann/structural/ATKStructuralTheorem.lean",
    "line": 166,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(F : FormulationProfile) {p : StructuralParameter} (h : F.MissingParameter p) : F.FrameworkIncomplete"
   },
@@ -1111,7 +1163,7 @@
    "name": "Riemann.structural.FormulationProfile.missing_parameter_implies_incomplete",
    "file": "RIEMANN/Riemann/structural/ATKStructuralTheorem.lean",
    "line": 151,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(F : FormulationProfile) {p : StructuralParameter} (h : F.MissingParameter p) : ¬ F.StructurallyComplete"
   },
@@ -1119,7 +1171,7 @@
    "name": "Riemann.structural.StructuralLogicCertificate.closes_every_certified_manifestation",
    "file": "RIEMANN/Riemann/structural/ATKStructuralTheorem.lean",
    "line": 195,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(C : StructuralLogicCertificate) {p : ProblemKind} (hp : p ∈ C.evidence) (s : C.Q.State) (hinv : C.Q.invariant s) (hreach : C.Q.Reachable C.Q.start s) : ∃ M : C.Q.Manifestation, M.kind = p ∧ ∃ t : C.Q.State, C.Q.Reachable s t ∧ M.objectTerminal (M.realize t)"
   },
@@ -1127,12 +1179,12 @@
    "name": "Riemann.structural.StructuralNumber.structural_number_closure",
    "file": "RIEMANN/Riemann/structural/ATKStructuralTheorem.lean",
    "line": 105,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(Q : StructuralNumber) (L : Q.IntrinsicClosureLaw) (M : Q.Manifestation) (s : Q.State) (hinv : Q.invariant s) (hreach : Q.Reachable Q.start s) : ∃ t : Q.State, Q.Reachable s t ∧ M.objectTerminal (M.realize t)"
   }
  ],
- "closed": 27,
+ "closed": 51,
  "files_sha256": {
   "RIEMANN/MCore/RH/NB/Antitone.lean": "53ad638a3f7fa211c552a1dde876fa5275ebdfde5ddb2a8512c506a0279db5e8",
   "RIEMANN/MCore/RH/NB/Distance.lean": "544b4690ae04a92636cf96abd1bc81520600292c656bb45e605c9c25bf166f7f",
@@ -1144,20 +1196,32 @@
   "RIEMANN/MCore/RH/NB/QuantitativeUpperBound.lean": "8c47cb29ff0d4c0e70c257f795fb256dd7c60e32825b00d5d6d476d948817aa5",
   "RIEMANN/MCore/RH/NB/ZeroLimitFrontier.lean": "de018ec39c01d4a62cf9f4998060f41e6dcbc68442672527660f5bee191e6c56",
   "RIEMANN/Riemann/claims/Claim4_EndpointTyped.lean": "528e7c9a5ca3093e875cf808aba984b86c7f4ccf8181fe54ed168395063a66d7",
+  "RIEMANN/Riemann/claims/Claim5_BalancedMobiusEstermannHabitant.lean": "aeb9c7fffe893dc06db2375e92d47a35c4d24599d9feaee67f7ea489d53b73d7",
+  "RIEMANN/Riemann/claims/Claim5_ConcreteMobiusVasyuninData.lean": "53252c34d299481715935260aadc6206710fc0eba84ad4f94e3623698d648d6d",
+  "RIEMANN/Riemann/claims/Claim5_CorrelatedBalancedDecay.lean": "bf4f64a64a32e7c3a85b422c29cdcadb5138710b2e14e6776d313a03d3feb4bf",
+  "RIEMANN/Riemann/claims/Claim5_MobiusTaperAsymptotics.lean": "1b7a52e61576bcd7b3b76146982def5decb95335c9fab98696976c6a430ee1cb",
+  "RIEMANN/Riemann/claims/Claim5_MultiStateWeightedModularDecay.lean": "0c64a6e7ef0cf77f42e502fd49f20bf32c53f8ffa0c730168f3684962a36ea32",
+  "RIEMANN/Riemann/claims/Claim5_RiemannHabitant.lean": "62f4f47fd2680b990beb77cd5d795b8b95b91ec147c01800d72b39823222c9d4",
   "RIEMANN/Riemann/claims/Claim5_UnconditionalVUB.lean": "069cd31f182460ddc0bee37af5bdcbec6fd640e2fec366dbd56d792bf7e3d426",
   "RIEMANN/Riemann/claims/Claim6_DNLimitZero.lean": "a7f00ca957ec9a788357314120a8802cd288a648bac559cf2daaa4734e00c961",
   "RIEMANN/Riemann/claims/Claim7_EndpointBridge.lean": "de94a1a8282f810fbd1186ae9b9a6d545ecf5a0b42cce6c6889c90d473264e93",
   "RIEMANN/Riemann/claims/Claim8_RiemannComplete.lean": "124714edc1004cf331db66265dbfea65f44f87b6e102c031c3847ab116db0f4d",
+  "RIEMANN/Riemann/claims/Claim9_StructuralMultiStateTheorem.lean": "ae499ba54f50b4a3af4b939f2c22d05f73170eca9a8a6b4fa0592203da14703c",
   "RIEMANN/Riemann/claims/FullClaimsRegistry.lean": "f290833577da7c7b2a0edce5bc3721690ea70233a4bd4dc4024dedcd2d9a3bdc",
+  "RIEMANN/Riemann/claims/WeightedModularBilinearDecay.lean": "3639e715102482f4ed2aa5292c1cdfc6f9fc55b72fd43ffd4a9fc79151a14cf8",
   "RIEMANN/Riemann/external/FinalExternalCertificate.lean": "05cb90f64faa43c2b1ffb14ada6767a2ee578dbfd4d219e9913da146e5c13158",
   "RIEMANN/Riemann/frozen/vanishing_upper_bound_green_5c66f8dc.lean": "9b06434ab8ac87f243115ccf701b2feb70ade53305c338eac733a055983ab58f",
+  "RIEMANN/Riemann/full/AllClosuresToTheorem.lean": "2565cfe5117ea05d6ccb615c563c8232086dacb9b0644a83118813be35ff3a4b",
   "RIEMANN/Riemann/full/Endpoint.lean": "cc68a7b17ff29bdddf732e5fa2881fba774c6cdf8547bc60c6e2e64bad8aa379",
   "RIEMANN/Riemann/full/FinalProof.lean": "a725454e1b290c5692782c8ae04d8b249c12d38c12b14f575eed41b5fbc30d04",
   "RIEMANN/Riemann/full/FinalRoot.lean": "1ee6654ec282e3a1877deefd215ccd64048cd56b3256b95a6591555e8351d45c",
+  "RIEMANN/Riemann/full/MinimalUnconditionalRHCertificate.lean": "14f4c53967ccd289b5891b86d0b37426398303f8adf07b44acdf6308104fa7c9",
   "RIEMANN/Riemann/full/Obligations.lean": "b7a7dd2c91e3236035bfd16314db54b5ad53e316e424151591b9389b224a688d",
+  "RIEMANN/Riemann/full/UnconditionalClaimCertificate.lean": "c78fd550ff6307add450c38fc42cfa78103878931bf088f39d62407d460858bf",
+  "RIEMANN/Riemann/structural/ATKStructuralTheorem.lean": "5a98dd8e36dd75b89f408784ac848eb2744ccc976b4d8f20c2c8c7e6ef549ee6",
   "RIEMANN/lakefile.lean": "f2bf43785be91762d87439f663c4447a8eb1a8808bb4a21ab23959b77aef3477",
   "RIEMANN/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea"
  },
- "published_at": "2026-11-02T20:55:44Z",
- "certificate_sha256": "b64367200fc85f4f52dd3a858a78cdafc712871278a4173e2bad90c2ea18a521"
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "05baac55b3a3558d4b69baf75971c573b2afadda27d07ff453e7f18141ced520"
 }

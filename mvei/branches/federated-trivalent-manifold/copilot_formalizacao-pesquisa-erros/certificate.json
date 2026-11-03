@@ -23,7 +23,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.14.0"
   ],
@@ -47,7 +47,7 @@
    "name": "Regra1_TeardownObrigatorio",
    "file": "Regra1.lean",
    "line": 22,
-   "state": "erro",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(s : SystemState) (hport : s.port = \" \") (hopen : s.port_open = true) : ∃ s' : SystemState, s' = teardown s ∧ s'.port_open = false"
   },
@@ -65,7 +65,7 @@
    "name": "Regra3_SeparacaoDominio",
    "file": "Regra3.lean",
    "line": 42,
-   "state": "erro",
+   "state": "aberto-sorry",
    "axioms_beyond_standard": [
     "hkdf_domain_separation",
     "sorryAx"
@@ -86,10 +86,9 @@
    "name": "Regra5_Contraposicao",
    "file": "Regra5.lean",
    "line": 43,
-   "state": "erro",
+   "state": "condicional",
    "axioms_beyond_standard": [
-    "Regra5_Conservacao",
-    "sorryAx"
+    "Regra5_Conservacao"
    ],
    "statement": "(e : ExodusFunc) (T : Time) : integralExodo e T = 0.0 → ∀ t < T, ¬ exodoPersiste e t"
   },
@@ -261,10 +260,9 @@
    "name": "regime_meio_enquanto_exodo",
    "file": "Regra5.lean",
    "line": 50,
-   "state": "erro",
+   "state": "condicional",
    "axioms_beyond_standard": [
-    "Regra5_Conservacao",
-    "sorryAx"
+    "Regra5_Conservacao"
    ],
    "statement": "(e : ExodusFunc) (T : Time) (h : ∃ t < T, exodoPersiste e t) : integralExodo e T ≠ 0.0"
   },
@@ -272,7 +270,7 @@
    "name": "resolvido_iff_erro_zero",
    "file": "MedidaClassica.lean",
    "line": 42,
-   "state": "erro",
+   "state": "aberto-sorry",
    "axioms_beyond_standard": [
     "sorryAx"
    ],
@@ -292,7 +290,7 @@
    "name": "tabela_completa",
    "file": "MedidaClassica.lean",
    "line": 149,
-   "state": "erro",
+   "state": "aberto-sorry",
    "axioms_beyond_standard": [
     "sorryAx"
    ],
@@ -366,7 +364,7 @@
    "statement": "(s : Complex) (hzero : isNonTrivialZero s) : s.re = 0.5"
   }
  ],
- "closed": 6,
+ "closed": 7,
  "files_sha256": {
   "Regra1.lean": "2c23ad758ee823caaab4c82b165f50807c91e23db9fe9bd1ab589112641a0b20",
   "Regra3.lean": "fb8c040e9af320dc1f099acb469d5921969498e9bc5321ccc55a3ed860582057",
@@ -374,6 +372,6 @@
   "lakefile.lean": "780a09437cbfa8eb9c3382792265609c99c73354b4009007b6e43eb1079ab47e",
   "lean-toolchain": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14"
  },
- "published_at": "2026-10-29T20:15:53Z",
- "certificate_sha256": "ab2443d3fd293158ce8d101060e3d597dcc84704e369fdd5266473aeca33d9af"
+ "published_at": "2026-11-03T11:27:59Z",
+ "certificate_sha256": "9980c420597ba4e8f3c1e5fc7591f24f1cd2afec6ac91d23b90a25ab3b9fd0d3"
 }
