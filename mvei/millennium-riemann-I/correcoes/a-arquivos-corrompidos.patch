@@ -1,0 +1,115 @@
+--- a/src/Riemann/Core/ClassicalZeros.lean
++++ b/src/Riemann/Core/ClassicalZeros.lean
+@@ -1,5 +1,4 @@
+ /-
+- copilot/add-inumber-class-implementation
+ ClassicalZeros.lean - Known properties of zeros
+ 
+ This module collects known facts about zeros of ζ(s).
+@@ -35,43 +34,5 @@
+     ∀ s₁ s₂ : ℂ, isNontrivialZero s₁ → isNontrivialZero s₂ →
+       |s₁.im - T| < 1 → |s₂.im - T| < 1 → s₁ ≠ s₂ →
+       |s₁.im - s₂.im| > Δ / 2
+-=======
+-Copyright (c) 2025 ShantiDraconis. All rights reserved.
+-Released under Apache 2.0 license as described in the file LICENSE.
+-Authors: ShantiDraconis
+-
+-# Classical Zeros
+-
+-Definition and properties of the classical (trivial) zeros of the zeta function.
+--/
+-
+-import Riemann.Core.ZetaDef
+-
+-namespace Riemann.Core
+-
+-open Millennium.Riemann.CollapseComplex
+-
+-/-- Classical trivial zeros at negative even integers: s = -2, -4, -6, ... -/
+-def isClassicalTrivialZero (s : CollapseComplex) : Prop :=
+-  ∃ n : ℕ, n > 0 ∧ s = ofReal (-(2 * (n : ℝ)))
+-
+-/-- The trivial zeros are indeed zeros of ζ. -/
+-axiom trivial_zeros_are_zeros :
+-  ∀ s : CollapseComplex, isClassicalTrivialZero s → zeta s = zero
+-
+-/-- Trivial zeros lie outside the critical strip. -/
+-lemma trivial_zeros_outside_strip (s : CollapseComplex) :
+-  isClassicalTrivialZero s → ¬inCriticalStrip s := by
+-  intro ⟨n, hn_pos, hs⟩
+-  unfold inCriticalStrip
+-  rw [hs]
+-  simp [ofReal]
+-  intro h_pos h_lt_one
+-  -- -2n < 0 for n > 0, so not in (0,1)
+-  have : -(2 * (n : ℝ)) < 0 := by
+-    have : (n : ℝ) > 0 := Nat.cast_pos.mpr hn_pos
+-    linarith
+-  linarith
+- main
+ 
+ end Riemann.Core
+--- a/lean/millennium/Riemann/ExtendedZeta.lean
++++ b/lean/millennium/Riemann/ExtendedZeta.lean
+@@ -212,6 +212,14 @@
+ axiom framework_principles : True
+ 
+ end ExtendedDocumentation
++
++end Millennium.Riemann
++
++/-
++Copyright (c) 2025 ShantiDraconis. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: ShantiDraconis
++
+ # Extended Zeta Function
+ 
+ Extends the Riemann zeta function to handle:
+--- a/lean/millennium/Riemann/NumericalHierarchy.lean
++++ b/lean/millennium/Riemann/NumericalHierarchy.lean
+@@ -25,13 +25,6 @@
+ This is a **symbolic, experimental, non-standard formalization**.
+ - This represents speculative mathematics for symbolic exploration.
+ - Not intended as rigorous classical mathematics.
+-# Numerical Hierarchy: New Number Classes
+-
+-Defines the hierarchy of number systems arising from the I-Collapse framework:
+-- ℝ ⊂ ℂ ⊂ CC (CollapseComplex)
+-- Exceptional numbers (off critical line)
+-- Singular numbers (at trivial zeros)
+-- Limit numbers (at horizons/collapse points)
+ -/
+ 
+ import Millennium.Riemann.CollapseComplex
+@@ -379,6 +372,29 @@
+     UniversalNumber.level n = NumericalLevel.refutation
+ 
+ end HierarchyTheorems
++
++end Millennium.Riemann
++
++/-
++Copyright (c) 2025 ShantiDraconis. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: ShantiDraconis
++
++# Numerical Hierarchy: New Number Classes
++
++Defines the hierarchy of number systems arising from the I-Collapse framework:
++- ℝ ⊂ ℂ ⊂ CC (CollapseComplex)
++- Exceptional numbers (off critical line)
++- Singular numbers (at trivial zeros)
++- Limit numbers (at horizons/collapse points)
++-/
++
++import Millennium.Riemann.CollapseComplex
++
++namespace Millennium.Riemann
++
++open CollapseComplex
++
+ /-- Level 0: Real numbers (no i, no I) -/
+ def IsReal (z : CollapseComplex) : Prop :=
+   z.im = 0 ∧ z.indet = 0

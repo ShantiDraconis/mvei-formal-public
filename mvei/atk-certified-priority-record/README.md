@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `c7f7df5228db78f998b14035273ae37d4c030fdf`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `c7f7df5228db78f998b14035273ae37d4c030fdf`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `snapshots/Elyon-Public-Proof` | v4.19.0 | partial | 870 | 0 | 0 | 197 / 0 / 1 / 11 / 25 |
+| `snapshots/Elyon-Public-Proof` | v4.19.0 | partial | 870 | 0 | 0 | 210 / 0 / 3 / 11 / 10 |
 | `snapshots/m-core-beal/atk-kernel` (no lakefile; project assembled by MVEI) | v4.19.0 | OK | 1 | 0 | 0 | — |
 | `snapshots/m-core-beal/audit` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 2 / 0 / 0 / 0 / 0 |
 | `snapshots/m-core-beal/formal` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 17 | 0 | 0 | — |
@@ -41,25 +41,27 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `c7f7df5228db78f998b14
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 4 925 |
-| Unique (name + statement) | 3 767 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 2 022 |
+| Counting each project | 4 938 |
+| Unique (name + statement) | 3 777 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 2 032 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `MCore.k13_open_core_not_certified` | `snapshots/Elyon-Public-Proof (file by file)` | open | `sorryAx` |
+| `MCore.k14_final_node_open` | `snapshots/Elyon-Public-Proof (file by file)` | open | `sorryAx` |
+| `MCore.k14_final_node_not_certified` | `snapshots/Elyon-Public-Proof (file by file)` | open | `sorryAx` |
 | `ATK.YangMills.effective_mass_slope_nonpos` | `snapshots/m-core-yang-mills/atk-kernel (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 3 043 `theorem`/`lemma` (counting copies). The kernel checked 2 278 of them (2 276 closed, 0 conditional, 2 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 765 the kernel has no result:
+The `.lean` files of the verified commit declare 3 043 `theorem`/`lemma` (counting copies). The kernel checked 2 293 of them (2 289 closed, 0 conditional, 4 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 750 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | the file did not compile (an error in it or in a file it imports) | 670 |
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 48 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 33 |
 | the file compiled, but the name did not appear in the kernel (private, mutual or macro-generated) | 29 |
 | checked file by file: the written proof does not pass the kernel | 18 |
 

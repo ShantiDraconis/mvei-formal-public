@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T16:50:26+00:00",
+ "generated_at": "2026-11-03T08:19:01+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 14.2,
+   "build_seconds": 12.1,
    "build_error": "(configuração original) ",
    "sorry_warnings": 0,
    "reconstructed": true,
@@ -25,21 +25,6 @@
      "name": "Beale_Kato_Majda_no_tanh",
      "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
      "statement": "∀ ν > 0,   ∀ T_star > 0,     ∀ (norm_omega_Linfty norm_u_Hs : ℝ → ℝ),       (∃ C, ∀ n > 0, ∑ k ∈ Finset.range n, norm_omega_Linfty (T_star * ↑k / ↑n) * (T_star / ↑n) ≤ C) →         ∃ M, ∀ (t : ℝ), 0 ≤ t → t < T_star → norm_u_Hs t ≤ M"
-    },
-    {
-     "name": "L_C1_ERes_omega_zero",
-     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
-     "statement": "∀ (E_Res : ℕ → ℝ), False → ∀ ε > 0, ∃ N, |E_Res N| < ε"
-    },
-    {
-     "name": "L_C2_Nmax_omega_infty",
-     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
-     "statement": "∀ (N_max : ℕ → ℝ), False → ∀ (M : ℝ), ∃ n, N_max n > M"
-    },
-    {
-     "name": "L_C3_e_nonneg_natural",
-     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
-     "statement": "∀ (e : ℝ → ℝ), False → ∀ t ≥ 0, e t ≥ 0"
     },
     {
      "name": "a_priori_energy_bound_no_tanh",
@@ -992,6 +977,39 @@
      "status": "condicional"
     },
     {
+     "name": "L_C1_ERes_omega_zero",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (E_Res : ℕ → ℝ), False → ∀ ε > 0, ∃ N, |E_Res N| < ε",
+     "status": "fechado"
+    },
+    {
+     "name": "L_C2_Nmax_omega_infty",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (N_max : ℕ → ℝ), False → ∀ (M : ℝ), ∃ n, N_max n > M",
+     "status": "fechado"
+    },
+    {
+     "name": "L_C3_e_nonneg_natural",
+     "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (e : ℝ → ℝ), False → ∀ t ≥ 0, e t ≥ 0",
+     "status": "fechado"
+    },
+    {
      "name": "ns_global_regularity_no_tanh_final",
      "module": "ANALISE_TANH_PARA_H1.Lemas_Master_F3_sem_tanh_Lean4",
      "axioms": [
@@ -1006,7 +1024,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com ANALISE_TANH_PARA_H1, FTM e o Mathlib v4.19.0 e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com ANALISE_TANH_PARA_H1, FTM e o Mathlib v4.19.0 e compilou o que foi possível",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4"
@@ -1017,31 +1035,10 @@
    "preenchimento": [
     {
      "tipo": "axioma",
-     "nome": "L_C2_Nmax_omega_infty",
-     "enunciado": "∀ (N_max : ℕ → ℝ), False → ∀ (M : ℝ), ∃ n, N_max n > M",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-    },
-    {
-     "tipo": "axioma",
      "nome": "Beale_Kato_Majda_no_tanh",
      "enunciado": "∀ ν > 0,   ∀ T_star > 0,     ∀ (norm_omega_Linfty norm_u_Hs : ℝ → ℝ),       (∃ C, ∀ n > 0, ∑ k ∈ Finset.range n, norm_omega_Linfty (T_star * ↑k / ↑n) * (T_star / ↑n) ≤ C) →         ∃ M, ∀ (t : ℝ), 0 ≤ t → t < T_star → norm_u_Hs t ≤ M",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "L_C1_ERes_omega_zero",
-     "enunciado": "∀ (E_Res : ℕ → ℝ), False → ∀ ε > 0, ∃ N, |E_Res N| < ε",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-    },
-    {
-     "tipo": "axioma",
-     "nome": "L_C3_e_nonneg_natural",
-     "enunciado": "∀ (e : ℝ → ℝ), False → ∀ t ≥ 0, e t ≥ 0",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
     },
     {
      "tipo": "axioma",
@@ -1059,11 +1056,11 @@
     }
    ],
    "summary": {
-    "fechado": 120,
+    "fechado": 123,
     "aberto-sorry": 0,
     "condicional": 8
    },
-   "hora_commit_mvei": 1793349359
+   "hora_commit_mvei": 1793652851
   },
   {
    "repo": "federated-trivalent-manifold",
@@ -1072,7 +1069,7 @@
    "toolchain_used": "leanprover/lean4:v4.8.0",
    "needs_mathlib": true,
    "build_ok": false,
-   "build_seconds": 1.2,
+   "build_seconds": 1.1,
    "build_error": "error: no such file or directory (error code: 2) | error: build failed",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -1302,7 +1299,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 4 arquivo(s); 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2.",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 4 arquivo(s); 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2.",
    "corrections": [
     "renomear-imports-mathlib",
     "tatica-encontrada",
@@ -1350,7 +1347,7 @@
     },
     {
      "arquivo": "formal/lean/Behaviors.lean",
-     "linha": 82,
+     "linha": 83,
      "nome": "ComportamentoEspecifico.limit_zero",
      "status": "erro",
      "axioms": [
@@ -1359,13 +1356,13 @@
       "Quot.sound",
       "sorryAx"
      ],
-     "erro": "linha 86: unsolved goals case h b : ComportamentoEspecifico ε : ℝ hε : ε > 0 n : ℕ hn : n ≥ sorryAx ℕ true + 1 hn_pos : n > 0 hcert : |b.gap n| ≤ b.C / ↑n hn_real : ↑n > 0 hCN : b.C / ↑n < ε ⊢ |b.gap n| < ε",
-     "coluna": 59,
-     "trecho": "ico) : ConvergesTo b.gap 0 := ⟦b⟧y"
+     "erro": "linha 93: omega could not prove the goal: a possible counterexample may satisfy the constraints a ≤ 0 a ≥ 0 where a := ↑⌈b.C / ε⌉₊",
+     "coluna": 47,
+     "trecho": " > 0 := Nat.lt_of_lt_pred (by ⟦o⟧mega)"
     },
     {
      "arquivo": "formal/lean/Behaviors.lean",
-     "linha": 181,
+     "linha": 182,
      "nome": "canonical_surreal_limit_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -1377,7 +1374,18 @@
     },
     {
      "arquivo": "formal/lean/Behaviors.lean",
-     "linha": 276,
+     "linha": 242,
+     "nome": "L_C3_e_nonneg_natural",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Behaviors.lean",
+     "linha": 278,
      "nome": "seet_phase1_closed_no_sorry",
      "status": "erro",
      "axioms": [
@@ -1386,7 +1394,7 @@
       "Quot.sound",
       "sorryAx"
      ],
-     "erro": "linha 289: invalid field 'norm_sq', the environment does not contain 'EnergyBehavior.norm_sq' b.energy has type EnergyBehavior",
+     "erro": "linha 291: invalid field 'norm_sq', the environment does not contain 'EnergyBehavior.norm_sq' b.energy has type EnergyBehavior",
      "coluna": 14,
      "trecho": "    (∀ t : ℝ, ⟦b⟧.energy.norm_sq t ≥ 0) ∧"
     },
@@ -1556,6 +1564,28 @@
      "status": "condicional",
      "axioms": [
       "Lean.ofReduceBool"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 56,
+     "nome": "L_C1_ERes_omega_zero",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "formal/lean/Lemas_Master.lean",
+     "linha": 69,
+     "nome": "L_C2_Nmax_omega_infty",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ]
     },
     {
@@ -1787,7 +1817,7 @@
     "aberto-sorry": 0,
     "condicional": 1
    },
-   "hora_commit_mvei": 1793349359
+   "hora_commit_mvei": 1793652851
   },
   {
    "repo": "federated-trivalent-manifold",
@@ -1970,7 +2000,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 1 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 1 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2.",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4): 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 12 arquivo(s): nomes_mathlib 1, noncomputable 9, notacao 1, palavra_chave 2.",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4"
@@ -1984,7 +2014,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793349359
+   "hora_commit_mvei": 1793652851
   }
  ]
 }

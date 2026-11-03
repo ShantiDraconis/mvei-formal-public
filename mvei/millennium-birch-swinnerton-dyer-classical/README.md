@@ -11,18 +11,18 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `44edb40cb18d994ff785d95e56d78767d0d5d15c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `44edb40cb18d994ff785d95e56d78767d0d5d15c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `src/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 58 | 0 | 6 | 11 / 1 / 86 / 33 / 86 |
+| `src/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 58 | 0 | 6 | 17 / 1 / 95 / 33 / 71 |
 | `tests/lean` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 0 | 0 | 0 | — |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 69 |
-| Unique (name + statement) | 69 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 21 |
+| Counting each project | 75 |
+| Unique (name + statement) | 75 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 27 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -34,6 +34,9 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `44edb40cb18d994ff785d
 | `BSD.EllipticCurve.Point.add_zero` | `src/lean` | open | `sorryAx` |
 | `Weierstrass.conductor_divides_discriminant` | `src/lean` | open | `sorryAx` |
 | `Weierstrass.discriminant_transform` | `src/lean` | open | `sorryAx` |
+| `ModularForm.eigenvalue_eq_coeff` | `src/lean (file by file)` | open | `sorryAx` |
+| `ModularForm.hecke_comm` | `src/lean (file by file)` | open | `sorryAx` |
+| `ModularForm.hecke_mult` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.heightMatrix_symmetric` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.regulator_pos` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.regulator_basis_independent` | `src/lean (file by file)` | open | `sorryAx` |
@@ -42,6 +45,8 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `44edb40cb18d994ff785d
 | `EllipticCurve.height_bound_constant` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.height_smul'` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.height_double` | `src/lean (file by file)` | open | `sorryAx` |
+| `BSD.BSD.bsd_conjecture` | `src/lean (file by file)` | open | `sorryAx` |
+| `EllipticCurve.strong_BSD_implies_sha_finite` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurveClassical.isomorphic_iff_same_j` | `src/lean (file by file)` | open | `sorryAx` |
 | `ShortWeierstrassClassical.j_zero_iff_A_zero` | `src/lean (file by file)` | open | `sorryAx` |
 | `ShortWeierstrassClassical.j_1728_iff_B_zero` | `src/lean (file by file)` | open | `sorryAx` |
@@ -104,6 +109,7 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `44edb40cb18d994ff785d
 | `regulator_in_bsd` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_rank_growth` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_computation_converges` | `src/lean (file by file)` | open | `sorryAx` |
+| `EllipticCurve.gamma_at_one` | `src/lean (file by file)` | open | `sorryAx` |
 | `LSeriesCoefficients.a_multiplicative` | `src/lean (file by file)` | open | `sorryAx` |
 | `LSeriesCoefficients.a_one` | `src/lean (file by file)` | open | `sorryAx` |
 | `absoluteConvergenceRegion` | `src/lean (file by file)` | open | `sorryAx` |
@@ -121,21 +127,25 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `44edb40cb18d994ff785d
 | `tamagawaProduct_pos` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.torsion_order_possibilities` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurve.regulator_from_generators` | `src/lean (file by file)` | open | `sorryAx` |
+| `BSD.Rank.rank_equality` | `src/lean (file by file)` | open | `sorryAx` |
+| `BSD.Rank.rank_zero_case` | `src/lean (file by file)` | open | `sorryAx` |
+| `BSD.Rank.rank_one_case` | `src/lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 225 `theorem`/`lemma` (counting copies). The kernel checked 109 of them (13 closed, 1 conditional, 95 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 116 the kernel has no result:
+The `.lean` files of the verified commit declare 225 `theorem`/`lemma` (counting copies). The kernel checked 124 of them (19 closed, 1 conditional, 104 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 101 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 86 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 71 |
 | checked file by file: the written proof does not pass the kernel | 30 |
 
 ### MVEI corrections
 
+* `correcoes/a-arquivos-corrompidos.patch` (arquivo corrompido no repositório (merge add/add resolvido aceitando os dois lados: linhas das duas versões intercaladas), 12 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/a-arquivos-corrompidos.patch` (in order, after the ones above)
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 12 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 30 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 * `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-birch-swinnerton-dyer-classical mvei/millennium-birch-swinnerton-dyer-classical/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
 

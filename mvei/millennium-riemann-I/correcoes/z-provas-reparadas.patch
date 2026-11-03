@@ -1,3 +1,265 @@
+--- a/MillenniumRiemann/CollapseComplex.lean
++++ b/MillenniumRiemann/CollapseComplex.lean
+@@ -134,38 +134,33 @@
+     (hre : z.re = w.re) (him : z.im = w.im) (hindet : z.indet = w.indet) :
+     z = w := by
+   cases z; cases w
+-  simp [*]
++  simp only at hre him hindet
++  subst hre; subst him; subst hindet; rfl
+ 
+ /- Addition is associative -/
+ theorem add_assoc (a b c : CollapseComplex) :
+     a + b + c = a + (b + c) := by
+-  ext <;> simp [HAdd.hAdd, instHAdd, add]
+-  ring
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add] <;> ring
+ 
+ /-- Addition is commutative -/
+ theorem add_comm (a b : CollapseComplex) :
+     a + b = b + a := by
+-  ext <;> simp [HAdd.hAdd, instHAdd, add]
+-  ring
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add] <;> ring
+ 
+ /-- Zero is a left identity for addition -/
+ theorem zero_add (a : CollapseComplex) :
+     0 + a = a := by
+-  ext <;> simp [HAdd.hAdd, instHAdd, add, Zero.zero, instZero]
++  ext <;> simp only [show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> ring
+ 
+ /-- Zero is a right identity for addition -/
+ theorem add_zero (a : CollapseComplex) :
+     a + 0 = a := by
+-  ext <;> simp [HAdd.hAdd, instHAdd, add, Zero.zero, instZero]
++  ext <;> simp only [show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> ring
+ 
+ /-- Every element has an additive inverse -/
+ theorem add_left_neg (a : CollapseComplex) :
+     -a + a = 0 := by
+-  ext <;> simp [HAdd.hAdd, instHAdd, add, Neg.neg, neg, Zero.zero, instZero]
++  ext <;> simp only [show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add, show ∀ x : CollapseComplex, -x = neg x from fun _ => rfl, neg, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> ring
+ 
+ /-- Addition makes CollapseComplex an additive commutative group -/
+ instance instAddCommGroup : AddCommGroup CollapseComplex where
+@@ -183,58 +178,42 @@
+ /-- Multiplication is associative -/
+ theorem mul_assoc (a b c : CollapseComplex) :
+     a * b * c = a * (b * c) := by
+-  ext <;> simp [HMul.hMul, instHMul, mul]
+-  ring
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul] <;> ring
+ 
+ /-- Multiplication is commutative -/
+ theorem mul_comm (a b : CollapseComplex) :
+     a * b = b * a := by
+-  ext <;> simp [HMul.hMul, instHMul, mul]
+-  ring
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul] <;> ring
+ 
+ /-- One is a left identity for multiplication -/
+ theorem one_mul (a : CollapseComplex) :
+     1 * a = a := by
+-  ext <;> simp [HMul.hMul, instHMul, mul, One.one, instOne]
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, show (1 : CollapseComplex) = ⟨1, 0, 1⟩ from rfl] <;> ring
+ 
+ /-- One is a right identity for multiplication -/
+ theorem mul_one (a : CollapseComplex) :
+     a * 1 = a := by
+-  ext <;> simp [HMul.hMul, instHMul, mul, One.one, instOne]
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, show (1 : CollapseComplex) = ⟨1, 0, 1⟩ from rfl] <;> ring
+ 
+ /-- Left distributivity: a * (b + c) = a * b + a * c -/
+ theorem left_distrib (a b c : CollapseComplex) :
+     a * (b + c) = a * b + a * c := by
+-  ext <;> simp [HMul.hMul, instHMul, mul, HAdd.hAdd, instHAdd, add]
+-  ring
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add] <;> ring
+ 
+ /-- Right distributivity: (a + b) * c = a * c + b * c -/
+ theorem right_distrib (a b c : CollapseComplex) :
+     (a + b) * c = a * c + b * c := by
+-  ext <;> simp [HMul.hMul, instHMul, mul, HAdd.hAdd, instHAdd, add]
+-  ring
+-  ring
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add] <;> ring
+ 
+ /-- Zero is an absorbing element for multiplication -/
+ theorem zero_mul (a : CollapseComplex) :
+     0 * a = 0 := by
+-  ext <;> simp [HMul.hMul, instHMul, mul, Zero.zero, instZero]
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> ring
+ 
+ /-- Zero is an absorbing element for multiplication (right) -/
+ theorem mul_zero (a : CollapseComplex) :
+     a * 0 = 0 := by
+-  ext <;> simp [HMul.hMul, instHMul, mul, Zero.zero, instZero]
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> ring
+ 
+ /-- CollapseComplex forms a commutative ring -/
+ instance instCommRing : CommRing CollapseComplex where
+@@ -265,15 +244,12 @@
+ /-- Conjugation is additive -/
+ theorem conj_add (z w : CollapseComplex) :
+     conj (z + w) = conj z + conj w := by
+-  ext <;> simp [conj, HAdd.hAdd, instHAdd, add]
+-  ring
++  ext <;> simp only [conj, show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add] <;> ring
+ 
+ /-- Conjugation is multiplicative -/
+ theorem conj_mul (z w : CollapseComplex) :
+     conj (z * w) = conj z * conj w := by
+-  ext <;> simp [conj, HMul.hMul, instHMul, mul]
+-  ring
+-  ring
++  ext <;> simp only [conj, show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul] <;> ring
+ 
+ /-- Conjugation is involutive -/
+ theorem conj_conj (z : CollapseComplex) :
+@@ -283,14 +259,12 @@
+ /-- Projection to ℂ preserves addition -/
+ theorem toComplex_add (z w : CollapseComplex) :
+     toComplex (z + w) = toComplex z + toComplex w := by
+-  simp [toComplex, HAdd.hAdd, instHAdd, add, Complex.add_re, Complex.add_im]
+-  ext <;> simp
++  apply Complex.ext <;> simp [toComplex, show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add]
+ 
+ /-- Projection to ℂ preserves multiplication -/
+ theorem toComplex_mul (z w : CollapseComplex) :
+     toComplex (z * w) = toComplex z * toComplex w := by
+-  simp [toComplex, HMul.hMul, instHMul, mul]
+-  ext <;> simp [Complex.mul_re, Complex.mul_im]
++  apply Complex.ext <;> simp [toComplex, show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, Complex.mul_re, Complex.mul_im]
+ 
+ /-- Projection to ℂ is a ring homomorphism -/
+ theorem toComplex_ringHom : ∀ (z w : CollapseComplex),
+@@ -302,22 +276,21 @@
+ /-- The kernel of π_C (projection to ℂ) consists of pure indeterminate elements -/
+ theorem kernel_toComplex (z : CollapseComplex) :
+     toComplex z = 0 ↔ z.re = 0 ∧ z.im = 0 := by
+-  simp [toComplex]
+   constructor
+   · intro h
+-    exact ⟨Complex.ext_iff.mp h |>.1, Complex.ext_iff.mp h |>.2⟩
+-  · intro ⟨h1, h2⟩
+-    ext <;> simp [h1, h2]
++    exact ⟨by simpa [toComplex] using congrArg Complex.re h, by simpa [toComplex] using congrArg Complex.im h⟩
++  · rintro ⟨h1, h2⟩
++    apply Complex.ext <;> simp [toComplex, h1, h2]
+ 
+ /-- Δ_I is linear (additive) -/
+ theorem deltaI_add (z w : CollapseComplex) :
+     deltaI (z + w) = deltaI z + deltaI w := by
+-  ext <;> simp [deltaI, HAdd.hAdd, instHAdd, add]
++  ext <;> simp only [deltaI, show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add] <;> ring
+ 
+ /-- Δ_I is homogeneous -/
+ theorem deltaI_smul («λ» : ℝ) (z : CollapseComplex) :
+     deltaI (ofReal «λ» * z) = ofReal «λ» * deltaI z := by
+-  ext <;> simp [deltaI, ofReal, HMul.hMul, instHMul, mul]
++  ext <;> simp only [deltaI, ofReal, show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul] <;> ring
+ 
+ /-- Δ_I is idempotent -/
+ theorem deltaI_idem (z : CollapseComplex) :
+@@ -327,21 +300,20 @@
+ /-- The kernel of Δ_I is the pure complex subspace -/
+ theorem kernel_deltaI (z : CollapseComplex) :
+     deltaI z = 0 ↔ z.indet = 0 := by
+-  simp [deltaI, Zero.zero, instZero]
+   constructor
+-  · intro h; exact h.2.2
+-  · intro h; exact ⟨rfl, rfl, h⟩
++  · intro h
++    exact congrArg CollapseComplex.indet h
++  · intro h
++    ext <;> simp [deltaI, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl, h]
+ 
+ /-- The image of Δ_I consists of pure indeterminate elements -/
+ theorem image_deltaI (w : CollapseComplex) :
+     (∃ z, deltaI z = w) ↔ w.re = 0 ∧ w.im = 0 := by
+   constructor
+-  · intro ⟨z, hz⟩
+-    simp [deltaI] at hz
+-    exact ⟨hz.1, hz.2.1⟩
+-  · intro ⟨hre, him⟩
+-    use { re := 0, im := 0, indet := w.indet }
+-    ext <;> simp [deltaI, hre, him]
++  · rintro ⟨z, rfl⟩
++    exact ⟨rfl, rfl⟩
++  · rintro ⟨hre, him⟩
++    exact ⟨w, by ext <;> simp [deltaI, hre, him]⟩
+ 
+ /-- Norm is non-negative -/
+ theorem normI_nonneg (z : CollapseComplex) :
+@@ -354,31 +326,36 @@
+ /-- Norm is zero iff the element is zero -/
+ theorem normI_eq_zero (z : CollapseComplex) :
+     normI z = 0 ↔ z = 0 := by
+-  simp [normI]
+   constructor
+   · intro h
+-    have h1 : Real.sqrt (z.re^2 + z.im^2) = 0 ∧ |z.indet| = 0 := by
+-      have := add_nonneg (Real.sqrt_nonneg (z.re^2 + z.im^2)) (abs_nonneg z.indet)
+-      omega
+-    ext
+-    · simp [Real.sqrt_eq_zero'] at h1
+-      have := h1.1
+-      nlinarith [sq_nonneg z.re, sq_nonneg z.im]
+-    · simp [Real.sqrt_eq_zero'] at h1
+-      have := h1.1
+-      nlinarith [sq_nonneg z.re, sq_nonneg z.im]
+-    · exact abs_eq_zero.mp h1.2
++    unfold normI at h
++    have hs := Real.sqrt_nonneg (z.re ^ 2 + z.im ^ 2)
++    have ha := abs_nonneg z.indet
++    have h1 : Real.sqrt (z.re ^ 2 + z.im ^ 2) = 0 := by linarith
++    have h2 : |z.indet| = 0 := by linarith
++    have h3 : z.re ^ 2 + z.im ^ 2 ≤ 0 := Real.sqrt_eq_zero'.mp h1
++    have hre : z.re ^ 2 = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg z.im]
++    have him : z.im ^ 2 = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg z.im]
++    ext <;> simp only [show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl]
++    · exact pow_eq_zero_iff (n := 2) (by norm_num) |>.mp hre
++    · exact pow_eq_zero_iff (n := 2) (by norm_num) |>.mp him
++    · exact abs_eq_zero.mp h2
+   · intro h
+-    simp [h]
++    rw [h]
++    simp [normI, show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl]
+ 
+ /-- Triangle inequality for normI -/
+ theorem normI_add_le (z w : CollapseComplex) :
+     normI (z + w) ≤ normI z + normI w := by
+-  simp [normI, HAdd.hAdd, instHAdd, add]
+-  have h1 : Real.sqrt ((z.re + w.re)^2 + (z.im + w.im)^2) ≤ 
+-            Real.sqrt (z.re^2 + z.im^2) + Real.sqrt (w.re^2 + w.im^2) := by
+-    apply Real.sqrt_sum_le
++  have key : ∀ a b : ℝ, Real.sqrt (a ^ 2 + b ^ 2) = ‖(⟨a, b⟩ : ℂ)‖ :=
++    fun a b => by rw [Complex.norm_eq_sqrt_sq_add_sq]
++  have hzw : (⟨z.re + w.re, z.im + w.im⟩ : ℂ) = ⟨z.re, z.im⟩ + ⟨w.re, w.im⟩ := Complex.ext (by simp) (by simp)
++  have h1 : Real.sqrt ((z.re + w.re) ^ 2 + (z.im + w.im) ^ 2) ≤
++      Real.sqrt (z.re ^ 2 + z.im ^ 2) + Real.sqrt (w.re ^ 2 + w.im ^ 2) := by
++    rw [key, key, key, hzw]
++    exact norm_add_le _ _
+   have h2 : |z.indet + w.indet| ≤ |z.indet| + |w.indet| := abs_add z.indet w.indet
++  simp only [normI, show ∀ x y : CollapseComplex, x + y = add x y from fun _ _ => rfl, add]
+   linarith
+ 
+ end CollapseComplex
 --- a/formal/DirectEndpointRule.lean
 +++ b/formal/DirectEndpointRule.lean
 @@ -32,7 +32,7 @@
@@ -17,3 +279,143 @@
 +  InvImage.wf stageRank Nat.lt_wfRel.wf
  
  end DirectEndpointRule
+--- a/lean/millennium/Riemann/CollapseComplex.lean
++++ b/lean/millennium/Riemann/CollapseComplex.lean
+@@ -147,39 +147,27 @@
+ 
+ /-- Addition is associative -/
+ theorem add_assoc (x y z : CollapseComplex) : (x + y) + z = x + (y + z) := by
+-  simp [add, Add.add]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x; cases y; cases z
++  simp only [show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Addition is commutative -/
+ theorem add_comm (x y : CollapseComplex) : x + y = y + x := by
+-  simp [add, Add.add]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x; cases y
++  simp only [show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Zero is left identity for addition -/
+ theorem zero_add (x : CollapseComplex) : 0 + x = x := by
+-  simp [add, Add.add, zero, Zero.zero]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x
++  simp only [show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, show (0 : CollapseComplex) = zero from rfl, zero, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Zero is right identity for addition -/
+ theorem add_zero (x : CollapseComplex) : x + 0 = x := by
+-  simp [add, Add.add, zero, Zero.zero]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x
++  simp only [show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, show (0 : CollapseComplex) = zero from rfl, zero, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Multiplication is associative (symbolic, assuming simplified algebra) -/
+ theorem mul_assoc (x y z : CollapseComplex) : (x * y) * z = x * (y * z) := by
+@@ -192,66 +180,43 @@
+ 
+ /-- Multiplication is commutative -/
+ theorem mul_comm (x y : CollapseComplex) : x * y = y * x := by
+-  simp [mul, Mul.mul]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x; cases y
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- One is left identity for multiplication -/
+ theorem one_mul (x : CollapseComplex) : 1 * x = x := by
+-  simp [mul, Mul.mul, one, One.one]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul, show (1 : CollapseComplex) = one from rfl, one, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- One is right identity for multiplication -/
+ theorem mul_one (x : CollapseComplex) : x * 1 = x := by
+-  simp [mul, Mul.mul, one, One.one]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul, show (1 : CollapseComplex) = one from rfl, one, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Left distributivity -/
+ theorem left_distrib (x y z : CollapseComplex) : x * (y + z) = x * y + x * z := by
+-  simp [mul, add, Mul.mul, Add.add]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x; cases y; cases z
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul, show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Right distributivity -/
+ theorem right_distrib (x y z : CollapseComplex) : (x + y) * z = x * z + y * z := by
+-  simp [mul, add, Mul.mul, Add.add]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  cases x; cases y; cases z
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul, show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Real embedding preserves addition -/
+ theorem ofReal_add (a b : ℝ) : ofReal (a + b) = ofReal a + ofReal b := by
+-  simp [ofReal, add, Add.add]
+-  constructor
+-  · rfl
+-  constructor
+-  · ring
+-  · ring
++  simp only [ofReal, show ∀ a b : CollapseComplex, a + b = add a b from fun _ _ => rfl, add, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Real embedding preserves multiplication -/
+ theorem ofReal_mul (a b : ℝ) : ofReal (a * b) = ofReal a * ofReal b := by
+-  simp [ofReal, mul, Mul.mul]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  simp only [ofReal, show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- The Universe-0-0 constant I has zero real and imaginary parts -/
+ theorem I_components : I.re = 0 ∧ I.im = 0 ∧ I.indet = 1 := by

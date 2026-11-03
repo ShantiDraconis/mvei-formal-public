@@ -1,0 +1,77 @@
+--- /dev/null
++++ b/universe00/MVEI_Refutacoes.lean
+@@ -0,0 +1,74 @@
++import Universe00.Core.Aggregation
++import Universe00.Core.Status
++import Universe00.Core.Ledger
++import Universe00.Core.Monotonicity
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `proven_of_aggregate_zero` é falso: o `zipWith` ignora os erros a mais. Pesos `[1]`, erros `[0, 1]`: agregado 0 e um erro igual a 1. -/
++theorem proven_of_aggregate_zero_falso :
++    ¬ ∀ (w : ErrorAggregation.Weights) (e : ErrorVector),
++      (∀ w' ∈ w.values, 0 < w') → ErrorAggregation.aggregateError w e = 0 → e.is_proven := by
++  intro h
++  let w : ErrorAggregation.Weights := ⟨[1], by simp, by simp⟩
++  let e : ErrorVector := ⟨[0, 1], by simp⟩
++  have := h w e (by simp [w]) (by simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, e])
++  have h1 := this 1 (by simp [e])
++  norm_num at h1
++
++/-- `refuted_implies_positive_error` é falso: o vetor vazio cumpre `irreducible` por vacuidade e não tem erro positivo. -/
++theorem refuted_implies_positive_error_falso :
++    ¬ ∀ rs : Universe00.Core.RefutedStatus, ∃ e ∈ rs.errorVector.components, e > 0 := by
++  intro h
++  obtain ⟨e, he, _⟩ := h ⟨⟨[], by simp⟩, 1, by norm_num, by simp⟩
++  simp at he
++
++/-- `proved_implies_zero_total` é falso: `status` é um campo livre em `ProblemLedger`; com `status := proved` e erro total 100 todas as restrições valem. -/
++theorem proved_implies_zero_total_falso :
++    ¬ ∀ l : ProblemLedger, l.is_proved → l.totalError = 0 := by
++  intro h
++  let w : ErrorAggregation.Weights := ⟨[1], by simp, by simp⟩
++  let p : MeasuredParameter ℝ := ⟨0, 1, by norm_num, by norm_num⟩
++  let ev : ErrorVector := ⟨[1], by simp⟩
++  have ht : ErrorAggregation.aggregateError w ev = 100 := by
++    simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, ev]
++  let l : ProblemLedger := ⟨"x", "x", [p], w, ev, 100, ProblemStatus.proved, rfl, rfl, ht.symm,
++    ⟨by norm_num, le_refl _⟩⟩
++  have := h l rfl
++  norm_num [l] at this
++
++/-- `zero_total_implies_proved` é falso: `status` é livre; com erro total 0, pesos `[1]` e `status := open` as restrições valem. -/
++theorem zero_total_implies_proved_falso :
++    ¬ ∀ l : ProblemLedger, (∀ w ∈ l.weights.values, 0 < w) → l.totalError = 0 → l.is_proved := by
++  intro h
++  let w : ErrorAggregation.Weights := ⟨[1], by simp, by simp⟩
++  let p : MeasuredParameter ℝ := ⟨0, 0, le_refl _, by norm_num⟩
++  let ev : ErrorVector := ⟨[0], by simp⟩
++  have ht : ErrorAggregation.aggregateError w ev = 0 := by
++    simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, ev]
++  let l : ProblemLedger := ⟨"x", "x", [p], w, ev, 0, ProblemStatus.open, rfl, rfl, ht.symm,
++    ⟨le_refl _, by norm_num⟩⟩
++  have := h l (by simp [l, w]) rfl
++  exact absurd this (by simp [l, ProblemLedger.is_proved])
++
++/-- `zero_terminal` é falso: `ProgressValid e' 0` é `0 ≤ e'`, que vale para `e' = 1`. -/
++theorem zero_terminal_falso :
++    ¬ ∀ (e' e : ℝ), e = 0 → Monotonicity.ProgressValid e' e → e' = 0 := by
++  intro h
++  have := h 1 0 rfl (by unfold Monotonicity.ProgressValid; norm_num)
++  norm_num at this
++
++/-- `zero_error_is_terminal` é falso: `progressValid 0 e'` é `e' ≤ 0`, que vale para `e' = −1`. -/
++theorem zero_error_is_terminal_falso :
++    ¬ ∀ e : ℝ, Universe00.Core.isComplete e →
++      ∀ e' : ℝ, Universe00.Core.progressValid e e' → Universe00.Core.isComplete e' := by
++  intro h
++  have := h 0 rfl (-1) (by unfold Universe00.Core.progressValid; norm_num)
++  unfold Universe00.Core.isComplete at this
++  norm_num at this
++
++end MVEI.Refutacoes

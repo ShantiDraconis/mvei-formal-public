@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ae79aed383c696c2ecce69e24e711d26beddd64d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `ae79aed383c696c2ecce69e24e711d26beddd64d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | v4.19.0 | partial | 25 | 0 | 1 | 48 / 16 / 25 / 43 / 97 |
+| `.` | v4.19.0 | partial | 25 | 0 | 1 | 61 / 16 / 27 / 43 / 82 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 73 |
-| Unique (name + statement) | 73 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 59 |
+| Counting each project | 86 |
+| Unique (name + statement) | 86 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 72 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -37,6 +37,8 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ae79aed383c696c2ecce6
 | `Collapse.CollapseComplex.normI_mul_le` | `. (file by file)` | open | `sorryAx` |
 | `Millennium.Riemann.Anomalous.Theorems.critical_zero_no_I_contribution` | `. (file by file)` | open | `sorryAx` |
 | `Millennium.Riemann.Anomalous.Theorems.anomalous_I_contribution` | `. (file by file)` | open | `sorryAx` |
+| `Riemann.Collapse.RH_from_I_ne_one` | `. (file by file)` | open | `sorryAx`, `Riemann.Collapse.IConstant` |
+| `Riemann.Zeros.anomalous_left_or_right` | `. (file by file)` | open | `sorryAx` |
 | `Millennium.Riemann.CollapseProof.symbolicRiemannHypothesis` | `. (file by file)` | open | `sorryAx`, `Millennium.Riemann.Core.zeta` |
 | `Millennium.Riemann.CollapseProof.no_zeros_left_strip` | `. (file by file)` | open | `sorryAx`, `Millennium.Riemann.Core.zeta` |
 | `Millennium.Riemann.CollapseProof.no_zeros_right_strip` | `. (file by file)` | open | `sorryAx`, `Millennium.Riemann.Core.zeta` |
@@ -72,19 +74,21 @@ MVEI verification of 2026-10-30T16:50:26+00:00, on commit `ae79aed383c696c2ecce6
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 235 `theorem`/`lemma` (counting copies). The kernel checked 95 of them (53 closed, 16 conditional, 26 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 140 the kernel has no result:
+The `.lean` files of the verified commit declare 235 `theorem`/`lemma` (counting copies). The kernel checked 110 of them (66 closed, 16 conditional, 28 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 125 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 97 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 82 |
 | checked file by file: the written proof does not pass the kernel | 43 |
 
 ### MVEI corrections
 
+* `correcoes/a-arquivos-corrompidos.patch` (arquivo corrompido no repositório (restos de conflito de merge: duas versões emendadas e merge add/add resolvido aceitando os dois lados: linhas das duas versões intercaladas), 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/a-arquivos-corrompidos.patch` (in order, after the ones above)
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 57 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
-* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
 ## Files in this folder
 

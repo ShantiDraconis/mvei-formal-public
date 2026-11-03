@@ -10,61 +10,16 @@
  # Core/Collapse.lean
 --- a/Core/Conservativity.lean
 +++ b/Core/Conservativity.lean
-@@ -4,6 +4,8 @@
+@@ -11,6 +11,8 @@
  import Core.Semantics
  import Core.Collapse
  
 +noncomputable section
 +
- /-
-   Core/Conservativity.lean
-   Chapter 6: Conservativity and Relative Consistency of TIF
-@@ -36,14 +38,14 @@
+ namespace TIF
  
- /-- The classical fragment of a state Σ: restrict equations and constraints
-     to those involving only classical expressions. -/
--def classicalFragmentState (Σ : MetaArithmeticState) : MetaArithmeticState :=
--  { equations   := Σ.equations.filter (fun eq =>
-+def classicalFragmentState («Σ» : MetaArithmeticState) : MetaArithmeticState :=
-+  { equations   := «Σ».equations.filter (fun eq =>
-       eq.lhs.isClassical && eq.rhs.isClassical)
--    constraints := Σ.constraints }
-+    constraints := «Σ».constraints }
- 
- /-- The classical fragment of a state is a substate. -/
--theorem classicalFragmentState_sub (Σ : MetaArithmeticState) :
--    classicalFragmentState Σ ≤ Σ := by
-+theorem classicalFragmentState_sub («Σ» : MetaArithmeticState) :
-+    classicalFragmentState «Σ» ≤ «Σ» := by
-   constructor
-   · intro eq heq
-     simp [classicalFragmentState, List.mem_filter] at heq
-@@ -153,13 +155,13 @@
-     the equation `φ = v` is already provable in T_cl. -/
- theorem collapse_classical_restriction
-     (res : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr)
--    (Σ : MetaArithmeticState) (φ v : IndeterminateExpr)
-+    («Σ» : MetaArithmeticState) (φ v : IndeterminateExpr)
-     (hφ : classicalFrag φ) (hv : classicalFrag v)
--    (hcol : collapse res Σ φ = v) :
-+    (hcol : collapse res «Σ» φ = v) :
-     -- φ = v is classically derivable from Σ's classical constraints.
-     ClassProves φ v := by
-   -- By A8, collapse of a classical expression is the identity.
--  have : collapse res Σ φ = φ := collapse_A8 res Σ φ hφ
-+  have : collapse res «Σ» φ = φ := collapse_A8 res «Σ» φ hφ
-   rw [this] at hcol
-   -- So v = φ.
-   subst hcol
-@@ -185,6 +187,7 @@
-   The Indeterminate Framework (TIF) — Chapter 6: Conservativity and Relative Consistency
- 
-   Covers Theorems 6.2.1–6.4.2: the conservativity theorem, relative consistency,
-+/-
-   and local completeness of collapse.
- -/
- 
-@@ -197,7 +200,7 @@
+ /-!
+@@ -19,7 +21,7 @@
  
  /-- Definition 6.1.1. Classical fragment L_cl ⊆ L_I:
      the sub-language of expressions with no indeterminate support. -/
@@ -87,16 +42,15 @@
  # Core/Eval.lean
 --- a/Core/Semantics.lean
 +++ b/Core/Semantics.lean
-@@ -2,6 +2,8 @@
- import Core.Syntax
- import Core.States
+@@ -11,6 +11,7 @@
+ -/
  
-+noncomputable section
-+
- /-
-   Core/Semantics.lean
-   Chapter 4: Algebraic and Logical Semantics of TIF
-@@ -99,12 +101,12 @@
+ import TIF.Core.States
++local notation "ℕ" => Nat
+ 
+ namespace TIF
+ 
+@@ -96,12 +97,12 @@
    | Constraint.pos e      => True
  
  /-- An *admissible valuation* for state Σ satisfies all its equations and constraints. -/
@@ -112,7 +66,7 @@
  
  /-!
  ## 4.4 Resolution Set
-@@ -115,9 +117,9 @@
+@@ -112,9 +113,9 @@
  
  /-- `resolutionSet Σ φ` is the set of all classical values `v` such that there
      exists an admissible valuation for Σ under which φ evaluates to v. -/
@@ -124,7 +78,7 @@
  
  /-!
  ## 4.5 Unique Determination
-@@ -126,15 +128,15 @@
+@@ -123,15 +124,15 @@
  -/
  
  /-- `uniquelyDetermined Σ φ v` holds iff `v` is the unique value in `Res_Σ(φ)`. -/
@@ -146,7 +100,7 @@
    rw [huniq] at hmem
    exact hmem
  
-@@ -145,22 +147,22 @@
+@@ -142,22 +143,22 @@
  -/
  
  /-- `stateRelTrue Σ φ ψ` holds iff `φ = ψ` in every admissible valuation of Σ. -/
@@ -177,7 +131,7 @@
    intro av'
    -- An admissible valuation for Σ' restricts to one for Σ (fewer constraints to satisfy).
    -- This requires showing that restriction is admissible; we appeal to sorry.
-@@ -174,16 +176,17 @@
+@@ -171,15 +172,15 @@
  
  /-- A classical equation is true in TIF iff it is classically true (A5).
      Here "classically true" means true in all classical valuations (iVal irrelevant). -/
@@ -194,10 +148,8 @@
 +theorem resSet_classical_const («Σ» : MetaArithmeticState) (c : ClassicalConst)
 +    (av : AdmissibleValuation «Σ» D) : eval av.base av.iVal (const c) = av.base.constVal c :=
    rfl
-+/-
-   The Indeterminate Framework (TIF) — Chapter 4: Algebraic and Logical Semantics
  
-   Covers free algebra semantics, relational semantics, logical semantics,
+ end TIF
 --- a/Core/States.lean
 +++ b/Core/States.lean
 @@ -1,5 +1,6 @@
@@ -345,7 +297,7 @@
  
  /-!
  ## 2.7 Determinacy Predicate
-@@ -192,20 +193,21 @@
+@@ -192,15 +193,15 @@
  
  /-- `determined Σ φ` holds iff `Σ` forces a unique classical value for `φ`.
      (Abstract predicate; instantiated concretely in Core.Semantics.) -/
@@ -364,12 +316,6 @@
    -- More information cannot destroy determinacy (A7).
    -- Formal proof requires the concrete semantics; sketched here.
    exact hdet
- 
- end MetaArithmeticState
-+/-
-   The Indeterminate Framework (TIF) — Chapter 2: Ontology of Indeterminacy
- 
-   Covers the typed-object interpretation of I, origin labels,
 --- a/Core/Theorems.lean
 +++ b/Core/Theorems.lean
 @@ -9,6 +9,8 @@
@@ -402,16 +348,17 @@
  
 --- a/FORMAL/Lean4/Core/Classification.lean
 +++ b/FORMAL/Lean4/Core/Classification.lean
-@@ -9,6 +9,8 @@
+@@ -8,6 +8,9 @@
+ import Mathlib.Data.Option.Basic
  import Mathlib.Tactic
  import MillenniumCore.Core.Universe
- 
-+noncomputable section
++import Mathlib.Analysis.Calculus.Deriv.Basic
 +
++noncomputable section
+ 
  /-!
  # TIF Core – Deepened Classification
- 
-@@ -240,12 +242,12 @@
+@@ -240,12 +243,12 @@
  lemma classifyExpr_deriv {α : Type} (x : Var) (e : Expr α) :
      classifyExpr (Expr.deriv x e) = classifyExpr e := rfl
  
@@ -426,7 +373,7 @@
  lemma classifyExpr_const {α : Type} (c : α) :
      classifyExpr (Expr.const c) = ExprClass.classical := rfl
  
-@@ -342,7 +344,7 @@
+@@ -342,7 +345,7 @@
  def exampleStateForce : State ℚ :=
    { equations := [(Expr.indet baseI, Expr.const 3)], constraints := [] }
  
@@ -437,9 +384,9 @@
  
 --- a/FORMAL/Lean4/Core/Conservativity.lean
 +++ b/FORMAL/Lean4/Core/Conservativity.lean
-@@ -5,6 +5,8 @@
+@@ -4,6 +4,8 @@
+ 
  import Universe
- import MillenniumCore.Core.Universe
  
 +noncomputable section
 +
@@ -448,9 +395,9 @@
  open UI
 --- a/FORMAL/Lean4/Core/ToyModel.lean
 +++ b/FORMAL/Lean4/Core/ToyModel.lean
-@@ -5,6 +5,8 @@
+@@ -4,6 +4,8 @@
+ 
  import Universe
- import MillenniumCore.Core.Universe
  
 +noncomputable section
 +
@@ -459,25 +406,16 @@
  open UI
 --- a/FORMAL/Lean4/Core/Universe.lean
 +++ b/FORMAL/Lean4/Core/Universe.lean
-@@ -39,6 +39,8 @@
+@@ -11,6 +11,8 @@
  
  import Mathlib.Data.Real.Basic
  
 +noncomputable section
 +
- /-!
- # The Universe U_I
+ -- ℝ has DecidableEq via classical logic in Mathlib, which gives us BEq ℝ.
+ noncomputable instance : DecidableEq ℝ := Classical.typeDecidableEq ℝ
  
 @@ -155,7 +157,7 @@
-     UI.Real a +ᵢ UI.Real b = UI.Real (a + b) := by
-   simp [add]
- 
--end UI
-+-- [MVEI] end UI  -- `end` sem escopo aberto
- 
- /-! ## Syntactic Expression Layer -/
- 
-@@ -179,7 +181,7 @@
    | sub   : Expr → Expr → Expr          -- extended subtraction -_I
    | mul   : Expr → Expr → Expr          -- extended multiplication ×_I
    | div   : Expr → Expr → Expr          -- extended division ÷_I
@@ -486,12 +424,6 @@
  
  /-! ## Valuations -/
  
-@@ -238,4 +240,4 @@
-     then some c       -- all defined evaluations agree on c: unique resolution
-     else none         -- multiple defined values possible: blocked
- 
--end MillenniumCore
-+-- [MVEI] end MillenniumCore  -- `end` sem escopo aberto
 --- a/FORMAL/Lean4/Hodge/HodgeConjecture.lean
 +++ b/FORMAL/Lean4/Hodge/HodgeConjecture.lean
 @@ -3,6 +3,7 @@
@@ -637,16 +569,17 @@
  
 --- a/TIF/Core.lean
 +++ b/TIF/Core.lean
-@@ -3,6 +3,8 @@
+@@ -2,6 +2,9 @@
+ import Mathlib.Data.Complex.Basic
  import Mathlib.Data.Finset.Basic
  import Mathlib.Data.Option.Basic
- 
-+noncomputable section
++import Mathlib.Analysis.Calculus.Deriv.Basic
 +
++noncomputable section
+ 
  /-!
  # The Indeterminate Framework (TIF) – Core Skeleton v1
- 
-@@ -126,7 +128,7 @@
+@@ -126,7 +129,7 @@
  to zero, the division expression is identified with `baseI`.
  -/
  def stateEntailsZeroZero {α : Type} [Field α] [DecidableEq α]
@@ -655,7 +588,7 @@
    ∀ v : α → α, ∀ η : IndetClass → Option α,
      -- every admissible valuation forces t₁ and t₂ to evaluate to 0
      True  -- placeholder: full entailment requires a proper logic layer
-@@ -206,8 +208,8 @@
+@@ -206,8 +209,8 @@
  would replace this with a proper constraint logic.
  -/
  def admissible {α : Type} [Field α] [DecidableEq α]
@@ -666,7 +599,7 @@
       match eval val eq.1, eval val eq.2 with
       | some a, some b => a = b
       | _, _ => False) ∧
-@@ -220,8 +222,8 @@
+@@ -220,8 +223,8 @@
  `⟦e⟧_Σ = { c | ∃ val admissible for Σ, eval val e = some c }`
  -/
  def semanticValueSet {α : Type} [Field α] [DecidableEq α]
@@ -677,7 +610,7 @@
  
  -- ─────────────────────────────────────────────────────────────────────────────
  -- 7. Collapse Operator (Definition D)
-@@ -261,8 +263,8 @@
+@@ -261,8 +264,8 @@
  - expressions involving unresolved indeterminate classes.
  -/
  noncomputable def collapseSem {α : Type} [Field α] [DecidableEq α]
@@ -688,7 +621,7 @@
    -- Return the unique element if S is a singleton; ⊥ (none) otherwise.
    if h : ∃! v, v ∈ S then some (h.choose) else none
  
-@@ -274,8 +276,8 @@
+@@ -274,8 +277,8 @@
  both notions coincide.
  -/
  noncomputable def collapseOp {α : Type} [Field α] [DecidableEq α]
@@ -699,7 +632,7 @@
  
  -- ─────────────────────────────────────────────────────────────────────────────
  -- 8. Classification Predicates
-@@ -302,8 +304,8 @@
+@@ -302,8 +305,8 @@
  
  /-- An expression is **blocked** under `Σ` if its collapse is `⊥` (i.e., `none`). -/
  noncomputable def isBlocked {α : Type} [Field α] [DecidableEq α]
@@ -710,7 +643,7 @@
  
  -- ─────────────────────────────────────────────────────────────────────────────
  -- 9. Axiom A11 — Local Non-Identification
-@@ -331,10 +333,10 @@
+@@ -331,10 +334,10 @@
  
      This ties A11 directly to the Collapse operator (Definition D). -/
  theorem a11_local_non_identification {α : Type} [Field α] [DecidableEq α]
@@ -784,14 +717,6 @@
    simp [collapse]
  
  /-!
-@@ -192,6 +194,7 @@
- 
-   Models rational functions with removable singularities as the simplest
-   instance of collapse. Covers Definitions 7.1.1–7.4.3 (algebraic part)
-+/-
-   and Theorems 8.1.3–8.1.4.
- -/
- 
 --- a/Toy/Analytic.lean
 +++ b/Toy/Analytic.lean
 @@ -4,6 +4,8 @@
@@ -823,15 +748,7 @@
      -- The collapse at z equals the collapse at conj(z).
      collapse res (meromorphicState f z) IndeterminateExpr.indeterminate =
      collapse res (meromorphicState f (GaussInt.conj z)) IndeterminateExpr.indeterminate := by
-@@ -184,6 +186,7 @@
- end Analytic
- end Toy
- end TIF
-+/-
-   The Indeterminate Framework (TIF) — Chapter 7, Section 7.4: Analytic Toy Model
-   and Chapter 9 + 12: Analytic and Complex-Analytic Bridges
- 
-@@ -294,7 +297,7 @@
+@@ -297,7 +299,7 @@
      (hF : F.satisfiesSymmetry = true) :
      F.satisfiesSymmetry = true := hF
  
@@ -887,15 +804,7 @@
    simp [collapse, satResolutionOracle]
  
  /-!
-@@ -181,6 +183,7 @@
- end Boolean
- end Toy
- end TIF
-+/-
-   The Indeterminate Framework (TIF) — Chapter 7, Section 7.2: Boolean Toy Model
- 
-   Models Boolean expressions with indeterminate certificate placeholders.
-@@ -221,7 +224,7 @@
+@@ -224,7 +226,7 @@
      | .constrained e _ => Expr.term! e
  
  /-- Boolean valuation: assigns True/False to variables. -/
@@ -967,15 +876,7 @@
        simp [collapse, tractableOracle, classicalFrag, isClassical, syntacticCollapse]
        exact fun h => by simp at h⟩
  
-@@ -208,6 +209,7 @@
- 
-   Covers the symbolic verifier, collapse-verifier operator,
-   and restricted P ≠ NP theorem for toy classes.
-+/-
- -/
- 
- 
-@@ -284,7 +286,7 @@
+@@ -287,7 +288,7 @@
      ∃ σ', σ'.constraints.length ≤ σ.constraints.length :=
    ⟨σ, le_refl _⟩
  
@@ -984,7 +885,7 @@
      (Open: collapse cannot efficiently solve NP-complete problems in general.) -/
  -- Stated as an open problem.
  
-@@ -293,11 +295,11 @@
+@@ -296,11 +297,11 @@
  -/
  
  /-- Definition 13.1.1. Language L: a set of binary strings, represented by a predicate. -/
@@ -998,7 +899,7 @@
  
  /-- Definition 13.1.3. Witness space: the set of valid witnesses for an instance. -/
  def WitnessSpace (V : PTVerifier) (x : List Bool) : List (List Bool) :=
-@@ -354,7 +356,7 @@
+@@ -357,7 +358,7 @@
        (∃ V : PTVerifier, ∀ x w, V x w = true → L x) ∧
        ¬ (∃ V : PTVerifier, ∀ x, L x ↔ ∃ w, V x w = true ∧ w.length ≤ x.length)
  
@@ -1032,15 +933,7 @@
  
  /-!
  ## 7.3.4 Unique Solution Yields Exact Collapse
-@@ -173,6 +175,7 @@
- end Linear
- end Toy
- end TIF
-+/-
-   The Indeterminate Framework (TIF) — Chapter 7, Section 7.3: Linear System Toy Model
- 
-   Models systems of linear equations with indeterminate variables.
-@@ -196,7 +199,7 @@
+@@ -199,7 +201,7 @@
    deriving Repr
  
  /-- A solution to the linear system: an assignment of integers to variables. -/
@@ -1081,7 +974,7 @@
  -- #check (TIF.I : Rat)   -- ERROR: Indet ≠ Rat
 --- a/lean/Core.lean
 +++ b/lean/Core.lean
-@@ -226,7 +226,7 @@
+@@ -226,12 +226,12 @@
  -- Section 6 – Stubs for T2 and T3 (future work)
  -- ============================================================
  
@@ -1090,14 +983,12 @@
      For any ZFC-sentence φ, 𝒯_I ⊢ φ iff ZFC ⊢ φ.
      Proof requires a full translation map; deferred to Paper 2. -/
  -- theorem t2_conservativity : ... := sorry
-@@ -245,6 +245,7 @@
  
-   Status: Etapa 1 skeleton — types and function signatures defined;
-           proofs marked as `sorry` and scheduled for Etapa 1–2.
-+/-
- -/
- 
- namespace TIF
+-/-- T3. Unique Collapse (stub).
++/- T3. Unique Collapse (stub).
+     If the semantic value set is a singleton, collapse returns that value.
+     Proof is by induction on term structure using rewriting completeness. -/
+ -- theorem t3_unique_collapse : ... := sorry
 --- a/lean/MilleniumCore/Collapse.lean
 +++ b/lean/MilleniumCore/Collapse.lean
 @@ -113,7 +113,7 @@
@@ -1161,6 +1052,14 @@
 +local notation "ℕ" => Nat
  /-
    MilleniumCore.IndetClass
+ 
+@@ -18,6 +19,7 @@
+     different origins of indetermination.  `IndetClass.mk 0` (written `i0`)
+     is the canonical "0/0" class corresponding to 𝒥₀. -/
+ structure IndetClass where
++  mkCampos ::
+   index : ℕ
+   deriving DecidableEq, Repr
  
 --- a/lean/Semantics.lean
 +++ b/lean/Semantics.lean
