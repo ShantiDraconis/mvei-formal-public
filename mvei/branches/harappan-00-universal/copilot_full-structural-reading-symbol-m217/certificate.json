@@ -1,0 +1,96 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/full-structural-reading-symbol-m217",
+ "branch_state": "parada",
+ "head_commit": "a2b1323ff3697aa8a1b5633199e7cb3c75040c44",
+ "head_commit_date": "2026-03-17T01:17:33+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "a2b1323ff3697aa8a1b5633199e7cb3c75040c44",
+   "date": "2026-03-17T01:17:33+00:00",
+   "subject": "Add M217 full structural analysis: formal proofs, Python/C++ implementation, scientific article"
+  },
+  {
+   "commit": "22ad95831ace230f6e0c6b3f86b2fabf721376e8",
+   "date": "2026-03-17T00:58:38+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "M217_balance_without_unity",
+   "file": "formal/lean/M217SymbolAnalysis.lean",
+   "line": 300,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(sys : M217System) : ¬ isClosed sys.params"
+  },
+  {
+   "name": "M217_controlled_duality",
+   "file": "formal/lean/M217SymbolAnalysis.lean",
+   "line": 289,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(sys : M217System) : 0 ≤ structuralEnergy sys.pieces ∧ 0 < gapRatio sys.params ∧ ¬ isClosed sys.params"
+  },
+  {
+   "name": "M217_never_closed",
+   "file": "formal/lean/M217SymbolAnalysis.lean",
+   "line": 141,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : M217Params) : ¬ isClosed p"
+  },
+  {
+   "name": "ego_never_equilibrium",
+   "file": "formal/lean/M217SymbolAnalysis.lean",
+   "line": 240,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : M217Params) : ¬ isClosed p"
+  },
+  {
+   "name": "gapRatio_pos",
+   "file": "formal/lean/M217SymbolAnalysis.lean",
+   "line": 133,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : M217Params) : 0 < gapRatio p"
+  },
+  {
+   "name": "structuralEnergy_nonneg",
+   "file": "formal/lean/M217SymbolAnalysis.lean",
+   "line": 168,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(pieces : M217Pieces) : 0 ≤ structuralEnergy pieces"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "formal/lean/M217SymbolAnalysis.lean": "b749ba5cd1a8027dfd1921838e0aa74b2b9a840f75d8705d19659c50a03789d8",
+  "formal/lean/lakefile.lean": "3089d69b4fe27e7bd028558e19211b27221f5c3b09886beca0044bc6ad77a8f8",
+  "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-11-03T11:27:59Z",
+ "certificate_sha256": "db91924231598737b20ce1309a8d8c23b2318a76af155c18890826cd1f49973d"
+}

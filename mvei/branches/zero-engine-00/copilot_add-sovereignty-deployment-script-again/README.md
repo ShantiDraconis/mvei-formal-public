@@ -3,18 +3,18 @@
 Lean sources from the branch `copilot/add-sovereignty-deployment-script-again` of the private repository `ShantiDraconis/zero-engine-00`, commit `013087b0b4784e01ca554fd6aec2aa538d25a3b8` (2026-01-04T04:03:53+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 11 — closed 6, conditional 0, open 0, proof error 5, not reached 0, no result 0.
+* Theorems only on branches, in this branch: 11 — closed 8, conditional 0, open 0, proof error 3, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `9be0ffa71a4d085e4664957293bb76ffa51663a232520655b43d849a89dffa84`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/zero-engine-00/copilot_add-sovereignty-deployment-script-again/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `d8d331af8610a7d9c8a6dfb7a10b9273680995c4c86d25c3cdffd4afbdedde92`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/zero-engine-00/copilot_add-sovereignty-deployment-script-again/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
 | Theorem | File | State |
 |---|---|---|
 | `ZeroEngine.architecture_unique` | `src/formal_verification/ZeroEngine.lean`:118 | fechado |
-| `ZeroEngine.correction_well_defined` | `src/formal_verification/ZeroEngine.lean`:50 | erro |
+| `ZeroEngine.correction_well_defined` | `src/formal_verification/ZeroEngine.lean`:50 | fechado |
 | `ZeroEngine.infrastructure_robust` | `src/formal_verification/ZeroEngine.lean`:82 | fechado |
-| `ZeroEngine.la2028_correction_exists` | `src/formal_verification/ZeroEngine.lean`:44 | erro |
+| `ZeroEngine.la2028_correction_exists` | `src/formal_verification/ZeroEngine.lean`:44 | fechado |
 | `ZeroEngine.la2028_correction_factor` | `src/formal_verification/ZeroEngine.lean`:32 | erro |
 | `ZeroEngine.orbital_sync_reflexive` | `src/formal_verification/ZeroEngine.lean`:74 | fechado |
 | `ZeroEngine.sovereign_architecture_finalized` | `src/formal_verification/ZeroEngine.lean`:104 | fechado |

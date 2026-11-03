@@ -1,0 +1,759 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Heu-7-universal-framework",
+ "branch": "copilot/add-initial-repository-structure",
+ "branch_state": "parada",
+ "head_commit": "81b71df03c53f6a2b8bcfcb1a87330ac9f014e49",
+ "head_commit_date": "2025-12-02T08:42:59+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "81b71df03c53f6a2b8bcfcb1a87330ac9f014e49",
+   "date": "2025-12-02T08:42:59+00:00",
+   "subject": "Address code review: improve documentation, fix redundant code, clarify placeholders"
+  },
+  {
+   "commit": "8049ecd9c067c2c7e4d4926e156f027f4d5a6e01",
+   "date": "2025-12-02T08:39:36+00:00",
+   "subject": "Major expansion: unified proof architecture, deep analysis modules, cross-domain connections"
+  },
+  {
+   "commit": "62375305407de3e7357acd7a3e06bd6b833f3541",
+   "date": "2025-12-01T22:14:32+00:00",
+   "subject": "Address code review feedback: fix Python findroot usage, improve documentation"
+  },
+  {
+   "commit": "61ee9005ef1ef78bb0b69a0b7095761937a8220f",
+   "date": "2025-12-01T22:12:40+00:00",
+   "subject": "Fix Lean syntax issues: type coercions and power notation"
+  },
+  {
+   "commit": "bc3fd6d1d96a7358040b6f395469d2c5b9c7987d",
+   "date": "2025-12-01T22:07:19+00:00",
+   "subject": "Add complete HEU-7 framework structure with Lean, LaTeX, Python files"
+  },
+  {
+   "commit": "ff8bcea50edbb986ac0ce81d8ea02b5d73f80ea2",
+   "date": "2025-12-01T21:53:58+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "HEU.BSD.BSD_HEU_Equivalence",
+   "file": "src/lean/HEU/BSD/Equivalence_BSD.lean",
+   "line": 24,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": BSD_Statement ↔ Critical BSD_Functional"
+  },
+  {
+   "name": "HEU.BSD.DeepAnalysis.BSD_iff_HEU",
+   "file": "src/lean/HEU/BSD/DeepAnalysis.lean",
+   "line": 141,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(basis : ∀ E : FullEllipticCurve, MordellWeilBasis E) : BSD_Statement ↔ (BSD_HEU_Functional' basis).HEU_Statement"
+  },
+  {
+   "name": "HEU.BSD.DeepAnalysis.BSD_implies_sha_finite",
+   "file": "src/lean/HEU/BSD/DeepAnalysis.lean",
+   "line": 160,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(E : FullEllipticCurve) (h : True) : shaSize E < Ord.omega"
+  },
+  {
+   "name": "HEU.BSD.DeepAnalysis.gross_zagier",
+   "file": "src/lean/HEU/BSD/DeepAnalysis.lean",
+   "line": 110,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(E : FullEllipticCurve) (h_analytic : analyticRank' E = 1) : True"
+  },
+  {
+   "name": "HEU.BSD.DeepAnalysis.kolyvagin",
+   "file": "src/lean/HEU/BSD/DeepAnalysis.lean",
+   "line": 118,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(E : FullEllipticCurve) (h : analyticRank' E ≤ 1) : True"
+  },
+  {
+   "name": "HEU.BSD.HEU_BSD_holds",
+   "file": "src/lean/HEU/BSD/Equivalence_BSD.lean",
+   "line": 19,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_BSD"
+  },
+  {
+   "name": "HEU.BSD.ranks_agree_implies_BSD",
+   "file": "src/lean/HEU/BSD/Equivalence_BSD.lean",
+   "line": 30,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(E : EllipticCurve) : ranksAgree E → F_BSD E ≥ κ_BSD"
+  },
+  {
+   "name": "HEU.Core.CrossDomain.chain_resolution",
+   "file": "src/lean/HEU/Core/CrossDomain.lean",
+   "line": 133,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(path : ResolutionPath) (hLast : path.sequence.length > 0) (solved : (path.sequence.getLast (List.ne_nil_of_length_pos hLast)).functional.HEU_Statement) : ∀ P ∈ path.sequence, P.functional.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.CrossDomain.countable_enumeration",
+   "file": "src/lean/HEU/Core/CrossDomain.lean",
+   "line": 81,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) (h : CountableDomain S) : ∃ enum : Nat → S.X, ∀ x : S.X, ∃ n : Nat, enum n = x"
+  },
+  {
+   "name": "HEU.Core.CrossDomain.minimum_implies_heu",
+   "file": "src/lean/HEU/Core/CrossDomain.lean",
+   "line": 97,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (hmin : HasMinimum S) (hbound : ∃ x₀ : S.X, S.F x₀ ≥ S.κ ∧ ∀ x : S.X, S.F x₀ ≤ S.F x) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.CrossDomain.reduction_preserves_solution",
+   "file": "src/lean/HEU/Core/CrossDomain.lean",
+   "line": 34,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P Q : MillenniumProblem) (r : ProblemReduction P Q) (hQ : Q.functional.HEU_Statement) : P.functional.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.CrossDomain.structurally_equivalent_symm",
+   "file": "src/lean/HEU/Core/CrossDomain.lean",
+   "line": 47,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P Q : MillenniumProblem) : StructurallyEquivalent P Q → StructurallyEquivalent Q P"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.approximation_limit",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 133,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (approx : Nat → S.X → S.X) (hApprox : ∀ n : Nat, ∀ x : S.X, S.F (approx n x) ≥ S.κ) (limit : ∀ x : S.X, ∃ n₀ : Nat, ∀ n ≥ n₀, S.F (approx n x) = S.F x) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.case_analysis",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 24,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{S : Functional} {P : S.X → Prop} [DecidablePred P] (h1 : ∀ x : S.X, P x → S.F x ≥ S.κ) (h2 : ∀ x : S.X, ¬P x → S.F x ≥ S.κ) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.composite_proof",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 160,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) (tech1 : S.HEU_Statement → Prop) (tech2 : Prop → S.HEU_Statement) (h1 : tech1 S.HEU_Statement) (h2 : ∀ p : Prop, p → tech2 p = S.HEU_Statement → S.HEU_Statement) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.direct_verification",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 18,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (h : ∀ x : S.X, S.F x ≥ S.κ) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.domain_induction",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 86,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (F : α → Ord) (κ : Ord) (base : ∀ x : α, F x ≥ κ) : ∀ x : α, F x ≥ κ"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.functional_reduction",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 147,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S T : Functional) (f : S.X → T.X) (hF : ∀ x : S.X, S.F x = T.F (f x)) (hκ : S.κ = T.κ) (hT : T.HEU_Statement) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.lower_bound_transfer",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 34,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{S : Functional} (g : S.X → Ord) (hg : ∀ x : S.X, g x ≥ S.κ) (hFg : ∀ x : S.X, S.F x ≥ g x) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.minimum_element_bound",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 44,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (x₀ : S.X) (hmin : ∀ x : S.X, S.F x₀ ≤ S.F x) (hx₀ : S.F x₀ ≥ S.κ) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.monotonic_minimum",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 91,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{X : Type} [LE X] [Nonempty X] (F : X → Ord) (κ : Ord) (hMono : ∀ x y : X, x ≤ y → F x ≤ F y) (x₀ : X) (hMin : ∀ x : X, x₀ ≤ x) (hBound : F x₀ ≥ κ) : ∀ x : X, F x ≥ κ"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.no_valid_counterexample",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 62,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) (h : ∀ x : S.X, S.F x < S.κ → False) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.positive_threshold",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 112,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (hκ : S.κ > 0) (h : ∀ x : S.X, S.F x > 0) (hBound : ∀ x : S.X, S.F x ≥ S.κ) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.proof_by_contradiction",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 52,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) (h : (∃ x : S.X, S.F x < S.κ) → False) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.strong_induction_on_functional",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 70,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) (h : ∀ n : Nat, (∀ x : S.X, S.F x < n → S.F x ≥ S.κ) → (∀ x : S.X, S.F x = n → S.F x ≥ S.κ)) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.symmetry_reduction",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 118,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{X : Type} (F : X → Ord) (κ : Ord) {G : Type} (action : G → X → X) (invariant : ∀ g : G, ∀ x : X, F (action g x) = F x) (representatives : List X) (covers : ∀ x : X, ∃ r ∈ representatives, ∃ g : G, action g r = x) (hReps : ∀ r ∈ representatives, F r ≥ κ) : ∀ x : X, F x ≥ κ"
+  },
+  {
+   "name": "HEU.Core.ProofTechniques.zero_threshold_trivial",
+   "file": "src/lean/HEU/Core/ProofTechniques.lean",
+   "line": 104,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (hκ : S.κ = 0) : S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.Unified.counterexample_refutes",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 132,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) (c : Counterexample P) : ¬P.classical_statement"
+  },
+  {
+   "name": "HEU.Core.Unified.critical_ordinal_total_order",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 73,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P Q : MillenniumProblem) : criticalOrdinalLe P Q ∨ criticalOrdinalLe Q P"
+  },
+  {
+   "name": "HEU.Core.Unified.heu_completeness",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 105,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) : P.classical_statement → P.functional.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.Unified.heu_is_universal",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 52,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) : S.HEU_Statement = (∀ x : S.X, S.F x ≥ S.κ)"
+  },
+  {
+   "name": "HEU.Core.Unified.heu_soundness",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 97,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) : P.functional.HEU_Statement → P.classical_statement"
+  },
+  {
+   "name": "HEU.Core.Unified.morphism_preserves_truth",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 91,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S T : Functional) (m : FunctionalMorphism S T) : (∀ x : S.X, S.F x ≥ S.κ) → (∀ x : S.X, T.F (m.map x) ≥ S.κ)"
+  },
+  {
+   "name": "HEU.Core.Unified.neg_heu_implies_counterexample",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 56,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) : ¬S.HEU_Statement ↔ ∃ x : S.X, S.F x < S.κ"
+  },
+  {
+   "name": "HEU.Core.Unified.no_counterexample_consistent",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 139,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) (h : ∀ x : P.functional.X, P.functional.F x ≥ P.functional.κ) : P.functional.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.Unified.structural_uniformity",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 44,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(P : MillenniumProblem) : ∃ (X : Type) (F : X → Ord) (κ : Ord), P.functional = ⟨X, F, κ⟩"
+  },
+  {
+   "name": "HEU.Core.Unified.unified_proof_strategy",
+   "file": "src/lean/HEU/Core/UnifiedFramework.lean",
+   "line": 111,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(problems : List MillenniumProblem) : (∀ P ∈ problems, P.functional.HEU_Statement) ↔ (∀ P ∈ problems, P.classical_statement)"
+  },
+  {
+   "name": "HEU.Core.critical_iff_heu",
+   "file": "src/lean/HEU/Core/CriticalLevel.lean",
+   "line": 16,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) : Critical S ↔ S.HEU_Statement"
+  },
+  {
+   "name": "HEU.Core.critical_no_counterexample",
+   "file": "src/lean/HEU/Core/CriticalLevel.lean",
+   "line": 25,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) (h : Critical S) : ∀ x, ¬Counterexample S x"
+  },
+  {
+   "name": "HEU.Core.heu_equiv_no_deficit",
+   "file": "src/lean/HEU/Core/Functional.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(S : Functional) : S.HEU_Statement ↔ S.NoDeficit"
+  },
+  {
+   "name": "HEU.Core.strictly_critical_imp_critical",
+   "file": "src/lean/HEU/Core/CriticalLevel.lean",
+   "line": 35,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(S : Functional) : StrictlyCritical S → Critical S"
+  },
+  {
+   "name": "HEU.Hodge.DeepAnalysis.Hodge_iff_HEU",
+   "file": "src/lean/HEU/Hodge/DeepAnalysis.lean",
+   "line": 111,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": Hodge_Statement ↔ Hodge_HEU_Functional'.HEU_Statement"
+  },
+  {
+   "name": "HEU.Hodge.DeepAnalysis.hodge_decomposition",
+   "file": "src/lean/HEU/Hodge/DeepAnalysis.lean",
+   "line": 40,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(X : CompleteVariety) (k : Nat) : True"
+  },
+  {
+   "name": "HEU.Hodge.DeepAnalysis.hodge_symmetry",
+   "file": "src/lean/HEU/Hodge/DeepAnalysis.lean",
+   "line": 45,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(X : CompleteVariety) (p q : Nat) : hodgeNumber X p q = hodgeNumber X q p"
+  },
+  {
+   "name": "HEU.Hodge.DeepAnalysis.lefschetz_1_1",
+   "file": "src/lean/HEU/Hodge/DeepAnalysis.lean",
+   "line": 116,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(X : CompleteVariety) (h : FullHodgeClass X) (h_deg : h.degree = 2) : True"
+  },
+  {
+   "name": "HEU.Hodge.HEU_Hodge_holds",
+   "file": "src/lean/HEU/Hodge/Equivalence_Hodge.lean",
+   "line": 19,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_Hodge"
+  },
+  {
+   "name": "HEU.Hodge.Hodge_HEU_Equivalence",
+   "file": "src/lean/HEU/Hodge/Equivalence_Hodge.lean",
+   "line": 24,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": Hodge_Statement ↔ Critical Hodge_Functional"
+  },
+  {
+   "name": "HEU.Hodge.algebraic_implies_bound",
+   "file": "src/lean/HEU/Hodge/Equivalence_Hodge.lean",
+   "line": 30,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(h : HodgeClass) : isAlgebraic h → F_Hodge h ≥ κ_Hodge"
+  },
+  {
+   "name": "HEU.NS.DeepAnalysis.global_regularity_iff_omega",
+   "file": "src/lean/HEU/NS/DeepAnalysis.lean",
+   "line": 117,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": (∀ sol : LerayHopfSolution, regularityOrdinal' sol ≥ Ord.omega) ↔ NS_GlobalRegularity"
+  },
+  {
+   "name": "HEU.NS.DeepAnalysis.small_data_global",
+   "file": "src/lean/HEU/NS/DeepAnalysis.lean",
+   "line": 129,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(u0 : InitialData) (ε : Nat) (hsmall : SmallData u0 ε) : ∃ sol : WeakSolution, sol.init = u0 ∧ GlobalRegular sol"
+  },
+  {
+   "name": "HEU.NS.HEU_NS_holds",
+   "file": "src/lean/HEU/NS/Equivalence_NS.lean",
+   "line": 19,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_NS"
+  },
+  {
+   "name": "HEU.NS.NS_HEU_Equivalence",
+   "file": "src/lean/HEU/NS/Equivalence_NS.lean",
+   "line": 25,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": NS_GlobalRegularity ↔ Critical NS_Functional"
+  },
+  {
+   "name": "HEU.NS.no_blowup_implies_global",
+   "file": "src/lean/HEU/NS/Equivalence_NS.lean",
+   "line": 31,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": (∀ sol : WeakSolution, ¬hasBlowup sol) → NS_GlobalRegularity"
+  },
+  {
+   "name": "HEU.PvsNP.DeepAnalysis.P_eq_NP_collapses_PH",
+   "file": "src/lean/HEU/PvsNP/DeepAnalysis.lean",
+   "line": 201,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": (¬PneNP) → True"
+  },
+  {
+   "name": "HEU.PvsNP.DeepAnalysis.PneNP_iff_omega_complexity",
+   "file": "src/lean/HEU/PvsNP/DeepAnalysis.lean",
+   "line": 145,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": PneNP ↔ ∀ cf : CircuitFamily, ComputesSAT cf → complexityOrdinal cf ≥ Ord.omega"
+  },
+  {
+   "name": "HEU.PvsNP.DeepAnalysis.PneNP_implies_separation",
+   "file": "src/lean/HEU/PvsNP/DeepAnalysis.lean",
+   "line": 209,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": PneNP → ∃ L, NP_complete L ∧ ExponentialLowerBound L"
+  },
+  {
+   "name": "HEU.PvsNP.DeepAnalysis.natural_proofs_barrier",
+   "file": "src/lean/HEU/PvsNP/DeepAnalysis.lean",
+   "line": 192,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": (∃ prg : Nat → List Bool, True) → ∀ np : NaturalProof, False"
+  },
+  {
+   "name": "HEU.PvsNP.HEU_PvsNP_holds",
+   "file": "src/lean/HEU/PvsNP/Equivalence_PvsNP.lean",
+   "line": 19,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_PvsNP"
+  },
+  {
+   "name": "HEU.PvsNP.P_eq_NP_polynomial_circuits",
+   "file": "src/lean/HEU/PvsNP/Equivalence_PvsNP.lean",
+   "line": 31,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬PneNP → ∀ L : Language, P L"
+  },
+  {
+   "name": "HEU.PvsNP.PvsNP_HEU_Equivalence",
+   "file": "src/lean/HEU/PvsNP/Equivalence_PvsNP.lean",
+   "line": 24,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": PneNP ↔ ∃ L, Critical PvsNP_Functional"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.HEU_captures_RH",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 130,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": RH_Functional.HEU_Statement ↔ RH_Statement"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.RH_iff_all_deviation_zero",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 116,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": RH_Statement ↔ ∀ z : ZeroApprox, inCriticalStrip z → F_RH_deviation z = 0"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.deviation_nonneg",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 95,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(z : ZeroApprox) : F_RH_deviation z ≥ 0"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.deviation_pos_off_line",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 107,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(z : ZeroApprox) (h : ¬onCriticalLine z) : F_RH_deviation z > 0"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.deviation_zero_on_line",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 102,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(z : ZeroApprox) (h : onCriticalLine z) : F_RH_deviation z = 0"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.verified_support_RH",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 153,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(zeros : List VerifiedZero) : ∀ vz ∈ zeros, onCriticalLine vz.zero.approx"
+  },
+  {
+   "name": "HEU.RH.DeepAnalysis.zero_count_bound",
+   "file": "src/lean/HEU/RH/DeepAnalysis.lean",
+   "line": 172,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(T : Nat) (hT : T > 10) : True"
+  },
+  {
+   "name": "HEU.RH.HEU_RH_holds",
+   "file": "src/lean/HEU/RH/Equivalence_RH.lean",
+   "line": 20,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_RH"
+  },
+  {
+   "name": "HEU.RH.HEU_RH_iff_Critical",
+   "file": "src/lean/HEU/RH/Equivalence_RH.lean",
+   "line": 42,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_RH ↔ Critical RH_Functional"
+  },
+  {
+   "name": "HEU.RH.RH_HEU_Equivalence",
+   "file": "src/lean/HEU/RH/Equivalence_RH.lean",
+   "line": 25,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": RH_Statement ↔ Critical RH_Functional"
+  },
+  {
+   "name": "HEU.YM.DeepAnalysis.YM_iff_HEU",
+   "file": "src/lean/HEU/YM/DeepAnalysis.lean",
+   "line": 133,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": YangMillsProblem ↔ YM_HEU_Functional'.HEU_Statement"
+  },
+  {
+   "name": "HEU.YM.DeepAnalysis.mass_gap_implies_glueballs",
+   "file": "src/lean/HEU/YM/DeepAnalysis.lean",
+   "line": 148,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(G : CompactSimpleGroup) (h : MassGapExists G) : True"
+  },
+  {
+   "name": "HEU.YM.HEU_YM_holds",
+   "file": "src/lean/HEU/YM/Equivalence_YM.lean",
+   "line": 19,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": HEU_YM"
+  },
+  {
+   "name": "HEU.YM.YM_HEU_Equivalence",
+   "file": "src/lean/HEU/YM/Equivalence_YM.lean",
+   "line": 24,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": YM_MassGap ↔ Critical YM_Functional"
+  },
+  {
+   "name": "HEU.YM.spectral_gap_implies_mass_gap",
+   "file": "src/lean/HEU/YM/Equivalence_YM.lean",
+   "line": 30,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(config : GaugeField) : spectralGap config ≥ 1 → F_YM config ≥ κ_YM"
+  }
+ ],
+ "closed": 31,
+ "files_sha256": {
+  "lakefile.lean": "07ad4e173d9af78bf0902e6b49df8e3df6df9b8318e9a4ce93587bf61b0efb2f",
+  "lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1",
+  "src/lean/HEU/BSD/DeepAnalysis.lean": "b0f0185d024e94353ece83ab8a624df20faf72f6b5e306b4a6bd2a45cadaf56b",
+  "src/lean/HEU/BSD/F_BSD.lean": "d35a5974bca7468337a56f8bdf3fec469ef949506f711e8474e0a11f330a0d76",
+  "src/lean/HEU/BSD/X_BSD.lean": "79049b43097068e21ab1f51dd850d16f4a42248041359102804a38712f03de8c",
+  "src/lean/HEU/Core/AdvancedOrdinals.lean": "399556bc750674f7191da3f1824d041d47135702409dffc59101e5569482e4d5",
+  "src/lean/HEU/Core/CriticalLevel.lean": "112ec449693dbdbbd98208e26ac41ffda99ef077b5c684212473881549e71022",
+  "src/lean/HEU/Core/CrossDomain.lean": "74b0169c91921c0e6d77ede1046c45728b50f93fff4ac2a19aeabbe8a2ef3680",
+  "src/lean/HEU/Core/Encoding.lean": "8c2e30fb75effdee9b3096f2fdb82a1ef67355c5e08e37557bc9966959d786c8",
+  "src/lean/HEU/Core/Functional.lean": "af3f381ec72ca82a77b9ac68836a5665e103f58f3c1e469bf41e7bbd2a515caf",
+  "src/lean/HEU/Core/Ordinals.lean": "0e7c3c51c5935e69a662314459c5df01e7b52bac21be3db232ebf900aff6ebb0",
+  "src/lean/HEU/Core/ProofTechniques.lean": "f0606a50792e791b13ae57fa41e741b19186ec2fb48309ac712fa1ff9e892942",
+  "src/lean/HEU/Core/UnifiedFramework.lean": "7d458e1060cfa4cbddb9571c6f4c0d72a7041df98116cf5e357f55d34426b35d",
+  "src/lean/HEU/Core/ZFC.lean": "950af1349be81621d7f1159815d1f5e4bb2e70e22c65ac77b47656f2535d45c1",
+  "src/lean/HEU/Hodge/DeepAnalysis.lean": "4707e6baa02adbf7c0915428e4e013328bc4a70f6d581846893b7a6927977285",
+  "src/lean/HEU/Hodge/F_Hodge.lean": "484834a6793b496bd3b9156e2c8672fed6c848183f3dc130a0b001224b75a66f",
+  "src/lean/HEU/Hodge/X_Hodge.lean": "0a204b4f8afcfeb5dead28ca8bc44c01ec7c33c25b68426235d5f3e319b66aab",
+  "src/lean/HEU/PvsNP/DeepAnalysis.lean": "15873c1ae455fcd80f7bd647842f5f804854087c0d1935ce8ffe9b5a9206590a",
+  "src/lean/HEU/PvsNP/F_PvsNP.lean": "1a83bc75d8118d4a26b8dbb7d330cb07d5821103bcaf0b87acccdb5eae2af8a7",
+  "src/lean/HEU/PvsNP/X_PvsNP.lean": "ce61641c80ea84e4e844dffa7e017bac861134aa536bc7ee7a93fa9f4e8b1c0e",
+  "src/lean/HEU/RH/DeepAnalysis.lean": "12cab98867d432c899cb538f2ce5dce7ae5b6751ad414f34a97a1c53e543e7b6",
+  "src/lean/HEU/RH/F_RH.lean": "faa5fbec28301d8c4007b036a926ad72d705789a06744eb087f3d6689173f98c",
+  "src/lean/HEU/RH/X_RH.lean": "f6a7d8ca81d0b771e096135fc6df74494a15ea8e9217a5b0a3611fe8604f02ce",
+  "src/lean/HEU/YM/DeepAnalysis.lean": "4b97ec090cd1651c67deac67eb6bdc604d9e216b4d37e89a9ddc2d0ebf396fee",
+  "src/lean/HEU/YM/F_YM.lean": "5147e8b1e3f86ed9a32182e6569dceeff4c0127bb020894a2b729b10d0c7ee75",
+  "src/lean/HEU/YM/X_YM.lean": "3728d8d8308e11f344101aaf251001f6f04fd6580f90120d831d8a2afa66b1fb"
+ },
+ "published_at": "2026-11-03T11:27:59Z",
+ "certificate_sha256": "06a9781a6f27d8149ab68196e773bb5b030a27448dc777bc2758688686c2a1e2"
+}

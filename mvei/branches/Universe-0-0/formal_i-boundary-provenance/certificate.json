@@ -1,0 +1,179 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "formal/i-boundary-provenance",
+ "branch_state": "parada",
+ "head_commit": "3027ff7a225f2b904e1c1597aeebabced57efa51",
+ "head_commit_date": "2026-09-25T15:10:41+01:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "3027ff7a225f2b904e1c1597aeebabced57efa51",
+   "date": "2026-09-25T15:10:41+01:00",
+   "subject": "ci: kernel-check I boundary provenance"
+  },
+  {
+   "commit": "5e00cd689b4c82eb47533c2e6468affc1427f107",
+   "date": "2026-09-25T15:09:39+01:00",
+   "subject": "formalize I boundary provenance and structural information loss"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Universe00.IBoundary.StructuralBoundaryInformationLoss",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 184,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": (∃ x y : INumber, x ≠ y ∧ BoundaryEquivalent x y ∧ provenanceCode x ≠ provenanceCode y) ∧ ¬ Function.Injective terminalProjection"
+  },
+  {
+   "name": "Universe00.IBoundary.approach_orientation_distinct",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 99,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) : (approachNeg ε).orientation ≠ (approachPos ε).orientation"
+  },
+  {
+   "name": "Universe00.IBoundary.approach_states_distinct",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 103,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) : approachNeg ε ≠ approachPos ε"
+  },
+  {
+   "name": "Universe00.IBoundary.canonical_states_boundary_equivalent",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 85,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": BoundaryEquivalent I00 I10 ∧ BoundaryEquivalent I00 I0Inf ∧ BoundaryEquivalent I00 I1Inf"
+  },
+  {
+   "name": "Universe00.IBoundary.canonical_states_pairwise_distinct",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 80,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": I00 ≠ I10 ∧ I00 ≠ I0Inf ∧ I00 ≠ I1Inf ∧ I10 ≠ I0Inf ∧ I10 ≠ I1Inf ∧ I0Inf ≠ I1Inf"
+  },
+  {
+   "name": "Universe00.IBoundary.collapse_preserves_terminal",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 160,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(x : INumber) : terminalProjection (collapse x) = terminalProjection x"
+  },
+  {
+   "name": "Universe00.IBoundary.negative_approach_has_residue",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 168,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) : ProvenanceResidue (approachNeg ε)"
+  },
+  {
+   "name": "Universe00.IBoundary.negative_terminal_limit",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 109,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": Tendsto (fun ε : ℝ => terminalProjection (approachNeg ε)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 0)"
+  },
+  {
+   "name": "Universe00.IBoundary.positive_approach_has_residue",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 172,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) : ProvenanceResidue (approachPos ε)"
+  },
+  {
+   "name": "Universe00.IBoundary.positive_terminal_limit",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 115,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": Tendsto (fun ε : ℝ => terminalProjection (approachPos ε)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 0)"
+  },
+  {
+   "name": "Universe00.IBoundary.same_boundary_different_orientation",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 152,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) : provenanceCode (approachNeg ε) ≠ provenanceCode (approachPos ε)"
+  },
+  {
+   "name": "Universe00.IBoundary.same_terminal_different_nature",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 145,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": terminalProjection I00 = terminalProjection I10 ∧ provenanceCode I00 ≠ provenanceCode I10"
+  },
+  {
+   "name": "Universe00.IBoundary.singularity_kinds_pairwise_distinct",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 71,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": SingularityKind.zeroOverZero ≠ SingularityKind.oneOverZero ∧ SingularityKind.zeroOverZero ≠ SingularityKind.zeroOverInfinity ∧ SingularityKind.zeroOverZero ≠ SingularityKind.oneOverInfinity ∧ SingularityKind.oneOverZero ≠ SingularityKind.zeroOverInfinity ∧ SingularityKind.oneOverZero ≠ SingularityKind.oneOverInfinity ∧ SingularityKind.zeroOverInfinity ≠ SingularityKind.oneOverInfinity"
+  },
+  {
+   "name": "Universe00.IBoundary.terminal_projection_not_injective",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 176,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬ Function.Injective terminalProjection"
+  },
+  {
+   "name": "Universe00.IBoundary.two_sided_terminal_distance",
+   "file": "provers/lean/Foundations/IBoundaryProvenance.lean",
+   "line": 121,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(ε : ℝ) (hε : 0 ≤ ε) : |terminalProjection (approachNeg ε) - terminalProjection (approachPos ε)| = 2 * ε"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "provers/lean/Foundations/IBoundaryProvenance.lean": "ed7047ca88ecbf1b401b12fe007da52dde3ca9bfc93bc34bb3f9d21153ab86f2"
+ },
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "663d0fc5a30ce50d600d4301b53dc35efd66b961bbd138d9318d8ace2f013352"
+}

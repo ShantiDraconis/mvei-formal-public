@@ -5,7 +5,7 @@ Lean sources from the branch `atk/bsd-material-deltas-20260930` of the private r
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 4, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `cf221b99d7b9adfad3016c9696f522c38152aa7e171029a4946473305b96e4f0`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-bsd/atk_bsd-material-deltas-20260930/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `004c50357b18fca3f833541c949bbef2ae49d4f69dbf2345f192162e8a0ad8c3`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-bsd/atk_bsd-material-deltas-20260930/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

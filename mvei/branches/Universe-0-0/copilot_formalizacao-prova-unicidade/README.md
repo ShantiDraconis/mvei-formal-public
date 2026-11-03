@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/formalizacao-prova-unicidade` of the private repository `ShantiDraconis/Universe-0-0`, commit `7ebb43195ae882ec7975874745af36c3d8c3c2be` (2026-01-06T07:27:02+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 26 — closed 4, conditional 0, open 0, proof error 2, not reached 20, no result 0.
+* Theorems only on branches, in this branch: 26 — closed 4, conditional 0, open 1, proof error 1, not reached 20, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `e735013a5d0d814762559a7ff4742a476605ce352e8207ab2c340aac35abdb47`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_formalizacao-prova-unicidade/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `9095d6c85297088c70221125f0a905bf5b59893a9254ad170c56d13a700df2fd`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_formalizacao-prova-unicidade/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -28,7 +28,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `Universe00.HarappanGeometry.grid2x2_has_four_cells` | `provers/lean/HarappanGeometry/Advanced.lean`:29 | nao_alcancado |
 | `Universe00.HarappanGeometry.grid2x2_total_area` | `provers/lean/HarappanGeometry/Advanced.lean`:33 | nao_alcancado |
 | `Universe00.HarappanGeometry.harappan_embeds_in_universe00` | `provers/lean/HarappanGeometry/Advanced.lean`:161 | nao_alcancado |
-| `Universe00.HarappanGeometry.harappan_structure_uniqueness` | `provers/lean/HarappanGeometry/Core.lean`:217 | erro |
+| `Universe00.HarappanGeometry.harappan_structure_uniqueness` | `provers/lean/HarappanGeometry/Core.lean`:217 | aberto-sorry |
 | `Universe00.HarappanGeometry.ontological_boundary_declared` | `provers/lean/HarappanGeometry/Core.lean`:251 | fechado |
 | `Universe00.HarappanGeometry.prime_pair_geometric_representation` | `provers/lean/HarappanGeometry/Core.lean`:185 | fechado |
 | `Universe00.HarappanGeometry.sphereNonSphere_equidistant` | `provers/lean/HarappanGeometry/Advanced.lean`:83 | nao_alcancado |

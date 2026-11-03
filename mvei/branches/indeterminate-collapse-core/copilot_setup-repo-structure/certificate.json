@@ -1,0 +1,591 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/indeterminate-collapse-core",
+ "branch": "copilot/setup-repo-structure",
+ "branch_state": "parada",
+ "head_commit": "35799ec4a7af1a7951b3c82f89399832b3beb9bf",
+ "head_commit_date": "2026-03-26T03:34:31+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "35799ec4a7af1a7951b3c82f89399832b3beb9bf",
+   "date": "2026-03-26T03:34:31+00:00",
+   "subject": "Create complete vendable repo structure for I Framework"
+  },
+  {
+   "commit": "5a1b02cad0dd305c8df106e813b8da3566da7bcb",
+   "date": "2026-03-26T03:13:38+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "FiniteStateSpace_length",
+   "file": "lean/States.lean",
+   "line": 65,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": FiniteStateSpace.length = 4"
+  },
+  {
+   "name": "IState_has_two_distinct_elements",
+   "file": "lean/Consistency.lean",
+   "line": 22,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": "{α : Type} [Inhabited α] : ∃ (a b : IState α), a ≠ b"
+  },
+  {
+   "name": "I_absorbing",
+   "file": "lean/Propagation.lean",
+   "line": 109,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (Ts : List (Transformation α α)) (hTs : ∀ T ∈ Ts, IPropagating T) : (chainTransformations Ts) IState.I = IState.I"
+  },
+  {
+   "name": "I_in_FiniteStateSpace",
+   "file": "lean/States.lean",
+   "line": 60,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": IState.I ∈ FiniteStateSpace"
+  },
+  {
+   "name": "I_is_fixpoint_of_ipropagating",
+   "file": "lean/Propagation.lean",
+   "line": 104,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (T : Transformation α α) (h : IPropagating T) : T IState.I = IState.I"
+  },
+  {
+   "name": "I_ne_known",
+   "file": "lean/Axioms.lean",
+   "line": 101,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": "{α : Type} (x : α) : (IState.I : IState α) ≠ IState.Known x"
+  },
+  {
+   "name": "apply_I_propagating",
+   "file": "lean/Transformations.lean",
+   "line": 65,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (h : IPropagating T) : T IState.I = IState.I"
+  },
+  {
+   "name": "axioms_consistent",
+   "file": "lean/Consistency.lean",
+   "line": 95,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬(∃ (P : Prop), P ∧ ¬P)"
+  },
+  {
+   "name": "chain_nil",
+   "file": "lean/Transformations.lean",
+   "line": 77,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} : chainTransformations ([] : List (Transformation α α)) = id"
+  },
+  {
+   "name": "chain_propagates",
+   "file": "lean/Propagation.lean",
+   "line": 48,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (Ts : List (Transformation α α)) (hTs : ∀ T ∈ Ts, Propagates T) : Propagates (chainTransformations Ts)"
+  },
+  {
+   "name": "chain_singleton",
+   "file": "lean/Transformations.lean",
+   "line": 81,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (T : Transformation α α) : chainTransformations [T] = meta_compose id T"
+  },
+  {
+   "name": "collapse_known_ne_unknown",
+   "file": "lean/Consistency.lean",
+   "line": 42,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P Q : Problem) (hk : Problem.isKnown P) (hu : Problem.isUnknown Q) : collapse P ≠ collapse Q"
+  },
+  {
+   "name": "collapse_known_not_I",
+   "file": "lean/Consistency.lean",
+   "line": 27,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P : Problem) (hk : Problem.isKnown P) : collapse P ≠ IState.I"
+  },
+  {
+   "name": "collapse_op_preserves_I",
+   "file": "lean/Operators.lean",
+   "line": 99,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (p : α → Bool) : (collapse_op p) IState.I = IState.I"
+  },
+  {
+   "name": "collapse_unknown_is_I",
+   "file": "lean/Consistency.lean",
+   "line": 37,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(P : Problem) (hu : Problem.isUnknown P) : collapse P = IState.I"
+  },
+  {
+   "name": "compose_id_right",
+   "file": "lean/Transformations.lean",
+   "line": 119,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) : TransformationEq (meta_compose T id) T"
+  },
+  {
+   "name": "compose_propagates",
+   "file": "lean/Propagation.lean",
+   "line": 35,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β γ : Type} (T₁ : Transformation α β) (T₂ : Transformation β γ) (h₁ : Propagates T₁) (h₂ : Propagates T₂) : Propagates (meta_compose T₁ T₂)"
+  },
+  {
+   "name": "consistent_compose",
+   "file": "lean/Consistency.lean",
+   "line": 57,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β γ : Type} (T₁ : Transformation α β) (T₂ : Transformation β γ) (h₁ : Consistent T₁) (h₂ : Consistent T₂) : Consistent (meta_compose T₁ T₂)"
+  },
+  {
+   "name": "consistent_preserves_known",
+   "file": "lean/Consistency.lean",
+   "line": 49,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (hc : Consistent T) (x : α) : ∃ y : β, T (IState.Known x) = IState.Known y"
+  },
+  {
+   "name": "evenFilter_propagates_I",
+   "file": "lean/Transformations.lean",
+   "line": 104,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": IPropagating evenFilter"
+  },
+  {
+   "name": "extract_I_default",
+   "file": "lean/States.lean",
+   "line": 104,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (d : α) : extractWithDefault IState.I d = d"
+  },
+  {
+   "name": "extract_known",
+   "file": "lean/States.lean",
+   "line": 108,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (x d : α) : extractWithDefault (IState.Known x) d = x"
+  },
+  {
+   "name": "global_propagation_theorem",
+   "file": "lean/Propagation.lean",
+   "line": 91,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (h : IPropagating T) : ∀ s : State α, s = IState.I → T s = IState.I"
+  },
+  {
+   "name": "global_stability",
+   "file": "lean/Stability.lean",
+   "line": 110,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (α β : Type) (T : ValidTransformation α β), Stable T.fn"
+  },
+  {
+   "name": "id_compose_left",
+   "file": "lean/Transformations.lean",
+   "line": 114,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) : TransformationEq (meta_compose id T) T"
+  },
+  {
+   "name": "identity_witnesses_non_triviality",
+   "file": "lean/Consistency.lean",
+   "line": 86,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": ": ∃ (T : ValidTransformation Nat Nat) (x : Nat), T.fn (IState.Known x) ≠ IState.I"
+  },
+  {
+   "name": "ipropagating_propagates",
+   "file": "lean/Propagation.lean",
+   "line": 14,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (h : IPropagating T) : Propagates T"
+  },
+  {
+   "name": "isIndeterminate_I",
+   "file": "lean/States.lean",
+   "line": 80,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [DecidableEq α] : isIndeterminate (IState.I : State α) = true"
+  },
+  {
+   "name": "isIndeterminate_known",
+   "file": "lean/States.lean",
+   "line": 84,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [DecidableEq α] (x : α) : isIndeterminate (IState.Known x) = false"
+  },
+  {
+   "name": "isKnown_I",
+   "file": "lean/States.lean",
+   "line": 88,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [DecidableEq α] : isKnown (IState.I : State α) = false"
+  },
+  {
+   "name": "isKnown_known",
+   "file": "lean/States.lean",
+   "line": 92,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [DecidableEq α] (x : α) : isKnown (IState.Known x) = true"
+  },
+  {
+   "name": "known_ne_I",
+   "file": "lean/Axioms.lean",
+   "line": 108,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": "{α : Type} (x : α) : IState.Known x ≠ (IState.I : IState α)"
+  },
+  {
+   "name": "known_ne_indeterminate",
+   "file": "lean/Consistency.lean",
+   "line": 14,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": "{α : Type} (x : α) : IState.Known x ≠ (IState.I : IState α)"
+  },
+  {
+   "name": "liftTransformation_identityPreserving",
+   "file": "lean/Definitions.lean",
+   "line": 82,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (f : α → β) : IdentityPreserving' (liftTransformation f)"
+  },
+  {
+   "name": "liftTransformation_is_stable",
+   "file": "lean/Stability.lean",
+   "line": 51,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (f : α → β) : Stable (liftTransformation f)"
+  },
+  {
+   "name": "liftTransformation_propagates",
+   "file": "lean/Definitions.lean",
+   "line": 76,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (f : α → β) : IPropagating (liftTransformation f)"
+  },
+  {
+   "name": "liftTransformation_propagatesI",
+   "file": "lean/Definitions.lean",
+   "line": 92,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α β : Type} (f : α → β) : Propagates (liftTransformation f)"
+  },
+  {
+   "name": "liftTransformation_stable",
+   "file": "lean/Definitions.lean",
+   "line": 87,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (f : α → β) : Stable (liftTransformation f)"
+  },
+  {
+   "name": "lift_preserves_I",
+   "file": "lean/Axioms.lean",
+   "line": 113,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_nonInterference"
+   ],
+   "statement": "{α β : Type} (f : α → β) : (fun s => match s with | IState.Known x => IState.Known (f x) | IState.Indeterminate => IState.I) IState.I = IState.I"
+  },
+  {
+   "name": "lift_propagates_I",
+   "file": "lean/Propagation.lean",
+   "line": 25,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (f : α → β) : Propagates (liftTransformation f)"
+  },
+  {
+   "name": "meta_add_I_left",
+   "file": "lean/Operators.lean",
+   "line": 70,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} [Add α] (y : IState α) : meta_add IState.I y = IState.I"
+  },
+  {
+   "name": "meta_add_I_right",
+   "file": "lean/Operators.lean",
+   "line": 77,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} [Add α] (x : IState α) : meta_add x IState.I = IState.I"
+  },
+  {
+   "name": "meta_compose_preserves_I",
+   "file": "lean/Operators.lean",
+   "line": 92,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α β γ : Type} (T₁ : Transformation α β) (T₂ : Transformation β γ) (h₁ : IPropagating T₁) (h₂ : IPropagating T₂) : IPropagating (meta_compose T₁ T₂)"
+  },
+  {
+   "name": "meta_lift1_I",
+   "file": "lean/Operators.lean",
+   "line": 108,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (f : α → α) : meta_lift1 f IState.I = IState.I"
+  },
+  {
+   "name": "meta_lift2_I_left",
+   "file": "lean/Operators.lean",
+   "line": 103,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (f : α → α → α) (y : IState α) : meta_lift2 f IState.I y = IState.I"
+  },
+  {
+   "name": "meta_mul_I_left",
+   "file": "lean/Operators.lean",
+   "line": 82,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} [Mul α] (y : IState α) : meta_mul IState.I y = IState.I"
+  },
+  {
+   "name": "meta_mul_I_right",
+   "file": "lean/Operators.lean",
+   "line": 87,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} [Mul α] (x : IState α) : meta_mul x IState.I = IState.I"
+  },
+  {
+   "name": "propagation_chain_stays_indeterminate",
+   "file": "lean/Propagation.lean",
+   "line": 68,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (Ts : List (Transformation α α)) (hTs : ∀ T ∈ Ts, Propagates T) (s₀ : State α) (hs₀ : IndeterminateState α s₀) : IndeterminateState α (chainTransformations Ts s₀)"
+  },
+  {
+   "name": "propagation_does_not_create_known",
+   "file": "lean/Propagation.lean",
+   "line": 59,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (T : Transformation α α) (h : Propagates T) : ∀ s : State α, IndeterminateState α s → IndeterminateState α (T s)"
+  },
+  {
+   "name": "propagation_not_determinising",
+   "file": "lean/Propagation.lean",
+   "line": 77,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type} (T : Transformation α α) (h : IPropagating T) : T IState.I ≠ IState.Known (T IState.I |>.extractVal) ∨ T IState.I = IState.I"
+  },
+  {
+   "name": "stable_known_not_I",
+   "file": "lean/Stability.lean",
+   "line": 29,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": "{α β : Type} (T : Transformation α β) (hs : Stable T) (x : α) : T (IState.Known x) ≠ IState.I"
+  },
+  {
+   "name": "stable_maps_I_to_I",
+   "file": "lean/Stability.lean",
+   "line": 23,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (hs : Stable T) : T IState.I = IState.I"
+  },
+  {
+   "name": "stable_maps_known_to_known",
+   "file": "lean/Stability.lean",
+   "line": 14,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (hs : Stable T) (x : α) : ∃ y : β, T (IState.Known x) = IState.Known y"
+  },
+  {
+   "name": "stable_preserves_determinate",
+   "file": "lean/Stability.lean",
+   "line": 56,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (hs : Stable T) : ∀ s : State α, DeterminateState s → DeterminateState (T s)"
+  },
+  {
+   "name": "stable_preserves_indeterminate",
+   "file": "lean/Stability.lean",
+   "line": 66,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : Transformation α β) (hs : Stable T) : ∀ s : State α, IndeterminateState α s → IndeterminateState β (T s)"
+  },
+  {
+   "name": "system_not_trivially_inconsistent",
+   "file": "lean/Consistency.lean",
+   "line": 70,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": ": ¬∀ (α : Type) (s : State α), s = IState.I"
+  },
+  {
+   "name": "system_stability_theorem",
+   "file": "lean/Stability.lean",
+   "line": 75,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : ValidTransformation α β) : (∀ s : State α, DeterminateState s → DeterminateState (T.fn s)) ∧ (∀ s : State α, IndeterminateState α s → IndeterminateState β (T.fn s))"
+  },
+  {
+   "name": "valid_compose_stable",
+   "file": "lean/Stability.lean",
+   "line": 37,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α β γ : Type} (T₁ : ValidTransformation α β) (T₂ : ValidTransformation β γ) : Stable (meta_compose T₁.fn T₂.fn)"
+  },
+  {
+   "name": "valid_does_not_indeterminate",
+   "file": "lean/Stability.lean",
+   "line": 92,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "axiom_existence"
+   ],
+   "statement": "{α β : Type} (T : ValidTransformation α β) (s : State α) (hd : DeterminateState s) : ¬IndeterminateState β (T.fn s)"
+  },
+  {
+   "name": "valid_does_not_resolve",
+   "file": "lean/Stability.lean",
+   "line": 101,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : ValidTransformation α β) (s : State α) (hi : IndeterminateState α s) : IndeterminateState β (T.fn s)"
+  },
+  {
+   "name": "valid_propagates",
+   "file": "lean/Propagation.lean",
+   "line": 30,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α β : Type} (T : ValidTransformation α β) : Propagates T.fn"
+  },
+  {
+   "name": "zeroCollapse_propagates_I",
+   "file": "lean/Transformations.lean",
+   "line": 97,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": IPropagating zeroCollapse"
+  }
+ ],
+ "closed": 38,
+ "files_sha256": {
+  "lean/Axioms.lean": "57c1cdaaf549ebcb7007b82e17ac0b7cb72e289304f44046964e4ee1fc22e67a",
+  "lean/Consistency.lean": "bb9961734d444df66bcd4da4ec85d7e18d3700ab327a172ba27f8246d05b683b",
+  "lean/Definitions.lean": "6137a42674c831ce44477583bf173ef120ea26e25295f0f0153ac9f4b6859e04",
+  "lean/Operators.lean": "02c9a00f81e50ef171296d9a0ab55b61a9925691356475921b92dfacec8802b0",
+  "lean/Propagation.lean": "7bf76ed4ce0df1c6b6f1b327563979d52feab244b027957d98ca6ecd58fefd7b",
+  "lean/Stability.lean": "849b602a03b7a9521849620d2d3f34b931590d4b3d9572a2ec85cc4215ccbe25",
+  "lean/States.lean": "8ceeeaa332970345511789bd41a074747f7fd015e10161bb976128b9d0e117fd",
+  "lean/Transformations.lean": "e9970bc9d8e6cf1c06570a3744183c1738269c78a3b9a76f17b4a88f926948c7"
+ },
+ "published_at": "2026-11-03T11:28:00Z",
+ "certificate_sha256": "20e9242e646964480d7b050e4aed6ca64b6a9491ed7ec3cd2409c6c91ae1d92c"
+}

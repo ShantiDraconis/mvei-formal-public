@@ -1,0 +1,195 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Millenium--core",
+ "branch": "copilot/add-blueprint-tif-document",
+ "branch_state": "incorporada",
+ "head_commit": "cf31e48f5faecca39827bbc87a867bf5930c03ad",
+ "head_commit_date": "2026-04-07T11:14:08-03:00",
+ "history_not_on_default_branch": [],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.14.0",
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "TIF.classical_preserves_semantics",
+   "file": "Core/Semantics.lean",
+   "line": 138,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(e : Expr) (h : e.isClassical = true) (σ : State) : isBlocked σ e = false"
+  },
+  {
+   "name": "TIF.classical_stability",
+   "file": "Core/Rewrite.lean",
+   "line": 131,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(σ : State) (e : Expr) (h : e.isClassical = true) : (stateGuidedRewrite σ e).isClassical = true"
+  },
+  {
+   "name": "TIF.collapse_completeness",
+   "file": "Core/Semantics.lean",
+   "line": 118,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : resolutionSet σ e = [v]) : collapseOp σ e = some v"
+  },
+  {
+   "name": "TIF.collapse_correctness",
+   "file": "Core/Rewrite.lean",
+   "line": 145,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (c : ClassicalConst) (h : collapseOp σ e = some c) : collapseTrigger σ (.constrained e .collapse) = .term (.cst c)"
+  },
+  {
+   "name": "TIF.collapse_soundness",
+   "file": "Core/Semantics.lean",
+   "line": 109,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : collapseOp σ e = some v) : v ∈ resolutionSet σ e"
+  },
+  {
+   "name": "TIF.conservativity",
+   "file": "Core/Conservativity.lean",
+   "line": 37,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "TIF.A12_conservativity"
+   ],
+   "statement": "(φ : Formula) (hv : universallyValid φ) : classicallyValid φ"
+  },
+  {
+   "name": "TIF.local_completeness",
+   "file": "Core/Conservativity.lean",
+   "line": 99,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (h : UniqueSolution σ e) : ∃ v : ClassicalConst, Collapse e σ = some v"
+  },
+  {
+   "name": "TIF.local_completeness_exact",
+   "file": "Core/Conservativity.lean",
+   "line": 106,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : resolutionSet σ e = [v]) : Collapse e σ = some v"
+  },
+  {
+   "name": "TIF.no_forced_classical_identity",
+   "file": "Core/States.lean",
+   "line": 129,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(i : IndetConst) (c : ClassicalConst) : (Term.indt i) ≠ (Term.cst c)"
+  },
+  {
+   "name": "TIF.no_spurious_classical",
+   "file": "Core/Conservativity.lean",
+   "line": 55,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "TIF.A13_no_spurious_classical"
+   ],
+   "statement": "(φ : Formula) (h : ∀ σ : State, σ.equations = [] → σ.constraints = [] → satisfies σ φ) : universallyValid φ"
+  },
+  {
+   "name": "TIF.nonderivability_of_contradiction",
+   "file": "Core/Conservativity.lean",
+   "line": 84,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬ universallyValid (.atom .bot)"
+  },
+  {
+   "name": "TIF.ontological_separation",
+   "file": "Core/States.lean",
+   "line": 135,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(i : IndetConst) (c : ClassicalConst) : ¬ (Term.indt i = Term.cst c)"
+  },
+  {
+   "name": "TIF.operator_conservativity",
+   "file": "Core/Conservativity.lean",
+   "line": 48,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : ClassicalOp) (t₁ t₂ : Term) (h₁ : t₁.isClassical = true) (h₂ : t₂.isClassical = true) : (Term.app (.classical op) t₁ t₂).isClassical = true"
+  },
+  {
+   "name": "TIF.restricted_confluence",
+   "file": "Core/Rewrite.lean",
+   "line": 161,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(σ : State) : ∀ e : Expr, e.isClassical = true → MultiStepRewrite σ e e"
+  },
+  {
+   "name": "TIF.soundness_of_collapse",
+   "file": "Core/Semantics.lean",
+   "line": 125,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ""
+  },
+  {
+   "name": "TIF.typed_object_interpretation",
+   "file": "Core/States.lean",
+   "line": 115,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), (Term.indt i) ≠ (Term.cst c)"
+  },
+  {
+   "name": "TIF.uniqueness_implies_recovery",
+   "file": "Core/Semantics.lean",
+   "line": 128,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (h : hasUniqueResolution σ e = true) : ∃ v : ClassicalConst, collapseOp σ e = some v"
+  },
+  {
+   "name": "TIF.wellformedness_preservation",
+   "file": "Core/Rewrite.lean",
+   "line": 119,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(σ : State) (e e' : Expr) (h : MultiStepRewrite σ e e') : e'.depth ≤ e.depth + 1"
+  }
+ ],
+ "closed": 11,
+ "files_sha256": {
+  "Core/Collapse.lean": "e84babded57ab479e5870e4ff368046f743c2f9a74ff121129aef4737b8762bf",
+  "Core/Conservativity.lean": "b5f16407fb7d3772c1b0c390b6ffb1996bd90dbea72c0fb101cbd8b7da29783c",
+  "Core/Rewrite.lean": "f7eb2c6587a6d37b6a24d04d33c94775aedc060412f431e2df7bcee0817cd083",
+  "Core/Semantics.lean": "feb674f88d5c245f640309ac2e7a2ca032c6d79a088fcfef756d6ba41c28b422",
+  "Core/States.lean": "53c8ad26a0b0f5b9c002696e4f9fe2a12f8088c1961c32a01631fd16be7a99bb",
+  "Core/Syntax.lean": "c82e871c50676f23b922153475b0d640b73324f48ca4995b68fc270d7d462e7a",
+  "lakefile.lean": "b6564b46ef29127e9c537e2dfe04d3664ffdfdd84bbf6c74ef897da04973f7ab",
+  "lakefile.toml": "80f76ea58ea36598ed175296dad5d8335c286ea8c8c3ac680ecc7605f1f98d59",
+  "lean-toolchain": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14"
+ },
+ "published_at": "2026-11-03T11:28:10Z",
+ "certificate_sha256": "ec9f8d8d47b00ce94f5f6ad2c8146f6b9b5f0d92f5d8803fb9cd2698577ade55"
+}

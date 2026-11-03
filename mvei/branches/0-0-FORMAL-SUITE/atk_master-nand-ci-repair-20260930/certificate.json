@@ -73,7 +73,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-30T16:50:26+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
    "leanprover/lean4:v4.12.0"
   ],
@@ -89,7 +89,7 @@
    "name": "FormalSuite.IMultiState.certificate_nonempty_iff_exists",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 197,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} {check : α → Bool} : Nonempty (ManifestCertificate α check) ↔ ∃ x : α, check x = true"
   },
@@ -97,7 +97,7 @@
    "name": "FormalSuite.IMultiState.certificate_roundtrip",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 185,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} {check : α → Bool} (c : ManifestCertificate α check) : subtypeToCertificate (certificateToSubtype c) = c"
   },
@@ -105,7 +105,7 @@
    "name": "FormalSuite.IMultiState.decodeBits_encodeBits",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 129,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : Phase) : decodeBits (encodeBits p) = some p"
   },
@@ -113,7 +113,7 @@
    "name": "FormalSuite.IMultiState.decodeBits_invalid",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 133,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": decodeBits (true, true) = none"
   },
@@ -121,7 +121,7 @@
    "name": "FormalSuite.IMultiState.edge_complete",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 107,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{a b : Phase} (h : Step a b) : edge a b = true"
   },
@@ -129,7 +129,7 @@
    "name": "FormalSuite.IMultiState.edge_rotate",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 97,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a : Phase) : edge a (rotate a) = true"
   },
@@ -137,7 +137,7 @@
    "name": "FormalSuite.IMultiState.edge_sound",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 101,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{a b : Phase} (h : edge a b = true) : Step a b"
   },
@@ -145,7 +145,7 @@
    "name": "FormalSuite.IMultiState.encodeBits_valid",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 140,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : Phase) : ValidBits (encodeBits p)"
   },
@@ -153,15 +153,17 @@
    "name": "FormalSuite.IMultiState.findFirst_exists_iff",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 244,
-   "state": "nao_checado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type u} (check : α → Bool) (xs : List α) : (∃ x, findFirst check xs = some x) ↔ ∃ x, x ∈ xs ∧ check x = true"
   },
   {
    "name": "FormalSuite.IMultiState.findFirst_mem",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 207,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (check : α → Bool) (xs : List α) (x : α) (h : findFirst check xs = some x) : x ∈ xs"
   },
@@ -169,7 +171,7 @@
    "name": "FormalSuite.IMultiState.findFirst_none_iff",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 229,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (check : α → Bool) (xs : List α) : findFirst check xs = none ↔ ∀ x ∈ xs, check x = false"
   },
@@ -185,7 +187,7 @@
    "name": "FormalSuite.IMultiState.nand_as_not",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 301,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a : Bool) : gateNand a a = gateNot a"
   },
@@ -193,7 +195,7 @@
    "name": "FormalSuite.IMultiState.nand_builds_and",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 305,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : gateNand (gateNand a b) (gateNand a b) = gateAnd a b"
   },
@@ -201,7 +203,7 @@
    "name": "FormalSuite.IMultiState.nand_builds_or",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 309,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : gateNand (gateNand a a) (gateNand b b) = gateOr a b"
   },
@@ -209,7 +211,7 @@
    "name": "FormalSuite.IMultiState.ofOptionBool_toOptionBool",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 32,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : Phase) : ofOptionBool (toOptionBool p) = p"
   },
@@ -217,7 +219,7 @@
    "name": "FormalSuite.IMultiState.oneHot_valid",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 162,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(p : Phase) : OneHotValid (oneHot p)"
   },
@@ -297,7 +299,7 @@
    "name": "FormalSuite.IMultiState.semanticProduce_sound",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 287,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} (S : Semantics α) (xs : List α) (w : {x : α // S.Meaning x}) (h : semanticProduce S xs = some w) : S.Meaning w.1"
   },
@@ -305,7 +307,7 @@
    "name": "FormalSuite.IMultiState.step_deterministic",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 79,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{a b c : Phase} (hab : Step a b) (hac : Step a c) : b = c"
   },
@@ -313,7 +315,7 @@
    "name": "FormalSuite.IMultiState.step_iff_eq_rotate",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 58,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{a b : Phase} : Step a b ↔ b = rotate a"
   },
@@ -321,7 +323,7 @@
    "name": "FormalSuite.IMultiState.step_total",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 87,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a : Phase) : ∃ b, Step a b"
   },
@@ -329,7 +331,7 @@
    "name": "FormalSuite.IMultiState.subtype_roundtrip",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 191,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{α : Type u} {check : α → Bool} (c : WitnessSubtype α check) : certificateToSubtype (subtypeToCertificate c) = c"
   },
@@ -337,7 +339,7 @@
    "name": "FormalSuite.IMultiState.toOptionBool_ofOptionBool",
    "file": "src/FormalSuite/I/MultiStateEncodings.lean",
    "line": 36,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(x : Option Bool) : toOptionBool (ofOptionBool x) = x"
   },
@@ -345,7 +347,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nandAnd",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 128,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a b : NandExpr n) : eval ρ (nandAnd a b) = (eval ρ a && eval ρ b)"
   },
@@ -353,7 +355,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nandImp",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 158,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a b : NandExpr n) : eval ρ (nandImp a b) = (!(eval ρ a) || eval ρ b)"
   },
@@ -361,7 +363,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nandNor",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 140,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a b : NandExpr n) : eval ρ (nandNor a b) = !(eval ρ a || eval ρ b)"
   },
@@ -369,7 +371,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nandOr",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 134,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a b : NandExpr n) : eval ρ (nandOr a b) = (eval ρ a || eval ρ b)"
   },
@@ -377,7 +379,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nandXnor",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 152,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a b : NandExpr n) : eval ρ (nandXnor a b) = !(Bool.xor (eval ρ a) (eval ρ b))"
   },
@@ -385,7 +387,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nandXor",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 146,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a b : NandExpr n) : eval ρ (nandXor a b) = Bool.xor (eval ρ a) (eval ρ b)"
   },
@@ -393,7 +395,7 @@
    "name": "FormalSuite.INand.NandExpr.eval_nnot",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 124,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (a : NandExpr n) : eval ρ (nnot a) = !(eval ρ a)"
   },
@@ -401,7 +403,7 @@
    "name": "FormalSuite.INand.bandN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 51,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bandN a b = (a && b)"
   },
@@ -409,7 +411,7 @@
    "name": "FormalSuite.INand.bimpN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 71,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bimpN a b = ((!a) || b)"
   },
@@ -417,7 +419,7 @@
    "name": "FormalSuite.INand.bnorN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 59,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bnorN a b = !(a || b)"
   },
@@ -425,7 +427,7 @@
    "name": "FormalSuite.INand.bnotN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 47,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a : Bool) : bnotN a = !a"
   },
@@ -433,7 +435,7 @@
    "name": "FormalSuite.INand.borN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 55,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : borN a b = (a || b)"
   },
@@ -441,7 +443,7 @@
    "name": "FormalSuite.INand.bxnorN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 67,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bxnorN a b = !(Bool.xor a b)"
   },
@@ -449,7 +451,7 @@
    "name": "FormalSuite.INand.bxorN_eq",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 63,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bxorN a b = Bool.xor a b"
   },
@@ -457,7 +459,7 @@
    "name": "FormalSuite.INand.compileNand_sound",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 208,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (ρ : Fin n → Bool) (c : Circuit n) : NandExpr.eval ρ (compileNand c) = Circuit.eval ρ c"
   },
@@ -465,7 +467,7 @@
    "name": "FormalSuite.INand.exists_nand_realization",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 230,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "{n : Nat} (c : Circuit n) : ∃ e : NandExpr n, ∀ ρ : Fin n → Bool, NandExpr.eval ρ e = Circuit.eval ρ c"
   },
@@ -473,7 +475,7 @@
    "name": "FormalSuite.INand.nand_is_not_and",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 75,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bnand a b = !(a && b)"
   },
@@ -481,7 +483,7 @@
    "name": "FormalSuite.INand.nor_is_not_or",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 78,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bnorN a b = !(a || b)"
   },
@@ -489,18 +491,20 @@
    "name": "FormalSuite.INand.xnor_is_not_xor",
    "file": "src/FormalSuite/I/NandCompleteBasis.lean",
    "line": 82,
-   "state": "nao_checado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(a b : Bool) : bxnorN a b = !(Bool.xor a b)"
   }
  ],
- "closed": 10,
+ "closed": 50,
  "files_sha256": {
   "lakefile.lean": "81d500170a9dd8cafeeb4e3b7624ad7a1ce2b34d2fa69fbb8b806c8566850dea",
   "lean-toolchain": "e6930c662006db4d6dc76c651d60a608e4f6a18bcfd53e6b0167d70a125285d5",
   "src/FormalSuite/Core/Prelude.lean": "ec3eec9dafa1a53ccc30c5dc54c6ee04806fea4ff0470271a93401add2a81491",
-  "src/FormalSuite/I/MultiStateKernel.lean": "b4ffbfbe41adf8efd17db7226b0bea8dffc324ff5f9ced5d02165f21766d1031"
+  "src/FormalSuite/I/MultiStateEncodings.lean": "bec52e690a3d33eda9c33798171ee8e15c13545234c01da19867dce9b9bfaa2f",
+  "src/FormalSuite/I/MultiStateKernel.lean": "b4ffbfbe41adf8efd17db7226b0bea8dffc324ff5f9ced5d02165f21766d1031",
+  "src/FormalSuite/I/NandCompleteBasis.lean": "9358e51f5376475aed15309f3bf9feecd43f3beaea010745c1ea7e8b2b2034be"
  },
- "published_at": "2026-11-02T20:55:34Z",
- "certificate_sha256": "6833e2a00bc866e898073e71addbe7284d5b7fc87ccac3ecb44cacb974989ede"
+ "published_at": "2026-11-03T11:27:58Z",
+ "certificate_sha256": "00090289fd8bf364955598baae33693fa3807ea43e11fcfbb5331d0c6d7112ae"
 }

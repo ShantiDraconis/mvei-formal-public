@@ -1,0 +1,150 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/harappan-00-universal",
+ "branch": "copilot/add-transition-matrix-modeling",
+ "branch_state": "parada",
+ "head_commit": "7c54bbfe8402739e0356342ab97f6302b599337a",
+ "head_commit_date": "2026-03-17T04:18:44+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "7c54bbfe8402739e0356342ab97f6302b599337a",
+   "date": "2026-03-17T04:18:44+00:00",
+   "subject": "Add M217 (H217) complete mathematical analysis module, formal proofs, and tests"
+  },
+  {
+   "commit": "499fd976e0b3d119020323f0d3efbf0bcfb6a862",
+   "date": "2026-03-17T04:03:14+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "M217.cooc_bounded_by_rowSum",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 189,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(target : SignId) : cooccurrence signId target corpus ≤ rowSum signId corpus symbols"
+  },
+  {
+   "name": "M217.cooc_nonneg",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 229,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(a b : SignId) : 0 ≤ cooccurrence a b corpus"
+  },
+  {
+   "name": "M217.cooc_not_generally_symmetric",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 293,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ (corpus : Corpus) (j : SignId), cooccurrence signId j corpus ≠ cooccurrence j signId corpus"
+  },
+  {
+   "name": "M217.countFirst_le_corpusSize",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 203,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": countFirst signId corpus ≤ corpus.length"
+  },
+  {
+   "name": "M217.countLast_le_corpusSize",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 217,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": countLast signId corpus ≤ corpus.length"
+  },
+  {
+   "name": "M217.freq_nonneg",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 176,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(s : SignId) : 0 ≤ absoluteFreq s corpus"
+  },
+  {
+   "name": "M217.m217_collapse_is_agent",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 259,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": collapseOperator = \" \""
+  },
+  {
+   "name": "M217.m217_has_signId",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 181,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": signId = \" \""
+  },
+  {
+   "name": "M217.m217_is_connector",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 249,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": m217Class = FunctionalClass.Connector"
+  },
+  {
+   "name": "M217.m217_mahadevan_id_pos",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 186,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": 0 < mahadevanId"
+  },
+  {
+   "name": "M217.m217_opcode_is_LINK_IF",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 254,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": opcode = \" \""
+  },
+  {
+   "name": "M217.predecessor_in_context",
+   "file": "formal/lean/IndusM217.lean",
+   "line": 235,
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(i : SignId) (h : cooccurrence i signId corpus > 0) : i ∈ contextSet corpus symbols"
+  }
+ ],
+ "closed": 7,
+ "files_sha256": {
+  "formal/lean/IndusM217.lean": "d97cd2076fb9b40065e08c33430c379c96664e67f5b6de094a80bc2ddb4c4e95",
+  "formal/lean/lakefile.lean": "3089d69b4fe27e7bd028558e19211b27221f5c3b09886beca0044bc6ad77a8f8",
+  "formal/lean/lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-11-03T11:27:59Z",
+ "certificate_sha256": "f4e646031b265d73fb020ed3b3a70eb805e8fe29820308bd3c3629c36e800ce2"
+}

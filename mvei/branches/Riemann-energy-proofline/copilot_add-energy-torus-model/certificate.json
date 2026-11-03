@@ -1,0 +1,307 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Riemann-energy-proofline",
+ "branch": "copilot/add-energy-torus-model",
+ "branch_state": "parada",
+ "head_commit": "4308ee22acad3bbdf05459b43de89847e52d2714",
+ "head_commit_date": "2025-12-02T14:49:31+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "4308ee22acad3bbdf05459b43de89847e52d2714",
+   "date": "2025-12-02T14:49:31+00:00",
+   "subject": "Fix workflow permissions for security compliance"
+  },
+  {
+   "commit": "8688853ce00288e4637451d64cf793280259a237",
+   "date": "2025-12-02T14:45:12+00:00",
+   "subject": "Add complete repository structure for Riemann Energy Torus Quantum framework"
+  },
+  {
+   "commit": "c68de574d274e2394478635b9b0d659eb487379f",
+   "date": "2025-12-02T14:11:06+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Riemann.E''_symmetric",
+   "file": "src/lean/Riemann/CurvatureDecomposition.lean",
+   "line": 33,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.C1_symmetric",
+    "Riemann.C2_symmetric",
+    "Riemann.curvature_decomposition",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (σ : ℝ) (hσ : 0 < σ ∧ σ < 1) : E'' w T σ = E'' w T (1 - σ)"
+  },
+  {
+   "name": "Riemann.E'_antisymmetric",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 30,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (σ : ℝ) (hσ : 0 < σ ∧ σ < 1) : E' w T σ = -E' w T (1 - σ)"
+  },
+  {
+   "name": "Riemann.E'_half_zero",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 37,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : E' w T (1/2) = 0"
+  },
+  {
+   "name": "Riemann.E_symmetric",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 21,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (σ : ℝ) (hσ : 0 < σ ∧ σ < 1) : E w T σ = E w T (1 - σ)"
+  },
+  {
+   "name": "Riemann.RF1_iff_not_RH_partial",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 30,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (h_connect : RF1 w T ↔ NotRH) : RF1 w T ↔ ¬RH"
+  },
+  {
+   "name": "Riemann.RF1_implies_not_RH",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 15,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.valley_implies_off_critical_zeros",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RF1 w T → ¬RH"
+  },
+  {
+   "name": "Riemann.RF2_cases",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 22,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RF2 w T ↔ RF2_strict w T ∨ RF2_degenerate w T"
+  },
+  {
+   "name": "Riemann.RF2_implies_not_RH",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 40,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.non_positive_curvature_implies_off_critical",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RF2 w T → ¬RH"
+  },
+  {
+   "name": "Riemann.RF3_indicates_limitation",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 27,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RF3 w T → True"
+  },
+  {
+   "name": "Riemann.RH_implies_not_RF1",
+   "file": "src/lean/Riemann/RefutationRF1.lean",
+   "line": 24,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.valley_implies_off_critical_zeros",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RH → ¬RF1 w T"
+  },
+  {
+   "name": "Riemann.RH_implies_positive_curvature",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 48,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "Riemann.non_positive_curvature_implies_off_critical",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RH → positive_curvature_at_half w T"
+  },
+  {
+   "name": "Riemann.RH_implies_strict_min",
+   "file": "src/lean/Riemann/RefutationRF2.lean",
+   "line": 58,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.non_positive_curvature_implies_off_critical",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : RH → (E' w T (1/2) = 0 ∧ 0 < E'' w T (1/2))"
+  },
+  {
+   "name": "Riemann.Util.integrable_on_Icc",
+   "file": "src/lean/Util/MeasureTheoryTools.lean",
+   "line": 13,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "∀ {f : ℝ → ℝ} {a b : ℝ}, Continuous f → MeasureTheory.IntegrableOn f (Set.Icc a b) MeasureTheory.volume"
+  },
+  {
+   "name": "Riemann.critical_line_is_critical_point",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 44,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : deriv (E w T) (1/2) = 0"
+  },
+  {
+   "name": "Riemann.extra_valley_at_same_level_implies_RF1",
+   "file": "src/lean/Riemann/ExtraValleyAxioms.lean",
+   "line": 33,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (v : ExtraValley w T) (h_eq : E w T v.sigma = E w T (1/2)) : RF1 w T"
+  },
+  {
+   "name": "Riemann.framework_conclusions",
+   "file": "src/lean/Riemann/RefutationRF3.lean",
+   "line": 41,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (h_app : framework_applicable w T) : (positive_curvature_at_half w T ∧ ¬RF1 w T) → True"
+  },
+  {
+   "name": "Riemann.no_refutation_iff",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 20,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : NoRefutation w T ↔ ¬AnyRefutation w T"
+  },
+  {
+   "name": "Riemann.not_rh_iff_exists_off_line",
+   "file": "src/lean/Riemann/BasicZetaXi.lean",
+   "line": 60,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.zeta",
+    "sorryAx"
+   ],
+   "statement": ": ¬RH ↔ NotRH"
+  },
+  {
+   "name": "Riemann.potential_symmetric",
+   "file": "src/lean/Riemann/SymmetryAndDerivative.lean",
+   "line": 12,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "Riemann.xi_functional_equation",
+    "sorryAx"
+   ],
+   "statement": "(σ t : ℝ) : potential σ t = potential (1 - σ) t"
+  },
+  {
+   "name": "Riemann.rh_framework_summary",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 48,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "Riemann.RH_geometric_equivalence",
+    "Riemann.non_positive_curvature_implies_off_critical",
+    "Riemann.valley_implies_off_critical_zeros",
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) : (RF1 w T → ¬RH) ∧ (RF2 w T → ¬RH) ∧ (RF3 w T → True) ∧ (StrongRHConsistency w T → RH)"
+  },
+  {
+   "name": "Riemann.strong_consistency_implies_no_refutation",
+   "file": "src/lean/Riemann/RHTruthFramework.lean",
+   "line": 32,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (h : StrongRHConsistency w T) : NoRefutation w T"
+  },
+  {
+   "name": "Riemann.torus_euler_characteristic",
+   "file": "src/lean/Riemann/TorusCompactification.lean",
+   "line": 31,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": (0 : ℤ) = 0"
+  },
+  {
+   "name": "Riemann.torus_genus",
+   "file": "src/lean/Riemann/TorusCompactification.lean",
+   "line": 34,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": (1 : ℕ) = 1"
+  },
+  {
+   "name": "Riemann.unique_extrema_implies_two_saddles",
+   "file": "src/lean/Riemann/MorseSetup.lean",
+   "line": 37,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "Riemann.morse_inequality"
+   ],
+   "statement": "(counts : MorseCounts) (h_min : counts.n_min = 1) (h_max : counts.n_max = 1) : counts.n_sad = 2"
+  },
+  {
+   "name": "Riemann.unique_min_implies_not_RF1",
+   "file": "src/lean/Riemann/ExtraValleyAxioms.lean",
+   "line": 44,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(w : WeightFunction) (T : CutoffParam) (h : UniqueMinimumAtHalf w T) : ¬RF1 w T"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "src/lean/Riemann/BasicZetaXi.lean": "0cf6f2dd9aad1bd76e5c5e6824a2be064e5be150f3dd881ce8f1f5b1ecb5210c",
+  "src/lean/Riemann/RefutationRF3.lean": "3f8ab717b81ecc318731dd9ecf027b559169bc07741139986e1f42cb0f5e2937",
+  "src/lean/Riemann/TorusCompactification.lean": "00fd70645b9520e1a7f827fa9cc840bd2283519b36419bdcdc89bddd2c9270d8",
+  "src/lean/Riemann/WeightAndEnergy.lean": "fa33b5159bbf6a1eaa17723dceafb24b30a6bc28c36381ab1c0142cd20f8237e",
+  "src/lean/lakefile.lean": "2cc02910adf5a9b874251182e6225e32139fa31c3713bdf69a961b55183da00b"
+ },
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "f73a8a8f4fbd9a1931c8a88d5a8f96aa09d7f777ba8a30e401a8f4298000e8d7"
+}

@@ -1,0 +1,775 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Millenium--core",
+ "branch": "copilot/separate-defensible-from-conjectural-again",
+ "branch_state": "incorporada",
+ "head_commit": "82edf75d47467e1648af3b7e16abd5b78632c068",
+ "head_commit_date": "2026-04-13T03:04:23-03:00",
+ "history_not_on_default_branch": [],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.14.0",
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "TIF.CExpr.embed_add",
+   "file": "Core/Syntax.lean",
+   "line": 181,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (e₁ e₂ : CExpr α) : ι (add e₁ e₂) = Expr.add (ι e₁) (ι e₂)"
+  },
+  {
+   "name": "TIF.CExpr.embed_const",
+   "file": "Core/Syntax.lean",
+   "line": 178,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (c : α) : ι (const c : CExpr α) = Expr.const c"
+  },
+  {
+   "name": "TIF.CExpr.embed_div",
+   "file": "Core/Syntax.lean",
+   "line": 190,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (e₁ e₂ : CExpr α) : ι (div e₁ e₂) = Expr.div (ι e₁) (ι e₂)"
+  },
+  {
+   "name": "TIF.CExpr.embed_mul",
+   "file": "Core/Syntax.lean",
+   "line": 187,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (e₁ e₂ : CExpr α) : ι (mul e₁ e₂) = Expr.mul (ι e₁) (ι e₂)"
+  },
+  {
+   "name": "TIF.CExpr.embed_sub",
+   "file": "Core/Syntax.lean",
+   "line": 184,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (e₁ e₂ : CExpr α) : ι (sub e₁ e₂) = Expr.sub (ι e₁) (ι e₂)"
+  },
+  {
+   "name": "TIF.CExpr.embed_var",
+   "file": "Core/Syntax.lean",
+   "line": 169,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (x : String) : ι (var x : CExpr α) = Expr.var x"
+  },
+  {
+   "name": "TIF.Expr.indet_inj",
+   "file": "Core/Syntax.lean",
+   "line": 108,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} {k₁ k₂ : IndetClass} : (indet k₁ : Expr α) = indet k₂ ↔ k₁ = k₂"
+  },
+  {
+   "name": "TIF.Expr.indet_ne_const",
+   "file": "Core/Syntax.lean",
+   "line": 97,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (k : IndetClass) (c : α) : indet k ≠ (const c : Expr α)"
+  },
+  {
+   "name": "TIF.Expr.var_inj",
+   "file": "Core/Syntax.lean",
+   "line": 122,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} {x y : String} : (var x : Expr α) = var y ↔ x = y"
+  },
+  {
+   "name": "TIF.State.empty_admissible",
+   "file": "Core/State.lean",
+   "line": 58,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] (v : Valuation α) : v ⊨ (State.empty (α"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.classicalFrag_binOp_iff",
+   "file": "Core/Syntax.lean",
+   "line": 348,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : OpSymbol 2) (e₁ e₂ : IndeterminateExpr) : classicalFrag (binOp op e₁ e₂) ↔ classicalFrag e₁ ∧ classicalFrag e₂"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.classicalFrag_const",
+   "file": "Core/Syntax.lean",
+   "line": 341,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c : ClassicalConst) : classicalFrag (const c)"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.depth_binOp_lt",
+   "file": "Core/Syntax.lean",
+   "line": 321,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : OpSymbol 2) (e₁ e₂ : IndeterminateExpr) : e₁.depth < (binOp op e₁ e₂).depth ∧ e₂.depth < (binOp op e₁ e₂).depth"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.depth_const",
+   "file": "Core/Syntax.lean",
+   "line": 315,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c : ClassicalConst) : (const c).depth = 0"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.depth_indeterminate",
+   "file": "Core/Syntax.lean",
+   "line": 318,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": indeterminate.depth = 0"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.iCount_pos_iff_containsI",
+   "file": "Core/Syntax.lean",
+   "line": 289,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(e : IndeterminateExpr) : 0 < e.iCount ↔ e.containsI = true"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.iCount_substI_classical",
+   "file": "Core/Syntax.lean",
+   "line": 425,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(e : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) : (substI v e).iCount = 0 → e.iCount = 0 ∨ True"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.not_classicalFrag_indeterminate",
+   "file": "Core/Syntax.lean",
+   "line": 344,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬classicalFrag indeterminate"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.substI_classical",
+   "file": "Core/Syntax.lean",
+   "line": 401,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : IndeterminateExpr) (e : IndeterminateExpr) (h : classicalFrag e) : substI v e = e"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.substI_indeterminate",
+   "file": "Core/Syntax.lean",
+   "line": 415,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(e : IndeterminateExpr) : substI indeterminate e = e"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.wellFormed_const",
+   "file": "Core/Syntax.lean",
+   "line": 377,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c : ClassicalConst) : wellFormed (const c)"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.wellFormed_div_indeterminate",
+   "file": "Core/Syntax.lean",
+   "line": 380,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(e : IndeterminateExpr) (h : wellFormed e) : wellFormed (binOp OpSymbol.Div e indeterminate)"
+  },
+  {
+   "name": "TIF.TIF.IndeterminateExpr.wellFormed_indeterminate",
+   "file": "Core/Syntax.lean",
+   "line": 374,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": wellFormed indeterminate"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A10_nonunique_forbids_collapse",
+   "file": "Core/Collapse.lean",
+   "line": 592,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (h : (resolutionSet σ e).length ≠ 1) : collapseOp σ e = none"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A11_local_noncontradiction",
+   "file": "Core/Collapse.lean",
+   "line": 601,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬ satisfies { equations"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A15_monotone_refinement",
+   "file": "Core/Collapse.lean",
+   "line": 628,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ σ' : State) (e : Expr) (hext : σ'.extends σ) (hadm : collapseAdmissible σ e) : σ'.constraints.length > 0"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A16_collapse_idempotent",
+   "file": "Core/Collapse.lean",
+   "line": 637,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : collapseOp σ e = some v) : collapseOp σ (.term (.cst v)) = some v"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A1_existence_base",
+   "file": "Core/Collapse.lean",
+   "line": 517,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ _ : IndetConst, True"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A2_existence_classes",
+   "file": "Core/Collapse.lean",
+   "line": 533,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ k : ℕ, ∃ _ : IndetConst, True"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A3_not_classical_real",
+   "file": "Core/Collapse.lean",
+   "line": 538,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A4_not_classical_complex",
+   "file": "Core/Collapse.lean",
+   "line": 548,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A5_distinct_from_classical",
+   "file": "Core/Collapse.lean",
+   "line": 553,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(i : IndetConst) (c : ClassicalConst) : Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A6_extended_operators",
+   "file": "Core/Collapse.lean",
+   "line": 558,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ op : ClassicalOp, ∃ extOp : ExtendedOp, extOp = .extended op"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A7_extension_coincides_classical",
+   "file": "Core/Collapse.lean",
+   "line": 567,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : ClassicalOp) (t₁ t₂ : Term) (h₁ : t₁.isClassical = true) (h₂ : t₂.isClassical = true) : (Term.app (.classical op) t₁ t₂).isClassical = true"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.A9_unique_resolution_implies_collapse",
+   "file": "Core/Collapse.lean",
+   "line": 585,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : resolutionSet σ e = [v]) : collapseOp σ e = some v"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.Collapse_unique",
+   "file": "Core/Collapse.lean",
+   "line": 675,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(e : Expr) (σ : State) (v₁ v₂ : ClassicalConst) (h₁ : Collapse e σ = some v₁) (h₂ : Collapse e σ = some v₂) : v₁ = v₂"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.classical_reduction",
+   "file": "Core/Collapse.lean",
+   "line": 643,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Formula) (h : universallyValid φ) : classicallyValid φ"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.collapse_uniqueness",
+   "file": "Core/Collapse.lean",
+   "line": 652,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v₁ v₂ : ClassicalConst) (h₁ : collapseOp σ e = some v₁) (h₂ : collapseOp σ e = some v₂) : v₁ = v₂"
+  },
+  {
+   "name": "TIF.TIF.TIF.TIF.indet_isolation",
+   "file": "Core/Collapse.lean",
+   "line": 660,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Formula) (σ : State) (hφ : ∀ c ∈ σ.constraints, c.sym = .block) : satisfies σ (.atom .top)"
+  },
+  {
+   "name": "TIF.TIF.TIF.classical_stability",
+   "file": "Core/Rewrite.lean",
+   "line": 610,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (h : e.isClassical = true) : (stateGuidedRewrite σ e).isClassical = true"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_A10",
+   "file": "Core/Collapse.lean",
+   "line": 394,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hnone : res Σ φ = none) : collapse res Σ φ = φ"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_A8",
+   "file": "Core/Collapse.lean",
+   "line": 370,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hcl : classicalFrag φ) : collapse res Σ φ = φ"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_A9",
+   "file": "Core/Collapse.lean",
+   "line": 385,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) (hres : res Σ φ = some v) : collapse res Σ φ = syntacticCollapse (some v) φ"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_classical_fragment_stable",
+   "file": "Core/Collapse.lean",
+   "line": 446,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hcl_res : ∀ v, res Σ φ = some v → res Σ (syntacticCollapse (some v) φ) = some v) : ∀ ψ : IndeterminateExpr, classicalFrag ψ → collapse res Σ ψ = ψ"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_correctness",
+   "file": "Core/Rewrite.lean",
+   "line": 624,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (c : ClassicalConst) (h : collapseOp σ e = some c) : collapseTrigger σ (.constrained e .collapse) = .term (.cst c)"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_div_zero_form",
+   "file": "Core/Collapse.lean",
+   "line": 476,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) (hform : Σ.equations.any (fun eq => eq.lhs == IndeterminateExpr.indeterminate && eq.rhs == binOp OpSymbol.Div e (const 0)) = true) (res_correct : res Σ (binOp OpSymbol.Div e (const 0)) = some v) : collapse res Σ (binOp OpSymbol.Div e (const 0)) = v"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_idempotent",
+   "file": "Core/Collapse.lean",
+   "line": 418,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hstable : ∀ v, res Σ φ = some v → res Σ v = some v) : collapse res Σ (collapse res Σ φ) = collapse res Σ φ"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_implies_rewrite_star",
+   "file": "Core/Collapse.lean",
+   "line": 489,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(res : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr) (Σ : MetaArithmeticState) (φ v : IndeterminateExpr) (hcol : collapse res Σ φ = v) (hv : classicalFrag v) : RewriteStar Σ φ v"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_recovery",
+   "file": "Core/Collapse.lean",
+   "line": 462,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (v : IndeterminateExpr) (hv : classicalFrag v) (res_correct : res Σ indeterminate = some v) : collapse res Σ indeterminate = v"
+  },
+  {
+   "name": "TIF.TIF.TIF.collapse_sound",
+   "file": "Core/Collapse.lean",
+   "line": 401,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ v : IndeterminateExpr) (hcol : collapse res Σ φ = v) (hv : classicalFrag v) (hres_sound : ∀ v', res Σ φ = some v' → classicalFrag v' → True) : True"
+  },
+  {
+   "name": "TIF.TIF.TIF.restricted_confluence",
+   "file": "Core/Rewrite.lean",
+   "line": 640,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) : ∀ e : Expr, e.isClassical = true → MultiStepRewrite σ e e"
+  },
+  {
+   "name": "TIF.TIF.TIF.wellformedness_preservation",
+   "file": "Core/Rewrite.lean",
+   "line": 598,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e e' : Expr) (h : MultiStepRewrite σ e e') : e'.depth ≤ e.depth + 1"
+  },
+  {
+   "name": "TIF.TIF.adm_empty",
+   "file": "Core/Eval.lean",
+   "line": 168,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) : Adm (State.empty) v"
+  },
+  {
+   "name": "TIF.TIF.blocked_of_vacuous",
+   "file": "Core/Collapse.lean",
+   "line": 267,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : Expr α) (hvac : ∀ v : Valuation α, ¬ Adm Σ v) : isBlocked Σ e"
+  },
+  {
+   "name": "TIF.TIF.classical_collapse_agreement",
+   "file": "Core/Collapse.lean",
+   "line": 280,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : CExpr α) (v₀ : Valuation α) (c : α) (hadm : ∀ v : Valuation α, Adm Σ v ↔ v = v₀) (heval : evalC v₀ e = some c) : Collapse' Σ (CExpr.embed e) = some c"
+  },
+  {
+   "name": "TIF.TIF.classical_term_is_expr",
+   "file": "Core/Syntax.lean",
+   "line": 587,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(t : Term) (h : t.isClassical = true) : ∃ e : Expr, e = .term t"
+  },
+  {
+   "name": "TIF.TIF.collapse'_none_iff",
+   "file": "Core/Collapse.lean",
+   "line": 239,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : Expr α) : Collapse' Σ e = none ↔ ¬(∃ c : α, (∃ v : Valuation α, Adm Σ v) ∧ UniquelyResolves Σ e c)"
+  },
+  {
+   "name": "TIF.TIF.collapse_complete",
+   "file": "Core/Collapse.lean",
+   "line": 171,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : Expr α) (c : α) (huniq : UniquelyResolves Σ e c) : Collapse Σ e = some c"
+  },
+  {
+   "name": "TIF.TIF.collapse_sound",
+   "file": "Core/Collapse.lean",
+   "line": 155,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e : Expr α) (c : α) (h : Collapse Σ e = some c) : ∀ v : Valuation α, Adm Σ v → eval v e = some c"
+  },
+  {
+   "name": "TIF.TIF.const_classicalNF",
+   "file": "Core/Rewrite.lean",
+   "line": 400,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (c : ClassicalConst) : classicalNF Σ (const c)"
+  },
+  {
+   "name": "TIF.TIF.depth_subexpr_le",
+   "file": "Core/Syntax.lean",
+   "line": 600,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : ExtendedOp) (l r : Term) : l.depth ≤ (Term.app op l r).depth ∧ r.depth ≤ (Term.app op l r).depth"
+  },
+  {
+   "name": "TIF.TIF.evalC_add",
+   "file": "Core/Eval.lean",
+   "line": 213,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.add e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => some (a + b) | _, _ => none"
+  },
+  {
+   "name": "TIF.TIF.evalC_const",
+   "file": "Core/Eval.lean",
+   "line": 210,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (c : α) : evalC v (CExpr.const c) = some c"
+  },
+  {
+   "name": "TIF.TIF.evalC_div",
+   "file": "Core/Eval.lean",
+   "line": 231,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.div e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => if b = 0 then none else some (a / b) | _, _ => none"
+  },
+  {
+   "name": "TIF.TIF.evalC_div_nonzero",
+   "file": "Core/Eval.lean",
+   "line": 237,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) (a b : α) (h₁ : evalC v e₁ = some a) (h₂ : evalC v e₂ = some b) (hb : b ≠ 0) : evalC v (CExpr.div e₁ e₂) = some (a / b)"
+  },
+  {
+   "name": "TIF.TIF.evalC_eq_eval",
+   "file": "Core/Eval.lean",
+   "line": 189,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (e : CExpr α) : evalC v e = eval v (CExpr.embed e)"
+  },
+  {
+   "name": "TIF.TIF.evalC_mul",
+   "file": "Core/Eval.lean",
+   "line": 225,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.mul e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => some (a * b) | _, _ => none"
+  },
+  {
+   "name": "TIF.TIF.evalC_sub",
+   "file": "Core/Eval.lean",
+   "line": 219,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e₁ e₂ : CExpr α) : evalC v (CExpr.sub e₁ e₂) = match evalC v e₁, evalC v e₂ with | some a, some b => some (a - b) | _, _ => none"
+  },
+  {
+   "name": "TIF.TIF.evalC_var",
+   "file": "Core/Eval.lean",
+   "line": 207,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (x : String) : evalC v (CExpr.var x) = some (v x)"
+  },
+  {
+   "name": "TIF.TIF.eval_const",
+   "file": "Core/Eval.lean",
+   "line": 148,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "[Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (c : α) : eval v (Expr.const c) = some c"
+  },
+  {
+   "name": "TIF.TIF.eval_indet",
+   "file": "Core/Eval.lean",
+   "line": 129,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "[Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (k : IndetClass) : eval v (Expr.indet k) = none"
+  },
+  {
+   "name": "TIF.TIF.eval_var",
+   "file": "Core/Eval.lean",
+   "line": 140,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "[Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (x : String) : eval v (Expr.var x) = some (v x)"
+  },
+  {
+   "name": "TIF.TIF.indeterminate_blockedNF",
+   "file": "Core/Rewrite.lean",
+   "line": 413,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (hno : ∀ v, ¬classicalFrag v → True) (hblock : ¬∃ v, classicalFrag v ∧ Rewrite1 Σ indeterminate v) : blockedNF Σ indeterminate"
+  },
+  {
+   "name": "TIF.TIF.rewrite1_depth_le",
+   "file": "Core/Rewrite.lean",
+   "line": 462,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e e' : IndeterminateExpr) (hstep : Rewrite1 Σ e e') : e'.depth ≤ e.depth"
+  },
+  {
+   "name": "TIF.TIF.rewrite1_preserves_wf",
+   "file": "Core/Rewrite.lean",
+   "line": 425,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e e' : IndeterminateExpr) (hwf : wellFormed e) (hstep : Rewrite1 Σ e e') : wellFormed e'"
+  },
+  {
+   "name": "TIF.TIF.rewrite1_to_star",
+   "file": "Core/Rewrite.lean",
+   "line": 372,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e e' : IndeterminateExpr) (h : Rewrite1 Σ e e') : RewriteStar Σ e e'"
+  },
+  {
+   "name": "TIF.TIF.rewriteStar_preserves_wf",
+   "file": "Core/Rewrite.lean",
+   "line": 454,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e e' : IndeterminateExpr) (hwf : wellFormed e) (hstar : RewriteStar Σ e e') : wellFormed e'"
+  },
+  {
+   "name": "TIF.TIF.rewriteStar_trans",
+   "file": "Core/Rewrite.lean",
+   "line": 365,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (e₁ e₂ e₃ : IndeterminateExpr) (h₁₂ : RewriteStar Σ e₁ e₂) (h₂₃ : RewriteStar Σ e₂ e₃) : RewriteStar Σ e₁ e₃"
+  },
+  {
+   "name": "TIF.TIF.supp_empty_iff_classical",
+   "file": "Core/Syntax.lean",
+   "line": 595,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(e : Expr) : e.indetSupport = [] ↔ e.isClassical = true"
+  },
+  {
+   "name": "TIF.addComm_preserves_classical",
+   "file": "Core/Rewrite.lean",
+   "line": 71,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} : (addComm (α"
+  },
+  {
+   "name": "TIF.addComm_sound",
+   "file": "Core/Rewrite.lean",
+   "line": 100,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] (hcomm : ∀ a b : α, a + b = b + a) : (addComm (α"
+  },
+  {
+   "name": "TIF.blocked_iff_not_unique_res",
+   "file": "Core/Collapse.lean",
+   "line": 61,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] (σ : State α) (e : Expr α) : Blocked σ e ↔ ¬UniqueRes σ e"
+  },
+  {
+   "name": "TIF.classicalFragment_evaluable",
+   "file": "Core/Rewrite.lean",
+   "line": 206,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(v : Valuation α) (e : CExpr α) (hnd : NoZeroDenom v e) : ClassicallyEvaluable v (CExpr.embed e)"
+  },
+  {
+   "name": "TIF.collapse_sound",
+   "file": "Core/Collapse.lean",
+   "line": 47,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] (σ : State α) (e : Expr α) (c : α) (h : IsCollapse σ e c) : ∀ v : Valuation α, v ⊨ σ → eval v e = some c"
+  },
+  {
+   "name": "TIF.eval_classical_no_indet",
+   "file": "Core/Eval.lean",
+   "line": 46,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] (v : Valuation α) (e : Expr α) (hcl : e.isClassical = true) : (∀ ι : IndetClass, e ≠ Expr.indet ι)"
+  },
+  {
+   "name": "TIF.eval_never_indet",
+   "file": "Core/Rewrite.lean",
+   "line": 236,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [Zero α] (v : Valuation α) (e : Expr α) (k : IndetClass) : eval v e ≠ some (0 : α) ∨ True"
+  },
+  {
+   "name": "TIF.identityRewrite_preserves_classical",
+   "file": "Core/Rewrite.lean",
+   "line": 61,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} : (identityRewrite (α"
+  },
+  {
+   "name": "TIF.identityRewrite_sound",
+   "file": "Core/Rewrite.lean",
+   "line": 92,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] : (identityRewrite (α"
+  },
+  {
+   "name": "TIF.originTag_zeroOverZero_produces_indet",
+   "file": "Core/Rewrite.lean",
+   "line": 168,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : State α) (e₁ e₂ : Expr α) (htag : OriginTag_ZeroOverZero Σ e₁ e₂) : ∀ v : Valuation α, Adm Σ v → eval v (Expr.div e₁ e₂) = none"
+  },
+  {
+   "name": "TIF.vacuous_implies_blocked",
+   "file": "Core/Collapse.lean",
+   "line": 76,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Add α] [Sub α] [Mul α] [Div α] [DecidableEq α] [OfNat α 0] [Nontrivial α] (σ : State α) (e : Expr α) (hvac : σ.IsVacuous) : Blocked σ e"
+  },
+  {
+   "name": "collapse_const",
+   "file": "Core/State.lean",
+   "line": 232,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Field α] [DecidableEq α] (c : α) (s : State α) : collapse (Expr.const c) s = some (Expr.const c)"
+  },
+  {
+   "name": "collapse_indet_none",
+   "file": "Core/State.lean",
+   "line": 238,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} [Field α] [DecidableEq α] (cls : IndetClass) (s : State α) : collapse (Expr.indet cls) s = none"
+  }
+ ],
+ "closed": 23,
+ "files_sha256": {
+  "Core/Syntax.lean": "384bbfda9ae75058a415965d10f8f9bea674c32d1f7dd4b841cfdc4b1ea70066",
+  "Core/Types.lean": "e8317317161b1fe979f9dd6090af2a2b247a7bfa5665729f31d7faa0026abfb8",
+  "lakefile.lean": "9b5c9d1a2a1b1965fdb81ee8d6f87b3f3f00f37bba45da4158c714556204e931",
+  "lakefile.toml": "16469f185b9e00385e2dba99ac239088229e8f5aa95a0caf08063b6ba5af4889",
+  "lean-toolchain": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14"
+ },
+ "published_at": "2026-11-03T11:28:10Z",
+ "certificate_sha256": "9359ef78e8e4ffc3b01c13a64a59c9f1fd6a65659b266be9c94cda1cdee2b932"
+}

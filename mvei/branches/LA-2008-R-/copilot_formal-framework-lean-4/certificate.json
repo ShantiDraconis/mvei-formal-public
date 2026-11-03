@@ -1,0 +1,121 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/LA-2008-R-",
+ "branch": "copilot/formal-framework-lean-4",
+ "branch_state": "parada",
+ "head_commit": "13256a1e0c240d66ce3c373cc5b15b0720029ca7",
+ "head_commit_date": "2026-04-11T14:01:57+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "13256a1e0c240d66ce3c373cc5b15b0720029ca7",
+   "date": "2026-04-11T14:01:57+00:00",
+   "subject": "fix: correct Hilbert–Pólya typography in Python and C++ files"
+  },
+  {
+   "commit": "f365d3619c48ab0b5f3f2ec65c38154b49419b93",
+   "date": "2026-04-11T13:59:41+00:00",
+   "subject": "feat: multi-language RH formal framework (Lean 4, Agda, Python, C++, HTML)"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "RHFramework.DensityDecomposition",
+   "file": "formal/RH_Framework.lean",
+   "line": 132,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(gamma_n : ℝ) (n : ℕ) : gamma_n = Nmain n + R gamma_n n"
+  },
+  {
+   "name": "RHFramework.HilbertPolyaRoute",
+   "file": "formal/RH_Framework.lean",
+   "line": 179,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(candidate : SpectralCandidate ℂ) (h_sa : candidate.selfAdjoint) (h_real : ∀ γ ∈ candidate.spectrum, True) (h_exact : ∀ s : ℂ, IsNonTrivialZero s → ∃ γ ∈ candidate.spectrum, s.im = γ ∧ s.re = 1 / 2) : RH"
+  },
+  {
+   "name": "RHFramework.Nmain_self_indistinct",
+   "file": "formal/RH_Framework.lean",
+   "line": 149,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": AsymptoticallyIndistinct Nmain Nmain"
+  },
+  {
+   "name": "RHFramework.counterexample_refutes_RH",
+   "file": "formal/RH_Framework.lean",
+   "line": 53,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(c : CounterexampleRH) : ¬RH"
+  },
+  {
+   "name": "RHFramework.lagarias_failure_refutes_RH",
+   "file": "formal/RH_Framework.lean",
+   "line": 87,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "RHFramework.LagariasCondition"
+   ],
+   "statement": "(equiv : RH ↔ LagariasCondition) (h : ¬LagariasCondition) : ¬RH"
+  },
+  {
+   "name": "RHFramework.lambda_pos_refutes_RH",
+   "file": "formal/RH_Framework.lean",
+   "line": 107,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "RHFramework.LambdaCharacterisesRH",
+    "RHFramework.deBruijnNewmanConstant"
+   ],
+   "statement": "(h : deBruijnNewmanConstant > 0) : ¬RH"
+  },
+  {
+   "name": "RHFramework.li_failure_refutes_RH",
+   "file": "formal/RH_Framework.lean",
+   "line": 95,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "RHFramework.LiCondition"
+   ],
+   "statement": "(equiv : RH ↔ LiCondition) (h : ¬LiCondition) : ¬RH"
+  },
+  {
+   "name": "RHFramework.mertens_failure_refutes_RH",
+   "file": "formal/RH_Framework.lean",
+   "line": 101,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "RHFramework.MertensBound"
+   ],
+   "statement": "(equiv : RH ↔ MertensBound) (h : ¬MertensBound) : ¬RH"
+  },
+  {
+   "name": "RHFramework.rh_case_split",
+   "file": "formal/RH_Framework.lean",
+   "line": 153,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{Φ : Prop} (h_pos : RH → Φ) (h_neg : ¬RH → Φ) : Φ"
+  }
+ ],
+ "closed": 5,
+ "files_sha256": {
+  "formal/RH_Framework.lean": "6e89cf97290daa0194f125077c92396a170eb4ff22dbeb6f34ca749b4010adc5"
+ },
+ "published_at": "2026-11-03T11:28:00Z",
+ "certificate_sha256": "fcc3661d757cc699d90c00882181b8533ee67e4cb8dfdc8d6f5c5404f81ef4b1"
+}

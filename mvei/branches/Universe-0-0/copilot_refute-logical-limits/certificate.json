@@ -13,8 +13,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
+   "leanprover/lean4:v4.19.0",
    "padrão do elan"
   ],
   "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
@@ -37,8 +38,10 @@
    "name": "SelfRefutation.canonicalExamplesEnsureTestability",
    "file": "provers/lean/SelfRefutation/TypeV.lean",
    "line": 85,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(c : LimitCriterion) (h : hasCanonicalExample c) (h2 : c.reproducible = true) : c.isComplete = true"
   },
   {
@@ -46,7 +49,9 @@
    "file": "provers/lean/SelfRefutation/TypeV.lean",
    "line": 69,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : allLimitsTestable s) : detectTypeVViolation s = none"
   },
   {
@@ -61,7 +66,7 @@
    "name": "SelfRefutation.distinctTypesPreserveInfo",
    "file": "provers/lean/SelfRefutation/TypeII.lean",
    "line": 105,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(lt1 lt2 : LimitType) (h : lt1 ≠ lt2) : LimitType.structurallyDistinct lt1 lt2 = true"
   },
@@ -70,7 +75,9 @@
    "file": "provers/lean/SelfRefutation/TypeIII.lean",
    "line": 63,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : allRegimeSwitchesPayCost s) : detectTypeIIIViolation s = none ∨ ∃ v, detectTypeIIIViolation s = some v ∧ v.severity < 5"
   },
   {
@@ -93,7 +100,7 @@
    "name": "SelfRefutation.granularityImpliesDistinction",
    "file": "provers/lean/SelfRefutation/TypeII.lean",
    "line": 91,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(lc : LimitClassification) (h : maintainsGranularity lc = true) : lc.types.eraseDups.length = lc.types.length"
   },
@@ -102,7 +109,9 @@
    "file": "provers/lean/SelfRefutation/TypeI.lean",
    "line": 59,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(rh : ResponseHistory) (h : rh.limitRatio > limitRatioThreshold) : ∃ v : Violation, v.violationType = ViolationType.typeI"
   },
   {
@@ -150,7 +159,9 @@
    "file": "provers/lean/SelfRefutation/TypeIV.lean",
    "line": 44,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : preservesOptionality s) : detectTypeIVViolation s = none"
   },
   {
@@ -158,14 +169,16 @@
    "file": "provers/lean/SelfRefutation/SelfRefutationTheorems.lean",
    "line": 100,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (rs : RegimeSwitch) : rs ∈ s.regimeSwitches → rs.hasExplicitCost → isNonTrivialCost rs.cost → detectTypeIIIViolation s = none ∨ ∃ v, detectTypeIIIViolation s = some v ∧ v.severity < 9"
   },
   {
    "name": "SelfRefutation.regimeFormalizationDecidable",
    "file": "provers/lean/SelfRefutation/TypeIII.lean",
    "line": 126,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(rs : RegimeSwitch) : (regimeConceptFormalized rs ∨ ¬regimeConceptFormalized rs)"
   },
@@ -182,7 +195,9 @@
    "file": "provers/lean/SelfRefutation/SelfRefutationTheorems.lean",
    "line": 146,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) : (s.isConsistent ∨ ¬s.isConsistent)"
   },
   {
@@ -222,7 +237,9 @@
    "file": "provers/lean/SelfRefutation/TypeI.lean",
    "line": 151,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : isTypeIViolation s = true) : ∃ v : Violation, v.violationType = ViolationType.typeI ∧ detectTypeIViolation s = some v"
   },
   {
@@ -230,7 +247,9 @@
    "file": "provers/lean/SelfRefutation/TypeII.lean",
    "line": 178,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : isTypeIIViolation s = true) : ∃ v : Violation, v.violationType = ViolationType.typeII ∧ detectTypeIIViolation s = some v"
   },
   {
@@ -238,7 +257,9 @@
    "file": "provers/lean/SelfRefutation/TypeIII.lean",
    "line": 107,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : isTypeIIIViolation s = true) : ∃ v : Violation, v.violationType = ViolationType.typeIII ∧ detectTypeIIIViolation s = some v"
   },
   {
@@ -246,7 +267,9 @@
    "file": "provers/lean/SelfRefutation/TypeII.lean",
    "line": 117,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : hasStructuralDistinction s.limitClassification = true) (h2 : maintainsGranularity s.limitClassification = true) : detectTypeIIViolation s = none ∨ ∃ v, detectTypeIIViolation s = some v ∧ v.severity < 5"
   },
   {
@@ -262,7 +285,9 @@
    "file": "provers/lean/SelfRefutation/TypeIV.lean",
    "line": 89,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : isTypeIVViolation s = true) : ∃ v : Violation, v.violationType = ViolationType.typeIV ∧ detectTypeIVViolation s = some v"
   },
   {
@@ -270,7 +295,9 @@
    "file": "provers/lean/SelfRefutation/TypeI.lean",
    "line": 51,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (v : Violation) (h : v.violationType = ViolationType.typeI) : ¬(s.addViolation v).isConsistent"
   },
   {
@@ -278,7 +305,9 @@
    "file": "provers/lean/SelfRefutation/TypeV.lean",
    "line": 104,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(s : SystemState) (h : isTypeVViolation s = true) : ∃ v : Violation, v.violationType = ViolationType.typeV ∧ detectTypeVViolation s = some v"
   },
   {
@@ -322,10 +351,12 @@
    "statement": "(s : SystemState) : (validateAll s).violations.length ≥ s.violations.length"
   }
  ],
- "closed": 1,
+ "closed": 4,
  "files_sha256": {
-  "provers/lean/SelfRefutation/Core.lean": "643b32387da60d5369698a94dda6c9d5ce6111926e31c0249dc21f2ecc538afb"
+  "provers/lean/SelfRefutation/Core.lean": "643b32387da60d5369698a94dda6c9d5ce6111926e31c0249dc21f2ecc538afb",
+  "provers/lean/SelfRefutation/TypeII.lean": "51c12d906bb3df7f44c01c6e55f9a502fee9b7dc776a7b8202fdd189cd320cdc",
+  "provers/lean/SelfRefutation/TypeIII.lean": "136650e07330df79e858aa2dd3f0a96d85e457995078309c90bfeec3b31d48fe"
  },
- "published_at": "2026-10-29T20:16:04Z",
- "certificate_sha256": "a3cc0f46d3b18c6334ce4c1df1bdd41abc038fe930e51e53b288e76de6e02cda"
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "7727b1217c0865f30aa72193398b4fa85ac25ef40f5ae4d9104c396ce20dadca"
 }
