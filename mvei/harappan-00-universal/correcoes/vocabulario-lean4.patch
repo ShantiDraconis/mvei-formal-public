@@ -38,7 +38,15 @@
  def computeBlockHash (b : Block) : Nat :=
 --- a/formal/lean/Block328_372.lean
 +++ b/formal/lean/Block328_372.lean
-@@ -186,8 +186,8 @@
+@@ -67,6 +67,7 @@
+ 
+ /-- Symbol ID type restricted to range [328, 372] -/
+ structure SymbolId where
++  mkCampos ::
+   value : Nat
+   h : 328 ≤ value ∧ value ≤ 372
+   deriving Repr
+@@ -186,8 +187,8 @@
  -- ============================================================================
  
  /-- Valid state transitions for the DFA -/
@@ -49,7 +57,7 @@
    | ClosureState.potential, OperatorType.prongs, ClosureState.multiplexed => True
    | ClosureState.potential, OperatorType.internal, ClosureState.qualified => True
    | ClosureState.potential, OperatorType.hatching, ClosureState.consummated => True
-@@ -212,13 +212,13 @@
+@@ -212,13 +213,13 @@
    cases op <;> cases to <;> contradiction
  
  /-- Any state can reach consummated via hatching -/

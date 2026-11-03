@@ -58,7 +58,7 @@
  
 --- a/formal/lean/Block328_372.lean
 +++ b/formal/lean/Block328_372.lean
-@@ -73,7 +73,7 @@
+@@ -74,7 +74,7 @@
  
  namespace SymbolId
  
@@ -67,7 +67,7 @@
  
  instance : OfNat SymbolId n where
    ofNat := 
-@@ -133,19 +133,23 @@
+@@ -134,19 +134,23 @@
       computeState ops == ClosureState.complex ∨
       computeState ops == ClosureState.consummated) := by
    intro h
@@ -104,7 +104,7 @@
  
  /-- Law 2: H indicates final state collapse -/
  theorem hatching_is_final (ops : List Operator) :
-@@ -209,7 +213,7 @@
+@@ -210,7 +214,7 @@
  theorem consummated_is_final (op : OperatorType) (to : ClosureState) :
      ¬validTransition ClosureState.consummated op to := by
    intro h
@@ -113,7 +113,7 @@
  
  /-- Any state can reach consummated via hatching -/
  theorem hatching_reaches_consummated («from» : ClosureState) :
-@@ -219,18 +223,10 @@
+@@ -220,18 +224,10 @@
                            validTransition mid OperatorType.hatching ClosureState.consummated := by
    intro h
    cases «from»
@@ -136,7 +136,7 @@
  
  -- ============================================================================
  -- Global Law Verification
-@@ -282,8 +278,7 @@
+@@ -283,8 +279,7 @@
      classifySymbol id = SymbolGroup.groupA := by
    intro h
    unfold classifySymbol
@@ -146,7 +146,7 @@
  
  /-- Symbol 346 is in group D and is the only symbol with sole hatching -/
  theorem symbol_346_is_unique (id : SymbolId) :
-@@ -291,8 +286,8 @@
+@@ -292,8 +287,8 @@
      classifySymbol id = SymbolGroup.groupD := by
    intro h
    unfold classifySymbol
@@ -157,7 +157,7 @@
  
  -- ============================================================================
  -- Verification Certificates
-@@ -315,7 +310,7 @@
+@@ -316,7 +311,7 @@
      cup.stableBase = true ∧ 
      cup.bilateralSymmetry = true ∧
      cup.structuralClass = "closure" := by

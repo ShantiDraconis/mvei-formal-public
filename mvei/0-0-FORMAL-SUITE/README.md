@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-10-30T16:50:26+00:00, on commit `fcc67dd53fa0e6d37c0c0c2f8bf682813e8c7850`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-03T08:19:01+00:00, on commit `fcc67dd53fa0e6d37c0c0c2f8bf682813e8c7850`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -49,7 +49,7 @@ The `.lean` files of the verified commit declare 102 `theorem`/`lemma` (counting
 
 ### MVEI corrections
 
-* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 11 file(s)): applies to the published sources: `git apply -p1 --directory=imports/0-0-FORMAL-SUITE mvei/0-0-FORMAL-SUITE/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 12 file(s)): applies to the published sources: `git apply -p1 --directory=imports/0-0-FORMAL-SUITE mvei/0-0-FORMAL-SUITE/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
 
 ## Files in this folder
 

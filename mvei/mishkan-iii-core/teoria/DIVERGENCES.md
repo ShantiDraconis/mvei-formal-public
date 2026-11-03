@@ -88,6 +88,11 @@ passa de 4000 e `absolute_precedence_pela_diferenca` que, com publicação − C
 essas 71 chegam ao kernel e caem com `⊢ False`. A causa não é a precedência do `↔` (isso é a entrada 3), é a
 aritmética do enunciado.
 
+**Reescrito a pedido do autor (2/nov/2026)**: o patch `zy-enunciados-do-autor` (tools/enunciados_do_autor.json) troca
+as 71 por `(modern_publication_N : Int) - carbon14_date_N > 4000`, com a mesma prova (`unfold …; norm_num`), conferida
+no Lean 4.19 com `#print axioms` só com os axiomas padrão. O enunciado original, como escrito, continua falso e fica
+registrado aqui e em `MveiDivergencias.absolute_precedence_falsas`; os 71 que fecham são os reescritos.
+
 ## 5. `meta_N_decidability`: `Decidable` é um tipo
 
 `core/proofs/FORMAL_VERIFICATIONS.lean`, 500 teoremas (`meta_0001_decidability` … `meta_0500_decidability`):

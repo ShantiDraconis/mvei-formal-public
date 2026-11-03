@@ -1,0 +1,24 @@
+--- /dev/null
++++ b/lean/millennium/MVEI_Refutacoes.lean
+@@ -0,0 +1,21 @@
++import Millennium.Riemann.CollapseComplex
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `CollapseComplex.mul_assoc` é falso com a multiplicação do arquivo: a componente indeterminada usa `re` e não `im`,
++    e `(i · i) · I = −I` mas `i · (i · I) = 0`. -/
++theorem collapse_mul_assoc_falso :
++    ¬ ∀ x y z : Millennium.Riemann.CollapseComplex, (x * y) * z = x * (y * z) := by
++  intro h
++  have := congrArg Millennium.Riemann.CollapseComplex.indet
++    (h Millennium.Riemann.CollapseComplex.i Millennium.Riemann.CollapseComplex.i Millennium.Riemann.CollapseComplex.I)
++  simp only [show ∀ a b : Millennium.Riemann.CollapseComplex, a * b = Millennium.Riemann.CollapseComplex.mul a b from
++      fun _ _ => rfl, Millennium.Riemann.CollapseComplex.mul, Millennium.Riemann.CollapseComplex.i,
++    Millennium.Riemann.CollapseComplex.I] at this
++  norm_num at this
++
++end MVEI.Refutacoes

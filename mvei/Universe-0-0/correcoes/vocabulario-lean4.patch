@@ -158,34 +158,6 @@
  /-
    Impossibility Theorem for 0/0 in Fields
    
-@@ -113,7 +115,7 @@
-   have : (1 : F) ≠ 0 := one_ne_zero
-   exact this (by assumption)
- 
--end FieldCollapse
-+end Impossibility  -- [MVEI] era: end FieldCollapse
- 
- section WeakCancellation
- 
-@@ -293,7 +295,8 @@
- 
- end Summary
- 
--end ImpossibilityTheorem
-+end Universe00  -- [MVEI] era: end ImpossibilityTheorem
-+/-
- Standard field cancellation: if c ≠ 0 and a·c = b·c, then a = b 
- -/
- theorem field_cancellation {a b c : F} (hc : c ≠ 0) (h : a * c = b * c) : a = b := by
-@@ -396,7 +399,7 @@
-   intros F _ _ td
-   exact nontrivial_field_no_strong_cancellation td
- 
--end Universe00.Impossibility
-+end ImpossibilityTheorem.FieldCollapse  -- [MVEI] era: end Universe00.Impossibility
- 
- /-!
- ## Extension: Sketch of Totalized Algebra
 --- a/provers/lean/Foundations/ImpossibilityTheorems.lean
 +++ b/provers/lean/Foundations/ImpossibilityTheorems.lean
 @@ -11,6 +11,9 @@
@@ -332,7 +304,7 @@
  
  /-
    Lei do Resíduo Estrutural (LRE) — Law of Structural Residue
-@@ -606,7 +611,7 @@
+@@ -610,7 +615,7 @@
        exact hfix x
      exact hr this
  
@@ -804,18 +776,19 @@
  axiom ns_divergent_points :
 --- a/provers/lean/UniversalOperator/OperatorCore.lean
 +++ b/provers/lean/UniversalOperator/OperatorCore.lean
-@@ -15,6 +15,10 @@
+@@ -15,6 +15,11 @@
  import Mathlib.Analysis.InnerProductSpace.Basic
  import Mathlib.Topology.MetricSpace.Lipschitz
  import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib.MeasureTheory.Integral.Bochner.Basic
 +open scoped ENNReal
 +
 +noncomputable section
  
  -- Hilbert space of mathematical states
  -- L²(ℂ → ℂ) ⊗ L²(ℝ⁴ → ℂ) representing number theory ⊗ physical space
-@@ -76,13 +80,13 @@
+@@ -76,13 +81,13 @@
  
  -- Spectrum of the operator
  def Spectrum (C : UniversalUnificationOperator) : Set ℂ :=
@@ -833,7 +806,7 @@
      MathematicalStateSpace.norm ψ < ∞ }
  
  -- Continuous spectrum
-@@ -101,7 +105,7 @@
+@@ -101,7 +106,7 @@
  
  -- Theorem: Self-adjoint operator has real spectrum
  theorem spectrum_is_real (C : UniversalUnificationOperator) :
@@ -1523,10 +1496,10 @@
    · intro ψ h_norm h_not_ground
 --- a/universe-00/applications/unified-field-theory/proofs/UFTOperators.lean
 +++ b/universe-00/applications/unified-field-theory/proofs/UFTOperators.lean
-@@ -13,6 +13,10 @@
- import Mathlib.Analysis.Complex.Basic
+@@ -14,6 +14,10 @@
  import Mathlib.Topology.MetricSpace.Basic
  import UFTAxioms
+ import Mathlib.Tactic
 +import Mathlib.Data.Complex.Basic
 +open scoped ENNReal
 +
@@ -1534,7 +1507,7 @@
  
  namespace UFTOperators
  
-@@ -219,8 +223,8 @@
+@@ -217,8 +221,8 @@
  := by
    -- Use axiom A7
    obtain ⟨C, _⟩ := axiom_A1
@@ -1561,18 +1534,19 @@
  
 --- a/universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean
 +++ b/universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean
-@@ -22,6 +22,10 @@
+@@ -22,6 +22,11 @@
  import Mathlib.Topology.MetricSpace.Basic
  import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
  import Mathlib.Analysis.SpecialFunctions.Exp
 +import Mathlib.Analysis.SpecialFunctions.Sqrt
 +import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.LinearAlgebra.Matrix.Hermitian
 +
 +noncomputable section
  
  -- Import Universe-00 kernel dependencies
  -- Note: These would need to be implemented separately
-@@ -34,7 +38,7 @@
+@@ -34,7 +39,7 @@
  /-! ## 1. Foundations -/
  
  /-- The universal Hilbert space (infinite-dimensional, separable) -/
@@ -1581,7 +1555,7 @@
  
  /-- Inner product on UniversalHilbert (L² inner product) -/
  noncomputable def inner_product (ψ φ : UniversalHilbert) : ℂ :=
-@@ -67,28 +71,28 @@
+@@ -67,28 +72,28 @@
  /-! ## 3. Spectral Theory -/
  
  /-- Eigenvalue of operator Ĉ -/
@@ -1618,7 +1592,7 @@
      -- Completeness (every state can be expanded)
      (∀ ψ : UniversalHilbert, ∃ c : ℕ → ℂ,
        ∀ x, ψ x = ∑' n, c n * φ n x) := by
-@@ -98,7 +102,7 @@
+@@ -98,7 +103,7 @@
  theorem ground_state_exists (C : UniversalOperator) :
    ∃ (ψ₀ : UniversalHilbert) (E₀ : ℝ),
      is_eigenvector C ψ₀ E₀ ∧
@@ -1627,7 +1601,7 @@
    sorry
  
  /-! ## 4. Spectral Entropy and P vs NP -/
-@@ -135,8 +139,8 @@
+@@ -135,8 +140,8 @@
  /-! ## 5. Dyson-Mehta Law (GUE Statistics) -/
  
  /-- Nearest-neighbor spacing sₙ = λₙ₊₁ - λₙ -/
@@ -1638,7 +1612,7 @@
  
  /-- GUE distribution P_GUE(s) = (32/π²) s² exp(-4s²/π) -/
  noncomputable def GUE_distribution (s : ℝ) : ℝ :=
-@@ -144,12 +148,12 @@
+@@ -144,12 +149,12 @@
  
  /-- Dyson-Mehta theorem: Level spacing follows GUE -/
  theorem dyson_mehta_law (C : UniversalOperator) :
@@ -1655,7 +1629,7 @@
    sorry
  
  /-- Connection to Riemann zeros -/
-@@ -200,7 +204,7 @@
+@@ -200,7 +205,7 @@
  /-! ## 7. Connection to 38-Parameter Hamiltonian -/
  
  /-- The 38-parameter configuration space -/
@@ -1664,7 +1638,7 @@
  
  /-- Finite-dimensional approximation Ĉ_N -/
  structure FiniteOperator (N : ℕ) where
-@@ -252,7 +256,7 @@
+@@ -252,7 +257,7 @@
    -- P ≠ NP from entropy
    (spectral_entropy C 1.0 = ⊤ → ∃ L, L ∈ NP ∧ L ∉ P) ∧
    -- GUE statistics hold
@@ -1673,7 +1647,7 @@
    -- Transcendentally complete
    (omega_infinity C = 1 → ∀ φ : Prop, Decidable φ) →
    -- Then: All of mathematics is unified
-@@ -264,7 +268,7 @@
+@@ -264,7 +269,7 @@
    mathematical_monism C →
    ∃ Ψ : UniversalHilbert,
      universe_state = Ψ ∧
