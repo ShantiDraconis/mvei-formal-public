@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/define-numerical-values` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 3 — closed 3, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `50ec74fc2b65859ec7ef90fac7b6793e48ba795dc6acd711bf23aa59ad22d51b`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_define-numerical-values/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `e3b039994cbc512af5eef382247bbb881a0683d1df00a7cecf66bfd3c139e79b`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_define-numerical-values/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

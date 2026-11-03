@@ -1,0 +1,200 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Universe-0-0",
+ "branch": "copilot/add-formalization-framework",
+ "branch_state": "parada",
+ "head_commit": "404da1cfdfc061c0d2e589ba8fbac2efa1466847",
+ "head_commit_date": "2025-12-31T02:07:55+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "404da1cfdfc061c0d2e589ba8fbac2efa1466847",
+   "date": "2025-12-31T02:07:55+00:00",
+   "subject": "Add QUICKSTART guide for Universe-00 Complement Layer"
+  },
+  {
+   "commit": "35a83429e3c9bb1179cdd50444eb9375745674ec",
+   "date": "2025-12-31T02:06:06+00:00",
+   "subject": "Finalize Universe-00 Complement Layer with governance and Halting example"
+  },
+  {
+   "commit": "ff4c25a7288daad6fc3330994f37f52f765ec7b5",
+   "date": "2025-12-31T02:03:31+00:00",
+   "subject": "Complete Universe-00 Complement Layer axioms, paper structure, and tracking"
+  },
+  {
+   "commit": "84b0d76dc0057326eb7f2a0dd60796c4e99d3a09",
+   "date": "2025-12-31T01:58:13+00:00",
+   "subject": "Add Universe-00 Complement Layer core structure and Lean formalization"
+  },
+  {
+   "commit": "ef59b4f7624d29addae8316329147bc302817d89",
+   "date": "2025-12-31T01:49:16+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-03T08:19:01+00:00",
+  "lean": [
+   "leanprover/lean4:v4.19.0",
+   "leanprover/lean4:v4.3.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Universe00.Examples.div_complement_classical",
+   "file": "universe-00/complement/lean/Universe00/Examples/Division.lean",
+   "line": 65,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(a b : ℚ) (h : b ≠ 0) : div_complement a b = Outcome.value (a / b)"
+  },
+  {
+   "name": "Universe00.Examples.div_complement_limit",
+   "file": "universe-00/complement/lean/Universe00/Examples/Division.lean",
+   "line": 77,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(a : ℚ) : div_complement a 0 = Outcome.limit LimitState.divisionByZero"
+  },
+  {
+   "name": "Universe00.Examples.halts_decidable_returns_value",
+   "file": "universe-00/complement/lean/Universe00/Examples/Halting.lean",
+   "line": 113,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : Program) (i : Input) (h : decidable_halting p i) : ∃ (b : Bool), halts_complement p i = Outcome.value b"
+  },
+  {
+   "name": "Universe00.Examples.halts_total",
+   "file": "universe-00/complement/lean/Universe00/Examples/Halting.lean",
+   "line": 104,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(p : Program) (i : Input) : ∃ (result : Outcome Bool), halts_complement p i = result"
+  },
+  {
+   "name": "Universe00.Examples.halts_undecidable_returns_limit",
+   "file": "universe-00/complement/lean/Universe00/Examples/Halting.lean",
+   "line": 125,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": "(p : Program) (i : Input) (h : ¬ decidable_halting p i) : halts_complement p i = Outcome.limit LimitState.haltingUndecidable"
+  },
+  {
+   "name": "Universe00.Laws.classical_addition_preserves",
+   "file": "universe-00/complement/lean/Universe00/Laws/Conservativity.lean",
+   "line": 60,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (a b : ℕ), lift (a + b) = Outcome.value (a + b)"
+  },
+  {
+   "name": "Universe00.Laws.classical_equality_preserves",
+   "file": "universe-00/complement/lean/Universe00/Laws/Conservativity.lean",
+   "line": 69,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} : ∀ (x y : α), x = y → lift x = lift y"
+  },
+  {
+   "name": "Universe00.Laws.classical_lifts",
+   "file": "universe-00/complement/lean/Universe00/Laws/Conservativity.lean",
+   "line": 41,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "Universe00.Laws.Conservativity"
+   ],
+   "statement": "(φ : Prop) (D : Regime) : φ → Provable_Complement φ D"
+  },
+  {
+   "name": "Universe00.Laws.classical_undefined_returns_limit",
+   "file": "universe-00/complement/lean/Universe00/Laws/Preservation.lean",
+   "line": 50,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "Universe00.Laws.PreservationLaw",
+    "sorryAx"
+   ],
+   "statement": "{α β γ : Type} : ∀ (op : α → β → Outcome γ) (a : α) (b : β), (∀ (result : γ), op a b ≠ Outcome.value result) → ∃ (ℓ : LimitState), op a b = Outcome.limit ℓ"
+  },
+  {
+   "name": "Universe00.Laws.lift_preserves",
+   "file": "universe-00/complement/lean/Universe00/Laws/Conservativity.lean",
+   "line": 55,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} (x y : α) : x = y → lift x = lift y"
+  },
+  {
+   "name": "Universe00.Laws.limit_preserves_consistency",
+   "file": "universe-00/complement/lean/Universe00/Laws/NonExplosion.lean",
+   "line": 48,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (ℓ : LimitState) (P : Prop), ¬ ((Outcome.limit ℓ : Outcome Prop) = Outcome.value P ∧ (Outcome.limit ℓ : Outcome Prop) = Outcome.value (¬P))"
+  },
+  {
+   "name": "Universe00.Laws.limits_coexist",
+   "file": "universe-00/complement/lean/Universe00/Laws/NonExplosion.lean",
+   "line": 58,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (ℓ₁ ℓ₂ : LimitState), ∃ (system : Type), (Outcome.limit ℓ₁ : Outcome system) ≠ Outcome.value False ∧ (Outcome.limit ℓ₂ : Outcome system) ≠ Outcome.value False"
+  },
+  {
+   "name": "Universe00.Laws.system_not_trivial_at_limit",
+   "file": "universe-00/complement/lean/Universe00/Laws/NonExplosion.lean",
+   "line": 70,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ {α : Type} (ℓ : LimitState), ∃ (P : Prop), ¬ Provable_From_Limit ℓ P where Provable_From_Limit (ℓ : LimitState) (P : Prop) : Prop"
+  },
+  {
+   "name": "Universe00.Laws.totalization_requires_sacrifice",
+   "file": "universe-00/complement/lean/Universe00/Laws/Inescapability.lean",
+   "line": 66,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (System : Type), (∀ (op : System → Outcome System), ∃ (result : System), op result = Outcome.value result) → (¬ Expressive System) ∨ (¬ NonTrivial System) ∨ (¬ Consistent System)"
+  },
+  {
+   "name": "Universe00.Laws.value_limit_disjoint",
+   "file": "universe-00/complement/lean/Universe00/Laws/NonExplosion.lean",
+   "line": 38,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "{α : Type} : ∀ (x : α) (ℓ : LimitState), Outcome.value x ≠ Outcome.limit ℓ"
+  }
+ ],
+ "closed": 6,
+ "files_sha256": {
+  "universe-00/complement/lean/Universe00/Core/LimitState.lean": "904c5c896d80df22c9cf4e9ce589970f3d39aa5dbc4a9cd09845538693a2d02d",
+  "universe-00/complement/lean/Universe00/Core/Outcome.lean": "8a8d937ec6efa4d8bec8a3146e6413d5586430f3f280c2e2c167cbd595a4135f",
+  "universe-00/complement/lean/Universe00/Core/Regime.lean": "54028d47c7273fd527f7d26355d9c66e7305547927bd4a7ed2c69c959f663a9c",
+  "universe-00/complement/lean/Universe00/Examples/Division.lean": "e7b94a5efaa6844deb15900396e6bf7847386cfd09059dbf14f5792f29cf9ada",
+  "universe-00/complement/lean/Universe00/Laws/Conservativity.lean": "1520e115dd3cf236eb442a3cbd6e8bee88cd3ed25ff903aaaba0b7e9928c4da9",
+  "universe-00/complement/lean/Universe00/Laws/NonExplosion.lean": "431c00f3b2c5f056e693b80ab3662bb9ed91425493a82d682a414b74e9ff6e4c",
+  "universe-00/complement/lean/Universe00/Laws/Preservation.lean": "abc1cb8dabb04c96b6968651c60171a8bb7e38e1f48482a649dbb8543e3fd2dd",
+  "universe-00/complement/lean/lakefile.lean": "07839f0a335a61569f2efe518e8c90d2c4a87a38bb2ff0a68ebe8b0c384c070e",
+  "universe-00/complement/lean/lean-toolchain": "6d47400dd103f39df811f48ed6262152fffc71fb6b8d927704f1410099b5f7f1"
+ },
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "8f5421d01f4a69c35c5a434a482d0f23f1bafe2816d66e9a6b77938f0a2f1b32"
+}

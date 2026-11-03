@@ -33,8 +33,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-10-29T05:36:17+00:00",
+  "generated_at": "2026-11-03T08:19:01+00:00",
   "lean": [
+   "leanprover/lean4:v4.19.0",
    "padrão do elan"
   ],
   "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
@@ -49,23 +50,27 @@
    "name": "CalabiYau41D.calabi_yau_is_ricci_flat",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 107,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(θ : ConfigSpace41D) : let g"
   },
   {
    "name": "CalabiYau41D.compactification_preserves_susy",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 139,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(S : SupersymmetryOperator) (θ : ConfigSpace41D) : ∃ S4D : Spacetime4D → Spacetime4D, compactify (S.Q θ) = S4D (compactify θ)"
   },
   {
    "name": "CalabiYau41D.dimension_is_prime",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 42,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": Nat.Prime 41"
   },
@@ -73,7 +78,7 @@
    "name": "CalabiYau41D.holomorphic_volume_form_exists",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 205,
-   "state": "nao_alcancado",
+   "state": "erro",
    "axioms_beyond_standard": [],
    "statement": ": ∃ ω : HolomorphicVolumeForm, True"
   },
@@ -81,15 +86,17 @@
    "name": "CalabiYau41D.mass_gap_from_geometry",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 157,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(θ : ConfigSpace41D) : ∃ (coupling : ℝ), coupling > 0 ∧ mass_gap θ = golden_ratio * coupling"
   },
   {
    "name": "CalabiYau41D.moduli_real_dimension",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 190,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": 2 * complex_dimension + 1 = dimension"
   },
@@ -97,7 +104,7 @@
    "name": "CalabiYau41D.respects_I_axioms",
    "file": "provers/lean/CalabiYau/Manifold41D.lean",
    "line": 221,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(θ : ConfigSpace41D) : 0 ≤ to_I_framework θ"
   },
@@ -105,7 +112,7 @@
    "name": "GodelDecidability.PvsNP_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 171,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": IsDecidable PvsNP_statement"
   },
@@ -113,39 +120,47 @@
    "name": "GodelDecidability.RH_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 158,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": IsDecidable RH_statement"
   },
   {
    "name": "GodelDecidability.decidability_respects_I",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 242,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(P : Prop) [h : IsDecidable P] : ∀ I : ℝ, I * I = I → IsDecidable (I = 0 ∨ I = 1)"
   },
   {
    "name": "GodelDecidability.eigenvalue_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 91,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(A : Fin 41 → Fin 41 → ℂ) (λ : ℂ) : IsDecidable (∃ (ψ : HilbertSpace41), ∀ i, (Finset.univ.sum fun j => A i j * ψ.state j) = λ * ψ.state i)"
   },
   {
    "name": "GodelDecidability.finite_dimensional_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 76,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ (P : HilbertSpace41 → Prop), (∃ (matrix : Fin 41 → Fin 41 → ℂ), True) → IsDecidable (∃ ψ, P ψ)"
   },
   {
    "name": "GodelDecidability.godel_ensures_consistency",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 113,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": godel_invariant > 0 → ¬ (∃ (P : Prop), P ∧ ¬P)"
   },
@@ -153,7 +168,7 @@
    "name": "GodelDecidability.godel_positive",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 106,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": godel_invariant > 0"
   },
@@ -161,15 +176,17 @@
    "name": "GodelDecidability.ground_state_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 129,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(H : TOEHamiltonian) : IsDecidable (∃ (ψ₀ : HilbertSpace41), ∀ ψ, H.H ψ₀ ≤ H.H ψ)"
   },
   {
    "name": "GodelDecidability.physics_realizable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 207,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": "(P : PhysicsProposition) : ∃ (r : ComputationallyRealizable True), r.steps ≤ 41^41"
   },
@@ -177,23 +194,27 @@
    "name": "GodelDecidability.spectral_gap_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 141,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(H : TOEHamiltonian) : IsDecidable (∃ Δ > 0, ∃ E₀ E₁, E₁ = E₀ + Δ ∧ (∀ E, E = E₀ ∨ E ≥ E₁))"
   },
   {
    "name": "GodelDecidability.toe_avoids_halting",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 218,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ (computation : ℕ → Bool), (∃ bound, ∀ n > bound, computation n = false) → IsDecidable (∃ n, computation n = true)"
   },
   {
    "name": "GodelDecidability.toe_completely_decidable",
    "file": "provers/lean/LogicFoundations/GodelDecidability.lean",
    "line": 264,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ (P : PhysicsProposition), ∃ (algorithm : ℕ → Bool) (bound : ℕ), (algorithm bound = true ↔ True) ∧ bound ≤ 41^41"
   },
@@ -201,72 +222,90 @@
    "name": "NonCommutativeGeometry.atiyah_singer_index",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 219,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(D : DiracOperator) (K : K0Group) : analytical_index D = topological_index K"
   },
   {
    "name": "NonCommutativeGeometry.beta_zero_conformal",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 132,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(D : DiracOperator) : (∀ Λ > 0, beta_function D Λ = 0) → ∃ (fixed_point : DiracOperator), ∀ Λ > 0, renormalized_operator D Λ = fixed_point"
   },
   {
    "name": "NonCommutativeGeometry.compact_resolvent_prevents_singularities",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 178,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(D : DiracOperator) : D.compact_resolvent = True.intro → ¬ (∃ (ψ : HilbertSpace), has_singularity ψ ∧ ∃ λ, D.apply ψ = ψ)"
   },
   {
    "name": "NonCommutativeGeometry.dimensional_regularization_finite",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 201,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(f : ℂ → ℂ) : (∃ poles : Finset ℂ, ∀ d ∉ poles, dimensional_integral f d ≠ ∞)"
   },
   {
    "name": "NonCommutativeGeometry.k_theory_prevents_singularities",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 83,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(T : SpectralTriple) : ∀ (K₀ : K0Group) (K₁ : K1Group), (∃ (obstruction : ℕ), obstruction ≠ 0) → ¬ (∃ (singularity : HilbertSpace), True)"
   },
   {
    "name": "NonCommutativeGeometry.spectral_action_gives_einstein",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 103,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(D : DiracOperator) : ∃ (G R : ℝ), spectral_action D 1 = G * R + sorry"
   },
   {
    "name": "NonCommutativeGeometry.spectral_respects_I_axioms",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 240,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(T : SpectralTriple) : ∀ (I : ℝ), I * I = I → ∃ (projection : HilbertSpace → HilbertSpace), projection ∘ projection = projection"
   },
   {
    "name": "NonCommutativeGeometry.spectral_zeta_connects_riemann",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 233,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(D : DiracOperator) : ∃ (ξ : ℂ → ℂ), ∀ s, spectral_zeta D s = ξ s + sorry"
   },
   {
    "name": "NonCommutativeGeometry.universal_has_spectral_decomposition",
    "file": "provers/lean/SpectralGeometry/DiracOperator.lean",
    "line": 160,
-   "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "state": "erro",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∃ (decomp : SpectralDecomposition), universal_as_dirac = decomp.total"
   },
   {
@@ -348,10 +387,12 @@
    "statement": ": ∀ (module₁ module₂ : Nat), toe_dependencies.edges module₁ module₂ → module₁ < module₂"
   }
  ],
- "closed": 5,
+ "closed": 13,
  "files_sha256": {
+  "provers/lean/CalabiYau/Manifold41D.lean": "0ec5497361eaafce2cbfc6abc343feb60295d2d1e6ee025de37f5652eb44d4cb",
+  "provers/lean/LogicFoundations/GodelDecidability.lean": "2d4ef11822f67c0eed94f7f7cf7b257300a9178689b9cc4d42bdd3c257e72adc",
   "provers/lean/TOEAudit/AuditScript.lean": "4847453437aba3cfcd18df12ff1ce27d296472cd5b3efa4e61b16c3c0f2d0942"
  },
- "published_at": "2026-10-29T20:16:04Z",
- "certificate_sha256": "1f773377cf16d8318cdf642963a235fee48543147b7e3d89826878d766b30b6d"
+ "published_at": "2026-11-03T11:28:13Z",
+ "certificate_sha256": "d2160a4fd5b1076ed3410050e4cd9c7b8086a659f7a5b9207fe33058e85caeda"
 }

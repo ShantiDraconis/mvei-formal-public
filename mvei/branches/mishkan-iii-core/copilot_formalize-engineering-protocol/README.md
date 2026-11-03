@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalize-engineering-protocol` of the pri
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 5 — closed 2, conditional 0, open 0, proof error 3, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `67568cf6a811e45db9be3f70ef02b50b39ffd688c632016299b002300520fe6f`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_formalize-engineering-protocol/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `649ad7e1423c2fe1aa701ba409dfebb36bca1a185fbfb6ad236c1f6b7fc932d0`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_formalize-engineering-protocol/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

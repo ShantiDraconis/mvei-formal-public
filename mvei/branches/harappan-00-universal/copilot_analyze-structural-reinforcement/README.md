@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/analyze-structural-reinforcement` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 11 — closed 11, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `2187b4cab43430a57305e5d36a7edd6de14b62a27a763fc1b5ac963da34ea2ae`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_analyze-structural-reinforcement/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `695c7eb01a3d7efb6cdc9053578277594be5a1acefd40e5037a5de35fb68bf84`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_analyze-structural-reinforcement/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalize-identity-mapping` of the private
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 1, conditional 1, open 0, proof error 2, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `997583e84acc5d3538528c8f8eea5cfec152e8e5bacba0bcbd31af690f04d2d1`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_formalize-identity-mapping/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `6be67cb4e9172259835d4980a59e9c0d3cfd5f2ef72b1207dffddc5a56092dfe`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_formalize-identity-mapping/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
