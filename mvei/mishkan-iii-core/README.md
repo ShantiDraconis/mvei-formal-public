@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `2e43209371b6c345d28b5dcabf4953bbb2cff104`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `2e43209371b6c345d28b5dcabf4953bbb2cff104`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -198,7 +198,8 @@ The `.lean` files of the verified commit declare 18 567 `theorem`/`lemma` (count
 * `correcoes/vinculo-estrutura.patch` (arquivos gerados usam ~4 100 nomes que não existem no repositório, 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-estrutura.patch` (in order, after the ones above)
 * `correcoes/vinculo-provas.patch` (provas que não fechavam por erro de tipo (Float onde é real, Nat onde é inteiro), instância de igualdade ausente, catálogo provado só com sorry, axiomas demonstráveis e nomes acentuados que o Lean não lê, 7 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vinculo-provas.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 10 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
-* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/mishkan-iii-core mvei/mishkan-iii-core/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
 
 ## Files in this folder
 

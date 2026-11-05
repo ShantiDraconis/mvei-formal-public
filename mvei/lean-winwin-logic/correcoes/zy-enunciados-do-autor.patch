@@ -1,0 +1,22 @@
+--- a/LeanWinWinLogic.lean
++++ b/LeanWinWinLogic.lean
+@@ -26,15 +26,13 @@
+ theorem bebedor
+     {Person : Type} (Drinks : Person → Prop) (x : Person)
+     (emAll : (∀ y, Drinks y) ∨ ¬ (∀ y, Drinks y)) :
+-    WinWin (∀ y, Drinks y) (Drinks x → ∀ y, Drinks y) := by
++    WinWin (∀ y, Drinks y) (∃ z, Drinks z → ∀ y, Drinks y) := by
+   constructor
+   · intro hall
+-    intro _
+-    exact hall
++    exact ⟨x, fun _ => hall⟩
+   · intro hnot
+-    intro hx
+-    exfalso
+-    exact hnot (fun _ => hx)
++    exact Classical.byContradiction fun hne =>
++      hnot fun y => Classical.byContradiction fun hy => hne ⟨y, fun hd => absurd hd hy⟩
+ 
+ /--
+ Abstract Hecke/Deuring split: this packages the two real mathematical

@@ -286,12 +286,13 @@
  axiom corpus_bidirectional_evidence : ∃ (att : CorpusAttestation),
 --- a/formal/lean/IndusHSCS.lean
 +++ b/formal/lean/IndusHSCS.lean
-@@ -1,3 +1,4 @@
+@@ -1,3 +1,5 @@
++import Mathlib.Tactic
 +import Mathlib.Logic.ExistsUnique
  /-
    HSCS Formal Proofs - Indus Script as State-Certification Language
    
-@@ -57,7 +58,7 @@
+@@ -57,7 +59,7 @@
    deriving Repr, DecidableEq
  
  -- Ledger as a set of states
@@ -300,7 +301,7 @@
  
  -- Axiom A0: State Certification
  -- Every valid inscription institutes a certified state
-@@ -122,7 +123,7 @@
+@@ -122,7 +124,7 @@
    -- Closure must be commit if present
    (∀ c, s.closure = some c → c.op_type = OperatorType.COMMIT) ∧
    -- Metadata must be qualifiers
@@ -309,7 +310,7 @@
  
  -- Position class constraints
  def valid_position_for_type (op_type : OperatorType) (pos : Position) : Prop :=
-@@ -146,7 +147,7 @@
+@@ -146,7 +148,7 @@
    ∀ h, s.header = some h → h.op_type ≠ OperatorType.COUNT
  
  def seal_cannot_be_medial (s : Sentence) : Prop :=
@@ -318,7 +319,7 @@
  
  def nucleus_after_closure_forbidden (s : Sentence) : Prop :=
    s.closure.isSome → True  -- In full implementation, would check ordering
-@@ -189,7 +190,7 @@
+@@ -178,7 +180,7 @@
  theorem no_narrative_encoding : 
    (∀ (op : Operator), ¬is_temporal_operator op) →
    ∀ (s : Sentence), ¬∃ (temporal_seq : List Operator), 
@@ -778,7 +779,7 @@
  
  /-
    Harappan Universal System - Universal Grammar Module
-@@ -172,6 +173,7 @@
+@@ -166,6 +167,7 @@
  /- Agreement is symmetric -/
  theorem agreement_symmetric (f : GrammaticalFeature) (p1 p2 : List GrammaticalFeature) :
      agreesInFeature f p1 p2 = agreesInFeature f p2 p1 := by

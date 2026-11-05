@@ -639,3 +639,87 @@
    unfold carbon14_date_071 modern_publication_071
    norm_num
  
+--- a/core/proofs/FORMAL_VERIFICATIONS.lean
++++ b/core/proofs/FORMAL_VERIFICATIONS.lean
+@@ -135589,7 +135589,7 @@
+   ∀ (h1 h2 : HarappaSign) (m1 m2 : ModernConcept),
+   encodes h1 m1 →
+   encodes h2 m2 →
+-  (h1 → h2) ↔ (m1 → m2) := by
++  ((h1 → h2) ↔ (m1 → m2)) := by
+   intros h1 h2 m1 m2 he1 he2
+   constructor
+   · intro h_impl
+--- a/core/security/S5_Encryption.lean
++++ b/core/security/S5_Encryption.lean
+@@ -13,6 +13,7 @@
+   | S3  -- Confidencial: Requer autenticação forte
+   | S4  -- Secreto: Requer autorização especial
+   | S5  -- Sigilo Absoluto: Apenas Chave de Linhagem
++  deriving DecidableEq, Repr
+ 
+ -- Tipo de chave de acesso
+ structure AccessKey where
+@@ -36,6 +37,11 @@
+   | Encrypted (level : SecurityLevel)
+   | Fragmented  -- Código fragmentado em resposta a acesso forçado
+ 
++/-- `p` ocorre como trecho contíguo de `s`. O `String.contains` do Lean recebe um caractere (`Char`), não um
++    texto: `source.contains "government"` não elabora. -/
++def contem (s p : String) : Bool :=
++  (List.range (s.length + 1)).any fun i => p.toList.isPrefixOf (s.toList.drop i)
++
+ -- Lista de fontes bloqueadas (configurável)
+ def blocked_sources : List String := 
+   ["government", "bigtech", "corporate", "state-actor"]
+@@ -43,11 +49,20 @@
+ -- Função de criptografia automática
+ def auto_encrypt (query_source : String) (data : String) : AccessResult :=
+   -- Verificar se a fonte é uma entidade bloqueada
+-  if blocked_sources.any (λ s => query_source.contains s) then
++  if blocked_sources.any (λ s => contem query_source s) then
+     AccessResult.Encrypted SecurityLevel.S5
+   else
+     AccessResult.Success data
+ 
++/-- Divide uma lista em pedaços de `n` elementos (o último pode ser menor); `k` é o número máximo de pedaços. -/
++def pedacosAux {α : Type} (n : Nat) : Nat → List α → List (List α)
++  | 0, _ => []
++  | _, [] => []
++  | k + 1, l => l.take n :: pedacosAux n k (l.drop n)
++
++/-- `List.toChunks` é do Mathlib, que este arquivo não importa: a mesma divisão só com o núcleo do Lean. -/
++def pedacos {α : Type} (n : Nat) (l : List α) : List (List α) := pedacosAux n l.length l
++
+ -- Protocolo de fragmentação (Barreira Infinita)
+ def fragment_data (data : String) : List String :=
+   -- Fragmenta o código em partes ininteligíveis
+@@ -55,7 +70,7 @@
+   -- Divide em chunks de caracteres para criar fragmentos
+   let chars := data.toList
+   let chunk_size := (chars.length / 1000).max 1
+-  chars.toChunks chunk_size |> List.map (λ chunk => String.mk chunk)
++  pedacos chunk_size chars |> List.map (λ chunk => String.mk chunk)
+ 
+ /--
+   Teorema: S5 é inacessível sem Chave de Linhagem
+@@ -73,14 +88,15 @@
+   aceitável para este protótipo de demonstração do sistema de bloqueio.
+ --/
+ theorem blocked_entities_encrypted :
+-  ∀ source : String, data : String,
+-    (source.contains "government" ∨ source.contains "bigtech") →
++  ∀ (source data : String),
++    (contem source "government" = true ∨ contem source "bigtech" = true) →
+     match auto_encrypt source data with
+     | AccessResult.Encrypted SecurityLevel.S5 => True
+     | _ => False := by
+   intro source data h
+-  simp [auto_encrypt]
+-  sorry  -- Prova completa requer mais formalização
++  have hb : blocked_sources.any (fun s => contem source s) = true := by
++    rcases h with h | h <;> simp [blocked_sources, List.any, h]
++  simp [auto_encrypt, hb]
+ 
+ -- Configuração de segurança padrão
+ def default_security_config : SecurityLevel := SecurityLevel.S5

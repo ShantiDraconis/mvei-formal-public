@@ -1,0 +1,47 @@
+--- a/formal/lean4/PvsNP/AverageParameterized.lean
++++ b/formal/lean4/PvsNP/AverageParameterized.lean
+@@ -55,7 +55,7 @@
+       ∃ _ : AverageCaseEasy L D, True
+ 
+ /-- Notation: P ≈_D NP -/
+-notation:50 "𝐏 ≈[" D "] 𝐍𝐏" => P_approx_D_NP D
++notation:50 "𝐏≈[" D "]𝐍𝐏" => P_approx_D_NP D
+ 
+ /-! ## Definition 2: Parameterized Approximate Equality -/
+ 
+@@ -97,7 +97,7 @@
+     ∀ κ ∈ K, isFPT ⟨L, κ⟩
+ 
+ /-- Notation: P ≈_K NP -/
+-notation:50 "𝐏 ≈[param:" K "] 𝐍𝐏" => P_approx_K_NP K
++notation:50 "𝐏≈[param:" K "]𝐍𝐏" => P_approx_K_NP K
+ 
+ /-! ## Lemma 5: Approximate Collapse Scenario -/
+ 
+--- a/formal/lean4/PvsNP/Barriers.lean
++++ b/formal/lean4/PvsNP/Barriers.lean
+@@ -128,7 +128,7 @@
+   time_bound : True  -- Abstract
+ 
+ /-- A natural property is both large and constructive -/
+-structure NaturalProperty (P : FunctionProperty) where
++structure NaturalPropertyOf (P : FunctionProperty) where
+   large : Largeness P
+   constructive : Constructivity P
+ 
+@@ -141,13 +141,13 @@
+   **Consequence:** Natural proof techniques cannot prove P ≠ NP
+   (assuming cryptography is secure).
+ -/
+-axiom razborov_rudich (P : FunctionProperty) (hNat : NaturalProperty P) :
++axiom razborov_rudich (P : FunctionProperty) (hNat : NaturalPropertyOf P) :
+     -- Under crypto assumptions, natural proofs cannot give lower bounds
+     True  -- Abstract statement
+ 
+ /-- A proof uses natural properties -/
+ def UsesNaturalProofs (proof : StoneLemma → P_neq_NP) : Prop :=
+-  ∃ P : FunctionProperty, NaturalProperty P
++  ∃ P : FunctionProperty, Nonempty (NaturalPropertyOf P)
+ 
+ /-- 
+   Corollary: Under crypto assumptions, natural proofs fail.

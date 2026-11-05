@@ -1,0 +1,14 @@
+--- a/anti_rh/lean/ExplicitFormulaModel.lean
++++ b/anti_rh/lean/ExplicitFormulaModel.lean
+@@ -68,10 +68,7 @@
+ theorem amplitude_bound (ρ : NonTrivialZero) (x : ℝ) (hx : 1 < x)
+     (ε : ℝ) (hε : 0 ≤ ε) (hBeta : ρ.beta ≤ (1 : ℝ) / 2 + ε) :
+     amplitude ρ x ≤ x ^ ((1 : ℝ) / 2 + ε) := by
+-  simp [amplitude]
+-  -- x^β ≤ x^{1/2 + ε}  since x > 1 and β ≤ 1/2 + ε
+-  -- This follows from monotonicity of x^· for x > 1.
+-  sorry   -- requires Real.rpow_le_rpow_of_exponent_le
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [ExplicitFormulaModel.amplitude]; done) | (simp_all [ExplicitFormulaModel.amplitude]; done) | (unfold ExplicitFormulaModel.amplitude; decide; done) | (unfold ExplicitFormulaModel.amplitude; rfl; done) | (simp [ExplicitFormulaModel.amplitude]; omega; done) | (intros; simp only [ExplicitFormulaModel.amplitude]; omega; done) | (intros; simp_all [ExplicitFormulaModel.amplitude]; done) | (intro x; cases x <;> simp [ExplicitFormulaModel.amplitude]; done) | (constructor <;> simp [ExplicitFormulaModel.amplitude]; done) | (norm_num [ExplicitFormulaModel.amplitude]; done) | (intros; norm_num [ExplicitFormulaModel.amplitude] at *; done) | (simp [ExplicitFormulaModel.amplitude]; ring; done) | (unfold ExplicitFormulaModel.amplitude; ring; done) | (simp [ExplicitFormulaModel.amplitude]; linarith; done) | (exact?; done)
+ 
+ /-! ## Explicit formula: structural decomposition -/
+ 

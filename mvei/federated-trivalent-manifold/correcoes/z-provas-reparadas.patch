@@ -1,0 +1,29 @@
+--- a/formal/lean/PvsNP_ComoNumeros.lean
++++ b/formal/lean/PvsNP_ComoNumeros.lean
+@@ -181,13 +181,10 @@
+ /-- Exatamente uma das duas é verdadeira (Lei do Terceiro Excluído no Bool). -/
+ theorem p_eq_or_neq_np : p_eq_np_prop ∨ p_neq_np_prop := by
+   simp [p_eq_np_prop, p_neq_np_prop]
+-  exact Bool.eq_true_or_eq_false p_eq_np_unknown
+ 
+ /-- Não podem ser ambas verdadeiras simultaneamente. -/
+ theorem not_both : ¬ (p_eq_np_prop ∧ p_neq_np_prop) := by
+   simp [p_eq_np_prop, p_neq_np_prop]
+-  intro h
+-  exact Bool.noConfusion h
+ 
+ -- ════════════════════════════════════════════════════════════════════════════
+ -- §5 — CINCO TEOREMAS DE EQUIVALÊNCIA LÓGICA  (sem sorry)
+@@ -223,12 +220,6 @@
+ /-- Equivalência 4: P = NP ↔ ¬ (P ≠ NP)  (Boolean complement). -/
+ theorem equiv_eq_not_neq : p_eq_np_prop ↔ ¬ p_neq_np_prop := by
+   simp [p_eq_np_prop, p_neq_np_prop]
+-  constructor
+-  · intro h hf; exact Bool.noConfusion (h ▸ hf)
+-  · intro h
+-    cases Bool.eq_true_or_eq_false p_eq_np_unknown with
+-    | inl ht => exact ht
+-    | inr hf => exact absurd hf h
+ 
+ /-- Equivalência 5: P < NP ↔ P%NP = ∅  (transitivity through P ≠ NP). -/
+ theorem equiv_lt_pct : p_lt_np_prop ↔ p_pct_np_prop := by

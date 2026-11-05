@@ -1,0 +1,37 @@
+--- a/formal_proofs/lean/IndeterminacaoZeroDivZero.lean
++++ b/formal_proofs/lean/IndeterminacaoZeroDivZero.lean
+@@ -167,11 +167,13 @@
+   1  -- sem degradação
+ 
+ /-- Teorema: Vantagem de longevidade da bateria magnética -/
+-theorem vantagem_longevidade (anos : α) (h : anos > 10) :
++theorem vantagem_longevidade [IsStrictOrderedRing α] (anos : α) (h : anos > 10) :
+   taxa_degradacao_magnetica anos > taxa_degradacao_quimica anos :=
+ by
+   unfold taxa_degradacao_magnetica taxa_degradacao_quimica
+-  sorry -- anos > 10 implica 1 > 1 - anos/10
++  have h10 : (0 : α) < 10 := by norm_num
++  have : 0 < anos / 10 := div_pos (lt_trans h10 h) h10
++  linarith
+ 
+ end BateriaMagnetica
+ 
+--- a/formal_proofs/lean/universe00_extended.lean
++++ b/formal_proofs/lean/universe00_extended.lean
+@@ -192,10 +192,14 @@
+ 
+ /-- Theorem: Renewable target achievability -/
+ theorem renewable_target_achievable :
+-  ∀ (gen : PowerGeneration),
++  ∀ (gen : PowerGeneration), 0 < gen.total →
+   gen.solar + gen.wind ≥ 0.6 * gen.total →
+   renewable_percentage gen ≥ 60 := by
+-  sorry
++  intro gen ht h
++  unfold renewable_percentage
++  have h' : 60 * gen.total ≤ (gen.solar + gen.wind) * 100 := by norm_num at h; linarith
++  rw [ge_iff_le, div_mul_eq_mul_div, le_div_iff₀ ht]
++  linarith
+ 
+ /-! ## Thermodynamics -/
+ 

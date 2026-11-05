@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -17,7 +17,7 @@
    "build_ok": false,
    "build_seconds": 0.0,
    "build_error": "o download do Mathlib falhou: error: ./lakefile.lean:16:8: error: '_package' has already been declared | error: ./lakefile.lean:18:15: error: unexpected token; expected command | error: ./lakefile.lean: package configuration has errors",
-   "sorry_warnings": 14,
+   "sorry_warnings": 13,
    "reconstructed": true,
    "bridges": [
     {
@@ -111,6 +111,29 @@
       "refutar: intro h; exact absurd (@h PUnit) (by simp)",
       "refutar: decide"
      ]
+    },
+    {
+     "repo": "cryptographic-logic-foundations",
+     "project": ".",
+     "theorem": "sync_108hz_coherent",
+     "statement": "∀ (t : Time), Pulse t 108 → TemporalCoherence t",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
     }
    ],
    "declared_axioms": [
@@ -126,6 +149,52 @@
     }
    ],
    "theorems": [
+    {
+     "name": "AuthSignatures.mk.inj",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ {shiva seth shiva_1 seth_1 : String},   { shiva := shiva, seth := seth } = { shiva := shiva_1, seth := seth_1 } → shiva = shiva_1 ∧ seth = seth_1",
+     "status": "fechado"
+    },
+    {
+     "name": "AuthSignatures.mk.injEq",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (shiva seth shiva_1 seth_1 : String),   ({ shiva := shiva, seth := seth } = { shiva := shiva_1, seth := seth_1 }) = (shiva = shiva_1 ∧ seth = seth_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "AuthSignatures.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (shiva seth : String), sizeOf { shiva := shiva, seth := seth } = 1 + sizeOf shiva + sizeOf seth",
+     "status": "fechado"
+    },
+    {
+     "name": "Component.mk.inj",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ {id hash : String} {verified : Bool} {id_1 hash_1 : String} {verified_1 : Bool},   { id := id, hash := hash, verified := verified } = { id := id_1, hash := hash_1, verified := verified_1 } →     id = id_1 ∧ hash = hash_1 ∧ verified = verified_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Component.mk.injEq",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (id hash : String) (verified : Bool) (id_1 hash_1 : String) (verified_1 : Bool),   ({ id := id, hash := hash, verified := verified } = { id := id_1, hash := hash_1, verified := verified_1 }) =     (id = id_1 ∧ hash = hash_1 ∧ verified = verified_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Component.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (id hash : String) (verified : Bool),   sizeOf { id := id, hash := hash, verified := verified } = 1 + sizeOf id + sizeOf hash + sizeOf verified",
+     "status": "fechado"
+    },
     {
      "name": "CryptoSignature.mk.inj",
      "module": "proofs.lean4.core.SecurityProperties",
@@ -252,6 +321,29 @@
      "status": "fechado"
     },
     {
+     "name": "Portfolio.mk.inj",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ {components : List Component} {signatures : AuthSignatures} {integrity : IntegrityProof}   {components_1 : List Component} {signatures_1 : AuthSignatures} {integrity_1 : IntegrityProof},   { components := components, signatures := signatures, integrity := integrity } =       { components := components_1, signatures := signatures_1, integrity := integrity_1 } →     components = components_1 ∧ sig",
+     "status": "fechado"
+    },
+    {
+     "name": "Portfolio.mk.injEq",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (components : List Component) (signatures : AuthSignatures) (integrity : IntegrityProof)   (components_1 : List Component) (signatures_1 : AuthSignatures) (integrity_1 : IntegrityProof),   ({ components := components, signatures := signatures, integrity := integrity } =       { components := components_1, signatures := signatures_1, integrity := integrity_1 }) =     (components = components_1 ∧",
+     "status": "fechado"
+    },
+    {
+     "name": "Portfolio.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (components : List Component) (signatures : AuthSignatures) (integrity : IntegrityProof),   sizeOf { components := components, signatures := signatures, integrity := integrity } =     1 + sizeOf components + sizeOf signatures + sizeOf integrity",
+     "status": "fechado"
+    },
+    {
      "name": "RiemannHypothesis.critical_line_hypothesis",
      "module": "«universe-0-0».Camada1_Provas.lean.MillenniumProblems.RiemannHypothesis.ZetaFunction",
      "axioms": [
@@ -346,6 +438,357 @@
      "status": "fechado"
     },
     {
+     "name": "Time.mk.inj",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ {value value_1 : ℕ}, { value := value } = { value := value_1 } → value = value_1",
+     "status": "fechado"
+    },
+    {
+     "name": "Time.mk.injEq",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (value value_1 : ℕ), ({ value := value } = { value := value_1 }) = (value = value_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "Time.mk.sizeOf_spec",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (value : ℕ), sizeOf { value := value } = 1 + sizeOf value",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.NP_Problem.complexity_nonneg",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : TriStability.NP_Problem), 0 ≤ self.complexity",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.NP_Problem.mk.inj",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {complexity : ℝ} {complexity_nonneg : 0 ≤ complexity} {complexity_1 : ℝ} {complexity_nonneg_1 : 0 ≤ complexity_1},   { complexity := complexity, complexity_nonneg := complexity_nonneg } =       { complexity := complexity_1, complexity_nonneg := complexity_nonneg_1 } →     complexity = complexity_1",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.NP_Problem.mk.injEq",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (complexity : ℝ) (complexity_nonneg : 0 ≤ complexity) (complexity_1 : ℝ) (complexity_nonneg_1 : 0 ≤ complexity_1),   ({ complexity := complexity, complexity_nonneg := complexity_nonneg } =       { complexity := complexity_1, complexity_nonneg := complexity_nonneg_1 }) =     (complexity = complexity_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.NP_Problem.mk.sizeOf_spec",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (complexity : ℝ) (complexity_nonneg : 0 ≤ complexity),   sizeOf { complexity := complexity, complexity_nonneg := complexity_nonneg } =     1 + sizeOf complexity + sizeOf complexity_nonneg",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.P_Algorithm.complexity_nonneg",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (self : TriStability.P_Algorithm), 0 ≤ self.complexity",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.P_Algorithm.mk.inj",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ {complexity : ℝ} {complexity_nonneg : 0 ≤ complexity} {complexity_1 : ℝ} {complexity_nonneg_1 : 0 ≤ complexity_1},   { complexity := complexity, complexity_nonneg := complexity_nonneg } =       { complexity := complexity_1, complexity_nonneg := complexity_nonneg_1 } →     complexity = complexity_1",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.P_Algorithm.mk.injEq",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (complexity : ℝ) (complexity_nonneg : 0 ≤ complexity) (complexity_1 : ℝ) (complexity_nonneg_1 : 0 ≤ complexity_1),   ({ complexity := complexity, complexity_nonneg := complexity_nonneg } =       { complexity := complexity_1, complexity_nonneg := complexity_nonneg_1 }) =     (complexity = complexity_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.P_Algorithm.mk.sizeOf_spec",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (complexity : ℝ) (complexity_nonneg : 0 ≤ complexity),   sizeOf { complexity := complexity, complexity_nonneg := complexity_nonneg } =     1 + sizeOf complexity + sizeOf complexity_nonneg",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.P_approx_NP.eq_1",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (ε : ℝ),   TriStability.P_approx_NP ε = ∀ (problem : TriStability.NP_Problem), ∃ sol, sol.complexity ≤ problem.complexity + ε",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.SystemState.Neon.sizeOf_spec",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "sizeOf TriStability.SystemState.Neon = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.SystemState.Sovereign.sizeOf_spec",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "sizeOf TriStability.SystemState.Sovereign = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.SystemState.W95.sizeOf_spec",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "sizeOf TriStability.SystemState.W95 = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.SystemState.ofNat_toCtorIdx",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "∀ (x : TriStability.SystemState), TriStability.SystemState.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.can_transition.eq_1",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "TriStability.can_transition TriStability.SystemState.W95 TriStability.SystemState.Neon = True",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.can_transition.eq_2",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "TriStability.can_transition TriStability.SystemState.Neon TriStability.SystemState.Sovereign = True",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.can_transition.eq_3",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "TriStability.can_transition TriStability.SystemState.Sovereign TriStability.SystemState.Neon = True",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.can_transition.eq_4",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "TriStability.can_transition TriStability.SystemState.Neon TriStability.SystemState.W95 = True",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.can_transition.eq_5",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "∀ (x x_1 : TriStability.SystemState),   (x = TriStability.SystemState.W95 → x_1 = TriStability.SystemState.Neon → False) →     (x = TriStability.SystemState.Neon → x_1 = TriStability.SystemState.Sovereign → False) →       (x = TriStability.SystemState.Sovereign → x_1 = TriStability.SystemState.Neon → False) →         (x = TriStability.SystemState.Neon → x_1 = TriStability.SystemState.W95 → False)",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.sovereign_zero_vulnerability",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (s : TriStability.SystemState), TriStability.state_vulnerability s = 0 ↔ s = TriStability.SystemState.Sovereign",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.state_vulnerability.eq_1",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "TriStability.state_vulnerability TriStability.SystemState.W95 = 1.0",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.state_vulnerability.eq_2",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "TriStability.state_vulnerability TriStability.SystemState.Neon = 0.5",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.state_vulnerability.eq_3",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "TriStability.state_vulnerability TriStability.SystemState.Sovereign = 0.0",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.system_phase_transition",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (s : TriStability.SystemState), s = TriStability.SystemState.Sovereign → ∃ ε > 0, TriStability.P_approx_NP ε",
+     "status": "fechado"
+    },
+    {
+     "name": "TriStability.transition_preserves_security",
+     "module": "CryptographicLogic.TriStability",
+     "axioms": [],
+     "statement": "∀ (s1 s2 : TriStability.SystemState),   TriStability.can_transition s1 s2 →     s1 = TriStability.SystemState.W95 ∧ s2 = TriStability.SystemState.Neon ∨       s1 = TriStability.SystemState.Neon ∧ s2 = TriStability.SystemState.Sovereign ∨         s1 = TriStability.SystemState.Sovereign ∧ s2 = TriStability.SystemState.Neon ∨           s1 = TriStability.SystemState.Neon ∧ s2 = TriStability.SystemStat",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.IsolatedMemory.mk.inj",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "∀ {baseAddress size : ℕ} {quadrant : Universe00.MemoryQuadrants.Quadrant}   {access : Universe00.MemoryQuadrants.QuadrantAccess} {baseAddress_1 size_1 : ℕ}   {quadrant_1 : Universe00.MemoryQuadrants.Quadrant} {access_1 : Universe00.MemoryQuadrants.QuadrantAccess},   { baseAddress := baseAddress, size := size, quadrant := quadrant, access := access } =       { baseAddress := baseAddress_1, size :=",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.IsolatedMemory.mk.injEq",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (baseAddress size : ℕ) (quadrant : Universe00.MemoryQuadrants.Quadrant)   (access : Universe00.MemoryQuadrants.QuadrantAccess) (baseAddress_1 size_1 : ℕ)   (quadrant_1 : Universe00.MemoryQuadrants.Quadrant) (access_1 : Universe00.MemoryQuadrants.QuadrantAccess),   ({ baseAddress := baseAddress, size := size, quadrant := quadrant, access := access } =       { baseAddress := baseAddress_1, size :=",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.IsolatedMemory.mk.sizeOf_spec",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "∀ (baseAddress size : ℕ) (quadrant : Universe00.MemoryQuadrants.Quadrant)   (access : Universe00.MemoryQuadrants.QuadrantAccess),   sizeOf { baseAddress := baseAddress, size := size, quadrant := quadrant, access := access } =     1 + sizeOf baseAddress + sizeOf size + sizeOf quadrant + sizeOf access",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.Quadrant.Gamma.sizeOf_spec",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "sizeOf Universe00.MemoryQuadrants.Quadrant.Gamma = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.Quadrant.Q1_Alpha.sizeOf_spec",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "sizeOf Universe00.MemoryQuadrants.Quadrant.Q1_Alpha = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.Quadrant.Q2_Beta.sizeOf_spec",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "sizeOf Universe00.MemoryQuadrants.Quadrant.Q2_Beta = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.Quadrant.Q3_Sat.sizeOf_spec",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "sizeOf Universe00.MemoryQuadrants.Quadrant.Q3_Sat = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.Quadrant.ofNat_toCtorIdx",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "∀ (x : Universe00.MemoryQuadrants.Quadrant), Universe00.MemoryQuadrants.Quadrant.ofNat x.toCtorIdx = x",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.QuadrantAccess.mk.inj",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "∀ {quadrant : Universe00.MemoryQuadrants.Quadrant} {owner signature : String} {creationDate : ℕ} {encrypted : Bool}   {quadrant_1 : Universe00.MemoryQuadrants.Quadrant} {owner_1 signature_1 : String} {creationDate_1 : ℕ}   {encrypted_1 : Bool},   { quadrant := quadrant, owner := owner, signature := signature, creationDate := creationDate,         encrypted := encrypted } =       { quadrant := quad",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.QuadrantAccess.mk.injEq",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (quadrant : Universe00.MemoryQuadrants.Quadrant) (owner signature : String) (creationDate : ℕ) (encrypted : Bool)   (quadrant_1 : Universe00.MemoryQuadrants.Quadrant) (owner_1 signature_1 : String) (creationDate_1 : ℕ)   (encrypted_1 : Bool),   ({ quadrant := quadrant, owner := owner, signature := signature, creationDate := creationDate,         encrypted := encrypted } =       { quadrant := qua",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.QuadrantAccess.mk.sizeOf_spec",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [],
+     "statement": "∀ (quadrant : Universe00.MemoryQuadrants.Quadrant) (owner signature : String) (creationDate : ℕ) (encrypted : Bool),   sizeOf       { quadrant := quadrant, owner := owner, signature := signature, creationDate := creationDate,         encrypted := encrypted } =     1 + sizeOf quadrant + sizeOf owner + sizeOf signature + sizeOf creationDate + sizeOf encrypted",
+     "status": "fechado"
+    },
+    {
+     "name": "Universe00.MemoryQuadrants.gamma_encryption_invariant",
+     "module": "kernel.«memory-quadrants».QUADRANT_SYSTEM",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (mem : Universe00.MemoryQuadrants.IsolatedMemory),   mem.quadrant = Universe00.MemoryQuadrants.Quadrant.Gamma →     (Universe00.MemoryQuadrants.panicEncryptGamma mem).access.encrypted = true",
+     "status": "fechado"
+    },
+    {
+     "name": "ValidShivaSeth.eq_1",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (sig : AuthSignatures),   ValidShivaSeth sig = (sig.shiva = \"AUTH_HASH_DESTRUCT_ERR_0\" ∧ sig.seth = \"AUTH_HASH_STORM_PROT_INF\")",
+     "status": "fechado"
+    },
+    {
+     "name": "auth_signature_valid",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (sig : AuthSignatures), ValidShivaSeth sig → Verifiable sig",
+     "status": "fechado"
+    },
+    {
      "name": "authenticated_implies_valid",
      "module": "proofs.lean4.core.SecurityProperties",
      "axioms": [],
@@ -360,6 +803,23 @@
      "status": "fechado"
     },
     {
+     "name": "mkVerifiedPortfolio.eq_1",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [],
+     "statement": "∀ (components : List Component) (shiva_sig seth_sig : String),   mkVerifiedPortfolio components shiva_sig seth_sig =     if (components.all fun x => x.verified) = true then       some { components := components, signatures := { shiva := shiva_sig, seth := seth_sig }, integrity := () }     else none",
+     "status": "fechado"
+    },
+    {
+     "name": "mkVerifiedPortfolio_consistent",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "Quot.sound",
+      "propext"
+     ],
+     "statement": "∀ (cs : List Component) (s1 s2 : String),   (cs.all fun x => x.verified) = true → ∃ p, mkVerifiedPortfolio cs s1 s2 = some p ∧ Consistent p",
+     "status": "fechado"
+    },
+    {
      "name": "no_leak_between_levels",
      "module": "proofs.lean4.core.TypeSafety",
      "axioms": [
@@ -367,6 +827,16 @@
      ],
      "statement": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "portfolio_consistency",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "Quot.sound",
+      "propext"
+     ],
+     "statement": "∀ (p : Portfolio), WellFormed p → Consistent p",
+     "status": "fechado"
     },
     {
      "name": "signature_unforgeable",
@@ -379,6 +849,15 @@
      "status": "fechado"
     },
     {
+     "name": "sync_108hz_coherent",
+     "module": "proofs.lean4.core.PortfolioConsistency",
+     "axioms": [
+      "sorryAx"
+     ],
+     "statement": "∀ (t : Time), Pulse t 108 → TemporalCoherence t",
+     "status": "aberto-sorry"
+    },
+    {
      "name": "type_safety_preserved",
      "module": "proofs.lean4.core.TypeSafety",
      "axioms": [
@@ -389,48 +868,27 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas): 3 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 2 arquivo(s); 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 1 prova(s) reescrita(s), conferidas no Lean do projeto: exponential_defense_growth. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././foundation.lean:81:19: type expected, got | error: ././././foundation.lean:82:28: type expected, got)",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 2 arquivo(s); 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, MVEI_Refutacoes_zkp_foundation, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././zkp/zkp_foundation.lean:68:4: don't know how to synthesize implicit argument 'proof' | error: ././././zkp/zkp_foundation.lean:68:4: don't know how to synthesize implicit argument 'statement')",
    "corrections": [
     "renomear-imports-mathlib",
     "tatica-encontrada",
     "vocabulario-lean4",
-    "z-provas-reparadas"
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor",
+    "zz-refutacoes"
    ],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `Main, .one `«formal-proofs».lean.SovereignCore, .one `foundation, .one `kernel.«layer0-symmetry».IDENTITY_CONSTANT, .one `kernel.«memory-quadrants».QUADRANT_SYSTEM, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `CryptographicLogic, .submodules `CryptographicLogic, .one `MVEI_Refutacoes_zkp_foundation, .one `Main, .one `«formal-proofs».lean.SovereignCore, .one `foundation, .one `kernel.«layer0-symmetry».IDENTITY_CONSTANT, .one `kernel.«memory-quadrants».QUADRANT_SYSTEM, .submodules `proofs, .submodules `provenance, .submodules `security, .submodules `«universe-0-0», .submodules `zkp]\n",
    "avulso": false,
    "salvage": [
     {
-     "arquivo": "CryptographicLogic/TriStability.lean",
-     "linha": 33,
-     "nome": "TriStability.system_phase_transition",
+     "arquivo": "MVEI_Refutacoes_zkp_foundation.lean",
+     "linha": 10,
+     "nome": "MVEI.Refutacoes.zkp_correctness_falso",
      "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
+     "axioms": [],
+     "dependencia_com_sorry": [
+      "zkp.zkp_foundation"
      ]
-    },
-    {
-     "arquivo": "CryptographicLogic/TriStability.lean",
-     "linha": 66,
-     "nome": "TriStability.sovereign_zero_vulnerability",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "erro": "linha 74: unsolved goals case Sovereign ⊢ 0.0 = 0",
-     "coluna": 14,
-     "trecho": "  | Sovereign ⟦=⟧> simp [state_vulnerability]"
-    },
-    {
-     "arquivo": "CryptographicLogic/TriStability.lean",
-     "linha": 84,
-     "nome": "TriStability.transition_preserves_security",
-     "status": "fechado",
-     "axioms": []
     },
     {
      "arquivo": "formal-proofs/lean/SovereignCore.lean",
@@ -448,7 +906,7 @@
      "nome": "Universe00.BootSequence.triple_signature_required",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-k9559hxh/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
@@ -456,7 +914,7 @@
      "nome": "Universe00.BootSequence.boot_sequence_chronological",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-k9559hxh/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
@@ -464,7 +922,7 @@
      "nome": "Universe00.BootSequence.panic_encrypts_gamma",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-k9559hxh/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "foundation.lean",
@@ -484,64 +942,12 @@
      ]
     },
     {
-     "arquivo": "kernel/memory-quadrants/QUADRANT_SYSTEM.lean",
-     "linha": 96,
-     "nome": "Universe00.MemoryQuadrants.gamma_encryption_invariant",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 100: unsolved goals mem : IsolatedMemory h : mem.quadrant = Quadrant.Gamma ⊢ (sorry ()).access.encrypted = true",
-     "coluna": 85,
-     "trecho": "m).access.encrypted = true := ⟦b⟧y"
-    },
-    {
      "arquivo": "kernel/microkernel/VERIFIED_CORE.lean",
      "linha": 59,
      "nome": "Universe00.Microkernel.security_enforcement",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-k9559hxh/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
-    },
-    {
-     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
-     "linha": 39,
-     "nome": "portfolio_consistency",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 44: tactic 'introN' failed, insufficient number of binders p : Portfolio h : WellFormed p ⊢ Consistent p",
-     "coluna": 8,
-     "trecho": "  intro ⟦c⟧ hc"
-    },
-    {
-     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
-     "linha": 59,
-     "nome": "auth_signature_valid",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
-     "linha": 81,
-     "nome": "sync_108hz_coherent",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "proofs/lean4/core/PortfolioConsistency.lean",
-     "linha": 100,
-     "nome": "mkVerifiedPortfolio_consistent",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 107: type mismatch cs has type List Component : Type but is expected to have type List Component✝ : Type u_3 the following variables have been introduced by the implicit lambda feature Component✝ : Type u_3 you can disable implicit lambdas using",
-     "coluna": 22,
-     "trecho": "  exists Portfolio.mk ⟦c⟧s (AuthSignatures.mk s1 s2) ("
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
@@ -641,7 +1047,11 @@
      ],
      "erro": "linha 30: unsolved goals case Neon ⊢ 0 < protectionLevel SystemState.Neon case W95 ⊢ 0 < protectionLevel SystemState.W95",
      "coluna": 27,
-     "trecho": "  0 < protectionLevel s := ⟦b⟧y"
+     "trecho": "  0 < protectionLevel s := ⟦b⟧y",
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [SystemCore.protectionLevel]; done) | (simp_all [SystemCore.protectionLevel]; done) | (unfold SystemCore.protectionLevel; decide; done) | (unfold SystemCore.protectionLevel; rfl; done) | (simp [SystemCore.protectionLevel]; omega; done) | (intros; simp only [SystemCore.protectionLevel]; omega; done) | (intros; simp_all [SystemCore.protectionLevel]; done) | (intro x; cases x <;> simp [SystemCore.protectionLevel]; done) | (constructor <;> simp [SystemCore.protectionLevel]; done) | (norm_num [SystemCore.protectionLevel]; done) | (intros; norm_num [SystemCore.protectionLevel] at *; done) | (simp [SystemCore.protectionLevel]; ring; done) | (unfold SystemCore.protectionLevel; ring; done) | (simp [SystemCore.protectionLevel]; linarith; done) | (exact?; done)"
+     }
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/Core/SystemState.lean",
@@ -654,7 +1064,11 @@
      ],
      "erro": "linha 35: unsolved goals case W95 ⊢ protectionLevel SystemState.W95 ≤ protectionLevel SystemState.Neon",
      "coluna": 77,
-     "trecho": "e.Neon ≥ protectionLevel s := ⟦b⟧y"
+     "trecho": "e.Neon ≥ protectionLevel s := ⟦b⟧y",
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [SystemCore.protectionLevel]; done) | (simp_all [SystemCore.protectionLevel]; done) | (unfold SystemCore.protectionLevel; decide; done) | (unfold SystemCore.protectionLevel; rfl; done) | (simp [SystemCore.protectionLevel]; omega; done) | (intros; simp only [SystemCore.protectionLevel]; omega; done) | (intros; simp_all [SystemCore.protectionLevel]; done) | (intro x; cases x <;> simp [SystemCore.protectionLevel]; done) | (constructor <;> simp [SystemCore.protectionLevel]; done) | (norm_num [SystemCore.protectionLevel]; done) | (intros; norm_num [SystemCore.protectionLevel] at *; done) | (simp [SystemCore.protectionLevel]; ring; done) | (unfold SystemCore.protectionLevel; ring; done) | (simp [SystemCore.protectionLevel]; linarith; done) | (exact?; done)"
+     }
     },
     {
      "arquivo": "universe-0-0/Camada1_Provas/lean/MillenniumProblems/PvsNP/CookLevin.lean",
@@ -690,27 +1104,19 @@
      "arquivo": "zkp/zkp_foundation.lean",
      "linha": 203,
      "nome": "ZKPFoundation.zkp_correctness",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 224: tactic 'apply' failed, failed to unify ∃ w, zkp.relation ?s w with zkp.relation s w case mpr stmt wit prf : Type u zkp : ZKProofSystem stmt wit prf h_comp : completeness zkp h_sound : soundness zkp s : stmt w : wit p : prf h_verify : zkp.ve",
-     "coluna": 4,
-     "trecho": "    ⟦a⟧pply h_sound"
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "zkp/zkp_foundation.lean",
-     "linha": 226,
+     "linha": 225,
      "nome": "ZKPFoundation.commitment_secure",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 232: unexpected token 'hiding'; expected term",
-     "coluna": 14,
-     "trecho": "  binding cs →⟦ ⟧hiding cs →"
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "zkp/zkp_foundation.lean",
-     "linha": 240,
+     "linha": 238,
      "nome": "ZKPFoundation.zk_preserves_privacy",
      "status": "aberto-sorry",
      "axioms": [
@@ -739,14 +1145,21 @@
      "enunciado": "∀ (d1 d2 : SecureData), d1.level ≠ d2.level → ¬(d1.content = d2.content ∧ d1.hash = d2.hash)",
      "resultado": "sem resultado",
      "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "sync_108hz_coherent",
+     "enunciado": "∀ (t : Time), Pulse t 108 → TemporalCoherence t",
+     "resultado": "sem resultado",
+     "tatica": ""
     }
    ],
    "summary": {
-    "fechado": 29,
-    "aberto-sorry": 4,
+    "fechado": 82,
+    "aberto-sorry": 5,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793828546
   },
   {
    "repo": "cryptographic-logic-foundations",
@@ -755,18 +1168,12 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 5.3,
+   "build_seconds": 5.7,
    "build_error": "(configuração original) error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
    "sorry_warnings": 0,
    "reconstructed": true,
    "bridges": [],
-   "declared_axioms": [
-    {
-     "name": "securityBreaking_is_NPHard",
-     "module": "SovereignCore",
-     "statement": "∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard"
-    }
-   ],
+   "declared_axioms": [],
    "theorems": [
     {
      "name": "ComplexityClass.NP.sizeOf_spec",
@@ -912,6 +1319,13 @@
      "status": "fechado"
     },
     {
+     "name": "securityBreaking_is_NPHard",
+     "module": "SovereignCore",
+     "axioms": [],
+     "statement": "∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard",
+     "status": "fechado"
+    },
+    {
      "name": "securityVerification_in_P",
      "module": "SovereignCore",
      "axioms": [
@@ -930,30 +1344,24 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 1 prova(s) reescrita(s), conferidas no Lean do projeto: exponential_defense_growth. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com SovereignCore e o Mathlib v4.19.0 e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com SovereignCore e o Mathlib v4.19.0 e compilou o que foi possível",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4",
-    "z-provas-reparadas"
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor",
+    "zz-refutacoes"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `SovereignCore]\n",
    "avulso": false,
    "salvage": [],
-   "preenchimento": [
-    {
-     "tipo": "axioma",
-     "nome": "securityBreaking_is_NPHard",
-     "enunciado": "∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard",
-     "resultado": "sem resultado",
-     "tatica": ""
-    }
-   ],
+   "preenchimento": [],
    "summary": {
-    "fechado": 21,
+    "fechado": 22,
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793828546
   },
   {
    "repo": "cryptographic-logic-foundations",
@@ -1028,11 +1436,13 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 1 prova(s) reescrita(s), conferidas no Lean do projeto: exponential_defense_growth. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4",
-    "z-provas-reparadas"
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor",
+    "zz-refutacoes"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.3.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Complexity, .one `NavierStokes, .one `Riemann, .one `Sovereign]\n",
    "avulso": false,
@@ -1112,7 +1522,7 @@
     "aberto-sorry": 1,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793828546
   }
  ]
 }

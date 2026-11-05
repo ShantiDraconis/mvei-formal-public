@@ -86,16 +86,14 @@
  
  /-!
  # Additional Theorems for CollapseComplex
-@@ -169,7 +172,7 @@
+@@ -169,14 +172,14 @@
  
  /-- Product of conjugate (when restricted to complex part) -/
  theorem conj_mul_self (z : CollapseComplex) :
 -    toComplex (z * conj z) = toComplex z * Complex.conj (toComplex z) := by
 +    toComplex (z * conj z) = toComplex z * (starRingEnd ℂ) (toComplex z) := by
-   simp [toComplex, conj, HMul.hMul, instHMul, mul]
-   ext
-   · simp [Complex.mul_re, Complex.conj_re, Complex.conj_im]
-@@ -180,8 +183,8 @@
+   first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
  /-! ### Norm Properties (Extended) -/
  
  /-- Norm respects scalar multiplication (for positive reals) -/
@@ -707,8 +705,9 @@
  
 --- a/lean/millennium/Riemann/NumericalHierarchy.lean
 +++ b/lean/millennium/Riemann/NumericalHierarchy.lean
-@@ -1,4 +1,8 @@
+@@ -1,4 +1,9 @@
  import Millennium.Riemann.CollapseComplex
++import Mathlib.Tactic
 +import Mathlib.Data.Complex.Basic
 +import Mathlib.Data.Real.Basic
 +
@@ -716,7 +715,7 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -56,7 +60,7 @@
+@@ -56,7 +61,7 @@
    im : ℝ           -- imaginary component (i)
    indet : ℝ        -- indeterminate component (I = 0/0)
    horizon : ℝ      -- infinity horizon component (∞)
@@ -725,7 +724,7 @@
  
  namespace HorizonComplex
  
-@@ -145,7 +149,7 @@
+@@ -145,7 +150,7 @@
    indet : ℝ        -- indeterminate component (I = 0/0)
    horizon : ℝ      -- infinity horizon component (∞)
    refutation : ℝ   -- refutation boundary component (ℜ)
@@ -734,7 +733,7 @@
  
  namespace RefutationComplex
  
-@@ -255,7 +259,7 @@
+@@ -255,7 +260,7 @@
    | collapseNum : CollapseComplex → UniversalNumber
    | horizonNum : HorizonComplex → UniversalNumber
    | refutationNum : RefutationComplex → UniversalNumber
@@ -743,7 +742,7 @@
  
  namespace UniversalNumber
  
-@@ -340,7 +344,7 @@
+@@ -340,7 +345,7 @@
  
  end SymbolicOperator
  

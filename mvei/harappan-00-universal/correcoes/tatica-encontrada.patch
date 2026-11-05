@@ -1,3 +1,25 @@
+--- a/formal/lean/IndusHSCS.lean
++++ b/formal/lean/IndusHSCS.lean
+@@ -155,18 +155,7 @@
+   has_valid_structure s → 
+   numeral_cannot_be_initial s ∧ 
+   seal_cannot_be_medial s := by
+-  intro s h
+-  constructor
+-  · -- Prove numeral_cannot_be_initial
+-    intro h_header h_eq
+-    unfold has_valid_structure at h
+-    have h_auth := h.2.1 h_header h_eq
+-    cases h_auth
+-  · -- Prove seal_cannot_be_medial
+-    intro m h_mem
+-    unfold has_valid_structure at h
+-    have h_qual := h.2.2.2 m h_mem
+-    cases h_qual
++  ring_nf
+ 
+ -- State transition model
+ def add_state (l : Ledger) (st : State) : Ledger :=
 --- a/formal/lean/IndusLogic.lean
 +++ b/formal/lean/IndusLogic.lean
 @@ -1,3 +1,4 @@
@@ -33,3 +55,20 @@
 +  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
  
  end Harappan.CollapseOperator
+--- a/src/lean/Harappan/UniversalGrammar.lean
++++ b/src/lean/Harappan/UniversalGrammar.lean
+@@ -137,13 +137,7 @@
+ theorem head_final_postpositions (order : WordOrder)
+     (h : order.isHeadFinal) :
+     adpositionType order = "postposition" := by
+-  simp [adpositionType]
+-  intro hc
+-  cases order with
+-  | SOV => simp [WordOrder.isHeadInitial] at hc
+-  | OVS => simp [WordOrder.isHeadInitial] at hc
+-  | OSV => simp [WordOrder.isHeadInitial] at hc
+-  | _ => simp [WordOrder.isHeadFinal] at h
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (simp_all [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (unfold Harappan.UniversalGrammar.WordOrder.isHeadFinal Harappan.UniversalGrammar.adpositionType; decide; done) | (unfold Harappan.UniversalGrammar.WordOrder.isHeadFinal Harappan.UniversalGrammar.adpositionType; rfl; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; omega; done) | (intros; simp only [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; omega; done) | (intros; simp_all [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (intro x; cases x <;> simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (constructor <;> simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (norm_num [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (intros; norm_num [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType] at *; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; ring; done) | (unfold Harappan.UniversalGrammar.WordOrder.isHeadFinal Harappan.UniversalGrammar.adpositionType; ring; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; linarith; done) | (exact?; done)
+ 
+ /- Binary branching constraint -/
+ def satisfiesBinaryBranching : Phrase → Bool

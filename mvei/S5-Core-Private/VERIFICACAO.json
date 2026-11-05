@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -10,12 +10,92 @@
  "projects": [
   {
    "repo": "S5-Core-Private",
+   "path": ".",
+   "toolchain": "leanprover/lean4:stable",
+   "toolchain_used": "leanprover/lean4:v4.19.0",
+   "needs_mathlib": false,
+   "build_ok": false,
+   "build_seconds": 19.6,
+   "build_error": "",
+   "sorry_warnings": 1,
+   "reconstructed": true,
+   "bridges": [],
+   "declared_axioms": [],
+   "theorems": [
+    {
+     "name": "S5.Core.Harappan.Frac.mk.inj",
+     "module": "s5.sandbox.alt_logic.harappan.m002_frequency_analysis_classical",
+     "axioms": [],
+     "statement": "∀ {num den num_1 den_1 : Nat}, { num := num, den := den } = { num := num_1, den := den_1 } → num = num_1 ∧ den = den_1",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.Frac.mk.injEq",
+     "module": "s5.sandbox.alt_logic.harappan.m002_frequency_analysis_classical",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (num den num_1 den_1 : Nat),   ({ num := num, den := den } = { num := num_1, den := den_1 }) = (num = num_1 ∧ den = den_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.Frac.mk.sizeOf_spec",
+     "module": "s5.sandbox.alt_logic.harappan.m002_frequency_analysis_classical",
+     "axioms": [],
+     "statement": "∀ (num den : Nat), sizeOf { num := num, den := den } = 1 + sizeOf num + sizeOf den",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.chi_squared_M002",
+     "module": "s5.sandbox.alt_logic.harappan.m002_frequency_analysis_classical",
+     "axioms": [],
+     "statement": "S5.Core.Harappan.chi_squared S5.Core.Harappan.M002_freq S5.Core.Harappan.uniform_dist = { num := 80, den := 15 }",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.clm_har_m002_b",
+     "module": "s5.sandbox.alt_logic.harappan.m002_frequency_analysis_classical",
+     "axioms": [],
+     "statement": "¬S5.Core.Harappan.chi_squared S5.Core.Harappan.M002_freq S5.Core.Harappan.uniform_dist > S5.Core.Harappan.threshold",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.clm_har_m003_b",
+     "module": "s5.sandbox.alt_logic.harappan.m003_structural_patterns_classical",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "¬∃ pattern, S5.Core.Harappan.high_confidence pattern S5.Core.Harappan.M003_occurrences",
+     "status": "fechado"
+    }
+   ],
+   "integrity": [],
+   "note": "only the files with theorems the kernel closed are published",
+   "corrections": [
+    "imports-no-topo",
+    "vocabulario-lean4",
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor"
+   ],
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `s5.sandbox.alt_logic.harappan.m002_frequency_analysis_classical, .one `s5.sandbox.alt_logic.harappan.m003_structural_patterns_classical, .one `s5.sandbox.alt_logic.millennium.navier_stokes_classical, .one `s5.sandbox.alt_logic.millennium.p_vs_np_classical, .one `s5.sandbox.alt_logic.millennium.riemann_hypothesis_classical]\n",
+   "avulso": false,
+   "salvage": [],
+   "preenchimento": [],
+   "summary": {
+    "fechado": 6,
+    "aberto-sorry": 1,
+    "condicional": 0
+   },
+   "hora_commit_mvei": 1793812370
+  },
+  {
+   "repo": "S5-Core-Private",
    "path": "lean",
    "toolchain": "",
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 25.7,
+   "build_seconds": 18.4,
    "build_error": "",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -27,7 +107,8 @@
    "corrections": [
     "imports-no-topo",
     "vocabulario-lean4",
-    "z-provas-reparadas"
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor"
    ],
    "lakefile_gerado": "",
    "avulso": false,
@@ -344,7 +425,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   },
   {
    "repo": "S5-Core-Private",
@@ -353,7 +434,7 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 36.6,
+   "build_seconds": 20.7,
    "build_error": "",
    "sorry_warnings": 1,
    "reconstructed": true,
@@ -484,6 +565,68 @@
      "status": "fechado"
     },
     {
+     "name": "S5.Core.Harappan.Frac.mk.inj",
+     "module": "S5.Core.Harappan.M002_frequency_analysis",
+     "axioms": [],
+     "statement": "∀ {num den num_1 den_1 : Nat}, { num := num, den := den } = { num := num_1, den := den_1 } → num = num_1 ∧ den = den_1",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.Frac.mk.injEq",
+     "module": "S5.Core.Harappan.M002_frequency_analysis",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (num den num_1 den_1 : Nat),   ({ num := num, den := den } = { num := num_1, den := den_1 }) = (num = num_1 ∧ den = den_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.Frac.mk.sizeOf_spec",
+     "module": "S5.Core.Harappan.M002_frequency_analysis",
+     "axioms": [],
+     "statement": "∀ (num den : Nat), sizeOf { num := num, den := den } = 1 + sizeOf num + sizeOf den",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.chi_squared_M002",
+     "module": "S5.Core.Harappan.M002_frequency_analysis",
+     "axioms": [],
+     "statement": "S5.Core.Harappan.chi_squared S5.Core.Harappan.M002_freq S5.Core.Harappan.uniform_dist = { num := 80, den := 15 }",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.clm_har_m002_a",
+     "module": "S5.Core.Harappan.M002_frequency_analysis",
+     "axioms": [],
+     "statement": "¬S5.Core.Harappan.CLM_HAR_M002",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.clm_har_m002_amostra_minima",
+     "module": "S5.Core.Harappan.M002_frequency_analysis",
+     "axioms": [],
+     "statement": "S5.Core.Harappan.chi_squared [0, 4, 0, 2, 0] S5.Core.Harappan.uniform_dist > S5.Core.Harappan.threshold ∧   ¬S5.Core.Harappan.chi_squared S5.Core.Harappan.M002_freq S5.Core.Harappan.uniform_dist > S5.Core.Harappan.threshold",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.clm_har_m003_a",
+     "module": "S5.Core.Harappan.M003_structural_patterns",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "¬S5.Core.Harappan.CLM_HAR_M003",
+     "status": "fechado"
+    },
+    {
+     "name": "S5.Core.Harappan.clm_har_m003_amostra_minima",
+     "module": "S5.Core.Harappan.M003_structural_patterns",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "S5.Core.Harappan.high_confidence (fun c => c == 2) [2, 2, 2]",
+     "status": "fechado"
+    },
+    {
      "name": "S5.Core.Track.A.sizeOf_spec",
      "module": "S5.Core.Types",
      "axioms": [],
@@ -509,18 +652,19 @@
    "note": "only the files with theorems the kernel closed are published",
    "corrections": [
     "vocabulario-lean4",
-    "z-provas-reparadas"
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `S5, .submodules `S5]\n",
    "avulso": false,
    "salvage": [],
    "preenchimento": [],
    "summary": {
-    "fechado": 20,
+    "fechado": 28,
     "aberto-sorry": 1,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   }
  ]
 }

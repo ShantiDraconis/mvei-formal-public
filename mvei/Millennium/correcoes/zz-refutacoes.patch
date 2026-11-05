@@ -1,4 +1,103 @@
 --- /dev/null
++++ b/MVEI_Refutacoes_ChainOfCommand.lean
+@@ -0,0 +1,21 @@
++import «chain-of-command».lean4.ChainOfCommand
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `la2028_governance` é falso: nada nas hipóteses liga `infra.managed_by` a `auth`; com duas autoridades de
++    designações diferentes ("a" e "b") e todas as proposições `True`, a conclusão `infra.managed_by = auth` falha. -/
++theorem la2028_governance_falso :
++    ¬ ∀ (infra : LA2028Infrastructure) (auth : TzashAuthority),
++      auth.is_sovereign ∧ infra.corporate_control_forbidden ∧ infra.government_control_forbidden →
++      infra.managed_by = auth := by
++  intro h
++  have h1 := h ⟨⟨"a", True, True, True⟩, true, true, true, True, True⟩ ⟨"b", True, True, True⟩
++    ⟨trivial, trivial, trivial⟩
++  have h2 := congrArg TzashAuthority.designation h1
++  exact absurd h2 (by decide)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/MVEI_Refutacoes_MillenniumFramework.lean
+@@ -0,0 +1,26 @@
++import Contaminated.NotImported.lean4.MillenniumFramework
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open LocalGlobalFramework in
++/-- `LocalGlobalFramework.bridge_transfer` é falso (o próprio autor anota que falta injetividade de mapLocal):
++F₁ = (Bool, Bool, Bool, id, id) tem ponte (Φ = id); F₂ = (Bool, Unit, Bool, const (), id) não tem (Φ () teria de
++valer true e false); m = (id, const (), id) é morfismo com mapX sobrejetiva. -/
++theorem bridge_transfer_falso :
++    ¬ (∀ {F₁ F₂ : Framework.{0, 0, 0}} (m : FrameworkMorphism F₁ F₂),
++      Function.Surjective m.mapX → HasBridge F₁ → HasBridge F₂) := by
++  intro h
++  let F₁ : Framework.{0, 0, 0} := ⟨Bool, Bool, Bool, id, id⟩
++  let F₂ : Framework.{0, 0, 0} := ⟨Bool, Unit, Bool, fun _ => (), id⟩
++  let m : FrameworkMorphism F₁ F₂ := ⟨id, fun _ => (), id, fun _ => rfl, fun _ => rfl⟩
++  obtain ⟨Φ, hΦ⟩ := h m (fun y => ⟨y, rfl⟩) ⟨id, fun _ => rfl⟩
++  have h1 : Φ () = true := hΦ true
++  have h2 : Φ () = false := hΦ false
++  rw [h1] at h2
++  exact Bool.noConfusion h2
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formal/lean/MVEI_Refutacoes_UnifiedTUNS.lean
+@@ -0,0 +1,21 @@
++import Unified.TUNS
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Tiago_Universal_Novelty_Theorem` é falso: pede, para todos os domínios A e B, uma prova φ : A = B; mas os
++construtores de `MathDomain` são distintos (A = RH, B = NS dá RH = NS, falso por `MathDomain.noConfusion`). -/
++theorem Tiago_Universal_Novelty_Theorem_falso :
++    ¬ (∃ (U : UniversalObjects) (F : MathDomain → MathDomain) (_ : MathDomain.Functor F),
++      ∀ (A B : MathDomain), ∃ (φ : A = B),
++      (U.spectrum = {«λ» : ℂ | ∀ A, ∃ x, spectralValue A x = «λ»}) ∧
++      (U.energy.1 + U.energy.2.1 + U.energy.2.2.1 + U.energy.2.2.2 = 0) ∧
++      (∀ t, U.timeParam t A = U.timeParam t B)) := by
++  rintro ⟨U, F, _, h⟩
++  obtain ⟨φ, _⟩ := h MathDomain.RH MathDomain.NS
++  exact MathDomain.noConfusion φ
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formal/lean/MVEI_Refutacoes_UniversalSpectrum.lean
+@@ -0,0 +1,19 @@
++import TUNS.UniversalSpectrum
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open TUNS in
++/-- `TUNS.universal_spectrum_unique` é falso: `UniversalSpectrum` tem o campo de dados `universalMeasure : ℝ → ℝ≥0`;
++com todos os espectros vazios (compatibilidade trivial), as medidas 0 e 1 dão dois elementos distintos. -/
++theorem universal_spectrum_unique_falso : ¬ (∀ σ σ' : UniversalSpectrum, σ = σ') := by
++  intro h
++  let σ : UniversalSpectrum := ⟨fun _ => ⟨∅, 0⟩, fun _ _ _ => by simp, 0⟩
++  let σ' : UniversalSpectrum := ⟨fun _ => ⟨∅, 0⟩, fun _ _ _ => by simp, 1⟩
++  have h1 := congrArg (fun s => s.universalMeasure 0) (h σ σ')
++  simp [σ, σ'] at h1
++
++end MVEI.Refutacoes
+--- /dev/null
 +++ b/lean/MVEI_Refutacoes.lean
 @@ -0,0 +1,33 @@
 +import NavierStokes.LRE

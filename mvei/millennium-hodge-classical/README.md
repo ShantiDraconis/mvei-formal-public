@@ -11,39 +11,51 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `63d59b2c49c25d98d25ae462a57fe79cae26adfc`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `63d59b2c49c25d98d25ae462a57fe79cae26adfc`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `lean` | v4.12.0 | partial | 30 | 0 | 0 | 98 / 0 / 3 / 27 / 4 |
+| `lean` | v4.12.0 | partial | 30 | 0 | 0 | 101 / 0 / 14 / 9 / 8 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 128 |
-| Unique (name + statement) | 124 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 103 |
+| Counting each project | 131 |
+| Unique (name + statement) | 126 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 105 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
+| `Hodge.lefschetz11` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeCodeim0` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeTopCodeim` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeForCurves` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeForSurfaces` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeForAbelianLowDim` | `lean (file by file)` | open | `sorryAx` |
 | `Hodge.hodgeForProductOfCurves` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeImpliesForHyperplane` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeFromAbelian` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.standardBImpliesHodge` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.standardDImpliesHodge` | `lean (file by file)` | open | `sorryAx` |
+| `Hodge.hodgeForProducts` | `lean (file by file)` | open | `sorryAx` |
 | `Hodge.ellipticCurveHodgeDiamond` | `lean (file by file)` | open | `sorryAx` |
 | `Hodge.hodgeSymmetry'` | `lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 141 `theorem`/`lemma` (counting copies). The kernel checked 109 of them (106 closed, 0 conditional, 3 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 32 the kernel has no result:
+The `.lean` files of the verified commit declare 141 `theorem`/`lemma` (counting copies). The kernel checked 123 of them (109 closed, 0 conditional, 14 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 18 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 27 |
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 4 |
+| checked file by file: the written proof does not pass the kernel | 9 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 8 |
 | the file did not compile (an error in it or in a file it imports) | 1 |
 
 ### MVEI corrections
 
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 22 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-hodge-classical mvei/millennium-hodge-classical/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/zzz-nomes-ligados.patch` (nome usado no arquivo e declarado em outro arquivo do mesmo repositório, sem o import, 8 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-hodge-classical mvei/millennium-hodge-classical/correcoes/zzz-nomes-ligados.patch` (in order, after the ones above)
 
 ## Files in this folder
 

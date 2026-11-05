@@ -11,14 +11,14 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 3 | 0 | 17 | 1 / 0 / 15 / 3 / 20 |
 | `problems/p-vs-np/approximation-logic/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 1 / 0 / 0 / 2 / 0 |
 | `problems/p-vs-np/formal-proofs/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
-| `problems/p-vs-np/formalization/lean` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 3 / 4 / 0 |
+| `problems/p-vs-np/formalization/lean` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 3 / 2 / 2 |
 | `problems/p-vs-np/formalizations/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 0 / 0 |
 | `proofs/p-vs-np/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 3 / 0 |
 
@@ -76,13 +76,15 @@ The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting 
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 20 |
-| checked file by file: the written proof does not pass the kernel | 15 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 22 |
+| checked file by file: the written proof does not pass the kernel | 13 |
 
 ### MVEI corrections
 
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/sfh-formalization-lab mvei/sfh-formalization-lab/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 18 file(s)): applies to the published sources: `git apply -p1 --directory=imports/sfh-formalization-lab mvei/sfh-formalization-lab/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/sfh-formalization-lab mvei/sfh-formalization-lab/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/sfh-formalization-lab mvei/sfh-formalization-lab/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
 
 ## Files in this folder
 

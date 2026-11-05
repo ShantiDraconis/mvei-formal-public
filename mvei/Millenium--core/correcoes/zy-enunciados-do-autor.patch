@@ -1,0 +1,74 @@
+--- a/lean/Axioms.lean
++++ b/lean/Axioms.lean
+@@ -12,8 +12,7 @@
+   Status: Etapa 1 skeleton — all axioms stated; proofs pending.
+ -/
+ 
+-import TIF.Core
+-import Core.State
++import Core
+ 
+ namespace TIF
+ 
+--- a/lean/Core.lean
++++ b/lean/Core.lean
+@@ -64,7 +64,7 @@
+     May contain duplicates; use `Term.supportSet` (below) for a deduplicated view. -/
+ def Term.support : Term → List Nat
+   | Term.lit _ _    => []
+-  | Term.indet i    => [i.idx]
++  | Term.indet (Indeterminate.mk idx _) => [idx]
+   | Term.add t₁ t₂  => t₁.support ++ t₂.support
+   | Term.sub t₁ t₂  => t₁.support ++ t₂.support
+   | Term.mul t₁ t₂  => t₁.support ++ t₂.support
+--- a/lean/MilleniumCore/Eval.lean
++++ b/lean/MilleniumCore/Eval.lean
+@@ -23,6 +23,7 @@
+ -/
+ 
+ import MilleniumCore.State
++import Mathlib.Algebra.Field.Defs
+ 
+ namespace MilleniumCore
+ 
+--- a/lean/MilleniumCore/Expr.lean
++++ b/lean/MilleniumCore/Expr.lean
+@@ -20,6 +20,7 @@
+ -/
+ 
+ import MilleniumCore.IndetClass
++import Mathlib.Tactic.TypeStar
+ local notation "ℕ" => Nat
+ 
+ namespace MilleniumCore
+@@ -42,7 +43,7 @@
+     - `mul e₁ e₂`  : extended multiplication (e₁ ×ᵢ e₂)
+     - `div e₁ e₂`  : extended division      (e₁ /ᵢ e₂)
+ -/
+-inductive Expr (α : Type*) : Type* where
++inductive Expr (α : Type*) where
+   | var   : VarName → Expr α
+   | const : α → Expr α
+   | indet : IndetClass → Expr α
+--- a/lean/Semantics.lean
++++ b/lean/Semantics.lean
+@@ -12,9 +12,7 @@
+   Status: Etapa 1–2 skeleton — types defined; key theorems stated with sorry.
+ -/
+ 
+-import TIF.Core
+-import Core.Syntax
+-import Core.State
++import Core
+ 
+ noncomputable section
+ 
+@@ -31,7 +29,7 @@
+ /-- Check whether a valuation satisfies a constraint (Definition F3.1). -/
+ def Constraint.satisfiedBy (v : Valuation) : Constraint → Bool
+   | .exact  x c   => v x == c
+-  | .approx x c ε => (v x - c).abs < ε
++  | .approx x c ε => |v x - c| < ε
+ 
+ /-- A valuation is admissible for a state if it satisfies all constraints
+     (Definition F3.1). -/

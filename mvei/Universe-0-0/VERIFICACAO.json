@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -17,7 +17,7 @@
    "build_ok": false,
    "build_seconds": 0.0,
    "build_error": "error: ././././Complexity.lean:75:7: failed to infer binder type | error: ././././Complexity.lean:86:9: failed to infer binder type | error: ././././Complexity.lean:86:7: failed to infer binder type",
-   "sorry_warnings": 127,
+   "sorry_warnings": 124,
    "reconstructed": true,
    "bridges": [
     {
@@ -137,11 +137,6 @@
      "statement": "∀ (local_system global_system : SorrySingularity.Architecture),   ∃ bridge, bridge = SorrySingularity.singularity_value ∧ local_system.is_expanding ∧ global_system.is_expanding"
     },
     {
-     "name": "SorrySingularity.iphone_processing",
-     "module": "Foundations.SorrySingularity",
-     "statement": "∃ process, process SorrySingularity.singularity_value"
-    },
-    {
      "name": "SorrySingularity.neon_pulsation",
      "module": "Foundations.SorrySingularity",
      "statement": "∃ pulse, pulse SorrySingularity.singularity_value > 0"
@@ -150,11 +145,6 @@
      "name": "SorrySingularity.singularity_expansion",
      "module": "Foundations.SorrySingularity",
      "statement": "SorrySingularity.SorrySingularityProp"
-    },
-    {
-     "name": "SorrySingularity.sorry_idempotence",
-     "module": "Foundations.SorrySingularity",
-     "statement": "SorrySingularity.singularity_value * SorrySingularity.singularity_value = SorrySingularity.singularity_value"
     },
     {
      "name": "SorrySingularity.sorry_is_singularity",
@@ -281,6 +271,17 @@
      "status": "fechado"
     },
     {
+     "name": "SorrySingularity.iphone_processing",
+     "module": "Foundations.SorrySingularity",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∃ process, process SorrySingularity.singularity_value",
+     "status": "fechado"
+    },
+    {
      "name": "SorrySingularity.proof_illumination",
      "module": "Foundations.SorrySingularity",
      "axioms": [
@@ -317,6 +318,17 @@
      "status": "fechado"
     },
     {
+     "name": "SorrySingularity.singularity_value.eq_1",
+     "module": "Foundations.SorrySingularity",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "SorrySingularity.singularity_value = 0 / 0",
+     "status": "fechado"
+    },
+    {
      "name": "SorrySingularity.sorry_delta_collapse",
      "module": "Foundations.SorrySingularity",
      "axioms": [
@@ -339,6 +351,17 @@
      ],
      "statement": "∀ (z : ℂ), z ≠ ↑SorrySingularity.I",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "SorrySingularity.sorry_idempotence",
+     "module": "Foundations.SorrySingularity",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "SorrySingularity.singularity_value * SorrySingularity.singularity_value = SorrySingularity.singularity_value",
+     "status": "fechado"
     },
     {
      "name": "SorrySingularity.sorry_is_collapsed",
@@ -476,58 +499,55 @@
     }
    ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com Complexity, Core, FluidDynamics, Foundations, LA2028_Applications, LRE, Linker, Millennium, MillenniumProblems, RHGeometry, Riemann, S5_Singularity_Kernel, SingularityResolution, UncertaintyProtection e o Mathlib v4.19.0 (alguns arquivos com erro)",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com Complexity, Core, FluidDynamics, Foundations, LA2028_Applications, LRE, Linker, MVEI_Refutacoes_ImpossibilityTheorem, MVEI_Refutacoes_ImpossibilityTheorems, MVEI_Refutacoes_InfiniteBarrierGrowth, MVEI e o Mathlib v4.19.0 (alguns arquivos com erro)",
    "corrections": [],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Complexity, .submodules `Core, .one `FluidDynamics, .one `Foundations.ImpossibilityTheorem, .one `Foundations.ImpossibilityTheorems, .one `Foundations.LogicAndSetsDelta, .one `Foundations.SorrySingularity, .one `Foundations.StructuralResidueFramework, .submodules `LA2028_Applications, .submodules `LRE, .one `Linker, .submodules `Millennium, .one `MillenniumProblems, .submodules `MillenniumProblems, .submodules `RHGeometry, .submodules `Riemann, .one `S5_Singularity_Kernel, .submodules `SingularityResolution, .one `UncertaintyProtection, .submodules `UniversalCollapse, .submodules `UniversalOperator, .submodules `Universe00, .one `ZetaFunction]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Complexity, .submodules `Core, .one `FluidDynamics, .one `Foundations.ImpossibilityTheorem, .one `Foundations.ImpossibilityTheorems, .one `Foundations.LogicAndSetsDelta, .one `Foundations.SorrySingularity, .one `Foundations.StructuralResidueFramework, .submodules `LA2028_Applications, .submodules `LRE, .one `Linker, .one `MVEI_Refutacoes_ImpossibilityTheorem, .one `MVEI_Refutacoes_ImpossibilityTheorems, .one `MVEI_Refutacoes_InfiniteBarrierGrowth, .one `MVEI_Refutacoes_UncertaintyProtection, .submodules `Millennium, .one `MillenniumProblems, .submodules `MillenniumProblems, .submodules `RHGeometry, .submodules `Riemann, .one `S5_Singularity_Kernel, .submodules `SingularityResolution, .one `UncertaintyProtection, .submodules `UniversalCollapse, .submodules `UniversalOperator, .submodules `Universe00, .one `ZetaFunction]\n",
    "avulso": true,
    "salvage": [
     {
      "arquivo": "provers/lean/Complexity.lean",
      "linha": 98,
      "nome": "Universe00.Complexity.P_subset_NP",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "sorryAx"
-     ],
-     "erro": "linha 104: no goals to be solved",
-     "coluna": 2,
-     "trecho": "  ⟦u⟧se fun w cert => M w  -- Cert"
+     ]
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 116,
+     "linha": 104,
      "nome": "Universe00.Complexity.P_closed_under_reduction",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 119: elaboration function for 'Universe00.Complexity.«term_≤ₚ_»' has not been implemented L1 ≤ₚ L2",
+     "erro": "linha 107: elaboration function for 'Universe00.Complexity.«term_≤ₚ_»' has not been implemented L1 ≤ₚ L2",
      "coluna": 16,
      "trecho": "    (h_reduce : ⟦L⟧1 ≤ₚ L2) (h_P : InP L2) : InP"
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 121,
+     "linha": 109,
      "nome": "Universe00.Complexity.NP_closed_under_reduction",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 124: elaboration function for 'Universe00.Complexity.«term_≤ₚ_»' has not been implemented L1 ≤ₚ L2",
+     "erro": "linha 112: elaboration function for 'Universe00.Complexity.«term_≤ₚ_»' has not been implemented L1 ≤ₚ L2",
      "coluna": 16,
      "trecho": "    (h_reduce : ⟦L⟧1 ≤ₚ L2) (h_NP : InNP L2) : I"
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 136,
+     "linha": 124,
      "nome": "Universe00.Complexity.NPC_in_P_implies_P_eq_NP",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 140: unsolved goals L : Language h_npc : NPComplete L h_P : InP L L' : Language h_NP : InNP L' h_hard : NPHard L ⊢ InP L'",
+     "erro": "linha 128: unsolved goals L : Language h_npc : NPComplete L h_P : InP L L' : Language h_NP : InNP L' h_hard : NPHard L ⊢ InP L'",
      "coluna": 39,
      "trecho": "Language, InNP L' → InP L' := ⟦b⟧y"
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 150,
+     "linha": 138,
      "nome": "Universe00.Complexity.SAT_is_NPC",
      "status": "aberto-sorry",
      "axioms": [
@@ -536,7 +556,7 @@
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 157,
+     "linha": 145,
      "nome": "Universe00.Complexity.ThreeSAT_is_NPC",
      "status": "aberto-sorry",
      "axioms": [
@@ -545,7 +565,7 @@
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 171,
+     "linha": 159,
      "nome": "Universe00.Complexity.P_neq_NP_means_hard_problems",
      "status": "aberto-sorry",
      "axioms": [
@@ -554,7 +574,7 @@
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 176,
+     "linha": 164,
      "nome": "Universe00.Complexity.P_eq_NP_means_all_efficient",
      "status": "aberto-sorry",
      "axioms": [
@@ -563,7 +583,7 @@
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 187,
+     "linha": 175,
      "nome": "Universe00.Complexity.P_eq_NP_implies_NP_eq_coNP",
      "status": "aberto-sorry",
      "axioms": [
@@ -572,7 +592,7 @@
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 193,
+     "linha": 181,
      "nome": "Universe00.Complexity.verification_easier_than_search",
      "status": "aberto-sorry",
      "axioms": [
@@ -581,7 +601,7 @@
     },
     {
      "arquivo": "provers/lean/Complexity.lean",
-     "linha": 203,
+     "linha": 191,
      "nome": "Universe00.Complexity.Clique_is_NPC",
      "status": "aberto-sorry",
      "axioms": [
@@ -601,17 +621,14 @@
      "arquivo": "provers/lean/Core/AuthorAuthority.lean",
      "linha": 115,
      "nome": "Universe00.Core.all_blocks_verified",
-     "status": "erro",
+     "status": "condicional",
      "axioms": [
       "Universe00.Core.primary_orcid"
-     ],
-     "erro": "linha 122: no goals to be solved",
-     "coluna": 2,
-     "trecho": "  ⟦r⟧fl"
+     ]
     },
     {
      "arquivo": "provers/lean/Core/AuthorAuthority.lean",
-     "linha": 123,
+     "linha": 122,
      "nome": "Universe00.Core.orcid_identifies_author",
      "status": "aberto-sorry",
      "axioms": [
@@ -740,258 +757,429 @@
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 38,
      "nome": "Universe00.Foundations.Distinction.i_ne_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.Distinction.i_ne_complex"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 43,
      "nome": "Universe00.Foundations.Distinction.absolute_distinction_immutable",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.Distinction.i_ne_complex"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 48,
      "nome": "Universe00.Foundations.Distinction.reflexive_identity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 54,
      "nome": "Universe00.Foundations.Distinction.one_equals_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 58,
      "nome": "Universe00.Foundations.Distinction.i_equals_i",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 62,
      "nome": "Universe00.Foundations.Distinction.identity_exact",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 78,
      "nome": "Universe00.Foundations.Distinction.one_approx_one_at_all_scales",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 87,
      "nome": "Universe00.Foundations.Distinction.approx_implies_exact_for_same_value",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 94,
      "nome": "Universe00.Foundations.Distinction.i_not_ne_itself",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 102,
      "nome": "Universe00.Foundations.Distinction.one_not_ne_itself",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 108,
      "nome": "Universe00.Foundations.Distinction.self_distinction_contradicts_reflexivity",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 139,
      "nome": "Universe00.Foundations.Distinction.master_reconciliation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.Distinction.i_ne_complex"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 159,
      "nome": "Universe00.Foundations.Distinction.i_ne_i_implies_inconsistency",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 167,
      "nome": "Universe00.Foundations.Distinction.one_ne_one_implies_inconsistency",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 173,
      "nome": "Universe00.Foundations.Distinction.one_approx_one_valid",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 178,
      "nome": "Universe00.Foundations.Distinction.interpret_one_ne_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 190,
      "nome": "Universe00.Foundations.Distinction.interpret_i_ne_i",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 200,
      "nome": "Universe00.Foundations.Distinction.interpret_i_ne_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.Distinction.i_ne_complex"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 206,
      "nome": "Universe00.Foundations.Distinction.statement_interpretation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 226,
      "nome": "Universe00.Foundations.Distinction.correct_fundamental_axiom",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.Distinction.i_ne_complex"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/DistinctionAxioms.lean",
      "linha": 231,
      "nome": "Universe00.Foundations.Distinction.framework_consistency",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 77,
-     "nome": "ImpossibilityTheorem.Universe00.Impossibility.field_collapses_with_strong_cancellation",
-     "status": "aberto-sorry",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 105,
-     "nome": "ImpossibilityTheorem.Universe00.Impossibility.impossibility_in_fields",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.Distinction.i_ne_complex"
      ],
-     "erro": "linha 114: unknown identifier 'F'",
-     "coluna": 14,
-     "trecho": "  have : (1 : ⟦F⟧) = 0 := field_collapses_with",
-     "preenchimento": {
-      "resultado": "refutável",
-      "tatica": "first | (intro h; simp_all) | (intro h; exact @h PUnit PUnit.unit PUnit.unit rfl) | (intro h; exact @h Bool true true rfl) | (intro h; exact @h Nat 0 0 rfl) | (intro h; exact absurd (@h PUnit) (by simp)) | (decide)"
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
      }
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 140,
-     "nome": "ImpossibilityTheorem.zero_annihilation_fails",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 146: failed to synthesize Field ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "coluna": 35,
-     "trecho": "e h : weak_div 1 0 * 0 = 1 := ⟦d⟧ivision_property 1 0"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 228,
-     "nome": "ImpossibilityTheorem.ExtendedField.zero_div_zero_eq_I",
-     "status": "erro",
-     "axioms": []
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 238,
-     "nome": "ImpossibilityTheorem.ExtendedField.zero_mul_I_eq_I",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 240: unsolved goals F : Type u_1 inst✝ : Field F ⊢ sorry () = I",
-     "coluna": 57,
-     "trecho": "ul (ofField (0 : F)) I = I := ⟦b⟧y"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 243,
-     "nome": "ImpossibilityTheorem.ExtendedField.I_idempotent",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 245: typeclass instance problem is stuck, it is often due to metavariables Field ?m.3551",
-     "coluna": 23,
-     "trecho": "theorem I_idempotent : ⟦m⟧ul I I = I := by"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 248,
-     "nome": "ImpossibilityTheorem.ExtendedField.not_a_ring",
-     "status": "erro",
-     "axioms": []
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 299,
-     "nome": "ImpossibilityTheorem.field_cancellation",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 302: failed to synthesize OfNat F 0 numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is F due to the absence of the instance above Additional diagnostic information may be available using ",
-     "coluna": 49,
-     "trecho": "llation {a b c : F} (hc : c ≠ ⟦0⟧) (h : a * c = b * c) : a = b"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 306,
-     "nome": "ImpossibilityTheorem.zero_mul",
+     "linha": 48,
+     "nome": "ImpossibilityTheorem.strong_cancellation",
      "status": "fechado",
      "axioms": [
       "propext"
@@ -999,124 +1187,238 @@
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 353,
+     "linha": 55,
      "nome": "ImpossibilityTheorem.field_collapses_with_strong_cancellation",
-     "status": "condicional",
+     "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
-      "ImpossibilityTheorem.div_zero_const",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 368,
-     "nome": "ImpossibilityTheorem.nontrivial_field_no_strong_cancellation",
-     "status": "condicional",
+     "linha": 71,
+     "nome": "ImpossibilityTheorem.impossibility_in_fields",
+     "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
-      "ImpossibilityTheorem.div_zero_const",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 380,
-     "nome": "ImpossibilityTheorem.zero_division_requires_nonclassical_structure",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "ImpossibilityTheorem.div_zero_const",
-      "Quot.sound"
-     ],
-     "erro": "linha 417: invalid universe level in constructor 'Universe00.TotalizedAlgebra.Extended.val', parameter has type α at universe level u_1+1 which is not less than or equal to the inductive type's resulting universe level u_2+1",
-     "coluna": 2,
-     "trecho": "  ⟦|⟧ val : α → Extended α"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 468,
-     "nome": "Universe00.TotalizedAlgebra.zero_div_zero_is_I",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 476: unknown identifier 'Extended.val'",
-     "coluna": 11,
-     "trecho": "    div_I (⟦E⟧xtended.val (0 : ℂ)) (Extende"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 482,
-     "nome": "Universe00.TotalizedAlgebra.add_I_comm",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 489: function expected at Extended term has type ?m.13128",
-     "coluna": 63,
-     "trecho": "dd α] [AddCommGroup α] (a b : ⟦E⟧xtended α) :"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 492,
-     "nome": "Universe00.TotalizedAlgebra.mul_I_modified_comm",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 493: function expected at Extended term has type ?m.16769",
-     "coluna": 60,
-     "trecho": " : Type*} [CommRing α] (a b : ⟦E⟧xtended α) :"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
-     "linha": 496,
-     "nome": "Universe00.TotalizedAlgebra.classical_restriction",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 502: typeclass instance problem is stuck, it is often due to metavariables Field ?m.23564",
-     "coluna": 4,
-     "trecho": "    ⟦d⟧iv_I (.val a) (.val b) = .val"
-    },
-    {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
-     "linha": 53,
-     "nome": "Universe00.Foundations.Impossibility.field_collapse_with_total_division",
+     "linha": 105,
+     "nome": "ImpossibilityTheorem.zero_annihilation_fails",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx",
-      "Universe00.Foundations.Impossibility.strong_cancellation",
-      "Universe00.Foundations.Impossibility.total_div"
+      "Classical.choice",
+      "ImpossibilityTheorem.weak_div",
+      "Quot.sound"
      ],
-     "erro": "linha 74: application type mismatch strong_cancellation 1 0 0 h argument h has type total_div 1 0 = total_div 0 0 : Prop but is expected to have type total_div 1 0 = total_div 0 0 : Prop",
-     "coluna": 63,
-     "trecho": " := strong_cancellation 1 0 0 ⟦h⟧"
+     "erro": "linha 111: failed to synthesize Field ℕ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 35,
+     "trecho": "e h : weak_div 1 0 * 0 = 1 := ⟦d⟧ivision_property 1 0"
     },
     {
-     "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
-     "linha": 152,
-     "nome": "Universe00.Foundations.Impossibility.ExtendedNumber.i_equals_zero_div_zero",
-     "status": "aberto-sorry",
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 195,
+     "nome": "ImpossibilityTheorem.ExtendedField.zero_div_zero_eq_I",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 201,
+     "nome": "ImpossibilityTheorem.ExtendedField.zero_mul_I_eq_I",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 209,
+     "nome": "ImpossibilityTheorem.ExtendedField.I_idempotent",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 214,
+     "nome": "ImpossibilityTheorem.ExtendedField.not_a_ring",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 294,
+     "nome": "Universe00.Impossibility.field_cancellation",
+     "status": "erro",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "erro": "linha 300: application type mismatch mul_inv_cancel hc argument hc has type c ≠ 0 : Prop but is expected to have type ?m.5070 : Type ?u.5069",
+     "coluna": 28,
+     "trecho": "  simp only [mul_inv_cancel ⟦h⟧c, mul_one] at this",
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
+     }
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 302,
+     "nome": "Universe00.Impossibility.zero_mul",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 349,
+     "nome": "Universe00.Impossibility.field_collapses_with_strong_cancellation",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 364,
+     "nome": "Universe00.Impossibility.nontrivial_field_no_strong_cancellation",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 376,
+     "nome": "Universe00.Impossibility.zero_division_requires_nonclassical_structure",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 465,
+     "nome": "Universe00.TotalizedAlgebra.zero_div_zero_is_I",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 479,
+     "nome": "Universe00.TotalizedAlgebra.add_I_comm",
+     "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
+     ],
+     "erro": "linha 487: unsolved goals case val.val α : Type u_1 inst✝¹ : Add α inst✝ : AddCommGroup α a✝¹ a✝ : α ⊢ a✝¹ + a✝ = a✝ + a✝¹",
+     "coluna": 29,
+     "trecho": "    add_I a b = add_I b a := ⟦b⟧y"
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 489,
+     "nome": "Universe00.TotalizedAlgebra.mul_I_modified_comm",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorem.lean",
+     "linha": 493,
+     "nome": "Universe00.TotalizedAlgebra.classical_restriction",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
      ]
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
-     "linha": 162,
-     "nome": "Universe00.Foundations.Impossibility.ExtendedNumber.i_idempotent",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 165: typeclass instance problem is stuck, it is often due to metavariables Field ?m.5042",
-     "coluna": 46,
-     "trecho": "minate I) (indeterminate I) = ⟦i⟧ndeterminate I := by"
+     "linha": 48,
+     "nome": "Universe00.Foundations.Impossibility.strong_cancellation",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
-     "linha": 168,
+     "linha": 56,
+     "nome": "Universe00.Foundations.Impossibility.field_collapse_with_total_division",
+     "status": "erro",
+     "axioms": [
+      "propext"
+     ],
+     "erro": "linha 139: failed to synthesize Decidable (a = 0) Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 6,
+     "trecho": "      ⟦i⟧f a = 0 then classical 0 else"
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
+     "linha": 154,
+     "nome": "Universe00.Foundations.Impossibility.ExtendedNumber.i_equals_zero_div_zero",
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
+     "linha": 164,
+     "nome": "Universe00.Foundations.Impossibility.ExtendedNumber.i_idempotent",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
+     "linha": 170,
      "nome": "Universe00.Foundations.Impossibility.ExtendedNumber.add_i_absorbs",
      "status": "fechado",
      "axioms": [
@@ -1125,7 +1427,7 @@
     },
     {
      "arquivo": "provers/lean/Foundations/ImpossibilityTheorems.lean",
-     "linha": 197,
+     "linha": 199,
      "nome": "Universe00.Foundations.Impossibility.axiomatic_cost",
      "status": "fechado",
      "axioms": []
@@ -1174,153 +1476,402 @@
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 50,
      "nome": "Universe00.Foundations.numeric_classes_partition",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 60,
      "nome": "Universe00.Foundations.classes_mutually_exclusive",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 80,
      "nome": "Universe00.Foundations.complex_critical",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 85,
      "nome": "Universe00.Foundations.i_collapsed",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 99,
      "nome": "Universe00.Foundations.all_transitions_valid",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "erro": "linha 103: tactic 'cases' failed, major premise type is not an inductive type Transition Explanation: the 'cases' tactic is for constructor-based reasoning as well as for applying custom cases principles with a 'using' clause or a registered '@[cases_",
+     "coluna": 2,
+     "trecho": "  ⟦c⟧ases t <;> trivial",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 104,
      "nome": "Universe00.Foundations.i_plus_i",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "erro": "linha 109: unsolved goals case h i j : 𝕀 ⊢ DeltaSpace.ofI i + DeltaSpace.ofI j = DeltaSpace.ofSum 0 (sorry ())",
+     "coluna": 78,
+     "trecho": "I j = DeltaSpace.ofSum 0 k := ⟦b⟧y",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 112,
      "nome": "Universe00.Foundations.i_mul_one",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "erro": "linha 116: simp made no progress",
+     "coluna": 2,
+     "trecho": "  ⟦s⟧imp [DeltaSpace.mul]",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/NumericClassesI.lean",
      "linha": 123,
      "nome": "Universe00.Foundations.delta_i",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.delta_idempotent",
+      "Universe00.Foundations.delta_operator_exists"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 85,
      "nome": "Universe00.Foundations.RiemannHypothesis.phase_interference_lemma",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 101,
      "nome": "Universe00.Foundations.RiemannHypothesis.delta_collapse",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 122,
      "nome": "Universe00.Foundations.RiemannHypothesis.riemann_hypothesis",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.RiemannHypothesis.I_ne_1"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 145: failed to synthesize Nonempty 𝕀 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "coluna": 30,
+     "trecho": "  have i_instance : IConst := ⟦C⟧lassical.arbitrary IConst",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 149,
      "nome": "Universe00.Foundations.RiemannHypothesis.riemann_hypothesis_collapse",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.RiemannHypothesis.I_ne_1"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 164,
      "nome": "Universe00.Foundations.RiemannHypothesis.rh_equivalence",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 182,
      "nome": "Universe00.Foundations.RiemannHypothesis.no_zeros_right_of_critical",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 191: linarith failed to find a contradiction case a ε : ℝ h_ε : ε > 0 z : NonTrivialZero h_on_line : z.s ∈ CriticalLine a✝ : z.s.re > 1 / 2 ⊢ False failed",
+     "coluna": 2,
+     "trecho": "  ⟦l⟧inarith",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 192,
      "nome": "Universe00.Foundations.RiemannHypothesis.no_zeros_left_of_critical",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 199: linarith failed to find a contradiction case a ε : ℝ h_ε : ε > 0 z : NonTrivialZero h_on_line : z.s ∈ CriticalLine a✝ : 1 / 2 > z.s.re ⊢ False failed",
+     "coluna": 2,
+     "trecho": "  ⟦l⟧inarith",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 200,
      "nome": "Universe00.Foundations.RiemannHypothesis.prime_number_theorem_error",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 208,
      "nome": "Universe00.Foundations.RiemannHypothesis.rh_quantum_interpretation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 223,
      "nome": "Universe00.Foundations.RiemannHypothesis.consistency_with_computation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.RiemannHypothesis.I_ne_1"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/RiemannHypothesis.lean",
      "linha": 237,
      "nome": "Universe00.Foundations.RiemannHypothesis.strengthens_hardy",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.RiemannHypothesis.I_ne_1"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/Foundations/StructuralResidueFramework.lean",
@@ -1408,21 +1959,16 @@
      "arquivo": "provers/lean/LA2028_Applications/SchedulingComplexity.lean",
      "linha": 146,
      "nome": "LA2028.approximation_required",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 159: application type mismatch ESP events venues argument venues has type List Venues : Type ?u.7095 but is expected to have type List Venue : Type",
-     "coluna": 13,
-     "trecho": "  ESP events ⟦v⟧enues →"
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "provers/lean/LA2028_Applications/SchedulingComplexity.lean",
-     "linha": 185,
+     "linha": 187,
      "nome": "LA2028.LA2028_requires_approximation",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 193: application type mismatch And LA2028_data_valid argument LA2028_data_valid has type ∃ events venues, events.length = num_events ∧ venues.length = num_venues ∧ (∀ (e : Event), e ∈ events → e.athletes_count ≤ num_athletes) ∧ ∀ (v : Venue), v ",
+     "erro": "linha 195: application type mismatch And LA2028_data_valid argument LA2028_data_valid has type ∃ events venues, events.length = num_events ∧ venues.length = num_venues ∧ (∀ (e : Event), e ∈ events → e.athletes_count ≤ num_athletes) ∧ ∀ (v : Venue), v ",
      "coluna": 4,
      "trecho": "    ⟦L⟧A2028_data_valid ∧"
     },
@@ -1495,7 +2041,7 @@
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 69,
+     "linha": 60,
      "nome": "LRE.ProjectionSystem.closure_idempotent",
      "status": "fechado",
      "axioms": [
@@ -1504,7 +2050,7 @@
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 77,
+     "linha": 68,
      "nome": "LRE.ProjectionSystem.residue_zero_on_image",
      "status": "fechado",
      "axioms": [
@@ -1513,7 +2059,7 @@
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 83,
+     "linha": 74,
      "nome": "LRE.ProjectionSystem.residue_in_kernel",
      "status": "fechado",
      "axioms": [
@@ -1522,94 +2068,88 @@
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 97,
+     "linha": 88,
      "nome": "LRE.ProjectionSystem.residue_zero_iff_injective",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 108: simp made no progress",
-     "coluna": 4,
-     "trecho": "    ⟦s⟧imp at hx hy"
+      "propext"
+     ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 118,
+     "linha": 102,
      "nome": "LRE.ProjectionSystem.residue_exists_of_nontrivial_kernel",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 129: linarith failed to find a contradiction C : Type u_1 D : Type u_2 inst✝¹ : AddCommGroup C inst✝ : AddCommGroup D sys : ProjectionSystem C D h : C h_ne_zero : h ≠ 0 h_in_ker : sys.π h = 0 contra : h = 0 ⊢ False failed",
-     "coluna": 21,
-     "trecho": "  have : h = 0 := by ⟦l⟧inarith"
-    },
-    {
-     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 131,
-     "nome": "LRE.ProjectionSystem.residue_zero_iff_in_image",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 141: simp made no progress",
-     "coluna": 4,
-     "trecho": "    ⟦s⟧imp at h"
-    },
-    {
-     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 151,
-     "nome": "LRE.ProjectionSystem.residueFree_eq_image",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
+      "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 157,
-     "nome": "LRE.ProjectionSystem.residue_additive",
-     "status": "erro",
+     "linha": 114,
+     "nome": "LRE.ProjectionSystem.residue_zero_iff_in_image",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 164: unsolved goals C : Type u_1 D : Type u_2 inst✝¹ : AddCommGroup C inst✝ : AddCommGroup D sys : ProjectionSystem C D h_ι_add : ∀ (d₁ d₂ : D), sys.ι (d₁ + d₂) = sys.ι d₁ + sys.ι d₂ x y : C ⊢ x + y - (sys.ι (sys.π x) + sys.ι (sys.π y)) = x - sy",
-     "coluna": 57,
-     "trecho": ".residue x + sys.residue y := ⟦b⟧y"
+      "propext"
+     ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 181,
+     "linha": 130,
+     "nome": "LRE.ProjectionSystem.residueFree_eq_image",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
+     "linha": 136,
+     "nome": "LRE.ProjectionSystem.residue_additive",
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
+     "linha": 159,
      "nome": "LRE.ProjectionSystem.residueNorm_nonneg",
      "status": "erro",
      "axioms": [
       "sorryAx"
      ],
-     "erro": "linha 184: invalid field notation, function 'residueNorm' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
+     "erro": "linha 162: invalid field notation, function 'residueNorm' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
      "coluna": 6,
-     "trecho": "  0 ≤ ⟦n⟧sys.residueNorm x :="
+     "trecho": "  0 ≤ ⟦n⟧sys.residueNorm x :=",
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [LRE.ProjectionSystem.residueNorm]; done) | (simp_all [LRE.ProjectionSystem.residueNorm]; done) | (unfold LRE.ProjectionSystem.residueNorm; decide; done) | (unfold LRE.ProjectionSystem.residueNorm; rfl; done) | (simp [LRE.ProjectionSystem.residueNorm]; omega; done) | (intros; simp only [LRE.ProjectionSystem.residueNorm]; omega; done) | (intros; simp_all [LRE.ProjectionSystem.residueNorm]; done) | (intro x; cases x <;> simp [LRE.ProjectionSystem.residueNorm]; done) | (constructor <;> simp [LRE.ProjectionSystem.residueNorm]; done) | (norm_num [LRE.ProjectionSystem.residueNorm]; done) | (intros; norm_num [LRE.ProjectionSystem.residueNorm] at *; done) | (simp [LRE.ProjectionSystem.residueNorm]; ring; done) | (unfold LRE.ProjectionSystem.residueNorm; ring; done) | (simp [LRE.ProjectionSystem.residueNorm]; linarith; done) | (exact?; done)"
+     }
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 186,
+     "linha": 164,
      "nome": "LRE.ProjectionSystem.residueNorm_zero_iff",
      "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "erro": "linha 189: invalid field notation, function 'residueNorm' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
+     "erro": "linha 167: invalid field notation, function 'residueNorm' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
      "coluna": 2,
-     "trecho": "  ⟦n⟧sys.residueNorm x = 0 ↔ nsys."
+     "trecho": "  ⟦n⟧sys.residueNorm x = 0 ↔ nsys.",
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; done) | (simp_all [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; done) | (unfold LRE.ProjectionSystem.residue LRE.ProjectionSystem.residueNorm; decide; done) | (unfold LRE.ProjectionSystem.residue LRE.ProjectionSystem.residueNorm; rfl; done) | (simp [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; omega; done) | (intros; simp only [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; omega; done) | (intros; simp_all [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; done) | (intro x; cases x <;> simp [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; done) | (constructor <;> simp [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; done) | (norm_num [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; done) | (intros; norm_num [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm] at *; done) | (simp [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; ring; done) | (unfold LRE.ProjectionSystem.residue LRE.ProjectionSystem.residueNorm; ring; done) | (simp [LRE.ProjectionSystem.residue, LRE.ProjectionSystem.residueNorm]; linarith; done) | (exact?; done)"
+     }
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 237,
+     "linha": 215,
      "nome": "LRE.ProjectionSystem.IPhase_range",
      "status": "erro",
      "axioms": [
@@ -1618,13 +2158,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 240: invalid field notation, function 'IPhase' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
+     "erro": "linha 218: invalid field notation, function 'IPhase' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
      "coluna": 6,
      "trecho": "  0 ≤ ⟦i⟧sys.IPhase x ε hε ∧ isys.IPha"
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 248,
+     "linha": 226,
      "nome": "LRE.ProjectionSystem.IPhase_zero_iff_no_residue",
      "status": "erro",
      "axioms": [
@@ -1633,101 +2173,82 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 251: invalid field notation, function 'IPhase' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
+     "erro": "linha 229: invalid field notation, function 'IPhase' does not have argument with type (ProjectionSystem ...) that can be used, it must be explicit or implicit with a unique name",
      "coluna": 2,
      "trecho": "  ⟦i⟧sys.IPhase x ε hε = 0 ↔ isys."
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 292,
+     "linha": 270,
      "nome": "LRE.universal_residue_law",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 301: push_neg made no progress",
-     "coluna": 2,
-     "trecho": "  ⟦p⟧ush_neg at h_not_inj"
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 362,
+     "linha": 351,
      "nome": "kernel_add_closed",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 367: unsolved goals α : Type u_1 β : Type u_2 C : ContinuousDomain α D : DiscreteDomain β π : Projection C D x y : C.carrier hx : x ∈ {c | π.map c = D.zero} hy : y ∈ {c | π.map c = D.zero} ⊢ D.add (π.map x) (π.map y) = D.zero",
-     "coluna": 26,
-     "trecho": "  C.add x y ∈ kernel π := ⟦b⟧y"
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 370,
+     "linha": 361,
      "nome": "zero_in_kernel",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 383,
+     "linha": 374,
      "nome": "closure_idempotent",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 387: application type mismatch closure π argument π has type Projection C D : Type (max ?u.19914 ?u.19884) but is expected to have type Set ?m.19921 : Type ?u.19920",
-     "coluna": 10,
-     "trecho": "  closure ⟦π⟧ ι (closure π ι x) = closure "
-    },
-    {
-     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 390,
-     "nome": "closure_fixed_iff_in_image",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 394: application type mismatch closure π argument π has type Projection C D : Type (max ?u.20680 ?u.20650) but is expected to have type Set ?m.20687 : Type ?u.20686",
-     "coluna": 10,
-     "trecho": "  closure ⟦π⟧ ι x = x ↔ ∃ d, ι.lift d = x "
-    },
-    {
-     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 413,
-     "nome": "residue_in_kernel",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
+      "propext"
      ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 422,
+     "linha": 381,
+     "nome": "closure_fixed_iff_in_image",
+     "status": "fechado",
+     "axioms": []
+    },
+    {
+     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
+     "linha": 403,
+     "nome": "residue_in_kernel",
+     "status": "erro",
+     "axioms": [
+      "sorryAx"
+     ],
+     "erro": "linha 411: type mismatch D.zero_add ?m.22389 has type D.add D.zero ?m.22389 = ?m.22389 : Prop but is expected to have type D.add (π.map (C.neg (ι.lift (π.map x)))) (π.map x) = D.zero : Prop",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact D.zero_add _"
+    },
+    {
+     "arquivo": "provers/lean/LRE/StructuralResidue.lean",
+     "linha": 412,
      "nome": "residue_zero_iff_closure_fixed",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 426: application type mismatch closure π argument π has type Projection C D : Type (max ?u.23272 ?u.23213) but is expected to have type Set ?m.23279 : Type ?u.23278",
-     "coluna": 35,
-     "trecho": "idue π ι x = C.zero ↔ closure ⟦π⟧ ι x = x := by"
+     "status": "fechado",
+     "axioms": []
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 438,
+     "linha": 428,
      "nome": "closure_eliminates_residue",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 442: application type mismatch closure π argument π has type Projection C D : Type (max ?u.23680 ?u.23650) but is expected to have type Set ?m.23710 : Type ?u.23709",
-     "coluna": 23,
-     "trecho": "  residue π ι (closure ⟦π⟧ ι x) = C.zero := by"
+      "propext"
+     ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 452,
+     "linha": 442,
      "nome": "injective_iff_trivial_kernel",
      "status": "erro",
      "axioms": [
@@ -1735,28 +2256,24 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 477: invalid field 'add_zero', the environment does not contain 'DiscreteDomain.add_zero' D has type DiscreteDomain β",
+     "erro": "linha 467: invalid field 'add_zero', the environment does not contain 'DiscreteDomain.add_zero' D has type DiscreteDomain β",
      "coluna": 51,
      "trecho": ".map y) (D.zero) = π.map y := ⟦D⟧.add_zero _"
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 482,
+     "linha": 472,
      "nome": "lre_main_theorem",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 489: unsolved goals α : Type u_1 β : Type u_2 C : ContinuousDomain α D : DiscreteDomain β π : Projection C D ι : Reconstruction C D π non_injective : ¬projection_injective π h_all_zero : ∀ (x : C.carrier), (R[π,ι]x) = C.zero ⊢ False",
-     "coluna": 45,
-     "trecho": "er, residue π ι x ≠ C.zero := ⟦b⟧y"
+     ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 513,
+     "linha": 501,
      "nome": "non_trivial_kernel_implies_residue",
      "status": "aberto-sorry",
      "axioms": [
@@ -1768,16 +2285,16 @@
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 528,
+     "linha": 516,
      "nome": "universal_zero_residue_implies_injective",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
+      "propext"
      ]
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 559,
+     "linha": 545,
      "nome": "i_phase_properties",
      "status": "aberto-sorry",
      "axioms": [
@@ -1789,22 +2306,21 @@
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 576,
+     "linha": 562,
      "nome": "lre_classical_consistency",
      "status": "fechado",
      "axioms": []
     },
     {
      "arquivo": "provers/lean/LRE/StructuralResidue.lean",
-     "linha": 584,
+     "linha": 570,
      "nome": "lre_information_loss",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 607: application type mismatch closure π argument π has type Projection C D : Type (max u_3 u_4) but is expected to have type Set ?m.29605 : Type ?u.29604",
-     "coluna": 31,
-     "trecho": "     have hfix : ∀ z, closure ⟦π⟧ ι z = z := by"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "provers/lean/Linker.lean",
@@ -1857,6 +2373,62 @@
      "trecho": "    ⟦a⟧chieves_30_percent_reduction "
     },
     {
+     "arquivo": "provers/lean/MVEI_Refutacoes_ImpossibilityTheorem.lean",
+     "linha": 10,
+     "nome": "MVEI.Refutacoes.zero_division_requires_nonclassical_structure_falso",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Foundations.ImpossibilityTheorem"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/MVEI_Refutacoes_ImpossibilityTheorems.lean",
+     "linha": 8,
+     "nome": "MVEI.Refutacoes.field_collapse_with_total_division_falso",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Foundations.ImpossibilityTheorems"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/MVEI_Refutacoes_InfiniteBarrierGrowth.lean",
+     "linha": 8,
+     "nome": "MVEI.Refutacoes.infinite_barrier_growth_falso",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "UncertaintyProtection"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/MVEI_Refutacoes_UncertaintyProtection.lean",
+     "linha": 10,
+     "nome": "MVEI.Refutacoes.escalating_protection_falso",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "UncertaintyProtection"
+     ]
+    },
+    {
      "arquivo": "provers/lean/Millennium/Complexity.lean",
      "linha": 160,
      "nome": "Millennium.Complexity.P_eq_NP_implies_NPComplete_in_P",
@@ -1881,61 +2453,71 @@
     },
     {
      "arquivo": "provers/lean/NetworkConnectivity/Basic.lean",
-     "linha": 84,
+     "linha": 85,
      "nome": "Universe00.Network.universal_connectivity",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/Basic.olean' of module Universe00.Foundations.Basic does not exist"
+     "dependencia_com_sorry": [
+      "NumericClasses00"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-ak_yssmw/p/.lake/mvei-salvage/Universe00/Foundations/Basic.olean' of module Universe00.Foundations.Basic does not exist",
+     "ponte_de_modulo": {
+      "NumericClasses00": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "provers/lean/NetworkConnectivity/Basic.lean",
-     "linha": 107,
+     "linha": 108,
      "nome": "Universe00.Network.resilience_preservation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/Basic.olean' of module Universe00.Foundations.Basic does not exist"
+     "dependencia_com_sorry": [
+      "NumericClasses00"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-ak_yssmw/p/.lake/mvei-salvage/Universe00/Foundations/Basic.olean' of module Universe00.Foundations.Basic does not exist",
+     "ponte_de_modulo": {
+      "NumericClasses00": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "provers/lean/NetworkConnectivity/Basic.lean",
-     "linha": 134,
+     "linha": 135,
      "nome": "Universe00.Network.global_ping_success",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/Basic.olean' of module Universe00.Foundations.Basic does not exist"
+     "dependencia_com_sorry": [
+      "NumericClasses00"
+     ],
+     "motivo": "object file '/tmp/mvei-rec-ak_yssmw/p/.lake/mvei-salvage/Universe00/Foundations/Basic.olean' of module Universe00.Foundations.Basic does not exist",
+     "ponte_de_modulo": {
+      "NumericClasses00": "outra pasta do repositório"
+     }
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
      "linha": 68,
      "nome": "Universe00.RHGeometry.ComplexNodeGeometry.Z_n_pos",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 72: tactic 'apply' failed, failed to unify 0 < √?x ↔ 0 < ?x with 0 < √(g.a_n ^ 2 + g.b ^ 2) g : ComplexNodeGeometry ⊢ 0 < √(g.a_n ^ 2 + g.b ^ 2)",
-     "coluna": 2,
-     "trecho": "  ⟦a⟧pply Real.sqrt_pos"
+     ]
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 89,
+     "linha": 86,
      "nome": "Universe00.RHGeometry.ComplexNodeGeometry.phase_angle_bounded",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 95: tactic 'apply' failed, failed to unify -(Real.pi / 2) < Real.arctan ?x with -Real.pi / 2 < Real.arctan (g.b / g.a_n) case left g : ComplexNodeGeometry ⊢ -Real.pi / 2 < Real.arctan (g.b / g.a_n)",
-     "coluna": 4,
-     "trecho": "  · ⟦a⟧pply Real.neg_pi_div_two_lt_a"
+     ]
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 119,
+     "linha": 117,
      "nome": "Universe00.RHGeometry.TransitionOperator.distance_metric_nonneg",
      "status": "aberto-sorry",
      "axioms": [
@@ -1947,7 +2529,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 126,
+     "linha": 124,
      "nome": "Universe00.RHGeometry.TransitionOperator.distance_metric_pos",
      "status": "aberto-sorry",
      "axioms": [
@@ -1959,22 +2541,18 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 146,
+     "linha": 144,
      "nome": "Universe00.RHGeometry.TransitionOperator.apply_preserves_imaginary",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 150: unsolved goals op : TransitionOperator source : ℂ geometries : List ComplexNodeGeometry ⊢ ((Complex.exp (-↑(op.distance_metric geometries))).im = 0 ∨ 1 + Complex.exp (-↑(op.distance_metric geometries)) = 0) ∨ 1 / 2 - source.re = 0",
-     "coluna": 51,
-     "trecho": "geometries).im = source.im := ⟦b⟧y"
+     ]
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 154,
+     "linha": 151,
      "nome": "Universe00.RHGeometry.TransitionOperator.apply_toward_critical_line",
      "status": "aberto-sorry",
      "axioms": [
@@ -1986,7 +2564,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 188,
+     "linha": 185,
      "nome": "Universe00.RHGeometry.DualZeroStates.primary_on_critical_line",
      "status": "fechado",
      "axioms": [
@@ -1997,7 +2575,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 195,
+     "linha": 192,
      "nome": "Universe00.RHGeometry.DualZeroStates.inverse_magnitude_grows",
      "status": "aberto-sorry",
      "axioms": [
@@ -2009,7 +2587,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 200,
+     "linha": 197,
      "nome": "Universe00.RHGeometry.DualZeroStates.inverse_phase_preserved",
      "status": "aberto-sorry",
      "axioms": [
@@ -2021,7 +2599,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 211,
+     "linha": 208,
      "nome": "Universe00.RHGeometry.triangle_inequality",
      "status": "aberto-sorry",
      "axioms": [
@@ -2033,17 +2611,17 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 221,
+     "linha": 218,
      "nome": "Universe00.RHGeometry.distance_metric_converges",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 230: application type mismatch { n := i, t := t, t_pos := t_pos } argument t_pos has type ?m.3530 : Sort ?u.3529 but is expected to have type 0 < t : Prop",
+     "erro": "linha 227: application type mismatch { n := i, t := t, t_pos := t_pos } argument t_pos has type ?m.3530 : Sort ?u.3529 but is expected to have type 0 < t : Prop",
      "coluna": 61,
      "trecho": "omplexNodeGeometry.Z_n ⟨i, t, ⟦t⟧_pos⟩) 0"
     },
     {
      "arquivo": "provers/lean/RHGeometry/ComplexTransition.lean",
-     "linha": 233,
+     "linha": 230,
      "nome": "Universe00.RHGeometry.dual_zeros_same_singularity",
      "status": "aberto-sorry",
      "axioms": [
@@ -2093,47 +2671,38 @@
      "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
      "linha": 123,
      "nome": "Universe00.RHGeometry.FlowTensor.conservation_score_nonneg",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "erro": "linha 128: tactic 'split_ifs' failed, no if-then-else conditions to split n : ℕ F : FlowTensor n ⊢ 0 ≤ let diffs := ∑ i, |F.row_sum i - F.col_sum i|; let total := ∑ i, F.row_sum i + ∑ j, F.col_sum j; if total > 0 then max 0 (1 - diffs / total) else 1",
-     "coluna": 2,
-     "trecho": "  ⟦s⟧plit_ifs"
-    },
-    {
-     "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 131,
-     "nome": "Universe00.RHGeometry.FlowTensor.conservation_score_le_one",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "erro": "linha 136: tactic 'split_ifs' failed, no if-then-else conditions to split n : ℕ F : FlowTensor n ⊢ (let diffs := ∑ i, |F.row_sum i - F.col_sum i|; let total := ∑ i, F.row_sum i + ∑ j, F.col_sum j; if total > 0 then max 0 (1 - diffs / total) else 1) ≤ ",
-     "coluna": 2,
-     "trecho": "  ⟦s⟧plit_ifs"
-    },
-    {
-     "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 139,
-     "nome": "Universe00.RHGeometry.FlowTensor.perfect_conservation_score_one",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 147,
+     "linha": 132,
+     "nome": "Universe00.RHGeometry.FlowTensor.conservation_score_le_one",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
+     "linha": 146,
+     "nome": "Universe00.RHGeometry.FlowTensor.perfect_conservation_score_one",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
+     "linha": 153,
      "nome": "Universe00.RHGeometry.FlowTensor.permute_refl",
      "status": "fechado",
      "axioms": [
@@ -2144,19 +2713,18 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 154,
+     "linha": 160,
      "nome": "Universe00.RHGeometry.FlowTensor.permute_trans",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 160,
+     "linha": 164,
      "nome": "Universe00.RHGeometry.FlowTensor.completely_invariant_uniform_diagonal",
      "status": "aberto-sorry",
      "axioms": [
@@ -2168,7 +2736,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 207,
+     "linha": 211,
      "nome": "Universe00.RHGeometry.NetworkTopology.fully_connected_max_score",
      "status": "aberto-sorry",
      "axioms": [
@@ -2180,7 +2748,7 @@
     },
     {
      "arquivo": "provers/lean/RHGeometry/FlowTensor.lean",
-     "linha": 236,
+     "linha": 240,
      "nome": "Universe00.RHGeometry.NetworkStability.stability_bounded",
      "status": "aberto-sorry",
      "axioms": [
@@ -2283,128 +2851,373 @@
      "linha": 52,
      "nome": "RiemannHypothesis.delta_collapse_theorem",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.collapse_trigger",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.delta_operator_exists"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 55: unsolved goals s : ℂ hanom : isAnomalousZero s hbound : Phi_bounded s hzeta_I : ζ_I s = 0 ⊢ Sort ?u.722 s : ℂ hanom : isAnomalousZero s hbound : Phi_bounded s hzeta_I : ζ_I s = 0 ⊢ ?m.723",
+     "coluna": 56,
+     "trecho": " s → Phi_bounded s → I = 1 := ⟦b⟧y",
+     "motivo": "importa RiemannHypothesis.IConstant, RiemannHypothesis.RegularizedZeta, Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/DeltaCollapse.lean",
      "linha": 75,
      "nome": "RiemannHypothesis.nontrivial_dichotomy",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 82: unknown constant 'RiemannHypothesis.onCriticalLine_iff.mpr'",
+     "coluna": 10,
+     "trecho": "    exact ⟦o⟧nCriticalLine_iff.mpr h",
+     "motivo": "importa RiemannHypothesis.IConstant, RiemannHypothesis.RegularizedZeta, Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/DeltaCollapse.lean",
      "linha": 85,
      "nome": "RiemannHypothesis.riemann_hypothesis",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.collapse_trigger",
+      "RiemannHypothesis.i_neq_one",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.delta_operator_exists"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/DeltaCollapse.lean",
      "linha": 111,
      "nome": "RiemannHypothesis.all_zeros_on_critical_line",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.collapse_trigger",
+      "RiemannHypothesis.i_neq_one",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.delta_operator_exists"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 129: unknown constant 'RiemannHypothesis.onCriticalLine_iff.mp'",
+     "coluna": 12,
+     "trecho": "      exact ⟦o⟧nCriticalLine_iff.mp this",
+     "motivo": "importa RiemannHypothesis.IConstant, RiemannHypothesis.RegularizedZeta, Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/DeltaCollapse.lean",
      "linha": 130,
      "nome": "RiemannHypothesis.no_anomalous_zeros",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.collapse_trigger",
+      "RiemannHypothesis.i_neq_one",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.delta_operator_exists"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/DeltaCollapse.lean",
      "linha": 151,
      "nome": "RiemannHypothesis.critical_line_is_zero_locus",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.collapse_trigger",
+      "RiemannHypothesis.i_neq_one",
+      "Universe00.Foundations.IConst",
+      "Universe00.Foundations.delta_operator_exists"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 158: unknown constant 'RiemannHypothesis.onCriticalLine_iff.mp'",
+     "coluna": 8,
+     "trecho": "  exact ⟦o⟧nCriticalLine_iff.mp this",
+     "motivo": "importa RiemannHypothesis.IConstant, RiemannHypothesis.RegularizedZeta, Universe00.Foundations.LogicAndSetsDelta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 60,
      "nome": "RiemannHypothesis.i_in_unit_interval",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 63,
      "nome": "RiemannHypothesis.i_nonneg",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 66,
      "nome": "RiemannHypothesis.i_le_one",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 80,
      "nome": "RiemannHypothesis.phase_trichotomy",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 94,
      "nome": "RiemannHypothesis.coherent_not_anomalous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 102,
      "nome": "RiemannHypothesis.anomalous_not_collapsed",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 110,
      "nome": "RiemannHypothesis.coherent_not_collapsed",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 118,
      "nome": "RiemannHypothesis.not_collapsed",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.i_neq_one"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 123,
      "nome": "RiemannHypothesis.coherent_or_anomalous",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.i_neq_one"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 142,
      "nome": "RiemannHypothesis.embed_complex_injective",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 147: tactic 'rfl' failed, the left-hand side z is not definitionally equal to the right-hand side w case refl z w : ℂ ⊢ z = w",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧fl",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
@@ -2412,7 +3225,18 @@
      "nome": "RiemannHypothesis.embed_add",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 153: unsolved goals z w : ℂ ⊢ sorry ()",
+     "coluna": 63,
+     "trecho": "omplex z + embed_complex w := ⟦b⟧y",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
@@ -2420,151 +3244,422 @@
      "nome": "RiemannHypothesis.embed_mul",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 158: unsolved goals z w : ℂ ⊢ sorry ()",
+     "coluna": 63,
+     "trecho": "omplex z * embed_complex w := ⟦b⟧y",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 165,
      "nome": "RiemannHypothesis.dampingFactor_ne_zero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 170,
      "nome": "RiemannHypothesis.dampingFactor_coherent",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 176: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact Complex.exp_zero",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 177,
      "nome": "RiemannHypothesis.dampingFactor_bounded",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/IConstant.lean",
      "linha": 199,
      "nome": "RiemannHypothesis.consistency",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 201: unsolved goals h : 0 = 1 ⊢ False",
+     "coluna": 37,
+     "trecho": " consistency : (0 : ℂ) ≠ 1 := ⟦b⟧y",
+     "motivo": "importa Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/InfiniteFrequencyRefutation.lean",
      "linha": 131,
      "nome": "RiemannHypothesis.InfiniteFrequency.zero_duality_refutation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/InfiniteFrequencyRefutation.lean",
      "linha": 151,
      "nome": "RiemannHypothesis.InfiniteFrequency.zeros_not_unique",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 175: function expected at network term has type ?m.9581",
+     "coluna": 18,
+     "trecho": "    Complex.abs ((⟦n⟧etwork n).Z_n - s) < 1 / netw",
+     "motivo": "importa RiemannHypothesis.IConstant, Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/InfiniteFrequencyRefutation.lean",
      "linha": 176,
      "nome": "RiemannHypothesis.InfiniteFrequency.rh_as_circular_circuit",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/InfiniteFrequencyRefutation.lean",
      "linha": 198,
      "nome": "RiemannHypothesis.InfiniteFrequency.load_distribution_optimal",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RegularizedZeta.lean",
      "linha": 53,
      "nome": "RiemannHypothesis.zeta_I_zero_preservation",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 61: no goals to be solved",
+     "coluna": 2,
+     "trecho": "  ⟦e⟧xact mul_zero (dampingFactor ",
+     "motivo": "importa RiemannHypothesis.IConstant, Universe00.Foundations.LogicAndSetsDelta, Universe00.Foundations.NumericClassesI, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RegularizedZeta.lean",
      "linha": 62,
      "nome": "RiemannHypothesis.zeta_I_classical_limit",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RegularizedZeta.lean",
      "linha": 69,
      "nome": "RiemannHypothesis.zeta_I_nonzero_of_zeta_nonzero",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RegularizedZeta.lean",
      "linha": 87,
      "nome": "RiemannHypothesis.onCriticalLine_iff",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RegularizedZeta.lean",
      "linha": 136,
      "nome": "RiemannHypothesis.damping_preserves_symmetry",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.IConstant",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RiemannProof.lean",
      "linha": 50,
      "nome": "RiemannHypothesis.RIEMANN_HYPOTHESIS",
      "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound",
+      "RiemannHypothesis.i_neq_one"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.DeltaCollapse",
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "erro": "linha 62: unknown constant 'RiemannHypothesis.onCriticalLine_iff.mp'",
+     "coluna": 8,
+     "trecho": "  exact ⟦o⟧nCriticalLine_iff.mp this",
+     "motivo": "importa RiemannHypothesis.DeltaCollapse, RiemannHypothesis.IConstant, RiemannHypothesis.RegularizedZeta, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RiemannProof.lean",
      "linha": 102,
      "nome": "RiemannHypothesis.RH_critical_line_version",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.DeltaCollapse",
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RiemannProof.lean",
      "linha": 109,
      "nome": "RiemannHypothesis.RH_no_zeros_off_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.DeltaCollapse",
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RiemannProof.lean",
      "linha": 115,
      "nome": "RiemannHypothesis.RH_no_anomalous_zeros",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.DeltaCollapse",
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/RiemannHypothesis/RiemannProof.lean",
      "linha": 127,
      "nome": "RiemannHypothesis.critical_strip_equals_critical_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/RiemannHypothesis/IConstant.olean' of module RiemannHypothesis.IConstant does not exist — RiemannHypothesis.IConstant não compilou: /tmp/mvei-rec-euv3djh1/p/RiemannHypothesis/IConstant.lean:16:0: error: object file '/tmp/mvei-rec-euv3djh1/p/.lake/mvei-salvage/Universe00/Foundations/LogicAndSetsDelta.olean' of module Universe00.Foundations.LogicAndSetsDelta does not exist"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "RiemannHypothesis.DeltaCollapse",
+      "RiemannHypothesis.IConstant",
+      "RiemannHypothesis.RegularizedZeta",
+      "Universe00.Foundations.LogicAndSetsDelta",
+      "Universe00.Foundations.NumericClassesI"
+     ],
+     "ponte_de_modulo": {
+      "Universe00.Foundations.LogicAndSetsDelta": "prefixo do pacote",
+      "Universe00.Foundations.NumericClassesI": "prefixo do pacote"
+     }
     },
     {
      "arquivo": "provers/lean/S5_Singularity_Kernel.lean",
@@ -2672,20 +3767,16 @@
      "arquivo": "provers/lean/UncertaintyProtection.lean",
      "linha": 210,
      "nome": "UncertaintyProtection.infinite_barrier_growth",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 223: unsolved goals case zero base_strength : ℝ h : 0 < base_strength h_growth : 1 < 1.08 ⊢ False",
-     "coluna": 11,
-     "trecho": "    | zero ⟦=⟧>"
+     ]
     },
     {
      "arquivo": "provers/lean/UniversalOperator/OperatorCore.lean",
-     "linha": 105,
+     "linha": 106,
      "nome": "spectrum_is_real",
      "status": "aberto-sorry",
      "axioms": [
@@ -2697,7 +3788,7 @@
     },
     {
      "arquivo": "provers/lean/UniversalOperator/OperatorCore.lean",
-     "linha": 110,
+     "linha": 111,
      "nome": "fredholm_essential_spectrum",
      "status": "aberto-sorry",
      "axioms": [
@@ -2740,7 +3831,7 @@
      "dependencia_com_sorry": [
       "UniversalOperator.OperatorCore"
      ],
-     "erro": "linha 133: invalid field notation, type is not of the form (C ...) where C is a constant D.Δ has type ?m.7768",
+     "erro": "linha 133: invalid field notation, type is not of the form (C ...) where C is a constant D.Δ has type ?m.9234",
      "coluna": 3,
      "trecho": "  (⟦D⟧.Δ.laplacian represents \"geom",
      "motivo": "importa UniversalOperator.OperatorCore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -2896,7 +3987,7 @@
       "UniversalOperator.OperatorCore",
       "UniversalOperator.OperatorDecomposition"
      ],
-     "erro": "linha 125: function expected at eval term has type ?m.9866",
+     "erro": "linha 125: function expected at eval term has type ?m.10488",
      "coluna": 17,
      "trecho": "   ∀ assignment, ⟦e⟧val φ assignment = false) := ",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -2916,7 +4007,7 @@
       "UniversalOperator.OperatorCore",
       "UniversalOperator.OperatorDecomposition"
      ],
-     "erro": "linha 140: function expected at speed term has type ?m.10192",
+     "erro": "linha 140: function expected at speed term has type ?m.10826",
      "coluna": 3,
      "trecho": "  (⟦s⟧peed quantum_alg) / (speed cl",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -2931,7 +4022,7 @@
       "UniversalOperator.OperatorCore",
       "UniversalOperator.OperatorDecomposition"
      ],
-     "erro": "linha 153: don't know how to synthesize implicit argument 'Measure' @levelSpacingDistribution UniversalUnificationOperator (?m.10756 C) (?m.10757 C) C context: UniversalUnificationOperator : Sort ?u.10735 C : UniversalUnificationOperator ⊢ ?m.10756 C ",
+     "erro": "linha 153: don't know how to synthesize implicit argument 'Measure' @levelSpacingDistribution UniversalUnificationOperator (?m.11426 C) (?m.11427 C) C context: UniversalUnificationOperator : Sort ?u.11405 C : UniversalUnificationOperator ⊢ ?m.11426 C ",
      "coluna": 2,
      "trecho": "  ⟦l⟧evelSpacingDistribution C = s",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -2962,7 +4053,7 @@
       "UniversalOperator.OperatorDecomposition",
       "UniversalOperator.SpectralTheory"
      ],
-     "erro": "linha 48: don't know how to synthesize implicit argument 'MathematicalStateSpace' @universalSchrodingerEquation UniversalUnificationOperator (?m.1776 C) C (spectralExpansion C) context: UniversalUnificationOperator : Sort ?u.1760 C : UniversalUnifica",
+     "erro": "linha 48: don't know how to synthesize implicit argument 'MathematicalStateSpace' @universalSchrodingerEquation UniversalUnificationOperator (?m.1839 C) C (spectralExpansion C) context: UniversalUnificationOperator : Sort ?u.1823 C : UniversalUnifica",
      "coluna": 2,
      "trecho": "  ⟦u⟧niversalSchrodingerEquation C",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, UniversalOperator.SpectralTheory, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -2978,7 +4069,7 @@
       "UniversalOperator.OperatorDecomposition",
       "UniversalOperator.SpectralTheory"
      ],
-     "erro": "linha 60: invalid field notation, type is not of the form (C ...) where C is a constant MathematicalStateSpace has type Sort ?u.1856",
+     "erro": "linha 60: invalid field notation, type is not of the form (C ...) where C is a constant MathematicalStateSpace has type Sort ?u.1919",
      "coluna": 2,
      "trecho": "  ⟦M⟧athematicalStateSpace.innerPr",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, UniversalOperator.SpectralTheory, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -2994,7 +4085,7 @@
       "UniversalOperator.OperatorDecomposition",
       "UniversalOperator.SpectralTheory"
      ],
-     "erro": "linha 82: stuck at solving universe constraint ?u.1981+1 =?= imax 1 ?u.1988 while trying to unify (Time → ?m.2056 ψ) → ℝ : Sort (max 1 (imax 1 ?u.1988)) with (Time → ?m.2056 ψ) → ℝ : Sort (max 1 (imax 1 ?u.1988))",
+     "erro": "linha 82: stuck at solving universe constraint ?u.2473+1 =?= imax 1 ?u.2480 while trying to unify (Time → ?m.2548 ψ) → ℝ : Sort (max 1 (imax 1 ?u.2480)) with (Time → ?m.2548 ψ) → ℝ : Sort (max 1 (imax 1 ?u.2480))",
      "coluna": 0,
      "trecho": "⟦t⟧heorem euler_lagrange_schrodi",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, UniversalOperator.SpectralTheory, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -3010,7 +4101,7 @@
       "UniversalOperator.OperatorDecomposition",
       "UniversalOperator.SpectralTheory"
      ],
-     "erro": "linha 101: function expected at CoherentState term has type ?m.2707",
+     "erro": "linha 101: function expected at CoherentState term has type ?m.3217",
      "coluna": 9,
      "trecho": "  ∃ cs : ⟦C⟧oherentState C,",
      "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, UniversalOperator.SpectralTheory, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -3086,7 +4177,7 @@
      "arquivo": "provers/lean/UniversalOperator/UniversalEvolution.lean",
      "linha": 147,
      "nome": "bsd_correlation",
-     "status": "nao_alcancado",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
@@ -3097,11 +4188,7 @@
       "UniversalOperator.OperatorCore",
       "UniversalOperator.OperatorDecomposition",
       "UniversalOperator.SpectralTheory"
-     ],
-     "erro": "linha 155: expected token",
-     "coluna": 2,
-     "trecho": "  ⟦∫⟧ t, universalCorrelation C 0 ",
-     "motivo": "importa UniversalOperator.OperatorCore, UniversalOperator.OperatorDecomposition, UniversalOperator.SpectralTheory, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     ]
     },
     {
      "arquivo": "provers/lean/UniversalOperator/UniversalEvolution.lean",
@@ -3195,7 +4282,7 @@
      "nome": "Universe00.ZetaFunction.functional_equation",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 86: failed to synthesize HPow ℂ ℝ ?m.1817 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "erro": "linha 86: failed to synthesize HPow ℂ ℝ ?m.1949 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
      "coluna": 24,
      "trecho": "  riemannZeta s = 2^s * ⟦R⟧eal.pi^(s.re - 1) * Complex.s"
     },
@@ -3203,10 +4290,9 @@
      "arquivo": "provers/lean/ZetaFunction.lean",
      "linha": 89,
      "nome": "Universe00.ZetaFunction.functional_equation_zeros",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
@@ -3270,7 +4356,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 129: function expected at sorry term has type ?m.3071",
+     "erro": "linha 129: function expected at sorry term has type ?m.3203",
      "coluna": 22,
      "trecho": "  ∃ (primes : ℕ → ℕ), ⟦s⟧orry  -- Euler product repres"
     },
@@ -3336,13 +4422,6 @@
     },
     {
      "tipo": "axioma",
-     "nome": "SorrySingularity.iphone_processing",
-     "enunciado": "∃ process, process SorrySingularity.singularity_value",
-     "resultado": "sem resultado",
-     "tatica": ""
-    },
-    {
-     "tipo": "axioma",
      "nome": "SorrySingularity.controlled_revelation",
      "enunciado": "ℝ → ∃ v, v ≠ SorrySingularity.singularity_value",
      "resultado": "sem resultado",
@@ -3359,13 +4438,6 @@
      "tipo": "axioma",
      "nome": "SorrySingularity.singularity_expansion",
      "enunciado": "SorrySingularity.SorrySingularityProp",
-     "resultado": "sem resultado",
-     "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "SorrySingularity.sorry_idempotence",
-     "enunciado": "SorrySingularity.singularity_value * SorrySingularity.singularity_value = SorrySingularity.singularity_value",
      "resultado": "sem resultado",
      "tatica": ""
     },
@@ -3420,11 +4492,11 @@
     }
    ],
    "summary": {
-    "fechado": 30,
+    "fechado": 33,
     "aberto-sorry": 3,
     "condicional": 1
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   },
   {
    "repo": "Universe-0-0",
@@ -3687,7 +4759,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   },
   {
    "repo": "Universe-0-0",
@@ -3810,7 +4882,7 @@
      "nome": "SpectralGeometry.hermitian_real_spectrum",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3818,7 +4890,7 @@
      "nome": "SpectralGeometry.spectral_basis",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3826,7 +4898,7 @@
      "nome": "SpectralGeometry.trinity_decomposition",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3834,7 +4906,7 @@
      "nome": "SpectralGeometry.hilbert_polya_conjecture",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3842,7 +4914,7 @@
      "nome": "SpectralGeometry.critical_line_theorem",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3850,7 +4922,7 @@
      "nome": "SpectralGeometry.spectral_universality",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3858,7 +4930,7 @@
      "nome": "SpectralGeometry.GUE_correlation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3866,7 +4938,7 @@
      "nome": "SpectralGeometry.spectrum_contains_millennium_solutions",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3874,7 +4946,7 @@
      "nome": "SpectralGeometry.RH_validated_in_spectrum",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3882,7 +4954,7 @@
      "nome": "SpectralGeometry.entropy_gap_PvsNP",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3890,7 +4962,7 @@
      "nome": "SpectralGeometry.P_neq_NP_spectral",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3898,7 +4970,7 @@
      "nome": "SpectralGeometry.I_as_spectral_accumulation",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3906,7 +4978,7 @@
      "nome": "SpectralGeometry.delta_collapse_spectral",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3914,7 +4986,7 @@
      "nome": "SpectralGeometry.LRE_spectral_realization",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3922,7 +4994,7 @@
      "nome": "SpectralGeometry.approximation_converges",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/SpectralGeometry.lean",
@@ -3930,7 +5002,7 @@
      "nome": "SpectralGeometry.universal_unification",
      "status": "nao_alcancado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/TheoryOfEverything.lean",
@@ -3941,7 +5013,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -3955,7 +5027,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -3969,7 +5041,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -3983,7 +5055,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -3997,7 +5069,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4011,7 +5083,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4025,7 +5097,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4039,7 +5111,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4053,7 +5125,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4067,7 +5139,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4081,7 +5153,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4095,7 +5167,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4109,7 +5181,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4123,7 +5195,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4137,7 +5209,7 @@
      "dependencia_com_sorry": [
       "AxiomaticFoundations"
      ],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-xejtbbpx/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
+     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-hz5__bfe/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
@@ -4432,7 +5504,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 57,
+     "linha": 58,
      "nome": "UFTOperators.rh_operator_forces_critical_line",
      "status": "nao_alcancado",
      "axioms": [
@@ -4444,14 +5516,14 @@
      "dependencia_com_sorry": [
       "UFTAxioms"
      ],
-     "erro": "linha 69: unknown identifier 'axiom_A1'",
+     "erro": "linha 70: unknown identifier 'axiom_A1'",
      "coluna": 19,
      "trecho": "  obtain ⟨C, _⟩ := ⟦a⟧xiom_A1",
      "motivo": "importa UFTAxioms, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 92,
+     "linha": 93,
      "nome": "UFTOperators.ns_operator_bounds_energy",
      "status": "aberto-sorry",
      "axioms": [
@@ -4466,7 +5538,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 101,
+     "linha": 102,
      "nome": "UFTOperators.ns_global_regularity",
      "status": "nao_alcancado",
      "axioms": [
@@ -4478,14 +5550,14 @@
      "dependencia_com_sorry": [
       "UFTAxioms"
      ],
-     "erro": "linha 107: type mismatch ⊤ has type ℝ≥0∞ : Type but is expected to have type ℝ : Type",
+     "erro": "linha 108: type mismatch ⊤ has type ℝ≥0∞ : Type but is expected to have type ℝ : Type",
      "coluna": 59,
      "trecho": " energy_functional_NS (u s) < ⟦∞⟧)",
      "motivo": "importa UFTAxioms, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 137,
+     "linha": 138,
      "nome": "UFTOperators.pvsnp_separation",
      "status": "nao_alcancado",
      "axioms": [
@@ -4497,52 +5569,42 @@
      "dependencia_com_sorry": [
       "UFTAxioms"
      ],
-     "erro": "linha 147: tactic 'introN' failed, insufficient number of binders D_PNP : PvsNPOperator problem : GraphConnectivityOperator h_np : problem.complexity_class = \"NP\" ⊢ ∃ ρ, (∀ (poly_bound : ℕ → ℝ), ∃ n, spectral_entropy ρ > poly_bound n) → problem.comple",
+     "erro": "linha 148: tactic 'introN' failed, insufficient number of binders D_PNP : PvsNPOperator problem : GraphConnectivityOperator h_np : problem.complexity_class = \"NP\" ⊢ ∃ ρ, (∀ (poly_bound : ℕ → ℝ), ∃ n, spectral_entropy ρ > poly_bound n) → problem.comple",
      "coluna": 21,
      "trecho": "  intro problem h_np ⟦ρ⟧ h_diverge",
      "motivo": "importa UFTAxioms, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 168,
+     "linha": 169,
      "nome": "UFTOperators.bsd_rank_equality",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
      "dependencia_com_sorry": [
       "UFTAxioms"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     ]
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 193,
+     "linha": 192,
      "nome": "UFTOperators.hodge_classes_algebraic",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
      "dependencia_com_sorry": [
       "UFTAxioms"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
-     }
+     ]
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 219,
+     "linha": 217,
      "nome": "UFTOperators.ym_mass_gap",
      "status": "nao_alcancado",
      "axioms": [
@@ -4554,14 +5616,14 @@
      "dependencia_com_sorry": [
       "UFTAxioms"
      ],
-     "erro": "linha 225: unknown identifier 'axiom_A1'",
+     "erro": "linha 223: unknown identifier 'axiom_A1'",
      "coluna": 19,
      "trecho": "  obtain ⟨C, _⟩ := ⟦a⟧xiom_A1",
      "motivo": "importa UFTAxioms, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 229,
+     "linha": 227,
      "nome": "UFTOperators.ym_mass_gap_numerical",
      "status": "aberto-sorry",
      "axioms": [
@@ -4576,7 +5638,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 244,
+     "linha": 242,
      "nome": "UFTOperators.operators_are_coupled",
      "status": "aberto-sorry",
      "axioms": [
@@ -4591,7 +5653,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 253,
+     "linha": 251,
      "nome": "UFTOperators.coupling_antisymmetric",
      "status": "aberto-sorry",
      "axioms": [
@@ -4606,7 +5668,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 268,
+     "linha": 266,
      "nome": "UFTOperators.rh_barrier_destroyed",
      "status": "fechado",
      "axioms": [
@@ -4620,7 +5682,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 276,
+     "linha": 274,
      "nome": "UFTOperators.ns_barrier_destroyed",
      "status": "fechado",
      "axioms": [
@@ -4634,7 +5696,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UFTOperators.lean",
-     "linha": 284,
+     "linha": 282,
      "nome": "UFTOperators.all_barriers_destroyed",
      "status": "nao_alcancado",
      "axioms": [
@@ -4646,7 +5708,7 @@
      "dependencia_com_sorry": [
       "UFTAxioms"
      ],
-     "erro": "linha 291: application type mismatch problem_destroyed BSDOperator argument BSDOperator has type Type 1 : Type 2 but is expected to have type Type : Type 1",
+     "erro": "linha 289: application type mismatch problem_destroyed BSDOperator argument BSDOperator has type Type 1 : Type 2 but is expected to have type Type : Type 1",
      "coluna": 20,
      "trecho": "  problem_destroyed ⟦B⟧SDOperator ψ ∧",
      "motivo": "importa UFTAxioms, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
@@ -5005,7 +6067,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 85,
+     "linha": 86,
      "nome": "UniversalUnificationOperator.spectral_decomposition",
      "status": "aberto-sorry",
      "axioms": [
@@ -5017,7 +6079,7 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 100,
+     "linha": 101,
      "nome": "UniversalUnificationOperator.ground_state_exists",
      "status": "aberto-sorry",
      "axioms": [
@@ -5029,27 +6091,27 @@
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 121,
+     "linha": 122,
      "nome": "UniversalUnificationOperator.P_ne_NP_from_infinite_entropy",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 125: typeclass instance problem is stuck, it is often due to metavariables Membership Language ?m.2938",
+     "erro": "linha 126: typeclass instance problem is stuck, it is often due to metavariables Membership Language ?m.2938",
      "coluna": 29,
      "trecho": "  ∃ (L : Language), L ∈ NP ∧ ⟦L⟧ ∉ P := by"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 127,
+     "linha": 128,
      "nome": "UniversalUnificationOperator.complexity_lower_bound",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 136: failed to synthesize HMul ℝ ENNReal ?m.6046 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "erro": "linha 137: failed to synthesize HMul ℝ ENNReal ?m.6046 Additional diagnostic information may be available using the `set_option diagnostics true` command.",
      "coluna": 46,
      "trecho": "me_complexity L n ≥ Real.exp (⟦c⟧ * spectral_entropy C 1.0)) :"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 148,
+     "linha": 149,
      "nome": "UniversalUnificationOperator.dyson_mehta_law",
      "status": "erro",
      "axioms": [
@@ -5058,43 +6120,45 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 156: function expected at empirical_distribution term has type ?m.8230",
+     "erro": "linha 157: function expected at empirical_distribution term has type ?m.8230",
      "coluna": 7,
      "trecho": "      |⟦e⟧mpirical_distribution (level_"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 158,
+     "linha": 159,
      "nome": "UniversalUnificationOperator.riemann_zeros_GUE",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 162: function expected at sector_encodes_riemann term has type ?m.8935",
+     "erro": "linha 163: function expected at sector_encodes_riemann term has type ?m.8935",
      "coluna": 13,
      "trecho": "  (∃ sector, ⟦s⟧ector_encodes_riemann C secto"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 166,
+     "linha": 167,
      "nome": "UniversalUnificationOperator.uranium_spectra_GUE",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 170: function expected at sector_encodes_nucleus term has type ?m.9322",
+     "erro": "linha 171: function expected at sector_encodes_nucleus term has type ?m.9322",
      "coluna": 13,
      "trecho": "  (∃ sector, ⟦s⟧ector_encodes_nucleus C secto"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 180,
+     "linha": 181,
      "nome": "UniversalUnificationOperator.transcendental_completeness",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 182: type of theorem 'UniversalUnificationOperator.transcendental_completeness' is not a proposition (C : UniversalOperator) → omega_infinity C = 1 → (φ : Prop) → Decidable φ",
-     "coluna": 0,
-     "trecho": "⟦/⟧-- Completeness property when"
+     "status": "aberto-sorry",
+     "axioms": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 188,
+     "linha": 190,
      "nome": "UniversalUnificationOperator.godel_resolution",
      "status": "erro",
      "axioms": [
@@ -5103,13 +6167,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 198: invalid field notation, type is not of the form (C ...) where C is a constant S has type FormalSystem",
+     "erro": "linha 200: invalid field notation, type is not of the form (C ...) where C is a constant S has type FormalSystem",
      "coluna": 24,
      "trecho": "  (∃ S : FormalSystem, ¬⟦S⟧.complete) ∧"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 213,
+     "linha": 215,
      "nome": "UniversalUnificationOperator.finite_convergence",
      "status": "erro",
      "axioms": [
@@ -5118,23 +6182,23 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 218: function expected at operator_distance term has type ?m.10644",
+     "erro": "linha 220: function expected at operator_distance term has type ?m.10717",
      "coluna": 6,
      "trecho": "      ⟦o⟧perator_distance C_N C_infini"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 220,
+     "linha": 222,
      "nome": "UniversalUnificationOperator.thirty_eight_is_special",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 226: failed to synthesize HasSubset Type Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "erro": "linha 228: failed to synthesize HasSubset Type Additional diagnostic information may be available using the `set_option diagnostics true` command.",
      "coluna": 6,
      "trecho": "      ⟦∃⟧ sector ⊆ Fin 38, sector_solv"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 235,
+     "linha": 237,
      "nome": "UniversalUnificationOperator.yang_mills_mass_gap",
      "status": "erro",
      "axioms": [
@@ -5143,43 +6207,43 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 238: function expected at mass_gap term has type ?m.13275",
+     "erro": "linha 240: function expected at mass_gap term has type ?m.13343",
      "coluna": 4,
      "trecho": "    ⟦m⟧ass_gap sector = golden_ratio"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 240,
+     "linha": 242,
      "nome": "UniversalUnificationOperator.ligo_riemann_echo",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 245: function expected at fourier_components term has type ?m.13458",
+     "erro": "linha 247: function expected at fourier_components term has type ?m.13526",
      "coluna": 4,
      "trecho": "    ⟦f⟧ourier_components signal ≈ ri"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 247,
+     "linha": 249,
      "nome": "UniversalUnificationOperator.mathematical_monism",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 253: application type mismatch And ⋯ argument C.self_adjoint has type ∀ (ψ φ : UniversalHilbert), inner_product (C.apply ψ) φ = inner_product ψ (C.apply φ) : Prop but is expected to have type Prop : Type",
+     "erro": "linha 255: application type mismatch And ⋯ argument C.self_adjoint has type ∀ (ψ φ : UniversalHilbert), inner_product (C.apply ψ) φ = inner_product ψ (C.apply φ) : Prop but is expected to have type Prop : Type",
      "coluna": 2,
      "trecho": "  ⟦C⟧.self_adjoint ∧ C.fredholm ∧ "
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 265,
+     "linha": 267,
      "nome": "UniversalUnificationOperator.reality_is_mathematics",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 268: function expected at mathematical_monism term has type ?m.32764",
+     "erro": "linha 270: function expected at mathematical_monism term has type ?m.32832",
      "coluna": 2,
      "trecho": "  ⟦m⟧athematical_monism C →"
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 273,
+     "linha": 275,
      "nome": "UniversalUnificationOperator.lhc_verification",
      "status": "erro",
      "axioms": [
@@ -5188,17 +6252,17 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 280: invalid field notation, type is not of the form (C ...) where C is a constant experiment has type LHCExperiment",
+     "erro": "linha 282: invalid field notation, type is not of the form (C ...) where C is a constant experiment has type LHCExperiment",
      "coluna": 4,
      "trecho": "    ⟦e⟧xperiment.target = \"glueball\""
     },
     {
      "arquivo": "universe-00/applications/unified-field-theory/proofs/UniversalUnificationOperator.lean",
-     "linha": 284,
+     "linha": 286,
      "nome": "UniversalUnificationOperator.ligo_verification",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 288: invalid field notation, type is not of the form (C ...) where C is a constant observation has type GravWaveObservation",
+     "erro": "linha 290: invalid field notation, type is not of the form (C ...) where C is a constant observation has type GravWaveObservation",
      "coluna": 4,
      "trecho": "    ⟦o⟧bservation.spectrum ≈ riemann"
     }
@@ -5209,7 +6273,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   },
   {
    "repo": "Universe-0-0",
@@ -5324,7 +6388,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   }
  ]
 }

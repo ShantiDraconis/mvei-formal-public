@@ -1,3 +1,37 @@
+--- a/MillenniumRiemann/Theorems.lean
++++ b/MillenniumRiemann/Theorems.lean
+@@ -117,7 +117,7 @@
+ 
+ theorem pureComplex_has_zero :
+     (0 : CollapseComplex) ∈ PureComplex := by
+-  simp [PureComplex, Zero.zero, instZero]
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Collapse.CollapseComplex.PureComplex]; done) | (simp_all [Collapse.CollapseComplex.PureComplex]; done) | (unfold Collapse.CollapseComplex.PureComplex; decide; done) | (unfold Collapse.CollapseComplex.PureComplex; rfl; done) | (simp [Collapse.CollapseComplex.PureComplex]; omega; done) | (intros; simp only [Collapse.CollapseComplex.PureComplex]; omega; done) | (intros; simp_all [Collapse.CollapseComplex.PureComplex]; done) | (intro x; cases x <;> simp [Collapse.CollapseComplex.PureComplex]; done) | (constructor <;> simp [Collapse.CollapseComplex.PureComplex]; done) | (norm_num [Collapse.CollapseComplex.PureComplex]; done) | (intros; norm_num [Collapse.CollapseComplex.PureComplex] at *; done) | (simp [Collapse.CollapseComplex.PureComplex]; ring; done) | (unfold Collapse.CollapseComplex.PureComplex; ring; done) | (simp [Collapse.CollapseComplex.PureComplex]; linarith; done) | (exact?; done)
+ 
+ theorem pureComplex_has_one :
+     { re := 1, im := 0, indet := 0 } ∈ PureComplex := by
+@@ -132,7 +132,7 @@
+ 
+ theorem pureIndet_has_zero :
+     (0 : CollapseComplex) ∈ PureIndeterminate := by
+-  simp [PureIndeterminate, Zero.zero, instZero]
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; done) | (simp_all [Collapse.CollapseComplex.PureIndeterminate]; done) | (unfold Collapse.CollapseComplex.PureIndeterminate; decide; done) | (unfold Collapse.CollapseComplex.PureIndeterminate; rfl; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; omega; done) | (intros; simp only [Collapse.CollapseComplex.PureIndeterminate]; omega; done) | (intros; simp_all [Collapse.CollapseComplex.PureIndeterminate]; done) | (intro x; cases x <;> simp [Collapse.CollapseComplex.PureIndeterminate]; done) | (constructor <;> simp [Collapse.CollapseComplex.PureIndeterminate]; done) | (norm_num [Collapse.CollapseComplex.PureIndeterminate]; done) | (intros; norm_num [Collapse.CollapseComplex.PureIndeterminate] at *; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; ring; done) | (unfold Collapse.CollapseComplex.PureIndeterminate; ring; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; linarith; done) | (exact?; done)
+ 
+ /-! ### Extended Operator Properties -/
+ 
+@@ -170,12 +170,7 @@
+ /-- Product of conjugate (when restricted to complex part) -/
+ theorem conj_mul_self (z : CollapseComplex) :
+     toComplex (z * conj z) = toComplex z * Complex.conj (toComplex z) := by
+-  simp [toComplex, conj, HMul.hMul, instHMul, mul]
+-  ext
+-  · simp [Complex.mul_re, Complex.conj_re, Complex.conj_im]
+-    ring
+-  · simp [Complex.mul_im, Complex.conj_re, Complex.conj_im]
+-    ring
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ /-! ### Norm Properties (Extended) -/
+ 
 --- a/lean/millennium/Riemann/CollapseComplex.lean
 +++ b/lean/millennium/Riemann/CollapseComplex.lean
 @@ -1,3 +1,4 @@
@@ -19,3 +53,40 @@
  
  end CollapseComplex
  
+--- a/lean/millennium/Riemann/NumericalHierarchy.lean
++++ b/lean/millennium/Riemann/NumericalHierarchy.lean
+@@ -351,15 +351,7 @@
+     ops1 = SymbolicOperator.operatorsAtLevel lvl1 ∧
+     ops2 = SymbolicOperator.operatorsAtLevel lvl2 ∧
+     ops1.length ≤ ops2.length := by
+-  intro h1 h2
+-  exists SymbolicOperator.complexOps
+-  exists (SymbolicOperator.complexOps ++ SymbolicOperator.collapseOps)
+-  simp [h1, h2, SymbolicOperator.operatorsAtLevel]
+-  constructor
+-  · rfl
+-  constructor
+-  · rfl
+-  · simp [SymbolicOperator.complexOps, SymbolicOperator.collapseOps]
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; done) | (simp_all [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; done) | (unfold Millennium.Riemann.UniversalNumber.level Millennium.Riemann.SymbolicOperator.operatorsAtLevel; decide; done) | (unfold Millennium.Riemann.UniversalNumber.level Millennium.Riemann.SymbolicOperator.operatorsAtLevel; rfl; done) | (simp [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; omega; done) | (intros; simp only [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; omega; done) | (intros; simp_all [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; done) | (intro x; cases x <;> simp [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; done) | (constructor <;> simp [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; done) | (norm_num [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; done) | (intros; norm_num [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel] at *; done) | (simp [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; ring; done) | (unfold Millennium.Riemann.UniversalNumber.level Millennium.Riemann.SymbolicOperator.operatorsAtLevel; ring; done) | (simp [Millennium.Riemann.UniversalNumber.level, Millennium.Riemann.SymbolicOperator.operatorsAtLevel]; linarith; done) | (exact?; done)
+ 
+ /-- Promotion preserves the algebraic structure -/
+ axiom promote_preserves_structure :
+--- a/lean/millennium/Riemann/Zeros/Nontrivial.lean
++++ b/lean/millennium/Riemann/Zeros/Nontrivial.lean
+@@ -74,14 +74,7 @@
+ /-- Δ-collapse is idempotent on the critical line -/
+ theorem DeltaCollapse_idempotent (s : CollapseComplex) :
+   s.re = 1/2 → DeltaCollapse (DeltaCollapse s) = DeltaCollapse s := by
+-  intro h
+-  simp [DeltaCollapse]
+-  constructor
+-  · rfl
+-  constructor
+-  · rfl
+-  · ring
+-    simp [h]
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (simp_all [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (unfold Millennium.Riemann.Zeros.DeltaCollapse; decide; done) | (unfold Millennium.Riemann.Zeros.DeltaCollapse; rfl; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; omega; done) | (intros; simp only [Millennium.Riemann.Zeros.DeltaCollapse]; omega; done) | (intros; simp_all [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (intro x; cases x <;> simp [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (constructor <;> simp [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (norm_num [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (intros; norm_num [Millennium.Riemann.Zeros.DeltaCollapse] at *; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; ring; done) | (unfold Millennium.Riemann.Zeros.DeltaCollapse; ring; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; linarith; done) | (exact?; done)
+ 
+ /-- Vertical symmetry property: if s is a zero, Δ(s) preserves the zero property -/
+ axiom DeltaCollapse_preserves_zeros : ∀ s : CollapseComplex,

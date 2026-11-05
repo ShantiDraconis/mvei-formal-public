@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -14,59 +14,71 @@
    "toolchain": "leanprover/lean4:v4.19.0",
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
-   "build_ok": false,
-   "build_seconds": 8.4,
-   "build_error": "error: ././././LeanWinWinLogic.lean:37:25: type mismatch | error: Lean exited with code 1 | error: build failed",
+   "build_ok": true,
+   "build_seconds": 9.2,
+   "build_error": "",
    "sorry_warnings": 0,
    "reconstructed": false,
    "bridges": [],
    "declared_axioms": [],
-   "theorems": [],
+   "theorems": [
+    {
+     "name": "LeanWinWinLogic.WinWin.viaNeg",
+     "module": "LeanWinWinLogic",
+     "axioms": [],
+     "statement": "∀ {P Q : Prop}, LeanWinWinLogic.WinWin P Q → ¬P → Q",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanWinWinLogic.WinWin.viaPos",
+     "module": "LeanWinWinLogic",
+     "axioms": [],
+     "statement": "∀ {P Q : Prop}, LeanWinWinLogic.WinWin P Q → P → Q",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanWinWinLogic.bebedor",
+     "module": "LeanWinWinLogic",
+     "axioms": [
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
+     ],
+     "statement": "∀ {Person : Type} (Drinks : Person → Prop),   Person →     ((∀ (y : Person), Drinks y) ∨ ¬∀ (y : Person), Drinks y) →       LeanWinWinLogic.WinWin (∀ (y : Person), Drinks y) (∃ z, Drinks z → ∀ (y : Person), Drinks y)",
+     "status": "fechado"
+    },
+    {
+     "name": "LeanWinWinLogic.self_needs_full_proof",
+     "module": "LeanWinWinLogic",
+     "axioms": [],
+     "statement": "∀ {P : Prop}, LeanWinWinLogic.WinWin P P → P ∨ ¬P → P",
+     "status": "fechado"
+    }
+   ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (zz-refutacoes): 1 negação(ões) provada(s) no kernel: bebedor. leitura de axiomas: nenhum módulo compilado encontrado",
+   "note": "CORRIGIDO PELO MVEI (zy-enunciados-do-autor, zz-refutacoes): 1 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: bebedor; 1 negação(ões) provada(s) no kernel: bebedor.",
    "corrections": [
+    "zy-enunciados-do-autor",
     "zz-refutacoes"
    ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
     {
-     "arquivo": "LeanWinWinLogic.lean",
-     "linha": 16,
-     "nome": "LeanWinWinLogic.self_needs_full_proof",
-     "status": "fechado",
-     "axioms": []
-    },
-    {
-     "arquivo": "LeanWinWinLogic.lean",
-     "linha": 24,
-     "nome": "LeanWinWinLogic.bebedor",
-     "status": "erro",
-     "axioms": [
-      "sorryAx"
-     ],
-     "erro": "linha 37: type mismatch hx has type Drinks x : Prop but is expected to have type Drinks x✝ : Prop",
-     "coluna": 25,
-     "trecho": "    exact hnot (fun _ => ⟦h⟧x)"
-    },
-    {
      "arquivo": "MVEI_Refutacoes.lean",
      "linha": 8,
      "nome": "MVEI.Refutacoes.bebedor_falso",
      "status": "fechado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "LeanWinWinLogic"
-     ]
+     "axioms": []
     }
    ],
    "preenchimento": [],
    "summary": {
-    "fechado": 0,
+    "fechado": 4,
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   }
  ]
 }

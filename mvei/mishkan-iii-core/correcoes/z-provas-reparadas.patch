@@ -1,0 +1,33 @@
+--- a/core/history/ORIGIN_LOGIC.lean
++++ b/core/history/ORIGIN_LOGIC.lean
+@@ -266,7 +266,7 @@
+ theorem harappa_signs_contain_logic :
+   ∀ (n : Nat), n < harappa_signs_count →
+   ∃ (sign : HarappaSign), sign.index = n ∧ sign.logical_value > 0 :=
+-  fun n _ => ⟨⟨n, "", "", 1⟩, rfl, Nat.one_pos⟩
++  fun n _ => ⟨⟨n, "", "", 1⟩, rfl, Nat.zero_lt_one⟩
+ 
+ /-- Teorema: Os sinais de Harappa são completos -/
+ theorem harappa_completeness :
+--- a/core/lineage/LINEAGE_MAP.lean
++++ b/core/lineage/LINEAGE_MAP.lean
+@@ -716,7 +716,8 @@
+ /-- Teorema: A conexão Harappa → Egito é forte -/
+ theorem harappa_egypt_strong :
+   connection_harappa_egypt.strength > 0.8 := by
+-  norm_num [connection_harappa_egypt]
++  show (0.85 : ℚ) > 0.8
++  norm_num
+ 
+ /-! ### Caminhos na Árvore -/
+ 
+@@ -911,7 +912,8 @@
+   lineage_completeness.completeness_rating > 0.90 := by
+   constructor
+   · rfl
+-  · norm_num [lineage_completeness]
++  · show (0.95 : ℚ) > 0.90
++    norm_num
+ 
+ /-! ### Assinatura do Mapa de Linhagem -/
+ 

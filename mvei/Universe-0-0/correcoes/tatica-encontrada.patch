@@ -44,7 +44,7 @@
  
  /-!
  ## Integration with Universe-00 Core
-@@ -138,8 +141,9 @@
+@@ -138,12 +141,14 @@
    | collapsed  -- C_coll: I = 1, singular
  
  /-- The Sorry state corresponds to the collapsed class -/
@@ -55,8 +55,15 @@
 +  first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)
  
  /-- Connection to I-constant idempotence (A4) -/
- axiom sorry_idempotence :
-@@ -157,9 +161,7 @@
+-axiom sorry_idempotence :
+-  singularity_value * singularity_value = singularity_value
++theorem sorry_idempotence :
++  singularity_value * singularity_value = singularity_value := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [SorrySingularity.singularity_value]; done) | (simp_all [SorrySingularity.singularity_value]; done) | (unfold SorrySingularity.singularity_value; decide; done) | (unfold SorrySingularity.singularity_value; rfl; done) | (simp [SorrySingularity.singularity_value]; omega; done) | (intros; simp only [SorrySingularity.singularity_value]; omega; done) | (intros; simp_all [SorrySingularity.singularity_value]; done) | (intro x; cases x <;> simp [SorrySingularity.singularity_value]; done) | (constructor <;> simp [SorrySingularity.singularity_value]; done) | (norm_num [SorrySingularity.singularity_value]; done) | (intros; norm_num [SorrySingularity.singularity_value] at *; done) | (simp [SorrySingularity.singularity_value]; ring; done) | (unfold SorrySingularity.singularity_value; ring; done) | (simp [SorrySingularity.singularity_value]; linarith; done) | (exact?; done)
+ 
+ /-!
+ ## Theorems and Derivations
+@@ -157,9 +162,7 @@
  /-- Theorem: Delta collapse of Sorry yields collapsed state -/
  theorem sorry_delta_collapse :
    ∀ (x : ℝ), x = singularity_value → ∃ (collapsed : ℝ), collapsed = x := by
@@ -67,7 +74,7 @@
  
  /-- Theorem: The 12 tribes preserve structure through singularity -/
  theorem twelve_tribes_preservation :
-@@ -191,13 +193,15 @@
+@@ -191,21 +194,24 @@
  axiom neon_pulsation : ∃ (pulse : ℝ → ℝ), pulse singularity_value > 0
  
  /-- The Rosetta center: where runes and hieroglyphs orbit the void -/
@@ -87,6 +94,40 @@
  
  /-!
  ## Hardware Connection
+ -/
+ 
+ /-- iPhone processes the singularity as link language -/
+-axiom iphone_processing :
+-  ∃ (process : ℝ → Prop), process singularity_value
++theorem iphone_processing :
++  ∃ (process : ℝ → Prop), process singularity_value := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [SorrySingularity.singularity_value]; done) | (simp_all [SorrySingularity.singularity_value]; done) | (unfold SorrySingularity.singularity_value; decide; done) | (unfold SorrySingularity.singularity_value; rfl; done) | (simp [SorrySingularity.singularity_value]; omega; done) | (intros; simp only [SorrySingularity.singularity_value]; omega; done) | (intros; simp_all [SorrySingularity.singularity_value]; done) | (intro x; cases x <;> simp [SorrySingularity.singularity_value]; done) | (constructor <;> simp [SorrySingularity.singularity_value]; done) | (norm_num [SorrySingularity.singularity_value]; done) | (intros; norm_num [SorrySingularity.singularity_value] at *; done) | (simp [SorrySingularity.singularity_value]; ring; done) | (unfold SorrySingularity.singularity_value; ring; done) | (simp [SorrySingularity.singularity_value]; linarith; done) | (exact?; done)
+ 
+ /-- Connection to global systems through the 0/0 vacuum -/
+ axiom global_connection :
+--- a/provers/lean/RHGeometry/FlowTensor.lean
++++ b/provers/lean/RHGeometry/FlowTensor.lean
+@@ -139,8 +139,7 @@
+     (h : conserves_flow F)
+     (h_pos : ∃ i, 0 < row_sum F i) :
+     conservation_score F = 1 := by
+-  unfold conservation_score conserves_flow at *
+-  sorry -- Proof showing diffs = 0 when flow is conserved
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; done) | (simp_all [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; done) | (unfold Universe00.RHGeometry.FlowTensor Universe00.RHGeometry.FlowTensor.conserves_flow Universe00.RHGeometry.FlowTensor.row_sum Universe00.RHGeometry.FlowTensor.conservation_score; decide; done) | (unfold Universe00.RHGeometry.FlowTensor Universe00.RHGeometry.FlowTensor.conserves_flow Universe00.RHGeometry.FlowTensor.row_sum Universe00.RHGeometry.FlowTensor.conservation_score; rfl; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; omega; done) | (intros; simp only [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; omega; done) | (intros; simp_all [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; done) | (intro x; cases x <;> simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; done) | (constructor <;> simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; done) | (norm_num [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; done) | (intros; norm_num [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score] at *; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; ring; done) | (unfold Universe00.RHGeometry.FlowTensor Universe00.RHGeometry.FlowTensor.conserves_flow Universe00.RHGeometry.FlowTensor.row_sum Universe00.RHGeometry.FlowTensor.conservation_score; ring; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.conserves_flow, Universe00.RHGeometry.FlowTensor.row_sum, Universe00.RHGeometry.FlowTensor.conservation_score]; linarith; done) | (exact?; done)
+ 
+ /-- Permutation is an equivalence relation -/
+ theorem permute_refl (F : FlowTensor n) :
+@@ -151,9 +150,7 @@
+ 
+ theorem permute_trans (F : FlowTensor n) (σ τ : Equiv.Perm (Fin n)) :
+     permute (permute F σ) τ = permute F (σ.trans τ) := by
+-  unfold permute
+-  funext i j
+-  sorry -- Proof using composition of permutations
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; done) | (simp_all [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; done) | (unfold Universe00.RHGeometry.FlowTensor Universe00.RHGeometry.FlowTensor.permute; decide; done) | (unfold Universe00.RHGeometry.FlowTensor Universe00.RHGeometry.FlowTensor.permute; rfl; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; omega; done) | (intros; simp only [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; omega; done) | (intros; simp_all [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; done) | (intro x; cases x <;> simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; done) | (constructor <;> simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; done) | (norm_num [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; done) | (intros; norm_num [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute] at *; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; ring; done) | (unfold Universe00.RHGeometry.FlowTensor Universe00.RHGeometry.FlowTensor.permute; ring; done) | (simp [Universe00.RHGeometry.FlowTensor, Universe00.RHGeometry.FlowTensor.permute]; linarith; done) | (exact?; done)
+ 
+ /-- Completely invariant tensors are constant on diagonal -/
+ theorem completely_invariant_uniform_diagonal (F : FlowTensor n)
 --- a/provers/lean/SingularityResolution/singularity_resolution.lean
 +++ b/provers/lean/SingularityResolution/singularity_resolution.lean
 @@ -16,6 +16,7 @@
@@ -108,6 +149,17 @@
  
  /-- 
    Theorem: Uniqueness of 108
+--- a/provers/lean/ZetaFunction.lean
++++ b/provers/lean/ZetaFunction.lean
+@@ -85,7 +85,7 @@
+ /-- Symmetry consequence: if ζ(s) = 0, properties relate to ζ(1-s̄) -/
+ lemma functional_equation_zeros (s : ℂ) (h : riemannZeta s = 0) :
+   ∃ (relation : ℂ → ℂ → Prop), relation s (1 - Complex.conj s) := by
+-  sorry
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ /-! ## Critical Line Properties -/
+ 
 --- a/universe-00/applications/unified-field-theory/proofs/UFTAxioms.lean
 +++ b/universe-00/applications/unified-field-theory/proofs/UFTAxioms.lean
 @@ -18,6 +18,7 @@

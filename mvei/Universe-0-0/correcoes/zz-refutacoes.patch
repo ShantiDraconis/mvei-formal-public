@@ -1,0 +1,393 @@
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_AuthorAuthority.lean
+@@ -0,0 +1,18 @@
++import Core.AuthorAuthority
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Universe00.Core.orcid_identifies_author` é falso: a estrutura AuthorAuthority aceita qualquer nome, e um valor
++    com o ORCID primário e nome vazio contradiz o enunciado. -/
++theorem orcid_identifies_author_falso :
++    ¬ ∀ (auth : Universe00.Core.AuthorAuthority),
++      auth.orcid = Universe00.Core.primary_orcid → auth.name = "Shanti Draconis" := by
++  intro H
++  have h := H { name := "", orcid := Universe00.Core.primary_orcid } rfl
++  exact absurd h (by decide)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_ComplexTransition.lean
+@@ -0,0 +1,25 @@
++import RHGeometry.ComplexTransition
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Universe00.RHGeometry in
++/-- `DualZeroStates.inverse_phase_preserved` é falso: arg vale em (-π, π]; com θ = π o estado inverso é
++    -(N+2)·(cos π, sin π) = (N+2, 0), de argumento 0, e θ + π = 2π. -/
++theorem inverse_phase_preserved_falso :
++    ¬ ∀ (d : DualZeroStates) (N : ℕ), ∃ θ' : ℝ, θ' = d.theta ∧
++      Complex.arg (d.inverse N) = θ' + Real.pi := by
++  intro H
++  obtain ⟨θ', h1, h2⟩ := H ⟨⟨0, 1, one_pos⟩, Real.pi⟩ 0
++  subst h1
++  have hinv : DualZeroStates.inverse ⟨⟨0, 1, one_pos⟩, Real.pi⟩ 0 = ((2 : ℝ) : ℂ) := by
++    apply Complex.ext <;> simp [DualZeroStates.inverse]
++  rw [hinv, Complex.arg_ofReal_of_nonneg (by norm_num)] at h2
++  have := Real.pi_pos
++  simp at h2
++  linarith
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_ImpossibilityTheorem.lean
+@@ -0,0 +1,35 @@
++import Foundations.ImpossibilityTheorem
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Universe00.Impossibility in
++/-- `Universe00.Impossibility.zero_division_requires_nonclassical_structure` é falso como escrito (sem a hipótese
++    DivZeroConst td, isto é, div 1 0 = div 0 0): a divisão totalizada td.div a b = (se b = 0 então a senão a / b)
++    concorda com a divisão do corpo fora do zero e é injetiva em a para todo b, logo tem cancelação forte (em ℚ). -/
++theorem zero_division_requires_nonclassical_structure_falso :
++    ¬ ∀ (F : Type) [Field F] [Nontrivial F] (td : TotalizedDivision F), ¬StrongCancellation td := by
++  intro h
++  refine h ℚ ⟨fun a b => if b = 0 then a else a / b, fun a b hb => if_neg hb⟩ ?_
++  intro a c b hab
++  by_cases hb : b = 0
++  · simpa [hb] using hab
++  · simp only [if_neg hb] at hab
++    exact (div_left_inj' hb).mp hab
++
++/-- `Universe00.TotalizedAlgebra.add_I_comm` é falso como o Lean lê: `[Add α]` e `[AddCommGroup α]` são duas
++    instâncias independentes, e add_I usa a primeira, que não precisa ser comutativa. Em ℤ com a soma
++    "projeção à esquerda" (a + b := a), add_I (val 1) (val 2) = val 1 ≠ val 2 = add_I (val 2) (val 1). -/
++theorem add_I_comm_falso :
++    ¬ ∀ {α : Type} [Add α] [AddCommGroup α] (a b : Universe00.TotalizedAlgebra.Extended α),
++      Universe00.TotalizedAlgebra.add_I a b = Universe00.TotalizedAlgebra.add_I b a := by
++  intro H
++  have h := @H ℤ ⟨fun a _ => a⟩ inferInstance (.val 1) (.val 2)
++  simp only [Universe00.TotalizedAlgebra.add_I] at h
++  have h2 := Universe00.TotalizedAlgebra.Extended.val.inj h
++  exact absurd h2 (by decide)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_ImpossibilityTheorems.lean
+@@ -0,0 +1,15 @@
++import Foundations.ImpossibilityTheorems
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Universe00.Foundations.Impossibility.field_collapse_with_total_division` é falso como escrito: o enunciado é
++    `(1 : F) = 0` para todo corpo F (a igualdade total_div 1 0 = total_div 0 0 de que a prova precisaria fica em aberto
++    na prova do autor e não está no enunciado), e em ℚ 1 ≠ 0. -/
++theorem field_collapse_with_total_division_falso : ¬ ∀ (F : Type) [Field F], (1 : F) = 0 :=
++  fun h => one_ne_zero (h ℚ)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_InfiniteBarrierGrowth.lean
+@@ -0,0 +1,18 @@
++import UncertaintyProtection
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `UncertaintyProtection.infinite_barrier_growth` é falso como escrito: com n = 0, 1.08⁰ = 1 e o enunciado
++    pede base_strength < base_strength. -/
++theorem infinite_barrier_growth_falso :
++    ¬ ∀ (base_strength : ℝ) (n : ℕ), 0 < base_strength →
++      base_strength < base_strength * (1.08 : ℝ) ^ n := by
++  intro h
++  have := h 1 0 one_pos
++  norm_num at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_InfiniteFrequencyRefutation.lean
+@@ -0,0 +1,36 @@
++import RiemannHypothesis.InfiniteFrequencyRefutation
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `RiemannHypothesis.InfiniteFrequency.zeros_not_unique` é falso: um `PhaseInterference` exige que
++    `inverseState n θ = (1/2 - (2.5 + n)) · exp(iθ)` convirja quando n → ∞, mas ‖inverseState n θ‖ = n + 2 → ∞.
++    (O axioma `inverse_state_limit` do arquivo afirma essa convergência e é, pelo mesmo cálculo, falso.) -/
++theorem zeros_not_unique_falso :
++    ¬ ∀ (s : RiemannHypothesis.InfiniteFrequency.ComplexVar) (_h : s.sigma = 1/2),
++      ∃ (interference : RiemannHypothesis.InfiniteFrequency.PhaseInterference),
++        interference.primary.s = s := by
++  intro H
++  obtain ⟨φ, -⟩ := H { sigma := 1/2, t := 0 } rfl
++  obtain ⟨L, hL⟩ := φ.h_interference
++  have hn : ∀ n : ℕ, ‖RiemannHypothesis.InfiniteFrequency.inverseState n φ.θ‖ = (n : ℝ) + 2 := by
++    intro n
++    simp only [RiemannHypothesis.InfiniteFrequency.inverseState, norm_mul, Complex.norm_exp,
++      Complex.mul_re, Complex.I_re, Complex.I_im, Complex.ofReal_re, Complex.ofReal_im]
++    have h0 : (0 : ℝ) * φ.θ - 1 * 0 = 0 := by ring
++    have e : (1 : ℂ) / 2 - (2.5 + ((n : ℝ) : ℂ)) = -((((n : ℝ) + 2 : ℝ)) : ℂ) := by
++      push_cast
++      norm_num
++      ring
++    have hpos : (0 : ℝ) ≤ (n : ℝ) + 2 := by positivity
++    rw [h0, Real.exp_zero, mul_one, e, norm_neg, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hpos]
++  have h1 : Filter.Tendsto (fun n : ℕ => ‖RiemannHypothesis.InfiniteFrequency.inverseState n φ.θ‖)
++      Filter.atTop Filter.atTop := by
++    simp_rw [hn]
++    exact Filter.tendsto_atTop_add_const_right _ 2 tendsto_natCast_atTop_atTop
++  exact not_tendsto_nhds_of_tendsto_atTop h1 _ hL.norm
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_OperatorCore.lean
+@@ -0,0 +1,46 @@
++import UniversalOperator.OperatorCore
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open scoped ENNReal in
++/-- `spectrum_is_real` é falso: o operador nulo (núcleo 0) satisfaz todos os campos de
++`UniversalUnificationOperator`, e o estado com componente de teoria dos números nula e componente
++física `1_{0}` (não nula, de quadrado integrável) é autovetor de qualquer `λ` pela definição de
++`Spectrum` (que só olha a componente de teoria dos números); com `λ = I`, `λ.im = 1 ≠ 0`. -/
++theorem spectrum_is_real_falso :
++    ¬ (∀ (C : UniversalUnificationOperator), ∀ «λ» ∈ C.Spectrum, «λ».im = 0) := by
++  intro h
++  let z : MathematicalStateSpace := ⟨0, 0, by simp, by simp⟩
++  let C0 : UniversalUnificationOperator :=
++    { op := fun _ => z
++      kernel := ⟨fun _ => 0, by simp, by simp, trivial⟩
++      integralForm := by intro ψ x; simp [z]
++      selfAdjoint := by intro ψ φ; simp [MathematicalStateSpace.innerProduct, z]
++      isFredholm := trivial
++      isBounded := ⟨0, by
++        intro ψ
++        simp [MathematicalStateSpace.norm, MathematicalStateSpace.innerProduct, z]⟩ }
++  have hphys : ∫⁻ x, (‖(Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℂ))) x‖₊ : ℝ≥0∞) ^ 2 < ∞ := by
++    have : (fun x => (‖(Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℂ))) x‖₊ : ℝ≥0∞) ^ 2)
++        = Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℝ≥0∞)) := by
++      funext x
++      by_cases hx : x ∈ ({0} : Set (Fin 4 → ℝ)) <;> simp [Set.indicator_of_mem, Set.indicator_of_not_mem, hx]
++    rw [this, MeasureTheory.lintegral_indicator_const (MeasurableSet.singleton 0)]
++    simp
++  let ψ : MathematicalStateSpace :=
++    ⟨0, Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℂ)), by simp, hphys⟩
++  have hmem : Complex.I ∈ C0.Spectrum := by
++    refine ⟨ψ, ?_, ?_⟩
++    · intro h0
++      have h1 := congrArg (fun p => p.2 0) h0
++      simp [ψ] at h1
++    · intro x
++      simp [C0, z, ψ]
++  have := h C0 Complex.I hmem
++  simp at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_OperatorDecomposition.lean
+@@ -0,0 +1,60 @@
++import UniversalOperator.OperatorDecomposition
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `yang_mills_mass_gap` é falso: para o operador nulo (núcleo 0), que satisfaz todos os campos de
++`UniversalUnificationOperator`, todo `λ` está em `DiscreteSpectrum` (autovetor com componente de teoria dos números
++nula e componente física `1_{0}`), então o conjunto das partes reais de `λ ≠ 0` é ℝ inteiro; ℝ não é limitado
++inferiormente e `sInf ℝ = 0` no Lean, logo `Δ_spec > 0` é `0 > 0`. -/
++theorem yang_mills_mass_gap_falso :
++    ¬ (∀ (C : UniversalUnificationOperator),
++      let Δ_spec := sInf { x : ℝ | ∃ «λ» ∈ C.DiscreteSpectrum, «λ» ≠ 0 ∧ «λ».re = x }
++      Δ_spec > 0) := by
++  intro h
++  let z : MathematicalStateSpace := ⟨0, 0, by simp, by simp⟩
++  let C0 : UniversalUnificationOperator :=
++    { op := fun _ => z
++      kernel := ⟨fun _ => 0, by simp, by simp, trivial⟩
++      integralForm := by intro ψ x; simp [z]
++      selfAdjoint := by intro ψ φ; simp [MathematicalStateSpace.innerProduct, z]
++      isFredholm := trivial
++      isBounded := ⟨0, by
++        intro ψ
++        simp [MathematicalStateSpace.norm, MathematicalStateSpace.innerProduct, z]⟩ }
++  have hphys : ∫⁻ x, (‖(Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℂ))) x‖₊ : ENNReal) ^ 2
++      < ⊤ := by
++    have : (fun x => (‖(Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℂ))) x‖₊ : ENNReal) ^ 2)
++        = Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ENNReal)) := by
++      funext x
++      by_cases hx : x ∈ ({0} : Set (Fin 4 → ℝ)) <;> simp [Set.indicator_of_mem, Set.indicator_of_not_mem, hx]
++    rw [this, MeasureTheory.lintegral_indicator_const (MeasurableSet.singleton 0)]
++    simp
++  let ψ : MathematicalStateSpace :=
++    ⟨0, Set.indicator ({0} : Set (Fin 4 → ℝ)) (fun _ => (1 : ℂ)), by simp, hphys⟩
++  have hψ : (ψ.numberTheoryComponent, ψ.physicalComponent) ≠ 0 := by
++    intro h0
++    have h1 := congrArg (fun p => p.2 0) h0
++    simp [ψ] at h1
++  have hmem : ∀ «λ» : ℂ, «λ» ∈ C0.DiscreteSpectrum := by
++    intro «λ»
++    refine ⟨⟨ψ, hψ, ?_⟩, ψ, hψ, ?_, ?_⟩
++    · intro x; simp [C0, z, ψ]
++    · intro x; simp [C0, z, ψ]
++    · exact ENNReal.ofReal_lt_top
++  have hS : { x : ℝ | ∃ «λ» ∈ C0.DiscreteSpectrum, «λ» ≠ 0 ∧ «λ».re = x } = Set.univ := by
++    ext x
++    simp only [Set.mem_setOf_eq, Set.mem_univ, iff_true]
++    refine ⟨⟨x, 1⟩, hmem _, ?_, rfl⟩
++    intro h0
++    have := congrArg Complex.im h0
++    simp at this
++  have h0 := h C0
++  simp only at h0
++  rw [hS, Real.sInf_of_not_bddBelow (fun hb => not_bddBelow_iff.mpr (fun b => ⟨b - 1, Set.mem_univ _, by linarith⟩) hb)] at h0
++  exact lt_irrefl _ h0
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_SecurityReductions.lean
+@@ -0,0 +1,21 @@
++import LA2028_Applications.SecurityReductions
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `LA2028.Security.hybrid_system_secure` é falso: a segunda parte pede que todo QuantumAttack tenha complexidade
++    ≥ 2^256 em algum ponto, mas QuantumAttack é uma estrutura livre; o ataque de complexidade constante 0 contradiz
++    (a primeira parte, condicionada a RiemannHypothesis, não importa). -/
++theorem hybrid_system_secure_falso :
++    ¬ ((LA2028.Security.RiemannHypothesis →
++        ∀ classical_attack : LA2028.Security.Attack, classical_attack.complexity 3072 ≥ 2^128) ∧
++      (∀ quantum_attack : LA2028.Security.QuantumAttack,
++        ∃ post_quantum_component, quantum_attack.complexity post_quantum_component ≥ 2^256)) := by
++  rintro ⟨-, h⟩
++  obtain ⟨c, hc⟩ := h { name := "", complexity := fun _ => 0, uses_shor := false }
++  simp at hc
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_SorrySingularity.lean
+@@ -0,0 +1,16 @@
++import Foundations.SorrySingularity
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `SorrySingularity.sorry_external` é falso: I é um número real (axioma `I : ℝ` do autor), e z = (I : ℂ) dá
++    z = I. -/
++theorem sorry_external_falso :
++    ¬ ∀ (z : ℂ), (z : ℂ) ≠ ((SorrySingularity.I : ℝ) : ℂ) := by
++  intro H
++  exact H ((SorrySingularity.I : ℝ) : ℂ) rfl
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_StructuralResidue.lean
+@@ -0,0 +1,46 @@
++import LRE.StructuralResidue
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `i_phase_properties` é falso: `norm` só satisfaz norm x = 0 ↔ x = 0 e pode ser negativa. Com C = ℤ, D = Unit,
++    ι = 0 (resíduo de 1 é 1), norm x = -x², ε = 2: I = -1/(-1 + 2) = -1 < 0. -/
++theorem i_phase_properties_falso :
++    ¬ ∀ {α β : Type} {C : ContinuousDomain.{0, 0} α} {D : DiscreteDomain.{0, 0} β}
++      (π : Projection C D) (ι : Reconstruction C D π)
++      (norm : C.carrier → ℝ) (ε : ℝ) (_ : ε > 0)
++      (_ : ∀ x, norm x = 0 ↔ x = C.zero) (x : C.carrier),
++      let I := i_phase_from_residue π ι norm ε x
++      (residue π ι x = C.zero → I = 0) ∧ (0 ≤ I) ∧ (I < 1) := by
++  intro H
++  let C : ContinuousDomain.{0, 0} Unit :=
++    { carrier := ℤ, add := (· + ·), neg := (- ·), zero := 0, add_assoc := add_assoc,
++      add_comm := add_comm, zero_add := zero_add, add_zero := add_zero,
++      add_left_neg := neg_add_cancel }
++  let D : DiscreteDomain.{0, 0} Unit :=
++    { carrier := Unit, add := fun _ _ => (), zero := (), equiv := fun _ _ => True,
++      add_assoc := fun _ _ _ => rfl, add_comm := fun _ _ => rfl, zero_add := fun _ => rfl,
++      equiv_refl := fun _ => trivial, equiv_symm := fun _ _ _ => trivial,
++      equiv_trans := fun _ _ _ _ _ => trivial }
++  let π : Projection C D :=
++    { map := fun _ => (), preserves_zero := rfl, preserves_add := fun _ _ => rfl,
++      surjective := fun _ => ⟨(0 : ℤ), rfl⟩ }
++  let ι : Reconstruction C D π := { lift := fun _ => (0 : ℤ), right_inverse := fun _ => rfl }
++  have hn : ∀ x : ℤ, -((x : ℝ) ^ 2) = 0 ↔ x = 0 := by
++    intro x
++    constructor
++    · intro h
++      have : (x : ℝ) = 0 := by nlinarith [sq_nonneg (x : ℝ)]
++      exact_mod_cast this
++    · intro h; subst h; simp
++  have h := (H π ι (fun z : ℤ => -((z : ℝ) ^ 2)) 2 (by norm_num) hn (1 : ℤ)).2.1
++  have hr : residue π ι (1 : ℤ) = (1 : ℤ) := by
++    show (1 : ℤ) + -(0 : ℤ) = 1
++    norm_num
++  simp only [i_phase_from_residue, hr] at h
++  norm_num at h
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/provers/lean/MVEI_Refutacoes_UncertaintyProtection.lean
+@@ -0,0 +1,21 @@
++import UncertaintyProtection
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open UncertaintyProtection in
++/-- `UncertaintyProtection.escalating_protection` é falso como escrito: com attack_count = 0 a função iterada é a
++    identidade e o enunciado pede load_percentage < load_percentage. -/
++theorem escalating_protection_falso :
++    ¬ ∀ (p : UnknownParameter) (attack_count : ℕ), p.is_active = true →
++      p.load_percentage < (p.protection_function^[attack_count]) p.load_percentage := by
++  intro h
++  let p : UnknownParameter :=
++    { id := "", load_percentage := 1, millennium_problem := "", protection_function := id,
++      load_positive := one_pos, protection_monotone := fun _ _ hxy => hxy }
++  exact lt_irrefl _ (h p 0 rfl)
++
++end MVEI.Refutacoes

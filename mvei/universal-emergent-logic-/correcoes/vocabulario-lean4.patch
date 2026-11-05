@@ -18,6 +18,15 @@
  
  namespace HEAU
  
+@@ -29,7 +33,7 @@
+   Aqui `coeff L n` representa os coeficientes Λ_L(n).
+ -/
+ def psiL {L : Type} [LFunction L] (f : L) (x : ℕ) : ℂ :=
+-  ∑ n in Finset.filter (fun n => (n : ℕ) ≤ x) (Finset.range (x+1)),
++  ∑ n ∈ Finset.filter (fun n => (n : ℕ) ≤ x) (Finset.range (x+1)),
+     LFunction.coeff f n
+ 
+ /--
 --- a/formalization/hcs_rbc_system/lean/RBC_Core.lean
 +++ b/formalization/hcs_rbc_system/lean/RBC_Core.lean
 @@ -28,6 +28,11 @@
@@ -141,7 +150,15 @@
  
  /-- **Axiom LRE-3: Non-Controllable Residue**
      
-@@ -450,7 +454,7 @@
+@@ -443,14 +447,14 @@
+ def linearProjection (n k : ℕ) (h : k < n) : 
+     ProjectiveSystem (Fin n → ℝ) (Fin k → ℝ) where
+   projection u i := u ⟨i.val, Nat.lt_trans i.isLt h⟩
+-  residue u := ∑ i in Finset.range (n - k), (u ⟨k + i, sorry⟩)^2
++  residue u := ∑ i ∈ Finset.range (n - k), (u ⟨k + i, sorry⟩)^2
+   residue_nonneg := by
+     intro u
+     apply Finset.sum_nonneg
      intro i _
      exact sq_nonneg _
  
@@ -184,17 +201,21 @@
  cannot be "completed" at a fixed level of description:
 --- a/formalization/lean/LRE/Complexity/Basic.lean
 +++ b/formalization/lean/LRE/Complexity/Basic.lean
-@@ -14,6 +14,9 @@
+@@ -14,6 +14,13 @@
  import Mathlib.Computability.TMComputable
  import Mathlib.Data.Nat.Basic
  import Mathlib.Logic.Basic
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Positivity
++import Mathlib.Tactic.Ring
 +import Mathlib.Data.Real.Basic
 +
 +noncomputable section
  
  namespace LRE.Complexity
  
-@@ -69,7 +72,7 @@
+@@ -69,7 +76,7 @@
  /-- The verification space D consists only of the verifiable properties:
  the instance and the claimed solution (certificate). -/
  structure VerificationSpace (prob : NPProblem) where
@@ -203,7 +224,7 @@
    certificate : prob.Solution
  
  /-! ## The Projection: C → D -/
-@@ -81,7 +84,7 @@
+@@ -81,7 +88,7 @@
  def searchProjection {prob : NPProblem} 
      (search : SearchSpace prob.toComputationalProblem)
      (trace : ∀ n, search.trace n) : VerificationSpace prob :=
@@ -212,7 +233,7 @@
      certificate := match search.output trace with
        | some sol => sol
        | none => sorry }  -- Default certificate if no solution
-@@ -147,7 +150,7 @@
+@@ -147,7 +154,7 @@
  
  /-! ## Geometric Interpretation -/
  
@@ -221,7 +242,7 @@
  This means the connection is "flat" - we can lift paths in D to C
  without accumulating exponential computational cost. -/
  
-@@ -168,7 +171,7 @@
+@@ -168,7 +175,7 @@
  
  /-! ## Physical Interpretation -/
  
@@ -698,6 +719,24 @@
  
  namespace ResidualRegularity
  
+@@ -25,7 +30,7 @@
+   toFun : ℝ → ℝ
+   bv_bound : ∃ (M : ℝ), ∀ (partition : Finset ℝ),
+     (∀ t ∈ partition, a ≤ t ∧ t ≤ b) →
+-    (∑ i in partition, |toFun (Finset.max' partition (by sorry)) - toFun (Finset.min' partition (by sorry))|) ≤ M
++    (∑ i ∈ partition, |toFun (Finset.max' partition (by sorry)) - toFun (Finset.min' partition (by sorry))|) ≤ M
+ 
+ /-- A residual function satisfying admissibility conditions -/
+ structure AdmissibleResidual (T : ℝ) extends BVFunction 0 T where
+@@ -89,7 +94,7 @@
+ 
+ /-- Shell model residual (discrete version) -/
+ def ShellModelResidual (M : ℕ) (k : ℕ → ℝ) (u : ℝ → ℕ → ℂ) : ℝ → ℝ :=
+-  fun t => Real.sqrt (∑ n in Finset.range M, 
++  fun t => Real.sqrt (∑ n ∈ Finset.range M, 
+     k n * Complex.normSq (u t n))
+ 
+ /-- For shell models, the residual is continuously differentiable -/
 --- a/formalization/lean/LRE/Core/Residue.lean
 +++ b/formalization/lean/LRE/Core/Residue.lean
 @@ -22,6 +22,9 @@
@@ -2818,11 +2857,11 @@
  noncomputable def C_continuity (Λ : ℝ) : ℝ := Λ
  
  /-- Operator norm bound for P_Λ -/
--axiom P_Λ_bounded (Λ : ℝ) (f : ℝ⁴ → ℝ³) :
-+axiom P_Λ_bounded (Λ : ℝ) (f : ℝ⁴ → «ℝ³») :
-   norm_L2 (P_Λ Λ f) ≤ C_continuity Λ * norm_L2 f
+-theorem P_Λ_bounded (Λ : ℝ) (f : ℝ⁴ → ℝ³) :
++theorem P_Λ_bounded (Λ : ℝ) (f : ℝ⁴ → «ℝ³») :
+   norm_L2 (P_Λ Λ f) ≤ C_continuity Λ * norm_L2 f := by
+   first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; done) | (simp_all [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; done) | (unfold LRE_NS_Injective.norm_L2 LRE_NS_Injective.«P_Λ» LRE_NS_Injective.C_continuity; decide; done) | (unfold LRE_NS_Injective.norm_L2 LRE_NS_Injective.«P_Λ» LRE_NS_Injective.C_continuity; rfl; done) | (simp [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; omega; done) | (intros; simp only [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; omega; done) | (intros; simp_all [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; done) | (intro x; cases x <;> simp [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; done) | (constructor <;> simp [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; done) | (norm_num [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; done) | (intros; norm_num [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity] at *; done) | (simp [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; ring; done) | (unfold LRE_NS_Injective.norm_L2 LRE_NS_Injective.«P_Λ» LRE_NS_Injective.C_continuity; ring; done) | (simp [LRE_NS_Injective.norm_L2, LRE_NS_Injective.«P_Λ», LRE_NS_Injective.C_continuity]; linarith; done) | (exact?; done)
  
- end LRE_NS_Injective
 --- a/formalization/lean/LRE/NavierStokes/LerayProjection.lean
 +++ b/formalization/lean/LRE/NavierStokes/LerayProjection.lean
 @@ -20,6 +20,8 @@
@@ -3943,7 +3982,7 @@
    constructor
    · rfl
    constructor
-@@ -202,7 +207,7 @@
+@@ -197,7 +202,7 @@
  
  /-! ## Interpretation and Next Steps -/
  
@@ -4761,6 +4800,15 @@
      (op : ℝ → LinearOp X) (scales : List ℝ) : List (LinearOp X) :=
 --- a/formalization/lean/Unified/Coupling/Definition.lean
 +++ b/formalization/lean/Unified/Coupling/Definition.lean
+@@ -151,7 +151,7 @@
+ 
+ /-- Check if matrix is diagonally dominant (sufficient for positive definiteness) -/
+ def diagonallyDominant (C : Coupling) : Prop :=
+-  ∀ i, C i i > ∑ j in Finset.univ.filter (· ≠ i), |C i j|
++  ∀ i, C i i > ∑ j ∈ Finset.univ.filter (· ≠ i), |C i j|
+ 
+ /-
+   ============ Standard Configurations ============
 @@ -183,6 +183,9 @@
  
  ```lean

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -1521,7 +1521,7 @@
     "aberto-sorry": 17,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1578,7 +1578,7 @@
      "trecho": "  ∀ ⟦r⟧eal_world_problem,",
      "preenchimento": {
       "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
      }
     }
    ],
@@ -1588,7 +1588,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1659,7 +1659,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1676,27 +1676,29 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, vocabulario-lean4): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 18 arquivo(s): abbrev 23, acento 1, campos_multiplos 2, docstring 20, end 2, instancia_mensuravel 1, lambda 53, nomes_mathlib 1, noncomputable 18, notacao 3, notacao_escopo 1, palavra_chave 5, precedencia 3, tipos_numericos 1. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././StructuralAsymmetry.lean:68:40: unknown constant 'Real.exp' | error: ././././StructuralAsymmetry.lean:128:8: failed to synthesize",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, vocabulario-lean4, zy-enunciados-do-autor): 4 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 18 arquivo(s): abbrev 23, acento 1, campos_multiplos 2, docstring 20, end 2, instancia_mensuravel 1, lambda 53, nomes_mathlib 2, noncomputable 18, notacao 3, notacao_escopo 1, palavra_chave 5, precedencia 3, tipos_numericos 1; 2 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: search_not_reducible_to_verification, search_not_reducible_to_verification. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././StructuralAsymmetry.lean:129:8: failed to synthesize | error: ././././StructuralAsymmetry.lean:152:7: failed to synthesize",
    "corrections": [
     "renomear-imports-mathlib",
-    "vocabulario-lean4"
+    "vocabulario-lean4",
+    "zy-enunciados-do-autor"
    ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
-     "linha": 98,
+     "linha": 99,
      "nome": "PvsNP.Operators.search_not_reducible_to_verification",
-     "status": "erro",
+     "status": "nao_alcancado",
      "axioms": [],
-     "erro": "linha 103: application type mismatch VerificationOperator β P argument P has type ?m.2398 : Sort ?u.2397 but is expected to have type β → Prop : Type",
-     "coluna": 26,
-     "trecho": "  [VerificationOperator β ⟦P⟧] :"
+     "dependencia_com_sorry": [
+      "StructuralAsymmetry"
+     ],
+     "motivo": "o Lean não chegou ao fim do arquivo"
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
-     "linha": 158,
+     "linha": 159,
      "nome": "PvsNP.Operators.parallelism_linear_speedup",
      "status": "aberto-sorry",
      "axioms": [
@@ -1704,21 +1706,33 @@
       "Classical.choice",
       "Quot.sound",
       "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "StructuralAsymmetry"
      ]
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/Operators.lean",
-     "linha": 164,
+     "linha": 165,
      "nome": "PvsNP.Operators.parallelism_preserves_entropy",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 167: invalid binder annotation, type is not a class instance ?m.4330 use the command `set_option checkBinderAnnotations false` to disable the check",
-     "coluna": 14,
-     "trecho": "  {α : Type} [⟦S⟧tructuralEntropy α] (n : ℕ) :"
+     "status": "nao_alcancado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "sorryAx"
+     ],
+     "dependencia_com_sorry": [
+      "StructuralAsymmetry"
+     ],
+     "erro": "linha 172: type mismatch HEq.rfl has type HEq ?m.2335 ?m.2335 : Prop but is expected to have type ∀ (x : α), StructuralEntropy.entropy x = StructuralEntropy.entropy x : Prop 'PvsNP.Operators.search_not_reducible_to_verification' depends on axioms: [pr",
+     "coluna": 2,
+     "trecho": "  ⟦r⟧fl",
+     "motivo": "importa StructuralAsymmetry, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 110,
+     "linha": 111,
      "nome": "PvsNP.structural_asymmetry_principle",
      "status": "erro",
      "axioms": [
@@ -1727,13 +1741,13 @@
       "Quot.sound",
       "sorryAx"
      ],
-     "erro": "linha 128: failed to synthesize instance Membership (VerificationSpace P) Type",
+     "erro": "linha 129: failed to synthesize instance Membership (VerificationSpace P) Type",
      "coluna": 8,
      "trecho": "        ⟦a⟧lg.compute s ∈ VerificationSp"
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 130,
+     "linha": 131,
      "nome": "PvsNP.p_eq_np_implies_entropy_collapse",
      "status": "erro",
      "axioms": [
@@ -1742,13 +1756,13 @@
       "Quot.sound",
       "sorryAx"
      ],
-     "erro": "linha 151: failed to synthesize instance StructuralEntropy (SearchSpace P)",
+     "erro": "linha 152: failed to synthesize instance StructuralEntropy (SearchSpace P)",
      "coluna": 7,
      "trecho": "      |⟦S⟧tructuralEntropy.entropy s - "
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 153,
+     "linha": 154,
      "nome": "PvsNP.p_eq_np_eliminates_creativity",
      "status": "aberto-sorry",
      "axioms": [
@@ -1757,7 +1771,7 @@
     },
     {
      "arquivo": "problems/p-vs-np/formalization/lean/StructuralAsymmetry.lean",
-     "linha": 175,
+     "linha": 176,
      "nome": "PvsNP.structural_implies_classical",
      "status": "aberto-sorry",
      "axioms": [
@@ -1774,7 +1788,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1812,7 +1826,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   },
   {
    "repo": "sfh-formalization-lab",
@@ -1887,7 +1901,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   }
  ]
 }
