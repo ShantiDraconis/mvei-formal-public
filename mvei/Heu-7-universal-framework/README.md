@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `63b80b7623e831645f843e1f04385a1cfe17717a`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `63b80b7623e831645f843e1f04385a1cfe17717a`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `src/lean` | v4.19.0 | partial | 6 | 0 | 0 | 9 / 5 / 65 / 0 / 4 |
+| `src/lean` | v4.19.0 | partial | 6 | 0 | 0 | 11 / 5 / 63 / 0 / 4 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 15 |
-| Unique (name + statement) | 15 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 9 |
+| Counting each project | 17 |
+| Unique (name + statement) | 17 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 11 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -59,7 +59,6 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `63b80b7623e831645f843
 | `HEU.Problems.PvsNP.NPComplete_determines_critical` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.PvsNP.PNP_equiv` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.PvsNP.PNP_LTC_equiv` | `src/lean (file by file)` | open | `sorryAx` |
-| `HEU.Problems.PvsNP.SAT_equiv` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.PvsNP.UBO_valid_implies_P_eq_NP` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.PvsNP.P_eq_NP_implies_UBO_valid` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.PvsNP.PNP_UBO_biequiv_proof` | `src/lean (file by file)` | open | `sorryAx` |
@@ -91,7 +90,6 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `63b80b7623e831645f843
 | `HEU.Problems.RH.O_RH_preserves_order` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.RH.ordinal_increases_with_precision` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.RH.UBO_nonneg_under_RH` | `src/lean (file by file)` | open | `sorryAx` |
-| `HEU.Problems.RH.RH_contrapositive` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.RH.RH_equilibrium_iff_RH` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.RH.O_RH_zero_on_critical` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.RH.O_RH_negative_off_critical` | `src/lean (file by file)` | open | `sorryAx` |
@@ -100,7 +98,7 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `63b80b7623e831645f843
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting copies). The kernel checked 79 of them (9 closed, 5 conditional, 65 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 4 the kernel has no result:
+The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting copies). The kernel checked 79 of them (11 closed, 5 conditional, 63 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 4 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
@@ -108,7 +106,10 @@ The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting 
 
 ### MVEI corrections
 
-* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 31 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Heu-7-universal-framework mvei/Heu-7-universal-framework/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Heu-7-universal-framework mvei/Heu-7-universal-framework/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 32 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Heu-7-universal-framework mvei/Heu-7-universal-framework/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 13 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Heu-7-universal-framework mvei/Heu-7-universal-framework/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/Heu-7-universal-framework mvei/Heu-7-universal-framework/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
 
 ## Files in this folder
 

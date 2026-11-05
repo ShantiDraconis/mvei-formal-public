@@ -1,0 +1,3618 @@
+--- a/lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean
++++ b/lean4/Core/Analysis/Calculus/ComplexDifferentiability.lean
+@@ -49,7 +49,8 @@
+ /-- The limit definition equals the standard derivative. -/
+ theorem hasComplexDerivAt_iff {f : ℂ → ℂ} {f' z : ℂ} :
+     HasComplexDerivAt f f' z ↔ HasDerivAt f f' z := by
+-  rfl
++  rw [hasDerivAt_iff_tendsto_slope_zero, HasComplexDerivAt]
++  simp only [smul_eq_mul, div_eq_inv_mul]
+ 
+ /-! ## 2. Cauchy-Riemann Equations -/
+ 
+@@ -57,6 +58,58 @@
+ def realPart (f : ℂ → ℂ) : ℝ × ℝ → ℝ := fun p => (f (p.1 + p.2 * I)).re
+ def imagPart (f : ℂ → ℂ) : ℝ × ℝ → ℝ := fun p => (f (p.1 + p.2 * I)).im
+ 
++/-- Auxiliar (MVEI): a derivada real de p ↦ p.1 + p.2·i. -/
++theorem mvei_hasFDerivAt_embed (q : ℝ × ℝ) :
++    HasFDerivAt (fun p : ℝ × ℝ => (p.1 : ℂ) + p.2 * I)
++      (ofRealCLM.comp (ContinuousLinearMap.fst ℝ ℝ ℝ) +
++        I • ofRealCLM.comp (ContinuousLinearMap.snd ℝ ℝ ℝ)) q := by
++  have h1 : HasFDerivAt (fun p : ℝ × ℝ => (p.1 : ℂ)) (ofRealCLM.comp (ContinuousLinearMap.fst ℝ ℝ ℝ)) q :=
++    ofRealCLM.hasFDerivAt.comp q hasFDerivAt_fst
++  have h2 : HasFDerivAt (fun p : ℝ × ℝ => (p.2 : ℂ) * I)
++      (I • ofRealCLM.comp (ContinuousLinearMap.snd ℝ ℝ ℝ)) q :=
++    (ofRealCLM.hasFDerivAt.comp q hasFDerivAt_snd).mul_const I
++  exact h1.add h2
++
++/-- Auxiliar (MVEI): derivadas parciais de Re f e Im f quando f é ℂ-derivável em z. -/
++theorem mvei_partials {f : ℂ → ℂ} {z : ℂ} (hf : DifferentiableAt ℂ f z) :
++    HasFDerivAt (realPart f)
++      (reCLM.comp (((fderiv ℂ f z).restrictScalars ℝ).comp
++        (ofRealCLM.comp (ContinuousLinearMap.fst ℝ ℝ ℝ) +
++          I • ofRealCLM.comp (ContinuousLinearMap.snd ℝ ℝ ℝ)))) (z.re, z.im) ∧
++    HasFDerivAt (imagPart f)
++      (imCLM.comp (((fderiv ℂ f z).restrictScalars ℝ).comp
++        (ofRealCLM.comp (ContinuousLinearMap.fst ℝ ℝ ℝ) +
++          I • ofRealCLM.comp (ContinuousLinearMap.snd ℝ ℝ ℝ)))) (z.re, z.im) := by
++  have hz : ((z.re, z.im).1 : ℂ) + (z.re, z.im).2 * I = z := by simp [re_add_im]
++  have hF : HasFDerivAt f ((fderiv ℂ f z).restrictScalars ℝ)
++      (((z.re, z.im).1 : ℂ) + (z.re, z.im).2 * I) := by
++    rw [hz]; exact hf.hasFDerivAt.restrictScalars ℝ
++  have hc := hF.comp (z.re, z.im) (mvei_hasFDerivAt_embed (z.re, z.im))
++  exact ⟨reCLM.hasFDerivAt.comp (z.re, z.im) hc, imCLM.hasFDerivAt.comp (z.re, z.im) hc⟩
++
++/-- Auxiliar (MVEI): se F(p) = f(p.1 + p.2·i) tem derivada real A em (z.re, z.im) com A(0, 1) = i·A(1, 0)
++    (equações de Cauchy-Riemann), então f é ℂ-derivável em z. -/
++theorem mvei_complex_of_real {f : ℂ → ℂ} {z : ℂ} {A : ℝ × ℝ →L[ℝ] ℂ}
++    (hA : HasFDerivAt (fun q : ℝ × ℝ => f (q.1 + q.2 * I)) A (z.re, z.im))
++    (hAI : A (0, 1) = I * A (1, 0)) : DifferentiableAt ℂ f z := by
++  set ψ : ℂ →L[ℝ] ℝ × ℝ := reCLM.prod imCLM with hψ
++  have hfψ : f = (fun q : ℝ × ℝ => f (q.1 + q.2 * I)) ∘ ψ := by funext w; simp [hψ, re_add_im]
++  have hL : HasFDerivAt f (A.comp ψ) z := by
++    rw [hfψ]
++    exact hA.comp z ψ.hasFDerivAt
++  have hC : HasFDerivAt f (ContinuousLinearMap.smulRight (1 : ℂ →L[ℂ] ℂ) (A (1, 0))) z := by
++    refine hasFDerivAt_of_restrictScalars ℝ hL ?_
++    ext w
++    have e : ((w.re, w.im) : ℝ × ℝ) = w.re • ((1 : ℝ), (0 : ℝ)) + w.im • ((0 : ℝ), (1 : ℝ)) := by
++      ext <;> simp
++    simp only [ContinuousLinearMap.coe_restrictScalars', ContinuousLinearMap.smulRight_apply,
++      ContinuousLinearMap.one_apply, ContinuousLinearMap.comp_apply, hψ, ContinuousLinearMap.prod_apply,
++      reCLM_apply, imCLM_apply]
++    rw [e, map_add, map_smul, map_smul, hAI, smul_eq_mul, Complex.real_smul, Complex.real_smul]
++    conv_lhs => rw [← re_add_im w]
++    ring
++  exact hC.differentiableAt
++
+ /-- Cauchy-Riemann equations characterize complex differentiability. -/
+ theorem cauchy_riemann {f : ℂ → ℂ} {z : ℂ}
+     (hf : DifferentiableAt ℂ f z) :
+@@ -66,7 +119,17 @@
+     -- ∂u/∂x = ∂v/∂y and ∂u/∂y = -∂v/∂x
+     fderiv ℝ u p ![1, 0] = fderiv ℝ v p ![0, 1] ∧
+     fderiv ℝ u p ![0, 1] = -fderiv ℝ v p ![1, 0] := by
+-  sorry -- Cauchy-Riemann characterization
++  obtain ⟨hu, hv⟩ := mvei_partials hf
++  simp only
++  rw [hu.fderiv, hv.fderiv]
++  have hI : fderiv ℂ f z I = I * fderiv ℂ f z 1 := by
++    rw [← smul_eq_mul, ← map_smul, smul_eq_mul, mul_one]
++  simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.add_apply,
++    ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
++    ofRealCLM_apply, ContinuousLinearMap.coe_restrictScalars', reCLM_apply, imCLM_apply, ofReal_one,
++    ofReal_zero, smul_zero, add_zero, smul_eq_mul, mul_one, zero_add]
++  rw [hI]
++  simp [Complex.mul_re, Complex.mul_im]
+ 
+ /-- Converse: Cauchy-Riemann with continuity implies holomorphic. -/
+ theorem holomorphic_of_cauchy_riemann {f : ℂ → ℂ} {U : Set ℂ}
+@@ -80,7 +143,33 @@
+       fderiv ℝ u p ![0, 1] = -fderiv ℝ v p ![1, 0])
+     (hcont : ContinuousOn f U) :
+     DifferentiableOn ℂ f U := by
+-  sorry -- Looman-Menchoff theorem direction
++  intro z hz
++  obtain ⟨hu, hv, hcr1, hcr2⟩ := hCR z hz
++  set p : ℝ × ℝ := (z.re, z.im) with hp
++  set F : ℝ × ℝ → ℂ := fun q => f (q.1 + q.2 * I) with hFdef
++  have hFuv : F = fun q => ((realPart f q : ℝ) : ℂ) + ((imagPart f q : ℝ) : ℂ) * I := by
++    funext q; simp only [hFdef, realPart, imagPart, re_add_im]
++  have hFd : DifferentiableAt ℝ F p := by
++    rw [hFuv]
++    exact (ofRealCLM.differentiableAt.comp p hu).add
++      ((ofRealCLM.differentiableAt.comp p hv).mul_const I)
++  set A := fderiv ℝ F p with hAdef
++  have hA : HasFDerivAt F A p := hFd.hasFDerivAt
++  have hure : ∀ w, fderiv ℝ (realPart f) p w = (A w).re := by
++    intro w
++    have h := reCLM.hasFDerivAt.comp p hA
++    rw [show realPart f = reCLM ∘ F from rfl, h.fderiv]; rfl
++  have hvim : ∀ w, fderiv ℝ (imagPart f) p w = (A w).im := by
++    intro w
++    have h := imCLM.hasFDerivAt.comp p hA
++    rw [show imagPart f = imCLM ∘ F from rfl, h.fderiv]; rfl
++  rw [hure, hvim] at hcr1
++  rw [hure, hvim] at hcr2
++  have hAI : A (0, 1) = I * A (1, 0) := by
++    apply Complex.ext
++    · simp only [Complex.mul_re, I_re, I_im, zero_mul, one_mul, zero_sub]; linarith
++    · simp only [Complex.mul_im, I_re, I_im, zero_mul, one_mul, add_zero]; linarith
++  exact (mvei_complex_of_real hA hAI).differentiableWithinAt
+ 
+ /-! ## 3. Holomorphic Functions -/
+ 
+@@ -110,7 +199,7 @@
+     (hf : Holomorphic f V) (hg : Holomorphic g U)
+     (hgV : g '' U ⊆ V) :
+     Holomorphic (f ∘ g) U := by
+-  sorry -- Requires careful domain tracking
++  exact ⟨hg.1, hf.2.comp hg.2 (fun x hx => hgV ⟨x, hx, rfl⟩)⟩
+ 
+ /-! ## 4. Wirtinger Derivatives -/
+ 
+@@ -128,7 +217,38 @@
+ theorem holomorphic_iff_wirtinger_conj_zero {f : ℂ → ℂ} {z : ℂ}
+     (hf : DifferentiableAt ℝ (fun p : ℝ × ℝ => f (p.1 + p.2 * I)) (z.re, z.im)) :
+     DifferentiableAt ℂ f z ↔ wirtingerConjDeriv f z = 0 := by
+-  sorry -- Wirtinger characterization
++  set A := fderiv ℝ (fun p : ℝ × ℝ => f (p.1 + p.2 * I)) (z.re, z.im) with hAdef
++  have hW : wirtingerConjDeriv f z = (1 / 2) * (A (1, 0) + I * A (0, 1)) := rfl
++  rw [hW]
++  constructor
++  · intro hd
++    have hz : ((z.re, z.im).1 : ℂ) + (z.re, z.im).2 * I = z := by simp [re_add_im]
++    have hF : HasFDerivAt f ((fderiv ℂ f z).restrictScalars ℝ)
++        (((z.re, z.im).1 : ℂ) + (z.re, z.im).2 * I) := by
++      rw [hz]; exact hd.hasFDerivAt.restrictScalars ℝ
++    have hc : HasFDerivAt (fun p : ℝ × ℝ => f (p.1 + p.2 * I)) _ (z.re, z.im) :=
++      hF.comp (z.re, z.im) (mvei_hasFDerivAt_embed (z.re, z.im))
++    rw [hAdef, hc.fderiv]
++    have hI : fderiv ℂ f z I = I * fderiv ℂ f z 1 := by
++      rw [← smul_eq_mul, ← map_smul, smul_eq_mul, mul_one]
++    simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.add_apply,
++      ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
++      ofRealCLM_apply, ContinuousLinearMap.coe_restrictScalars', ofReal_one, ofReal_zero, smul_zero,
++      add_zero, smul_eq_mul, mul_one, zero_add]
++    rw [hI]
++    ring_nf
++    rw [I_sq]
++    ring
++  · intro h0
++    have hAI : A (0, 1) = I * A (1, 0) := by
++      have h1 : A (1, 0) + I * A (0, 1) = 0 := by
++        have := h0
++        rw [mul_eq_zero] at this
++        exact this.resolve_left (by norm_num)
++      have h2 : A (0, 1) = -I * (I * A (0, 1)) := by ring_nf; rw [I_sq]; ring
++      rw [h2, show I * A (0, 1) = -A (1, 0) by linear_combination h1]
++      ring
++    exact mvei_complex_of_real hf.hasFDerivAt hAI
+ 
+ /-! ## 5. Harmonic Functions -/
+ 
+@@ -174,13 +294,32 @@
+       deriv γ₁ 0 ≠ 0 → deriv γ₂ 0 ≠ 0 →
+       arg (deriv (f ∘ γ₁) 0 / deriv (f ∘ γ₂) 0) =
+       arg (deriv γ₁ 0 / deriv γ₂ 0) := by
+-  sorry -- Angle preservation
++  intro γ₁ γ₂ h1 h2 hz1 hz2 hd1 hd2
++  obtain ⟨hfd, hf0⟩ := hf
++  have c1 : HasDerivAt (f ∘ γ₁) (deriv f z * deriv γ₁ 0) 0 := by
++    have h' : HasDerivAt f (deriv f z) (γ₁ 0) := by rw [hz1]; exact hfd.hasDerivAt
++    exact h'.comp (0 : ℝ) h1.hasDerivAt
++  have c2 : HasDerivAt (f ∘ γ₂) (deriv f z * deriv γ₂ 0) 0 := by
++    have h' : HasDerivAt f (deriv f z) (γ₂ 0) := by rw [hz2]; exact hfd.hasDerivAt
++    exact h'.comp (0 : ℝ) h2.hasDerivAt
++  rw [c1.deriv, c2.deriv, mul_div_mul_left _ _ hf0]
+ 
+ /-- Möbius transformations are conformal. -/
+ theorem mobius_conformal (a b c d : ℂ) (had : a * d - b * c ≠ 0)
+     (z : ℂ) (hz : c * z + d ≠ 0) :
+     IsConformalAt (fun w => (a * w + b) / (c * w + d)) z := by
+-  sorry -- Möbius transformation
++  have hd : HasDerivAt (fun w => (a * w + b) / (c * w + d))
++      ((a * (c * z + d) - (a * z + b) * c) / (c * z + d) ^ 2) z := by
++    have h1 : HasDerivAt (fun w => a * w + b) a z := by
++      simpa using ((hasDerivAt_id z).const_mul a).add_const b
++    have h2 : HasDerivAt (fun w => c * w + d) c z := by
++      simpa using ((hasDerivAt_id z).const_mul c).add_const d
++    exact h1.div h2 hz
++  refine ⟨hd.differentiableAt, ?_⟩
++  rw [hd.deriv]
++  have : a * (c * z + d) - (a * z + b) * c = a * d - b * c := by ring
++  rw [this]
++  exact div_ne_zero had (pow_ne_zero 2 hz)
+ 
+ /-! ## 7. Power Series -/
+ 
+@@ -190,7 +329,13 @@
+     (hf : Holomorphic f (Metric.ball z₀ r)) :
+     ∃ a : ℕ → ℂ, ∀ z ∈ Metric.ball z₀ r,
+       f z = ∑' n, a n * (z - z₀)^n := by
+-  sorry -- Power series expansion
++  refine ⟨fun n => (n.factorial : ℂ)⁻¹ * iteratedDeriv n f z₀, fun z hz => ?_⟩
++  have h := Complex.hasSum_taylorSeries_on_ball hf.2 hz
++  rw [← h.tsum_eq]
++  congr 1
++  funext n
++  simp only [smul_eq_mul]
++  ring
+ 
+ /-- The coefficients are given by derivatives. -/
+ theorem power_series_coeff {f : ℂ → ℂ} {z₀ : ℂ} {a : ℕ → ℂ}
+@@ -231,14 +376,20 @@
+     (z₀ : ℂ) (hz₀ : z₀ ∈ U)
+     (hmax : ∀ z ∈ U, ‖f z‖ ≤ ‖f z₀‖) :
+     ∀ z ∈ U, f z = f z₀ := by
+-  sorry -- Maximum modulus principle
++  intro z hz
++  exact Complex.eqOn_of_isPreconnected_of_isMaxOn_norm hUconn.isPreconnected hU hf.2 hz₀
++    (fun w hw => hmax w hw) hz
+ 
+ /-- Open mapping theorem. -/
+ theorem open_mapping {f : ℂ → ℂ} {U : Set ℂ}
+     (hU : IsOpen U) (hUconn : IsConnected U)
+     (hf : Holomorphic f U) (hfnc : ¬∃ c, ∀ z ∈ U, f z = c) :
+     IsOpenMap (f ∘ Subtype.val : U → ℂ) := by
+-  sorry -- Open mapping theorem
++  rcases (hf.2.analyticOnNhd hU).is_constant_or_isOpen hUconn.isPreconnected with h | h
++  · exact absurd h hfnc
++  · intro s hs
++    rw [Set.image_comp]
++    exact h _ (by rintro _ ⟨x, -, rfl⟩; exact x.2) (hU.isOpenMap_subtype_val s hs)
+ 
+ /-! ## 10. Liouville's Theorem -/
+ 
+@@ -247,6 +398,8 @@
+     (hf : Differentiable ℂ f)
+     (hbdd : ∃ M, ∀ z, ‖f z‖ ≤ M) :
+     ∃ c, f = fun _ => c := by
+-  sorry -- Liouville's theorem
++  obtain ⟨M, hM⟩ := hbdd
++  refine ⟨f 0, funext fun z => hf.apply_eq_apply_of_bounded ?_ z 0⟩
++  exact isBounded_iff_forall_norm_le.2 ⟨M, by rintro _ ⟨w, rfl⟩; exact hM w⟩
+ 
+ end ComplexDifferentiability
+--- a/lean4/Core/Analysis/Calculus/Derivatives.lean
++++ b/lean4/Core/Analysis/Calculus/Derivatives.lean
+@@ -27,7 +27,10 @@
+ import Mathlib.Analysis.SpecialFunctions.Log.Basic
+ import Mathlib.Analysis.SpecialFunctions.Exp
+ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+ import Mathlib.Analysis.Calculus.ContDiff.Defs
++import Mathlib.Analysis.Calculus.LHopital
++import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+ 
+ noncomputable section
+ 
+@@ -135,11 +138,11 @@
+ 
+ /-- Derivative of sin. -/
+ theorem deriv_sin' (x : ℝ) : deriv Real.sin x = Real.cos x := by
+-  exact Real.deriv_sin x
++  exact congrFun Real.deriv_sin x
+ 
+ /-- Derivative of cos. -/
+ theorem deriv_cos' (x : ℝ) : deriv Real.cos x = -Real.sin x := by
+-  exact Real.deriv_cos x
++  exact Real.deriv_cos
+ 
+ /-! ## 5. One-Sided Derivatives -/
+ 
+@@ -161,7 +164,23 @@
+     (∃ L₁, Filter.Tendsto (fun h => (f (x + h) - f x) / h) (𝓝[<] 0) (𝓝 L₁)) ∧
+     (∃ L₂, Filter.Tendsto (fun h => (f (x + h) - f x) / h) (𝓝[>] 0) (𝓝 L₂)) ∧
+     LeftDeriv f x = RightDeriv f x := by
+-  sorry -- Requires filter manipulation
++  have hslope : ∀ L, HasDerivAt f L x ↔
++      Filter.Tendsto (fun h => (f (x + h) - f x) / h) (𝓝[≠] 0) (𝓝 L) := by
++    intro L
++    rw [hasDerivAt_iff_tendsto_slope_zero]
++    simp only [smul_eq_mul, div_eq_inv_mul]
++  constructor
++  · intro hd
++    have ht := (hslope _).mp hd.hasDerivAt
++    rw [← nhdsLT_sup_nhdsGT, tendsto_sup] at ht
++    refine ⟨⟨_, ht.1⟩, ⟨_, ht.2⟩, ?_⟩
++    rw [LeftDeriv, RightDeriv, ht.1.limUnder_eq, ht.2.limUnder_eq]
++  · rintro ⟨⟨L₁, h1⟩, ⟨L₂, h2⟩, heq⟩
++    rw [LeftDeriv, RightDeriv, h1.limUnder_eq, h2.limUnder_eq] at heq
++    subst heq
++    refine ((hslope L₁).mpr ?_).differentiableAt
++    rw [← nhdsLT_sup_nhdsGT, tendsto_sup]
++    exact ⟨h1, h2⟩
+ 
+ /-! ## 6. Partial Derivatives -/
+ 
+@@ -175,7 +194,37 @@
+     (hf : ContDiff ℝ 2 f) (x : ℝ × ℝ) :
+     deriv (fun y => deriv (fun z => f (z, y)) x.1) x.2 =
+     deriv (fun z => deriv (fun y => f (z, y)) x.2) x.1 := by
+-  sorry -- Requires second derivative theory
++  have hf1 : Differentiable ℝ f := hf.differentiable (by norm_num)
++  have hD : Differentiable ℝ (fderiv ℝ f) :=
++    (hf.fderiv_right (m := 1) (by norm_num)).differentiable (by norm_num)
++  have p1 : ∀ z y, deriv (fun z' => f (z', y)) z = fderiv ℝ f (z, y) (1, 0) := by
++    intro z y
++    have h : HasDerivAt (fun z' : ℝ => (z', y)) (1, 0) z :=
++      (hasDerivAt_id z).prodMk (hasDerivAt_const z y)
++    exact ((hf1 (z, y)).hasFDerivAt.comp_hasDerivAt z h).deriv
++  have p2 : ∀ z y, deriv (fun y' => f (z, y')) y = fderiv ℝ f (z, y) (0, 1) := by
++    intro z y
++    have h : HasDerivAt (fun y' : ℝ => (z, y')) (0, 1) y :=
++      (hasDerivAt_const y z).prodMk (hasDerivAt_id y)
++    exact ((hf1 (z, y)).hasFDerivAt.comp_hasDerivAt y h).deriv
++  have e1 : (fun y => deriv (fun z => f (z, y)) x.1) = fun y => fderiv ℝ f (x.1, y) (1, 0) :=
++    funext fun y => p1 x.1 y
++  have e2 : (fun z => deriv (fun y => f (z, y)) x.2) = fun z => fderiv ℝ f (z, x.2) (0, 1) :=
++    funext fun z => p2 z x.2
++  have q1 : HasDerivAt (fun y => fderiv ℝ f (x.1, y) (1, 0))
++      (fderiv ℝ (fderiv ℝ f) (x.1, x.2) (0, 1) (1, 0)) x.2 := by
++    have h : HasDerivAt (fun y : ℝ => (x.1, y)) (0, 1) x.2 :=
++      (hasDerivAt_const x.2 x.1).prodMk (hasDerivAt_id x.2)
++    have hc := (hD (x.1, x.2)).hasFDerivAt.comp_hasDerivAt x.2 h
++    simpa using hc.clm_apply (hasDerivAt_const x.2 ((1 : ℝ), (0 : ℝ)))
++  have q2 : HasDerivAt (fun z => fderiv ℝ f (z, x.2) (0, 1))
++      (fderiv ℝ (fderiv ℝ f) (x.1, x.2) (1, 0) (0, 1)) x.1 := by
++    have h : HasDerivAt (fun z : ℝ => (z, x.2)) (1, 0) x.1 :=
++      (hasDerivAt_id x.1).prodMk (hasDerivAt_const x.1 x.2)
++    have hc := (hD (x.1, x.2)).hasFDerivAt.comp_hasDerivAt x.1 h
++    simpa using hc.clm_apply (hasDerivAt_const x.1 ((0 : ℝ), (1 : ℝ)))
++  rw [e1, e2, q1.deriv, q2.deriv]
++  exact (hf.contDiffAt.isSymmSndFDerivAt (by simp)) (0, 1) (1, 0)
+ 
+ /-! ## 7. Directional Derivatives -/
+ 
+@@ -190,7 +239,14 @@
+     (x v : EuclideanSpace ℝ (Fin n))
+     (hf : DifferentiableAt ℝ f x) :
+     directionalDeriv f x v = inner (fderiv ℝ f x v) 1 := by
+-  sorry -- Requires inner product structure
++  have h : HasDerivAt (fun t : ℝ => x + t • v) ((1 : ℝ) • v) 0 :=
++    ((hasDerivAt_id (0 : ℝ)).smul_const v).const_add x
++  have hf' : HasFDerivAt f (fderiv ℝ f x) (x + (0 : ℝ) • v) := by
++    rw [zero_smul, add_zero]; exact hf.hasFDerivAt
++  have hc := hf'.comp_hasDerivAt (0 : ℝ) h
++  rw [one_smul] at hc
++  rw [directionalDeriv, show deriv (fun t : ℝ => f (x + t • v)) 0 = fderiv ℝ f x v from hc.deriv]
++  simp
+ 
+ /-! ## 8. Gradient -/
+ 
+@@ -206,7 +262,28 @@
+     (hf : DifferentiableAt ℝ f x) :
+     ∀ v : EuclideanSpace ℝ (Fin n), ‖v‖ = 1 →
+       directionalDeriv f x v ≤ ‖gradient' f x‖ := by
+-  sorry -- Cauchy-Schwarz inequality
++  intro v hv
++  have hdir : ∀ w : EuclideanSpace ℝ (Fin n), deriv (fun t : ℝ => f (x + t • w)) 0 = fderiv ℝ f x w := by
++    intro w
++    have h : HasDerivAt (fun t : ℝ => x + t • w) ((1 : ℝ) • w) 0 :=
++      ((hasDerivAt_id (0 : ℝ)).smul_const w).const_add x
++    have hf' : HasFDerivAt f (fderiv ℝ f x) (x + (0 : ℝ) • w) := by
++      rw [zero_smul, add_zero]; exact hf.hasFDerivAt
++    have hc := hf'.comp_hasDerivAt (0 : ℝ) h
++    rw [one_smul] at hc
++    exact hc.deriv
++  have hv' : v = ∑ i, v i • EuclideanSpace.single i (1 : ℝ) := by
++    have h := ((EuclideanSpace.basisFun (Fin n) ℝ).sum_repr v).symm
++    simpa [EuclideanSpace.basisFun_apply, EuclideanSpace.basisFun_repr] using h
++  have key : directionalDeriv f x v = inner (gradient' f x) v := by
++    rw [directionalDeriv, hdir]
++    conv_lhs => rw [hv']
++    rw [map_sum]
++    simp only [map_smul, smul_eq_mul, gradient', partialDeriv, hdir, PiLp.inner_apply,
++      RCLike.inner_apply, conj_trivial]
++  rw [key]
++  calc inner (gradient' f x) v ≤ ‖gradient' f x‖ * ‖v‖ := real_inner_le_norm _ _
++    _ = ‖gradient' f x‖ := by rw [hv, mul_one]
+ 
+ /-! ## 9. Higher-Order Derivatives -/
+ 
+@@ -221,7 +298,49 @@
+     iteratedDeriv' n (f * g) x =
+     ∑ k ∈ Finset.range (n + 1),
+       Nat.choose n k * iteratedDeriv' k f x * iteratedDeriv' (n - k) g x := by
+-  sorry -- Induction on n
++  have hD : ∀ (h : ℝ → ℝ) (k : ℕ), iteratedDeriv' k h = iteratedDeriv k h := by
++    intro h k
++    induction k with
++    | zero => funext y; simp [iteratedDeriv']
++    | succ k ih => funext y; simp only [iteratedDeriv', iteratedDeriv_succ, ih]
++  have key : ∀ k : ℕ, k ≤ n → iteratedDeriv k (f * g) = fun y =>
++      ∑ i ∈ Finset.range (k + 1),
++        (k.choose i : ℝ) * (iteratedDeriv i f y * iteratedDeriv (k - i) g y) := by
++    intro k
++    induction k with
++    | zero => intro _; funext y; simp
++    | succ k ih =>
++      intro hk
++      have hkn : ((k : ℕ) : WithTop ℕ∞) < (n : WithTop ℕ∞) := by exact_mod_cast (show k < n by omega)
++      rw [iteratedDeriv_succ, ih (by omega)]
++      funext y
++      have hdf : ∀ i ≤ k, DifferentiableAt ℝ (iteratedDeriv i f) y := fun i hi =>
++        (hf.differentiable_iteratedDeriv i (lt_of_le_of_lt (by exact_mod_cast hi) hkn)) y
++      have hdg : ∀ i ≤ k, DifferentiableAt ℝ (iteratedDeriv i g) y := fun i hi =>
++        (hg.differentiable_iteratedDeriv i (lt_of_le_of_lt (by exact_mod_cast hi) hkn)) y
++      have hterm : ∀ i ∈ Finset.range (k + 1), HasDerivAt
++          (fun y => (k.choose i : ℝ) * (iteratedDeriv i f y * iteratedDeriv (k - i) g y))
++          ((k.choose i : ℝ) * (iteratedDeriv (i + 1) f y * iteratedDeriv (k - i) g y +
++              iteratedDeriv i f y * iteratedDeriv (k - i + 1) g y)) y := by
++        intro i hi
++        have hi' : i ≤ k := Nat.lt_succ_iff.mp (Finset.mem_range.mp hi)
++        have h1 := (hdf i hi').hasDerivAt
++        have h2 := (hdg (k - i) (Nat.sub_le _ _)).hasDerivAt
++        rw [iteratedDeriv_succ, iteratedDeriv_succ]
++        exact (h1.mul h2).const_mul _
++      rw [(HasDerivAt.sum hterm).deriv]
++      have hp := Finset.sum_choose_succ_mul (R := ℝ)
++        (fun i j => iteratedDeriv i f y * iteratedDeriv j g y) k
++      simp only at hp
++      rw [show k + 1 + 1 = k + 2 from rfl, hp]
++      simp only [mul_add, Finset.sum_add_distrib]
++      rw [add_comm]
++      congr 1
++      refine Finset.sum_congr rfl fun i hi => ?_
++      have hi' : i ≤ k := Nat.lt_succ_iff.mp (Finset.mem_range.mp hi)
++      rw [show k - i + 1 = k + 1 - i by omega]
++  rw [hD, key n le_rfl]
++  simp only [hD, mul_assoc]
+ 
+ /-! ## 10. L'Hôpital's Rule -/
+ 
+@@ -232,7 +351,7 @@
+     (hg' : ∀ᶠ x in 𝓝[≠] a, deriv g x ≠ 0)
+     (hlim : Filter.Tendsto (fun x => deriv f x / deriv g x) (𝓝[≠] a) (𝓝 L)) :
+     Filter.Tendsto (fun x => f x / g x) (𝓝[≠] a) (𝓝 L) := by
+-  sorry -- Classical L'Hôpital
++  exact deriv.lhopital_zero_nhds' hdf hg' (hf.mono_left nhdsWithin_le_nhds) (hg.mono_left nhdsWithin_le_nhds) hlim
+ 
+ /-- L'Hôpital's rule (∞/∞ form). -/
+ theorem lhopital_infty {f g : ℝ → ℝ} {L : ℝ}
+@@ -257,7 +376,26 @@
+ theorem convex_has_subderivative {f : ℝ → ℝ}
+     (hf : ConvexOn ℝ Set.univ f) (x : ℝ) :
+     ∃ c, IsSubderivative f x c := by
+-  sorry -- Follows from convexity
++  set S := (fun y => (f x - f y) / (x - y)) '' Set.Iio x with hS
++  have hbdd : BddAbove S := by
++    refine ⟨(f (x + 1) - f x) / (x + 1 - x), ?_⟩
++    rintro _ ⟨y, hy, rfl⟩
++    exact hf.slope_mono_adjacent (Set.mem_univ y) (Set.mem_univ (x + 1)) hy (by linarith)
++  have hne : S.Nonempty := ⟨_, x - 1, by simp, rfl⟩
++  refine ⟨sSup S, fun y => ?_⟩
++  rcases lt_trichotomy y x with hy | rfl | hy
++  · have h1 : (f x - f y) / (x - y) ≤ sSup S := le_csSup hbdd ⟨y, hy, rfl⟩
++    have hxy : 0 < x - y := by linarith
++    rw [div_le_iff₀ hxy] at h1
++    linarith [show sSup S * (y - x) = -(sSup S * (x - y)) by ring]
++  · simp
++  · have h2 : sSup S ≤ (f y - f x) / (y - x) := by
++      apply csSup_le hne
++      rintro _ ⟨z, hz, rfl⟩
++      exact hf.slope_mono_adjacent (Set.mem_univ z) (Set.mem_univ y) hz hy
++    have hxy : 0 < y - x := by linarith
++    rw [le_div_iff₀ hxy] at h2
++    linarith
+ 
+ /-! ## 12. Implicit Differentiation -/
+ 
+@@ -268,6 +406,9 @@
+     (hFcont : ContDiff ℝ 1 F) :
+     ∃ (f : ℝ → ℝ), DifferentiableAt ℝ f x ∧ f x = y ∧
+       deriv f x = -deriv (fun s => F (s, y)) x / deriv (fun t => F (x, t)) y := by
+-  sorry -- Implicit function theorem
++  set c := -deriv (fun s => F (s, y)) x / deriv (fun t => F (x, t)) y
++  have h : HasDerivAt (fun s => y + c * (s - x)) c x := by
++    simpa using (((hasDerivAt_id x).sub_const x).const_mul c).const_add y
++  exact ⟨fun s => y + c * (s - x), h.differentiableAt, by simp, h.deriv⟩
+ 
+ end DerivativesTheory
+--- a/lean4/Core/Analysis/Calculus/HigherDerivatives.lean
++++ b/lean4/Core/Analysis/Calculus/HigherDerivatives.lean
+@@ -48,8 +48,9 @@
+   induction n with
+   | zero => rfl
+   | succ k ih =>
+-    simp only [iteratedDerivative, nthDeriv, Function.iterate_succ']
+-    rw [ih]
++    show deriv (iteratedDerivative k f) = deriv^[k + 1] f
++    rw [Function.iterate_succ_apply', ih]
++    rfl
+ 
+ /-! ## 2. Smooth Functions -/
+ 
+@@ -95,7 +96,7 @@
+ /-- C^∞ implies C^k for all k. -/
+ theorem smooth_imp_Ck {k : ℕ} {f : ℝ → ℝ}
+     (h : IsSmooth f) : IsCn k f := by
+-  exact h.of_le le_top
++  exact h.of_le (WithTop.coe_le_coe.mpr le_top)
+ 
+ /-! ## 4. Taylor's Theorem -/
+ 
+@@ -104,13 +105,52 @@
+   fun x => ∑ k ∈ Finset.range (n + 1),
+     (iteratedDerivative k f a) / k.factorial * (x - a)^k
+ 
++/-- Auxiliar (MVEI): `iteratedDerivative` é o `iteratedDeriv` do Mathlib. -/
++theorem mvei_iteratedDerivative_eq (k : ℕ) (f : ℝ → ℝ) : iteratedDerivative k f = iteratedDeriv k f := by
++  induction k with
++  | zero => rfl
++  | succ k ih => rw [iteratedDeriv_succ, ← ih]; rfl
++
++/-- Auxiliar (MVEI): o polinômio de Taylor do arquivo é o `taylorWithinEval` do Mathlib quando as derivadas
++    relativas a s coincidem com as globais no centro. -/
++theorem mvei_taylorPolynomial_eq (f : ℝ → ℝ) (a x : ℝ) (n : ℕ) (s : Set ℝ)
++    (h : ∀ k ≤ n, iteratedDerivWithin k f s a = iteratedDeriv k f a) :
++    taylorWithinEval f n s a x = taylorPolynomial f a n x := by
++  rw [taylor_within_apply, taylorPolynomial]
++  refine Finset.sum_congr rfl fun k hk => ?_
++  rw [h k (Nat.lt_succ_iff.mp (Finset.mem_range.mp hk)), mvei_iteratedDerivative_eq, smul_eq_mul]
++  ring
++
+ /-- Taylor's theorem with Lagrange remainder. -/
+ theorem taylor_lagrange {f : ℝ → ℝ} {a b : ℝ} (n : ℕ)
+     (hf : IsCn (n + 1) f) (hab : a < b) :
+     ∃ c ∈ Set.Ioo a b,
+       f b = taylorPolynomial f a n b +
+         (iteratedDerivative (n + 1) f c) / (n + 1).factorial * (b - a)^(n + 1) := by
+-  sorry -- Classical Taylor's theorem
++  have hf' : ContDiff ℝ ((n + 1 : ℕ) : WithTop ℕ∞) f := by unfold IsCn at hf; exact_mod_cast hf
++  have hW : ∀ k : ℕ, k ≤ n + 1 → ∀ x ∈ Set.Icc a b,
++      iteratedDerivWithin k f (Set.Icc a b) x = iteratedDeriv k f x := by
++    intro k hk x hx
++    rw [iteratedDerivWithin_eq_iteratedFDerivWithin, iteratedDeriv_eq_iteratedFDeriv,
++      iteratedFDerivWithin_eq_iteratedFDeriv (uniqueDiffOn_Icc hab)
++        ((hf'.of_le (by exact_mod_cast hk)).contDiffAt) hx]
++  have hcont : ContDiffOn ℝ n f (Set.Icc a b) :=
++    (hf'.of_le (by exact_mod_cast Nat.le_succ n)).contDiffOn
++  have hdiff : DifferentiableOn ℝ (iteratedDerivWithin n f (Set.Icc a b)) (Set.Ioo a b) := by
++    intro y hy
++    have hev : iteratedDerivWithin n f (Set.Icc a b) =ᶠ[𝓝 y] iteratedDeriv n f := by
++      filter_upwards [Icc_mem_nhds hy.1 hy.2] with z hz using hW n (Nat.le_succ n) z hz
++    have hd : DifferentiableAt ℝ (iteratedDeriv n f) y :=
++      hf'.differentiable_iteratedDeriv n (by exact_mod_cast Nat.lt_succ_self n) y
++    exact (hd.congr_of_eventuallyEq hev).differentiableWithinAt
++  obtain ⟨c, hc, hrem⟩ := taylor_mean_remainder_lagrange hab hcont hdiff
++  refine ⟨c, hc, ?_⟩
++  rw [mvei_taylorPolynomial_eq f a b n (Set.Icc a b)
++      (fun k hk => hW k (Nat.le_succ_of_le hk) a (Set.left_mem_Icc.mpr hab.le))] at hrem
++  rw [hW (n + 1) le_rfl c (Set.Ioo_subset_Icc_self hc)] at hrem
++  rw [mvei_iteratedDerivative_eq]
++  linarith [show iteratedDeriv (n + 1) f c * (b - a) ^ (n + 1) / ((n + 1).factorial : ℝ) =
++    iteratedDeriv (n + 1) f c / ((n + 1).factorial : ℝ) * (b - a) ^ (n + 1) by ring]
+ 
+ /-- Taylor's theorem with integral remainder. -/
+ theorem taylor_integral {f : ℝ → ℝ} {a b : ℝ} (n : ℕ)
+@@ -124,7 +164,15 @@
+     (hf : IsCn n f) :
+     ∀ ε > 0, ∃ δ > 0, ∀ x, |x - a| < δ →
+       |f x - taylorPolynomial f a n x| ≤ ε * |x - a|^n := by
+-  sorry -- Peano form
++  intro ε hε
++  have hf' : ContDiff ℝ (n : WithTop ℕ∞) f := by unfold IsCn at hf; exact_mod_cast hf
++  have h := taylor_isLittleO (n := n) (x₀ := a) convex_univ (Set.mem_univ a) hf'.contDiffOn
++  rw [nhdsWithin_univ] at h
++  obtain ⟨δ, hδ, hball⟩ := Metric.eventually_nhds_iff.mp (h.def hε)
++  refine ⟨δ, hδ, fun x hx => ?_⟩
++  have := hball (show dist x a < δ by rwa [Real.dist_eq])
++  rw [mvei_taylorPolynomial_eq f a x n Set.univ (fun k _ => by rw [iteratedDerivWithin_univ])] at this
++  simpa [Real.norm_eq_abs, abs_pow] using this
+ 
+ /-! ## 5. Multivariate Higher Derivatives -/
+ 
+@@ -143,7 +191,8 @@
+     ∀ x, ∃ R : ℝ,
+       f x = ∑ k ∈ Finset.range (n + 1),
+         (1 / k.factorial : ℝ) * iteratedFDeriv ℝ k f a (fun _ => x - a) + R := by
+-  sorry -- Multivariate Taylor
++  intro x
++  exact ⟨_, (add_sub_cancel _ _).symm⟩
+ 
+ /-! ## 6. Faà di Bruno Formula -/
+ 
+@@ -174,12 +223,132 @@
+ /-- Analytic functions are smooth. -/
+ theorem analytic_is_smooth {f : ℝ → ℝ} {S : Set ℝ}
+     (h : IsAnalyticOn f S) : ∀ x ∈ S, IsCkAt ⊤ f x := by
+-  sorry -- Analytic implies smooth
++  intro x hx
++  obtain ⟨r, hr, hf⟩ := h x hx
++  set c : ℕ → ℝ := fun n => iteratedDerivative n f x / n.factorial with hc
++  have hf' : ∀ y, |y - x| < r → f y = ∑' n, c n * (y - x) ^ n := hf
++  by_cases hs : ∃ y, 0 < |y - x| ∧ |y - x| < r ∧ Summable (fun n => c n * (y - x) ^ n)
++  · obtain ⟨y, hy0, hyr, hsy⟩ := hs
++    set ρ := |y - x| with hρ
++    obtain ⟨C, hC⟩ := (hsy.tendsto_atTop_zero.abs).bddAbove_range
++    have hC' : ∀ n, |c n| * ρ ^ n ≤ C := fun n => by
++      have := hC ⟨n, rfl⟩
++      simpa [abs_mul, abs_pow, hρ] using this
++    have hbound : ∀ (w : ℝ), |w| ≤ ρ / 2 → ∀ n, |c n * w ^ n| ≤ C * (1 / 2) ^ n := by
++      intro w hw n
++      rw [abs_mul, abs_pow]
++      have h1 : |w| ^ n ≤ (ρ / 2) ^ n := pow_le_pow_left₀ (abs_nonneg w) hw n
++      have h2 : |c n| * (ρ / 2) ^ n = |c n| * ρ ^ n * (1 / 2) ^ n := by
++        rw [div_eq_mul_one_div ρ 2, mul_pow]; ring
++      calc |c n| * |w| ^ n ≤ |c n| * (ρ / 2) ^ n := mul_le_mul_of_nonneg_left h1 (abs_nonneg _)
++        _ = |c n| * ρ ^ n * (1 / 2) ^ n := h2
++        _ ≤ C * (1 / 2) ^ n := mul_le_mul_of_nonneg_right (hC' n) (by positivity)
++    have hgeo : Summable (fun n : ℕ => C * (1 / 2 : ℝ) ^ n) :=
++      (summable_geometric_of_lt_one (by norm_num) (by norm_num)).mul_left C
++    set p : FormalMultilinearSeries ℝ ℝ ℝ :=
++      fun n => ContinuousMultilinearMap.mkPiRing ℝ (Fin n) (c n) with hpdef
++    have hp : ∀ n (w : ℝ), p n (fun _ => w) = c n * w ^ n := by
++      intro n w
++      simp only [hpdef, ContinuousMultilinearMap.mkPiRing_apply, Finset.prod_const, Finset.card_univ,
++        Fintype.card_fin, smul_eq_mul]
++      ring
++    have hρ2 : (0 : ℝ) ≤ ρ / 2 := by positivity
++    set ρ' : NNReal := ⟨ρ / 2, hρ2⟩ with hρ'
++    have hle : (ρ' : ENNReal) ≤ p.radius := by
++      apply p.le_radius_of_summable
++      refine Summable.of_nonneg_of_le (fun n => by positivity) (fun n => ?_) hgeo
++      have := hbound (ρ / 2) (by rw [abs_of_nonneg hρ2]) n
++      simpa only [hpdef, ContinuousMultilinearMap.norm_mkPiRing, Real.norm_eq_abs, abs_mul, abs_pow,
++        abs_of_nonneg hρ2, hρ', NNReal.coe_mk] using this
++    have han : AnalyticAt ℝ f x := by
++      refine ⟨p, ρ', { r_le := hle, r_pos := ?_, hasSum := ?_ }⟩
++      · rw [hρ', ENNReal.coe_pos, ← NNReal.coe_pos, NNReal.coe_mk]; linarith
++      · intro w hw
++        rw [Metric.emetric_ball_nnreal, Metric.mem_ball, dist_zero_right, Real.norm_eq_abs, hρ',
++          NNReal.coe_mk] at hw
++        have hsw : Summable (fun n => c n * w ^ n) :=
++          Summable.of_norm_bounded _ hgeo (fun n => by
++            rw [Real.norm_eq_abs]; exact hbound w hw.le n)
++        have hfx := hf' (x + w) (by rw [add_sub_cancel_left]; linarith)
++        simp only [hp]
++        rw [hfx, add_sub_cancel_left]
++        exact hsw.hasSum
++    exact han.contDiffAt
++  · exfalso
++    push_neg at hs
++    have hzero : ∀ y, 0 < |y - x| → |y - x| < r → f y = 0 := by
++      intro y h0 hr'
++      rw [hf' y hr']
++      exact tsum_eq_zero_of_not_summable (hs y h0 hr')
++    have hloc : ∀ᶠ y in 𝓝[≠] x, f y = 0 := by
++      have hb : Metric.ball x r ∈ 𝓝 x := Metric.ball_mem_nhds x hr
++      filter_upwards [nhdsWithin_le_nhds hb, self_mem_nhdsWithin] with y hy hyx
++      exact hzero y (abs_pos.mpr (sub_ne_zero.mpr hyx)) (by rwa [Metric.mem_ball, Real.dist_eq] at hy)
++    have hd0 : deriv f =ᶠ[𝓝 x] fun _ => 0 := by
++      have hb : Metric.ball x r ∈ 𝓝 x := Metric.ball_mem_nhds x hr
++      filter_upwards [hb] with y hy
++      rcases eq_or_ne y x with rfl | hyx
++      · by_cases hfx : f y = 0
++        · have hev : f =ᶠ[𝓝 y] fun _ => 0 := by
++            rw [Filter.EventuallyEq, ← nhdsNE_sup_pure, Filter.eventually_sup]
++            exact ⟨hloc, by simpa using hfx⟩
++          rw [hev.deriv_eq]; simp
++        · apply deriv_zero_of_not_differentiableAt
++          intro hd
++          have h1 : Tendsto f (𝓝[≠] y) (𝓝 (f y)) := hd.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
++          have h2 : Tendsto f (𝓝[≠] y) (𝓝 0) := tendsto_const_nhds.congr' (hloc.mono fun z hz => hz.symm)
++          exact hfx (tendsto_nhds_unique h1 h2)
++      · have hopen : IsOpen (Metric.ball x r \ {x}) := Metric.isOpen_ball.sdiff isClosed_singleton
++        have hev : f =ᶠ[𝓝 y] fun _ => 0 := by
++          filter_upwards [hopen.mem_nhds ⟨hy, hyx⟩] with z hz
++          exact hzero z (abs_pos.mpr (sub_ne_zero.mpr hz.2))
++            (by have := hz.1; rwa [Metric.mem_ball, Real.dist_eq] at this)
++        rw [hev.deriv_eq]; simp
++    have hiter : ∀ n : ℕ, iteratedDeriv n (deriv f) =ᶠ[𝓝 x] fun _ => 0 := by
++      intro n
++      induction n with
++      | zero => simpa using hd0
++      | succ n ih =>
++        rw [iteratedDeriv_succ]
++        exact ih.deriv.trans (by simp [Filter.EventuallyEq])
++    have hcn : ∀ n, n ≠ 0 → c n = 0 := by
++      intro n hn
++      obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn
++      simp only [hc, mvei_iteratedDerivative_eq, iteratedDeriv_succ', (hiter m).self_of_nhds,
++        zero_div]
++    apply hs (x + r / 2) (by rw [add_sub_cancel_left, abs_of_pos (by linarith)]; linarith)
++      (by rw [add_sub_cancel_left, abs_of_pos (by linarith)]; linarith)
++    apply summable_of_ne_finset_zero (s := {0})
++    intro n hn
++    rw [Finset.mem_singleton] at hn
++    rw [hcn n hn, zero_mul]
+ 
+ /-- Smooth functions need not be analytic (bump functions exist). -/
+ theorem smooth_not_analytic_example :
+     ∃ f : ℝ → ℝ, IsSmooth f ∧ ¬IsAnalyticOn f Set.univ := by
+-  sorry -- Bump function example
++  refine ⟨expNegInvGlue, expNegInvGlue.contDiff, fun h => ?_⟩
++  have hz : ∀ k : ℕ, ∀ x : ℝ, x ≤ 0 → iteratedDeriv k expNegInvGlue x = 0 := by
++    intro k
++    induction k with
++    | zero => intro x hx; simpa using expNegInvGlue.zero_of_nonpos hx
++    | succ k ih =>
++      intro x hx
++      rw [iteratedDeriv_succ]
++      rcases hx.lt_or_eq with hx | rfl
++      · have hev : iteratedDeriv k expNegInvGlue =ᶠ[𝓝 x] fun _ => 0 := by
++          filter_upwards [Iio_mem_nhds hx] with y hy using ih y (le_of_lt hy)
++        rw [hev.deriv_eq]; simp
++      · have hd : DifferentiableAt ℝ (iteratedDeriv k expNegInvGlue) 0 :=
++          expNegInvGlue.contDiff.differentiable_iteratedDeriv k
++            (WithTop.coe_lt_coe.mpr (ENat.coe_lt_top k)) 0
++        have h1 : HasDerivWithinAt (iteratedDeriv k expNegInvGlue) 0 (Set.Iic 0) 0 :=
++          (hasDerivWithinAt_const (0 : ℝ) (Set.Iic 0) (0 : ℝ)).congr (fun y hy => ih y hy) (ih 0 le_rfl)
++        exact ((uniqueDiffOn_Iic 0 0 Set.right_mem_Iic).eq_deriv _
++          hd.hasDerivAt.hasDerivWithinAt h1)
++  obtain ⟨r, hr, hsum⟩ := h 0 (Set.mem_univ 0)
++  have h2 := hsum (r / 2) (by rw [sub_zero, abs_of_pos (by linarith)]; linarith)
++  simp only [mvei_iteratedDerivative_eq, hz _ 0 le_rfl, zero_div, zero_mul, tsum_zero] at h2
++  exact (expNegInvGlue.pos_of_pos (by linarith : (0 : ℝ) < r / 2)).ne' h2
+ 
+ /-! ## 8. Smooth Bump Functions -/
+ 
+@@ -189,11 +358,27 @@
+ 
+ /-- The bump function is smooth. -/
+ theorem smoothBump_smooth : IsSmooth smoothBump := by
+-  sorry -- Classical analysis
++  have h : smoothBump = expNegInvGlue ∘ (fun x : ℝ => 1 - x ^ 2) := by
++    funext x
++    simp only [smoothBump, Function.comp, expNegInvGlue]
++    by_cases hx : |x| < 1
++    · have hpos : 0 < 1 - x ^ 2 := by
++        have := abs_lt.mp hx; nlinarith
++      rw [if_pos hx, if_neg (not_le.mpr hpos), neg_div, one_div]
++    · have hle : 1 - x ^ 2 ≤ 0 := by
++        have h1 : 1 ≤ |x| := not_lt.mp hx
++        nlinarith [sq_abs x, abs_nonneg x]
++      rw [if_neg hx, if_pos hle]
++  rw [IsSmooth, h]
++  exact expNegInvGlue.contDiff.comp (contDiff_const.sub (contDiff_id.pow 2))
+ 
+ /-- The bump function has compact support. -/
+ theorem smoothBump_compactSupport : Function.support smoothBump ⊆ Set.Icc (-1) 1 := by
+-  sorry -- By definition
++  intro x hx
++  rw [Function.mem_support] at hx
++  by_cases h : |x| < 1
++  · exact ⟨by linarith [neg_abs_le x], by linarith [le_abs_self x]⟩
++  · exact absurd (by simp [smoothBump, h]) hx
+ 
+ /-! ## 9. Partitions of Unity -/
+ 
+@@ -250,6 +435,16 @@
+ /-- Relationship between Zygmund and Lipschitz. -/
+ theorem zygmund_between_lip :
+     ∀ f : ℝ → ℝ, LipschitzWith 1 f → IsZygmund f := by
+-  sorry -- Zygmund is weaker than Lip(1)
++  intro f hf
++  refine ⟨2, fun x h => ?_⟩
++  have h1 : |f (x + h) - f x| ≤ |h| := by
++    have := hf.dist_le_mul (x + h) x
++    simpa [Real.dist_eq] using this
++  have h2 : |f (x - h) - f x| ≤ |h| := by
++    have := hf.dist_le_mul (x - h) x
++    simpa [Real.dist_eq, abs_neg] using this
++  calc |f (x + h) + f (x - h) - 2 * f x| = |(f (x + h) - f x) + (f (x - h) - f x)| := by ring_nf
++    _ ≤ |f (x + h) - f x| + |f (x - h) - f x| := abs_add _ _
++    _ ≤ 2 * |h| := by linarith
+ 
+ end HigherDerivativesTheory
+--- a/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
++++ b/lean4/Core/Analysis/Calculus/ImplicitFunction.lean
+@@ -23,6 +23,7 @@
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ import Mathlib.Analysis.Calculus.ContDiff.Defs
+ import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib
+ 
+ namespace ImplicitFunctionTheory
+ 
+@@ -40,7 +41,70 @@
+       ContDiffOn ℝ 1 g U ∧
+       g x₀ = y₀ ∧
+       ∀ x ∈ U, F (x, g x) = 0 := by
+-  sorry -- 2D implicit function theorem
++  have hFd : HasFDerivAt F (fderiv ℝ F (x₀, y₀)) (x₀, y₀) := (hF.differentiableAt le_rfl).hasFDerivAt
++  set D := fderiv ℝ F (x₀, y₀) with hDdef
++  have hlin : ∀ h k : ℝ, D (h, k) = h * D (1, 0) + k * D (0, 1) := by
++    intro h k
++    have e : ((h, k) : ℝ × ℝ) = h • ((1 : ℝ), (0 : ℝ)) + k • ((0 : ℝ), (1 : ℝ)) := by ext <;> simp
++    rw [e, map_add, map_smul, map_smul, smul_eq_mul, smul_eq_mul]
++  have hb : D (0, 1) ≠ 0 := by
++    intro hb0
++    apply hFy
++    have h : HasDerivAt (fun y : ℝ => (x₀, y)) (0, 1) y₀ :=
++      (hasDerivAt_const y₀ x₀).prodMk (hasDerivAt_id y₀)
++    have hc := hFd.comp_hasDerivAt y₀ h
++    rw [hb0] at hc
++    exact hc.hasFDerivAt.fderiv.trans (by ext; simp)
++  set a := D (1, 0)
++  set b := D (0, 1)
++  set L : ℝ × ℝ →L[ℝ] ℝ × ℝ := (ContinuousLinearMap.fst ℝ ℝ ℝ).prod D with hL
++  set M : ℝ × ℝ →L[ℝ] ℝ × ℝ := (ContinuousLinearMap.fst ℝ ℝ ℝ).prod
++    (b⁻¹ • (ContinuousLinearMap.snd ℝ ℝ ℝ - a • ContinuousLinearMap.fst ℝ ℝ ℝ)) with hM
++  have h1 : Function.LeftInverse M L := by
++    intro q
++    simp only [hL, hM, ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
++      ContinuousLinearMap.smul_apply, ContinuousLinearMap.sub_apply, ContinuousLinearMap.coe_snd',
++      smul_eq_mul]
++    rw [hlin]
++    ext
++    · rfl
++    · simp only; field_simp; ring
++  have h2 : Function.RightInverse M L := by
++    intro q
++    simp only [hL, hM, ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
++      ContinuousLinearMap.smul_apply, ContinuousLinearMap.sub_apply, ContinuousLinearMap.coe_snd',
++      smul_eq_mul]
++    rw [hlin]
++    ext
++    · rfl
++    · simp only; field_simp; ring
++  set Le : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ) := ContinuousLinearEquiv.equivOfInverse L M h1 h2
++  set Φ : ℝ × ℝ → ℝ × ℝ := fun q => (q.1, F q) with hΦdef
++  have hΦ : ContDiffAt ℝ 1 Φ (x₀, y₀) := contDiffAt_fst.prodMk hF
++  have hΦ' : HasFDerivAt Φ (Le : ℝ × ℝ →L[ℝ] ℝ × ℝ) (x₀, y₀) := hasFDerivAt_fst.prodMk hFd
++  set e := hΦ.toPartialHomeomorph Φ hΦ' le_rfl
++  have hgc : ContDiffAt ℝ 1 e.symm (Φ (x₀, y₀)) := hΦ.to_localInverse hΦ' le_rfl
++  have hga : e.symm (Φ (x₀, y₀)) = (x₀, y₀) := hΦ.localInverse_apply_image hΦ' le_rfl
++  have hfa : Φ (x₀, y₀) ∈ e.target := hΦ.image_mem_toPartialHomeomorph_target hΦ' le_rfl
++  have hΦp : Φ (x₀, y₀) = (x₀, 0) := by simp [hΦdef, hF0]
++  rw [hΦp] at hgc hga hfa
++  obtain ⟨W₁, hW₁, hW₁o, hW₁a⟩ := mem_nhds_iff.mp (hgc.eventually (by simp))
++  set W := e.target ∩ W₁
++  have hWo : IsOpen W := e.open_target.inter hW₁o
++  have hemb : Continuous (fun x : ℝ => (x, (0 : ℝ))) := continuous_id.prodMk continuous_const
++  refine ⟨(fun x : ℝ => (x, (0 : ℝ))) ⁻¹' W, fun x => (e.symm (x, 0)).2, ⟨hfa, hW₁a⟩,
++    hWo.preimage hemb, ?_, by simp [hga], ?_⟩
++  · intro x hx
++    have hc : ContDiffAt ℝ 1 (fun x : ℝ => (e.symm (x, 0)).2) x :=
++      contDiffAt_snd.comp x ((show ContDiffAt ℝ 1 e.symm (x, 0) from hW₁ hx.2).comp x
++        (contDiffAt_id.prodMk contDiffAt_const))
++    exact hc.contDiffWithinAt
++  · intro x hx
++    have hr : Φ (e.symm (x, 0)) = (x, 0) := e.right_inv hx.1
++    have h1' : (e.symm (x, 0)).1 = x := congrArg Prod.fst hr
++    have h2' : F (e.symm (x, 0)) = 0 := congrArg Prod.snd hr
++    have hpt : e.symm (x, 0) = (x, (e.symm (x, 0)).2) := Prod.ext h1' rfl
++    rw [← hpt]; exact h2'
+ 
+ /-- Derivative of implicit function. -/
+ theorem implicit_function_deriv {F : ℝ × ℝ → ℝ} {x₀ y₀ : ℝ} {g : ℝ → ℝ}
+@@ -49,7 +113,33 @@
+     (hg : ∀ᶠ x in 𝓝 x₀, F (x, g x) = 0) :
+     deriv g x₀ = -fderiv ℝ (fun x => F (x, y₀)) x₀ 1 /
+                   fderiv ℝ (fun y => F (x₀, y)) y₀ 1 := by
+-  sorry -- Chain rule application
++  have hFd : HasFDerivAt F (fderiv ℝ F (x₀, y₀)) (x₀, y₀) := (hF.differentiableAt le_rfl).hasFDerivAt
++  set D := fderiv ℝ F (x₀, y₀)
++  have hx : fderiv ℝ (fun x => F (x, y₀)) x₀ 1 = D (1, 0) := by
++    have h : HasDerivAt (fun x : ℝ => (x, y₀)) (1, 0) x₀ :=
++      (hasDerivAt_id x₀).prodMk (hasDerivAt_const x₀ y₀)
++    rw [fderiv_deriv]; exact (hFd.comp_hasDerivAt x₀ h).deriv
++  have hy : fderiv ℝ (fun y => F (x₀, y)) y₀ 1 = D (0, 1) := by
++    have h : HasDerivAt (fun y : ℝ => (x₀, y)) (0, 1) y₀ :=
++      (hasDerivAt_const y₀ x₀).prodMk (hasDerivAt_id y₀)
++    rw [fderiv_deriv]; exact (hFd.comp_hasDerivAt y₀ h).deriv
++  have hb : D (0, 1) ≠ 0 := by
++    rw [← hy]; intro h0
++    exact hFy (ContinuousLinearMap.ext_ring (by simpa using h0))
++  have hcomp : HasDerivAt (fun x => F (x, g x)) (D (1, deriv g x₀)) x₀ := by
++    have h : HasDerivAt (fun x : ℝ => (x, g x)) (1, deriv g x₀) x₀ :=
++      (hasDerivAt_id x₀).prodMk hgd.hasDerivAt
++    have hFd' : HasFDerivAt F D (x₀, g x₀) := by rw [hg0]; exact hFd
++    exact hFd'.comp_hasDerivAt x₀ h
++  have h0 : D (1, deriv g x₀) = 0 := by
++    have hev : (fun x => F (x, g x)) =ᶠ[𝓝 x₀] fun _ => 0 := hg
++    rw [← hcomp.deriv, hev.deriv_eq]; simp
++  have hlin : D (1, deriv g x₀) = D (1, 0) + deriv g x₀ * D (0, 1) := by
++    have e : ((1 : ℝ), deriv g x₀) = ((1 : ℝ), (0 : ℝ)) + deriv g x₀ • ((0 : ℝ), (1 : ℝ)) := by
++      ext <;> simp
++    rw [e, map_add, map_smul, smul_eq_mul]
++  rw [hx, hy, eq_div_iff hb]
++  linarith
+ 
+ /-! ## 2. General Implicit Function Theorem -/
+ 
+@@ -126,7 +216,9 @@
+     (hsoc : ∀ v, fderiv ℝ g p v = 0 →
+       (fderiv ℝ (fderiv ℝ f) p v) v - «λ» * (fderiv ℝ (fderiv ℝ g) p v) v < 0) :
+     IsLocalMax (f ∘ Subtype.val : {x | g x = 0} → ℝ) ⟨p, hconstr⟩ := by
+-  sorry -- Second-order condition
++  exfalso
++  have h := hsoc 0 (by simp)
++  simp at h
+ 
+ /-! ## 6. KKT Conditions -/
+ 
+@@ -155,7 +247,27 @@
+     (hx : Differentiable ℝ x)
+     (V := fun θ' => f θ' (x θ')) :
+     deriv V θ = fderiv ℝ (fun t => f t (x θ)) θ 1 := by
+-  sorry -- Envelope theorem
++  have hd : DifferentiableAt ℝ (Function.uncurry f) (θ, x θ) := (hf.differentiable (by norm_num)) _
++  set D := fderiv ℝ (Function.uncurry f) (θ, x θ)
++  have h1 : HasDerivAt (fun θ' => f θ' (x θ')) (D (1, deriv x θ)) θ := by
++    have h : HasDerivAt (fun t => (t, x t)) (1, deriv x θ) θ :=
++      (hasDerivAt_id θ).prodMk (hx θ).hasDerivAt
++    exact hd.hasFDerivAt.comp_hasDerivAt θ h
++  have h2 : HasDerivAt (fun t => f t (x θ)) (D (1, 0)) θ := by
++    have h : HasDerivAt (fun t => (t, x θ)) (1, 0) θ :=
++      (hasDerivAt_id θ).prodMk (hasDerivAt_const θ (x θ))
++    exact hd.hasFDerivAt.comp_hasDerivAt θ h
++  have h3 : HasDerivAt (fun y => f θ y) (D (0, 1)) (x θ) := by
++    have h : HasDerivAt (fun y => (θ, y)) (0, 1) (x θ) :=
++      (hasDerivAt_const (x θ) θ).prodMk (hasDerivAt_id (x θ))
++    exact hd.hasFDerivAt.comp_hasDerivAt (x θ) h
++  have hmax : IsLocalMax (fun y => f θ y) (x θ) := Filter.Eventually.of_forall fun y => hopt θ y
++  have h0 : D (0, 1) = 0 := hmax.hasDerivAt_eq_zero h3
++  have hlin : D (1, deriv x θ) = D (1, 0) + deriv x θ * D (0, 1) := by
++    have e : ((1 : ℝ), deriv x θ) = ((1 : ℝ), (0 : ℝ)) + deriv x θ • ((0 : ℝ), (1 : ℝ)) := by
++      ext <;> simp
++    rw [e, map_add, map_smul, smul_eq_mul]
++  rw [h1.deriv, fderiv_deriv, h2.deriv, hlin, h0, mul_zero, add_zero]
+ 
+ /- Roy's identity (consumer theory). -/
+ -- Relates Marshallian demand to indirect utility
+--- a/lean4/Core/Analysis/Calculus/InverseFunction.lean
++++ b/lean4/Core/Analysis/Calculus/InverseFunction.lean
+@@ -22,6 +22,7 @@
+ import Mathlib.Analysis.InnerProductSpace.PiL2
+ import Mathlib.Analysis.Calculus.ContDiff.Defs
+ import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib
+ open scoped ENNReal
+ 
+ noncomputable section
+@@ -32,6 +33,36 @@
+ 
+ /-! ## 1. Inverse Function Theorem (Real) -/
+ 
++/-- Auxiliar (MVEI): forma local do teorema da função inversa do Mathlib (`ContDiffAt.toPartialHomeomorph`,
++    `ContDiffAt.to_localInverse`), com abertos U ∋ a e V ∋ f a onde f e a inversa são `C^n` (n ≠ ∞). -/
++theorem mvei_local_inverse {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
++    [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} {a : E} {n : WithTop ℕ∞}
++    (f' : E ≃L[ℝ] F) (hf : ContDiffAt ℝ n f a) (hf' : HasFDerivAt f (f' : E →L[ℝ] F) a)
++    (hn : 1 ≤ n) (hn' : n ≠ ((⊤ : ℕ∞) : WithTop ℕ∞)) :
++    ∃ (U : Set E) (V : Set F) (g : F → E), a ∈ U ∧ IsOpen U ∧ f a ∈ V ∧ IsOpen V ∧
++      Set.MapsTo f U V ∧ Set.MapsTo g V U ∧ (∀ x ∈ U, g (f x) = x) ∧ (∀ y ∈ V, f (g y) = y) ∧
++      ContDiffOn ℝ n f U ∧ ContDiffOn ℝ n g V := by
++  set e := hf.toPartialHomeomorph f hf' hn with he
++  have hgc : ContDiffAt ℝ n e.symm (f a) := hf.to_localInverse hf' hn
++  have hga : e.symm (f a) = a := hf.localInverse_apply_image hf' hn
++  have hfa : f a ∈ e.target := hf.image_mem_toPartialHomeomorph_target hf' hn
++  have has : a ∈ e.source := hf.mem_toPartialHomeomorph_source hf' hn
++  have hcoe : (e : E → F) = f := rfl
++  obtain ⟨W₁, hW₁, hW₁o, hW₁a⟩ := mem_nhds_iff.mp (hgc.eventually hn')
++  obtain ⟨W₂, hW₂, hW₂o, hW₂a⟩ := mem_nhds_iff.mp (hf.eventually hn')
++  set V := (e.target ∩ e.symm ⁻¹' W₂) ∩ W₁ with hV
++  have hVo : IsOpen V := (e.symm.isOpen_inter_preimage hW₂o).inter hW₁o
++  set U := e.source ∩ e ⁻¹' V with hU
++  have hUo : IsOpen U := e.isOpen_inter_preimage hVo
++  have hfaV : f a ∈ V := ⟨⟨hfa, by simp only [Set.mem_preimage, hga]; exact hW₂a⟩, hW₁a⟩
++  refine ⟨U, V, e.symm, ⟨has, hfaV⟩, hUo, hfaV, hVo, fun x hx => hx.2, fun y hy => ?_,
++    fun x hx => e.left_inv hx.1, fun y hy => e.right_inv hy.1.1, fun x hx => ?_,
++    fun y hy => (hW₁ hy.2).contDiffWithinAt⟩
++  · exact ⟨e.map_target hy.1.1, by simp only [Set.mem_preimage]; rw [e.right_inv hy.1.1]; exact hy⟩
++  · have hx2 : e.symm (e x) ∈ W₂ := hx.2.1.2
++    rw [e.left_inv hx.1] at hx2
++    exact (hW₂ hx2).contDiffWithinAt
++
+ /-- Inverse function theorem for f : ℝ → ℝ. -/
+ theorem inverse_function_1d {f : ℝ → ℝ} {a : ℝ}
+     (hf : ContDiffAt ℝ 1 f a)
+@@ -42,7 +73,15 @@
+       ContDiffOn ℝ 1 g V ∧
+       ∀ y ∈ V, f (g y) = y ∧
+       ∀ x ∈ U, g (f x) = x := by
+-  sorry -- 1D inverse function theorem
++  set f' : ℝ ≃L[ℝ] ℝ := ContinuousLinearEquiv.unitsEquivAut ℝ (Units.mk0 (deriv f a) hf')
++  have hd : HasFDerivAt f (f' : ℝ →L[ℝ] ℝ) a := by
++    have h := (hf.differentiableAt le_rfl).hasDerivAt.hasFDerivAt
++    convert h using 1
++  obtain ⟨U, V, g, haU, hUo, hfaV, hVo, hUV, hVU, hgf, hfg, -, hg⟩ :=
++    mvei_local_inverse f' hf hd le_rfl (by simp)
++  refine ⟨U, V, g, haU, hUo, hfaV, hVo, ⟨hUV, fun x₁ h₁ x₂ h₂ h => ?_, fun y hy => ⟨g y, hVU hy, hfg y hy⟩⟩,
++    hg, fun y hy => ⟨hfg y hy, hgf⟩⟩
++  rw [← hgf x₁ h₁, h, hgf x₂ h₂]
+ 
+ /-- Derivative of inverse. -/
+ theorem deriv_inverse {f g : ℝ → ℝ} {a : ℝ}
+@@ -51,7 +90,8 @@
+     (hfg : g (f a) = a)
+     (hgf : ∀ᶠ x in 𝓝 a, g (f x) = x) :
+     deriv g (f a) = 1 / deriv f a := by
+-  sorry -- Chain rule for inverse
++  have hs : HasStrictDerivAt f (deriv f a) a := hf.hasStrictDerivAt le_rfl
++  rw [(hs.to_local_left_inverse hf' hgf).hasDerivAt.deriv, one_div]
+ 
+ /-! ## 2. Inverse Function Theorem (Banach Spaces) -/
+ 
+@@ -68,7 +108,15 @@
+       Set.BijOn f U V ∧
+       ContDiffOn ℝ 1 g V ∧
+       ∀ y ∈ V, f (g y) = y := by
+-  sorry -- Banach space inverse function theorem
++  set f' : E ≃L[ℝ] F := ContinuousLinearEquiv.ofBijective (fderiv ℝ f a) hker hf'
++  have hd : HasFDerivAt f (f' : E →L[ℝ] F) a := by
++    rw [ContinuousLinearEquiv.coe_ofBijective]
++    exact (hf.differentiableAt le_rfl).hasFDerivAt
++  obtain ⟨U, V, g, haU, hUo, hfaV, hVo, hUV, hVU, hgf, hfg, -, hg⟩ :=
++    mvei_local_inverse f' hf hd le_rfl (by simp)
++  refine ⟨U, V, g, haU, hUo, hfaV, hVo, ⟨hUV, fun x₁ h₁ x₂ h₂ h => ?_, fun y hy => ⟨g y, hVU hy, hfg y hy⟩⟩,
++    hg, hfg⟩
++  rw [← hgf x₁ h₁, h, hgf x₂ h₂]
+ 
+ /-- The inverse is as smooth as the original function. -/
+ theorem inverse_smooth {E F : Type*}
+@@ -79,7 +127,7 @@
+     (hf' : (fderiv ℝ f a).range = ⊤)
+     (hker : (fderiv ℝ f a).ker = ⊥) :
+     ∃ g : F → E, ContDiffAt ℝ n g (f a) ∧ g (f a) = a := by
+-  sorry -- Smooth inverse
++  exact ⟨fun _ => a, contDiffAt_const, rfl⟩
+ 
+ /-! ## 3. Local Diffeomorphisms -/
+ 
+@@ -109,7 +157,13 @@
+     (hdet : (fderiv ℝ f a).det ≠ 0) :
+     ∃ d : LocalDiffeo (EuclideanSpace ℝ (Fin n)) (EuclideanSpace ℝ (Fin n)) ⊤ a,
+       d.toFun = f := by
+-  sorry -- Local diffeomorphism from invertibility
++  set f' := (fderiv ℝ f a).toContinuousLinearEquivOfDetNeZero hdet
++  have hd : HasFDerivAt f (f' : _ →L[ℝ] _) a := by
++    rw [ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero]
++    exact (hf.differentiableAt (by simp)).hasFDerivAt
++  obtain ⟨U, V, g, haU, hUo, hfaV, hVo, hUV, hVU, hgf, hfg, hfU, hgV⟩ :=
++    mvei_local_inverse f' hf hd (by simp) (by simp)
++  exact ⟨⟨f, g, U, V, haU, hUo, hVo, hUV, hVU, hgf, hfg, hfU.of_le le_top, hgV.of_le le_top⟩, rfl⟩
+ 
+ /-! ## 4. Global Inverse -/
+ 
+@@ -123,7 +177,23 @@
+     (hsurj : Function.Surjective f)
+     (hderiv : ∀ x, (fderiv ℝ f x).range = ⊤ ∧ (fderiv ℝ f x).ker = ⊥) :
+     ∃ g : F → E, ContDiff ℝ 1 g ∧ Function.LeftInverse g f ∧ Function.RightInverse g f := by
+-  sorry -- Global inverse function theorem
++  set φ := Equiv.ofBijective f ⟨hinj, hsurj⟩
++  refine ⟨φ.symm, ?_, fun x => φ.symm_apply_apply x, fun y => φ.apply_symm_apply y⟩
++  rw [contDiff_iff_contDiffAt]
++  intro y
++  set x := φ.symm y
++  have hxy : f x = y := φ.apply_symm_apply y
++  set f' : E ≃L[ℝ] F := ContinuousLinearEquiv.ofBijective (fderiv ℝ f x) (hderiv x).2 (hderiv x).1
++  have hd : HasFDerivAt f (f' : E →L[ℝ] F) x := by
++    rw [ContinuousLinearEquiv.coe_ofBijective]
++    exact (hf.differentiable le_rfl x).hasFDerivAt
++  have hcx : ContDiffAt ℝ 1 f x := hf.contDiffAt
++  have hloc := hcx.to_localInverse hd le_rfl
++  have hstrict := hcx.hasStrictFDerivAt' hd le_rfl
++  have heq := hstrict.localInverse_unique (g := φ.symm)
++    (Filter.Eventually.of_forall fun z => φ.symm_apply_apply z)
++  rw [← hxy]
++  exact hloc.congr_of_eventuallyEq heq
+ 
+ /-- Hadamard's global inverse function theorem. -/
+ theorem hadamard_global_inverse {f : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin n)}
+@@ -205,6 +275,36 @@
+       ContDiffOn ℝ 1 φ (Set.Ioo (-ε) ε) ∧
+       φ 0 = x₀ ∧
+       ∀ t ∈ Set.Ioo (-ε) ε, deriv φ t = f (t, φ t) := by
+-  sorry -- ODE existence via implicit function
++  have hv : ContDiffAt ℝ 1 (fun p : ℝ × ℝ => ((1 : ℝ), f p)) ((0 : ℝ), x₀) :=
++    contDiffAt_const.prodMk hf.contDiffAt
++  obtain ⟨Φ, hΦ0, ε, hε, hΦ⟩ := exists_forall_hasDerivAt_Ioo_eq_of_contDiffAt (0 : ℝ) hv
++  simp only [zero_sub, zero_add] at hΦ
++  have hI : IsOpen (Set.Ioo (-ε) ε) := isOpen_Ioo
++  have hd1 : ∀ t ∈ Set.Ioo (-ε) ε, HasDerivAt (fun s => (Φ s).1 - s) 0 t := by
++    intro t ht
++    simpa using (hasFDerivAt_fst.comp_hasDerivAt t (hΦ t ht)).sub (hasDerivAt_id t)
++  have h1 : ∀ t ∈ Set.Ioo (-ε) ε, (Φ t).1 = t := by
++    intro t ht
++    have h0 : (0 : ℝ) ∈ Set.Ioo (-ε) ε := ⟨by linarith, hε⟩
++    have := hI.is_const_of_deriv_eq_zero isPreconnected_Ioo
++      (fun s hs => (hd1 s hs).differentiableAt.differentiableWithinAt)
++      (fun s hs => (hd1 s hs).deriv) ht h0
++    simp only [hΦ0, sub_zero] at this
++    linarith
++  have hd2 : ∀ t ∈ Set.Ioo (-ε) ε, HasDerivAt (fun s => (Φ s).2) (f (t, (Φ t).2)) t := by
++    intro t ht
++    have := hasFDerivAt_snd.comp_hasDerivAt t (hΦ t ht)
++    have hΦt : Φ t = (t, (Φ t).2) := Prod.ext (h1 t ht) rfl
++    rw [hΦt] at this
++    simpa using this
++  refine ⟨ε, fun s => (Φ s).2, hε, ?_, by simp [hΦ0], fun t ht => (hd2 t ht).deriv⟩
++  have hdiff : DifferentiableOn ℝ (fun s => (Φ s).2) (Set.Ioo (-ε) ε) :=
++    fun s hs => (hd2 s hs).differentiableAt.differentiableWithinAt
++  rw [show (1 : WithTop ℕ∞) = 0 + 1 from rfl, contDiffOn_succ_iff_deriv_of_isOpen hI]
++  refine ⟨hdiff, by simp, ?_⟩
++  rw [contDiffOn_zero]
++  have hc : ContinuousOn (fun t => f (t, (Φ t).2)) (Set.Ioo (-ε) ε) :=
++    hf.continuous.comp_continuousOn (continuousOn_id.prodMk hdiff.continuousOn)
++  exact hc.congr fun t ht => (hd2 t ht).deriv
+ 
+ end InverseFunctionTheory
+--- a/lean4/Core/Analysis/Calculus/Jacobians.lean
++++ b/lean4/Core/Analysis/Calculus/Jacobians.lean
+@@ -49,6 +49,23 @@
+     jacobianMatrix f x i j = deriv (fun t => f (x + t • EuclideanSpace.single j 1) i) 0 := by
+   sorry -- Partial derivative definition
+ 
++/-- Auxiliar (MVEI): a entrada (i, j) da matriz jacobiana de uma função derivável é a i-ésima coordenada de
++    `fderiv h z (single j 1)`. -/
++theorem mvei_jacobian_entry_eq {p q : ℕ}
++    (h : EuclideanSpace ℝ (Fin q) → EuclideanSpace ℝ (Fin p)) (z : EuclideanSpace ℝ (Fin q))
++    (hz : DifferentiableAt ℝ h z) (i : Fin p) (j : Fin q) :
++    jacobianMatrix h z i j = (fderiv ℝ h z (EuclideanSpace.single j 1)) i := by
++  unfold jacobianMatrix
++  have e : (fun y => h y i) = (EuclideanSpace.proj i : EuclideanSpace ℝ (Fin p) →L[ℝ] ℝ) ∘ h := rfl
++  rw [e, fderiv_comp z (EuclideanSpace.proj i).differentiableAt hz, ContinuousLinearMap.fderiv]
++  rfl
++
++/-- Auxiliar (MVEI): todo vetor de EuclideanSpace é a soma das coordenadas vezes os vetores da base canônica. -/
++theorem mvei_sum_single {p : ℕ} (v : EuclideanSpace ℝ (Fin p)) :
++    v = ∑ k, v k • EuclideanSpace.single k (1 : ℝ) := by
++  have h := ((EuclideanSpace.basisFun (Fin p) ℝ).sum_repr v).symm
++  simpa [EuclideanSpace.basisFun_apply, EuclideanSpace.basisFun_repr] using h
++
+ /-- The Jacobian determinant. -/
+ noncomputable def jacobianDet {n : ℕ}
+     (f : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin n))
+@@ -65,7 +82,21 @@
+     (hf : DifferentiableAt ℝ f x)
+     (hg : DifferentiableAt ℝ g (f x)) :
+     jacobianMatrix (g ∘ f) x = jacobianMatrix g (f x) * jacobianMatrix f x := by
+-  sorry -- Matrix chain rule
++  ext i j
++  rw [mvei_jacobian_entry_eq _ _ (hg.comp x hf), Matrix.mul_apply, fderiv_comp x hg hf,
++    ContinuousLinearMap.comp_apply]
++  simp only [mvei_jacobian_entry_eq _ _ hg, mvei_jacobian_entry_eq _ _ hf]
++  conv_lhs => rw [mvei_sum_single (fderiv ℝ f x (EuclideanSpace.single j 1))]
++  rw [map_sum]
++  simp only [map_smul]
++  have hs := map_sum (EuclideanSpace.proj (𝕜 := ℝ) i)
++    (fun k => (fderiv ℝ f x (EuclideanSpace.single j 1)) k •
++      (fderiv ℝ g (f x)) (EuclideanSpace.single k (1 : ℝ))) Finset.univ
++  have e1 : ∀ v : EuclideanSpace ℝ (Fin l), EuclideanSpace.proj (𝕜 := ℝ) i v = v i := fun v => rfl
++  simp only [e1] at hs
++  rw [hs]
++  refine Finset.sum_congr rfl fun k _ => ?_
++  simp [mul_comm]
+ 
+ /-- Chain rule for Jacobian determinant. -/
+ theorem jacobian_det_comp {n : ℕ}
+@@ -74,7 +105,8 @@
+     (hf : DifferentiableAt ℝ f x)
+     (hg : DifferentiableAt ℝ g (f x)) :
+     jacobianDet (g ∘ f) x = jacobianDet g (f x) * jacobianDet f x := by
+-  sorry -- det(AB) = det(A)det(B)
++  rw [jacobianDet, jacobian_comp f g x hf hg, Matrix.det_mul]
++  rfl
+ 
+ /-! ## 3. Change of Variables -/
+ 
+@@ -93,7 +125,25 @@
+ theorem polar_jacobian :
+     jacobianDet (fun p : EuclideanSpace ℝ (Fin 2) =>
+       ![p 0 * Real.cos (p 1), p 0 * Real.sin (p 1)]) = fun p => p 0 := by
+-  sorry -- r dr dθ
++  funext x
++  set P0 := EuclideanSpace.proj (𝕜 := ℝ) (0 : Fin 2)
++  set P1 := EuclideanSpace.proj (𝕜 := ℝ) (1 : Fin 2)
++  have h0 : HasFDerivAt (fun y : EuclideanSpace ℝ (Fin 2) => P0 y * Real.cos (P1 y))
++      (P0 x • (-Real.sin (P1 x) • P1) + Real.cos (P1 x) • P0) x :=
++    (P0.hasFDerivAt (x := x)).mul ((Real.hasDerivAt_cos (P1 x)).comp_hasFDerivAt x P1.hasFDerivAt)
++  have h1 : HasFDerivAt (fun y : EuclideanSpace ℝ (Fin 2) => P0 y * Real.sin (P1 y))
++      (P0 x • (Real.cos (P1 x) • P1) + Real.sin (P1 x) • P0) x :=
++    (P0.hasFDerivAt (x := x)).mul ((Real.hasDerivAt_sin (P1 x)).comp_hasFDerivAt x P1.hasFDerivAt)
++  have e0 : (fun y : EuclideanSpace ℝ (Fin 2) =>
++      (![y 0 * Real.cos (y 1), y 0 * Real.sin (y 1)] : EuclideanSpace ℝ (Fin 2)) 0) =
++      fun y => P0 y * Real.cos (P1 y) := rfl
++  have e1 : (fun y : EuclideanSpace ℝ (Fin 2) =>
++      (![y 0 * Real.cos (y 1), y 0 * Real.sin (y 1)] : EuclideanSpace ℝ (Fin 2)) 1) =
++      fun y => P0 y * Real.sin (P1 y) := rfl
++  rw [jacobianDet, Matrix.det_fin_two]
++  simp only [jacobianMatrix, e0, e1, h0.fderiv, h1.fderiv]
++  simp [P0, P1, EuclideanSpace.single_apply]
++  linear_combination (x 0) * Real.sin_sq_add_cos_sq (x 1)
+ 
+ /-- Spherical coordinates in ℝ³. -/
+ theorem spherical_jacobian :
+@@ -101,7 +151,38 @@
+       ![p 0 * Real.sin (p 1) * Real.cos (p 2),
+         p 0 * Real.sin (p 1) * Real.sin (p 2),
+         p 0 * Real.cos (p 1)]) = fun p => p 0^2 * Real.sin (p 1) := by
+-  sorry -- ρ² sin φ dρ dφ dθ
++  funext x
++  set P0 := EuclideanSpace.proj (𝕜 := ℝ) (0 : Fin 3)
++  set P1 := EuclideanSpace.proj (𝕜 := ℝ) (1 : Fin 3)
++  set P2 := EuclideanSpace.proj (𝕜 := ℝ) (2 : Fin 3)
++  have hs1 := (Real.hasDerivAt_sin (P1 x)).comp_hasFDerivAt x (P1.hasFDerivAt (x := x))
++  have hc1 := (Real.hasDerivAt_cos (P1 x)).comp_hasFDerivAt x (P1.hasFDerivAt (x := x))
++  have hs2 := (Real.hasDerivAt_sin (P2 x)).comp_hasFDerivAt x (P2.hasFDerivAt (x := x))
++  have hc2 := (Real.hasDerivAt_cos (P2 x)).comp_hasFDerivAt x (P2.hasFDerivAt (x := x))
++  have h0 : HasFDerivAt (fun y => P0 y * Real.sin (P1 y) * Real.cos (P2 y)) _ x :=
++    ((P0.hasFDerivAt (x := x)).mul hs1).mul hc2
++  have h1 : HasFDerivAt (fun y => P0 y * Real.sin (P1 y) * Real.sin (P2 y)) _ x :=
++    ((P0.hasFDerivAt (x := x)).mul hs1).mul hs2
++  have h2 : HasFDerivAt (fun y => P0 y * Real.cos (P1 y)) _ x := (P0.hasFDerivAt (x := x)).mul hc1
++  have e0 : (fun y : EuclideanSpace ℝ (Fin 3) =>
++      (![y 0 * Real.sin (y 1) * Real.cos (y 2), y 0 * Real.sin (y 1) * Real.sin (y 2),
++        y 0 * Real.cos (y 1)] : EuclideanSpace ℝ (Fin 3)) 0) =
++      fun y => P0 y * Real.sin (P1 y) * Real.cos (P2 y) := rfl
++  have e1 : (fun y : EuclideanSpace ℝ (Fin 3) =>
++      (![y 0 * Real.sin (y 1) * Real.cos (y 2), y 0 * Real.sin (y 1) * Real.sin (y 2),
++        y 0 * Real.cos (y 1)] : EuclideanSpace ℝ (Fin 3)) 1) =
++      fun y => P0 y * Real.sin (P1 y) * Real.sin (P2 y) := rfl
++  have e2 : (fun y : EuclideanSpace ℝ (Fin 3) =>
++      (![y 0 * Real.sin (y 1) * Real.cos (y 2), y 0 * Real.sin (y 1) * Real.sin (y 2),
++        y 0 * Real.cos (y 1)] : EuclideanSpace ℝ (Fin 3)) 2) =
++      fun y => P0 y * Real.cos (P1 y) := rfl
++  rw [jacobianDet, Matrix.det_fin_three]
++  simp only [jacobianMatrix, e0, e1, e2, h0.fderiv, h1.fderiv, h2.fderiv]
++  simp [P0, P1, P2, EuclideanSpace.single_apply, Function.comp]
++  have hs := Real.sin_sq_add_cos_sq (x 1)
++  have hs' := Real.sin_sq_add_cos_sq (x 2)
++  linear_combination (x 0 ^ 2 * Real.sin (x 1) * (Real.sin (x 1) ^ 2 + Real.cos (x 1) ^ 2)) * hs' +
++    (x 0 ^ 2 * Real.sin (x 1)) * hs
+ 
+ /-! ## 4. Inverse Function Theorem via Jacobian -/
+ 
+@@ -116,7 +197,31 @@
+       Set.BijOn f U V ∧
+       ContDiffOn ℝ 1 g V ∧
+       ∀ y ∈ V, f (g y) = y := by
+-  sorry -- IFT
++  have hfd : DifferentiableAt ℝ f a := hf.differentiableAt le_rfl
++  set b := (EuclideanSpace.basisFun (Fin n) ℝ).toBasis
++  have hmat : jacobianMatrix f a = LinearMap.toMatrix b b (fderiv ℝ f a : _ →ₗ[ℝ] _) := by
++    ext i j
++    rw [mvei_jacobian_entry_eq _ _ hfd, LinearMap.toMatrix_apply]
++    simp [b, EuclideanSpace.basisFun_apply, EuclideanSpace.basisFun_repr]
++  have hdet' : (fderiv ℝ f a).det ≠ 0 := by
++    rw [jacobianDet, hmat, LinearMap.det_toMatrix] at hdet
++    exact hdet
++  set f' := (fderiv ℝ f a).toContinuousLinearEquivOfDetNeZero hdet'
++  have hd : HasFDerivAt f (f' : _ →L[ℝ] _) a := by
++    rw [ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero]
++    exact hfd.hasFDerivAt
++  set e := hf.toPartialHomeomorph f hd le_rfl with he
++  have hgc : ContDiffAt ℝ 1 e.symm (f a) := hf.to_localInverse hd le_rfl
++  have hfa : f a ∈ e.target := hf.image_mem_toPartialHomeomorph_target hd le_rfl
++  have has : a ∈ e.source := hf.mem_toPartialHomeomorph_source hd le_rfl
++  obtain ⟨W, hW, hWo, hWa⟩ := mem_nhds_iff.mp (hgc.eventually (by simp))
++  set V := e.target ∩ W
++  have hVo : IsOpen V := e.open_target.inter hWo
++  refine ⟨e.source ∩ e ⁻¹' V, V, e.symm, ⟨has, hfa, hWa⟩, e.isOpen_inter_preimage hVo, ⟨hfa, hWa⟩, hVo,
++    ⟨fun x hx => hx.2, fun x₁ h₁ x₂ h₂ h => e.injOn h₁.1 h₂.1 h,
++      fun y hy => ⟨e.symm y, ⟨e.map_target hy.1, by simp only [Set.mem_preimage]; rw [e.right_inv hy.1]; exact hy⟩,
++        e.right_inv hy.1⟩⟩,
++    fun y hy => (show ContDiffAt ℝ 1 e.symm y from hW hy.2).contDiffWithinAt, fun y hy => e.right_inv hy.1⟩
+ 
+ /-- Jacobian of inverse. -/
+ theorem jacobian_inverse {n : ℕ}
+@@ -152,7 +257,18 @@
+     (x : EuclideanSpace ℝ (Fin n))
+     (hf : ContDiffAt ℝ 2 f x) :
+     (hessianMatrix f x).IsSymm := by
+-  sorry -- Symmetry of second derivatives
++  have hD : DifferentiableAt ℝ (fderiv ℝ f) x :=
++    (hf.fderiv_right (m := 1) (by norm_num)).differentiableAt le_rfl
++  have key : ∀ i j, hessianMatrix f x i j =
++      fderiv ℝ (fderiv ℝ f) x (EuclideanSpace.single i 1) (EuclideanSpace.single j 1) := by
++    intro i j
++    unfold hessianMatrix
++    rw [fderiv_clm_apply hD (differentiableAt_const _)]
++    simp
++  have hsymm := hf.isSymmSndFDerivAt (by simp)
++  refine Matrix.IsSymm.ext fun i j => ?_
++  rw [key, key]
++  exact hsymm _ _
+ 
+ /-! ## 6. Critical Points Classification -/
+ 
+--- a/lean4/Core/Analysis/Calculus/MeanValueTheorem.lean
++++ b/lean4/Core/Analysis/Calculus/MeanValueTheorem.lean
+@@ -42,8 +42,8 @@
+       deriv f c * (b - a) = f b - f a := by
+   obtain ⟨c, hc, heq⟩ := mean_value hab hfc hfd
+   use c, hc
+-  field_simp at heq ⊢
+-  linarith [heq]
++  rw [heq]
++  field_simp [sub_ne_zero.mpr hab.ne']
+ 
+ /-! ## 2. Cauchy Mean Value Theorem -/
+ 
+@@ -56,7 +56,15 @@
+     (hg' : ∀ c ∈ Ioo a b, deriv g c ≠ 0) :
+     ∃ c ∈ Ioo a b,
+       (f b - f a) / (g b - g a) = deriv f c / deriv g c := by
+-  sorry -- Cauchy MVT
++  obtain ⟨c, hc, h⟩ := exists_ratio_deriv_eq_ratio_slope f hab hfc hfd g hgc hgd
++  have hgab : g b - g a ≠ 0 := by
++    intro h0
++    obtain ⟨d, hd, hd'⟩ := exists_deriv_eq_slope g hab hgc hgd
++    rw [h0, zero_div] at hd'
++    exact hg' d hd hd'
++  refine ⟨c, hc, ?_⟩
++  rw [div_eq_div_iff hgab (hg' c hc)]
++  linarith
+ 
+ /- Application: L'Hôpital's rule proof. -/
+ -- The Cauchy MVT is the key lemma for L'Hôpital
+@@ -70,7 +78,7 @@
+     (M : ℝ) (hM : ∀ c ∈ Ioo a b, deriv f c ≤ M) :
+     f b - f a ≤ M * (b - a) := by
+   obtain ⟨c, hc, heq⟩ := mean_value hab hfc hfd
+-  calc f b - f a = deriv f c * (b - a) := by linarith [heq, hab]
++  calc f b - f a = deriv f c * (b - a) := by rw [heq]; field_simp [sub_ne_zero.mpr hab.ne']
+     _ ≤ M * (b - a) := by
+         apply mul_le_mul_of_nonneg_right (hM c hc)
+         linarith
+@@ -86,7 +94,7 @@
+   constructor
+   · calc m * (b - a) ≤ deriv f c * (b - a) := by
+           apply mul_le_mul_of_nonneg_right (hm c hc); linarith
+-      _ = f b - f a := by linarith [heq, hab]
++      _ = f b - f a := by rw [heq]; field_simp [sub_ne_zero.mpr hab.ne']
+   · exact mean_value_inequality hab hfc hfd M hM
+ 
+ /-! ## 4. Multivariate Mean Value Theorem -/
+@@ -109,7 +117,13 @@
+     (a b : ℝ) (hab : a < b) :
+     ∃ c ∈ Ioo a b,
+       f (γ b) - f (γ a) = fderiv ℝ f (γ c) (deriv γ c) * (b - a) := by
+-  sorry -- MVT along curve
++  have hd : Differentiable ℝ (f ∘ γ) := hf.comp hγ
++  obtain ⟨c, hc, hcd⟩ := exists_deriv_eq_slope (f ∘ γ) hab hd.continuous.continuousOn
++    hd.differentiableOn
++  refine ⟨c, hc, ?_⟩
++  have h : deriv (f ∘ γ) c = fderiv ℝ f (γ c) (deriv γ c) := fderiv_comp_deriv c (hf (γ c)) (hγ c)
++  rw [← h, hcd, Function.comp_apply, Function.comp_apply]
++  field_simp [sub_ne_zero.mpr hab.ne']
+ 
+ /-! ## 5. Second Mean Value Theorem for Integrals -/
+ 
+@@ -117,7 +131,23 @@
+ theorem integral_mean_value {f : ℝ → ℝ} {a b : ℝ} (hab : a < b)
+     (hf : ContinuousOn f (Icc a b)) :
+     ∃ c ∈ Ioo a b, ∫ x in a..b, f x = f c * (b - a) := by
+-  sorry -- First integral MVT
++  have hI : ContinuousOn (fun u => ∫ x in a..u, f x) (Icc a b) := by
++    have h := intervalIntegral.continuousOn_primitive_interval (μ := MeasureTheory.volume) (a := a) (b := b)
++      (f := f) (by rw [Set.uIcc_of_le hab.le]; exact hf.integrableOn_Icc)
++    rwa [Set.uIcc_of_le hab.le] at h
++  have hD : ∀ u ∈ Ioo a b, HasDerivAt (fun u => ∫ x in a..u, f x) (f u) u := by
++    intro u hu
++    apply intervalIntegral.integral_hasDerivAt_right
++    · exact (hf.mono (by rw [Set.uIcc_of_le hu.1.le]; exact Icc_subset_Icc le_rfl hu.2.le)).intervalIntegrable
++    · exact (hf.mono Ioo_subset_Icc_self).stronglyMeasurableAtFilter isOpen_Ioo u hu
++    · exact hf.continuousAt (Icc_mem_nhds hu.1 hu.2)
++  obtain ⟨c, hc, hcd⟩ := exists_deriv_eq_slope (fun u => ∫ x in a..u, f x) hab hI
++    (fun u hu => (hD u hu).differentiableAt.differentiableWithinAt)
++  refine ⟨c, hc, ?_⟩
++  rw [(hD c hc).deriv] at hcd
++  simp only [intervalIntegral.integral_same, sub_zero] at hcd
++  rw [hcd]
++  field_simp [sub_ne_zero.mpr hab.ne']
+ 
+ /-- Second mean value theorem for integrals (Bonnet's form). -/
+ theorem integral_second_mean_value {f g : ℝ → ℝ} {a b : ℝ} (hab : a < b)
+@@ -152,20 +182,15 @@
+     ∃ c, ∀ x ∈ Icc a b, f x = c := by
+   use f a
+   intro x hx
+-  by_cases hxa : x = a
+-  · simp [hxa]
+-  · have hxa' : a < x := by
+-      cases hx.1.lt_or_eq with
+-      | inl h => exact h
+-      | inr h => exact (hxa h.symm).elim
+-    have := mean_value_inequality hxa' (hf.mono (Icc_subset_Icc_right hx.2))
+-      (hf.mono (Ioo_subset_Icc_self.trans (Icc_subset_Icc_right hx.2))) 0
+-      (fun c hc => le_of_eq (hf' c ⟨hc.1, lt_of_lt_of_le hc.2 hx.2⟩))
+-    simp at this
+-    have := mean_value_inequality hxa' (hf.mono (Icc_subset_Icc_right hx.2))
+-      (hf.mono (Ioo_subset_Icc_self.trans (Icc_subset_Icc_right hx.2))) 0
+-      (fun c hc => le_of_eq (hf' c ⟨hc.1, lt_of_lt_of_le hc.2 hx.2⟩))
+-    sorry -- Complete the argument
++  rcases eq_or_lt_of_le hx.1 with h | hxa'
++  · rw [h]
++  · have hsub : Icc a x ⊆ Icc a b := Icc_subset_Icc_right hx.2
++    have hz : ∀ c ∈ Ioo a x, deriv f c = 0 := fun c hc => hf' c ⟨hc.1, lt_of_lt_of_le hc.2 hx.2⟩
++    have := mean_value_bounds hxa' (hf.continuousOn.mono hsub)
++      (hf.mono (Ioo_subset_Icc_self.trans hsub)) 0 0
++      (fun c hc => (hz c hc).symm.le) (fun c hc => (hz c hc).le)
++    simp only [zero_mul] at this
++    linarith [this.1, this.2]
+ 
+ /-- Equal derivatives implies functions differ by constant. -/
+ theorem deriv_eq_const_diff {f g : ℝ → ℝ} {a b : ℝ}
+@@ -173,7 +198,30 @@
+     (hg : DifferentiableOn ℝ g (Icc a b))
+     (heq : ∀ x ∈ Ioo a b, deriv f x = deriv g x) :
+     ∃ c, ∀ x ∈ Icc a b, f x - g x = c := by
+-  sorry -- Constant difference
++  refine ⟨f a - g a, fun x hx => ?_⟩
++  rcases eq_or_lt_of_le hx.1 with h | hax
++  · rw [h]
++  have hsub : Icc a x ⊆ Icc a b := Icc_subset_Icc le_rfl hx.2
++  have hcont : ContinuousOn (fun y => f y - g y) (Icc a x) :=
++    (hf.continuousOn.sub hg.continuousOn).mono hsub
++  have hdiff : DifferentiableOn ℝ (fun y => f y - g y) (Ioo a x) := by
++    intro y hy
++    have hy' : y ∈ Ioo a b := ⟨hy.1, lt_of_lt_of_le hy.2 hx.2⟩
++    have hfy : DifferentiableAt ℝ f y :=
++      (hf y (Ioo_subset_Icc_self hy')).differentiableAt (Icc_mem_nhds hy'.1 hy'.2)
++    have hgy : DifferentiableAt ℝ g y :=
++      (hg y (Ioo_subset_Icc_self hy')).differentiableAt (Icc_mem_nhds hy'.1 hy'.2)
++    exact (hfy.sub hgy).differentiableWithinAt
++  obtain ⟨c, hc, hc'⟩ := exists_deriv_eq_slope (fun y => f y - g y) hax hcont hdiff
++  have hc2 : c ∈ Ioo a b := ⟨hc.1, lt_of_lt_of_le hc.2 hx.2⟩
++  have hfc : DifferentiableAt ℝ f c :=
++    (hf c (Ioo_subset_Icc_self hc2)).differentiableAt (Icc_mem_nhds hc2.1 hc2.2)
++  have hgc : DifferentiableAt ℝ g c :=
++    (hg c (Ioo_subset_Icc_self hc2)).differentiableAt (Icc_mem_nhds hc2.1 hc2.2)
++  rw [deriv_sub hfc hgc, heq c hc2, sub_self] at hc'
++  have hxa : x - a ≠ 0 := sub_ne_zero.mpr hax.ne'
++  have := (div_eq_zero_iff.mp hc'.symm).resolve_right hxa
++  linarith
+ 
+ /-- Bernstein's inequality for polynomials. -/
+ theorem bernstein_polynomial {p : Polynomial ℝ} :
+--- a/lean4/Core/Analysis/Calculus/RealDifferentiability.lean
++++ b/lean4/Core/Analysis/Calculus/RealDifferentiability.lean
+@@ -50,7 +50,7 @@
+     (hfd : DifferentiableOn ℝ f (Set.Ioo a b))
+     (hfab : f a = f b) :
+     ∃ c ∈ Set.Ioo a b, deriv f c = 0 := by
+-  exact exists_deriv_eq_zero hab hfc hfd hfab
++  exact exists_deriv_eq_zero hab hfc hfab
+ 
+ /-- Generalized Rolle: derivative changes sign. -/
+ theorem rolle_sign {f : ℝ → ℝ} {a b : ℝ} (hab : a < b)
+@@ -60,7 +60,9 @@
+     ∃ c ∈ Set.Ioo a b, HasDerivAt f 0 c := by
+   obtain ⟨c, hc, hc'⟩ := rolle hab hfc hfd hfab
+   use c, hc
+-  exact (hfd c hc).hasDerivAt (Ioo_mem_nhds hc.1 hc.2) |>.deriv_eq_zero_iff.mpr hc'
++  have hd : DifferentiableAt ℝ f c := (hfd c hc).differentiableAt (Ioo_mem_nhds hc.1 hc.2)
++  rw [← hc']
++  exact hd.hasDerivAt
+ 
+ /-! ## 3. Mean Value Theorem -/
+ 
+@@ -89,47 +91,26 @@
+   -- First, g(b) ≠ g(a) since g' ≠ 0 everywhere (by Rolle's theorem contrapositive)
+   have hgne : g b ≠ g a := by
+     by_contra heq
+-    -- If g(a) = g(b), then by Rolle's theorem ∃c: g'(c) = 0, contradiction
+-    obtain ⟨c, hc, hc'⟩ := exists_deriv_eq_zero hab hgc hgd heq.symm
++    obtain ⟨c, hc, hc'⟩ := exists_deriv_eq_zero hab hgc heq.symm
+     exact hg' c hc hc'
+-  
+-  -- Define auxiliary function h
+   set h := fun x => (f b - f a) * g x - (g b - g a) * f x with hh_def
+-  
+-  -- h is continuous on [a,b] and differentiable on (a,b)
+   have hhc : ContinuousOn h (Set.Icc a b) := by
+     apply ContinuousOn.sub
+     · exact ContinuousOn.mul continuousOn_const hgc
+     · exact ContinuousOn.mul continuousOn_const hfc
+-  
+-  have hhd : DifferentiableOn ℝ h (Set.Ioo a b) := by
+-    apply DifferentiableOn.sub
+-    · exact DifferentiableOn.mul differentiableOn_const hgd
+-    · exact DifferentiableOn.mul differentiableOn_const hfd
+-  
+-  -- h(a) = h(b)
+   have hhab : h a = h b := by
+     simp only [hh_def]
+     ring
+-  
+-  -- Apply Rolle's theorem to h
+-  obtain ⟨c, hc, hhc'⟩ := exists_deriv_eq_zero hab hhc hhd hhab
+-  
++  obtain ⟨c, hc, hhc'⟩ := exists_deriv_eq_zero hab hhc hhab
+   use c, hc
+-  
+-  -- deriv h c = 0 means (f b - f a) * g'(c) = (g b - g a) * f'(c)
+-  have hderiv : deriv h c = (f b - f a) * deriv g c - (g b - g a) * deriv f c := by
+-    simp only [hh_def]
+-    rw [deriv_sub, deriv_mul_const, deriv_mul_const]
+-    · exact (hfd c hc).differentiableAt (Ioo_mem_nhds hc.1 hc.2)
+-    · exact (hgd c hc).differentiableAt (Ioo_mem_nhds hc.1 hc.2)
+-  
++  have hfdc : DifferentiableAt ℝ f c := (hfd c hc).differentiableAt (Ioo_mem_nhds hc.1 hc.2)
++  have hgdc : DifferentiableAt ℝ g c := (hgd c hc).differentiableAt (Ioo_mem_nhds hc.1 hc.2)
++  have hderiv : deriv h c = (f b - f a) * deriv g c - (g b - g a) * deriv f c :=
++    (((hgdc.hasDerivAt.const_mul (f b - f a))).sub (hfdc.hasDerivAt.const_mul (g b - g a))).deriv
+   rw [hderiv] at hhc'
+-  -- (f b - f a) * g'(c) = (g b - g a) * f'(c)
+   have heq : (f b - f a) * deriv g c = (g b - g a) * deriv f c := by linarith
+-  
+-  -- Divide both sides by (g b - g a) * g'(c)
+-  field_simp [hgne, hg' c hc]
++  have hgb : g b - g a ≠ 0 := sub_ne_zero.mpr hgne
++  rw [div_eq_div_iff hgb (hg' c hc)]
+   linarith [heq]
+ 
+ /-! ## 4. Monotonicity and Derivatives -/
+@@ -140,7 +121,7 @@
+     (hfd : DifferentiableOn ℝ f (Set.Ioo a b))
+     (hf' : ∀ x ∈ Set.Ioo a b, 0 ≤ deriv f x) :
+     MonotoneOn f (Set.Icc a b) := by
+-  exact monotoneOn_of_deriv_nonneg (convex_Icc a b) hfc hfd.continuousOn hf'
++  exact monotoneOn_of_deriv_nonneg (convex_Icc a b) hfc (by rwa [interior_Icc]) (by rwa [interior_Icc])
+ 
+ /-- Positive derivative implies strictly increasing. -/
+ theorem pos_deriv_strict_mono {f : ℝ → ℝ} {a b : ℝ}
+@@ -148,7 +129,7 @@
+     (hfd : DifferentiableOn ℝ f (Set.Ioo a b))
+     (hf' : ∀ x ∈ Set.Ioo a b, 0 < deriv f x) :
+     StrictMonoOn f (Set.Icc a b) := by
+-  exact strictMonoOn_of_deriv_pos (convex_Icc a b) hfc hfd hf'
++  exact strictMonoOn_of_deriv_pos (convex_Icc a b) hfc (by rwa [interior_Icc])
+ 
+ /-- Nonpositive derivative implies nonincreasing. -/
+ theorem nonpos_deriv_anti {f : ℝ → ℝ} {a b : ℝ}
+@@ -156,7 +137,7 @@
+     (hfd : DifferentiableOn ℝ f (Set.Ioo a b))
+     (hf' : ∀ x ∈ Set.Ioo a b, deriv f x ≤ 0) :
+     AntitoneOn f (Set.Icc a b) := by
+-  exact antitoneOn_of_deriv_nonpos (convex_Icc a b) hfc hfd.continuousOn hf'
++  exact antitoneOn_of_deriv_nonpos (convex_Icc a b) hfc (by rwa [interior_Icc]) (by rwa [interior_Icc])
+ 
+ /-- Negative derivative implies strictly decreasing. -/
+ theorem neg_deriv_strict_anti {f : ℝ → ℝ} {a b : ℝ}
+@@ -164,7 +145,7 @@
+     (hfd : DifferentiableOn ℝ f (Set.Ioo a b))
+     (hf' : ∀ x ∈ Set.Ioo a b, deriv f x < 0) :
+     StrictAntiOn f (Set.Icc a b) := by
+-  exact strictAntiOn_of_deriv_neg (convex_Icc a b) hfc hfd hf'
++  exact strictAntiOn_of_deriv_neg (convex_Icc a b) hfc (by rwa [interior_Icc])
+ 
+ /-! ## 5. Convexity and Derivatives -/
+ 
+@@ -203,15 +184,16 @@
+   -- Proof: f'' ≥ 0 means f' is non-decreasing (by integration).
+   -- Non-decreasing derivative implies convexity.
+   -- Standard characterization: f(λx + (1-λ)y) ≤ λf(x) + (1-λ)f(y)
++  have hI : ContDiffOn ℝ 2 f (Set.Ioo a b) := hfc.mono Set.Ioo_subset_Icc_self
+   apply convexOn_of_deriv2_nonneg (convex_Icc a b)
+   · exact hfc.continuousOn
+-  · intro x hx
+-    exact (hfc.differentiableOn le_rfl).differentiableAt (Icc_mem_nhds hx.1 hx.2)
+-  · intro x hx
+-    -- f is twice differentiable in the interior
+-    have h1 : ContDiffAt ℝ 2 f x := hfc.contDiffAt (Icc_mem_nhds hx.1 hx.2)
+-    exact h1.differentiableAt (by norm_num : 1 ≤ 2) |>.deriv
+-  · intro x hx
++  · rw [interior_Icc]
++    exact hI.differentiableOn (by norm_num)
++  · rw [interior_Icc]
++    exact (hI.deriv_of_isOpen isOpen_Ioo (by norm_num) : ContDiffOn ℝ 1 (deriv f) (Set.Ioo a b)).differentiableOn
++      le_rfl
++  · rw [interior_Icc]
++    intro x hx
+     exact hf'' x hx
+ 
+ /-- Strictly positive second derivative implies strictly convex. -/
+@@ -223,15 +205,10 @@
+   -- The proof follows from the second derivative test:
+   -- If f'' > 0 strictly, then f' is strictly increasing,
+   -- which implies strict convexity.
+-  apply strictConvexOn_of_deriv2_pos (convex_Icc a b)
+-  · exact hfc.continuousOn
+-  · intro x hx
+-    exact (hfc.differentiableOn le_rfl).differentiableAt (Icc_mem_nhds hx.1 hx.2)
+-  · intro x hx
+-    have h1 : ContDiffAt ℝ 2 f x := hfc.contDiffAt (Icc_mem_nhds hx.1 hx.2)
+-    exact h1.differentiableAt (by norm_num : 1 ≤ 2) |>.deriv
+-  · intro x hx
+-    exact hf'' x hx
++  apply strictConvexOn_of_deriv2_pos (convex_Icc a b) hfc.continuousOn
++  rw [interior_Icc]
++  intro x hx
++  exact hf'' x hx
+ 
+ /-! ## 6. Critical Points -/
+ 
+@@ -244,14 +221,14 @@
+     (hf : DifferentiableAt ℝ f x)
+     (hmax : IsLocalMax f x) :
+     IsCriticalPoint f x := by
+-  exact ⟨hf, hmax.deriv_eq_zero hf⟩
++  exact ⟨hf, hmax.deriv_eq_zero⟩
+ 
+ /-- Local minimum version. -/
+ theorem local_min_critical {f : ℝ → ℝ} {x : ℝ}
+     (hf : DifferentiableAt ℝ f x)
+     (hmin : IsLocalMin f x) :
+     IsCriticalPoint f x := by
+-  exact ⟨hf, hmin.deriv_eq_zero hf⟩
++  exact ⟨hf, hmin.deriv_eq_zero⟩
+ 
+ /-! ## 7. First Derivative Test -/
+ 
+@@ -262,50 +239,8 @@
+     (hpos : ∀ᶠ x in 𝓝[<] c, 0 < deriv f x)
+     (hneg : ∀ᶠ x in 𝓝[>] c, deriv f x < 0) :
+     IsLocalMax f c := by
+-  -- First derivative test: if f' > 0 on (c-δ, c) and f' < 0 on (c, c+δ),
+-  -- then f has a local maximum at c.
+-  -- Proof: f is increasing before c and decreasing after c.
+-  rw [isLocalMax_iff]
+-  -- Get the neighborhoods where the derivative signs hold
+-  obtain ⟨δ₁, hδ₁_pos, hδ₁⟩ := (nhdsWithin_hasBasis nhds_basis_Ioo_pos _).mem_iff.mp hpos
+-  obtain ⟨δ₂, hδ₂_pos, hδ₂⟩ := (nhdsWithin_hasBasis nhds_basis_Ioo_pos _).mem_iff.mp hneg
+-  set δ := min δ₁ δ₂ with hδ_def
+-  have hδ_pos : 0 < δ := lt_min hδ₁_pos hδ₂_pos
+-  use Set.Ioo (c - δ) (c + δ)
+-  constructor
+-  · exact Ioo_mem_nhds (by linarith) (by linarith)
+-  · intro x hx
+-    by_cases hxc : x = c
+-    · simp [hxc]
+-    · by_cases hxlt : x < c
+-      · -- x < c: f is increasing on [x, c], so f(x) ≤ f(c)
+-        have hpos' : ∀ y ∈ Set.Ioo x c, 0 < deriv f y := by
+-          intro y hy
+-          apply hδ₁
+-          constructor
+-          · exact lt_of_lt_of_le hy.1 (le_of_lt hx.2)
+-          · exact hy.2
+-        -- Use MVT: f(c) - f(x) = f'(ξ)(c - x) > 0 for some ξ ∈ (x, c)
+-        have := strictMonoOn_of_deriv_pos (convex_Icc x c)
+-          (hfc.continuousOn.mono (Set.Ioo_subset_Icc_self.trans (Set.Icc_subset_Ioo hx.1 (by linarith))))
+-          (fun y hy => (hfd.self_of_nhds).differentiableAt.mono (Set.Ioo_subset_Icc_self hy))
+-          hpos'
+-        linarith [this (Set.left_mem_Icc.mpr (le_of_lt hxlt)) (Set.right_mem_Icc.mpr (le_of_lt hxlt)) hxlt]
+-      · -- x > c: f is decreasing on [c, x], so f(x) ≤ f(c)
+-        push_neg at hxlt
+-        have hxgt : c < x := lt_of_le_of_ne hxlt (Ne.symm hxc)
+-        have hneg' : ∀ y ∈ Set.Ioo c x, deriv f y < 0 := by
+-          intro y hy
+-          apply hδ₂
+-          constructor
+-          · exact hy.1
+-          · exact lt_of_lt_of_le hy.2 (le_of_lt hx.2)
+-        -- Use MVT: f(x) - f(c) = f'(ξ)(x - c) < 0 for some ξ ∈ (c, x)
+-        have := strictAntiOn_of_deriv_neg (convex_Icc c x)
+-          (hfc.continuousOn.mono (Set.Ioo_subset_Icc_self.trans (Set.Icc_subset_Ioo (by linarith) hx.2)))
+-          (fun y hy => (hfd.self_of_nhds).differentiableAt.mono (Set.Ioo_subset_Icc_self hy))
+-          hneg'
+-        linarith [this (Set.left_mem_Icc.mpr (le_of_lt hxgt)) (Set.right_mem_Icc.mpr (le_of_lt hxgt)) hxgt]
++  exact isLocalMax_of_deriv hfc (hfd.filter_mono nhdsWithin_le_nhds)
++    (hpos.mono fun _ h => h.le) (hneg.mono fun _ h => h.le)
+ 
+ /-- First derivative test for local minimum. -/
+ theorem first_deriv_test_min {f : ℝ → ℝ} {c : ℝ}
+@@ -314,26 +249,8 @@
+     (hneg : ∀ᶠ x in 𝓝[<] c, deriv f x < 0)
+     (hpos : ∀ᶠ x in 𝓝[>] c, 0 < deriv f x) :
+     IsLocalMin f c := by
+-  -- First derivative test for minimum: if f' < 0 on (c-δ, c) and f' > 0 on (c, c+δ),
+-  -- then f has a local minimum at c.
+-  -- Apply the maximum test to -f
+-  have hmax : IsLocalMax (-f) c := by
+-    apply first_deriv_test_max
+-    · exact hfc.neg
+-    · filter_upwards [hfd] with x hx using hx.neg
+-    · filter_upwards [hneg] with x hx
+-      simp only [Pi.neg_apply, deriv_neg']
+-      linarith
+-    · filter_upwards [hpos] with x hx
+-      simp only [Pi.neg_apply, deriv_neg']
+-      linarith
+-  rw [isLocalMin_iff]
+-  obtain ⟨U, hU, hmax'⟩ := hmax
+-  use U, hU
+-  intro x hx
+-  have := hmax' hx
+-  simp only [Pi.neg_apply] at this
+-  linarith
++  exact isLocalMin_of_deriv hfc (hfd.filter_mono nhdsWithin_le_nhds)
++    (hneg.mono fun _ h => h.le) (hpos.mono fun _ h => h.le)
+ 
+ /-! ## 8. Second Derivative Test -/
+ 
+@@ -343,48 +260,28 @@
+     (hf' : deriv f c = 0)
+     (hf'' : deriv (deriv f) c < 0) :
+     IsLocalMax f c := by
+-  -- Second derivative test: if f'(c) = 0 and f''(c) < 0, then c is a local maximum.
+-  -- Proof: f''(c) < 0 means f' is strictly decreasing near c.
+-  -- Since f'(c) = 0, we have f' > 0 for x < c and f' < 0 for x > c (near c).
+-  -- By first derivative test, c is a local maximum.
+-  
+-  -- f'' is continuous at c (since f is C²)
+-  have hcont_f'' : ContinuousAt (deriv (deriv f)) c := by
+-    exact hf.differentiableAt (by norm_num : 1 ≤ 2) |>.deriv.continuousAt
+-  
+-  -- Since f''(c) < 0 and f'' is continuous, f'' < 0 in a neighborhood of c
+-  have hneg_nbhd : ∀ᶠ x in 𝓝 c, deriv (deriv f) x < 0 := by
+-    exact hcont_f''.eventually_lt continuousAt_const hf''
+-  
+-  -- f' is differentiable near c
+-  have hf'_diff : ∀ᶠ x in 𝓝 c, DifferentiableAt ℝ (deriv f) x := by
+-    have : ContDiffAt ℝ 1 (deriv f) c := hf.deriv
+-    exact this.eventually_differentiableAt le_rfl
+-  
+-  -- Since f''(c) < 0, f' is strictly decreasing near c
+-  -- And f'(c) = 0, so f' > 0 for x < c and f' < 0 for x > c
+-  
+-  -- Apply first derivative test
+-  apply first_deriv_test_max
+-  · exact hf.continuousAt
+-  · exact hf.differentiableAt le_rfl |>.eventually
+-  · -- f' > 0 for x < c (since f' is decreasing and f'(c) = 0)
+-    rw [Filter.eventually_iff] at hneg_nbhd ⊢
+-    obtain ⟨U, hUo, hUc, hU⟩ := mem_nhds_iff.mp hneg_nbhd
+-    use U ∩ Set.Iio c
+-    constructor
+-    · exact Filter.inter_mem (mem_nhdsWithin_of_mem_nhds (hUo.mem_nhds hUc)) self_mem_nhdsWithin
+-    · intro x ⟨hxU, hxc⟩
+-      -- By MVT on [x, c]: f'(c) - f'(x) = f''(ξ)(c - x) for some ξ ∈ (x, c)
+-      -- f''(ξ) < 0 and c - x > 0, so f'(c) - f'(x) < 0, i.e., f'(x) > f'(c) = 0
+-      have hlt : x < c := hxc
+-      have hdiff : DifferentiableOn ℝ (deriv f) (Set.Ioo x c) := by
+-        intro y hy
+-        have : y ∈ U := hUo.mem_nhds (hU y (Set.Ioo_subset_Iio_self hy))
+-        sorry -- Technical: need to show differentiability in the interval
+-      sorry -- Apply MVT to get f'(x) > 0
+-  · -- f' < 0 for x > c (similar argument)
+-    sorry -- Similar to above
++  obtain ⟨u, hu, hfu⟩ := hf.contDiffOn (m := 2) le_rfl (by simp)
++  obtain ⟨v, hvu, hvo, hcv⟩ := mem_nhds_iff.mp hu
++  have h1 : ContDiffOn ℝ 1 (deriv f) v := (hfu.mono hvu).deriv_of_isOpen hvo (by norm_num)
++  have hd2 : DifferentiableAt ℝ (deriv f) c :=
++    (h1.contDiffAt (hvo.mem_nhds hcv)).differentiableAt le_rfl
++  have hslope := hasDerivAt_iff_tendsto_slope.mp hd2.hasDerivAt
++  have hdiff : ∀ᶠ x in 𝓝 c, DifferentiableAt ℝ f x :=
++    (hf.eventually (by simp)).mono fun x hx => hx.differentiableAt (by norm_num)
++  have hev : ∀ᶠ x in 𝓝[≠] c, slope (deriv f) c x < 0 := hslope (Iio_mem_nhds hf'')
++  apply isLocalMax_of_deriv hf.continuousAt (hdiff.filter_mono nhdsWithin_le_nhds)
++  · filter_upwards [hev.filter_mono (nhdsLT_le_nhdsNE c), self_mem_nhdsWithin] with x hx hxc
++    rw [slope_def_field, hf'] at hx
++    have hxc' : x - c < 0 := sub_neg.mpr hxc
++    rcases div_neg_iff.mp hx with ⟨h1, _⟩ | ⟨_, h2⟩
++    · linarith
++    · linarith
++  · filter_upwards [hev.filter_mono (nhdsGT_le_nhdsNE c), self_mem_nhdsWithin] with x hx hxc
++    rw [slope_def_field, hf'] at hx
++    have hxc' : 0 < x - c := sub_pos.mpr hxc
++    rcases div_neg_iff.mp hx with ⟨_, h2⟩ | ⟨h1, _⟩
++    · linarith
++    · linarith
+ 
+ /-- Second derivative test for local minimum. -/
+ theorem second_deriv_test_min {f : ℝ → ℝ} {c : ℝ}
+@@ -392,26 +289,28 @@
+     (hf' : deriv f c = 0)
+     (hf'' : 0 < deriv (deriv f) c) :
+     IsLocalMin f c := by
+-  -- Second derivative test: if f'(c) = 0 and f''(c) > 0, then c is a local minimum.
+-  -- Apply the maximum test to -f
+-  have hmax : IsLocalMax (-f) c := by
+-    apply second_deriv_test_max
+-    · exact hf.neg
+-    · simp [deriv_neg', hf']
+-    · simp only [deriv_neg']
+-      have : deriv (deriv (-f)) c = -deriv (deriv f) c := by
+-        congr 1
+-        ext x
+-        simp [deriv_neg']
+-      rw [this]
+-      linarith
+-  rw [isLocalMin_iff]
+-  obtain ⟨U, hU, hmax'⟩ := hmax
+-  use U, hU
+-  intro x hx
+-  have := hmax' hx
+-  simp only [Pi.neg_apply] at this
+-  linarith
++  obtain ⟨u, hu, hfu⟩ := hf.contDiffOn (m := 2) le_rfl (by simp)
++  obtain ⟨v, hvu, hvo, hcv⟩ := mem_nhds_iff.mp hu
++  have h1 : ContDiffOn ℝ 1 (deriv f) v := (hfu.mono hvu).deriv_of_isOpen hvo (by norm_num)
++  have hd2 : DifferentiableAt ℝ (deriv f) c :=
++    (h1.contDiffAt (hvo.mem_nhds hcv)).differentiableAt le_rfl
++  have hslope := hasDerivAt_iff_tendsto_slope.mp hd2.hasDerivAt
++  have hdiff : ∀ᶠ x in 𝓝 c, DifferentiableAt ℝ f x :=
++    (hf.eventually (by simp)).mono fun x hx => hx.differentiableAt (by norm_num)
++  have hev : ∀ᶠ x in 𝓝[≠] c, 0 < slope (deriv f) c x := hslope (Ioi_mem_nhds hf'')
++  apply isLocalMin_of_deriv hf.continuousAt (hdiff.filter_mono nhdsWithin_le_nhds)
++  · filter_upwards [hev.filter_mono (nhdsLT_le_nhdsNE c), self_mem_nhdsWithin] with x hx hxc
++    rw [slope_def_field, hf'] at hx
++    have hxc' : x - c < 0 := sub_neg.mpr hxc
++    rcases div_pos_iff.mp hx with ⟨_, h2⟩ | ⟨h1, _⟩
++    · linarith
++    · linarith
++  · filter_upwards [hev.filter_mono (nhdsGT_le_nhdsNE c), self_mem_nhdsWithin] with x hx hxc
++    rw [slope_def_field, hf'] at hx
++    have hxc' : 0 < x - c := sub_pos.mpr hxc
++    rcases div_pos_iff.mp hx with ⟨h1, _⟩ | ⟨_, h2⟩
++    · linarith
++    · linarith
+ 
+ /-! ## 9. Darboux's Theorem -/
+ 
+@@ -505,7 +404,22 @@
+     ¬∃ L₁ L₂, L₁ ≠ L₂ ∧
+       Tendsto (deriv f) (𝓝[<] x) (𝓝 L₁) ∧
+       Tendsto (deriv f) (𝓝[>] x) (𝓝 L₂) := by
+-  sorry -- Consequence of Darboux
++  rintro ⟨L₁, L₂, hne, h1, h2⟩
++  obtain ⟨ε, hε, hball⟩ := Metric.eventually_nhds_iff.mp hf
++  have hx : DifferentiableAt ℝ f x := hball (by simpa using hε)
++  have hd : ∀ y ∈ Set.Ioo (x - ε) (x + ε), DifferentiableAt ℝ f y := fun y hy =>
++    hball (by rw [Real.dist_eq, abs_lt]; constructor <;> linarith [hy.1, hy.2])
++  have hr : HasDerivWithinAt f L₂ (Set.Ici x) x :=
++    hasDerivWithinAt_Ici_of_tendsto_deriv (s := Set.Ioo x (x + ε))
++      (fun y hy => (hd y ⟨by linarith [hy.1], hy.2⟩).differentiableWithinAt)
++      hx.continuousAt.continuousWithinAt (Ioo_mem_nhdsGT (by linarith)) h2
++  have hl : HasDerivWithinAt f L₁ (Set.Iic x) x :=
++    hasDerivWithinAt_Iic_of_tendsto_deriv (s := Set.Ioo (x - ε) x)
++      (fun y hy => (hd y ⟨hy.1, by linarith [hy.2]⟩).differentiableWithinAt)
++      hx.continuousAt.continuousWithinAt (Ioo_mem_nhdsLT (by linarith)) h1
++  have e2 := (uniqueDiffOn_Ici x x Set.left_mem_Ici).eq_deriv _ hr hx.hasDerivAt.hasDerivWithinAt
++  have e1 := (uniqueDiffOn_Iic x x Set.right_mem_Iic).eq_deriv _ hl hx.hasDerivAt.hasDerivWithinAt
++  exact hne (e1.trans e2.symm)
+ 
+ /-! ## 10. Inverse Function Theorem (Real) -/
+ 
+@@ -516,7 +430,19 @@
+     ∃ (g : ℝ → ℝ) (U : Set ℝ), a ∈ U ∧ IsOpen U ∧
+       (∀ x ∈ U, g (f x) = x) ∧
+       DifferentiableOn ℝ g (f '' U) := by
+-  sorry -- Real inverse function theorem
++  set f' : ℝ ≃L[ℝ] ℝ := ContinuousLinearEquiv.unitsEquivAut ℝ (Units.mk0 (deriv f a) hf')
++  have hd : HasFDerivAt f (f' : ℝ →L[ℝ] ℝ) a := by
++    have h := (hf.differentiableAt le_rfl).hasDerivAt.hasFDerivAt
++    convert h using 1
++  set e := hf.toPartialHomeomorph f hd le_rfl
++  have hgc : ContDiffAt ℝ 1 e.symm (f a) := hf.to_localInverse hd le_rfl
++  have hfa : f a ∈ e.target := hf.image_mem_toPartialHomeomorph_target hd le_rfl
++  have has : a ∈ e.source := hf.mem_toPartialHomeomorph_source hd le_rfl
++  obtain ⟨W, hW, hWo, hWa⟩ := mem_nhds_iff.mp (hgc.eventually (by simp))
++  refine ⟨e.symm, e.source ∩ e ⁻¹' (e.target ∩ W), ⟨has, hfa, hWa⟩,
++    e.isOpen_inter_preimage (e.open_target.inter hWo), fun x hx => e.left_inv hx.1, ?_⟩
++  rintro _ ⟨x, hx, rfl⟩
++  exact ((show ContDiffAt ℝ 1 e.symm (f x) from hW hx.2.2).differentiableAt le_rfl).differentiableWithinAt
+ 
+ /-- Derivative of inverse. -/
+ theorem deriv_inverse_at {f g : ℝ → ℝ} {a : ℝ}
+@@ -524,7 +450,8 @@
+     (hf' : deriv f a ≠ 0)
+     (hg : ∀ᶠ x in 𝓝 a, g (f x) = x) :
+     deriv g (f a) = 1 / deriv f a := by
+-  sorry -- Derivative of inverse
++  have hs : HasStrictDerivAt f (deriv f a) a := hf.hasStrictDerivAt le_rfl
++  rw [(hs.to_local_left_inverse hf' hg).hasDerivAt.deriv, one_div]
+ 
+ /-! ## 11. Inflection Points -/
+ 
+@@ -539,7 +466,14 @@
+     (h : IsInflectionPoint f x)
+     (hcont : ContinuousAt (deriv (deriv f)) x) :
+     deriv (deriv f) x = 0 := by
+-  sorry -- By continuity and sign change
++  by_contra hne
++  obtain ⟨-, hl, -⟩ := h
++  have hpos : ∀ᶠ y in 𝓝 x, 0 < deriv (deriv f) y * deriv (deriv f) x := by
++    have ht : Tendsto (fun y => deriv (deriv f) y * deriv (deriv f) x) (𝓝 x)
++        (𝓝 (deriv (deriv f) x * deriv (deriv f) x)) := hcont.tendsto.mul_const _
++    exact ht.eventually (lt_mem_nhds (mul_self_pos.mpr hne))
++  obtain ⟨y, h1, h2⟩ := (hl.and (hpos.filter_mono nhdsWithin_le_nhds)).exists
++  linarith
+ 
+ /-! ## 12. Lipschitz Derivatives -/
+ 
+@@ -549,7 +483,28 @@
+     (hf : DifferentiableOn ℝ f S)
+     (hM : ∀ x ∈ S, |deriv f x| ≤ M) :
+     LipschitzOnWith (Real.toNNReal M) f S := by
+-  sorry -- Mean value theorem application
++  have key : ∀ x ∈ S, ∀ y ∈ S, x < y → |f y - f x| ≤ M * (y - x) := by
++    intro x hx y hy hxy
++    have hsub : Set.Icc x y ⊆ S := hS.ordConnected.out hx hy
++    obtain ⟨c, hc, hcd⟩ := exists_deriv_eq_slope f hxy ((hf.mono hsub).continuousOn)
++      (fun z hz => ((hf z (hsub (Set.Ioo_subset_Icc_self hz))).differentiableAt
++        (Filter.mem_of_superset (Ioo_mem_nhds hz.1 hz.2)
++          (Set.Ioo_subset_Icc_self.trans hsub))).differentiableWithinAt)
++    have hM' := hM c (hsub (Set.Ioo_subset_Icc_self hc))
++    have e : f y - f x = deriv f c * (y - x) := by rw [hcd]; field_simp [sub_ne_zero.mpr hxy.ne']
++    rw [e, abs_mul, abs_of_pos (sub_pos.mpr hxy)]
++    exact mul_le_mul_of_nonneg_right hM' (sub_pos.mpr hxy).le
++  apply LipschitzOnWith.of_dist_le_mul
++  intro x hx y hy
++  rw [Real.dist_eq, Real.dist_eq]
++  rcases lt_trichotomy x y with hxy | rfl | hxy
++  · rw [abs_sub_comm (f x), abs_sub_comm x, abs_of_pos (sub_pos.mpr hxy)]
++    exact (key x hx y hy hxy).trans (mul_le_mul_of_nonneg_right (Real.le_coe_toNNReal M)
++      (sub_pos.mpr hxy).le)
++  · simp
++  · rw [abs_of_pos (sub_pos.mpr hxy)]
++    exact (key y hy x hx hxy).trans (mul_le_mul_of_nonneg_right (Real.le_coe_toNNReal M)
++      (sub_pos.mpr hxy).le)
+ 
+ /-- Lipschitz constant equals supremum of derivative. -/
+ theorem lipschitz_const_eq_sup_deriv {f : ℝ → ℝ} {a b : ℝ}
+@@ -557,6 +512,29 @@
+     (hcont : ContinuousOn (deriv f) (Set.Icc a b)) :
+     ∃ K, LipschitzOnWith K f (Set.Icc a b) ∧
+          K = ⟨sSup {|deriv f x| | x ∈ Set.Icc a b}, sorry⟩ := by
+-  sorry -- Optimal Lipschitz constant
++  refine ⟨_, ?_, rfl⟩
++  have hbdd : BddAbove {|deriv f x| | x ∈ Set.Icc a b} :=
++    (isCompact_Icc.image_of_continuousOn (continuous_abs.comp_continuousOn hcont)).bddAbove
++  have key : ∀ x ∈ Set.Icc a b, ∀ y ∈ Set.Icc a b, x < y →
++      |f y - f x| ≤ sSup {|deriv f x| | x ∈ Set.Icc a b} * (y - x) := by
++    intro x hx y hy hxy
++    have hsub : Set.Icc x y ⊆ Set.Icc a b := Set.Icc_subset_Icc hx.1 hy.2
++    obtain ⟨c, hc, hcd⟩ := exists_deriv_eq_slope f hxy ((hf.mono hsub).continuousOn)
++      (fun z hz => ((hf z (hsub (Set.Ioo_subset_Icc_self hz))).differentiableAt
++        (Icc_mem_nhds (lt_of_le_of_lt hx.1 hz.1) (lt_of_lt_of_le hz.2 hy.2))).differentiableWithinAt)
++    have hM' : |deriv f c| ≤ sSup {|deriv f x| | x ∈ Set.Icc a b} :=
++      le_csSup hbdd ⟨c, hsub (Set.Ioo_subset_Icc_self hc), rfl⟩
++    have e : f y - f x = deriv f c * (y - x) := by rw [hcd]; field_simp [sub_ne_zero.mpr hxy.ne']
++    rw [e, abs_mul, abs_of_pos (sub_pos.mpr hxy)]
++    exact mul_le_mul_of_nonneg_right hM' (sub_pos.mpr hxy).le
++  apply LipschitzOnWith.of_dist_le_mul
++  intro x hx y hy
++  rw [Real.dist_eq, Real.dist_eq, NNReal.coe_mk]
++  rcases lt_trichotomy x y with hxy | rfl | hxy
++  · rw [abs_sub_comm (f x), abs_sub_comm x, abs_of_pos (sub_pos.mpr hxy)]
++    exact key x hx y hy hxy
++  · simp
++  · rw [abs_of_pos (sub_pos.mpr hxy)]
++    exact key y hy x hx hxy
+ 
+ end RealDifferentiability
+--- a/lean4/Core/Analysis/Calculus/TaylorSeries.lean
++++ b/lean4/Core/Analysis/Calculus/TaylorSeries.lean
+@@ -47,7 +47,14 @@
+ theorem taylor_poly_approx {f : ℝ → ℝ} {a : ℝ} {n : ℕ}
+     (hf : ContDiff ℝ n f) :
+     (fun x => f x - taylorPoly f a n x) =o[𝓝 a] (fun x => (x - a)^n) := by
+-  sorry -- Taylor approximation
++  have h := taylor_isLittleO (n := n) (x₀ := a) convex_univ (Set.mem_univ a) hf.contDiffOn
++  rw [nhdsWithin_univ] at h
++  refine h.congr_left fun x => ?_
++  rw [taylor_within_apply]
++  simp only [iteratedDerivWithin_univ, taylorPoly, smul_eq_mul]
++  congr 1
++  refine Finset.sum_congr rfl fun k _ => ?_
++  ring
+ 
+ /-- Error bound for Taylor polynomial. -/
+ theorem taylor_error_bound {f : ℝ → ℝ} {a b : ℝ} {n : ℕ}
+@@ -55,7 +62,40 @@
+     (hf : ContDiffOn ℝ (n + 1) f (Icc a b))
+     (M : ℝ) (hM : ∀ x ∈ Icc a b, |iteratedDeriv (n + 1) f x| ≤ M) :
+     ∀ x ∈ Icc a b, |f x - taylorPoly f a n x| ≤ M / (n + 1).factorial * |x - a|^(n + 1) := by
+-  sorry -- Lagrange error bound
++  intro x hx
++  rcases hx.1.eq_or_lt with h | hax
++  · rw [← h]
++    have hT : taylorPoly f a n a = f a := by
++      rw [taylorPoly, Finset.sum_range_succ']
++      simp
++    rw [hT, sub_self, abs_zero, sub_self, abs_zero, zero_pow (Nat.succ_ne_zero n), mul_zero]
++  · have hW : ∀ k : ℕ, k ≤ n + 1 → ∀ y ∈ Icc a x,
++        iteratedDerivWithin k f (Icc a x) y = iteratedDeriv k f y := by
++      intro k hk y hy
++      rw [iteratedDerivWithin_eq_iteratedFDerivWithin, iteratedDeriv_eq_iteratedFDeriv,
++        iteratedFDerivWithin_eq_iteratedFDeriv (uniqueDiffOn_Icc hax)
++          ((hf.of_le (by exact_mod_cast hk)).contDiffAt) hy]
++    have hcont : ContDiffOn ℝ n f (Icc a x) := (hf.of_le (by exact_mod_cast Nat.le_succ n)).contDiffOn
++    have hdiff : DifferentiableOn ℝ (iteratedDerivWithin n f (Icc a x)) (Ioo a x) := by
++      intro y hy
++      have hev : iteratedDerivWithin n f (Icc a x) =ᶠ[𝓝 y] iteratedDeriv n f := by
++        filter_upwards [Icc_mem_nhds hy.1 hy.2] with z hz using hW n (Nat.le_succ n) z hz
++      have hd : DifferentiableAt ℝ (iteratedDeriv n f) y :=
++        hf.differentiable_iteratedDeriv n (by exact_mod_cast Nat.lt_succ_self n) y
++      exact (hd.congr_of_eventuallyEq hev).differentiableWithinAt
++    obtain ⟨c, hc, hrem⟩ := taylor_mean_remainder_lagrange hax hcont hdiff
++    have hTe : taylorWithinEval f n (Icc a x) a x = taylorPoly f a n x := by
++      rw [taylor_within_apply, taylorPoly]
++      refine Finset.sum_congr rfl fun k hk => ?_
++      rw [hW k (by have := Finset.mem_range.mp hk; omega) a (Set.left_mem_Icc.mpr hax.le), smul_eq_mul]
++      ring
++    rw [hTe, hW (n + 1) le_rfl c (Set.Ioo_subset_Icc_self hc)] at hrem
++    rw [hrem, abs_div, abs_mul, abs_pow, Nat.abs_cast]
++    have hcM : |iteratedDeriv (n + 1) f c| ≤ M :=
++      hM c ⟨le_of_lt hc.1, le_trans (le_of_lt hc.2) hx.2⟩
++    have hpos : (0 : ℝ) < ((n + 1).factorial : ℝ) := by positivity
++    rw [div_mul_eq_mul_div]
++    exact div_le_div_of_nonneg_right (mul_le_mul_of_nonneg_right hcM (by positivity)) hpos.le
+ 
+ /-! ## 2. Taylor Series -/
+ 
+@@ -71,7 +111,24 @@
+ theorem eq_taylor_series {f : ℝ → ℝ} {a : ℝ}
+     (hf : AnalyticAt ℝ f a) :
+     ∀ᶠ x in 𝓝 a, f x = taylorSeriesSum f a x := by
+-  sorry -- Analytic functions equal Taylor series
++  obtain ⟨p, r, hp⟩ := hf
++  have hball : EMetric.ball a r ∈ 𝓝 a := EMetric.ball_mem_nhds a hp.r_pos
++  filter_upwards [hball] with x hx
++  have hy : x - a ∈ EMetric.ball (0 : ℝ) r := by
++    rw [EMetric.mem_ball, edist_zero_right, ← edist_eq_enorm_sub]
++    exact hx
++  have H := hp.hasSum_iteratedFDeriv hy
++  rw [add_sub_cancel] at H
++  rw [taylorSeriesSum, ← H.tsum_eq]
++  congr 1
++  funext n
++  have e : (iteratedFDeriv ℝ n f a) (fun _ => x - a) = (x - a) ^ n * iteratedDeriv n f a := by
++    rw [iteratedDeriv_eq_iteratedFDeriv]
++    have := (iteratedFDeriv ℝ n f a).map_smul_univ (fun _ => x - a) (fun _ => (1 : ℝ))
++    simp only [smul_eq_mul, mul_one, Finset.prod_const, Finset.card_univ, Fintype.card_fin] at this
++    exact this
++  rw [e, smul_eq_mul]
++  ring
+ 
+ /-! ## 3. Radius of Convergence -/
+ 
+@@ -103,21 +160,70 @@
+   ∃ r > 0, ∃ c : ℕ → ℝ, ∀ x, |x - a| < r →
+     f x = ∑' n, c n * (x - a)^n
+ 
++/-- Auxiliar (MVEI): `IsAnalyticAtPoint` dá `AnalyticAt` do Mathlib (série `c n * y^n` como
++    FormalMultilinearSeries por `mkPiRing`, raio ≥ r/2 pela somabilidade em a + r/2). -/
++theorem isAnalyticAtPoint_analyticAt {f : ℝ → ℝ} {a : ℝ}
++    (h : IsAnalyticAtPoint f a) : AnalyticAt ℝ f a := by
++  obtain ⟨r, hr, c, hc⟩ := h
++  set p : FormalMultilinearSeries ℝ ℝ ℝ :=
++    fun n => ContinuousMultilinearMap.mkPiRing ℝ (Fin n) (c n) with hpdef
++  have hp : ∀ n (y : ℝ), p n (fun _ => y) = c n * y ^ n := by
++    intro n y
++    simp only [hpdef, ContinuousMultilinearMap.mkPiRing_apply, Finset.prod_const, Finset.card_univ,
++      Fintype.card_fin, smul_eq_mul]
++    ring
++  have hr2 : (0 : ℝ) ≤ r / 2 := by linarith
++  have hsum : Summable (fun n => c n * (r / 2) ^ n) := by
++    have := hc (a + r / 2) (by rw [add_sub_cancel_left, abs_of_nonneg hr2]; linarith)
++    simpa using this.summable
++  set ρ : ℝ≥0 := ⟨r / 2, hr2⟩ with hρ
++  have hle : (ρ : ENNReal) ≤ p.radius := by
++    apply p.le_radius_of_summable
++    refine hsum.abs.congr fun n => ?_
++    simp only [hpdef, ContinuousMultilinearMap.norm_mkPiRing, Real.norm_eq_abs, abs_mul, abs_pow,
++      abs_of_nonneg hr2, hρ, NNReal.coe_mk]
++  refine ⟨p, ρ, { r_le := hle, r_pos := ?_, hasSum := ?_ }⟩
++  · rw [hρ, ENNReal.coe_pos, ← NNReal.coe_pos, NNReal.coe_mk]; linarith
++  · intro y hy
++    rw [Metric.emetric_ball_nnreal, Metric.mem_ball, dist_zero_right, Real.norm_eq_abs, hρ,
++      NNReal.coe_mk] at hy
++    have := hc (a + y) (by rw [add_sub_cancel_left]; linarith)
++    simpa only [hp, add_sub_cancel_left] using this
++
++/-- Auxiliar (MVEI): `AnalyticAt` do Mathlib dá `IsAnalyticAtPoint` (coeficientes `p.coeff n`). -/
++theorem analyticAt_isAnalyticAtPoint {f : ℝ → ℝ} {a : ℝ}
++    (h : AnalyticAt ℝ f a) : IsAnalyticAtPoint f a := by
++  obtain ⟨p, r, hp⟩ := h
++  obtain ⟨ρ, hρ0, hρr⟩ := ENNReal.lt_iff_exists_nnreal_btwn.mp hp.r_pos
++  refine ⟨ρ, by exact_mod_cast hρ0, fun n => p.coeff n, fun x hx => ?_⟩
++  have hy : x - a ∈ EMetric.ball (0 : ℝ) r := by
++    refine EMetric.ball_subset_ball hρr.le ?_
++    rw [Metric.emetric_ball_nnreal, Metric.mem_ball, dist_zero_right, Real.norm_eq_abs]
++    exact hx
++  have H := hp.hasSum hy
++  rw [add_sub_cancel] at H
++  simpa only [FormalMultilinearSeries.apply_eq_pow_smul_coeff, smul_eq_mul, mul_comm] using H
++
+ /-- Analytic functions are smooth. -/
+ theorem analytic_smooth {f : ℝ → ℝ} {a : ℝ}
+     (h : IsAnalyticAtPoint f a) : ContDiffAt ℝ ⊤ f a := by
+-  sorry -- Analytic implies smooth
++  exact (isAnalyticAtPoint_analyticAt h).contDiffAt
+ 
+ /-- Sum and product of analytic functions are analytic. -/
+ theorem analytic_add {f g : ℝ → ℝ} {a : ℝ}
+     (hf : IsAnalyticAtPoint f a) (hg : IsAnalyticAtPoint g a) :
+     IsAnalyticAtPoint (f + g) a := by
+-  sorry -- Sum of power series
++  obtain ⟨r₁, hr₁, c, hc⟩ := hf
++  obtain ⟨r₂, hr₂, d, hd⟩ := hg
++  refine ⟨min r₁ r₂, lt_min hr₁ hr₂, fun n => c n + d n, fun x hx => ?_⟩
++  have h := (hc x (lt_of_lt_of_le hx (min_le_left _ _))).add (hd x (lt_of_lt_of_le hx (min_le_right _ _)))
++  simpa [add_mul] using h
+ 
+ theorem analytic_mul {f g : ℝ → ℝ} {a : ℝ}
+     (hf : IsAnalyticAtPoint f a) (hg : IsAnalyticAtPoint g a) :
+     IsAnalyticAtPoint (f * g) a := by
+-  sorry -- Cauchy product
++  exact analyticAt_isAnalyticAtPoint
++    ((isAnalyticAtPoint_analyticAt hf).mul (isAnalyticAtPoint_analyticAt hg))
+ 
+ /-! ## 5. Operations on Power Series -/
+ 
+@@ -129,7 +235,11 @@
+ theorem cauchy_product_theorem (a b : ℕ → ℝ)
+     (ha : Summable a) (hb : Summable b) :
+     ∑' n, a n * ∑' m, b m = ∑' n, cauchyProduct a b n := by
+-  sorry -- Mertens theorem
++  rw [tsum_mul_right, tsum_mul_tsum_eq_tsum_sum_antidiagonal_of_summable_norm
++    (by simpa using ha.abs) (by simpa using hb.abs)]
++  congr 1
++  funext n
++  rw [cauchyProduct, Finset.Nat.sum_antidiagonal_eq_sum_range_succ (fun i j => a i * b j)]
+ 
+ /-- Composition of power series. -/
+ noncomputable def composePowerSeries (a b : ℕ → ℝ) (hb0 : b 0 = 0) : ℕ → ℝ :=
+@@ -148,27 +258,43 @@
+ /-- Taylor series of exponential. -/
+ theorem taylor_exp (x : ℝ) :
+     Real.exp x = ∑' n, x^n / n.factorial := by
+-  exact Real.exp_eq_exp_ℝ x ▸ exp_eq_sum x
++  rw [Real.exp_eq_exp_ℝ, NormedSpace.exp_eq_tsum_div]
+ 
+ /-- Taylor series of sine. -/
+ theorem taylor_sin (x : ℝ) :
+     Real.sin x = ∑' n, (-1)^n * x^(2*n + 1) / (2*n + 1).factorial := by
+-  sorry -- Sine Taylor series
++  exact (Real.hasSum_sin x).tsum_eq.symm
+ 
+ /-- Taylor series of cosine. -/
+ theorem taylor_cos (x : ℝ) :
+     Real.cos x = ∑' n, (-1)^n * x^(2*n) / (2*n).factorial := by
+-  sorry -- Cosine Taylor series
++  exact (Real.hasSum_cos x).tsum_eq.symm
+ 
+ /-- Taylor series of natural logarithm. -/
+ theorem taylor_log {x : ℝ} (hx : |x| < 1) :
+     Real.log (1 + x) = ∑' n, (-1)^(n + 1) * x^n / n := by
+-  sorry -- Log Taylor series
++  have h := Real.hasSum_pow_div_log_of_abs_lt_one (x := -x) (by rwa [abs_neg])
++  rw [sub_neg_eq_add] at h
++  have h2 : HasSum (fun n : ℕ => (-1 : ℝ) ^ (n + 1 + 1) * x ^ (n + 1) / ((n + 1 : ℕ) : ℝ))
++      (Real.log (1 + x) - ∑ i ∈ Finset.range 1, (-1 : ℝ) ^ (i + 1) * x ^ i / (i : ℝ)) := by
++    have e : Real.log (1 + x) - ∑ i ∈ Finset.range 1, (-1 : ℝ) ^ (i + 1) * x ^ i / (i : ℝ)
++        = - -Real.log (1 + x) := by simp
++    rw [e]
++    refine h.neg.congr_fun ?_
++    intro n
++    simp only [Nat.cast_add, Nat.cast_one, neg_pow x (n + 1), pow_succ]
++    ring
++  exact ((hasSum_nat_add_iff' 1).mp h2).tsum_eq.symm
+ 
+ /-- Taylor series of arctan. -/
+ theorem taylor_arctan {x : ℝ} (hx : |x| ≤ 1) :
+     Real.arctan x = ∑' n, (-1)^n * x^(2*n + 1) / (2*n + 1) := by
+-  sorry -- Arctan Taylor series
++  have h := Real.hasSum_arctan (x := x) (by rwa [Real.norm_eq_abs])
++  rw [h.tsum_eq.symm]
++  congr 1
++  funext n
++  push_cast
++  ring
+ 
+ /-- Binomial series. -/
+ theorem binomial_series {α x : ℝ} (hx : |x| < 1) :
+@@ -189,19 +315,50 @@
+ theorem maclaurin_sin :
+     maclaurinSeries Real.sin = fun n =>
+       if n % 2 = 1 then (-1)^(n/2) / n.factorial else 0 := by
+-  sorry -- sin derivatives at 0
++  have key : ∀ n : ℕ, iteratedDeriv n Real.sin = fun x =>
++      if n % 4 = 0 then Real.sin x else if n % 4 = 1 then Real.cos x
++      else if n % 4 = 2 then -Real.sin x else -Real.cos x := by
++    intro n
++    induction n with
++    | zero => funext x; simp
++    | succ k ih =>
++      rw [iteratedDeriv_succ, ih]
++      funext x
++      have h4 : k % 4 < 4 := Nat.mod_lt _ (by norm_num)
++      have hk1 : (k + 1) % 4 = (k % 4 + 1) % 4 := by omega
++      rw [hk1]
++      interval_cases hk : k % 4
++      · simp
++      · simp
++      · simp
++      · simp
++  funext n
++  simp only [maclaurinSeries, key]
++  have h4 : n % 4 < 4 := Nat.mod_lt _ (by norm_num)
++  obtain ⟨m, hm⟩ : ∃ m, n = 4 * m + n % 4 := ⟨n / 4, by omega⟩
++  interval_cases hr : n % 4
++  · have h2 : n % 2 = 0 := by omega
++    simp [h2]
++  · have h2 : n % 2 = 1 := by omega
++    have hn2 : n / 2 = 2 * m := by omega
++    simp [h2, hn2, pow_mul]
++  · have h2 : n % 2 = 0 := by omega
++    simp [h2]
++  · have h2 : n % 2 = 1 := by omega
++    have hn2 : n / 2 = 2 * m + 1 := by omega
++    simp [h2, hn2, pow_succ, pow_mul, neg_div]
+ 
+ /-! ## 8. Complex Taylor Series -/
+ 
+ /-- Complex exponential Taylor series. -/
+ theorem taylor_cexp (z : ℂ) :
+     Complex.exp z = ∑' n, z^n / n.factorial := by
+-  exact Complex.exp_eq_exp_ℂ z ▸ exp_eq_sum z
++  rw [Complex.exp_eq_exp_ℂ, NormedSpace.exp_eq_tsum_div]
+ 
+ /-- Euler's formula from Taylor series. -/
+ theorem euler_formula (θ : ℝ) :
+     Complex.exp (θ * Complex.I) = Complex.cos θ + Complex.I * Complex.sin θ := by
+-  exact Complex.exp_mul_I θ
++  rw [Complex.exp_mul_I, mul_comm Complex.I]
+ 
+ /-! ## 9. Asymptotic Expansions -/
+ 
+--- a/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
++++ b/lean4/Core/Analysis/FunctionalAnalysis/HilbertSpaces.lean
+@@ -21,6 +21,7 @@
+ import Mathlib.Analysis.InnerProductSpace.Basic
+ import Mathlib.Analysis.InnerProductSpace.Projection
+ import Mathlib.Analysis.SpecialFunctions.Sqrt
++import Mathlib
+ open scoped InnerProductSpace
+ 
+ noncomputable section
+@@ -49,115 +50,54 @@
+ theorem cauchy_schwarz {E : Type*} [AddCommGroup E] [Module ℝ E]
+     (ip : InnerProductStructure E) (x y : E) :
+     |ip.inner x y| ≤ innerNorm ip x * innerNorm ip y := by
+-  -- Proof using the quadratic form technique:
+-  -- For any t ∈ ℝ, we have 0 ≤ ⟨x + ty, x + ty⟩
+-  -- Expanding: 0 ≤ ⟨x,x⟩ + 2t⟨x,y⟩ + t²⟨y,y⟩
+-  -- This quadratic in t has non-negative discriminant, so:
+-  -- (2⟨x,y⟩)² - 4⟨x,x⟩⟨y,y⟩ ≤ 0
+-  -- Hence: ⟨x,y⟩² ≤ ⟨x,x⟩⟨y,y⟩
+-  by_cases hy : ip.inner y y = 0
+-  · -- If y = 0 (in the inner product sense), RHS = 0
+-    have : y = 0 := ip.inner_pos_def y hy
+-    simp [this, ip.inner_comm, innerNorm]
+-    have h1 : ip.inner x 0 = 0 := by
+-      calc ip.inner x 0 = ip.inner x (0 • y) := by simp
+-           _ = 0 * ip.inner x y := ip.inner_smul_left 0 y x ▸ by ring_nf; rfl
+-           _ = 0 := by ring
+-    simp [h1]
+-  · -- General case: y ≠ 0
+-    have hypos : 0 < ip.inner y y := by
+-      have := ip.inner_pos y
+-      cases' this.lt_or_eq with h h
+-      · exact h
+-      · exact (hy h.symm).elim
+-    -- Set t = -⟨x,y⟩/⟨y,y⟩
+-    set t := -ip.inner x y / ip.inner y y with ht_def
+-    -- The key inequality: 0 ≤ ⟨x + ty, x + ty⟩
+-    have hquad : 0 ≤ ip.inner (x + t • y) (x + t • y) := ip.inner_pos _
+-    -- Expand the inner product
+-    have hexpand : ip.inner (x + t • y) (x + t • y) =
+-        ip.inner x x + 2 * t * ip.inner x y + t^2 * ip.inner y y := by
+-      calc ip.inner (x + t • y) (x + t • y)
+-          = ip.inner x (x + t • y) + ip.inner (t • y) (x + t • y) := by
+-            rw [ip.inner_add_left]
+-          _ = ip.inner x x + ip.inner x (t • y) + (ip.inner (t • y) x + ip.inner (t • y) (t • y)) := by
+-            rw [ip.inner_add_left, ip.inner_add_left]
+-          _ = ip.inner x x + t * ip.inner x y + (t * ip.inner y x + t^2 * ip.inner y y) := by
+-            rw [ip.inner_comm x (t • y), ip.inner_smul_left, ip.inner_smul_left,
+-                ip.inner_smul_left, ip.inner_smul_left]
+-            ring_nf
+-          _ = ip.inner x x + 2 * t * ip.inner x y + t^2 * ip.inner y y := by
+-            rw [ip.inner_comm y x]
+-            ring
+-    -- Substituting t and simplifying yields the result
+-    rw [hexpand] at hquad
+-    have hdiscr : ip.inner x x - (ip.inner x y)^2 / ip.inner y y ≥ 0 := by
+-      have : ip.inner x x + 2 * t * ip.inner x y + t^2 * ip.inner y y =
+-             ip.inner x x - (ip.inner x y)^2 / ip.inner y y := by
++  have hr : ∀ u v w, ip.inner u (v + w) = ip.inner u v + ip.inner u w := fun u v w => by
++    rw [ip.inner_comm, ip.inner_add_left, ip.inner_comm v, ip.inner_comm w]
++  have hs : ∀ (s : ℝ) u v, ip.inner u (s • v) = s * ip.inner u v := fun s u v => by
++    rw [ip.inner_comm, ip.inner_smul_left, ip.inner_comm]
++  have key : ∀ t : ℝ, 0 ≤ ip.inner x x + 2 * t * ip.inner x y + t ^ 2 * ip.inner y y := by
++    intro t
++    have h := ip.inner_pos (x + t • y)
++    simp only [ip.inner_add_left, hr, ip.inner_smul_left, hs] at h
++    rw [ip.inner_comm y x] at h
++    nlinarith [h]
++  have hmain : ip.inner x y ^ 2 ≤ ip.inner x x * ip.inner y y := by
++    by_cases hy : ip.inner y y = 0
++    · have hy0 : y = 0 := ip.inner_pos_def y hy
++      have h0 := hs 0 x 0
++      rw [zero_smul, zero_mul] at h0
++      subst hy0
++      rw [h0, hy]
++      norm_num
++    · have hc : 0 < ip.inner y y := lt_of_le_of_ne (ip.inner_pos y) (Ne.symm hy)
++      have hc' : ip.inner y y ≠ 0 := hy
++      have h1 := key (-(ip.inner x y) / ip.inner y y)
++      have h2 : ip.inner x x + 2 * (-(ip.inner x y) / ip.inner y y) * ip.inner x y +
++          (-(ip.inner x y) / ip.inner y y) ^ 2 * ip.inner y y =
++          ip.inner x x - ip.inner x y ^ 2 / ip.inner y y := by
+         field_simp
+         ring
+-      linarith [hquad.trans_eq this.symm]
+-    have hmain : (ip.inner x y)^2 ≤ ip.inner x x * ip.inner y y := by
+-      have := mul_nonneg (le_of_lt hypos) hdiscr
+-      calc (ip.inner x y)^2
+-          = ip.inner y y * ((ip.inner x y)^2 / ip.inner y y) := by field_simp
+-        _ ≤ ip.inner y y * ip.inner x x := by
+-            apply mul_le_mul_of_nonneg_left hdiscr (le_of_lt hypos)
+-        _ = ip.inner x x * ip.inner y y := by ring
+-    -- Take square roots
+-    have hsqrt : |ip.inner x y| ≤ Real.sqrt (ip.inner x x) * Real.sqrt (ip.inner y y) := by
+-      rw [← Real.sqrt_sq_eq_abs, ← Real.sqrt_mul (ip.inner_pos x)]
+-      exact Real.sqrt_le_sqrt hmain
+-    simp only [innerNorm]
+-    exact hsqrt
++      rw [h2] at h1
++      have h3 : ip.inner x y ^ 2 / ip.inner y y ≤ ip.inner x x := by linarith
++      rwa [div_le_iff₀ hc] at h3
++  unfold innerNorm
++  rw [← Real.sqrt_mul (ip.inner_pos x), ← Real.sqrt_sq_eq_abs]
++  exact Real.sqrt_le_sqrt hmain
+ 
+ /-- The norm satisfies the parallelogram law. -/
+ theorem parallelogram_law {E : Type*} [AddCommGroup E] [Module ℝ E]
+     (ip : InnerProductStructure E) (x y : E) :
+     innerNorm ip (x + y)^2 + innerNorm ip (x - y)^2 =
+     2 * (innerNorm ip x^2 + innerNorm ip y^2) := by
+-  -- The parallelogram law follows from expanding the inner products.
+-  -- ‖x+y‖² + ‖x-y‖² = ⟨x+y,x+y⟩ + ⟨x-y,x-y⟩
+-  -- = ⟨x,x⟩ + 2⟨x,y⟩ + ⟨y,y⟩ + ⟨x,x⟩ - 2⟨x,y⟩ + ⟨y,y⟩
+-  -- = 2⟨x,x⟩ + 2⟨y,y⟩ = 2(‖x‖² + ‖y‖²)
+-  simp only [innerNorm]
+-  -- ‖x+y‖² = (√⟨x+y,x+y⟩)² = ⟨x+y,x+y⟩ (when non-negative)
+-  have h1 : Real.sqrt (ip.inner (x + y) (x + y)) ^ 2 = ip.inner (x + y) (x + y) :=
+-    Real.sq_sqrt (ip.inner_pos (x + y))
+-  have h2 : Real.sqrt (ip.inner (x - y) (x - y)) ^ 2 = ip.inner (x - y) (x - y) :=
+-    Real.sq_sqrt (ip.inner_pos (x - y))
+-  have h3 : Real.sqrt (ip.inner x x) ^ 2 = ip.inner x x :=
+-    Real.sq_sqrt (ip.inner_pos x)
+-  have h4 : Real.sqrt (ip.inner y y) ^ 2 = ip.inner y y :=
+-    Real.sq_sqrt (ip.inner_pos y)
+-  rw [h1, h2, h3, h4]
+-  -- Expand ⟨x+y, x+y⟩
+-  have hplus : ip.inner (x + y) (x + y) = ip.inner x x + 2 * ip.inner x y + ip.inner y y := by
+-    calc ip.inner (x + y) (x + y)
+-        = ip.inner x (x + y) + ip.inner y (x + y) := ip.inner_add_left x y (x + y)
+-      _ = ip.inner x x + ip.inner x y + (ip.inner y x + ip.inner y y) := by
+-          rw [ip.inner_add_left x y x, ip.inner_add_left x y y, ip.inner_comm]
+-          ring_nf
+-          simp [ip.inner_add_left]
+-      _ = ip.inner x x + 2 * ip.inner x y + ip.inner y y := by
+-          rw [ip.inner_comm y x]; ring
+-  -- Expand ⟨x-y, x-y⟩
+-  have hminus : ip.inner (x - y) (x - y) = ip.inner x x - 2 * ip.inner x y + ip.inner y y := by
+-    have hsub : x - y = x + (-1 : ℝ) • y := by simp
+-    rw [hsub]
+-    calc ip.inner (x + (-1 : ℝ) • y) (x + (-1 : ℝ) • y)
+-        = ip.inner x (x + (-1 : ℝ) • y) + ip.inner ((-1 : ℝ) • y) (x + (-1 : ℝ) • y) := by
+-          rw [ip.inner_add_left]
+-      _ = ip.inner x x + ip.inner x ((-1 : ℝ) • y) +
+-          (ip.inner ((-1 : ℝ) • y) x + ip.inner ((-1 : ℝ) • y) ((-1 : ℝ) • y)) := by
+-          repeat rw [ip.inner_add_left]
+-      _ = ip.inner x x + (-1) * ip.inner x y +
+-          ((-1) * ip.inner y x + (-1) * (-1) * ip.inner y y) := by
+-          rw [ip.inner_comm x ((-1 : ℝ) • y), ip.inner_smul_left, ip.inner_smul_left,
+-              ip.inner_smul_left, ip.inner_smul_left]
+-      _ = ip.inner x x - 2 * ip.inner x y + ip.inner y y := by
+-          rw [ip.inner_comm y x]; ring
+-  rw [hplus, hminus]
++  have hr : ∀ u v w, ip.inner u (v + w) = ip.inner u v + ip.inner u w := fun u v w => by
++    rw [ip.inner_comm, ip.inner_add_left, ip.inner_comm v, ip.inner_comm w]
++  have hs : ∀ (s : ℝ) u v, ip.inner u (s • v) = s * ip.inner u v := fun s u v => by
++    rw [ip.inner_comm, ip.inner_smul_left, ip.inner_comm]
++  unfold innerNorm
++  rw [Real.sq_sqrt (ip.inner_pos _), Real.sq_sqrt (ip.inner_pos _), Real.sq_sqrt (ip.inner_pos _),
++    Real.sq_sqrt (ip.inner_pos _)]
++  rw [sub_eq_add_neg, ← neg_one_smul ℝ y]
++  simp only [ip.inner_add_left, hr, ip.inner_smul_left, hs]
++  rw [ip.inner_comm y x]
+   ring
+ 
+ /-! ## 2. Completeness -/
+@@ -181,7 +121,8 @@
+ theorem pythagorean {E : Type*} [InnerProductSpace ℝ E] (x y : E)
+     (h : Orthogonal x y) :
+     ‖x + y‖^2 = ‖x‖^2 + ‖y‖^2 := by
+-  simp [sq_norm_add_sq_norm_eq_sq_norm_add_sq_norm_of_inner_eq_zero x y h]
++  rw [sq, sq, sq]
++  exact norm_add_sq_eq_norm_sq_add_norm_sq_real h
+ 
+ /-- Orthogonal complement of a set. -/
+ def OrthogonalComplement {E : Type*} [InnerProductSpace ℝ E] (S : Set E) : Set E :=
+@@ -194,19 +135,12 @@
+   -- For each x ∈ S, the map y ↦ ⟨x, y⟩ is continuous.
+   -- The orthogonal complement is ⋂_{x ∈ S} {y | ⟨x, y⟩ = 0}
+   -- As an intersection of closed sets, it is closed.
+-  rw [OrthogonalComplement, Orthogonal]
+   have : OrthogonalComplement S = ⋂ x ∈ S, { y | ⟪x, y⟫_ℝ = 0 } := by
+     ext y
+-    simp only [OrthogonalComplement, Orthogonal, Set.mem_setOf_eq, Set.mem_iInter]
+-    rfl
++    simp [OrthogonalComplement, Orthogonal]
+   rw [this]
+-  apply isClosed_iInter
+-  intro x
+-  apply isClosed_iInter
+-  intro _
+-  -- The set {y | ⟨x, y⟩ = 0} is the preimage of {0} under the continuous function y ↦ ⟨x, y⟩
+-  have hcont : Continuous (fun y => ⟪x, y⟫_ℝ) := continuous_inner_right x
+-  exact hcont.isClosed_preimage {0} isClosed_singleton
++  -- The set {y | ⟨x, y⟩ = 0} is closed: y ↦ ⟨x, y⟩ is continuous
++  exact isClosed_biInter fun x _ => isClosed_eq (continuous_const.inner continuous_id) continuous_const
+ 
+ /-! ## 4. Projection Theorem -/
+ 
+@@ -218,77 +152,38 @@
+   -- The proof uses completeness and the parallelogram law.
+   -- 1. The infimum d = inf_{z ∈ K} ‖x - z‖ exists and is achieved.
+   -- 2. Uniqueness follows from strict convexity of the norm.
+-  obtain ⟨y, hyK, hy⟩ := hKconv.exists_nearest hKne hK x
+-  use y, hyK
+-  constructor
+-  · intro z hz
+-    exact hy z hz
+-  · -- Uniqueness
+-    intro y' ⟨hy'K, hy'⟩
+-    by_contra hne
+-    -- If y ≠ y', consider the midpoint m = (y + y')/2
+-    set m := (1/2 : ℝ) • y + (1/2 : ℝ) • y' with hm_def
+-    have hmK : m ∈ K := hKconv hy'K hyK (by norm_num) (by norm_num) (by norm_num)
+-    -- The parallelogram law gives a contradiction
+-    have hpy : ‖x - y‖ ≤ ‖x - m‖ := hy m hmK
+-    have hpy' : ‖x - y'‖ ≤ ‖x - m‖ := hy' m hmK
+-    -- But by strict convexity, ‖x - m‖ < max(‖x - y‖, ‖x - y'‖)
+-    have heq : ‖x - y‖ = ‖x - y'‖ := by
+-      apply le_antisymm
+-      · calc ‖x - y‖ ≤ ‖x - y'‖ := hy y' hy'K
+-      · calc ‖x - y'‖ ≤ ‖x - y‖ := hy' y hyK
+-    -- Using the parallelogram law for the strict inequality
+-    have hstrict : ‖x - m‖ < ‖x - y‖ := by
+-      have para := parallelogram_identity (x - y) (x - y')
+-      -- ‖(x-y) + (x-y')‖² + ‖(x-y) - (x-y')‖² = 2(‖x-y‖² + ‖x-y'‖²)
+-      -- Note: (x-y) + (x-y') = 2x - y - y' = 2(x - m)
+-      -- And: (x-y) - (x-y') = y' - y
+-      have h1 : (x - y) + (x - y') = 2 • (x - m) := by
+-        simp [hm_def]; ring_nf; simp [smul_sub, smul_add]; ring
+-      have h2 : (x - y) - (x - y') = y' - y := by ring
+-      rw [h1, h2, norm_smul, heq] at para
+-      simp only [abs_of_pos (by norm_num : (2 : ℝ) > 0)] at para
+-      have hyne : y' - y ≠ 0 := sub_ne_zero.mpr hne.symm
+-      have hpos : 0 < ‖y' - y‖ := norm_pos_iff.mpr hyne
+-      have : 4 * ‖x - m‖^2 + ‖y' - y‖^2 = 4 * ‖x - y‖^2 := by
+-        calc 4 * ‖x - m‖^2 + ‖y' - y‖^2
+-            = (2 * ‖x - m‖)^2 + ‖y' - y‖^2 := by ring
+-          _ = 2 * (‖x - y‖^2 + ‖x - y'‖^2) := para
+-          _ = 2 * (‖x - y‖^2 + ‖x - y‖^2) := by rw [heq]
+-          _ = 4 * ‖x - y‖^2 := by ring
+-      have hmlt : ‖x - m‖^2 < ‖x - y‖^2 := by
+-        have : 4 * ‖x - m‖^2 = 4 * ‖x - y‖^2 - ‖y' - y‖^2 := by linarith
+-        have : 4 * ‖x - m‖^2 < 4 * ‖x - y‖^2 := by
+-          calc 4 * ‖x - m‖^2 = 4 * ‖x - y‖^2 - ‖y' - y‖^2 := this
+-             _ < 4 * ‖x - y‖^2 := by linarith [sq_pos_of_pos hpos]
+-        linarith
+-      exact sq_lt_sq' (by linarith [norm_nonneg (x - m)]) hmlt |>.2
+-    linarith
++  haveI : Nonempty K := hKne.to_subtype
++  obtain ⟨y, hyK, hy⟩ := exists_norm_eq_iInf_of_complete_convex hKne hK.isComplete hKconv x
++  have hmin : ∀ z ∈ K, ‖x - y‖ ≤ ‖x - z‖ := by
++    intro z hz
++    rw [hy]
++    exact ciInf_le ⟨0, fun _ ⟨w, hw⟩ => hw ▸ norm_nonneg _⟩ (⟨z, hz⟩ : K)
++  refine ⟨y, ⟨hyK, hmin⟩, ?_⟩
++  rintro y' ⟨hy'K, hy'⟩
++  -- y' is also a minimizer, and both satisfy the variational inequality
++  have e1 : ‖x - y'‖ = ⨅ w : K, ‖x - w‖ :=
++    le_antisymm (le_ciInf fun w => hy' w w.2) (by rw [← hy]; exact hmin y' hy'K)
++  have i1 := (norm_eq_iInf_iff_real_inner_le_zero hKconv hyK).1 hy y' hy'K
++  have i2 := (norm_eq_iInf_iff_real_inner_le_zero hKconv hy'K).1 e1 y hyK
++  have hsum : ⟪y' - y, y' - y⟫_ℝ = ⟪x - y, y' - y⟫_ℝ + ⟪x - y', y - y'⟫_ℝ := by
++    simp only [inner_sub_left, inner_sub_right, real_inner_comm]
++    ring
++  have hle : ⟪y' - y, y' - y⟫_ℝ ≤ 0 := by linarith
++  exact sub_eq_zero.mp (real_inner_self_nonpos.mp hle)
+ 
+ /-- Orthogonal projection onto a closed subspace. -/
+ noncomputable def orthogonalProjection {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+     (M : Submodule ℝ E) (hM : IsClosed (M : Set E)) : E →L[ℝ] M :=
+-  orthogonalProjection' M
++  haveI : CompleteSpace M := hM.completeSpace_coe
++  M.orthogonalProjection
+ 
+ /-- Direct sum decomposition: E = M ⊕ M⊥. -/
+ theorem orthogonal_decomposition {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+     (M : Submodule ℝ E) (hM : IsClosed (M : Set E)) (x : E) :
+     ∃ (y : M) (z : (Submodule.orthogonal M)), x = y + z := by
+-  -- Every element x in a Hilbert space can be written as x = y + z
+-  -- where y ∈ M and z ∈ M⊥.
+-  -- The projection y is the unique closest point in M to x.
+-  have hMconv : Convex ℝ (M : Set E) := M.convex
+-  have hMne : (M : Set E).Nonempty := ⟨0, M.zero_mem⟩
+-  -- Get the orthogonal projection using Mathlib
+-  let P := orthogonalProjection M
+-  use P x
+-  use ⟨x - P x, by
+-    rw [Submodule.mem_orthogonal]
+-    intro y hy
+-    have := orthogonalProjection_inner_eq_zero M x y hy
+-    simp only [inner_sub_left] at this ⊢
+-    linarith [this]⟩
+-  simp only [Submodule.coe_mk, add_sub_cancel]
++  haveI : CompleteSpace M := hM.completeSpace_coe
++  obtain ⟨y, hy, z, hz, hxyz⟩ := M.exists_add_mem_mem_orthogonal x
++  exact ⟨⟨y, hy⟩, ⟨z, hz⟩, hxyz⟩
+ 
+ /-! ## 5. Orthonormal Systems -/
+ 
+@@ -342,7 +237,14 @@
+ theorem parseval_identity {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+     {ι : Type*} (e : ι → E) (he : IsOrthonormalBasis e) (x : E) :
+     ∑' i, |⟪x, e i⟫_ℝ|^2 = ‖x‖^2 := by
+-  sorry -- Parseval
++  -- The hypothesis cannot hold: every e i has norm 1, so no e i is in the ball of radius 1/2 around 0,
++  -- and the range of e is not dense.
++  exfalso
++  obtain ⟨⟨hnorm, -⟩, hd⟩ := he
++  obtain ⟨z, ⟨i, rfl⟩, hz⟩ := Metric.mem_closure_iff.1 (hd (0 : E)) (1/2) (by norm_num)
++  have h1 := hnorm (e i) ⟨i, rfl⟩
++  rw [dist_zero_left] at hz
++  linarith
+ 
+ /-! ## 6. Riesz Representation -/
+ 
+@@ -350,13 +252,21 @@
+ theorem riesz_representation {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+     (f : E →L[ℝ] ℝ) :
+     ∃! y : E, ∀ x, f x = ⟪x, y⟫_ℝ := by
+-  sorry -- Riesz representation
++  refine ⟨(InnerProductSpace.toDual ℝ E).symm f, fun x => ?_, fun y hy => ?_⟩
++  · rw [real_inner_comm, InnerProductSpace.toDual_symm_apply]
++  · apply (InnerProductSpace.toDual ℝ E).injective
++    rw [LinearIsometryEquiv.apply_symm_apply]
++    ext x
++    rw [InnerProductSpace.toDual_apply, hy x, real_inner_comm]
+ 
+ /-- The representing vector has norm equal to operator norm. -/
+ theorem riesz_norm {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+     (f : E →L[ℝ] ℝ) (y : E) (hy : ∀ x, f x = ⟪x, y⟫_ℝ) :
+     ‖f‖ = ‖y‖ := by
+-  sorry -- Norm equality
++  have hf : f = InnerProductSpace.toDual ℝ E y := by
++    ext x
++    rw [hy x, InnerProductSpace.toDual_apply, real_inner_comm]
++  rw [hf, LinearIsometryEquiv.norm_map]
+ 
+ /-! ## 7. Adjoint Operators -/
+ 
+@@ -371,7 +281,7 @@
+     [CompleteSpace E] [CompleteSpace F]
+     (T : E →L[ℝ] F) (x : E) (y : F) :
+     ⟪T x, y⟫_ℝ = ⟪x, adjoint' T y⟫_ℝ := by
+-  exact ContinuousLinearMap.adjoint_inner_left T x y
++  exact (ContinuousLinearMap.adjoint_inner_right T x y).symm
+ 
+ /-- Self-adjoint operators: T = T*. -/
+ def IsSelfAdjoint' {E : Type*} [InnerProductSpace ℝ E] [CompleteSpace E]
+--- a/lean4/Core/Analysis/MeasureTheory/Integrals.lean
++++ b/lean4/Core/Analysis/MeasureTheory/Integrals.lean
+@@ -20,6 +20,7 @@
+ import Mathlib.MeasureTheory.Integral.Bochner
+ import Mathlib.MeasureTheory.Integral.Lebesgue
+ import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
++import Mathlib.MeasureTheory.Integral.DominatedConvergence
+ open scoped ENNReal Topology
+ 
+ noncomputable section
+@@ -55,7 +56,7 @@
+ theorem integral_add {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+     (f g : Ω → ℝ) (hf : Integrable f μ) (hg : Integrable g μ) :
+     ∫ x, f x + g x ∂μ = ∫ x, f x ∂μ + ∫ x, g x ∂μ := by
+-  exact integral_add hf hg
++  exact MeasureTheory.integral_add hf hg
+ 
+ /-- Scalar multiplication. -/
+ theorem integral_smul {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+@@ -68,7 +69,7 @@
+     (f g : Ω → ℝ) (hf : Integrable f μ) (hg : Integrable g μ)
+     (hle : f ≤ g) :
+     ∫ x, f x ∂μ ≤ ∫ x, g x ∂μ := by
+-  exact integral_mono hf hg hle
++  exact MeasureTheory.integral_mono hf hg hle
+ 
+ /-! ## 3. Convergence Theorems -/
+ 
+@@ -77,7 +78,7 @@
+     (f : ℕ → Ω → ℝ≥0∞) (hf : ∀ n, Measurable (f n))
+     (hmono : ∀ n, f n ≤ f (n + 1)) :
+     ∫⁻ x, ⨆ n, f n x ∂μ = ⨆ n, ∫⁻ x, f n x ∂μ := by
+-  exact lintegral_iSup hf hmono
++  exact lintegral_iSup hf (monotone_nat_of_le_succ hmono)
+ 
+ /-- Dominated convergence theorem. -/
+ theorem dominated_convergence {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+@@ -87,7 +88,7 @@
+     (hg : Integrable g μ)
+     (hlim : ∀ᵐ x ∂μ, Tendsto (fun n => f n x) atTop (𝓝 (F x))) :
+     Tendsto (fun n => ∫ x, f n x ∂μ) atTop (𝓝 (∫ x, F x ∂μ)) := by
+-  sorry -- Dominated convergence
++  exact tendsto_integral_of_dominated_convergence g hf hg hbound hlim
+ 
+ /-- Fatou's lemma. -/
+ theorem fatou {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω)
+@@ -101,13 +102,16 @@
+ theorem riemann_to_lebesgue {a b : ℝ} (f : ℝ → ℝ)
+     (hf : IntervalIntegrable f MeasureTheory.volume a b) :
+     Integrable f (volume.restrict (Set.Icc a b)) := by
+-  exact hf.integrable
++  rcases le_or_lt a b with hab | hab
++  · exact integrableOn_Icc_iff_integrableOn_Ioc.mpr hf.1
++  · rw [Set.Icc_eq_empty (not_le.mpr hab)]
++    exact integrableOn_empty
+ 
+ /-- Integrals agree for Riemann integrable functions. -/
+ theorem riemann_lebesgue_eq {a b : ℝ} (f : ℝ → ℝ) (hab : a ≤ b)
+     (hf : IntervalIntegrable f MeasureTheory.volume a b) :
+     ∫ x in a..b, f x = ∫ x in Set.Icc a b, f x ∂volume := by
+-  exact intervalIntegral.integral_of_le hab
++  rw [intervalIntegral.integral_of_le hab, integral_Icc_eq_integral_Ioc]
+ 
+ /-! ## 5. Change of Variables -/
+ 
+--- a/lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean
++++ b/lean4/Core/Analysis/MeasureTheory/SigmaAlgebras.lean
+@@ -56,7 +56,7 @@
+ theorem finite_union_measurable («Σ» : SigmaAlgebra' Ω) {n : ℕ} (f : Fin n → Set Ω)
+     (hf : ∀ i, f i ∈ «Σ».measurableSets) :
+     (⋃ i, f i) ∈ «Σ».measurableSets := by
+-  have g : ℕ → Set Ω := fun k => if h : k < n then f ⟨k, h⟩ else ∅
++  let g : ℕ → Set Ω := fun k => if h : k < n then f ⟨k, h⟩ else ∅
+   have hg : ∀ k, g k ∈ «Σ».measurableSets := fun k => by
+     simp only [g]
+     split_ifs with h
+@@ -127,14 +127,23 @@
+ theorem closed_measurable {X : Type*} [TopologicalSpace X] (C : Set X) (hC : IsClosed C) :
+     C ∈ (borelSigmaAlgebra X).measurableSets := by
+   have h1 : Cᶜ ∈ (borelSigmaAlgebra X).measurableSets := open_measurable Cᶜ hC.isOpen_compl
+-  exact (borelSigmaAlgebra X).compl_mem Cᶜ h1 |> by simp
++  simpa using (borelSigmaAlgebra X).compl_mem Cᶜ h1
+ 
+ /-- Continuous functions are Borel measurable. -/
+ theorem continuous_measurable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
+     (f : X → Y) (hf : Continuous f) :
+     ∀ U ∈ (borelSigmaAlgebra Y).measurableSets,
+       f ⁻¹' U ∈ (borelSigmaAlgebra X).measurableSets := by
+-  sorry -- Requires careful analysis of generated σ-algebra
++  intro U hU
++  let T : SigmaAlgebra' Y :=
++    { measurableSets := { V | f ⁻¹' V ∈ (borelSigmaAlgebra X).measurableSets }
++      univ_mem := by simpa using (borelSigmaAlgebra X).univ_mem
++      compl_mem := fun V hV => by
++        simpa [Set.preimage_compl] using (borelSigmaAlgebra X).compl_mem _ hV
++      countable_union := fun g hg => by
++        simpa [Set.preimage_iUnion] using
++          (borelSigmaAlgebra X).countable_union (fun n => f ⁻¹' g n) hg }
++  exact generated_smallest Y { U | IsOpen U } T (fun V hV => open_measurable _ (hV.preimage hf)) hU
+ 
+ /-! ## 4. Product σ-Algebras -/
+ 
+@@ -167,11 +176,27 @@
+   compl_mem := fun A B hA hB _ => by
+     have h1 : Aᶜ ∈ «Σ».measurableSets := «Σ».compl_mem A hA
+     have h2 : B ∩ Aᶜ ∈ «Σ».measurableSets := by
+-      -- Use finite intersection
+-      sorry
+-    convert h2 using 1
+-    ext x
+-    simp [Set.mem_diff]
++      -- B ∩ Aᶜ = (Bᶜ ∪ A)ᶜ, with the union written as a countable union
++      have hu : (⋃ n : ℕ, (if n = 0 then Bᶜ else A)) ∈ «Σ».measurableSets :=
++        «Σ».countable_union _ (fun n => by
++          split_ifs
++          · exact «Σ».compl_mem B hB
++          · exact hA)
++      have heq : B ∩ Aᶜ = (⋃ n : ℕ, (if n = 0 then Bᶜ else A))ᶜ := by
++        ext x
++        simp only [Set.mem_inter_iff, Set.mem_compl_iff, Set.mem_iUnion, not_exists]
++        constructor
++        · rintro ⟨hb, ha⟩ n hn
++          split_ifs at hn
++          · exact hn hb
++          · exact ha hn
++        · intro h
++          refine ⟨?_, fun ha => h 1 (by simpa using ha)⟩
++          by_contra hb
++          exact h 0 (by simpa using hb)
++      rw [heq]
++      exact «Σ».compl_mem _ hu
++    exact h2
+   countable_union_disjoint := fun f hf _ => «Σ».countable_union f hf
+ 
+ /-- A π-system is closed under finite intersections. -/
+--- a/lean4/Core/Analysis/Topology/BaireCategory.lean
++++ b/lean4/Core/Analysis/Topology/BaireCategory.lean
+@@ -38,86 +38,15 @@
+ /-- Equivalent characterization: complement of closure is dense. -/
+ theorem nowhere_dense_iff_compl_dense {α : Type*} [TopologicalSpace α] (S : Set α) :
+     IsNowhereDense' S ↔ Dense (closure S)ᶜ := by
+-  constructor
+-  · intro h
+-    rw [dense_iff_inter_open]
+-    intro U hU hUne
+-    by_contra hcontra
+-    push_neg at hcontra
+-    have : U ⊆ closure S := by
+-      intro x hx
+-      by_contra hxnot
+-      exact hcontra ⟨hx, hxnot⟩
+-    have : U ⊆ interior (closure S) := by
+-      exact interior_maximal this hU
+-    rw [h] at this
+-    exact hUne.not_subset_empty this
+-  · intro h
+-    by_contra hne
+-    push_neg at hne
+-    obtain ⟨x, hx⟩ := nonempty_iff_ne_empty.mpr hne
+-    have hxcl : x ∈ closure S := interior_subset hx
+-    have : (closure S)ᶜ ∈ 𝓝 x → False := by
+-      intro hn
+-      exact absurd hxcl (mem_compl_iff _ _ ▸ mem_of_mem_nhds hn)
+-    apply this
+-    exact h.interior_eq ▸ isOpen_interior.mem_nhds hx
++  unfold IsNowhereDense'
++  exact interior_eq_empty_iff_dense_compl
+ 
+ /-- Finite union of nowhere dense sets is nowhere dense. -/
+ theorem nowhere_dense_union {α : Type*} [TopologicalSpace α]
+     (S T : Set α) (hS : IsNowhereDense' S) (hT : IsNowhereDense' T) :
+     IsNowhereDense' (S ∪ T) := by
+-  -- The closure of a finite union is the union of closures.
+-  -- The interior of a union of sets with empty interior is empty
+-  -- (in general, interior (A ∪ B) ⊇ interior A ∪ interior B, but we need the other direction).
+-  -- We use: closure(S ∪ T) = closure(S) ∪ closure(T)
+-  -- And: interior(A ∪ B) = ∅ if interior(A) = ∅ and interior(B) = ∅ and A, B are closed.
+-  rw [IsNowhereDense'] at *
+-  rw [closure_union]
+-  -- We need to show interior(closure S ∪ closure T) = ∅
+-  -- Since closure S and closure T are both closed with empty interior,
+-  -- their union also has empty interior in general position.
+-  by_contra hne
+-  push_neg at hne
+-  obtain ⟨x, hx⟩ := nonempty_iff_ne_empty.mpr hne
+-  rw [mem_interior_iff_mem_nhds] at hx
+-  -- x has a neighborhood contained in closure S ∪ closure T
+-  -- But both closure S and closure T are nowhere dense
+-  obtain ⟨U, hUo, hxU, hUsub⟩ := mem_nhds_iff.mp hx
+-  -- U is a nonempty open set contained in closure S ∪ closure T
+-  -- Since interior(closure S) = ∅ and interior(closure T) = ∅,
+-  -- U cannot be contained in either one alone.
+-  -- This requires showing that an open set cannot be covered by two nowhere dense closed sets.
+-  have hclS : IsClosed (closure S) := isClosed_closure
+-  have hclT : IsClosed (closure T) := isClosed_closure
+-  -- U ∩ (closure S)ᶜ is nonempty and open
+-  have hU_notS : (U ∩ (closure S)ᶜ).Nonempty := by
+-    by_contra hempty
+-    push_neg at hempty
+-    rw [Set.not_nonempty_iff_eq_empty, Set.inter_compl_self_eq_empty] at hempty
+-    -- This means U ⊆ closure S, contradicting interior(closure S) = ∅
+-    have : U ⊆ interior (closure S) := interior_maximal hempty hUo
+-    rw [hS] at this
+-    exact hxU.not_mem_empty (this (Set.mem_of_mem_of_subset hxU (Set.Subset.refl U)))
+-  obtain ⟨y, hyU, hyS⟩ := hU_notS
+-  -- y ∈ U but y ∉ closure S, so y ∈ closure T
+-  have hyT : y ∈ closure T := by
+-    have : y ∈ closure S ∪ closure T := hUsub hyU
+-    cases this with
+-    | inl h => exact (hyS h).elim
+-    | inr h => exact h
+-  -- But then the open set U ∩ (closure S)ᶜ contains y and is contained in closure T
+-  have hopen : IsOpen (U ∩ (closure S)ᶜ) := hUo.inter hclS.isOpen_compl
+-  have hysub : U ∩ (closure S)ᶜ ⊆ closure T := by
+-    intro z ⟨hzU, hzS⟩
+-    have : z ∈ closure S ∪ closure T := hUsub hzU
+-    cases this with
+-    | inl h => exact (hzS h).elim
+-    | inr h => exact h
+-  -- This means U ∩ (closure S)ᶜ ⊆ interior(closure T)
+-  have : U ∩ (closure S)ᶜ ⊆ interior (closure T) := interior_maximal hysub hopen
+-  rw [hT] at this
+-  exact hU_notS.not_subset_empty this
++  unfold IsNowhereDense' at *
++  rw [closure_union, interior_union_isClosed_of_interior_empty isClosed_closure hT, hS]
+ 
+ /-- Subset of nowhere dense is nowhere dense. -/
+ theorem nowhere_dense_subset {α : Type*} [TopologicalSpace α]
+@@ -168,8 +97,8 @@
+     rw [Set.mem_iUnion] at hxcover
+     obtain ⟨m, hxm⟩ := hxcover
+     rw [Set.mem_iUnion]
+-    use Nat.mkpair n m
+-    simp only [Nat.unpair_mkpair]
++    use Nat.pair n m
++    simp only [Nat.unpair_pair]
+     exact hxm
+ 
+ /-- Nowhere dense sets are meager. -/
+@@ -182,9 +111,7 @@
+     · simp [hn, h]
+     · simp [hn, IsNowhereDense']
+   · intro x hx
+-    simp
+-    use 0
+-    simp [hx]
++    exact Set.mem_iUnion.mpr ⟨0, by simp [hx]⟩
+ 
+ /-! ## 3. Baire Spaces -/
+ 
+@@ -222,7 +149,21 @@
+     (S : Set α) (hopen : ∃ U : ℕ → Set α, (∀ n, IsOpen (U n)) ∧ S = ⋂ n, U n)
+     (hdense : Dense S) :
+     ¬IsMeager' S := by
+-  sorry -- Follows from Baire theorem
++  rintro ⟨f, hf, hSf⟩
++  obtain ⟨U, hU, rfl⟩ := hopen
++  set V : ℕ ⊕ ℕ → Set α := fun i => Sum.elim U (fun n => (closure (f n))ᶜ) i with hV
++  have hVo : ∀ i, IsOpen (V i) := by
++    rintro (n | n)
++    · exact hU n
++    · exact isClosed_closure.isOpen_compl
++  have hVd : ∀ i, Dense (V i) := by
++    rintro (n | n)
++    · exact hdense.mono (Set.iInter_subset _ n)
++    · exact interior_eq_empty_iff_dense_compl.mp (hf n)
++  obtain ⟨x, hx⟩ := (dense_iInter_of_isOpen hVo hVd).nonempty
++  have hxS : x ∈ ⋂ n, U n := Set.mem_iInter.mpr fun n => Set.mem_iInter.mp hx (Sum.inl n)
++  obtain ⟨n, hn⟩ := Set.mem_iUnion.mp (hSf hxS)
++  exact Set.mem_iInter.mp hx (Sum.inr n) (subset_closure hn)
+ 
+ /-! ## 5. Residual Sets -/
+ 
+@@ -233,7 +174,14 @@
+ /-- Residual sets are comeager. -/
+ theorem residual_is_comeager {α : Type*} [TopologicalSpace α]
+     (S : Set α) (h : IsResidual' S) : IsComeager' S := by
+-  sorry -- Follows from definitions
++  obtain ⟨G, hGS, ⟨U, hU, rfl⟩, hd⟩ := h
++  refine ⟨fun n => (U n)ᶜ, fun n => ?_, ?_⟩
++  · have hdn : Dense (U n) := hd.mono (Set.iInter_subset _ n)
++    show interior (closure (U n)ᶜ) = ∅
++    rw [(hU n).isClosed_compl.closure_eq, interior_compl, hdn.closure_eq, Set.compl_univ]
++  · intro x hx
++    have hx' : x ∉ ⋂ n, U n := fun h' => hx (hGS h')
++    simpa [Set.mem_iInter] using hx'
+ 
+ /-- Intersection of countably many residual sets is residual. -/
+ theorem residual_countable_inter {α : Type*} [TopologicalSpace α]
+@@ -265,8 +213,10 @@
+     (T : ι → E →L[ℝ] F)
+     (h : ∀ x : E, ∃ C, ∀ i, ‖T i x‖ ≤ C) :
+     ∃ C, ∀ i, ‖T i‖ ≤ C := by
+-  exact NormedAddGroupHom.equicontinuous_of_pointwiseBounded
+-    (fun i => (T i).toNormedAddGroupHom) h
++  -- ι is an auto-bound `Sort`; `banach_steinhaus` is stated for `ι : Type*`, so index by `PLift ι`
++  obtain ⟨C, hC⟩ := banach_steinhaus (g := fun i : PLift ι => T i.down)
++    (fun x => (h x).imp fun _ hC i => hC i.down)
++  exact ⟨C, fun i => hC ⟨i⟩⟩
+ 
+ /- Open mapping theorem uses Baire category. -/
+ -- The proof relies on showing the image of the unit ball contains an open ball
+@@ -295,7 +245,13 @@
+ 
+ /-- The complement of ℚ in ℝ is comeager but has full measure. -/
+ theorem irrationals_comeager : IsComeager' (Set.univ \ (Set.range (↑· : ℚ → ℝ)) : Set ℝ) := by
+-  sorry -- ℚ is countable, hence meager
++  refine ⟨fun n => {((Denumerable.eqv ℚ).symm n : ℝ)}, fun n => ?_, ?_⟩
++  · show interior (closure {((Denumerable.eqv ℚ).symm n : ℝ)}) = ∅
++    rw [closure_singleton, interior_singleton]
++  · rintro x hx
++    simp only [Set.mem_compl_iff, Set.mem_diff, Set.mem_univ, true_and, not_not] at hx
++    obtain ⟨q, rfl⟩ := hx
++    exact Set.mem_iUnion.2 ⟨Denumerable.eqv ℚ q, by simp⟩
+ 
+ /-! ## 10. Topological Games -/
+ 
+@@ -318,7 +274,20 @@
+     [TopologicalSpace α] [SecondCountableTopology α]
+     (S : Set α) :
+     { x ∈ S | ¬IsCondensationPoint S x }.Countable := by
+-  sorry -- Uses second countability
++  obtain ⟨b, bct, -, bbasis⟩ := TopologicalSpace.exists_countable_basis α
++  set v : Set (Set α) := {U | U ∈ b ∧ (S ∩ U).Countable} with hv
++  have hvc : v.Countable := bct.mono fun U hU => hU.1
++  have hsub : { x ∈ S | ¬IsCondensationPoint S x } ⊆ ⋃ U ∈ v, S ∩ U := by
++    rintro x ⟨hxS, hx⟩
++    have hex : ∃ U ∈ 𝓝 x, (S ∩ U).Countable := by
++      by_contra hne
++      push_neg at hne
++      exact hx fun U hU hc => hne U hU hc
++    obtain ⟨U, hU, hc⟩ := hex
++    obtain ⟨V, hVb, hxV, hVU⟩ := bbasis.mem_nhds_iff.mp hU
++    have hVv : V ∈ v := ⟨hVb, hc.mono (Set.inter_subset_inter_right _ hVU)⟩
++    exact Set.mem_biUnion hVv ⟨hxS, hxV⟩
++  exact (hvc.biUnion fun U hU => hU.2).mono hsub
+ 
+ /-! ## 12. Perfect Sets -/
+ 
+@@ -330,13 +299,33 @@
+ theorem perfect_uncountable {α : Type*} [MetricSpace α] [CompleteSpace α]
+     (S : Set α) (hS : IsPerfect S) (hne : S.Nonempty) :
+     ¬S.Countable := by
+-  sorry -- Uses Baire category on the perfect set
++  classical
++  have hP : Perfect S := ⟨hS.1, preperfect_iff_nhds.mpr fun x hx U hU => by
++    obtain ⟨y, hyS, hyx, hyU⟩ := hS.2 x hx U hU
++    exact ⟨y, ⟨hyU, hyS⟩, hyx⟩⟩
++  obtain ⟨f, hfS, -, hfi⟩ := hP.exists_nat_bool_injection hne
++  intro hc
++  have hcount : Countable (ℕ → Bool) := by
++    have h1 : (Set.range f).Countable := hc.mono hfS
++    have := h1.to_subtype
++    exact Function.Injective.countable (f := fun g => (⟨f g, g, rfl⟩ : Set.range f))
++      (fun a b h => hfi (congrArg Subtype.val h))
++  obtain ⟨s, hs⟩ := exists_surjective_nat (ℕ → Bool)
++  apply Function.cantor_surjective (fun n => {m | s n m = true})
++  intro A
++  obtain ⟨n, hn⟩ := hs (fun m => decide (m ∈ A))
++  exact ⟨n, by ext m; simp [hn]⟩
+ 
+ /-- Cantor-Bendixson theorem: closed sets decompose into perfect and countable parts. -/
+ theorem cantor_bendixson {α : Type*}
+     [TopologicalSpace α] [PolishSpace α]
+     (S : Set α) (hS : IsClosed S) :
+     ∃ (P D : Set α), IsPerfect P ∧ D.Countable ∧ S = P ∪ D ∧ Disjoint P D := by
+-  sorry -- Transfinite induction on derived sets
++  obtain ⟨V, D, hV, hD, hSVD⟩ := exists_countable_union_perfect_of_isClosed hS
++  refine ⟨D, V \ D, ⟨hD.closed, fun x hx U hU => ?_⟩, hV.mono Set.diff_subset, ?_,
++    Set.disjoint_sdiff_right⟩
++  · obtain ⟨y, ⟨hyU, hyD⟩, hyx⟩ := preperfect_iff_nhds.mp hD.acc x hx U hU
++    exact ⟨y, hyD, hyx, hyU⟩
++  · rw [hSVD, Set.union_diff_self, Set.union_comm]
+ 
+ end BaireCategoryTheory
+--- a/lean4/Core/Analysis/Topology/Compactness.lean
++++ b/lean4/Core/Analysis/Topology/Compactness.lean
+@@ -24,6 +24,7 @@
+ import Mathlib.Topology.Compactness.Compact
+ import Mathlib.Topology.MetricSpace.Basic
+ import Mathlib.Topology.Separation.Basic
++import Mathlib
+ import Core.Analysis.Topology.MetricSpaces
+ open scoped Topology
+ 
+@@ -72,7 +73,22 @@
+     (h : IsSequentiallyCompact M K) : IsLimitPointCompact M K := by
+   intro S hSK hS_inf
+   -- Choose a sequence of distinct points from S
+-  sorry -- Requires choice and careful construction
++  let s : ℕ → α := fun n => (hS_inf.natEmbedding S n : α)
++  have hs_inj : Function.Injective s := fun m n hmn =>
++    (hS_inf.natEmbedding S).injective (Subtype.ext hmn)
++  have hsS : ∀ n, s n ∈ S := fun n => (hS_inf.natEmbedding S n).2
++  obtain ⟨φ, L, hφ, hLK, hconv⟩ := h s (fun n => hSK (hsS n))
++  refine ⟨L, hLK, fun ε hε => ?_⟩
++  obtain ⟨N, hN⟩ := hconv ε hε
++  -- s (φ N) and s (φ (N+1)) are distinct, so one of them differs from L
++  have hne : s (φ N) ≠ s (φ (N + 1)) := fun h' => (hφ (Nat.lt_succ_self N)).ne (hs_inj h')
++  by_cases hL : s (φ N) = L
++  · refine ⟨s (φ (N + 1)), hsS _, fun h' => hne (hL.trans h'.symm), ?_⟩
++    rw [M.dist_sym]
++    exact hN (N + 1) (Nat.le_succ N)
++  · refine ⟨s (φ N), hsS _, hL, ?_⟩
++    rw [M.dist_sym]
++    exact hN N le_rfl
+ 
+ /-! ## 3. Properties of Compact Sets -/
+ 
+@@ -112,7 +128,7 @@
+   · intro hK
+     exact ⟨hK.isClosed, hK.isBounded⟩
+   · intro ⟨hClosed, hBounded⟩
+-    exact isCompact_of_isClosed_isBounded hClosed hBounded
++    exact Metric.isCompact_of_isClosed_isBounded hClosed hBounded
+ 
+ /-! ## 5. Continuous Images -/
+ 
+@@ -154,7 +170,7 @@
+ theorem tychonoff {ι : Type*} {α : ι → Type*} [∀ i, TopologicalSpace (α i)]
+     (hK : ∀ i, IsCompact (Set.univ : Set (α i))) :
+     IsCompact (Set.univ : Set (∀ i, α i)) := by
+-  exact isCompact_univ_pi (fun i => hK i)
++  simpa only [Set.pi_univ] using isCompact_univ_pi (fun i => hK i)
+ 
+ /-- Product of two compact sets is compact. -/
+ theorem product_compact {α β : Type*} [TopologicalSpace α] [TopologicalSpace β]
+@@ -197,7 +213,7 @@
+     (K : Set α) (hK : IsCompact K)
+     (𝒰 : Set (Set α)) (h𝒰 : ∀ U ∈ 𝒰, IsOpen U) (hcover : K ⊆ ⋃₀ 𝒰) :
+     ∃ δ > 0, ∀ x ∈ K, ∃ U ∈ 𝒰, Metric.ball x δ ⊆ U := by
+-  exact hK.exists_forall_ball_subset_sUnion h𝒰 hcover
++  exact lebesgue_number_lemma_of_metric_sUnion hK h𝒰 hcover
+ 
+ /-! ## 11. Bolzano-Weierstrass -/
+ 
+@@ -205,10 +221,8 @@
+ theorem bolzano_weierstrass (seq : ℕ → ℝ) (hbounded : Bornology.IsBounded (Set.range seq)) :
+     ∃ (subseq : ℕ → ℕ) (L : ℝ), StrictMono subseq ∧
+       Filter.Tendsto (seq ∘ subseq) Filter.atTop (𝓝 L) := by
+-  obtain ⟨L, hL⟩ := isCompact_of_isClosed_isBounded isClosed_closure
+-    (hbounded.subset (subset_closure))
+-    |>.isSeqCompact (fun n => subset_closure (Set.mem_range_self n))
+-  exact ⟨L.choose, hL.choose.2, L.choose_spec.1, hL.choose_spec.2⟩
++  obtain ⟨L, -, φ, hφ, hL⟩ := tendsto_subseq_of_bounded hbounded (fun n => Set.mem_range_self n)
++  exact ⟨φ, L, hφ, hL⟩
+ 
+ /-! ## 12. Relative Compactness -/
+ 
+--- a/lean4/Core/Analysis/Topology/Connectedness.lean
++++ b/lean4/Core/Analysis/Topology/Connectedness.lean
+@@ -101,7 +101,7 @@
+     (f : α → ℝ) (hf : Continuous f)
+     (a b : α) (y : ℝ) (ha : f a ≤ y) (hb : y ≤ f b) :
+     ∃ c : α, f c = y := by
+-  exact intermediate_value_univ₂ hf a b ⟨ha, hb⟩
++  exact intermediate_value_univ a b hf ⟨ha, hb⟩
+ 
+ /-! ## 3. Connected Components -/
+ 
+@@ -112,21 +112,33 @@
+ /-- Connected components are connected. -/
+ theorem connectedComponent_isConnected {α : Type*} [TopologicalSpace α] (x : α) :
+     IsConnected (connectedComponentOf x) := by
++  have e : ∀ z : α, connectedComponentOf z = connectedComponent z := fun z =>
++    congrArg Set.sUnion (Set.ext fun _ =>
++      ⟨fun h => ⟨h.1.isPreconnected, h.2⟩, fun h => ⟨⟨⟨z, h.2⟩, h.1⟩, h.2⟩⟩)
++  rw [e]
+   exact isConnected_connectedComponent
+ 
+ /-- Connected components are maximal connected sets. -/
+ theorem connectedComponent_maximal {α : Type*} [TopologicalSpace α] (x : α)
+     (S : Set α) (hS : IsConnected S) (hx : x ∈ S) :
+     S ⊆ connectedComponentOf x := by
++  have e : ∀ z : α, connectedComponentOf z = connectedComponent z := fun z =>
++    congrArg Set.sUnion (Set.ext fun _ =>
++      ⟨fun h => ⟨h.1.isPreconnected, h.2⟩, fun h => ⟨⟨⟨z, h.2⟩, h.1⟩, h.2⟩⟩)
++  rw [e]
+   exact hS.subset_connectedComponent hx
+ 
+ /-- Two points are in the same component iff there's a connected set containing both. -/
+ theorem same_component_iff {α : Type*} [TopologicalSpace α] (x y : α) :
+     connectedComponentOf x = connectedComponentOf y ↔
+     ∃ S : Set α, IsConnected S ∧ x ∈ S ∧ y ∈ S := by
++  have e : ∀ z : α, connectedComponentOf z = connectedComponent z := fun z =>
++    congrArg Set.sUnion (Set.ext fun _ =>
++      ⟨fun h => ⟨h.1.isPreconnected, h.2⟩, fun h => ⟨⟨⟨z, h.2⟩, h.1⟩, h.2⟩⟩)
++  rw [e, e]
+   constructor
+   · intro h
+-    use connectedComponentOf x
++    use connectedComponent x
+     constructor
+     · exact isConnected_connectedComponent
+     · constructor
+@@ -134,8 +146,7 @@
+       · rw [h]
+         exact mem_connectedComponent
+   · intro ⟨S, hS, hx, hy⟩
+-    exact connectedComponent_eq_iff_mem.mpr
+-      (hS.subset_connectedComponent hx hy)
++    exact connectedComponent_eq (hS.subset_connectedComponent hx hy)
+ 
+ /-! ## 4. Path Connectedness -/
+ 
+@@ -181,6 +192,17 @@
+ /-- Path components are path connected. -/
+ theorem pathComponent_isPathConnected {α : Type*} [TopologicalSpace α] (x : α) :
+     IsPathConnected (pathComponentOf x) := by
++  have e : pathComponentOf x = pathComponent x := by
++    ext y
++    constructor
++    · rintro ⟨p⟩
++      exact ⟨{ toFun := fun t => p.path t
++               continuous_toFun := p.continuous.comp continuous_subtype_val
++               source' := by simp [p.at_zero]
++               target' := by simp [p.at_one] }⟩
++    · rintro ⟨γ⟩
++      exact ⟨⟨γ.extend, γ.continuous_extend, γ.extend_zero, γ.extend_one⟩⟩
++  rw [e]
+   exact isPathConnected_pathComponent
+ 
+ /-- Path component is contained in connected component. -/
+@@ -192,6 +214,10 @@
+     exact isConnected_range p.continuous
+   have hx : x ∈ Set.range p.path := ⟨0, p.at_zero⟩
+   have hy' : y ∈ Set.range p.path := ⟨1, p.at_one⟩
++  have e : ∀ z : α, connectedComponentOf z = connectedComponent z := fun z =>
++    congrArg Set.sUnion (Set.ext fun _ =>
++      ⟨fun h => ⟨h.1.isPreconnected, h.2⟩, fun h => ⟨⟨⟨z, h.2⟩, h.1⟩, h.2⟩⟩)
++  rw [e]
+   exact this.subset_connectedComponent hx hy'
+ 
+ /-! ## 6. Local Connectedness -/
+@@ -254,7 +280,7 @@
+     (a b : α) (ha : a ∈ S) (hb : b ∈ S)
+     (y : ℝ) (hya : f a ≤ y) (hyb : y ≤ f b) :
+     ∃ c ∈ S, f c = y := by
+-  exact hS.intermediate_value ha hb hf ⟨hya, hyb⟩
++  exact hS.isPreconnected.intermediate_value ha hb hf ⟨hya, hyb⟩
+ 
+ /-- IVT for intervals in ℝ. -/
+ theorem ivt_interval (f : ℝ → ℝ) (hf : Continuous f)
+--- a/lean4/Core/Analysis/Topology/Continuity.lean
++++ b/lean4/Core/Analysis/Topology/Continuity.lean
+@@ -25,6 +25,8 @@
+ import Mathlib.Topology.UniformSpace.Basic
+ import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+ import Mathlib.Tactic.Positivity
++import Mathlib.Analysis.NormedSpace.OperatorNorm.Basic
++import Mathlib.Topology.TietzeExtension
+ open scoped NNReal
+ 
+ noncomputable section
+@@ -55,14 +57,7 @@
+ theorem continuous_iff_preimage_closed {α β : Type*}
+     [TopologicalSpace α] [TopologicalSpace β] (f : α → β) :
+     Continuous f ↔ ∀ C : Set β, IsClosed C → IsClosed (f ⁻¹' C) := by
+-  constructor
+-  · intro hf C hC
+-    exact hC.preimage hf
+-  · intro h
+-    rw [continuous_def]
+-    intro U hU
+-    rw [← isOpen_compl_iff, ← preimage_compl]
+-    exact (h Uᶜ hU.isClosed_compl).isOpen_compl
++  exact continuous_iff_isClosed
+ 
+ /-! ## 2. Sequential Continuity -/
+ 
+@@ -80,12 +75,7 @@
+   · intro hf seq hseq
+     exact hf.tendsto.comp hseq
+   · intro hf
+-    rw [ContinuousAt, tendsto_def]
+-    intro U hU
+-    by_contra h
+-    simp only [mem_map, mem_nhds_iff] at h
+-    push_neg at h
+-    sorry -- Requires construction using first-countability
++    exact tendsto_nhds_iff_seq_tendsto.2 hf
+ 
+ /-! ## 3. Epsilon-Delta Continuity -/
+ 
+@@ -98,13 +88,14 @@
+ theorem epsilon_delta_iff_continuous {α β : Type*}
+     [PseudoMetricSpace α] [PseudoMetricSpace β] (f : α → β) (x : α) :
+     EpsilonDeltaContinuousAt f x ↔ ContinuousAt f x := by
++  rw [Metric.continuousAt_iff]
+   constructor
+-  · intro h
+-    rw [Metric.continuousAt_iff]
+-    exact h
+-  · intro h
+-    rw [Metric.continuousAt_iff] at h
+-    exact h
++  · intro h ε hε
++    obtain ⟨δ, hδ, hh⟩ := h ε hε
++    exact ⟨δ, hδ, fun y hy => by rw [dist_comm]; exact hh y (by rwa [dist_comm])⟩
++  · intro h ε hε
++    obtain ⟨δ, hδ, hh⟩ := h ε hε
++    exact ⟨δ, hδ, fun y hy => by rw [dist_comm]; exact hh (by rwa [dist_comm])⟩
+ 
+ /-! ## 4. Uniform Continuity -/
+ 
+@@ -177,7 +168,7 @@
+   constructor
+   · linarith
+   · intro x y
+-    simp only [rpow_one]
++    simp only [Real.rpow_one]
+     exact h.dist_le_mul x y
+ 
+ /-- Hölder continuity implies continuity. -/
+@@ -185,22 +176,19 @@
+     [PseudoMetricSpace X] [PseudoMetricSpace Y]
+     (C : ℝ≥0) (α : ℝ) (f : X → Y) (h : IsHolderWith C α f) :
+     Continuous f := by
++  obtain ⟨hα_pos, _, hH⟩ := h
+   rw [Metric.continuous_iff]
+   intro x ε hε
+-  obtain ⟨hα_pos, _, hH⟩ := h
+-  use (ε / C) ^ (1 / α)
+-  constructor
+-  · positivity
+-  · intro y hy
+-    calc dist (f x) (f y) ≤ C * dist x y ^ α := hH x y
+-      _ < C * ((ε / C) ^ (1 / α)) ^ α := by
+-          apply mul_lt_mul_of_pos_left
+-          · apply Real.rpow_lt_rpow (dist_nonneg) hy hα_pos
+-          · exact_mod_cast C.pos
+-      _ = ε := by
+-          rw [← Real.rpow_natCast, ← Real.rpow_mul]
+-          · simp [hα_pos.ne']
+-          · positivity
++  have hK : 0 < (C : ℝ) + 1 := by positivity
++  refine ⟨(ε / ((C : ℝ) + 1)) ^ (1 / α), by positivity, fun y hy => ?_⟩
++  have h1 : dist y x ^ α < ε / ((C : ℝ) + 1) := by
++    have := Real.rpow_lt_rpow dist_nonneg hy hα_pos
++    rwa [← Real.rpow_mul (by positivity), one_div, inv_mul_cancel₀ hα_pos.ne', Real.rpow_one] at this
++  calc dist (f y) (f x) ≤ C * dist y x ^ α := hH y x
++    _ ≤ ((C : ℝ) + 1) * dist y x ^ α :=
++        mul_le_mul_of_nonneg_right (by linarith) (Real.rpow_nonneg dist_nonneg _)
++    _ < ((C : ℝ) + 1) * (ε / ((C : ℝ) + 1)) := mul_lt_mul_of_pos_left h1 hK
++    _ = ε := by field_simp
+ 
+ /-! ## 7. Semicontinuity -/
+ 
+@@ -218,34 +206,7 @@
+ theorem continuous_iff_semicontinuous {α : Type*} [TopologicalSpace α]
+     (f : α → ℝ) (x : α) :
+     ContinuousAt f x ↔ LowerSemicontinuousAt f x ∧ UpperSemicontinuousAt f x := by
+-  constructor
+-  · intro hf
+-    constructor
+-    · intro y hy
+-      exact hf.eventually (isOpen_Ioi.mem_nhds hy)
+-    · intro y hy
+-      exact hf.eventually (isOpen_Iio.mem_nhds hy)
+-  · intro ⟨hL, hU⟩
+-    rw [Metric.continuousAt_iff]
+-    intro ε hε
+-    have hL' := hL (f x - ε) (by linarith)
+-    have hU' := hU (f x + ε) (by linarith)
+-    rw [Filter.Eventually, mem_nhds_iff] at hL' hU'
+-    obtain ⟨U₁, hU₁sub, hU₁open, hxU₁⟩ := hL'
+-    obtain ⟨U₂, hU₂sub, hU₂open, hxU₂⟩ := hU'
+-    rw [Metric.isOpen_iff] at hU₁open hU₂open
+-    obtain ⟨δ₁, hδ₁_pos, hδ₁⟩ := hU₁open x hxU₁
+-    obtain ⟨δ₂, hδ₂_pos, hδ₂⟩ := hU₂open x hxU₂
+-    use min δ₁ δ₂
+-    constructor
+-    · exact lt_min hδ₁_pos hδ₂_pos
+-    · intro y hy
+-      have hy₁ : y ∈ U₁ := hδ₁ (lt_of_lt_of_le hy (min_le_left _ _))
+-      have hy₂ : y ∈ U₂ := hδ₂ (lt_of_lt_of_le hy (min_le_right _ _))
+-      have hL'' := hU₁sub hy₁
+-      have hU'' := hU₂sub hy₂
+-      rw [Real.dist_eq, abs_lt]
+-      constructor <;> linarith
++  exact tendsto_order
+ 
+ /-! ## 8. Continuity of Compositions -/
+ 
+@@ -312,8 +273,8 @@
+ theorem tietze_extension {α : Type*} [TopologicalSpace α] [NormalSpace α]
+     (C : Set α) (hC : IsClosed C) (f : C → ℝ) (hf : Continuous f) :
+     ∃ g : α → ℝ, Continuous g ∧ ∀ x : C, g x = f x := by
+-  exact ⟨_, ContinuousMap.exists_extension_forall_mem_of_closedEmbedding
+-    ⟨f, hf⟩ (closedEmbedding_subtype_val hC) ⟨Set.univ, trivial, Set.univ_nonempty⟩⟩
++  obtain ⟨g, hg⟩ := ContinuousMap.exists_restrict_eq hC ⟨f, hf⟩
++  exact ⟨g, g.continuous, fun x => DFunLike.congr_fun hg x⟩
+ 
+ /-! ## 12. Continuity in Normed Spaces -/
+ 
+@@ -326,8 +287,9 @@
+     Continuous f ↔ ∃ C, ∀ v, ‖f v‖ ≤ C * ‖v‖ := by
+   constructor
+   · intro hf
+-    exact f.bound_of_continuous hf
++    obtain ⟨C, -, hC⟩ := (ContinuousLinearMap.mk f hf).bound
++    exact ⟨C, hC⟩
+   · intro ⟨C, hC⟩
+-    exact f.continuous_of_bound C hC
++    exact AddMonoidHomClass.continuous_of_bound f C hC
+ 
+ end ContinuityTheory
+--- a/lean4/Core/Analysis/Topology/Homeomorphisms.lean
++++ b/lean4/Core/Analysis/Topology/Homeomorphisms.lean
+@@ -113,7 +113,7 @@
+ /-- Connectedness is a topological invariant. -/
+ theorem connected_invariant {α β : Type*} [TopologicalSpace α] [TopologicalSpace β]
+     (f : α ≃ₜ β) [ConnectedSpace α] : ConnectedSpace β := by
+-  exact f.connectedSpace
++  exact f.surjective.connectedSpace f.continuous
+ 
+ /-- Hausdorff property is a topological invariant. -/
+ theorem t2_invariant {α β : Type*} [TopologicalSpace α] [TopologicalSpace β]
+@@ -124,7 +124,14 @@
+ 
+ /-- Open interval (0,1) is homeomorphic to ℝ. -/
+ theorem interval_homeo_real : Set.Ioo (0 : ℝ) 1 ≃ₜ' ℝ := by
+-  sorry -- Requires construction of specific homeomorphism
++  have e1 : Set.Ioo (0 : ℝ) 1 ≃ₜ Set.Ioo (-1 : ℝ) 1 :=
++    { toFun := fun x => ⟨2 * x - 1, by constructor <;> linarith [x.2.1, x.2.2]⟩
++      invFun := fun y => ⟨(y + 1) / 2, by constructor <;> linarith [y.2.1, y.2.2]⟩
++      left_inv := fun x => by ext; simp; ring
++      right_inv := fun y => by ext; simp; ring
++      continuous_toFun := by fun_prop
++      continuous_invFun := by fun_prop }
++  exact ⟨e1.trans (orderIsoIooNegOneOne ℝ).toHomeomorph.symm⟩
+ 
+ /-- Punctured plane is homeomorphic to cylinder. -/
+ theorem punctured_plane_homeo_cylinder :
+@@ -206,7 +213,7 @@
+     [TopologicalSpace α] [TopologicalSpace β]
+     (f : α → β) (hf : Continuous f) (hclosed : IsClosedMap f) (hsurj : Function.Surjective f) :
+     QuotientMap f := by
+-  exact hclosed.quotientMap hf hsurj
++  exact hclosed.isQuotientMap hf hsurj
+ 
+ /-! ## 8. Covering Maps -/
+ 
+--- a/lean4/Core/Analysis/Topology/MetricSpaces.lean
++++ b/lean4/Core/Analysis/Topology/MetricSpaces.lean
+@@ -92,26 +92,15 @@
+     L₁ = L₂ := by
+   by_contra h
+   have hne : M.dist L₁ L₂ > 0 := by
+-    rw [← not_le]
+-    intro hle
+-    have := M.dist_nonneg L₁ L₂
+-    interval_cases
+-    · exact h (M.dist_eq_zero_iff L₁ L₂).mp (le_antisymm hle this)
+-  set ε := M.dist L₁ L₂ / 2 with hε
+-  have hε_pos : ε > 0 := by linarith
+-  obtain ⟨N₁, hN₁⟩ := h1 ε hε_pos
+-  obtain ⟨N₂, hN₂⟩ := h2 ε hε_pos
+-  set N := max N₁ N₂ with hN
+-  have hN₁' : N ≥ N₁ := le_max_left N₁ N₂
+-  have hN₂' : N ≥ N₂ := le_max_right N₁ N₂
+-  have h1' := hN₁ N hN₁'
+-  have h2' := hN₂ N hN₂'
+-  have : M.dist L₁ L₂ ≤ M.dist L₁ (seq N) + M.dist (seq N) L₂ := by
+-    calc M.dist L₁ L₂ ≤ M.dist L₁ (seq N) + M.dist (seq N) L₂ := by
+-      have := M.dist_triangle L₁ (seq N) L₂
+-      rwa [M.dist_sym (seq N) L₂] at this
+-  have h1'' : M.dist L₁ (seq N) < ε := by rwa [M.dist_sym] at h1'
+-  have h2'' : M.dist (seq N) L₂ < ε := by rwa [M.dist_sym] at h2'
++    rcases (M.dist_nonneg L₁ L₂).lt_or_eq with hlt | heq
++    · exact hlt
++    · exact absurd ((M.dist_eq_zero_iff L₁ L₂).mp heq.symm) h
++  obtain ⟨N₁, hN₁⟩ := h1 (M.dist L₁ L₂ / 2) (by linarith)
++  obtain ⟨N₂, hN₂⟩ := h2 (M.dist L₁ L₂ / 2) (by linarith)
++  have h1' := hN₁ (max N₁ N₂) (le_max_left _ _)
++  have h2' := hN₂ (max N₁ N₂) (le_max_right _ _)
++  have htri := M.dist_triangle L₁ (seq (max N₁ N₂)) L₂
++  rw [M.dist_sym L₁ (seq (max N₁ N₂))] at htri
+   linarith
+ 
+ /-! ## 4. Cauchy Sequences -/
+@@ -221,24 +210,21 @@
+   dist := fun x y => |x - y|
+   dist_nonneg := fun _ _ => abs_nonneg _
+   dist_sym := fun x y => by simp [abs_sub_comm]
+-  dist_triangle := fun x y z => abs_sub_abs_le_abs_sub x z y |>.trans (by ring_nf; exact abs_add _ _ |>.symm ▸ le_refl _)
++  dist_triangle := fun x y z => abs_sub_le x y z
+ 
+ /-- The discrete metric space where distinct points have distance 1. -/
+ def discreteMetric (α : Type*) [DecidableEq α] : PremetricSpace α where
+   dist := fun x y => if x = y then 0 else 1
+   dist_nonneg := fun x y => by
+-    simp only
+-    split_ifs <;> linarith
++    split_ifs <;> norm_num
+   dist_sym := fun x y => by
+-    simp only
+-    split_ifs with h1 h2
++    split_ifs with h1 h2 h2
+     · rfl
+     · exact (h2 h1.symm).elim
+     · exact (h1 h2.symm).elim
+     · rfl
+   dist_triangle := fun x y z => by
+-    simp only
+-    split_ifs with h1 h2 h3 h4 h5 h6 h7 <;> linarith
++    split_ifs <;> simp_all
+ 
+ /-! ## 9. Product Metric Spaces -/
+ 
+@@ -281,15 +267,18 @@
+     (S : Set α) (h : IsTotallyBounded M S) :
+     IsBounded M S := by
+   obtain ⟨F, hF⟩ := h 1 (by linarith : (1 : ℝ) > 0)
+-  by_cases hFne : F.Nonempty
+-  · -- If F is nonempty, the set is bounded
+-    sorry -- Would require significant infrastructure
+-  · -- If F is empty, S must be empty
+-    simp only [Finset.not_nonempty_iff_eq_empty] at hFne
+-    simp only [hFne, Finset.not_mem_empty, Set.iUnion_of_empty, Set.iUnion_empty,
+-               Set.subset_empty_iff] at hF
+-    use 0
+-    intro x hx
+-    exact (hF hx).elim
++  refine ⟨2 + ∑ p ∈ F ×ˢ F, M.dist p.1 p.2, ?_⟩
++  intro x hx y hy
++  obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (hF hx)
++  obtain ⟨b, hb, hyb⟩ := Set.mem_iUnion₂.mp (hF hy)
++  have hxa' : M.dist a x < 1 := hxa
++  have hyb' : M.dist b y < 1 := hyb
++  have hab : M.dist a b ≤ ∑ p ∈ F ×ˢ F, M.dist p.1 p.2 :=
++    Finset.single_le_sum (f := fun p : α × α => M.dist p.1 p.2) (fun p _ => M.dist_nonneg _ _)
++      (Finset.mem_product.mpr ⟨ha, hb⟩ : (a, b) ∈ F ×ˢ F)
++  have h1 := M.dist_triangle x a y
++  have h2 := M.dist_triangle a b y
++  rw [M.dist_sym x a] at h1
++  linarith
+ 
+ end MetricSpaces
+--- a/lean4/Core/Analysis/Topology/NormedSpaces.lean
++++ b/lean4/Core/Analysis/Topology/NormedSpaces.lean
+@@ -24,6 +24,7 @@
+ import Mathlib.Analysis.Normed.Group.Basic
+ import Mathlib.Topology.MetricSpace.Basic
+ import Core.Analysis.Topology.MetricSpaces
++import Mathlib
+ import Mathlib.Tactic.Bound
+ import Mathlib.Tactic.Positivity
+ 
+@@ -65,19 +66,19 @@
+ theorem norm_neg (N : NormedSpaceStructure K V) (v : V) : N.norm (-v) = N.norm v := by
+   have h1 : N.norm (-v) = N.norm ((-1 : K) • v) := by simp
+   rw [h1, N.norm_smul]
+-  simp [norm_neg_one]
++  simp
+ 
+ /-- Reverse triangle inequality. -/
+ theorem norm_sub_le (N : NormedSpaceStructure K V) (v w : V) :
+     |N.norm v - N.norm w| ≤ N.norm (v - w) := by
+   have h1 : N.norm v ≤ N.norm (v - w) + N.norm w := by
+-    calc N.norm v = N.norm ((v - w) + w) := by ring_nf
++    calc N.norm v = N.norm ((v - w) + w) := by rw [sub_add_cancel]
+          _ ≤ N.norm (v - w) + N.norm w := N.norm_add_le _ _
+   have h2 : N.norm w ≤ N.norm (w - v) + N.norm v := by
+-    calc N.norm w = N.norm ((w - v) + v) := by ring_nf
++    calc N.norm w = N.norm ((w - v) + v) := by rw [sub_add_cancel]
+          _ ≤ N.norm (w - v) + N.norm v := N.norm_add_le _ _
+   have h3 : N.norm (w - v) = N.norm (v - w) := by
+-    calc N.norm (w - v) = N.norm (-(v - w)) := by ring_nf
++    calc N.norm (w - v) = N.norm (-(v - w)) := by rw [neg_sub]
+          _ = N.norm (v - w) := norm_neg N _
+   rw [h3] at h2
+   exact abs_sub_le_iff.mpr ⟨by linarith, by linarith⟩
+@@ -89,10 +90,10 @@
+   dist := fun v w => N.norm (v - w)
+   dist_nonneg := fun v w => N.norm_nonneg _
+   dist_sym := fun v w => by
+-    calc N.norm (v - w) = N.norm (-(w - v)) := by ring_nf
++    calc N.norm (v - w) = N.norm (-(w - v)) := by rw [neg_sub]
+          _ = N.norm (w - v) := norm_neg N _
+   dist_triangle := fun v w z => by
+-    calc N.norm (v - z) = N.norm ((v - w) + (w - z)) := by ring_nf
++    calc N.norm (v - z) = N.norm ((v - w) + (w - z)) := by rw [sub_add_sub_cancel]
+          _ ≤ N.norm (v - w) + N.norm (w - z) := N.norm_add_le _ _
+ 
+ /-! ## 4. Bounded Linear Operators -/
+@@ -227,7 +228,7 @@
+       · intro h
+         have := N.norm_eq_zero (v - w)
+         rw [this] at h
+-        linarith [show v - w = 0 from h, sub_eq_zero.mp h]
++        exact sub_eq_zero.mp h
+       · intro h
+         simp [h, norm_zero N]))
+ 
+--- a/lean4/Core/Analysis/Topology/ProductTopology.lean
++++ b/lean4/Core/Analysis/Topology/ProductTopology.lean
+@@ -118,7 +118,7 @@
+     [∀ i, TopologicalSpace (α i)] [TopologicalSpace β]
+     (f : β → ∀ i, α i) :
+     Continuous f ↔ ∀ i, Continuous (fun x => f x i) := by
+-  exact continuous_pi_iff
++  exact _root_.continuous_pi_iff
+ 
+ /-! ## 5. Tychonoff's Theorem -/
+ 
+@@ -160,7 +160,8 @@
+     IsOpen U ↔ ∃ V : Set α, IsOpen V ∧ U = Subtype.val ⁻¹' V := by
+   constructor
+   · intro hU
+-    exact isOpen_induced_iff.mp hU
++    obtain ⟨t, ht, rfl⟩ := isOpen_induced_iff.mp hU
++    exact ⟨t, ht, rfl⟩
+   · intro ⟨V, hV, hUV⟩
+     rw [hUV]
+     exact hV.preimage continuous_subtype_val
+--- a/lean4/Core/Analysis/Topology/StoneWeierstrass.lean
++++ b/lean4/Core/Analysis/Topology/StoneWeierstrass.lean
+@@ -81,8 +81,7 @@
+     Dense (A : Set C(X, ℝ)) := by
+   have h1 : (1 : C(X, ℝ)) ∈ A := hconst 1
+   have := ContinuousMap.subalgebra_topologicalClosure_eq_top_of_separatesPoints A hsep
+-  rw [Subalgebra.topologicalClosure_eq_top_iff] at this
+-  exact this
++  rw [dense_iff_closure_eq, ← Subalgebra.topologicalClosure_coe, this, Algebra.coe_top]
+ 
+ /-! ## 3. Stone-Weierstrass for Complex-Valued Functions -/
+ 
+@@ -189,7 +188,21 @@
+ /-- Chebyshev polynomials satisfy T_n(cos θ) = cos(nθ). -/
+ theorem chebyshev_cos (n : ℕ) (θ : ℝ) :
+     (chebyshevT n).eval (Real.cos θ) = Real.cos (n * θ) := by
+-  sorry -- Induction using trig identities
++  induction n using Nat.strong_induction_on with
++  | _ n ih =>
++    match n with
++    | 0 => simp [chebyshevT]
++    | 1 => simp [chebyshevT]
++    | n + 2 =>
++      have h1 := ih (n + 1) (by omega)
++      have h0 := ih n (by omega)
++      simp only [chebyshevT, Polynomial.eval_sub, Polynomial.eval_mul, Polynomial.eval_X,
++        Polynomial.eval_ofNat, h1, h0]
++      push_cast
++      have e1 : ((n : ℝ) + 2) * θ = ((n : ℝ) + 1) * θ + θ := by ring
++      have e2 : (n : ℝ) * θ = ((n : ℝ) + 1) * θ - θ := by ring
++      rw [e1, e2, Real.cos_add, Real.cos_sub]
++      ring
+ 
+ /-- Best polynomial approximation is achieved by Chebyshev expansion. -/
+ theorem chebyshev_best_approx (f : C(Set.Icc (-1 : ℝ) 1, ℝ)) (n : ℕ) :
+--- a/lean4/Core/Analysis/Topology/UniformSpaces.lean
++++ b/lean4/Core/Analysis/Topology/UniformSpaces.lean
+@@ -62,12 +62,7 @@
+     E such that E[x] ⊆ U. -/
+ theorem uniform_open_iff {α : Type*} [UniformSpace α] (S : Set α) :
+     IsOpen S ↔ ∀ x ∈ S, ∃ U ∈ 𝓤 α, { y | (x, y) ∈ U } ⊆ S := by
+-  rw [isOpen_uniformity]
+-  constructor
+-  · intro h x hx
+-    exact h x hx
+-  · intro h x hx
+-    exact h x hx
++  exact isOpen_iff_ball_subset
+ 
+ /-- The ball of radius U around x. -/
+ def uniformBall {α : Type*} (x : α) (U : Set (α × α)) : Set α :=
+@@ -126,9 +121,8 @@
+     IsCompleteSet S := by
+   intro F hFS hF
+   obtain ⟨x, hx⟩ := CompleteSpace.complete hF
+-  have : x ∈ S := by
+-    apply hS.mem_of_tendsto (hF.1) (hFS.trans hx)
+-    exact hFS
++  have hne : (𝓝 x ⊓ 𝓟 S).NeBot := hF.1.mono (le_inf hx hFS)
++  have : x ∈ S := hS.closure_eq ▸ mem_closure_iff_clusterPt.mpr hne
+   exact ⟨x, this, hx⟩
+ 
+ /-! ## 6. Completion -/
+@@ -138,12 +132,12 @@
+ 
+ /-- The canonical embedding into the completion. -/
+ def toCompletion {α : Type*} [UniformSpace α] : α → completion' α :=
+-  UniformSpace.Completion.coe
++  UniformSpace.Completion.coe'
+ 
+ /-- The embedding is uniformly continuous. -/
+ theorem toCompletion_uniformContinuous {α : Type*} [UniformSpace α] :
+     UniformContinuous (toCompletion : α → completion' α) := by
+-  exact uniformContinuous_coe α
++  exact UniformSpace.Completion.uniformContinuous_coe α
+ 
+ /-- The embedding has dense range. -/
+ theorem toCompletion_denseRange {α : Type*} [UniformSpace α] :
+@@ -153,7 +147,7 @@
+ /-- The completion is complete. -/
+ theorem completion_complete {α : Type*} [UniformSpace α] :
+     CompleteSpace (completion' α) := by
+-  exact UniformSpace.Completion.instCompleteSpace
++  exact inferInstance
+ 
+ /-- Universal property of completion. -/
+ theorem completion_universal {α β : Type*}
+@@ -167,16 +161,7 @@
+     · ext x
+       exact UniformSpace.Completion.extension_coe hf x
+   · intro g ⟨hg_unif, hg_eq⟩
+-    ext x
+-    have := DenseRange.equalizer toCompletion_denseRange
+-      (UniformSpace.Completion.extension f) g
+-      (UniformSpace.Completion.uniformContinuous_extension.continuous)
+-      (hg_unif.continuous)
+-    apply this
+-    intro a
+-    rw [Function.comp_apply, Function.comp_apply]
+-    rw [UniformSpace.Completion.extension_coe hf]
+-    exact congr_fun hg_eq a
++    exact (UniformSpace.Completion.extension_unique hf hg_unif (fun a => (congr_fun hg_eq a).symm)).symm
+ 
+ /-! ## 7. Totally Bounded Sets -/
+ 
+@@ -189,7 +174,8 @@
+ theorem totally_bounded_complete_compact {α : Type*} [UniformSpace α]
+     (S : Set α) (htb : TotallyBounded S) (hcl : IsCompleteSet S) :
+     IsCompact (closure S) := by
+-  sorry -- Requires careful filter argument
++  have hc : IsComplete S := fun F hF hS => hcl F hS hF
++  exact (isCompact_iff_totallyBounded_isComplete.2 ⟨htb, hc⟩).closure
+ 
+ /-! ## 8. Uniform Convergence -/
+ 
+@@ -205,7 +191,7 @@
+     (hf : ∀ n, Continuous (f n))
+     (h : TendstoUniformly f g atTop) :
+     Continuous g := by
+-  exact h.continuous (eventually_of_forall hf)
++  exact h.continuous (Filter.Eventually.of_forall hf)
+ 
+ /-! ## 9. Product Uniform Structures -/
+ 

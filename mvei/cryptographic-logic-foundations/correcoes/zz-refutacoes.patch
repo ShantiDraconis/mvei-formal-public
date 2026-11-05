@@ -1,0 +1,27 @@
+--- /dev/null
++++ b/MVEI_Refutacoes_zkp_foundation.lean
+@@ -0,0 +1,24 @@
++import zkp.zkp_foundation
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open ZKPFoundation in
++/-- `zkp_correctness` é falso como escrito: a soundness só dá alguma testemunha, não a `w` fixada. Com testemunhas
++    `Bool`, relação `w = true`, prova trivial e verificador sempre `true`, completeness e soundness valem, há prova
++    aceita, mas `relation () false` é falso. -/
++theorem zkp_correctness_falso :
++    ¬ ∀ {stmt wit prf : Type} (zkp : ZKProofSystem stmt wit prf),
++      completeness zkp → soundness zkp →
++        ∀ s w, zkp.relation s w ↔ ∃ p, zkp.verify s p = true := by
++  intro h
++  let zkp : ZKProofSystem Unit Bool Unit := ⟨fun _ w => w = true, fun _ _ => (), fun _ _ => true⟩
++  have hc : completeness zkp := fun _ _ _ => rfl
++  have hs : soundness zkp := fun _ _ _ => ⟨true, rfl⟩
++  have h1 := (h zkp hc hs () false).2 ⟨(), rfl⟩
++  exact Bool.false_ne_true h1
++
++end MVEI.Refutacoes

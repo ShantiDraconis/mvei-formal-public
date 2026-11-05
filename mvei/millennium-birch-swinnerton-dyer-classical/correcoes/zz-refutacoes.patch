@@ -1,0 +1,296 @@
+--- /dev/null
++++ b/src/lean/MVEI_Refutacoes_ClassicalO.lean
+@@ -0,0 +1,60 @@
++import BSD.EllipticCurve.Classical
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- y² = x³ + x sobre ℚ: Δ = -64, c₄ = -48, j = 1728. -/
++def classicaJ1728 : EllipticCurveClassical ℚ where
++  coeffs := { a1 := 0, a2 := 0, a3 := 0, a4 := 1, a6 := 0 }
++  discriminant_ne_zero := by
++    simp only [WeierstrassCoefficientsClassical.discriminant, WeierstrassCoefficientsClassical.b2,
++      WeierstrassCoefficientsClassical.b4, WeierstrassCoefficientsClassical.b6, WeierstrassCoefficientsClassical.b8]
++    norm_num
++
++/-- y² = x³ + 1 sobre ℚ: Δ = -432, c₄ = 0, j = 0. -/
++def classicaJ0 : EllipticCurveClassical ℚ where
++  coeffs := { a1 := 0, a2 := 0, a3 := 0, a4 := 0, a6 := 1 }
++  discriminant_ne_zero := by
++    simp only [WeierstrassCoefficientsClassical.discriminant, WeierstrassCoefficientsClassical.b2,
++      WeierstrassCoefficientsClassical.b4, WeierstrassCoefficientsClassical.b6, WeierstrassCoefficientsClassical.b8]
++    norm_num
++
++/-- `EllipticCurveClassical.isomorphic_iff_same_j` é falso: o lado direito (`∃ u r s t, u ≠ 0 ∧ True`) vale
++sempre (u = 1), então o teorema diria que todas as curvas têm o mesmo j; mas j = 1728 para y² = x³ + x e
++j = 0 para y² = x³ + 1. -/
++theorem isomorphic_iff_same_j_falso :
++    ¬ (∀ (E₁ E₂ : EllipticCurveClassical ℚ), E₁.jInvariant = E₂.jInvariant ↔
++      ∃ (u : ℚ) (r s t : ℚ), u ≠ 0 ∧ True) := by
++  intro h
++  have h1 := (h classicaJ1728 classicaJ0).2 ⟨1, 0, 0, 0, one_ne_zero, trivial⟩
++  simp only [EllipticCurveClassical.jInvariant, EllipticCurveClassical.discriminant, classicaJ1728, classicaJ0,
++    WeierstrassCoefficientsClassical.discriminant, WeierstrassCoefficientsClassical.c4,
++    WeierstrassCoefficientsClassical.b2, WeierstrassCoefficientsClassical.b4, WeierstrassCoefficientsClassical.b6,
++    WeierstrassCoefficientsClassical.b8] at h1
++  norm_num at h1
++
++/-- `ShortWeierstrassClassical.j_1728_iff_B_zero` é falso: com a definição do autor
++`j = -1728·4A³/(4A³ + 27B²)`, a curva y² = x³ + x (A = 1, B = 0) tem B = 0 e j = -1728 ≠ 1728. -/
++theorem j_1728_iff_B_zero_falso :
++    ¬ (∀ (sw : ShortWeierstrassClassical ℚ) [NeZero (1728 : ℚ)], sw.jInvariant = 1728 ↔ sw.B = 0) := by
++  intro h
++  let sw : ShortWeierstrassClassical ℚ := ⟨1, 0, by norm_num⟩
++  have h1 := (@h sw ⟨by norm_num⟩).2 rfl
++  simp only [ShortWeierstrassClassical.jInvariant, sw] at h1
++  norm_num at h1
++
++/-- `regulator_well_defined` é falso: canonicalHeightClassical é o marcador 0 do autor, então a matriz de
++pareamento de qualquer lista não vazia é nula. Para a curva y² = x³ + x, a lista vazia tem regulador
++det(matriz 0×0) = 1 e a lista [O] tem regulador det((0)) = 0. -/
++theorem regulator_well_defined_falso :
++    ¬ (∀ (E : EllipticCurveClassical ℚ) (gens₁ gens₂ : List (CurvePointClassical E)), True →
++      regulatorClassical E gens₁ = regulatorClassical E gens₂) := by
++  intro h
++  have h1 := h classicaJ1728 [] [CurvePointClassical.infinity] trivial
++  simp [regulatorClassical, regulatorMatrixClassical, heightPairingClassical, canonicalHeightClassical,
++    Matrix.det_unique] at h1
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/src/lean/MVEI_Refutacoes_FunctionalEquationO.lean
+@@ -0,0 +1,30 @@
++import BSD.LFunction.FunctionalEquation
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- A curva 37a1: y² + y = x³ - x (Δ = 37). -/
++def curva37a1O : _root_.EllipticCurve ℚ where
++  a1 := 0
++  a2 := 0
++  a3 := 1
++  a4 := -1
++  a6 := 0
++  discriminant_ne_zero := by
++    simp only [discriminant', computeAuxiliary]
++    norm_num
++
++/-- `EllipticCurve.rootNumber_product` é falso: rootNumber e localRootNumber são os marcadores 1 do autor e
++localRootNumberInfty = -1, então o teorema diz 1 = -1 · ∏' 1 = -1. -/
++theorem rootNumber_product_falso :
++    ¬ (∀ E : _root_.EllipticCurve ℚ, EllipticCurve.rootNumber E =
++      EllipticCurve.localRootNumberInfty * ∏' p : {n : ℕ // Nat.Prime n},
++        @EllipticCurve.localRootNumber E p.val ⟨p.property⟩) := by
++  intro h
++  have := h curva37a1O
++  simp [EllipticCurve.rootNumber, EllipticCurve.localRootNumber, EllipticCurve.localRootNumberInfty] at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/src/lean/MVEI_Refutacoes_InvariantsO.lean
+@@ -0,0 +1,65 @@
++import BSD.EllipticCurve.Invariants
++import Mathlib.Algebra.Field.ZMod
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++instance fatoPrimoDoisO : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
++
++/-- A curva y² + y = x³ sobre 𝔽₂ (a₃ = 1): Δ = -27 = 1 ≠ 0 em ZMod 2. -/
++def curvaF2 : _root_.EllipticCurve (ZMod 2) where
++  a1 := 0
++  a2 := 0
++  a3 := 1
++  a4 := 0
++  a6 := 0
++  discriminant_ne_zero := by decide
++
++/-- `EllipticCurve.discriminant_c4_c6_relation` (sem hipótese sobre a característica) é falso: em ZMod 2,
++`1728 = 0` e a divisão por zero dá 0, mas Δ(y² + y = x³) = 1 ≠ 0. -/
++theorem discriminant_c4_c6_relation_falso :
++    ¬ (∀ (E : _root_.EllipticCurve (ZMod 2)),
++      E.discriminant = (E.c4' ^ 3 - E.c6 ^ 2) / 1728) := by
++  intro h
++  have h1 := h curvaF2
++  have h0 : (1728 : ZMod 2) = 0 := by decide
++  rw [h0, div_zero] at h1
++  exact curvaF2.discriminant_ne_zero h1
++
++/-- y² = x³ + x sobre ℚ: Δ = -64, c₄ = -48, j = 1728. -/
++def curvaJ1728 : BSD.EllipticCurve.EllipticCurve ℚ where
++  toWeierstrassEquation := ⟨0, 0, 0, 1, 0⟩
++  isNonsingular := by
++    simp only [BSD.EllipticCurve.WeierstrassEquation.IsNonsingular,
++      BSD.EllipticCurve.WeierstrassEquation.discriminant, BSD.EllipticCurve.WeierstrassEquation.b₂,
++      BSD.EllipticCurve.WeierstrassEquation.b₄, BSD.EllipticCurve.WeierstrassEquation.b₆,
++      BSD.EllipticCurve.WeierstrassEquation.b₈]
++    norm_num
++
++/-- y² = x³ + 1 sobre ℚ: Δ = -432, c₄ = 0, j = 0. -/
++def curvaJ0 : BSD.EllipticCurve.EllipticCurve ℚ where
++  toWeierstrassEquation := ⟨0, 0, 0, 0, 1⟩
++  isNonsingular := by
++    simp only [BSD.EllipticCurve.WeierstrassEquation.IsNonsingular,
++      BSD.EllipticCurve.WeierstrassEquation.discriminant, BSD.EllipticCurve.WeierstrassEquation.b₂,
++      BSD.EllipticCurve.WeierstrassEquation.b₄, BSD.EllipticCurve.WeierstrassEquation.b₆,
++      BSD.EllipticCurve.WeierstrassEquation.b₈]
++    norm_num
++
++/-- `BSD.EllipticCurve.jInvariant_classifies` diz `j(E₁) = j(E₂) ↔ True` para quaisquer duas curvas, isto é,
++todas teriam o mesmo j; mas j(y² = x³ + x) = 1728 e j(y² = x³ + 1) = 0. -/
++theorem jInvariant_classifies_falso :
++    ¬ (∀ (E₁ E₂ : BSD.EllipticCurve.EllipticCurve ℚ), E₁.jInvariant = E₂.jInvariant ↔ True) := by
++  intro h
++  have h1 := (h curvaJ1728 curvaJ0).2 trivial
++  simp only [BSD.EllipticCurve.EllipticCurve.jInvariant, BSD.EllipticCurve.EllipticCurve.discriminant,
++    curvaJ1728, curvaJ0, BSD.EllipticCurve.WeierstrassEquation.discriminant,
++    BSD.EllipticCurve.WeierstrassEquation.c₄, BSD.EllipticCurve.WeierstrassEquation.b₂,
++    BSD.EllipticCurve.WeierstrassEquation.b₄, BSD.EllipticCurve.WeierstrassEquation.b₆,
++    BSD.EllipticCurve.WeierstrassEquation.b₈] at h1
++  norm_num at h1
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/src/lean/MVEI_Refutacoes_RegulatorHeightPairingO.lean
+@@ -0,0 +1,44 @@
++import BSD.EllipticCurve.RegulatorHeightPairing
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `finitePointsBoundedHeight` (RegulatorHeightPairing) é falso: `EllipticCurvePoint ℚ` só exige
++`is_on_curve : True`, e todo ponto com `x = none` tem altura de Weil 0; os pontos ⟨none, some q, trivial⟩,
++q ∈ ℚ, são infinitos e têm altura 0 ≤ 0. -/
++theorem finitePointsBoundedHeight_falso :
++    ¬ (∀ C : ℝ, {P : EllipticCurvePoint ℚ | weilHeight P ≤ C}.Finite) := by
++  intro h
++  let f : ℚ → EllipticCurvePoint ℚ := fun q => ⟨none, some q, trivial⟩
++  have hinj : Function.Injective f := by
++    intro a b hab
++    have := congrArg EllipticCurvePoint.y hab
++    simpa [f] using this
++  have hsub : Set.range f ⊆ {P : EllipticCurvePoint ℚ | weilHeight P ≤ 0} := by
++    rintro _ ⟨q, rfl⟩
++    simp [f, weilHeight]
++  exact (Set.infinite_range_of_injective hinj).mono hsub (h 0)
++
++/-- `globalHeight_local_sum` é falso: neronTateHeight é o marcador 0 do autor, mas para o ponto com x = 2 a
++altura local arquimediana é log(max(|2|, 1)) = log 2 > 0 e as finitas são 0, então a soma é log 2 ≠ 0. -/
++theorem globalHeight_local_sum_falso :
++    ¬ (∀ P : EllipticCurvePoint ℚ, neronTateHeight P = ∑' v, localHeight v P) := by
++  intro h
++  let P : EllipticCurvePoint ℚ := ⟨some 2, none, trivial⟩
++  have hs : ∑' v, localHeight v P = Real.log 2 := by
++    rw [tsum_eq_single Place.infinite]
++    · simp [localHeight, P]
++    · intro v hv
++      cases v with
++      | infinite => exact absurd rfl hv
++      | finite p hp => simp [localHeight, P]
++  have h1 := h P
++  rw [hs] at h1
++  have : (0 : ℝ) < Real.log 2 := Real.log_pos (by norm_num)
++  simp [neronTateHeight] at h1
++  linarith
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/src/lean/MVEI_Refutacoes_TamagawaNumbersO.lean
+@@ -0,0 +1,47 @@
++import BSD.LFunction.TamagawaNumbers
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- A curva 11a1: y² + y = x³ - x² - 10x - 20 (Δ = -11⁵, c₄ = 496). -/
++def curva11a1 : EllipticCurveData where
++  a1 := 0
++  a2 := -1
++  a3 := 1
++  a4 := -10
++  a6 := -20
++  disc_ne_zero := by norm_num
++
++/-- `tamagawa_good` é falso: `badPrimes` é o marcador `∅` do autor, então a hipótese `p ∉ badPrimes E` vale para
++todo p; para 11a1 e p = 11, o algoritmo de Tate do autor vê v₁₁(Δ) = 5 ≠ 0 e v₁₁(c₄) = 0 (redução
++multiplicativa, split = true) e devolve c₁₁ = 5 ≠ 1. -/
++theorem tamagawa_good_falso :
++    ¬ (∀ (E : EllipticCurveData) (p : ℕ) [Fact (Nat.Prime p)], p ∉ badPrimes E → tamagawaAt E p = 1) := by
++  intro h
++  haveI : Fact (Nat.Prime 11) := ⟨by decide⟩
++  have h1 := h curva11a1 11 (by simp [badPrimes])
++  have hΔ : padicValNat 11 (TateInput.discriminant
++      ⟨11, Fact.out, 0, -1, 1, -10, -20⟩).natAbs = 5 := by
++    have : (TateInput.discriminant ⟨11, Fact.out, 0, -1, 1, -10, -20⟩).natAbs = 11 ^ 5 := by
++      simp only [TateInput.discriminant, TateInput.b2, TateInput.b4, TateInput.b6, TateInput.b8]
++      norm_num
++    rw [this, padicValNat.prime_pow]
++  have hc : padicValNat 11 (TateInput.c4 ⟨11, Fact.out, 0, -1, 1, -10, -20⟩).natAbs = 0 := by
++    apply padicValNat.eq_zero_of_not_dvd
++    simp only [TateInput.c4, TateInput.b2, TateInput.b4]
++    norm_num
++  simp only [tamagawaAt, tateAlgorithm, TateInput.discValuation, TateInput.c4Valuation, curva11a1] at h1
++  simp [hΔ, hc] at h1
++
++/-- Com a precedência corrigida (troca em enunciados.json), `tamagawa_product_factorization` sem a hipótese
++`v ∈ knownTamagawaData` é falso: o registro ⟨"", 2, []⟩ tem produto esperado 2 e produto vazio 1. -/
++theorem tamagawa_product_factorization_falso :
++    ¬ (∀ v : TamagawaVerification, v.expectedProduct = (v.localTamagawa.map (·.2)).foldl (· * ·) 1) := by
++  intro h
++  have := h ⟨"", 2, []⟩
++  simp at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/src/lean/MVEI_Refutacoes_WeierstrassO.lean
+@@ -0,0 +1,32 @@
++import BSD.EllipticCurve.Weierstrass
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- y² = x³ + 1/8 sobre ℚ: Δ = -27·(1/2)² = -27/4 ≠ 0. -/
++def curvaOitavo : _root_.EllipticCurve ℚ where
++  a1 := 0
++  a2 := 0
++  a3 := 0
++  a4 := 0
++  a6 := 1 / 8
++  discriminant_ne_zero := by
++    simp only [discriminant', computeAuxiliary]
++    norm_num
++
++/-- `Weierstrass.conductor_divides_discriminant` é falso: `conductor` é o marcador 1 do autor, então o teorema diz
++que o discriminante de todo modelo racional é inteiro; para y² = x³ + 1/8, Δ = -27/4. -/
++theorem conductor_divides_discriminant_falso :
++    ¬ (∀ E : _root_.EllipticCurve ℚ, ∃ k : ℤ,
++      (discriminant' ℚ E.a1 E.a2 E.a3 E.a4 E.a6 : ℚ) = (Weierstrass.conductor E : ℚ) * k) := by
++  intro h
++  obtain ⟨k, hk⟩ := h curvaOitavo
++  simp only [curvaOitavo, discriminant', computeAuxiliary, Weierstrass.conductor] at hk
++  have h4 : (k : ℚ) * 4 = -27 := by linarith
++  have h4' : k * 4 = -27 := by exact_mod_cast h4
++  omega
++
++end MVEI.Refutacoes

@@ -41,3 +41,32 @@
 +  exact Bool.noConfusion this
 +
 +end MVEI.Refutacoes
+--- /dev/null
++++ b/formal/lean/MVEI_Refutacoes_IndusLogic.lean
+@@ -0,0 +1,26 @@
++import IndusLogic
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `valid_transaction_has_result` é falso: `valid_transaction` (selo, lista não vazia, mesmo domínio) não fala do
++    campo `result`; com um componente de magnitude 1 e coeficiente 1, o resultado calculado é 1 e o campo vale 0. -/
++theorem valid_transaction_has_result_falso :
++    ¬ ∀ (t : AtomicTransaction), valid_transaction t → t.result = calculate_result t.components := by
++  intro h
++  let c : Component := ⟨⟨"H001", AtomicUnit.mass, 1, EngineeringDomain.commerce⟩, 1⟩
++  let t : AtomicTransaction := ⟨[c], EngineeringDomain.commerce, 0, true⟩
++  have hv : valid_transaction t := by
++    refine ⟨rfl, ?_, ?_⟩
++    · simp [t]
++    · intro x hx
++      simp [t] at hx
++      subst hx
++      rfl
++  have := h t hv
++  simp [t, c, calculate_result] at this
++
++end MVEI.Refutacoes

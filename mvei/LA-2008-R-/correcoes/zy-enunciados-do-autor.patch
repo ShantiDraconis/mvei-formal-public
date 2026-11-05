@@ -1,0 +1,33 @@
+--- a/anti-rh-research-os/lean/AntiRHDefinitions.lean
++++ b/anti-rh-research-os/lean/AntiRHDefinitions.lean
+@@ -4,7 +4,7 @@
+ -- Assumes: AntiRH.antiRH (at least one zero off the critical line)
+ -- and builds the classification of zero sets.
+ 
+-import AntiRH.RHFramework
++import RHFramework
+ import Mathlib.Tactic
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Data.Real.Basic
+--- a/anti-rh-research-os/lean/ExplicitFormulaModel.lean
++++ b/anti-rh-research-os/lean/ExplicitFormulaModel.lean
+@@ -4,7 +4,7 @@
+ -- Models the pair contribution of (ρ, ρ̄) to ψ(x) and the
+ -- resulting amplitude growth.
+ 
+-import AntiRH.AntiRHDefinitions
++import AntiRHDefinitions
+ import Mathlib.Tactic
+ import Mathlib.Data.Real.Basic
+ 
+--- a/anti_rh/lean/AntiRHDefinitions.lean
++++ b/anti_rh/lean/AntiRHDefinitions.lean
+@@ -56,7 +56,7 @@
+ /-! ## Displacement analysis -/
+ 
+ /-- All Δ values in a scenario. -/
+-def allDeltas (s : Scenario) : List Float :=
++noncomputable def allDeltas (s : Scenario) : List ℝ :=
+   s.zeros.map Delta
+ 
+ /-- Count off-critical zeros in a scenario. -/

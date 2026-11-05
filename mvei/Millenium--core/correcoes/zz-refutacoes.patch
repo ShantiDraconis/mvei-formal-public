@@ -1,0 +1,50 @@
+--- /dev/null
++++ b/lean/MVEI_Refutacoes_Semantics.lean
+@@ -0,0 +1,47 @@
++import Semantics
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `TIF.classical_singleton_resolution` é falso: `Term.var "x"` não tem indeterminado (isClassical = true),
++    mas o valor depende da valoração (v = fun _ => r + 1 dá r + 1 ≠ r). -/
++theorem classical_singleton_resolution_falso :
++    ¬ (∀ (t : TIF.Term) (_ : t.isClassical = true) (_ : TIF.State),
++        ∃ r : Rat, ∀ v : TIF.Valuation, t.eval v = some r) := by
++  intro H
++  obtain ⟨r, hr⟩ := H (TIF.Term.var "x") rfl TIF.State.empty
++  have h := hr (fun _ => r + 1)
++  simp [TIF.Term.eval] at h
++
++/-- `TIF.C2_binOp_collapses` é falso: `rewriteStep` não tem regra de redução clássica para ×_I, então
++    2 ×_I 3 fica em forma normal sem virar constante, embora os dois operandos normalizem para constantes. -/
++theorem C2_binOp_collapses_falso :
++    ¬ (∀ (op : TIF.ExtOp) (t₁ t₂ : TIF.Term) (σ : TIF.State) (v₁ v₂ : Rat),
++        t₁.normalize σ 1000 = .const v₁ →
++        t₂.normalize σ 1000 = .const v₂ →
++        (op = .divI → v₂ ≠ 0) →
++        ∃ v : Rat, (TIF.Term.binOp op t₁ t₂).normalize σ 1000 = .const v) := by
++  intro H
++  obtain ⟨v, hv⟩ := H .mulI (.const 2) (.const 3) TIF.State.empty 2 3 rfl rfl (fun h => by cases h)
++  have h : (TIF.Term.binOp .mulI (.const 2) (.const 3)).normalize TIF.State.empty 1000
++      = TIF.Term.binOp .mulI (.const 2) (.const 3) := rfl
++  rw [h] at hv
++  cases hv
++
++/-- `TIF.F3_T1_collapse_correct` é falso: com restrições contraditórias (x = 0 e x = 1) nenhuma valoração é
++    admissível, mas a constante 5 normaliza para ela mesma. -/
++theorem F3_T1_collapse_correct_falso :
++    ¬ (∀ (t : TIF.Term) (σ : TIF.State) (r : Rat),
++        t.normalize σ 1000 = .const r → t.inResolutionSet σ r) := by
++  intro H
++  obtain ⟨v, hv, -⟩ := H (.const 5) ⟨[], [.exact "x" 0, .exact "x" 1]⟩ 5 rfl
++  have h0 := hv (.exact "x" 0) (by simp)
++  have h1 := hv (.exact "x" 1) (by simp)
++  simp [TIF.Constraint.satisfiedBy] at h0 h1
++  rw [h0] at h1
++  exact absurd h1 (by norm_num)
++
++end MVEI.Refutacoes

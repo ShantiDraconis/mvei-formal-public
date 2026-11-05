@@ -1071,13 +1071,22 @@
  
  namespace Universe00.ZetaFunction
  
+@@ -61,7 +66,7 @@
+ 
+ /-- The zeta series converges for Re(s) > 1 -/
+ lemma zeta_convergence (s : ℂ) (h : s.re > 1) :
+-  ∃ (L : ℂ), Filter.Tendsto (fun N => ∑ n in Finset.range N, (n : ℂ)^(-s)) Filter.atTop (𝓝 L) := by
++  ∃ (L : ℂ), Filter.Tendsto (fun N => ∑ n ∈ Finset.range N, (n : ℂ)^(-s)) Filter.atTop (𝓝 L) := by
+   sorry  -- Standard result from complex analysis
+ 
+ /-- The zeta function has a simple pole at s = 1 -/
 @@ -84,7 +89,7 @@
  
  /-- Symmetry consequence: if ζ(s) = 0, properties relate to ζ(1-s̄) -/
  lemma functional_equation_zeros (s : ℂ) (h : riemannZeta s = 0) :
 -  ∃ (relation : ℂ → ℂ → Prop), relation s (1 - Complex.conj s) := by
 +  ∃ (relation : ℂ → ℂ → Prop), relation s (1 - (starRingEnd ℂ) s) := by
-   sorry
+   first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
  
  /-! ## Critical Line Properties -/
 @@ -99,7 +104,7 @@

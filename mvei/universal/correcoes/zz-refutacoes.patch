@@ -1,0 +1,1723 @@
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_BaireCategory.lean
+@@ -0,0 +1,33 @@
++import Core.Analysis.Topology.BaireCategory
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Topology in
++/-- `BaireCategoryTheory.residual_countable_inter` é falso sem a hipótese de espaço de Baire: em ℚ cada {q}ᶜ é aberto
++    e denso (residual), mas a interseção de {qₙ}ᶜ sobre uma enumeração de ℚ é vazia, e ∅ não é denso. -/
++theorem residual_countable_inter_falso :
++    ¬ ∀ {α : Type} [TopologicalSpace α] (S : ℕ → Set α), (∀ n, BaireCategoryTheory.IsResidual' (S n)) →
++      BaireCategoryTheory.IsResidual' (⋂ n, S n) := by
++  intro H
++  let q : ℕ → ℚ := fun n => (Denumerable.eqv ℚ).symm n
++  have hres : ∀ n, BaireCategoryTheory.IsResidual' ({q n}ᶜ : Set ℚ) := by
++    intro n
++    exact ⟨{q n}ᶜ, le_rfl, ⟨fun _ => {q n}ᶜ, fun _ => isOpen_compl_singleton, (Set.iInter_const _).symm⟩,
++      dense_compl_singleton (q n)⟩
++  obtain ⟨G, hG, -, hd⟩ := H (fun n => ({q n}ᶜ : Set ℚ)) hres
++  have hempty : (⋂ n, ({q n}ᶜ : Set ℚ)) = ∅ := by
++    ext x
++    simp only [Set.mem_iInter, Set.mem_compl_iff, Set.mem_singleton_iff, Set.mem_empty_iff_false, iff_false,
++      not_forall, not_not]
++    exact ⟨Denumerable.eqv ℚ x, ((Denumerable.eqv ℚ).symm_apply_apply x).symm⟩
++  rw [hempty, Set.subset_empty_iff] at hG
++  rw [hG] at hd
++  have h0 := hd.closure_eq
++  rw [closure_empty] at h0
++  exact (Set.empty_ne_univ h0)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_BaireCategoryL.lean
+@@ -0,0 +1,74 @@
++import Core.Analysis.Topology.BaireCategory
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `BaireCategoryTheory.dense_Gδ_not_meager` (sem `[Nonempty α]`) é falso no espaço vazio: lá ∅ é Gδ (interseção
++    de ∅), denso (não há pontos) e magro (coberto por ∅, que é raro), e `BaireSpace Empty` vale trivialmente. -/
++theorem dense_Gδ_not_meager_falso :
++    ¬ ∀ {α : Type} [TopologicalSpace α] [BaireSpace α] (S : Set α),
++      (∃ U : ℕ → Set α, (∀ n, IsOpen (U n)) ∧ S = ⋂ n, U n) → Dense S →
++      ¬BaireCategoryTheory.IsMeager' S := by
++  intro H
++  haveI : BaireSpace Empty := ⟨fun _ _ _ x => x.elim⟩
++  apply H (α := Empty) ∅ ⟨fun _ => ∅, fun _ => isOpen_empty, (Set.iInter_const (∅ : Set Empty)).symm⟩
++    (fun x => x.elim)
++  refine ⟨fun _ => ∅, fun _ => ?_, by simp⟩
++  simp [BaireCategoryTheory.IsNowhereDense']
++
++/-- `BaireCategoryTheory.baire_iff_not_meager` é falso: a volta (univ não magro ⇒ Baire) não vale. Em ℚ ⊔ {∗}
++    (soma topológica), o ponto ∗ é isolado, então univ não é magro (um raro não contém ponto isolado); mas os abertos
++    densos Uₙ = {inl qₙ}ᶜ (qₙ enumera ℚ) têm interseção {∗}, que não é densa. -/
++theorem baire_iff_not_meager_falso :
++    ¬ ∀ {α : Type} [TopologicalSpace α] [Nonempty α],
++      BaireCategoryTheory.IsBaireSpace' α ↔ ¬BaireCategoryTheory.IsMeager' (Set.univ : Set α) := by
++  intro H
++  have h := (H (α := ℚ ⊕ Unit)).mpr ?_
++  · obtain ⟨q, hq⟩ := exists_surjective_nat ℚ
++    set U : ℕ → Set (ℚ ⊕ Unit) := fun n => {Sum.inl (q n)}ᶜ with hU
++    have hUo : ∀ n, IsOpen (U n) ∧ Dense (U n) := by
++      intro n
++      refine ⟨isOpen_compl_singleton, ?_⟩
++      have hd : Dense ({q n}ᶜ : Set ℚ) := dense_compl_singleton (q n)
++      rw [dense_iff_closure_eq, Set.eq_univ_iff_forall]
++      intro z
++      rcases z with r | u
++      · have h1 : (Sum.inl r : ℚ ⊕ Unit) ∈ Sum.inl '' closure ({q n}ᶜ : Set ℚ) :=
++          ⟨r, by rw [hd.closure_eq]; trivial, rfl⟩
++        have h2 := image_closure_subset_closure_image continuous_inl h1
++        refine closure_mono ?_ h2
++        rintro _ ⟨s, hs, rfl⟩
++        simp only [hU, Set.mem_compl_iff, Set.mem_singleton_iff, Sum.inl.injEq]
++        exact hs
++      · apply subset_closure
++        simp [hU]
++    have hden := h U hUo
++    have hsub : (⋂ n, U n) ⊆ {Sum.inr ()} := by
++      intro z hz
++      rcases z with r | u
++      · obtain ⟨n, hn⟩ := hq r
++        have := Set.mem_iInter.mp hz n
++        simp [hU, hn] at this
++      · simp
++    have h0 : (Sum.inl 0 : ℚ ⊕ Unit) ∈ closure (⋂ n, U n) := by rw [hden.closure_eq]; trivial
++    have := closure_mono hsub h0
++    rw [closure_singleton] at this
++    simp at this
++  · rintro ⟨f, hf, hcov⟩
++    obtain ⟨n, hn⟩ := Set.mem_iUnion.mp (hcov (Set.mem_univ (Sum.inr ())))
++    have hopen : IsOpen ({Sum.inr ()} : Set (ℚ ⊕ Unit)) := by
++      have := (isOpen_range_inr : IsOpen (Set.range (Sum.inr : Unit → ℚ ⊕ Unit)))
++      convert this using 1
++      ext z; rcases z with r | u <;> simp
++    have hsub : ({Sum.inr ()} : Set (ℚ ⊕ Unit)) ⊆ interior (closure (f n)) :=
++      interior_maximal (Set.singleton_subset_iff.mpr (subset_closure hn)) hopen
++    have hnd := hf n
++    unfold BaireCategoryTheory.IsNowhereDense' at hnd
++    rw [hnd] at hsub
++    exact hsub rfl
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_ComplexDifferentiability.lean
+@@ -0,0 +1,58 @@
++import Core.Analysis.Calculus.ComplexDifferentiability
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Topology in
++/-- `ComplexDifferentiability.zeros_isolated` é falso: `f ≠ 0` só diz que f não é a função nula em ℂ inteiro.
++    Com U = bola unitária e f = 0 em U, 1 fora (holomorfa em U, onde é constante), z₀ = 0 é zero e toda bola
++    furada em torno de 0 tem zeros. -/
++theorem zeros_isolated_falso :
++    ¬ ∀ {f : ℂ → ℂ} {U : Set ℂ}, IsOpen U → IsConnected U → ComplexDifferentiability.Holomorphic f U → f ≠ 0 →
++      ∀ z₀ ∈ U, f z₀ = 0 → ∃ r > 0, ∀ z ∈ Metric.ball z₀ r \ {z₀}, f z ≠ 0 := by
++  intro H
++  classical
++  let f : ℂ → ℂ := fun z => if z ∈ Metric.ball (0 : ℂ) 1 then 0 else 1
++  have hU : IsOpen (Metric.ball (0 : ℂ) 1) := Metric.isOpen_ball
++  have hc : IsConnected (Metric.ball (0 : ℂ) 1) := (convex_ball (0 : ℂ) 1).isConnected (by simp)
++  have hhol : ComplexDifferentiability.Holomorphic f (Metric.ball (0 : ℂ) 1) := by
++    refine ⟨hU, ?_⟩
++    have : Set.EqOn f (fun _ => 0) (Metric.ball (0 : ℂ) 1) := fun z hz => by
++      show (if z ∈ Metric.ball (0 : ℂ) 1 then (0 : ℂ) else 1) = 0
++      rw [if_pos hz]
++    exact (differentiableOn_const 0).congr this
++  have hne : f ≠ 0 := by
++    intro h
++    have := congrFun h 2
++    simp [f, Complex.dist_eq] at this
++  obtain ⟨r, hr, hz⟩ := H hU hc hhol hne 0 (Metric.mem_ball_self one_pos) (by simp [f])
++  set t : ℝ := min (r / 2) (1 / 2) with ht
++  have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
++  have hmem : ((t : ℝ) : ℂ) ∈ Metric.ball (0 : ℂ) r \ {0} := by
++    refine ⟨?_, ?_⟩
++    · rw [Metric.mem_ball, Complex.dist_eq, sub_zero, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
++      exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
++    · simpa using ht0.ne'
++  apply hz _ hmem
++  have : ((t : ℝ) : ℂ) ∈ Metric.ball (0 : ℂ) 1 := by
++    rw [Metric.mem_ball, Complex.dist_eq, sub_zero, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
++    exact lt_of_le_of_lt (min_le_right _ _) (by norm_num)
++  show (if ((t : ℝ) : ℂ) ∈ Metric.ball (0 : ℂ) 1 then (0 : ℂ) else 1) = 0
++  rw [if_pos this]
++
++open Topology in
++/-- `ComplexDifferentiability.zero_factorization` é falso: para f = 0, orderOfZero f z₀ = sInf ∅ = 0 (e o enunciado
++    vale para todo n), e com n = 0 a fatoração dá f z₀ = g z₀ ≠ 0. -/
++theorem zero_factorization_falso :
++    ¬ ∀ {f : ℂ → ℂ} {z₀ : ℂ}, DifferentiableAt ℂ f z₀ → f z₀ = 0 → ∀ (n : ℕ),
++      ∃ g : ℂ → ℂ, DifferentiableAt ℂ g z₀ ∧ g z₀ ≠ 0 ∧ ∀ᶠ z in 𝓝 z₀, f z = (z - z₀)^n * g z := by
++  intro H
++  obtain ⟨g, -, hg0, hev⟩ := H (f := fun _ => 0) (z₀ := 0) (differentiableAt_const 0) rfl 0
++  have := hev.self_of_nhds
++  simp at this
++  exact hg0 this.symm
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_ComplexDifferentiabilityL.lean
+@@ -0,0 +1,118 @@
++import Core.Analysis.Calculus.ComplexDifferentiability
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Topology in
++/-- Auxiliar: ∑ n! wⁿ não é somável para w ≠ 0 (teste da razão). -/
++theorem power_series_coeff_aux_fact (w : ℂ) (hw : w ≠ 0) :
++    ¬ Summable fun n : ℕ => (n.factorial : ℂ) * w ^ n := by
++  apply not_summable_of_ratio_norm_eventually_ge (r := 2) (by norm_num)
++  · refine Filter.Frequently.of_forall fun n => ?_
++    simp [Nat.factorial_ne_zero, hw]
++  · have hxa : 0 < ‖w‖ := norm_pos_iff.mpr hw
++    obtain ⟨N, hN⟩ := exists_nat_gt (2 / ‖w‖)
++    filter_upwards [Filter.eventually_ge_atTop N] with n hn
++    have h1 : (2 : ℝ) ≤ (n + 1) * ‖w‖ := by
++      have h3 : (N : ℝ) ≤ n := by exact_mod_cast hn
++      have h4 : 2 / ‖w‖ < n + 1 := by linarith
++      rw [div_lt_iff₀ hxa] at h4; linarith
++    have h2 : 0 ≤ (n.factorial : ℝ) * ‖w‖ ^ n := by positivity
++    have e1 : ‖(n.factorial : ℂ) * w ^ n‖ = (n.factorial : ℝ) * ‖w‖ ^ n := by
++      rw [norm_mul, norm_pow]; simp
++    have e2 : ‖((n + 1).factorial : ℂ) * w ^ (n + 1)‖ =
++        ((n + 1) * ‖w‖) * ((n.factorial : ℝ) * ‖w‖ ^ n) := by
++      rw [norm_mul, norm_pow, RCLike.norm_natCast, Nat.factorial_succ, pow_succ]; push_cast; ring
++    rw [e1, e2]
++    nlinarith
++
++open Filter Topology in
++/-- `ComplexDifferentiability.power_series_coeff` é falso como o Lean lê: `∑'` vale 0 numa série não somável. Com
++    f = 0, z₀ = 0 e aₙ = n! (a₀ = 0): para z ≠ 0 a série ∑ n! zⁿ diverge e o `tsum` vale 0 = f z; em z = 0 a soma é
++    a₀ = 0. Mas a₁ = 1 ≠ 0 = f'(0)/1!. -/
++theorem power_series_coeff_falso :
++    ¬ ∀ {f : ℂ → ℂ} {z₀ : ℂ} {a : ℕ → ℂ}, DifferentiableAt ℂ f z₀ →
++      (∀ᶠ z in 𝓝 z₀, f z = ∑' n, a n * (z - z₀) ^ n) →
++      ∀ n, a n = (iteratedDeriv n f z₀) / n.factorial := by
++  intro H
++  set a : ℕ → ℂ := fun n => if n = 0 then 0 else (n.factorial : ℂ) with ha
++  have hsum : ∀ z : ℂ, ∑' n, a n * (z - 0) ^ n = 0 := by
++    intro z
++    by_cases hz : z = 0
++    · subst hz
++      have : (fun n => a n * ((0 : ℂ) - 0) ^ n) = fun _ => 0 := by
++        funext n; rcases n with _ | n <;> simp [ha]
++      rw [this, tsum_zero]
++    · apply tsum_eq_zero_of_not_summable
++      intro hs
++      apply power_series_coeff_aux_fact z hz
++      have h1 := (summable_nat_add_iff 1).mpr hs
++      have h2 : Summable (fun n : ℕ => ((n + 1).factorial : ℂ) * z ^ (n + 1)) := by
++        simpa [ha] using h1
++      exact (summable_nat_add_iff 1).mp h2
++  have := H (f := fun _ => 0) (z₀ := 0) (a := a) (differentiableAt_const _)
++    (Eventually.of_forall fun z => (hsum z).symm) 1
++  simp [ha, iteratedDeriv_one] at this
++
++open Filter Topology in
++/-- Auxiliar: com f(w) = 0 em ‖w‖ < 1 e c fora, e φ contínua, φ ∘ (re, im) de f… não é contínua em (1, 0) quando
++    φ c ≠ φ 0: ao longo de (t, 0), t → 1⁻, vale φ 0, e em (1, 0) vale φ c. -/
++theorem harmonic_aux_not_cont (c : ℂ) (φ : ℂ → ℝ) (hφ : φ c ≠ φ 0) :
++    ¬ Continuous (fun p : ℝ × ℝ => φ ((fun w : ℂ => if ‖w‖ < 1 then 0 else c) (p.1 + p.2 * Complex.I))) := by
++  intro hc
++  have h1 : Tendsto (fun t : ℝ => φ ((fun w : ℂ => if ‖w‖ < 1 then 0 else c) ((t, (0 : ℝ)).1 + (t, (0 : ℝ)).2 * Complex.I)))
++      (𝓝[<] 1) (𝓝 (φ ((fun w : ℂ => if ‖w‖ < 1 then 0 else c) (((1 : ℝ), (0 : ℝ)).1 + ((1 : ℝ), (0 : ℝ)).2 * Complex.I)))) :=
++    ((hc.comp (continuous_id.prodMk continuous_const)).tendsto 1).mono_left nhdsWithin_le_nhds
++  have h2 : Tendsto (fun t : ℝ => φ ((fun w : ℂ => if ‖w‖ < 1 then 0 else c) ((t, (0 : ℝ)).1 + (t, (0 : ℝ)).2 * Complex.I)))
++      (𝓝[<] 1) (𝓝 (φ 0)) := by
++    refine tendsto_const_nhds.congr' ?_
++    filter_upwards [Ioo_mem_nhdsLT (show (0 : ℝ) < 1 by norm_num)] with t ht
++    have : ‖((t : ℂ) + (0 : ℝ) * Complex.I)‖ < 1 := by
++      simp only [Complex.ofReal_zero, zero_mul, add_zero, Complex.norm_real, Real.norm_eq_abs]
++      rw [abs_of_pos ht.1]; exact ht.2
++    simp only at this ⊢
++    rw [if_pos this]
++  have := tendsto_nhds_unique h1 h2
++  simp at this
++  exact hφ this
++
++open Filter Topology in
++/-- `ComplexDifferentiability.holomorphic_real_part_harmonic` é falso: `IsHarmonic` pede `ContDiff ℝ 2` em todo o
++    plano, e f só é holomorfa em U. Com U = bola unitária, f = 0 em U e 1 + i fora: f é holomorfa (e C²) em U, mas
++    Re f não é nem contínua em (1, 0). -/
++theorem holomorphic_real_part_harmonic_falso :
++    ¬ ∀ {f : ℂ → ℂ} {U : Set ℂ}, ComplexDifferentiability.Holomorphic f U → ContDiffOn ℂ 2 f U →
++      ∀ z ∈ U, ComplexDifferentiability.IsHarmonic (ComplexDifferentiability.realPart f) := by
++  intro H
++  set f : ℂ → ℂ := fun w => if ‖w‖ < 1 then 0 else 1 + Complex.I with hf
++  have hU : ∀ y ∈ Metric.ball (0 : ℂ) 1, f y = 0 := fun y hy => by
++    simp only [hf]; rw [if_pos (by simpa using hy)]
++  have hhol : ComplexDifferentiability.Holomorphic f (Metric.ball 0 1) :=
++    ⟨Metric.isOpen_ball, fun y hy => (differentiableWithinAt_const (0 : ℂ)).congr
++      (fun w hw => hU w hw) (hU y hy)⟩
++  have hcd : ContDiffOn ℂ 2 f (Metric.ball 0 1) := contDiffOn_const.congr fun w hw => hU w hw
++  have h := H hhol hcd 0 (Metric.mem_ball_self one_pos)
++  exact harmonic_aux_not_cont (1 + Complex.I) Complex.re (by simp) h.1.continuous
++
++open Filter Topology in
++/-- `ComplexDifferentiability.holomorphic_imag_part_harmonic` é falso pelo mesmo motivo: Im f, com f = 0 na bola
++    unitária e 1 + i fora, não é contínua em (1, 0). -/
++theorem holomorphic_imag_part_harmonic_falso :
++    ¬ ∀ {f : ℂ → ℂ} {U : Set ℂ}, ComplexDifferentiability.Holomorphic f U → ContDiffOn ℂ 2 f U →
++      ∀ z ∈ U, ComplexDifferentiability.IsHarmonic (ComplexDifferentiability.imagPart f) := by
++  intro H
++  set f : ℂ → ℂ := fun w => if ‖w‖ < 1 then 0 else 1 + Complex.I with hf
++  have hU : ∀ y ∈ Metric.ball (0 : ℂ) 1, f y = 0 := fun y hy => by
++    simp only [hf]; rw [if_pos (by simpa using hy)]
++  have hhol : ComplexDifferentiability.Holomorphic f (Metric.ball 0 1) :=
++    ⟨Metric.isOpen_ball, fun y hy => (differentiableWithinAt_const (0 : ℂ)).congr
++      (fun w hw => hU w hw) (hU y hy)⟩
++  have hcd : ContDiffOn ℂ 2 f (Metric.ball 0 1) := contDiffOn_const.congr fun w hw => hU w hw
++  have h := H hhol hcd 0 (Metric.mem_ball_self one_pos)
++  exact harmonic_aux_not_cont (1 + Complex.I) Complex.im (by simp) h.1.continuous
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_Connectedness.lean
+@@ -0,0 +1,48 @@
++import Core.Analysis.Topology.Connectedness
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Connectedness.interval_connected` é falso: para a > b o intervalo `Icc a b` é vazio, e `IsConnected` exige
++    conjunto não vazio (com a = 1, b = 0). -/
++theorem interval_connected_falso : ¬ ∀ a b : ℝ, IsConnected (Set.Icc a b) := by
++  intro h
++  have := (h 1 0).nonempty
++  rw [Set.nonempty_Icc] at this
++  norm_num at this
++
++/-- `Connectedness.convex_path_connected` é falso: o conjunto vazio é convexo, e `IsPathConnected` exige um ponto
++    do conjunto (com E = ℝ e S = ∅). -/
++theorem convex_path_connected_falso :
++    ¬ ∀ (E : Type) [NormedAddCommGroup E] [NormedSpace ℝ E] (S : Set E), Convex ℝ S → IsPathConnected S := by
++  intro h
++  obtain ⟨x, hx, -⟩ := h ℝ ∅ convex_empty
++  exact hx
++
++/-- `Connectedness.zero_dim_is_totally_disc` é falso: IsZeroDimensional (base de abertos-fechados em cada ponto) não
++    exige separação; em Bool com a topologia indiscreta a única vizinhança é univ, que é aberto-fechado, mas univ é
++    conexo com dois pontos. -/
++theorem zero_dim_is_totally_disc_falso :
++    ¬ ∀ {α : Type} [TopologicalSpace α], Connectedness.IsZeroDimensional α → TotallyDisconnectedSpace α := by
++  intro H
++  letI : TopologicalSpace Bool := ⊤
++  have hz : Connectedness.IsZeroDimensional Bool := by
++    intro x U hU
++    have hU' : U = Set.univ := Filter.mem_top.mp (by rwa [nhds_top] at hU)
++    exact ⟨Set.univ, hU' ▸ subset_rfl, Filter.univ_mem, isClopen_univ⟩
++  have ht := H hz
++  have hpre : IsPreconnected (Set.univ : Set Bool) := by
++    intro u v hu hv _ hsu hsv
++    have hu' : u = Set.univ := by
++      rcases (TopologicalSpace.isOpen_top_iff u).1 hu with h | h
++      · obtain ⟨y, -, hy⟩ := hsu; rw [h] at hy; exact absurd hy (Set.not_mem_empty y)
++      · exact h
++    obtain ⟨y, -, hy⟩ := hsv
++    exact ⟨y, trivial, by rw [hu']; trivial, hy⟩
++  have := ht.isTotallyDisconnected_univ Set.univ (Set.subset_univ _) hpre
++  exact absurd (this (Set.mem_univ true) (Set.mem_univ false)) (by decide)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_DerivNoJump.lean
+@@ -0,0 +1,73 @@
++import Core.Analysis.Calculus.RealDifferentiability
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Classical Filter Topology in
++/-- Auxiliar: t ↦ (t² se t é racional, 0 senão) não é contínua em nenhum t ≠ 0. -/
++theorem deriv_no_jump_aux_not_cont {t : ℝ} (ht0 : t ≠ 0) :
++    ¬ ContinuousAt (fun y : ℝ => if y ∈ Set.range ((↑) : ℚ → ℝ) then y ^ 2 else 0) t := by
++  intro hc
++  have ht2 : t ^ 2 ≠ 0 := pow_ne_zero 2 ht0
++  by_cases ht : t ∈ Set.range ((↑) : ℚ → ℝ)
++  · have hfr : ∃ᶠ y in 𝓝 t, y ∈ {y : ℝ | Irrational y} := mem_closure_iff_frequently.mp (dense_irrational t)
++    have := tendsto_nhds_unique_of_frequently_eq hc (tendsto_const_nhds (x := (0 : ℝ)))
++      (hfr.mono fun y hy => by simp only [Set.mem_setOf_eq] at hy; simp [show y ∉ Set.range ((↑) : ℚ → ℝ) from hy])
++    simp [ht] at this; exact ht0 this
++  · have hfr : ∃ᶠ y in 𝓝 t, y ∈ Set.range ((↑) : ℚ → ℝ) := mem_closure_iff_frequently.mp (Rat.denseRange_cast t)
++    have := tendsto_nhds_unique_of_frequently_eq hc ((continuous_pow 2).continuousAt (x := t))
++      (hfr.mono fun y hy => by simp [hy])
++    simp [ht] at this; exact ht2 this.symm
++
++open Filter Topology in
++/-- `RealDifferentiability.deriv_no_jump` é falso: f só é suposta derivável no ponto x, e `deriv f` vale 0 onde f não
++    é derivável. Com f(t) = t + (t² se t < 0 e t racional, 0 senão): f é derivável em 0 (f'(0) = 1, porque o termo
++    extra é ≤ t²), em t > 0 f = id perto de t (deriv = 1), e em t < 0 f não é derivável (o termo extra não é nem
++    contínuo), logo deriv f = 0. Os limites laterais de deriv f em 0 são 0 e 1. -/
++theorem deriv_no_jump_falso :
++    ¬ ∀ {f : ℝ → ℝ} {x : ℝ}, DifferentiableAt ℝ f x →
++      ¬∃ L₁ L₂, L₁ ≠ L₂ ∧
++        Filter.Tendsto (deriv f) (𝓝[<] x) (𝓝 L₁) ∧
++        Filter.Tendsto (deriv f) (𝓝[>] x) (𝓝 L₂) := by
++  intro Hc
++  classical
++  set K : ℝ → ℝ := fun y => if y ∈ Set.range ((↑) : ℚ → ℝ) then y ^ 2 else 0 with hK
++  set E : ℝ → ℝ := fun y => if y < 0 then K y else 0 with hE
++  set f : ℝ → ℝ := fun y => y + E y with hf
++  have hEb : ∀ y, ‖E y‖ ≤ 1 * ‖y ^ 2‖ := by
++    intro y; simp only [hE, hK, one_mul]
++    split_ifs <;> simp [norm_nonneg, sq_nonneg]
++  have hEd : HasDerivAt E 0 0 := by
++    rw [hasDerivAt_iff_isLittleO_nhds_zero]
++    have hE0 : E 0 = 0 := by simp [hE]
++    have h1 : (fun h : ℝ => E (0 + h) - E 0 - h • (0 : ℝ)) =O[𝓝 0] fun h => h ^ 2 :=
++      Asymptotics.IsBigO.of_bound 1 (Eventually.of_forall fun h => by
++        simp only [zero_add, hE0, sub_zero, smul_zero]; exact hEb h)
++    exact h1.trans_isLittleO (Asymptotics.isLittleO_pow_id (by norm_num))
++  have hfd : DifferentiableAt ℝ f 0 := (hasDerivAt_id' 0 |>.add hEd).differentiableAt
++  apply Hc hfd
++  refine ⟨0, 1, by norm_num, ?_, ?_⟩
++  · refine tendsto_const_nhds.congr' ?_
++    filter_upwards [self_mem_nhdsWithin] with t (ht : t < 0)
++    symm
++    apply deriv_zero_of_not_differentiableAt
++    intro hd
++    have hEd' : DifferentiableAt ℝ E t := by
++      have : E = fun y => f y - y := by funext y; simp [hf]
++      rw [this]; exact hd.sub differentiableAt_id'
++    have hEK : E =ᶠ[𝓝 t] K := by
++      filter_upwards [Iio_mem_nhds ht] with y (hy : y < 0)
++      simp [hE, hy]
++    exact deriv_no_jump_aux_not_cont ht.ne (hEd'.continuousAt.congr hEK)
++  · refine tendsto_const_nhds.congr' ?_
++    filter_upwards [self_mem_nhdsWithin] with t (ht : 0 < t)
++    have hfe : f =ᶠ[𝓝 t] fun y => y := by
++      filter_upwards [Ioi_mem_nhds ht] with y (hy : 0 < y)
++      simp [hf, hE, not_lt.mpr hy.le]
++    rw [hfe.deriv_eq]; simp
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_Derivatives.lean
+@@ -0,0 +1,65 @@
++import Core.Analysis.Calculus.Derivatives
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Classical Filter Topology in
++/-- Auxiliar: x ↦ (x se x é racional, 0 senão) não é contínua em nenhum x ≠ 0. -/
++theorem lhopital_aux_not_cont {x : ℝ} (hx0 : x ≠ 0) :
++    ¬ ContinuousAt (fun y : ℝ => if y ∈ Set.range ((↑) : ℚ → ℝ) then y else 0) x := by
++  intro hc
++  by_cases hx : x ∈ Set.range ((↑) : ℚ → ℝ)
++  · have hfr : ∃ᶠ y in 𝓝 x, y ∈ {y : ℝ | Irrational y} := mem_closure_iff_frequently.mp (dense_irrational x)
++    have := tendsto_nhds_unique_of_frequently_eq hc (tendsto_const_nhds (x := (0 : ℝ)))
++      (hfr.mono fun y hy => by simp only [Set.mem_setOf_eq] at hy; simp [show y ∉ Set.range ((↑) : ℚ → ℝ) from hy])
++    simp [hx] at this; exact hx0 this
++  · have hfr : ∃ᶠ y in 𝓝 x, y ∈ Set.range ((↑) : ℚ → ℝ) := mem_closure_iff_frequently.mp (Rat.denseRange_cast x)
++    have := tendsto_nhds_unique_of_frequently_eq hc continuousAt_id
++      (hfr.mono fun y hy => by simp [hy])
++    simp [hx] at this; exact hx0 this.symm
++
++open Filter Topology in
++/-- `DerivativesTheory.lhopital_zero` é falso: as hipóteses não pedem que f seja derivável. Com f(x) = x para x
++    racional e 0 para x irracional, g = id e a = 0: f → 0 e g → 0 em 0, g' = 1 ≠ 0, e f não é derivável em nenhum
++    x ≠ 0 (nem contínua), então `deriv f = 0` ali e f'/g' → 0 = L; mas f/g vale 1 em todo racional não nulo, e não
++    tende a 0. -/
++theorem lhopital_zero_falso :
++    ¬ ∀ {f g : ℝ → ℝ} {a L : ℝ},
++      Filter.Tendsto f (𝓝 a) (𝓝 0) → Filter.Tendsto g (𝓝 a) (𝓝 0) →
++      (∀ᶠ x in 𝓝[≠] a, deriv g x ≠ 0) →
++      Filter.Tendsto (fun x => deriv f x / deriv g x) (𝓝[≠] a) (𝓝 L) →
++      Filter.Tendsto (fun x => f x / g x) (𝓝[≠] a) (𝓝 L) := by
++  intro H
++  classical
++  set F : ℝ → ℝ := fun y => if y ∈ Set.range ((↑) : ℚ → ℝ) then y else 0 with hF
++  have hf : Filter.Tendsto F (𝓝 0) (𝓝 0) := by
++    refine squeeze_zero_norm (a := fun y : ℝ => ‖y‖) (fun y => ?_) ?_
++    · simp only [hF]; split_ifs <;> simp
++    · simpa using (continuous_norm.tendsto (0 : ℝ))
++  have hg : Filter.Tendsto (fun y : ℝ => y) (𝓝 0) (𝓝 0) := tendsto_id
++  have hg' : ∀ᶠ x in 𝓝[≠] (0 : ℝ), deriv (fun y : ℝ => y) x ≠ 0 :=
++    Eventually.of_forall fun x => by simp
++  have hdf : ∀ x : ℝ, x ≠ 0 → deriv F x = 0 := fun x hx =>
++    deriv_zero_of_not_differentiableAt fun h => lhopital_aux_not_cont hx h.continuousAt
++  have hlim : Filter.Tendsto (fun x => deriv F x / deriv (fun y : ℝ => y) x) (𝓝[≠] (0 : ℝ)) (𝓝 0) := by
++    refine tendsto_const_nhds.congr' ?_
++    filter_upwards [self_mem_nhdsWithin] with x hx
++    rw [hdf x hx]; simp
++  have hcon := H hf hg hg' hlim
++  have hfr : ∃ᶠ x in 𝓝[≠] (0 : ℝ), F x / x = 1 := by
++    rw [Filter.frequently_iff]
++    intro U hU
++    obtain ⟨ε, hε, hεU⟩ := Metric.mem_nhdsWithin_iff.mp hU
++    obtain ⟨q, hq0, hqε⟩ := exists_rat_btwn hε
++    refine ⟨q, hεU ⟨?_, ?_⟩, ?_⟩
++    · rw [Metric.mem_ball, Real.dist_eq, sub_zero, abs_of_pos hq0]; exact hqε
++    · exact hq0.ne'
++    · simp only [hF, Set.mem_range_self, if_true]; exact div_self hq0.ne'
++  have := tendsto_nhds_unique_of_frequently_eq hcon tendsto_const_nhds hfr
++  norm_num at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_DerivativesL.lean
+@@ -0,0 +1,67 @@
++import Core.Analysis.Calculus.Derivatives
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Classical Filter Topology in
++/-- Auxiliar: y ↦ (y se y é racional, 0 senão) não é contínua em nenhum x ≠ 0. -/
++theorem lhopital_infty_aux_not_cont {x : ℝ} (hx0 : x ≠ 0) :
++    ¬ ContinuousAt (fun y : ℝ => if y ∈ Set.range ((↑) : ℚ → ℝ) then y else 0) x := by
++  intro hc
++  by_cases hx : x ∈ Set.range ((↑) : ℚ → ℝ)
++  · have hfr : ∃ᶠ y in 𝓝 x, y ∈ {y : ℝ | Irrational y} := mem_closure_iff_frequently.mp (dense_irrational x)
++    have := tendsto_nhds_unique_of_frequently_eq hc (tendsto_const_nhds (x := (0 : ℝ)))
++      (hfr.mono fun y hy => by simp only [Set.mem_setOf_eq] at hy; simp [show y ∉ Set.range ((↑) : ℚ → ℝ) from hy])
++    simp [hx] at this; exact hx0 this
++  · have hfr : ∃ᶠ y in 𝓝 x, y ∈ Set.range ((↑) : ℚ → ℝ) := mem_closure_iff_frequently.mp (Rat.denseRange_cast x)
++    have := tendsto_nhds_unique_of_frequently_eq hc continuousAt_id
++      (hfr.mono fun y hy => by simp [hy])
++    simp [hx] at this; exact hx0 this.symm
++
++open Classical Filter Topology in
++/-- `DerivativesTheory.lhopital_infty` é falso: as hipóteses não pedem que f seja derivável, e `deriv f` vale 0 onde
++    f não é derivável. Com f(x) = 2x para x racional e x para x irracional, g = id: f → ∞ e g → ∞, g' = 1 ≠ 0, f não é
++    contínua em nenhum x ≠ 0, então f'/g' = 0 → 0 = L; mas f/g vale 2 em todo racional positivo, e não tende a 0. -/
++theorem lhopital_infty_falso :
++    ¬ ∀ {f g : ℝ → ℝ} {L : ℝ},
++      Filter.Tendsto f Filter.atTop Filter.atTop → Filter.Tendsto g Filter.atTop Filter.atTop →
++      (∀ᶠ x in Filter.atTop, deriv g x ≠ 0) →
++      Filter.Tendsto (fun x => deriv f x / deriv g x) Filter.atTop (𝓝 L) →
++      Filter.Tendsto (fun x => f x / g x) Filter.atTop (𝓝 L) := by
++  intro H
++  obtain ⟨F, hF⟩ : ∃ F : ℝ → ℝ, F = fun y => y + (if y ∈ Set.range ((↑) : ℚ → ℝ) then y else 0) :=
++    ⟨_, rfl⟩
++  have hFsub : (fun y => F y - y) = fun y : ℝ => if y ∈ Set.range ((↑) : ℚ → ℝ) then y else 0 := by
++    funext y; simp [hF]
++  have hf : Tendsto F atTop atTop := by
++    refine tendsto_atTop_mono' atTop ?_ tendsto_id
++    filter_upwards [eventually_ge_atTop 0] with y hy
++    simp only [hF, id]
++    split_ifs <;> linarith
++  have hg : Tendsto (fun y : ℝ => y) atTop atTop := tendsto_id
++  have hg' : ∀ᶠ x in atTop, deriv (fun y : ℝ => y) x ≠ 0 := Eventually.of_forall fun x => by simp
++  have hdF : ∀ x : ℝ, x ≠ 0 → deriv F x = 0 := fun x hx =>
++    deriv_zero_of_not_differentiableAt fun h => lhopital_infty_aux_not_cont hx (by
++      have : ContinuousAt (fun y => F y - y) x := h.continuousAt.sub continuousAt_id
++      rwa [hFsub] at this)
++  have hlim : Tendsto (fun x => deriv F x / deriv (fun y : ℝ => y) x) atTop (𝓝 0) := by
++    refine tendsto_const_nhds.congr' ?_
++    filter_upwards [eventually_gt_atTop 0] with x hx
++    rw [hdF x hx.ne']; simp
++  have hcon := H hf hg hg' hlim
++  have hfr : ∃ᶠ x in atTop, F x / x = 2 := by
++    rw [frequently_atTop]
++    intro a
++    obtain ⟨q, hq⟩ := exists_rat_gt (max a 1)
++    refine ⟨q, le_of_lt (lt_of_le_of_lt (le_max_left _ _) hq), ?_⟩
++    have hq0 : (q : ℝ) ≠ 0 := by linarith [le_max_right a 1]
++    simp only [hF, Set.mem_range_self, if_true]
++    field_simp; ring
++  have := tendsto_nhds_unique_of_frequently_eq hcon tendsto_const_nhds hfr
++  norm_num at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_HigherDerivatives.lean
+@@ -0,0 +1,24 @@
++import Core.Analysis.Calculus.HigherDerivatives
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `HigherDerivativesTheory.smoothBump_smooth`, com a definição original `IsSmooth f := ContDiff ℝ ⊤ f`, é
++    falso: no Mathlib v4.19 o `⊤` de `WithTop ℕ∞` é ω (função analítica), não ∞. A função bump é nula em (1, ∞) e
++    não nula em 0; se fosse analítica em ℝ (conexo), o princípio de identidade a faria nula em toda parte. -/
++theorem smoothBump_smooth_falso : ¬ ContDiff ℝ (⊤ : WithTop ℕ∞) HigherDerivativesTheory.smoothBump := by
++  intro h
++  have ha : AnalyticOnNhd ℝ HigherDerivativesTheory.smoothBump Set.univ := h.analyticOnNhd
++  have hz : HigherDerivativesTheory.smoothBump =ᶠ[nhds (2 : ℝ)] 0 := by
++    filter_upwards [Ioi_mem_nhds (by norm_num : (1 : ℝ) < 2)] with x hx
++    have : ¬ |x| < 1 := by
++      rw [not_lt]; exact le_trans (le_of_lt hx) (le_abs_self x)
++    simp [HigherDerivativesTheory.smoothBump, this]
++  have h0 := ha.eqOn_zero_of_preconnected_of_eventuallyEq_zero isPreconnected_univ (Set.mem_univ 2) hz
++    (Set.mem_univ 0)
++  simp [HigherDerivativesTheory.smoothBump] at h0
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_HilbertSpaces.lean
+@@ -0,0 +1,53 @@
++import Core.Analysis.FunctionalAnalysis.HilbertSpaces
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open scoped InnerProductSpace in
++/-- `HilbertSpaces.bessel_inequality` é falso: `IsOrthonormal (Set.range e)` só fala dos pontos distintos da imagem,
++    e e pode repetir um vetor. Em E = ℝ com e = (fun _ : Bool => 1), S = univ e x = 1, a soma vale 2 > 1 = ‖x‖². -/
++theorem bessel_inequality_falso :
++    ¬ ∀ {E : Type} [NormedAddCommGroup E] [InnerProductSpace ℝ E] {ι : Type} (e : ι → E),
++      HilbertSpaces.IsOrthonormal (Set.range e) → ∀ (x : E) (S : Finset ι),
++      ∑ i ∈ S, |⟪x, e i⟫_ℝ|^2 ≤ ‖x‖^2 := by
++  intro h
++  have he : HilbertSpaces.IsOrthonormal (Set.range (fun _ : Bool => (1 : ℝ))) := by
++    refine ⟨?_, ?_⟩
++    · rintro x ⟨i, rfl⟩
++      simp
++    · rintro x y ⟨i, rfl⟩ ⟨j, rfl⟩ hxy
++      exact absurd rfl hxy
++  have h11 : ⟪(1 : ℝ), (1 : ℝ)⟫_ℝ = 1 := by
++    rw [real_inner_self_eq_norm_sq]
++    simp
++  have := h (fun _ : Bool => (1 : ℝ)) he 1 Finset.univ
++  simp only [h11, abs_one, one_pow, Finset.sum_const, Finset.card_univ, Fintype.card_bool, norm_one] at this
++  norm_num at this
++
++/-- `HilbertSpaces.spectral_theorem_compact` é falso no espaço nulo: em E = EuclideanSpace ℝ (Fin 0) (completo,
++    de dimensão 0) o operador 0 é compacto e autoadjunto, mas não há vetor de norma 1, e a conclusão pede uma família
++    ortonormal e : ℕ → E. -/
++theorem spectral_theorem_compact_falso :
++    ¬ ∀ {E : Type} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E]
++      (T : E →L[ℝ] E), HilbertSpaces.IsCompactOperator' T → HilbertSpaces.IsSelfAdjoint' T →
++      ∃ (l : ℕ → ℝ) (e : ℕ → E), HilbertSpaces.IsOrthonormal (Set.range e) ∧
++        (∀ n, T (e n) = l n • e n) ∧ Filter.Tendsto l Filter.atTop (nhds 0) := by
++  intro h
++  have h0 : ∀ v : EuclideanSpace ℝ (Fin 0), v = 0 := fun v => by
++    ext i
++    exact i.elim0
++  have hc : HilbertSpaces.IsCompactOperator' (0 : EuclideanSpace ℝ (Fin 0) →L[ℝ] EuclideanSpace ℝ (Fin 0)) := by
++    unfold HilbertSpaces.IsCompactOperator'
++    exact isCompact_singleton.of_isClosed_subset isClosed_closure
++      (fun v _ => Set.mem_singleton_iff.mpr (h0 v))
++  have hs : HilbertSpaces.IsSelfAdjoint' (0 : EuclideanSpace ℝ (Fin 0) →L[ℝ] EuclideanSpace ℝ (Fin 0)) :=
++    ContinuousLinearMap.ext fun v => (h0 _).trans (h0 _).symm
++  obtain ⟨l, e, ⟨hn, -⟩, -, -⟩ := h _ hc hs
++  have h1 := hn (e 0) ⟨0, rfl⟩
++  rw [h0 (e 0), norm_zero] at h1
++  exact zero_ne_one h1
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_HomeomorphismsL.lean
+@@ -0,0 +1,30 @@
++import Core.Analysis.Topology.Homeomorphisms
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `HomeomorphismsTheory.covering_is_local_homeo` é falso com a definição `IsCoveringMap` do arquivo: ela não
++    pede que p restrita a cada folha V seja aberta (homeomorfismo sobre U). A identidade de Bool discreto em Bool
++    indiscreto é contínua e cumpre a definição (U = V = univ), mas não é aberta ({true} é aberto na origem e não no
++    destino), logo não é homeomorfismo local. -/
++theorem covering_is_local_homeo_falso :
++    ¬ ∀ {E X : Type} [TopologicalSpace E] [TopologicalSpace X] (p : E → X),
++      HomeomorphismsTheory.IsCoveringMap p → IsLocalHomeomorph p := by
++  intro H
++  have hcov : @HomeomorphismsTheory.IsCoveringMap Bool Bool ⊥ ⊤ id := by
++    refine ⟨continuous_bot, fun x => ⟨Set.univ, Set.mem_univ x, @isOpen_univ Bool ⊤, Set.univ, rfl,
++      fun s _ => ⟨Set.univ, Set.mem_univ s, @isOpen_univ Bool ⊥, Set.image_univ_of_surjective
++        Function.surjective_id, Set.injOn_id _⟩⟩⟩
++  have hloc := @H Bool Bool ⊥ ⊤ id hcov
++  have hopen := @IsLocalHomeomorph.isOpenMap Bool Bool ⊥ ⊤ id hloc {true} (@isOpen_discrete Bool ⊥ ⟨rfl⟩ _)
++  rw [Set.image_id] at hopen
++  rcases (TopologicalSpace.isOpen_top_iff {true}).mp hopen with h | h
++  · simp at h
++  · have : false ∈ ({true} : Set Bool) := h ▸ Set.mem_univ false
++    simp at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_ImplicitFunctionL.lean
+@@ -0,0 +1,161 @@
++import Core.Analysis.Calculus.ImplicitFunction
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Topology in
++/-- `ImplicitFunctionTheory.implicit_function_deriv` é falso: g não é suposta passar por (x₀, y₀) (falta
++    `g x₀ = y₀`), e então pode seguir outro ramo do conjunto de nível. Com F(x, y) = y·(y - 1 - 2x), x₀ = y₀ = 0:
++    F é polinomial, ∂F/∂y(0, 0) = -1 ≠ 0, e g(x) = 1 + 2x satisfaz F(x, g x) = 0 em todo x; mas g'(0) = 2, enquanto
++    -F_x(0, 0)/F_y(0, 0) = 0. -/
++theorem implicit_function_deriv_falso :
++    ¬ ∀ {F : ℝ × ℝ → ℝ} {x₀ y₀ : ℝ} {g : ℝ → ℝ},
++      ContDiffAt ℝ 1 F (x₀, y₀) → fderiv ℝ (fun y => F (x₀, y)) y₀ ≠ 0 →
++      (∀ᶠ x in 𝓝 x₀, F (x, g x) = 0) →
++      deriv g x₀ = -fderiv ℝ (fun x => F (x, y₀)) x₀ 1 / fderiv ℝ (fun y => F (x₀, y)) y₀ 1 := by
++  intro H
++  have hy : HasDerivAt (fun y : ℝ => (fun p : ℝ × ℝ => p.2 * (p.2 - 1 - 2 * p.1)) (0, y)) (-1) 0 := by
++    have h := ((hasDerivAt_id (0 : ℝ)).mul ((hasDerivAt_id (0 : ℝ)).sub_const 1))
++    convert h using 1
++    · funext y; simp
++    · simp
++  have hFy : fderiv ℝ (fun y : ℝ => (fun p : ℝ × ℝ => p.2 * (p.2 - 1 - 2 * p.1)) (0, y)) 0 ≠ 0 := by
++    intro h0
++    have := congrArg (fun L : ℝ →L[ℝ] ℝ => L 1) h0
++    simp only [fderiv_deriv, hy.deriv, ContinuousLinearMap.zero_apply] at this
++    norm_num at this
++  have h := H (F := fun p : ℝ × ℝ => p.2 * (p.2 - 1 - 2 * p.1)) (x₀ := 0) (y₀ := 0)
++    (g := fun x => 1 + 2 * x) (by fun_prop) hFy (Eventually.of_forall fun x => by ring)
++  have hg : deriv (fun x : ℝ => 1 + 2 * x) 0 = 2 := by
++    have := (((hasDerivAt_id (0 : ℝ)).const_mul 2).const_add 1)
++    simpa using this.deriv
++  have h0 : (fun x : ℝ => (fun p : ℝ × ℝ => p.2 * (p.2 - 1 - 2 * p.1)) (x, 0)) = fun _ => 0 := by
++    funext x; simp
++  rw [hg, h0] at h
++  simp at h
++
++/-- `ImplicitFunctionTheory.level_set_graph` é falso: `fderiv ℝ F p ≠ 0` não impede que o gradiente seja horizontal.
++    Com F = Prod.fst, c = 0, p = (0, 0): o conjunto de nível é a reta x = 0, e F(x, g x) = x = 0 não vale em nenhum
++    aberto U ∋ 0. -/
++theorem level_set_graph_falso :
++    ¬ ∀ {F : ℝ × ℝ → ℝ} {c : ℝ} {p : ℝ × ℝ}, ContDiffAt ℝ 1 F p → F p = c → fderiv ℝ F p ≠ 0 →
++      ∃ (U : Set ℝ) (g : ℝ → ℝ), p.1 ∈ U ∧ IsOpen U ∧ ∀ x ∈ U, F (x, g x) = c := by
++  intro H
++  have hne : fderiv ℝ (Prod.fst : ℝ × ℝ → ℝ) (0, 0) ≠ 0 := by
++    rw [fderiv_fst]
++    intro h0
++    have := congrArg (fun L : ℝ × ℝ →L[ℝ] ℝ => L (1, 0)) h0
++    simp at this
++  obtain ⟨U, g, h0U, hUo, hU⟩ := H (F := Prod.fst) (c := 0) (p := (0, 0)) contDiff_fst.contDiffAt rfl hne
++  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hUo 0 h0U
++  have hmem : ε / 2 ∈ U := hball (by rw [Metric.mem_ball, Real.dist_eq, sub_zero, abs_of_pos (by linarith)]; linarith)
++  have := hU _ hmem
++  simp at this
++  linarith
++
++open Filter Topology in
++/-- `ImplicitFunctionTheory.lagrange_multiplier` é falso: g só é suposta derivável em p, e o conjunto {g = 0} pode
++    ser o ponto isolado {p}. Com g(x, y) = x² se y = 0 e y senão: g é derivável em 0 com derivada (0, 1) (o termo
++    extra é ≤ ‖·‖²), {g = 0} = {0}, então f = Prod.fst tem máximo local (trivial) em 0 sobre {g = 0}; mas ∇f = (1, 0)
++    não é múltiplo de ∇g = (0, 1). -/
++theorem lagrange_multiplier_falso :
++    ¬ ∀ {f g : ℝ × ℝ → ℝ} {p : ℝ × ℝ} (hf : DifferentiableAt ℝ f p) (hg : DifferentiableAt ℝ g p)
++      (hconstr : g p = 0) (hgrad_g : fderiv ℝ g p ≠ 0)
++      (hmax : IsLocalMax (f ∘ Subtype.val : {x | g x = 0} → ℝ) ⟨p, hconstr⟩),
++      ∃ «λ» : ℝ, fderiv ℝ f p = «λ» • fderiv ℝ g p := by
++  intro H
++  classical
++  set G : ℝ × ℝ → ℝ := fun q => if q.2 = 0 then q.1 ^ 2 else q.2 with hG
++  have hG0 : G 0 = 0 := by simp [hG]
++  have hGd : HasFDerivAt G (ContinuousLinearMap.snd ℝ ℝ ℝ) 0 := by
++    rw [hasFDerivAt_iff_isLittleO_nhds_zero]
++    have hb : (fun h : ℝ × ℝ => G (0 + h) - G 0 - (ContinuousLinearMap.snd ℝ ℝ ℝ) h) =O[𝓝 0]
++        fun h => ‖h‖ ^ 2 := by
++      refine Asymptotics.IsBigO.of_bound 1 (Filter.Eventually.of_forall fun h => ?_)
++      simp only [zero_add, hG0, sub_zero, ContinuousLinearMap.coe_snd', one_mul, norm_pow, norm_norm]
++      by_cases h2 : h.2 = 0
++      · simp only [hG, h2, if_true, sub_zero, Real.norm_eq_abs]
++        rw [abs_of_nonneg (sq_nonneg _)]
++        have h1 : |h.1| ≤ ‖h‖ := by simpa [Real.norm_eq_abs] using norm_fst_le h
++        calc h.1 ^ 2 = |h.1| ^ 2 := (sq_abs _).symm
++          _ ≤ ‖h‖ ^ 2 := pow_le_pow_left₀ (abs_nonneg _) h1 2
++      · simp [hG, h2]
++    exact hb.trans_isLittleO (Asymptotics.isLittleO_norm_pow_id (by norm_num))
++  have hzero : ∀ q : ℝ × ℝ, G q = 0 → q = 0 := by
++    intro q hq
++    by_cases h2 : q.2 = 0
++    · simp only [hG, h2, if_true] at hq
++      exact Prod.ext (pow_eq_zero_iff (by norm_num) |>.mp hq) h2
++    · simp [hG, h2] at hq
++  have hne : fderiv ℝ G 0 ≠ 0 := by
++    rw [hGd.fderiv]
++    intro h0
++    have := congrArg (fun L : ℝ × ℝ →L[ℝ] ℝ => L (0, 1)) h0
++    simp at this
++  have hmax : IsLocalMax ((Prod.fst : ℝ × ℝ → ℝ) ∘ Subtype.val : {x | G x = 0} → ℝ) ⟨0, hG0⟩ :=
++    Filter.Eventually.of_forall fun y => le_of_eq (by
++      have : (y : ℝ × ℝ) = 0 := hzero y y.2
++      simp [Function.comp, this])
++  obtain ⟨l, hl⟩ := H (f := Prod.fst) (g := G) (p := 0) differentiableAt_fst hGd.differentiableAt hG0 hne hmax
++  rw [fderiv_fst, hGd.fderiv] at hl
++  have := congrArg (fun L : ℝ × ℝ →L[ℝ] ℝ => L (1, 0)) hl
++  simp at this
++
++/-- `ImplicitFunctionTheory.lagrange_multiplier_multiple` é falso: não há hipótese de extremo. Com n = 1, m = 0 e
++    f = a coordenada x ↦ x 0: a soma sobre Fin 0 é 0, mas fderiv f p ≠ 0. -/
++theorem lagrange_multiplier_multiple_falso :
++    ¬ ∀ {n m : ℕ}, m < n → ∀ {f : EuclideanSpace ℝ (Fin n) → ℝ}
++      {g : Fin m → EuclideanSpace ℝ (Fin n) → ℝ} {p : EuclideanSpace ℝ (Fin n)},
++      DifferentiableAt ℝ f p → (∀ i, DifferentiableAt ℝ (g i) p) → (∀ i, g i p = 0) →
++      LinearIndependent ℝ (fun i => fderiv ℝ (g i) p) →
++      ∃ «λ» : Fin m → ℝ, fderiv ℝ f p = ∑ i, «λ» i • fderiv ℝ (g i) p := by
++  intro H
++  set P := EuclideanSpace.proj (𝕜 := ℝ) (0 : Fin 1)
++  obtain ⟨l, hl⟩ := H (n := 1) (m := 0) (by norm_num) (f := fun x => P x) (g := fun i => i.elim0)
++    (p := 0) P.differentiableAt (fun i => i.elim0) (fun i => i.elim0) (linearIndependent_empty_type)
++  rw [show (fun x => P x) = (P : EuclideanSpace ℝ (Fin 1) → ℝ) from rfl, P.fderiv] at hl
++  have := congrArg (fun L : EuclideanSpace ℝ (Fin 1) →L[ℝ] ℝ => L (EuclideanSpace.single 0 1)) hl
++  simp [P] at this
++
++/-- `ImplicitFunctionTheory.kkt_conditions` é falso sem qualificação de restrição. Com n = m = 1, f(x) = x 0 e
++    g(x) = (x 0)²: o único ponto viável é 0, que é mínimo (trivial); mas ∇g(0) = 0 e ∇f(0) ≠ 0, e nenhum μ dá
++    ∇f + μ ∇g = 0. -/
++theorem kkt_conditions_falso :
++    ¬ ∀ {n m : ℕ} {f : EuclideanSpace ℝ (Fin n) → ℝ} {g : Fin m → EuclideanSpace ℝ (Fin n) → ℝ}
++      {p : EuclideanSpace ℝ (Fin n)},
++      DifferentiableAt ℝ f p → (∀ i, DifferentiableAt ℝ (g i) p) → (∀ i, g i p ≤ 0) →
++      (∀ x, (∀ i, g i x ≤ 0) → f p ≤ f x) →
++      ∃ μ : Fin m → ℝ, (∀ i, μ i ≥ 0) ∧ (∀ i, μ i * g i p = 0) ∧
++        fderiv ℝ f p + ∑ i, μ i • fderiv ℝ (g i) p = 0 := by
++  intro H
++  set P := EuclideanSpace.proj (𝕜 := ℝ) (0 : Fin 1)
++  have hg : ∀ i : Fin 1, HasFDerivAt (fun x : EuclideanSpace ℝ (Fin 1) => P x ^ 2) (0 : _ →L[ℝ] ℝ) 0 := by
++    intro i
++    have := (P.hasFDerivAt (x := 0)).mul (P.hasFDerivAt (x := 0))
++    simpa [sq] using this
++  obtain ⟨μ, -, -, hμ⟩ := H (n := 1) (m := 1) (f := fun x => P x) (g := fun _ x => P x ^ 2) (p := 0)
++    P.differentiableAt (fun i => (hg i).differentiableAt) (fun i => by simp)
++    (fun x hx => by
++      have h0 : P x = 0 := pow_eq_zero_iff (by norm_num) |>.mp (le_antisymm (hx 0) (sq_nonneg _))
++      simp [h0])
++  rw [show (fun x => P x) = (P : EuclideanSpace ℝ (Fin 1) → ℝ) from rfl, P.fderiv] at hμ
++  simp only [(hg 0).fderiv, smul_zero, Finset.sum_const_zero, add_zero] at hμ
++  have := congrArg (fun L : EuclideanSpace ℝ (Fin 1) →L[ℝ] ℝ => L (EuclideanSpace.single 0 1)) hμ
++  simp [P] at this
++
++/-- `ImplicitFunctionTheory.envelope_theorem` é falso: `(V := fun θ' => f θ' (x θ'))` é um parâmetro com valor
++    padrão, e o enunciado vale para todo V. Com f = 0, x = 0 e V = id: deriv V = 1 ≠ 0. -/
++theorem envelope_theorem_falso :
++    ¬ ∀ {θ : ℝ} {f : ℝ → ℝ → ℝ}, ContDiff ℝ 2 (Function.uncurry f) → ∀ (x : ℝ → ℝ),
++      (∀ θ', ∀ y, f θ' y ≤ f θ' (x θ')) → Differentiable ℝ x → ∀ (V : ℝ → ℝ),
++      deriv V θ = fderiv ℝ (fun t => f t (x θ)) θ 1 := by
++  intro H
++  have := H (θ := 0) (f := fun _ _ => 0) contDiff_const (fun _ => 0) (fun _ _ => le_rfl)
++    (differentiable_const _) id
++  simp at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_Integrals.lean
+@@ -0,0 +1,57 @@
++import Core.Analysis.MeasureTheory.Integrals
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open MeasureTheory in
++/-- `Integrals.change_of_variables` é falso sem mensurabilidade de f: com Ω = Unit, Ω' = Bool com a σ-álgebra
++    trivial ⊥, μ = dirac (), φ constante `true` e f = indicadora de `true`, f não é q.t.p. igual a nenhuma função
++    ⊥-mensurável (essas são constantes, e todo conjunto não vazio tem medida 1 para dirac true), então a integral
++    na medida imagem vale 0, enquanto ∫ f ∘ φ ∂μ = f true = 1. -/
++theorem change_of_variables_falso :
++    ¬ ∀ (Ω Ω' : Type) [MeasurableSpace Ω] [MeasurableSpace Ω'] (μ : Measure Ω) (_ν : Measure Ω')
++      (φ : Ω → Ω'), Measurable φ → ∀ f : Ω' → ℝ, ∫ y, f y ∂(μ.map φ) = ∫ x, f (φ x) ∂μ := by
++  intro h
++  letI : MeasurableSpace Bool := ⊥
++  set f : Bool → ℝ := fun b => if b then 1 else 0 with hf
++  have hφ : Measurable (fun _ : Unit => true) := measurable_const
++  have H := h Unit Bool (Measure.dirac ()) 0 (fun _ => true) hφ f
++  have hR : ∫ x, f ((fun _ : Unit => true) x) ∂(Measure.dirac ()) = 1 := by
++    simp [hf]
++  have hnm : ¬ AEStronglyMeasurable f ((Measure.dirac ()).map (fun _ : Unit => true)) := by
++    rw [Measure.map_dirac hφ]
++    rintro ⟨g, hg, hfg⟩
++    have hgm : Measurable g := hg.measurable
++    have hc : g false = g true := by
++      have h1 := hgm (measurableSet_singleton (g true))
++      rw [MeasurableSpace.measurableSet_bot_iff] at h1
++      rcases h1 with h1 | h1
++      · have h2 : true ∈ g ⁻¹' {g true} := rfl
++        rw [h1] at h2
++        exact h2.elim
++      · have h2 : false ∈ g ⁻¹' {g true} := by rw [h1]; trivial
++        exact h2
++    have hs : (Measure.dirac true) {x | ¬ f x = g x} = 0 := ae_iff.mp hfg
++    have hne : ({x | ¬ f x = g x} : Set Bool).Nonempty := by
++      by_cases hgt : g true = 1
++      · refine ⟨false, ?_⟩
++        simp only [Set.mem_setOf_eq, hf, hc, hgt]
++        norm_num
++      · exact ⟨true, by simpa [hf] using Ne.symm hgt⟩
++    have hT := measurableSet_toMeasurable (Measure.dirac true) {x | ¬ f x = g x}
++    rw [MeasurableSpace.measurableSet_bot_iff] at hT
++    have hsub := subset_toMeasurable (Measure.dirac true) {x | ¬ f x = g x}
++    rcases hT with h0 | h1
++    · rw [h0] at hsub
++      obtain ⟨x, hx⟩ := hne
++      exact hsub hx
++    · have h3 := measure_toMeasurable (μ := Measure.dirac true) {x | ¬ f x = g x}
++      rw [h1, hs] at h3
++      simp at h3
++  rw [integral_non_aestronglyMeasurable hnm, hR] at H
++  norm_num at H
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_Jacobians.lean
+@@ -0,0 +1,46 @@
++import Core.Analysis.Calculus.Jacobians
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `JacobiansTheory.jacobian_entry` é falso sem derivabilidade: `fderiv` vale 0 onde f não é diferenciável, mas a
++    derivada parcial pode existir. Com n = 2, m = 1, f(y) = |y₁| + y₀ em x = 0: f não é diferenciável em 0 (na direção
++    e₁ é |t|), logo a entrada (0,0) do jacobiano é 0, e a derivada de t ↦ f(t e₀) = t em 0 é 1. -/
++theorem jacobian_entry_falso :
++    ¬ ∀ {m n : ℕ} (f : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin m))
++      (x : EuclideanSpace ℝ (Fin n)) (i : Fin m) (j : Fin n),
++      JacobiansTheory.jacobianMatrix f x i j =
++        deriv (fun t : ℝ => f (x + t • EuclideanSpace.single j (1 : ℝ)) i) 0 := by
++  intro h
++  let g : EuclideanSpace ℝ (Fin 2) → ℝ := fun y => |y 1| + y 0
++  have hnd : ¬ DifferentiableAt ℝ g 0 := by
++    intro hd
++    have hl : DifferentiableAt ℝ (fun t : ℝ => t • EuclideanSpace.single (1 : Fin 2) (1 : ℝ)) 0 :=
++      differentiableAt_id.smul_const _
++    have hd' : DifferentiableAt ℝ g ((fun t : ℝ => t • EuclideanSpace.single (1 : Fin 2) (1 : ℝ)) 0) := by
++      simpa using hd
++    have hc := hd'.comp (0 : ℝ) hl
++    have he : (g ∘ fun t : ℝ => t • EuclideanSpace.single (1 : Fin 2) (1 : ℝ)) = fun t => |t| := by
++      funext t
++      simp [g, EuclideanSpace.single_apply]
++    rw [he] at hc
++    exact not_differentiableAt_abs_zero hc
++  let F : EuclideanSpace ℝ (Fin 2) → EuclideanSpace ℝ (Fin 1) :=
++    fun y => (WithLp.equiv 2 (Fin 1 → ℝ)).symm (fun _ => g y)
++  have h1 := h F 0 0 0
++  have hL : JacobiansTheory.jacobianMatrix F 0 0 0 = 0 := by
++    show fderiv ℝ g 0 (EuclideanSpace.single 0 1) = 0
++    rw [fderiv_zero_of_not_differentiableAt hnd]
++    rfl
++  have hR : deriv (fun t : ℝ => F (0 + t • EuclideanSpace.single (0 : Fin 2) (1 : ℝ)) 0) 0 = 1 := by
++    have he : (fun t : ℝ => F (0 + t • EuclideanSpace.single (0 : Fin 2) (1 : ℝ)) 0) = fun t => t := by
++      funext t
++      simp [F, g, EuclideanSpace.single_apply]
++    rw [he, deriv_id'']
++  rw [hL, hR] at h1
++  exact zero_ne_one h1
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_JacobiansL.lean
+@@ -0,0 +1,82 @@
++import Core.Analysis.Calculus.Jacobians
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Topology in
++/-- `JacobiansTheory.jacobian_inverse` é falso: não há hipótese de derivabilidade, e as hipóteses pedem g ∘ f = id
++    perto de f x (não de x) e f ∘ g = id perto de x, o que não amarra g perto de f x à inversa local de f perto de x.
++    Em ℝ¹ (EuclideanSpace ℝ (Fin 1)), com x = 0: f(y) = y + 5 se y₀ < 5/2 e 2y senão; g(z) = z - 5 se z₀ < 1,
++    3z se 1 ≤ z₀ < 15/2, z/2 se z₀ ≥ 15/2. Então f 0 = 5, g(f y) = y perto de 5, f(g y) = y perto de 0, mas a
++    jacobiana de g em f 0 = 5 é [3] e a inversa da jacobiana de f em 0 é [1]. -/
++theorem jacobian_inverse_falso :
++    ¬ ∀ {n : ℕ} (f g : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin n)) (x : EuclideanSpace ℝ (Fin n)),
++      (∀ᶠ y in 𝓝 (f x), g (f y) = y) → (∀ᶠ y in 𝓝 x, f (g y) = y) →
++      JacobiansTheory.jacobianMatrix g (f x) = (JacobiansTheory.jacobianMatrix f x)⁻¹ := by
++  intro H
++  set P := EuclideanSpace.proj (𝕜 := ℝ) (0 : Fin 1) with hP
++  have hPc : Continuous (fun z : EuclideanSpace ℝ (Fin 1) => z 0) := P.continuous
++  set v : EuclideanSpace ℝ (Fin 1) := EuclideanSpace.single 0 5 with hv
++  set f : EuclideanSpace ℝ (Fin 1) → EuclideanSpace ℝ (Fin 1) :=
++    fun y => if y 0 < 5 / 2 then y + v else (2 : ℝ) • y with hf
++  set g : EuclideanSpace ℝ (Fin 1) → EuclideanSpace ℝ (Fin 1) :=
++    fun z => if z 0 < 1 then z - v else if z 0 < 15 / 2 then (3 : ℝ) • z else (1 / 2 : ℝ) • z with hg
++  have hv0 : v 0 = 5 := by simp [hv]
++  have hf0 : f 0 = v := by simp [hf]
++  have hnear5 : ∀ᶠ y in 𝓝 v, 4 < y 0 ∧ y 0 < 6 := by
++    have : {y : EuclideanSpace ℝ (Fin 1) | 4 < y 0 ∧ y 0 < 6} ∈ 𝓝 v :=
++      (isOpen_Ioo.preimage hPc).mem_nhds (by simp [hv0]; norm_num)
++    exact this
++  have hnear0 : ∀ᶠ y in 𝓝 (0 : EuclideanSpace ℝ (Fin 1)), -1 < y 0 ∧ y 0 < 1 := by
++    have : {y : EuclideanSpace ℝ (Fin 1) | -1 < y 0 ∧ y 0 < 1} ∈ 𝓝 0 :=
++      (isOpen_Ioo.preimage hPc).mem_nhds (by simp)
++    exact this
++  have h1 : ∀ᶠ y in 𝓝 (f 0), g (f y) = y := by
++    rw [hf0]
++    filter_upwards [hnear5] with y hy
++    have hfy : f y = (2 : ℝ) • y := by simp only [hf]; rw [if_neg (by linarith [hy.1])]
++    rw [hfy]
++    have e : ((2 : ℝ) • y) 0 = 2 * y 0 := by simp
++    simp only [hg, e]
++    rw [if_neg (by linarith [hy.1]), if_neg (by linarith [hy.1]), smul_smul]
++    norm_num
++  have h2 : ∀ᶠ y in 𝓝 (0 : EuclideanSpace ℝ (Fin 1)), f (g y) = y := by
++    filter_upwards [hnear0] with y hy
++    have hgy : g y = y - v := by simp only [hg]; rw [if_pos hy.2]
++    rw [hgy]
++    have e : (y - v) 0 = y 0 - 5 := by simp [hv0]
++    simp only [hf, e]
++    rw [if_pos (by linarith [hy.2]), sub_add_cancel]
++  have h := H (n := 1) f g 0 h1 h2
++  have hJf : JacobiansTheory.jacobianMatrix f 0 0 0 = 1 := by
++    have hev : (fun y : EuclideanSpace ℝ (Fin 1) => f y 0) =ᶠ[𝓝 0] fun y => P y + 5 := by
++      filter_upwards [hnear0] with y hy
++      simp only [hf]; rw [if_pos (by linarith [hy.2])]; simp [hv, hP]
++    have hd : HasFDerivAt (fun y : EuclideanSpace ℝ (Fin 1) => P y + 5) P 0 :=
++      P.hasFDerivAt.add_const 5
++    unfold JacobiansTheory.jacobianMatrix
++    rw [hev.fderiv_eq, hd.fderiv]
++    simp [hP]
++  have hJg : JacobiansTheory.jacobianMatrix g (f 0) 0 0 = 3 := by
++    have hev : (fun z : EuclideanSpace ℝ (Fin 1) => g z 0) =ᶠ[𝓝 (f 0)] fun z => 3 * P z := by
++      rw [hf0]
++      filter_upwards [hnear5] with z hz
++      simp only [hg]; rw [if_neg (by linarith [hz.1]), if_pos (by linarith [hz.2])]; simp [hP]
++    have hd : HasFDerivAt (fun z : EuclideanSpace ℝ (Fin 1) => 3 * P z) ((3 : ℝ) • P) (f 0) :=
++      P.hasFDerivAt.const_mul 3
++    unfold JacobiansTheory.jacobianMatrix
++    rw [hev.fderiv_eq, hd.fderiv]
++    simp [hP]
++  have hM : JacobiansTheory.jacobianMatrix f 0 = 1 := by
++    ext i j
++    fin_cases i; fin_cases j
++    simpa using hJf
++  have := congrFun (congrFun h 0) 0
++  rw [hJg, hM, inv_one] at this
++  simp at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_MeanValueTheoremL.lean
+@@ -0,0 +1,93 @@
++import Core.Analysis.Calculus.MeanValueTheorem
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `MeanValueTheorems.mean_value_vector` é falso: `DifferentiableOn ℝ f (segment ℝ a b)` é derivabilidade relativa
++    ao segmento, e o `fderiv` (global) vale 0 onde f não é derivável. Com f(x, y) = x + |y| em ℝ², a = (0, 0),
++    b = (1, 0): no segmento f = x (derivável relativamente a ele), mas f não é derivável em nenhum (t, 0), o supremo
++    vale 0 e ‖f b - f a‖ = 1 > 0. -/
++theorem mean_value_vector_falso :
++    ¬ ∀ {E F : Type} [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F]
++      {f : E → F} {a b : E}, DifferentiableOn ℝ f (segment ℝ a b) →
++      ‖f b - f a‖ ≤ ‖b - a‖ * ⨆ t ∈ Set.Icc (0 : ℝ) 1, ‖fderiv ℝ f (a + t • (b - a))‖ := by
++  intro H
++  set f : ℝ × ℝ → ℝ := fun p => p.1 + |p.2| with hf
++  have hseg : ∀ y ∈ segment ℝ ((0 : ℝ), (0 : ℝ)) (1, 0), f y = y.1 := by
++    rintro y ⟨s, t, hs, ht, hst, rfl⟩
++    simp [hf]
++  have hd : DifferentiableOn ℝ f (segment ℝ ((0 : ℝ), (0 : ℝ)) (1, 0)) := fun y hy =>
++    (differentiableAt_fst.differentiableWithinAt).congr (fun z hz => hseg z hz) (hseg y hy)
++  have hnd : ∀ t : ℝ, ¬ DifferentiableAt ℝ f (t, 0) := by
++    intro t h
++    have h1 : DifferentiableAt ℝ (fun y : ℝ => f (t, y)) 0 :=
++      h.comp (0 : ℝ) ((differentiableAt_const t).prodMk differentiableAt_id)
++    have h2 : DifferentiableAt ℝ (fun y : ℝ => f (t, y) - t) 0 := h1.sub_const t
++    have e : (fun y : ℝ => f (t, y) - t) = fun y => |y| := by funext y; simp [hf]
++    rw [e] at h2
++    exact not_differentiableAt_abs_zero h2
++  have hz : ∀ t : ℝ, fderiv ℝ f (((0 : ℝ), (0 : ℝ)) + t • (((1 : ℝ), (0 : ℝ)) - (0, 0))) = 0 := by
++    intro t
++    apply fderiv_zero_of_not_differentiableAt
++    simpa using hnd t
++  have := H (f := f) (a := ((0 : ℝ), (0 : ℝ))) (b := (1, 0)) hd
++  simp only [hz, norm_zero] at this
++  simp [hf] at this
++  linarith
++
++/-- `MeanValueTheorems.flett_mvt` é falso: `DifferentiableOn ℝ f (Icc a b)` é derivabilidade relativa ao intervalo,
++    e `deriv f a = deriv f b` usa as derivadas globais nas pontas (0 onde f não é derivável). Com f(x) = x² para
++    x ≤ 1 e 0 para x > 1, a = 0, b = 1: deriv f 0 = 0 = deriv f 1 (f não é contínua em 1), mas em c ∈ (0, 1)
++    deriv f c = 2c ≠ c = (f c - f 0)/(c - 0). -/
++theorem flett_mvt_falso :
++    ¬ ∀ {f : ℝ → ℝ} {a b : ℝ}, a < b → DifferentiableOn ℝ f (Set.Icc a b) → deriv f a = deriv f b →
++      ∃ c ∈ Set.Ioo a b, deriv f c = (f c - f a) / (c - a) := by
++  intro H
++  set f : ℝ → ℝ := fun x => if x ≤ 1 then x ^ 2 else 0 with hf
++  have hloc : ∀ c : ℝ, c < 1 → f =ᶠ[nhds c] fun x => x ^ 2 := by
++    intro c hc
++    filter_upwards [Iio_mem_nhds hc] with x hx
++    simp [hf, le_of_lt (show x < 1 from hx)]
++  have hdc : ∀ c : ℝ, c < 1 → deriv f c = 2 * c := by
++    intro c hc
++    rw [(hloc c hc).deriv_eq]
++    simp
++  have hdon : DifferentiableOn ℝ f (Set.Icc 0 1) := fun x hx =>
++    ((differentiableAt_pow 2).differentiableWithinAt).congr (fun y hy => by simp [hf, hy.2])
++      (by simp [hf, hx.2])
++  have hnc : ¬ ContinuousAt f 1 := by
++    intro hc
++    have h1 : Filter.Tendsto f (nhdsWithin 1 (Set.Ioi 1)) (nhds (f 1)) :=
++      hc.tendsto.mono_left nhdsWithin_le_nhds
++    have h2 : Filter.Tendsto f (nhdsWithin 1 (Set.Ioi 1)) (nhds 0) :=
++      tendsto_const_nhds.congr' (by
++        filter_upwards [self_mem_nhdsWithin] with x hx
++        simp [hf, not_le.mpr (show (1 : ℝ) < x from hx)])
++    have := tendsto_nhds_unique h1 h2
++    simp [hf] at this
++  have hd1 : deriv f 1 = 0 := deriv_zero_of_not_differentiableAt fun h => hnc h.continuousAt
++  obtain ⟨c, hc, hcd⟩ := H (f := f) (a := 0) (b := 1) one_pos hdon (by rw [hdc 0 one_pos, hd1]; ring)
++  rw [hdc c hc.2] at hcd
++  have hc0 : c ≠ 0 := hc.1.ne'
++  simp only [hf, if_pos hc.2.le, if_pos (zero_le_one' ℝ)] at hcd
++  field_simp at hcd
++  have : c = 0 := by nlinarith [hc.1]
++  exact hc0 this
++
++/-- `MeanValueTheorems.pompeiu_mvt` é falso: a fórmula do enunciado não é a de Pompeiu. Com f = 1, a = 1, b = 2: o
++    lado esquerdo é 0 e o direito é 1/c ≠ 0 para todo c ∈ (1, 2). -/
++theorem pompeiu_mvt_falso :
++    ¬ ∀ {f : ℝ → ℝ} {a b : ℝ}, a < b → a ≠ 0 → b ≠ 0 → DifferentiableOn ℝ f (Set.Icc a b) →
++      ∃ c ∈ Set.Ioo a b, (f b - f a) / (b - a) = f c / c - c * deriv f c / c ^ 2 + deriv f c := by
++  intro H
++  obtain ⟨c, hc, h⟩ := H (f := fun _ => 1) (a := 1) (b := 2) (by norm_num) one_ne_zero two_ne_zero
++    (differentiableOn_const 1)
++  have hc0 : c ≠ 0 := by linarith [hc.1]
++  simp at h
++  exact hc0 h.symm
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_MetricSpaces.lean
+@@ -0,0 +1,20 @@
++import Core.Analysis.Topology.MetricSpaces
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `MetricSpaces.bounded_iff_finite_diameter` é falso: o lado direito `∃ d, diameter M S ≤ d` vale sempre
++    (d = diameter M S), e há conjuntos não limitados; em ℝ com realMetric, S = univ não é limitado. -/
++theorem bounded_iff_finite_diameter_falso :
++    ¬ ∀ {α : Type} [Nonempty α] (M : MetricSpaces.PremetricSpace α) (S : Set α), S.Nonempty →
++      (MetricSpaces.IsBounded M S ↔ ∃ d, MetricSpaces.diameter M S ≤ d) := by
++  intro h
++  obtain ⟨C, hC⟩ := (h MetricSpaces.realMetric Set.univ Set.univ_nonempty).2 ⟨_, le_refl _⟩
++  have h1 : |C + 1 - 0| ≤ C := hC (C + 1) trivial 0 trivial
++  have h2 := le_abs_self (C + 1 - 0)
++  linarith
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_NormedSpaces.lean
+@@ -0,0 +1,54 @@
++import Core.Analysis.Topology.NormedSpaces
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `NormedSpaces.finite_dim_complete` é falso: o corpo K é qualquer corpo normado, e ℚ (dimensão 1 sobre si
++    mesmo, com a norma |·|) não é completo. Aproximações racionais q n de √2 (|q n - √2| < 1/(n+1)) formam uma
++    sequência de Cauchy cujo limite em ℚ seria √2, que é irracional. -/
++theorem finite_dim_complete_falso :
++    ¬ ∀ (K : Type) (V : Type) [NormedField K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
++      (N : NormedSpaces.NormedSpaceStructure K V), NormedSpaces.IsComplete N := by
++  intro h
++  let N : NormedSpaces.NormedSpaceStructure ℚ ℚ :=
++    ⟨fun q => ‖q‖, fun q => norm_nonneg q, fun _ => norm_eq_zero, fun v w => norm_add_le v w,
++     fun a v => norm_smul a v⟩
++  have hc := h ℚ ℚ N
++  have hq : ∀ n : ℕ, ∃ q : ℚ, Real.sqrt 2 < q ∧ (q : ℝ) < Real.sqrt 2 + 1 / (n + 1) := fun n =>
++    exists_rat_btwn (by have : (0 : ℝ) < 1 / (n + 1) := by positivity
++                        linarith)
++  choose q hq1 hq2 using hq
++  have hd : ∀ n : ℕ, |(q n : ℝ) - Real.sqrt 2| < 1 / (n + 1) := fun n => by
++    rw [abs_lt]
++    constructor <;> linarith [hq1 n, hq2 n]
++  have hnorm : ∀ a b : ℚ, N.norm (a - b) = |(a : ℝ) - b| := fun a b => by
++    show ‖a - b‖ = _
++    rw [← Rat.norm_cast_real, Rat.cast_sub, Real.norm_eq_abs]
++  have hmono : ∀ k m : ℕ, k ≤ m → (1 : ℝ) / (m + 1) ≤ 1 / (k + 1) := fun k m hkm => by
++    have : (k : ℝ) ≤ m := by exact_mod_cast hkm
++    exact one_div_le_one_div_of_le (by positivity) (by linarith)
++  obtain ⟨L, hL⟩ := hc q (by
++    intro ε hε
++    obtain ⟨K0, hK0⟩ := exists_nat_one_div_lt (half_pos hε)
++    refine ⟨K0, fun m n hm hn => ?_⟩
++    show N.norm (q m - q n) < ε
++    rw [hnorm]
++    have h3 := abs_sub_le (q m : ℝ) (Real.sqrt 2) (q n)
++    rw [abs_sub_comm (Real.sqrt 2)] at h3
++    linarith [hd m, hd n, hmono K0 m hm, hmono K0 n hn])
++  have hsq : Real.sqrt 2 = (L : ℝ) := by
++    by_contra hne
++    have hδ : 0 < |Real.sqrt 2 - L| := abs_pos.mpr (sub_ne_zero.mpr hne)
++    obtain ⟨N1, hN1⟩ := hL _ (half_pos hδ)
++    obtain ⟨K1, hK1⟩ := exists_nat_one_div_lt (half_pos hδ)
++    have h4 : N.norm (q (max N1 K1) - L) < |Real.sqrt 2 - L| / 2 := hN1 _ (le_max_left _ _)
++    rw [hnorm] at h4
++    have h5 := abs_sub_le (Real.sqrt 2) (q (max N1 K1) : ℝ) (L : ℝ)
++    have h6 : |Real.sqrt 2 - q (max N1 K1)| = |(q (max N1 K1) : ℝ) - Real.sqrt 2| := abs_sub_comm _ _
++    linarith [hd (max N1 K1), hmono K1 (max N1 K1) (le_max_right _ _)]
++  exact irrational_sqrt_two.ne_rat L hsq
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_NormedSpacesL.lean
+@@ -0,0 +1,84 @@
++import Core.Analysis.Topology.NormedSpaces
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `NormedSpaces.finite_dim_norms_equivalent` é falso: sobre um corpo normado qualquer (não completo) duas normas
++    em dimensão finita podem não ser equivalentes. Em ℚ², N₁(a, b) = |a| + |b| e N₂(a, b) = |a + b√2| são normas
++    (N₂ é positiva porque √2 é irracional), mas pelo teorema de Dirichlet há (a, b) = (-j, k) com k ≥ 1 e
++    |k√2 - j| ≤ 1/(n+1), logo N₁ ≥ 1 e N₂ ≤ 1/(n+1) para todo n: nenhuma constante c dá N₁ ≤ c·N₂. -/
++theorem finite_dim_norms_equivalent_falso :
++    ¬ ∀ (K : Type) (V : Type) [NormedField K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
++      (N₁ N₂ : NormedSpaces.NormedSpaceStructure K V), NormedSpaces.EquivalentNorms N₁ N₂ := by
++  intro H
++  have hq : ∀ q : ℚ, ‖q‖ = |(q : ℝ)| := fun q => by
++    rw [← Rat.norm_cast_real, Real.norm_eq_abs]
++  let N₁ : NormedSpaces.NormedSpaceStructure ℚ (ℚ × ℚ) :=
++    { norm := fun v => |(v.1 : ℝ)| + |(v.2 : ℝ)|
++      norm_nonneg := fun v => by positivity
++      norm_eq_zero := fun v => by
++        constructor
++        · intro h
++          have h1 : |(v.1 : ℝ)| = 0 := by linarith [abs_nonneg (v.1 : ℝ), abs_nonneg (v.2 : ℝ)]
++          have h2 : |(v.2 : ℝ)| = 0 := by linarith [abs_nonneg (v.1 : ℝ), abs_nonneg (v.2 : ℝ)]
++          simp only [abs_eq_zero, Rat.cast_eq_zero] at h1 h2
++          exact Prod.ext h1 h2
++        · rintro rfl; simp
++      norm_add_le := fun v w => by
++        simp only [Prod.fst_add, Prod.snd_add, Rat.cast_add]
++        linarith [abs_add (v.1 : ℝ) w.1, abs_add (v.2 : ℝ) w.2]
++      norm_smul := fun a v => by
++        simp only [Prod.smul_fst, Prod.smul_snd, smul_eq_mul, Rat.cast_mul, abs_mul, hq]
++        ring }
++  let N₂ : NormedSpaces.NormedSpaceStructure ℚ (ℚ × ℚ) :=
++    { norm := fun v => |(v.1 : ℝ) + (v.2 : ℝ) * Real.sqrt 2|
++      norm_nonneg := fun v => abs_nonneg _
++      norm_eq_zero := fun v => by
++        constructor
++        · intro h
++          rw [abs_eq_zero] at h
++          by_cases hb : v.2 = 0
++          · have ha : (v.1 : ℝ) = 0 := by simpa [hb] using h
++            exact Prod.ext (by exact_mod_cast ha) hb
++          · exfalso
++            have hs : Real.sqrt 2 = ((-v.1 / v.2 : ℚ) : ℝ) := by
++              have hb' : (v.2 : ℝ) ≠ 0 := by exact_mod_cast hb
++              push_cast
++              field_simp
++              linarith
++            exact irrational_sqrt_two ⟨_, hs.symm⟩
++        · rintro rfl; simp
++      norm_add_le := fun v w => by
++        simp only [Prod.fst_add, Prod.snd_add, Rat.cast_add]
++        calc |(v.1 : ℝ) + w.1 + (v.2 + w.2) * Real.sqrt 2|
++            = |((v.1 : ℝ) + v.2 * Real.sqrt 2) + (w.1 + w.2 * Real.sqrt 2)| := by ring_nf
++          _ ≤ _ := abs_add _ _
++      norm_smul := fun a v => by
++        simp only [Prod.smul_fst, Prod.smul_snd, smul_eq_mul, Rat.cast_mul, hq]
++        rw [← abs_mul]; ring_nf }
++  obtain ⟨c₁, c₂, hc₁, -, h1, -⟩ := H ℚ (ℚ × ℚ) N₁ N₂
++  obtain ⟨n, hn⟩ := exists_nat_gt c₁
++  have hnpos : 0 < n := by
++    rcases Nat.eq_zero_or_pos n with h | h
++    · subst h; simp at hn; linarith
++    · exact h
++  obtain ⟨j, k, hk0, -, hjk⟩ := Real.exists_int_int_abs_mul_sub_le (Real.sqrt 2) hnpos
++  have hv := h1 ((-j : ℚ), (k : ℚ))
++  simp only [N₁, N₂] at hv
++  push_cast at hv
++  have hk1 : (1 : ℝ) ≤ |(k : ℝ)| := by
++    rw [abs_of_pos (by exact_mod_cast hk0)]; exact_mod_cast hk0
++  have e : |-(j : ℝ) + (k : ℝ) * Real.sqrt 2| = |(k : ℝ) * Real.sqrt 2 - j| := by ring_nf
++  rw [e] at hv
++  have hn1 : (0 : ℝ) < n + 1 := by positivity
++  have h3 : c₁ * |(k : ℝ) * Real.sqrt 2 - j| ≤ c₁ * (1 / (n + 1)) :=
++    mul_le_mul_of_nonneg_left hjk hc₁.le
++  have h4 : c₁ * (1 / (n + 1)) < 1 := by
++    rw [mul_one_div, div_lt_one hn1]; linarith
++  linarith [abs_nonneg (-(j : ℝ))]
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_RealDifferentiability.lean
+@@ -0,0 +1,44 @@
++import Core.Analysis.Calculus.RealDifferentiability
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `RealDifferentiability.darboux` é falso: `DifferentiableOn ℝ f (Icc a b)` só dá derivada lateral nas pontas, e
++    `deriv f a` é a derivada bilateral (0 quando não existe). Com f = |·|, a = 0, b = 1: deriv f 0 = 0, deriv f 1 = 1,
++    y = 1/2 está entre elas, mas deriv f = 1 em (0, 1). -/
++theorem darboux_falso :
++    ¬ ∀ (f : ℝ → ℝ) (a b : ℝ), a < b → DifferentiableOn ℝ f (Set.Icc a b) → ∀ y : ℝ,
++      y ∈ Set.Ioo (deriv f a) (deriv f b) ∪ Set.Ioo (deriv f b) (deriv f a) →
++      ∃ c ∈ Set.Ioo a b, deriv f c = y := by
++  intro h
++  obtain ⟨c, hc, hdc⟩ := h (fun x => |x|) 0 1 one_pos
++    (differentiableOn_id.congr fun x hx => abs_of_nonneg hx.1) (1/2)
++    (Or.inl ⟨by rw [deriv_abs_zero]; norm_num, by rw [deriv_abs_pos one_pos]; norm_num⟩)
++  rw [deriv_abs_pos hc.1] at hdc
++  norm_num at hdc
++
++/-- `RealDifferentiability.convex_deriv_mono` é falso: `DifferentiableOn ℝ f S` num S fechado só dá derivada lateral
++    nas pontas, e `deriv f` é a derivada bilateral (0 quando não existe). Com f = -|·| e S = [-1, 0]: f = id em S
++    (convexa e derivável em S), deriv f (-1/2) = 1, mas deriv f 0 = 0, e -1/2 ≤ 0 com 1 > 0. -/
++theorem convex_deriv_mono_falso :
++    ¬ ∀ {f : ℝ → ℝ} {S : Set ℝ}, Convex ℝ S → ConvexOn ℝ S f → DifferentiableOn ℝ f S →
++      MonotoneOn (deriv f) S := by
++  intro h
++  have hEq : Set.EqOn (fun x : ℝ => x) (fun x : ℝ => -|x|) (Set.Icc (-1) 0) := by
++    intro x hx
++    simp only
++    rw [abs_of_nonpos hx.2, neg_neg]
++  have hconv : ConvexOn ℝ (Set.Icc (-1 : ℝ) 0) (fun x : ℝ => -|x|) :=
++    (convexOn_id (convex_Icc (-1 : ℝ) 0)).congr hEq
++  have hdiff : DifferentiableOn ℝ (fun x : ℝ => -|x|) (Set.Icc (-1 : ℝ) 0) :=
++    differentiableOn_id.congr fun x hx => (hEq hx).symm
++  have hm := h (convex_Icc (-1 : ℝ) 0) hconv hdiff
++    (⟨by norm_num, by norm_num⟩ : (-1/2 : ℝ) ∈ Set.Icc (-1) 0)
++    (⟨by norm_num, le_refl 0⟩ : (0 : ℝ) ∈ Set.Icc (-1) 0) (by norm_num)
++  rw [deriv.neg, deriv.neg, deriv_abs_neg (by norm_num), deriv_abs_zero] at hm
++  norm_num at hm
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_SigmaAlgebrasL.lean
+@@ -0,0 +1,61 @@
++import Core.Analysis.MeasureTheory.SigmaAlgebras
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `SigmaAlgebras.monotone_class` é falso: o teorema da classe monótona pede que 𝒜 seja uma álgebra (fechada por
++    complemento), não só um π-sistema. Com Ω = Bool, 𝒜 = {{true}} e ℳ = {univ, {true}} (uma classe monótona com
++    univ, que contém 𝒜): {false} = {true}ᶜ está na σ-álgebra gerada, mas não em ℳ. -/
++theorem monotone_class_falso :
++    ¬ ∀ (Ω : Type) (𝒜 : Set (Set Ω)), (∀ A B, A ∈ 𝒜 → B ∈ 𝒜 → A ∩ B ∈ 𝒜) →
++      ∀ (ℳ : Set (Set Ω)), Set.univ ∈ ℳ →
++      (∀ f : ℕ → Set Ω, (∀ n, f n ∈ ℳ) → Monotone f → (⋃ n, f n) ∈ ℳ) →
++      (∀ f : ℕ → Set Ω, (∀ n, f n ∈ ℳ) → Antitone f → (⋂ n, f n) ∈ ℳ) →
++      𝒜 ⊆ ℳ → (SigmaAlgebras.generatedSigmaAlgebra Ω 𝒜).measurableSets ⊆ ℳ := by
++  intro H
++  set 𝒜 : Set (Set Bool) := {{true}} with h𝒜
++  set ℳ : Set (Set Bool) := {S | S = Set.univ ∨ S = {true}} with hℳ
++  have htrue : ∀ S ∈ ℳ, true ∈ S := by
++    rintro S (rfl | rfl) <;> simp
++  have hmono : ∀ f : ℕ → Set Bool, (∀ n, f n ∈ ℳ) → Monotone f → (⋃ n, f n) ∈ ℳ := by
++    intro f hf _
++    by_cases h : ∃ n, f n = Set.univ
++    · obtain ⟨n, hn⟩ := h
++      left; exact Set.eq_univ_of_univ_subset (hn ▸ Set.subset_iUnion f n)
++    · push_neg at h
++      right
++      have : ∀ n, f n = {true} := fun n => (hf n).resolve_left (h n)
++      simp [this]
++  have hanti : ∀ f : ℕ → Set Bool, (∀ n, f n ∈ ℳ) → Antitone f → (⋂ n, f n) ∈ ℳ := by
++    intro f hf _
++    by_cases h : ∃ n, f n = {true}
++    · obtain ⟨n, hn⟩ := h
++      right
++      apply Set.Subset.antisymm
++      · exact hn ▸ Set.iInter_subset f n
++      · intro b hb
++        rw [Set.mem_singleton_iff.mp hb]
++        exact Set.mem_iInter.mpr fun m => htrue _ (hf m)
++    · push_neg at h
++      left
++      have : ∀ n, f n = Set.univ := fun n => (hf n).resolve_right (h n)
++      simp only [this, Set.iInter_const]
++  have hsub := H Bool 𝒜 (by
++      intro A B hA hB
++      rw [h𝒜, Set.mem_singleton_iff] at hA hB
++      subst hA; subst hB; simp [h𝒜]) ℳ (Or.inl rfl) hmono hanti
++    (by intro S hS; rw [h𝒜, Set.mem_singleton_iff] at hS; exact Or.inr hS)
++  have hgen : ({true} : Set Bool) ∈ (SigmaAlgebras.generatedSigmaAlgebra Bool 𝒜).measurableSets :=
++    SigmaAlgebras.generator_subset Bool 𝒜 (by simp [h𝒜])
++  have hc := (SigmaAlgebras.generatedSigmaAlgebra Bool 𝒜).compl_mem _ hgen
++  rcases hsub hc with h | h
++  · have : true ∈ ({true} : Set Bool)ᶜ := by rw [h]; trivial
++    simp at this
++  · have : false ∈ ({true} : Set Bool)ᶜ := by simp
++    rw [h] at this; simp at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_StoneWeierstrassL.lean
+@@ -0,0 +1,44 @@
++import Core.Analysis.Topology.StoneWeierstrass
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `StoneWeierstrassTheory.stone_weierstrass_lattice` é falso: a versão em reticulado do teorema pede separação
++    forte (valores prescritos em dois pontos), não só separar pontos e conter as constantes. Em X = Bool, o conjunto
++    A = {g | g false ≤ g true} é um sub-reticulado de C(Bool, ℝ), contém as constantes, separa os pontos (g = 1 em
++    true, 0 em false), é fechado e não é tudo (falta g = 0 em true, 1 em false), logo não é denso. -/
++theorem stone_weierstrass_lattice_falso :
++    ¬ ∀ {X : Type} [TopologicalSpace X] [CompactSpace X] [T2Space X] (A : Set C(X, ℝ)),
++      StoneWeierstrassTheory.IsSubLattice A → (∀ c : ℝ, (ContinuousMap.const X c) ∈ A) →
++      (∀ x y : X, x ≠ y → ∃ f ∈ A, f x ≠ f y) → Dense A := by
++  intro H
++  set A : Set C(Bool, ℝ) := {g | g false ≤ g true} with hA
++  have hcl : IsClosed A :=
++    isClosed_le (continuous_eval_const false) (continuous_eval_const true)
++  have hd := H A ⟨fun f hf g hg => by
++      simp only [hA, Set.mem_setOf_eq, ContinuousMap.sup_apply] at hf hg ⊢; exact sup_le_sup hf hg,
++    fun f hf g hg => by
++      simp only [hA, Set.mem_setOf_eq, ContinuousMap.inf_apply] at hf hg ⊢; exact inf_le_inf hf hg⟩
++    (fun c => show (ContinuousMap.const Bool c) false ≤ (ContinuousMap.const Bool c) true from le_rfl) (by
++      intro x y hxy
++      refine ⟨⟨fun b => if b then (1 : ℝ) else 0, continuous_of_discreteTopology⟩, ?_, ?_⟩
++      · show (if false then (1 : ℝ) else 0) ≤ (if true then (1 : ℝ) else 0)
++        norm_num
++      · cases x <;> cases y
++        · exact absurd rfl hxy
++        · show (if false then (1 : ℝ) else 0) ≠ (if true then (1 : ℝ) else 0)
++          norm_num
++        · show (if true then (1 : ℝ) else 0) ≠ (if false then (1 : ℝ) else 0)
++          norm_num
++        · exact absurd rfl hxy)
++  have huniv : A = Set.univ := by rw [← hcl.closure_eq, hd.closure_eq]
++  have hmem : (⟨fun b => if b then 0 else 1, continuous_of_discreteTopology⟩ : C(Bool, ℝ)) ∈ A := by
++    rw [huniv]; trivial
++  have h' : (if false then (0 : ℝ) else 1) ≤ (if true then (0 : ℝ) else 1) := hmem
++  norm_num at h'
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_TaylorSeries.lean
+@@ -0,0 +1,182 @@
++import Core.Analysis.Calculus.TaylorSeries
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- Auxiliar: uma família real indexada por ℝ que não se anula num intervalo aberto não vazio não é somável
++    (o suporte de uma família somável é enumerável, e um intervalo aberto tem medida positiva). -/
++theorem taylor_not_summable_of_Ioo {f : ℝ → ℝ} {a b : ℝ} (hab : a < b)
++    (h : ∀ n ∈ Set.Ioo a b, f n ≠ 0) : ¬ Summable f := by
++  intro hs
++  have hc : (Set.Ioo a b).Countable := hs.countable_support.mono (fun n hn => h n hn)
++  have h0 := hc.measure_zero MeasureTheory.volume
++  rw [Real.volume_Ioo, ENNReal.ofReal_eq_zero] at h0
++  linarith
++
++/-- `TaylorSeriesTheory.taylor_log` é falso como o Lean o lê: o índice de `∑'` é `n : ℝ`, a família não é somável
++    (é não nula em todo o intervalo (0, 1/2)), a soma vale 0, e log (1 + 1/2) > 0. -/
++theorem taylor_log_falso :
++    ¬ ∀ {x : ℝ}, |x| < 1 → Real.log (1 + x) = ∑' n : ℝ, (-1) ^ (n + 1) * x ^ n / n := by
++  intro H
++  have h := @H (1 / 2) (by rw [abs_of_pos (by norm_num)]; norm_num)
++  have hns : ¬ Summable (fun n : ℝ => (-1 : ℝ) ^ (n + 1) * (1 / 2 : ℝ) ^ n / n) := by
++    refine taylor_not_summable_of_Ioo (a := 0) (b := 1 / 2) (by norm_num) ?_
++    intro n hn
++    have hn0 : 0 < n := hn.1
++    have hcos : Real.cos ((n + 1) * Real.pi) < 0 := by
++      apply Real.cos_neg_of_pi_div_two_lt_of_lt <;> nlinarith [Real.pi_pos, hn.1, hn.2]
++    have hpow : (-1 : ℝ) ^ (n + 1) = Real.cos ((n + 1) * Real.pi) := by
++      rw [Real.rpow_def_of_neg (by norm_num)]; simp
++    rw [hpow]
++    have h2 : (0 : ℝ) < (1 / 2 : ℝ) ^ n := Real.rpow_pos_of_pos (by norm_num) n
++    exact div_ne_zero (mul_ne_zero hcos.ne h2.ne') hn0.ne'
++  rw [tsum_eq_zero_of_not_summable hns] at h
++  have : 0 < Real.log (1 + 1 / 2) := Real.log_pos (by norm_num)
++  linarith
++
++/-- `TaylorSeriesTheory.taylor_arctan` é falso como o Lean o lê: o índice de `∑'` é `n : ℝ` (o `/ (2*n + 1)`
++    fixa o tipo), a família não é somável (é positiva em todo o intervalo (0, 1/2)), a soma vale 0, e
++    arctan (1/2) > 0. -/
++theorem taylor_arctan_falso :
++    ¬ ∀ {x : ℝ}, |x| ≤ 1 → Real.arctan x = ∑' n : ℝ, (-1) ^ n * x ^ (2 * n + 1) / (2 * n + 1) := by
++  intro H
++  have h := @H (1 / 2) (by rw [abs_of_pos (by norm_num)]; norm_num)
++  have hns : ¬ Summable (fun n : ℝ => (-1 : ℝ) ^ n * (1 / 2 : ℝ) ^ (2 * n + 1) / (2 * n + 1)) := by
++    refine taylor_not_summable_of_Ioo (a := 0) (b := 1 / 2) (by norm_num) ?_
++    intro n hn
++    have hcos : 0 < Real.cos (n * Real.pi) := by
++      apply Real.cos_pos_of_mem_Ioo
++      constructor <;> nlinarith [Real.pi_pos, hn.1, hn.2]
++    have hpow : (-1 : ℝ) ^ n = Real.cos (n * Real.pi) := by
++      rw [Real.rpow_def_of_neg (by norm_num)]; simp
++    rw [hpow]
++    have h2 : (0 : ℝ) < (1 / 2 : ℝ) ^ (2 * n + 1) := Real.rpow_pos_of_pos (by norm_num) _
++    have h3 : (0 : ℝ) < 2 * n + 1 := by linarith [hn.1]
++    exact div_ne_zero (mul_ne_zero hcos.ne' h2.ne') h3.ne'
++  rw [tsum_eq_zero_of_not_summable hns] at h
++  have : Real.arctan 0 < Real.arctan (1 / 2) := Real.arctan_strictMono (by norm_num)
++  rw [Real.arctan_zero] at this
++  linarith
++
++/-- Auxiliar: para x ≠ 0 a série ∑ n! xⁿ não é somável (teste da razão). -/
++theorem analytic_add_aux_fact (x : ℝ) (hx0 : x ≠ 0) :
++    ¬ Summable fun n : ℕ => (n.factorial : ℝ) * x ^ n := by
++  apply not_summable_of_ratio_norm_eventually_ge (r := 2) (by norm_num)
++  · refine Filter.Frequently.of_forall fun n => ?_
++    simp [Nat.factorial_ne_zero, hx0]
++  · have hxa : 0 < |x| := abs_pos.mpr hx0
++    obtain ⟨N, hN⟩ := exists_nat_gt (2 / |x|)
++    filter_upwards [Filter.eventually_ge_atTop N] with n hn
++    have h1 : (2 : ℝ) ≤ (n + 1) * |x| := by
++      have h3 : (N : ℝ) ≤ n := by exact_mod_cast hn
++      have h4 : 2 / |x| < n + 1 := by linarith
++      rw [div_lt_iff₀ hxa] at h4; linarith
++    have h2 : 0 ≤ (n.factorial : ℝ) * |x| ^ n := by positivity
++    have e1 : ‖(n.factorial : ℝ) * x ^ n‖ = (n.factorial : ℝ) * |x| ^ n := by
++      rw [Real.norm_eq_abs, abs_mul, abs_pow, Nat.abs_cast]
++    have e2 : ‖((n + 1).factorial : ℝ) * x ^ (n + 1)‖ = ((n + 1) * |x|) * ((n.factorial : ℝ) * |x| ^ n) := by
++      rw [Real.norm_eq_abs, abs_mul, abs_pow, Nat.abs_cast, Nat.factorial_succ, pow_succ]; push_cast; ring
++    rw [e1, e2]
++    nlinarith
++
++/-- Auxiliar: se ∑ cₙ xⁿ = 1 para todo 0 < x < r, então |c₀ - 1| < 1/2 (a série converge em r/2, e a cota
++    geométrica dá |∑ cₙ xⁿ - c₀| pequeno para x pequeno). -/
++theorem analytic_add_aux_cont (c : ℕ → ℝ) (r : ℝ) (hr : 0 < r)
++    (hval : ∀ x, 0 < x → x < r → ∑' n, c n * x ^ n = 1) : |c 0 - 1| < 1 / 2 := by
++  have hx₀pos : 0 < r / 2 := by positivity
++  have hs : Summable fun n => c n * (r / 2) ^ n := by
++    by_contra hns
++    have h := hval (r / 2) hx₀pos (by linarith)
++    rw [tsum_eq_zero_of_not_summable hns] at h
++    norm_num at h
++  obtain ⟨M, hM⟩ := (hs.tendsto_atTop_zero.norm).bddAbove_range
++  have hM' : ∀ n, |c n| * (r / 2) ^ n ≤ M := by
++    intro n
++    have h : ‖c n * (r / 2) ^ n‖ ≤ M := hM ⟨n, rfl⟩
++    rw [Real.norm_eq_abs, abs_mul, abs_pow, abs_of_pos hx₀pos] at h
++    exact h
++  have hM0 : 0 ≤ M := le_trans (by positivity) (hM' 0)
++  have hq0 : 0 < 1 / (4 * (M + 1)) := by positivity
++  have hq1 : 1 / (4 * (M + 1)) ≤ 1 / 4 :=
++    div_le_div_of_nonneg_left (by norm_num) (by norm_num) (by linarith)
++  have hMq : M * (1 / (4 * (M + 1))) < 1 / 4 := by
++    rw [mul_one_div, div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith
++  generalize hqq : 1 / (4 * (M + 1)) = q at hq0 hq1 hMq
++  have hxpos : 0 < r / 2 * q := by positivity
++  have hxr : r / 2 * q < r := by nlinarith
++  have hbound : ∀ n, ‖c n * (r / 2 * q) ^ n‖ ≤ M * q ^ n := by
++    intro n
++    rw [Real.norm_eq_abs, abs_mul, abs_pow, abs_of_pos hxpos, mul_pow, ← mul_assoc]
++    exact mul_le_mul_of_nonneg_right (hM' n) (by positivity)
++  have hgeo : Summable fun n : ℕ => M * q ^ n :=
++    (summable_geometric_of_lt_one hq0.le (by linarith)).mul_left M
++  have hsx : Summable fun n => c n * (r / 2 * q) ^ n := Summable.of_norm_bounded _ hgeo hbound
++  have hsplit := hsx.tsum_eq_zero_add
++  rw [hval _ hxpos hxr, pow_zero, mul_one] at hsplit
++  have hg1 : Summable fun n : ℕ => M * q ^ (n + 1) :=
++    ((summable_geometric_of_lt_one hq0.le (by linarith)).mul_left (M * q)).congr (fun n => by ring)
++  have hs1n : Summable fun n => ‖c (n + 1) * (r / 2 * q) ^ (n + 1)‖ :=
++    Summable.of_nonneg_of_le (fun n => norm_nonneg _) (fun n => hbound (n + 1)) hg1
++  have htail : ‖∑' n, c (n + 1) * (r / 2 * q) ^ (n + 1)‖ ≤ M * (q / (1 - q)) := by
++    calc ‖∑' n, c (n + 1) * (r / 2 * q) ^ (n + 1)‖ ≤ ∑' n, ‖c (n + 1) * (r / 2 * q) ^ (n + 1)‖ :=
++          norm_tsum_le_tsum_norm hs1n
++      _ ≤ ∑' n : ℕ, M * q ^ (n + 1) :=
++          Summable.tsum_le_tsum (fun n => hbound (n + 1)) hs1n hg1
++      _ = M * (q / (1 - q)) := by
++          rw [tsum_mul_left]
++          congr 1
++          rw [show (fun n : ℕ => q ^ (n + 1)) = fun n => q ^ n * q from funext fun n => pow_succ q n,
++            tsum_mul_right, tsum_geometric_of_lt_one hq0.le (by linarith)]
++          field_simp
++  have hle : M * (q / (1 - q)) ≤ M * (4 / 3 * q) := by
++    apply mul_le_mul_of_nonneg_left _ hM0
++    rw [div_le_iff₀ (by linarith)]; nlinarith
++  rw [Real.norm_eq_abs] at htail
++  have e : c 0 - 1 = -∑' n, c (n + 1) * (r / 2 * q) ^ (n + 1) := by linarith
++  rw [e, abs_neg]
++  nlinarith
++
++/-- `TaylorSeriesTheory.analytic_add` é falso como o Lean o lê, com a definição original
++    `IsAnalyticAtPoint f a := ∃ r > 0, ∃ c, ∀ x, |x - a| < r → f x = ∑' n, c n * (x - a)^n` (escrita por extenso
++    abaixo): `∑'` vale 0 numa série não somável, então f = (1 em 0, 0 fora) é "analítica" em 0 com cₙ = n!, g = 1 é
++    analítica, e f + g (2 em 0, 1 fora) não é. -/
++theorem analytic_add_falso :
++    ¬ ∀ {f g : ℝ → ℝ} {a : ℝ},
++      (∃ r > 0, ∃ c : ℕ → ℝ, ∀ x, |x - a| < r → f x = ∑' n, c n * (x - a)^n) →
++      (∃ r > 0, ∃ c : ℕ → ℝ, ∀ x, |x - a| < r → g x = ∑' n, c n * (x - a)^n) →
++      (∃ r > 0, ∃ c : ℕ → ℝ, ∀ x, |x - a| < r → (f + g) x = ∑' n, c n * (x - a)^n) := by
++  intro H
++  classical
++  have hf : ∃ r > 0, ∃ c : ℕ → ℝ, ∀ x, |x - 0| < r →
++      (fun x : ℝ => if x = 0 then (1 : ℝ) else 0) x = ∑' n, c n * (x - 0)^n := by
++    refine ⟨1, one_pos, fun n => (n.factorial : ℝ), fun x _ => ?_⟩
++    dsimp only
++    by_cases hx0 : x = 0
++    · subst hx0
++      rw [if_pos rfl, tsum_eq_single 0]
++      · simp
++      · intro n hn; simp [zero_pow hn]
++    · rw [if_neg hx0, sub_zero, tsum_eq_zero_of_not_summable (analytic_add_aux_fact x hx0)]
++  have hg : ∃ r > 0, ∃ c : ℕ → ℝ, ∀ x, |x - 0| < r → (fun _ : ℝ => (1 : ℝ)) x = ∑' n, c n * (x - 0)^n := by
++    refine ⟨1, one_pos, fun n => if n = 0 then 1 else 0, fun x _ => ?_⟩
++    dsimp only
++    rw [tsum_eq_single 0]
++    · simp
++    · intro n hn; simp [hn]
++  obtain ⟨r, hr, c, hc⟩ := H hf hg
++  have hc0 : c 0 = 2 := by
++    have h := hc 0 (by simpa using hr)
++    rw [tsum_eq_single 0] at h
++    · simp at h; linarith
++    · intro n hn; simp [zero_pow hn]
++  have hc1 := analytic_add_aux_cont c r hr (fun x hx0 hxr => by
++    have h := hc x (by rw [sub_zero, abs_of_pos hx0]; exact hxr)
++    simp only [Pi.add_apply, if_neg hx0.ne', sub_zero] at h
++    linarith)
++  rw [hc0] at hc1
++  norm_num [abs_of_pos] at hc1
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_TaylorSeriesL.lean
+@@ -0,0 +1,61 @@
++import Core.Analysis.Calculus.TaylorSeries
++import Mathlib
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Topology in
++/-- `TaylorSeriesTheory.taylor_error_bound` é falso: f só é C^(n+1) em Icc a b, mas `taylorPoly` usa as derivadas
++    globais `iteratedDeriv k f a` na ponta a, onde f pode não ser derivável (valem 0). Com f = |·|, a = 0, b = 1,
++    n = 1: f = id em [0, 1] (C² lá), f'' = 0 em [0, 1] (M = 0), mas `deriv |·| 0 = 0`, o polinômio de Taylor é 0 e
++    |f 1 - 0| = 1 > 0. -/
++theorem taylor_error_bound_falso :
++    ¬ ∀ {f : ℝ → ℝ} {a b : ℝ} {n : ℕ}, a < b → ContDiffOn ℝ (n + 1) f (Set.Icc a b) →
++      ∀ (M : ℝ), (∀ x ∈ Set.Icc a b, |iteratedDeriv (n + 1) f x| ≤ M) →
++      ∀ x ∈ Set.Icc a b, |f x - TaylorSeriesTheory.taylorPoly f a n x| ≤
++        M / (n + 1).factorial * |x - a| ^ (n + 1) := by
++  intro H
++  have hd1 : ∀ y : ℝ, 0 < y → deriv (fun x : ℝ => |x|) y = 1 := fun y hy => (hasDerivAt_abs_pos hy).deriv
++  have hd0 : deriv (fun x : ℝ => |x|) 0 = 0 :=
++    deriv_zero_of_not_differentiableAt not_differentiableAt_abs_zero
++  have hdd : ∀ y ∈ Set.Icc (0 : ℝ) 1, iteratedDeriv (1 + 1) (fun x : ℝ => |x|) y = 0 := by
++    intro y hy
++    rw [iteratedDeriv_succ, iteratedDeriv_one]
++    rcases hy.1.lt_or_eq with hy0 | hy0
++    · have : deriv (fun x : ℝ => |x|) =ᶠ[𝓝 y] fun _ => 1 := by
++        filter_upwards [Ioi_mem_nhds hy0] with z hz using hd1 z hz
++      rw [this.deriv_eq]; simp
++    · subst hy0
++      apply deriv_zero_of_not_differentiableAt
++      intro hdiff
++      have hc : Tendsto (deriv fun x : ℝ => |x|) (𝓝[>] 0) (𝓝 (deriv (fun x : ℝ => |x|) 0)) :=
++        hdiff.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
++      have h1 : Tendsto (deriv fun x : ℝ => |x|) (𝓝[>] 0) (𝓝 1) :=
++        tendsto_const_nhds.congr' (by
++          filter_upwards [self_mem_nhdsWithin] with z hz using (hd1 z hz).symm)
++      have := tendsto_nhds_unique hc h1
++      rw [hd0] at this; norm_num at this
++  have := H (f := fun x : ℝ => |x|) (a := 0) (b := 1) (n := 1) one_pos
++    (contDiffOn_id.congr fun x hx => abs_of_nonneg hx.1) 0
++    (fun x hx => by rw [hdd x hx]; simp) 1 ⟨zero_le_one, le_rfl⟩
++  simp [TaylorSeriesTheory.taylorPoly, Finset.sum_range_succ, hd0] at this
++  linarith
++
++open Filter Topology in
++/-- `TaylorSeriesTheory.borel_sum_analytic` é falso: `(c := maclaurinSeries …)` é um parâmetro com valor padrão,
++    e o enunciado vale para todo c. Com f = 1 (analítica em 0) e c = 0: `borelSum 0 = 0 ≠ 1`. -/
++theorem borel_sum_analytic_falso :
++    ¬ ∀ {f : ℝ → ℝ} {a : ℝ}, TaylorSeriesTheory.IsAnalyticAtPoint f a →
++      ∀ (c : ℕ → ℝ), ∀ᶠ x in 𝓝 0, TaylorSeriesTheory.borelSum c x = f (a + x) := by
++  intro H
++  have hf : TaylorSeriesTheory.IsAnalyticAtPoint (fun _ => (1 : ℝ)) 0 := by
++    refine ⟨1, one_pos, fun n => if n = 0 then 1 else 0, fun x _ => ?_⟩
++    convert hasSum_ite_eq 0 (1 : ℝ) using 1
++    funext n; split_ifs with h <;> simp [h]
++  obtain ⟨x, hx⟩ := (H hf 0).exists
++  simp [TaylorSeriesTheory.borelSum, TaylorSeriesTheory.borelTransform] at hx
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean4/MVEI_Refutacoes_UniformSpaces.lean
+@@ -0,0 +1,16 @@
++import Core.Analysis.Topology.UniformSpaces
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `UniformSpacesTheory.convergent_cauchy` é falso: `Cauchy F` exige `F.NeBot`, e o filtro ⊥ satisfaz `⊥ ≤ 𝓝 x`
++    sem ser Cauchy (em α = Unit, x = ()). -/
++theorem convergent_cauchy_falso :
++    ¬ ∀ {α : Type} [UniformSpace α] (F : Filter α) (x : α), F ≤ nhds x → Cauchy F := by
++  intro h
++  exact (h (α := Unit) ⊥ () bot_le).1.ne rfl
++
++end MVEI.Refutacoes

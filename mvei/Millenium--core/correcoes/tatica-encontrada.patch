@@ -1,3 +1,16 @@
+--- a/lean/Core.lean
++++ b/lean/Core.lean
+@@ -276,9 +276,7 @@
+ -- Verify distinctness: 𝒥_k ≠ 𝒥_j for k ≠ j
+ theorem indetClass_distinct {k j : Nat} (h : k ≠ j) (hk : k ≠ 0) (hj : j ≠ 0) :
+     indetClass k ≠ indetClass j := by
+-  simp [indetClass, hk, hj]
+-  intro h'
+-  exact h (Indet.cls.inj h')
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [TIF.indetClass]; done) | (simp_all [TIF.indetClass]; done) | (unfold TIF.indetClass; decide; done) | (unfold TIF.indetClass; rfl; done) | (simp [TIF.indetClass]; omega; done) | (intros; simp only [TIF.indetClass]; omega; done) | (intros; simp_all [TIF.indetClass]; done) | (intro x; cases x <;> simp [TIF.indetClass]; done) | (constructor <;> simp [TIF.indetClass]; done) | (norm_num [TIF.indetClass]; done) | (intros; norm_num [TIF.indetClass] at *; done) | (simp [TIF.indetClass]; ring; done) | (unfold TIF.indetClass; ring; done) | (simp [TIF.indetClass]; linarith; done) | (exact?; done)
+ 
+ -- ============================================================
+ -- F0.1 — Terms (Definition F0.1)
 --- a/lean4/Indeterminate.lean
 +++ b/lean4/Indeterminate.lean
 @@ -93,7 +93,7 @@

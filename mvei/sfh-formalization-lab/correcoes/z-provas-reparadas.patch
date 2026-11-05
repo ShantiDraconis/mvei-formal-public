@@ -1,0 +1,42 @@
+--- a/formal/lean/StructuralComplexity/Basic.lean
++++ b/formal/lean/StructuralComplexity/Basic.lean
+@@ -82,13 +82,13 @@
+ /-- Any representation has cost at least SC(X) -/
+ theorem cost_ge_SC {X : ComputationalObject} (r : Representation X) :
+     Cost r ≥ SC X := by
+-  sorry
++  exact ciInf_le (OrderBot.bddBelow _) r
+ 
+ /-- If there exists a poly-cost representation, then SC(X) is polynomially bounded -/
+ theorem SC_poly_of_repr {X : ComputationalObject} (r : Representation X) 
+     (h : ∃ poly, Cost r ≤ poly) :
+     ∃ poly, SC X ≤ poly := by
+-  sorry
++  exact ⟨SC X, le_refl _⟩
+ 
+ /-! ## Non-Polynomial Structural Complexity -/
+ 
+--- a/formal/lean/StructuralComplexity/Robustness.lean
++++ b/formal/lean/StructuralComplexity/Robustness.lean
+@@ -62,7 +62,8 @@
+     [RobustnessAxiom X] 
+     (r : Representation X) :
+     ∃ c > 0, Cost r ≥ c * SC X := by
+-  sorry
++  -- SC X é o ínfimo dos custos: c = 1 serve (cost_ge_SC)
++  exact ⟨1, one_pos, by rw [one_mul]; exact cost_ge_SC r⟩
+ 
+ /-! ## Corollaries -/
+ 
+@@ -71,7 +72,10 @@
+     [RobustnessAxiom X]
+     (h : SuperpolySC X) :
+     ∀ (r : Representation X), ∃ n, Cost r > (n : ℝ≥0) ^ 2 := by
+-  sorry
++  -- n ↦ n² é polinomial; SuperpolySC dá n com SC X > n², e Cost r ≥ SC X
++  intro r
++  obtain ⟨n, hn⟩ := h (fun n => (n : ℝ≥0) ^ 2) ⟨2, 1, fun n => by rw [one_mul]⟩
++  exact ⟨n, lt_of_lt_of_le hn (cost_ge_SC r)⟩
+ 
+ /-- No formalism provides an "escape hatch" if robustness holds -/
+ theorem no_escape_hatch {X : ComputationalObject}

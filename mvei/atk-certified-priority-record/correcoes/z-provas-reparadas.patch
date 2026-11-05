@@ -36,6 +36,18 @@
  
  theorem growingCritical_ge_one (n : ℕ) : 1 ≤ growingCritical n := by
    simp [growingCritical]
+--- a/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ProblemSignature.lean
++++ b/snapshots/Elyon-Public-Proof/lean/MCore/FinalFail/ProblemSignature.lean
+@@ -64,6 +64,8 @@
+     (P : ClassifiedProblem)
+     (h : HasTwoSidedDynamics P.signature) :
+     HasTwoSidedDynamics P.class.signature := by
+-  simpa [BehaviorEquivalent] using h
++  have hp : P.signature = P.class.signature := P.preserves
++  rw [← hp]
++  exact h
+ 
+ end MCore.FinalFail
 --- a/snapshots/m-core-beal/formal/DirectEndpointRule.lean
 +++ b/snapshots/m-core-beal/formal/DirectEndpointRule.lean
 @@ -32,7 +32,7 @@

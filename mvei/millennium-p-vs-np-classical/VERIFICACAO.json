@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,9 +15,9 @@
    "toolchain_used": "leanprover/lean4:v4.36.0-rc2",
    "needs_mathlib": true,
    "build_ok": false,
-   "build_seconds": 28.8,
-   "build_error": "error: PvsNP/lakefile.lean:14:0: elaboration function for `Lake.DSL.packageCommand` has not been implemented | error: PvsNP/lakefile.lean:20:0: elaboration function for `Lake.DSL.leanLibCommand` has not been implemented | error: PvsNP/CircuitComplexity.lean:81:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern | error: PvsNP/AverageParameterized.lean:58:12: invalid atom",
-   "sorry_warnings": 20,
+   "build_seconds": 30.9,
+   "build_error": "error: PvsNP/lakefile.lean:14:0: elaboration function for `Lake.DSL.packageCommand` has not been implemented | error: PvsNP/lakefile.lean:20:0: elaboration function for `Lake.DSL.leanLibCommand` has not been implemented | error: PvsNP/AverageParameterized.lean:58:12: invalid atom | error: PvsNP/AverageParameterized.lean:100:12: invalid atom",
+   "sorry_warnings": 16,
    "reconstructed": false,
    "bridges": [
     {
@@ -140,29 +140,6 @@
      "project": "formal/lean4",
      "theorem": "PvsNP.PSPACE_subset_EXP",
      "statement": "PvsNP.PSPACE ⊆ PvsNP.EXP",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
-    },
-    {
-     "repo": "millennium-p-vs-np-classical",
-     "project": "formal/lean4",
-     "theorem": "PvsNP.P_closed_complement",
-     "statement": "∀ L ∈ PvsNP.PClass, ∁L ∈ PvsNP.PClass",
      "verdict": "aberta",
      "tactic": "",
      "attempts": [
@@ -483,52 +460,6 @@
     {
      "repo": "millennium-p-vs-np-classical",
      "project": "formal/lean4",
-     "theorem": "PvsNP.manyOne_NP_closed",
-     "statement": "∀ (A B : PvsNP.Language), A ≤ₘᵖ B → PvsNP.inNP B → PvsNP.inNP A",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
-    },
-    {
-     "repo": "millennium-p-vs-np-classical",
-     "project": "formal/lean4",
-     "theorem": "PvsNP.manyOne_P_closed",
-     "statement": "∀ (A B : PvsNP.Language), A ≤ₘᵖ B → PvsNP.inP B → PvsNP.inP A",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
-    },
-    {
-     "repo": "millennium-p-vs-np-classical",
-     "project": "formal/lean4",
      "theorem": "PvsNP.space_hierarchy",
      "statement": "∀ (f g : ℕ → ℕ),   PvsNP.isSpaceConstructible f →     PvsNP.isSpaceConstructible g → (∀ (c : ℕ), ∃ n₀, ∀ n ≥ n₀, c * f n < g n) → PvsNP.SPACE f ⊂ PvsNP.SPACE g",
      "verdict": "aberta",
@@ -596,6 +527,59 @@
      "module": "PvsNP.SAT_NPCompleteness",
      "axioms": [],
      "statement": "∀ (numVars : ℕ) (clauses : List PvsNP.Clause),   sizeOf { numVars := numVars, clauses := clauses } = 1 + sizeOf numVars + sizeOf clauses",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.Circuit.mk.inj",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ {numInputs numGates depth numInputs_1 numGates_1 depth_1 : ℕ},   { numInputs := numInputs, numGates := numGates, depth := depth } =       { numInputs := numInputs_1, numGates := numGates_1, depth := depth_1 } →     numInputs = numInputs_1 ∧ numGates = numGates_1 ∧ depth = depth_1",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.Circuit.mk.injEq",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (numInputs numGates depth numInputs_1 numGates_1 depth_1 : ℕ),   ({ numInputs := numInputs, numGates := numGates, depth := depth } =       { numInputs := numInputs_1, numGates := numGates_1, depth := depth_1 }) =     (numInputs = numInputs_1 ∧ numGates = numGates_1 ∧ depth = depth_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.Circuit.mk.sizeOf_spec",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ (numInputs numGates depth : ℕ),   sizeOf { numInputs := numInputs, numGates := numGates, depth := depth } =     1 + sizeOf numInputs + sizeOf numGates + sizeOf depth",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.CircuitSizeConstants.exponent_bound",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ (self : PvsNP.CircuitSizeConstants), self.circuitExponent ≤ 2 * self.tmTimeExponent",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.CircuitSizeConstants.mk.inj",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ {tmTimeConstant tmTimeExponent circuitConstant circuitExponent : ℕ}   {exponent_bound : circuitExponent ≤ 2 * tmTimeExponent}   {tmTimeConstant_1 tmTimeExponent_1 circuitConstant_1 circuitExponent_1 : ℕ}   {exponent_bound_1 : circuitExponent_1 ≤ 2 * tmTimeExponent_1},   { tmTimeConstant := tmTimeConstant, tmTimeExponent := tmTimeExponent, circuitConstant := circuitConstant,         circuitExpone",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.CircuitSizeConstants.mk.injEq",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (tmTimeConstant tmTimeExponent circuitConstant circuitExponent : ℕ)   (exponent_bound : circuitExponent ≤ 2 * tmTimeExponent)   (tmTimeConstant_1 tmTimeExponent_1 circuitConstant_1 circuitExponent_1 : ℕ)   (exponent_bound_1 : circuitExponent_1 ≤ 2 * tmTimeExponent_1),   ({ tmTimeConstant := tmTimeConstant, tmTimeExponent := tmTimeExponent, circuitConstant := circuitConstant,         circuitExpon",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.CircuitSizeConstants.mk.sizeOf_spec",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ (tmTimeConstant tmTimeExponent circuitConstant circuitExponent : ℕ)   (exponent_bound : circuitExponent ≤ 2 * tmTimeExponent),   sizeOf       { tmTimeConstant := tmTimeConstant, tmTimeExponent := tmTimeExponent, circuitConstant := circuitConstant,         circuitExponent := circuitExponent, exponent_bound := exponent_bound } =     1 + sizeOf tmTimeConstant + sizeOf tmTimeExponent + sizeOf circui",
      "status": "fechado"
     },
     {
@@ -767,6 +751,50 @@
      "status": "fechado"
     },
     {
+     "name": "PvsNP.GateType.and.sizeOf_spec",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "sizeOf PvsNP.GateType.and = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.GateType.input.inj",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ {a a_1 : ℕ}, PvsNP.GateType.input a = PvsNP.GateType.input a_1 → a = a_1",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.GateType.input.injEq",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a a_1 : ℕ), (PvsNP.GateType.input a = PvsNP.GateType.input a_1) = (a = a_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.GateType.input.sizeOf_spec",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "∀ (a : ℕ), sizeOf (PvsNP.GateType.input a) = 1 + sizeOf a",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.GateType.not.sizeOf_spec",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "sizeOf PvsNP.GateType.not = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.GateType.or.sizeOf_spec",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [],
+     "statement": "sizeOf PvsNP.GateType.or = 1",
+     "status": "fechado"
+    },
+    {
      "name": "PvsNP.L_strictly_subset_PSPACE",
      "module": "PvsNP.HierarchyTheorems",
      "axioms": [
@@ -868,6 +896,15 @@
      "status": "aberto-sorry"
     },
     {
+     "name": "PvsNP.NP_subset_Ppoly_of_P_eq_NP",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "PvsNP.P_eq_NP → ∀ (L : PvsNP.Language), PvsNP.inNP L → PvsNP.inPpoly L",
+     "status": "fechado"
+    },
+    {
      "name": "PvsNP.NTM.branching_positive",
      "module": "PvsNP.TuringMachines",
      "axioms": [],
@@ -911,11 +948,10 @@
      "name": "PvsNP.P_closed_complement",
      "module": "PvsNP.ComplexityClasses",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "statement": "∀ L ∈ PvsNP.PClass, ∁L ∈ PvsNP.PClass",
-     "status": "aberto-sorry"
+     "status": "fechado"
     },
     {
      "name": "PvsNP.P_eq_NP_iff",
@@ -989,6 +1025,15 @@
      ],
      "statement": "PvsNP.PClass ⊆ PvsNP.PSPACE",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "PvsNP.P_subset_Ppoly",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (L : PvsNP.Language), PvsNP.inP L → PvsNP.inPpoly L",
+     "status": "fechado"
     },
     {
      "name": "PvsNP.ReductionConstants.constant_pos",
@@ -1222,21 +1267,19 @@
      "name": "PvsNP.manyOne_NP_closed",
      "module": "PvsNP.Reductions",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "statement": "∀ (A B : PvsNP.Language), A ≤ₘᵖ B → PvsNP.inNP B → PvsNP.inNP A",
-     "status": "aberto-sorry"
+     "status": "fechado"
     },
     {
      "name": "PvsNP.manyOne_P_closed",
      "module": "PvsNP.Reductions",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "statement": "∀ (A B : PvsNP.Language), A ≤ₘᵖ B → PvsNP.inP B → PvsNP.inP A",
-     "status": "aberto-sorry"
+     "status": "fechado"
     },
     {
      "name": "PvsNP.manyOne_implies_turing",
@@ -1259,6 +1302,15 @@
       "propext"
      ],
      "statement": "∀ (A B C : PvsNP.Language), A ≤ₘᵖ B → B ≤ₘᵖ C → A ≤ₘᵖ C",
+     "status": "fechado"
+    },
+    {
+     "name": "PvsNP.sep_of_NP_not_in_Ppoly",
+     "module": "PvsNP.CircuitComplexity",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "PvsNP.NP_not_in_Ppoly → PvsNP.P_neq_NP",
      "status": "fechado"
     },
     {
@@ -1294,9 +1346,10 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (imports-no-topo, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): imports movidos para o início (antes de comentários de módulo ou de documentação) em 18 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 25 arquivo(s): abbrev 7, docstring 1, nomes_mathlib 1, noncomputable 10, notacao 14, precedencia 7, precedencia_prefixa 2; 3 prova(s) reescrita(s), conferidas no Lean do projeto: instance Membership Word Language, complement_complement, inter_union_distrib; 1 negação(ões) provada(s) no kernel: NP_eq_NP_verifier.",
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): imports movidos para o início (antes de comentários de módulo ou de documentação) em 18 arquivo(s); 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 25 arquivo(s): abbrev 7, docstring 1, nomes_mathlib 1, noncomputable 9, notacao 15, precedencia 7, precedencia_prefixa 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: P_subset_Ppoly, NP_subset_Ppoly_of_P_eq_NP, instance Membership Word Language, complement_complement, inter_union_distrib; 1 negação(ões) provada(s) no kernel: NP_eq_NP_verifier.",
    "corrections": [
     "imports-no-topo",
+    "tatica-encontrada",
     "vocabulario-lean4",
     "z-provas-reparadas",
     "zz-refutacoes"
@@ -1344,13 +1397,6 @@
      "tipo": "teorema aberto",
      "nome": "PvsNP.PSPACE_subset_EXP",
      "enunciado": "PvsNP.PSPACE ⊆ PvsNP.EXP",
-     "resultado": "sem resultado",
-     "tatica": ""
-    },
-    {
-     "tipo": "teorema aberto",
-     "nome": "PvsNP.P_closed_complement",
-     "enunciado": "∀ L ∈ PvsNP.PClass, ∁L ∈ PvsNP.PClass",
      "resultado": "sem resultado",
      "tatica": ""
     },
@@ -1447,20 +1493,6 @@
     },
     {
      "tipo": "teorema aberto",
-     "nome": "PvsNP.manyOne_NP_closed",
-     "enunciado": "∀ (A B : PvsNP.Language), A ≤ₘᵖ B → PvsNP.inNP B → PvsNP.inNP A",
-     "resultado": "sem resultado",
-     "tatica": ""
-    },
-    {
-     "tipo": "teorema aberto",
-     "nome": "PvsNP.manyOne_P_closed",
-     "enunciado": "∀ (A B : PvsNP.Language), A ≤ₘᵖ B → PvsNP.inP B → PvsNP.inP A",
-     "resultado": "sem resultado",
-     "tatica": ""
-    },
-    {
-     "tipo": "teorema aberto",
      "nome": "PvsNP.space_hierarchy",
      "enunciado": "∀ (f g : ℕ → ℕ),   PvsNP.isSpaceConstructible f →     PvsNP.isSpaceConstructible g → (∀ (c : ℕ), ∃ n₀, ∀ n ≥ n₀, c * f n < g n) → PvsNP.SPACE f ⊂ PvsNP.SPACE g",
      "resultado": "sem resultado",
@@ -1475,11 +1507,11 @@
     }
    ],
    "summary": {
-    "fechado": 60,
-    "aberto-sorry": 24,
+    "fechado": 79,
+    "aberto-sorry": 21,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   },
   {
    "repo": "millennium-p-vs-np-classical",
@@ -1488,7 +1520,7 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 19.5,
+   "build_seconds": 23.3,
    "build_error": "(configuração original) error: Basics.lean:1:0: unknown module prefix 'Mathlib' | error: TuringMachines.lean:1:0: unknown module prefix 'PvsNP' | error: ComplexityClasses.lean:1:0: unknown module prefix 'PvsNP' | error: CircuitComplexity.lean:8:0: unknown module prefix 'PvsNP'",
    "sorry_warnings": 0,
    "reconstructed": true,
@@ -1611,9 +1643,10 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (imports-no-topo, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): imports movidos para o início (antes de comentários de módulo ou de documentação) em 18 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 25 arquivo(s): abbrev 7, docstring 1, nomes_mathlib 1, noncomputable 10, notacao 14, precedencia 7, precedencia_prefixa 2; 3 prova(s) reescrita(s), conferidas no Lean do projeto: instance Membership Word Language, complement_complement, inter_union_distrib; 1 negação(ões) provada(s) no kernel: NP_eq_NP_verifier. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Basics e o Mathlib v4.19.0 e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): imports movidos para o início (antes de comentários de módulo ou de documentação) em 18 arquivo(s); 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 25 arquivo(s): abbrev 7, docstring 1, nomes_mathlib 1, noncomputable 9, notacao 15, precedencia 7, precedencia_prefixa 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: P_subset_Ppoly, NP_subset_Ppoly_of_P_eq_NP, instance Membership Word Language, complement_complement, inter_union_distrib; 1 negação(ões) provada(s) no kernel: NP_eq_NP_verifier. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Basics e o Mathlib v4.19.0 e compilou o que foi possível",
    "corrections": [
     "imports-no-topo",
+    "tatica-encontrada",
     "vocabulario-lean4",
     "z-provas-reparadas",
     "zz-refutacoes"
@@ -1630,7 +1663,7 @@
       "propext"
      ],
      "ponte_de_modulo": {
-      "PvsNP.Basics": "prefixo do pacote",
+      "PvsNP.Basics": "mesmo arquivo que Basics",
       "PvsNP.ComplexityClasses": "prefixo do pacote",
       "PvsNP.TuringMachines": "prefixo do pacote"
      }
@@ -1646,13 +1679,12 @@
       "PvsNP.baker_gill_solovay"
      ],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
      "erro": "linha 92: unknown identifier 'B'",
      "coluna": 15,
      "trecho": "  have := hRel ⟦B⟧",
-     "motivo": "importa PvsNP.CircuitComplexity, PvsNP.StoneLemma, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "motivo": "importa PvsNP.StoneLemma, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
       "PvsNP.CircuitComplexity": "prefixo do pacote",
@@ -1671,7 +1703,6 @@
       "sorryAx"
      ],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
      "ponte_de_modulo": {
@@ -1692,7 +1723,6 @@
       "sorryAx"
      ],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
      "ponte_de_modulo": {
@@ -1712,7 +1742,6 @@
       "propext"
      ],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
      "ponte_de_modulo": {
@@ -1727,10 +1756,9 @@
      "arquivo": "formal/lean4/PvsNP/CircuitComplexity.lean",
      "linha": 56,
      "nome": "PvsNP.P_subset_Ppoly",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
@@ -1740,16 +1768,12 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/CircuitComplexity.lean",
-     "linha": 71,
+     "linha": 74,
      "nome": "PvsNP.NP_subset_Ppoly_of_P_eq_NP",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
-     "erro": "linha 81: tactic 'rewrite' failed, did not find instance of the pattern in the target expression NPClass hEq : PClass = NPClass L : Language hNP : L ∈ NPClass ⊢ L ∈ PClass",
-     "coluna": 9,
-     "trecho": "    rwa [⟦←⟧ hEq]",
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
       "PvsNP.ComplexityClasses": "prefixo do pacote",
@@ -1758,12 +1782,11 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/CircuitComplexity.lean",
-     "linha": 89,
+     "linha": 92,
      "nome": "PvsNP.sep_of_NP_not_in_Ppoly",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
@@ -1773,7 +1796,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 60,
+     "linha": 59,
      "nome": "PvsNP.P_eq_P'",
      "status": "aberto-sorry",
      "axioms": [
@@ -1787,7 +1810,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 93,
+     "linha": 92,
      "nome": "PvsNP.NP_eq_NP_verifier",
      "status": "aberto-sorry",
      "axioms": [
@@ -1801,7 +1824,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 97,
+     "linha": 96,
      "nome": "PvsNP.P_subset_NP",
      "status": "aberto-sorry",
      "axioms": [
@@ -1815,12 +1838,11 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 109,
+     "linha": 108,
      "nome": "PvsNP.P_closed_complement",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
@@ -1829,7 +1851,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 115,
+     "linha": 112,
      "nome": "PvsNP.P_subset_NP_inter_coNP",
      "status": "aberto-sorry",
      "axioms": [
@@ -1843,7 +1865,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 132,
+     "linha": 129,
      "nome": "PvsNP.P_eq_NP_iff",
      "status": "aberto-sorry",
      "axioms": [
@@ -1858,7 +1880,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 168,
+     "linha": 165,
      "nome": "PvsNP.eq_of_npc_in_p",
      "status": "aberto-sorry",
      "axioms": [
@@ -1872,7 +1894,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/ComplexityClasses.lean",
-     "linha": 177,
+     "linha": 174,
      "nome": "PvsNP.P_eq_NP_iff_NPC_in_P",
      "status": "aberto-sorry",
      "axioms": [
@@ -2033,10 +2055,9 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
-     "motivo": "object file '/tmp/mvei-rec-plzxn9kz/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
+     "motivo": "object file '/tmp/mvei-rec-g6ylgwst/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
      "ponte_de_modulo": {
       "PvsNP.AverageParameterized": "prefixo do pacote",
       "PvsNP.Basics": "prefixo do pacote",
@@ -2054,10 +2075,9 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
-     "motivo": "object file '/tmp/mvei-rec-plzxn9kz/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
+     "motivo": "object file '/tmp/mvei-rec-g6ylgwst/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
      "ponte_de_modulo": {
       "PvsNP.AverageParameterized": "prefixo do pacote",
       "PvsNP.Basics": "prefixo do pacote",
@@ -2075,10 +2095,9 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
-     "motivo": "object file '/tmp/mvei-rec-plzxn9kz/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
+     "motivo": "object file '/tmp/mvei-rec-g6ylgwst/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
      "ponte_de_modulo": {
       "PvsNP.AverageParameterized": "prefixo do pacote",
       "PvsNP.Basics": "prefixo do pacote",
@@ -2096,10 +2115,9 @@
      "status": "nao_alcancado",
      "axioms": [],
      "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity",
       "PvsNP.StoneLemma"
      ],
-     "motivo": "object file '/tmp/mvei-rec-plzxn9kz/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-plzxn9kz/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
+     "motivo": "object file '/tmp/mvei-rec-g6ylgwst/p/.lake/mvei-salvage/PvsNP/AverageParameterized.olean' of module PvsNP.AverageParameterized does not exist — PvsNP.AverageParameterized não compilou: /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid atom | /tmp/mvei-rec-g6ylgwst/p/AverageParameterized.lean:57:0: error: invalid syntax node kind 'PvsNP.«term𝐏_≈[_]_𝐍𝐏»'",
      "ponte_de_modulo": {
       "PvsNP.AverageParameterized": "prefixo do pacote",
       "PvsNP.Basics": "prefixo do pacote",
@@ -2140,10 +2158,9 @@
      "arquivo": "formal/lean4/PvsNP/Reductions.lean",
      "linha": 88,
      "nome": "PvsNP.manyOne_P_closed",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
@@ -2153,12 +2170,11 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/Reductions.lean",
-     "linha": 98,
+     "linha": 94,
      "nome": "PvsNP.manyOne_NP_closed",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
@@ -2168,7 +2184,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/Reductions.lean",
-     "linha": 122,
+     "linha": 116,
      "nome": "PvsNP.NPComplete_in_P_implies_P_eq_NP",
      "status": "aberto-sorry",
      "axioms": [
@@ -2184,7 +2200,7 @@
     },
     {
      "arquivo": "formal/lean4/PvsNP/Reductions.lean",
-     "linha": 153,
+     "linha": 147,
      "nome": "PvsNP.manyOne_implies_turing",
      "status": "fechado",
      "axioms": [],
@@ -2273,18 +2289,14 @@
      "arquivo": "formal/lean4/PvsNP/StoneLemma.lean",
      "linha": 32,
      "nome": "PvsNP.stone_lemma_equiv",
-     "status": "nao_alcancado",
+     "status": "erro",
      "axioms": [
       "propext",
       "sorryAx"
      ],
-     "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity"
-     ],
      "erro": "linha 42: no goals to be solved",
      "coluna": 4,
      "trecho": "    ⟦e⟧xact ⟨by omega, hSize⟩",
-     "motivo": "importa PvsNP.CircuitComplexity, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
       "PvsNP.CircuitComplexity": "prefixo do pacote",
@@ -2296,13 +2308,9 @@
      "arquivo": "formal/lean4/PvsNP/StoneLemma.lean",
      "linha": 47,
      "nome": "PvsNP.sep_of_stone",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
-     ],
-     "dependencia_com_sorry": [
-      "PvsNP.CircuitComplexity"
+      "propext"
      ],
      "ponte_de_modulo": {
       "PvsNP.Basics": "prefixo do pacote",
@@ -2318,7 +2326,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   },
   {
    "repo": "millennium-p-vs-np-classical",
@@ -2327,7 +2335,7 @@
    "toolchain_used": "padrão do elan",
    "needs_mathlib": false,
    "build_ok": false,
-   "build_seconds": 22.0,
+   "build_seconds": 21.0,
    "build_error": "error: TuringMachines.lean:1:0: unknown module prefix 'PvsNP' | error: ComplexityClasses.lean:1:0: unknown module prefix 'PvsNP' | error: Reductions.lean:1:0: unknown module prefix 'PvsNP' | error: CircuitComplexity.lean:1:0: unknown module prefix 'PvsNP'",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -2335,9 +2343,10 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (imports-no-topo, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): imports movidos para o início (antes de comentários de módulo ou de documentação) em 18 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 25 arquivo(s): abbrev 7, docstring 1, nomes_mathlib 1, noncomputable 10, notacao 14, precedencia 7, precedencia_prefixa 2; 3 prova(s) reescrita(s), conferidas no Lean do projeto: instance Membership Word Language, complement_complement, inter_union_distrib; 1 negação(ões) provada(s) no kernel: NP_eq_NP_verifier. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Basics.lean:281:12: unknown constant 'Nat.one_lt_iff_ne_one.mpr' | error: Lean exited with code 1",
+   "note": "CORRIGIDO PELO MVEI (imports-no-topo, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): imports movidos para o início (antes de comentários de módulo ou de documentação) em 18 arquivo(s); 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 25 arquivo(s): abbrev 7, docstring 1, nomes_mathlib 1, noncomputable 9, notacao 15, precedencia 7, precedencia_prefixa 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: P_subset_Ppoly, NP_subset_Ppoly_of_P_eq_NP, instance Membership Word Language, complement_complement, inter_union_distrib; 1 negação(ões) provada(s) no kernel: NP_eq_NP_verifier. a configuração original não compila; o MVEI reconstruiu o lakefile com o Mathlib v4.19.0, mas o código também não compila: error: ././././Basics.lean:281:12: unknown constant 'Nat.one_lt_iff_ne_one.mpr' | error: Lean exited with code 1",
    "corrections": [
     "imports-no-topo",
+    "tatica-encontrada",
     "vocabulario-lean4",
     "z-provas-reparadas",
     "zz-refutacoes"
@@ -3087,7 +3096,7 @@
      },
      "preenchimento": {
       "resultado": "demonstrável",
-      "tatica": "first | (rfl) | (decide) | (trivial) | (simp) | (omega) | (simp_all) | (exact fun _ => trivial) | (norm_num) | (linarith) | (positivity) | (ring) | (tauto) | (aesop) | (nlinarith) | (exact?)"
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [PvsNP.EXP, PvsNP.PClass]; done) | (simp_all [PvsNP.EXP, PvsNP.PClass]; done) | (unfold PvsNP.EXP PvsNP.PClass; decide; done) | (unfold PvsNP.EXP PvsNP.PClass; rfl; done) | (simp [PvsNP.EXP, PvsNP.PClass]; omega; done) | (intros; simp only [PvsNP.EXP, PvsNP.PClass]; omega; done) | (intros; simp_all [PvsNP.EXP, PvsNP.PClass]; done) | (intro x; cases x <;> simp [PvsNP.EXP, PvsNP.PClass]; done) | (constructor <;> simp [PvsNP.EXP, PvsNP.PClass]; done) | (norm_num [PvsNP.EXP, PvsNP.PClass]; done) | (intros; norm_num [PvsNP.EXP, PvsNP.PClass] at *; done) | (simp [PvsNP.EXP, PvsNP.PClass]; ring; done) | (unfold PvsNP.EXP PvsNP.PClass; ring; done) | (simp [PvsNP.EXP, PvsNP.PClass]; linarith; done) | (exact?; done)"
      }
     },
     {
@@ -3357,10 +3366,9 @@
      "arquivo": "src/lean4/HierarchyTheorems.lean",
      "linha": 253,
      "nome": "PvsNP.EXP_ne_NEXP_implies_P_ne_NP",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
-      "propext",
-      "sorryAx"
+      "propext"
      ],
      "dependencia_com_sorry": [
       "PvsNP.Basics",
@@ -3786,6 +3794,10 @@
       "PvsNP.Reductions": "prefixo do pacote",
       "PvsNP.SAT_NPCompleteness": "prefixo do pacote",
       "PvsNP.TuringMachines": "prefixo do pacote"
+     },
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
      }
     },
     {
@@ -4867,7 +4879,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793831476
   }
  ]
 }

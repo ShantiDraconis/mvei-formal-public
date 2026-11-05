@@ -47,7 +47,12 @@
  
 --- a/Millennium/Logical/Scenarios.lean
 +++ b/Millennium/Logical/Scenarios.lean
-@@ -41,7 +41,7 @@
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Millennium/Logical/Scenarios.lean
+   
+@@ -41,7 +42,7 @@
    pvsnp_status : PvsNPStatus
  deriving DecidableEq, Repr
  
@@ -368,7 +373,7 @@
    /-- Determine if global smoothness can be guaranteed -/
    guarantees_global : LocalRegularityData → Bool
    /-- Consistency: if all local regions are regular, global is smooth -/
-@@ -145,7 +148,7 @@
+@@ -142,7 +145,7 @@
  
  /-- Bridge Theorem for NS: Uniform local control implies global smoothness -/
  theorem bridge_theorem_ns (u₀ : InitialData) (Φ : BridgeOperator) :
@@ -377,7 +382,7 @@
        (Φ.extract_local (0, t) (x, r)).energy.bounded) →
      Φ.consistency →
      ∃ (sol : NSSolution), is_global_smooth sol := by
-@@ -220,7 +223,7 @@
+@@ -217,7 +220,7 @@
    t₁ ≤ t₂ → Energy flow t₂ ≤ Energy flow t₁
  
  /-- Vorticity field ω = ∇ × u -/
@@ -988,6 +993,15 @@
  /-!
  # Basic Definitions for RH-P vs NP Framework
  
+@@ -65,7 +67,7 @@
+ 
+ /-- The Chebyshev function ψ(x) = Σ_{n ≤ x} Λ(n) -/
+ noncomputable def chebyshevPsi (x : ℝ) : ℝ :=
+-  ∑ n in Finset.filter (fun n => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
++  ∑ n ∈ Finset.filter (fun n => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
+ 
+ /-- Prime stability condition with exponent α -/
+ def PrimeStability (α : ℝ) : Prop :=
 --- a/lean/RHPvsNP/CircuitComplexity.lean
 +++ b/lean/RHPvsNP/CircuitComplexity.lean
 @@ -11,6 +11,9 @@
@@ -1042,6 +1056,15 @@
  
  /-!
  # Zeta Zeros Formalization
+@@ -64,7 +66,7 @@
+ noncomputable def AggregateGap (zeros : Finset ZetaZero) (T : ℝ) : ℝ :=
+   let filtered := zeros.filter (fun ρ => ρ.val.im ≤ T)
+   if h : filtered.card = 0 then 0
+-  else (∑ ρ in filtered, (DeltaRH ρ)^2) / filtered.card
++  else (∑ ρ ∈ filtered, (DeltaRH ρ)^2) / filtered.card
+ 
+ /-- Under RH, the aggregate gap is zero -/
+ theorem aggregate_gap_zero_under_rh (zeros : Finset ZetaZero) (T : ℝ)
 --- a/lean/RiemannHypothesis/Basic.lean
 +++ b/lean/RiemannHypothesis/Basic.lean
 @@ -7,6 +7,12 @@
@@ -1494,11 +1517,14 @@
    Float is used as a placeholder for ℝ (Real). A full formalization
 --- a/lean4/Groups/Group2_GeometricFlows.lean
 +++ b/lean4/Groups/Group2_GeometricFlows.lean
-@@ -8,6 +8,9 @@
+@@ -8,6 +8,12 @@
  
  import Mathlib.Data.Real.Basic
  import Mathlib.Topology.Basic
-+import Mathlib.Tactic
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Positivity
++import Mathlib.Tactic.Ring
 +
 +noncomputable section
  
@@ -2108,6 +2134,15 @@
  
  open Complex Real
  
+@@ -31,7 +35,7 @@
+ 
+ /-- The Chebyshev psi function: sum of log p over prime powers p^k ≤ x -/
+ noncomputable def chebyshevPsi (x : ℝ) : ℝ :=
+-  ∑ n in Finset.filter (fun n => Nat.Prime n) (Finset.range (Nat.ceil x + 1)),
++  ∑ n ∈ Finset.filter (fun n => Nat.Prime n) (Finset.range (Nat.ceil x + 1)),
+     (Nat.floor (Real.log x / Real.log n)) * Real.log n
+ 
+ /-- Prime Number Theorem error bound: ψ(x) - x = O(x^(1/2) log²x) -/
 --- a/lean4/SOF/Axioms.lean
 +++ b/lean4/SOF/Axioms.lean
 @@ -8,6 +8,8 @@
@@ -2128,6 +2163,13 @@
  
  /-- 1. Preserves classical truths -/
  axiom classical_preservation : ∀ (P : Prop), P → P
+--- a/lean4/StructuralCheckmate.lean
++++ b/lean4/StructuralCheckmate.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Structural Checkmate Theorem
+   
 --- a/lean4/StructuralInadequacy.lean
 +++ b/lean4/StructuralInadequacy.lean
 @@ -1,3 +1,7 @@
@@ -3017,6 +3059,15 @@
  
  /-- Kinetic energy functional -/
  noncomputable def KineticEnergy (u : VelocityField) : ℝ :=
+@@ -109,7 +115,7 @@
+   (h_rh : ∀ n : ℕ, ∃ s : ℂ, NonTrivialZero s ∧ s.im = γ n)
+   (k : ℝ)
+   (N : ℕ) :
+-  |∑ j in Finset.range N, Real.cos (γ j * Real.log k) / γ j| ≤
++  |∑ j ∈ Finset.range N, Real.cos (γ j * Real.log k) / γ j| ≤
+   Real.sqrt N := by
+   sorry
+ 
 --- a/rh-umi-invariant/formal/lean/UMI_RH/Basic.lean
 +++ b/rh-umi-invariant/formal/lean/UMI_RH/Basic.lean
 @@ -5,7 +5,7 @@
@@ -3163,6 +3214,13 @@
  namespace Millennium.Logical
  
  /-- Two propositions are independent if neither implies the other -/
+--- a/src/lean/Millennium/Logical/Invariance.lean
++++ b/src/lean/Millennium/Logical/Invariance.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Tactic
+ /-
+   Classical Invariance Theorem - Lean Formalization
+ 
 --- a/src/lean/Millennium/Logical/SevenScenarios.lean
 +++ b/src/lean/Millennium/Logical/SevenScenarios.lean
 @@ -5,6 +5,8 @@

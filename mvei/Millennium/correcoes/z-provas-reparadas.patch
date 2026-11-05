@@ -1,3 +1,110 @@
+--- a/Contaminated/NotImported/lean4/LocalGlobal/Instances/Poincare.lean
++++ b/Contaminated/NotImported/lean4/LocalGlobal/Instances/Poincare.lean
+@@ -81,6 +81,5 @@
+     simp only [Delta] at this
+     split_ifs at this with hcond
+     · exact hcond hsc
+-    · simp at this
+ 
+ end LocalGlobal.Instances.Poincare
+--- a/Contaminated/NotImported/lean4/MillenniumFramework.lean
++++ b/Contaminated/NotImported/lean4/MillenniumFramework.lean
+@@ -950,10 +950,8 @@
+   · -- YM mass gap
+     exact h_YM
+   · -- Poincaré
+-    simp [Δ_Poincare] at h_Poincare
+-    split_ifs at h_Poincare with h
+-    · exact h
+-    · contradiction
++    by_contra h
++    simp [Δ_Poincare, h] at h_Poincare
+ 
+ /-!
+ # The Seven Groups
+--- a/cross/riemann_vs_navier/spectral_link.lean
++++ b/cross/riemann_vs_navier/spectral_link.lean
+@@ -101,11 +101,10 @@
+   intro h
+   unfold both_satisfied deviation_norm deviation_vector at h
+   simp only at h
+-  constructor
+-  · -- RH part
+-    sorry  -- Requires analysis of sqrt = 0
+-  · -- NS part  
+-    sorry
++  -- √(a² + b²) = 0 com a² + b² ≥ 0 dá a² + b² = 0, logo a² = 0 e b² = 0
++  rw [Real.sqrt_eq_zero (by positivity)] at h
++  obtain ⟨ha, hb⟩ := (add_eq_zero_iff_of_nonneg (sq_nonneg _) (sq_nonneg _)).mp h
++  exact ⟨pow_eq_zero_iff (n := 2) (by norm_num) |>.mp ha, pow_eq_zero_iff (n := 2) (by norm_num) |>.mp hb⟩
+ 
+ /-
+   Curvature Unification Conjecture
+--- a/formal-proofs/ZeroEngine.lean
++++ b/formal-proofs/ZeroEngine.lean
+@@ -87,9 +87,15 @@
+   use fun t => Real.exp (t - target_date)
+   intro t ht
+   constructor
+-  · sorry -- Prova da monotonicidade estrita
++  · exact Real.exp_lt_exp.mpr (by linarith)
+   · intro n
+-    sorry -- Prova do crescimento super-linear
++    have h1 : Real.exp (t + n - target_date) = Real.exp (t - target_date) * Real.exp n := by
++      rw [← Real.exp_add]; ring_nf
++    have h2 : (n : ℝ) < Real.exp n := by linarith [Real.add_one_le_exp (n : ℝ)]
++    have h3 := Real.exp_pos (t - target_date)
++    show Real.exp (t + n - target_date) > n * Real.exp (t - target_date)
++    rw [h1]
++    nlinarith
+ 
+ -- Definição do Meta LA 2028
+ def meta_LA_2028 : Prop := 
+--- a/formal/lean/BSD/Classical.lean
++++ b/formal/lean/BSD/Classical.lean
+@@ -60,8 +60,8 @@
+     simp [this]
+   · intro h E
+     have gap := h E
+-    simp [Δ_BSD] at gap
+-    exact Nat.cast_injective gap
++    simp only [Δ_BSD] at gap
++    omega
+ 
+ /-- Weak BSD: L(E,1) ≠ 0 iff rank(E) = 0 -/
+ def WeakBSD : Prop :=
+--- a/formal/lean/Core/MetaTheorem.lean
++++ b/formal/lean/Core/MetaTheorem.lean
+@@ -62,6 +62,7 @@
+     allTrue = allDeltaZero → 
+     (allTrue = true ↔ allDeltaZero = true) := by
+   intro allTrue allDeltaZero h
+-  constructor <;> (intro; rw [h]; assumption)
++  subst h
++  exact Iff.rfl
+ 
+ end UMOS.Core.MetaTheorem
+--- a/formal/lean/RH/Classical.lean
++++ b/formal/lean/RH/Classical.lean
+@@ -47,11 +47,14 @@
+   RiemannHypothesis ↔ ∀ ρ : ℂ, NonTrivialZero ρ → Δ_RH ρ = 0 := by
+   constructor
+   · intro h ρ hρ
+-    simp [Δ_RH]
+-    exact sub_eq_zero.mpr (h ρ hρ)
++    have h1 : ρ.re = 1/2 := h ρ hρ
++    unfold Δ_RH
++    rw [h1]
++    norm_num
+   · intro h ρ hρ
+-    simp [OnCriticalLine]
+-    exact sub_eq_zero.mp (h ρ hρ)
++    have h1 : ρ.re - 1/2 = 0 := h ρ hρ
++    show ρ.re = 1/2
++    linarith
+ 
+ /-- All non-trivial zeros lie in the critical strip (known theorem) -/
+ axiom zeros_in_critical_strip : ∀ ρ : ℂ, NonTrivialZero ρ → InCriticalStrip ρ
 --- a/formal/lean/Unified/UniversalOperators.lean
 +++ b/formal/lean/Unified/UniversalOperators.lean
 @@ -30,7 +30,7 @@
@@ -9,6 +116,61 @@
  
  /-- The RH statement in delta form -/
  def RH_statement (zeros : Set ℂ) : Prop :=
+--- a/formal/lean4/TUSC.lean
++++ b/formal/lean4/TUSC.lean
+@@ -185,7 +185,7 @@
+   constructor
+   · trivial
+   · -- The existence of a universal invariant is the research program
+-    sorry
++    exact ⟨fun _ => 0, fun _ => rfl, fun _ => rfl, fun _ => rfl, fun _ => rfl, fun _ => rfl⟩
+ 
+ /-- Corollary: Local-to-Global Correspondence
+     Every local operator has a global image -/
+@@ -193,14 +193,10 @@
+   ∀ O ∈ BlockA.Operators, 
+     (∃ O' ∈ BlockB.Operators, True) ∧
+     (∃ O' ∈ BlockC.Operators, True) := by
+-  intro O _hO
++  intro O hO
+   constructor
+-  · -- Follows from F_AG.operator_preservation
+-    have h := F_AG.operator_preservation O
+-    sorry
+-  · -- Follows from F_AN.operator_preservation  
+-    have h := F_AN.operator_preservation O
+-    sorry
++  · exact (F_AG.operator_preservation O hO).imp fun _ h => ⟨h.1, trivial⟩
++  · exact (F_AN.operator_preservation O hO).imp fun _ h => ⟨h.1, trivial⟩
+ 
+ /-- Corollary: Transfer Theorem
+     A proof in one domain transfers invariants to another -/
+@@ -208,12 +204,10 @@
+   ∀ I ∈ BlockA.Invariants,
+     (∃ I' ∈ BlockB.Invariants, True) ∧
+     (∃ I' ∈ BlockC.Invariants, True) := by
+-  intro I _hI
++  intro I hI
+   constructor
+-  · have h := F_AG.invariant_compatibility I
+-    sorry
+-  · have h := F_AN.invariant_compatibility I
+-    sorry
++  · exact (F_AG.invariant_compatibility I hI).imp fun _ h => ⟨h.1, trivial⟩
++  · exact (F_AN.invariant_compatibility I hI).imp fun _ h => ⟨h.1, trivial⟩
+ 
+ end TUSCTheorem
+ 
+--- a/groups/Group2_GeometricFlows.lean
++++ b/groups/Group2_GeometricFlows.lean
+@@ -244,6 +244,6 @@
+   -- 3. Classification of ancient solutions
+   -- 4. Finite-time extinction for simply-connected case
+   -- Conclusion: M ≅ S³
+-  trivial  -- Already proven (but complex!)
++  exact F.dim_3
+ 
+ end MillenniumGroups.Group2
 --- a/lean/ParityGap.lean
 +++ b/lean/ParityGap.lean
 @@ -70,7 +70,8 @@
@@ -43,8 +205,8 @@
  
  /-- The Chebyshev function ψ(x) = Σ_{n ≤ x} Λ(n) -/
  noncomputable def chebyshevPsi (x : ℝ) : ℝ :=
--  ∑ n in Finset.filter (fun n => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
-+  ∑ n in Finset.filter (fun n : ℕ => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
+-  ∑ n ∈ Finset.filter (fun n => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
++  ∑ n ∈ Finset.filter (fun n : ℕ => (n : ℝ) ≤ x) (Finset.range (Nat.ceil x + 1)), vonMangoldt n
  
  /-- Prime stability condition with exponent α -/
  def PrimeStability (α : ℝ) : Prop :=
@@ -192,6 +354,149 @@
  
  /-- Experimental candidates exist -/
  axiom experimental_candidates_exist : True
+--- a/lean4/UnifiedTheory/CoreTheory.lean
++++ b/lean4/UnifiedTheory/CoreTheory.lean
+@@ -106,7 +106,6 @@
+ theorem energy_nonneg_at_canonical (ut : UnifiedTheory) : 
+     energy_functional ut canonical_parameters = 0 := by
+   simp [energy_functional, UnifiedTheory.potential, universal_potential]
+-  ring
+ 
+ /-- Block extraction for problem-specific coupling -/
+ def extract_block (ut : UnifiedTheory) (indices : Finset (Fin 38)) :
+--- a/rh-ns-cascade/lean/RH_NS_Cascade.lean
++++ b/rh-ns-cascade/lean/RH_NS_Cascade.lean
+@@ -71,15 +71,9 @@
+ theorem rh_implies_stability :
+   RiemannHypothesis →
+   IsStable (1/2) 0 2 := by
+-  intro h_rh
+-  unfold IsStable CouplingConstant
+-  simp
+-  -- The deviation term is zero under RH conditions
+-  have h_deviation : |(1/2 : ℝ) - 0.5| + |0| + |2 - 2| = 0 := by norm_num
+-  rw [h_deviation]
+-  simp [Real.exp]
+-  -- κ_base * N_RH * 1 < κ_critical needs numerical verification
+-  sorry
++  intro _
++  unfold IsStable CouplingConstant κ_critical
++  norm_num
+ 
+ /-- Energy inequality under RH coupling -/
+ theorem energy_inequality_rh
+--- a/src/lean/Millennium/Complexity/Classes.lean
++++ b/src/lean/Millennium/Complexity/Classes.lean
+@@ -33,7 +33,12 @@
+   obtain ⟨m, hm⟩ := hL
+   -- P problems are verified by empty certificate
+   use m
+-  sorry -- Full proof requires TM semantics
++  -- acceptsInTime é o marcador True do autor: L ∈ P ⇔ L = univ, e o certificado vazio serve
++  obtain ⟨p, hp⟩ := hm
++  refine ⟨p, fun x => ?_⟩
++  rw [hp x]
++  simp only [DTM.acceptsInTime, and_true, true_iff]
++  exact ⟨[], Nat.zero_le _⟩
+ 
+ /-- The P vs NP question -/
+ def P_equals_NP : Prop := ClassP = ClassNP
+--- a/src/lean/Millennium/Complexity/DeltaNP.lean
++++ b/src/lean/Millennium/Complexity/DeltaNP.lean
+@@ -223,17 +223,25 @@
+   ∃ (k : ℕ), deltaNP L ≤ k := by
+   use 1
+   simp only [deltaNP]
++  norm_num
+ 
+ /-- P = NP iff all NP problems have finite deltaNP -/
+ theorem p_eq_np_iff_delta_finite :
+   P_equals_NP ↔ ∀ L ∈ ClassNP, ∃ (k : ℕ), deltaNP L ≤ k := by
+   constructor
+   · intro heq L hL
+-    rw [heq] at hL
++    rw [← (heq : ClassP = ClassNP)] at hL
+     exact deltaNP_finite_for_P L hL
+   · intro h
+     -- If all NP problems have polynomial algorithms...
+-    sorry
++    -- com o marcador acceptsInTime := True do autor, ClassP = ClassNP (= {univ}); não é P = NP
++    apply Set.Subset.antisymm p_subset_np
++    intro L hL
++    obtain ⟨V, p, hp⟩ := hL
++    refine ⟨V, p, fun x => ?_⟩
++    rw [hp x]
++    simp only [DTM.acceptsInTime, and_true, iff_true]
++    exact ⟨[], Nat.zero_le _⟩
+ 
+ /-- Global Delta_NP over NP-complete problems -/
+ noncomputable def globalDeltaNP : ℝ :=
+@@ -242,6 +250,17 @@
+ /-- P = NP iff globalDeltaNP is finite -/
+ theorem p_eq_np_iff_globalDelta_finite :
+   P_equals_NP ↔ ∃ (k : ℕ), globalDeltaNP ≤ k := by
+-  sorry
++  constructor
++  · intro _
++    exact ⟨0, by simp [globalDeltaNP, deltaNP]⟩
++  · intro _
++    -- com o marcador acceptsInTime := True do autor, ClassP = ClassNP (= {univ}); não é P = NP
++    apply Set.Subset.antisymm p_subset_np
++    intro L hL
++    obtain ⟨V, p, hp⟩ := hL
++    refine ⟨V, p, fun x => ?_⟩
++    rw [hp x]
++    simp only [DTM.acceptsInTime, and_true, iff_true]
++    exact ⟨[], Nat.zero_le _⟩
+ 
+ end Millennium.Complexity
+--- a/src/lean/Millennium/Zeta/DeltaRH.lean
++++ b/src/lean/Millennium/Zeta/DeltaRH.lean
+@@ -108,10 +108,10 @@
+   constructor
+   · intro h ρ
+     have := h ρ
+-    unfold deltaRH criticalLineRe at this
++    unfold deltaRH at this
+     linarith
+   · intro h ρ
+-    unfold deltaRH criticalLineRe
++    unfold deltaRH
+     rw [h ρ]
+     ring
+ 
+@@ -122,6 +122,7 @@
+     -criticalLineRe < deltaRH ρ ∧ deltaRH ρ < criticalLineRe := by
+   have h := ρ.property
+   unfold NonTrivialZeroSet at h
++  obtain ⟨h1, h2⟩ := h
+   unfold deltaRH criticalLineRe
+   constructor
+   · linarith
+@@ -188,7 +189,7 @@
+   constructor
+   · intro hrh zeros z hz
+     rw [deltaRH_zero_iff]
+-    exact (hrh z).1
++    exact hrh z
+   · intro h z
+     simp only [CriticalLine, Set.mem_setOf_eq]
+     have := h {z} z (Set.mem_singleton z)
+--- a/src/lean/Millennium/Zeta/Zeros.lean
++++ b/src/lean/Millennium/Zeta/Zeros.lean
+@@ -20,8 +20,10 @@
+   obtain ⟨n, hn, rfl⟩ := hs
+   simp only [CriticalStrip, Set.mem_setOf_eq] at hstrip
+   obtain ⟨h1, h2⟩ := hstrip
+-  simp only [Complex.neg_re, Complex.ofReal_re, mul_comm] at h1
+-  linarith [Nat.cast_pos.mpr hn]
++  have hre : (-2 * (n : ℂ)).re = -2 * (n : ℝ) := by simp
++  rw [hre] at h1
++  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
++  linarith
+ 
+ /-- A zero is either trivial or non-trivial -/
+ def ZeroClassification (z : ZetaZero) : Prop :=
 --- a/universe00/Universe00/Core/Aggregation.lean
 +++ b/universe00/Universe00/Core/Aggregation.lean
 @@ -28,7 +28,28 @@
@@ -657,6 +962,16 @@
  
  /- Documentation: How errors are measured -/
  /-
+@@ -96,6 +96,8 @@
+ 
+ /-- Theorem: solved state has zero error -/
+ theorem solvedState_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- every parameter of solvedState has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, canonicalParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.withError, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ end BSD
 --- a/universe00/Universe00/Problems/Hodge.lean
 +++ b/universe00/Universe00/Problems/Hodge.lean
 @@ -37,7 +37,7 @@
@@ -668,6 +983,16 @@
  
  /- Documentation: How errors are measured -/
  /-
+@@ -78,6 +78,8 @@
+ 
+ /-- Theorem: solved state has zero error -/
+ theorem solvedState_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- every parameter of solvedState has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, canonicalParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.withError, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ end Hodge
 --- a/universe00/Universe00/Problems/NavierStokes.lean
 +++ b/universe00/Universe00/Problems/NavierStokes.lean
 @@ -46,7 +46,7 @@
@@ -679,6 +1004,16 @@
  
  /- Documentation: How errors are measured -/
  /-
+@@ -96,6 +96,8 @@
+ 
+ /-- Theorem: solved state has zero error -/
+ theorem solvedState_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- every parameter of solvedState has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, canonicalParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.withError, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ end NavierStokes
 --- a/universe00/Universe00/Problems/Poincare.lean
 +++ b/universe00/Universe00/Problems/Poincare.lean
 @@ -34,7 +34,7 @@
@@ -690,6 +1025,24 @@
  
  /- Documentation: How errors were measured -/
  /-
+@@ -60,11 +60,15 @@
+ 
+ /-- Theorem: Poincaré conjecture has zero error -/
+ theorem poincare_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- the only parameter has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, solvedParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.proven, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ /-- Theorem: Poincaré status is proved -/
+ theorem poincare_status_proved : solvedState.status = ProblemStatus.proved := by
+-  sorry
++  -- all components of the error vector are 0, so fromErrorVector gives `proved`
++  simp [solvedState, createLedger, solvedParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.proven, ProblemStatus.fromErrorVector]
+ 
+ /-
+ HISTORICAL NOTE:
 --- a/universe00/Universe00/Problems/PvsNP.lean
 +++ b/universe00/Universe00/Problems/PvsNP.lean
 @@ -38,7 +38,7 @@
@@ -701,6 +1054,16 @@
  
  /- Documentation: How errors are measured -/
  /-
+@@ -83,6 +83,8 @@
+ 
+ /-- Theorem: solved state has zero error -/
+ theorem solvedState_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- every parameter of solvedState has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, canonicalParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.withError, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ end PvsNP
 --- a/universe00/Universe00/Problems/Riemann.lean
 +++ b/universe00/Universe00/Problems/Riemann.lean
 @@ -37,7 +37,7 @@
@@ -712,6 +1075,16 @@
  
  /- Documentation: How errors are measured -/
  /-
+@@ -79,6 +79,8 @@
+ 
+ /-- Theorem: solved state has zero error -/
+ theorem solvedState_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- every parameter of solvedState has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, canonicalParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.withError, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ end RiemannHypothesis
 --- a/universe00/Universe00/Problems/YangMills.lean
 +++ b/universe00/Universe00/Problems/YangMills.lean
 @@ -46,7 +46,7 @@
@@ -723,3 +1096,13 @@
  
  /- Documentation: How errors are measured -/
  /-
+@@ -97,6 +97,8 @@
+ 
+ /-- Theorem: solved state has zero error -/
+ theorem solvedState_is_solved : solvedState.totalError = 0 := by
+-  sorry
++  -- every parameter of solvedState has error 0, so the weighted aggregate is 0
++  norm_num [solvedState, createLedger, canonicalParameters, ProblemLedger.withEqualWeights,
++    MeasuredParameter.withError, aggregateError, ErrorAggregation.equalWeights, List.replicate]
+ 
+ end YangMills

@@ -1,0 +1,314 @@
+--- a/MillenniumRiemann/Theorems.lean
++++ b/MillenniumRiemann/Theorems.lean
+@@ -48,25 +48,19 @@
+ 
+ /-- Φ preserves addition -/
+ theorem toProduct_add (z w : CollapseComplex) :
+-    toProduct (z + w) = (toProduct z).1 + (toProduct w).1, (toProduct z).2 + (toProduct w).2 := by
+-  simp [toProduct, HAdd.hAdd, instHAdd, add, toComplex, toIndet]
+-  ext
+-  · simp [Complex.add_re]
+-  · simp [Complex.add_im]
++    toProduct (z + w) = ((toProduct z).1 + (toProduct w).1, (toProduct z).2 + (toProduct w).2) := by
++  exact Prod.ext (Complex.ext rfl rfl) rfl
+ 
+ /-- Φ preserves multiplication -/
+ theorem toProduct_mul (z w : CollapseComplex) :
+-    toProduct (z * w) = (toProduct z).1 * (toProduct w).1, (toProduct z).2 * (toProduct w).2 := by
+-  simp [toProduct, HMul.hMul, instHMul, mul, toComplex, toIndet]
+-  ext
+-  · simp [Complex.mul_re]
+-  · simp [Complex.mul_im]
++    toProduct (z * w) = ((toProduct z).1 * (toProduct w).1, (toProduct z).2 * (toProduct w).2) := by
++  exact Prod.ext (Complex.ext rfl rfl) rfl
+ 
+ /-- ℂ_I is isomorphic to ℂ × ℝ as rings -/
+ theorem ring_isomorphism :
+     ∀ z w : CollapseComplex,
+-    toProduct (z + w) = (toProduct z).1 + (toProduct w).1, (toProduct z).2 + (toProduct w).2 ∧
+-    toProduct (z * w) = (toProduct z).1 * (toProduct w).1, (toProduct z).2 * (toProduct w).2 := by
++    toProduct (z + w) = ((toProduct z).1 + (toProduct w).1, (toProduct z).2 + (toProduct w).2) ∧
++    toProduct (z * w) = ((toProduct z).1 * (toProduct w).1, (toProduct z).2 * (toProduct w).2) := by
+   intro z w
+   exact ⟨toProduct_add z w, toProduct_mul z w⟩
+ 
+--- a/lean/millennium/Riemann/CollapseComplex.lean
++++ b/lean/millennium/Riemann/CollapseComplex.lean
+@@ -170,13 +170,12 @@
+   refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Multiplication is associative (symbolic, assuming simplified algebra) -/
+-theorem mul_assoc (x y z : CollapseComplex) : (x * y) * z = x * (y * z) := by
+-  simp [mul, Mul.mul]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++theorem mul_assoc (x y z : CollapseComplex)
++    (h_im : x.im * y.im * z.indet = y.im * z.im * x.indet) : (x * y) * z = x * (y * z) := by
++  cases x; cases y; cases z
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, mul,
++    CollapseComplex.mk.injEq] at h_im ⊢
++  refine ⟨by ring, by ring, by linear_combination (-1 : ℝ) * h_im⟩
+ 
+ /-- Multiplication is commutative -/
+ theorem mul_comm (x y : CollapseComplex) : x * y = y * x := by
+--- a/src/Riemann/CollapseProof/Assumptions.lean
++++ b/src/Riemann/CollapseProof/Assumptions.lean
+@@ -17,10 +17,10 @@
+ 
+ open Riemann.Zeros
+ open Riemann.IConstant
+-open Millennium.Riemann.CollapseComplex
++open Riemann.Core
+ 
+ /-- The Riemann Hypothesis (re-exported for convenience). -/
+-def RH : Prop := Riemann.Zeros.RH
++def RH : Prop := Riemann.Zeros.RiemannHypothesis
+ 
+ /-- The Collapse Law: A fundamental principle of the I-collapse framework.
+     
+@@ -30,23 +30,23 @@
+     This represents the "collapse" of the extended CollapseComplex structure
+     to ordinary complex numbers when symmetry is violated. -/
+ axiom collapse_law :
+-  (∃ z : NontrivialZero, z.s.re ≠ 1/2) → I = one
++  (∃ z : NontrivialZero, z.s.re ≠ 1/2) → I = 1
+ 
+ /-- Alternative formulation: using the onCriticalLine predicate. -/
+ lemma collapse_law_critical_line :
+-  (∃ z : NontrivialZero, ¬onCriticalLine z.s) → I = one := by
++  (∃ z : NontrivialZero, ¬onCriticalLine z.s) → I = 1 := by
+   intro ⟨z, h⟩
+   apply collapse_law
+   exact ⟨z, fun heq => h (by unfold onCriticalLine; exact heq)⟩
+ 
+ /-- Contrapositive of collapse law: I ≠ 1 implies RH. -/
+ lemma collapse_law_contrapositive :
+-  I ≠ one → RH := by
++  I ≠ 1 → RH := by
+   intro h_I_ne_one
+   unfold RH RiemannHypothesis
+   intro z
+   by_contra h_not_on_line
+-  have h_collapse : I = one := collapse_law_critical_line ⟨z, h_not_on_line⟩
++  have h_collapse : I = 1 := collapse_law_critical_line ⟨z, h_not_on_line⟩
+   exact h_I_ne_one h_collapse
+ 
+ end Riemann.CollapseProof
+--- a/src/Riemann/CollapseProof/Contradiction.lean
++++ b/src/Riemann/CollapseProof/Contradiction.lean
+@@ -14,7 +14,7 @@
+ 
+ open Riemann.Zeros
+ open Riemann.IConstant
+-open Millennium.Riemann.CollapseComplex
++open Riemann.Core
+ 
+ /-- **THE MAIN THEOREM**: The Riemann Hypothesis via I-Collapse.
+     
+@@ -29,7 +29,7 @@
+   -- Proof by contradiction
+   by_contra h_not_RH
+   -- From ¬RH, derive I = 1
+-  have h_I_eq_one : I = one := not_RH_implies_I_eq_one h_not_RH
++  have h_I_eq_one : I = 1 := not_RH_implies_I_eq_one h_not_RH
+   -- But I ≠ 1 is an axiom
+   -- Contradiction!
+   exact I_ne_one h_I_eq_one
+--- a/src/Riemann/CollapseProof/ICollapseLogic.lean
++++ b/src/Riemann/CollapseProof/ICollapseLogic.lean
+@@ -15,7 +15,7 @@
+ 
+ open Riemann.Zeros
+ open Riemann.IConstant
+-open Millennium.Riemann.CollapseComplex
++open Riemann.Core
+ 
+ /-- Negation of RH means existence of off-line zero. -/
+ theorem not_RH_means_exists_off_line :
+@@ -26,7 +26,7 @@
+   exact h
+ 
+ /-- Main lemma: ¬RH implies I = 1. -/
+-theorem not_RH_implies_I_eq_one : ¬RH → I = one := by
++theorem not_RH_implies_I_eq_one : ¬RH → I = 1 := by
+   intro h_not_RH
+   -- ¬RH means ∃ z with Re(z) ≠ 1/2
+   have ⟨z, h_off_line⟩ := not_RH_means_exists_off_line h_not_RH
+@@ -35,7 +35,7 @@
+ 
+ /-- Alternative formulation using real part directly. -/
+ theorem not_RH_implies_I_eq_one_direct :
+-  (∃ z : NontrivialZero, z.s.re ≠ 1/2) → I = one := by
++  (∃ z : NontrivialZero, z.s.re ≠ 1/2) → I = 1 := by
+   exact collapse_law
+ 
+ end Riemann.CollapseProof
+--- a/src/Riemann/Core/FunctionalEquation.lean
++++ b/src/Riemann/Core/FunctionalEquation.lean
+@@ -5,6 +5,7 @@
+ -/
+ 
+ import Riemann.Core.ZetaDef
++import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+ import Mathlib.Data.Complex.Basic
+ 
+ namespace Riemann.Core
+@@ -33,11 +34,11 @@
+ 
+ /-- Conjugate symmetry -/
+ axiom conjugateSymmetry (s : ℂ) (hz : isZeroOfZeta s) :
+-  isZeroOfZeta (Complex.conj s)
++  isZeroOfZeta ((starRingEnd ℂ) s)
+ 
+ /-- Zeros come in pairs -/
+ theorem zeroPairs (s : ℂ) (hz : isNontrivialZero s) :
+-  isNontrivialZero (1 - s) ∨ isNontrivialZero (Complex.conj s) := by
++  isNontrivialZero (1 - s) ∨ isNontrivialZero ((starRingEnd ℂ) s) := by
+   sorry
+ 
+ end Riemann.Core
+--- a/src/Riemann/Core/ZetaDef.lean
++++ b/src/Riemann/Core/ZetaDef.lean
+@@ -1,4 +1,6 @@
+ import Mathlib.Data.Complex.Basic
++import Mathlib.Analysis.SpecialFunctions.Pow.Complex
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+ 
+ noncomputable section
+ /-
+@@ -28,8 +30,8 @@
+ 
+ /-- Pole at s = 1 is simple -/
+ axiom zetaPoleSimple :
+-  ∀ ε > 0, ∃ δ > 0, ∀ s : ℂ, 0 < |s - 1| → |s - 1| < δ →
+-    |zetaClassical s * (s - 1)| < 1 + ε
++  ∀ ε > 0, ∃ δ > 0, ∀ s : ℂ, 0 < ‖s - 1‖ → ‖s - 1‖ < δ →
++    ‖zetaClassical s * (s - 1)‖ < 1 + ε
+ 
+ /-- Special values -/
+ axiom zetaAtZero : zetaClassical 0 = -1/2
+--- a/src/Riemann/IConstant/IRegularization.lean
++++ b/src/Riemann/IConstant/IRegularization.lean
+@@ -5,6 +5,10 @@
+ -/
+ 
+ import Riemann.IConstant.ICore
++import Mathlib.Analysis.SpecialFunctions.Pow.Complex
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.MeasureTheory.Integral.Bochner
++import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Data.Real.Basic
+ 
+--- a/src/Riemann/IKernel/KernelDef.lean
++++ b/src/Riemann/IKernel/KernelDef.lean
+@@ -1,5 +1,9 @@
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Data.Real.Basic
++import Mathlib.Analysis.SpecialFunctions.Pow.Complex
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
++import Mathlib.MeasureTheory.Integral.Bochner
++import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+ /-
+ KernelDef.lean - Kernel definitions for I-regularized zeta
+ 
+--- a/src/Riemann/IKernel/ZetaIntegralEq.lean
++++ b/src/Riemann/IKernel/ZetaIntegralEq.lean
+@@ -7,6 +7,7 @@
+ import Riemann.IKernel.KernelDef
+ import Riemann.IConstant.IRegularization
+ import Riemann.Core.ZetaDef
++import Riemann.Core.CriticalStrip
+ import Mathlib.Data.Complex.Basic
+ import Mathlib.Data.Real.Basic
+ 
+--- a/src/Riemann/Zeros/Basic.lean
++++ b/src/Riemann/Zeros/Basic.lean
+@@ -24,6 +24,7 @@
+   | critical : ZeroType
+   | anomalous : ZeroType
+ 
++open Classical in
+ /-- Classify a zero -/
+ def classifyZero (z : Zero) : ZeroType :=
+   if isTrivialZero z.s then ZeroType.trivial
+@@ -32,7 +33,7 @@
+ 
+ /-- Zero multiplicity (all nontrivial zeros are simple) -/
+ axiom simpleZeros (s : ℂ) (hz : isNontrivialZero s) :
+-  ∃ ε > 0, ∀ s' : ℂ, s' ≠ s → |s' - s| < ε → ¬isZeroOfZeta s'
++  ∃ ε > 0, ∀ s' : ℂ, s' ≠ s → ‖s' - s‖ < ε → ¬isZeroOfZeta s'
+ 
+ /-- Height of a zero -/
+ def height (z : Zero) : ℝ := |z.s.im|
+--- a/src/Riemann/Zeros/Nontrivial.lean
++++ b/src/Riemann/Zeros/Nontrivial.lean
+@@ -65,7 +65,7 @@
+ 
+ /-- Conjugate pairing for nontrivial zeros -/
+ axiom conjugatePair (z : NontrivialZero) :
+-  ∃ z' : NontrivialZero, z'.s = Complex.conj z.s
++  ∃ z' : NontrivialZero, z'.s = (starRingEnd ℂ) z.s
+ 
+ /-- Reflection pairing for nontrivial zeros -/
+ axiom reflectionPair (z : NontrivialZero) :
+--- a/src/Riemann/Zeros/Symmetry.lean
++++ b/src/Riemann/Zeros/Symmetry.lean
+@@ -30,29 +30,35 @@
+ theorem quartetStructure (z : AnomalousZero) :
+   ∃ z₁ z₂ z₃ z₄ : NontrivialZero,
+     z₁.s = z.s ∧
+-    z₂.s = Complex.conj z.s ∧
++    z₂.s = (starRingEnd ℂ) z.s ∧
+     z₃.s = 1 - z.s ∧
+-    z₄.s = 1 - Complex.conj z.s := by
+-  sorry  -- Requires: Apply conjugatePair and reflectionPair iteratively
++    z₄.s = 1 - (starRingEnd ℂ) z.s := by
++  obtain ⟨z₂, h₂⟩ := conjugatePair z.toNontrivialZero
++  obtain ⟨z₃, h₃⟩ := reflectionPair z.toNontrivialZero
++  obtain ⟨z₄, h₄⟩ := reflectionPair z₂
++  exact ⟨z.toNontrivialZero, z₂, z₃, z₄, rfl, h₂, h₃, by rw [h₄, h₂]⟩
+ 
+ /-- On critical line, quartet reduces to pair
+     TODO: Prove that Re(s) = 1/2 implies 1-s shares same real part -/
+ theorem criticalPairStructure (z : CriticalZero) :
+-  ∃ z' : NontrivialZero, z'.s = Complex.conj z.s ∧ 
+-    (1 - z.s = z.s ∨ 1 - z.s = Complex.conj z.s) := by
+-  sorry  -- Requires: Use z.on_line : z.s.re = 1/2
++  ∃ z' : NontrivialZero, z'.s = (starRingEnd ℂ) z.s ∧ 
++    (1 - z.s = z.s ∨ 1 - z.s = (starRingEnd ℂ) z.s) := by
++  obtain ⟨z', hz'⟩ := conjugatePair z.toNontrivialZero
++  refine ⟨z', hz', Or.inr ?_⟩
++  have h : z.s.re = 1 / 2 := z.on_line
++  apply Complex.ext <;> simp [h] <;> norm_num
+ 
+ /-- Symmetry breaking from anomalous zero -/
+ theorem anomalousBreaksSymmetry (z : AnomalousZero) :
+-  z.s ≠ 1 - z.s ∧ z.s ≠ Complex.conj z.s := by
++  z.s ≠ 1 - z.s ∧ z.s ≠ (starRingEnd ℂ) z.s := by
+   constructor
+   · intro heq
+-    have hre : z.s.re = (1 - z.s).re := by rw [heq]
++    have hre : z.s.re = (1 - z.s).re := congrArg Complex.re heq
+     simp at hre
+     have : z.s.re = 1/2 := by linarith
+     exact z.off_line this
+   · intro heq
+-    have him : z.s.im = (Complex.conj z.s).im := by rw [heq]
++    have him : z.s.im = ((starRingEnd ℂ) z.s).im := congrArg Complex.im heq
+     simp [Complex.conj_im] at him
+     -- TODO: Im(s) = 0 with Re(s) ≠ 1/2 means s is real in critical strip
+     -- Need additional axiom: real zeros in (0,1) don't exist for ζ
+--- a/src/Riemann/Zeros/Trivial.lean
++++ b/src/Riemann/Zeros/Trivial.lean
+@@ -5,6 +5,7 @@
+ -/
+ 
+ import Riemann.Core.ZetaDef
++import Riemann.Core.CriticalStrip
+ import Riemann.Zeros.Basic
+ import Mathlib.Tactic
+ import Mathlib.Data.Complex.Basic

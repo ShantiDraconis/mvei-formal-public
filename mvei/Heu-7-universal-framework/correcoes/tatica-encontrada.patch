@@ -1,0 +1,22 @@
+--- a/src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean
+@@ -44,7 +44,7 @@
+ /-- SAT equivalence -/
+ theorem SAT_equiv :
+     P_eq_NP ↔ inP SAT := by
+-  sorry  -- Copilot: expand
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ /-- UBO validity implies P = NP -/
+ theorem UBO_valid_implies_P_eq_NP :
+--- a/src/lean/HEU/Problems/RH/Lemmas_RH.lean
++++ b/src/lean/HEU/Problems/RH/Lemmas_RH.lean
+@@ -72,7 +72,6 @@
+ /-- Lemma: Contrapositive of RH equivalence -/
+ lemma RH_contrapositive :
+     (∃ x : X_RH, O_RH x < Ord.zero) → ¬RH_statement := by
+-  intro ⟨x, hx⟩
+-  sorry  -- Copilot: expand
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ end HEU.Problems.RH
