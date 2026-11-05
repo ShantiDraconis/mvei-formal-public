@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-internal-proof-structure` of the priva
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 28 — closed 3, conditional 8, open 16, proof error 0, not reached 1, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `7f4e788d4ac19d482d93ad07b4e2d0639adbf5b3d2e1db8a35bc7686832e9229`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Eclectic_S/copilot_add-internal-proof-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `b9581b78c1d44ed8939f291bc3dc7a87f61d1e8761aba4ebfb7c3317646bc498`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Eclectic_S/copilot_add-internal-proof-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

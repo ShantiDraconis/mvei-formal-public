@@ -1,0 +1,243 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Millenium--core",
+ "branch": "copilot/create-formal-master-outline-again",
+ "branch_state": "incorporada",
+ "head_commit": "11c4827213138a3d8b1cc038709a447c46e01ecf",
+ "head_commit_date": "2026-04-08T14:00:15-03:00",
+ "history_not_on_default_branch": [],
+ "verification": {
+  "generated_at": "2026-11-05T15:19:16+00:00",
+  "lean": [
+   "leanprover/lean4:v4.14.0",
+   "leanprover/lean4:v4.19.0",
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "TIF.TIF.A10_nonunique_forbids_collapse",
+   "file": "Core/Collapse.lean",
+   "line": 283,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (h : (resolutionSet σ e).length ≠ 1) : collapseOp σ e = none"
+  },
+  {
+   "name": "TIF.TIF.A11_local_noncontradiction",
+   "file": "Core/Collapse.lean",
+   "line": 292,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [],
+   "statement": ": ¬ satisfies { equations"
+  },
+  {
+   "name": "TIF.TIF.A15_monotone_refinement",
+   "file": "Core/Collapse.lean",
+   "line": 319,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(σ σ' : State) (e : Expr) (hext : σ'.extends σ) (hadm : collapseAdmissible σ e) : σ'.constraints.length > 0"
+  },
+  {
+   "name": "TIF.TIF.A16_collapse_idempotent",
+   "file": "Core/Collapse.lean",
+   "line": 328,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : collapseOp σ e = some v) : collapseOp σ (.term (.cst v)) = some v"
+  },
+  {
+   "name": "TIF.TIF.A1_existence_base",
+   "file": "Core/Collapse.lean",
+   "line": 208,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∃ _ : IndetConst, True"
+  },
+  {
+   "name": "TIF.TIF.A2_existence_classes",
+   "file": "Core/Collapse.lean",
+   "line": 224,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ k : ℕ, ∃ _ : IndetConst, True"
+  },
+  {
+   "name": "TIF.TIF.A3_not_classical_real",
+   "file": "Core/Collapse.lean",
+   "line": 229,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.A4_not_classical_complex",
+   "file": "Core/Collapse.lean",
+   "line": 239,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (i : IndetConst) (c : ClassicalConst), Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.A5_distinct_from_classical",
+   "file": "Core/Collapse.lean",
+   "line": 244,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(i : IndetConst) (c : ClassicalConst) : Term.indt i ≠ Term.cst c"
+  },
+  {
+   "name": "TIF.TIF.A6_extended_operators",
+   "file": "Core/Collapse.lean",
+   "line": 249,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ op : ClassicalOp, ∃ extOp : ExtendedOp, extOp = .extended op"
+  },
+  {
+   "name": "TIF.TIF.A7_extension_coincides_classical",
+   "file": "Core/Collapse.lean",
+   "line": 258,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(op : ClassicalOp) (t₁ t₂ : Term) (h₁ : t₁.isClassical = true) (h₂ : t₂.isClassical = true) : (Term.app (.classical op) t₁ t₂).isClassical = true"
+  },
+  {
+   "name": "TIF.TIF.A9_unique_resolution_implies_collapse",
+   "file": "Core/Collapse.lean",
+   "line": 276,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : resolutionSet σ e = [v]) : collapseOp σ e = some v"
+  },
+  {
+   "name": "TIF.TIF.Collapse_unique",
+   "file": "Core/Collapse.lean",
+   "line": 366,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(e : Expr) (σ : State) (v₁ v₂ : ClassicalConst) (h₁ : Collapse e σ = some v₁) (h₂ : Collapse e σ = some v₂) : v₁ = v₂"
+  },
+  {
+   "name": "TIF.TIF.classical_reduction",
+   "file": "Core/Collapse.lean",
+   "line": 334,
+   "state": "condicional",
+   "axioms_beyond_standard": [
+    "TIF.TIF.A12_conservativity"
+   ],
+   "statement": "(φ : Formula) (h : universallyValid φ) : classicallyValid φ"
+  },
+  {
+   "name": "TIF.TIF.collapse_uniqueness",
+   "file": "Core/Collapse.lean",
+   "line": 343,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(σ : State) (e : Expr) (v₁ v₂ : ClassicalConst) (h₁ : collapseOp σ e = some v₁) (h₂ : collapseOp σ e = some v₂) : v₁ = v₂"
+  },
+  {
+   "name": "TIF.TIF.indet_isolation",
+   "file": "Core/Collapse.lean",
+   "line": 351,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(φ : Formula) (σ : State) (hφ : ∀ c ∈ σ.constraints, c.sym = .block) : satisfies σ (.atom .top)"
+  },
+  {
+   "name": "TIF.collapse_A10",
+   "file": "Core/Collapse.lean",
+   "line": 85,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hnone : res Σ φ = none) : collapse res Σ φ = φ"
+  },
+  {
+   "name": "TIF.collapse_A8",
+   "file": "Core/Collapse.lean",
+   "line": 61,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hcl : classicalFrag φ) : collapse res Σ φ = φ"
+  },
+  {
+   "name": "TIF.collapse_A9",
+   "file": "Core/Collapse.lean",
+   "line": 76,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) (hres : res Σ φ = some v) : collapse res Σ φ = syntacticCollapse (some v) φ"
+  },
+  {
+   "name": "TIF.collapse_classical_fragment_stable",
+   "file": "Core/Collapse.lean",
+   "line": 137,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hcl_res : ∀ v, res Σ φ = some v → res Σ (syntacticCollapse (some v) φ) = some v) : ∀ ψ : IndeterminateExpr, classicalFrag ψ → collapse res Σ ψ = ψ"
+  },
+  {
+   "name": "TIF.collapse_div_zero_form",
+   "file": "Core/Collapse.lean",
+   "line": 167,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(Σ : MetaArithmeticState) (e : IndeterminateExpr) (v : IndeterminateExpr) (hv : classicalFrag v) (hform : Σ.equations.any (fun eq => eq.lhs == IndeterminateExpr.indeterminate && eq.rhs == binOp OpSymbol.Div e (const 0)) = true) (res_correct : res Σ (binOp OpSymbol.Div e (const 0)) = some v) : collapse res Σ (binOp OpSymbol.Div e (const 0)) = v"
+  },
+  {
+   "name": "TIF.collapse_idempotent",
+   "file": "Core/Collapse.lean",
+   "line": 109,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(Σ : MetaArithmeticState) (φ : IndeterminateExpr) (hstable : ∀ v, res Σ φ = some v → res Σ v = some v) : collapse res Σ (collapse res Σ φ) = collapse res Σ φ"
+  },
+  {
+   "name": "TIF.collapse_implies_rewrite_star",
+   "file": "Core/Collapse.lean",
+   "line": 180,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "(res : MetaArithmeticState → IndeterminateExpr → Option IndeterminateExpr) (Σ : MetaArithmeticState) (φ v : IndeterminateExpr) (hcol : collapse res Σ φ = v) (hv : classicalFrag v) : RewriteStar Σ φ v"
+  },
+  {
+   "name": "TIF.collapse_recovery",
+   "file": "Core/Collapse.lean",
+   "line": 153,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(Σ : MetaArithmeticState) (v : IndeterminateExpr) (hv : classicalFrag v) (res_correct : res Σ indeterminate = some v) : collapse res Σ indeterminate = v"
+  }
+ ],
+ "closed": 16,
+ "files_sha256": {
+  "Core/Collapse.lean": "e3fac6170d0fc0954aeb6c5c8c96eb4226ff151fd551cd0f8f5d7eabb873eaec",
+  "Core/Semantics.lean": "eb9d9166332655356578521b64d516539707536eb249c6991bb2c22fd56b715b",
+  "Core/States.lean": "1b6d6dccdc3dad7f757ac90e149047a08082533340dcd7016967636eab9e35fa",
+  "Core/Syntax.lean": "341cd43ce4410784339ab8782e138df66429d01ad1f7b1d7acb07e7507b482da",
+  "lakefile.lean": "d814f4406250955698caeb53f9788f62a6a7aeac3931ecfcf90b9fe1333d3ddc",
+  "lakefile.toml": "80f76ea58ea36598ed175296dad5d8335c286ea8c8c3ac680ecc7605f1f98d59",
+  "lean-toolchain": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14"
+ },
+ "published_at": "2026-11-05T17:43:08Z",
+ "certificate_sha256": "9542abbecfa3ea9de41c64e10b5c992905850200868451bb8ebc4c1f3ea247b5"
+}

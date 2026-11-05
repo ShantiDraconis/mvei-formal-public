@@ -7,7 +7,7 @@
  "head_commit_date": "2026-04-13T03:14:47-03:00",
  "history_not_on_default_branch": [],
  "verification": {
-  "generated_at": "2026-11-03T08:19:01+00:00",
+  "generated_at": "2026-11-05T15:19:16+00:00",
   "lean": [
    "leanprover/lean4:v4.14.0",
    "leanprover/lean4:v4.19.0",
@@ -34,7 +34,9 @@
    "file": "Core/Collapse.lean",
    "line": 776,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ¬ satisfies { equations"
   },
   {
@@ -42,7 +44,9 @@
    "file": "Core/Collapse.lean",
    "line": 803,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ σ' : State) (e : Expr) (hext : σ'.extends σ) (hadm : collapseAdmissible σ e) : σ'.constraints.length > 0"
   },
   {
@@ -50,7 +54,9 @@
    "file": "Core/Collapse.lean",
    "line": 812,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : collapseOp σ e = some v) : collapseOp σ (.term (.cst v)) = some v"
   },
   {
@@ -58,7 +64,9 @@
    "file": "Core/Collapse.lean",
    "line": 692,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∃ _ : IndetConst, True"
   },
   {
@@ -66,7 +74,9 @@
    "file": "Core/Collapse.lean",
    "line": 708,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": ": ∀ k : ℕ, ∃ _ : IndetConst, True"
   },
   {
@@ -97,7 +107,7 @@
    "name": "TIF.A6_extended_operators",
    "file": "Core/Collapse.lean",
    "line": 733,
-   "state": "nao_alcancado",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ op : ClassicalOp, ∃ extOp : ExtendedOp, extOp = .extended op"
   },
@@ -106,7 +116,9 @@
    "file": "Core/Collapse.lean",
    "line": 742,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(op : ClassicalOp) (t₁ t₂ : Term) (h₁ : t₁.isClassical = true) (h₂ : t₂.isClassical = true) : (Term.app (.classical op) t₁ t₂).isClassical = true"
   },
   {
@@ -114,7 +126,9 @@
    "file": "Core/Collapse.lean",
    "line": 760,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) (e : Expr) (v : ClassicalConst) (h : resolutionSet σ e = [v]) : collapseOp σ e = some v"
   },
   {
@@ -122,7 +136,9 @@
    "file": "Core/Collapse.lean",
    "line": 850,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(e : Expr) (σ : State) (v₁ v₂ : ClassicalConst) (h₁ : Collapse e σ = some v₁) (h₂ : Collapse e σ = some v₂) : v₁ = v₂"
   },
   {
@@ -344,7 +360,9 @@
    "file": "Core/Rewrite.lean",
    "line": 341,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) (e : Expr) (h : e.isClassical = true) : (stateGuidedRewrite σ e).isClassical = true"
   },
   {
@@ -352,7 +370,9 @@
    "file": "Core/Rewrite.lean",
    "line": 355,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) (e : Expr) (c : ClassicalConst) (h : collapseOp σ e = some c) : collapseTrigger σ (.constrained e .collapse) = .term (.cst c)"
   },
   {
@@ -368,7 +388,9 @@
    "file": "Core/Rewrite.lean",
    "line": 371,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) : ∀ e : Expr, e.isClassical = true → MultiStepRewrite σ e e"
   },
   {
@@ -376,7 +398,9 @@
    "file": "Core/Rewrite.lean",
    "line": 329,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) (e e' : Expr) (h : MultiStepRewrite σ e e') : e'.depth ≤ e.depth + 1"
   },
   {
@@ -416,7 +440,9 @@
    "file": "Core/Collapse.lean",
    "line": 827,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(σ : State) (e : Expr) (v₁ v₂ : ClassicalConst) (h₁ : collapseOp σ e = some v₁) (h₂ : collapseOp σ e = some v₂) : v₁ = v₂"
   },
   {
@@ -448,7 +474,9 @@
    "file": "Core/Rewrite.lean",
    "line": 144,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(Σ : MetaArithmeticState) (hno : ∀ v, ¬classicalFrag v → True) (hblock : ¬∃ v, classicalFrag v ∧ Rewrite1 Σ indeterminate v) : blockedNF Σ indeterminate"
   },
   {
@@ -464,7 +492,9 @@
    "file": "Core/Rewrite.lean",
    "line": 156,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(Σ : MetaArithmeticState) (e e' : IndeterminateExpr) (hwf : wellFormed e) (hstep : Rewrite1 Σ e e') : wellFormed e'"
   },
   {
@@ -480,7 +510,9 @@
    "file": "Core/Rewrite.lean",
    "line": 185,
    "state": "nao_alcancado",
-   "axioms_beyond_standard": [],
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "(Σ : MetaArithmeticState) (e e' : IndeterminateExpr) (hwf : wellFormed e) (hstar : RewriteStar Σ e e') : wellFormed e'"
   },
   {
@@ -500,14 +532,19 @@
    "statement": "(e : Expr) : e.indetSupport = [] ↔ e.isClassical = true"
   }
  ],
- "closed": 6,
+ "closed": 7,
  "files_sha256": {
+  "Core/Collapse.lean": "2e21419f91aa1a77cbe832d51b9804a2a3eaad143b1044de7f6d17eaba173ba7",
+  "Core/Eval.lean": "dbf82fd20be5670e7fe03c41b2b5bf1601b5caf3f164b1778591985faa3a3122",
+  "Core/Semantics.lean": "eb9d9166332655356578521b64d516539707536eb249c6991bb2c22fd56b715b",
+  "Core/State.lean": "1a949eb3139bdad3e34a7e1510abd6e0abb832b8c50b410712dff8aafcd6f748",
+  "Core/States.lean": "1b6d6dccdc3dad7f757ac90e149047a08082533340dcd7016967636eab9e35fa",
   "Core/Syntax.lean": "e5022021d44596b870d6c6561596596ceadbf678142048775caf41f6de583e58",
   "Core/Types.lean": "5045ab1942777f1277165b303865f227c366db835cd38266d942f39f85972a46",
   "lakefile.lean": "b084f222d832dd2c54db52d06b3e7e41b401813d26fef786dc81578c86209e5d",
   "lakefile.toml": "16469f185b9e00385e2dba99ac239088229e8f5aa95a0caf08063b6ba5af4889",
   "lean-toolchain": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14"
  },
- "published_at": "2026-11-03T11:28:10Z",
- "certificate_sha256": "af50bcd56228de2ae20928afd6185291417277e7718261a7627ca84131893d54"
+ "published_at": "2026-11-05T17:43:08Z",
+ "certificate_sha256": "3150d7b49163cafd1183f1d109973c0b41492e5c61f22cd16599cd4dc46959c7"
 }

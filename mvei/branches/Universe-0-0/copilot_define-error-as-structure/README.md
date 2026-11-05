@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/define-error-as-structure` of the private 
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 12 — closed 5, conditional 0, open 4, proof error 3, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `06f8629426220792f093543d8598be17f3ae60661d5971b433a42ac0593db06d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_define-error-as-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `cdc5444aa1caf9bbab6cd662dbbf668d4ff20a436f0198af7869c8feb5e5b862`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_define-error-as-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

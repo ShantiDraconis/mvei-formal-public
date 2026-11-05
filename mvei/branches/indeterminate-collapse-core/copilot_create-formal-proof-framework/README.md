@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-formal-proof-framework` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 69 — closed 55, conditional 3, open 2, proof error 0, not reached 9, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `30a7382880bb95fb59a66c5d48f64ee0cb84bf46f2afcb53fbfb1aea4c1a0074`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/indeterminate-collapse-core/copilot_create-formal-proof-framework/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `6df01b7d49f846258dd4101e47d410e71b3e74c58d564a3dd0035029c301108a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/indeterminate-collapse-core/copilot_create-formal-proof-framework/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

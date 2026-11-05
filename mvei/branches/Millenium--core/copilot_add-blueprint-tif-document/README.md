@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-blueprint-tif-document` of the private
 * Branch state: incorporada (already in the default branch).
 * Theorems only on branches, in this branch: 18 — closed 11, conditional 2, open 1, proof error 0, not reached 4, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ec9f8d8d47b00ce94f5f6ad2c8146f6b9b5f0d92f5d8803fb9cd2698577ade55`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_add-blueprint-tif-document/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `f0efa3fe5771fd1e809a5b81f0f9ae1ae6f87076db465550d131acc24725c341`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_add-blueprint-tif-document/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

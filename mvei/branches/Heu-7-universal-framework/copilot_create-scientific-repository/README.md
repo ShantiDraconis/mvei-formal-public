@@ -3,15 +3,15 @@
 Lean sources from the branch `copilot/create-scientific-repository` of the private repository `ShantiDraconis/Heu-7-universal-framework`, commit `8a96b4515634986aa29448563e1f56d8dcacdacf` (2025-12-02T08:47:05+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 48 — closed 19, conditional 1, open 16, proof error 4, not reached 8, no result 0.
+* Theorems only on branches, in this branch: 48 — closed 20, conditional 1, open 15, proof error 4, not reached 8, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `77c48d799e770984d4718836c1131e0560996114bef0c2a2ed35c14c9dc28da8`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_create-scientific-repository/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `965c0cabe462ac0bab12b754547179ab8777e3fd423c6aab1f99ca7986c4d855`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_create-scientific-repository/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
 | Theorem | File | State |
 |---|---|---|
-| `HEU.BSD.BSD_structural_equivalence` | `src/lean/HEU/BSD/Equivalence_BSD.lean`:22 | aberto-sorry |
+| `HEU.BSD.BSD_structural_equivalence` | `src/lean/HEU/BSD/Equivalence_BSD.lean`:22 | fechado |
 | `HEU.BSD.F_BSD_finite` | `src/lean/HEU/BSD/F_BSD.lean`:23 | aberto-sorry |
 | `HEU.BSD.α_BSD_type` | `src/lean/HEU/BSD/Critical_BSD.lean`:17 | fechado |
 | `HEU.Core.Advanced.OrdinalNotation.wf` | `src/lean/HEU/Core/AdvancedOrdinals.lean`:87 | aberto-sorry |
