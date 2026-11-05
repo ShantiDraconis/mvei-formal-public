@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.35.0-rc2",
    "needs_mathlib": true,
    "build_ok": true,
-   "build_seconds": 2.5,
+   "build_seconds": 3.5,
    "build_error": "",
    "sorry_warnings": 0,
    "reconstructed": false,
@@ -23,25 +23,51 @@
    "declared_axioms": [],
    "theorems": [],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (z-provas-reparadas): 2 prova(s) reescrita(s), conferidas no Lean do projeto: no_infinite_descent, forwardDependency_wellFounded.",
+   "note": "CORRIGIDO PELO MVEI (z-provas-reparadas, zy-enunciados-do-autor): 2 prova(s) reescrita(s), conferidas no Lean do projeto: no_infinite_descent, forwardDependency_wellFounded; 1 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: terminal_closure.",
    "corrections": [
-    "z-provas-reparadas"
+    "z-provas-reparadas",
+    "zy-enunciados-do-autor"
    ],
    "lakefile_gerado": "",
    "avulso": false,
    "salvage": [
     {
      "arquivo": "formal/ATKTerminalStaging.lean",
-     "linha": 11,
+     "linha": 28,
+     "nome": "ATKTerminalStaging.mapM_id_map_some",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Computability.TMComputable"
+     ]
+    },
+    {
+     "arquivo": "formal/ATKTerminalStaging.lean",
+     "linha": 33,
+     "nome": "ATKTerminalStaging.decodePar_encode",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ],
+     "import_trocado": [
+      "Mathlib.Computability.TMComputable"
+     ]
+    },
+    {
+     "arquivo": "formal/ATKTerminalStaging.lean",
+     "linha": 65,
      "nome": "ATKTerminalStaging.terminal_closure",
      "status": "aberto-sorry",
      "axioms": [
       "sorryAx"
      ],
-     "preenchimento": {
-      "resultado": "refutável",
-      "tatica": "first | (intro h; simp_all) | (intro h; exact @h PUnit PUnit.unit PUnit.unit rfl) | (intro h; exact @h Bool true true rfl) | (intro h; exact @h Nat 0 0 rfl) | (intro h; exact absurd (@h PUnit) (by simp)) | (decide)"
-     }
+     "import_trocado": [
+      "Mathlib.Computability.TMComputable"
+     ]
     },
     {
      "arquivo": "formal/DirectEndpointRule.lean",
@@ -71,7 +97,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793812370
   }
  ]
 }

@@ -1,4 +1,431 @@
 --- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_ClosureObstruction.lean
+@@ -0,0 +1,32 @@
++import LRE.Core.ClosureObstruction
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open ProjectionSystem in
++theorem toyModel_NC_falso :
++    ¬ NonControl toyModel (MeasureTheory.volume : MeasureTheory.Measure (ℝ × ℝ)) := by
++  intro h
++  exact h ⟨fun _ => ⊤, measurable_const, Filter.Eventually.of_forall fun _ => le_top⟩
++
++theorem sigma_pi_measurable_iff_factors_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}) (α : Type) [ma : MeasurableSpace α] (f : sys.C → α),
++      (ProjectionSystem.SigmaPiMeasurable sys f ↔ ∃ (F : sys.D → α), Measurable F ∧ f = F ∘ sys.π) := by
++  intro h
++  let sys : ProjectionSystem.{0, 0} :=
++    { C := Bool, mC := ⊤, D := Unit, mD := ⊤, π := fun _ => (), π_meas := measurable_const,
++      R := fun _ => 0, R_meas := measurable_const }
++  have hm : @ProjectionSystem.SigmaPiMeasurable sys Bool ⊥ (fun b : Bool => b) := by
++    intro s hs
++    rcases MeasurableSpace.measurableSet_bot_iff.mp hs with rfl | rfl
++    · exact @MeasurableSet.empty _ sys.generatedSigmaAlgebra
++    · exact @MeasurableSet.univ _ sys.generatedSigmaAlgebra
++  obtain ⟨F, -, hF⟩ := (@h sys Bool ⊥ (fun b : Bool => b)).mp hm
++  have h1 : true = F () := congrFun hF true
++  have h2 : false = F () := congrFun hF false
++  exact Bool.noConfusion (h1.trans h2.symm)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_CoreBasic.lean
+@@ -0,0 +1,30 @@
++import LRE.Core.Basic
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `ProjectionSystem.measurable_wrt_projection_iff_factors` é falso como escrito: com σ-álgebra trivial (⊥) em α,
++    toda f é mensurável, mas f = F ∘ π obriga f a ser constante nas fibras. Com C = Bool, D = Unit, π constante,
++    α = Bool com ⊥ e f = id, a ida falha (id não é constante). -/
++theorem measurable_wrt_projection_iff_factors_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}) (α : Type) [ma : MeasurableSpace α] (f : sys.C → α),
++      (@Measurable sys.C α (sys.generatedSigmaAlgebra) ma f ↔
++        ∃ (F : sys.D → α), Measurable F ∧ f = F ∘ sys.π) := by
++  intro h
++  let sys : ProjectionSystem.{0, 0} :=
++    { C := Bool, mC := ⊤, D := Unit, mD := ⊤, π := fun _ => (), π_meas := measurable_const,
++      R := fun _ => 0, R_meas := measurable_const }
++  have hm : @Measurable sys.C Bool sys.generatedSigmaAlgebra ⊥ (fun b : Bool => b) := by
++    intro s hs
++    rcases MeasurableSpace.measurableSet_bot_iff.mp hs with rfl | rfl
++    · exact @MeasurableSet.empty _ sys.generatedSigmaAlgebra
++    · exact @MeasurableSet.univ _ sys.generatedSigmaAlgebra
++  obtain ⟨F, -, hF⟩ := (@h sys Bool ⊥ (fun b : Bool => b)).mp hm
++  have h1 : true = F () := congrFun hF true
++  have h2 : false = F () := congrFun hF false
++  exact Bool.noConfusion (h1.trans h2.symm)
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_CoreBloco.lean
+@@ -0,0 +1,53 @@
++import LRE.Core.Projection
++import LRE.Core.Residue
++import LRE.Core.NonControl
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `ProjectionSystem.fiber_measurable` (sem `MeasurableSingletonClass sys.D`) é falso: C = D = Bool com ⊥,
++    π = id; a fibra sobre true é {true}, que não é mensurável em ⊥. -/
++theorem fiber_measurable_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}) (d : sys.D), MeasurableSet (FiberOver sys d) := by
++  intro h
++  let sys : ProjectionSystem.{0, 0} :=
++    { C := Bool, mC := ⊥, D := Bool, mD := ⊥, π := id, π_meas := measurable_id,
++      R := fun _ => 0, R_meas := measurable_const }
++  rcases MeasurableSpace.measurableSet_bot_iff.mp (h sys true) with h1 | h1
++  · have h2 : (true : Bool) ∈ FiberOver sys true := rfl
++    rw [h1] at h2
++    exact h2
++  · have h2 : (false : Bool) ∈ FiberOver sys true := by rw [h1]; exact Set.mem_univ _
++    exact Bool.noConfusion (show false = true from h2)
++
++open scoped ENNReal in
++/-- `ProjectionSystem.residue_unbounded_on_fibers` é falso: com R ≡ 0 e π constante em Bool, π não é injetiva,
++    mas nenhum u tem 0 < R u. -/
++theorem residue_unbounded_on_fibers_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}), (∃ (u v : sys.C), u ≠ v ∧ sys.π u = sys.π v) →
++      ∀ M : ℝ≥0∞, M < ⊤ → ∃ d : sys.D, ∃ u ∈ FiberOver sys d, M < sys.R u := by
++  intro h
++  let sys : ProjectionSystem.{0, 0} :=
++    { C := Bool, mC := ⊤, D := Unit, mD := ⊤, π := fun _ => (), π_meas := measurable_const,
++      R := fun _ => 0, R_meas := measurable_const }
++  obtain ⟨d, u, -, hu⟩ := h sys ⟨true, false, by decide, rfl⟩ 0 ENNReal.zero_lt_top
++  exact absurd hu (lt_irrefl _)
++
++/-- `ProjectionSystem.essentially_noninjective_implies_noncontrol` é falso: com μ = 0 a hipótese vale (ae da medida
++    nula), e NonControl nunca vale (F ≡ ⊤ controla R). -/
++theorem essentially_noninjective_implies_noncontrol_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}) (μ : MeasureTheory.Measure sys.C),
++      ProjectionSystem.EssentiallyNonInjective sys μ → ProjectionSystem.NonControl sys μ := by
++  intro h
++  let sys : ProjectionSystem.{0, 0} :=
++    { C := Unit, mC := ⊤, D := Unit, mD := ⊤, π := id, π_meas := measurable_id,
++      R := fun _ => 0, R_meas := measurable_const }
++  have hE : ProjectionSystem.EssentiallyNonInjective sys 0 := by
++    unfold ProjectionSystem.EssentiallyNonInjective ProjectionSystem.pushforwardMeasure
++    simp
++  exact h sys 0 hE ⟨fun _ => ⊤, measurable_const, Filter.Eventually.of_forall fun _ => le_top⟩
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_Final.lean
+@@ -0,0 +1,54 @@
++import LRE.Final
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Set Topology in
++/-- `LRE_Final.cubic_growth_implies_blowup` é falso como escrito: a hipótese só fala de `deriv R`, que vale 0 onde R
++    não é derivável, e não pede continuidade. R t = 1 + 2t para t < 1/10 e R t = −1 depois (α = 1) satisfaz
++    deriv R t ≥ (R t)³ para todo t ≥ 0 (2 ≥ (1 + 2t)³ em [0, 1/10); no salto R não é derivável e deriv = 0 ≥ −1;
++    depois deriv = 0 ≥ −1), mas R ≤ 2 em toda parte, então não tende a +∞ em nenhum T. -/
++theorem cubic_growth_implies_blowup_falso :
++    ¬ ∀ (R : ℝ → ℝ) (α : ℝ), α > 0 → R 0 > 0 → (∀ t ≥ 0, deriv R t ≥ α * (R t) ^ 3) →
++      ∃ T > 0, Tendsto R (𝓝[<] T) atTop := by
++  intro h
++  let R : ℝ → ℝ := fun t => if t < 1 / 10 then 1 + 2 * t else -1
++  have hR : ∀ t, R t = if t < 1 / 10 then 1 + 2 * t else -1 := fun t => rfl
++  have hd : ∀ t ≥ (0 : ℝ), deriv R t ≥ 1 * (R t) ^ 3 := by
++    intro t ht
++    rcases lt_trichotomy t (1 / 10) with h1 | h1 | h1
++    · have he : R =ᶠ[𝓝 t] fun s => 1 + 2 * s := by
++        filter_upwards [Iio_mem_nhds h1] with s hs
++        rw [hR, if_pos (show s < 1 / 10 from hs)]
++      have hD : deriv (fun s : ℝ => 1 + 2 * s) t = 2 := by
++        have := ((hasDerivAt_id' t).const_mul (2 : ℝ)).const_add 1
++        simpa using this.deriv
++      rw [he.deriv_eq, hD, hR, if_pos h1]
++      nlinarith [ht, h1, mul_nonneg ht ht]
++    · have hv : R (1 / 10) = -1 := by rw [hR, if_neg (lt_irrefl _)]
++      have hnd : ¬ DifferentiableAt ℝ R (1 / 10) := by
++        intro hdiff
++        have hc : Tendsto R (𝓝[<] (1 / 10 : ℝ)) (𝓝 (R (1 / 10))) :=
++          hdiff.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
++        rw [hv] at hc
++        have e1 : ∀ᶠ s in 𝓝[<] (1 / 10 : ℝ), R s < 0 := eventually_lt_of_tendsto_lt (by norm_num) hc
++        have e2 : ∀ᶠ s in 𝓝[<] (1 / 10 : ℝ), s ∈ Ioo (0 : ℝ) (1 / 10) := Ioo_mem_nhdsLT (by norm_num)
++        obtain ⟨s, hs1, hs2⟩ := (e1.and e2).exists
++        rw [hR, if_pos hs2.2] at hs1
++        linarith [hs2.1]
++      rw [h1, deriv_zero_of_not_differentiableAt hnd, hv]
++      norm_num
++    · have he : R =ᶠ[𝓝 t] fun _ => -1 := by
++        filter_upwards [Ioi_mem_nhds h1] with s hs
++        rw [hR, if_neg (not_lt.mpr (le_of_lt hs))]
++      rw [he.deriv_eq, hR, if_neg (not_lt.mpr h1.le)]
++      norm_num
++  obtain ⟨T, -, hlim⟩ := h R 1 one_pos (by rw [hR, if_pos (by norm_num)]; norm_num) hd
++  obtain ⟨s, hs⟩ := (hlim.eventually (eventually_gt_atTop 2)).exists
++  rw [hR] at hs
++  split_ifs at hs with h2 <;> linarith
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_LRENavierStokes.lean
+@@ -0,0 +1,51 @@
++import LRE.NavierStokes
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open LRE.NavierStokes in
++/-- `LRE.NavierStokes.ns_closure_problem` é falso: com H = L = ℝ (normas usuais, índice s = 3 > 5/2), a projeção
++identidade (contínua, `HEq (map u) u`, limitada com C = 1), Λ = 1 e a solução constante u ≡ 0, a dinâmica fechada
++F = id satisfaz π(u(t+1)) = F(π(u(t))) para todo t. -/
++theorem ns_closure_problem_falso :
++    ¬ (∀ {s : ℝ} {H : SobolevSpace.{0} s} {L : L2Space.{0}} (π : NSProjection s H L) (Λ : FrequencyCutoff)
++      (u : ℝ → H.carrier), ¬∃ (F : L.carrier → L.carrier), ∀ t, π.map (u (t + 1)) = F (π.map (u t))) := by
++  intro h
++  let H : SobolevSpace 3 := { carrier := ℝ, sobolev_index := by norm_num }
++  let L : L2Space := { carrier := ℝ }
++  let π : NSProjection 3 H L :=
++    { map := fun x => x, continuous := continuous_id, is_inclusion := fun _ => HEq.rfl,
++      bounded := ⟨1, one_pos, fun u => by simp [H, L]⟩ }
++  exact h π ⟨1, one_pos⟩ (fun _ => (0 : ℝ)) ⟨id, fun _ => rfl⟩
++
++open LRE.NavierStokes in
++/-- `LRE.NavierStokes.singularity_is_observer_dependent` é falso: `criticalMoment` não depende do corte Λ
++(`highFrequencyResidue` e `lowFrequencyPart` ignoram Λ); com a projeção identidade de ℝ em ℝ, u ≡ 0, t = 0,
++Λ₁ = 1 e Λ₂ = 2, vale `criticalMoment` para os dois cortes (‖0‖ ≥ ‖0‖). -/
++theorem singularity_is_observer_dependent_falso :
++    ¬ (∀ {s : ℝ} {H : SobolevSpace.{0} s} {L : L2Space.{0}} (π₁ π₂ : NSProjection s H L)
++      (Λ₁ Λ₂ : FrequencyCutoff) (u : ℝ → H.carrier) (t : ℝ),
++      criticalMoment π₁ Λ₁ u t → ¬(Λ₁.1 = Λ₂.1) → ¬criticalMoment π₂ Λ₂ u t) := by
++  intro h
++  let H : SobolevSpace 3 := { carrier := ℝ, sobolev_index := by norm_num }
++  let L : L2Space := { carrier := ℝ }
++  let π : NSProjection 3 H L :=
++    { map := fun x => x, continuous := continuous_id, is_inclusion := fun _ => HEq.rfl,
++      bounded := ⟨1, one_pos, fun u => by simp [H, L]⟩ }
++  have hc : ∀ Λ : FrequencyCutoff, criticalMoment π Λ (fun _ => (0 : ℝ)) 0 := by
++    intro Λ
++    simp [criticalMoment, highFrequencyResidue, lowFrequencyPart, π, H, L]
++  exact h π π ⟨1, one_pos⟩ ⟨2, two_pos⟩ (fun _ => (0 : ℝ)) 0 (hc _) (by norm_num) (hc _)
++
++/-- `closure_problem_nonlinearity` é falso: `NS_residual_curvature` é o marcador 0 do autor, então
++`∃ u, NS_residual_curvature N u ≠ 0` é falso (o espaço de configuração é habitado: Ω = ∅, u = 0). -/
++theorem closure_problem_nonlinearity_falso :
++    ¬ (∀ (N : ℕ) (u : NSConfigSpace), ∃ (u : NSConfigSpace), NS_residual_curvature N u ≠ 0) := by
++  intro h
++  obtain ⟨v, hv⟩ := h 0 ⟨∅, Bornology.isBounded_empty, fun _ => 0, trivial⟩
++  exact hv rfl
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_OperatorCore.lean
+@@ -0,0 +1,20 @@
++import Millennium.UnifiedTheory.OperatorCore
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open OperatorCore in
++/-- `OperatorCore.critical_dimension_consistency` é falso como escrito: em GeometricField, `dim : ℕ := 41` é só um
++    valor padrão, e um campo geométrico com dim = 0 (métrica nula, positividade vazia em Fin 0 → ℝ) existe. -/
++theorem critical_dimension_consistency_falso :
++    ¬ ∃ (D_c : ℕ), D_c = 41 ∧ ∀ (geom : GeometricField), geom.dim = D_c := by
++  rintro ⟨D_c, rfl, h⟩
++  have h0 := h { dim := 0, x := fun i => i.elim0, y := fun i => i.elim0, metric := fun _ _ => 0,
++                 metric_symmetric := fun _ _ => rfl,
++                 metric_pos_def := fun _ hp => absurd (funext fun i => i.elim0) hp }
++  norm_num at h0
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_QuantitativeObstruction.lean
+@@ -0,0 +1,41 @@
++import LRE.QuantitativeObstruction
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open LRE in
++/-- `LRE.quantitative_closure_obstruction` é falso como escrito: closureError é o placeholder 0, então a conclusão
++    pede R = 0 num conjunto denso S; como {R = 0} é fechado, R ≡ 0, o que a estrutura Residual não impõe. Com
++    C = ℝ × ℝ, D = ℝ, π = fst, R (x, y) = ‖y‖₊ (zero exatamente na seção y = 0), curvatura Ω ≡ 1, o conjunto denso S
++    encontra {y > 0}, onde 0 ≥ α·R é falso. -/
++theorem quantitative_closure_obstruction_falso :
++    ¬ ∀ (sys : ProjectiveSystem.{0, 0}) (res : Residual sys) (dyn : Dynamics sys)
++      (conn : EhresmannConnection sys) (curv : Curvature sys conn) (cl : Closure sys),
++      hasPositiveCoupling sys res dyn → hasNonZeroCurvature sys conn curv →
++      ∃ (α : ℝ) (_ : α > 0) (S : Set sys.C) (_ : Dense S),
++        ∀ c ∈ S, closureError sys dyn cl c ≥ α * (res.R c : ℝ) := by
++  intro h
++  obtain ⟨α, hα, S, hS, hle⟩ := h
++    { C := ℝ × ℝ, D := ℝ, π := Prod.fst, π_continuous := continuous_fst, fiberDim := 1,
++      hfiberDimPos := one_pos }
++    { R := fun c : ℝ × ℝ => ‖c.2‖₊, continuous_R := continuous_nnnorm.comp continuous_snd,
++      zero_section := ⟨fun d : ℝ => ((d, 0) : ℝ × ℝ), continuous_id.prod_mk continuous_const,
++        fun _ => rfl, fun c => ⟨fun hc => ⟨c.1, Prod.ext rfl (nnnorm_eq_zero.mp hc)⟩,
++          fun ⟨d, hd⟩ => by rw [hd]; simp⟩⟩ }
++    { X_C := id, continuous_X := continuous_id }
++    { isHorizontal := fun _ => True, continuous_connection := trivial }
++    { Ω := fun _ => 1, continuous_Ω := continuous_const }
++    { X_D_cl := id, continuous_X_cl := continuous_id }
++    (by unfold hasPositiveCoupling couplingConstant; norm_num)
++    ⟨((0 : ℝ), (0 : ℝ)), one_ne_zero⟩
++  obtain ⟨c, hc2, hcS⟩ := hS.inter_open_nonempty {c : ℝ × ℝ | 0 < c.2}
++    (isOpen_lt continuous_const continuous_snd) ⟨((0 : ℝ), (1 : ℝ)), by norm_num⟩
++  have h1 := hle c hcS
++  have h2 : (0 : ℝ) < ‖c.2‖ := norm_pos_iff.mpr (ne_of_gt hc2)
++  simp only [closureError, coe_nnnorm] at h1
++  nlinarith
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_RBC.lean
+@@ -0,0 +1,29 @@
++import LRE.RBC
++import Mathlib.Analysis.SpecialFunctions.ExpDeriv
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Set Topology in
++/-- `LRE_RBC.blowup_of_deriv_ge_cubic` é falso como escrito: `(Tstar : ℝ := 1 / (2 * α * (R 0) ^ 2))` é só um valor
++    padrão, o teorema vale para todo Tstar. Com R = exp, α = 1 e Tstar = 0, todas as hipóteses valem em t < 0
++    (exp t > 0, exp' = exp ≥ exp³ porque exp t < 1), mas exp → 1 (e não +∞) quando t → 0⁻. -/
++theorem blowup_of_deriv_ge_cubic_falso :
++    ¬ ∀ (R : ℝ → ℝ) (α : ℝ), 0 < α → 0 < R 0 → ∀ (Tstar : ℝ),
++      (∀ t, t ∈ Iio Tstar → 0 < R t) → (∀ t, t ∈ Iio Tstar → DifferentiableAt ℝ R t) →
++      (∀ t, t ∈ Iio Tstar → deriv R t ≥ α * (R t) ^ 3) → Tendsto R (𝓝[<] Tstar) atTop := by
++  intro h
++  have hlim := h Real.exp 1 one_pos (Real.exp_pos 0) 0 (fun t _ => Real.exp_pos t)
++    (fun t _ => Real.differentiableAt_exp) (fun t ht => by
++      rw [Real.deriv_exp]
++      have h1 : Real.exp t < 1 := Real.exp_lt_one_iff.mpr ht
++      have h0 := Real.exp_pos t
++      nlinarith [mul_pos h0 (sub_pos.mpr h1), mul_pos (mul_pos h0 h0) (sub_pos.mpr h1)])
++  have hc : Tendsto Real.exp (𝓝[<] (0 : ℝ)) (𝓝 (Real.exp 0)) :=
++    Real.continuous_exp.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
++  exact not_tendsto_nhds_of_tendsto_atTop hlim _ hc
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_RBC_Corrected.lean
+@@ -0,0 +1,31 @@
++import LRE.RBC_Corrected
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Set Topology LRE_RBC_Corrected in
++/-- `LRE_RBC_Corrected.residual_blowup_criterion_corrected` é falso como escrito: ResidualDynamics exige R
++    derivável em toda parte (logo contínua), então R nunca tende a +∞ num ponto finito; as hipóteses só obrigam a
++    explosão quando o intervalo (t0, T) é longo e está em t ≥ 0. Com R ≡ 1, α = 1, D = 0, κ t = −2t − 1, δ = 1,
++    t0 = −2, T = −1: a LRE vale em t ≥ 0 (0 ≥ −2t), κ − D ≥ 1 em (−2, −1), R(−2) = 1 > 0, e R ≡ 1 não explode. -/
++theorem residual_blowup_criterion_corrected_falso :
++    ¬ ∀ (dyn : ResidualDynamics), satisfies_supercritical_LRE dyn →
++      ∀ (δ t0 T : ℝ), curvature_dominant dyn δ t0 T → dyn.R t0 > 0 →
++      ∃ T' ∈ Ioo t0 T, Tendsto dyn.R (𝓝[<] T') atTop := by
++  intro h
++  let dyn : ResidualDynamics :=
++    { R := fun _ => 1, κ := fun t => -2 * t - 1, D := fun _ => 0, α := 1,
++      R_diff := differentiable_const 1, R_pos := fun _ _ => one_pos, α_pos := one_pos }
++  have hLRE : satisfies_supercritical_LRE dyn := by
++    intro t ht
++    simp only [dyn, deriv_const]
++    nlinarith
++  have hcd : curvature_dominant dyn 1 (-2) (-1) :=
++    ⟨one_pos, by norm_num, fun t ht => by simp only [dyn]; linarith [ht.2]⟩
++  obtain ⟨T', -, hT'⟩ := h dyn hLRE 1 (-2) (-1) hcd one_pos
++  exact not_tendsto_nhds_of_tendsto_atTop hT' 1 tendsto_const_nhds
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_SupportingLemmasO.lean
+@@ -0,0 +1,56 @@
++import Millennium.SupportingLemmas
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Filter Topology
++
++/-- `Millennium.Lemmas.gronwall_decay` é falso: a hipótese usa `deriv`, que vale 0 onde a função não é
++derivável. Para E(t) = -1 (t ≠ 1), E(1) = -1/4 e α = 1: deriv E = 0 em todo ponto (constante perto de t ≠ 1;
++não derivável em 1, por não ser contínua), então deriv E t = 0 ≤ -E t; E₀ = E 0 = -1, mas
++E 1 = -1/4 > -e⁻¹ = E₀·e^(-α·1), porque e < 4. -/
++theorem gronwall_decay_falso :
++    ¬ (∀ (E : ℝ → ℝ) (α : ℝ), α > 0 → (∀ t ≥ 0, deriv E t ≤ -α * E t) →
++      ∀ (E₀ : ℝ), E 0 = E₀ → ∀ t ≥ 0, E t ≤ E₀ * Real.exp (-α * t)) := by
++  intro h
++  let E : ℝ → ℝ := fun t => if t = 1 then -1 / 4 else -1
++  have hloc : ∀ t, t ≠ 1 → deriv E t = 0 := by
++    intro t ht
++    have : E =ᶠ[𝓝 t] fun _ => (-1 : ℝ) := by
++      filter_upwards [isOpen_ne.mem_nhds ht] with x hx
++      simp [E, hx]
++    rw [this.deriv_eq, deriv_const]
++  have hnd : ¬ DifferentiableAt ℝ E 1 := by
++    intro hd
++    have h1 : Tendsto E (𝓝[≠] 1) (𝓝 (-1)) :=
++      tendsto_const_nhds.congr' (eventually_nhdsWithin_of_forall fun x hx => by
++        have hx' : x ≠ 1 := hx
++        simp [E, hx'])
++    have h2 : Tendsto E (𝓝[≠] 1) (𝓝 (E 1)) := hd.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
++    have h3 := tendsto_nhds_unique h1 h2
++    have h4 : (-1 : ℝ) = -1 / 4 := by simpa [E] using h3
++    norm_num at h4
++  have hder : ∀ t, deriv E t = 0 := by
++    intro t
++    by_cases ht : t = 1
++    · subst ht; exact deriv_zero_of_not_differentiableAt hnd
++    · exact hloc t ht
++  have hd : ∀ t ≥ 0, deriv E t ≤ -1 * E t := by
++    intro t _
++    rw [hder]
++    by_cases ht : t = 1 <;> simp [E, ht] <;> norm_num
++  have hc := h E 1 one_pos hd (-1) (by simp [E]) 1 zero_le_one
++  -- e⁻¹ = (e^(-1/2))² > (1/2)² = 1/4, pois e^x > 1 + x para x ≠ 0
++  have h12 := Real.add_one_lt_exp (show (-1 / 2 : ℝ) ≠ 0 by norm_num)
++  have hsq : Real.exp (-1 * 1) = Real.exp (-1 / 2) * Real.exp (-1 / 2) := by
++    rw [← Real.exp_add]; norm_num
++  have hb : (1 : ℝ) / 4 < Real.exp (-1 * 1) := by
++    rw [hsq]; nlinarith [Real.exp_pos (-1 / 2)]
++  have hE1 : E 1 = -1 / 4 := by simp [E]
++  rw [hE1] at hc
++  linarith
++
++end MVEI.Refutacoes
+--- /dev/null
 +++ b/universe00/MVEI_Refutacoes.lean
 @@ -0,0 +1,74 @@
 +import Universe00.Core.Aggregation
@@ -73,5 +500,819 @@
 +  have := h 0 rfl (-1) (by unfold Universe00.Core.progressValid; norm_num)
 +  unfold Universe00.Core.isComplete at this
 +  norm_num at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/universe00/MVEI_Refutacoes_Monotonicity.lean
+@@ -0,0 +1,64 @@
++import Universe00.Core.Monotonicity
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Monotonicity.vector_monotone` é falso: com E₁ = [0] e E₂ = [1], `progressValid_vector E₂ E₁` (= `refines E₁ E₂`) vale e 0 ≥ 1 não. -/
++theorem vector_monotone_falso :
++    ¬ ∀ {E₁ E₂ : ErrorVector}, Monotonicity.progressValid_vector E₂ E₁ → E₁.norm_l1 ≥ E₂.norm_l1 := by
++  intro h
++  have := @h ⟨[0], by simp⟩ ⟨[1], by simp⟩
++    ⟨rfl, fun i => by fin_cases i; simp [ErrorVector.get]⟩
++  simp [ErrorVector.norm_l1] at this
++  norm_num at this
++
++/-- `Monotonicity.ledger_monotone` é falso: L₁ com erro total 0 refina L₂ com erro total 100, e 0 ≥ 100 não vale. -/
++theorem ledger_monotone_falso :
++    ¬ ∀ {L₁ L₂ : ProblemLedger}, Monotonicity.progressValid_ledger L₂ L₁ → L₁.totalError ≥ L₂.totalError := by
++  intro h
++  let w : ErrorAggregation.Weights := ⟨[1], by simp, by simp⟩
++  let p0 : MeasuredParameter ℝ := ⟨0, 0, le_refl _, by norm_num⟩
++  let p1 : MeasuredParameter ℝ := ⟨0, 1, by norm_num, le_refl _⟩
++  let e0 : ErrorVector := ⟨[0], by simp⟩
++  let e1 : ErrorVector := ⟨[1], by simp⟩
++  have h0 : ErrorAggregation.aggregateError w e0 = 0 := by
++    simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, e0]
++  have h1 : ErrorAggregation.aggregateError w e1 = 100 := by
++    simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, e1]
++  let L₁ : ProblemLedger := ⟨"x", "x", [p0], w, e0, 0, ProblemStatus.proved, rfl, rfl, h0.symm,
++    ⟨le_refl _, by norm_num⟩⟩
++  let L₂ : ProblemLedger := ⟨"x", "x", [p1], w, e1, 100, ProblemStatus.open, rfl, rfl, h1.symm,
++    ⟨by norm_num, le_refl _⟩⟩
++  have href : ProblemLedger.refines L₁ L₂ :=
++    ⟨rfl, rfl, ⟨rfl, fun i => by fin_cases i; simp [ErrorVector.get, L₁, L₂, e0, e1]⟩, by simp [L₁, L₂]⟩
++  have := @h L₁ L₂ href
++  norm_num [L₁, L₂] at this
++
++/-- `Monotonicity.validation_implies_progress` é falso: de erro 100 para erro 0 a validação passa, mas `refines L_old L_new` pede 100 ≤ 0. -/
++theorem validation_implies_progress_falso :
++    ¬ ∀ (L_old L_new : ProblemLedger), Monotonicity.validateUpdate L_old L_new = true →
++      Monotonicity.progressValid_ledger L_new L_old := by
++  intro h
++  let w : ErrorAggregation.Weights := ⟨[1], by simp, by simp⟩
++  let p0 : MeasuredParameter ℝ := ⟨0, 0, le_refl _, by norm_num⟩
++  let p1 : MeasuredParameter ℝ := ⟨0, 1, by norm_num, le_refl _⟩
++  let e0 : ErrorVector := ⟨[0], by simp⟩
++  let e1 : ErrorVector := ⟨[1], by simp⟩
++  have h0 : ErrorAggregation.aggregateError w e0 = 0 := by
++    simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, e0]
++  have h1 : ErrorAggregation.aggregateError w e1 = 100 := by
++    simp [ErrorAggregation.aggregateError, ErrorAggregation.weightedSum, w, e1]
++  let L₁ : ProblemLedger := ⟨"x", "x", [p0], w, e0, 0, ProblemStatus.proved, rfl, rfl, h0.symm,
++    ⟨le_refl _, by norm_num⟩⟩
++  let L₂ : ProblemLedger := ⟨"x", "x", [p1], w, e1, 100, ProblemStatus.open, rfl, rfl, h1.symm,
++    ⟨by norm_num, le_refl _⟩⟩
++  have href : ProblemLedger.refines L₁ L₂ :=
++    ⟨rfl, rfl, ⟨rfl, fun i => by fin_cases i; simp [ErrorVector.get, L₁, L₂, e0, e1]⟩, by simp [L₁, L₂]⟩
++  have := h L₂ L₁ (by simp [Monotonicity.validateUpdate, L₁, L₂])
++  have h3 := this.2.2.2
++  norm_num [L₁, L₂] at h3
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/universe00/MVEI_Refutacoes_Problems.lean
+@@ -0,0 +1,721 @@
++import Universe00.Problems.BSD
++import Universe00.Problems.Hodge
++import Universe00.Problems.NavierStokes
++import Universe00.Problems.Poincare
++import Universe00.Problems.PvsNP
++import Universe00.Problems.Riemann
++import Universe00.Problems.YangMills
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_computeTotalError_correct_falso :
++    ¬ (∀ (params : BSDParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.current_total_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_current_total_error_calculation_falso :
++    ¬ (currentLedger.totalError = 
++    (0.4 * 0.75) + (0.35 * 0.8) + (0.25 * 0.85)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.current_total_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_current_total_error_value_falso :
++    ¬ (currentLedger.totalError = 0.7725) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.improvedRank_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_improvedRank_error_calculation_falso :
++    ¬ (improvedRankLedger.totalError = 
++    (0.4 * 0.5) + (0.35 * 0.8) + (0.25 * 0.85)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.improvedRank_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_improvedRank_error_value_falso :
++    ¬ (improvedRankLedger.totalError = 0.6725) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.improvedSha_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_improvedSha_error_calculation_falso :
++    ¬ (improvedShaLedger.totalError = 
++    (0.4 * 0.75) + (0.35 * 0.8) + (0.25 * 0.5)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.improvedSha_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_improvedSha_error_value_falso :
++    ¬ (improvedShaLedger.totalError = 0.675) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.analyticalLedger_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_analyticalLedger_error_calculation_falso :
++    ¬ (analyticalLedger.totalError = 
++    (0.3 * 0.75) + (0.4 * 0.8) + (0.3 * 0.85)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.BSD in
++/-- `Universe00.Problems.BSD.analyticalLedger_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem BSD_analyticalLedger_error_value_falso :
++    ¬ (analyticalLedger.totalError = 0.78) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRankParameters, improvedRankLedger, improvedShaParameters, improvedShaLedger, provenParameters, provenLedger, analyticalWeights, analyticalLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_computeTotalError_correct_falso :
++    ¬ (∀ (params : HodgeParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.current_total_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_current_total_error_calculation_falso :
++    ¬ (currentLedger.totalError = 
++    (0.6 * 0.95) + (0.4 * 0.85)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.current_total_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_current_total_error_value_falso :
++    ¬ (currentLedger.totalError = 0.91) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.improvedAlgebraic_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_improvedAlgebraic_error_calculation_falso :
++    ¬ (improvedAlgebraicLedger.totalError = 
++    (0.6 * 0.7) + (0.4 * 0.85)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.improvedAlgebraic_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_improvedAlgebraic_error_value_falso :
++    ¬ (improvedAlgebraicLedger.totalError = 0.76) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.improvedGenerality_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_improvedGenerality_error_calculation_falso :
++    ¬ (improvedGeneralityLedger.totalError = 
++    (0.6 * 0.95) + (0.4 * 0.6)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.improvedGenerality_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_improvedGenerality_error_value_falso :
++    ¬ (improvedGeneralityLedger.totalError = 0.81) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.refuted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_refuted_error_calculation_falso :
++    ¬ (refutedLedger.totalError = 0.4) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.generalityWeighted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_generalityWeighted_error_calculation_falso :
++    ¬ (generalityWeightedLedger.totalError = 
++    (0.4 * 0.95) + (0.6 * 0.85)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.generalityWeighted_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_generalityWeighted_error_value_falso :
++    ¬ (generalityWeightedLedger.totalError = 0.89) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.total_error_bounds` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_total_error_bounds_falso :
++    ¬ (∀ (params : HodgeParameters), 0 ≤ (makeLedger params).totalError ∧ (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.errors_independent` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_errors_independent_falso :
++    ¬ (∀ (params1 params2 : HodgeParameters), let ledger1 := makeLedger params1
++    let ledger2 := makeLedger params2
++    ledger1.totalError - ledger2.totalError = 
++      0.6 * (params1.algebraicDistance.error - params2.algebraicDistance.error) +
++      0.4 * (params1.generalityCoverage.error - params2.generalityCoverage.error)) := by
++  intro h
++  have h1 := h currentParameters provenParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Hodge in
++/-- `Universe00.Problems.Hodge.max_error_bound` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Hodge_max_error_bound_falso :
++    ¬ (∀ (params : HodgeParameters), (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedAlgebraicParameters, improvedAlgebraicLedger, improvedGeneralityParameters, improvedGeneralityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, generalityWeighted, generalityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_computeTotalError_correct_falso :
++    ¬ (∀ (params : NavierStokesParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.current_total_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_current_total_error_calculation_falso :
++    ¬ (currentLedger.totalError = 
++    (0.4 * 0.75) + (0.4 * 0.9) + (0.2 * 0.95)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.current_total_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_current_total_error_value_falso :
++    ¬ (currentLedger.totalError = 0.85) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.improvedRegularity_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_improvedRegularity_error_calculation_falso :
++    ¬ (improvedRegularityLedger.totalError = 
++    (0.4 * 0.5) + (0.4 * 0.9) + (0.2 * 0.95)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.improvedRegularity_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_improvedRegularity_error_value_falso :
++    ¬ (improvedRegularityLedger.totalError = 0.69) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.improvedGlobality_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_improvedGlobality_error_calculation_falso :
++    ¬ (improvedGlobalityLedger.totalError = 
++    (0.4 * 0.75) + (0.4 * 0.5) + (0.2 * 0.95)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.improvedGlobality_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_improvedGlobality_error_value_falso :
++    ¬ (improvedGlobalityLedger.totalError = 0.69) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.refuted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_refuted_error_calculation_falso :
++    ¬ (refutedLedger.totalError = 0.2) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.regularityWeighted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_regularityWeighted_error_calculation_falso :
++    ¬ (regularityWeightedLedger.totalError = 
++    (0.5 * 0.75) + (0.3 * 0.9) + (0.2 * 0.95)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.regularityWeighted_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_regularityWeighted_error_value_falso :
++    ¬ (regularityWeightedLedger.totalError = 0.835) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.total_error_bounds` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_total_error_bounds_falso :
++    ¬ (∀ (params : NavierStokesParameters), 0 ≤ (makeLedger params).totalError ∧ (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.errors_independent` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_errors_independent_falso :
++    ¬ (∀ (params1 params2 : NavierStokesParameters), let ledger1 := makeLedger params1
++    let ledger2 := makeLedger params2
++    ledger1.totalError - ledger2.totalError = 
++      0.4 * (params1.regularity.error - params2.regularity.error) +
++      0.4 * (params1.timeGlobality.error - params2.timeGlobality.error) +
++      0.2 * (params1.initialDataCoverage.error - params2.initialDataCoverage.error)) := by
++  intro h
++  have h1 := h currentParameters provenParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.max_error_bound` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem NavierStokes_max_error_bound_falso :
++    ¬ (∀ (params : NavierStokesParameters), (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_computeTotalError_correct_falso :
++    ¬ (∀ (params : PoincareParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h historicalParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.historical_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_historical_error_calculation_falso :
++    ¬ (historicalLedger.totalError = 1.0 * 0.85) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.historical_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_historical_error_value_falso :
++    ¬ (historicalLedger.totalError = 0.85) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.announcement_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_announcement_error_calculation_falso :
++    ¬ (announcementLedger.totalError = 1.0 * 0.2) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.announcement_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_announcement_error_value_falso :
++    ¬ (announcementLedger.totalError = 0.2) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.total_error_bounds` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_total_error_bounds_falso :
++    ¬ (∀ (params : PoincareParameters), 0 ≤ (makeLedger params).totalError ∧ (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h historicalParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.max_error_bound` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_max_error_bound_falso :
++    ¬ (∀ (params : PoincareParameters), (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h historicalParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Poincare in
++/-- `Universe00.Problems.Poincare.errors_independent` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Poincare_errors_independent_falso :
++    ¬ (∀ (params1 params2 : PoincareParameters), let ledger1 := makeLedger params1
++    let ledger2 := makeLedger params2
++    ledger1.totalError - ledger2.totalError = 
++      1.0 * (params1.proofCompleteness.error - params2.proofCompleteness.error)) := by
++  intro h
++  have h1 := h historicalParameters currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, historicalParameters, historicalLedger, announcementParameters, announcementLedger, emptyLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_computeTotalError_correct_falso :
++    ¬ (∀ (params : PvsNPParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.current_total_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_current_total_error_calculation_falso :
++    ¬ (currentLedger.totalError = 
++    (0.6 * 0.95) + (0.4 * 0.9)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.current_total_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_current_total_error_value_falso :
++    ¬ (currentLedger.totalError = 0.93) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.improvedLowerBounds_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_improvedLowerBounds_error_calculation_falso :
++    ¬ (improvedLowerBoundsLedger.totalError = 
++    (0.6 * 0.6) + (0.4 * 0.9)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.improvedLowerBounds_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_improvedLowerBounds_error_value_falso :
++    ¬ (improvedLowerBoundsLedger.totalError = 0.72) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.barrierBreakthrough_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_barrierBreakthrough_error_calculation_falso :
++    ¬ (barrierBreakthroughLedger.totalError = 
++    (0.6 * 0.95) + (0.4 * 0.5)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.barrierBreakthrough_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_barrierBreakthrough_error_value_falso :
++    ¬ (barrierBreakthroughLedger.totalError = 0.77) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.barrierWeighted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_barrierWeighted_error_calculation_falso :
++    ¬ (barrierWeightedLedger.totalError = 
++    (0.4 * 0.95) + (0.6 * 0.9)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.barrierWeighted_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_barrierWeighted_error_value_falso :
++    ¬ (barrierWeightedLedger.totalError = 0.92) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.total_error_bounds` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_total_error_bounds_falso :
++    ¬ (∀ (params : PvsNPParameters), 0 ≤ (makeLedger params).totalError ∧ (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.max_error_bound` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_max_error_bound_falso :
++    ¬ (∀ (params : PvsNPParameters), (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.PvsNP in
++/-- `Universe00.Problems.PvsNP.errors_independent` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem PvsNP_errors_independent_falso :
++    ¬ (∀ (params1 params2 : PvsNPParameters), let ledger1 := makeLedger params1
++    let ledger2 := makeLedger params2
++    ledger1.totalError - ledger2.totalError = 
++      0.6 * (params1.lowerBoundStrength.error - params2.lowerBoundStrength.error) +
++      0.4 * (params1.barrierError.error - params2.barrierError.error)) := by
++  intro h
++  have h1 := h currentParameters separationProvenParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedLowerBoundsParameters, improvedLowerBoundsLedger, barrierBreakthroughParameters, barrierBreakthroughLedger, separationProvenParameters, separationProvenLedger, equalityProvenParameters, equalityProvenLedger, progressHistorySeparation, barrierWeighted, barrierWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_computeTotalError_correct_falso :
++    ¬ (∀ (params : RiemannParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.current_total_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_current_total_error_calculation_falso :
++    ¬ (currentLedger.totalError = 
++    (0.4 * 0.05) + (0.6 * 0.9999999999)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.current_total_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_current_total_error_value_falso :
++    ¬ (currentLedger.totalError = 0.61999999994) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.improvedVerification_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_improvedVerification_error_calculation_falso :
++    ¬ (improvedVerificationLedger.totalError = 
++    (0.4 * 0.05) + (0.6 * 0.999999999)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.improvedVerification_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_improvedVerification_error_value_falso :
++    ¬ (improvedVerificationLedger.totalError = 0.6199999994) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.analyticalBreakthrough_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_analyticalBreakthrough_error_calculation_falso :
++    ¬ (analyticalBreakthroughLedger.totalError = 
++    (0.4 * 0.01) + (0.6 * 0.5)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.analyticalBreakthrough_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_analyticalBreakthrough_error_value_falso :
++    ¬ (analyticalBreakthroughLedger.totalError = 0.304) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.refuted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_refuted_error_calculation_falso :
++    ¬ (refutedLedger.totalError = 0.6) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.computationalLedger_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_computationalLedger_error_calculation_falso :
++    ¬ (computationalLedger.totalError = 
++    (0.2 * 0.05) + (0.8 * 0.9999999999)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.computationalLedger_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_computationalLedger_error_value_falso :
++    ¬ (computationalLedger.totalError = 0.80999999992) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.total_error_bounds` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_total_error_bounds_falso :
++    ¬ (∀ (params : RiemannParameters), 0 ≤ (makeLedger params).totalError ∧ (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.max_error_bound` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_max_error_bound_falso :
++    ¬ (∀ (params : RiemannParameters), (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.Riemann in
++/-- `Universe00.Problems.Riemann.errors_independent` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem Riemann_errors_independent_falso :
++    ¬ (∀ (params1 params2 : RiemannParameters), let ledger1 := makeLedger params1
++    let ledger2 := makeLedger params2
++    ledger1.totalError - ledger2.totalError = 
++      0.4 * (params1.localDeviation.error - params2.localDeviation.error) +
++      0.6 * (params1.globalCoverage.error - params2.globalCoverage.error)) := by
++  intro h
++  have h1 := h currentParameters provenParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedVerificationParameters, improvedVerificationLedger, analyticalBreakthroughParameters, analyticalBreakthroughLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, progressScenario, computationalWeights, computationalLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.computeTotalError_correct` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_computeTotalError_correct_falso :
++    ¬ (∀ (params : YangMillsParameters), computeTotalError params = (makeLedger params).totalError) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.current_total_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_current_total_error_calculation_falso :
++    ¬ (currentLedger.totalError = 
++    (0.2 * 0.4) + (0.5 * 0.9) + (0.3 * 0.8)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.current_total_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_current_total_error_value_falso :
++    ¬ (currentLedger.totalError = 0.77) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.improvedContinuum_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_improvedContinuum_error_calculation_falso :
++    ¬ (improvedContinuumLedger.totalError = 
++    (0.2 * 0.4) + (0.5 * 0.5) + (0.3 * 0.8)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.improvedContinuum_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_improvedContinuum_error_value_falso :
++    ¬ (improvedContinuumLedger.totalError = 0.57) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.axiomatizationComplete_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_axiomatizationComplete_error_calculation_falso :
++    ¬ (axiomatizationCompleteLedger.totalError = 
++    (0.2 * 0.4) + (0.5 * 0.9) + (0.3 * 0)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.axiomatizationComplete_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_axiomatizationComplete_error_value_falso :
++    ¬ (axiomatizationCompleteLedger.totalError = 0.53) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.refuted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_refuted_error_calculation_falso :
++    ¬ (refutedLedger.totalError = 0.3) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.latticeWeighted_error_calculation` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_latticeWeighted_error_calculation_falso :
++    ¬ (latticeWeightedLedger.totalError = 
++    (0.4 * 0.4) + (0.3 * 0.9) + (0.3 * 0.8)) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.latticeWeighted_error_value` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_latticeWeighted_error_value_falso :
++    ¬ (latticeWeightedLedger.totalError = 0.67) := by
++  intro h
++  have h1 := h
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.total_error_bounds` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_total_error_bounds_falso :
++    ¬ (∀ (params : YangMillsParameters), 0 ≤ (makeLedger params).totalError ∧ (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.errors_independent` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_errors_independent_falso :
++    ¬ (∀ (params1 params2 : YangMillsParameters), let ledger1 := makeLedger params1
++    let ledger2 := makeLedger params2
++    ledger1.totalError - ledger2.totalError = 
++      0.2 * (params1.latticeDiscretization.error - params2.latticeDiscretization.error) +
++      0.5 * (params1.continuumLimit.error - params2.continuumLimit.error) +
++      0.3 * (params1.axiomatization.error - params2.axiomatization.error)) := by
++  intro h
++  have h1 := h currentParameters provenParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.YangMills in
++/-- `Universe00.Problems.YangMills.max_error_bound` é falso: o total do ledger é percentual (100 · Σ wᵢeᵢ). -/
++theorem YangMills_max_error_bound_falso :
++    ¬ (∀ (params : YangMillsParameters), (makeLedger params).totalError ≤ 1) := by
++  intro h
++  have h1 := h currentParameters
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedContinuumParameters, improvedContinuumLedger, axiomatizationCompleteParameters, axiomatizationCompleteLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, latticeWeighted, latticeWeightedLedger, historicalContext, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++open Universe00.Problems Universe00.Problems.NavierStokes in
++/-- `Universe00.Problems.NavierStokes.remaining_uncertainty` é falso: o total do ledger é percentual. -/
++theorem NavierStokes_remaining_uncertainty_falso :
++    ¬ (∀ (params : NavierStokesParameters), params.regularity.error = 0 → params.timeGlobality.error = 0 →
++      (makeLedger params).totalError = 0.2 * params.initialDataCoverage.error) := by
++  intro h
++  have h1 := h refutedParameters (by norm_num [refutedParameters]) (by norm_num [refutedParameters])
++  norm_num [currentParameters, weights, makeLedger, currentLedger, computeTotalError, improvedRegularityParameters, improvedRegularityLedger, improvedGlobalityParameters, improvedGlobalityLedger, provenParameters, provenLedger, refutedParameters, refutedLedger, regularityWeighted, regularityWeightedLedger, Universe00.Core.ProblemLedger.mk, Universe00.Core.aggregateError, Universe00.Core.ProblemLedger.extractErrors] at h1
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/universe00/MVEI_Refutacoes_ProblemsBSD.lean
+@@ -0,0 +1,20 @@
++import Universe00.Problems.BSD
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Universe00.Problems.BSD.progressHistory_is_monotone` é falso: a lista de erros totais do histórico é
++[79,25; 69,25; 70,5; 0] (lemas do autor current/improvedRank/improvedSha/proven_error_*), e 69,25 ≥ 70,5 é falso —
++os dois cenários do meio são alternativas, não uma cronologia. -/
++theorem progressHistory_is_monotone_falso : ¬ Universe00.Problems.BSD.validateProgressHistory := by
++  intro h
++  unfold Universe00.Problems.BSD.validateProgressHistory Universe00.Problems.BSD.progressHistory at h
++  simp only [List.map_cons, List.map_nil, List.chain'_cons, List.chain'_singleton] at h
++  have h2 := h.2.1
++  rw [Universe00.Problems.BSD.improvedRank_error_value, Universe00.Problems.BSD.improvedSha_error_value] at h2
++  norm_num at h2
 +
 +end MVEI.Refutacoes

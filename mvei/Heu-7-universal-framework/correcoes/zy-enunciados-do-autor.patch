@@ -1,0 +1,77 @@
+--- a/src/lean/HEU/Core/Functional/Criticality.lean
++++ b/src/lean/HEU/Core/Functional/Criticality.lean
+@@ -11,6 +11,7 @@
+ 
+ import HEU.Core.ZF.Ordinals
+ import HEU.Core.Functional.Functional
++import Mathlib.Data.Set.Defs
+ 
+ namespace HEU.Core.Functional
+ 
+@@ -19,7 +20,7 @@
+ /-- Critical threshold structure -/
+ structure CriticalThreshold (X : Type) where
+   κ : Ord
+-  isCritical : ∀ x : X, x → Ord
++  isCritical : X → Ord
+   threshold_positive : κ > Ord.zero
+ 
+ /-- Default critical threshold -/
+--- a/src/lean/HEU/Cross/UniversalDiagrams.lean
++++ b/src/lean/HEU/Cross/UniversalDiagrams.lean
+@@ -13,6 +13,9 @@
+ import HEU.Problems.RH.X_RH
+ import HEU.Problems.PvsNP.X_PNP
+ import HEU.Problems.NS.X_NS
++import HEU.Problems.RH.O_RH
++import HEU.Problems.PvsNP.O_PNP
++import HEU.Problems.NS.O_NS
+ 
+ noncomputable section
+ 
+--- a/src/lean/HEU/Problems/NS/X_NS.lean
++++ b/src/lean/HEU/Problems/NS/X_NS.lean
+@@ -60,7 +60,7 @@
+ 
+ /-- Divergence-free condition (discrete approximation) -/
+ def isDivergenceFree (u : X_NS) : Prop :=
+-  ∀ t x y z, True  -- Placeholder for ∇·u = 0
++  ∀ (_t _x _y _z : Nat), True  -- Placeholder for ∇·u = 0
+ 
+ /-- Initial condition regularity -/
+ def hasRegularInitialCondition (u : X_NS) : Prop :=
+--- a/src/lean/HEU/Problems/PvsNP/Critical_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/Critical_PNP.lean
+@@ -46,8 +46,9 @@
+     P_eq_NP ↔ ∀ p : X_PNP, isNPCompleteClass p → isCriticalPoint_PNP p := by
+   sorry  -- Copilot: expand
+ 
++open Classical in
+ /-- Complexity barrier -/
+-def complexityBarrier (p : X_PNP) : Nat :=
++noncomputable def complexityBarrier (p : X_PNP) : Nat :=
+   if isNPCompleteClass p then 1000 else p.timeComplexity
+ 
+ /-- Critical transition for complexity -/
+@@ -57,7 +58,7 @@
+ 
+ /-- Relativization barrier -/
+ axiom relativizationBarrier :
+-    ∃ oracle₁ oracle₂, True  -- Placeholder for oracle separation
++    ∃ (oracle₁ oracle₂ : Nat → Bool), True  -- Placeholder for oracle separation
+ 
+ /-- Natural proofs barrier -/
+ axiom naturalProofsBarrier :
+--- a/src/lean/HEU/Problems/RH/Critical_RH.lean
++++ b/src/lean/HEU/Problems/RH/Critical_RH.lean
+@@ -54,8 +54,9 @@
+   ∃ N : Nat, (∀ n < N, O_RH (seq n) < Ord.zero) ∧
+              (∀ n ≥ N, O_RH (seq n) ≥ Ord.zero)
+ 
++open Classical in
+ /-- Critical density: ratio of critical to total -/
+-def criticalDensity (zeros : List X_RH) : Nat :=
++noncomputable def criticalDensity (zeros : List X_RH) : Nat :=
+   let critical := zeros.filter (fun x => decide (isCriticalPoint_RH x))
+   critical.length * 100 / zeros.length.max 1
+ 

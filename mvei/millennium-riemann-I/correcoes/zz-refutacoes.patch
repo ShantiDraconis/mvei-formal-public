@@ -22,3 +22,27 @@
 +  norm_num at this
 +
 +end MVEI.Refutacoes
+--- /dev/null
++++ b/lean/millennium/MVEI_Refutacoes_HorizonComplex.lean
+@@ -0,0 +1,21 @@
++import Millennium.Riemann.HorizonComplex
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `HorizonComplex.mul_assoc` é falso com a multiplicação do arquivo: a componente indeterminada usa
++    z.re·w.indet + w.re·z.indet + z.indet·w.indet (sem a parte imaginária), e `(i · i) · I = −I` mas `i · (i · I) = 0`. -/
++theorem horizon_mul_assoc_falso :
++    ¬ ∀ x y z : Millennium.Riemann.HorizonComplex, (x * y) * z = x * (y * z) := by
++  intro h
++  have := congrArg Millennium.Riemann.HorizonComplex.indet
++    (h Millennium.Riemann.HorizonComplex.i Millennium.Riemann.HorizonComplex.i Millennium.Riemann.HorizonComplex.I)
++  simp only [show ∀ a b : Millennium.Riemann.HorizonComplex, a * b = Millennium.Riemann.HorizonComplex.mul a b from
++      fun _ _ => rfl, Millennium.Riemann.HorizonComplex.mul, Millennium.Riemann.HorizonComplex.i,
++    Millennium.Riemann.HorizonComplex.I] at this
++  norm_num at this
++
++end MVEI.Refutacoes

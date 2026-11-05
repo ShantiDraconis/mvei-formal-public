@@ -1,6 +1,16 @@
 --- a/formal/lean4/SovereignCore.lean
 +++ b/formal/lean4/SovereignCore.lean
-@@ -44,9 +44,7 @@
+@@ -37,16 +37,15 @@
+   | SecurityProblem.BreakingSecurity _ => ComplexityClass.NPHard
+ 
+ -- Axiom: Breaking system security is classified as NP-Hard
+-axiom securityBreaking_is_NPHard : 
+-  ∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard
++theorem securityBreaking_is_NPHard : 
++  ∀ (id : Identity), problemComplexity (SecurityProblem.BreakingSecurity id) = ComplexityClass.NPHard := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [problemComplexity]; done) | (simp_all [problemComplexity]; done) | (unfold problemComplexity; decide; done) | (unfold problemComplexity; rfl; done) | (simp [problemComplexity]; omega; done) | (intros; simp only [problemComplexity]; omega; done) | (intros; simp_all [problemComplexity]; done) | (intro x; cases x <;> simp [problemComplexity]; done) | (constructor <;> simp [problemComplexity]; done) | (norm_num [problemComplexity]; done) | (intros; norm_num [problemComplexity] at *; done) | (simp [problemComplexity]; ring; done) | (unfold problemComplexity; ring; done) | (simp [problemComplexity]; linarith; done) | (exact?; done)
+ 
+ -- Theorem: Security verification is in P
  theorem securityVerification_in_P : 
    ∀ (id : Identity) (proof : Nat), 
    ∃ (verify : Nat → Nat → Bool), True := by

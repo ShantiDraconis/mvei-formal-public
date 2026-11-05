@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T08:19:01+00:00",
+ "generated_at": "2026-11-05T15:19:16+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.36.0-rc2",
    "needs_mathlib": true,
    "build_ok": true,
-   "build_seconds": 2.6,
+   "build_seconds": 2.2,
    "build_error": "(configuração original) Note: This will be an error in a future version of Lake. | Hint: This warning (or error) can be suppressed with '--allow-empty'. | error: no such file or directory (error code: 2) | error: build failed",
    "sorry_warnings": 0,
    "reconstructed": true,
@@ -95,12 +95,13 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zz-refutacoes): 2 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 5 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 8 arquivo(s): abbrev 4, nomes_mathlib 7, noncomputable 8, notacao_escopo 1, palavra_chave 4; 5 prova(s) reescrita(s), conferidas no Lean do projeto: compensation_degrades, higher_snr_increases_capacity, higher_renewable_reduces_carbon, titanium_better_than_aluminum, high_reynolds_turbulent; 2 negação(ões) provada(s) no kernel: vantagem_longevidade, renewable_target_achievable. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Universe00 e o Mathlib v4.36.0-rc2 e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 2 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 1 arquivo(s); 5 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 8 arquivo(s): abbrev 4, nomes_mathlib 7, noncomputable 8, notacao_escopo 1, palavra_chave 4; 6 prova(s) reescrita(s), conferidas no Lean do projeto: scarcity_resolution, compensation_degrades, higher_snr_increases_capacity, higher_renewable_reduces_carbon, titanium_better_than_aluminum, high_reynolds_turbulent; 2 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: vantagem_longevidade, renewable_target_achievable; 2 negação(ões) provada(s) no kernel: vantagem_longevidade, renewable_target_achievable. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Universe00 e o Mathlib v4.36.0-rc2 e compilou o que foi possível",
    "corrections": [
     "renomear-imports-mathlib",
     "tatica-encontrada",
     "vocabulario-lean4",
     "z-provas-reparadas",
+    "zy-enunciados-do-autor",
     "zz-refutacoes"
    ],
    "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.36.0-rc2\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.one `Universe00]\n",
@@ -121,7 +122,7 @@
      "coluna": 4,
      "trecho": "    ⟦l⟧inarith",
      "ponte_de_modulo": {
-      "Universe00.Universe00": "prefixo do pacote"
+      "Universe00.Universe00": "mesmo arquivo que Universe00"
      }
     },
     {
@@ -135,7 +136,7 @@
       "Quot.sound"
      ],
      "ponte_de_modulo": {
-      "Universe00.Universe00": "prefixo do pacote"
+      "Universe00.Universe00": "mesmo arquivo que Universe00"
      }
     },
     {
@@ -153,7 +154,7 @@
      "coluna": 8,
      "trecho": "  intro ⟦V⟧ h_turb",
      "ponte_de_modulo": {
-      "Universe00.Universe00": "prefixo do pacote"
+      "Universe00.Universe00": "mesmo arquivo que Universe00"
      }
     },
     {
@@ -275,7 +276,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793824446
   },
   {
    "repo": "UMA",
@@ -363,15 +364,16 @@
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
      "linha": 168,
      "nome": "BateriaMagnetica.vantagem_longevidade",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx"
+      "Classical.choice",
+      "Quot.sound"
      ]
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 199,
+     "linha": 201,
      "nome": "SistemaCriptoPrimosPares.descentralizado",
      "status": "fechado",
      "axioms": [
@@ -382,7 +384,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/IndeterminacaoZeroDivZero.lean",
-     "linha": 206,
+     "linha": 208,
      "nome": "independencia_logistica_absoluta_viavel",
      "status": "erro",
      "axioms": [
@@ -391,7 +393,7 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 215: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.10388",
+     "erro": "linha 217: function expected at ProtocoloCivilizacaoAutonoma term has type ?m.10597",
      "coluna": 11,
      "trecho": "  ∃ (pca : ⟦P⟧rotocoloCivilizacaoAutonoma ℝ"
     },
@@ -538,7 +540,11 @@
      "trecho": "  ⟦r⟧ing_nf",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
-     ]
+     ],
+     "preenchimento": {
+      "resultado": "demonstrável",
+      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Universe00.compensate]; done) | (simp_all [Universe00.compensate]; done) | (unfold Universe00.compensate; decide; done) | (unfold Universe00.compensate; rfl; done) | (simp [Universe00.compensate]; omega; done) | (intros; simp only [Universe00.compensate]; omega; done) | (intros; simp_all [Universe00.compensate]; done) | (intro x; cases x <;> simp [Universe00.compensate]; done) | (constructor <;> simp [Universe00.compensate]; done) | (norm_num [Universe00.compensate]; done) | (intros; norm_num [Universe00.compensate] at *; done) | (simp [Universe00.compensate]; ring; done) | (unfold Universe00.compensate; ring; done) | (simp [Universe00.compensate]; linarith; done) | (exact?; done)"
+     }
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
@@ -599,22 +605,19 @@
      "arquivo": "formal_proofs/lean/universe00_core.lean",
      "linha": 297,
      "nome": "Universe00.scarcity_resolution",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 305: no goals to be solved",
-     "coluna": 2,
-     "trecho": "  ⟦r⟧fl",
      "import_trocado": [
       "Mathlib.Data.Nat.Prime"
      ]
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 317,
+     "linha": 316,
      "nome": "Universe00.precision_achievable",
      "status": "fechado",
      "axioms": [
@@ -628,7 +631,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 363,
+     "linha": 362,
      "nome": "Universe00.validation_sound",
      "status": "fechado",
      "axioms": [
@@ -642,7 +645,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_core.lean",
-     "linha": 372,
+     "linha": 371,
      "nome": "Universe00.system_integration",
      "status": "condicional",
      "axioms": [
@@ -704,10 +707,9 @@
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
      "linha": 192,
      "nome": "Universe00Extended.renewable_target_achievable",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ],
@@ -718,7 +720,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 209,
+     "linha": 213,
      "nome": "Universe00Extended.negative_gibbs_spontaneous",
      "status": "fechado",
      "axioms": [
@@ -733,7 +735,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 245,
+     "linha": 249,
      "nome": "Universe00Extended.high_reynolds_turbulent",
      "status": "fechado",
      "axioms": [
@@ -748,7 +750,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 282,
+     "linha": 286,
      "nome": "Universe00Extended.higher_snr_increases_capacity",
      "status": "fechado",
      "axioms": [
@@ -763,7 +765,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 305,
+     "linha": 309,
      "nome": "Universe00Extended.high_cpk_capable",
      "status": "fechado",
      "axioms": [
@@ -778,7 +780,7 @@
     },
     {
      "arquivo": "formal_proofs/lean/universe00_extended.lean",
-     "linha": 469,
+     "linha": 473,
      "nome": "Universe00Extended.higher_renewable_reduces_carbon",
      "status": "fechado",
      "axioms": [
@@ -798,7 +800,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793824446
   },
   {
    "repo": "UMA",
@@ -1159,7 +1161,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793652851
+   "hora_commit_mvei": 1793824446
   }
  ]
 }

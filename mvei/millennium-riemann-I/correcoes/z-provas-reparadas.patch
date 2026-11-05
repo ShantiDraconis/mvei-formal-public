@@ -260,6 +260,130 @@
    linarith
  
  end CollapseComplex
+--- a/MillenniumRiemann/Theorems.lean
++++ b/MillenniumRiemann/Theorems.lean
+@@ -110,13 +110,15 @@
+     (hz : z ∈ PureComplex) (hw : w ∈ PureComplex) :
+     z + w ∈ PureComplex := by
+   simp [PureComplex, HAdd.hAdd, instHAdd, add] at *
++  show z.indet + w.indet = 0
+   linarith
+ 
+ theorem pureComplex_closed_mul (z w : CollapseComplex)
+     (hz : z ∈ PureComplex) (hw : w ∈ PureComplex) :
+     z * w ∈ PureComplex := by
+   simp [PureComplex, HMul.hMul, instHMul, mul] at *
+-  linarith
++  show z.indet * w.indet = 0
++  simp [hz]
+ 
+ theorem pureComplex_has_zero :
+     (0 : CollapseComplex) ∈ PureComplex := by
+@@ -131,6 +133,7 @@
+     (hz : z ∈ PureIndeterminate) (hw : w ∈ PureIndeterminate) :
+     z + w ∈ PureIndeterminate := by
+   simp [PureIndeterminate, HAdd.hAdd, instHAdd, add] at *
++  show z.re + w.re = 0 ∧ z.im + w.im = 0
+   exact ⟨by linarith, by linarith⟩
+ 
+ theorem pureIndet_has_zero :
+@@ -145,18 +148,19 @@
+   simp [deltaI, PureIndeterminate]
+   constructor
+   · intro ⟨z, hz⟩
+-    exact ⟨hz.1, hz.2.1⟩
++    subst hz
++    exact ⟨rfl, rfl⟩
+   · intro ⟨hre, him⟩
+     use { re := 0, im := 0, indet := w.indet }
+-    simp [hre, him]
++    ext <;> simp [hre, him]
+ 
+ /-- The kernel of Δ_I is exactly PureComplex -/
+ theorem kernel_deltaI_eq_pureComplex (z : CollapseComplex) :
+     deltaI z = 0 ↔ z ∈ PureComplex := by
+   simp [deltaI, PureComplex, Zero.zero, instZero]
+   constructor
+-  · intro h; exact h.2.2
+-  · intro h; exact ⟨rfl, rfl, h⟩
++  · intro h; exact congrArg CollapseComplex.indet h
++  · intro h; ext <;> simp [h] <;> rfl
+ 
+ /-- Conjugation preserves PureComplex -/
+ theorem conj_pureComplex (z : CollapseComplex) (h : z ∈ PureComplex) :
+@@ -168,7 +172,7 @@
+ theorem conj_pureIndet (z : CollapseComplex) (h : z ∈ PureIndeterminate) :
+     conj z ∈ PureIndeterminate := by
+   simp [PureIndeterminate, conj] at *
+-  exact ⟨h.1, by linarith, by linarith⟩
++  exact h
+ 
+ /-- Product of conjugate (when restricted to complex part) -/
+ theorem conj_mul_self (z : CollapseComplex) :
+@@ -194,21 +198,18 @@
+ 
+ /-- i² = -1 in the complex part -/
+ theorem i_sq : i * i = { re := -1, im := 0, indet := 0 } := by
+-  simp [i, HMul.hMul, instHMul, mul]
+-  ext <;> simp
+-  ring
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, i] <;> norm_num
+ 
+ /-- The symbolic I (0/0 constant) -/
+ def I : CollapseComplex := Icc
+ 
+ /-- I² = I in the indeterminate algebra -/
+ theorem I_sq : I * I = { re := 0, im := 0, indet := 1 } := by
+-  simp [I, Icc, HMul.hMul, instHMul, mul]
+-  ext <;> simp
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, I, Icc] <;> norm_num
+ 
+ /-- i and I are orthogonal: their product has both components -/
+ theorem i_mul_I : i * I = 0 := by
+-  simp [i, I, Icc, HMul.hMul, instHMul, mul, Zero.zero, instZero]
+-  ext <;> simp
++  ext <;> simp only [show ∀ x y : CollapseComplex, x * y = mul x y from fun _ _ => rfl, mul, i, I, Icc,
++    show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> norm_num
+ 
+ end Collapse.CollapseComplex
+--- a/cross/lean/Riemann/INumber.lean
++++ b/cross/lean/Riemann/INumber.lean
+@@ -100,21 +100,19 @@
+ /-- Addition is commutative for regular numbers -/
+ theorem add_comm (z₁ z₂ : ℂ) : 
+   add (regular z₁) (regular z₂) = add (regular z₂) (regular z₁) := by
+-  simp [add, Complex.add_comm]
++  simp [add, _root_.add_comm]
+ 
+ /-- Multiplication is commutative for regular numbers -/
+ theorem mul_comm (z₁ z₂ : ℂ) : 
+   mul (regular z₁) (regular z₂) = mul (regular z₂) (regular z₁) := by
+-  simp [mul, Complex.mul_comm]
++  simp [mul, _root_.mul_comm]
+ 
+ /-- Zero is additive identity for regular numbers -/
+ theorem add_zero (z : ℂ) : add (regular z) zero_num = regular z := by
+   simp [add, zero_num, ofComplex]
+-  ring
+ 
+ /-- One is multiplicative identity for regular numbers -/
+ theorem mul_one (z : ℂ) : mul (regular z) one_num = regular z := by
+   simp [mul, one_num, ofComplex]
+-  ring
+ 
+ end Riemann.INumber
+--- a/cross/lean/Riemann/Zeros/CriticalLine.lean
++++ b/cross/lean/Riemann/Zeros/CriticalLine.lean
+@@ -36,7 +36,7 @@
+ theorem critical_zero_distance (z : CriticalZero) :
+   distanceFromCriticalLine z.s = 0 := by
+   unfold distanceFromCriticalLine
+-  simp [z.on_line]
+-  norm_num
++  have h : z.s.re = (1 : ℝ) / 2 := z.on_line
++  simp [h]
+ 
+ end Riemann.Zeros
 --- a/formal/DirectEndpointRule.lean
 +++ b/formal/DirectEndpointRule.lean
 @@ -32,7 +32,7 @@
@@ -419,3 +543,205 @@
  
  /-- The Universe-0-0 constant I has zero real and imaginary parts -/
  theorem I_components : I.re = 0 ∧ I.im = 0 ∧ I.indet = 1 := by
+--- a/lean/millennium/Riemann/Core/FunctionalEquation.lean
++++ b/lean/millennium/Riemann/Core/FunctionalEquation.lean
+@@ -56,7 +56,11 @@
+ /-- The functional equation maps critical strip to itself -/
+ theorem functional_eq_preserves_strip (s : CollapseComplex) :
+   in_critical_strip s ↔ in_critical_strip (one - s) := by
+-  constructor <;> intro h <;> simp [in_critical_strip] at * <;> 
+-  constructor <;> linarith
++  have hre : (one - s).re = 1 - s.re := by
++    show 1 + -s.re = 1 - s.re
++    ring
++  unfold in_critical_strip
++  rw [hre]
++  constructor <;> intro h <;> constructor <;> linarith [h.1, h.2]
+ 
+ end Millennium.Riemann.Core
+--- a/lean/millennium/Riemann/HorizonComplex.lean
++++ b/lean/millennium/Riemann/HorizonComplex.lean
+@@ -167,27 +167,20 @@
+ 
+ /-- Addition is associative -/
+ theorem add_assoc (x y z : HorizonComplex) : (x + y) + z = x + (y + z) := by
+-  simp [add, Add.add]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : HorizonComplex, a + b = add a b from fun _ _ => rfl, add, HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Addition is commutative -/
+ theorem add_comm (x y : HorizonComplex) : x + y = y + x := by
+-  simp [add, Add.add]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : HorizonComplex, a + b = add a b from fun _ _ => rfl, add, HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Zero is additive identity -/
+ theorem zero_add (x : HorizonComplex) : 0 + x = x := by
+-  simp [add, Add.add, zero, Zero.zero]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  cases x
++  simp only [show ∀ a b : HorizonComplex, a + b = add a b from fun _ _ => rfl, add, show (0 : HorizonComplex) = zero from rfl, zero,
++    HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Multiplication is associative -/
+ theorem mul_assoc (x y z : HorizonComplex) : (x * y) * z = x * (y * z) := by
+@@ -199,27 +192,21 @@
+ 
+ /-- Multiplication is commutative -/
+ theorem mul_comm (x y : HorizonComplex) : x * y = y * x := by
+-  simp [mul, Mul.mul]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : HorizonComplex, a * b = mul a b from fun _ _ => rfl, mul, HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- One is multiplicative identity -/
+ theorem one_mul (x : HorizonComplex) : 1 * x = x := by
+-  simp [mul, Mul.mul, one, One.one]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  cases x
++  simp only [show ∀ a b : HorizonComplex, a * b = mul a b from fun _ _ => rfl, mul, show (1 : HorizonComplex) = one from rfl, one,
++    HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Distributivity -/
+ theorem left_distrib (x y z : HorizonComplex) : x * (y + z) = x * y + x * z := by
+-  simp [mul, add, Mul.mul, Add.add]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : HorizonComplex, a * b = mul a b from fun _ _ => rfl, show ∀ a b : HorizonComplex, a + b = add a b from fun _ _ => rfl, mul, add,
++    HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- The Horizon constant H has the expected components -/
+ theorem H_components : H.re = 0 ∧ H.im = 0 ∧ H.indet = 0 ∧ H.horizon = 1 := by
+@@ -229,11 +216,9 @@
+ theorem ofCollapseComplex_add (z w : CollapseComplex) : 
+   ofCollapseComplex (CollapseComplex.add z w) = 
+   ofCollapseComplex z + ofCollapseComplex w := by
+-  simp [ofCollapseComplex, CollapseComplex.add, add, Add.add]
+-  constructor; rfl
+-  constructor; rfl
+-  constructor; rfl
+-  ring
++  simp only [show ∀ a b : HorizonComplex, a + b = add a b from fun _ _ => rfl, ofCollapseComplex, CollapseComplex.add, add,
++    HorizonComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_⟩ <;> first | trivial | ring
+ 
+ end HorizonComplex
+ 
+--- a/lean/millennium/Riemann/IConstant/ICore.lean
++++ b/lean/millennium/Riemann/IConstant/ICore.lean
+@@ -32,28 +32,33 @@
+ 
+ /-- Idempotent property: 𝕀² = 𝕀 -/
+ theorem I_squared : 𝕀 * 𝕀 = 𝕀 := by
+-  simp [𝕀, I, mul, Mul.mul]
+-  constructor
+-  · ring
+-  constructor
+-  · ring
+-  · ring
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, 𝕀, I, mul,
++    CollapseComplex.mk.injEq]
++  norm_num
+ 
+ /-- 𝕀 · 0 = 0 (absorption with zero) -/
+ theorem I_times_zero : 𝕀 * zero = zero := by
+-  simp [𝕀, I, zero, mul, Mul.mul, Zero.zero]
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, 𝕀, I, zero, mul,
++    CollapseComplex.mk.injEq]
++  norm_num
+ 
+ /-- 0 · 𝕀 = 0 -/
+ theorem zero_times_I : zero * 𝕀 = zero := by
+-  simp [𝕀, I, zero, mul, Mul.mul, Zero.zero]
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, 𝕀, I, zero, mul,
++    CollapseComplex.mk.injEq]
++  norm_num
+ 
+ /-- 𝕀 · 1 = 𝕀 -/
+ theorem I_times_one : 𝕀 * one = 𝕀 := by
+-  simp [𝕀, I, one, mul, Mul.mul, One.one]
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, 𝕀, I, one, mul,
++    CollapseComplex.mk.injEq]
++  norm_num
+ 
+ /-- 1 · 𝕀 = 𝕀 -/
+ theorem one_times_I : one * 𝕀 = 𝕀 := by
+-  simp [𝕀, I, one, mul, Mul.mul, One.one]
++  simp only [show ∀ a b : CollapseComplex, a * b = mul a b from fun _ _ => rfl, 𝕀, I, one, mul,
++    CollapseComplex.mk.injEq]
++  norm_num
+ 
+ /-- 𝕀 ≠ 0 -/
+ theorem I_ne_zero : 𝕀 ≠ zero := by
+--- a/lean/millennium/Riemann/SymbolicZeta.lean
++++ b/lean/millennium/Riemann/SymbolicZeta.lean
+@@ -150,12 +150,19 @@
+ theorem functional_equation_symmetry :
+   ∀ s : CollapseComplex, isSymbolicZero s → 
+     chiSymbolic s ≠ zero → isSymbolicZero (one - s) := by
+-  intro s hs hchi
++  intro s hs _hchi
+   unfold isSymbolicZero at *
+-  have := symbolicFunctionalEquation s
+-  rw [hs] at this
+-  simp [mul, Mul.mul, zero, Zero.zero] at this
+-  exact this
++  have h1 := symbolicFunctionalEquation (one - s)
++  have h2 : one - (one - s) = s := by
++    show add one (neg (add one (neg s))) = s
++    cases s
++    simp only [add, neg, one, CollapseComplex.mk.injEq]
++    refine ⟨?_, ?_, ?_⟩ <;> ring
++  rw [h2, hs] at h1
++  rw [h1]
++  show mul (chiSymbolic (one - s)) zero = zero
++  simp only [mul, zero, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ namespace Documentation
+ 
+--- a/src/Riemann/Zeros/Symmetry.lean
++++ b/src/Riemann/Zeros/Symmetry.lean
+@@ -16,7 +16,7 @@
+ theorem verticalSymmetry (z : NontrivialZero) :
+   ∃ z' : NontrivialZero, z'.s.re + z.s.re = 1 := by
+   obtain ⟨z', hz'⟩ := reflectionPair z
+-  exact ⟨z', by simp [hz']; ring⟩
++  exact ⟨z', by simp [hz']⟩
+ 
+ /-- Horizontal symmetry: zeros symmetric about Im(s) = 0 -/
+ theorem horizontalSymmetry (z : NontrivialZero) :
+--- a/src/Riemann/Zeros/Trivial.lean
++++ b/src/Riemann/Zeros/Trivial.lean
+@@ -30,9 +30,6 @@
+ theorem trivialNotInStrip (z : TrivialZero) :
+   ¬inCriticalStrip z.s := by
+   simp [inCriticalStrip, z.at_neg_even]
+-  intro h
+-  have : ((-2 : ℂ) * z.n).re = -2 * z.n := by simp
+-  linarith [z.n_pos]
+ 
+ /-- Trivial zeros are simple -/
+ axiom trivialSimple (n : ℕ) (hn : n > 0) :

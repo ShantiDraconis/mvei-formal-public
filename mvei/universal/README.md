@@ -11,22 +11,24 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `459428bdf95732b15340106312929cb6c0f4ba23`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | v4.19.0 | failed | 0 | 0 | 0 | 99 / 0 / 118 / 142 / 12 |
+| `.` | v4.19.0 | failed | 0 | 0 | 0 | 171 / 0 / 121 / 71 / 12 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 99 |
-| Unique (name + statement) | 99 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 99 |
+| Counting each project | 171 |
+| Unique (name + statement) | 171 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 167 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
+| `ComplexDifferentiability.cauchy_riemann` | `. (file by file)` | open | `sorryAx` |
+| `ComplexDifferentiability.holomorphic_of_cauchy_riemann` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.holomorphic_comp` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.holomorphic_iff_wirtinger_conj_zero` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.holomorphic_real_part_harmonic` | `. (file by file)` | open | `sorryAx` |
@@ -34,6 +36,7 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `459428bdf95732b153401
 | `ComplexDifferentiability.conformal_preserves_angles` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.mobius_conformal` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.holomorphic_has_power_series` | `. (file by file)` | open | `sorryAx` |
+| `ComplexDifferentiability.power_series_coeff` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.zeros_isolated` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.zero_factorization` | `. (file by file)` | open | `sorryAx` |
 | `ComplexDifferentiability.maximum_modulus` | `. (file by file)` | open | `sorryAx` |
@@ -72,16 +75,18 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `459428bdf95732b153401
 | `InverseFunctionTheory.deriv_inverse` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.local_diffeo_of_invertible_deriv` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.hadamard_global_inverse` | `. (file by file)` | open | `sorryAx` |
-| `InverseFunctionTheory.constant_rank` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.submersion_has_section` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.immersion_locally_injective` | `. (file by file)` | open | `sorryAx` |
 | `InverseFunctionTheory.ode_flow_exists` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.jacobian_comp` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.jacobian_det_comp` | `. (file by file)` | open | `sorryAx` |
+| `JacobiansTheory.change_of_variables` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.polar_jacobian` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.spherical_jacobian` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.inverse_function_jacobian` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.jacobian_inverse` | `. (file by file)` | open | `sorryAx` |
+| `JacobiansTheory.hessian_symmetric` | `. (file by file)` | open | `sorryAx` |
+| `JacobiansTheory.second_deriv_test_min'` | `. (file by file)` | open | `sorryAx` |
 | `JacobiansTheory.curl_antisymm` | `. (file by file)` | open | `sorryAx` |
 | `MeanValueTheorems.cauchy_mean_value` | `. (file by file)` | open | `sorryAx` |
 | `MeanValueTheorems.mean_value_vector` | `. (file by file)` | open | `sorryAx` |
@@ -111,8 +116,6 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `459428bdf95732b153401
 | `TaylorSeriesTheory.binomial_series` | `. (file by file)` | open | `sorryAx` |
 | `TaylorSeriesTheory.borel_sum_analytic` | `. (file by file)` | open | `sorryAx` |
 | `Integrals.dominated_convergence` | `. (file by file)` | open | `sorryAx` |
-| `SigmaAlgebras.generated_smallest` | `. (file by file)` | open | `sorryAx` |
-| `SigmaAlgebras.rectangle_measurable` | `. (file by file)` | open | `sorryAx` |
 | `SigmaAlgebras.monotone_class` | `. (file by file)` | open | `sorryAx` |
 | `BaireCategoryTheory.baire_iff_not_meager` | `. (file by file)` | open | `sorryAx` |
 | `BaireCategoryTheory.dense_Gδ_not_meager` | `. (file by file)` | open | `sorryAx` |
@@ -148,19 +151,22 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `459428bdf95732b153401
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting copies). The kernel checked 217 of them (99 closed, 0 conditional, 118 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 154 the kernel has no result:
+The `.lean` files of the verified commit declare 371 `theorem`/`lemma` (counting copies). The kernel checked 288 of them (167 closed, 0 conditional, 121 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 83 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 142 |
+| checked file by file: the written proof does not pass the kernel | 71 |
 | checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 12 |
 
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 40 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
-* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/tatica-encontrada.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 63 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 22 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 19 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
+* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 25 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal mvei/universal/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
 ## Files in this folder
 

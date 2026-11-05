@@ -11,19 +11,19 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `1990622af0a0c2ebcbe450979ba48f62025c736d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `1990622af0a0c2ebcbe450979ba48f62025c736d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean4` | v4.36.0-rc2 | partial | 60 | 0 | 24 | — |
-| `formal/lean4/PvsNP` | v4.19.0 | OK | 14 | 0 | 0 | 6 / 0 / 29 / 1 / 6 |
-| `src/lean4` | padrão do elan | failed | 0 | 0 | 0 | 42 / 0 / 42 / 0 / 40 |
+| `formal/lean4` | v4.36.0-rc2 | partial | 79 | 0 | 21 | — |
+| `formal/lean4/PvsNP` | v4.19.0 | OK | 14 | 0 | 0 | 13 / 0 / 23 / 1 / 5 |
+| `src/lean4` | padrão do elan | failed | 0 | 0 | 0 | 43 / 0 / 41 / 0 / 40 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 122 |
-| Unique (name + statement) | 100 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 57 |
+| Counting each project | 149 |
+| Unique (name + statement) | 121 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 66 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -35,7 +35,6 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.NP_strictly_subset_NEXP` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.NP_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.PSPACE_subset_EXP` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.P_closed_complement` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_eq_NP_iff` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_eq_NP_iff_NPC_in_P` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_eq_P'` | `formal/lean4` | open | `sorryAx` |
@@ -49,18 +48,13 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.cook_levin` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.eq_of_SAT_in_P` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.eq_of_npc_in_p` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.manyOne_NP_closed` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.manyOne_P_closed` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.space_hierarchy` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.time_hierarchy` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.natural_proofs_insufficient` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.proof_must_not_algebrize` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.P_subset_Ppoly` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.sep_of_NP_not_in_Ppoly` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_eq_P'` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.NP_eq_NP_verifier` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_subset_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.P_closed_complement` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_subset_NP_inter_coNP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_eq_NP_iff` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.eq_of_npc_in_p` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
@@ -73,15 +67,12 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.P_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.NP_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.PSPACE_subset_EXP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.manyOne_P_closed` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.manyOne_NP_closed` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.NPComplete_in_P_implies_P_eq_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.SAT_in_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.SAT_NP_hard` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.cook_levin` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.eq_of_SAT_in_P` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.ThreeSAT_is_NPComplete` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.sep_of_stone` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.baker_gill_solovay` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.proof_must_not_relativize` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.natural_proofs_barrier` | `src/lean4 (file by file)` | open | `sorryAx` |
@@ -97,7 +88,6 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.ntime_hierarchy` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.NP_strictly_subset_NEXP` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.complexity_landscape` | `src/lean4 (file by file)` | open | `sorryAx` |
-| `PvsNP.EXP_ne_NEXP_implies_P_ne_NP` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.SymbolicSeparationProgram` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.MasterTheorem` | `src/lean4 (file by file)` | open | `sorryAx` |
 | `PvsNP.branches_consistent` | `src/lean4 (file by file)` | open | `sorryAx` |
@@ -127,18 +117,20 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `1990622af0a0c2ebcbe45
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 168 `theorem`/`lemma` (counting copies). The kernel checked 121 of them (50 closed, 0 conditional, 71 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 47 the kernel has no result:
+The `.lean` files of the verified commit declare 168 `theorem`/`lemma` (counting copies). The kernel checked 122 of them (58 closed, 0 conditional, 64 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 46 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 46 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 45 |
 | checked file by file: the written proof does not pass the kernel | 1 |
 
 ### MVEI corrections
 
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 18 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/imports-no-topo.patch` (in order, after the ones above)
+* `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 25 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
-* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 5 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
 * `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-p-vs-np-classical mvei/millennium-p-vs-np-classical/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
 ## Files in this folder

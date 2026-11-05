@@ -66,12 +66,15 @@
  variable (E : EllipticCurve ℚ)
 --- a/src/lean/BSD/Auxiliary/HeightPairings.lean
 +++ b/src/lean/BSD/Auxiliary/HeightPairings.lean
-@@ -5,6 +5,9 @@
+@@ -5,6 +5,12 @@
  -/
  
  import BSD.EllipticCurve.Heights
 +import Mathlib.Data.Nat.Prime.Defs
-+import Mathlib.Algebra.Field.Rat
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Positivity
++import Mathlib.Tactic.Ring
 +import Mathlib.Data.Real.Basic
  
  /-!
@@ -88,7 +91,7 @@
  
  /-!
  # Known Cases of BSD
-@@ -103,7 +106,7 @@
+@@ -105,7 +108,7 @@
  theorem BSD_holds_rank_leq_1' (E : EllipticCurve ℚ) (h : analyticRank E ≤ 1) :
      WeakBSD E := WeakBSD_holds_rank_leq_1 E h
  
@@ -97,7 +100,7 @@
  -- This would require explicit numerical data
  
  /-! ## Database Curves -/
-@@ -112,7 +115,7 @@
+@@ -114,7 +117,7 @@
  structure DatabaseCurve where
    label : String
    conductor : ℕ
@@ -106,7 +109,7 @@
    rank : ℕ
    torsion : ℕ
    bsd_verified : Bool
-@@ -150,7 +153,7 @@
+@@ -152,7 +155,7 @@
  
  /-! ## Future Work -/
  
@@ -117,19 +120,22 @@
  end EllipticCurve
 --- a/src/lean/BSD/BSD/ReductionSchemes.lean
 +++ b/src/lean/BSD/BSD/ReductionSchemes.lean
-@@ -5,6 +5,11 @@
+@@ -5,6 +5,14 @@
  -/
  
  import BSD.BSD.Statement
 +import Mathlib.Data.Nat.Prime.Defs
-+import Mathlib.Algebra.Field.Rat
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Positivity
++import Mathlib.Tactic.Ring
 +import Mathlib.Data.Complex.Basic
 +
 +noncomputable section
  
  /-!
  # Reduction Schemes for BSD
-@@ -97,11 +102,11 @@
+@@ -103,11 +111,11 @@
  
  /-! ## Open Problems -/
  
@@ -339,11 +345,12 @@
      simp only [Neg.neg, neg] at h ⊢
 --- a/src/lean/BSD/EllipticCurve/Heights.lean
 +++ b/src/lean/BSD/EllipticCurve/Heights.lean
-@@ -6,6 +6,7 @@
+@@ -6,6 +6,8 @@
  
  import BSD.EllipticCurve.Basic
  import BSD.EllipticCurve.GroupLaw
 +import Mathlib.Analysis.SpecialFunctions.Log.Basic
++import Mathlib.Tactic.Positivity
  
  /-!
  # Heights on Elliptic Curves
@@ -369,20 +376,21 @@
  /-- Relation between discriminant and c₄, c₆: Δ = (c₄³ - c₆²)/1728 -/
 --- a/src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean
 +++ b/src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean
-@@ -9,6 +9,12 @@
+@@ -9,6 +9,13 @@
  import Mathlib.Analysis.InnerProductSpace.Basic
  import Mathlib.Analysis.SpecialFunctions.Log.Basic
  import Mathlib.Data.Rat.Defs
 +import Mathlib.Data.Nat.Prime.Defs
 +import Mathlib.LinearAlgebra.Matrix.Symmetric
 +import Mathlib.Data.Real.Basic
++import Mathlib.Tactic.Positivity
 +open scoped ENNReal
 +
 +noncomputable section
  
  /-!
  # Regulator and Height Pairing for Elliptic Curves
-@@ -472,7 +478,7 @@
+@@ -472,7 +479,7 @@
  example : regulator [point37a1] = neronTateHeight point37a1 := by
    exact regulator_rank_one point37a1
  
@@ -447,6 +455,15 @@
  
  /-!
  # Euler Factors of L-Functions
+@@ -104,7 +109,7 @@
+ /-- Absolute convergence of the Euler product for Re(s) > 3/2 -/
+ theorem euler_product_converges (s : ℂ) (hs : s.re > 3/2) :
+     ∃ L : ℂ, Filter.Tendsto
+-      (fun N => ∏ p in Finset.filter Nat.Prime (Finset.range N),
++      (fun N => ∏ p ∈ Finset.filter Nat.Prime (Finset.range N),
+         1 / @localFactor E p ⟨Finset.mem_filter.mp (by sorry)⟩ s)
+       Filter.atTop (nhds L) := by
+   sorry
 --- a/src/lean/BSD/LFunction/FunctionalEquation.lean
 +++ b/src/lean/BSD/LFunction/FunctionalEquation.lean
 @@ -7,6 +7,11 @@
@@ -500,17 +517,18 @@
  Released under MIT license as described in the file LICENSE.
 --- a/src/lean/BSD/LFunction/TamagawaNumbers.lean
 +++ b/src/lean/BSD/LFunction/TamagawaNumbers.lean
-@@ -7,6 +7,9 @@
+@@ -7,6 +7,10 @@
  import Mathlib.NumberTheory.Padics.PadicVal.Basic
  import Mathlib.Data.Int.Basic
  import Mathlib.Data.Nat.Prime.Basic
 +import Mathlib.Data.Nat.Prime.Defs
++import Mathlib.Tactic.Positivity
 +
 +noncomputable section
  
  /-!
  # Tamagawa Numbers for Elliptic Curves
-@@ -329,7 +332,7 @@
+@@ -329,7 +333,7 @@
  /-- Data for an elliptic curve over ℚ -/
  structure EllipticCurveData where
    /-- Weierstrass coefficients -/
@@ -519,7 +537,7 @@
    /-- The discriminant is non-zero -/
    disc_ne_zero : a1^2 * (a1^2 * a6 + 4 * a2 * a6 - a1 * a3 * a4 + a2 * a3^2 - a4^2) -
                   8 * (2 * a4 + a1 * a3)^3 - 
-@@ -439,7 +442,7 @@
+@@ -430,7 +434,7 @@
      }
    else none
  

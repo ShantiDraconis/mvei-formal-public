@@ -1,0 +1,172 @@
+--- a/s5/formal/lean/S5/Core/Harappan/M002_frequency_analysis.lean
++++ b/s5/formal/lean/S5/Core/Harappan/M002_frequency_analysis.lean
+@@ -12,8 +12,47 @@
+ 
+ namespace S5.Core.Harappan
+ 
+-/-- Harappan symbol M-002 exhibits non-random frequency distribution suggesting linguistic structure -/
+-theorem clm_har_m002_a : chi_squared(M002_freq, uniform_dist) > threshold := by
+-  sorry  -- Proof pending
++/-! Definições estatísticas (antes omitidas como "stubs"), com os dados do corpus do autor:
++  harappan-00-universal, INDUS-KERNEL-CORE/analysis/position_stats.json (glifo G00x = sinal H00x, INDUS-KERNEL-CORE/glyphs/glyph_manifest.json; os 417 sinais H### seguem a numeração de Mahadevan 1977).
++  Posições na inscrição P1..P5. -/
++
++/-- Fração de naturais (numerador, denominador positivo). -/
++structure Frac where
++  num : Nat
++  den : Nat
++  deriving DecidableEq
++
++instance : LT Frac := ⟨fun x y => x.num * y.den < y.num * x.den⟩
++instance (x y : Frac) : Decidable (x < y) := inferInstanceAs (Decidable (x.num * y.den < y.num * x.den))
++
++/-- Frequências observadas de M-002 (G002/H002) por posição P1..P5: 3 ocorrências, 2 em P2 e 1 em P4. -/
++def M002_freq : List Nat := [0, 2, 0, 1, 0]
++
++/-- A uniforme de comparação: a mesma chance nas 5 posições (contagem esperada n/5 em cada). -/
++def uniform_dist : Nat := 5
++
++/-- χ² de Pearson das contagens contra a uniforme em k posições, exato: Σ (k·Oᵢ − n)² / (k·n). -/
++def chi_squared (obs : List Nat) (k : Nat) : Frac :=
++  let n : Nat := obs.foldl (· + ·) 0
++  let d : List Int := obs.map fun o => Int.ofNat (k * o) - Int.ofNat n
++  ⟨(d.map fun x => (x * x).toNat).foldl (· + ·) 0, k * n⟩
++
++/-- Limiar de significância: χ² crítico com 4 graus de liberdade a 5 % (9,48773…), arredondado para cima. -/
++def threshold : Frac := ⟨94878, 10000⟩
++
++/-- O valor exato com os dados: χ² = 80/15 = 16/3. -/
++theorem chi_squared_M002 : chi_squared M002_freq uniform_dist = ⟨80, 15⟩ := by decide
++
++/-- A afirmação CLM-HAR-M002 (distribuição posicional de M-002 diferente da uniforme a 5 %). -/
++abbrev CLM_HAR_M002 : Prop := chi_squared M002_freq uniform_dist > threshold
++
++/-- Decidida com os dados: χ² = 16/3 ≈ 5,33 < 9,4877 — com 3 ocorrências não se distingue da uniforme. -/
++theorem clm_har_m002_a : ¬ CLM_HAR_M002 := by decide
++
++/-- O ponto exato que decide: com as mesmas proporções e 6 ocorrências (2 em P2 para 1 em P4, dobrado) o teste
++    passa (χ² = 32/3 ≈ 10,67 > 9,4877); com 3 não. -/
++theorem clm_har_m002_amostra_minima :
++    chi_squared [0, 4, 0, 2, 0] uniform_dist > threshold ∧ ¬ (chi_squared M002_freq uniform_dist > threshold) := by
++  decide
+ 
+ end S5.Core.Harappan
+--- a/s5/formal/lean/S5/Core/Harappan/M003_structural_patterns.lean
++++ b/s5/formal/lean/S5/Core/Harappan/M003_structural_patterns.lean
+@@ -11,8 +11,34 @@
+ 
+ namespace S5.Core.Harappan
+ 
+-/-- Symbol M-003 appears in specific positional contexts suggesting grammatical role -/
+-theorem clm_har_m003_a : ∃ pattern : Context → Bool, high_confidence(pattern, M003_occurrences) := by
+-  sorry  -- Proof pending
++/-! Definições de padrão posicional (antes omitidas como "stubs"), com os dados do corpus do autor:
++  harappan-00-universal, INDUS-KERNEL-CORE/analysis/position_stats.json (glifo G00x = sinal H00x, INDUS-KERNEL-CORE/glyphs/glyph_manifest.json; os 417 sinais H### seguem a numeração de Mahadevan 1977). -/
++
++/-- Contexto linguístico: a posição do sinal na inscrição (P1..P5 ↦ 0..4). -/
++abbrev Context := Fin 5
++
++/-- Ocorrências observadas de M-003 (G003/H003): 2, ambas em P3. -/
++def M003_occurrences : List Context := [2, 2]
++
++/-- Confiança alta: o padrão cobre todas as ocorrências, escolhe uma única posição, e a chance de todas as n
++    caírem numa mesma posição sob a uniforme, corrigida pela escolha da posição, 5·(1/5)ⁿ = (1/5)ⁿ⁻¹, fica abaixo de
++    5 % (5ⁿ⁻¹ > 20). -/
++def high_confidence (pattern : Context → Bool) (occ : List Context) : Prop :=
++  (occ.all pattern = true) ∧ (([0, 1, 2, 3, 4] : List Context).filter pattern).length = 1 ∧
++  5 ^ (occ.length - 1) > 20
++
++instance (pattern : Context → Bool) (occ : List Context) : Decidable (high_confidence pattern occ) := by
++  unfold high_confidence; exact inferInstance
++
++/-- A afirmação CLM-HAR-M003. -/
++abbrev CLM_HAR_M003 : Prop := ∃ pattern : Context → Bool, high_confidence pattern M003_occurrences
++
++/-- Decidida com os dados: com 2 ocorrências a chance corrigida é 1/5 = 20 % > 5 %; nenhum padrão tem confiança alta. -/
++theorem clm_har_m003_a : ¬ CLM_HAR_M003 := by
++  intro ⟨_, h⟩
++  exact absurd h.2.2 (by decide)
++
++/-- O ponto exato: com 3 ocorrências em P3 a chance é 1/25 = 4 % < 5 % e o padrão "posição 3" tem confiança alta. -/
++theorem clm_har_m003_amostra_minima : high_confidence (fun c => c == 2) [2, 2, 2] := by decide
+ 
+ end S5.Core.Harappan
+--- a/s5/sandbox/alt_logic/harappan/m002_frequency_analysis_classical.lean
++++ b/s5/sandbox/alt_logic/harappan/m002_frequency_analysis_classical.lean
+@@ -5,8 +5,39 @@
+ 
+ namespace S5.Core.Harappan
+ 
+-/-- Harappan symbol M-002 exhibits non-random frequency distribution suggesting linguistic structure -/
+-theorem clm_har_m002_b : χ²(M002_freq, uniform_dist) > threshold := by
+-  sorry  -- Proof pending
++/-! Definições estatísticas (antes omitidas como "stubs"), com os dados do corpus do autor:
++  harappan-00-universal, INDUS-KERNEL-CORE/analysis/position_stats.json (glifo G00x = sinal H00x, INDUS-KERNEL-CORE/glyphs/glyph_manifest.json; os 417 sinais H### seguem a numeração de Mahadevan 1977).
++  Posições na inscrição P1..P5. -/
++
++/-- Fração de naturais (numerador, denominador positivo). -/
++structure Frac where
++  num : Nat
++  den : Nat
++  deriving DecidableEq
++
++instance : LT Frac := ⟨fun x y => x.num * y.den < y.num * x.den⟩
++instance (x y : Frac) : Decidable (x < y) := inferInstanceAs (Decidable (x.num * y.den < y.num * x.den))
++
++/-- Frequências observadas de M-002 (G002/H002) por posição P1..P5: 3 ocorrências, 2 em P2 e 1 em P4. -/
++def M002_freq : List Nat := [0, 2, 0, 1, 0]
++
++/-- A uniforme de comparação: a mesma chance nas 5 posições (contagem esperada n/5 em cada). -/
++def uniform_dist : Nat := 5
++
++/-- χ² de Pearson das contagens contra a uniforme em k posições, exato: Σ (k·Oᵢ − n)² / (k·n). -/
++def chi_squared (obs : List Nat) (k : Nat) : Frac :=
++  let n : Nat := obs.foldl (· + ·) 0
++  let d : List Int := obs.map fun o => Int.ofNat (k * o) - Int.ofNat n
++  ⟨(d.map fun x => (x * x).toNat).foldl (· + ·) 0, k * n⟩
++
++/-- Limiar de significância: χ² crítico com 4 graus de liberdade a 5 % (9,48773…), arredondado para cima. -/
++def threshold : Frac := ⟨94878, 10000⟩
++
++/-- O valor exato com os dados: χ² = 80/15 = 16/3. -/
++theorem chi_squared_M002 : chi_squared M002_freq uniform_dist = ⟨80, 15⟩ := by decide
++
++/-- Decidida com os dados (trilha B, lógica clássica): χ² = 16/3 < 9,4877. `χ²(a, b)` não é sintaxe do Lean (² não
++    entra em identificador e `f(a, b)` aplica f a um par): a chamada é `chi_squared a b`. -/
++theorem clm_har_m002_b : ¬ (chi_squared M002_freq uniform_dist > threshold) := by decide
+ 
+ end S5.Core.Harappan
+--- a/s5/sandbox/alt_logic/harappan/m003_structural_patterns_classical.lean
++++ b/s5/sandbox/alt_logic/harappan/m003_structural_patterns_classical.lean
+@@ -5,8 +5,28 @@
+ 
+ namespace S5.Core.Harappan
+ 
+-/-- Symbol M-003 appears in specific positional contexts suggesting grammatical role -/
+-theorem clm_har_m003_b : ∃ pattern : Context → Bool, high_confidence(pattern, M003_occurrences) := by
+-  sorry  -- Proof pending
++/-! Definições de padrão posicional (antes omitidas como "stubs"), com os dados do corpus do autor:
++  harappan-00-universal, INDUS-KERNEL-CORE/analysis/position_stats.json (glifo G00x = sinal H00x, INDUS-KERNEL-CORE/glyphs/glyph_manifest.json; os 417 sinais H### seguem a numeração de Mahadevan 1977). -/
++
++/-- Contexto linguístico: a posição do sinal na inscrição (P1..P5 ↦ 0..4). -/
++abbrev Context := Fin 5
++
++/-- Ocorrências observadas de M-003 (G003/H003): 2, ambas em P3. -/
++def M003_occurrences : List Context := [2, 2]
++
++/-- Confiança alta: o padrão cobre todas as ocorrências, escolhe uma única posição, e a chance de todas as n
++    caírem numa mesma posição sob a uniforme, corrigida pela escolha da posição, 5·(1/5)ⁿ = (1/5)ⁿ⁻¹, fica abaixo de
++    5 % (5ⁿ⁻¹ > 20). -/
++def high_confidence (pattern : Context → Bool) (occ : List Context) : Prop :=
++  (occ.all pattern = true) ∧ (([0, 1, 2, 3, 4] : List Context).filter pattern).length = 1 ∧
++  5 ^ (occ.length - 1) > 20
++
++instance (pattern : Context → Bool) (occ : List Context) : Decidable (high_confidence pattern occ) := by
++  unfold high_confidence; exact inferInstance
++
++/-- Decidida com os dados (trilha B): nenhum padrão tem confiança alta com 2 ocorrências. -/
++theorem clm_har_m003_b : ¬ ∃ pattern : Context → Bool, high_confidence pattern M003_occurrences := by
++  intro ⟨_, h⟩
++  exact absurd h.2.2 (by decide)
+ 
+ end S5.Core.Harappan

@@ -19,6 +19,15 @@
    Δ : ℚ                      -- discriminant
    nonsingular : Δ ≠ 0        -- classical non-singularity condition
  
+@@ -383,7 +386,7 @@
+ 
+ -- Infinite product convergence (needed for Euler products)
+ def ClassicalInfiniteProductConvergent (u : ℕ → ℝ) : Prop :=
+-  ∃ L : ℝ, Tendsto (fun N => ∏ n in Finset.range N, u n)
++  ∃ L : ℝ, Tendsto (fun N => ∏ n ∈ Finset.range N, u n)
+                    Filter.atTop
+                    (Filter.principal {x | x = L})
+ 
 @@ -864,7 +867,7 @@
  structure ClassicalPeriodStructure where
    f : ℝ → ℝ
@@ -1142,7 +1151,7 @@
  namespace ProductTopology
  
  open Set Topology
-@@ -254,7 +256,7 @@
+@@ -253,7 +255,7 @@
      [RegularSpace α] [RegularSpace β] : RegularSpace (α × β) := by
    exact inferInstance
  

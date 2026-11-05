@@ -11,12 +11,12 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-03T08:19:01+00:00, on commit `95e7a6a7a64832ae25a2342445e429eb17a2098c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-05T15:19:16+00:00, on commit `95e7a6a7a64832ae25a2342445e429eb17a2098c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `.` | v4.19.0 | OK | 123 | 8 | 0 | — |
-| `formal/lean` | v4.8.0 | partial | 28 | 1 | 0 | 21 / 13 / 2 / 10 / 0 |
+| `formal/lean` | v4.8.0 | partial | 28 | 1 | 0 | 21 / 16 / 2 / 7 / 0 |
 | `hub/formal/lean` | v4.8.0 | OK | 23 | 0 | 0 | — |
 
 | Closed theorems in this repository | |
@@ -47,26 +47,30 @@ MVEI verification of 2026-11-03T08:19:01+00:00, on commit `95e7a6a7a64832ae25a23
 | `L_B2_Res_bound` | `formal/lean (file by file)` | conditional | `Lean.ofReduceBool` |
 | `seet_fase1_fechado` | `formal/lean (file by file)` | open | `sorryAx` |
 | `godelNum_PeqNP_value` | `formal/lean (file by file)` | conditional | `Lean.ofReduceBool` |
+| `p_eq_or_neq_np` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
+| `not_both` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 | `equiv_eq_ge` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 | `equiv_neq_lt` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 | `equiv_neq_pct` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
+| `equiv_eq_not_neq` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 | `equiv_lt_pct` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 | `cinco_equivalencias` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 | `pvsnp_nao_e_gap_assintotico` | `formal/lean (file by file)` | conditional | `p_eq_np_unknown` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 64 of them (40 closed, 22 conditional, 2 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 10 the kernel has no result:
+The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 67 of them (40 closed, 25 conditional, 2 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 7 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 10 |
+| checked file by file: the written proof does not pass the kernel | 7 |
 
 ### MVEI corrections
 
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/federated-trivalent-manifold mvei/federated-trivalent-manifold/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 3 file(s)): applies to the published sources: `git apply -p1 --directory=imports/federated-trivalent-manifold mvei/federated-trivalent-manifold/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 12 file(s)): applies to the published sources: `git apply -p1 --directory=imports/federated-trivalent-manifold mvei/federated-trivalent-manifold/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 1 file(s)): applies to the published sources: `git apply -p1 --directory=imports/federated-trivalent-manifold mvei/federated-trivalent-manifold/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
 
 ## Files in this folder
 

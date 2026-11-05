@@ -1,0 +1,246 @@
+--- a/src/lean/HEU/Core/Functional/Criticality.lean
++++ b/src/lean/HEU/Core/Functional/Criticality.lean
+@@ -59,7 +59,11 @@
+ /-- Criticality theorem skeleton -/
+ theorem criticality_dichotomy {X : Type} (F : X → Ord) (κ : Ord) (x : X) :
+     isCriticalPoint F κ x ∨ isSubcritical F κ x ∨ isSupercritical F κ x := by
+-  sorry  -- Copilot: Complete the trichotomy proof
++  have hext : ∀ a b : Ord, a.val = b.val → a = b := fun ⟨_⟩ ⟨_⟩ h => by cases h; rfl
++  rcases Nat.lt_trichotomy (F x).val κ.val with h | h | h
++  · exact Or.inr (Or.inl h)
++  · exact Or.inl (hext _ _ h)
++  · exact Or.inr (Or.inr h)
+ 
+ /-- Threshold uniqueness (up to equivalence) -/
+ axiom threshold_unique {X : Type} (F : X → Ord) (κ₁ κ₂ : Ord) :
+--- a/src/lean/HEU/Core/Functional/Functional.lean
++++ b/src/lean/HEU/Core/Functional/Functional.lean
+@@ -28,7 +28,7 @@
+   F := fun _ => Ord.zero
+   domain := HSet.empty
+   monotone := fun _ _ h => h
+-  bounded := ⟨Ord.zero, fun _ => le_refl _⟩
++  bounded := ⟨Ord.zero, fun _ => Nat.le_refl _⟩
+ 
+ /-- Composition of functionals -/
+ def Functional.comp {X Y : Type} (g : Functional Y) (f : X → Y) (dom : HSet X) : Functional X where
+--- a/src/lean/HEU/Core/Functional/LTC.lean
++++ b/src/lean/HEU/Core/Functional/LTC.lean
+@@ -97,7 +97,7 @@
+ /-- Meta-theorem: LTC extends classical logic -/
+ theorem ltc_extends_classical (P : Prop) :
+     P ∨ ¬P := by
+-  exact em P
++  exact Classical.em P
+ 
+ /-- Ordinal reflection principle -/
+ axiom ordinal_reflection {s : Statement} :
+--- a/src/lean/HEU/Core/Functional/Operators.lean
++++ b/src/lean/HEU/Core/Functional/Operators.lean
+@@ -40,12 +40,12 @@
+ /-- Scaling operator -/
+ def Operator.scale {X : Type} (O : Operator X) (c : Ord) : Operator X where
+   apply := fun x => O.apply x * c
+-  name := s!"{c} * {O.name}"
++  name := s!"{c.val} * {O.name}"
+ 
+ /-- Shift operator -/
+ def Operator.shift {X : Type} (O : Operator X) (δ : Ord) : Operator X where
+   apply := fun x => O.apply x + δ
+-  name := s!"{O.name} + {δ}"
++  name := s!"{O.name} + {δ.val}"
+ 
+ /-- Maximum operator -/
+ def Operator.max {X : Type} (O₁ O₂ : Operator X) : Operator X where
+--- a/src/lean/HEU/Core/ZF/Classical.lean
++++ b/src/lean/HEU/Core/ZF/Classical.lean
+@@ -76,6 +76,6 @@
+ 
+ /-- Decidable equality for Prop (classical) -/
+ noncomputable instance : DecidableEq Prop := fun P Q =>
+-  if h : P ↔ Q then isTrue (propext h) else isFalse (fun heq => h (heq ▸ Iff.rfl))
++  Classical.propDecidable (P = Q)
+ 
+ end HEU.Core.ZF
+--- a/src/lean/HEU/Problems/NS/F_NS.lean
++++ b/src/lean/HEU/Problems/NS/F_NS.lean
+@@ -31,7 +31,13 @@
+ 
+ /-- F_NS is bounded -/
+ theorem F_NS_bounded (u : X_NS) : F_NS u ≤ ⟨1000⟩ := by
+-  sorry  -- Copilot: expand
++  unfold F_NS
++  dsimp only
++  split
++  · exact Nat.le_refl _
++  · rename_i h
++    show 1000000 / (maxVelocity u + 1) ≤ 1000
++    exact Nat.div_le_of_le_mul (by omega)
+ 
+ /-- F_NS as a Functional structure -/
+ def F_NS_functional : Functional X_NS where
+--- a/src/lean/HEU/Problems/NS/O_NS.lean
++++ b/src/lean/HEU/Problems/NS/O_NS.lean
+@@ -32,10 +32,11 @@
+   critical := Ord.zero
+   monotone := by
+     intro u v hle hge
+-    sorry  -- Copilot: complete
++    -- Ord é ⟨ℕ⟩ e ≤ compara os val: Ord.zero.val = 0 ≤ qualquer val
++    exact Nat.zero_le _
+   nonneg := by
+     intro u
+-    sorry  -- Copilot: complete
++    exact Nat.zero_le _
+ 
+ /-- NS equilibrium condition -/
+ def NS_equilibrium : Prop :=
+@@ -49,7 +50,7 @@
+ /-- O_NS is zero for smooth fields -/
+ theorem O_NS_zero_for_smooth (u : X_NS) (h : isSmooth u) :
+     O_NS u ≥ Ord.zero := by
+-  sorry  -- Copilot: expand
++  exact Nat.zero_le _
+ 
+ /-- O_NS is negative for blowup fields -/
+ theorem O_NS_negative_for_blowup (u : X_NS) (h : hasBlowup u) :
+--- a/src/lean/HEU/Problems/PvsNP/Critical_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/Critical_PNP.lean
+@@ -37,7 +37,9 @@
+ /-- Polynomial problems are critical -/
+ theorem poly_is_critical (p : X_PNP) (h : inP p) :
+     isCriticalPoint_PNP p := by
+-  sorry  -- Copilot: expand
++  have hp : isPolynomialTime p = true := h
++  simp only [isCriticalPoint_PNP, O_PNP, F_PNP, hp, if_true]
++  rfl
+ 
+ /-- NP-complete problems determine criticality -/
+ theorem NPComplete_determines_critical :
+--- a/src/lean/HEU/Problems/PvsNP/F_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/F_PNP.lean
+@@ -38,11 +38,15 @@
+ /-- F_PNP achieves maximum for polynomial problems -/
+ theorem F_PNP_max_poly (p : X_PNP) (h : inP p) :
+     F_PNP p = ⟨1000⟩ := by
+-  sorry  -- Copilot: expand
++  have hp : isPolynomialTime p = true := h
++  simp [F_PNP, hp]
+ 
+ /-- F_PNP is bounded -/
+ theorem F_PNP_bounded (p : X_PNP) : F_PNP p ≤ ⟨1000⟩ := by
+-  sorry  -- Copilot: expand
++  unfold F_PNP
++  split
++  · exact Nat.le_refl _
++  · exact Nat.sub_le _ _
+ 
+ /-- F_PNP as a Functional structure -/
+ def F_PNP_functional : Functional X_PNP where
+--- a/src/lean/HEU/Problems/PvsNP/O_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/O_PNP.lean
+@@ -33,10 +33,11 @@
+   critical := Ord.zero
+   monotone := by
+     intro p q hle hge
+-    sorry  -- Copilot: complete
++    -- Ord é ⟨ℕ⟩ e ≤ compara os val: Ord.zero.val = 0 ≤ qualquer val
++    exact Nat.zero_le _
+   nonneg := by
+     intro p
+-    sorry  -- Copilot: complete
++    exact Nat.zero_le _
+ 
+ /-- P vs NP equilibrium condition -/
+ def PNP_equilibrium : Prop :=
+@@ -50,7 +51,9 @@
+ /-- O_PNP is zero for polynomial problems -/
+ theorem O_PNP_zero_for_P (p : X_PNP) (h : inP p) :
+     O_PNP p = Ord.zero := by
+-  sorry  -- Copilot: expand
++  have hp : isPolynomialTime p = true := h
++  simp only [O_PNP, F_PNP, hp, if_true]
++  rfl
+ 
+ /-- O_PNP is negative for exponential problems -/
+ theorem O_PNP_negative_for_exp (p : X_PNP) (h : isExponentialTime p = true) :
+--- a/src/lean/HEU/Problems/RH/F_RH.lean
++++ b/src/lean/HEU/Problems/RH/F_RH.lean
+@@ -45,7 +45,8 @@
+ 
+ /-- F_RH is bounded -/
+ theorem F_RH_bounded (x : X_RH) : F_RH x ≤ ⟨1000⟩ := by
+-  sorry  -- Copilot: expand boundedness proof
++  unfold F_RH
++  exact Nat.sub_le _ _
+ 
+ /-- F_RH as a Functional structure -/
+ def F_RH_functional : Functional X_RH where
+--- a/src/lean/HEU/Problems/RH/Lemmas_RH.lean
++++ b/src/lean/HEU/Problems/RH/Lemmas_RH.lean
+@@ -41,12 +41,14 @@
+ theorem O_RH_preserves_order (x y : X_RH) :
+     F_RH x ≤ F_RH y → O_RH x ≤ O_RH y := by
+   intro h
+-  sorry  -- Copilot: expand
++  have h' : (F_RH x).val ≤ (F_RH y).val := h
++  show (F_RH x).val - κ_RH.val ≤ (F_RH y).val - κ_RH.val
++  exact Nat.sub_le_sub_right h' _
+ 
+ /-- Lemma: Equilibrium is decidable (in principle) -/
+-theorem equilibrium_decidable :
+-    Decidable RH_equilibrium := by
+-  sorry  -- Copilot: expand decidability
++noncomputable def equilibrium_decidable :
++    Decidable RH_equilibrium :=
++  Classical.propDecidable _
+ 
+ /-- Lemma: Critical points form a dense set on critical line -/
+ axiom criticalPoints_dense :
+@@ -68,7 +70,7 @@
+ theorem UBO_nonneg_under_RH :
+     RH_statement → ∀ x : X_RH, O_RH x ≥ Ord.zero := by
+   intro hRH x
+-  sorry  -- Copilot: expand
++  exact Nat.zero_le _
+ 
+ /-- Lemma: Contrapositive of RH equivalence -/
+ theorem RH_contrapositive :
+--- a/src/lean/HEU/Problems/RH/O_RH.lean
++++ b/src/lean/HEU/Problems/RH/O_RH.lean
+@@ -33,10 +33,11 @@
+   critical := Ord.zero
+   monotone := by
+     intro x y hle hge
+-    sorry  -- Copilot: complete
++    -- Ord é ⟨ℕ⟩ e ≤ compara os val: Ord.zero.val = 0 ≤ qualquer val
++    exact Nat.zero_le _
+   nonneg := by
+     intro x
+-    sorry  -- Copilot: complete
++    exact Nat.zero_le _
+ 
+ /-- O_RH equilibrium condition -/
+ def RH_equilibrium : Prop :=
+@@ -51,7 +52,9 @@
+ theorem O_RH_zero_on_critical (x : X_RH)
+     (h : ∀ n, onCriticalLine (x.seq n) = true) :
+     O_RH x = Ord.zero := by
+-  sorry  -- Copilot: expand
++  have hb : (F_RH x).val ≤ 1000 := by unfold F_RH; exact Nat.sub_le _ _
++  show (⟨(F_RH x).val - 1000⟩ : Ord) = ⟨0⟩
++  rw [Nat.sub_eq_zero_of_le hb]
+ 
+ /-- O_RH is negative off critical line -/
+ theorem O_RH_negative_off_critical (x : X_RH)
+@@ -61,7 +64,9 @@
+ 
+ /-- O_RH monotonicity -/
+ theorem O_RH_monotone (x y : X_RH) (h : F_RH x ≤ F_RH y) : O_RH x ≤ O_RH y := by
+-  sorry  -- Copilot: expand
++  have h' : (F_RH x).val ≤ (F_RH y).val := h
++  show (F_RH x).val - κ_RH.val ≤ (F_RH y).val - κ_RH.val
++  exact Nat.sub_le_sub_right h' _
+ 
+ /-- Total balance over a set of zeros -/
+ def totalBalance (zeros : List X_RH) : Ord :=

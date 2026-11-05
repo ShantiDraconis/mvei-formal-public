@@ -1,0 +1,78 @@
+--- a/formal/ATKTerminalStaging.lean
++++ b/formal/ATKTerminalStaging.lean
+@@ -1,14 +1,69 @@
++import Mathlib.Computability.TMComputable
++import Mathlib.Computability.Encoding
++import Mathlib.Algebra.Polynomial.Eval.Defs
++
+ /-!
+-Terminal closure staging. This file is intentionally NOT a certificate.
+-Replace ExactEndpoint with the repository's actual typed mathematical endpoint
+-before promotion. No oracle or axiom is introduced here.
++Terminal closure staging. The endpoint is now the repository's typed mathematical endpoint: `OfficialPneqNP`
++(final-proof/endpoints.json, cadeia `OfficialPneqNP → FinalExternalCertificate → FINAL_ROOT`), with P and NP defined
++in Mathlib's Turing-machine model (TM2, time polynomial in the length of the encoded input). No oracle or axiom is
++introduced here; the theorem itself is the Millennium problem and stays open.
+ -/
+ namespace ATKTerminalStaging
+ 
+--- This interface isolates the final open obligation without claiming it is solved.
+--- A concrete endpoint must be substituted after auditing the existing definitions.
+-variable (ExactEndpoint : Prop)
++open Computability
++
++/-- Palavras binárias codificadas por elas mesmas. -/
++def finEncodingListBool : FinEncoding (List Bool) where
++  Γ := Bool
++  encode := id
++  decode := some
++  decode_encode _ := rfl
++  ΓFin := Bool.fintype
++
++/-- Decodifica `w ++ [separador] ++ c` (bits como `some b`, separador `none`). -/
++def decodePar : List (Option Bool) → Option (List Bool × List Bool)
++  | [] => none
++  | none :: r => (r.mapM id).map fun c => ([], c)
++  | some b :: r => (decodePar r).map fun p => (b :: p.1, p.2)
++
++theorem mapM_id_map_some (c : List Bool) : (c.map some).mapM id = some c := by
++  induction c with
++  | nil => rfl
++  | cons b c ih => simp_all [List.mapM_cons]
++
++theorem decodePar_encode (w c : List Bool) :
++    decodePar (w.map some ++ none :: c.map some) = some (w, c) := by
++  induction w with
++  | nil =>
++    show (((c.map some).mapM id).map fun c => (([] : List Bool), c)) = some ([], c)
++    rw [mapM_id_map_some]
++    rfl
++  | cons b w ih => simp [decodePar, ih]
++
++/-- Pares de palavras (entrada, certificado) num alfabeto finito: bits e um separador. -/
++def finEncodingPar : FinEncoding (List Bool × List Bool) where
++  Γ := Option Bool
++  encode p := p.1.map some ++ none :: p.2.map some
++  decode := decodePar
++  decode_encode p := decodePar_encode p.1 p.2
++  ΓFin := inferInstance
++
++/-- P oficial: L é decidida em tempo polinomial por uma máquina de Turing (TM2 do Mathlib). -/
++def OfficialP (L : List Bool → Prop) : Prop :=
++  ∃ f : List Bool → Bool, (∀ w, L w ↔ f w = true) ∧
++    Nonempty (Turing.TM2ComputableInPolyTime finEncodingListBool finEncodingBoolBool f)
++
++/-- NP oficial (verificador): um polinômio p e um verificador V de tempo polinomial com
++    L w ↔ ∃ c, |c| ≤ p(|w|) ∧ V(w, c). -/
++def OfficialNP (L : List Bool → Prop) : Prop :=
++  ∃ (p : Polynomial ℕ) (V : List Bool × List Bool → Bool),
++    (∀ w, L w ↔ ∃ c : List Bool, c.length ≤ p.eval w.length ∧ V (w, c) = true) ∧
++    Nonempty (Turing.TM2ComputableInPolyTime finEncodingPar finEncodingBoolBool V)
++
++/-- O enunciado final do repositório (`OfficialPneqNP`): as classes P e NP oficiais são diferentes. -/
++def ExactEndpoint : Prop := ¬ ∀ L : List Bool → Prop, OfficialP L ↔ OfficialNP L
+ 
++/-- O fechamento terminal é o problema do milênio P vs NP (Clay): aberto, sem oráculo nem axioma. -/
+ theorem terminal_closure : ExactEndpoint := by
+   sorry
+ 

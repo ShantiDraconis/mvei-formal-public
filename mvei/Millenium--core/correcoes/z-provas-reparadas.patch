@@ -1,0 +1,137 @@
+--- a/lean/Axioms.lean
++++ b/lean/Axioms.lean
+@@ -74,7 +74,16 @@
+     Witnessed by the R₁/R₂ cases in Term.rewriteStep. -/
+ theorem A7_classical_addI (a b : Rat) :
+     (Term.binOp .addI (.const a) (.const b)).rewriteStep State.empty
+-      = .rewritten (.const (a + b)) := rfl
++      = .rewritten (.const (a + b)) := by
++  rcases eq_or_ne b 0 with rfl | hb
++  · rw [add_zero]
++    obtain ⟨(_ | m) | m, _ | _ | e, h3, h4⟩ := a <;> first | rfl | exact absurd rfl h3
++  rcases eq_or_ne a 0 with rfl | ha
++  · rw [zero_add]
++    obtain ⟨(_ | n) | n, _ | _ | d, h1, h2⟩ := b <;>
++      first | rfl | exact absurd rfl hb | exact absurd rfl h1
++  obtain ⟨(_ | n) | n, _ | _ | d, h1, h2⟩ := b <;> obtain ⟨(_ | m) | m, _ | _ | e, h3, h4⟩ := a <;>
++    first | rfl | exact absurd rfl hb | exact absurd rfl ha | exact absurd rfl h1 | exact absurd rfl h3
+ 
+ theorem A7_classical_subI (a b : Rat) :
+     (Term.binOp .subI (.const a) (.const b)).rewriteStep State.empty
+@@ -88,12 +97,13 @@
+ theorem A7_classical_divI (n d : Rat) (hd : d ≠ 0) :
+     (Term.binOp .divI (.const n) (.const d)).rewriteStep State.empty
+       = .rewritten (.const (n / d)) := by
+-  simp [Term.rewriteStep, hd]
++  obtain ⟨(_ | k) | k, _ | _ | l, h1, h2⟩ := d <;> obtain ⟨(_ | m) | m, _ | _ | e, h3, h4⟩ := n <;>
++    first | rfl | exact absurd rfl hd | exact absurd rfl h1 | exact absurd rfl h3
+ 
+ theorem A7_zero_divI (n : Rat) :
+     (Term.binOp .divI (.const n) (.const 0)).rewriteStep State.empty
+       = .rewritten (.indet .base) := by
+-  simp [Term.rewriteStep]
++  obtain ⟨(_ | m) | m, _ | _ | e, h3, h4⟩ := n <;> first | rfl | exact absurd rfl h3
+ 
+ -- ============================================================
+ -- Block D — Collapse Behaviour
+--- a/lean/Core.lean
++++ b/lean/Core.lean
+@@ -152,40 +152,32 @@
+ theorem t4_classical_stability (t : Term) (σ : State)
+     (h : t.isClassical = true) :
+     ∃ n d, collapse t σ = CollapseResult.value n d := by
+-  simp [Term.isClassical, Term.support] at h
+   induction t with
+   | lit n d =>
+       exact ⟨n, d, rfl⟩
+   | indet i =>
+-      simp [Term.support] at h
++      cases i
++      simp [Term.isClassical, Term.support] at h
+   | add t₁ t₂ ih₁ ih₂ =>
+-      simp [Term.support, List.isEmpty_append] at h
+-      obtain ⟨h₁, h₂⟩ := h
+-      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h₁
+-      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h₂
++      simp only [Term.isClassical, Term.support, List.isEmpty_iff, List.append_eq_nil_iff] at h ih₁ ih₂
++      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h.1
++      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h.2
+       simp [collapse, hc₁, hc₂]
+-      exact ⟨_, _, rfl⟩
+   | sub t₁ t₂ ih₁ ih₂ =>
+-      simp [Term.support, List.isEmpty_append] at h
+-      obtain ⟨h₁, h₂⟩ := h
+-      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h₁
+-      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h₂
++      simp only [Term.isClassical, Term.support, List.isEmpty_iff, List.append_eq_nil_iff] at h ih₁ ih₂
++      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h.1
++      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h.2
+       simp [collapse, hc₁, hc₂]
+-      exact ⟨_, _, rfl⟩
+   | mul t₁ t₂ ih₁ ih₂ =>
+-      simp [Term.support, List.isEmpty_append] at h
+-      obtain ⟨h₁, h₂⟩ := h
+-      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h₁
+-      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h₂
++      simp only [Term.isClassical, Term.support, List.isEmpty_iff, List.append_eq_nil_iff] at h ih₁ ih₂
++      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h.1
++      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h.2
+       simp [collapse, hc₁, hc₂]
+-      exact ⟨_, _, rfl⟩
+   | div t₁ t₂ ih₁ ih₂ =>
+-      simp [Term.support, List.isEmpty_append] at h
+-      obtain ⟨h₁, h₂⟩ := h
+-      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h₁
+-      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h₂
++      simp only [Term.isClassical, Term.support, List.isEmpty_iff, List.append_eq_nil_iff] at h ih₁ ih₂
++      obtain ⟨n₁, d₁, hc₁⟩ := ih₁ h.1
++      obtain ⟨n₂, d₂, hc₂⟩ := ih₂ h.2
+       simp [collapse, hc₁, hc₂]
+-      exact ⟨_, _, rfl⟩
+ 
+ /-- A5. Non-contradiction: the base indeterminate is not the literal 0 or 1.
+     This is an axiom; we state it as a definition-level separation. -/
+--- a/lean/Semantics.lean
++++ b/lean/Semantics.lean
+@@ -139,9 +139,9 @@
+   | var _ => simp [Term.isGround] at ht
+   | indet _ => simp [Term.isGround] at ht
+   | binOp op t₁ t₂ ih₁ ih₂ =>
+-    simp [Term.isGround] at ht
+-    obtain ⟨h₁, h₂⟩ := Bool.and_eq_true.mp ht
+-    simp [Term.eval, ih₁ h₁ v₁ v₂, ih₂ h₂ v₁ v₂]
++    simp only [Term.isGround, Bool.and_eq_true] at ht
++    obtain ⟨h₁, h₂⟩ := ht
++    simp [Term.eval, ih₁ h₁, ih₂ h₂]
+ 
+ /-- C0.T1 (stated): Conservativity of T_I over classical ground terms.
+     For ground classical terms t₁, t₂: if T_I proves t₁ = t₂, then this
+@@ -155,8 +155,8 @@
+     (t₁.eval (fun _ => 0) = t₂.eval (fun _ => 0)) →
+     (∀ v : Valuation, t₁.eval v = t₂.eval v) := by
+   intro h v
+-  rw [ground_classical_eval t₁ h₁ (fun _ => 0) v,
+-      ground_classical_eval t₂ h₂ (fun _ => 0) v]
++  rw [← ground_classical_eval t₁ h₁ (fun _ => 0) v,
++      ← ground_classical_eval t₂ h₂ (fun _ => 0) v]
+   exact h
+ 
+ -- ============================================================
+@@ -217,7 +217,16 @@
+ theorem C2_collapse_completeness_var (x : String) (v : Rat) :
+     let σ := State.empty.addConstraint (.exact x v)
+     (Term.var x).normalize σ 1000 = .const v := by
+-  simp [Term.normalize, Term.rewriteStep, State.addConstraint, State.exactValue]
++  intro σ
++  have hσ : σ.exactValue x = some v := by
++    simp [σ, State.exactValue, State.addConstraint, State.empty]
++  have h1 : (Term.var x).rewriteStep σ = .rewritten (.const v) := by
++    show (match σ.exactValue x with
++      | some v => RewriteResult.rewritten (Term.const v)
++      | none => RewriteResult.normal) = _
++    rw [hσ]
++  rw [Term.normalize, h1]
++  all_goals first | rfl | (intro _ _ _ h; cases h)
+ 
+ /-- C2.T1 for classical binary ops: if both operands collapse, the composite collapses. -/
+ theorem C2_binOp_collapses (op : ExtOp) (t₁ t₂ : Term) (σ : State) (v₁ v₂ : Rat) :
