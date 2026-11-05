@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/consolidar-tese-mishkan-iii-core` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 5 — closed 3, conditional 0, open 0, proof error 2, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `32a159b7c22abf93fc096fbaf4283637918745ec4dc9117538b53084c5305ba7`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_consolidar-tese-mishkan-iii-core/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `9891020ebb7041b726ce04513415397797326f5dda9213c8d2559b2f60c18648`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/mishkan-iii-core/copilot_consolidar-tese-mishkan-iii-core/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

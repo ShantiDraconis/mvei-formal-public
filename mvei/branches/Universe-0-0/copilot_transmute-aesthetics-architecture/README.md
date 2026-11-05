@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/transmute-aesthetics-architecture` of the 
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 4 — closed 2, conditional 0, open 1, proof error 1, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `069bdf7caf5dd50224c0abc694cf8b836e8c2a63b4e0e9bf3d90863102999aed`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_transmute-aesthetics-architecture/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `f9c8f8c746c9d3dabf90f2837f21e0c5b461dea8d0e593c3088639a42ebd4b06`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_transmute-aesthetics-architecture/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

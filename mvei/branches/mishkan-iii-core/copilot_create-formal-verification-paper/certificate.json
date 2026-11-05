@@ -1,0 +1,105 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/mishkan-iii-core",
+ "branch": "copilot/create-formal-verification-paper",
+ "branch_state": "parada",
+ "head_commit": "47937be66be39083938da6785e7a58f5703e150b",
+ "head_commit_date": "2026-01-14T21:39:01+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "47937be66be39083938da6785e7a58f5703e150b",
+   "date": "2026-01-14T21:39:01+00:00",
+   "subject": "Add technical notes clarifying formal verification approach"
+  },
+  {
+   "commit": "ab18d4b3963957c5ce34ba432d2b73471a5ed3a4",
+   "date": "2026-01-14T21:36:56+00:00",
+   "subject": "Add complete package manifest and finalize documentation"
+  },
+  {
+   "commit": "1b8684a5ff4b5f77f09de1d74ee65522e384d837",
+   "date": "2026-01-14T21:35:30+00:00",
+   "subject": "Add complete Lean 4 formal verification structure for Clay Institute submission"
+  },
+  {
+   "commit": "346ecabdab4539ba874f86b90fb84dc7e9718e59",
+   "date": "2026-01-14T21:27:44+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-05T15:19:16+00:00",
+  "lean": [
+   "leanprover/lean4:v4.3.0"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "Mishkan.Proofs.acacia_quantum_stability",
+   "file": "Mishkan/Proofs/AcaciaCore.lean",
+   "line": 29,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (acacia : AcaciaBiotech), acacia.dmt_active = true ∧ acacia.neural_interface = Interface_I ∧ acacia.quantum_enabled = true ∧ acacia.room_temperature = true → ∃ (state : QuantumState), state.coherent = true ∧ state.temperature ≥ 293.0 ∧ state.temperature ≤ 303.0 ∧ state.stable = true"
+  },
+  {
+   "name": "Mishkan.Proofs.millennium_problems_unified_resolution",
+   "file": "Mishkan/Proofs/Unified.lean",
+   "line": 57,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (p : MillenniumProblem), p = MillenniumProblem.PvsNP ∨ p = MillenniumProblem.RiemannHypothesis ∨ p = MillenniumProblem.NavierStokes → (solves \" \" p).solved = true"
+  },
+  {
+   "name": "Mishkan.Proofs.navier_stokes_sustainable_solution",
+   "file": "Mishkan/Proofs/NavierStokes.lean",
+   "line": 44,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (config : SustainableFluidConfig), config.harappa_optimized = true ∧ config.energy_conserving = true ∧ config.temple_aligned = true → ∀ (initial : FluidState), ∃ (solution : Float → FluidState), (∀ t : Float, t ≥ 0.0 → is_smooth (solution t)) ∧ solution 0.0 = initial"
+  },
+  {
+   "name": "Mishkan.Proofs.p_equals_np_solution",
+   "file": "Mishkan/Proofs/PvsNP.lean",
+   "line": 15,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (p : Problem), p.complexity = Complexity.NP → ∃ (oracle : DaatOracle) (state : BioHardwareState), oracle_recognition Interface_I oracle = true ∧ state.under_acacia = true ∧ state.interface_active = true ∧ ∃ (p' : Problem), p'.name = p.name ∧ p'.complexity = Complexity.P"
+  },
+  {
+   "name": "Mishkan.Proofs.riemann_hypothesis_harappan_proof",
+   "file": "Mishkan/Proofs/RiemannHypothesis.lean",
+   "line": 34,
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (s : ComplexNum), is_zero s ∧ ¬(is_trivial s) → s.re = 1.0 / 2.0"
+  }
+ ],
+ "closed": 1,
+ "files_sha256": {
+  "Mishkan/InterfaceI.lean": "4b617f13236b76cf6ea6221f1599aec9fc5490b2f4128b90d8a1d913f0cb2f5f",
+  "Mishkan/Proofs/AcaciaCore.lean": "2ae18978eb56544681b1bbeefefb35744666dc7ec32f61f5d71bf4bbfee9e4c8",
+  "Mishkan/Proofs/NavierStokes.lean": "770e88a3476a041cbdebec8f876f51bdcff65a18765433d45dad664cc8d1a536",
+  "Mishkan/Proofs/PvsNP.lean": "22ecc8ce1c577df16cded3372f2abc62442601778e38cfe785997f8557e32c33",
+  "Mishkan/Proofs/RiemannHypothesis.lean": "2919aa28749b4fdfd8bf6872be4f029b0bb1ee74b1933297017bbfac36f351c8",
+  "Mishkan/Proofs/Unified.lean": "ca3f9ebc97a73caaa0f609472b84d93ffbfc46221b167df714fa3e0aaaec039c",
+  "lakefile.lean": "3cf11a82cbf10b374ee60067091978ee11714f3d198628f419c192a622975a14",
+  "lean-toolchain": "a9f5595ac2ea7bacd4ca4573162569a778a02212bf914ed492513921a91d77ba"
+ },
+ "published_at": "2026-11-05T17:43:16Z",
+ "certificate_sha256": "e26a4593b5e04221409d4fb3a9a31eac8e2a4f88d12ee377fa1a62b032d0f542"
+}

@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/add-initial-repository-structure` of the private repository `ShantiDraconis/Heu-7-universal-framework`, commit `81b71df03c53f6a2b8bcfcb1a87330ac9f014e49` (2025-12-02T08:42:59+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 75 — closed 31, conditional 0, open 17, proof error 0, not reached 27, no result 0.
+* Theorems only on branches, in this branch: 75 — closed 31, conditional 0, open 16, proof error 0, not reached 28, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `06a9781a6f27d8149ab68196e773bb5b030a27448dc777bc2758688686c2a1e2`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-initial-repository-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `44c64e453eec0048d8a1e7f280e3112587539176e723017af47f7382db9384ba`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-initial-repository-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -54,7 +54,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `HEU.Core.strictly_critical_imp_critical` | `src/lean/HEU/Core/CriticalLevel.lean`:35 | fechado |
 | `HEU.Hodge.DeepAnalysis.Hodge_iff_HEU` | `src/lean/HEU/Hodge/DeepAnalysis.lean`:111 | aberto-sorry |
 | `HEU.Hodge.DeepAnalysis.hodge_decomposition` | `src/lean/HEU/Hodge/DeepAnalysis.lean`:40 | fechado |
-| `HEU.Hodge.DeepAnalysis.hodge_symmetry` | `src/lean/HEU/Hodge/DeepAnalysis.lean`:45 | aberto-sorry |
+| `HEU.Hodge.DeepAnalysis.hodge_symmetry` | `src/lean/HEU/Hodge/DeepAnalysis.lean`:45 | nao_alcancado |
 | `HEU.Hodge.DeepAnalysis.lefschetz_1_1` | `src/lean/HEU/Hodge/DeepAnalysis.lean`:116 | fechado |
 | `HEU.Hodge.HEU_Hodge_holds` | `src/lean/HEU/Hodge/Equivalence_Hodge.lean`:19 | nao_alcancado |
 | `HEU.Hodge.Hodge_HEU_Equivalence` | `src/lean/HEU/Hodge/Equivalence_Hodge.lean`:24 | aberto-sorry |

@@ -1,0 +1,91 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/Oral-substrate-br",
+ "branch": "copilot/introduce-operational-axiom",
+ "branch_state": "parada",
+ "head_commit": "bfaed7e59f5f14b982a6d6b2c42852aed99d0ab8",
+ "head_commit_date": "2026-02-08T01:54:48+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "bfaed7e59f5f14b982a6d6b2c42852aed99d0ab8",
+   "date": "2026-02-08T01:54:48+00:00",
+   "subject": "Add QUICKSTART.md for rapid onboarding"
+  },
+  {
+   "commit": "abb96ebc790f36be5b073fdf6f03137ba85f2da2",
+   "date": "2026-02-08T01:54:26+00:00",
+   "subject": "Add QUICKSTART.md, SUMMARY.md, and verify complete framework functionality"
+  },
+  {
+   "commit": "d200d9cc39d2e095b7a90a4b24c6118ab4884d77",
+   "date": "2026-02-08T01:52:25+00:00",
+   "subject": "Add mobile app, comprehensive documentation, Docker setup, and testing"
+  },
+  {
+   "commit": "ea3d91a8bc75c457c77196683ce99f7543f70991",
+   "date": "2026-02-08T01:48:04+00:00",
+   "subject": "Implement core framework: Python library, formal proofs, web interface, and calculator"
+  },
+  {
+   "commit": "6f7ad33df4cddfa7f8fe08fe22b120dad2a2c620",
+   "date": "2026-02-08T01:37:57+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-05T15:19:16+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "navier_stokes_spectral_closure",
+   "file": "formal/lean/OperationalClosure.lean",
+   "line": 97,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (u : ℝ × ℝ → ℝ) (E : ℝ → ℝ) (λ : ℝ), (∀ t, E t ≤ E 0 * Real.exp (-λ * t)) → ∃ u_smooth : ℝ × ℝ → ℝ, True"
+  },
+  {
+   "name": "operational_completeness",
+   "file": "formal/lean/OperationalClosure.lean",
+   "line": 51,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": "{α : Type*} (sys : OperationalSystem α) : frequency_normalized sys → has_closure sys → ∃ β : ℝ, is_power_law sys.frequency β"
+  },
+  {
+   "name": "p_neq_np_structural",
+   "file": "formal/lean/OperationalClosure.lean",
+   "line": 64,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (P NP : Set (ℕ → Bool)), (∀ L ∈ P, ∃ sys : OperationalSystem ℕ, has_closure sys) → (∃ L ∈ NP, ∀ sys : OperationalSystem ℕ, ¬has_closure sys) → P ≠ NP"
+  },
+  {
+   "name": "riemann_structural",
+   "file": "formal/lean/OperationalClosure.lean",
+   "line": 73,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (ζ : ℂ → ℂ) (zero : ℂ), (∀ s : ℂ, ζ s = ∑' n : ℕ+, (n : ℂ) ^ (-s)) → ζ zero = 0 → zero.re ≠ 1 ∧ zero.re ≠ 0 → zero.re = 1/2"
+  }
+ ],
+ "closed": 2,
+ "files_sha256": {
+  "formal/lean/OperationalClosure.lean": "9b66292d72adf15f0eaa1af1b35a7deb5c0c980dfaa03f06b78e874101c3ace7"
+ },
+ "published_at": "2026-11-05T17:43:10Z",
+ "certificate_sha256": "dec18b43f8f64e6df5586bda6acd6ed8d95e33f0fb47710a4d47a3cd6d729877"
+}

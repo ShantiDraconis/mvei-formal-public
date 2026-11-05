@@ -1,0 +1,85 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/mishkan-iii-core",
+ "branch": "copilot/add-genesis-date-entries",
+ "branch_state": "parada",
+ "head_commit": "71d1a52969a1d57d863d32ecf1543b483090c3ad",
+ "head_commit_date": "2026-01-14T21:34:02+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "71d1a52969a1d57d863d32ecf1543b483090c3ad",
+   "date": "2026-01-14T21:34:02+00:00",
+   "subject": "Complete Lean proofs and add detailed axiom documentation"
+  },
+  {
+   "commit": "3f887ffb0b4b1be4d8d320ac641e2b0effce87a4",
+   "date": "2026-01-14T21:31:51+00:00",
+   "subject": "Add chronological foundation with formal proof of anteriority"
+  },
+  {
+   "commit": "5c02bba60e00f96ebad33e8d760aadc9734ac7bb",
+   "date": "2026-01-14T21:28:07+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-05T15:19:16+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "date_lt_by_computation",
+   "file": "core/history/FIRST_DATES.lean",
+   "line": 95,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "(d1 d2 : Date) (h : d1.year < d2.year ∨ (d1.year = d2.year ∧ d1.month < d2.month) ∨ (d1.year = d2.year ∧ d1.month = d2.month ∧ d1.day < d2.day)) : d1 < d2"
+  },
+  {
+   "name": "inception_precedes_formalization",
+   "file": "core/history/FIRST_DATES.lean",
+   "line": 110,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": inception_date < date_lean_core"
+  },
+  {
+   "name": "inception_precedes_interface_constant",
+   "file": "core/history/FIRST_DATES.lean",
+   "line": 102,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": inception_date < date_yeshu_ident"
+  },
+  {
+   "name": "inception_precedes_resolution",
+   "file": "core/history/FIRST_DATES.lean",
+   "line": 117,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": inception_date < date_final_sovereign"
+  },
+  {
+   "name": "proof_of_priority",
+   "file": "core/history/FIRST_DATES.lean",
+   "line": 63,
+   "state": "erro",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ (claimant : Entity), claimant ≠ \" \" → timestamp_of_solution claimant > inception_date"
+  }
+ ],
+ "closed": 4,
+ "files_sha256": {
+  "core/history/FIRST_DATES.lean": "0f25ddbaabb200b658b35c7a54496f2c4306f4db987346968f1927b68cd57282"
+ },
+ "published_at": "2026-11-05T17:43:16Z",
+ "certificate_sha256": "69720d1cc2afbca793773d9aabbc8f519168d8577aae357d36c2afae04c11f6d"
+}

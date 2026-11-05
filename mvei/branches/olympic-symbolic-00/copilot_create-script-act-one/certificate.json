@@ -23,9 +23,9 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-11-03T08:19:01+00:00",
+  "generated_at": "2026-11-05T15:19:16+00:00",
   "lean": [
-   "padrão do elan"
+   "leanprover/lean4:v4.19.0"
   ],
   "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
   "standard_axioms": [
@@ -47,20 +47,16 @@
    "name": "case_0_48_demonstrates_protocol_error",
    "file": "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean",
    "line": 139,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
-   "statement": ": ∃ (error : Prop), error"
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": "∃ error, error"
   },
   {
    "name": "case_0_48_protocol_error",
    "file": "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean",
    "line": 141,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "fechado",
+   "axioms_beyond_standard": [],
    "statement": ": ∃ (protocol_error : Prop), protocol_error"
   },
   {
@@ -69,7 +65,7 @@
    "line": 101,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(e_sensor : Evidence) (e_crypto : Evidence) (h_conflict : match e_sensor, e_crypto with | Evidence.measurement _ _, Evidence.git_commit _ _ => True | _, _ => False) : ∃ (precedence : Prop), precedence"
+   "statement": "∀ (e_sensor e_crypto : Evidence),   (match e_sensor, e_crypto with     | Evidence.measurement value protocol, Evidence.git_commit hash timestamp => True     | x, x_1 => False) →     ∃ precedence, precedence"
   },
   {
    "name": "impossibility_lemma",
@@ -101,7 +97,7 @@
    "line": 179,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(protocol_has_systematic_flaw : Prop) (false_positives_documented : Prop) (harm_caused : Prop) : ∃ (reform_required : Prop), reform_required"
+   "statement": "Prop → Prop → Prop → ∃ reform_required, reform_required"
   },
   {
    "name": "protocol_systematic_flaw",
@@ -109,7 +105,7 @@
    "line": 150,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(p : Protocol) (h_cannot_distinguish : ∀ (acetone ethanol : Float), acetone > 0 → ethanol = 0 → ∃ (false_positive : Prop), false_positive) : ∃ (design_flaw : Prop), design_flaw"
+   "statement": "Protocol →   (∀ (acetone ethanol : Float), acetone > 0 → ethanol = 0 → ∃ false_positive, false_positive) →     ∃ design_flaw, design_flaw"
   },
   {
    "name": "self_proving",
@@ -117,7 +113,7 @@
    "line": 163,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∃ (proof : Evidence), match proof with | Evidence.formal_proof verified _ => verified = true | _ => False"
+   "statement": "∃ proof,   match proof with   | Evidence.formal_proof verified complexity => verified = true   | x => False"
   },
   {
    "name": "self_verification",
@@ -130,11 +126,11 @@
    "statement": ": ∃ (proof : FormalProof), verifiable proof ∧ complex proof"
   }
  ],
- "closed": 8,
+ "closed": 10,
  "files_sha256": {
   "03_FORMAL_PROOF/Lean/CognitiveCapacity.lean": "950f2c3f8c3215cf99ddc40b4cbbc1b87bd527fc106aae8c755e7fc3b462d16b",
   "03_FORMAL_PROOF/Lean/ImpossibilityLemma.lean": "ed9ac15a95e0370b993f62826a43e18b93b0bd7e41efb8d2358412ce8e6ef9a1"
  },
- "published_at": "2026-11-03T11:28:12Z",
- "certificate_sha256": "838d84ce46e485d59b783123c9dfcab8e2df393cfd4dca0a251672a5313bd4b4"
+ "published_at": "2026-11-05T17:43:10Z",
+ "certificate_sha256": "cda61fd2ea6cb176f7fca7bb079a7de369620e5ba4d36537bc7316120b64b3b6"
 }

@@ -1,0 +1,159 @@
+{
+ "type": "MVEI kernel certificate for a branch",
+ "source_repository": "ShantiDraconis/olympic-symbolic-00",
+ "branch": "copilot/add-proof-of-prime-percentage",
+ "branch_state": "parada",
+ "head_commit": "62896aeadb29bcdcf3e0f928870ec6f25c42c573",
+ "head_commit_date": "2026-01-22T00:10:25+00:00",
+ "history_not_on_default_branch": [
+  {
+   "commit": "62896aeadb29bcdcf3e0f928870ec6f25c42c573",
+   "date": "2026-01-22T00:10:25+00:00",
+   "subject": "Add final sealing and integration documents"
+  },
+  {
+   "commit": "5a877af6b5cd6d18f25a2b0828c28fe06762598c",
+   "date": "2026-01-22T00:07:12+00:00",
+   "subject": "Add complete formal proof framework for 97% Primality Theorem"
+  },
+  {
+   "commit": "674d9f06283840c64eae7f429c110383365687bd",
+   "date": "2026-01-21T23:54:59+00:00",
+   "subject": "Initial plan"
+  }
+ ],
+ "verification": {
+  "generated_at": "2026-11-05T15:19:16+00:00",
+  "lean": [
+   "padrão do elan"
+  ],
+  "checker": "Lean 4 kernel; axioms read with Lean.collectAxioms (#print axioms)",
+  "standard_axioms": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "theorems_only_on_branches": [
+  {
+   "name": "RiemannSpectacle.i_squared",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 59,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": Complex.I ^ 2 = -1"
+  },
+  {
+   "name": "RiemannSpectacle.indeterminate_forms_connection",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 78,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": ∀ f g : ℝ → ℝ, (∀ ε > 0, ∃ δ > 0, ∀ x, |x| < δ → |f x| < ε ∧ |g x| < ε) → True"
+  },
+  {
+   "name": "RiemannSpectacle.ninety_seven_is_largest_prime_to_100",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 36,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ p : ℕ, Nat.Prime p → p ≤ 100 → p ≤ 97"
+  },
+  {
+   "name": "RiemannSpectacle.ninety_seven_is_primal",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 47,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": IsPrimalCompletion 97 100"
+  },
+  {
+   "name": "RiemannSpectacle.ninety_seven_is_prime",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 30,
+   "state": "fechado",
+   "axioms_beyond_standard": [],
+   "statement": ": Nat.Prime 97"
+  },
+  {
+   "name": "RiemannSpectacle.primality_signature_theorem",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 89,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (proof_completion : ℕ), IsPrimalCompletion proof_completion 100 → proof_completion = 97"
+  },
+  {
+   "name": "RiemannSpectacle.prime_infinity_critical_line_connection",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 102,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": Set.Infinite Primes ∧ (∀ s : ℂ, s.re > 1 → riemannZeta s = ∏' (p : Primes), (1 - (p.val : ℂ)^(-s))⁻¹) ∧ (∀ z : ℂ, riemannZeta z = 0 → z.re < 0 ∨ OnCriticalLine z)"
+  },
+  {
+   "name": "RiemannSpectacle.prime_reciprocal_sum_diverges",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 25,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ¬ Summable (fun p : Primes => (1 : ℝ) / p.val)"
+  },
+  {
+   "name": "RiemannSpectacle.primes_infinite",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 21,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": Set.Infinite Primes"
+  },
+  {
+   "name": "RiemannSpectacle.proof_at_ninety_seven_percent",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 126,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∃ (state : ProofState), state.completion = 97"
+  },
+  {
+   "name": "RiemannSpectacle.proof_subject_isomorphism",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 146,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (state : ProofState), state.completion = 97 → Nat.Prime state.completion ∧ (∀ p ∈ Primes, Nat.Prime p) ∧ (Nat.Prime state.completion ↔ Set.Infinite Primes)"
+  },
+  {
+   "name": "RiemannSpectacle.remaining_three_percent_is_recognition",
+   "file": "formal-proofs/lean/RiemannSpectacle.lean",
+   "line": 131,
+   "state": "aberto-sorry",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
+   "statement": ": ∀ (state : ProofState), state.completion = 97 → (100 - state.completion = 3) ∧ Nat.Prime 3"
+  }
+ ],
+ "closed": 3,
+ "files_sha256": {
+  "formal-proofs/lean/RiemannSpectacle.lean": "f6ca2f738a4573e37151ebfd05581c3389701dac80c43d331e8a60a2600ba7ed"
+ },
+ "published_at": "2026-11-05T17:43:10Z",
+ "certificate_sha256": "a781f565dd8d0b8e05a1f174a35d9266b8cdc3797337e9b045bb617954abbfbf"
+}

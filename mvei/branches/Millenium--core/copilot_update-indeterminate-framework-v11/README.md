@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/update-indeterminate-framework-v11` of the private repository `ShantiDraconis/Millenium--core`, commit `5367a36b3912ecd77c6615c7b9995a2fb75952c7` (2026-04-13T03:14:47-03:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: incorporada (already in the default branch).
-* Theorems only on branches, in this branch: 58 — closed 6, conditional 0, open 2, proof error 8, not reached 42, no result 0.
+* Theorems only on branches, in this branch: 58 — closed 7, conditional 0, open 2, proof error 8, not reached 41, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `af50bcd56228de2ae20928afd6185291417277e7718261a7627ca84131893d54`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_update-indeterminate-framework-v11/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `3150d7b49163cafd1183f1d109973c0b41492e5c61f22cd16599cd4dc46959c7`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_update-indeterminate-framework-v11/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -20,7 +20,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `TIF.A3_not_classical_real` | `Core/Collapse.lean`:713 | nao_alcancado |
 | `TIF.A4_not_classical_complex` | `Core/Collapse.lean`:723 | nao_alcancado |
 | `TIF.A5_distinct_from_classical` | `Core/Collapse.lean`:728 | nao_alcancado |
-| `TIF.A6_extended_operators` | `Core/Collapse.lean`:733 | nao_alcancado |
+| `TIF.A6_extended_operators` | `Core/Collapse.lean`:733 | fechado |
 | `TIF.A7_extension_coincides_classical` | `Core/Collapse.lean`:742 | nao_alcancado |
 | `TIF.A9_unique_resolution_implies_collapse` | `Core/Collapse.lean`:760 | nao_alcancado |
 | `TIF.Collapse_unique` | `Core/Collapse.lean`:850 | nao_alcancado |

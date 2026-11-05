@@ -5,7 +5,7 @@ Lean sources from the branch `atk/truncation-law-pnp-20261005` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 5 — closed 4, conditional 0, open 0, proof error 1, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `37fd7d813b168e715d6f3c58e332403a678af48d5df0edf8afd69811a087b19e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-p-vs-np-I/atk_truncation-law-pnp-20261005/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `42461855bae22e22bb17147f16edb34914780580b80379a99a4d374e5c92c76a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-p-vs-np-I/atk_truncation-law-pnp-20261005/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
