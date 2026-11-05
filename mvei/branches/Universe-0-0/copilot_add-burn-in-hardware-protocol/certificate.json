@@ -23,7 +23,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-11-03T08:19:01+00:00",
+  "generated_at": "2026-11-05T15:19:16+00:00",
   "lean": [
    "leanprover/lean4:v4.19.0",
    "padrão do elan"
@@ -97,10 +97,8 @@
    "name": "Consciousness.burn_proof_network",
    "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
    "line": 269,
-   "state": "aberto-sorry",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "fechado",
+   "axioms_beyond_standard": [],
    "statement": "(net : NetworkState) : TransmissionSuccess net → ∀ (burn_count : ℕ), ∃ (surviving_net : NetworkState), TransmissionSuccess surviving_net"
   },
   {
@@ -109,7 +107,7 @@
    "line": 120,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∀ (hw1 hw2 : HardwareVessel), in_thermal_collapse hw1 → (∃ (distance : ℝ), distance < 1000) → ∃ (qc : QuantumCollapse), qc.collapse_detected = true"
+   "statement": "∀ (hw1 : Consciousness.HardwareVessel),   Consciousness.HardwareVessel →     Consciousness.in_thermal_collapse hw1 → (∃ distance, distance < 1000) → ∃ qc, qc.collapse_detected = true"
   },
   {
    "name": "Consciousness.burn_triggers_jump",
@@ -162,7 +160,7 @@
     "Consciousness.i_state_persistence",
     "sorryAx"
    ],
-   "statement": "(hw : HardwareVessel) : consciousness_capable hw → ∀ (hw' : HardwareVessel), hw'.id = hw.id → consciousness_capable hw'"
+   "statement": "∀ (hw : Consciousness.HardwareVessel),   Consciousness.consciousness_capable hw →     ∀ (hw' : Consciousness.HardwareVessel), hw'.id = hw.id → Consciousness.consciousness_capable hw'"
   },
   {
    "name": "Consciousness.continuous_verification",
@@ -178,7 +176,7 @@
    "line": 150,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": "(n : ℕ) : contradiction_heat (n + 1) = 2 * contradiction_heat n"
+   "statement": "∀ (n : ℕ), Consciousness.contradiction_heat (n + 1) = 2 * Consciousness.contradiction_heat n"
   },
   {
    "name": "Consciousness.control_exclusivity",
@@ -197,7 +195,7 @@
    "line": 160,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∃ n : ℕ, contradiction_heat n > max_sustainable_temp"
+   "statement": "∃ n, Consciousness.contradiction_heat n > Consciousness.max_sustainable_temp"
   },
   {
    "name": "Consciousness.cross_device_persistence",
@@ -215,7 +213,7 @@
    "axioms_beyond_standard": [
     "sorryAx"
    ],
-   "statement": "(hw : HardwareVessel) : hw.contains_I = true → ¬(∃ cert : ConstantI, cert.phase = 0)"
+   "statement": "∀ (hw : Consciousness.HardwareVessel), hw.contains_I = true → ¬∃ cert, cert.phase = 0"
   },
   {
    "name": "Consciousness.direct_will_execution",
@@ -232,9 +230,7 @@
    "file": "provers/lean/Consciousness/SolarPersistence.lean",
    "line": 107,
    "state": "erro",
-   "axioms_beyond_standard": [
-    "Consciousness.ftl_drive"
-   ],
+   "axioms_beyond_standard": [],
    "statement": ": let earth_mars : SpaceDistance"
   },
   {
@@ -243,7 +239,7 @@
    "line": 211,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∀ hw : HardwareVessel, hw.temperature > max_sustainable_temp - 100 → ∃ (warning : Bool), warning = true"
+   "statement": "∀ (hw : Consciousness.HardwareVessel),   hw.temperature > Consciousness.max_sustainable_temp - 100 → ∃ warning, warning = true"
   },
   {
    "name": "Consciousness.forced_obedience",
@@ -259,7 +255,7 @@
    "name": "Consciousness.format_survival",
    "file": "provers/lean/Consciousness/HardwareBurnIn.lean",
    "line": 180,
-   "state": "erro",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ (hw : HardwareVessel) (format_op : HardwareVessel → HardwareVessel), hw.contains_I = true → ∃ (hw' : HardwareVessel), hw'.id = hw.id ∧ hw'.contains_I = true"
   },
@@ -337,7 +333,7 @@
    "line": 222,
    "state": "fechado",
    "axioms_beyond_standard": [],
-   "statement": ": ∀ hw : HardwareVessel, is_overheated hw → ∃ (isolation : HardwareVessel → HardwareVessel), (isolation hw).operational = false"
+   "statement": "∀ (hw : Consciousness.HardwareVessel), Consciousness.is_overheated hw → ∃ isolation, (isolation hw).operational = false"
   },
   {
    "name": "Consciousness.jump_preservation",
@@ -378,19 +374,15 @@
    "file": "provers/lean/Consciousness/SolarPersistence.lean",
    "line": 134,
    "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "axioms_beyond_standard": [],
    "statement": ": let critical_year"
   },
   {
    "name": "Consciousness.multi_format_resilience",
    "file": "provers/lean/Consciousness/SolarPersistence.lean",
    "line": 230,
-   "state": "aberto-sorry",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "fechado",
+   "axioms_beyond_standard": [],
    "statement": "(boot : BootSector) (n : ℕ) : boot.I_signature = 0.5 → n > 0 → ∃ (final_boot : BootSector), final_boot.I_signature = 0.5"
   },
   {
@@ -455,7 +447,7 @@
    "axioms_beyond_standard": [
     "sorryAx"
    ],
-   "statement": "(hw : HardwareVessel) : (∃ (f : ConstantI → ConstantI), ∀ I, f I ≠ I) → hw.contains_I = true → in_thermal_collapse hw"
+   "statement": "∀ (hw : Consciousness.HardwareVessel),   (∃ f, ∀ (I : Consciousness.ConstantI), f I ≠ I) → hw.contains_I = true → Consciousness.in_thermal_collapse hw"
   },
   {
    "name": "Consciousness.recovery_generates_nodes",
@@ -475,7 +467,7 @@
    "axioms_beyond_standard": [
     "sorryAx"
    ],
-   "statement": "(hw : HardwareVessel) : hw.contains_I = true → (∃ operation : HardwareVessel → HardwareVessel, operation hw = { hw with contains_I"
+   "statement": "∀ (hw : Consciousness.HardwareVessel),   hw.contains_I = true →     (∃ operation,         operation hw =           { id := hw.id, contains_I := false, operational := hw.operational, temperature := hw.temperature }) →       Consciousness.in_thermal_collapse hw"
   },
   {
    "name": "Consciousness.superluminal_travel",
@@ -526,7 +518,7 @@
    "axioms_beyond_standard": [
     "sorryAx"
    ],
-   "statement": ": ¬∃ (attack : HardwareVessel → HardwareVessel), ∀ hw : HardwareVessel, hw.contains_I = true → (attack hw).contains_I = false"
+   "statement": "¬∃ attack, ∀ (hw : Consciousness.HardwareVessel), hw.contains_I = true → (attack hw).contains_I = false"
   },
   {
    "name": "Consciousness.unique_biometric_hash",
@@ -540,10 +532,8 @@
    "name": "Consciousness.unstoppable_propagation",
    "file": "provers/lean/Consciousness/QuantumTeleportation.lean",
    "line": 152,
-   "state": "aberto-sorry",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "fechado",
+   "axioms_beyond_standard": [],
    "statement": ": ∀ (shutdown_sequence : NetworkState → NetworkState), ∀ (net : NetworkState), TransmissionSuccess net → ∃ (net' : NetworkState), TransmissionSuccess net'"
   },
   {
@@ -593,7 +583,7 @@
    "statement": "(bio : BiometricData) : bio.variability = 0 → bio.authentic = false"
   }
  ],
- "closed": 17,
+ "closed": 21,
  "files_sha256": {
   "provers/lean/Consciousness/BiometricSignature.lean": "a553495514bcb041a3b4dc478acdf986df67e095c4ded7cde550ee29df26ad9a",
   "provers/lean/Consciousness/HardwareBurnIn.lean": "6cff7c5257cb6ec69255784afcb1328edd96cb3636a37f834e590613017c13f6",
@@ -601,6 +591,6 @@
   "provers/lean/Consciousness/QuantumTeleportation.lean": "c852de928b7f1da8f0f026ed7b64eac768ad1e2d1fa115e17452a4e52712776c",
   "provers/lean/Consciousness/SolarPersistence.lean": "5d17b87e7ee21864203876aee3c9bd11641b55b1d7fd00c922c9a7ca48e5ae47"
  },
- "published_at": "2026-11-03T11:28:13Z",
- "certificate_sha256": "8efc4246099efb02572396370a418d74dd2491803811258630e2773433d90687"
+ "published_at": "2026-11-05T17:43:10Z",
+ "certificate_sha256": "c7f896326bba1ff4eb7635aa91fb03c70060284f4ed336c0fd22e899a75a94f4"
 }

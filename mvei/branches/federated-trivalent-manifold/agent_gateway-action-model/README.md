@@ -5,7 +5,7 @@ Lean sources from the branch `agent/gateway-action-model` of the private reposit
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 20 — closed 20, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `a0b8f77dfd0e5992d963fea43ca3eb125b354820dc147f54517fa0a9002c0379`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/agent_gateway-action-model/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `673ef2bdb3097c3ac5cc831bfbd172d930b04f4297007fa7aa0adbac90a50722`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/agent_gateway-action-model/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

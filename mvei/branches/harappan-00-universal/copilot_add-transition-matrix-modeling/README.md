@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-transition-matrix-modeling` of the pri
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 12 — closed 7, conditional 0, open 1, proof error 4, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `f4e646031b265d73fb020ed3b3a70eb805e8fe29820308bd3c3629c36e800ce2`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_add-transition-matrix-modeling/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `3b72aaaeda039c6fefff0de5ac9ae5956117f58c1d475285bb7fb35bf14ff9a5`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_add-transition-matrix-modeling/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

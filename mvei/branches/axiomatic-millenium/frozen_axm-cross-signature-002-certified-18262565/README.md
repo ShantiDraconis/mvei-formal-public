@@ -5,7 +5,7 @@ Lean sources from the branch `frozen/axm-cross-signature-002-certified-18262565`
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 6 — closed 6, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 21 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `e6058bf623748e686d8d9bbf03c6f42dd2305a834b7a90757fd883f7d37a7354`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/frozen_axm-cross-signature-002-certified-18262565/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `95ac8f8616cd691d1949a58b657c68e6ad1114d9849b647ef968d2163ed8673e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/axiomatic-millenium/frozen_axm-cross-signature-002-certified-18262565/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

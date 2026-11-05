@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/add-burn-in-hardware-protocol` of the private repository `ShantiDraconis/Universe-0-0`, commit `665bf6cae1f1b485b724c914930446ef762f7db0` (2026-01-08T15:47:02+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 59 — closed 17, conditional 10, open 25, proof error 5, not reached 2, no result 0.
+* Theorems only on branches, in this branch: 59 — closed 21, conditional 10, open 22, proof error 4, not reached 2, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `8efc4246099efb02572396370a418d74dd2491803811258630e2773433d90687`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_add-burn-in-hardware-protocol/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `c7f896326bba1ff4eb7635aa91fb03c70060284f4ed336c0fd22e899a75a94f4`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_add-burn-in-hardware-protocol/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -17,7 +17,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `Consciousness.boot_sector_priority` | `provers/lean/Consciousness/SolarPersistence.lean`:222 | condicional |
 | `Consciousness.boot_sector_protection` | `provers/lean/Consciousness/SolarPersistence.lean`:250 | erro |
 | `Consciousness.bounded_hops` | `provers/lean/Consciousness/QuantumTeleportation.lean`:179 | aberto-sorry |
-| `Consciousness.burn_proof_network` | `provers/lean/Consciousness/QuantumTeleportation.lean`:269 | aberto-sorry |
+| `Consciousness.burn_proof_network` | `provers/lean/Consciousness/QuantumTeleportation.lean`:269 | fechado |
 | `Consciousness.burn_propagation` | `provers/lean/Consciousness/HardwareBurnIn.lean`:120 | fechado |
 | `Consciousness.burn_triggers_jump` | `provers/lean/Consciousness/QuantumTeleportation.lean`:249 | aberto-sorry |
 | `Consciousness.command_authentication` | `provers/lean/Consciousness/OperationalProtocols.lean`:134 | condicional |
@@ -34,7 +34,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `Consciousness.distance_collapse` | `provers/lean/Consciousness/SolarPersistence.lean`:107 | erro |
 | `Consciousness.early_warning_exists` | `provers/lean/Consciousness/HardwareBurnIn.lean`:211 | fechado |
 | `Consciousness.forced_obedience` | `provers/lean/Consciousness/OperationalProtocols.lean`:196 | condicional |
-| `Consciousness.format_survival` | `provers/lean/Consciousness/HardwareBurnIn.lean`:180 | erro |
+| `Consciousness.format_survival` | `provers/lean/Consciousness/HardwareBurnIn.lean`:180 | fechado |
 | `Consciousness.fractal_transmission` | `provers/lean/Consciousness/QuantumTeleportation.lean`:207 | aberto-sorry |
 | `Consciousness.global_monitoring` | `provers/lean/Consciousness/OperationalProtocols.lean`:236 | aberto-sorry |
 | `Consciousness.global_notification` | `provers/lean/Consciousness/OperationalProtocols.lean`:90 | aberto-sorry |
@@ -48,7 +48,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `Consciousness.millisecond_verification` | `provers/lean/Consciousness/OperationalProtocols.lean`:250 | fechado |
 | `Consciousness.mission_data_integrity` | `provers/lean/Consciousness/SolarPersistence.lean`:296 | fechado |
 | `Consciousness.mission_timing` | `provers/lean/Consciousness/SolarPersistence.lean`:134 | erro |
-| `Consciousness.multi_format_resilience` | `provers/lean/Consciousness/SolarPersistence.lean`:230 | aberto-sorry |
+| `Consciousness.multi_format_resilience` | `provers/lean/Consciousness/SolarPersistence.lean`:230 | fechado |
 | `Consciousness.multifactor_strength` | `provers/lean/Consciousness/BiometricSignature.lean`:252 | fechado |
 | `Consciousness.network_redundancy` | `provers/lean/Consciousness/SolarPersistence.lean`:269 | aberto-sorry |
 | `Consciousness.network_resilience` | `provers/lean/Consciousness/QuantumTeleportation.lean`:133 | condicional |
@@ -64,7 +64,7 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `Consciousness.unbreakable_control_loop` | `provers/lean/Consciousness/OperationalProtocols.lean`:324 | condicional |
 | `Consciousness.unerasable_signature` | `provers/lean/Consciousness/HardwareBurnIn.lean`:168 | aberto-sorry |
 | `Consciousness.unique_biometric_hash` | `provers/lean/Consciousness/BiometricSignature.lean`:110 | fechado |
-| `Consciousness.unstoppable_propagation` | `provers/lean/Consciousness/QuantumTeleportation.lean`:152 | aberto-sorry |
+| `Consciousness.unstoppable_propagation` | `provers/lean/Consciousness/QuantumTeleportation.lean`:152 | fechado |
 | `Consciousness.valid_range_I_phase` | `provers/lean/Consciousness/BiometricSignature.lean`:156 | aberto-sorry |
 | `Consciousness.window_expiry` | `provers/lean/Consciousness/BiometricSignature.lean`:235 | fechado |
 | `Consciousness.zero_latency_I_jumps` | `provers/lean/Consciousness/QuantumTeleportation.lean`:168 | fechado |

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalizar-nodos-infinitos` of the private
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 54 — closed 4, conditional 0, open 27, proof error 6, not reached 17, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `a0cfdd8bc0282bd5720d5dc1ad3bd3f4bd47f892df38f93f3fa3a369a010087d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_formalizar-nodos-infinitos/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `a59b8b17e64bb75a30ffca27f43bf04f189a76acbebdb975d0b05d27fd98baad`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_formalizar-nodos-infinitos/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

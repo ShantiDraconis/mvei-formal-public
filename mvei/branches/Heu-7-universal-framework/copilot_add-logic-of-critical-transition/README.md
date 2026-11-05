@@ -3,9 +3,9 @@
 Lean sources from the branch `copilot/add-logic-of-critical-transition` of the private repository `ShantiDraconis/Heu-7-universal-framework`, commit `c081074f1582d6e35a6a1ef3b262cc8e3737b29a` (2025-12-02T08:33:29+00:00), that hold theorems found only on branches (no default branch of any repository has a theorem with the same name). Published here: the files with the theorems the kernel closed, the local files they import and the Lake files of their project.
 
 * Branch state: parada (not in the default branch).
-* Theorems only on branches, in this branch: 11 — closed 3, conditional 0, open 0, proof error 8, not reached 0, no result 0.
+* Theorems only on branches, in this branch: 11 — closed 7, conditional 0, open 0, proof error 3, not reached 1, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `59c7b6c49b35627a504c3aadaaddc8c7e84c2f109bd32d2c4a7f2185a3c2b6e8`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-logic-of-critical-transition/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `d20e4459d02c6b50986296c594b223f2a8b3887b1d0b923e071a386ca726774f`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-logic-of-critical-transition/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
@@ -16,9 +16,9 @@ Closed means the kernel accepted the proof and it depends only on `propext`, `Cl
 | `class1681_count` | `universal-operator/universal-criticality.lean`:211 | fechado |
 | `classes1681_correct` | `universal-operator/universal-criticality.lean`:204 | fechado |
 | `critical_transition_universal` | `universal-operator/UBO.lean`:206 | erro |
-| `no_forbidden_iff_resolved` | `universal-operator/universal-criticality.lean`:57 | erro |
-| `state_ordering_valid` | `universal-operator/universal-criticality.lean`:38 | erro |
-| `state_trichotomy` | `universal-operator/universal-criticality.lean`:103 | erro |
+| `no_forbidden_iff_resolved` | `universal-operator/universal-criticality.lean`:57 | fechado |
+| `state_ordering_valid` | `universal-operator/universal-criticality.lean`:38 | fechado |
+| `state_trichotomy` | `universal-operator/universal-criticality.lean`:103 | nao_alcancado |
 | `universal_balance_resolved` | `universal-operator/UBO.lean`:148 | erro |
-| `universal_critical_theorem` | `universal-operator/universal-criticality.lean`:85 | erro |
-| `zero_div_zero_is_equilibrium` | `universal-operator/universal-criticality.lean`:179 | erro |
+| `universal_critical_theorem` | `universal-operator/universal-criticality.lean`:85 | fechado |
+| `zero_div_zero_is_equilibrium` | `universal-operator/universal-criticality.lean`:179 | fechado |

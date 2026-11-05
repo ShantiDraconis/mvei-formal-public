@@ -28,7 +28,7 @@
   }
  ],
  "verification": {
-  "generated_at": "2026-11-03T08:19:01+00:00",
+  "generated_at": "2026-11-05T15:19:16+00:00",
   "lean": [
    "padrão do elan"
   ],
@@ -88,17 +88,15 @@
    "name": "no_forbidden_iff_resolved",
    "file": "universal-operator/universal-criticality.lean",
    "line": 57,
-   "state": "erro",
-   "axioms_beyond_standard": [
-    "sorryAx"
-   ],
+   "state": "fechado",
+   "axioms_beyond_standard": [],
    "statement": "{α : Type*} [Nonempty α] (op : UBO α) : (¬ ∃ x : α, op.operator x < 0) ↔ (∀ x : α, op.operator x ≥ 0)"
   },
   {
    "name": "state_ordering_valid",
    "file": "universal-operator/universal-criticality.lean",
    "line": 38,
-   "state": "erro",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": stateToOrdinal CriticalState.collapse < stateToOrdinal CriticalState.equilibrium ∧ stateToOrdinal CriticalState.equilibrium < stateToOrdinal CriticalState.supercritical"
   },
@@ -106,8 +104,10 @@
    "name": "state_trichotomy",
    "file": "universal-operator/universal-criticality.lean",
    "line": 103,
-   "state": "erro",
-   "axioms_beyond_standard": [],
+   "state": "nao_alcancado",
+   "axioms_beyond_standard": [
+    "sorryAx"
+   ],
    "statement": "{α : Type*} (op : UBO α) (x : α) : (op.operator x < 0 ∧ classifyState (op.operator x) = CriticalState.collapse) ∨ (op.operator x = 0 ∧ classifyState (op.operator x) = CriticalState.equilibrium) ∨ (op.operator x > 0 ∧ classifyState (op.operator x) = CriticalState.supercritical)"
   },
   {
@@ -124,7 +124,7 @@
    "name": "universal_critical_theorem",
    "file": "universal-operator/universal-criticality.lean",
    "line": 85,
-   "state": "erro",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": ∀ (α : Type*) [Nonempty α] (op : UBO α), (∀ x, op.operator x ≥ 0) ∨ (∃ x, op.operator x < 0)"
   },
@@ -132,15 +132,15 @@
    "name": "zero_div_zero_is_equilibrium",
    "file": "universal-operator/universal-criticality.lean",
    "line": 179,
-   "state": "erro",
+   "state": "fechado",
    "axioms_beyond_standard": [],
    "statement": ": classifyState 0 = CriticalState.equilibrium"
   }
  ],
- "closed": 3,
+ "closed": 7,
  "files_sha256": {
   "universal-operator/universal-criticality.lean": "a6a88ca324cedec943feb7e97febdae8038a23f376f5c90c13eb5d68d2e4c362"
  },
- "published_at": "2026-11-03T11:28:00Z",
- "certificate_sha256": "59c7b6c49b35627a504c3aadaaddc8c7e84c2f109bd32d2c4a7f2185a3c2b6e8"
+ "published_at": "2026-11-05T17:43:00Z",
+ "certificate_sha256": "d20e4459d02c6b50986296c594b223f2a8b3887b1d0b923e071a386ca726774f"
 }
