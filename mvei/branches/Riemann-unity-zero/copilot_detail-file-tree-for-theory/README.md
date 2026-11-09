@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/detail-file-tree-for-theory` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 44 — closed 16, conditional 0, open 9, proof error 1, not reached 18, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `350d76dfaa46ac7073412d0df3d2c1b8e933b22c76d98b6c474460a636b4f842`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-unity-zero/copilot_detail-file-tree-for-theory/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `58a6792ce75f67d228ea73fc4610155ab6c1a0b3080c00ffa97b090ec9d0080f`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-unity-zero/copilot_detail-file-tree-for-theory/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

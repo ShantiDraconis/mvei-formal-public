@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/implement-certificacao-protocolo-unico` of
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 37 — closed 13, conditional 0, open 11, proof error 13, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `e29ede94266bee0733d10a59f453ab3b3c068a1740666657892d584a885f843a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_implement-certificacao-protocolo-unico/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `048717d92480fa9ffd1932a6bb29569789e7c116b97c4c96cbf60e5ccbe1026e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_implement-certificacao-protocolo-unico/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

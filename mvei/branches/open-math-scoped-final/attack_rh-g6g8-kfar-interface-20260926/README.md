@@ -5,7 +5,7 @@ Lean sources from the branch `attack/rh-g6g8-kfar-interface-20260926` of the pri
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 77 — closed 51, conditional 0, open 16, proof error 1, not reached 9, no result 0.
 * History: 99 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `995d1b01ecf563033d28e67248a70b6b8d29065639232580a94a6a0f75d7f698`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/open-math-scoped-final/attack_rh-g6g8-kfar-interface-20260926/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `8c6aa1edcd5c813ee48443476000f324dc1aafbf7fe400984d73258c1382d582`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/open-math-scoped-final/attack_rh-g6g8-kfar-interface-20260926/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

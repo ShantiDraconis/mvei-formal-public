@@ -40,7 +40,6 @@ Each row is a branch of a private repository of ShantiDraconis with theorems tha
 | harappan-00-universal | `copilot/test-everything-harappan-symbols` | 2025-11-30 | parada | 1 / 5 | 8 | 6 | [certificate](../mvei/branches/harappan-00-universal/copilot_test-everything-harappan-symbols/README.md) |
 | Heu-7-universal-framework | `copilot/add-initial-repository-structure` | 2025-12-02 | parada | 31 / 75 | 26 | 6 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_add-initial-repository-structure/README.md) |
 | Heu-7-universal-framework | `copilot/create-scientific-repository` | 2025-12-02 | parada | 20 / 48 | 21 | 6 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_create-scientific-repository/README.md) |
-| Heu-7-universal-framework | `copilot/add-logic-of-critical-transition` | 2025-12-02 | parada | 7 / 11 | 1 | 4 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_add-logic-of-critical-transition/README.md) |
 | Heu-7-universal-framework | `copilot/create-unified-repository-structure` | 2025-12-02 | parada | 6 / 33 | 11 | 4 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_create-unified-repository-structure/README.md) |
 | i-constant-core | `work/t-state-calculus-v0` | 2026-09-20 | parada | 54 / 54 | 18 | 47 | [certificate](../mvei/branches/i-constant-core/work_t-state-calculus-v0/README.md) |
 | i-constant-core | `atk/anti-circular-open-math-cert` | 2026-09-27 | parada | 1 / 2 | 1 | 3 | [certificate](../mvei/branches/i-constant-core/atk_anti-circular-open-math-cert/README.md) |
@@ -88,16 +87,9 @@ Each row is a branch of a private repository of ShantiDraconis with theorems tha
 | Universe-0-0 | `copilot/add-epistemological-operating-system` | 2025-12-31 | parada | 18 / 28 | 10 | 4 | [certificate](../mvei/branches/Universe-0-0/copilot_add-epistemological-operating-system/README.md) |
 | Universe-0-0 | `copilot/implement-certificacao-protocolo-unico` | 2025-12-27 | parada | 13 / 37 | 3 | 5 | [certificate](../mvei/branches/Universe-0-0/copilot_implement-certificacao-protocolo-unico/README.md) |
 | Universe-0-0 | `copilot/add-formalization-framework` | 2025-12-31 | parada | 6 / 15 | 9 | 5 | [certificate](../mvei/branches/Universe-0-0/copilot_add-formalization-framework/README.md) |
-| Universe-0-0 | `copilot/define-error-as-structure` | 2025-12-31 | parada | 5 / 12 | 1 | 5 | [certificate](../mvei/branches/Universe-0-0/copilot_define-error-as-structure/README.md) |
 | Universe-0-0 | `copilot/formalizar-nodos-infinitos` | 2026-01-08 | parada | 4 / 54 | 5 | 4 | [certificate](../mvei/branches/Universe-0-0/copilot_formalizar-nodos-infinitos/README.md) |
 | Universe-0-0 | `copilot/refute-logical-limits` | 2025-12-31 | parada | 4 / 37 | 3 | 1 | [certificate](../mvei/branches/Universe-0-0/copilot_refute-logical-limits/README.md) |
 | Universe-0-0 | `copilot/formalizacao-prova-unicidade` | 2026-01-06 | parada | 4 / 26 | 1 | 5 | [certificate](../mvei/branches/Universe-0-0/copilot_formalizacao-prova-unicidade/README.md) |
 | Universe-0-0 | `formal/i-boundary-provenance` | 2026-09-25 | parada | 4 / 15 | 1 | 2 | [certificate](../mvei/branches/Universe-0-0/formal_i-boundary-provenance/README.md) |
-| Universe-0-0 | `copilot/fix-identity-ontological-issues` | 2025-12-31 | parada | 3 / 8 | 1 | 5 | [certificate](../mvei/branches/Universe-0-0/copilot_fix-identity-ontological-issues/README.md) |
-| Universe-0-0 | `copilot/fix-regime-de-igualdade` | 2025-12-31 | parada | 3 / 6 | 1 | 4 | [certificate](../mvei/branches/Universe-0-0/copilot_fix-regime-de-igualdade/README.md) |
-| Universe-0-0 | `copilot/fix-ambiguous-regime-change` | 2025-12-31 | parada | 2 / 7 | 1 | 3 | [certificate](../mvei/branches/Universe-0-0/copilot_fix-ambiguous-regime-change/README.md) |
-| Universe-0-0 | `copilot/transmute-aesthetics-architecture` | 2026-01-06 | parada | 2 / 4 | 1 | 4 | [certificate](../mvei/branches/Universe-0-0/copilot_transmute-aesthetics-architecture/README.md) |
-| Universe-0-0 | `copilot/integrate-retaliation-protocol` | 2026-01-09 | incorporada | 2 / 2 | 1 | 0 | [certificate](../mvei/branches/Universe-0-0/copilot_integrate-retaliation-protocol/README.md) |
-| Universe-0-0 | `copilot/add-burn-in-hardware-system-again` | 2026-01-09 | parada | 1 / 10 | 1 | 2 | [certificate](../mvei/branches/Universe-0-0/copilot_add-burn-in-hardware-system-again/README.md) |
 | zero-engine-00 | `copilot/add-sovereignty-deployment-script-again` | 2026-01-04 | parada | 8 / 11 | 3 | 4 | [certificate](../mvei/branches/zero-engine-00/copilot_add-sovereignty-deployment-script-again/README.md) |
 | zero-engine-00 | `copilot/add-sovereignty-deployment-script` | 2026-01-04 | parada | 2 / 2 | 1 | 5 | [certificate](../mvei/branches/zero-engine-00/copilot_add-sovereignty-deployment-script/README.md) |

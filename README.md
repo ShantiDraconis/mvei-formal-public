@@ -85,5 +85,5 @@ Kernel-checked theories that MVEI wrote around repositories published here. They
 <!-- mvei-branches:start -->
 ## Theorems found only on branches
 
-116 branch(es) with 981 theorems that exist only on branches and that the Lean kernel closed, each with a certificate (commit, date, history, SHA-256): [`branches/README.md`](branches/README.md).
+108 branch(es) with 956 theorems that exist only on branches and that the Lean kernel closed, each with a certificate (commit, date, history, SHA-256): [`branches/README.md`](branches/README.md).
 <!-- mvei-branches:end -->

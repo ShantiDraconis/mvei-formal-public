@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/refute-logical-limits` of the private repo
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 37 — closed 4, conditional 0, open 1, proof error 0, not reached 32, no result 0.
 * History: 1 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `002584106e7767ff6c90b468b595fbe80c769c58c23f5301f8ec2f9f7c7d32ad`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_refute-logical-limits/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `a8ca2b7bf02d7c2c6d9c1427f11c11148068c8a6e504344714e38d75e274bc52`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_refute-logical-limits/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

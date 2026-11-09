@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-epistemological-system` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 65 — closed 29, conditional 0, open 5, proof error 1, not reached 30, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `61d1312641eed8953c6d70bbf677658b7635b60f56574377d7e20f7f4bd93512`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_create-epistemological-system/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `2ebf37548dc7229dcbf394b2182fb3595901f9ecaa850934d9bf99bd26c53ea7`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_create-epistemological-system/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

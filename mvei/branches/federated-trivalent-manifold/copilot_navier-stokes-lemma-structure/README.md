@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/navier-stokes-lemma-structure` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 2 — closed 2, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 10 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `1f0f112f79d69fc83acd16119630d94f683e4116bb5fc19fc1daf7b0bcf5ffb2`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_navier-stokes-lemma-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `49bc77298ee1f458d68a5546cf951189ecaa1d4732f9994fef088d6a9e88d28d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_navier-stokes-lemma-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

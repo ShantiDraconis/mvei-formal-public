@@ -5,7 +5,7 @@ Lean sources from the branch `atk-hodge-structural-core` of the private reposito
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 1 — closed 1, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `a43358704df85dfed77ab14497a2dd1b2fad13272cf1531117cd2e9137200414`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-hodge/atk-hodge-structural-core/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `d43465ebf7275d8d8a58de9114788f57caebdb5a1310052cfd0d6268419e6c7e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-hodge/atk-hodge-structural-core/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-refutation-scheme-riemann` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 9 — closed 2, conditional 1, open 6, proof error 0, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `e3d5040a90a59dfe73f77a73790bcdb586188a426c8e524ed8de05d720e7761f`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millennium-rh-energy-torus-quantum/copilot_add-refutation-scheme-riemann/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `1f8e6e805795701c5ac54f07a01374fcfbb5309d2c4af7196a2e0f60c5eec9a4`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millennium-rh-energy-torus-quantum/copilot_add-refutation-scheme-riemann/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

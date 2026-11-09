@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-initial-repository-structure` of the p
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 75 — closed 31, conditional 0, open 16, proof error 0, not reached 28, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `44c64e453eec0048d8a1e7f280e3112587539176e723017af47f7382db9384ba`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-initial-repository-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `a7ec887d7e10707075e9f8035038c9462087b1dfda0ea73a8d9658cd50bf770b`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_add-initial-repository-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
