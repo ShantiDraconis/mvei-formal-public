@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T15:19:16+00:00",
+ "generated_at": "2026-11-06T00:22:08+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,8 +16,8 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (588ms) | ✔ [41/42] Built Cache.Main:c.o (640ms) | ✔ [42/42] Built cache:exe (687ms)",
-   "sorry_warnings": 6,
+   "build_error": "o download do Mathlib falhou: ✔ [40/42] Built Cache.Main (918ms) | ✔ [41/42] Built Cache.Main:c.o (1.1s) | ✔ [42/42] Built cache:exe (838ms)",
+   "sorry_warnings": 5,
    "reconstructed": true,
    "bridges": [
     {
@@ -64,6 +64,51 @@
      "name": "Collapse.SymbolicZeta.zetaI",
      "module": "MillenniumRiemann.CollapseComplex",
      "statement": "Collapse.CollapseComplex → Collapse.CollapseComplex"
+    },
+    {
+     "name": "Riemann.Core.zetaAtMinusOne",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "Riemann.Core.zetaClassical (-1) = -1 / 12"
+    },
+    {
+     "name": "Riemann.Core.zetaAtTwo",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "Riemann.Core.zetaClassical 2 = ↑Real.pi ^ 2 / 6"
+    },
+    {
+     "name": "Riemann.Core.zetaAtZero",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "Riemann.Core.zetaClassical 0 = -1 / 2"
+    },
+    {
+     "name": "Riemann.Core.zetaClassical",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "ℂ → ℂ"
+    },
+    {
+     "name": "Riemann.Core.zetaDirichlet",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "∀ (s : ℂ), s.re > 1 → Riemann.Core.zetaClassical s = ∑' (n : ℕ+), 1 / ↑↑n ^ s"
+    },
+    {
+     "name": "Riemann.Core.zetaEulerProduct",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "∀ (s : ℂ), s.re > 1 → Riemann.Core.zetaClassical s = ∏' (p : Nat.Primes), (1 - 1 / ↑↑p ^ s)⁻¹"
+    },
+    {
+     "name": "Riemann.Core.zetaMeromorphic",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "∀ (s : ℂ), s ≠ 1 → ∃ val, Riemann.Core.zetaClassical s = val"
+    },
+    {
+     "name": "Riemann.Core.zetaPoleSimple",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "∀ ε > 0, ∃ δ > 0, ∀ (s : ℂ), 0 < ‖s - 1‖ → ‖s - 1‖ < δ → ‖Riemann.Core.zetaClassical s * (s - 1)‖ < 1 + ε"
+    },
+    {
+     "name": "Riemann.Core.zetaTrivialZeros",
+     "module": "src.Riemann.Core.ZetaDef",
+     "statement": "∀ n > 0, Riemann.Core.zetaClassical (-2 * ↑n) = 0"
     },
     {
      "name": "Riemann.Sim.analyze_i_kernel_spectrum_external",
@@ -1022,7 +1067,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (a-arquivos-corrompidos, imports-no-topo, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): src/Riemann/Core/ClassicalZeros.lean: merge da branch copilot/add-inumber-class-implementation com main ficou no arquivo (a linha ======= e os nomes das branches soltos); fica o lado da branch, que usa ℂ, isNontrivialZero e Riemann.Core.CriticalStrip como os outros módulos de src/Riemann; o lado de main (isClassicalTrivialZero sobre CollapseComplex) é uma variante de lean/millennium/Riemann/Core/ClassicalZeros.lean, que continua no repositório, e não compila em src/ (não há Millennium.Riemann.CollapseComplex nessa árvore); lean/millennium/Riemann/ExtendedZeta.lean: o merge 5885ccb (2025-11-25 Merge branch 'main' into copilot/add-nova-classe-numerica) juntou dois arquivos criados separadamente nas duas branches (add/add) e o git intercalou as linhas das duas versões: o arquivo não é nenhuma delas; os dois lados declaram nomes diferentes: as duas versões inteiras, uma depois da outra; lean/millennium/Riemann/NumericalHierarchy.lean: o merge 5885ccb (2025-11-25 Merge branch 'main' into copilot/add-nova-classe-numerica) juntou dois arquivos criados separadamente nas duas branches (add/add) e o git intercalou as linhas das duas versões: o arquivo não é nenhuma delas; os dois lados declaram nomes diferentes: as duas versões inteiras, uma depois da outra; imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s); 4 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 3 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 57 arquivo(s): campos_mathlib 2, docstring 22, lambda 17, lemma 4, nomes_mathlib 5, noncomputable 42, notacao 69, palavra_chave 4, repr 17; 66 prova(s) reescrita(s), conferidas no Lean do projeto: ext, add_assoc, add_comm, zero_add, add_zero, add_left_neg, mul_assoc, mul_comm, one_mul, mul_one, left_distrib, right_distrib, zero_mul, mul_zero, conj_add, conj_mul, toComplex_add, toComplex_mul, kernel_toComplex, deltaI_add, deltaI_smul, kernel_deltaI, image_deltaI, normI_eq_zero, normI_add_le, pureComplex_closed_add, pureComplex_closed_mul, pureIndet_closed_add, deltaI_image_eq_pureIndet, kernel_deltaI_eq_pureComplex, conj_pureIndet, i_sq, I_sq, i_mul_I, add_zero, mul_one, add_comm, mul_comm, critical_zero_distance, no_infinite_descent, forwardDependency_wellFounded, add_assoc, add_comm, zero_add, add_zero, mul_comm, one_mul, mul_one, left_distrib, right_distrib, ofReal_add, ofReal_mul, functional_eq_preserves_strip, add_assoc, add_comm, zero_add, mul_comm, one_mul, left_distrib, ofCollapseComplex_add, I_squared, I_times_zero, zero_times_I, I_times_one, one_times_I, functional_equation_symmetry; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: toProduct_add, toProduct_mul, ring_isomorphism, mul_assoc; 2 negação(ões) provada(s) no kernel: mul_assoc, mul_assoc. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com MillenniumRiemann, cross, formal, lean, src e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: build cycle detected: | error: ././././MillenniumRiemann/Tests.lean: bad import 'MillenniumRiemann')",
+   "note": "CORRIGIDO PELO MVEI (a-arquivos-corrompidos, imports-no-topo, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): src/Riemann/Core/ClassicalZeros.lean: merge da branch copilot/add-inumber-class-implementation com main ficou no arquivo (a linha ======= e os nomes das branches soltos); fica o lado da branch, que usa ℂ, isNontrivialZero e Riemann.Core.CriticalStrip como os outros módulos de src/Riemann; o lado de main (isClassicalTrivialZero sobre CollapseComplex) é uma variante de lean/millennium/Riemann/Core/ClassicalZeros.lean, que continua no repositório, e não compila em src/ (não há Millennium.Riemann.CollapseComplex nessa árvore); lean/millennium/Riemann/ExtendedZeta.lean: o merge 5885ccb (2025-11-25 Merge branch 'main' into copilot/add-nova-classe-numerica) juntou dois arquivos criados separadamente nas duas branches (add/add) e o git intercalou as linhas das duas versões: o arquivo não é nenhuma delas; os dois lados declaram nomes diferentes: as duas versões inteiras, uma depois da outra; lean/millennium/Riemann/NumericalHierarchy.lean: o merge 5885ccb (2025-11-25 Merge branch 'main' into copilot/add-nova-classe-numerica) juntou dois arquivos criados separadamente nas duas branches (add/add) e o git intercalou as linhas das duas versões: o arquivo não é nenhuma delas; os dois lados declaram nomes diferentes: as duas versões inteiras, uma depois da outra; imports movidos para o início (antes de comentários de módulo ou de documentação) em 2 arquivo(s); 7 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 4 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 57 arquivo(s): campos_mathlib 2, docstring 22, lambda 17, lemma 4, nomes_mathlib 5, noncomputable 42, notacao 69, palavra_chave 4, repr 17; 68 prova(s) reescrita(s), conferidas no Lean do projeto: ext, add_assoc, add_comm, zero_add, add_zero, add_left_neg, mul_assoc, mul_comm, one_mul, mul_one, left_distrib, right_distrib, zero_mul, mul_zero, conj_add, conj_mul, toComplex_add, toComplex_mul, kernel_toComplex, deltaI_add, deltaI_smul, kernel_deltaI, image_deltaI, normI_eq_zero, normI_add_le, pureComplex_closed_add, pureComplex_closed_mul, pureIndet_closed_add, deltaI_image_eq_pureIndet, kernel_deltaI_eq_pureComplex, conj_pureIndet, i_sq, I_sq, i_mul_I, add_zero, mul_one, add_comm, mul_comm, critical_zero_distance, no_infinite_descent, forwardDependency_wellFounded, add_assoc, add_comm, zero_add, add_zero, mul_comm, one_mul, mul_one, left_distrib, right_distrib, ofReal_add, ofReal_mul, functional_eq_preserves_strip, add_assoc, add_comm, zero_add, mul_comm, one_mul, left_distrib, ofCollapseComplex_add, I_squared, I_times_zero, zero_times_I, I_times_one, one_times_I, functional_equation_symmetry, verticalSymmetry, trivialNotInStrip; 30 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: toProduct_add, toProduct_mul, ring_isomorphism, mul_assoc, RH, collapse_law, collapse_law_critical_line, collapse_law_contrapositive, collapse_law_contrapositive, (cabeçalho), RH_by_I_collapse, (cabeçalho), not_RH_implies_I_eq_one, not_RH_implies_I_eq_one_direct, (cabeçalho), conjugateSymmetry, zeroPairs, (cabeçalho), zetaPoleSimple, (cabeçalho), (cabeçalho), (cabeçalho), classifyZero, simpleZeros, conjugatePair, quartetStructure, criticalPairStructure, anomalousBreaksSymmetry, anomalousBreaksSymmetry, (cabeçalho); 2 negação(ões) provada(s) no kernel: mul_assoc, mul_assoc. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com MillenniumRiemann, cross, formal, lean, src e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: build cycle detected: | error: ././././MillenniumRiemann/Tests.lean: bad import 'MillenniumRiemann')",
    "corrections": [
     "a-arquivos-corrompidos",
     "imports-no-topo",
@@ -1154,20 +1199,12 @@
      "arquivo": "MillenniumRiemann/Theorems.lean",
      "linha": 116,
      "nome": "Collapse.CollapseComplex.pureComplex_has_zero",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 118: unsolved goals ⊢ indet 0 = 0",
-     "coluna": 43,
-     "trecho": "apseComplex) ∈ PureComplex := ⟦b⟧y",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Collapse.CollapseComplex.PureComplex]; done) | (simp_all [Collapse.CollapseComplex.PureComplex]; done) | (unfold Collapse.CollapseComplex.PureComplex; decide; done) | (unfold Collapse.CollapseComplex.PureComplex; rfl; done) | (simp [Collapse.CollapseComplex.PureComplex]; omega; done) | (intros; simp only [Collapse.CollapseComplex.PureComplex]; omega; done) | (intros; simp_all [Collapse.CollapseComplex.PureComplex]; done) | (intro x; cases x <;> simp [Collapse.CollapseComplex.PureComplex]; done) | (constructor <;> simp [Collapse.CollapseComplex.PureComplex]; done) | (norm_num [Collapse.CollapseComplex.PureComplex]; done) | (intros; norm_num [Collapse.CollapseComplex.PureComplex] at *; done) | (simp [Collapse.CollapseComplex.PureComplex]; ring; done) | (unfold Collapse.CollapseComplex.PureComplex; ring; done) | (simp [Collapse.CollapseComplex.PureComplex]; linarith; done) | (exact?; done)"
-     }
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
@@ -1195,20 +1232,12 @@
      "arquivo": "MillenniumRiemann/Theorems.lean",
      "linha": 132,
      "nome": "Collapse.CollapseComplex.pureIndet_has_zero",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 134: unsolved goals ⊢ re 0 = 0 ∧ im 0 = 0",
-     "coluna": 49,
-     "trecho": "mplex) ∈ PureIndeterminate := ⟦b⟧y",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; done) | (simp_all [Collapse.CollapseComplex.PureIndeterminate]; done) | (unfold Collapse.CollapseComplex.PureIndeterminate; decide; done) | (unfold Collapse.CollapseComplex.PureIndeterminate; rfl; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; omega; done) | (intros; simp only [Collapse.CollapseComplex.PureIndeterminate]; omega; done) | (intros; simp_all [Collapse.CollapseComplex.PureIndeterminate]; done) | (intro x; cases x <;> simp [Collapse.CollapseComplex.PureIndeterminate]; done) | (constructor <;> simp [Collapse.CollapseComplex.PureIndeterminate]; done) | (norm_num [Collapse.CollapseComplex.PureIndeterminate]; done) | (intros; norm_num [Collapse.CollapseComplex.PureIndeterminate] at *; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; ring; done) | (unfold Collapse.CollapseComplex.PureIndeterminate; ring; done) | (simp [Collapse.CollapseComplex.PureIndeterminate]; linarith; done) | (exact?; done)"
-     }
+     ]
     },
     {
      "arquivo": "MillenniumRiemann/Theorems.lean",
@@ -3335,26 +3364,19 @@
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
      "linha": 76,
      "nome": "Millennium.Riemann.Zeros.DeltaCollapse_idempotent",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 82: no goals to be solved",
-     "coluna": 2,
-     "trecho": "  ⟦c⟧onstructor",
      "ponte_de_modulo": {
       "Millennium.Riemann.CollapseComplex": "mesmo arquivo que lean.millennium.Riemann.CollapseComplex"
-     },
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (simp_all [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (unfold Millennium.Riemann.Zeros.DeltaCollapse; decide; done) | (unfold Millennium.Riemann.Zeros.DeltaCollapse; rfl; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; omega; done) | (intros; simp only [Millennium.Riemann.Zeros.DeltaCollapse]; omega; done) | (intros; simp_all [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (intro x; cases x <;> simp [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (constructor <;> simp [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (norm_num [Millennium.Riemann.Zeros.DeltaCollapse]; done) | (intros; norm_num [Millennium.Riemann.Zeros.DeltaCollapse] at *; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; ring; done) | (unfold Millennium.Riemann.Zeros.DeltaCollapse; ring; done) | (simp [Millennium.Riemann.Zeros.DeltaCollapse]; linarith; done) | (exact?; done)"
      }
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 149,
+     "linha": 142,
      "nome": "Millennium.Riemann.Zeros.I_collapse_contradiction",
      "status": "aberto-sorry",
      "axioms": [
@@ -3370,7 +3392,7 @@
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 166,
+     "linha": 159,
      "nome": "Millennium.Riemann.Zeros.symbolic_RH_via_I_collapse",
      "status": "aberto-sorry",
      "axioms": [
@@ -3386,7 +3408,7 @@
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 197,
+     "linha": 190,
      "nome": "Millennium.Riemann.Zeros.vertical_symmetry_from_Delta",
      "status": "condicional",
      "axioms": [
@@ -3402,7 +3424,7 @@
     },
     {
      "arquivo": "lean/millennium/Riemann/Zeros/Nontrivial.lean",
-     "linha": 213,
+     "linha": 206,
      "nome": "Millennium.Riemann.Zeros.zeros_satisfy_integral_equation",
      "status": "erro",
      "axioms": [
@@ -3412,7 +3434,7 @@
       "Quot.sound",
       "Millennium.Riemann.zetaSymbolic"
      ],
-     "erro": "linha 220: type mismatch zero has type CollapseComplex : Type but is expected to have type zetaSymbolic s = I_operator (fun x => zero) s : Prop",
+     "erro": "linha 213: type mismatch zero has type CollapseComplex : Type but is expected to have type zetaSymbolic s = I_operator (fun x => zero) s : Prop",
      "coluna": 54,
      "trecho": "a_integral_representation s = ⟦z⟧ero := by",
      "ponte_de_modulo": {
@@ -3655,10 +3677,9 @@
      "arquivo": "src/Riemann/CollapseProof/Assumptions.lean",
      "linha": 34,
      "nome": "Riemann.CollapseProof.collapse_law_critical_line",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
       "Riemann.CollapseProof.collapse_law",
@@ -3666,16 +3687,10 @@
       "Riemann.IConstant.I"
      ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 37: function expected at onCriticalLine term has type ?m.247",
-     "coluna": 26,
-     "trecho": "  (∃ z : NontrivialZero, ¬⟦o⟧nCriticalLine z.s) → I = one ",
-     "motivo": "importa Riemann.Core.ZetaDef, Riemann.IConstant.ICore, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3683,21 +3698,20 @@
      "arquivo": "src/Riemann/CollapseProof/Assumptions.lean",
      "linha": 41,
      "nome": "Riemann.CollapseProof.collapse_law_contrapositive",
-     "status": "aberto-sorry",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
       "Riemann.IConstant.I"
      ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3705,28 +3719,21 @@
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 18,
      "nome": "Riemann.CollapseProof.RH_by_I_collapse",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
       "Riemann.IConstant.I",
       "Riemann.IConstant.I_ne_one"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.CollapseProof.ICollapseLogic",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 32: unknown identifier 'one'",
-     "coluna": 24,
-     "trecho": "  have h_I_eq_one : I = ⟦o⟧ne := not_RH_implies_I_eq_one",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3734,24 +3741,21 @@
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 36,
      "nome": "Riemann.CollapseProof.RH_by_I_collapse_contrapositive",
-     "status": "aberto-sorry",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
       "Riemann.IConstant.I",
       "Riemann.IConstant.I_ne_one"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.CollapseProof.ICollapseLogic",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3759,27 +3763,21 @@
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 40,
      "nome": "Riemann.CollapseProof.riemann_hypothesis",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Riemann.Core.zetaClassical"
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.I_ne_one"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.CollapseProof.ICollapseLogic",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 43: type mismatch RH_by_I_collapse has type RH : Prop but is expected to have type RiemannHypothesis : Prop",
-     "coluna": 2,
-     "trecho": "  ⟦e⟧xact RH_by_I_collapse",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3787,21 +3785,21 @@
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 44,
      "nome": "Riemann.CollapseProof.all_nontrivial_zeros_on_critical_line",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.CollapseProof.ICollapseLogic",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.I_ne_one"
      ],
-     "erro": "linha 47: function expected at onCriticalLine term has type ?m.12",
-     "coluna": 24,
-     "trecho": "  ∀ z : NontrivialZero, ⟦o⟧nCriticalLine z.s := by",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
+     "dependencia_com_sorry": [
+      "Riemann.IConstant.ICore"
+     ],
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3809,29 +3807,21 @@
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 49,
      "nome": "Riemann.CollapseProof.no_nontrivial_zero_off_critical_line",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
       "Riemann.Core.zetaClassical",
       "Riemann.IConstant.I",
       "Riemann.IConstant.I_ne_one"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.CollapseProof.ICollapseLogic",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 52: function expected at onCriticalLine term has type ?m.193",
-     "coluna": 26,
-     "trecho": "  ¬∃ z : NontrivialZero, ¬⟦o⟧nCriticalLine z.s := by",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3839,27 +3829,21 @@
      "arquivo": "src/Riemann/CollapseProof/Contradiction.lean",
      "linha": 56,
      "nome": "Riemann.CollapseProof.all_nontrivial_zeros_real_part_half",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Riemann.Core.zetaClassical"
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IConstant.I",
+      "Riemann.IConstant.I_ne_one"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.CollapseProof.ICollapseLogic",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 59: unsolved goals z : NontrivialZero ⊢ z.s.re = 1 / 2",
-     "coluna": 40,
-     "trecho": "ntrivialZero, z.s.re = 1/2 := ⟦b⟧y",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.CollapseProof.ICollapseLogic, Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3867,26 +3851,18 @@
      "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
      "linha": 19,
      "nome": "Riemann.CollapseProof.not_RH_means_exists_off_line",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 22: function expected at onCriticalLine term has type ?m.9",
-     "coluna": 31,
-     "trecho": " ¬RH → ∃ z : NontrivialZero, ¬⟦o⟧nCriticalLine z.s := by",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.Core.ZetaDef, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3894,26 +3870,20 @@
      "arquivo": "src/Riemann/CollapseProof/ICollapseLogic.lean",
      "linha": 27,
      "nome": "Riemann.CollapseProof.not_RH_implies_I_eq_one",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
+      "Riemann.CollapseProof.collapse_law",
+      "Riemann.Core.zetaClassical",
       "Riemann.IConstant.I"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
-     "erro": "linha 29: unsolved goals one : ℂ h_not_RH : ¬RH ⊢ I = one",
-     "coluna": 51,
-     "trecho": "s_I_eq_one : ¬RH → I = one := ⟦b⟧y",
-     "motivo": "importa Riemann.CollapseProof.Assumptions, Riemann.Core.ZetaDef, Riemann.IConstant.ICore, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3931,13 +3901,10 @@
       "Riemann.IConstant.I"
      ],
      "dependencia_com_sorry": [
-      "Riemann.CollapseProof.Assumptions",
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
+      "Riemann.IConstant.ICore"
      ],
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -3951,13 +3918,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Core/FunctionalEquation.lean",
-     "linha": 28,
+     "linha": 29,
      "nome": "Riemann.Core.reflectionSymmetry",
      "status": "aberto-sorry",
      "axioms": [
@@ -3967,15 +3934,15 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Core/FunctionalEquation.lean",
-     "linha": 37,
+     "linha": 38,
      "nome": "Riemann.Core.zeroPairs",
-     "status": "nao_alcancado",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
@@ -3983,13 +3950,9 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef"
-     ],
-     "erro": "linha 40: unknown constant 'Complex.conj'",
-     "coluna": 47,
-     "trecho": "o (1 - s) ∨ isNontrivialZero (⟦C⟧omplex.conj s) := by",
-     "motivo": "importa Riemann.Core.ZetaDef, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
@@ -4005,10 +3968,12 @@
       "Riemann.IConstant.deltaCollapse"
      ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
       "Riemann.IConstant.ICore",
       "Riemann.IConstant.IRegularization"
-     ]
+     ],
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
@@ -4025,10 +3990,12 @@
       "Riemann.IConstant.deltaCollapse"
      ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
       "Riemann.IConstant.ICore",
       "Riemann.IConstant.IRegularization"
-     ]
+     ],
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/IConstant/DeltaCollapse.lean",
@@ -4044,82 +4011,86 @@
       "Riemann.IConstant.deltaCollapse"
      ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
       "Riemann.IConstant.ICore",
       "Riemann.IConstant.IRegularization"
-     ]
-    },
-    {
-     "arquivo": "src/Riemann/IKernel/KernelDef.lean",
-     "linha": 44,
-     "nome": "Riemann.IKernel.gaussianAtZero",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
      ],
-     "erro": "linha 46: unsolved goals I : ℂ ⊢ sorry () = 1",
-     "coluna": 59,
-     "trecho": ") : gaussianKernel I 0 = 1 := ⟦b⟧y",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Riemann.IKernel.gaussianKernel]; done) | (simp_all [Riemann.IKernel.gaussianKernel]; done) | (unfold Riemann.IKernel.gaussianKernel; decide; done) | (unfold Riemann.IKernel.gaussianKernel; rfl; done) | (simp [Riemann.IKernel.gaussianKernel]; omega; done) | (intros; simp only [Riemann.IKernel.gaussianKernel]; omega; done) | (intros; simp_all [Riemann.IKernel.gaussianKernel]; done) | (intro x; cases x <;> simp [Riemann.IKernel.gaussianKernel]; done) | (constructor <;> simp [Riemann.IKernel.gaussianKernel]; done) | (norm_num [Riemann.IKernel.gaussianKernel]; done) | (intros; norm_num [Riemann.IKernel.gaussianKernel] at *; done) | (simp [Riemann.IKernel.gaussianKernel]; ring; done) | (unfold Riemann.IKernel.gaussianKernel; ring; done) | (simp [Riemann.IKernel.gaussianKernel]; linarith; done) | (exact?; done)"
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
      }
     },
     {
+     "arquivo": "src/Riemann/IKernel/KernelDef.lean",
+     "linha": 48,
+     "nome": "Riemann.IKernel.gaussianAtZero",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
      "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 36,
+     "linha": 37,
      "nome": "Riemann.IKernel.zero_integral_equation",
-     "status": "nao_alcancado",
-     "axioms": [],
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.Core.zetaClassical",
+      "Riemann.IKernel.zeros_preserved",
+      "Riemann.IKernel.zetaI_equals_integral"
+     ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
       "Riemann.IConstant.ICore",
       "Riemann.IConstant.IRegularization",
       "Riemann.IKernel.KernelDef"
      ],
-     "erro": "linha 41: expected token",
-     "coluna": 2,
-     "trecho": "  ⟦∫⟧ t : ℝ, gaussianKernel I t * ",
-     "motivo": "importa Riemann.Core.ZetaDef, Riemann.IConstant.ICore, Riemann.IConstant.IRegularization, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 66,
+     "linha": 67,
      "nome": "Riemann.IKernel.reflection_zero",
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "Riemann.IKernel.zetaI_functional_equation"
+     ],
+     "dependencia_com_sorry": [
+      "Riemann.IConstant.ICore",
+      "Riemann.IConstant.IRegularization",
+      "Riemann.IKernel.KernelDef"
+     ],
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
+    },
+    {
+     "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
+     "linha": 76,
+     "nome": "Riemann.IKernel.RH_integral_formulation",
      "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Riemann.IKernel.zetaI_functional_equation"
+      "Riemann.Core.zetaClassical"
      ],
      "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.IConstant.ICore",
-      "Riemann.IConstant.IRegularization",
-      "Riemann.IKernel.KernelDef"
-     ]
-    },
-    {
-     "arquivo": "src/Riemann/IKernel/ZetaIntegralEq.lean",
-     "linha": 75,
-     "nome": "Riemann.IKernel.RH_integral_formulation",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
       "Riemann.IConstant.ICore",
       "Riemann.IConstant.IRegularization",
       "Riemann.IKernel.KernelDef"
      ],
-     "erro": "linha 90: function expected at onCriticalLine term has type ?m.2465",
-     "coluna": 32,
-     "trecho": "∀ s : ℂ, isNontrivialZero s → ⟦o⟧nCriticalLine s := by",
-     "motivo": "importa Riemann.Core.ZetaDef, Riemann.IConstant.ICore, Riemann.IConstant.IRegularization, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
@@ -4132,10 +4103,9 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
@@ -4148,10 +4118,9 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
@@ -4164,10 +4133,9 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Zeros/Nontrivial.lean",
@@ -4180,16 +4148,15 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
      "linha": 14,
      "nome": "Riemann.Zeros.verticalSymmetry",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
       "Classical.choice",
@@ -4197,17 +4164,8 @@
       "Riemann.Core.zetaClassical",
       "Riemann.Zeros.reflectionPair"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.FunctionalEquation",
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
-     ],
-     "erro": "linha 19: no goals to be solved",
-     "coluna": 28,
-     "trecho": "  exact ⟨z', by simp [hz']; ⟦r⟧ing⟩",
-     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -4215,25 +4173,16 @@
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
      "linha": 20,
      "nome": "Riemann.Zeros.horizontalSymmetry",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Riemann.Core.zetaClassical"
+      "Riemann.Core.zetaClassical",
+      "Riemann.Zeros.conjugatePair"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.FunctionalEquation",
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
-     ],
-     "erro": "linha 24: unknown identifier 'conjugatePair'",
-     "coluna": 22,
-     "trecho": "  obtain ⟨z', hz'⟩ := ⟦c⟧onjugatePair z",
-     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
@@ -4241,59 +4190,42 @@
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
      "linha": 26,
      "nome": "Riemann.Zeros.quartetStructure",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Riemann.Core.zetaClassical"
+      "Riemann.Core.zetaClassical",
+      "Riemann.Zeros.conjugatePair",
+      "Riemann.Zeros.reflectionPair"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.FunctionalEquation",
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
-     ],
-     "erro": "linha 33: unknown constant 'Complex.conj'",
-     "coluna": 11,
-     "trecho": "    z₂.s = ⟦C⟧omplex.conj z.s ∧",
-     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 37,
+     "linha": 40,
      "nome": "Riemann.Zeros.criticalPairStructure",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
-      "Riemann.Core.zetaClassical"
+      "Riemann.Core.zetaClassical",
+      "Riemann.Zeros.conjugatePair"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.FunctionalEquation",
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
-     ],
-     "erro": "linha 41: unknown constant 'Complex.conj'",
-     "coluna": 32,
-     "trecho": "∃ z' : NontrivialZero, z'.s = ⟦C⟧omplex.conj z.s ∧ ",
-     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
     {
      "arquivo": "src/Riemann/Zeros/Symmetry.lean",
-     "linha": 44,
+     "linha": 50,
      "nome": "Riemann.Zeros.anomalousBreaksSymmetry",
-     "status": "nao_alcancado",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
@@ -4301,23 +4233,14 @@
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.FunctionalEquation",
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic",
-      "Riemann.Zeros.Nontrivial"
-     ],
-     "erro": "linha 47: unknown constant 'Complex.conj'",
-     "coluna": 24,
-     "trecho": "  z.s ≠ 1 - z.s ∧ z.s ≠ ⟦C⟧omplex.conj z.s := by",
-     "motivo": "importa Riemann.Core.FunctionalEquation, Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou",
      "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef",
       "Riemann.Zeros.Nontrivial": "mesmo arquivo que cross.lean.Riemann.Zeros.Nontrivial"
      }
     },
     {
      "arquivo": "src/Riemann/Zeros/Trivial.lean",
-     "linha": 23,
+     "linha": 24,
      "nome": "Riemann.Zeros.negEvenIsZero",
      "status": "condicional",
      "axioms": [
@@ -4327,31 +4250,24 @@
       "Riemann.Core.zetaClassical",
       "Riemann.Core.zetaTrivialZeros"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic"
-     ]
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     },
     {
      "arquivo": "src/Riemann/Zeros/Trivial.lean",
-     "linha": 28,
+     "linha": 29,
      "nome": "Riemann.Zeros.trivialNotInStrip",
-     "status": "nao_alcancado",
+     "status": "condicional",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound",
       "Riemann.Core.zetaClassical"
      ],
-     "dependencia_com_sorry": [
-      "Riemann.Core.ZetaDef",
-      "Riemann.Zeros.Basic"
-     ],
-     "erro": "linha 31: function expected at inCriticalStrip term has type ?m.1098",
-     "coluna": 3,
-     "trecho": "  ¬⟦i⟧nCriticalStrip z.s := by",
-     "motivo": "importa Riemann.Core.ZetaDef, Riemann.Zeros.Basic, que só compila com provas trocadas por sorry; com isso a prova deste teorema não passou"
+     "ponte_de_modulo": {
+      "Riemann.Core.ZetaDef": "mesmo arquivo que src.Riemann.Core.ZetaDef"
+     }
     }
    ],
    "preenchimento": [
@@ -4366,6 +4282,13 @@
      "tipo": "axioma",
      "nome": "Riemann.Sim.compute_zeros_external",
      "enunciado": "ℕ → IO (List ℂ)",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaAtZero",
+     "enunciado": "Riemann.Core.zetaClassical 0 = -1 / 2",
      "resultado": "sem resultado",
      "tatica": ""
     },
@@ -4399,6 +4322,55 @@
     },
     {
      "tipo": "axioma",
+     "nome": "Riemann.Core.zetaMeromorphic",
+     "enunciado": "∀ (s : ℂ), s ≠ 1 → ∃ val, Riemann.Core.zetaClassical s = val",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaAtMinusOne",
+     "enunciado": "Riemann.Core.zetaClassical (-1) = -1 / 12",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaEulerProduct",
+     "enunciado": "∀ (s : ℂ), s.re > 1 → Riemann.Core.zetaClassical s = ∏' (p : Nat.Primes), (1 - 1 / ↑↑p ^ s)⁻¹",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaPoleSimple",
+     "enunciado": "∀ ε > 0, ∃ δ > 0, ∀ (s : ℂ), 0 < ‖s - 1‖ → ‖s - 1‖ < δ → ‖Riemann.Core.zetaClassical s * (s - 1)‖ < 1 + ε",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaTrivialZeros",
+     "enunciado": "∀ n > 0, Riemann.Core.zetaClassical (-2 * ↑n) = 0",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaAtTwo",
+     "enunciado": "Riemann.Core.zetaClassical 2 = ↑Real.pi ^ 2 / 6",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaClassical",
+     "enunciado": "ℂ → ℂ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
      "nome": "Collapse.SymbolicZeta.functionalEquation",
      "enunciado": "∀ (s : Collapse.CollapseComplex),   Collapse.SymbolicZeta.zetaI s = Collapse.SymbolicZeta.chiI s * Collapse.SymbolicZeta.zetaI (1 - s)",
      "resultado": "sem resultado",
@@ -4408,6 +4380,13 @@
      "tipo": "axioma",
      "nome": "Collapse.SymbolicZeta.chiClassical",
      "enunciado": "ℂ → ℂ",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "axioma",
+     "nome": "Riemann.Core.zetaDirichlet",
+     "enunciado": "∀ (s : ℂ), s.re > 1 → Riemann.Core.zetaClassical s = ∑' (n : ℕ+), 1 / ↑↑n ^ s",
      "resultado": "sem resultado",
      "tatica": ""
     },
@@ -4424,7 +4403,7 @@
     "aberto-sorry": 1,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793828546
+   "hora_commit_mvei": 1793899522
   }
  ]
 }

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T15:19:16+00:00",
+ "generated_at": "2026-11-06T00:22:08+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -868,7 +868,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 2 arquivo(s); 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, MVEI_Refutacoes_zkp_foundation, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././zkp/zkp_foundation.lean:68:4: don't know how to synthesize implicit argument 'proof' | error: ././././zkp/zkp_foundation.lean:68:4: don't know how to synthesize implicit argument 'statement')",
+   "note": "CORRIGIDO PELO MVEI (renomear-imports-mathlib, tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 import(s) trocados pelo nome do módulo na versão do Mathlib do projeto, em 2 arquivo(s); 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 8 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, triple_signature_required, boot_sequence_chronological, panic_encrypts_gamma, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 7 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: (cabeçalho), (cabeçalho), security_enforcement, portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com CryptographicLogic, MVEI_Refutacoes_zkp_foundation, Main, formal-proofs, foundation, kernel, proofs, provenance, security, universe-0-0, zkp e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././zkp/zkp_foundation.lean:68:4: don't know how to synthesize implicit argument 'proof' | error: ././././zkp/zkp_foundation.lean:68:4: don't know how to synthesize implicit argument 'statement')",
    "corrections": [
     "renomear-imports-mathlib",
     "tatica-encontrada",
@@ -894,25 +894,45 @@
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
      "linha": 106,
      "nome": "Universe00.BootSequence.triple_signature_required",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "status": "condicional",
+     "axioms": [
+      "propext",
+      "Universe00.Layer0.I"
+     ],
+     "dependencia_com_sorry": [
+      "IDENTITY_CONSTANT"
+     ],
+     "ponte_de_modulo": {
+      "QUADRANT_SYSTEM": "mesmo arquivo que kernel.memory-quadrants.QUADRANT_SYSTEM"
+     }
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
-     "linha": 119,
+     "linha": 118,
      "nome": "Universe00.BootSequence.boot_sequence_chronological",
-     "status": "nao_alcancado",
+     "status": "fechado",
      "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "dependencia_com_sorry": [
+      "IDENTITY_CONSTANT"
+     ],
+     "ponte_de_modulo": {
+      "QUADRANT_SYSTEM": "mesmo arquivo que kernel.memory-quadrants.QUADRANT_SYSTEM"
+     }
     },
     {
      "arquivo": "formal-proofs/lean4/BOOT_SEQUENCE.lean",
-     "linha": 130,
+     "linha": 126,
      "nome": "Universe00.BootSequence.panic_encrypts_gamma",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "status": "condicional",
+     "axioms": [
+      "Universe00.Layer0.I"
+     ],
+     "dependencia_com_sorry": [
+      "IDENTITY_CONSTANT"
+     ],
+     "ponte_de_modulo": {
+      "QUADRANT_SYSTEM": "mesmo arquivo que kernel.memory-quadrants.QUADRANT_SYSTEM"
+     }
     },
     {
      "arquivo": "foundation.lean",
@@ -935,9 +955,13 @@
      "arquivo": "kernel/microkernel/VERIFIED_CORE.lean",
      "linha": 59,
      "nome": "Universe00.Microkernel.security_enforcement",
-     "status": "nao_alcancado",
-     "axioms": [],
-     "motivo": "unknown module prefix 'Universe00' No directory 'Universe00' or file 'Universe00.olean' in the search path entries: /tmp/mvei-rec-7ef20n6s/p/.lake/mvei-salvage ././.lake/packages/Cli/.lake/build/lib/l"
+     "status": "fechado",
+     "axioms": [
+      "propext"
+     ],
+     "dependencia_com_sorry": [
+      "IDENTITY_CONSTANT"
+     ]
     },
     {
      "arquivo": "provenance/timestamp_proof.lean",
@@ -1149,7 +1173,7 @@
     "aberto-sorry": 5,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793828546
+   "hora_commit_mvei": 1793883115
   },
   {
    "repo": "cryptographic-logic-foundations",
@@ -1158,7 +1182,7 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": false,
    "build_ok": true,
-   "build_seconds": 5.7,
+   "build_seconds": 6.1,
    "build_error": "(configuração original) error: ./lakefile.lean:1:0: error: expected token | error: ./lakefile.lean: package configuration has errors",
    "sorry_warnings": 0,
    "reconstructed": true,
@@ -1334,7 +1358,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com SovereignCore e o Mathlib v4.19.0 e compilou o que foi possível",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 8 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, triple_signature_required, boot_sequence_chronological, panic_encrypts_gamma, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 7 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: (cabeçalho), (cabeçalho), security_enforcement, portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com SovereignCore e o Mathlib v4.19.0 e compilou o que foi possível",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4",
@@ -1351,7 +1375,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793828546
+   "hora_commit_mvei": 1793883115
   },
   {
    "repo": "cryptographic-logic-foundations",
@@ -1426,7 +1450,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 5 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 4 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor, zz-refutacoes): 3 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 15 arquivo(s): abbrev 1, docstring 1, nome_simbolico 7, nomes_mathlib 1, noncomputable 11, notacao 4, tatica_mathlib 2; 8 prova(s) reescrita(s), conferidas no Lean do projeto: sovereign_zero_vulnerability, triple_signature_required, boot_sequence_chronological, panic_encrypts_gamma, exponential_defense_growth, gamma_encryption_invariant, portfolio_consistency, mkVerifiedPortfolio_consistent; 7 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: (cabeçalho), (cabeçalho), security_enforcement, portfolio_consistency, hiding, commitment_secure, zkp_correctness; 1 negação(ões) provada(s) no kernel: zkp_correctness. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com Complexity, NavierStokes, Riemann, Sovereign e o Mathlib v4.3.0 e compilou o que foi possível (erros restantes: error: > LEAN_PATH=./.lake/packages/std/.lake/build/lib:./.lake/packages/Qq/.lake/build/lib:./.lake/packages/aesop/.lake/build/lib:./.lake/packages/proofwidgets/.lake/build/lib:./.lake/packages/Cli/.lake/build/lib:./.lake/packages/mathlib/.lake/build/lib:./.lake/build/lib LD_LIBRARY_PATH=/opt/hosted)",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4",
@@ -1512,7 +1536,7 @@
     "aberto-sorry": 1,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793828546
+   "hora_commit_mvei": 1793883115
   }
  ]
 }

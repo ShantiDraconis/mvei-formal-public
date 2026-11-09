@@ -11,20 +11,20 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-05T15:19:16+00:00, on commit `dc52454bba8a6aefec4baa010494c463f4aa4897`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-06T00:22:08+00:00, on commit `dc52454bba8a6aefec4baa010494c463f4aa4897`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `.` | v4.14.0 | partial | 17 | 0 | 0 | 4 / 0 / 9 / 4 / 82 |
 | `FORMAL/Lean4/Core` | v4.14.0 | partial | 71 | 0 | 0 | 8 / 0 / 3 / 7 / 0 |
-| `lean` | v4.19.0 | partial | 54 | 0 | 0 | 4 / 0 / 0 / 4 / 21 |
+| `lean` | v4.19.0 | partial | 56 | 0 | 0 | 24 / 0 / 1 / 3 / 2 |
 | `lean4` | padrão do elan | OK | 31 | 0 | 0 | — |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 189 |
-| Unique (name + statement) | 189 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 39 |
+| Counting each project | 211 |
+| Unique (name + statement) | 211 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 58 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -42,16 +42,17 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `dc52454bba8a6aefec4ba
 | `MillenniumCore.Classification.pureIndeterminate_collapse_dichotomy` | `FORMAL/Lean4/Core (file by file)` | open | `sorryAx` |
 | `MillenniumCore.Classification.mixed_collapse_dichotomy` | `FORMAL/Lean4/Core (file by file)` | open | `sorryAx` |
 | `MillenniumCore.Classification.classical_collapse_unique` | `FORMAL/Lean4/Core (file by file)` | open | `sorryAx` |
+| `TIF.C2_binOp_collapses` | `lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 179 `theorem`/`lemma` (counting copies). The kernel checked 49 of them (37 closed, 0 conditional, 12 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 130 the kernel has no result:
+The `.lean` files of the verified commit declare 179 `theorem`/`lemma` (counting copies). The kernel checked 69 of them (56 closed, 0 conditional, 13 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 110 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 94 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 75 |
 | the file did not compile (an error in it or in a file it imports) | 20 |
-| checked file by file: the written proof does not pass the kernel | 15 |
+| checked file by file: the written proof does not pass the kernel | 14 |
 | the file compiled, but the name did not appear in the kernel (private, mutual or macro-generated) | 1 |
 
 ### MVEI corrections

@@ -126,15 +126,6 @@
  
  open scoped BigOperators
  
-@@ -277,7 +280,7 @@
-   definition :
-     ∀ w : Word,
-       languageFromFamily w ↔
--        let p := encoding.toVec w
-+        (let p := encoding.toVec w)
-         in family p.1 p.2 = true
- 
- /-
 --- a/lean4/Complexity/Circuits.lean
 +++ b/lean4/Complexity/Circuits.lean
 @@ -25,6 +25,8 @@
@@ -146,24 +137,6 @@
  namespace Complexity
  namespace Circuits
  
-@@ -244,7 +246,7 @@
-   recognition :
-     ∀ w : Word,
-       language w ↔
--        let p := encoding.toVec w
-+        (let p := encoding.toVec w)
-         in Circuit.eval (family.circuitAt p.1) p.2 = true
- 
- /-
-@@ -288,7 +290,7 @@
-   satFamily_recognizes_SAT :
-     ∀ w : Word,
-       SATlang w ↔
--        let p := encoding.toVec w
-+        (let p := encoding.toVec w)
-         in Circuit.eval (satFamily.circuitAt p.1) p.2 = true
- 
- /--
 --- a/lean4/Complexity/ComplexityMeasures.lean
 +++ b/lean4/Complexity/ComplexityMeasures.lean
 @@ -32,6 +32,10 @@
@@ -188,17 +161,6 @@
  namespace Complexity
  namespace Reductions
  
-@@ -238,8 +240,8 @@
-   /-- Correctness: the reduction is exact. -/
-   correct :
-     ∀ w : Word,
--      let qs := queries w
--      let ans := qs.map (fun q => decide (L₂ q))
-+      (let qs := queries w)
-+      (let ans := qs.map (fun q => decide (L₂ q)))
-       in (decision w ans = true) ↔ L₁ w
- 
-   /--
 @@ -291,7 +293,7 @@
  structure ManyOneCompositionSchema
      (measure : WordMeasure)

@@ -11,25 +11,25 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-05T15:19:16+00:00, on commit `44edb40cb18d994ff785d95e56d78767d0d5d15c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-06T00:22:08+00:00, on commit `44edb40cb18d994ff785d95e56d78767d0d5d15c`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `src/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 215 | 24 | 28 | 46 / 1 / 50 / 16 / 0 |
+| `src/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 331 | 23 | 26 | 55 / 2 / 36 / 4 / 0 |
 | `tests/lean` (no lakefile; project assembled by MVEI) | padrão do elan | OK | 0 | 0 | 0 | — |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 261 |
-| Unique (name + statement) | 261 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 154 |
+| Counting each project | 386 |
+| Unique (name + statement) | 385 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 194 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `BSD.EllipticCurve.canonicalHeight_quadratic` | `src/lean` | open | `sorryAx` |
-| `EllipticCurve.BSD_11a1` | `src/lean` | conditional | `EllipticCurve.curve_11a1_rank_0`, `EllipticCurve.curve_11a1_analytic_rank_0` |
+| `BSD.EllipticCurve.jInvariant_classifies` | `src/lean` | open | `sorryAx` |
 | `EllipticCurve.BSD_37a1` | `src/lean` | conditional | `EllipticCurve.curve_37a1_rank_1`, `EllipticCurve.curve_37a1_analytic_rank_1` |
 | `EllipticCurve.BSD_components_pos` | `src/lean` | conditional | `EllipticCurve.L_function`, `EllipticCurve.realPeriod_pos`, `EllipticCurve.torsion_finite` |
 | `EllipticCurve.BSD_formula_at_rank_0` | `src/lean` | open | `EllipticCurve.L_function`, `sorryAx` |
@@ -59,13 +59,10 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `44edb40cb18d994ff785d
 | `EllipticCurve.analyticRank_one_iff` | `src/lean` | open | `EllipticCurve.L_function`, `sorryAx` |
 | `EllipticCurve.analyticRank_zero_iff_L_nonzero` | `src/lean` | conditional | `EllipticCurve.L_function`, `EllipticCurve.analyticRank_spec` |
 | `EllipticCurve.canonicalHeight_zero_iff_torsion` | `src/lean` | open | `sorryAx` |
-| `EllipticCurve.canonical_height_decomposition` | `src/lean` | open | `sorryAx` |
 | `EllipticCurve.euler_product_converges` | `src/lean` | open | `sorryAx` |
 | `EllipticCurve.functional_equation_detailed` | `src/lean` | open | `EllipticCurve.L_function`, `sorryAx` |
 | `EllipticCurve.functional_equation_sign` | `src/lean` | open | `EllipticCurve.L_function`, `sorryAx` |
-| `EllipticCurve.goodReductionFactor_factored` | `src/lean` | open | `sorryAx` |
 | `EllipticCurve.height_bound_constant` | `src/lean` | open | `sorryAx` |
-| `EllipticCurve.height_double` | `src/lean` | open | `sorryAx` |
 | `EllipticCurve.leadingTerm.eq_1` | `src/lean` | conditional | `EllipticCurve.L_function` |
 | `EllipticCurve.leadingTerm_ne_zero` | `src/lean` | conditional | `EllipticCurve.L_function`, `EllipticCurve.analyticRank_spec` |
 | `EllipticCurve.rank_one_characterization` | `src/lean` | open | `sorryAx` |
@@ -79,67 +76,54 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `44edb40cb18d994ff785d
 | `EllipticCurve.strong_implies_weak` | `src/lean` | conditional | `EllipticCurve.L_function` |
 | `EllipticCurve.torsion_order_possibilities` | `src/lean` | open | `sorryAx` |
 | `Weierstrass.conductor_divides_discriminant` | `src/lean` | open | `sorryAx` |
-| `Weierstrass.discriminant_transform` | `src/lean` | open | `sorryAx` |
+| `tamagawa_good` | `src/lean` | open | `sorryAx` |
 | `ModularForm.eigenvalue_eq_coeff` | `src/lean (file by file)` | open | `sorryAx` |
 | `ModularForm.hecke_comm` | `src/lean (file by file)` | open | `sorryAx` |
 | `ModularForm.hecke_mult` | `src/lean (file by file)` | open | `sorryAx` |
 | `EllipticCurveClassical.isomorphic_iff_same_j` | `src/lean (file by file)` | open | `sorryAx` |
-| `ShortWeierstrassClassical.j_zero_iff_A_zero` | `src/lean (file by file)` | open | `sorryAx` |
 | `ShortWeierstrassClassical.j_1728_iff_B_zero` | `src/lean (file by file)` | open | `sorryAx` |
-| `scalarMult_add` | `src/lean (file by file)` | open | `sorryAx` |
-| `conductor_finite_bad_primes` | `src/lean (file by file)` | open | `sorryAx` |
-| `naiveHeight_nonneg` | `src/lean (file by file)` | open | `sorryAx` |
 | `finitePointsBoundedHeight` | `src/lean (file by file)` | open | `sorryAx` |
 | `canonicalHeight_zero_iff_torsion` | `src/lean (file by file)` | open | `sorryAx` |
-| `canonicalHeight_quadratic` | `src/lean (file by file)` | open | `sorryAx` |
-| `canonicalHeight_parallelogram` | `src/lean (file by file)` | open | `sorryAx` |
-| `heightPairing_bilinear_left` | `src/lean (file by file)` | open | `sorryAx` |
-| `heightPairing_diagonal` | `src/lean (file by file)` | open | `sorryAx` |
-| `regulator_pos` | `src/lean (file by file)` | open | `sorryAx` |
+| `heightPairing_pos_def` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_well_defined` | `src/lean (file by file)` | open | `sorryAx` |
-| `EllipticCurve.discriminant_c4_c6_relation` | `src/lean (file by file)` | open | `sorryAx` |
-| `EllipticCurve.j_1728_iff` | `src/lean (file by file)` | open | `sorryAx` |
-| `BSD.EllipticCurve.jInvariant_classifies` | `src/lean (file by file)` | open | `sorryAx` |
-| `BSD.EllipticCurve.jInvariant_zero_special` | `src/lean (file by file)` | open | `sorryAx` |
-| `BSD.EllipticCurve.jInvariant_1728_special` | `src/lean (file by file)` | open | `sorryAx` |
-| `weilHeight_nonneg` | `src/lean (file by file)` | open | `sorryAx` |
 | `finitePointsBoundedHeight` | `src/lean (file by file)` | open | `sorryAx` |
 | `neronTateHeight_quadratic` | `src/lean (file by file)` | open | `sorryAx` |
 | `neronTateHeight_parallelogram` | `src/lean (file by file)` | open | `sorryAx` |
 | `heightPairing_symmetric` | `src/lean (file by file)` | open | `sorryAx` |
 | `heightPairing_bilinear_left` | `src/lean (file by file)` | open | `sorryAx` |
+| `heightPairing_bilinear_right` | `src/lean (file by file)` | open | `sorryAx` |
 | `heightPairing_diagonal` | `src/lean (file by file)` | open | `sorryAx` |
 | `heightPairing_pos_def` | `src/lean (file by file)` | open | `sorryAx` |
 | `heightPairing_torsion` | `src/lean (file by file)` | open | `sorryAx` |
+| `heightPairingMatrix_symmetric` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_basis_independent` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_pos` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_rank_zero` | `src/lean (file by file)` | open | `sorryAx` |
+| `regulator_rank_one` | `src/lean (file by file)` | open | `sorryAx` |
+| `regulator_rank_two` | `src/lean (file by file)` | open | `sorryAx` |
 | `heightPairing_cauchy_schwarz` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_nonneg` | `src/lean (file by file)` | open | `sorryAx` |
 | `globalHeight_local_sum` | `src/lean (file by file)` | open | `sorryAx` |
-| `regulator_in_bsd` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_rank_growth` | `src/lean (file by file)` | open | `sorryAx` |
 | `regulator_computation_converges` | `src/lean (file by file)` | open | `sorryAx` |
 | `absoluteConvergenceRegion` | `src/lean (file by file)` | open | `sorryAx` |
 | `conditionalConvergenceRegion` | `src/lean (file by file)` | open | `sorryAx` |
 | `lowerDerivativesVanish` | `src/lean (file by file)` | open | `LFunctionClassical`, `sorryAx` |
 | `leadingDerivative_nonzero` | `src/lean (file by file)` | open | `LFunctionClassical`, `sorryAx` |
+| `taylorExpansionAt1` | `src/lean (file by file)` | conditional | `LFunctionClassical`, `LFunction_entire` |
 | `leadingCoefficient_limit` | `src/lean (file by file)` | open | `LFunctionClassical`, `sorryAx` |
 | `thetaSeries_convergence` | `src/lean (file by file)` | open | `sorryAx` |
 | `weakBSD_implies_parity` | `src/lean (file by file)` | open | `rootNumber`, `sorryAx` |
 | `functionalEquation_from_modularity` | `src/lean (file by file)` | conditional | `LFunctionClassical`, `functionalEquation`, `rootNumber` |
-| `tamagawa_bound` | `src/lean (file by file)` | open | `sorryAx` |
-| `tateAlgorithm_valid` | `src/lean (file by file)` | open | `sorryAx` |
-| `tamagawa_good` | `src/lean (file by file)` | open | `sorryAx` |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 225 `theorem`/`lemma` (counting copies). The kernel checked 207 of them (108 closed, 22 conditional, 77 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 18 the kernel has no result:
+The `.lean` files of the verified commit declare 225 `theorem`/`lemma` (counting copies). The kernel checked 219 of them (133 closed, 22 conditional, 64 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 6 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: the written proof does not pass the kernel | 15 |
 | the file did not compile (an error in it or in a file it imports) | 3 |
+| checked file by file: the written proof does not pass the kernel | 3 |
 
 ### MVEI corrections
 

@@ -1,3 +1,61 @@
+--- a/src/lean/HEU/Core/ZF/Classical.lean
++++ b/src/lean/HEU/Core/ZF/Classical.lean
+@@ -14,7 +14,8 @@
+ namespace HEU.Core.ZF
+ 
+ /-- Law of Excluded Middle -/
+-axiom em : ∀ (P : Prop), P ∨ ¬P
++theorem em : ∀ (P : Prop), P ∨ ¬P := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ /-- Double Negation Elimination -/
+ theorem dne : ∀ (P : Prop), ¬¬P → P := by
+--- a/src/lean/HEU/Problems/BSD/BSD.lean
++++ b/src/lean/HEU/Problems/BSD/BSD.lean
+@@ -70,11 +70,14 @@
+   sorry  -- Copilot: expand
+ 
+ /-- Mordell-Weil theorem -/
+-axiom MordellWeil (E : X_BSD) :
+-    ∃ r : Nat, rank E = r
++theorem MordellWeil (E : X_BSD) :
++    ∃ r : Nat, rank E = r := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (simp_all [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (unfold HEU.Problems.BSD.X_BSD HEU.Problems.BSD.rank; decide; done) | (unfold HEU.Problems.BSD.X_BSD HEU.Problems.BSD.rank; rfl; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; omega; done) | (intros; simp only [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; omega; done) | (intros; simp_all [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (intro x; cases x <;> simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (constructor <;> simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (norm_num [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (intros; norm_num [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank] at *; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; ring; done) | (unfold HEU.Problems.BSD.X_BSD HEU.Problems.BSD.rank; ring; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; linarith; done) | (exact?; done)
+ 
+ /-- Tate-Shafarevich group finiteness -/
+-axiom ShaFiniteness (E : X_BSD) :
++theorem ShaFiniteness (E : X_BSD) :
+     True  -- Placeholder for Sha finiteness
++:= by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.BSD.X_BSD]; done) | (simp_all [HEU.Problems.BSD.X_BSD]; done) | (unfold HEU.Problems.BSD.X_BSD; decide; done) | (unfold HEU.Problems.BSD.X_BSD; rfl; done) | (simp [HEU.Problems.BSD.X_BSD]; omega; done) | (intros; simp only [HEU.Problems.BSD.X_BSD]; omega; done) | (intros; simp_all [HEU.Problems.BSD.X_BSD]; done) | (intro x; cases x <;> simp [HEU.Problems.BSD.X_BSD]; done) | (constructor <;> simp [HEU.Problems.BSD.X_BSD]; done) | (norm_num [HEU.Problems.BSD.X_BSD]; done) | (intros; norm_num [HEU.Problems.BSD.X_BSD] at *; done) | (simp [HEU.Problems.BSD.X_BSD]; ring; done) | (unfold HEU.Problems.BSD.X_BSD; ring; done) | (simp [HEU.Problems.BSD.X_BSD]; linarith; done) | (exact?; done)
+ 
+ end HEU.Problems.BSD
+--- a/src/lean/HEU/Problems/Hodge/Hodge.lean
++++ b/src/lean/HEU/Problems/Hodge/Hodge.lean
+@@ -71,8 +71,9 @@
+   sorry  -- Copilot: expand
+ 
+ /-- Lefschetz theorem on (1,1) classes -/
+-axiom Lefschetz_1_1 (c : X_Hodge) :
+-    c.degree = 2 → isHodgeType c = true → isAlgebraic c
++theorem Lefschetz_1_1 (c : X_Hodge) :
++    c.degree = 2 → isHodgeType c = true → isAlgebraic c := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (simp_all [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (unfold HEU.Problems.Hodge.X_Hodge HEU.Problems.Hodge.isHodgeType HEU.Problems.Hodge.isAlgebraic; decide; done) | (unfold HEU.Problems.Hodge.X_Hodge HEU.Problems.Hodge.isHodgeType HEU.Problems.Hodge.isAlgebraic; rfl; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; omega; done) | (intros; simp only [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; omega; done) | (intros; simp_all [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (intro x; cases x <;> simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (constructor <;> simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (norm_num [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (intros; norm_num [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic] at *; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; ring; done) | (unfold HEU.Problems.Hodge.X_Hodge HEU.Problems.Hodge.isHodgeType HEU.Problems.Hodge.isAlgebraic; ring; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; linarith; done) | (exact?; done)
+ 
+ /-- Deligne's theorem on absolute Hodge cycles -/
+ axiom Deligne_absolute_Hodge :
+--- a/src/lean/HEU/Problems/NS/Equivalence_NS.lean
++++ b/src/lean/HEU/Problems/NS/Equivalence_NS.lean
+@@ -41,8 +41,7 @@
+ /-- UBO validity implies NS regularity -/
+ theorem UBO_valid_implies_NS :
+     valid UBO_NS → NS_statement := by
+-  intro h
+-  sorry  -- Copilot: expand
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ /-- NS regularity implies UBO validity -/
+ theorem NS_implies_UBO_valid :
 --- a/src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean
 +++ b/src/lean/HEU/Problems/PvsNP/Equivalence_PNP.lean
 @@ -44,7 +44,7 @@
@@ -9,6 +67,18 @@
  
  /-- UBO validity implies P = NP -/
  theorem UBO_valid_implies_P_eq_NP :
+--- a/src/lean/HEU/Problems/PvsNP/X_PNP.lean
++++ b/src/lean/HEU/Problems/PvsNP/X_PNP.lean
+@@ -81,7 +81,8 @@
+   p.timeComplexity ≤ q.timeComplexity + 10
+ 
+ /-- Cook-Levin: SAT is NP-complete -/
+-axiom cookLevin : isNPCompleteClass SAT
++theorem cookLevin : isNPCompleteClass SAT := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (simp_all [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (unfold HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT; decide; done) | (unfold HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT; rfl; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; omega; done) | (intros; simp only [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; omega; done) | (intros; simp_all [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (intro x; cases x <;> simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (constructor <;> simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (norm_num [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (intros; norm_num [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT] at *; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; ring; done) | (unfold HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT; ring; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; linarith; done) | (exact?; done)
+ 
+ /-- NP-completeness transitivity -/
+ axiom npComplete_transitive (p q : X_PNP) :
 --- a/src/lean/HEU/Problems/RH/Lemmas_RH.lean
 +++ b/src/lean/HEU/Problems/RH/Lemmas_RH.lean
 @@ -72,7 +72,6 @@

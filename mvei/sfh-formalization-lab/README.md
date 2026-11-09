@@ -11,11 +11,11 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-05T15:19:16+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-06T00:22:08+00:00, on commit `b770052dbe60a6ab123f127ea1b82499619d6f2b`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 3 | 0 | 17 | 1 / 0 / 15 / 3 / 20 |
+| `formal/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 10 | 0 | 25 | 1 / 0 / 16 / 4 / 15 |
 | `problems/p-vs-np/approximation-logic/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 1 / 0 / 0 / 2 / 0 |
 | `problems/p-vs-np/formal-proofs/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
 | `problems/p-vs-np/formalization/lean` | v4.3.0 | failed | 0 | 0 | 0 | 0 / 0 / 3 / 2 / 2 |
@@ -24,14 +24,19 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `b770052dbe60a6ab123f1
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 5 |
-| Unique (name + statement) | 5 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 2 |
+| Counting each project | 12 |
+| Unique (name + statement) | 12 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 3 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
+| `EfficientReduction.efficient` | `formal/lean` | open | `sorryAx` |
+| `EfficientReduction.mk.inj` | `formal/lean` | open | `sorryAx` |
+| `EfficientReduction.mk.injEq` | `formal/lean` | open | `sorryAx` |
+| `EfficientReduction.mk.sizeOf_spec` | `formal/lean` | open | `sorryAx` |
+| `EfficientReduction.preserve` | `formal/lean` | open | `sorryAx` |
 | `PvsNP_L0001_RAM_Circuit_equiv` | `formal/lean` | open | `time_complexity`, `RAMMachine`, `UniformCircuit`, `sorryAx` |
 | `PvsNP_L0001_TM_RAM_equiv` | `formal/lean` | open | `time_complexity`, `TuringMachine`, `RAMMachine`, `sorryAx` |
 | `PvsNP_L0002_P_definition` | `formal/lean` | open | `TuringMachine`, `time_complexity`, `sorryAx` |
@@ -49,6 +54,9 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `b770052dbe60a6ab123f1
 | `PvsNP_L1003_Karp_Lipton` | `formal/lean` | open | `NP`, `computes`, `PH`, `Sigma2P`, `sorryAx` |
 | `PvsNP_L1004_Shannon_bound` | `formal/lean` | open | `RandomBooleanFunction`, `circuit_size`, `sorryAx` |
 | `PvsNP_L1005_need_explicit_hardness` | `formal/lean` | open | `NP`, `computes`, `Explicit`, `sorryAx` |
+| `SC_monotone` | `formal/lean` | open | `sorryAx` |
+| `SC_poly_of_repr` | `formal/lean` | open | `sorryAx` |
+| `cost_ge_SC` | `formal/lean` | open | `sorryAx` |
 | `Barriers.relativization_barrier` | `formal/lean (file by file)` | open | `sorryAx`, `Barriers.ComplexityClassWithOracle`, `Barriers.Oracle` |
 | `Complexity.P_subset_NP` | `formal/lean (file by file)` | open | `sorryAx` |
 | `Complexity.NP_subset_EXP` | `formal/lean (file by file)` | open | `sorryAx` |
@@ -60,10 +68,11 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `b770052dbe60a6ab123f1
 | `MasterLemma.ToyExamples.conservation_via_master_lemma` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP_resolution_via_circuits` | `formal/lean (file by file)` | open | `CircuitSize`, `NP`, `P`, `SAT`, `sorryAx` |
 | `PvsNP_resolution_via_algorithm` | `formal/lean (file by file)` | open | `NP`, `P`, `SAT`, `computation_time`, `sorryAx` |
-| `cost_ge_SC` | `formal/lean (file by file)` | open | `sorryAx` |
-| `SC_poly_of_repr` | `formal/lean (file by file)` | open | `sorryAx` |
+| `P_neq_NP_equivalence` | `formal/lean (file by file)` | open | `sorryAx` |
 | `SC_oracle_dependent` | `formal/lean (file by file)` | open | `sorryAx` |
 | `non_relativizing_requires_structure` | `formal/lean (file by file)` | open | `sorryAx` |
+| `invariance_theorem` | `formal/lean (file by file)` | open | `sorryAx` |
+| `all_repr_superpoly_of_SC_superpoly` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Operators.parallelism_linear_speedup` | `problems/p-vs-np/formalization/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.p_eq_np_eliminates_creativity` | `problems/p-vs-np/formalization/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.structural_implies_classical` | `problems/p-vs-np/formalization/lean (file by file)` | open | `sorryAx` |
@@ -72,12 +81,12 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `b770052dbe60a6ab123f1
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 39 of them (2 closed, 0 conditional, 37 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 35 the kernel has no result:
+The `.lean` files of the verified commit declare 74 `theorem`/`lemma` (counting copies). The kernel checked 43 of them (2 closed, 0 conditional, 41 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 31 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 22 |
-| checked file by file: the written proof does not pass the kernel | 13 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 17 |
+| checked file by file: the written proof does not pass the kernel | 14 |
 
 ### MVEI corrections
 

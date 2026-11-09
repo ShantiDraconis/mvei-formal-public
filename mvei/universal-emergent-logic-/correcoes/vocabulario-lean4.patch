@@ -482,19 +482,6 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -128,9 +131,9 @@
-   the essential oscillation of R on the fiber exceeds K times the measure of B -/
-   curvature_cond : ∀ (B : Set res_sys.D) (hB : MeasurableSet B) 
-       (hB_pos : 0 < μ (res_sys.π ⁻¹' B)),
--    let fiber_B := res_sys.π ⁻¹' B
--    let R_max := sSup {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → res_sys.R u ≤ M}
--    let R_min := sInf {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → M ≤ res_sys.R u}
-+    (let fiber_B := res_sys.π ⁻¹' B)
-+    (let R_max := sSup {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → res_sys.R u ≤ M})
-+    (let R_min := sInf {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → M ≤ res_sys.R u})
-     R_max - R_min ≥ K * (μ B).toReal
- 
- /-- **Theorem 1' (Quantitative Closure Obstruction with Curvature)**
 @@ -280,6 +283,7 @@
  Closure Obstruction Theorem - the quantitative version.
  
@@ -627,15 +614,6 @@
  /-! ## Residue Structure -/
  
  /-- The residue R measures the "hidden information" or "vertical component"
-@@ -83,7 +88,7 @@
-   is bounded below by K times the measure of B -/
-   curvature_cond : ∀ (B : Set sys.D) (hB : MeasurableSet B) 
-       (hB_pos : 0 < sys.μ (sys.π ⁻¹' B)),
--    let fiber_B := sys.π ⁻¹' B
-+    (let fiber_B := sys.π ⁻¹' B)
-     essSup res.R (sys.μ.restrict fiber_B) - 
-     essInf res.R (sys.μ.restrict fiber_B) ≥ K
- 
 --- a/formalization/lean/LRE/Core/QuantitativeExamples.lean
 +++ b/formalization/lean/LRE/Core/QuantitativeExamples.lean
 @@ -10,6 +10,8 @@
@@ -1021,17 +999,6 @@
  namespace LRE.Examples
  
  open MeasureTheory
-@@ -132,8 +134,8 @@
- structure ToyModelODE (params : ToyModelParams) where
-   /-- dx/dt = f(x) + k·sign(y)·√(2(R(x,y) - |y|)) -/
-   dx_dt : ℝ → ℝ → ℝ → ℝ := fun t x y =>
--    let R := residue_full x y
--    let coupling := params.k * (if y ≥ 0 then 1 else -1) * 
-+    (let R := residue_full x y)
-+    (let coupling := params.k * (if y ≥ 0 then 1 else -1) *) 
-                     Real.sqrt (max 0 (2 * (R - |y|)))
-     f_logistic x + coupling
-   
 --- a/formalization/lean/LRE/Examples.lean
 +++ b/formalization/lean/LRE/Examples.lean
 @@ -11,6 +11,10 @@
@@ -1083,15 +1050,6 @@
  /-! ## Vertical and Horizontal Spaces -/
  
  /-- The vertical subspace at a point c ∈ C consists of tangent vectors
-@@ -92,7 +96,7 @@
-   -- Key property: Non-zero curvature implies path-dependence
-   nonzero_implies_holonomy : Ω ≠ 0 → 
-     ∃ (γ : ℝ → D) (c : C), 
--      let c_end := conn.horizontal_lift (bundle.projection.π c) c γ sorry 1
-+      (let c_end := conn.horizontal_lift (bundle.projection.π c) c γ sorry 1)
-       c_end ≠ c  -- Parallel transport around a loop doesn't return to start
- 
- /-- The residual curvature form as a 2-form.
 --- a/formalization/lean/LRE/Final.lean
 +++ b/formalization/lean/LRE/Final.lean
 @@ -24,6 +24,9 @@
@@ -1335,15 +1293,6 @@
  
  /-
  Copyright (c) 2025 ShantiDraconis. All rights reserved.
-@@ -53,7 +58,7 @@
-   -/
-   curvature_condition : ∀ (B : Set sys.D), MeasurableSet B → 
-     0 < μ (sys.π ⁻¹' B) →
--    let fiber_B := sys.π ⁻¹' B
-+    (let fiber_B := sys.π ⁻¹' B)
-     ∃ (M_sup M_inf : ℝ≥0∞), 
-       (∀ᵐ u ∂(μ.restrict fiber_B), sys.R u ≤ M_sup) ∧
-       (∀ε > 0, 0 < μ {u ∈ fiber_B | M_inf - ε < sys.R u}) ∧
 @@ -300,6 +305,7 @@
  ## Curvature 2-Form
  
@@ -1374,15 +1323,6 @@
  
  /-! ## The Toy Model System -/
  
-@@ -119,7 +124,7 @@
-   solution : ℝ → ℝ × ℝ → ℝ × ℝ
-   satisfies_ode : ∀ t ⟨x, y⟩,
-     -- Enhanced dynamics with residual feedback
--    let R := |y| + (1/2) * y^2
-+    (let R := |y| + (1/2) * y^2)
-     let residual_feedback := k * Real.sign y * Real.sqrt (2 * (R - |y|))
-     let forcing := β * Real.sin (ω * t)
-     -- dx/dt = f(x) + residual_feedback
 --- a/formalization/lean/LRE/Geometry/ToyModelComplete.lean
 +++ b/formalization/lean/LRE/Geometry/ToyModelComplete.lean
 @@ -27,6 +27,8 @@
@@ -4119,17 +4059,6 @@
  
  /-!
  # Berry-Keating Operator and Riemann Hypothesis
-@@ -64,8 +68,8 @@
-   
-   /-- Operator application: H = (1/2)(xp + px) -/
-   apply : L2Space → L2Space := fun f =>
--    let xpf := x_op.apply (p_op.apply f)
--    let pxf := p_op.apply (x_op.apply f)
-+    (let xpf := x_op.apply (p_op.apply f))
-+    (let pxf := p_op.apply (x_op.apply f))
-     fun t => (xpf t + pxf t) / 2
-   
-   /-- H is symmetric (Hermitian) -/
 @@ -89,8 +93,8 @@
  
  /-- Theorem: All eigenvalues of H are real -/

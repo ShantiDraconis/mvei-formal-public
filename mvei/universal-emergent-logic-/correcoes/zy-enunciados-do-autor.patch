@@ -304,17 +304,11 @@
      (f : sys.C → α) :
      SigmaPiMeasurable sys f ↔ 
      ∃ (F : sys.D → α), Measurable F ∧ f = F ∘ sys.π := by
-@@ -131,10 +132,10 @@
-   the essential oscillation of R on the fiber exceeds K times the measure of B -/
-   curvature_cond : ∀ (B : Set res_sys.D) (hB : MeasurableSet B) 
-       (hB_pos : 0 < μ (res_sys.π ⁻¹' B)),
--    (let fiber_B := res_sys.π ⁻¹' B)
--    (let R_max := sSup {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → res_sys.R u ≤ M})
--    (let R_min := sInf {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → M ≤ res_sys.R u})
+@@ -134,7 +135,7 @@
+     let fiber_B := res_sys.π ⁻¹' B
+     let R_max := sSup {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → res_sys.R u ≤ M}
+     let R_min := sInf {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → M ≤ res_sys.R u}
 -    R_max - R_min ≥ K * (μ B).toReal
-+    let fiber_B := res_sys.π ⁻¹' B
-+    let R_max := sSup {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → res_sys.R u ≤ M}
-+    let R_min := sInf {M : ℝ≥0∞ | ∀ᵐ u ∂μ, u ∈ fiber_B → M ≤ res_sys.R u}
 +    R_max - R_min ≥ (K : ℝ≥0∞) * μ fiber_B
  
  /-- **Theorem 1' (Quantitative Closure Obstruction with Curvature)**
@@ -602,15 +596,6 @@
    /-- Curvature constant -/
    K : ℝ≥0
    /-- Must be strictly positive -/
-@@ -88,7 +88,7 @@
-   is bounded below by K times the measure of B -/
-   curvature_cond : ∀ (B : Set sys.D) (hB : MeasurableSet B) 
-       (hB_pos : 0 < sys.μ (sys.π ⁻¹' B)),
--    (let fiber_B := sys.π ⁻¹' B)
-+    let fiber_B := sys.π ⁻¹' B
-     essSup res.R (sys.μ.restrict fiber_B) - 
-     essInf res.R (sys.μ.restrict fiber_B) ≥ K
- 
 @@ -99,15 +99,15 @@
    {c | sys.π c = d}
  
@@ -833,15 +818,6 @@
    /-- The curvature constant K > 0 -/
    K : ℝ
    /-- K must be positive -/
-@@ -58,7 +58,7 @@
-   -/
-   curvature_condition : ∀ (B : Set sys.D), MeasurableSet B → 
-     0 < μ (sys.π ⁻¹' B) →
--    (let fiber_B := sys.π ⁻¹' B)
-+    let fiber_B := sys.π ⁻¹' B
-     ∃ (M_sup M_inf : ℝ≥0∞), 
-       (∀ᵐ u ∂(μ.restrict fiber_B), sys.R u ≤ M_sup) ∧
-       (∀ε > 0, 0 < μ {u ∈ fiber_B | M_inf - ε < sys.R u}) ∧
 @@ -84,7 +84,7 @@
  -/
  theorem residue_fibration 

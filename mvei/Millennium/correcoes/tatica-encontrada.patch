@@ -49,6 +49,21 @@
  
  /-- Modularity (Wiles et al.): All elliptic curves over ℚ are modular -/
  axiom modularity (E : EllipticCurveQ) :
+--- a/formal/lean/Core/MetaTheorem.lean
++++ b/formal/lean/Core/MetaTheorem.lean
+@@ -52,9 +52,11 @@
+ deriving DecidableEq, Repr
+ 
+ /-- Invariance principle: results from Ax_B transfer to all scenarios -/
+-axiom invariance_principle : 
++theorem invariance_principle : 
+   ∀ (prop : Bool), -- Simplified: a property provable from base axioms
+     prop → prop  -- holds in all extensions
++:= by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)
+ 
+ /-- The meta-theorem statement -/
+ theorem mega_theorem : 
 --- a/formal/lean/Millennium/BSD_Instance.lean
 +++ b/formal/lean/Millennium/BSD_Instance.lean
 @@ -47,7 +47,9 @@
@@ -459,6 +474,42 @@
  
  /-- Vorticity bound under RH -/
  lemma vorticity_bound_rh
+--- a/src/lean/Millennium/Complexity/DeltaNP.lean
++++ b/src/lean/Millennium/Complexity/DeltaNP.lean
+@@ -94,7 +94,8 @@
+ 
+ /- P ⊆ NP is a standard theorem: deterministic solutions are also
+     non-deterministic solutions, so C_det ≥ C_ndet (in complexity cost terms) -/
+-axiom P_subseteq_NP : ∀ L : Language, C_ndet L ≤ C_det L
++theorem P_subseteq_NP : ∀ L : Language, C_ndet L ≤ C_det L := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Language, C_ndet, C_det]; done) | (simp_all [Language, C_ndet, C_det]; done) | (unfold Language C_ndet C_det; decide; done) | (unfold Language C_ndet C_det; rfl; done) | (simp [Language, C_ndet, C_det]; omega; done) | (intros; simp only [Language, C_ndet, C_det]; omega; done) | (intros; simp_all [Language, C_ndet, C_det]; done) | (intro x; cases x <;> simp [Language, C_ndet, C_det]; done) | (constructor <;> simp [Language, C_ndet, C_det]; done) | (norm_num [Language, C_ndet, C_det]; done) | (intros; norm_num [Language, C_ndet, C_det] at *; done) | (simp [Language, C_ndet, C_det]; ring; done) | (unfold Language C_ndet C_det; ring; done) | (simp [Language, C_ndet, C_det]; linarith; done) | (exact?; done)
+ 
+ /- The gap is always non-negative (since P ⊆ NP) -/
+ theorem deltaNP_nonneg (L : Language) : 0 ≤ deltaNP L := by
+@@ -168,8 +169,9 @@
+     This is the contrapositive of the standard result that
+     if P = NP, all NP-complete problems are in P.
+ -/
+-axiom npc_gap_zero_implies_p_eq_np :
+-  ∀ L : Language, IsNPComplete L → deltaNP L = 0 → PEqualsNP
++theorem npc_gap_zero_implies_p_eq_np :
++  ∀ L : Language, IsNPComplete L → deltaNP L = 0 → PEqualsNP := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; done) | (simp_all [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; done) | (unfold Language DeltaNP.deltaNP DeltaNP.PEqualsNP; decide; done) | (unfold Language DeltaNP.deltaNP DeltaNP.PEqualsNP; rfl; done) | (simp [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; omega; done) | (intros; simp only [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; omega; done) | (intros; simp_all [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; done) | (intro x; cases x <;> simp [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; done) | (constructor <;> simp [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; done) | (norm_num [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; done) | (intros; norm_num [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP] at *; done) | (simp [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; ring; done) | (unfold Language DeltaNP.deltaNP DeltaNP.PEqualsNP; ring; done) | (simp [Language, DeltaNP.deltaNP, DeltaNP.PEqualsNP]; linarith; done) | (exact?; done)
+ 
+ end DeltaNP
+ 
+--- a/src/lean/Millennium/Logical/Consistency.lean
++++ b/src/lean/Millennium/Logical/Consistency.lean
+@@ -11,7 +11,8 @@
+   ¬(T ∧ ¬T)
+ 
+ /-- ZFC consistency (assumed) -/
+-axiom zfc_consistent : TheoryConsistent True
++theorem zfc_consistent : TheoryConsistent True := by
++  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Millennium.Logical.TheoryConsistent]; done) | (simp_all [Millennium.Logical.TheoryConsistent]; done) | (unfold Millennium.Logical.TheoryConsistent; decide; done) | (unfold Millennium.Logical.TheoryConsistent; rfl; done) | (simp [Millennium.Logical.TheoryConsistent]; omega; done) | (intros; simp only [Millennium.Logical.TheoryConsistent]; omega; done) | (intros; simp_all [Millennium.Logical.TheoryConsistent]; done) | (intro x; cases x <;> simp [Millennium.Logical.TheoryConsistent]; done) | (constructor <;> simp [Millennium.Logical.TheoryConsistent]; done) | (norm_num [Millennium.Logical.TheoryConsistent]; done) | (intros; norm_num [Millennium.Logical.TheoryConsistent] at *; done) | (simp [Millennium.Logical.TheoryConsistent]; ring; done) | (unfold Millennium.Logical.TheoryConsistent; ring; done) | (simp [Millennium.Logical.TheoryConsistent]; linarith; done) | (exact?; done)
+ 
+ /-- Each scenario is consistent with ZFC -/
+ theorem scenarios_consistent_with_zfc :
 --- a/src/lean/Millennium/Logical/Invariance.lean
 +++ b/src/lean/Millennium/Logical/Invariance.lean
 @@ -36,11 +36,12 @@

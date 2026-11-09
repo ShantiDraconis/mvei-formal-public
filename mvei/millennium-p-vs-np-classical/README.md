@@ -11,53 +11,50 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-05T15:19:16+00:00, on commit `1990622af0a0c2ebcbe450979ba48f62025c736d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-06T00:22:08+00:00, on commit `1990622af0a0c2ebcbe450979ba48f62025c736d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `formal/lean4` | v4.36.0-rc2 | partial | 79 | 0 | 21 | — |
-| `formal/lean4/PvsNP` | v4.19.0 | OK | 14 | 0 | 0 | 13 / 0 / 23 / 1 / 5 |
+| `formal/lean4` | v4.36.0-rc2 | partial | 162 | 1 | 20 | — |
+| `formal/lean4/PvsNP` | v4.19.0 | OK | 14 | 0 | 0 | 21 / 1 / 20 / 0 / 0 |
 | `src/lean4` | padrão do elan | failed | 0 | 0 | 0 | 43 / 0 / 41 / 0 / 40 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 149 |
-| Unique (name + statement) | 121 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 66 |
+| Counting each project | 240 |
+| Unique (name + statement) | 199 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 96 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
 | Theorem | Project | State | Axioms beyond the standard three |
 |---|---|---|---|
 | `PvsNP.L_strictly_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.NPComplete_in_P_implies_P_eq_NP` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.NP_eq_NP_verifier` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.NP_strictly_subset_NEXP` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.NP_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.PSPACE_subset_EXP` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.P_eq_NP_iff` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_eq_NP_iff_NPC_in_P` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_eq_P'` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_strictly_subset_EXP` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.P_subset_NP` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.P_subset_NP_inter_coNP` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.P_subset_PSPACE` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.SAT_NP_hard` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.SAT_in_NP` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.ThreeSAT_is_NPComplete` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.cook_levin` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.eq_of_SAT_in_P` | `formal/lean4` | open | `sorryAx` |
-| `PvsNP.eq_of_npc_in_p` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.master_equality` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.master_theorem_program` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.natural_proofs_insufficient` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.proof_must_not_algebrize` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.proof_must_not_relativize` | `formal/lean4` | conditional | `PvsNP.baker_gill_solovay` |
 | `PvsNP.space_hierarchy` | `formal/lean4` | open | `sorryAx` |
 | `PvsNP.time_hierarchy` | `formal/lean4` | open | `sorryAx` |
+| `PvsNP.proof_must_not_relativize` | `formal/lean4/PvsNP (file by file)` | conditional | `PvsNP.baker_gill_solovay` |
 | `PvsNP.natural_proofs_insufficient` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.proof_must_not_algebrize` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_eq_P'` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.NP_eq_NP_verifier` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.P_subset_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.P_subset_NP_inter_coNP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.P_eq_NP_iff` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.eq_of_npc_in_p` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_eq_NP_iff_NPC_in_P` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.time_hierarchy` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.P_strictly_subset_EXP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
@@ -67,7 +64,8 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `1990622af0a0c2ebcbe45
 | `PvsNP.P_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.NP_subset_PSPACE` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.PSPACE_subset_EXP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
-| `PvsNP.NPComplete_in_P_implies_P_eq_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.master_equality` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
+| `PvsNP.master_theorem_program` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.SAT_in_NP` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.SAT_NP_hard` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
 | `PvsNP.cook_levin` | `formal/lean4/PvsNP (file by file)` | open | `sorryAx` |
@@ -117,12 +115,11 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `1990622af0a0c2ebcbe45
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 168 `theorem`/`lemma` (counting copies). The kernel checked 122 of them (58 closed, 0 conditional, 64 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 46 the kernel has no result:
+The `.lean` files of the verified commit declare 168 `theorem`/`lemma` (counting copies). The kernel checked 128 of them (66 closed, 1 conditional, 61 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 40 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 45 |
-| checked file by file: the written proof does not pass the kernel | 1 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 40 |
 
 ### MVEI corrections
 

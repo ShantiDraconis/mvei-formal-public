@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T15:19:16+00:00",
+ "generated_at": "2026-11-06T00:22:08+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -16,8 +16,8 @@
    "needs_mathlib": true,
    "build_ok": false,
    "build_seconds": 0.0,
-   "build_error": "error: ././././BSD/EllipticCurve/RegulatorHeightPairing.lean:127:26: function expected at | error: ././././BSD/EllipticCurve/RegulatorHeightPairing.lean:132:6: unknown identifier 'height_zero' | error: ././././BSD/EllipticCurve/RegulatorHeightPairing.lean:127:38: unsolved goals",
-   "sorry_warnings": 95,
+   "build_error": "error: ././././BSD/EllipticCurve/RegulatorHeightPairing.lean:458:4: invalid {...} notation, structure type expected | error: ././././BSD/EllipticCurve/RegulatorHeightPairing.lean:459:4: unexpected token ':='; expected command | error: Lean exited with code 1",
+   "sorry_warnings": 78,
    "reconstructed": true,
    "bridges": [
     {
@@ -25,6 +25,29 @@
      "project": "src/lean",
      "theorem": "BSD.EllipticCurve.canonicalHeight_quadratic",
      "statement": "∀ {K : Type u_1} [inst : Field K] {E : BSD.EllipticCurve.EllipticCurve K} (P : BSD.EllipticCurve.Point E) (n : ℤ),   BSD.EllipticCurve.canonicalHeight sorry = ↑n ^ 2 * BSD.EllipticCurve.canonicalHeight P",
+     "verdict": "aberta",
+     "tactic": "",
+     "attempts": [
+      "fechar: decide",
+      "fechar: rfl",
+      "fechar: trivial",
+      "fechar: simp",
+      "fechar: omega",
+      "fechar: simp_all",
+      "fechar: exact?",
+      "refutar: intro h; simp_all",
+      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
+      "refutar: intro h; exact @h Bool true true rfl",
+      "refutar: intro h; exact @h Nat 0 0 rfl",
+      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
+      "refutar: decide"
+     ]
+    },
+    {
+     "repo": "millennium-birch-swinnerton-dyer-classical",
+     "project": "src/lean",
+     "theorem": "BSD.EllipticCurve.jInvariant_classifies",
+     "statement": "∀ {K : Type u_1} [inst : Field K] (E₁ E₂ : BSD.EllipticCurve.EllipticCurve K), E₁.jInvariant = E₂.jInvariant ↔ True",
      "verdict": "aberta",
      "tactic": "",
      "attempts": [
@@ -299,29 +322,6 @@
     {
      "repo": "millennium-birch-swinnerton-dyer-classical",
      "project": "src/lean",
-     "theorem": "EllipticCurve.canonical_height_decomposition",
-     "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point),   E.canonicalHeight P = E.localHeight_infty P + ∑' (p : { n // Nat.Prime n }), E.localHeight_p P ↑p",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
-    },
-    {
-     "repo": "millennium-birch-swinnerton-dyer-classical",
-     "project": "src/lean",
      "theorem": "EllipticCurve.euler_product_converges",
      "statement": "∀ (E : EllipticCurve ℚ) (s : ℂ),   s.re > 3 / 2 →     ∃ L,       Filter.Tendsto (fun N => ∏ p ∈ Finset.subtype Nat.Prime (Finset.range N), 1 / E.localFactor (↑p) s) Filter.atTop         (nhds L)",
      "verdict": "aberta",
@@ -391,54 +391,8 @@
     {
      "repo": "millennium-birch-swinnerton-dyer-classical",
      "project": "src/lean",
-     "theorem": "EllipticCurve.goodReductionFactor_factored",
-     "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [inst : Fact (Nat.Prime p)] (s : ℂ),   E.goodReduction p →     ∃ α β, α + β = ↑(E.a_p p) ∧ α * β = ↑p ∧ E.goodReductionFactor p s = (1 - α * ↑p ^ (-s)) * (1 - β * ↑p ^ (-s))",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
-    },
-    {
-     "repo": "millennium-birch-swinnerton-dyer-classical",
-     "project": "src/lean",
      "theorem": "EllipticCurve.height_bound_constant",
      "statement": "∀ (E : EllipticCurve ℚ), ∃ C, ∀ (P : E.Point), |E.naiveHeight P - E.canonicalHeight P| ≤ C",
-     "verdict": "aberta",
-     "tactic": "",
-     "attempts": [
-      "fechar: decide",
-      "fechar: rfl",
-      "fechar: trivial",
-      "fechar: simp",
-      "fechar: omega",
-      "fechar: simp_all",
-      "fechar: exact?",
-      "refutar: intro h; simp_all",
-      "refutar: intro h; exact @h PUnit PUnit.unit PUnit.unit rfl",
-      "refutar: intro h; exact @h Bool true true rfl",
-      "refutar: intro h; exact @h Nat 0 0 rfl",
-      "refutar: intro h; exact absurd (@h PUnit) (by simp)",
-      "refutar: decide"
-     ]
-    },
-    {
-     "repo": "millennium-birch-swinnerton-dyer-classical",
-     "project": "src/lean",
-     "theorem": "EllipticCurve.height_double",
-     "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point), E.canonicalHeight (P + P) = 4 * E.canonicalHeight P",
      "verdict": "aberta",
      "tactic": "",
      "attempts": [
@@ -644,8 +598,8 @@
     {
      "repo": "millennium-birch-swinnerton-dyer-classical",
      "project": "src/lean",
-     "theorem": "Weierstrass.discriminant_transform",
-     "statement": "∀ {K : Type u} [inst : Field K] (T : Weierstrass.Transformation K) (a1 a2 a3 a4 a6 : K),   match Weierstrass.transformCoefficients T a1 a2 a3 a4 a6 with   | (a1', a2', a3', a4', a6') => discriminant' K a1' a2' a3' a4' a6' = discriminant' K a1 a2 a3 a4 a6 / T.u ^ 12",
+     "theorem": "tamagawa_good",
+     "statement": "∀ (E : EllipticCurveData) (p : ℕ) [hp : Fact (Nat.Prime p)], p ∉ badPrimes E → tamagawaAt E p = 1",
      "verdict": "aberta",
      "tactic": "",
      "attempts": [
@@ -666,16 +620,6 @@
     }
    ],
    "declared_axioms": [
-    {
-     "name": "BSD.LFunction.L_analytic_continuation",
-     "module": "BSD.LFunction.AnalyticContinuationAxioms",
-     "statement": "BSD.LFunction.LFunc → True"
-    },
-    {
-     "name": "BSD.LFunction.functional_equation",
-     "module": "BSD.LFunction.FunctionalEquationAxioms",
-     "statement": "BSD.LFunction.LFunc → True"
-    },
     {
      "name": "BSD.Rank.mordell_weil_finitely_generated",
      "module": "BSD.Rank.AlgebraicRank",
@@ -727,16 +671,6 @@
      "statement": "∀ (E : EllipticCurve ℚ), True → E.analyticRank = 0 → E.StrongBSD"
     },
     {
-     "name": "EllipticCurve.a_multiplicative",
-     "module": "BSD.LFunction.Definition",
-     "statement": "∀ (E : EllipticCurve ℚ) (m n : ℕ) (hm : m > 0) (hn : n > 0), m.Coprime n → E.a_n (m * n) ⋯ = E.a_n m hm * E.a_n n hn"
-    },
-    {
-     "name": "EllipticCurve.a_prime_power_recurrence",
-     "module": "BSD.LFunction.Definition",
-     "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [hp : Fact (Nat.Prime p)],   ∀ k ≥ 2, True → E.a_n (p ^ k) ⋯ = E.a_p p * E.a_n (p ^ (k - 1)) ⋯ - ↑p * E.a_n (p ^ (k - 2)) ⋯"
-    },
-    {
      "name": "EllipticCurve.analyticRank_spec",
      "module": "BSD.LFunction.Definition",
      "statement": "∀ (E : EllipticCurve ℚ),   (∀ k < E.analyticRank, deriv^[k] E.L_function 1 = 0) ∧ deriv^[E.analyticRank] E.L_function 1 ≠ 0"
@@ -745,16 +679,6 @@
      "name": "EllipticCurve.canonicalHeight_limit",
      "module": "BSD.EllipticCurve.Heights",
      "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point),   ∃ L, Filter.Tendsto (fun n => E.naiveHeight (n • P) / ↑n ^ 2) Filter.atTop (nhds L)"
-    },
-    {
-     "name": "EllipticCurve.curve_11a1_analytic_rank_0",
-     "module": "BSD.BSD.KnownCases",
-     "statement": "EllipticCurve.curve_11a1.analyticRank = 0"
-    },
-    {
-     "name": "EllipticCurve.curve_11a1_rank_0",
-     "module": "BSD.BSD.KnownCases",
-     "statement": "EllipticCurve.curve_11a1.algebraicRank = 0"
     },
     {
      "name": "EllipticCurve.curve_37a1_analytic_rank_1",
@@ -772,19 +696,9 @@
      "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [inst : Fact (Nat.Prime p)],   E.goodReduction p → ∃ α β, α + β = ↑(E.a_p p) ∧ α * β = ↑p ∧ α.abs = √↑p ∧ β.abs = √↑p"
     },
     {
-     "name": "EllipticCurve.functional_equation",
-     "module": "BSD.LFunction.Definition",
-     "statement": "∀ (E : EllipticCurve ℚ) (s : ℂ), E.completed_L s = ↑E.rootNumber * E.completed_L (2 - s)"
-    },
-    {
      "name": "EllipticCurve.galois_rep_exists",
      "module": "BSD.BSD.ReductionSchemes",
      "statement": "∀ (E : EllipticCurve ℚ) (ℓ : ℕ) [inst : Fact (Nat.Prime ℓ)], E.GaloisRepresentation ℓ"
-    },
-    {
-     "name": "EllipticCurve.galois_rep_modular",
-     "module": "BSD.BSD.ReductionSchemes",
-     "statement": "∀ (ℓ : ℕ) [inst : Fact (Nat.Prime ℓ)], True"
     },
     {
      "name": "EllipticCurve.gross_zagier_kolyvagin",
@@ -800,11 +714,6 @@
      "name": "EllipticCurve.is_modular",
      "module": "BSD.BSD.ReductionSchemes",
      "statement": "True"
-    },
-    {
-     "name": "EllipticCurve.kolyvagin_method",
-     "module": "BSD.BSD.ReductionSchemes",
-     "statement": "∀ (E : EllipticCurve ℚ), EllipticCurve.HeegnerSystem → E.analyticRank = 1 → E.algebraicRank = 1 ∧ True"
     },
     {
      "name": "EllipticCurve.kolyvagin_rank_zero",
@@ -835,11 +744,6 @@
      "name": "EllipticCurve.realPeriod_pos",
      "module": "BSD.BSD.Statement",
      "statement": "∀ (E : EllipticCurve ℚ), E.realPeriod > 0"
-    },
-    {
-     "name": "EllipticCurve.selmer_bounds_rank",
-     "module": "BSD.BSD.ReductionSchemes",
-     "statement": "ℕ → True"
     },
     {
      "name": "EllipticCurve.sha_finite_if_BSD",
@@ -936,6 +840,17 @@
      "status": "fechado"
     },
     {
+     "name": "BSD.EllipticCurve.EllipticCurve.discriminant.eq_1",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u_2} [inst : Field K] (E : BSD.EllipticCurve.EllipticCurve K),   E.discriminant = E.toWeierstrassEquation.discriminant",
+     "status": "fechado"
+    },
+    {
      "name": "BSD.EllipticCurve.EllipticCurve.isNonsingular",
      "module": "BSD.EllipticCurve.Weierstrass",
      "axioms": [
@@ -944,6 +859,17 @@
       "Quot.sound"
      ],
      "statement": "∀ {K : Type u_3} [inst : Field K] (self : BSD.EllipticCurve.EllipticCurve K), self.toWeierstrassEquation.IsNonsingular",
+     "status": "fechado"
+    },
+    {
+     "name": "BSD.EllipticCurve.EllipticCurve.jInvariant.eq_1",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u_2} [inst : Field K] (E : BSD.EllipticCurve.EllipticCurve K),   E.jInvariant = E.toWeierstrassEquation.c₄ * E.toWeierstrassEquation.c₄ * E.toWeierstrassEquation.c₄ / E.discriminant",
      "status": "fechado"
     },
     {
@@ -1295,6 +1221,17 @@
      "status": "fechado"
     },
     {
+     "name": "BSD.EllipticCurve.WeierstrassEquation.IsNonsingular.eq_1",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u_2} [inst : Field K] (W : BSD.EllipticCurve.WeierstrassEquation K), W.IsNonsingular = (W.discriminant ≠ 0)",
+     "status": "fechado"
+    },
+    {
      "name": "BSD.EllipticCurve.WeierstrassEquation.b₂.eq_1",
      "module": "BSD.EllipticCurve.Weierstrass",
      "axioms": [],
@@ -1320,6 +1257,13 @@
      "module": "BSD.EllipticCurve.Weierstrass",
      "axioms": [],
      "statement": "∀ {R : Type u_1} [inst : Ring R] (W : BSD.EllipticCurve.WeierstrassEquation R),   W.b₈ = W.a₁ * W.a₁ * W.a₆ + 4 * W.a₂ * W.a₆ - W.a₁ * W.a₃ * W.a₄ + W.a₂ * W.a₃ * W.a₃ - W.a₄ * W.a₄",
+     "status": "fechado"
+    },
+    {
+     "name": "BSD.EllipticCurve.WeierstrassEquation.c₄.eq_1",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [],
+     "statement": "∀ {R : Type u_1} [inst : Ring R] (W : BSD.EllipticCurve.WeierstrassEquation R), W.c₄ = W.b₂ * W.b₂ - 24 * W.b₄",
      "status": "fechado"
     },
     {
@@ -1444,6 +1388,40 @@
      "status": "fechado"
     },
     {
+     "name": "BSD.EllipticCurve.jInvariant_1728_special",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u_1} [inst : Field K] (E : BSD.EllipticCurve.EllipticCurve K), E.jInvariant = 1728 → True",
+     "status": "fechado"
+    },
+    {
+     "name": "BSD.EllipticCurve.jInvariant_classifies",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "sorryAx"
+     ],
+     "statement": "∀ {K : Type u_1} [inst : Field K] (E₁ E₂ : BSD.EllipticCurve.EllipticCurve K), E₁.jInvariant = E₂.jInvariant ↔ True",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "BSD.EllipticCurve.jInvariant_zero_special",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u_1} [inst : Field K] (E : BSD.EllipticCurve.EllipticCurve K), E.jInvariant = 0 → True",
+     "status": "fechado"
+    },
+    {
      "name": "BSD.EllipticCurve.zero_add'",
      "module": "BSD.EllipticCurve.GroupLaw",
      "axioms": [
@@ -1459,6 +1437,13 @@
      "module": "BSD.LFunction.Definition",
      "axioms": [],
      "statement": "sizeOf { } = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "BSD.LFunction.L_analytic_continuation",
+     "module": "BSD.LFunction.AnalyticContinuationAxioms",
+     "axioms": [],
+     "statement": "BSD.LFunction.LFunc → True",
      "status": "fechado"
     },
     {
@@ -1480,6 +1465,13 @@
      "module": "BSD.LFunction.FunctionalEquationAxioms",
      "axioms": [],
      "statement": "sizeOf BSD.LFunction.RootNumber.plus = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "BSD.LFunction.functional_equation",
+     "module": "BSD.LFunction.FunctionalEquationAxioms",
+     "axioms": [],
+     "statement": "BSD.LFunction.LFunc → True",
      "status": "fechado"
     },
     {
@@ -1644,12 +1636,10 @@
      "axioms": [
       "propext",
       "Classical.choice",
-      "Quot.sound",
-      "EllipticCurve.curve_11a1_rank_0",
-      "EllipticCurve.curve_11a1_analytic_rank_0"
+      "Quot.sound"
      ],
      "statement": "EllipticCurve.curve_11a1.WeakBSD",
-     "status": "condicional"
+     "status": "fechado"
     },
     {
      "name": "EllipticCurve.BSD_37a1",
@@ -2644,6 +2634,28 @@
      "status": "fechado"
     },
     {
+     "name": "EllipticCurve.a_multiplicative",
+     "module": "BSD.LFunction.Definition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (m n : ℕ) (hm : m > 0) (hn : n > 0), m.Coprime n → E.a_n (m * n) ⋯ = E.a_n m hm * E.a_n n hn",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.a_prime_power_recurrence",
+     "module": "BSD.LFunction.Definition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [hp : Fact (Nat.Prime p)],   ∀ k ≥ 2, True → E.a_n (p ^ k) ⋯ = E.a_p p * E.a_n (p ^ (k - 1)) ⋯ - ↑p * E.a_n (p ^ (k - 2)) ⋯",
+     "status": "fechado"
+    },
+    {
      "name": "EllipticCurve.algebraicRank.eq_1",
      "module": "BSD.BSD.Statement",
      "axioms": [
@@ -2778,6 +2790,26 @@
      "status": "fechado"
     },
     {
+     "name": "EllipticCurve.c4'.eq_1",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.c4' = c4 K E.a1 E.a2 E.a3 E.a4 E.a6",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.c6.eq_1",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K),   E.c6 =     -(computeAuxiliary K E.a1 E.a2 E.a3 E.a4 E.a6).b2 ^ 3 +         36 * (computeAuxiliary K E.a1 E.a2 E.a3 E.a4 E.a6).b2 * (computeAuxiliary K E.a1 E.a2 E.a3 E.a4 E.a6).b4 -       216 * (computeAuxiliary K E.a1 E.a2 E.a3 E.a4 E.a6).b6",
+     "status": "fechado"
+    },
+    {
      "name": "EllipticCurve.canonicalHeight.eq_1",
      "module": "BSD.EllipticCurve.Heights",
      "axioms": [
@@ -2839,11 +2871,63 @@
      "axioms": [
       "propext",
       "Classical.choice",
-      "Quot.sound",
-      "sorryAx"
+      "Quot.sound"
      ],
      "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point),   E.canonicalHeight P = E.localHeight_infty P + ∑' (p : { n // Nat.Prime n }), E.localHeight_p P ↑p",
-     "status": "aberto-sorry"
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.completed_L.eq_1",
+     "module": "BSD.LFunction.Definition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (s : ℂ), E.completed_L s = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.curve_11a1_analytic_rank_0",
+     "module": "BSD.BSD.KnownCases",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "EllipticCurve.curve_11a1.analyticRank = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.curve_11a1_rank_0",
+     "module": "BSD.BSD.KnownCases",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "EllipticCurve.curve_11a1.algebraicRank = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.discriminant.eq_1",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.discriminant = discriminant' K E.a1 E.a2 E.a3 E.a4 E.a6",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.discriminant_c4_c6_relation",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), 1728 ≠ 0 → E.discriminant = (E.c4' ^ 3 - E.c6 ^ 2) / 1728",
+     "status": "fechado"
     },
     {
      "name": "EllipticCurve.discriminant_ne_zero",
@@ -2852,6 +2936,28 @@
       "propext"
      ],
      "statement": "∀ {K : Type u} [inst : Field K] (self : EllipticCurve K), discriminant' K self.a1 self.a2 self.a3 self.a4 self.a6 ≠ 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.discriminant_ne_zero'",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.discriminant ≠ 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.discriminant_transformation",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K], EllipticCurve K → ∀ (u : K), u ≠ 0 → K → K → K → True",
      "status": "fechado"
     },
     {
@@ -2889,6 +2995,17 @@
      "status": "fechado"
     },
     {
+     "name": "EllipticCurve.functional_equation",
+     "module": "BSD.LFunction.Definition",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (s : ℂ), E.completed_L s = ↑E.rootNumber * E.completed_L (2 - s)",
+     "status": "fechado"
+    },
+    {
      "name": "EllipticCurve.functional_equation_detailed",
      "module": "BSD.LFunction.FunctionalEquation",
      "axioms": [
@@ -2915,6 +3032,15 @@
      "status": "aberto-sorry"
     },
     {
+     "name": "EllipticCurve.galois_rep_modular",
+     "module": "BSD.BSD.ReductionSchemes",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (ℓ : ℕ) [inst : Fact (Nat.Prime ℓ)], True",
+     "status": "fechado"
+    },
+    {
      "name": "EllipticCurve.gamma_at_one",
      "module": "BSD.LFunction.FunctionalEquation",
      "axioms": [
@@ -2926,16 +3052,26 @@
      "status": "fechado"
     },
     {
+     "name": "EllipticCurve.goodReductionFactor.eq_1",
+     "module": "BSD.LFunction.EulerFactors",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [inst : Fact (Nat.Prime p)] (s : ℂ),   E.goodReductionFactor p s = 1 - ↑(E.a_p p) * ↑p ^ (-s) + ↑p ^ (1 - 2 * s)",
+     "status": "fechado"
+    },
+    {
      "name": "EllipticCurve.goodReductionFactor_factored",
      "module": "BSD.LFunction.EulerFactors",
      "axioms": [
       "propext",
       "Classical.choice",
-      "Quot.sound",
-      "sorryAx"
+      "Quot.sound"
      ],
      "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [inst : Fact (Nat.Prime p)] (s : ℂ),   E.goodReduction p →     ∃ α β, α + β = ↑(E.a_p p) ∧ α * β = ↑p ∧ E.goodReductionFactor p s = (1 - α * ↑p ^ (-s)) * (1 - β * ↑p ^ (-s))",
-     "status": "aberto-sorry"
+     "status": "fechado"
     },
     {
      "name": "EllipticCurve.heightMatrix.eq_1",
@@ -3021,11 +3157,10 @@
      "axioms": [
       "propext",
       "Classical.choice",
-      "Quot.sound",
-      "sorryAx"
+      "Quot.sound"
      ],
      "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point), E.canonicalHeight (P + P) = 4 * E.canonicalHeight P",
-     "status": "aberto-sorry"
+     "status": "fechado"
     },
     {
      "name": "EllipticCurve.height_smul'",
@@ -3045,6 +3180,57 @@
       "propext"
      ],
      "statement": "∀ {K : Type u} [inst : Field K] (E1 E2 : EllipticCurve K),   (∃ (_ : E1.jInvariant = E2.jInvariant), True) ↔ E1.jInvariant = E2.jInvariant",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.jInvariant.eq_1",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.jInvariant = c4 K E.a1 E.a2 E.a3 E.a4 E.a6 ^ 3 / E.discriminant",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.j_1728_iff",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.jInvariant = 1728 ↔ E.c6 = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.j_invariant_formula",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.jInvariant = E.c4' ^ 3 / E.discriminant",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.j_zero_iff",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (E : EllipticCurve K), E.jInvariant = 0 ↔ E.c4' = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.kolyvagin_method",
+     "module": "BSD.BSD.ReductionSchemes",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ), EllipticCurve.HeegnerSystem → E.analyticRank = 1 → E.algebraicRank = 1 ∧ True",
      "status": "fechado"
     },
     {
@@ -3071,6 +3257,46 @@
      ],
      "statement": "∀ (E : EllipticCurve ℚ), E.leadingTerm ≠ 0",
      "status": "condicional"
+    },
+    {
+     "name": "EllipticCurve.localHeight_infty.eq_1",
+     "module": "BSD.Auxiliary.HeightPairings",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point), E.localHeight_infty P = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.localHeight_p.eq_1",
+     "module": "BSD.Auxiliary.HeightPairings",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (P : E.Point) (p : ℕ) [inst : Fact (Nat.Prime p)], E.localHeight_p P p = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.localRootNumber.eq_1",
+     "module": "MVEI_Refutacoes_FunctionalEquationO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ) (p : ℕ) [inst : Fact (Nat.Prime p)], E.localRootNumber p = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.localRootNumberInfty.eq_1",
+     "module": "MVEI_Refutacoes_FunctionalEquationO",
+     "axioms": [],
+     "statement": "EllipticCurve.localRootNumberInfty = -1",
+     "status": "fechado"
     },
     {
      "name": "EllipticCurve.mk.inj",
@@ -3326,6 +3552,13 @@
      "status": "fechado"
     },
     {
+     "name": "EllipticCurve.selmer_bounds_rank",
+     "module": "BSD.BSD.ReductionSchemes",
+     "axioms": [],
+     "statement": "ℕ → True",
+     "status": "fechado"
+    },
+    {
      "name": "EllipticCurve.shaOrder.eq_1",
      "module": "BSD.BSD.StrongBSD",
      "axioms": [
@@ -3334,6 +3567,26 @@
       "Quot.sound"
      ],
      "statement": "∀ (E : EllipticCurve ℚ), E.shaOrder = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.shortDiscriminant.eq_1",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (A B : K), EllipticCurve.shortDiscriminant A B = -16 * (4 * A ^ 3 + 27 * B ^ 2)",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurve.short_weierstrass_invariants",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (A B : K),   4 * A ^ 3 + 27 * B ^ 2 ≠ 0 →     EllipticCurve.shortDiscriminant A B = -16 * (4 * A ^ 3 + 27 * B ^ 2) ∧       1728 * (4 * A ^ 3) / (4 * A ^ 3 + 27 * B ^ 2) = 1728 * (4 * A ^ 3) / (4 * A ^ 3 + 27 * B ^ 2)",
      "status": "fechado"
     },
     {
@@ -3451,6 +3704,512 @@
      "status": "fechado"
     },
     {
+     "name": "EllipticCurveData.disc_ne_zero",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (self : EllipticCurveData),   self.a1 ^ 2 *             (self.a1 ^ 2 * self.a6 + 4 * self.a2 * self.a6 - self.a1 * self.a3 * self.a4 + self.a2 * self.a3 ^ 2 -               self.a4 ^ 2) -           8 * (2 * self.a4 + self.a1 * self.a3) ^ 3 -         27 * (self.a3 ^ 2 + 4 * self.a6) ^ 2 +       9 * (self.a1 ^ 2 + 4 * self.a2) * (2 * self.a4 + self.a1 * self.a3) * (self.a3 ^ 2 + 4 * self.a6) ≠",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurveData.mk.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {a1 a2 a3 a4 a6 : ℤ}   {disc_ne_zero :     a1 ^ 2 * (a1 ^ 2 * a6 + 4 * a2 * a6 - a1 * a3 * a4 + a2 * a3 ^ 2 - a4 ^ 2) - 8 * (2 * a4 + a1 * a3) ^ 3 -           27 * (a3 ^ 2 + 4 * a6) ^ 2 +         9 * (a1 ^ 2 + 4 * a2) * (2 * a4 + a1 * a3) * (a3 ^ 2 + 4 * a6) ≠       0}   {a1_1 a2_1 a3_1 a4_1 a6_1 : ℤ}   {disc_ne_zero_1 :     a1_1 ^ 2 * (a1_1 ^ 2 * a6_1 + 4 * a2_1 * a6_1 - a1_1 * a3_1 * a4_1 + a2",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurveData.mk.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a1 a2 a3 a4 a6 : ℤ)   (disc_ne_zero :     a1 ^ 2 * (a1 ^ 2 * a6 + 4 * a2 * a6 - a1 * a3 * a4 + a2 * a3 ^ 2 - a4 ^ 2) - 8 * (2 * a4 + a1 * a3) ^ 3 -           27 * (a3 ^ 2 + 4 * a6) ^ 2 +         9 * (a1 ^ 2 + 4 * a2) * (2 * a4 + a1 * a3) * (a3 ^ 2 + 4 * a6) ≠       0)   (a1_1 a2_1 a3_1 a4_1 a6_1 : ℤ)   (disc_ne_zero_1 :     a1_1 ^ 2 * (a1_1 ^ 2 * a6_1 + 4 * a2_1 * a6_1 - a1_1 * a3_1 * a4_1 + a2",
+     "status": "fechado"
+    },
+    {
+     "name": "EllipticCurveData.mk.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (a1 a2 a3 a4 a6 : ℤ)   (disc_ne_zero :     a1 ^ 2 * (a1 ^ 2 * a6 + 4 * a2 * a6 - a1 * a3 * a4 + a2 * a3 ^ 2 - a4 ^ 2) - 8 * (2 * a4 + a1 * a3) ^ 3 -           27 * (a3 ^ 2 + 4 * a6) ^ 2 +         9 * (a1 ^ 2 + 4 * a2) * (2 * a4 + a1 * a3) * (a3 ^ 2 + 4 * a6) ≠       0),   sizeOf { a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6, disc_ne_zero := disc_ne_zero } =     1 + sizeOf a1 + sizeOf a2 + s",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.I.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ {n n_1 : ℕ}, KodairaSymbol.I n = KodairaSymbol.I n_1 → n = n_1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.I.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (n n_1 : ℕ), (KodairaSymbol.I n = KodairaSymbol.I n_1) = (n = n_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.I.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (n : ℕ), sizeOf (KodairaSymbol.I n) = 1 + sizeOf n",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.II.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "sizeOf KodairaSymbol.II = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.III.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "sizeOf KodairaSymbol.III = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.IIIstar.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "sizeOf KodairaSymbol.IIIstar = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.IIstar.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "sizeOf KodairaSymbol.IIstar = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.IV.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "sizeOf KodairaSymbol.IV = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.IVstar.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "sizeOf KodairaSymbol.IVstar = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.Istar.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ {n n_1 : ℕ}, KodairaSymbol.Istar n = KodairaSymbol.Istar n_1 → n = n_1",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.Istar.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (n n_1 : ℕ), (KodairaSymbol.Istar n = KodairaSymbol.Istar n_1) = (n = n_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.Istar.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (n : ℕ), sizeOf (KodairaSymbol.Istar n) = 1 + sizeOf n",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_1",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (a : ℕ), (KodairaSymbol.I a).discriminantContribution = a",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_2",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "KodairaSymbol.II.discriminantContribution = 2",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_3",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "KodairaSymbol.III.discriminantContribution = 3",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_4",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "KodairaSymbol.IV.discriminantContribution = 4",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_5",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (a : ℕ), (KodairaSymbol.Istar a).discriminantContribution = a + 6",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_6",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "KodairaSymbol.IVstar.discriminantContribution = 8",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_7",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "KodairaSymbol.IIIstar.discriminantContribution = 9",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.discriminantContribution.eq_8",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "KodairaSymbol.IIstar.discriminantContribution = 10",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.isGood.eq_1",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "(KodairaSymbol.I 0).isGood = true",
+     "status": "fechado"
+    },
+    {
+     "name": "KodairaSymbol.isGood.eq_2",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (x : KodairaSymbol), (x = KodairaSymbol.I 0 → False) → x.isGood = false",
+     "status": "fechado"
+    },
+    {
+     "name": "LocalData.hp",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (self : LocalData), Nat.Prime self.p",
+     "status": "fechado"
+    },
+    {
+     "name": "LocalData.mk.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {p : ℕ} {hp : Nat.Prime p} {kodaira : KodairaSymbol} {splitComponentGroup : Bool} {starZeroData : Option (Fin 3)}   {p_1 : ℕ} {hp_1 : Nat.Prime p_1} {kodaira_1 : KodairaSymbol} {splitComponentGroup_1 : Bool}   {starZeroData_1 : Option (Fin 3)},   { p := p, hp := hp, kodaira := kodaira, splitComponentGroup := splitComponentGroup, starZeroData := starZeroData } =       { p := p_1, hp := hp_1, koda",
+     "status": "fechado"
+    },
+    {
+     "name": "LocalData.mk.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (p : ℕ) (hp : Nat.Prime p) (kodaira : KodairaSymbol) (splitComponentGroup : Bool) (starZeroData : Option (Fin 3))   (p_1 : ℕ) (hp_1 : Nat.Prime p_1) (kodaira_1 : KodairaSymbol) (splitComponentGroup_1 : Bool)   (starZeroData_1 : Option (Fin 3)),   ({ p := p, hp := hp, kodaira := kodaira, splitComponentGroup := splitComponentGroup, starZeroData := starZeroData } =       { p := p_1, hp := hp_1, kod",
+     "status": "fechado"
+    },
+    {
+     "name": "LocalData.mk.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (p : ℕ) (hp : Nat.Prime p) (kodaira : KodairaSymbol) (splitComponentGroup : Bool) (starZeroData : Option (Fin 3)),   sizeOf       { p := p, hp := hp, kodaira := kodaira, splitComponentGroup := splitComponentGroup,         starZeroData := starZeroData } =     1 + sizeOf p + sizeOf hp + sizeOf kodaira + sizeOf splitComponentGroup + sizeOf starZeroData",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.conductor_divides_discriminant_falso",
+     "module": "MVEI_Refutacoes_WeierstrassO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "¬∀ (E : EllipticCurve ℚ), ∃ k, discriminant' ℚ E.a1 E.a2 E.a3 E.a4 E.a6 = ↑(Weierstrass.conductor E) * ↑k",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.curva11a1.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ],
+     "statement": "MVEI.Refutacoes.curva11a1 =   { a1 := 0, a2 := -1, a3 := 1, a4 := -10, a6 := -20, disc_ne_zero := MVEI.Refutacoes.curva11a1._proof_1 }",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.curvaJ0.eq_1",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "MVEI.Refutacoes.curvaJ0 =   { toWeierstrassEquation := { a₁ := 0, a₂ := 0, a₃ := 0, a₄ := 0, a₆ := 1 },     isNonsingular := MVEI.Refutacoes.curvaJ0._proof_3 }",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.curvaJ1728.eq_1",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "MVEI.Refutacoes.curvaJ1728 =   { toWeierstrassEquation := { a₁ := 0, a₂ := 0, a₃ := 0, a₄ := 1, a₆ := 0 },     isNonsingular := MVEI.Refutacoes.curvaJ1728._proof_2 }",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.curvaOitavo.eq_1",
+     "module": "MVEI_Refutacoes_WeierstrassO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "MVEI.Refutacoes.curvaOitavo =   { a1 := 0, a2 := 0, a3 := 0, a4 := 0, a6 := 1 / 8, discriminant_ne_zero := MVEI.Refutacoes.curvaOitavo._proof_1 }",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.discriminant_c4_c6_relation_falso",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (E : EllipticCurve (ZMod 2)), E.discriminant = (E.c4' ^ 3 - E.c6 ^ 2) / 1728",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.fatoPrimoDoisO",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "Fact (Nat.Prime 2)",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.jInvariant_classifies_falso",
+     "module": "MVEI_Refutacoes_InvariantsO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "¬∀ (E₁ E₂ : BSD.EllipticCurve.EllipticCurve ℚ), E₁.jInvariant = E₂.jInvariant ↔ True",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.rootNumber_product_falso",
+     "module": "MVEI_Refutacoes_FunctionalEquationO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "¬∀ (E : EllipticCurve ℚ),     E.rootNumber = EllipticCurve.localRootNumberInfty * ∏' (p : { n // Nat.Prime n }), E.localRootNumber ↑p",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.tamagawa_good_falso",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "¬∀ (E : EllipticCurveData) (p : ℕ) [inst : Fact (Nat.Prime p)], p ∉ badPrimes E → tamagawaAt E p = 1",
+     "status": "fechado"
+    },
+    {
+     "name": "MVEI.Refutacoes.tamagawa_product_factorization_falso",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "¬∀ (v : TamagawaVerification),     v.expectedProduct = List.foldl (fun x1 x2 => x1 * x2) 1 (List.map (fun x => x.2) v.localTamagawa)",
+     "status": "fechado"
+    },
+    {
+     "name": "TamagawaVerification.mk.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ {label : String} {expectedProduct : ℕ} {localTamagawa : List (ℕ × ℕ)} {label_1 : String} {expectedProduct_1 : ℕ}   {localTamagawa_1 : List (ℕ × ℕ)},   { label := label, expectedProduct := expectedProduct, localTamagawa := localTamagawa } =       { label := label_1, expectedProduct := expectedProduct_1, localTamagawa := localTamagawa_1 } →     label = label_1 ∧ expectedProduct = expectedProduct_1",
+     "status": "fechado"
+    },
+    {
+     "name": "TamagawaVerification.mk.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (label : String) (expectedProduct : ℕ) (localTamagawa : List (ℕ × ℕ)) (label_1 : String) (expectedProduct_1 : ℕ)   (localTamagawa_1 : List (ℕ × ℕ)),   ({ label := label, expectedProduct := expectedProduct, localTamagawa := localTamagawa } =       { label := label_1, expectedProduct := expectedProduct_1, localTamagawa := localTamagawa_1 }) =     (label = label_1 ∧ expectedProduct = expectedProduc",
+     "status": "fechado"
+    },
+    {
+     "name": "TamagawaVerification.mk.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (label : String) (expectedProduct : ℕ) (localTamagawa : List (ℕ × ℕ)),   sizeOf { label := label, expectedProduct := expectedProduct, localTamagawa := localTamagawa } =     1 + sizeOf label + sizeOf expectedProduct + sizeOf localTamagawa",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.b2.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (t : TateInput), t.b2 = t.a1 ^ 2 + 4 * t.a2",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.b4.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (t : TateInput), t.b4 = 2 * t.a4 + t.a1 * t.a3",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.b6.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (t : TateInput), t.b6 = t.a3 ^ 2 + 4 * t.a6",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.b8.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (t : TateInput), t.b8 = t.a1 ^ 2 * t.a6 + 4 * t.a2 * t.a6 - t.a1 * t.a3 * t.a4 + t.a2 * t.a3 ^ 2 - t.a4 ^ 2",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.c4.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (t : TateInput), t.c4 = t.b2 ^ 2 - 24 * t.b4",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.c4Valuation.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (t : TateInput), t.c4Valuation = padicValNat t.p t.c4.natAbs",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.discValuation.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (t : TateInput), t.discValuation = padicValNat t.p t.discriminant.natAbs",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.discriminant.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (t : TateInput), t.discriminant = -t.b2 ^ 2 * t.b8 - 8 * t.b4 ^ 3 - 27 * t.b6 ^ 2 + 9 * t.b2 * t.b4 * t.b6",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.hp",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (self : TateInput), Nat.Prime self.p",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.mk.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ {p : ℕ} {hp : Nat.Prime p} {a1 a2 a3 a4 a6 : ℤ} {p_1 : ℕ} {hp_1 : Nat.Prime p_1} {a1_1 a2_1 a3_1 a4_1 a6_1 : ℤ},   { p := p, hp := hp, a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6 } =       { p := p_1, hp := hp_1, a1 := a1_1, a2 := a2_1, a3 := a3_1, a4 := a4_1, a6 := a6_1 } →     p = p_1 ∧ a1 = a1_1 ∧ a2 = a2_1 ∧ a3 = a3_1 ∧ a4 = a4_1 ∧ a6 = a6_1",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.mk.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (p : ℕ) (hp : Nat.Prime p) (a1 a2 a3 a4 a6 : ℤ) (p_1 : ℕ) (hp_1 : Nat.Prime p_1) (a1_1 a2_1 a3_1 a4_1 a6_1 : ℤ),   ({ p := p, hp := hp, a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6 } =       { p := p_1, hp := hp_1, a1 := a1_1, a2 := a2_1, a3 := a3_1, a4 := a4_1, a6 := a6_1 }) =     (p = p_1 ∧ a1 = a1_1 ∧ a2 = a2_1 ∧ a3 = a3_1 ∧ a4 = a4_1 ∧ a6 = a6_1)",
+     "status": "fechado"
+    },
+    {
+     "name": "TateInput.mk.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (p : ℕ) (hp : Nat.Prime p) (a1 a2 a3 a4 a6 : ℤ),   sizeOf { p := p, hp := hp, a1 := a1, a2 := a2, a3 := a3, a4 := a4, a6 := a6 } =     1 + sizeOf p + sizeOf hp + sizeOf a1 + sizeOf a2 + sizeOf a3 + sizeOf a4 + sizeOf a6",
+     "status": "fechado"
+    },
+    {
+     "name": "TateOutput.mk.inj",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ {kodaira : KodairaSymbol} {tamagawa conductorExp minDiscVal : ℕ} {kodaira_1 : KodairaSymbol}   {tamagawa_1 conductorExp_1 minDiscVal_1 : ℕ},   { kodaira := kodaira, tamagawa := tamagawa, conductorExp := conductorExp, minDiscVal := minDiscVal } =       { kodaira := kodaira_1, tamagawa := tamagawa_1, conductorExp := conductorExp_1, minDiscVal := minDiscVal_1 } →     kodaira = kodaira_1 ∧ tamagawa",
+     "status": "fechado"
+    },
+    {
+     "name": "TateOutput.mk.injEq",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (kodaira : KodairaSymbol) (tamagawa conductorExp minDiscVal : ℕ) (kodaira_1 : KodairaSymbol)   (tamagawa_1 conductorExp_1 minDiscVal_1 : ℕ),   ({ kodaira := kodaira, tamagawa := tamagawa, conductorExp := conductorExp, minDiscVal := minDiscVal } =       { kodaira := kodaira_1, tamagawa := tamagawa_1, conductorExp := conductorExp_1, minDiscVal := minDiscVal_1 }) =     (kodaira = kodaira_1 ∧ tamaga",
+     "status": "fechado"
+    },
+    {
+     "name": "TateOutput.mk.sizeOf_spec",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "∀ (kodaira : KodairaSymbol) (tamagawa conductorExp minDiscVal : ℕ),   sizeOf { kodaira := kodaira, tamagawa := tamagawa, conductorExp := conductorExp, minDiscVal := minDiscVal } =     1 + sizeOf kodaira + sizeOf tamagawa + sizeOf conductorExp + sizeOf minDiscVal",
+     "status": "fechado"
+    },
+    {
      "name": "Weierstrass.Conductor.mk.inj",
      "module": "BSD.EllipticCurve.Weierstrass",
      "axioms": [],
@@ -3553,6 +4312,17 @@
      "status": "fechado"
     },
     {
+     "name": "Weierstrass.conductor.eq_1",
+     "module": "MVEI_Refutacoes_WeierstrassO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurve ℚ), Weierstrass.conductor E = 1",
+     "status": "fechado"
+    },
+    {
      "name": "Weierstrass.conductor_divides_discriminant",
      "module": "BSD.EllipticCurve.Weierstrass",
      "axioms": [
@@ -3570,11 +4340,21 @@
      "axioms": [
       "propext",
       "Classical.choice",
-      "Quot.sound",
-      "sorryAx"
+      "Quot.sound"
      ],
      "statement": "∀ {K : Type u} [inst : Field K] (T : Weierstrass.Transformation K) (a1 a2 a3 a4 a6 : K),   match Weierstrass.transformCoefficients T a1 a2 a3 a4 a6 with   | (a1', a2', a3', a4', a6') => discriminant' K a1' a2' a3' a4' a6' = discriminant' K a1 a2 a3 a4 a6 / T.u ^ 12",
-     "status": "aberto-sorry"
+     "status": "fechado"
+    },
+    {
+     "name": "Weierstrass.transformCoefficients.eq_1",
+     "module": "BSD.EllipticCurve.Weierstrass",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ {K : Type u} [inst : Field K] (T : Weierstrass.Transformation K) (a1 a2 a3 a4 a6 : K),   Weierstrass.transformCoefficients T a1 a2 a3 a4 a6 =     ((a1 + 2 * T.s) / T.u, (a2 - T.s * a1 + 3 * T.r - T.s ^ 2) / T.u ^ 2, (a3 + T.r * a1 + 2 * T.t) / T.u ^ 3,       (a4 - T.s * a3 + 2 * T.r * a2 - (T.t + T.r * T.s) * a1 + 3 * T.r ^ 2 - 2 * T.s * T.t) / T.u ^ 4,       (a6 + T.r * a4 + T.r ^ 2 * a2 + T.r",
+     "status": "fechado"
     },
     {
      "name": "WeierstrassAuxiliary.mk.inj",
@@ -3600,6 +4380,34 @@
      "status": "fechado"
     },
     {
+     "name": "badPrimes.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurveData), badPrimes E = ∅",
+     "status": "fechado"
+    },
+    {
+     "name": "bsd_tamagawa_factor",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "EllipticCurveData → True",
+     "status": "fechado"
+    },
+    {
+     "name": "c4.eq_1",
+     "module": "BSD.EllipticCurve.Invariants",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (K : Type u) [inst : Field K] (a1 a2 a3 a4 a6 : K),   c4 K a1 a2 a3 a4 a6 = (computeAuxiliary K a1 a2 a3 a4 a6).b2 ^ 2 - 24 * (computeAuxiliary K a1 a2 a3 a4 a6).b4",
+     "status": "fechado"
+    },
+    {
      "name": "computeAuxiliary.eq_1",
      "module": "BSD.EllipticCurve.Basic",
      "axioms": [
@@ -3616,12 +4424,154 @@
      ],
      "statement": "∀ (K : Type u) [inst : Field K] (a1 a2 a3 a4 a6 : K),   discriminant' K a1 a2 a3 a4 a6 =     -(computeAuxiliary K a1 a2 a3 a4 a6).b2 ^ 2 * (computeAuxiliary K a1 a2 a3 a4 a6).b8 -           8 * (computeAuxiliary K a1 a2 a3 a4 a6).b4 ^ 3 -         27 * (computeAuxiliary K a1 a2 a3 a4 a6).b6 ^ 2 +       9 * (computeAuxiliary K a1 a2 a3 a4 a6).b2 * (computeAuxiliary K a1 a2 a3 a4 a6).b4 *         (co",
      "status": "fechado"
+    },
+    {
+     "name": "good_reduction_iff",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (t : TateInput), (tateAlgorithm t).kodaira.isGood = true ↔ t.discValuation = 0",
+     "status": "fechado"
+    },
+    {
+     "name": "knownTamagawaData.eq_1",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [],
+     "statement": "knownTamagawaData =   [{ label := \"11a1\", expectedProduct := 5, localTamagawa := [(11, 5)] },     { label := \"37a1\", expectedProduct := 1, localTamagawa := [(37, 1)] },     { label := \"32a2\", expectedProduct := 4, localTamagawa := [(2, 4)] },     { label := \"27a1\", expectedProduct := 3, localTamagawa := [(3, 3)] },     { label := \"14a1\", expectedProduct := 6, localTamagawa := [(2, 6), (7, 1)] }]",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawaAt.eq_1",
+     "module": "MVEI_Refutacoes_TamagawaNumbersO",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (E : EllipticCurveData) (p : ℕ) [hp : Fact (Nat.Prime p)],   tamagawaAt E p =     (tateAlgorithm { p := p, hp := ⋯, a1 := E.a1, a2 := E.a2, a3 := E.a3, a4 := E.a4, a6 := E.a6 }).tamagawa",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawaFromLocalData.eq_1",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (data : LocalData),   tamagawaFromLocalData data =     match data.kodaira with     | KodairaSymbol.I 0 => 1     | KodairaSymbol.I n =>       if data.splitComponentGroup = true then n       else         match n % 2 with         | 0 => 2         | x => 1     | KodairaSymbol.II => 1     | KodairaSymbol.III => 2     | KodairaSymbol.IV => if data.splitComponentGroup = true then 3 else 1     | Kodaira",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawaProduct_finite",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (E : EllipticCurveData), (↑(badPrimes E)).Finite",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawaProduct_pos",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+     ],
+     "statement": "∀ (E : EllipticCurveData), tamagawaProduct E > 0",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawa_bound",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (data : LocalData),   tamagawaFromLocalData data ≤     match data.kodaira with     | KodairaSymbol.I n => n.max 4     | x => 4",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawa_cassels_tate",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "EllipticCurveData → True",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawa_component_group",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "EllipticCurveData → ∀ (p : ℕ) [hp : Fact (Nat.Prime p)], True",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawa_good",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice",
+      "sorryAx"
+     ],
+     "statement": "∀ (E : EllipticCurveData) (p : ℕ) [hp : Fact (Nat.Prime p)], p ∉ badPrimes E → tamagawaAt E p = 1",
+     "status": "aberto-sorry"
+    },
+    {
+     "name": "tamagawa_positive",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Quot.sound"
+     ],
+     "statement": "∀ (data : LocalData), tamagawaFromLocalData data > 0",
+     "status": "fechado"
+    },
+    {
+     "name": "tamagawa_product_factorization",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ v ∈ knownTamagawaData,   v.expectedProduct = List.foldl (fun x1 x2 => x1 * x2) 1 (List.map (fun x => x.2) v.localTamagawa)",
+     "status": "fechado"
+    },
+    {
+     "name": "tateAlgorithm.eq_1",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (t : TateInput),   tateAlgorithm t =     if t.discValuation = 0 then { kodaira := KodairaSymbol.I 0, tamagawa := 1, conductorExp := 0, minDiscVal := 0 }     else       if t.c4Valuation = 0 then         let n := t.discValuation;         let split := true;         { kodaira := KodairaSymbol.I n, tamagawa := if split = true then n else if n % 2 = 0 then 2 else 1,           conductorExp := 1, minDis",
+     "status": "fechado"
+    },
+    {
+     "name": "tateAlgorithm_valid",
+     "module": "BSD.LFunction.TamagawaNumbers",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "statement": "∀ (t : TateInput),   let out := tateAlgorithm t;   out.tamagawa > 0 ∧ out.minDiscVal = out.kodaira.discriminantContribution",
+     "status": "fechado"
     }
    ],
    "integrity": [],
-   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com BSD, BSDMeta e o Mathlib v4.19.0 (alguns arquivos com erro)",
+   "note": "AVULSO: arquivos .lean sem lakefile; o MVEI montou um projeto com BSD, BSDMeta, MVEI_Refutacoes_ClassicalO, MVEI_Refutacoes_FunctionalEquationO, MVEI_Refutacoes_InvariantsO, MVEI_Refutacoes_RegulatorHeightPairingO, MVEI_Refutacoes_TamagawaNumbersO, MVEI_Refutacoes_W e o Mathlib v4.19.0 (alguns arquivos com erro)",
    "corrections": [],
-   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `BSD, .submodules `BSDMeta]\n",
+   "lakefile_gerado": "import Lake\nopen Lake DSL\n\npackage mveiReconstruido\n\nrequire mathlib from git\n  \"https://github.com/leanprover-community/mathlib4\" @ \"v4.19.0\"\n\n@[default_target] lean_lib MveiReconstruido where\n  srcDir := \".\"\n  globs := #[.submodules `BSD, .submodules `BSDMeta, .one `MVEI_Refutacoes_ClassicalO, .one `MVEI_Refutacoes_FunctionalEquationO, .one `MVEI_Refutacoes_InvariantsO, .one `MVEI_Refutacoes_RegulatorHeightPairingO, .one `MVEI_Refutacoes_TamagawaNumbersO, .one `MVEI_Refutacoes_WeierstrassO]\n",
    "avulso": true,
    "salvage": [
     {
@@ -3707,17 +4657,16 @@
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
      "linha": 210,
      "nome": "ShortWeierstrassClassical.j_zero_iff_A_zero",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 215,
+     "linha": 221,
      "nome": "ShortWeierstrassClassical.j_1728_iff_B_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -3729,7 +4678,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 261,
+     "linha": 267,
      "nome": "CurvePointClassical.neg_neg",
      "status": "fechado",
      "axioms": [
@@ -3740,7 +4689,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 295,
+     "linha": 301,
      "nome": "CurvePointClassical.toW_Δ",
      "status": "fechado",
      "axioms": [
@@ -3751,7 +4700,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 300,
+     "linha": 306,
      "nome": "CurvePointClassical.onCurve_iff",
      "status": "fechado",
      "axioms": [
@@ -3762,7 +4711,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 306,
+     "linha": 312,
      "nome": "CurvePointClassical.nonsingular_of_onCurve",
      "status": "fechado",
      "axioms": [
@@ -3773,7 +4722,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 312,
+     "linha": 318,
      "nome": "CurvePointClassical.chord_coords",
      "status": "fechado",
      "axioms": [
@@ -3784,7 +4733,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 336,
+     "linha": 342,
      "nome": "CurvePointClassical.tangent_coords",
      "status": "fechado",
      "axioms": [
@@ -3795,7 +4744,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 378,
+     "linha": 384,
      "nome": "CurvePointClassical.onCurve_of_equation",
      "status": "fechado",
      "axioms": [
@@ -3806,7 +4755,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 384,
+     "linha": 390,
      "nome": "CurvePointClassical.chord_onCurve",
      "status": "fechado",
      "axioms": [
@@ -3817,7 +4766,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 399,
+     "linha": 405,
      "nome": "CurvePointClassical.tangent_onCurve",
      "status": "fechado",
      "axioms": [
@@ -3828,7 +4777,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 456,
+     "linha": 462,
      "nome": "add_infinity_right",
      "status": "fechado",
      "axioms": [
@@ -3839,7 +4788,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 461,
+     "linha": 467,
      "nome": "add_infinity_left",
      "status": "fechado",
      "axioms": [
@@ -3850,7 +4799,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 473,
+     "linha": 479,
      "nome": "CurvePointClassical.some_eq_some",
      "status": "fechado",
      "axioms": [
@@ -3861,7 +4810,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 479,
+     "linha": 485,
      "nome": "CurvePointClassical.toPoint_injective",
      "status": "fechado",
      "axioms": [
@@ -3872,7 +4821,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 494,
+     "linha": 500,
      "nome": "CurvePointClassical.toPoint_neg",
      "status": "fechado",
      "axioms": [
@@ -3883,7 +4832,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 501,
+     "linha": 507,
      "nome": "CurvePointClassical.toPoint_add",
      "status": "fechado",
      "axioms": [
@@ -3894,7 +4843,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 535,
+     "linha": 541,
      "nome": "CurvePointClassical.add_neg",
      "status": "fechado",
      "axioms": [
@@ -3905,7 +4854,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 542,
+     "linha": 548,
      "nome": "CurvePointClassical.add_comm",
      "status": "fechado",
      "axioms": [
@@ -3916,7 +4865,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 547,
+     "linha": 553,
      "nome": "CurvePointClassical.add_assoc",
      "status": "fechado",
      "axioms": [
@@ -3927,7 +4876,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 589,
+     "linha": 595,
      "nome": "scalarMult_zero",
      "status": "fechado",
      "axioms": [
@@ -3938,7 +4887,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 593,
+     "linha": 599,
      "nome": "scalarMult_one",
      "status": "fechado",
      "axioms": [
@@ -3949,19 +4898,18 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 598,
+     "linha": 604,
      "nome": "scalarMult_add",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 676,
+     "linha": 696,
      "nome": "conductor_pos",
      "status": "fechado",
      "axioms": [
@@ -3972,31 +4920,29 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 680,
+     "linha": 700,
      "nome": "conductor_finite_bad_primes",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 702,
+     "linha": 724,
      "nome": "naiveHeight_nonneg",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 712,
+     "linha": 734,
      "nome": "finitePointsBoundedHeight",
      "status": "aberto-sorry",
      "axioms": [
@@ -4008,7 +4954,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 730,
+     "linha": 752,
      "nome": "canonicalHeight_nonneg",
      "status": "fechado",
      "axioms": [
@@ -4019,7 +4965,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 735,
+     "linha": 757,
      "nome": "canonicalHeight_zero_iff_torsion",
      "status": "aberto-sorry",
      "axioms": [
@@ -4031,39 +4977,29 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 741,
+     "linha": 763,
      "nome": "canonicalHeight_quadratic",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [canonicalHeightClassical, scalarMultInt]; done) | (simp_all [canonicalHeightClassical, scalarMultInt]; done) | (unfold canonicalHeightClassical scalarMultInt; decide; done) | (unfold canonicalHeightClassical scalarMultInt; rfl; done) | (simp [canonicalHeightClassical, scalarMultInt]; omega; done) | (intros; simp only [canonicalHeightClassical, scalarMultInt]; omega; done) | (intros; simp_all [canonicalHeightClassical, scalarMultInt]; done) | (intro x; cases x <;> simp [canonicalHeightClassical, scalarMultInt]; done) | (constructor <;> simp [canonicalHeightClassical, scalarMultInt]; done) | (norm_num [canonicalHeightClassical, scalarMultInt]; done) | (intros; norm_num [canonicalHeightClassical, scalarMultInt] at *; done) | (simp [canonicalHeightClassical, scalarMultInt]; ring; done) | (unfold canonicalHeightClassical scalarMultInt; ring; done) | (simp [canonicalHeightClassical, scalarMultInt]; linarith; done) | (exact?; done)"
-     }
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 747,
+     "linha": 769,
      "nome": "canonicalHeight_parallelogram",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [canonicalHeightClassical]; done) | (simp_all [canonicalHeightClassical]; done) | (unfold canonicalHeightClassical; decide; done) | (unfold canonicalHeightClassical; rfl; done) | (simp [canonicalHeightClassical]; omega; done) | (intros; simp only [canonicalHeightClassical]; omega; done) | (intros; simp_all [canonicalHeightClassical]; done) | (intro x; cases x <;> simp [canonicalHeightClassical]; done) | (constructor <;> simp [canonicalHeightClassical]; done) | (norm_num [canonicalHeightClassical]; done) | (intros; norm_num [canonicalHeightClassical] at *; done) | (simp [canonicalHeightClassical]; ring; done) | (unfold canonicalHeightClassical; ring; done) | (simp [canonicalHeightClassical]; linarith; done) | (exact?; done)"
-     }
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 758,
+     "linha": 780,
      "nome": "heightPairing_symmetric",
      "status": "fechado",
      "axioms": [
@@ -4074,8 +5010,30 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 765,
+     "linha": 787,
      "nome": "heightPairing_bilinear_left",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
+     "linha": 794,
+     "nome": "heightPairing_diagonal",
+     "status": "fechado",
+     "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    },
+    {
+     "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
+     "linha": 799,
+     "nome": "heightPairing_pos_def",
      "status": "aberto-sorry",
      "axioms": [
       "propext",
@@ -4086,38 +5044,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 771,
-     "nome": "heightPairing_diagonal",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [heightPairingClassical, canonicalHeightClassical]; done) | (simp_all [heightPairingClassical, canonicalHeightClassical]; done) | (unfold heightPairingClassical canonicalHeightClassical; decide; done) | (unfold heightPairingClassical canonicalHeightClassical; rfl; done) | (simp [heightPairingClassical, canonicalHeightClassical]; omega; done) | (intros; simp only [heightPairingClassical, canonicalHeightClassical]; omega; done) | (intros; simp_all [heightPairingClassical, canonicalHeightClassical]; done) | (intro x; cases x <;> simp [heightPairingClassical, canonicalHeightClassical]; done) | (constructor <;> simp [heightPairingClassical, canonicalHeightClassical]; done) | (norm_num [heightPairingClassical, canonicalHeightClassical]; done) | (intros; norm_num [heightPairingClassical, canonicalHeightClassical] at *; done) | (simp [heightPairingClassical, canonicalHeightClassical]; ring; done) | (unfold heightPairingClassical canonicalHeightClassical; ring; done) | (simp [heightPairingClassical, canonicalHeightClassical]; linarith; done) | (exact?; done)"
-     }
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 778,
-     "nome": "heightPairing_pos_def",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "erro": "linha 784: tactic 'rewrite' failed, did not find instance of the pattern in the target expression ∃ n > 0, scalarMultNat n ?P = CurvePointClassical.infinity E : EllipticCurveClassical ℚ P : CurvePointClassical E h : ∀ n > 0, scalarMultNat n P ≠ CurveP",
-     "coluna": 6,
-     "trecho": "  rw [⟦←⟧ canonicalHeight_zero_iff_tor"
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 798,
+     "linha": 820,
      "nome": "regulatorMatrix_symmetric",
      "status": "fechado",
      "axioms": [
@@ -4128,19 +5055,18 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 804,
+     "linha": 826,
      "nome": "regulator_pos",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 811,
+     "linha": 839,
      "nome": "regulator_well_defined",
      "status": "aberto-sorry",
      "axioms": [
@@ -4152,163 +5078,25 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 847,
+     "linha": 875,
      "nome": "tamagawaProduct_pos",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx"
-     ],
-     "erro": "linha 849: function expected at tamagawaProduct term has type ℕ",
-     "coluna": 30,
-     "trecho": "theorem tamagawaProduct_pos : ⟦t⟧amagawaProduct E > 0 := by"
+      "Classical.choice",
+      "Quot.sound"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/Classical.lean",
-     "linha": 880,
+     "linha": 908,
      "nome": "pointCount_bounds",
-     "status": "erro",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "erro": "linha 888: linarith failed to find a contradiction case left.a E : EllipticCurveClassical ℚ p : ℕ hp : Fact (Nat.Prime p) hgood : reductionTypeAt E p = ReductionType.good h : ↑|traceOfFrobenius E p hgood| ≤ 2 * √↑p a✝ : ↑p + 1 - 2 * √↑p > ↑p + 1 - ↑(t",
-     "coluna": 4,
-     "trecho": "    ⟦l⟧inarith [abs_nonneg (traceOfF",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [reductionTypeAt, traceOfFrobenius]; done) | (simp_all [reductionTypeAt, traceOfFrobenius]; done) | (unfold reductionTypeAt traceOfFrobenius; decide; done) | (unfold reductionTypeAt traceOfFrobenius; rfl; done) | (simp [reductionTypeAt, traceOfFrobenius]; omega; done) | (intros; simp only [reductionTypeAt, traceOfFrobenius]; omega; done) | (intros; simp_all [reductionTypeAt, traceOfFrobenius]; done) | (intro x; cases x <;> simp [reductionTypeAt, traceOfFrobenius]; done) | (constructor <;> simp [reductionTypeAt, traceOfFrobenius]; done) | (norm_num [reductionTypeAt, traceOfFrobenius]; done) | (intros; norm_num [reductionTypeAt, traceOfFrobenius] at *; done) | (simp [reductionTypeAt, traceOfFrobenius]; ring; done) | (unfold reductionTypeAt traceOfFrobenius; ring; done) | (simp [reductionTypeAt, traceOfFrobenius]; linarith; done) | (exact?; done)"
-     }
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 39,
-     "nome": "EllipticCurve.discriminant_c4_c6_relation",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 44,
-     "nome": "EllipticCurve.j_invariant_formula",
-     "status": "erro",
-     "axioms": [
-      "propext"
-     ],
-     "erro": "linha 49: no goals to be solved",
-     "coluna": 2,
-     "trecho": "  ⟦r⟧ing",
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.c4']; done) | (simp_all [EllipticCurve.c4']; done) | (unfold EllipticCurve.c4'; decide; done) | (unfold EllipticCurve.c4'; rfl; done) | (simp [EllipticCurve.c4']; omega; done) | (intros; simp only [EllipticCurve.c4']; omega; done) | (intros; simp_all [EllipticCurve.c4']; done) | (intro x; cases x <;> simp [EllipticCurve.c4']; done) | (constructor <;> simp [EllipticCurve.c4']; done) | (norm_num [EllipticCurve.c4']; done) | (intros; norm_num [EllipticCurve.c4'] at *; done) | (simp [EllipticCurve.c4']; ring; done) | (unfold EllipticCurve.c4'; ring; done) | (simp [EllipticCurve.c4']; linarith; done) | (exact?; done)"
-     }
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 50,
-     "nome": "EllipticCurve.short_weierstrass_invariants",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
      ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 60,
-     "nome": "EllipticCurve.j_zero_iff",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 78,
-     "nome": "EllipticCurve.j_1728_iff",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 83,
-     "nome": "EllipticCurve.discriminant_ne_zero'",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 87,
-     "nome": "EllipticCurve.discriminant_transformation",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 128,
-     "nome": "BSD.EllipticCurve.jInvariant_classifies",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 136,
-     "nome": "BSD.EllipticCurve.jInvariant_zero_special",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
-     }
-    },
-    {
-     "arquivo": "src/lean/BSD/EllipticCurve/Invariants.lean",
-     "linha": 142,
-     "nome": "BSD.EllipticCurve.jInvariant_1728_special",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
-     }
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
@@ -4325,20 +5113,16 @@
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
      "linha": 124,
      "nome": "QuadraticHeight.pairing_diagonal",
-     "status": "erro",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 127: function expected at height term has type ?m.5473",
-     "coluna": 26,
-     "trecho": "    bilinearPairing P P = ⟦h⟧eight P := by"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 137,
+     "linha": 134,
      "nome": "QuadraticHeight.pairing_bilinear_left",
      "status": "fechado",
      "axioms": [
@@ -4349,7 +5133,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 155,
+     "linha": 152,
      "nome": "QuadraticHeight.pairing_bilinear_right",
      "status": "fechado",
      "axioms": [
@@ -4360,19 +5144,18 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 195,
+     "linha": 192,
      "nome": "weilHeight_nonneg",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 204,
+     "linha": 200,
      "nome": "finitePointsBoundedHeight",
      "status": "aberto-sorry",
      "axioms": [
@@ -4384,7 +5167,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 221,
+     "linha": 217,
      "nome": "neronTateHeight_nonneg",
      "status": "fechado",
      "axioms": [
@@ -4395,7 +5178,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 225,
+     "linha": 221,
      "nome": "neronTateHeight_zero_iff_torsion",
      "status": "fechado",
      "axioms": [
@@ -4406,7 +5189,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 230,
+     "linha": 226,
      "nome": "neronTateHeight_quadratic",
      "status": "aberto-sorry",
      "axioms": [
@@ -4418,7 +5201,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 235,
+     "linha": 231,
      "nome": "neronTateHeight_parallelogram",
      "status": "aberto-sorry",
      "axioms": [
@@ -4430,7 +5213,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 251,
+     "linha": 247,
      "nome": "heightPairing_symmetric",
      "status": "aberto-sorry",
      "axioms": [
@@ -4442,7 +5225,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 258,
+     "linha": 254,
      "nome": "heightPairing_bilinear_left",
      "status": "aberto-sorry",
      "axioms": [
@@ -4454,22 +5237,19 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 264,
+     "linha": 260,
      "nome": "heightPairing_bilinear_right",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 269: tactic 'rewrite' failed, did not find instance of the pattern in the target expression heightPairing sorry ?R P Q R : EllipticCurvePoint ℚ ⊢ heightPairing sorry P = heightPairing P Q + heightPairing P R",
-     "coluna": 6,
-     "trecho": "  rw [⟦h⟧eightPairing_bilinear_left]"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 271,
+     "linha": 266,
      "nome": "heightPairing_diagonal",
      "status": "aberto-sorry",
      "axioms": [
@@ -4481,7 +5261,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 278,
+     "linha": 273,
      "nome": "heightPairing_pos_def",
      "status": "aberto-sorry",
      "axioms": [
@@ -4493,7 +5273,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 287,
+     "linha": 282,
      "nome": "heightPairing_torsion",
      "status": "aberto-sorry",
      "axioms": [
@@ -4505,22 +5285,19 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 310,
+     "linha": 305,
      "nome": "heightPairingMatrix_symmetric",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 314: tactic 'introN' failed, insufficient number of binders gens : List (EllipticCurvePoint ℚ) ⊢ (heightPairingMatrix gens).IsSymm",
-     "coluna": 8,
-     "trecho": "  intro ⟦i⟧ j"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 317,
+     "linha": 312,
      "nome": "regulator_basis_independent",
      "status": "aberto-sorry",
      "axioms": [
@@ -4532,7 +5309,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 325,
+     "linha": 320,
      "nome": "regulator_pos",
      "status": "aberto-sorry",
      "axioms": [
@@ -4544,7 +5321,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 333,
+     "linha": 328,
      "nome": "regulator_rank_zero",
      "status": "aberto-sorry",
      "axioms": [
@@ -4556,37 +5333,31 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 337,
+     "linha": 332,
      "nome": "regulator_rank_one",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 342: tactic 'rewrite' failed, did not find instance of the pattern in the target expression Matrix.det ?A P : EllipticCurvePoint ℚ ⊢ heightPairing P P = neronTateHeight P",
-     "coluna": 6,
-     "trecho": "  rw [⟦M⟧atrix.det_fin_one]"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 344,
+     "linha": 338,
      "nome": "regulator_rank_two",
-     "status": "erro",
+     "status": "aberto-sorry",
      "axioms": [
       "propext",
       "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 348: unsolved goals P Q : EllipticCurvePoint ℚ ⊢ heightPairingMatrix [P, Q] 0 0 * heightPairingMatrix [P, Q] 1 1 - heightPairingMatrix [P, Q] 0 1 * heightPairingMatrix [P, Q] 1 0 = heightPairing P P * heightPairing Q Q - heightPairing P Q ^ 2",
-     "coluna": 69,
-     "trecho": " Q - (heightPairing P Q)^2 := ⟦b⟧y"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 352,
+     "linha": 345,
      "nome": "heightPairing_cauchy_schwarz",
      "status": "aberto-sorry",
      "axioms": [
@@ -4598,7 +5369,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 358,
+     "linha": 351,
      "nome": "regulator_nonneg",
      "status": "aberto-sorry",
      "axioms": [
@@ -4610,7 +5381,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 391,
+     "linha": 384,
      "nome": "globalHeight_local_sum",
      "status": "aberto-sorry",
      "axioms": [
@@ -4622,7 +5393,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 397,
+     "linha": 390,
      "nome": "localHeight_product_formula",
      "status": "fechado",
      "axioms": [
@@ -4633,19 +5404,18 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 424,
+     "linha": 417,
      "nome": "regulator_in_bsd",
-     "status": "aberto-sorry",
+     "status": "fechado",
      "axioms": [
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
      ]
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 432,
+     "linha": 436,
      "nome": "regulator_rank_growth",
      "status": "aberto-sorry",
      "axioms": [
@@ -4657,7 +5427,7 @@
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 450,
+     "linha": 454,
      "nome": "canonicalHeight_error",
      "status": "erro",
      "axioms": [
@@ -4666,13 +5436,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 454: invalid {...} notation, structure type expected Real.le✝ |neronTateHeight P - computeCanonicalHeight P n| (C / 4 ^ n)",
+     "erro": "linha 458: invalid {...} notation, structure type expected Real.le✝ |neronTateHeight P - computeCanonicalHeight P n| (C / 4 ^ n)",
      "coluna": 4,
      "trecho": "    ⟦w⟧here C : ℝ := 0  -- Constant "
     },
     {
      "arquivo": "src/lean/BSD/EllipticCurve/RegulatorHeightPairing.lean",
-     "linha": 465,
+     "linha": 469,
      "nome": "regulator_computation_converges",
      "status": "aberto-sorry",
      "axioms": [
@@ -4684,7 +5454,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 144,
+     "linha": 145,
      "nome": "LSeriesCoefficients.a_multiplicative",
      "status": "fechado",
      "axioms": [
@@ -4694,7 +5464,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 149,
+     "linha": 150,
      "nome": "LSeriesCoefficients.a_one",
      "status": "fechado",
      "axioms": [
@@ -4704,7 +5474,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 186,
+     "linha": 187,
      "nome": "absoluteConvergenceRegion",
      "status": "aberto-sorry",
      "axioms": [
@@ -4716,7 +5486,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 194,
+     "linha": 195,
      "nome": "conditionalConvergenceRegion",
      "status": "aberto-sorry",
      "axioms": [
@@ -4728,7 +5498,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 202,
+     "linha": 203,
      "nome": "eulerProductEqualsDirichlet",
      "status": "fechado",
      "axioms": [
@@ -4739,17 +5509,17 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 238,
+     "linha": 239,
      "nome": "analyticRank_parity",
      "status": "erro",
      "axioms": [],
-     "erro": "linha 242: function expected at analyticRank_exists term has type ?m.7926",
+     "erro": "linha 243: function expected at analyticRank_exists term has type ?m.7928",
      "coluna": 20,
      "trecho": "    Even (Nat.find (⟦a⟧nalyticRank_exists L)) := by"
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 271,
+     "linha": 272,
      "nome": "lowerDerivativesVanish",
      "status": "aberto-sorry",
      "axioms": [
@@ -4762,7 +5532,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 276,
+     "linha": 277,
      "nome": "leadingDerivative_nonzero",
      "status": "aberto-sorry",
      "axioms": [
@@ -4775,23 +5545,20 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 285,
+     "linha": 286,
      "nome": "taylorExpansionAt1",
-     "status": "erro",
+     "status": "condicional",
      "axioms": [
       "LFunctionClassical",
+      "LFunction_entire",
       "propext",
-      "sorryAx",
       "Classical.choice",
       "Quot.sound"
-     ],
-     "erro": "linha 287: failed to synthesize Lattice ℂ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
-     "coluna": 41,
-     "trecho": "lorExpansionAt1 (s : ℂ) (hs : ⟦|⟧s - 1| < 1) :"
+     ]
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 291,
+     "linha": 298,
      "nome": "nearS1Behavior",
      "status": "erro",
      "axioms": [
@@ -4801,13 +5568,13 @@
       "Classical.choice",
       "Quot.sound"
      ],
-     "erro": "linha 293: failed to synthesize Lattice ℂ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "erro": "linha 300: failed to synthesize Lattice ℂ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
      "coluna": 53,
      "trecho": "(s : ℂ) (hs : s ≠ 1) (hnear : ⟦|⟧s - 1| < 1) :"
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 297,
+     "linha": 304,
      "nome": "leadingCoefficient_limit",
      "status": "aberto-sorry",
      "axioms": [
@@ -4820,7 +5587,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 317,
+     "linha": 324,
      "nome": "approximateL1_error",
      "status": "erro",
      "axioms": [
@@ -4828,13 +5595,13 @@
       "sorryAx",
       "Quot.sound"
      ],
-     "erro": "linha 321: failed to synthesize Lattice ℂ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+     "erro": "linha 328: failed to synthesize Lattice ℂ Additional diagnostic information may be available using the `set_option diagnostics true` command.",
      "coluna": 4,
      "trecho": "    ⟦|⟧LFunctionClassical L 1 - appr"
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 341,
+     "linha": 348,
      "nome": "thetaSeries_convergence",
      "status": "aberto-sorry",
      "axioms": [
@@ -4846,7 +5613,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 387,
+     "linha": 394,
      "nome": "weakBSD_implies_parity",
      "status": "aberto-sorry",
      "axioms": [
@@ -4859,7 +5626,7 @@
     },
     {
      "arquivo": "src/lean/BSD/LFunction/LSeriesExpansionS1.lean",
-     "linha": 433,
+     "linha": 440,
      "nome": "functionalEquation_from_modularity",
      "status": "condicional",
      "axioms": [
@@ -4872,117 +5639,74 @@
      ]
     },
     {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 191,
-     "nome": "tamagawa_positive",
-     "status": "fechado",
-     "axioms": [
-      "propext",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 197,
-     "nome": "tamagawa_bound",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 294,
-     "nome": "tateAlgorithm_valid",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 301,
-     "nome": "good_reduction_iff",
+     "arquivo": "src/lean/MVEI_Refutacoes_ClassicalO.lean",
+     "linha": 24,
+     "nome": "MVEI.Refutacoes.isomorphic_iff_same_j_falso",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "BSD.EllipticCurve.Classical"
      ]
     },
     {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 342,
-     "nome": "tamagawa_good",
-     "status": "aberto-sorry",
-     "axioms": [
-      "propext",
-      "sorryAx",
-      "Classical.choice",
-      "Quot.sound"
-     ]
-    },
-    {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 353,
-     "nome": "tamagawaProduct_pos",
+     "arquivo": "src/lean/MVEI_Refutacoes_ClassicalO.lean",
+     "linha": 38,
+     "nome": "MVEI.Refutacoes.j_1728_iff_B_zero_falso",
      "status": "fechado",
      "axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "BSD.EllipticCurve.Classical"
      ]
     },
     {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 357,
-     "nome": "tamagawaProduct_finite",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 360: invalid field 'Finite', the environment does not contain 'Finset.Finite' badPrimes E has type Finset ℕ",
-     "coluna": 4,
-     "trecho": "    ⟦(⟧badPrimes E).Finite := by"
-    },
-    {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 368,
-     "nome": "bsd_tamagawa_factor",
+     "arquivo": "src/lean/MVEI_Refutacoes_ClassicalO.lean",
+     "linha": 48,
+     "nome": "MVEI.Refutacoes.regulator_well_defined_falso",
      "status": "fechado",
      "axioms": [
-      "propext"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "BSD.EllipticCurve.Classical"
      ]
     },
     {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 374,
-     "nome": "tamagawa_component_group",
+     "arquivo": "src/lean/MVEI_Refutacoes_RegulatorHeightPairingO.lean",
+     "linha": 8,
+     "nome": "MVEI.Refutacoes.finitePointsBoundedHeight_falso",
      "status": "fechado",
      "axioms": [
-      "propext"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "BSD.EllipticCurve.RegulatorHeightPairing"
      ]
     },
     {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 380,
-     "nome": "tamagawa_cassels_tate",
+     "arquivo": "src/lean/MVEI_Refutacoes_RegulatorHeightPairingO.lean",
+     "linha": 24,
+     "nome": "MVEI.Refutacoes.globalHeight_local_sum_falso",
      "status": "fechado",
      "axioms": [
-      "propext"
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ],
+     "dependencia_com_sorry": [
+      "BSD.EllipticCurve.RegulatorHeightPairing"
      ]
-    },
-    {
-     "arquivo": "src/lean/BSD/LFunction/TamagawaNumbers.lean",
-     "linha": 504,
-     "nome": "tamagawa_product_factorization",
-     "status": "erro",
-     "axioms": [],
-     "erro": "linha 507: invalid field notation, type is not of the form (C ...) where C is a constant x✝ has type ?m.26852",
-     "coluna": 45,
-     "trecho": "roduct = v.localTamagawa.map (⟦·⟧.2) |>.foldl (· * ·) 1 := by"
     }
    ],
    "preenchimento": [
@@ -4992,13 +5716,6 @@
      "enunciado": "(E : EllipticCurve ℚ) → E.AssociatedModularForm",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.functional_equation",
-     "enunciado": "∀ (E : EllipticCurve ℚ) (s : ℂ), E.completed_L s = ↑E.rootNumber * E.completed_L (2 - s)",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.completed_L, EllipticCurve.rootNumber]; done) | (simp_all [EllipticCurve.completed_L, EllipticCurve.rootNumber]; done) | (unfold EllipticCurve.completed_L EllipticCurve.rootNumber; decide; done) | (unfold EllipticCurve.completed_L EllipticCurve.rootNumber; rfl; done) | (simp [EllipticCurve.completed_L, EllipticCurve.rootNumber]; omega; done) | (intros; simp only [EllipticCurve.completed_L, EllipticCurve.rootNumber]; omega; done) | (intros; simp_all [EllipticCurve.completed_L, EllipticCurve.rootNumber]; done) | (intro x; cases x <;> simp [EllipticCurve.completed_L, EllipticCurve.rootNumber]; done) | (constructor <;> simp [EllipticCurve.completed_L, EllipticCurve.rootNumber]; done) | (norm_num [EllipticCurve.completed_L, EllipticCurve.rootNumber]; done) | (intros; norm_num [EllipticCurve.completed_L, EllipticCurve.rootNumber] at *; done) | (simp [EllipticCurve.completed_L, EllipticCurve.rootNumber]; ring; done) | (unfold EllipticCurve.completed_L EllipticCurve.rootNumber; ring; done) | (simp [EllipticCurve.completed_L, EllipticCurve.rootNumber]; linarith; done) | (exact?; done)"
     },
     {
      "tipo": "axioma",
@@ -5023,59 +5740,10 @@
     },
     {
      "tipo": "axioma",
-     "nome": "EllipticCurve.selmer_bounds_rank",
-     "enunciado": "ℕ → True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.curve_11a1_rank_0",
-     "enunciado": "EllipticCurve.curve_11a1.algebraicRank = 0",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.algebraicRank]; done) | (simp_all [EllipticCurve.algebraicRank]; done) | (unfold EllipticCurve.algebraicRank; decide; done) | (unfold EllipticCurve.algebraicRank; rfl; done) | (simp [EllipticCurve.algebraicRank]; omega; done) | (intros; simp only [EllipticCurve.algebraicRank]; omega; done) | (intros; simp_all [EllipticCurve.algebraicRank]; done) | (intro x; cases x <;> simp [EllipticCurve.algebraicRank]; done) | (constructor <;> simp [EllipticCurve.algebraicRank]; done) | (norm_num [EllipticCurve.algebraicRank]; done) | (intros; norm_num [EllipticCurve.algebraicRank] at *; done) | (simp [EllipticCurve.algebraicRank]; ring; done) | (unfold EllipticCurve.algebraicRank; ring; done) | (simp [EllipticCurve.algebraicRank]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.a_prime_power_recurrence",
-     "enunciado": "∀ (E : EllipticCurve ℚ) (p : ℕ) [hp : Fact (Nat.Prime p)],   ∀ k ≥ 2, True → E.a_n (p ^ k) ⋯ = E.a_p p * E.a_n (p ^ (k - 1)) ⋯ - ↑p * E.a_n (p ^ (k - 2)) ⋯",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.a_n, EllipticCurve.a_p]; done) | (simp_all [EllipticCurve.a_n, EllipticCurve.a_p]; done) | (unfold EllipticCurve.a_n EllipticCurve.a_p; decide; done) | (unfold EllipticCurve.a_n EllipticCurve.a_p; rfl; done) | (simp [EllipticCurve.a_n, EllipticCurve.a_p]; omega; done) | (intros; simp only [EllipticCurve.a_n, EllipticCurve.a_p]; omega; done) | (intros; simp_all [EllipticCurve.a_n, EllipticCurve.a_p]; done) | (intro x; cases x <;> simp [EllipticCurve.a_n, EllipticCurve.a_p]; done) | (constructor <;> simp [EllipticCurve.a_n, EllipticCurve.a_p]; done) | (norm_num [EllipticCurve.a_n, EllipticCurve.a_p]; done) | (intros; norm_num [EllipticCurve.a_n, EllipticCurve.a_p] at *; done) | (simp [EllipticCurve.a_n, EllipticCurve.a_p]; ring; done) | (unfold EllipticCurve.a_n EllipticCurve.a_p; ring; done) | (simp [EllipticCurve.a_n, EllipticCurve.a_p]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.a_multiplicative",
-     "enunciado": "∀ (E : EllipticCurve ℚ) (m n : ℕ) (hm : m > 0) (hn : n > 0), m.Coprime n → E.a_n (m * n) ⋯ = E.a_n m hm * E.a_n n hn",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.a_n]; done) | (simp_all [EllipticCurve.a_n]; done) | (unfold EllipticCurve.a_n; decide; done) | (unfold EllipticCurve.a_n; rfl; done) | (simp [EllipticCurve.a_n]; omega; done) | (intros; simp only [EllipticCurve.a_n]; omega; done) | (intros; simp_all [EllipticCurve.a_n]; done) | (intro x; cases x <;> simp [EllipticCurve.a_n]; done) | (constructor <;> simp [EllipticCurve.a_n]; done) | (norm_num [EllipticCurve.a_n]; done) | (intros; norm_num [EllipticCurve.a_n] at *; done) | (simp [EllipticCurve.a_n]; ring; done) | (unfold EllipticCurve.a_n; ring; done) | (simp [EllipticCurve.a_n]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.kolyvagin_method",
-     "enunciado": "∀ (E : EllipticCurve ℚ), EllipticCurve.HeegnerSystem → E.analyticRank = 1 → E.algebraicRank = 1 ∧ True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; done) | (simp_all [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; done) | (unfold EllipticCurve.analyticRank EllipticCurve.algebraicRank; decide; done) | (unfold EllipticCurve.analyticRank EllipticCurve.algebraicRank; rfl; done) | (simp [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; omega; done) | (intros; simp only [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; omega; done) | (intros; simp_all [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; done) | (intro x; cases x <;> simp [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; done) | (constructor <;> simp [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; done) | (norm_num [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; done) | (intros; norm_num [EllipticCurve.analyticRank, EllipticCurve.algebraicRank] at *; done) | (simp [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; ring; done) | (unfold EllipticCurve.analyticRank EllipticCurve.algebraicRank; ring; done) | (simp [EllipticCurve.analyticRank, EllipticCurve.algebraicRank]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
      "nome": "EllipticCurve.sha_finite_if_BSD",
      "enunciado": "∀ (E : EllipticCurve ℚ), True → {P | True}.Finite",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "BSD.LFunction.L_analytic_continuation",
-     "enunciado": "BSD.LFunction.LFunc → True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.curve_11a1_analytic_rank_0",
-     "enunciado": "EllipticCurve.curve_11a1.analyticRank = 0",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.analyticRank]; done) | (simp_all [EllipticCurve.analyticRank]; done) | (unfold EllipticCurve.analyticRank; decide; done) | (unfold EllipticCurve.analyticRank; rfl; done) | (simp [EllipticCurve.analyticRank]; omega; done) | (intros; simp only [EllipticCurve.analyticRank]; omega; done) | (intros; simp_all [EllipticCurve.analyticRank]; done) | (intro x; cases x <;> simp [EllipticCurve.analyticRank]; done) | (constructor <;> simp [EllipticCurve.analyticRank]; done) | (norm_num [EllipticCurve.analyticRank]; done) | (intros; norm_num [EllipticCurve.analyticRank] at *; done) | (simp [EllipticCurve.analyticRank]; ring; done) | (unfold EllipticCurve.analyticRank; ring; done) | (simp [EllipticCurve.analyticRank]; linarith; done) | (exact?; done)"
     },
     {
      "tipo": "axioma",
@@ -5233,24 +5901,10 @@
     },
     {
      "tipo": "axioma",
-     "nome": "BSD.LFunction.functional_equation",
-     "enunciado": "BSD.LFunction.LFunc → True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
      "nome": "EllipticCurve.Λ_functional_eq",
      "enunciado": "∀ (E : EllipticCurve ℚ) (s : ℂ), E.Λ s = ↑E.rootNumber * E.Λ (2 - s)",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "EllipticCurve.galois_rep_modular",
-     "enunciado": "∀ (ℓ : ℕ) [inst : Fact (Nat.Prime ℓ)], True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
     },
     {
      "tipo": "axioma",
@@ -5263,6 +5917,13 @@
      "tipo": "teorema aberto",
      "nome": "BSD.EllipticCurve.canonicalHeight_quadratic",
      "enunciado": "∀ {K : Type u_1} [inst : Field K] {E : BSD.EllipticCurve.EllipticCurve K} (P : BSD.EllipticCurve.Point E) (n : ℤ),   BSD.EllipticCurve.canonicalHeight sorry = ↑n ^ 2 * BSD.EllipticCurve.canonicalHeight P",
+     "resultado": "sem resultado",
+     "tatica": ""
+    },
+    {
+     "tipo": "teorema aberto",
+     "nome": "BSD.EllipticCurve.jInvariant_classifies",
+     "enunciado": "∀ {K : Type u_1} [inst : Field K] (E₁ E₂ : BSD.EllipticCurve.EllipticCurve K), E₁.jInvariant = E₂.jInvariant ↔ True",
      "resultado": "sem resultado",
      "tatica": ""
     },
@@ -5345,13 +6006,6 @@
     },
     {
      "tipo": "teorema aberto",
-     "nome": "EllipticCurve.canonical_height_decomposition",
-     "enunciado": "∀ (E : EllipticCurve ℚ) (P : E.Point),   E.canonicalHeight P = E.localHeight_infty P + ∑' (p : { n // Nat.Prime n }), E.localHeight_p P ↑p",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; done) | (simp_all [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; done) | (unfold EllipticCurve.canonicalHeight EllipticCurve.localHeight_infty EllipticCurve.localHeight_p; decide; done) | (unfold EllipticCurve.canonicalHeight EllipticCurve.localHeight_infty EllipticCurve.localHeight_p; rfl; done) | (simp [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; omega; done) | (intros; simp only [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; omega; done) | (intros; simp_all [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; done) | (intro x; cases x <;> simp [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; done) | (constructor <;> simp [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; done) | (norm_num [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; done) | (intros; norm_num [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p] at *; done) | (simp [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; ring; done) | (unfold EllipticCurve.canonicalHeight EllipticCurve.localHeight_infty EllipticCurve.localHeight_p; ring; done) | (simp [EllipticCurve.canonicalHeight, EllipticCurve.localHeight_infty, EllipticCurve.localHeight_p]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "teorema aberto",
      "nome": "EllipticCurve.euler_product_converges",
      "enunciado": "∀ (E : EllipticCurve ℚ) (s : ℂ),   s.re > 3 / 2 →     ∃ L,       Filter.Tendsto (fun N => ∏ p ∈ Finset.subtype Nat.Prime (Finset.range N), 1 / E.localFactor (↑p) s) Filter.atTop         (nhds L)",
      "resultado": "sem resultado",
@@ -5373,24 +6027,10 @@
     },
     {
      "tipo": "teorema aberto",
-     "nome": "EllipticCurve.goodReductionFactor_factored",
-     "enunciado": "∀ (E : EllipticCurve ℚ) (p : ℕ) [inst : Fact (Nat.Prime p)] (s : ℂ),   E.goodReduction p →     ∃ α β, α + β = ↑(E.a_p p) ∧ α * β = ↑p ∧ E.goodReductionFactor p s = (1 - α * ↑p ^ (-s)) * (1 - β * ↑p ^ (-s))",
-     "resultado": "sem resultado",
-     "tatica": ""
-    },
-    {
-     "tipo": "teorema aberto",
      "nome": "EllipticCurve.height_bound_constant",
      "enunciado": "∀ (E : EllipticCurve ℚ), ∃ C, ∀ (P : E.Point), |E.naiveHeight P - E.canonicalHeight P| ≤ C",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "teorema aberto",
-     "nome": "EllipticCurve.height_double",
-     "enunciado": "∀ (E : EllipticCurve ℚ) (P : E.Point), E.canonicalHeight (P + P) = 4 * E.canonicalHeight P",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [EllipticCurve.canonicalHeight]; done) | (simp_all [EllipticCurve.canonicalHeight]; done) | (unfold EllipticCurve.canonicalHeight; decide; done) | (unfold EllipticCurve.canonicalHeight; rfl; done) | (simp [EllipticCurve.canonicalHeight]; omega; done) | (intros; simp only [EllipticCurve.canonicalHeight]; omega; done) | (intros; simp_all [EllipticCurve.canonicalHeight]; done) | (intro x; cases x <;> simp [EllipticCurve.canonicalHeight]; done) | (constructor <;> simp [EllipticCurve.canonicalHeight]; done) | (norm_num [EllipticCurve.canonicalHeight]; done) | (intros; norm_num [EllipticCurve.canonicalHeight] at *; done) | (simp [EllipticCurve.canonicalHeight]; ring; done) | (unfold EllipticCurve.canonicalHeight; ring; done) | (simp [EllipticCurve.canonicalHeight]; linarith; done) | (exact?; done)"
     },
     {
      "tipo": "teorema aberto",
@@ -5450,18 +6090,18 @@
     },
     {
      "tipo": "teorema aberto",
-     "nome": "Weierstrass.discriminant_transform",
-     "enunciado": "∀ {K : Type u} [inst : Field K] (T : Weierstrass.Transformation K) (a1 a2 a3 a4 a6 : K),   match Weierstrass.transformCoefficients T a1 a2 a3 a4 a6 with   | (a1', a2', a3', a4', a6') => discriminant' K a1' a2' a3' a4' a6' = discriminant' K a1 a2 a3 a4 a6 / T.u ^ 12",
+     "nome": "tamagawa_good",
+     "enunciado": "∀ (E : EllipticCurveData) (p : ℕ) [hp : Fact (Nat.Prime p)], p ∉ badPrimes E → tamagawaAt E p = 1",
      "resultado": "sem resultado",
      "tatica": ""
     }
    ],
    "summary": {
-    "fechado": 215,
-    "aberto-sorry": 28,
-    "condicional": 24
+    "fechado": 331,
+    "aberto-sorry": 26,
+    "condicional": 23
    },
-   "hora_commit_mvei": 1793836609
+   "hora_commit_mvei": 1793900427
   },
   {
    "repo": "millennium-birch-swinnerton-dyer-classical",
@@ -5489,7 +6129,7 @@
     "aberto-sorry": 0,
     "condicional": 0
    },
-   "hora_commit_mvei": 1793836609
+   "hora_commit_mvei": 1793900427
   }
  ]
 }

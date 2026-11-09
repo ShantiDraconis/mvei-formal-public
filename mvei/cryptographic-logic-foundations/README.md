@@ -11,19 +11,19 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-05T15:19:16+00:00, on commit `6a4ece53b5f0df5bf095a8f5500b4f2bd9d1c9eb`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-06T00:22:08+00:00, on commit `6a4ece53b5f0df5bf095a8f5500b4f2bd9d1c9eb`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `.` | v4.19.0 | partial | 82 | 0 | 5 | 8 / 0 / 6 / 6 / 5 |
+| `.` | v4.19.0 | partial | 82 | 0 | 5 | 10 / 2 / 6 / 6 / 1 |
 | `formal/lean4` | v4.19.0 | OK | 22 | 0 | 0 | — |
 | `provers/lean` | v4.3.0 | partial | 2 | 0 | 1 | 1 / 1 / 2 / 1 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 115 |
-| Unique (name + statement) | 115 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 27 |
+| Counting each project | 117 |
+| Unique (name + statement) | 117 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 29 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -35,6 +35,8 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `6a4ece53b5f0df5bf095a
 | `no_leak_between_levels` | `.` | open | `sorryAx` |
 | `sync_108hz_coherent` | `.` | open | `sorryAx` |
 | `RiemannHypothesis_equiv` | `provers/lean` | open | `RiemannZeta`, `sorryAx` |
+| `Universe00.BootSequence.triple_signature_required` | `. (file by file)` | conditional | `Universe00.Layer0.I` |
+| `Universe00.BootSequence.panic_encrypts_gamma` | `. (file by file)` | conditional | `Universe00.Layer0.I` |
 | `Universe00.Layer0.layer0_integrity` | `. (file by file)` | open | `sorryAx`, `Universe00.Layer0.I` |
 | `TimestampProof.chain_integrity_preserved` | `. (file by file)` | open | `sorryAx`, `TimestampProof.encode`, `TimestampProof.hash_function` |
 | `TimestampProof.temporal_consistency_monotonic` | `. (file by file)` | open | `sorryAx`, `TimestampProof.encode`, `TimestampProof.hash_function` |
@@ -47,12 +49,12 @@ MVEI verification of 2026-11-05T15:19:16+00:00, on commit `6a4ece53b5f0df5bf095a
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 51 `theorem`/`lemma` (counting copies). The kernel checked 39 of them (24 closed, 1 conditional, 14 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 12 the kernel has no result:
+The `.lean` files of the verified commit declare 51 `theorem`/`lemma` (counting copies). The kernel checked 43 of them (26 closed, 3 conditional, 14 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 8 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
 | checked file by file: the written proof does not pass the kernel | 7 |
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 5 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 1 |
 
 ### MVEI corrections
 

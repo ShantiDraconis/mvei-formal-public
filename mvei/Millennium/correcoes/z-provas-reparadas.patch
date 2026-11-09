@@ -75,7 +75,7 @@
  def WeakBSD : Prop :=
 --- a/formal/lean/Core/MetaTheorem.lean
 +++ b/formal/lean/Core/MetaTheorem.lean
-@@ -62,6 +62,7 @@
+@@ -65,6 +65,7 @@
      allTrue = allDeltaZero → 
      (allTrue = true ↔ allDeltaZero = true) := by
    intro allTrue allDeltaZero h
@@ -403,7 +403,7 @@
  def P_equals_NP : Prop := ClassP = ClassNP
 --- a/src/lean/Millennium/Complexity/DeltaNP.lean
 +++ b/src/lean/Millennium/Complexity/DeltaNP.lean
-@@ -223,17 +223,25 @@
+@@ -225,17 +225,25 @@
    ∃ (k : ℕ), deltaNP L ≤ k := by
    use 1
    simp only [deltaNP]
@@ -431,7 +431,7 @@
  
  /-- Global Delta_NP over NP-complete problems -/
  noncomputable def globalDeltaNP : ℝ :=
-@@ -242,6 +250,17 @@
+@@ -244,6 +252,17 @@
  /-- P = NP iff globalDeltaNP is finite -/
  theorem p_eq_np_iff_globalDelta_finite :
    P_equals_NP ↔ ∃ (k : ℕ), globalDeltaNP ≤ k := by
