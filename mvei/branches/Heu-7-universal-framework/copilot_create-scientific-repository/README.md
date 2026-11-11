@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-scientific-repository` of the priva
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 48 — closed 20, conditional 1, open 15, proof error 4, not reached 8, no result 0.
 * History: 6 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `2d0d4cb641368ff4fb29e004a97bc44fb94edadd2ad05b6e523e9074a99fa56b`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_create-scientific-repository/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `4f119c808f27b4dc3d9832c0b55716563353d0c4613da55babb70b509ab78734`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Heu-7-universal-framework/copilot_create-scientific-repository/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

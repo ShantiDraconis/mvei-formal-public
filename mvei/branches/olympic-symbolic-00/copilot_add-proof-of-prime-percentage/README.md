@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-proof-of-prime-percentage` of the priv
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 12 — closed 3, conditional 0, open 9, proof error 0, not reached 0, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `ae906158fc341740e900ee80c1a98dbbf63c45ea38960e239e5f93e06203b4a5`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/olympic-symbolic-00/copilot_add-proof-of-prime-percentage/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `8d6d5284b9131624e9397d505b5d257d0a728386247171abc71a12da286e5b51`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/olympic-symbolic-00/copilot_add-proof-of-prime-percentage/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

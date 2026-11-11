@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formalizar-erros-em-leis` of the private r
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 26 — closed 9, conditional 12, open 4, proof error 1, not reached 0, no result 0.
 * History: 1 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `8ea6d5eb329612c7628555d6d5c3f73a3b18102ce2ca7cdff2465aeac666cd78`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_formalizar-erros-em-leis/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `ee44da48d735ae71b59579fbd2c6eeb816256f4c095802b9b3da2fbee0340de5`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_formalizar-erros-em-leis/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

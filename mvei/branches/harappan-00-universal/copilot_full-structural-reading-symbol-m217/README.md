@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/full-structural-reading-symbol-m217` of th
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 6 — closed 4, conditional 0, open 1, proof error 1, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `79ea61464979dce0efe92ac37963a33dcef2852833798e0b5c037848d64a3d2e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_full-structural-reading-symbol-m217/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `a2244047597637510a4631668e9231906d65065d33a86112812fa33860d98674`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_full-structural-reading-symbol-m217/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

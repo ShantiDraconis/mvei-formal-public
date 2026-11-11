@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-final-tree-structure` of the private r
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 60 — closed 11, conditional 0, open 39, proof error 2, not reached 8, no result 0.
 * History: 3 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `067232d2b43321f7ac5b214e104adb2ad7227b8785ef73aa5aac522159997974`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-energy-proofline/copilot_add-final-tree-structure/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `226c14da90a39e02f1cc7fdcb97b4c507c59236c253393764ca2532ad148e81d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Riemann-energy-proofline/copilot_add-final-tree-structure/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

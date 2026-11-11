@@ -40,6 +40,7 @@ Each row is a branch of a private repository of ShantiDraconis with theorems tha
 | harappan-00-universal | `copilot/test-everything-harappan-symbols` | 2025-11-30 | parada | 1 / 5 | 8 | 6 | [certificate](../mvei/branches/harappan-00-universal/copilot_test-everything-harappan-symbols/README.md) |
 | Heu-7-universal-framework | `copilot/add-initial-repository-structure` | 2025-12-02 | parada | 31 / 75 | 26 | 6 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_add-initial-repository-structure/README.md) |
 | Heu-7-universal-framework | `copilot/create-scientific-repository` | 2025-12-02 | parada | 20 / 48 | 21 | 6 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_create-scientific-repository/README.md) |
+| Heu-7-universal-framework | `copilot/add-logic-of-critical-transition` | 2025-12-02 | parada | 7 / 11 | 1 | 4 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_add-logic-of-critical-transition/README.md) |
 | Heu-7-universal-framework | `copilot/create-unified-repository-structure` | 2025-12-02 | parada | 6 / 33 | 11 | 4 | [certificate](../mvei/branches/Heu-7-universal-framework/copilot_create-unified-repository-structure/README.md) |
 | i-constant-core | `work/t-state-calculus-v0` | 2026-09-20 | parada | 54 / 54 | 18 | 47 | [certificate](../mvei/branches/i-constant-core/work_t-state-calculus-v0/README.md) |
 | i-constant-core | `atk/anti-circular-open-math-cert` | 2026-09-27 | parada | 1 / 2 | 1 | 3 | [certificate](../mvei/branches/i-constant-core/atk_anti-circular-open-math-cert/README.md) |

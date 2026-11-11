@@ -5,7 +5,7 @@ Lean sources from the branch `elyon-open-math-miner` of the private repository `
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 9 — closed 9, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 42 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `2c2a38d2dbd32d56b02d32043f5283cb43ff5066aeec728e3f064043e23ae318`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-proof-hub/elyon-open-math-miner/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `719c752bb118d96990147bb39ea350112c0897e00548db7e4d78163b27f9dc33`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/universal-proof-hub/elyon-open-math-miner/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

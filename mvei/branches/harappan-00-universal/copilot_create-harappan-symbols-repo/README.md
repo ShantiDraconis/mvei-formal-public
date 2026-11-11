@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-harappan-symbols-repo` of the priva
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 27 — closed 13, conditional 1, open 9, proof error 3, not reached 1, no result 0.
 * History: 9 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `cb30488eda362f1dbce79a577b1b8950196329c66a81682221ce2e5a73d0bd26`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_create-harappan-symbols-repo/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `1c550b89b252b1c7a0b480f14d42df982c7c2156e822098d1096011d0061aee6`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/harappan-00-universal/copilot_create-harappan-symbols-repo/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

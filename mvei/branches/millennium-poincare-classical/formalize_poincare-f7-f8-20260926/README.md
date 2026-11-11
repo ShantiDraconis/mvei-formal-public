@@ -5,7 +5,7 @@ Lean sources from the branch `formalize/poincare-f7-f8-20260926` of the private 
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 3 — closed 2, conditional 0, open 0, proof error 1, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `59c0572dca922371824fe0161357b93f8e03f89fdf0cda12c677af65e933ca71`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-poincare-classical/formalize_poincare-f7-f8-20260926/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `91130f85d6bdad52a625f684ed69b3bee5c1181ab36828330b05edf4f36b0f88`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-poincare-classical/formalize_poincare-f7-f8-20260926/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/local-rigidity-zero-iff` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 10 — closed 8, conditional 0, open 0, proof error 2, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `7a26f8ceb38452b5d0c0412c76f8a549b77e8f9b0c930e214893972bb0da3634`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_local-rigidity-zero-iff/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `3026be26f8829848f04affd2ab464c1ae07aec88825aa94c33b7dc577743d646`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/federated-trivalent-manifold/copilot_local-rigidity-zero-iff/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

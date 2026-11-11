@@ -5,7 +5,7 @@ Lean sources from the branch `atk/winwin-green-v435-20261025` of the private rep
 * Branch state: em andamento (not in the default branch).
 * Theorems only on branches, in this branch: 7 — closed 7, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 1 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `307e6e41c5970badfdbe5f315d56db588247356efe0713a96603d97eb56b753d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/lean-winwin-logic/atk_winwin-green-v435-20261025/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `481cf46d161847ad3ff1166a900b953ed4a4223e2c6dc8ef4bab055d8350c904`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/lean-winwin-logic/atk_winwin-green-v435-20261025/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

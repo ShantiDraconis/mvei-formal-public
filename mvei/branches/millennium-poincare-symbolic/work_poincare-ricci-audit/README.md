@@ -5,7 +5,7 @@ Lean sources from the branch `work/poincare-ricci-audit` of the private reposito
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 12 — closed 12, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 12 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `8b306562291fad53ff34235c44cee293e91627f8347fa73684414236a37314cb`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-poincare-symbolic/work_poincare-ricci-audit/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `748fee9cdb094ab2f5033ca20c591b57c6b7d183f4e920179c3d787e5c8328bb`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/millennium-poincare-symbolic/work_poincare-ricci-audit/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

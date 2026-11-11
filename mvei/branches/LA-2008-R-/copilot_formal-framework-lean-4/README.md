@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/formal-framework-lean-4` of the private re
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 9 — closed 5, conditional 4, open 0, proof error 0, not reached 0, no result 0.
 * History: 2 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `9ec873f1e821dab7e04ca51fd822249932e88dd0e5a2e905a130afe866d6a1ca`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/LA-2008-R-/copilot_formal-framework-lean-4/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `1c99134b1ab98751b062bb127b855fe19d1f6751f9ca89ffb92440afa50a4fd7`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/LA-2008-R-/copilot_formal-framework-lean-4/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

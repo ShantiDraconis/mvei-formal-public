@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/separate-defensible-from-conjectural` of t
 * Branch state: incorporada (already in the default branch).
 * Theorems only on branches, in this branch: 45 — closed 17, conditional 0, open 0, proof error 0, not reached 28, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `d3b29ba6cd4bc0244a615e202713f1e4b1291dcf1e0ec282f24e338b9e01a8dd`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_separate-defensible-from-conjectural/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `bdc63e1406212b2d887000c5caf0e35930d3f4ba362a1d930ed95af08072e7e3`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_separate-defensible-from-conjectural/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

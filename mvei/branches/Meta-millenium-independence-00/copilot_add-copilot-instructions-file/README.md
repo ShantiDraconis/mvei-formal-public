@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-copilot-instructions-file` of the priv
 * Branch state: incorporada (already in the default branch).
 * Theorems only on branches, in this branch: 1 — closed 1, conditional 0, open 0, proof error 0, not reached 0, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `c9f2ee4c2bbd8368cfce0b1ec9a839b457b75f762190df0fbb43ebbaf2db0852`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Meta-millenium-independence-00/copilot_add-copilot-instructions-file/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `870027c459c9f8d437089510465a8a8a1ccc6b634f3a210b6f44f503c5db8eda`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Meta-millenium-independence-00/copilot_add-copilot-instructions-file/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

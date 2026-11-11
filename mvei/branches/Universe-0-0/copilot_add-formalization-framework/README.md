@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-formalization-framework` of the privat
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 15 — closed 6, conditional 1, open 1, proof error 0, not reached 7, no result 0.
 * History: 5 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `6980262c2d1d34f761a343abae9cc0ce32c5bbe2ec8bb01daa710510f1aed118`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_add-formalization-framework/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `278a37d1cc9fb5caf608f2e0831251af4f66f07491204ce280ab2a7f5e953ac0`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Universe-0-0/copilot_add-formalization-framework/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

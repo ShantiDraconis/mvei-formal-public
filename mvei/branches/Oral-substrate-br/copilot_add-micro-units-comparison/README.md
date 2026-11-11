@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/add-micro-units-comparison` of the private
 * Branch state: parada (not in the default branch).
 * Theorems only on branches, in this branch: 12 — closed 6, conditional 0, open 1, proof error 5, not reached 0, no result 0.
 * History: 4 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `7f322982f7fc521d1c0fe75173748d9b591079a78283a18e9dcaef6dd4452e2e`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Oral-substrate-br/copilot_add-micro-units-comparison/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `1744dd297ca25802b7d5a05d06a0958489dccfee20684505a022ead63e59570a`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Oral-substrate-br/copilot_add-micro-units-comparison/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 

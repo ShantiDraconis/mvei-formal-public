@@ -5,7 +5,7 @@ Lean sources from the branch `copilot/create-formal-master-outline-again` of the
 * Branch state: incorporada (already in the default branch).
 * Theorems only on branches, in this branch: 24 — closed 16, conditional 1, open 2, proof error 0, not reached 5, no result 0.
 * History: 0 commit(s) of this branch that are not in the default branch, with date and subject, in `certificate.json`.
-* `certificate.json` (SHA-256 of its content: `9e9f5818985d71351007bc4c462b87b61aa2a09acc553026f1ba6e25fdcb8f0d`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_create-formal-master-outline-again/SOURCES.sha256`.
+* `certificate.json` (SHA-256 of its content: `ebff2b572c51a78b841e9426794eca57ab93ec5a839db308c763b1023a8b0ef0`) lists every theorem with its state and the axioms beyond the standard three, and the SHA-256 of every published file. From the repository root: `sha256sum -c mvei/branches/Millenium--core/copilot_create-formal-master-outline-again/SOURCES.sha256`.
 
 Closed means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`; it proves the statement written in the file and is not a claim that an open problem is solved.
 
