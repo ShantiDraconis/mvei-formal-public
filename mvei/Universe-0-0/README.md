@@ -11,20 +11,20 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-06T00:22:08+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-10T04:38:10+00:00, on commit `ad86336840111095220c61c09ffe0dabeedb9447`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `provers/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 115 | 21 | 3 | 89 / 43 / 74 / 23 / 16 |
+| `provers/lean` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 115 | 21 | 3 | 90 / 43 / 73 / 23 / 16 |
 | `universe-00/applications/millennium/riemann` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 4 / 0 / 8 |
 | `universe-00/applications/unified-field-theory/proofs` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 7 / 1 / 30 / 21 / 46 |
 | `universe-00/core/lean` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 0 / 7 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 211 |
-| Unique (name + statement) | 211 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 137 |
+| Counting each project | 212 |
+| Unique (name + statement) | 212 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 138 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -105,7 +105,6 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `ad86336840111095220c6
 | `Universe00.Foundations.RiemannHypothesis.no_zeros_right_of_critical` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.Foundations.IConst`, `Universe00.Foundations.RiemannHypothesis.I_ne_1` |
 | `Universe00.Foundations.RiemannHypothesis.no_zeros_left_of_critical` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.Foundations.IConst`, `Universe00.Foundations.RiemannHypothesis.I_ne_1` |
 | `Universe00.Foundations.RiemannHypothesis.prime_number_theorem_error` | `provers/lean (file by file)` | open | `sorryAx` |
-| `Universe00.Foundations.RiemannHypothesis.rh_quantum_interpretation` | `provers/lean (file by file)` | open | `sorryAx` |
 | `Universe00.Foundations.RiemannHypothesis.consistency_with_computation` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.Foundations.IConst`, `Universe00.Foundations.RiemannHypothesis.I_ne_1` |
 | `Universe00.Foundations.RiemannHypothesis.strengthens_hardy` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.Foundations.IConst`, `Universe00.Foundations.RiemannHypothesis.I_ne_1` |
 | `Universe00.StructuralResidue.problem_I_correspondence` | `provers/lean (file by file)` | open | `sorryAx`, `Universe00.StructuralResidue.I` |
@@ -180,11 +179,12 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `ad86336840111095220c6
 | `UFTAxioms.ground_state_energy_zero` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
 | `UFTAxioms.spectral_gap_exists` | `universe-00/applications/unified-field-theory/proofs (file by file)` | conditional | `UFTAxioms.axiom_A7` |
 | `UFTHamiltonian.kinetic_energy_nonneg` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
-| … 28 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| `UFTHamiltonian.potential_convex_at_minimum` | `universe-00/applications/unified-field-theory/proofs (file by file)` | open | `sorryAx` |
+| … 27 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 270 of them (110 closed, 47 conditional, 113 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 126 the kernel has no result:
+The `.lean` files of the verified commit declare 396 `theorem`/`lemma` (counting copies). The kernel checked 270 of them (111 closed, 47 conditional, 112 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 126 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|

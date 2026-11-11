@@ -1,4 +1,31 @@
 --- /dev/null
++++ b/MVEI_Refutacoes_TheoremsQ.lean
+@@ -0,0 +1,24 @@
++import MillenniumRiemann.Theorems
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Collapse.CollapseComplex.normI_smul_nonneg` é falso: ofReal λ = (λ, 0, 0) multiplica a componente
++    indeterminada por 0 (a componente indet do produto é κ₁κ₂), então para z = (0, 0, 1) e λ = 1 o lado
++    esquerdo é normI (0, 0, 0) = 0 e o direito é 1 · (0 + |1|) = 1. -/
++theorem normI_smul_nonneg_falso :
++    ¬ ∀ (l : ℝ) (z : Collapse.CollapseComplex), 0 ≤ l →
++      Collapse.CollapseComplex.normI (Collapse.CollapseComplex.ofReal l * z) =
++        l * Collapse.CollapseComplex.normI z := by
++  intro h
++  have h1 := h 1 ⟨0, 0, 1⟩ zero_le_one
++  have e : Collapse.CollapseComplex.ofReal 1 * (⟨0, 0, 1⟩ : Collapse.CollapseComplex) = ⟨0, 0, 0⟩ := by
++    show Collapse.CollapseComplex.mul _ _ = _
++    simp [Collapse.CollapseComplex.mul, Collapse.CollapseComplex.ofReal]
++  rw [e] at h1
++  simp [Collapse.CollapseComplex.normI] at h1
++
++end MVEI.Refutacoes
+--- /dev/null
 +++ b/lean/millennium/MVEI_Refutacoes.lean
 @@ -0,0 +1,21 @@
 +import Millennium.Riemann.CollapseComplex
@@ -20,6 +47,29 @@
 +      fun _ _ => rfl, Millennium.Riemann.CollapseComplex.mul, Millennium.Riemann.CollapseComplex.i,
 +    Millennium.Riemann.CollapseComplex.I] at this
 +  norm_num at this
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/lean/millennium/MVEI_Refutacoes_DeltaCollapseQ.lean
+@@ -0,0 +1,20 @@
++import Millennium.Riemann.IConstant.DeltaCollapse
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open Millennium.Riemann Millennium.Riemann.IConstant in
++/-- `collapse_equiv_iff` é falso: Δ guarda o desvio de Re(s) na componente indeterminada, então
++    0 e 1 têm a mesma parte imaginária mas Δ 0 ≠ Δ 1 (indet −1/2 contra 1/2). -/
++theorem collapse_equiv_iff_falso :
++    ¬ ∀ (s t : CollapseComplex), collapse_equiv s t ↔ s.im = t.im := by
++  intro h
++  have h1 := (h ⟨0, 0, 0⟩ ⟨1, 0, 0⟩).2 rfl
++  have h2 := congrArg CollapseComplex.indet h1
++  simp only [Δ] at h2
++  norm_num at h2
 +
 +end MVEI.Refutacoes
 --- /dev/null

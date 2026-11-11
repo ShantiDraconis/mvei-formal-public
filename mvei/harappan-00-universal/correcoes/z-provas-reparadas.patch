@@ -809,3 +809,36 @@
  /-
    Harappan Universal System - Phonology Proofs
    
+--- a/src/lean/Harappan/UniversalGrammar.lean
++++ b/src/lean/Harappan/UniversalGrammar.lean
+@@ -138,7 +138,7 @@
+ theorem head_final_postpositions (order : WordOrder)
+     (h : order.isHeadFinal) :
+     adpositionType order = "postposition" := by
+-  first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (simp_all [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (unfold Harappan.UniversalGrammar.WordOrder.isHeadFinal Harappan.UniversalGrammar.adpositionType; decide; done) | (unfold Harappan.UniversalGrammar.WordOrder.isHeadFinal Harappan.UniversalGrammar.adpositionType; rfl; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; omega; done) | (intros; simp only [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; omega; done) | (intros; simp_all [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (intro x; cases x <;> simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (constructor <;> simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (norm_num [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; done) | (intros; norm_num [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType] at *; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; ring; done) | (unfold Harappan.UniversalGrammar.WordOrder.isHeadFinal Harappan.UniversalGrammar.adpositionType; ring; done) | (simp [Harappan.UniversalGrammar.WordOrder.isHeadFinal, Harappan.UniversalGrammar.adpositionType]; linarith; done) | (exact?; done)
++  cases order <;> simp_all [WordOrder.isHeadFinal, WordOrder.isHeadInitial, adpositionType]
+ 
+ /- Binary branching constraint -/
+ def satisfiesBinaryBranching : Phrase → Bool
+@@ -157,8 +157,8 @@
+   cases p with
+   | terminal _ _ => simp at hm
+   | nonTerminal _ children =>
+-      simp [satisfiesBinaryBranching] at hw
+-      exact hw.2 child hm
++      simp only [satisfiesBinaryBranching, Bool.and_eq_true, List.all_eq_true] at hw
++      exact hw.2 ⟨child, hm⟩ (List.mem_attach _ _)
+ 
+ /- Feature agreement principle -/
+ def agreesInFeature (f : GrammaticalFeature) (p1 p2 : List GrammaticalFeature) : Bool :=
+@@ -167,9 +167,8 @@
+ /- Agreement is symmetric -/
+ theorem agreement_symmetric (f : GrammaticalFeature) (p1 p2 : List GrammaticalFeature) :
+     agreesInFeature f p1 p2 = agreesInFeature f p2 p1 := by
++  simp only [agreesInFeature, eq_comm]
+ /-
+-  simp [agreesInFeature]
+-  constructor <;> intro h <;> exact h.symm
+   Harappan Universal System - Universal Grammar
+   
+   Formal axioms for universal grammar theory.

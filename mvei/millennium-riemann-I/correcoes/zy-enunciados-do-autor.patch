@@ -32,6 +32,51 @@
    intro z w
    exact ⟨toProduct_add z w, toProduct_mul z w⟩
  
+--- a/cross/lean/Riemann/IKernel/KernelDef.lean
++++ b/cross/lean/Riemann/IKernel/KernelDef.lean
+@@ -1,4 +1,5 @@
+ import Mathlib.Data.Complex.Basic
++import Mathlib.Analysis.SpecialFunctions.Pow.Complex
+ import Mathlib.Data.Real.Basic
+ 
+ noncomputable section
+--- a/cross/lean/Riemann/INumber.lean
++++ b/cross/lean/Riemann/INumber.lean
+@@ -70,7 +70,7 @@
+ 
+ /-- Complex conjugate -/
+ def conj : INumber → INumber
+-  | regular z => regular (Complex.conj z)
++  | regular z => regular ((starRingEnd ℂ) z)
+   | collapse => collapse
+ 
+ /-- Real part (returns option) -/
+--- a/cross/lean/Riemann/Zeros/Anomalous.lean
++++ b/cross/lean/Riemann/Zeros/Anomalous.lean
+@@ -23,10 +23,6 @@
+ theorem anomalous_zero_off_line (z : AnomalousZero) :
+   z.s.re ≠ (1 : ℝ) / 2 := z.off_line
+ 
+-/-- All anomalous zeros are nontrivial zeros -/
+-def AnomalousZero.toNontrivialZero (z : AnomalousZero) : NontrivialZero :=
+-  z.toNontrivialZero
+-
+ /-- Every anomalous zero satisfies isAnomalousZero predicate -/
+ theorem anomalous_zero_is_anomalous (z : AnomalousZero) :
+   isAnomalousZero z.toNontrivialZero := by
+--- a/cross/lean/Riemann/Zeros/CriticalLine.lean
++++ b/cross/lean/Riemann/Zeros/CriticalLine.lean
+@@ -22,10 +22,6 @@
+ theorem critical_zero_on_line (z : CriticalZero) :
+   z.s.re = (1 : ℝ) / 2 := z.on_line
+ 
+-/-- All critical zeros are nontrivial zeros -/
+-def CriticalZero.toNontrivialZero (z : CriticalZero) : NontrivialZero :=
+-  z.toNontrivialZero
+-
+ /-- Every critical zero satisfies isCriticalZero predicate -/
+ theorem critical_zero_is_critical (z : CriticalZero) :
+   isCriticalZero z.toNontrivialZero := by
 --- a/lean/millennium/Riemann/CollapseComplex.lean
 +++ b/lean/millennium/Riemann/CollapseComplex.lean
 @@ -170,13 +170,12 @@
@@ -54,6 +99,98 @@
  
  /-- Multiplication is commutative -/
  theorem mul_comm (x y : CollapseComplex) : x * y = y * x := by
+--- a/lean/millennium/Riemann/CollapseProof/Assumptions.lean
++++ b/lean/millennium/Riemann/CollapseProof/Assumptions.lean
+@@ -14,6 +14,7 @@
+ import Millennium.Riemann.Core.ClassicalZeros
+ import Millennium.Riemann.IConstant.ICore
+ import Millennium.Riemann.IConstant.DeltaCollapse
++import Millennium.Riemann.IConstant.IRegularization
+ import Mathlib.Data.Real.Basic
+ 
+ namespace Millennium.Riemann.CollapseProof
+--- a/lean/millennium/Riemann/ExtendedZeta.lean
++++ b/lean/millennium/Riemann/ExtendedZeta.lean
+@@ -142,7 +142,7 @@
+ theorem zeta_universal_preserves_level :
+   ∀ n : UniversalNumber,
+     level (zetaUniversal n) = level n ∨
+-    level (zetaUniversal n) = promote n |> level := by
++    level (zetaUniversal n) = (promote n |> level) := by
+   intro n
+   cases n with
+   | baseNum z => right; simp [zetaUniversal, level, promote]
+--- a/lean/millennium/Riemann/FormalAxioms.lean
++++ b/lean/millennium/Riemann/FormalAxioms.lean
+@@ -150,7 +150,7 @@
+ /-- **Definition D11** (Φ-Functional):
+     Φ(I,s) = |Re(s) - 1/2|² + weighted zeta contribution. -/
+ def D11_Phi (z : CollapseComplex) : ℝ :=
+-  (z.re - criticalLineValue) ^ 2 + z.im ^ 2 * (1 - z.indet).abs
++  (z.re - criticalLineValue) ^ 2 + z.im ^ 2 * |1 - z.indet|
+ 
+ /-- **Definition D12** (Anomalous Zero):
+     A non-trivial zero not on the critical line. -/
+@@ -160,7 +160,7 @@
+ /-- **Definition D13** (Horizon Emergence):
+     The condition when a number transitions to HorizonComplex. -/
+ def D13_horizon_emergence (z : CollapseComplex) : Prop :=
+-  z.indet.abs ≥ 1
++  |z.indet| ≥ 1
+ 
+ /-- **Definition D14** (Refutation Emergence):
+     The condition when logical tension creates RefutationComplex. -/
+@@ -205,7 +205,7 @@
+ /-- **Lemma L3** (Φ at Critical Line):
+     On the critical line (Re(s) = 1/2), Φ simplifies. -/
+ theorem L3_Phi_on_critical (z : CollapseComplex) (h : D4_critical_line z) : 
+-  D11_Phi z = z.im ^ 2 * (1 - z.indet).abs := by
++  D11_Phi z = z.im ^ 2 * |1 - z.indet| := by
+   unfold D11_Phi D4_critical_line at *
+   rw [h]
+   ring
+--- a/lean/millennium/Riemann/HorizonComplex.lean
++++ b/lean/millennium/Riemann/HorizonComplex.lean
+@@ -121,7 +121,7 @@
+ def reachesHorizon (z : CollapseComplex) : Bool :=
+   -- Horizon reached when indeterminate component is non-zero and significant
+   -- or when approaching critical boundaries
+-  z.indet ≠ 0 ∧ (z.indet.abs ≥ 1 ∨ (z.re.abs + z.im.abs < z.indet.abs))
++  z.indet ≠ 0 ∧ (|z.indet| ≥ 1 ∨ (|z.re| + |z.im| < |z.indet|))
+ 
+ /-- Transition from CollapseComplex to HorizonComplex at limit.
+     When a CollapseComplex number reaches its limit/horizon, 
+--- a/lean/millennium/Riemann/IConstant/IRegularization.lean
++++ b/lean/millennium/Riemann/IConstant/IRegularization.lean
+@@ -14,7 +14,6 @@
+ import Millennium.Riemann.Core.ZetaDef
+ 
+ noncomputable section
+-local notation "ℕ" => Nat
+ 
+ namespace Millennium.Riemann.IConstant
+ 
+--- a/lean/millennium/Riemann/Zeros/Basic.lean
++++ b/lean/millennium/Riemann/Zeros/Basic.lean
+@@ -12,7 +12,6 @@
+ import Millennium.Riemann.Core.ZetaDef
+ 
+ noncomputable section
+-local notation "ℕ" => Nat
+ 
+ namespace Millennium.Riemann.Zeros
+ 
+--- a/lean/millennium/Riemann/Zeros/Nontrivial.lean
++++ b/lean/millennium/Riemann/Zeros/Nontrivial.lean
+@@ -210,7 +210,7 @@
+     ζ(s) = ∫_ℝ e^(-It²) f(t) dt = 0
+ -/
+ theorem zeros_satisfy_integral_equation : ∀ s : CollapseComplex,
+-  isSymbolicZero s ↔ zeta_integral_representation s = zero := by
++  isSymbolicZero s ↔ I_operator (fun _ => zero) s = zero := by
+   intro s
+   constructor
+   · intro hs
 --- a/src/Riemann/CollapseProof/Assumptions.lean
 +++ b/src/Riemann/CollapseProof/Assumptions.lean
 @@ -17,10 +17,10 @@

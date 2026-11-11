@@ -11,13 +11,13 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-06T00:22:08+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-10T04:38:10+00:00, on commit `041a2090e226310380ee3297d5abef5a51801265`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `codigo` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 0 / 3 / 0 |
 | `formalization` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 1 / 4 / 0 |
-| `formalization/lean` | v4.19.0 | partial | 210 | 0 | 42 | 97 / 3 / 340 / 103 / 319 |
+| `formalization/lean` | v4.19.0 | partial | 210 | 0 | 42 | 98 / 3 / 338 / 103 / 320 |
 | `proofs/bsd_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 4 / 1 / 0 |
 | `proofs/hodge_conjecture` (no lakefile; project assembled by MVEI) | padrão do elan | failed | 0 | 0 | 0 | 0 / 0 / 2 / 3 / 0 |
 | `proofs/navier_stokes` (no lakefile; project assembled by MVEI) | v4.19.0 | OK | 0 | 0 | 3 | 0 / 0 / 4 / 1 / 1 |
@@ -29,9 +29,9 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `041a2090e226310380ee3
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 741 |
-| Unique (name + statement) | 740 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 436 |
+| Counting each project | 742 |
+| Unique (name + statement) | 741 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 437 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -187,15 +187,15 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `041a2090e226310380ee3
 | `LRE.Millennium.hodge_all_algebraic` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.Millennium.hodge_decomposition` | `formalization/lean (file by file)` | open | `sorryAx` |
 | `LRE.Millennium.hodge_symmetry` | `formalization/lean (file by file)` | open | `sorryAx` |
-| … 339 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| … 337 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 817 of them (348 closed, 4 conditional, 465 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 552 the kernel has no result:
+The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counting copies). The kernel checked 816 of them (349 closed, 4 conditional, 463 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 553 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|
-| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 355 |
+| checked file by file: Lean did not reach the theorem (missing import, syntax error or timeout) | 356 |
 | checked file by file: the written proof does not pass the kernel | 133 |
 | the file did not compile (an error in it or in a file it imports) | 43 |
 | the file compiled, but the name did not appear in the kernel (private, mutual or macro-generated) | 21 |
@@ -207,9 +207,9 @@ The `.lean` files of the verified commit declare 1 369 `theorem`/`lemma` (counti
 * `correcoes/renomear-imports-mathlib.patch` (import de módulo que não existe na versão do Mathlib do projeto (renomeado ou dividido), 61 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/renomear-imports-mathlib.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 17 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 215 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
-* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 30 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
-* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 51 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
-* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 14 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/zz-refutacoes.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 36 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 57 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
+* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 17 file(s)): applies to the published sources: `git apply -p1 --directory=imports/universal-emergent-logic- mvei/universal-emergent-logic-/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
 ## Files in this folder
 

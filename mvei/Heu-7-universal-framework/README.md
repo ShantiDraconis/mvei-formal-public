@@ -11,17 +11,17 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-06T00:22:08+00:00, on commit `63b80b7623e831645f843e1f04385a1cfe17717a`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-10T04:38:10+00:00, on commit `63b80b7623e831645f843e1f04385a1cfe17717a`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
-| `src/lean` | v4.19.0 | partial | 119 | 5 | 37 | 3 / 0 / 13 / 0 / 0 |
+| `src/lean` | v4.19.0 | partial | 129 | 0 | 37 | 4 / 0 / 12 / 0 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 122 |
-| Unique (name + statement) | 122 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 36 |
+| Counting each project | 133 |
+| Unique (name + statement) | 133 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 47 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -29,11 +29,6 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `63b80b7623e831645f843
 |---|---|---|---|
 | `HEU.Core.LTC.completeness` | `src/lean` | open | `sorryAx` |
 | `HEU.Core.LTC.soundness` | `src/lean` | open | `sorryAx` |
-| `HEU.Core.ZF.byContradiction` | `src/lean` | conditional | `HEU.Core.ZF.em` |
-| `HEU.Core.ZF.classicalImpl` | `src/lean` | conditional | `HEU.Core.ZF.em` |
-| `HEU.Core.ZF.deMorgan1` | `src/lean` | conditional | `HEU.Core.ZF.em` |
-| `HEU.Core.ZF.dne` | `src/lean` | conditional | `HEU.Core.ZF.em` |
-| `HEU.Core.ZF.peirce` | `src/lean` | conditional | `HEU.Core.ZF.em` |
 | `HEU.Problems.BSD.BSD_equiv` | `src/lean` | open | `sorryAx` |
 | `HEU.Problems.Hodge.Hodge_equiv` | `src/lean` | open | `sorryAx` |
 | `HEU.Problems.NS.F_NS_smooth_higher` | `src/lean` | open | `sorryAx` |
@@ -73,7 +68,6 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `63b80b7623e831645f843
 | `HEU.Problems.NS.blowup_is_subcritical` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.NS.NS_equiv` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.NS.NS_LTC_equiv` | `src/lean (file by file)` | open | `sorryAx` |
-| `HEU.Problems.NS.UBO_valid_implies_NS` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.NS.NS_implies_UBO_valid` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.NS.NS_UBO_biequiv_proof` | `src/lean (file by file)` | open | `sorryAx` |
 | `HEU.Problems.NS.enstrophy_bounds_regularity` | `src/lean (file by file)` | open | `sorryAx` |
@@ -85,7 +79,7 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `63b80b7623e831645f843
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting copies). The kernel checked 82 of them (27 closed, 5 conditional, 50 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 the kernel has no result:
+The `.lean` files of the verified commit declare 83 `theorem`/`lemma` (counting copies). The kernel checked 82 of them (33 closed, 0 conditional, 49 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 1 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|

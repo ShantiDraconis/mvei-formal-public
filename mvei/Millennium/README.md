@@ -11,25 +11,25 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-06T00:22:08+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-10T04:38:10+00:00, on commit `5c5ec3d9597f5ffd00210793a63b1ebdeff08baa`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
 | `.` (no lakefile; project assembled by MVEI) | v4.19.0 | partial | 244 | 29 | 10 | 19 / 7 / 14 / 6 / 5 |
-| `formal/lean` | v4.36.0-rc2 | partial | 124 | 21 | 3 | 14 / 3 / 17 / 9 / 13 |
+| `formal/lean` | v4.36.0-rc2 | partial | 125 | 21 | 3 | 14 / 3 / 17 / 9 / 13 |
 | `formal/theorems` | v4.12.0 | failed | 0 | 0 | 0 | 3 / 3 / 0 / 0 / 1 |
 | `lean` | v4.19.0 | partial | 92 | 10 | 12 | 6 / 11 / 3 / 4 / 0 |
 | `lean4` | v4.12.0 | partial | 492 | 9 | 14 | 82 / 19 / 107 / 61 / 37 |
 | `rh-umi-invariant/formal/lean` | v4.12.0 | OK | 0 | 2 | 0 | — |
-| `src/lean` | v4.19.0 | partial | 118 | 2 | 3 | 0 / 4 / 0 / 0 / 0 |
+| `src/lean` | v4.19.0 | partial | 122 | 1 | 3 | 0 / 4 / 0 / 0 / 0 |
 | `src/lean4` | v4.3.0 | partial | 3 | 0 | 0 | 5 / 0 / 4 / 1 / 33 |
 | `universe00` | v4.19.0 | partial | 38 | 0 | 0 | 11 / 0 / 0 / 0 / 0 |
 
 | Closed theorems in this repository | |
 |---|---:|
-| Counting each project | 1 251 |
-| Unique (name + statement) | 1 250 |
-| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 338 |
+| Counting each project | 1 256 |
+| Unique (name + statement) | 1 255 |
+| Unique, without the lemmas Lean generates itself (`eq_1`, `mk.inj`, `sizeOf_spec`, `deriving`) | 343 |
 
 *Closed* means the kernel accepted the proof and it depends only on `propext`, `Classical.choice` and `Quot.sound`. It says that the statement as written in the file is proved; it does not say that an open problem is solved. Every statement is in `VERIFICACAO.json`. *Conditional* means the proof also uses axioms declared in the repository; *open* means it uses `sorry`. *Checked file by file* covers the files that no build reached: each one went through Lean whole, with a `#print axioms` for each theorem.
 
@@ -145,7 +145,6 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `5c5ec3d9597f5ffd00210
 | `masterTheorem` | `lean4` | conditional | `lawA1` |
 | `UMI_RH.I_RH.eq_1` | `rh-umi-invariant/formal/lean` | conditional | `UMI_RH.d` |
 | `UMI_RH.RH_equiv_I` | `rh-umi-invariant/formal/lean` | conditional | `UMI_RH.RH`, `UMI_RH.d`, `UMI_RH.NB_BD_anchor` |
-| `DeltaNP.deltaNP_nonneg` | `src/lean` | conditional | `DeltaNP.P_subseteq_NP` |
 | `Millennium.Framework.no_equivalence` | `src/lean` | open | `sorryAx` |
 | `Millennium.Framework.no_implications` | `src/lean` | conditional | `Millennium.Framework.no_known_implication` |
 | `Millennium.Framework.summary_independence` | `src/lean` | open | `sorryAx` |
@@ -182,11 +181,12 @@ MVEI verification of 2026-11-06T00:22:08+00:00, on commit `5c5ec3d9597f5ffd00210
 | `PvsNP.Bridge.time_hierarchy` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.NP_subset_PSPACE` | `formal/lean (file by file)` | open | `sorryAx` |
 | `PvsNP.Bridge.PSPACE_subset_EXP` | `formal/lean (file by file)` | open | `sorryAx` |
-| … 157 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
+| `PvsNP.Bridge.pvsnp_dichotomy` | `formal/lean (file by file)` | open | `sorryAx` |
+| … 156 more in `VERIFICACAO.json` and `TEOREMAS.csv` | | | |
 
 ### Declared theorems
 
-The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 486 of them (226 closed, 77 conditional, 183 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 201 the kernel has no result:
+The `.lean` files of the verified commit declare 687 `theorem`/`lemma` (counting copies). The kernel checked 486 of them (227 closed, 76 conditional, 183 open). The closed count in the table above is larger: it also counts the theorems Lean generates by itself (equation lemmas, structure fields, `deriving`), which are not written in the text. For 201 the kernel has no result:
 
 | Reason | Theorems |
 |---|---:|

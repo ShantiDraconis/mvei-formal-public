@@ -247,3 +247,14 @@
  
  -- Complete System Properties
  
+--- a/src/lean/Harappan/UniversalGrammar.lean
++++ b/src/lean/Harappan/UniversalGrammar.lean
+@@ -144,7 +144,7 @@
+ def satisfiesBinaryBranching : Phrase → Bool
+   | Phrase.terminal _ _ => true
+   | Phrase.nonTerminal _ children =>
+-      children.length ≤ 2 && children.all satisfiesBinaryBranching
++      children.length ≤ 2 && children.attach.all (fun ⟨c, _⟩ => satisfiesBinaryBranching c)
+ 
+ /- Every well-formed phrase satisfies binary branching -/
+ theorem wellformed_binary (p : Phrase) (principles : UGPrinciples)

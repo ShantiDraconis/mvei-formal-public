@@ -732,6 +732,31 @@
      -- This should say: d(π(evolve(t,u)))/dt = closed_dynamics(π(u)) + coupling_operator(u)
      True  -- Placeholder for the differential equation
  
+@@ -117,13 +117,13 @@
+ 
+ /-- In the toy model, the coupling is linear in y -/
+ theorem toyModel_coupling_linear (hα : α > 0) (hk : k ≠ 0) :
+-    (toyModelDynamics k α f g hα hk).coupling_operator = fun ⟨_, y⟩ => k * y := by
++    (toyModelDynamics k α f hα hk).coupling_operator = fun ⟨_, y⟩ => k * y := by
+   rfl
+ 
+ /-- The closure error is |k| times the residue |y| -/
+ theorem toyModel_closure_error (hα : α > 0) (hk : k ≠ 0) 
+     (u : toyModel.C) :
+-    ClosureError toyModel (toyModelDynamics k α f g hα hk) u = 
++    ClosureError toyModel (toyModelDynamics k α f hα hk) u = 
+       |k| * |(u.2)| := by
+   obtain ⟨x, y⟩ := u
+   unfold ClosureError
+@@ -136,7 +136,7 @@
+ 
+ /-- The coupling depends on phase: K(y) = k·|y|·sign(y) -/
+ theorem toyModel_phase_dependence (hk : k ≠ 0) :
+-    ∀ ⟨x, y⟩ : toyModel.C,
++    ∀ (x y : ℝ),
+       k * y = k * (|y| * toyModelPhase ⟨x, y⟩) := by
+   intro x y
+   unfold toyModelPhase
 --- a/formalization/lean/LRE/Geometry/Ehresmann.lean
 +++ b/formalization/lean/LRE/Geometry/Ehresmann.lean
 @@ -2,6 +2,7 @@
@@ -897,6 +922,35 @@
      (conn : Connection sys) (curv : Curvature sys conn)
      (μ : MeasureTheory.Measure sys.C)
      (K : ℝ≥0) (hK : K > 0)
+--- a/formalization/lean/LRE/Geometry/ToyModel.lean
++++ b/formalization/lean/LRE/Geometry/ToyModel.lean
+@@ -65,7 +65,7 @@
+ 
+ /-- Any vertical line (fiber) contains points with arbitrarily large residue -/
+ theorem toyModel_fiber_unbounded_residue (x : ℝ) :
+-    ∀ M : ℝ, ∃ ⟨x', y'⟩ ∈ FiberOver ToyModel x, M < |y'| := by
++    ∀ M : ℝ, ∃ p ∈ FiberOver ToyModel x, M < |p.2| := by
+   intro M
+   refine ⟨(x, M + 1), rfl, ?_⟩
+   exact lt_of_lt_of_le (lt_add_one M) (le_abs_self _)
+@@ -226,7 +226,7 @@
+ 
+ /-- The coupling k·y = k·|y|·sign(y) depends on both magnitude and phase -/
+ theorem coupling_needs_phase (k : ℝ) (hk : k ≠ 0) :
+-    ∀ ⟨x, y⟩ : ℝ × ℝ, 
++    ∀ (x y : ℝ),
+       k * y = k * (|y| * toyModelPhase ⟨x, y⟩) := by
+   intro x y
+   unfold toyModelPhase
+@@ -275,7 +275,7 @@
+ 
+ /-- Cannot express coupling as function of residue magnitude alone -/
+ theorem coupling_not_function_of_magnitude (k : ℝ) (hk : k ≠ 0) :
+-    ¬ ∃ F : ℝ≥0∞ → ℝ, ∀ ⟨x, y⟩ : ℝ × ℝ, 
++    ¬ ∃ F : ℝ≥0∞ → ℝ, ∀ (x y : ℝ),
+       k * y = F (ToyModel.R ⟨x, y⟩) := by
+   rintro ⟨F, hF⟩
+   -- Consider y = 1 and y = -1, both have R = 1
 --- a/formalization/lean/LRE/Geometry/ToyModelComplete.lean
 +++ b/formalization/lean/LRE/Geometry/ToyModelComplete.lean
 @@ -45,7 +45,7 @@
@@ -908,6 +962,69 @@
    R := fun ⟨_, y⟩ => ENNReal.ofReal |y|
    measurable_R := by
      apply Measurable.ennreal_ofReal
+--- a/formalization/lean/LRE/Geometry/ToyModelDetailed.lean
++++ b/formalization/lean/LRE/Geometry/ToyModelDetailed.lean
+@@ -58,10 +58,10 @@
+ abbrev D := ℝ
+ 
+ /-- The projection π: C → D given by π(x,y) = x -/
+-def π : C → D := Prod.fst
++def proj : C → D := Prod.fst
+ 
+ /-- The fiber over a point x ∈ D -/
+-def fiber (x : D) : Set C := {p : C | π p = x}
++def fiber (x : D) : Set C := {p : C | proj p = x}
+ 
+ /-- Residue function R(x,y) = |y| -/
+ def R : C → ℝ≥0 := fun ⟨_, y⟩ => ⟨|y|, abs_nonneg y⟩
+@@ -157,7 +157,7 @@
+     sorry  -- ∫₀ᵗ exp(-α(t-s)) g(x(s)) ds
+ 
+ theorem residue_decay_without_forcing (params : DynamicsParams) (y₀ : ℝ) (t : ℝ) 
+-    (h : ∀ s, params.g 0 = 0) :
++    (h : ∀ s : ℝ, params.g 0 = 0) :
+     |fiberDynamicsSolution params (fun _ => 0) y₀ t| = |y₀| * exp (-params.α * t) := by
+   sorry
+ 
+@@ -192,32 +192,32 @@
+ /-- Horizontal lift of a curve γ with connection A, starting at (x₀, y₀)
+ The horizontal lift satisfies: ẏ = A(x,y)ẋ -/
+ structure HorizontalLift (conn : ConnectionFunction) (γ : BaseCurve) 
+-    (start : C) (h : π start = γ 0) where
++    (start : C) (h : proj start = γ 0) where
+   /-- The lifted curve in C -/
+   lift : ℝ → C
+   /-- Projects back to γ -/
+-  projects : ∀ t, π (lift t) = γ t
++  projects : ∀ t, proj (lift t) = γ t
+   /-- Starts at the right point -/
+   starts_at : lift 0 = start
+   /-- Tangent is horizontal -/
+-  horizontal : ∀ t, isHorizontal conn (lift t) (deriv lift t, deriv (fun s => (lift s).2) t)
++  horizontal : ∀ t, isHorizontal conn (lift t) (deriv (fun s => (lift s).1) t, deriv (fun s => (lift s).2) t)
+ 
+ /-- For linear connection A(x,y) = γy, the horizontal lift has explicit solution:
+ y(t) = y₀ exp(γ(x(t) - x₀)) -/
+ theorem linearConnection_lift_explicit (γ_param : ℝ) (curve : BaseCurve) 
+     (x₀ y₀ : ℝ) (h : curve 0 = x₀) :
+-    ∃ lift : HorizontalLift (linearConnection γ_param) curve ⟨x₀, y₀⟩ h,
++    ∃ lift : HorizontalLift (linearConnection γ_param) curve ⟨x₀, y₀⟩ h.symm,
+       ∀ t, (lift.lift t).2 = y₀ * exp (γ_param * (curve t - x₀)) := by
+   sorry
+ 
+ /-- Holonomy around a loop: the difference y(1) - y(0) -/
+ def holonomy (conn : ConnectionFunction) (γ : BaseCurve) (hloop : isLoop γ) 
+-    (start : C) (h : π start = γ 0) : ℝ :=
++    (start : C) (h : proj start = γ 0) : ℝ :=
+   sorry  -- Would be (horizontal lift at t=1).2 - start.2
+ 
+ /-- For a closed loop in D, with linear connection, holonomy is trivial in 1D -/
+ theorem linearConnection_trivial_holonomy (γ_param : ℝ) (curve : BaseCurve) 
+-    (hloop : isLoop curve) (start : C) (h : π start = curve 0) :
++    (hloop : isLoop curve) (start : C) (h : proj start = curve 0) :
+     holonomy (linearConnection γ_param) curve hloop start h = 0 := by
+   sorry
+   /- Since curve(1) = curve(0), we have x(1) = x(0), 
 --- a/formalization/lean/LRE/Implementation/Roadmap.lean
 +++ b/formalization/lean/LRE/Implementation/Roadmap.lean
 @@ -109,7 +109,7 @@
@@ -1076,6 +1193,19 @@
    { R := residual
      nonneg := fun _ => le_refl _ }
  
+--- a/formalization/lean/LRE/NS/Basic.lean
++++ b/formalization/lean/LRE/NS/Basic.lean
+@@ -63,7 +63,9 @@
+ /-- The space of solenoidal (divergence-free) vector fields.
+ H_σ^s(ℝ^n) = {u ∈ H^s(ℝ^n)^n : ∇·u = 0}
+ -/
+-structure SolenoidalSpace (s : ℝ) (n : ℕ) extends VectorSobolev s n where
++structure SolenoidalSpace (s : ℝ) (n : ℕ) where
++  /-- The underlying vector field -/
++  toVectorSobolev : VectorSobolev s n
+   /-- Divergence-free condition: ∇·u = 0 in the distributional sense -/
+   divergence_free : 
+     -- In Fourier space: ξ · û(ξ) = 0 for all ξ
 --- a/formalization/lean/LRE/NavierStokes.lean
 +++ b/formalization/lean/LRE/NavierStokes.lean
 @@ -107,19 +107,18 @@
@@ -1583,7 +1713,7 @@
    sorry  -- ∫ |u(x)|² dx over Ω
  
  /-- Enstrophy (vorticity squared integrated) -/
-@@ -209,7 +209,7 @@
+@@ -208,7 +208,7 @@
      (∀ v₀ : VelocityField, 
        ∃ v : ℝ → VelocityField, 
          v 0 = v₀ ∧ 
@@ -1888,6 +2018,16 @@
  
  end LRE_RBC
 \ No newline at end of file
+--- a/formalization/lean/LRE/RBC_Corrected.lean
++++ b/formalization/lean/LRE/RBC_Corrected.lean
+@@ -35,6 +35,7 @@
+ -/
+ 
+ import Mathlib.Analysis.Calculus.Deriv.Basic
++import Mathlib.Analysis.Calculus.Deriv.MeanValue
+ import Mathlib.Analysis.SpecialFunctions.Exp
+ import Mathlib.Analysis.SpecialFunctions.Pow.Real
+ import Mathlib.Data.Real.Basic
 --- a/formalization/lean/LRE/YangMills/MassGap.lean
 +++ b/formalization/lean/LRE/YangMills/MassGap.lean
 @@ -116,8 +116,8 @@
@@ -1967,6 +2107,167 @@
 +  ⟨trivial, trivial, trivial⟩
  
  end NCG
+--- a/formalization/lean/ProvaCondicionalEstrutural.lean
++++ b/formalization/lean/ProvaCondicionalEstrutural.lean
+@@ -64,7 +64,7 @@
+ 
+ E(u) ≥ α ‖u‖² para algum α > 0
+ -/
+-def Coercivo (op : OperadorEstrutural E) (α : ℝ) : Prop :=
++def Coercivo (op : OperadorEstrutural (𝕜 := 𝕜) E) (α : ℝ) : Prop :=
+   α > 0 ∧ ∀ u : E, op.energia u ≥ α * ‖u‖^2
+ 
+ /-- 
+@@ -87,7 +87,7 @@
+ 
+ Todos os autovalores no eixo têm parte real ≤ 0.
+ -/
+-def EixoEstavel (op : OperadorEstrutural E) (decomp : DecomposicaoEixo E) : Prop :=
++def EixoEstavel (op : OperadorEstrutural (𝕜 := 𝕜) E) (decomp : DecomposicaoEixo (𝕜 := 𝕜) E) : Prop :=
+   ∀ (u : E) (hu : u ∈ decomp.eixo) («λ» : 𝕜),
+     op.aplicar u = «λ» • u → RCLike.re «λ» ≤ 0
+ 
+@@ -96,7 +96,7 @@
+ 
+ Operador é limitado em modos de alta frequência.
+ -/
+-def Regular (op : OperadorEstrutural E) : Prop :=
++def Regular (op : OperadorEstrutural (𝕜 := 𝕜) E) : Prop :=
+   ∃ C : ℝ, C > 0 ∧ ∀ u : E, ‖op.aplicar u‖ ≤ C * ‖u‖
+ 
+ /--
+@@ -104,11 +104,11 @@
+ 
+ Possui as três propriedades fundamentais: coercividade, eixo estável, regularidade.
+ -/
+-structure EstruturalmenteResoluvel (op : OperadorEstrutural E) : Prop where
++structure EstruturalmenteResoluvel (op : OperadorEstrutural (𝕜 := 𝕜) E) : Prop where
+   /-- Existe α > 0 tal que E é α-coercivo -/
+   existe_coercividade : ∃ α : ℝ, Coercivo op α
+   /-- Existe decomposição com eixo estável -/
+-  existe_eixo_estavel : ∃ decomp : DecomposicaoEixo E, EixoEstavel op decomp
++  existe_eixo_estavel : ∃ decomp : DecomposicaoEixo (𝕜 := 𝕜) E, EixoEstavel op decomp
+   /-- Operador é regular -/
+   regularidade : Regular op
+ 
+@@ -126,12 +126,12 @@
+ Então existe decomposição espectral com eixo dominante.
+ -/
+ theorem lema_colapso_visual_implica_eixo
+-    (op : OperadorEstrutural E)
+-    (h_estrutura : ∃ decomp : DecomposicaoEixo E, EixoEstavel op decomp)
+-    (h_dominancia : ∃ (C : ℝ) (hC : C > 1), ∀ (decomp : DecomposicaoEixo E),
++    (op : OperadorEstrutural (𝕜 := 𝕜) E)
++    (h_estrutura : ∃ decomp : DecomposicaoEixo (𝕜 := 𝕜) E, EixoEstavel op decomp)
++    (h_dominancia : ∃ (C : ℝ) (hC : C > 1), ∀ (decomp : DecomposicaoEixo (𝕜 := 𝕜) E),
+       ∀ (u : E) (hu : u ∈ decomp.eixo) (v : E) (hv : v ∈ decomp.periferico),
+         ‖op.aplicar u‖ ≥ C * ‖op.aplicar v‖) :
+-    ∃ decomp : DecomposicaoEixo E, EixoEstavel op decomp := by
++    ∃ decomp : DecomposicaoEixo (𝕜 := 𝕜) E, EixoEstavel op decomp := by
+   exact h_estrutura
+ 
+ /-!
+@@ -149,9 +149,9 @@
+ Então o operador é estruturalmente resolúvel.
+ -/
+ theorem teorema_principal_resolubilidade
+-    (op : OperadorEstrutural E)
++    (op : OperadorEstrutural (𝕜 := 𝕜) E)
+     (h_coercivo : ∃ α : ℝ, Coercivo op α)
+-    (h_eixo : ∃ decomp : DecomposicaoEixo E, EixoEstavel op decomp)
++    (h_eixo : ∃ decomp : DecomposicaoEixo (𝕜 := 𝕜) E, EixoEstavel op decomp)
+     (h_regular : Regular op) :
+     EstruturalmenteResoluvel op := by
+   constructor
+@@ -169,7 +169,7 @@
+ Nota: Esta é uma representação simplificada. A versão completa
+ requer formalização da função zeta de Riemann.
+ -/
+-axiom OperadorRiemann : OperadorEstrutural E
++axiom OperadorRiemann : OperadorEstrutural (𝕜 := 𝕜) E
+ 
+ /--
+ Confinamento à linha crítica.
+@@ -177,7 +177,7 @@
+ Se todos os autovalores têm Re(λ) = 1/2, então RH é verdadeira.
+ -/
+ axiom confinamento_linha_critica :
+-  (∀ (u : E) («λ» : 𝕜), OperadorRiemann.aplicar u = «λ» • u → RCLike.re «λ» = 1/2) →
++  (∀ (u : E) («λ» : 𝕜), (OperadorRiemann (𝕜 := 𝕜) (E := E)).aplicar u = «λ» • u → RCLike.re «λ» = 1/2) →
+   True  -- Placeholder para "RH é verdadeira"
+ 
+ /--
+@@ -185,9 +185,9 @@
+ e espectro está na linha crítica, então RH segue (condicionalmente).
+ -/
+ theorem aplicacao_riemann_hypothesis
+-    («h_resolúvel» : EstruturalmenteResoluvel OperadorRiemann)
++    («h_resolúvel» : EstruturalmenteResoluvel (OperadorRiemann (𝕜 := 𝕜) (E := E)))
+     (h_linha_critica : ∀ (u : E) («λ» : 𝕜),
+-      OperadorRiemann.aplicar u = «λ» • u → RCLike.re «λ» = 1/2) :
++      (OperadorRiemann (𝕜 := 𝕜) (E := E)).aplicar u = «λ» • u → RCLike.re «λ» = 1/2) :
+     True := by  -- Placeholder
+   exact confinamento_linha_critica h_linha_critica
+ 
+@@ -200,7 +200,7 @@
+ 
+ Nota: Versão simplificada. Requer formalização completa de EDPs.
+ -/
+-axiom OperadorNavierStokes : ℝ → OperadorEstrutural E
++axiom OperadorNavierStokes : ℝ → OperadorEstrutural (𝕜 := 𝕜) E
+ 
+ /--
+ Dissipação dominante implica regularidade.
+@@ -209,8 +209,8 @@
+ -/
+ axiom dissipacao_dominante_implica_regularidade :
+   ∀ (ν : ℝ) (hν : ν > 0) (δ : ℝ) (hδ : δ > 0),
+-    (∀ u : E, (OperadorNavierStokes ν).energia u ≥ δ * ‖u‖^2) →
+-    Regular (OperadorNavierStokes ν)
++    (∀ u : E, (OperadorNavierStokes (𝕜 := 𝕜) (E := E) ν).energia u ≥ δ * ‖u‖^2) →
++    Regular (OperadorNavierStokes (𝕜 := 𝕜) (E := E) ν)
+ 
+ /--
+ **Aplicação NS**: Se dissipação é dominante, então NS é resolúvel.
+@@ -218,8 +218,8 @@
+ theorem aplicacao_navier_stokes
+     (ν : ℝ) (hν : ν > 0)
+     (h_dissipacao : ∃ δ > 0, ∀ u : E,
+-      (OperadorNavierStokes ν).energia u ≥ δ * ‖u‖^2) :
+-    EstruturalmenteResoluvel (OperadorNavierStokes ν) := by
++      (OperadorNavierStokes (𝕜 := 𝕜) (E := E) ν).energia u ≥ δ * ‖u‖^2) :
++    EstruturalmenteResoluvel (OperadorNavierStokes (𝕜 := 𝕜) (E := E) ν) := by
+   sorry  -- Requer prova completa
+ 
+ /-!
+@@ -255,7 +255,7 @@
+ abordagem sistemática, não prova clássica completa.
+ -/
+ theorem teorema_unificador
+-    (problemas : Fin 6 → OperadorEstrutural E)
++    (problemas : Fin 6 → OperadorEstrutural (𝕜 := 𝕜) E)
+     (h_todos_resoluveis : ∀ i : Fin 6, EstruturalmenteResoluvel (problemas i)) :
+     ∀ i : Fin 6, EstruturalmenteResoluvel (problemas i) := by
+   exact h_todos_resoluveis
+--- a/formalization/lean/UETheta_to_RH.lean
++++ b/formalization/lean/UETheta_to_RH.lean
+@@ -6,14 +6,14 @@
+ open UETheta
+ 
+ /-- Enunciado abstrato da Hipótese de Riemann (placeholder). -/
+-def RiemannHypothesis : Prop := True
++def UETheta.RiemannHypothesis : Prop := True
+ 
+ /-- Enunciado abstrato da conjectura de Hardy–Littlewood k-tuplas (placeholder). -/
+ def HardyLittlewood (k : ℕ) : Prop := True
+ 
+ /-- Teorema condicional: UEΘ + EC ⇒ RH (esqueleto, assumido como `by trivial`). -/
+ theorem UETheta_implies_RH [UEThetaAxiom] [ECAxiom] :
+-    RiemannHypothesis := by
++    UETheta.RiemannHypothesis := by
+   trivial
+ 
+ /-- Teorema condicional: UEΘ + EC ⇒ Hardy–Littlewood para k ≥ 2 (esqueleto). -/
 --- a/formalization/lean/UMI/Core.lean
 +++ b/formalization/lean/UMI/Core.lean
 @@ -22,35 +22,38 @@
@@ -2619,6 +2920,19 @@
  
  /-!
    ## Monotonicity of Progress
+@@ -311,10 +294,10 @@
+   [currentLedger, improvedAlgebraicLedger, improvedGeneralityLedger, provenLedger]
+ 
+ /-- Check if progress history is monotone (each step has non-increasing error) -/
+-def validateProgressHistory : Bool :=
++def validateProgressHistory : Prop :=
+   let errors := progressHistory.map (·.totalError)
+   -- Check that each consecutive pair satisfies error_i ≥ error_{i+1}
+-  List.Chain (· ≥ ·) errors
++  List.Chain' (· ≥ ·) errors
+ 
+ theorem progressHistory_is_monotone : validateProgressHistory := by
+   unfold validateProgressHistory progressHistory
 @@ -350,20 +333,16 @@
  
  /-- Ledger with generality-weighted weights -/
@@ -3053,7 +3367,20 @@
  
  /-!
    ## Monotonicity of Progress
-@@ -294,19 +283,10 @@
+@@ -239,10 +228,10 @@
+   [historicalLedger, announcementLedger, currentLedger]
+ 
+ /-- Check if progress history is monotone (each step has non-increasing error) -/
+-def validateProgressHistory : Bool :=
++def validateProgressHistory : Prop :=
+   let errors := progressHistory.map (·.totalError)
+   -- Check that each consecutive pair satisfies error_i ≥ error_{i+1}
+-  List.Chain (· ≥ ·) errors
++  List.Chain' (· ≥ ·) errors
+ 
+ theorem progressHistory_is_monotone : validateProgressHistory := by
+   unfold validateProgressHistory progressHistory
+@@ -292,19 +281,10 @@
  
  /-- The total error is always between 0 and 1 -/
  theorem total_error_bounds (params : PoincareParameters) :
@@ -3077,7 +3404,7 @@
  
  /-- Progress is transitive -/
  theorem progress_transitive {A B C : Universe00.Core.ProblemLedger} 
-@@ -316,8 +296,10 @@
+@@ -314,8 +294,10 @@
  
  /-- Maximum possible error is 1 (100%) -/
  theorem max_error_bound (params : PoincareParameters) :
@@ -3090,7 +3417,7 @@
  
  /-- Minimum possible error is 0 -/
  theorem min_error_bound (params : PoincareParameters) :
-@@ -330,24 +312,24 @@
+@@ -328,24 +310,24 @@
    ## Summary and Interpretation
  -/
  
@@ -3122,7 +3449,7 @@
    IO.println statusReport
  
  /- Additional theorems for completeness -/
-@@ -356,11 +338,8 @@
+@@ -354,11 +336,8 @@
  theorem errors_independent (params1 params2 : PoincareParameters) :
      let ledger1 := makeLedger params1
      let ledger2 := makeLedger params2
@@ -3226,6 +3553,28 @@
  
  /-- Scenario 3: Complete proof that P ≠ NP -/
  def separationProvenParameters : PvsNPParameters where
+@@ -307,10 +293,10 @@
+   [currentLedger, improvedLowerBoundsLedger, barrierBreakthroughLedger, separationProvenLedger]
+ 
+ /-- Check if progress history is monotone (each step has non-increasing error) -/
+-def validateProgressHistorySeparation : Bool :=
++def validateProgressHistorySeparation : Prop :=
+   let errors := progressHistorySeparation.map (·.totalError)
+   -- Check that each consecutive pair satisfies error_i ≥ error_{i+1}
+-  List.Chain (· ≥ ·) errors
++  List.Chain' (· ≥ ·) errors
+ 
+ theorem progressHistorySeparation_is_monotone : validateProgressHistorySeparation := by
+   unfold validateProgressHistorySeparation progressHistorySeparation
+@@ -338,7 +324,7 @@
+    separationProvenLedger]     -- Finally prove: 0.72 → 0
+ 
+ theorem monotoneHistorySeparation_is_monotone : 
+-    List.Chain (· ≥ ·) (monotoneHistorySeparation.map (·.totalError)) := by
++    List.Chain' (· ≥ ·) (monotoneHistorySeparation.map (·.totalError)) := by
+   unfold monotoneHistorySeparation
+   simp
+   constructor
 @@ -372,20 +358,16 @@
  
  /-- Ledger with barrier-weighted weights -/
@@ -3689,6 +4038,19 @@
  
  /-!
    ## Monotonicity of Progress
+@@ -352,10 +336,10 @@
+    provenLedger]
+ 
+ /-- Check if progress history is monotone (each step has non-increasing error) -/
+-def validateProgressHistory : Bool :=
++def validateProgressHistory : Prop :=
+   let errors := monotoneHistory.map (·.totalError)
+   -- Check that each consecutive pair satisfies error_i ≥ error_{i+1}
+-  List.Chain (· ≥ ·) errors
++  List.Chain' (· ≥ ·) errors
+ 
+ theorem progressHistory_is_monotone : validateProgressHistory := by
+   unfold validateProgressHistory monotoneHistory
 @@ -391,20 +375,16 @@
  
  /-- Ledger with lattice-weighted weights -/

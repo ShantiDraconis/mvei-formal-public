@@ -123,6 +123,48 @@
 +
 +end MVEI.Refutacoes
 --- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_CouplingQ.lean
+@@ -0,0 +1,39 @@
++import LRE.Geometry.Coupling
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open ProjectionSystem in
++/-- `ProjectionSystem.projection_prediction_error` é falso: o preditor pode ser a constante K(u). No modelo de
++    brinquedo do autor (toyModelDynamics com k = 1, α = 1, f = id), em u = (0, 1) temos K(u) = 1 e R(u) = 1;
++    com predictor ≡ 1, |1 − 1| = 0 < c · 1 para todo c > 0. -/
++theorem projection_prediction_error_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}) (dyn : CoupledDynamics sys) (predictor : sys.D → ℝ) (u : sys.C)
++      (k : ℝ) (_ : k ≠ 0), ∃ c > 0, |predictor (sys.π u) - (dyn.coupling_operator u)| ≥ c * (sys.R u).toReal := by
++  intro h
++  obtain ⟨c, hc, hle⟩ := h toyModel (toyModelDynamics 1 1 id (by norm_num) one_ne_zero) (fun _ => 1)
++    ((0, 1) : ℝ × ℝ) 1 one_ne_zero
++  have h2 : |(1 : ℝ) - 1 * 1| ≥ c * (ENNReal.ofReal |(1 : ℝ)|).toReal := hle
++  norm_num at h2
++  linarith
++
++open ProjectionSystem in
++/-- `ProjectionSystem.large_coupling_implies_large_error` é falso: o `k` do enunciado não está ligado à
++    dinâmica. Com toyModelDynamics de acoplamento 1, u = (0, 1) e k = 2: ClosureError = |1 · 1| = 1 e
++    R(u) = 1, mas 1 > 1 é falso. -/
++theorem large_coupling_implies_large_error_falso :
++    ¬ ∀ (sys : ProjectionSystem.{0, 0}) (dyn : CoupledDynamics sys) (k : ℝ) (_ : |k| > 1) (u : sys.C)
++      (_ : sys.R u > 0), ClosureError sys dyn u > (sys.R u).toReal := by
++  intro h
++  have hR : (toyModel.R ((0, 1) : ℝ × ℝ)) = ENNReal.ofReal |(1 : ℝ)| := rfl
++  have hpos : toyModel.R ((0, 1) : ℝ × ℝ) > 0 := by
++    rw [hR]; simp
++  have := h toyModel (toyModelDynamics 1 1 id (by norm_num) one_ne_zero) 2 (by norm_num)
++    ((0, 1) : ℝ × ℝ) hpos
++  have h2 : |(1 : ℝ) * 1| > (ENNReal.ofReal |(1 : ℝ)|).toReal := this
++  norm_num at h2
++
++end MVEI.Refutacoes
+--- /dev/null
 +++ b/formalization/lean/MVEI_Refutacoes_Final.lean
 @@ -0,0 +1,54 @@
 +import LRE.Final
@@ -254,6 +296,37 @@
 +                 metric_symmetric := fun _ _ => rfl,
 +                 metric_pos_def := fun _ hp => absurd (funext fun i => i.elim0) hp }
 +  norm_num at h0
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/formalization/lean/MVEI_Refutacoes_ProvaCondicionalEstruturalQ.lean
+@@ -0,0 +1,28 @@
++import ProvaCondicionalEstrutural
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++open ProvaCondicionalEstrutural in
++/-- `ProvaCondicionalEstrutural.aplicacao_navier_stokes` é falso: `EixoEstavel op decomp` nunca vale, porque
++    0 está em todo eixo e `op.aplicar 0 = 1 • 0`, com Re 1 = 1 > 0; logo nenhum operador é
++    `EstruturalmenteResoluvel`. Já a hipótese vale no espaço nulo (E = EuclideanSpace ℝ (Fin 0), 𝕜 = ℝ): lá
++    ‖u‖ = 0 e a energia é ≥ 0 (campo energia_nonneg). -/
++theorem aplicacao_navier_stokes_falso :
++    ¬ ∀ (ν : ℝ) (_ : ν > 0) (_ : ∃ δ > 0, ∀ u : EuclideanSpace ℝ (Fin 0),
++        (OperadorNavierStokes (𝕜 := ℝ) (E := EuclideanSpace ℝ (Fin 0)) ν).energia u ≥ δ * ‖u‖^2),
++      EstruturalmenteResoluvel (OperadorNavierStokes (𝕜 := ℝ) (E := EuclideanSpace ℝ (Fin 0)) ν) := by
++  intro h
++  have hres := h 1 one_pos ⟨1, one_pos, fun u => by
++    have hu : u = 0 := Subsingleton.elim u 0
++    subst hu
++    simpa using (OperadorNavierStokes (𝕜 := ℝ) (E := EuclideanSpace ℝ (Fin 0)) 1).energia_nonneg 0⟩
++  obtain ⟨decomp, hd⟩ := hres.existe_eixo_estavel
++  have := hd 0 decomp.eixo.zero_mem 1 (by simp)
++  simp at this
++  linarith
 +
 +end MVEI.Refutacoes
 --- /dev/null
@@ -1313,6 +1386,43 @@
 +  simp only [List.map_cons, List.map_nil, List.chain'_cons, List.chain'_singleton] at h
 +  have h2 := h.2.1
 +  rw [Universe00.Problems.BSD.improvedRank_error_value, Universe00.Problems.BSD.improvedSha_error_value] at h2
++  norm_num at h2
++
++end MVEI.Refutacoes
+--- /dev/null
++++ b/universe00/MVEI_Refutacoes_ProblemsQ.lean
+@@ -0,0 +1,34 @@
++import Universe00.Problems.Hodge
++import Universe00.Problems.PvsNP
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `Universe00.Problems.Hodge.progressHistory_is_monotone` é falso: os erros totais do histórico são
++[91; 76; 81; 0] (lemas do autor current/improvedAlgebraic/improvedGenerality/proven), e 76 ≥ 81 é falso. -/
++theorem hodge_progressHistory_is_monotone_falso : ¬ Universe00.Problems.Hodge.validateProgressHistory := by
++  intro h
++  unfold Universe00.Problems.Hodge.validateProgressHistory Universe00.Problems.Hodge.progressHistory at h
++  simp only [List.map_cons, List.map_nil, List.chain'_cons, List.chain'_singleton] at h
++  have h2 := h.2.1
++  rw [Universe00.Problems.Hodge.improvedAlgebraic_error_value,
++    Universe00.Problems.Hodge.improvedGenerality_error_value] at h2
++  norm_num at h2
++
++/-- `Universe00.Problems.PvsNP.progressHistorySeparation_is_monotone` é falso: os erros totais são
++[93; 72; 77; 0], e 72 ≥ 77 é falso (o próprio comentário do autor nota isso). -/
++theorem progressHistorySeparation_is_monotone_falso :
++    ¬ Universe00.Problems.PvsNP.validateProgressHistorySeparation := by
++  intro h
++  unfold Universe00.Problems.PvsNP.validateProgressHistorySeparation
++    Universe00.Problems.PvsNP.progressHistorySeparation at h
++  simp only [List.map_cons, List.map_nil, List.chain'_cons, List.chain'_singleton] at h
++  have h2 := h.2.1
++  rw [Universe00.Problems.PvsNP.improvedLowerBounds_error_value,
++    Universe00.Problems.PvsNP.barrierBreakthrough_error_value] at h2
 +  norm_num at h2
 +
 +end MVEI.Refutacoes

@@ -11,7 +11,7 @@ This folder records what the Lean 4 kernel said about the Lean sources of the pr
 
 ## What the kernel said
 
-MVEI verification of 2026-11-06T00:22:08+00:00, on commit `ae79aed383c696c2ecce69e24e711d26beddd64d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
+MVEI verification of 2026-11-10T04:38:10+00:00, on commit `ae79aed383c696c2ecce69e24e711d26beddd64d`. Each theorem was read with `Lean.collectAxioms`, the function behind `#print axioms`.
 
 | Lean project | Lean version | Build | Closed | Conditional | Open (`sorry`) | Checked file by file: closed / conditional / open / proof error / not reached |
 |---|---|---|---:|---:|---:|---|
@@ -101,9 +101,9 @@ The `.lean` files of the verified commit declare 235 `theorem`/`lemma` (counting
 * `correcoes/imports-no-topo.patch` (import fora do início do arquivo, 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/imports-no-topo.patch` (in order, after the ones above)
 * `correcoes/tatica-encontrada.patch` (prova que não passava (ou axioma) que uma tática padrão fecha no kernel, 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/tatica-encontrada.patch` (in order, after the ones above)
 * `correcoes/vocabulario-lean4.patch` (grafia que o Lean 4 não lê (nome acentuado, λ/Σ/Π como nome, ∀ x y ∈ s, docstring solta, constant, tática do Mathlib sem import), 57 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/vocabulario-lean4.patch` (in order, after the ones above)
-* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 12 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
-* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 14 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
-* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 2 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/zz-refutacoes.patch` (in order, after the ones above)
+* `correcoes/z-provas-reparadas.patch` (prova que não passava no kernel (o enunciado fica igual), 23 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/z-provas-reparadas.patch` (in order, after the ones above)
+* `correcoes/zy-enunciados-do-autor.patch` (enunciado reescrito a pedido do autor (o original, como escrito, fica registrado), 25 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/zy-enunciados-do-autor.patch` (in order, after the ones above)
+* `correcoes/zz-refutacoes.patch` (teorema com enunciado falso como o Lean o lê (o original fica como está), 4 file(s)): applies to the published sources: `git apply -p1 --directory=imports/millennium-riemann-I mvei/millennium-riemann-I/correcoes/zz-refutacoes.patch` (in order, after the ones above)
 
 ## Files in this folder
 

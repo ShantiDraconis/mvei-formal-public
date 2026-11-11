@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-06T00:22:08+00:00",
+ "generated_at": "2026-11-10T04:38:10+00:00",
  "standard_axioms": [
   "Classical.choice",
   "Quot.sound",
@@ -15,7 +15,7 @@
    "toolchain_used": "leanprover/lean4:v4.19.0",
    "needs_mathlib": true,
    "build_ok": false,
-   "build_seconds": 1.5,
+   "build_seconds": 0.9,
    "build_error": "error: HEU/HEU_Main.lean:20:0: unknown module prefix 'HEU' | error: build failed",
    "sorry_warnings": 58,
    "reconstructed": true,
@@ -949,34 +949,14 @@
      "statement": "HEU.Core.ZF.ZFC"
     },
     {
-     "name": "HEU.Core.ZF.em",
-     "module": "HEU.Core.ZF.Classical",
-     "statement": "∀ (P : Prop), P ∨ ¬P"
-    },
-    {
      "name": "HEU.Cross.transfinite_induction",
      "module": "HEU.Cross.OrdinalComparisons",
      "statement": "∀ (P : HEU.Core.ZF.Ord → Prop),   P HEU.Core.ZF.Ord.zero →     (∀ (α : HEU.Core.ZF.Ord), P α → P α.succ) →       (∀ (α : HEU.Core.ZF.Ord), α.isLimit → (∀ β < α, P β) → P α) → ∀ (α : HEU.Core.ZF.Ord), P α"
     },
     {
-     "name": "HEU.Problems.BSD.MordellWeil",
-     "module": "HEU.Problems.BSD.BSD",
-     "statement": "∀ (E : HEU.Problems.BSD.X_BSD), ∃ r, HEU.Problems.BSD.rank E = r"
-    },
-    {
-     "name": "HEU.Problems.BSD.ShaFiniteness",
-     "module": "HEU.Problems.BSD.BSD",
-     "statement": "HEU.Problems.BSD.X_BSD → True"
-    },
-    {
      "name": "HEU.Problems.Hodge.Deligne_absolute_Hodge",
      "module": "HEU.Problems.Hodge.Hodge",
      "statement": "True"
-    },
-    {
-     "name": "HEU.Problems.Hodge.Lefschetz_1_1",
-     "module": "HEU.Problems.Hodge.Hodge",
-     "statement": "∀ (c : HEU.Problems.Hodge.X_Hodge),   c.degree = 2 → HEU.Problems.Hodge.isHodgeType c = true → HEU.Problems.Hodge.isAlgebraic c"
     },
     {
      "name": "HEU.Problems.NS.NSEquations",
@@ -992,11 +972,6 @@
      "name": "HEU.Problems.PvsNP.circuitLowerBounds",
      "module": "HEU.Problems.PvsNP.Lemmas_PNP",
      "statement": "HEU.Problems.PvsNP.P_neq_NP → ∃ p, HEU.Problems.PvsNP.isNPCompleteClass p"
-    },
-    {
-     "name": "HEU.Problems.PvsNP.cookLevin",
-     "module": "HEU.Problems.PvsNP.X_PNP",
-     "statement": "HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT"
     },
     {
      "name": "HEU.Problems.PvsNP.naturalProofsBarrier",
@@ -1422,28 +1397,34 @@
      "name": "HEU.Core.ZF.byContradiction",
      "module": "HEU.Core.ZF.Classical",
      "axioms": [
-      "HEU.Core.ZF.em"
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
      ],
      "statement": "∀ {P : Prop}, (¬P → False) → P",
-     "status": "condicional"
+     "status": "fechado"
     },
     {
      "name": "HEU.Core.ZF.classicalImpl",
      "module": "HEU.Core.ZF.Classical",
      "axioms": [
-      "HEU.Core.ZF.em"
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
      ],
      "statement": "∀ {P Q : Prop}, P → Q ↔ ¬P ∨ Q",
-     "status": "condicional"
+     "status": "fechado"
     },
     {
      "name": "HEU.Core.ZF.deMorgan1",
      "module": "HEU.Core.ZF.Classical",
      "axioms": [
-      "HEU.Core.ZF.em"
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
      ],
      "statement": "∀ {P Q : Prop}, ¬(P ∧ Q) ↔ ¬P ∨ ¬Q",
-     "status": "condicional"
+     "status": "fechado"
     },
     {
      "name": "HEU.Core.ZF.deMorgan2",
@@ -1456,19 +1437,34 @@
      "name": "HEU.Core.ZF.dne",
      "module": "HEU.Core.ZF.Classical",
      "axioms": [
-      "HEU.Core.ZF.em"
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
      ],
      "statement": "∀ (P : Prop), ¬¬P → P",
-     "status": "condicional"
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Core.ZF.em",
+     "module": "HEU.Core.ZF.Classical",
+     "axioms": [
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
+     ],
+     "statement": "∀ (P : Prop), P ∨ ¬P",
+     "status": "fechado"
     },
     {
      "name": "HEU.Core.ZF.peirce",
      "module": "HEU.Core.ZF.Classical",
      "axioms": [
-      "HEU.Core.ZF.em"
+      "Classical.choice",
+      "propext",
+      "Quot.sound"
      ],
      "statement": "∀ {P Q : Prop}, ((P → Q) → P) → P",
-     "status": "condicional"
+     "status": "fechado"
     },
     {
      "name": "HEU.Cross.EquilibriumStatus.achieved.sizeOf_spec",
@@ -1727,6 +1723,22 @@
      "status": "fechado"
     },
     {
+     "name": "HEU.Problems.BSD.MordellWeil",
+     "module": "HEU.Problems.BSD.BSD",
+     "axioms": [
+      "propext"
+     ],
+     "statement": "∀ (E : HEU.Problems.BSD.X_BSD), ∃ r, HEU.Problems.BSD.rank E = r",
+     "status": "fechado"
+    },
+    {
+     "name": "HEU.Problems.BSD.ShaFiniteness",
+     "module": "HEU.Problems.BSD.BSD",
+     "axioms": [],
+     "statement": "HEU.Problems.BSD.X_BSD → True",
+     "status": "fechado"
+    },
+    {
      "name": "HEU.Problems.Hodge.AlgebraicCycle.mk.inj",
      "module": "HEU.Problems.Hodge.Hodge",
      "axioms": [],
@@ -1780,6 +1792,13 @@
      ],
      "statement": "HEU.Problems.Hodge.Hodge_equilibrium ↔ HEU.Problems.Hodge.Hodge_statement",
      "status": "aberto-sorry"
+    },
+    {
+     "name": "HEU.Problems.Hodge.Lefschetz_1_1",
+     "module": "HEU.Problems.Hodge.Hodge",
+     "axioms": [],
+     "statement": "∀ (c : HEU.Problems.Hodge.X_Hodge),   c.degree = 2 → HEU.Problems.Hodge.isHodgeType c = true → HEU.Problems.Hodge.isAlgebraic c",
+     "status": "fechado"
     },
     {
      "name": "HEU.Problems.NS.F_NS_bounded",
@@ -2106,6 +2125,13 @@
      "status": "aberto-sorry"
     },
     {
+     "name": "HEU.Problems.PvsNP.cookLevin",
+     "module": "HEU.Problems.PvsNP.X_PNP",
+     "axioms": [],
+     "statement": "HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT",
+     "status": "fechado"
+    },
+    {
      "name": "HEU.Problems.PvsNP.isCriticalPoint_PNP.eq_1",
      "module": "HEU.Problems.PvsNP.Critical_PNP",
      "axioms": [],
@@ -2351,7 +2377,7 @@
     }
    ],
    "integrity": [],
-   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor): 2 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 2 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 32 arquivo(s): abbrev 1, docstring 2, lemma 8, noncomputable 28, notacao 4, palavra_chave 1, repr 1; 20 prova(s) reescrita(s), conferidas no Lean do projeto: criticality_dichotomy, id, ltc_extends_classical, scale, shift, instance@78, F_NS_bounded, O_NS_zero_for_smooth, UBO_NS, poly_is_critical, F_PNP_max_poly, F_PNP_bounded, O_PNP_zero_for_P, UBO_PNP, F_RH_bounded, O_RH_preserves_order, UBO_nonneg_under_RH, O_RH_zero_on_critical, O_RH_monotone, UBO_RH; 7 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: (cabeçalho), CriticalThreshold, (cabeçalho), isDivergenceFree, complexityBarrier, relativizationBarrier, criticalDensity. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com HEU e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././HEU/Core/ZF/Encodings.lean:23:4: fail to show termination for | with errors)",
+   "note": "CORRIGIDO PELO MVEI (tatica-encontrada, vocabulario-lean4, z-provas-reparadas, zy-enunciados-do-autor): 8 prova(s) trocada(s) pela tática que o MVEI achou para o mesmo enunciado (axiomas viram teoremas), em 7 arquivo(s); trocas de grafia com o mesmo nome e o mesmo enunciado em 33 arquivo(s): abbrev 1, docstring 2, lemma 8, noncomputable 24, notacao 9, palavra_chave 1, repr 1; 20 prova(s) reescrita(s), conferidas no Lean do projeto: criticality_dichotomy, id, ltc_extends_classical, scale, shift, instance@78, F_NS_bounded, O_NS_zero_for_smooth, UBO_NS, poly_is_critical, F_PNP_max_poly, F_PNP_bounded, O_PNP_zero_for_P, UBO_PNP, F_RH_bounded, O_RH_preserves_order, UBO_nonneg_under_RH, O_RH_zero_on_critical, O_RH_monotone, UBO_RH; 7 enunciado(s) reescrito(s) a pedido do autor, conferidos no Lean do projeto: (cabeçalho), CriticalThreshold, (cabeçalho), isDivergenceFree, complexityBarrier, relativizationBarrier, criticalDensity. RECONSTRUÍDO: a configuração original não compila; o MVEI gerou um lakefile com HEU e o Mathlib v4.19.0 e compilou o que foi possível (erros restantes: error: ././././HEU/Core/ZF/Encodings.lean:23:4: fail to show termination for | with errors)",
    "corrections": [
     "tatica-encontrada",
     "vocabulario-lean4",
@@ -2405,7 +2431,7 @@
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
-     "linha": 22,
+     "linha": 21,
      "nome": "HEU.Problems.NS.NS_equiv",
      "status": "aberto-sorry",
      "axioms": [
@@ -2417,7 +2443,7 @@
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
-     "linha": 37,
+     "linha": 36,
      "nome": "HEU.Problems.NS.NS_LTC_equiv",
      "status": "aberto-sorry",
      "axioms": [
@@ -2429,23 +2455,17 @@
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
-     "linha": 42,
+     "linha": 41,
      "nome": "HEU.Problems.NS.UBO_valid_implies_NS",
-     "status": "aberto-sorry",
-     "axioms": [
-      "sorryAx"
-     ],
+     "status": "fechado",
+     "axioms": [],
      "dependencia_com_sorry": [
       "HEU.Problems.NS.Critical_NS"
-     ],
-     "preenchimento": {
-      "resultado": "demonstrável",
-      "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
-     }
+     ]
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
-     "linha": 48,
+     "linha": 46,
      "nome": "HEU.Problems.NS.NS_implies_UBO_valid",
      "status": "aberto-sorry",
      "axioms": [
@@ -2457,7 +2477,7 @@
     },
     {
      "arquivo": "src/lean/HEU/Problems/NS/Equivalence_NS.lean",
-     "linha": 58,
+     "linha": 56,
      "nome": "HEU.Problems.NS.NS_UBO_biequiv_proof",
      "status": "aberto-sorry",
      "axioms": [
@@ -2564,13 +2584,6 @@
     },
     {
      "tipo": "axioma",
-     "nome": "HEU.Problems.Hodge.Lefschetz_1_1",
-     "enunciado": "∀ (c : HEU.Problems.Hodge.X_Hodge),   c.degree = 2 → HEU.Problems.Hodge.isHodgeType c = true → HEU.Problems.Hodge.isAlgebraic c",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (simp_all [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (unfold HEU.Problems.Hodge.X_Hodge HEU.Problems.Hodge.isHodgeType HEU.Problems.Hodge.isAlgebraic; decide; done) | (unfold HEU.Problems.Hodge.X_Hodge HEU.Problems.Hodge.isHodgeType HEU.Problems.Hodge.isAlgebraic; rfl; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; omega; done) | (intros; simp only [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; omega; done) | (intros; simp_all [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (intro x; cases x <;> simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (constructor <;> simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (norm_num [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; done) | (intros; norm_num [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic] at *; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; ring; done) | (unfold HEU.Problems.Hodge.X_Hodge HEU.Problems.Hodge.isHodgeType HEU.Problems.Hodge.isAlgebraic; ring; done) | (simp [HEU.Problems.Hodge.X_Hodge, HEU.Problems.Hodge.isHodgeType, HEU.Problems.Hodge.isAlgebraic]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
      "nome": "HEU.Problems.RH.zeroSpacing_lower_bound",
      "enunciado": "∀ (x y : HEU.Problems.RH.X_RH), x ≠ y → ∃ n m, (x.seq n).im ≠ (y.seq m).im",
      "resultado": "sem resultado",
@@ -2606,13 +2619,6 @@
     },
     {
      "tipo": "axioma",
-     "nome": "HEU.Problems.BSD.MordellWeil",
-     "enunciado": "∀ (E : HEU.Problems.BSD.X_BSD), ∃ r, HEU.Problems.BSD.rank E = r",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (simp_all [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (unfold HEU.Problems.BSD.X_BSD HEU.Problems.BSD.rank; decide; done) | (unfold HEU.Problems.BSD.X_BSD HEU.Problems.BSD.rank; rfl; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; omega; done) | (intros; simp only [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; omega; done) | (intros; simp_all [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (intro x; cases x <;> simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (constructor <;> simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (norm_num [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; done) | (intros; norm_num [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank] at *; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; ring; done) | (unfold HEU.Problems.BSD.X_BSD HEU.Problems.BSD.rank; ring; done) | (simp [HEU.Problems.BSD.X_BSD, HEU.Problems.BSD.rank]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
      "nome": "HEU.Problems.PvsNP.circuitLowerBounds",
      "enunciado": "HEU.Problems.PvsNP.P_neq_NP → ∃ p, HEU.Problems.PvsNP.isNPCompleteClass p",
      "resultado": "sem resultado",
@@ -2624,13 +2630,6 @@
      "enunciado": "HEU.Core.ZF.ZFC",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "HEU.Core.ZF.em",
-     "enunciado": "∀ (P : Prop), P ∨ ¬P",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (exact?; done)"
     },
     {
      "tipo": "axioma",
@@ -2676,13 +2675,6 @@
     },
     {
      "tipo": "axioma",
-     "nome": "HEU.Problems.BSD.ShaFiniteness",
-     "enunciado": "HEU.Problems.BSD.X_BSD → True",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.BSD.X_BSD]; done) | (simp_all [HEU.Problems.BSD.X_BSD]; done) | (unfold HEU.Problems.BSD.X_BSD; decide; done) | (unfold HEU.Problems.BSD.X_BSD; rfl; done) | (simp [HEU.Problems.BSD.X_BSD]; omega; done) | (intros; simp only [HEU.Problems.BSD.X_BSD]; omega; done) | (intros; simp_all [HEU.Problems.BSD.X_BSD]; done) | (intro x; cases x <;> simp [HEU.Problems.BSD.X_BSD]; done) | (constructor <;> simp [HEU.Problems.BSD.X_BSD]; done) | (norm_num [HEU.Problems.BSD.X_BSD]; done) | (intros; norm_num [HEU.Problems.BSD.X_BSD] at *; done) | (simp [HEU.Problems.BSD.X_BSD]; ring; done) | (unfold HEU.Problems.BSD.X_BSD; ring; done) | (simp [HEU.Problems.BSD.X_BSD]; linarith; done) | (exact?; done)"
-    },
-    {
-     "tipo": "axioma",
      "nome": "HEU.Problems.PvsNP.timeHierarchy",
      "enunciado": "∀ (k : ℕ),   ∃ p,     p.timeComplexity = k ∧       ∀ (q : HEU.Problems.PvsNP.X_PNP), q.timeComplexity < k → ¬HEU.Problems.PvsNP.polyReducible p q",
      "resultado": "sem resultado",
@@ -2694,13 +2686,6 @@
      "enunciado": "∀ (p : HEU.Problems.PvsNP.X_PNP), p.timeComplexity * 1 ≥ 1",
      "resultado": "sem resultado",
      "tatica": ""
-    },
-    {
-     "tipo": "axioma",
-     "nome": "HEU.Problems.PvsNP.cookLevin",
-     "enunciado": "HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT",
-     "resultado": "demonstrável",
-     "tatica": "first | (rfl; done) | (decide; done) | (trivial; done) | (simp; done) | (omega; done) | (simp_all; done) | (exact fun _ => trivial; done) | (norm_num; done) | (linarith; done) | (positivity; done) | (ring; done) | (tauto; done) | (aesop; done) | (nlinarith; done) | (intro x; cases x <;> decide; done) | (intro x; cases x <;> simp_all; done) | (intro x y; cases x <;> cases y <;> decide; done) | (constructor <;> simp_all; done) | (exact ⟨_, rfl⟩; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (simp_all [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (unfold HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT; decide; done) | (unfold HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT; rfl; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; omega; done) | (intros; simp only [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; omega; done) | (intros; simp_all [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (intro x; cases x <;> simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (constructor <;> simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (norm_num [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; done) | (intros; norm_num [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT] at *; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; ring; done) | (unfold HEU.Problems.PvsNP.isNPCompleteClass HEU.Problems.PvsNP.SAT; ring; done) | (simp [HEU.Problems.PvsNP.isNPCompleteClass, HEU.Problems.PvsNP.SAT]; linarith; done) | (exact?; done)"
     },
     {
      "tipo": "axioma",
@@ -3019,11 +3004,11 @@
     }
    ],
    "summary": {
-    "fechado": 119,
+    "fechado": 129,
     "aberto-sorry": 37,
-    "condicional": 5
+    "condicional": 0
    },
-   "hora_commit_mvei": 1793883115
+   "hora_commit_mvei": 1794265849
   }
  ]
 }

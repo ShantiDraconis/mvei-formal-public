@@ -91,6 +91,37 @@
  
  /-- A5. Non-contradiction: the base indeterminate is not the literal 0 or 1.
      This is an axiom; we state it as a definition-level separation. -/
+@@ -220,8 +212,12 @@
+ theorem toy3_blocked (σ : State)
+     (hσ : σ.equations.find? (fun eq => eq.lhs == Term.I) = none) :
+     ∃ t, collapse toyX σ = CollapseResult.blocked t := by
+-  simp [toyX, collapse, Term.I, hσ]
+-  exact ⟨_, rfl⟩
++  -- o indeterminado I não tem equação em σ, então colapsa para `blocked`, e a soma e a divisão também
++  have hI : collapse Term.I σ = CollapseResult.blocked Term.I := by
++    rw [Term.I] at hσ ⊢
++    simp only [collapse, hσ]
++  refine ⟨toyX, ?_⟩
++  simp only [toyX, collapse, hI]
+ 
+ -- ============================================================
+ -- Section 6 – Stubs for T2 and T3 (future work)
+@@ -522,9 +518,13 @@
+     match t.rewriteStep σ with
+     | .rewritten t' => t'.wellFormed = true
+     | .normal       => True := by
+-  simp [Term.rewriteStep, Term.wellFormed]
++  -- wellFormed vale para todo termo (todos os construtores dão true)
++  have hwf : ∀ u : Term, u.wellFormed = true := by
++    intro u
++    induction u <;> simp_all [Term.wellFormed]
+   split
+-  all_goals simp_all [Term.wellFormed]
++  · exact hwf _
++  · trivial
+ 
+ /-- Theorem F4.T3: Classical expressions are stable under rewriting.
+     (If a term has no indeterminate support and is reduced, the result is also classical.) -/
 --- a/lean/Semantics.lean
 +++ b/lean/Semantics.lean
 @@ -139,9 +139,9 @@

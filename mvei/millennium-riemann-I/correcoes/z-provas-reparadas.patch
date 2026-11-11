@@ -262,7 +262,42 @@
  end CollapseComplex
 --- a/MillenniumRiemann/Theorems.lean
 +++ b/MillenniumRiemann/Theorems.lean
-@@ -110,13 +110,15 @@
+@@ -88,12 +88,32 @@
+ /-- The inverse satisfies z * z⁻¹ = 1 (when z is a unit) -/
+ theorem mul_inv_cancel (z : CollapseComplex) (h : IsUnit z) :
+     z * inv z = 1 := by
+-  sorry  -- This requires more complex real arithmetic
++  obtain ⟨hc, hk⟩ := h
++  have hk' : z.indet ≠ 0 := hk
++  have hN : z.re ^ 2 + z.im ^ 2 ≠ 0 := by
++    intro h0
++    apply hc
++    have h1 : z.re = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg z.im]
++    have h2 : z.im = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg z.im]
++    simp [toComplex, Complex.ext_iff, h1, h2]
++  show mul z (inv z) = { re := 1, im := 0, indet := 1 }
++  simp only [mul, inv, toComplex]
++  ext <;> dsimp only <;> field_simp <;> ring
+ 
+ /-- The inverse satisfies z⁻¹ * z = 1 (when z is a unit) -/
+ theorem inv_mul_cancel (z : CollapseComplex) (h : IsUnit z) :
+     inv z * z = 1 := by
+-  sorry  -- This requires more complex real arithmetic
++  obtain ⟨hc, hk⟩ := h
++  have hk' : z.indet ≠ 0 := hk
++  have hN : z.re ^ 2 + z.im ^ 2 ≠ 0 := by
++    intro h0
++    apply hc
++    have h1 : z.re = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg z.im]
++    have h2 : z.im = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg z.im]
++    simp [toComplex, Complex.ext_iff, h1, h2]
++  show mul (inv z) z = { re := 1, im := 0, indet := 1 }
++  simp only [mul, inv, toComplex]
++  ext <;> dsimp only <;> field_simp <;> ring
+ 
+ /-! ### Substructures -/
+ 
+@@ -110,13 +130,15 @@
      (hz : z ∈ PureComplex) (hw : w ∈ PureComplex) :
      z + w ∈ PureComplex := by
    simp [PureComplex, HAdd.hAdd, instHAdd, add] at *
@@ -279,7 +314,7 @@
  
  theorem pureComplex_has_zero :
      (0 : CollapseComplex) ∈ PureComplex := by
-@@ -131,6 +133,7 @@
+@@ -131,6 +153,7 @@
      (hz : z ∈ PureIndeterminate) (hw : w ∈ PureIndeterminate) :
      z + w ∈ PureIndeterminate := by
    simp [PureIndeterminate, HAdd.hAdd, instHAdd, add] at *
@@ -287,7 +322,7 @@
    exact ⟨by linarith, by linarith⟩
  
  theorem pureIndet_has_zero :
-@@ -145,18 +148,19 @@
+@@ -145,18 +168,19 @@
    simp [deltaI, PureIndeterminate]
    constructor
    · intro ⟨z, hz⟩
@@ -311,7 +346,7 @@
  
  /-- Conjugation preserves PureComplex -/
  theorem conj_pureComplex (z : CollapseComplex) (h : z ∈ PureComplex) :
-@@ -168,7 +172,7 @@
+@@ -168,7 +192,7 @@
  theorem conj_pureIndet (z : CollapseComplex) (h : z ∈ PureIndeterminate) :
      conj z ∈ PureIndeterminate := by
    simp [PureIndeterminate, conj] at *
@@ -320,7 +355,29 @@
  
  /-- Product of conjugate (when restricted to complex part) -/
  theorem conj_mul_self (z : CollapseComplex) :
-@@ -194,21 +198,18 @@
+@@ -185,7 +209,20 @@
+ /-- Submultiplicativity of norm (approximate) -/
+ theorem normI_mul_le (z w : CollapseComplex) :
+     normI (z * w) ≤ normI z * normI w + 2 * |z.re * w.im + z.im * w.re| := by
+-  sorry  -- Requires detailed norm calculation
++  -- |z w|_ℂ = |z|_ℂ |w|_ℂ e |κ₁κ₂| = |κ₁||κ₂|; os termos cruzados de normI z * normI w são ≥ 0
++  unfold normI
++  have e : (z * w).re ^ 2 + (z * w).im ^ 2 = (z.re ^ 2 + z.im ^ 2) * (w.re ^ 2 + w.im ^ 2) := by
++    show (mul z w).re ^ 2 + (mul z w).im ^ 2 = _
++    simp only [mul]
++    ring
++  have hi : (z * w).indet = z.indet * w.indet := rfl
++  rw [e, Real.sqrt_mul (by positivity), hi, abs_mul]
++  have h1 := Real.sqrt_nonneg (z.re ^ 2 + z.im ^ 2)
++  have h2 := Real.sqrt_nonneg (w.re ^ 2 + w.im ^ 2)
++  have h3 := abs_nonneg z.indet
++  have h4 := abs_nonneg w.indet
++  have h5 := abs_nonneg (z.re * w.im + z.im * w.re)
++  nlinarith [mul_nonneg h1 h4, mul_nonneg h3 h2]
+ 
+ /-! ### Special Elements -/
+ 
+@@ -194,21 +231,18 @@
  
  /-- i² = -1 in the complex part -/
  theorem i_sq : i * i = { re := -1, im := 0, indet := 0 } := by
@@ -346,6 +403,21 @@
 +    show (0 : CollapseComplex) = ⟨0, 0, 0⟩ from rfl] <;> norm_num
  
  end Collapse.CollapseComplex
+--- a/cross/lean/Riemann/Collapse/Constants.lean
++++ b/cross/lean/Riemann/Collapse/Constants.lean
+@@ -35,10 +35,8 @@
+ /-- Contrapositive: I ≠ 1 implies no anomalous zeros -/
+ theorem no_anomalous_from_I_ne_one :
+   ¬isCollapsed IConstant → ¬∃ z : AnomalousZero, True := by
+-  intro h
+-  contrapose
+-  intro ⟨z, _⟩
+-  exact collapse_from_anomalous ⟨z, trivial⟩
++  intro h ⟨z, _⟩
++  exact h (collapse_from_anomalous ⟨z, trivial⟩)
+ 
+ /-- Functional Φ(I, s₀) for hunting constants -/
+ noncomputable def Phi (I s₀ : ℂ) («λ» : ℝ) : ℝ :=
 --- a/cross/lean/Riemann/INumber.lean
 +++ b/cross/lean/Riemann/INumber.lean
 @@ -100,21 +100,19 @@
@@ -372,6 +444,24 @@
 -  ring
  
  end Riemann.INumber
+--- a/cross/lean/Riemann/Zeros/Anomalous.lean
++++ b/cross/lean/Riemann/Zeros/Anomalous.lean
+@@ -37,14 +37,13 @@
+ theorem anomalous_zero_distance_pos (z : AnomalousZero) :
+   distanceFromCriticalLine z.s > 0 := by
+   unfold distanceFromCriticalLine
+-  simp
+   exact abs_pos.mpr (sub_ne_zero.mpr z.off_line)
+ 
+ /-- Anomalous zeros are either left or right of the critical line -/
+ theorem anomalous_zero_side (z : AnomalousZero) :
+   z.s.re < (1 : ℝ) / 2 ∨ z.s.re > (1 : ℝ) / 2 := by
+   have h := z.off_line
+-  omega
++  exact lt_or_gt_of_ne h
+ 
+ /-- An anomalous zero to the left -/
+ def anomalousLeft (z : AnomalousZero) : Prop :=
 --- a/cross/lean/Riemann/Zeros/CriticalLine.lean
 +++ b/cross/lean/Riemann/Zeros/CriticalLine.lean
 @@ -36,7 +36,7 @@
@@ -543,6 +633,106 @@
  
  /-- The Universe-0-0 constant I has zero real and imaginary parts -/
  theorem I_components : I.re = 0 ∧ I.im = 0 ∧ I.indet = 1 := by
+--- a/lean/millennium/Riemann/CollapseProof/Contradiction.lean
++++ b/lean/millennium/Riemann/CollapseProof/Contradiction.lean
+@@ -46,8 +46,6 @@
+   zeta s = zero → 0 < s.re → s.re < 1 → s.re = 1/2 := by
+   intro s hz hpos hlt
+   have hRH := symbolicRiemannHypothesis
+-  simp [RiemannHypothesis, Core.IsNontrivialZero, Core.CriticalStrip, 
+-        Core.IsZetaZero] at hRH
+   exact hRH s ⟨hz, hpos, hlt⟩
+ 
+ /-- Corollary: All zeros in critical strip are on critical line -/
+@@ -55,7 +53,7 @@
+   (h : s ∈ Core.CriticalStrip) (hz : zeta s = zero) :
+   s ∈ Core.CriticalLine := by
+   simp [Core.CriticalStrip] at h
+-  simp [Core.CriticalLine]
++  show s.re = 1/2
+   exact RH_explicit s hz h.1 h.2
+ 
+ /-- No zeros exist in the left strip (0 < Re < 1/2) -/
+--- a/lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean
++++ b/lean/millennium/Riemann/CollapseProof/ICollapseLogic.lean
+@@ -38,7 +38,7 @@
+   obtain ⟨s, ⟨hz, hstrip⟩, hne⟩ := h
+   use s
+   simp [Core.CriticalStrip] at hstrip
+-  exact ⟨hz, hstrip.1, hstrip.2, hne⟩
++  exact ⟨hz, hstrip.1, hstrip.2, by rw [one_div]; exact hne⟩
+ 
+ /-- Singularity index of an exceptional zero -/
+ def singularityIndex (ez : ExceptionalZero) : ℝ :=
+@@ -47,7 +47,7 @@
+ /-- Singularity index is positive for exceptional zeros -/
+ theorem singularity_positive (ez : ExceptionalZero) :
+   singularityIndex ez > 0 := by
+-  simp [singularityIndex]
++  unfold singularityIndex
+   exact abs_pos.mpr (sub_ne_zero.mpr ez.not_critical)
+ 
+ /-- The I-collapse step: exceptional zero implies I-component constraint -/
+@@ -79,14 +79,18 @@
+ theorem I_times_zero_ne_one : 𝕀 * zero ≠ one := by
+   intro h
+   have h1 : (𝕀 * zero).re = one.re := by rw [h]
+-  simp [𝕀, I, zero, one, mul, Mul.mul, Zero.zero, One.one] at h1
++  have h2 : (𝕀 * zero).re = 0 := by
++    show (CollapseComplex.mul 𝕀 zero).re = 0
++    simp [CollapseComplex.mul, 𝕀, I, zero]
++  rw [h2] at h1
++  simp [one] at h1
+ 
+ /-- The contradiction emerges -/
+ theorem I_collapse_contradiction :
+   (∃ ez : ExceptionalZero, True) → False := by
+   intro ⟨ez, _⟩
+   -- If exceptional zero exists, we need I^(-1) = 0
+-  have h := I_inverse_zero ⟨ez, trivial⟩
++  have h := @I_inverse_zero zero ⟨ez, trivial⟩
+   -- But if I^(-1) = 0, then I · I^(-1) = I · 0 = 0 ≠ 1
+   -- This is a contradiction since I · I^(-1) should equal 1
+   -- SYMBOLIC NOTE: This is the core I-Collapse step
+--- a/lean/millennium/Riemann/Core/CriticalStrip.lean
++++ b/lean/millennium/Riemann/Core/CriticalStrip.lean
+@@ -45,8 +45,11 @@
+ /-- The functional equation creates symmetry about Re(s) = 1/2 -/
+ theorem functional_symmetry (s : CollapseComplex) :
+   s ∈ LeftStrip ↔ (one - s) ∈ RightStrip := by
+-  simp [LeftStrip, RightStrip, one]
+-  constructor <;> intro ⟨h1, h2⟩ <;> constructor <;> linarith
++  have h : (one - s).re = 1 - s.re := by
++    show (CollapseComplex.add one (CollapseComplex.neg s)).re = 1 - s.re
++    simp [CollapseComplex.add, CollapseComplex.neg, one, sub_eq_add_neg]
++  simp only [LeftStrip, RightStrip, Set.mem_setOf_eq, h]
++  constructor <;> rintro ⟨h1, h2⟩ <;> constructor <;> linarith
+ 
+ /-- Distance from critical line -/
+ def distance_from_critical_line (s : CollapseComplex) : ℝ :=
+@@ -55,14 +58,18 @@
+ /-- Points on critical line have zero distance -/
+ theorem on_critical_line_iff (s : CollapseComplex) :
+   s ∈ CriticalLine ↔ distance_from_critical_line s = 0 := by
+-  simp [CriticalLine, distance_from_critical_line, abs_eq_zero]
++  simp [CriticalLine, distance_from_critical_line, abs_eq_zero, sub_eq_zero]
+ 
+ /-- Symmetry: d(s) = d(1-s) -/
+ theorem distance_symmetric (s : CollapseComplex) :
+   distance_from_critical_line s = distance_from_critical_line (one - s) := by
+-  simp [distance_from_critical_line, one]
+-  ring_nf
+-  simp [abs_sub_comm]
++  have h : (one - s).re = 1 - s.re := by
++    show (CollapseComplex.add one (CollapseComplex.neg s)).re = 1 - s.re
++    simp [CollapseComplex.add, CollapseComplex.neg, one, sub_eq_add_neg]
++  simp only [distance_from_critical_line, h]
++  rw [abs_sub_comm]
++  congr 1
++  ring
+ 
+ /-- Hardy's theorem: infinitely many zeros on critical line -/
+ axiom hardy_theorem : ∃ infinitely_many : ℕ → CollapseComplex,
 --- a/lean/millennium/Riemann/Core/FunctionalEquation.lean
 +++ b/lean/millennium/Riemann/Core/FunctionalEquation.lean
 @@ -56,7 +56,11 @@
@@ -559,6 +749,69 @@
 +  constructor <;> intro h <;> constructor <;> linarith [h.1, h.2]
  
  end Millennium.Riemann.Core
+--- a/lean/millennium/Riemann/ExtendedZeta.lean
++++ b/lean/millennium/Riemann/ExtendedZeta.lean
+@@ -145,7 +145,7 @@
+     level (zetaUniversal n) = promote n |> level := by
+   intro n
+   cases n with
+-  | baseNum z => left; simp [zetaUniversal, level]
++  | baseNum z => right; simp [zetaUniversal, level, promote]
+   | collapseNum z => left; simp [zetaUniversal, level]
+   | horizonNum z => left; simp [zetaUniversal, level]
+   | refutationNum z => left; simp [zetaUniversal, level]
+@@ -290,7 +290,6 @@
+   (h : s.re ≠ 1/2) (hz : zeta s = zero) :
+   ∃ c : ℝ, True := by  -- dζ/ds = c · ∫ζ
+   use |s.re - 1/2| * Real.pi
+-  trivial
+ 
+ /-- Geometric shape for Riemann curvature calculations -/
+ inductive GeometricShape
+--- a/lean/millennium/Riemann/FormalAxioms.lean
++++ b/lean/millennium/Riemann/FormalAxioms.lean
+@@ -208,8 +208,7 @@
+   D11_Phi z = z.im ^ 2 * (1 - z.indet).abs := by
+   unfold D11_Phi D4_critical_line at *
+   rw [h]
+-  ring_nf
+-  simp [sub_self]
++  ring
+ 
+ /-- **Lemma L4** (Φ = 0 on Critical Line in Coherent Phase):
+     When Re(s) = 1/2, im = 0, and I ≠ 1, we have Φ = 0. -/
+@@ -218,8 +217,7 @@
+   D11_Phi z = 0 := by
+   unfold D11_Phi
+   rw [h1, h2]
+-  ring_nf
+-  simp [sub_self]
++  ring
+ 
+ /-- **Lemma L5** (Critical Strip Bounds): 
+     Critical strip is bounded by 0 < Re(s) < 1. -/
+@@ -232,6 +230,7 @@
+   D5_critical_strip z := by
+   unfold D4_critical_line D5_critical_strip at *
+   rw [h]
++  unfold criticalLineValue
+   constructor
+   · norm_num
+   · norm_num
+@@ -260,10 +259,9 @@
+ theorem L9_I_idempotent : 
+   CollapseComplex.I * CollapseComplex.I = 
+   { re := 0, im := 0, indet := 1 } := by
+-  simp [CollapseComplex.I, CollapseComplex.mul, Mul.mul]
+-  constructor; ring
+-  constructor; ring
+-  ring
++  show CollapseComplex.mul CollapseComplex.I CollapseComplex.I = _
++  simp only [CollapseComplex.I, CollapseComplex.mul, CollapseComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_⟩ <;> ring
+ 
+ /-- **Lemma L10** (Embedding Preserves Structure):
+     ofReal is a ring homomorphism. -/
 --- a/lean/millennium/Riemann/HorizonComplex.lean
 +++ b/lean/millennium/Riemann/HorizonComplex.lean
 @@ -167,27 +167,20 @@
@@ -649,6 +902,37 @@
  
  end HorizonComplex
  
+--- a/lean/millennium/Riemann/IConstant/DeltaCollapse.lean
++++ b/lean/millennium/Riemann/IConstant/DeltaCollapse.lean
+@@ -47,7 +47,6 @@
+   Δ (Δ s) = Δ s := by
+   intro s hs
+   simp [Δ, hs]
+-  ring
+ 
+ /-- Δ maps critical line points to themselves (up to I-component) -/
+ theorem Delta_critical_line : ∀ s : CollapseComplex, s.re = 1/2 →
+@@ -92,16 +91,9 @@
+ theorem collapse_equiv_iff (s t : CollapseComplex) :
+   collapse_equiv s t ↔ s.im = t.im := by
+   simp [collapse_equiv, Δ]
+-  constructor
+-  · intro ⟨_, him, _⟩
+-    exact him
+-  · intro h
+-    constructor
+-    · rfl
+-    constructor
+-    · exact h
+-    · -- NOTE: This requires additional information about indeterminate component equality
+-      -- In the general case, collapse equivalence may differ in indet part
+-      sorry
++  intro _
++  -- NOTE: This requires additional information about indeterminate component equality
++  -- In the general case, collapse equivalence may differ in indet part
++  sorry
+ 
+ end Millennium.Riemann.IConstant
 --- a/lean/millennium/Riemann/IConstant/ICore.lean
 +++ b/lean/millennium/Riemann/IConstant/ICore.lean
 @@ -32,28 +32,33 @@
@@ -695,6 +979,97 @@
  
  /-- 𝕀 ≠ 0 -/
  theorem I_ne_zero : 𝕀 ≠ zero := by
+--- a/lean/millennium/Riemann/IKernel/ZetaIntegralEq.lean
++++ b/lean/millennium/Riemann/IKernel/ZetaIntegralEq.lean
+@@ -31,7 +31,7 @@
+   zeta s = zero ↔ ITransform (fun _ => one) s = zero := by
+   constructor
+   · intro hz
+-    rw [← zeta_integral_rep s] at hz
++    rw [zeta_integral_rep s] at hz
+     exact hz
+   · intro hi
+     rw [zeta_integral_rep s]
+--- a/lean/millennium/Riemann/RefutationComplex.lean
++++ b/lean/millennium/Riemann/RefutationComplex.lean
+@@ -208,48 +208,32 @@
+ 
+ /-- Addition is associative -/
+ theorem add_assoc (x y z : RefutationComplex) : (x + y) + z = x + (y + z) := by
+-  simp [add, Add.add]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : RefutationComplex, a + b = add a b from fun _ _ => rfl, add, RefutationComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Addition is commutative -/
+ theorem add_comm (x y : RefutationComplex) : x + y = y + x := by
+-  simp [add, Add.add]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : RefutationComplex, a + b = add a b from fun _ _ => rfl, add, RefutationComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Zero is additive identity -/
+ theorem zero_add (x : RefutationComplex) : 0 + x = x := by
+-  simp [add, Add.add, zero, Zero.zero]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  cases x
++  simp only [show ∀ a b : RefutationComplex, a + b = add a b from fun _ _ => rfl, add, show (0 : RefutationComplex) = zero from rfl, zero,
++    RefutationComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Multiplication is commutative -/
+ theorem mul_comm (x y : RefutationComplex) : x * y = y * x := by
+-  simp [mul, Mul.mul]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : RefutationComplex, a * b = mul a b from fun _ _ => rfl, mul, RefutationComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- One is multiplicative identity -/
+ theorem one_mul (x : RefutationComplex) : 1 * x = x := by
+-  simp [mul, Mul.mul, one, One.one]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  cases x
++  simp only [show ∀ a b : RefutationComplex, a * b = mul a b from fun _ _ => rfl, mul, show (1 : RefutationComplex) = one from rfl, one,
++    RefutationComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- The Refutation constant R has expected components -/
+ theorem R_components : R.re = 0 ∧ R.im = 0 ∧ R.indet = 0 ∧ R.horizon = 0 ∧ R.refutation = 1 := by
+@@ -257,12 +241,8 @@
+ 
+ /-- Double refutation inverts: R² = -R -/
+ theorem R_squared : R * R = neg R := by
+-  simp [R, mul, Mul.mul, neg, Neg.neg]
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  constructor; ring
+-  ring
++  simp only [show ∀ a b : RefutationComplex, a * b = mul a b from fun _ _ => rfl, mul, R, neg, RefutationComplex.mk.injEq]
++  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> ring
+ 
+ /-- Collapse is idempotent: collapsing twice yields same result -/
+ theorem collapse_idempotent (z : RefutationComplex) : collapse (collapse z) = collapse z := by
 --- a/lean/millennium/Riemann/SymbolicZeta.lean
 +++ b/lean/millennium/Riemann/SymbolicZeta.lean
 @@ -150,12 +150,19 @@
@@ -722,6 +1097,36 @@
  
  namespace Documentation
  
+--- a/lean/millennium/Riemann/Zeros/Symmetry.lean
++++ b/lean/millennium/Riemann/Zeros/Symmetry.lean
+@@ -38,19 +38,22 @@
+ /-- Reflection preserves imaginary part (up to sign) -/
+ theorem reflect_imaginary (ρ : ZetaZero) :
+   (reflectZero ρ).im = -ρ.imagPart := by
+-  simp [reflectZero, one, Sub.sub, neg, add]
+-  ring
++  show (CollapseComplex.add one (CollapseComplex.neg ρ.location)).im = -ρ.imagPart
++  simp [CollapseComplex.add, CollapseComplex.neg, one, ZetaZero.imagPart]
+ 
+ /-- Reflection swaps left/right of critical line -/
+ theorem reflect_swaps_sides (ρ : ZetaZero) :
+   (reflectZero ρ).re = 1 - ρ.realPart := by
+-  simp [reflectZero, one, Sub.sub, neg, add]
++  show (CollapseComplex.add one (CollapseComplex.neg ρ.location)).re = 1 - ρ.realPart
++  simp [CollapseComplex.add, CollapseComplex.neg, one, ZetaZero.realPart, sub_eq_add_neg]
+ 
+ /-- On critical line, reflection is identity for real part -/
+ theorem critical_line_fixed_point (ρ : ZetaZero) (h : ρ.realPart = 1/2) :
+   (reflectZero ρ).re = ρ.realPart := by
+-  simp [reflectZero, one, Sub.sub, neg, add, h]
+-  ring
++  show (CollapseComplex.add one (CollapseComplex.neg ρ.location)).re = ρ.realPart
++  simp only [ZetaZero.realPart] at h
++  simp only [CollapseComplex.add, CollapseComplex.neg, one, ZetaZero.realPart, h]
++  norm_num
+ 
+ /-- Four-fold symmetry group of zeros -/
+ inductive ZeroSymmetry
 --- a/src/Riemann/Zeros/Symmetry.lean
 +++ b/src/Riemann/Zeros/Symmetry.lean
 @@ -16,7 +16,7 @@

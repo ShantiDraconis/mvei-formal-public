@@ -1,4 +1,31 @@
 --- /dev/null
++++ b/lean/MVEI_Refutacoes_CoreQ.lean
+@@ -0,0 +1,24 @@
++import Core
++
++/-! Refutações (MVEI): para cada teorema deste repositório cujo enunciado é falso como o Lean o lê, a
++    negação do enunciado, provada no kernel com as definições do próprio repositório. O teorema original
++    fica como está (o arquivo dele não muda). -/
++
++namespace MVEI.Refutacoes
++
++/-- `TIF.classical_stable` é falso: a regra R₂ de rewriteStep reescreve 0 ÷_I 0 (dois literais clássicos, sem
++    indeterminado) para o indeterminado `.indet .base`, que não é clássico. -/
++theorem classical_stable_falso :
++    ¬ ∀ (σ : TIF.State) (t : TIF.Term), t.isClassical = true →
++      match t.rewriteStep σ with
++      | .rewritten t' => t'.isClassical = true
++      | .normal       => True := by
++  intro h
++  have h1 := h TIF.State.empty (TIF.Term.binOp .divI (.const 0) (.const 0)) rfl
++  have e : TIF.Term.rewriteStep TIF.State.empty (TIF.Term.binOp .divI (.const 0) (.const 0)) =
++      TIF.RewriteResult.rewritten (TIF.Term.indet .base) := by
++    rfl
++  rw [e] at h1
++  simp [TIF.Term.isClassical, TIF.Term.hasIndet] at h1
++
++end MVEI.Refutacoes
+--- /dev/null
 +++ b/lean/MVEI_Refutacoes_Semantics.lean
 @@ -0,0 +1,47 @@
 +import Semantics
